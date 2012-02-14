@@ -1,0 +1,112 @@
+<?php
+
+/**
+ * @file
+ * Install, update, and uninstall functions for the metatag module.
+ */
+
+/**
+ * Implements hook_schema().
+ */
+function metatag_schema() {
+  $schema['metatag_config'] = array(
+    'description' => 'Storage of meta tag configuration and defaults.',
+    'export' => array(
+      'key' => 'instance',
+      'key name' => 'Instance',
+      'primary key' => 'cid',
+      'identifier' => 'config',
+      'default hook' => 'metatag_config_default',
+      'api' => array(
+        'owner' => 'metatag',
+        'api' => 'metatag',
+        'minimum_version' => 1,
+        'current_version' => 1,
+      ),
+      'cache defaults' => TRUE,
+      'default cache bin' => 'cache_metatag',
+    ),
+    'fields' => array(
+      'cid' => array(
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'description' => 'The primary identifier for a metatag configuration set.',
+      ),
+      'instance' => array(
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => '',
+        'description' => 'The machine-name of the configuration, typically entity-type:bundle.',
+      ),
+      'config' => array(
+        'type' => 'blob',
+        'size' => 'big',
+        'not null' => TRUE,
+        'serialize' => TRUE,
+        'description' => 'Serialized data containing the meta tag configuration.',
+        'translatable' => TRUE,
+      ),
+    ),
+    'primary key' => array('cid'),
+    'unique keys' => array(
+      'instance' => array('instance'),
+    ),
+  );
+
+  $schema['metatag'] = array(
+    'fields' => array(
+      'entity_type' => array(
+        'type' => 'varchar',
+        'length' => 32,
+        'not null' => TRUE,
+        'default' => '',
+        'description' => 'The entity type this data is attached to',
+      ),
+      'entity_id' => array(
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+        'description' => 'The entity id this data is attached to',
+      ),
+      // @todo Enable revisionable meta tags.
+      'data' => array(
+        'type' => 'blob',
+        'size' => 'big',
+        'not null' => TRUE,
+        'serialize' => TRUE,
+      ),
+    ),
+    'primary key' => array('entity_type', 'entity_id'),
+  );
+
+  $schema['cache_metatag'] = drupal_get_schema_unprocessed('system', 'cache');
+  $schema['cache_metatag']['description'] = t('Cache table for the generated meta tag output.');
+
+  return $schema;
+}
+
+/**
+ * Disable the deprecated metatag_ui module which has been merged into metatag.
+ */
+function metatag_update_7000() {
+  if (module_exists('metatag_ui')) {
+    module_disable(array('metatag_ui'), FALSE);
+    drupal_uninstall_modules(array('metatag_ui'), FALSE);
+  }
+}
+
+/**
+ * Fix the {metatag_config}.cid column cannot be NULL.
+ */
+function metatag_update_7001() {
+  $field = array(
+    'type' => 'serial',
+    'unsigned' => TRUE,
+    'not null' => TRUE,
+    'description' => 'The primary identifier for a metatag configuration set.',
+  );
+  db_change_field('metatag_config', 'cid', 'cid', $field);
+}

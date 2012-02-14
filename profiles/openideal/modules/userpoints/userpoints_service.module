@@ -1,0 +1,151 @@
+<?php
+
+/**
+ * Implementation of hook_help().
+ */
+
+function userpoints_service_help($section) {
+  switch ($section) {
+    case 'admin/help#services_userpoints':
+    case 'admin/modules#description':
+      return t('<p>Provides Userpoints XML-RPC service. Requires services.module.</p>');
+  }
+}
+
+/**
+ * Implementation of hook_services_resources().
+ */
+function userpoints_service_services_resources() {
+  return array(
+    'userpoints' => array(
+      'retrieve' => array(
+        'help' => 'Retrieve the amount of points a user has',
+        'file' => array('file' => 'inc', 'module' => 'userpoints_service'),
+        'callback' => 'userpoints_service_get',
+        'access callback' => 'userpoints_service_view_access',
+        'access arguments append' => TRUE,
+        'args' => array(
+          array(
+            'name' => 'uid',
+            'type' => 'int',
+            'description' => 'The User ID for which the points should be loaded. Defaults to the .',
+            'source' => array('path' => 0),
+          ),
+          array(
+            'name' => 'tid',
+            'type' => 'all',
+            'optional' => TRUE,
+            'source' => array('param' => 'tid'),
+            'description' => t('An optional Term ID for the category.'),
+          ),
+          array(
+            'name' => 'type',
+            'type' => 'string',
+            'optional' => TRUE,
+            'source' => array('param' => 'type'),
+            'description' => t('The type of points, either max or current, to which it defaults.'),
+          ),
+        ),
+      ),
+      'index' => array(
+        'help' => 'Index of all users with points',
+        'file' => array('file' => 'inc', 'module' => 'userpoints_service'),
+        'callback' => 'userpoints_service_index',
+        'access callback' => 'userpoints_service_view_access',
+        'args' => array(
+          array(
+            'name' => 'page',
+            'optional' => TRUE,
+            'type' => 'int',
+            'description' => 'The zero-based index of the page to get, defaults to 0.',
+            'default value' => 0,
+            'source' => array('param' => 'page'),
+          ),
+          array(
+            'name' => 'tid',
+            'type' => 'string',
+            'optional' => TRUE,
+            'source' => array('param' => 'tid'),
+            'description' => t('An optional Term ID for the category.'),
+          ),
+          array(
+            'name' => 'sort',
+            'type' => 'string',
+            'optional' => TRUE,
+            'default value' => 'points',
+            'source' => array('param' => 'sort'),
+            'description' => t('Sort field'),
+          ),
+          array(
+            'name' => 'dir',
+            'type' => 'string',
+            'optional' => TRUE,
+            'default value' => 'DESC',
+            'source' => array('param' => 'dir'),
+            'description' => t('Sort direction'),
+          ),
+        ),
+      ),
+      'actions' => array(
+        'add' => array(
+          'help' => 'Add or subtract a given amount of points for a user',
+          'file' => array('file' => 'inc', 'module' => 'userpoints_service'),
+          'callback' => 'userpoints_service_add',
+          'access callback' => 'userpoints_admin_access',
+          'access arguments' => array('add'),
+          'args' => array(
+            array(
+              'name' => 'uid',
+              'type' => 'int',
+              'optional' => FALSE,
+              'description' => 'A valid Drupal User ID.',
+              'source' => array('data' => 'uid'),
+            ),
+            array(
+              'name' => 'points',
+              'type' => 'int',
+              'optional' => FALSE,
+              'source' => array('data' => 'points'),
+              'description' => 'Number of points to add/subtract.',
+            ),
+            array(
+              'name' => 'tid',
+              'type' => 'int',
+              'optional' => TRUE,
+              'source' => array('data' => 'tid'),
+              'description' => t('An optional Term ID for the category.'),
+            ),
+            array(
+              'name' => 'operation',
+              'type' => 'string',
+              'optional' => TRUE,
+              'source' => array('data' => 'operation'),
+              'description' => t('An operation string for this transaction.'),
+            ),
+            array(
+              'name' => 'description',
+              'type' => 'string',
+              'optional' => TRUE,
+              'source' => array('data' => 'description'),
+              'description' => t('An optional description of this transaction.'),
+            ),
+            array(
+              'name' => 'entity_type',
+              'type' => 'string',
+              'optional' => TRUE,
+              'source' => array('data' => 'entity_type'),
+              'description' => t('An optional description of this transaction.'),
+            ),
+            array(
+              'name' => 'entity_id',
+              'type' => 'int',
+              'optional' => TRUE,
+              'source' => array('data' => 'entity_id'),
+              'description' => t('An optional description of this transaction.'),
+            ),
+          ),
+        ),
+      ),
+    ),
+  );
+}

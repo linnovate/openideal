@@ -1,0 +1,338 @@
+# $Id: ja.po,v 1.4.2.2 2010/05/22 23:41:32 hass Exp $
+# -----------------------------------------------------------------------------
+# Japanese translation of Drupal (modules-googleanalytics)
+#
+# Copyright (c) 2006-2009  Drupal Japan  ( http://drupal.jp/ )  /
+#                          Takafumi      ( jp.drupal@imagine **reverse order**)
+#
+# Generated from file:
+#  googleanalytics.admin.inc,v 1.4.2.12 2009/03/08 11:38:26 hass
+#  googleanalytics.module,v 1.19.2.8 2009/03/08 11:38:26 hass
+#  googleanalytics.info,v 1.7.2.2 2008/09/18 18:39:45 hass
+#
+# -----------------------------------------------------------------------------
+msgid ""
+msgstr ""
+"POT-Creation-Date: 2009-03-30 13:25+0900\n"
+"Last-Translator: Takafumi <jp.drupal@imagine **reverse order**>\n"
+"Language-Team: Drupal Japan\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n!=1);\n"
+
+#: googleanalytics.admin.inc:15
+msgid "General settings"
+msgstr "全般の設定"
+
+#: googleanalytics.admin.inc:21
+msgid "Google Analytics account number"
+msgstr "Google Analyticsのアカウント番号"
+
+#: googleanalytics.admin.inc:26
+msgid "The account number is unique to the websites domain. Click the <strong>Edit</strong> link in your Google Analytics account next to the appropriate profile on the <strong>Analytics Settings</strong> page, then select <strong>Check Status</strong> at the top-right of the table to find the account number (UA-xxxx-x) of your site. You can obtain a user account from the <a href=\"@url\">Google Analytics</a> website."
+msgstr "アカウント番号はウェブサイトのドメインに固有です。 <strong>Analytics 設定</strong>ページで適切なプロフィールの隣にあるGoogle Analyticsアカウントの<strong>編集</strong>をクリックし、サイトのアカウント番号(UA-xxxx-x)を見つけるためにテーブルの右上にある<strong>ステータスを確認</strong>を選んでください。 ユーザアカウントは<a href=\"@url\">Google Analytics</a>のウェブサイトから入手できます。"
+
+#: googleanalytics.admin.inc:32
+msgid "User specific tracking settings"
+msgstr "ユーザ固有のトラッキング設定"
+
+#: googleanalytics.admin.inc:37
+msgid "Custom tracking settings"
+msgstr "カスタムトラッキング設定"
+
+#: googleanalytics.admin.inc:39
+msgid "Users cannot control whether they are tracked or not."
+msgstr "ユーザはトラックされるかどうかをコントロールできない"
+
+#: googleanalytics.admin.inc:40
+msgid "Track users by default, but let individual users to opt out."
+msgstr "デフォルトでユーザをトラックするが、各ユーザが拒否することもできる"
+
+#: googleanalytics.admin.inc:41
+msgid "Do not track users by default, but let individual users to opt in."
+msgstr "デフォルトでユーザをトラックしないが、各ユーザが許可することもできる"
+
+#: googleanalytics.admin.inc:43
+msgid "Allow individual users to customize the visibility of tracking in their account settings. Only users with %permission permission are allowed to set their own preference."
+msgstr "各ユーザごとのアカウント設定で、トラックの表示をカスタマイズできるかどうかを指定してください。 「%permission」権限を持ったユーザのみが設定を行えます。"
+
+#: googleanalytics.admin.inc:43 googleanalytics.module:23
+msgid "opt-in or out of tracking"
+msgstr "トラッキングの許可・許否"
+
+#: googleanalytics.admin.inc:50
+msgid "Role specific tracking settings"
+msgstr "ロール固有のトラッキング設定"
+
+#: googleanalytics.admin.inc:61
+msgid "Add tracking for specific roles"
+msgstr "トラッキングを加える特定ロール"
+
+#: googleanalytics.admin.inc:64
+msgid "Add tracking only for the selected role(s). If none of the roles are selected, all users will be tracked. If a user has any of the roles checked, that user will be tracked."
+msgstr "トラッキングを特定のロールに限定したい場合、それらのロール名にチェックを入れてください。 どのロールも選択しない場合、すべてのユーザがトラックされます。 "
+
+#: googleanalytics.admin.inc:70
+msgid "Page specific tracking settings"
+msgstr "ページ固有のトラッキング設定"
+
+#: googleanalytics.admin.inc:85
+msgid "Add to every page except the listed pages."
+msgstr "リストに記載したページ以外のすべてのページに加える"
+
+#: googleanalytics.admin.inc:85
+msgid "Add to the listed pages only."
+msgstr "リストに記載したページにのみ加える"
+
+#: googleanalytics.admin.inc:86
+msgid "Enter one page per line as Drupal paths. The '*' character is a wildcard. Example paths are %blog for the blog page and %blog-wildcard for every personal blog. %front is the front page."
+msgstr "１行に１ベージとして、Drupalパスを入力してください。 <b>*</b> はワイルドカードとして使えます。 例えばブログページのパスを指定するには <b>%blog</b>、ユーザ別のブログは <b>%blog-wildcard</b> と入力してください。 また、フロントページを指定するには <b>%front</b> と入力してください。<br />"
+
+#: googleanalytics.admin.inc:89
+msgid "Add if the following PHP code returns <code>TRUE</code> (PHP-mode, experts only)."
+msgstr "以下のPHPコードが <code>TRUE</code> を返したら加える（PHPモード － PHPに精通した方専用)"
+
+#: googleanalytics.admin.inc:90
+msgid "If the PHP-mode is chosen, enter PHP code between %php. Note that executing incorrect PHP-code can break your Drupal site."
+msgstr "PHPモードを選択した場合、<b>%php</b> で囲まれたPHPコード（※ return や print 等の命令を使用して結果を返す必要があります）を記入してください。 ただし、間違ったPHPコードを実行するとサイトを壊す可能性もありますので、十分に注意を払うようにしてください。"
+
+#: googleanalytics.admin.inc:94
+msgid "Add tracking to specific pages"
+msgstr "トラッキングを加える特定ページ"
+
+#: googleanalytics.admin.inc:100
+msgid "Pages"
+msgstr "ページ"
+
+#: googleanalytics.admin.inc:110
+msgid "User segmentation settings"
+msgstr "ユーザ区分の設定"
+
+#: googleanalytics.admin.inc:115
+msgid "User roles"
+msgstr "ユーザロール"
+
+#: googleanalytics.admin.inc:125
+msgid "Add segmentation information to tracking code"
+msgstr "トラッキングコードに加える区分化情報"
+
+#: googleanalytics.admin.inc:126
+msgid "Segment users based on different properties, additionally to the basic IP address based tracking provided by Google Analytics."
+msgstr "Google Analyticsによって提供される、IPアドレスをベースとした基本的なトラッキングに加え、異なるプロパティに基づいてユーザを区分します。"
+
+#: googleanalytics.admin.inc:126
+msgid "<a href=\"@module_list\">Enable the profile module</a> to be able to use profile fields for more granular tracking."
+msgstr "より詳細なトラッキングのためにプロフィールフィールドを使用できるように、<a href=\"@module_list\">Profileモジュールを有効化</a>してください。"
+
+#: googleanalytics.admin.inc:126
+msgid "Make sure you will not associate (or permit any third party to associate) any data gathered from Your Website(s) (or such third parties' website(s)) with any personally identifying information from any source as part of Your use (or such third parties' use) of the Google Analytics service. For more information see section 8.1 in the <a href=\"@ga_tos\">Google Analytics terms of use</a>."
+msgstr "あなたが Google Analytics サービスを使用する（または第三者が利用する）にあたり、ウェブサイト（または第三者のウェブサイト）から集めたデータを、ソースを問わず個人情報と関連づけない（または第三者に関連づけさせない）ようにしてください。 詳細については「<a href=\"@ga_tos\">Google Analytics サービス利用規約</a>」の「プライバシー」を参照してください。"
+
+#: googleanalytics.admin.inc:126
+msgid "Selecting one or more values is supported. To select multiple items, hold down CTRL (PC) or &#8984; (Mac) while selecting fields."
+msgstr "複数の値を選択することもできます。 複数のアイテムを選択するには、Ctrlキー(PC)/&#8984;(Mac)を押下しながらフィールドを選択してください。"
+
+#: googleanalytics.admin.inc:136
+msgid "Link tracking settings"
+msgstr "リンクトラッキングの設定"
+
+#: googleanalytics.admin.inc:142
+msgid "Track outgoing links"
+msgstr "外部リンクのトラック"
+
+#: googleanalytics.admin.inc:144
+msgid "Enables tracking of clicks on outgoing links."
+msgstr "外部リンクのクリックをトラックするかどうかを指定してください。"
+
+#: googleanalytics.admin.inc:148
+msgid "Track mailto links"
+msgstr "mailtoリンクのトラック"
+
+#: googleanalytics.admin.inc:150
+msgid "Enables tracking of clicks on mailto links."
+msgstr "mailtoリンクのクリックをトラックするかどうかを指定してください。"
+
+#: googleanalytics.admin.inc:154
+msgid "Track download links"
+msgstr "ダウンロードリンクのトラック"
+
+#: googleanalytics.admin.inc:156
+msgid "Enables tracking of clicks on links to files based on the file extensions list below."
+msgstr "以下のファイル拡張子リストに基づいて、ファイルへのリンクのクリックをトラックするかどうかを指定してください。"
+
+#: googleanalytics.admin.inc:160
+msgid "File extensions to track"
+msgstr "トラックするファイル拡張子"
+
+#: googleanalytics.admin.inc:162
+msgid "A pipe separated list of file extensions that should be tracked when clicked with regular expression support. Example: !extensions"
+msgstr "クリックされた際にトラックするファイルの拡張子を、パイプ(|)で区切って指定してください。 正規表現もサポートされます。 例： !extensions"
+
+#: googleanalytics.admin.inc:169
+msgid "Advanced settings"
+msgstr "拡張設定"
+
+#: googleanalytics.admin.inc:176
+msgid "Cache tracking code file locally"
+msgstr "トラッキングコードをローカルにキャッシュ"
+
+#: googleanalytics.admin.inc:177
+msgid "If checked, the tracking code file is retrieved from Google Analytics and cached locally. It is updated daily from Google's servers to ensure updates to tracking code are reflected in the local copy. Do not activate this until after Google Analytics has confirmed your tracker!"
+msgstr "チェックを入れると、トラッキングコードがGoogle Analyticsから検索され、ローカルにキャッシュされます。 トラッキングコードの更新がローカルコピーに反映されていることを確実にするために、キャッシュはGoogleのサーバから毎日更新されます。 Google Analyticsがトラッカーを確認するまで、これを有効にしないでください！"
+
+#: googleanalytics.admin.inc:182
+msgid "<a href=\"@url\">Public file transfers</a> must be enabled to allow local caching."
+msgstr "ローカルキャッシュを使用するには、<a href=\"@url\">ダウンロードの方法を「パブリック」</a>にする必要があります。"
+
+#: googleanalytics.admin.inc:189
+msgid "Track translation sets as one unit"
+msgstr "翻訳セットを1つの単位としてトラック"
+
+#: googleanalytics.admin.inc:190
+msgid "When a node is part of a translation set, record statistics for the originating node instead. This allows for a translation set to be treated as a single unit."
+msgstr "ノードが翻訳セットの一部である場合、代わりに翻訳元のノードの統計を記録します。 これにより、翻訳セットを単一の単位で扱えるようになります。"
+
+#: googleanalytics.admin.inc:196
+msgid "Depends on: !dependencies"
+msgstr "次に依存： !dependencies"
+
+#: googleanalytics.admin.inc:196
+msgid "@module (<span class=\"admin-enabled\">enabled</span>)"
+msgstr "@module (<span class=\"admin-enabled\">有効</span>)"
+
+#: googleanalytics.admin.inc:196
+msgid "@module (<span class=\"admin-disabled\">disabled</span>)"
+msgstr "@module (<span class=\"admin-enabled\">無効</span>)"
+
+#: googleanalytics.admin.inc:203
+msgid "Track internal search"
+msgstr "内部検索のトラック"
+
+#: googleanalytics.admin.inc:204
+msgid "If checked, internal search keywords are tracked. You must configure your Google account to use the internal query parameter <strong>search</strong>. For more information see <a href=\"@url\">How do I set up Site Search for my profile</a>."
+msgstr "チェックを入れると、内部の検索キーワードがトラックされます。内部のクエリパラメータの<strong>検索</strong>を使用するには、Googleアカウントの設定が必要となります。 詳細については「<a href=\"@url\">サイト内検索を設定する方法</a>」を参照してください。"
+
+#: googleanalytics.admin.inc:211
+msgid "Track AdSense ads"
+msgstr "AdSense広告のトラック"
+
+#: googleanalytics.admin.inc:212
+msgid "If checked, your AdSense ads will be tracked in your Google Analytics account."
+msgstr "チェックを入れると、AdSense広告がGoogle Analyticsアカウントでトラックされます。"
+
+#: googleanalytics.admin.inc:218
+msgid "Custom JavaScript code"
+msgstr "カスタムJavaScriptコード"
+
+#: googleanalytics.admin.inc:221
+msgid "You can add custom Google Analytics <a href=\"@snippets\">code snippets</a> here. These will be added to every page that Google Analytics appears on. Before you add custom code to the below textarea's you should read <a href=\"@ga_concepts_overview\">Google Analytics Tracking Code - Functional Overview</a> and the <a href=\"@ga_js_api\">Google Analytics Tracking API</a> documentation. <strong>Do not include the &lt;script&gt; tags</strong>, and always end your code with a semicolon (;)."
+msgstr "ここに、カスタムGoogle Analyticsの<a href=\"@snippets\">コードスニペット</a>を追加することができます。 これらはGoogle Analyticsが現れる、すべてのページに追加されます。 以下のテキストエリアにカスタムコードを加える前に、<a href=\"@ga_concepts_overview\">Google Analytics Tracking Code - Functional Overview</a> と <a href=\"@ga_js_api\">Google Analytics Tracking API</a> のドキュメントを読むべきです。 <strong>&lt;script&gt; タグは含めず</strong>、 コードの終端には常にセミコロン (;) を付加してください。"
+
+#: googleanalytics.admin.inc:225
+msgid "Code snippet (before)"
+msgstr "コードスニペット（前）"
+
+#: googleanalytics.admin.inc:229
+msgid "Code in this textarea will be added <strong>before</strong> pageTracker._trackPageview()."
+msgstr "このテキストエリアのコードは、pageTracker._trackPageview() の<strong>前</strong>に追加されます。"
+
+#: googleanalytics.admin.inc:233
+msgid "Code snippet (after)"
+msgstr "コードスニペット（後）"
+
+#: googleanalytics.admin.inc:237
+msgid "Code in this textarea will be added <strong>after</strong> pageTracker._trackPageview(). This is useful if you'd like to track a site in two accounts."
+msgstr "このテキストエリアのコードは、pageTracker._trackPageview() の<strong>後</strong>に追加されます。 これは2つのアカウントでサイトをトラックしたい場合に役立ちます。"
+
+#: googleanalytics.admin.inc:242
+msgid "JavaScript scope"
+msgstr "JavaScriptのスコープ"
+
+#: googleanalytics.admin.inc:243
+msgid "<strong>Warning:</strong> Google recommends adding the external JavaScript files to footer for performance reasons."
+msgstr "<strong>警告：</strong> Google はパフォーマンスの理由から、フッタに外部JavaScriptを追加することを推奨しています。"
+
+#: googleanalytics.admin.inc:245
+msgid "Footer"
+msgstr "フッタ"
+
+#: googleanalytics.admin.inc:246
+msgid "Header"
+msgstr "ヘッダ"
+
+#: googleanalytics.admin.inc:256
+msgid "A valid Google Analytics account number is case sensitive and formatted like UA-xxxxxx-x."
+msgstr "有効なGoogle Analyticsのアカウント番号は大文字・小文字が区別され、UA-xxxxxx-x のような形式です。"
+
+#: googleanalytics.admin.inc:261;264
+msgid "Do not add the tracker code provided by Google into the javascript code snippets! This module already builds the tracker code based on your Google Analytics account number and settings."
+msgstr "Javascriptコードスニペット内に、Googleから提供されたトラッカーコードを加えないでください！ このモジュールは、Google Analyticsのアカウント番号と設定に基づいたトラッカーコードをすでに構築しています。"
+
+#: googleanalytics.admin.inc:267;270
+msgid "Do not include the &lt;script&gt; tags in the javascript code snippets."
+msgstr "Javascriptコードスニペットに &lt;script&gt; タグを含めないでください。"
+
+#: googleanalytics.module:18
+msgid "<a href=\"@ga_url\">Google Analytics</a> is a free statistics package based on the excellent Urchin system. This module provides services to better integrate Drupal with Google Analytics."
+msgstr "<a href=\"@ga_url\">Google Analytics</a>は、優れたUrchinシステムに基づいたフリーの統計パッケージです。 このモジュールは、DrupalとGoogle Analyticsをより良く統合するためのサービスを提供します。"
+
+#: googleanalytics.module:186
+msgid "Google Analytics configuration"
+msgstr "Google Analyticsの設定"
+
+#: googleanalytics.module:194
+msgid "Disable user tracking"
+msgstr "ユーザのトラッキングを無効化"
+
+#: googleanalytics.module:195
+msgid "Users are tracked by default, but you are able to opt out."
+msgstr "デフォルトでユーザはトラックされますが、あなたはそれを拒否することもできます。"
+
+#: googleanalytics.module:199
+msgid "Enable user tracking"
+msgstr "ユーザのトラッキングを有効化"
+
+#: googleanalytics.module:200
+msgid "Users are <em>not</em> tracked by default, but you are able to opt in."
+msgstr "デフォルトでユーザはトラックされませんが、あなたはそれを許可することもできます。"
+
+#: googleanalytics.module:228
+msgid "Google Analytics module"
+msgstr "Google Analytics モジュール"
+
+#: googleanalytics.module:229
+msgid "Google Analytics module has not been configured yet. Please configure its settings from the <a href=\"@url\">Google Analytics settings page</a>."
+msgstr "Google Analyticsモジュールは未設定です。 <a href=\"@url\">Google Analyticsの設定ページ</a>で設定を行ってください。"
+
+#: googleanalytics.module:231
+msgid "Not configured"
+msgstr "設定されていません"
+
+#: googleanalytics.module:23
+msgid "administer google analytics"
+msgstr "google analyticsの管理"
+
+#: googleanalytics.module:23
+msgid "use PHP for tracking visibility"
+msgstr "トラッキングの表示にPHPを使用"
+
+#: googleanalytics.module:28 googleanalytics.info:0
+msgid "Google Analytics"
+msgstr "Google Analytics"
+
+#: googleanalytics.module:29
+msgid "Configure the settings used to generate your Google Analytics tracking code."
+msgstr "Google Analyticsのトラッキングコードを生成するための設定を行います。"
+
+#: googleanalytics.module:0
+msgid "googleanalytics"
+msgstr "googleanalytics"
+
+#: googleanalytics.info:0
+msgid "Adds Google Analytics javascript tracking code to all your site's pages."
+msgstr "Google Analytics javascript トラッキングコードをサイトページに追加します。"
+
+#: googleanalytics.info:0
+msgid "Statistics"
+msgstr "統計"

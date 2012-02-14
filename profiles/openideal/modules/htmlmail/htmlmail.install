@@ -1,0 +1,111 @@
+<?php
+
+/**
+ * @file
+ * Installation for HTML Mail module.
+ */
+
+/**
+ * Implements hook_requirements().
+ *
+ * Ensures that the Mail System module is available, and
+ * that HTML Mail uses its own MailSystemInterface class.
+ */
+function htmlmail_requirements($phase) {
+  $result = array();
+  if ($phase === 'install') {
+    return $result;
+  }
+  if (module_load_include('inc', 'mailsystem', 'html_to_text') !== FALSE) {
+    return $result;
+  }
+  $args = array(
+    '%htmlmail' => 'HTML Mail',
+    '!htmlmail' => 'http://drupal.org/project/htmlmail',
+    '%mailsystem' => 'Mail System',
+    '!mailsystem' => 'http://drupal.org/project/mailsystem',
+  );
+  $result['htmlmail_mailsystem'] = array(
+    'title' => t('%mailsystem module', $args),
+    'value' => t('7.x-1.x'),
+    'description' => t(
+      '<a href="!htmlmail">%htmlmail</a> new requires <a href="!mailsystem">%mailsystem</a> 7.x-2.6 or later.  Please download and install a recent version of <a href+"!mailsystem">%mailsystem</a>, then re-enable the <a href="!htmlmail">%htmlmail</a> module.', $args
+    ),
+    'severity' => REQUIREMENT_ERROR,
+  );
+  return $result;
+}
+
+/**
+ * Implements hook_update_N().
+ *
+ * Removes variables that are no longer used.
+ */
+function htmlmail_update_7200() {
+  variable_del('htmlmail_header');
+  variable_del('htmlmail_footer');
+  variable_del('htmlmail_css');
+}
+
+/**
+ * Implements hook_update_N().
+ *
+ * Rename HTMLMailMailSystem to HTMLMailSystem.
+ */
+function htmlmail_update_7201() {
+  foreach (mailsystem_get() as $name => $value) {
+    if ($value == 'HTMLMailMailSystem') {
+      mailsystem_set(array($name => 'HTMLMailSystem'));
+    }
+  }
+}
+
+/**
+ * Implements hook_update_N().
+ *
+ * Increase module weight so dependent modules get loaded first.
+ */
+function htmlmail_update_7202() {
+  db_query("UPDATE {system} SET weight = 10 WHERE type = 'module' AND name = 'htmlmail'");
+}
+
+function htmlmail_update_7203() {
+  if ($requirements = htmlmail_requirements('runtime')) {
+    $requirement = array_shift($requirements);
+    throw new DrupalUpdateException($requirement['description']);
+  }
+}
+
+/**
+ * Implements hook_enable().
+ */
+function htmlmail_enable() {
+  module_load_include('module', 'mailsystem');
+  mailsystem_set(array('htmlmail' => 'HTMLMailSystem'));
+}
+
+/**
+ * Implements hook_disable().
+ */
+function htmlmail_disable() {
+  // Check is necessary because a 7.x-1.x to 7.x-2.x upgrade
+  // may not have mailsystem installed.
+  if (function_exists('mailsystem_clear')) {
+    mailsystem_clear(array('htmlmail' => 'HTMLMailSystem'));
+  }
+}
+
+/**
+ * Implements hook_install().
+ */
+function htmlmail_install() {
+  htmlmail_update_7202();
+}
+
+/**
+ * Implements hook_uninstall().
+ */
+function htmlmail_uninstall() {
+  db_query("DELETE FROM {variable} WHERE name LIKE 'htmlmail_%'");
+  cache_clear_all('variables', 'cache');
+}

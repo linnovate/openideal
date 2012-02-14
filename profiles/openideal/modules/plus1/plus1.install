@@ -1,0 +1,35 @@
+<?php
+
+/**
+ * @file
+ * Install file
+ */
+
+/**
+ * Implements hook_uninstall().
+ */
+function plus1_uninstall() {
+  variable_del('plus1_add_js');
+  variable_del('plus1_add_css');
+  variable_del('plus1_node_types');
+  variable_del('plus1_node_in_teaser');
+  variable_del('plus1_node_in_full_view');
+  variable_del('plus1_node_vote_text');
+  variable_del('plus1_node_voted_text');
+  variable_del('plus1_node_undo_vote');
+  variable_del('plus1_node_undo_vote_text');
+  variable_del('plus1_node_widget_weight');
+  variable_del('plus1_comment_widget_show');
+  variable_del('plus1_comment_vote_text');
+  variable_del('plus1_comment_voted_text');
+  variable_del('plus1_comment_undo_vote');
+  variable_del('plus1_comment_undo_vote_text');
+  variable_del('plus1_comment_widget_weight');
+  variable_del('plus1_taxonomy_term_widget_show');
+  variable_del('plus1_taxonomy_vocabularies');
+  variable_del('plus1_taxonomy_term_vote_text');
+  variable_del('plus1_taxonomy_term_voted_text');
+  variable_del('plus1_taxonomy_term_undo_vote');
+  variable_del('plus1_taxonomy_term_undo_vote_text');
+  variable_del('plus1_taxonomy_term_widget_weight');
+}

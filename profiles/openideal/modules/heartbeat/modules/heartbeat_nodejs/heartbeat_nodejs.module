@@ -1,0 +1,60 @@
+<?php
+
+/**
+ * @file
+ * Heartbeat node.js integration.
+ */
+
+/**
+ * Implements hook_heartbeat_stream_load().
+ */
+function heartbeat_nodejs_heartbeat_stream_load($heartbeatStream) {
+  drupal_add_js(drupal_get_path('module', 'heartbeat_nodejs') . '/heartbeat_nodejs.js');
+}
+
+/**
+ * Implements hook_heartbeat_activity_save().
+ *
+ * Problems on message output:
+ * - Denied links: skip messages for a user if links are in the message that lead to access
+ *   denied pages, if configured that way.
+ * - Broken flag links: run the flag link different for each user so the flaglink token is correct
+ * - Comment access: Deny comment box (run heartbeat_activity_view with an account so we can check
+ *   if the user receiving the message from the server sees the correct comment attachment.
+ * - Delete buttons: each heartbeat activity box that appears will have the delete button as the
+ *   message was rendered for the owner.
+ *   Here we need to run the user_access check for each user in the stream channel.
+ *
+ * Problems for stream access
+ * - Refactor the code so hasAccess can be invoked on each HeartbeatActivity object with
+ *   the stream as parameter. This way the permission restriction can be invoked from everywhere
+ *   within the current context. For instance a message template is denied for a stream.
+ * - Add a function to check access on template configuration as the stream query does. This is only
+ *   needed for the node.js implementation. Example "shout" type is blocked for PublicActivity stream.
+ *   When nodejs pushes, it can't do these types of messages as this would be bad.
+ *
+ * Suggestions:
+ * - Open up channels for each stream that is displayed somewhere and add the users to it.
+ * - Create a javascript theme function where access can be done.
+ */
+function heartbeat_nodejs_heartbeat_activity_save($heartbeatActivity) {
+
+  // Create the activity message.
+  $heartbeatActivity->rebuild_message();
+
+  //$accounts = nodejs_get_server_stats()->authenticatedClients;
+  $output = heartbeat_activity_view($heartbeatActivity);
+
+  // Node.js push implementation.
+  nodejs_broadcast_message('', drupal_render($output));
+}
+
+
+/**
+ * Implements hook_heartbeat_activity_delete().
+ */
+function heartbeat_nodejs_heartbeat_activity_delete($uaids, $all) {
+  foreach ($uaids as $uaid) {
+    nodejs_broadcast_message('heartbeat-delete-message', $uaid);
+  }
+}

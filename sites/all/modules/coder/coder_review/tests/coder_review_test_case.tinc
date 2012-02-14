@@ -1,0 +1,94 @@
+<?php
+
+/**
+ * @file
+ * Main coder test suite.
+ */
+
+class CoderReviewTestCase extends DrupalUnitTestCase {
+  protected $review_name;
+
+  function __construct($review_name, $id = NULL) {
+    parent::__construct($id);
+    $this->review_name = $review_name;
+  }
+
+  function setUp() {
+    parent::setUp('coder_review');
+  }
+
+  function runTest($code, $severity = SEVERITY_MINOR) {
+    $reviews = coder_review_reviews();
+    $ext = variable_get('coder_review_php_ext', array('inc', 'php', 'install', 'test'));
+
+    // Review code snippets in the test files.
+    $coder_args = array(
+      '#severity' => $severity,
+      '#filename' => 'snippet.php',
+      '#test' => $code,
+      '#php_extensions' => $ext,
+      '#include_extensions' => _coder_review_get_reviews_extensions($ext, $reviews),
+      '#ignore_lines' => array(),
+    );
+    _coder_review_read_and_parse_file($coder_args);
+    $reviews[$this->review_name]['#review_name'] = $this->review_name;
+    $results = do_coder_review($coder_args, $reviews[$this->review_name]);
+
+    unset($results['#stats']);
+    return $results;
+  }
+
+  function runTestModuleTest($severity = SEVERITY_MINOR) {
+    $reviews = coder_review_reviews();
+    $ext = variable_get('coder_review_php_ext', array('inc', 'php', 'install', 'test'));
+
+    // Review the coder_review_test module.
+    $coder_args = array(
+      '#severity' => $severity,
+      '#filename' => drupal_get_path('module', 'coder_review_test') . '/coder_review_test.module',
+      '#php_extensions' => $ext,
+      '#include_extensions' => _coder_review_get_reviews_extensions($ext, $reviews),
+      '#ignore_lines' => array(),
+    );
+    _coder_review_read_and_parse_file($coder_args);
+    $reviews[$this->review_name]['#review_name'] = $this->review_name;
+    $results = do_coder_review($coder_args, $reviews[$this->review_name]);
+
+    unset($results['#stats']);
+    return $results;
+  }
+
+  protected function assertCoderReviewPass($code) {
+    // Run the coder review on the code snippet.
+    $results = $this->runTest($code);
+
+    // Display the test results.
+    $message = 'Pass: ';
+    $message .= $this->getWarnings($results);
+    $message .= '<pre>' . check_plain(str_replace(array('%s', '%d'), array('%%s', '%%d'), $code)) . '</pre>';
+    $this->assertTrue(count($results) == 0, $message);
+  }
+
+  protected function assertCoderReviewFail($code) {
+    // Run the coder review on the code snippet.
+    $results = $this->runTest($code);
+
+    // Display the test results.
+    $message = 'Fail: ';
+    $message .= $this->getWarnings($results);
+    $message .= '<pre>' . check_plain(str_replace(array('%s', '%d'), array('%%s', '%%d'), $code)) . '</pre>';
+    $this->assertTrue(count($results), $message);
+  }
+  
+  private function getWarnings($results) {
+    $warnings = array();
+    foreach ($results as $error) {
+      $warning = _coder_review_warning($error['rule']);
+      if (is_array($warning)) {
+        $warning = $warning['#warning'];
+      }
+      $warnings[] = $warning;
+    }
+    return implode('; ', $warnings);
+  }
+}

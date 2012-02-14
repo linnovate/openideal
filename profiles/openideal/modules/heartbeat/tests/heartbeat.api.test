@@ -1,0 +1,61 @@
+<?php
+
+/**
+ * @file
+ * Heartbeat API tests.
+ */
+
+/**
+ * Test basic API.
+ */
+class HeartbeatAPI extends DrupalWebTestCase {
+
+  public static function getInfo() {
+    return array(
+      'name' => 'Heartbeat API',
+      'description' => 'Tests for heartbeat API.',
+      'group' => 'Heartbeat API',
+    );
+  }
+
+  function setUp() {
+    parent::setUp('heartbeat', 'heartbeat_defaults');
+
+    $web_user = $this->drupalCreateUser(array('create page content', 'edit own page content', 'view heartbeat messages', 'view site activity'));
+    $this->drupalLogin($web_user);
+  }
+
+  /**
+   * Tests logging through API function calls.
+   */
+  function testLogging() {
+
+    // Create a node, logging should follow.
+    $title = $this->createSimpleNode();
+    // Go to the public siteactivity with this user and check if it's there.
+    $node = $this->drupalGet('heartbeat/siteactivity');
+    $this->assertRaw($title, t('Node activity is shown.'));
+
+  }
+
+  /**
+   * Creates a simple node, used to populate heartbeat activity table.
+   */
+  private function createSimpleNode() {
+    // Create a node.
+    $edit = array();
+    $langcode = LANGUAGE_NONE;
+    $edit["title"] = $this->randomName(8);
+    $edit["body[$langcode][0][value]"] = $this->randomName(16);
+    $this->drupalPost('node/add/page', $edit, t('Save'));
+
+    // Check that the Basic page has been created.
+    $this->assertRaw(t('!post %title has been created.', array('!post' => 'Basic page', '%title' => $edit["title"])), t('Basic page created.'));
+
+    // Check that the node exists in the database.
+    $node = $this->drupalGetNodeByTitle($edit["title"]);
+    $this->assertTrue($node, t('Node found in database.'));
+    return $edit["title"];
+  }
+
+}

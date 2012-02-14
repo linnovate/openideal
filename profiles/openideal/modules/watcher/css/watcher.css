@@ -1,0 +1,154 @@
+@CHARSET "UTF-8";
+
+/**
+ * Intro text in binder
+ */
+	
+#watcher_binder_intro {
+  margin: 1em 0;
+}
+
+/**
+ * Email notification status link in binder
+ */
+
+.watcher_binder_send_email_status_icon {
+  background-image: url(../images/send_email_disabled.gif);
+  background-repeat: no-repeat!important;
+  width: 47px;
+  height: 24px;
+  display: block;
+  padding-left: 47px;
+  font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+  font-size: 10px;
+		line-height: 1.2em;
+}
+
+.watcher_binder_send_email_status_icon_disabled {
+  background-image: url(../images/send_email_disabled.gif);
+  color: #c00!important;
+}
+
+.watcher_binder_send_email_status_icon_enabled {
+  background-image: url(../images/send_email_enabled.gif);
+  color: #0b0!important;
+}
+
+/*
+  Must be on hover or firefox will not play the animated GIFs asynchronously,
+  instead they'll all sync and loop at the same time.
+  The last frame of the GIFs lasts for 10 seconds to handle long latencies.
+*/
+.watcher_binder_send_email_status_icon_from_enabled_to_disabled:hover {
+  background-image: url(../images/send_email_from_enabled_to_disabled_ani.gif)!important;
+}
+.watcher_binder_send_email_status_icon_from_disabled_to_enabled:hover {
+  background-image: url(../images/send_email_from_disabled_to_enabled_ani.gif)!important;
+}
+
+/**
+ * Stop watching link in binder (watch list)
+ */
+.watcher_binder_stop_watching_icon {
+  background-image: url(../images/stop_watching.png);
+  background-repeat: no-repeat!important;
+  width: 100%;
+  height: 22px;
+  display: block;
+  text-indent: -300em;
+}
+
+/**
+ * Toggle watching link on nodes
+ */
+.watcher_node {
+  background-image: url(../images/unwatch.gif);
+  background-repeat: no-repeat!important;
+  background-position: 0% 50%;
+  padding-left: 22px;
+  padding-top: 0px;
+  padding-bottom: 3px;
+  margin: 0;
+  font-size: 13px;
+  height: 18px;
+}
+
+.watcher_node_watched {
+  background-image: url(../images/watch.gif)!important;
+}
+
+.watcher_node_toggle_watching_link {
+  display: block;
+  color: #5F5F5F!important;
+}
+
+.watcher_node_toggle_watching_link_watched {
+  color: #0c0!important;
+  font-weight: bold;
+}
+
+/**
+ * Node links inline
+ */
+.node .links .watcher_node_toggle_watching_link {
+  color: #5F5F5F;
+}
+
+.node .links .watcher_node_toggle_watching_link_watched {
+  color: #0c0;
+  font-weight: bold;
+}
+
+
+
+.watcher_node_toggle_watching_link_with_link_to_binder {
+  margin-bottom: 1.5em;
+}
+
+.watcher_node_help_link_to_binder {
+  font-family: Verdana, Arial, Helvetica, sans-serif;
+  font-size: 12px;
+  margin-top: 15px;
+}
+
+/**
+ * Watcher Help Page
+ */
+
+#watcher_help_page dl dt {
+  font-weight: bold!important;
+}
+
+/**
+ * Defaults notice on user's settings page
+ */
+.watcher_settings_defaults_notice {
+  font-weight: bold;
+  padding: 1em 1em 1em 54px;
+  background: url(../images/important.png) no-repeat 8px 50%;
+}
+
+.watcher-warning {
+  color: #d00;
+  font-weight: bold;
+  display: block;
+  background: #F5E7E7;
+  padding: .2em .4em .2em .4em;
+  margin: .2em 0;
+  -moz-border-radius: .4em;
+  -webkit-border-radius: .4em;
+  border-radius: .4em;
+}
+
+.watcher-recommended {
+  color: #fff;
+  font-weight: bold;
+  background: #0062A0;
+  padding: .2em .4em .2em .4em;
+  margin: .2em 0;
+  text-transform: uppercase;
+  font-size: 70%;
+  -moz-border-radius: .4em;
+  -webkit-border-radius: .4em;
+  border-radius: .4em;
+}

@@ -1,0 +1,183 @@
+<h2><a href="http://drupal.org/project/htmlmail">HTML Mail</a></h2>
+<p>Lets you theme your messages the same way you theme the rest of your website.</p>
+<h3><a href="http://www.dict.org/bin/Dict?Form=Dict2&amp;Database=*&amp;Query=requirement">Requirement</a></h3>
+<ul>
+  <li><a href="http://drupal.org/project/mailsystem">Mail System 7.x-2.x</a></li>
+</ul>
+<h3><a href="http://drupal.org/documentation/install/modules-themes/modules-7">Installation</a></h3>
+<p>The following additional modules, while not required, are highly recommended:</p>
+<ul>
+  <li>
+    <dl>
+      <dt><a href="http://drupal.org/project/echo">Echo</a></dt>
+      <dd>Wraps your messages in a drupal theme. Now you can "brand" your messages with the same logo, header, fonts, and styles as your website.</dd>
+    </dl>
+  </li>
+  <li>
+    <dl>
+      <dt><a href="http://drupal.org/project/emogrifier">Emogrifier</a></dt>
+      <dd>Converts stylesheets to inline style rules, for consistent display on mobile devices and webmail.</dd>
+    </dl>
+  </li>
+  <li>
+    <dl>
+      <dt><a href="http://drupal.org/project/mailmime">Mail MIME</a></dt>
+      <dd>Provides a text/plain alternative to text/html emails, and automatically converts image references to inline image attachments.</dd>
+    </dl>
+  </li>
+  <li>
+    <dl>
+      <dt><a href="http://drupal.org/project/pathologic">Pathologic</a></dt>
+      <dd>Converts urls from relative to absolute, so clickable links in your email messages work as intended.</dd>
+    </dl>
+  </li>
+  <li>
+    <dl>
+      <dt><a href="http://drupal.org/project/filter_transliteration">Transliteration</a></dt>
+      <dd>
+        <p>Converts non-ASCII characters to their US-ASCII equivalents, such as from Microsoft "smart-quotes" to regular quotes.</p>
+      </dd>
+      <dd>
+        <p><em>Also available as a <a href="http://drupal.org/node/1095278#comment-4219530">patch</a>.</em></p>
+      </dd>
+    </dl>
+  </li>
+</ul>
+<h3><a href="http://drupal.org/node/250790">Updating from previous versions</a></h3>
+<p>The <a href="http://drupal.org/node/1106064">7.x-2.x</a> branch shares 94% of its code with the <a href="http://drupal.org/node/1119548">6.x-2.x</a> branch, but only 15% of its code with the <a href="http://drupal.org/node/355250">7.x-1.x</a> branch, and a tiny 8% of its code with the <a href="http://drupal.org/node/329828">6.x-1.x</a> branch.</p>
+<p>Let your compatibility expectations be adjusted accordingly.</p>
+<ul>
+  <li>
+    <p>Check the module dependencies, as they have changed. The latest version of <a href="http://drupal.org/project/htmlmail">HTML Mail</a> depends on the <a href="http://drupal.org/project/mailsystem">Mail System</a> module (7.x-2.2 or later) and will not work without it.</p>
+  </li>
+  <li>
+    <p>Run <code>update.php</code> <em>immediately</em> after uploading new code.</p>
+  </li>
+  <li>
+    <p>The user-interface for adding email header and footer text has been removed. Headers and footers may be added by template files and/or by enabling the <a href="http://drupal.org/project/echo">Echo</a> module.</p>
+  </li>
+  <li>
+    <p>Any customized filters should be carefully tested, as some of the template variables have changed. Full documentation is provided both on the module configuration page (Click on the <u>Instructions</u> link) and as comments within the <code>htmlmail.tpl.php</code> file itself.</p>
+  </li>
+  <li>
+    <p>The following options have been removed from the module settings page. In their place, any combination of <a href="http://drupal.org/project/modules/?filters=type%3Aproject_project%20tid%3A63%20hash%3A1hbejm%20-bs_project_sandbox%3A1%20bs_project_has_releases%3A1">over 200 filter modules</a> may be used to create an email-specific <a href="http://drupal.org/node/778976">text format</a> for post-template filtering.</p>
+    <ul>
+      <li><a href="http://api.drupal.org/api/drupal/modules--filter--filter.module/function/_filter_autop/7">Line break converter</a></li>
+      <li><a href="http://api.drupal.org/api/drupal/modules--filter--filter.module/function/_filter_url/7">URL Filter</a></li>
+      <li><a href="http://drupal.org/project/rel_to_abs">Relative Path to Absolute URLs</a></li>
+      <li><a href="http://www.pelagodesign.com/sidecar/emogrifier/">Emogrifier</a></li>
+      <li><a href="http://drupal.org/project/token">Token support</a></li>
+    </ul>
+  </li>
+  <li>
+    <p>Full MIME handling, including automatic generation of a plaintext alternative part and conversion of image references to inline image attachments, is available simply by enabling the <a href="http://drupal.org/project/mailmime">Mail MIME</a> module.</p>
+  </li>
+</ul>
+<h3><a href="http://drupal.org/files/images/htmlmail_settings_2.thumbnail.png">Configuration</a></h3>
+<p>Visit the <a href="http://drupal.org/project/mailsystem">Mail System</a> settings page at <u>admin/config/system/mailsystem</u> to select which parts of Drupal will use <a href="http://drupal.org/project/htmlmail">HTML Mail</a> instead of the <a href="http://api.drupal.org/api/drupal/modules--system--system.mail.inc/class/DefaultMailSystem/7">default</a> <a href="http://api.drupal.org/api/drupal/includes--mail.inc/function/drupal_mail_system/7">mail system</a>.</p>
+<p>Visit the <a href="http://drupal.org/project/htmlmail">HTML Mail</a> settings page at <u>admin/config/system/htmlmail</u> to select a theme and post-filter for your messages.</p>
+<h3><a href="http://drupal.org/documentation/theme">Theming</a></h3>
+<p>The email message text goes through three transformations before sending:</p>
+<ol style="list-style-type: decimal;">
+  <li>
+    <h3>Template File</h3>
+    <p>A template file is applied to your message header, subject, and body text. The default template is the included <code>htmlmail.tpl.php</code> file. You may copy this file to your <cite>email theme</cite> directory (selected below), and use it to customize the contents and formatting of your messages. The comments within that file contain complete documentation on its usage.</p>
+  </li>
+  <li>
+    <h3>Theming</h3>
+    <p>You may choose a theme that will hold your templates from Step 1 above. If the <a href="http://drupal.org/project/echo">Echo</a> module is installed, this theme will also be used to wrap your templated text in a webpage. You use any one of <a href="http://drupal.org/project/themes">over 800</a> themes to style your messages, or <a href="http://drupal.org/documentation/theme">create your own</a> for even more power and flexibility.</p>
+  </li>
+  <li>
+    <h3>Post-filtering</h3>
+    <p>You may choose a <a href="http://drupal.org/node/778976">text format</a> to be used for filtering email messages <em>after</em> theming. This allows you to use any combination of <a href="http://drupal.org/project/modules/?filters=type%3Aproject_project%20tid%3A63%20hash%3A1hbejm%20-bs_project_sandbox%3A1%20bs_project_has_releases%3A1">over 200 filter modules</a> to make final changes to your message before sending.</p>
+    <p>Here is a recommended configuration:</p>
+    <ul>
+      <li>
+        <p><a href="http://drupal.org/project/emogrifier">Emogrifier</a> Converts stylesheets to inline style rules for consistent display on mobile devices and webmail.</p>
+      </li>
+      <li>
+        <p><a href="http://drupal.org/project/filter_transliteration">Transliteration</a> Converts non-ASCII text to US-ASCII equivalents. This helps prevent Microsoft "smart-quotes" from appearing as question-marks in Mozilla Thunderbird.</p>
+      </li>
+      <li>
+        <p><a href="http://drupal.org/project/pathologic">Pathologic</a> Converts relative URLS to absolute URLS so that clickable links in your message will work as intended.</p>
+      </li>
+    </ul>
+  </li>
+</ol>
+<h3>Troubleshooting</h3>
+<ul>
+  <li>
+    <p>Double-check the <a href="http://drupal.org/project/mailsystem">Mail System</a> module settings and and make sure you selected <u><code>HTMLMailSystem</code></u> for your <u>Site-wide default mail system</u>.</p>
+  </li>
+  <li>
+    <p>Try selecting the <u><code>[ ]</code> <em>(Optional)</em> Debug</u> checkbox at the <a href="http://drupal.org/project/htmlmail">HTML Mail</a> module settings page and re-sending your message.</p>
+  </li>
+  <li>
+    <p>Clear your cache after changing any <u><code>.tpl.php</code></u> files.</p>
+  </li>
+  <li>
+    <p>If you use a post-filter, make sure your filter settings page looks like <a href="http://drupal.org/node/1130960">this</a>.</p>
+  </li>
+  <li>
+    <p>Visit the <a href="http://drupal.org/project/issues/htmlmail">issue queue</a> for support and feature requests.</p>
+  </li>
+</ul>
+<h3>Related Modules</h3>
+<dl>
+  <dt><strong>Echo</strong></dt>
+  <dd>
+    <p>http://drupal.org/project/echo</p>
+  </dd>
+  <dt><strong>Emogrifier</strong></dt>
+  <dd>
+    <p>http://drupal.org/project/emogrifier</p>
+  </dd>
+  <dt><strong>HTML Purifier</strong></dt>
+  <dd>
+    <p>http://drupal.org/project/htmlpurifier</p>
+  </dd>
+  <dt><strong>htmLawed</strong></dt>
+  <dd>
+    <p>http://drupal.org/project/htmlawed</p>
+  </dd>
+  <dt><strong>Mail MIME</strong></dt>
+  <dd>
+    <p>http://drupal.org/project/mailmime</p>
+  </dd>
+  <dt><strong>Mail System</strong></dt>
+  <dd>
+    <p>http://drupal.org/project/mailsystem</p>
+  </dd>
+  <dt><strong>Pathologic</strong></dt>
+  <dd>
+    <p>http://drupal.org/project/pathologic</p>
+  </dd>
+  <dt><strong>Transliteration</strong></dt>
+  <dd>
+    <p>http://drupal.org/project/transliteration</p>
+  </dd>
+</dl>
+<h3><a href="http://drupal.org/project/documentation">Documentation</a></h3>
+<dl>
+  <dt><strong><a href="http://api.drupal.org/api/drupal/modules--filter--filter.module/6">filter.module</a></strong></dt>
+  <dd><a href="http://api.drupal.org/api/drupal/modules--filter--filter.module/7">api.drupal.org/api/drupal/modules--filter--filter.module</a></dd>
+  <dd>
+    <p><a href="http://api.drupal.org/api/drupal/modules--filter--filter.module/group/standard_filters/7">api.drupal.org/api/drupal/modules--filter--filter.module/group/standard_filters/7</a></p>
+  </dd>
+  <dt><strong><a href="http://drupal.org/documentation/install/modules-themes/modules-7">Installing contributed modules</a></strong></dt>
+  <dd>
+    <p><a href="http://drupal.org/documentation/install/modules-themes/modules-7">drupal.org/documentation/install/modules-themes/modules-7</a></p>
+  </dd>
+  <dt><strong><a href="http://drupal.org/documentation/theme">Theming guide</a></strong></dt>
+  <dd>
+    <p><a href="http://drupal.org/documentation/theme">drupal.org/documentation/theme</a></p>
+  </dd>
+</dl>
+<h3>Original Author</h3>
+<ul>
+  <li><a href="http://drupal.org/user/1171">Chris Herberte</a></li>
+</ul>
+<h3>Current Maintainer</h3>
+<ul>
+  <li><a href="http://drupal.org/user/36148">Bob Vincent</a></li>
+</ul>

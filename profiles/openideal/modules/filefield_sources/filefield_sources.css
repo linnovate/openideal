@@ -1,0 +1,31 @@
+
+/* Generic display for all sources. */
+
+div.filefield-source input.form-text,
+div.filefield-source select.form-select {
+  display: inline;
+  width: 20em;
+}
+
+div.filefield-source .form-item {
+  white-space: normal;
+}
+
+div.filefield-source input.hint {
+  color: #999;
+}
+
+div.filefield-sources-list a.active {
+  font-weight: bold;
+}
+
+/* Reference source. */
+div.filefield-source-reference-item {
+  font-size: 90%;
+}
+
+/* Remote source. */
+div.filefield-source-remote input.form-text {
+  /* Helps with display consistency since references has a background. */
+  background-image: inherit;
+}

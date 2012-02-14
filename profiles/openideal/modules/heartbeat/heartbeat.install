@@ -1,0 +1,401 @@
+<?php
+
+/**
+ * @file
+ *   Installation file for the heartbeat module.
+ * @author
+ *   Jochen Stals - Menhir - www.menhir.be
+ */
+
+/**
+ * Implementation of hook_install().
+ */
+function heartbeat_install() {
+
+  // Module weights in core: put heartbeat after most modules in the chain.
+  // especially core modules, rules, token and pathauto
+  /*db_update('system')
+    ->fields(array('weight' => 50))
+    ->condition('name', 'heartbeat')
+    ->execute();*/
+
+}
+
+/**
+ * Implementation of hook_uninstall().
+ */
+function heartbeat_uninstall() {
+  variable_del('heartbeat_activity_grouping_seconds');
+  variable_del('heartbeat_activity_grouping_how_many');
+  variable_del('heartbeat_activity_log_cron_delete');
+}
+
+/**
+ * Implementation of hook_schema().
+ */
+function heartbeat_schema() {
+
+ $schema = array();
+
+ $schema += _heartbeat_update_7010();
+
+ $schema['heartbeat_messages'] = array(
+    'description' => t('Table that contains predefined messages that can be used in heartbeat views.'),
+    // CTools export definitions.
+    'export' => array(
+      'key' => 'message_id',
+      'key name' => 'Message ID',
+      'primary key' => 'message_id',
+      'bulk export' => TRUE,
+      'identifier' => 'heartbeatmessagetemplate',
+      'object' => 'HeartbeatMessageTemplate',
+      'default hook' => 'heartbeat_template_info',
+      'list callback' => 'heartbeat_templates_names',
+      'delete callback' => 'heartbeat_message_template_delete',
+      //'export callback' => 'heartbeat_message_template_export',
+      'can disable' => TRUE,
+      'api' => array(
+        'owner' => 'heartbeat',
+        'api' => 'heartbeat',
+        'minimum_version' => 1,
+        'current_version' => 1,
+      ),
+    ),
+    'fields' => array(
+      'hid' => array(
+        'type' => 'serial',
+        'not null' => TRUE,
+        'description' => t('Primary Key: Unique heartbeat_messages event ID.'),
+        'no export' => TRUE,
+      ),
+      'message_id' => array(
+        'type' => 'varchar',
+        'length' => 250,
+        'not null' => FALSE,
+        'default' => '',
+        'description' => t('The message id which is unique to identify activity.'),
+      ),
+      'description' => array(
+        'type' => 'text',
+        'not null' => FALSE,
+        'size' => 'big',
+        'description' => t('Description and/or help text.'),
+      ),
+      'message' => array(
+        'type' => 'text',
+        'not null' => TRUE,
+        'size' => 'big',
+        'description' => t('Text of log message to be passed into the t() function.'),
+        'alias' => 'message_orig', // Internal heartbeat field/property
+      ),
+      'message_concat' => array(
+        'type' => 'text',
+        'not null' => TRUE,
+        'size' => 'big',
+        'description' => t('Text of translatable log message for in concatenated form.'),
+        'alias' => 'message_concat_orig', // Internal heartbeat field/property
+      ),
+      'perms' => array(
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => FALSE,
+        'default' => 4,
+        'description' => t('Permissions for this message.'),
+      ),
+      'group_type' => array(
+        'type' => 'varchar',
+        'length' => 20,
+        'not null' => TRUE,
+        'default' => 'single',
+        'description' => t('The group type of the template'),
+      ),
+      'concat_args' => array(
+        'description' => t('Arguments for concatenation message.'),
+        'type' => 'blob',
+        'serialize' => TRUE,
+        'not null' => FALSE,
+      ),
+      'variables' => array(
+        'description' => t('Variables to parse into the message (used in message).'),
+        'type' => 'blob',
+        'serialize' => TRUE,
+        'not null' => FALSE,
+      ),
+      'attachments' => array(
+        'description' => t('Attachments on messages.'),
+        'type' => 'blob',
+        'serialize' => TRUE,
+        'not null' => FALSE,
+      ),
+    ),
+    'primary key' => array('hid'),
+    'indexes' => array(
+      'message_id' => array('message_id'),
+    ),
+  );
+
+  $schema['heartbeat_activity'] = array(
+    'description' => t('Table that contains logs of all user triggerable actions.'),
+    'fields' => array(
+      'uaid' => array(
+        'type' => 'serial',
+        'not null' => TRUE,
+        'description' => t('Primary Key: Unique heartbeat_activity event ID.'),
+      ),
+      'uid' => array(
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+        'description' => t('The {users}.uid of the user who triggered the event (requester).'),
+      ),
+      'uid_target' => array(
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => FALSE,
+        'default' => 0,
+        'description' => t('The target User ID'),
+      ),
+      'nid' => array(
+        'description' => t('The Node ID.'),
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => FALSE,
+      ),
+      'nid_target' => array(
+        'description' => t('The target Node ID (E.g. Group id, node reference, ...).'),
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => FALSE,
+      ),
+      'cid' => array(
+        'description' => t('The target comment ID (optional).'),
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => FALSE,
+      ),
+      'access' => array(
+        'type' => 'int',
+        'not null' => TRUE,
+        'size' => 'tiny',
+        'description' => t('Access for this message to others.'),
+        'default' => 0,
+      ),
+      'message_id' => array(
+        'type' => 'varchar',
+        'length' => 250,
+        'not null' => FALSE,
+        'default' => '',
+        'description' => t('The message id which links to the heartbeat message.'),
+      ),
+      'timestamp' => array(
+        'description' => t('The activity\'s unix timestamp when action occurred'),
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'language' => array(
+        'type' => 'varchar',
+        'length' => 12,
+        'not null' => FALSE,
+        'default' => 'en',
+        'description' => t('language for a log".'),
+      ),
+      'variables' => array(
+        'type' => 'text',
+        'not null' => FALSE,
+        'size' => 'big',
+        'description' => t('Serialized array of variables that match the message string and that is passed into the t() function.'),
+      ),
+    ),
+    'primary key' => array('uaid'),
+    'indexes' => array(
+      'timestamp' => array('timestamp'),
+      'uid' => array('uid'),
+      'message_id' => array('message_id'),
+      'uid_target' => array('uid_target'),
+      'nid' => array('nid'),
+      'nid_target' => array('nid_target'),
+      'cid' => array('cid'),
+      'language' => array('language'),
+    ),
+  );
+
+  $schema['heartbeat_translations'] = array(
+    'description' => t('Table that connects translations of the same activity.'),
+    'fields' => array(
+      'uaid' => array(
+        'type' => 'int',
+        'not null' => TRUE,
+        'description' => t('The uaid of the connection.'),
+      ),
+      'tuaid' => array(
+        'type' => 'int',
+        'not null' => TRUE,
+        'description' => t('The corresponding tuaid.'),
+      ),
+    ),
+  );
+
+  return $schema;
+}
+
+/**
+ * Helper function to add the new schema for streams.
+ */
+function _heartbeat_update_7010() {
+
+   $schema['heartbeat_streams'] = array(
+    'description' => t('Table that contains heartbeat streams.'),
+    // CTools export definitions.
+    'export' => array(
+      'key' => 'class',
+      'key name' => 'name',
+      'primary key' => 'class',
+      'bulk export' => TRUE,
+      'identifier' => 'heartbeatstream',
+      'object' => 'HeartbeatStreamConfig',
+      'default hook' => 'heartbeat_stream_info',
+      'load callback' => '_heartbeat_stream_config_load',
+      'load all callback' => '_heartbeat_stream_config_load_all',
+      'can disable' => TRUE,
+      'api' => array(
+        'owner' => 'heartbeat',
+        'api' => 'heartbeat',
+        'minimum_version' => 1,
+        'current_version' => 1,
+      ),
+    ),
+    'fields' => array(
+      'class' => array(
+        'type' => 'varchar',
+        'length' => 100,
+        'not null' => TRUE,
+        'default' => '',
+        'description' => t('Class of the stream to load.'),
+      ),
+      'real_class' => array(
+        'type' => 'varchar',
+        'length' => 100,
+        'not null' => TRUE,
+        'default' => '',
+        'description' => t('Real Class of the stream to load.'),
+      ),
+      'name' => array(
+        'type' => 'varchar',
+        'length' => 100,
+        'not null' => TRUE,
+        'default' => '',
+        'description' => t('Name of the stream. Cloned streams will have the same object but same class.'),
+      ),
+      'module' => array(
+        'type' => 'varchar',
+        'length' => 100,
+        'not null' => TRUE,
+        'default' => '',
+        'description' => t('The module that defines the class and where the query builder is located.'),
+      ),
+      'title' => array(
+        'type' => 'varchar',
+        'length' => 100,
+        'not null' => TRUE,
+        'default' => '',
+        'description' => t('Human readable name of the stream.'),
+      ),
+      'path' => array(
+        'type' => 'varchar',
+        'length' => 250,
+        'not null' => TRUE,
+        'default' => '',
+        'description' => t('Path to the stream object.'),
+      ),
+      'settings' => array(
+        'description' => t('Serialized settings for this stream.'),
+        'type' => 'blob',
+        'serialize' => TRUE,
+        'not null' => FALSE,
+      ),
+      'variables' => array(
+        'description' => t('Variables to parse into the message (used in message).'),
+        'type' => 'blob',
+        'serialize' => TRUE,
+        'not null' => FALSE,
+      ),
+    ),
+    'primary key' => array('class'),
+    'indexes' => array(
+      'name' => array('name'),
+    ),
+  );
+
+  return $schema;
+
+}
+
+/**
+ * Removing fields from D6 branch, replacing some things by ctools export.
+ */
+function heartbeat_update_7010() {
+
+  // Type, export_type, disabled, and some others are taken over by ctools.
+  db_drop_field('heartbeat_messages', 'custom');
+  db_drop_field('heartbeat_messages', 'disabled');
+  db_change_field('heartbeat_messages', 'variables', 'variables', array('type' => 'blob', 'not null' => FALSE, 'size' => 'big','serialize' => TRUE));
+  db_change_field('heartbeat_messages', 'concat_args', 'concat_args', array('type' => 'blob', 'not null' => FALSE, 'size' => 'big','serialize' => TRUE));
+  db_change_field('heartbeat_messages', 'attachments', 'attachments', array('type' => 'blob', 'not null' => FALSE, 'size' => 'big', 'serialize' => TRUE));
+  if (!db_field_exists('heartbeat_messages', 'group_type')) {
+    db_add_field('heartbeat_messages', 'group_type', array('type' => 'varchar', 'length' => 20, 'not null' => TRUE, 'default' => 'single', 'description' => t('The group type of the template')));
+  }
+
+  if (!db_table_exists('heartbeat_streams')) {
+    $schema =_heartbeat_update_7010();
+    db_create_table('heartbeat_streams', $schema['heartbeat_streams']);
+  }
+
+  db_drop_field('heartbeat_activity', 'message');
+  db_drop_field('heartbeat_activity', 'message_concat');
+
+}
+
+/**
+ * Adding a field to hold comments for activity.
+ */
+function heartbeat_update_7011() {
+
+  if (!db_field_exists('heartbeat_activity',  'uaid_comments')) {
+    db_add_field('heartbeat_activity', 'uaid_comments', array(
+      'type' => 'int',
+      'not null' => FALSE,
+      'default' => '0',
+      'description' => 'The comment count for a heartbeat message.',
+    ));
+  }
+
+}
+
+/**
+ * Removed the count field for comments specific.
+ */
+function heartbeat_update_7012() {
+
+  db_drop_field('heartbeat_activity', 'uaid_comments');
+
+}
+
+/**
+ * Add a real_class field so clones can get their original class.
+ */
+function heartbeat_update_7013() {
+
+  if (!db_field_exists('heartbeat_streams',  'real_class')) {
+    db_add_field('heartbeat_streams', 'real_class', array(
+      'type' => 'varchar',
+      'length' => 100,
+      'not null' => TRUE,
+      'default' => '',
+      'description' => t('Real Class of the stream to load.'),
+    ));
+  }
+
+}

@@ -1,0 +1,22 @@
+<?php
+
+/**
+ * @file
+ */
+
+/**
+ * Implementation of hook_uninstall().
+ */
+function module_filter_uninstall() {
+  variable_del('module_filter_tabs');
+  variable_del('module_filter_count_enabled');
+  variable_del('module_filter_visual_aid');
+  variable_del('module_filter_dynamic_save_position');
+}
+
+/**
+ * Remove the 'module_filter_autocomplete' variable.
+ */
+function module_filter_update_7100() {
+  variable_del('module_filter_autocomplete');
+}

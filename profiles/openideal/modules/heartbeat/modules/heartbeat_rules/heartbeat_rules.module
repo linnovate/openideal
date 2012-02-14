@@ -1,0 +1,104 @@
+<?php
+
+/**
+ * @file
+ * Rules integration. Event/trigger as well as the heartbeat actions.
+ */
+
+/**
+ * Implementation of hook_menu().
+ */
+function heartbeat_rules_menu() {
+
+  $items = array();
+  $items['heartbeat/heartbeat_activity_rules_default/js'] = array(
+    'title' => 'Callback to supply extra action variables as arguments',
+    'type' => MENU_CALLBACK,
+    'page callback' => 'heartbeat_rules_action_message_id_js',
+    'access arguments' => array('admin heartbeat templates'),
+  );
+
+  return $items;
+}
+
+/**
+ * Implements hook_token_info().
+ */
+function heartbeat_token_info() {
+  /*$type = array(
+    'name' => t('Heartbeat activity'),
+    'description' => t('Tokens related to individual heartbeat activity messages.'),
+    'needs-data' => 'heartbeatactivity',
+  );*/
+
+  // Core tokens for nodes.
+  $node['link'] = array(
+    'name' => t("Content name with a link to it"),
+    'description' => t('The node with a link to it.'),
+  );
+
+  // Core tokens for nodes.
+  $user['link'] = array(
+    'name' => t("Username with a link to it"),
+    'description' => t('The user with a link to it.'),
+  );
+
+  return array(
+    //'types' => array('heartbeat' => $type),
+    'tokens' => array('node' => $node, 'user' => $user),
+  );
+}
+
+/**
+ * Implements hook_tokens().
+ */
+function heartbeat_tokens($type, $tokens, array $data = array(), array $options = array()) {
+  $url_options = array('absolute' => TRUE);
+  $url_options['alias'] = TRUE;
+  if (isset($options['language'])) {
+    $url_options['language'] = $options['language'];
+    $language_code = $options['language']->language;
+  }
+  else {
+    $language_code = NULL;
+  }
+  $sanitize = !empty($options['sanitize']);
+
+  $replacements = array();
+
+  if ($type == 'node' && !empty($data['node'])) {
+    $node = $data['node'];
+
+    foreach ($tokens as $name => $original) {
+      switch ($name) {
+
+        case 'link':
+          $replacements[$original] = l($node->title, 'node/' . $node->nid, $url_options);
+          break;
+      }
+    }
+
+  }
+
+  if ($type == 'user' && !empty($data['user'])) {
+    $account = $data['user'];
+
+    foreach ($tokens as $name => $original) {
+      switch ($name) {
+
+        case 'link':
+          $url_options['attributes']['class'] = array('user-link');
+          $replacements[$original] = l($account->name, 'user/' . $account->uid, $url_options);
+          break;
+      }
+    }
+
+  }
+
+  return $replacements;
+}
+
+
+/**
+ * eof().
+ */

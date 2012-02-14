@@ -1,0 +1,140 @@
+<?php
+
+/**
+ * @file
+ * Install, update and uninstall functions for the Login Destination module.
+ */
+
+/**
+ * Implements hook_schema().
+ */
+function login_destination_schema() {
+  $schema['login_destination'] = array(
+    'description' => 'Login Destination rules.',
+    'fields' => array(
+      'id' => array(
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'description' => 'Primary Key: Unique ID.',
+      ),
+      'triggers' => array(
+        'type' => 'text',
+        'not null' => TRUE,
+        'description' => 'Triggers on which to perform redirect',
+      ),
+      'roles' => array(
+        'type' => 'text',
+        'not null' => TRUE,
+        'description' => 'Roles to perform redirect for',
+      ),
+      'pages_type' => array(
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+        'size' => 'tiny',
+        'description' => 'Flag to indicate from which pages to redirect. (0 = all pages except listed pages, 1 = only listed pages, 2 = Use custom PHP code)',
+      ),
+      'pages' => array(
+        'type' => 'text',
+        'not null' => TRUE,
+        'description' => 'Pages from which to redirect',
+      ),
+      'destination_type' => array(
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+        'size' => 'tiny',
+        'description' => 'Flag to indicate the destination type. (0 = static URL, 1 = PHP code)',
+      ),
+      'destination' => array(
+        'type' => 'text',
+        'not null' => TRUE,
+        'description' => 'Redirect destination',
+      ),
+      'weight' => array(
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+        'description' => "The rule's weight.",
+      ),
+    ),
+    'primary key' => array('id'),
+    'indexes' => array(
+      'list' => array('weight'),
+    ),
+  );
+
+  return $schema;
+}
+
+/**
+ * Implementation of hook_install().
+ */
+function login_destination_install() {
+  // update the alter option of 'user/logout' to TRUE (menu_save invokes necessary hooks)
+  $result = db_query("SELECT mlid, menu_name FROM {menu_links} WHERE link_path = 'user/logout' OR  link_path = 'user' ORDER BY mlid ASC");
+  foreach($result as $res) {
+    $item = menu_link_load($res->mlid);
+    $item['options']['alter'] = TRUE;
+    db_update('menu_links')
+      ->fields(array(
+        'options' => serialize($item['options']),
+      ))
+      ->condition('mlid', $item['mlid'])
+      ->execute();
+  }
+}
+
+/**
+ * Implementation of hook_uninstall().
+ */
+function login_destination_uninstall() {
+  variable_del('login_destination_preserve_destination');
+  variable_del('login_destination_profile_redirect');
+}
+
+function login_destination_update_7000() {
+  $type = variable_get('ld_condition_type', 'always');
+  $snippet = variable_get('ld_condition_snippet', '');
+
+  if ($type == 'snippet') {
+    $form_state['values']['pages_type'] = 2;
+    // We introduced php tags.
+    $form_state['values']['pages'] = '<?php ' . $snippet . '?>';
+  }
+  elseif ($type == 'pages') {
+    $form_state['values']['pages_type'] = 1;
+    $form_state['values']['pages'] = $snippet;
+  }
+  else {
+    $form_state['values']['pages_type'] = 0;
+    $form_state['values']['pages'] = $snippet;
+  }
+
+  $type = variable_get('ld_url_type', 'static');
+  $snippet = variable_get('ld_url_destination', '');
+
+  if ($type == 'snippet') {
+    $form_state['values']['destination_type'] = 1;
+    // syntax for return value has changed.
+    $form_state['values']['destination'] = '<?php /* ' . $snippet . ' */ ?>';
+  }
+  else {
+    $form_state['values']['destination_type'] = 0;
+    $form_state['values']['destination'] = $snippet;
+  }
+
+  $form_state['values']['triggers'] = serialize(array('login'));
+  $form_state['values']['roles'] = serialize(array());
+
+  drupal_write_record('login_destination', $form_state['values']);
+
+  variable_set('login_destination_preserve_destination', variable_get('ld_destination', 0));
+
+  variable_del('ld_condition_type');
+  variable_del('ld_condition_snippet');
+  variable_del('ld_destination');
+  variable_del('ld_url_type');
+  variable_del('ld_url_destination');
+}
