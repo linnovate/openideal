@@ -1,0 +1,114 @@
+<?php
+// $Id: rules_scheduler.module,v 1.1.2.5 2009/07/13 13:34:27 fago Exp $
+
+
+/**
+ * @file
+ * Rules scheduler module.
+ */
+
+// Path definition for scheduling page
+define('RULES_SCHEDULER_PATH', RULES_ADMIN_SET_PATH .'/scheduling');
+
+/**
+ * Implementation of hook_cron().
+ */
+function rules_scheduler_cron() {
+  // Do max 30 rule sets
+  //TODO: make this configureable
+  $result = db_query_range("SELECT * FROM {rules_scheduler} WHERE date < '%s'", gmdate('Y-m-d H:i:s'), 0, 30);
+
+  while ($row = db_fetch_object($result)) {
+    rules_include('rules');
+    $vars = rules_unpack_variables(unserialize($row->arguments));
+
+    if ($vars) {
+      // Invoke the rule set
+      $args = $vars['data'];
+      array_unshift($args, $row->set_name);
+      call_user_func_array('rules_invoke_rule_set', $args);
+    }
+    db_query("DELETE FROM {rules_scheduler} WHERE tid = %d", $row->tid);
+  }
+}
+
+/**
+ * Implementation of hook_menu().
+ */
+function rules_scheduler_menu() {
+  $items = array();
+  $items[RULES_SCHEDULER_PATH] = array(
+    'title' => 'Scheduling',
+    'type' => MENU_LOCAL_TASK,
+    'page callback' => 'rules_scheduler_scheduling',
+    'access arguments' => array('administer rules'),
+    'file' => 'rules_scheduler.admin.inc',
+  );
+  $items[RULES_SCHEDULER_PATH .'/%rules_scheduler_tid/delete'] = array(
+    'title' => 'Delete a scheduled task',
+    'type' => MENU_CALLBACK,
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('rules_scheduler_delete_task', 4),
+    'access arguments' => array('administer rules'),
+    'load arguments' => array(4),
+    'file' => 'rules_scheduler.admin.inc',
+  );
+  return $items;
+}
+
+/**
+ * Load a task by a given task ID.
+ */
+function rules_scheduler_tid_load($tid) {
+  $result = db_query("SELECT * FROM {rules_scheduler} WHERE tid = %d", $tid);
+  $task = db_fetch_array($result);
+  return $task;
+}
+
+/**
+ * Implementation of hook_views_api().
+ */
+function rules_scheduler_views_api() {
+  return array(
+    'api' => 2.0,
+    'path' => drupal_get_path('module', 'rules_scheduler') .'/includes',
+  );
+}
+
+/**
+ * Schedule a task by inserting it into the database.
+ *
+ * @param $rule_set_name
+ *   The machine readyble name of the rule set to be scheduled.
+ * @param $date
+ *   Timestamp when the rule set should be executed.
+ * @param $task_identifier
+ *   User provided string to identify the task within this rule set.
+ * @param $arg_info
+ *   Array that contains information and structure of argument variables.
+ * @param $arguments
+ *   Array of data for the given variables, in the same order as in $arg_info.
+ * @param $log
+ *   Boolean flag to indicate whether the Rules log is available or not.
+ */
+function rules_scheduler_schedule_task($rule_set_name, $date, $task_identifier = "", $arg_info = array(), $arguments = NULL, $log = FALSE) {
+  $pack = rules_pack_variables($arg_info, $arguments);
+  if ($pack !== FALSE) {
+    if (!empty($task_identifier)) {
+      // If there is a task with the same identifier and rule set,
+      // we replace it, so we run a delete query first.
+      db_query("DELETE FROM {rules_scheduler} WHERE set_name = '%s' AND identifier = '%s'", $rule_set_name, $task_identifier);
+    }
+    $rules_date = new rules_data_type_date();
+    $date = $rules_date->check_value(array('label' => 'execution date'), $date);
+    drupal_write_record('rules_scheduler', $task = array(
+        'date' => $date,
+        'set_name' => $rule_set_name,
+        'arguments' => $pack,
+        'identifier' => $task_identifier,
+    ));
+  }
+  elseif ($log) {
+    rules_log(t('Packing arguments for scheduling the rule set %set failed.', array('%set' => $rule_set_name)), TRUE);
+  }
+}

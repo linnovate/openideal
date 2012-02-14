@@ -1,0 +1,26 @@
+<?php
+// $Id: rules_forms.install,v 1.1.2.2 2010/06/10 12:56:38 klausi Exp $
+
+
+/**
+ * @file
+ * Rules Forms - Installation file.
+ */
+
+/**
+ * Implementation of hook_install().
+ */
+function rules_forms_install() {
+  // Set the modules' weight to 20, because we want it to be the last one using
+  // hook_form_alter().
+  db_query("UPDATE {system} SET weight = 20 WHERE name = 'rules_forms'");
+}
+
+/**
+ * Update the module's weight to 20.
+ */
+function rules_forms_update_6001() {
+  $ret = array();
+  $ret[] = update_sql("UPDATE {system} SET weight = 20 WHERE name = 'rules_forms'");
+  return $ret;
+}

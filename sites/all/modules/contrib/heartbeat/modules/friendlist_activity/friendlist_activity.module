@@ -1,0 +1,170 @@
+<?php
+// $Id: friendlist_activity.module,v 1.1.2.2.2.23 2010/10/16 09:16:36 stalski Exp $
+// by Jochen Stals - Menhir - www.menhir.be
+
+/**
+ * Implementation of hook_heartbeat_register_access_types().
+ */
+function friendlist_activity_heartbeat_register_access_types() {
+  return array(
+    0 => array(
+      'name' => 'Heartbeat relational activity',
+      'class' => 'ConnectedHeartbeat',
+      'path' => 'connectedheartbeat.inc',
+      'module' => 'friendlist_activity',
+      'access' => 'user_is_logged_in'
+    ),
+  );
+}
+/**
+ * Implementation of hook_heartbeat_message_info().
+ */
+function friendlist_activity_heartbeat_message_info() {
+  $info = array(
+    0 => array(
+      'message' => '!user1 is now !relation_type with !user2.',
+      'message_concat' => '!user1 is now !relation_type with %user2%.',
+      'message_id' => 'heartbeat_become_friends',
+      'concat_args' =>
+      array(
+        'type' => 'summary',
+        'group_by' => 'user-user',
+        'group_target' => 'user2',
+        'group_by_target' => 'user1',
+        'group_num_max' => '3',
+        'merge_separator' => ', ',
+        'merge_end_separator' => ' and ',
+      ),
+      'description' => 'one user becomes friends with another.',
+      'perms' => '1',
+      'custom' => HEARTBEAT_MESSAGE_DEFAULT,
+      'variables' =>
+      array(
+        'build_mode' => 'full',
+      ),
+    ),
+    1 => array(
+      'message' => '!user1 has become a !relation of !user2.',
+      'message_concat' => '%users% have become a !relation of !user2.',
+      'message_id' => 'heartbeat_add_FL_OW_relation',
+      'concat_args' =>
+      array(
+        'type' => 'summary',
+        'group_by' => 'user-user',
+        'group_target' => 'user1',
+        'group_by_target' => 'user2',
+        'merge_separator' => ',  ',
+        'merge_end_separator' => ' and ',
+      ),
+      'description' => 'Adds a one way relation ',
+      'perms' => '1',
+      'custom' => HEARTBEAT_MESSAGE_DEFAULT,
+      'variables' =>
+      array(
+      ),
+    ),
+  );
+  return $info;
+}
+
+/**
+ * Implementation of hook_heartbeat_related_uid_info().
+ * Static cache helper for the friends of a user.
+ */
+function friendlist_activity_heartbeat_related_uid_info($uid) {
+  static $uids = array();
+
+  if (!isset($uids[$uid])) {
+    $uids[$uid] = friendlist_activity_get_friends($uid);
+  }
+
+  return $uids[$uid];
+}
+
+/**
+ * Implementation of hook_form_alter().
+ */
+function friendlist_activity_form_alter(&$form, $form_state, $form_id) {
+
+  if ($form_id == 'heartbeat_admin_settings') {
+
+    // heartbeat_relations_api
+    $form['heartbeat_relations'] = array(
+      '#type' => 'fieldset',
+      '#weight' => 0,
+      '#title' => t('Heartbeat relation settings'),
+      '#collapsible' => TRUE,
+      '#collapsed' => FALSE,
+    );
+
+    $options = array('none' => t('None'));
+    if (module_exists('friendlist_api')) {
+      $options['friendlist_api'] = t('Friendlist API');
+    }
+    if (module_exists('user_relationships_api')) {
+      $options['user_relationships_api'] = t('User Relationships');
+    }
+    if (module_exists('flag_friend')) {
+      $options['flag_friend_api'] = t('Flag friend');
+    }
+    $form['heartbeat_relations']['heartbeat_relations_api'] = array(
+      '#title' => t('User relation API to define heartbeat relations'),
+      '#type' => 'select',
+      '#options' => $options,
+      '#default_value' => variable_get('heartbeat_relations_api', 'none'),
+    );
+
+  }
+
+}
+
+/**
+ * Generate the view of people that a user is following
+ */
+function friendlist_activity_get_friends($uid) {
+
+  $uids = array();
+
+  $api = variable_get('heartbeat_relations_api', 'none');
+
+  if ($api == 'friendlist_api') {
+
+    $sql = "SELECT fr.requestee_id as 'uid' FROM {friendlist_relations} as fr
+    INNER JOIN {friendlist_statuses} fs ON fs.rid = fr.rid
+    WHERE fr.requester_id = %d AND fs.status = '%s' ORDER BY fs.last_update_time DESC, fr.rid DESC";
+    $result = db_query($sql, $uid, 'TW_BOTH');
+    while ($row = db_fetch_object($result)) {
+      $uids[] = $row->uid;
+    }
+
+  }
+  elseif ($api == 'user_relationships_api') {
+
+    // If the current user is fan, following, ..., has a one way relation
+    // to the other user, or if he has a two way relation to the user ...
+    // fetch them
+    $sql = "SELECT DISTINCT ur.requestee_id FROM {user_relationships} ur
+    INNER JOIN {user_relationship_types} urt ON ur.rtid = urt.rtid
+    WHERE
+    (
+      ur.requester_id = %d AND urt.is_oneway = 0
+    OR
+      ur.requester_id = %d AND ur.approved = 1 AND urt.is_oneway <> 0
+    )";
+    $result = db_query($sql, $uid, $uid);
+    if (!empty($result)) {
+      while ($row = db_fetch_object($result)) {
+        $uids[] = $row->requestee_id;
+      }
+    }
+
+  }
+  elseif ($api == 'flag_friend_api') {
+
+    $uids = array_keys(flag_friend_get_friends($uid));
+
+  }
+
+  return $uids;
+
+}

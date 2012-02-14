@@ -1,0 +1,270 @@
+# Hungarian translation of page_title (6.x-2.2)
+# Copyright (c) 2009 by the Hungarian translation team
+# Generated from files:
+#  page_title.admin.inc,v 1.1.2.7 2009/06/11 10:26:49 njt1982
+#  page_title.module,v 1.18.2.15 2009/06/17 15:03:07 njt1982
+#  page_title/page_title-admin-settings-form.tpl.php: n/a
+#  page_title.info,v 1.5 2008/05/02 16:29:11 njt1982
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: page_title (6.x-2.2)\n"
+"POT-Creation-Date: 2009-09-12 22:47+0200\n"
+"PO-Revision-Date: 2009-09-02 22:23+0200\n"
+"Language-Team: Hungarian\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n!=1);\n"
+
+#: page_title.admin.inc:46
+msgid "Default"
+msgstr "Alapértelmezés"
+
+#: page_title.admin.inc:40,116
+msgid "User"
+msgstr "Felhasználó"
+
+#: page_title.admin.inc:83
+msgid "Node"
+msgstr "Tartalom"
+
+#: page_title.module:135,150,164
+msgid "Page title"
+msgstr "Oldal címe"
+
+#: page_title.admin.inc:104
+msgid "Taxonomy"
+msgstr "Taxonómia"
+
+#: page_title-admin-settings-form.tpl.php:22
+msgid "Page Type"
+msgstr "Oldaltípus"
+
+#: page_title-admin-settings-form.tpl.php:22
+msgid "Token Scope"
+msgstr "Vezérjel hatóköre"
+
+#: page_title-admin-settings-form.tpl.php:22
+msgid "Pattern"
+msgstr "Minta"
+
+#: page_title-admin-settings-form.tpl.php:22
+msgid "Show Field"
+msgstr "Mező mutatása"
+
+#: page_title.admin.inc:31
+msgid "Page Title Patterns"
+msgstr "Oldalcím minták"
+
+#: page_title.admin.inc:38,39
+msgid "Global Only"
+msgstr "Csak globális"
+
+#: page_title.admin.inc:51
+msgid "Frontpage"
+msgstr "Címoldal"
+
+#: page_title.admin.inc:55
+msgid "User Profile"
+msgstr "Felhasználói profil"
+
+#: page_title.admin.inc:75
+msgid "Content Type - %type"
+msgstr "Tartalomtípus - %type"
+
+#: page_title.admin.inc:96
+msgid "Vocabulary - %vocab_name"
+msgstr "Szótár - %vocab_name"
+
+#: page_title.admin.inc:112
+msgid "Blog Homepage"
+msgstr "Blog címoldal"
+
+#: page_title.admin.inc:122
+msgid "Pattern for pages that contain a pager"
+msgstr "Minta a lapozót tartalmazó oldalakhoz"
+
+#: page_title.admin.inc:124
+msgid ""
+"This pattern will be appended to a page title for any given page with "
+"a pager on it"
+msgstr ""
+"Ez a minta az oldal címéhez lesz hozzáfűzve bármely oldalon, "
+"amelyiken lapozó található"
+
+#: page_title.admin.inc:130
+msgid "Available Tokens List"
+msgstr "Elérhető vezérjelek listája"
+
+#: page_title.module:22
+msgid ""
+"Page Title provides control over the &lt;title> element on a page "
+"using token patterns and an optional textfield to override the title "
+"of the item (be it a node, term, user or other). The Token Scope "
+"column lets you know which tokens are available for this field (Global "
+"is always available). Please click on the <strong><em>more "
+"help&hellip;</em></strong> link below if you need further assistance."
+msgstr ""
+"A <em>Page Title</em> modul teljes vezérlést biztosít az oldal "
+"&lt;title&gt; eleme felett vezérjelek és minták segítségével. "
+"Opcionális szövegmezőben megadható a cím, amely felülbírálja "
+"az adott elem címét (legyen az tartalom, kifejezés, felhasználó, "
+"vagy egyéb.). A vezérjel hatóköre oszlop megadja, hogy mely "
+"vezérlőjel használható az adott elemhez (A globális mindig "
+"használható). További segítség elérhető az alábbi, "
+"<strong><em>további segítség&hellip;</em></strong> hivatkozásra "
+"kattitva."
+
+#: page_title.module:25
+msgid "Drupal's default page title follows one of two patterns:"
+msgstr ""
+"A Drupal alapértelmezés szerint az alábbi két minta valamelyikét "
+"használja az oldal címeként:"
+
+#: page_title.module:27
+msgid ""
+"<strong>Default Page</strong>: <samp><em>page title</em> | <em>site "
+"name</em></samp>"
+msgstr ""
+"<strong>Alapértelmezett oldal</strong>: <samp><em>oldalcím</em> | "
+"<em>honlapnév</em></samp>"
+
+#: page_title.module:28
+msgid ""
+"<strong>Default Frontpage</strong>: <samp><em>site name</em> | "
+"<em>site slogan</em></samp>"
+msgstr ""
+"<strong>Alapértelmezett címoldal</strong>: <samp><em>honlapnév</em> "
+"| <em>honlap szlogen</em></samp>"
+
+#: page_title.module:31
+msgid ""
+"The <strong>Page Title</strong> module lets you change these defaults "
+"in two ways. First, you can adjust the patterns below using the "
+"placeholders given. This will change the way the default page titles "
+"are created. Second, on enabled forms (curently node, term & user "
+"editing forms) you have the option of specifying a title that is "
+"different to the title of the item. This field only appears if the "
+"<em>Show Field</em> box is checked for the item. If a value is "
+"provided it will be used to generate the <samp>[page-title]</samp> "
+"placeholder however if it is left blank the <samp>[page-title]</samp> "
+"token will inherit the item's own title."
+msgstr ""
+"A <strong>Page Title</strong> modul segítségével kétféle módon "
+"lehet lecserélni az alapértelmezett címeket. Először a megadott "
+"helykitöltőkbe beállítható egy minta, amely alapján elkészül "
+"az oldal alapértelmezés szerinti címe. Másodszor, az "
+"engedélyezett űrlapokon (jelenleg tartalom, kifejezés és "
+"felhasználói profil űrlapok) beállítható az a cím, ami "
+"különbözik az elem címétől. Ez a mező csak akkor látható, ha "
+"a <em>Mező mutatása</em> kapcsolóval engedélyezve lett. Ha a mező "
+"kapott értéket akkor az a <samp>[page-title]</samp> helykitöltőbe "
+"kerül. Ha üresen maradt, akkor a <samp>[page-title]</samp> vezérjel "
+"az elem címét használja."
+
+#: page_title.module:32
+msgid ""
+"The <samp>[page-title]</samp> token will default to the value returned "
+"from <samp>drupal_get_title</samp> if there is no value specified or "
+"no available page title field."
+msgstr ""
+"A <samp>[page-title]</samp> vezérjel alapértelmezett tartalmát a "
+"<samp>drupal_get_title</samp> állítja be, ha nincs megadott érték, "
+"vagy nincs oldalcím mező."
+
+#: page_title.module:33
+msgid ""
+"Certain types of page title pattern have access to special tokens "
+"which others do not, depending on their <em>scope</em>. All patterns "
+"have access to the <strong>Global</strong> scope. Content type "
+"patterns have access to the <strong>Node</strong> tokens, vocabulary "
+"patterns have access to the <strong>Taxonomy</strong> tokens and "
+"finally the user patterns have access to the <strong>User</strong> "
+"tokens."
+msgstr ""
+"A <em>láthatósági tartománytól</em> függ, hogy bizonyos "
+"oldalcím mintákban használható-e egy speciális vezérjel, vagy "
+"sem. Minden minta elérhető a <strong>Globális</strong> "
+"láthatósági tartományban. A tartalomtípus minták elérhetők a "
+"<strong>Tartalom</strong> vezérjelekben, a szótár minták "
+"elérhetők a <strong>Taxonómia</strong> vezérjelekben, és végül "
+"a felhasználói minták elérhetők a <strong>Felhasználó</strong> "
+"vezérjelekben."
+
+#: page_title.module:136,151,165
+msgid ""
+"Optionally specify a different title to appear in the &lt;title&gt; "
+"tag of the page."
+msgstr ""
+"Megadható egy másik cím, mely megjelenik az oldal &lt;title&gt; "
+"mezőjében."
+
+#: page_title.module:176
+msgid "Page Title Settings"
+msgstr "Oldalcím beállítások"
+
+#: page_title.module:184
+msgid "Page Title Field"
+msgstr "Oldalcím mező"
+
+#: page_title.module:185
+msgid ""
+"If checked, the <em>Page Title</em> field will appear on the node edit "
+"form for those who have permission to set the title."
+msgstr ""
+"Ha ez be van kapcsolva, akkor az <em>Oldalcím</em> mező megjelenik a "
+"tartalom szerkesztése formon azoknak a felhasználoknak, akik "
+"rendelkeznek az oldalcím beállítása jogosultsággal."
+
+#: page_title.module:187
+msgid "Show field"
+msgstr "Mező mutatása"
+
+#: page_title.module:194
+msgid "Page Title Pattern"
+msgstr "Oldalcím minta"
+
+#: page_title.module:196
+msgid ""
+"Enter the <em>Page Title</em> pattern you want to use for this node "
+"type. For more information, please use the !link settings page"
+msgstr ""
+"Meg kell adni azt az <em>Oldalcím</em> mintát, amely ebben a "
+"tartalomtípusban használva lesz. További információ a !link "
+"beállítások oldalon."
+
+#: page_title.module:484
+msgid "The page title."
+msgstr "Az oldal címe."
+
+#: page_title.module:509; page_title.info:0
+msgid "Page Title"
+msgstr "Oldalcím"
+
+#: page_title.module:510
+msgid "Page Title form."
+msgstr "Oldalcím űrlap."
+
+#: page_title.module:44
+msgid "set page title"
+msgstr "oldalcím beállítása"
+
+#: page_title.module:44
+msgid "administer page titles"
+msgstr "oldalcímek adminisztrációja"
+
+#: page_title.module:55
+msgid "Page titles"
+msgstr "Oldalcímek"
+
+#: page_title.module:56
+msgid "Enhanced control over the page titles (in the &lt;head&gt; tag)."
+msgstr ""
+"Részletesebb vezérlés az oldalcímek felett (a &lt;head&gt; "
+"elemben)."
+
+#: page_title.info:0
+msgid "Enhanced control over the page title (in the &lt;head> tag)."
+msgstr "Részletesebb vezérlés az oldalcím felett (a &lt;head&gt; elemben)."
+

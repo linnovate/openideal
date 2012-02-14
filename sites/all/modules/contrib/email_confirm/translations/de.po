@@ -1,0 +1,174 @@
+# German translation of email_confirm (6.x-1.2)
+# Copyright (c) 2009 by the German translation team
+# Generated from files:
+#  email_confirm.module,v 1.1.4.8 2008/09/23 03:50:09 jaydub
+#  email_confirm/email_confirm.info: n/a
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: email_confirm (6.x-1.2)\n"
+"POT-Creation-Date: 2009-03-05 13:00+0100\n"
+"PO-Revision-Date: 2009-03-05 13:01+0100\n"
+"Language-Team: German\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n!=1);\n"
+"Last-Translator: TobiasB <info@tobiasbaehr.de>\n"
+"X-Poedit-Language: German\n"
+"X-Poedit-Country: GERMANY\n"
+
+#: email_confirm.module:184
+msgid "user"
+msgstr "Benutzer"
+
+#: email_confirm.module:32,10
+msgid "Configuration of confirmation email sent to users who attempt to change their email address."
+msgstr "Konfiguration der  an Benutzer zu versendenden E-Mail-Bestätigung, die versuchen ihre E-Mail-Adresse zu ändern."
+
+#: email_confirm.module:12
+msgid "<p>The Email Change Confirmation module addresses missing functionality in the core distribution of Drupal. With this module enabled, a user who attempts to change the email address associated with their account must confirm that change by clicking a confirmation link that is sent to the new email address. The confirmation link must be clicked with a certain time period after which the pending update to their email address will expire and they will have to attempt to update their account again. This module was based on code from <a href=\"!url\">this issue</a></p>"
+msgstr "<p>Das Email_Confirm-Module ergänzt eine fehlende Funktionalität der Kern-Distribution von Drupal. Wenn das Modul aktiviert ist, muss ein Benutzer der versucht seine E-Mail-Adresse zu ändern, die dem Benutzerkonto zu geordnet ist, verifizieren. Indem ein Bestätigungslink in einer E-Mail aufgerufen wird, die an die neue E-Mail-Adresse versendet wird. Dieser Aufruf des Bestätigungslink muss innerhalb eines bestimmten Zeitraum erfolgen. Erfolgt dies nicht, verfällt der Link und der Vorgang muss wiederholt werden. Dieses Modul basiert auf dem Code <a href=\"!url\">aus diesem Issue.</a></p>"
+
+#: email_confirm.module:14
+msgid "When the Email Change Confirmation module is enabled, users who attempt to update their email address will be required to confirm their changes by clicking a confirmation link in an email sent to the new email address. The settings below determine the subject and body of the confirmation email sent to the user. A copy is sent to both the user's original email address and the new address."
+msgstr "Wenn das Email_Confirm-Modul aktiviert ist, müssen Benutzer die versuchen ihre E-Mail-Adresse zu ändern, dies bestätigen, indem ein einmaliger Link in einer E-Mail aufgerufen wird, welche an die neue Adresse versendet wird. Die Bestätigungs-E-Mail enthält ein anpassbaren Betreff und Textkörper, welche an den Benutzern versendet wird. Eine Kopie wird an die neue und alte E-Mail-Adresse versendet."
+
+#: email_confirm.module:51
+msgid "Email address change request email subject"
+msgstr "Betreff der Bestätigungs-E-Mail"
+
+#: email_confirm.module:52
+msgid "The above text will be the subject for the email sent to a user that is attempting to update their email address. The placeholders !username and !site will be replaced by the username and the site name."
+msgstr "Der Betreff der Bestätigungs-E-Mail. Die Platzhalter !username und !site ersetzen den Benutzernamen und die URL der Website."
+
+#: email_confirm.module:248,53
+msgid "Email address change request for !username at !site"
+msgstr "Änderung der E-Mail-Adresse von !username auf !site"
+
+#: email_confirm.module:61
+msgid "Email address change request email author"
+msgstr "Absender der Bestätigungs-E-Mail"
+
+#: email_confirm.module:64
+msgid "The above address will be the 'From' email address for the confirmation email for an email address change request. If no address is supplied the default site email address will be used."
+msgstr "Wenn nicht angegeben, so wird die Standard-E-Mail-Adresse der Webseite für die Bestätigungs-E-Mail verwendet."
+
+#: email_confirm.module:69
+msgid "Email address change request email BCC email address"
+msgstr "Zusätzlicher BCC-Empfänger"
+
+#: email_confirm.module:72
+msgid "The above address will receive a BCC email copy of the confirmation email for an email address change request."
+msgstr "Die hier eingebene E-Mail-Adresse erhält eine Blindkopie der Bestätigungs-E-Mail."
+
+#: email_confirm.module:77
+msgid "Email address change request email body"
+msgstr "Bestätigungs-E-Mail an die NEUE E-Mail-Adresse"
+
+#: email_confirm.module:78
+msgid "The above text will be the body for the email sent to a user that is attempting to update their email address. The text here will be sent to the user's new email address. The placeholders !username and !site will be replaced by the username and the site name."
+msgstr "Dieser Text wird der Textkörper der E-Mail für die Benutzer sein, die versuchen ihre E-Mail-Adresse zu ändern. Und wird an dem Benutzer der neuen E-Mail-Adresse versendet. Die Platzhalter !username und !site ersetzen den Benutzernamen und die URL der Website."
+
+#: email_confirm.module:250,80
+msgid ""
+"Hello !username,\n"
+"\n"
+"A request to change your email address has been made at !site.\n"
+"You need to verify the change by clicking on the link below or by\n"
+"copying and pasting it in your browser:\n"
+"\n"
+"!email_url\n"
+"\n"
+"This is a one-time URL - it can be used only once. It expires after\n"
+"24 hours. If you do not click the link to confirm, your email address\n"
+"at !site will not be updated.\n"
+msgstr ""
+"Hallo !username,\r\n"
+"\r\n"
+"auf der Website !site wurde die E-Mail-Adresse geändert.\r\n"
+"Die Änderung muss bestätigt werden, indem auf den folgenden Link geklickt oder kopiert und in die Adresszeile des Webbrowsers eingefügt wird:\r\n"
+"\r\n"
+"!email_url\r\n"
+"\r\n"
+"Dies ist ein einmaliger Link, der nur ein einziges Mal verwendet werden kann. Nach 24 Stunden verfällt der Link.\r\n"
+"Wenn innerhalb dieser Zeit der Link nicht aufgerufen wird, wird die E-Mail-Adresse auf !site nicht aktualisiert.\n"
+
+#: email_confirm.module:99
+msgid "Email address change request email body (Original)"
+msgstr "Bestätigungs-E-Mail an die URSPRÜNGLICHE E-Mail-Adresse"
+
+#: email_confirm.module:100
+msgid "The above text will be the body for the email sent to a user that is attempting to update their email address. The text here will be sent to the user's original email address. The placeholders !username and !site will be replaced by the username and the site name."
+msgstr "Dieser Text wird der Textkörper der E-Mail für die Benutzer sein, die versuchen ihre E-Mail-Adresse zu ändern. Und wird an dem Benutzer der ursprünglichen E-Mail-Adresse versendet. Die Platzhalter !username und !site ersetzen den Benutzernamen und die URL der Website."
+
+#: email_confirm.module:270,102
+msgid ""
+"Hello !username,\n"
+"\n"
+"A request to change your email address has been made at !site.\n"
+"In order to confirm the update of your email address you will\n"
+"need to follow the instructions sent to your new email address\n"
+"within 24 hours.\n"
+msgstr ""
+"Hallo !username,\r\n"
+"\r\n"
+"auf der Website !site wurde die E-Mail-Adresse geändert.\r\n"
+"Um die Aktualisierung der E-Mail-Adresse zu bestätigen, muss die Anweisung innerhalb von 24 Stunden befolgt werden, welche an die neue E-Mail-Adresse versandt wurde.\n"
+
+#: email_confirm.module:122
+msgid "You must enter a valid email address for the \"Email address change request email author\" setting."
+msgstr "Es muss eine gültige E-Mail-Adresse für die „Anfrage zur Änderung der E-Mail-Adresse -- Absender“ Einstellung angeben werden."
+
+#: email_confirm.module:125
+msgid "You must enter a valid email address for the \"Email address change request email BCC email address\" setting."
+msgstr "Der angegebene \"Zusätzliche BCC-Empfänger\" ist ungültig."
+
+#: email_confirm.module:162
+msgid "You have tried to use a one-time e-mail change link for %account that has expired--your change of e-mail request was not completed. Please visit your account edit page if you wish to attempt the change again."
+msgstr "Es wurde versucht einen einmaligen Link zur Änderung der E-Mail-Adresse für %account zu verwenden, welches aber abgelaufen ist -- die Änderung der E-Mail-Adresse wurde nicht durchgeführt. Bitte rufen Sie ihre Bearbeitungsseite des Benutzerkontos auf und wiederholen Sie den Vorgang falls nötig."
+
+#: email_confirm.module:171
+msgid "You are currently logged in as %user, and are attempting to confirm an e-mail change for %account, which is not allowed. Please log in as %account and initiate a new change of e-mail request."
+msgstr "Sie sind aktuell als %user angemeldet und versuchen eine Änderung der E-Mail-Adresse für %account durchzuführen, was jedoch nicht erlaubt ist. Bitte melden Sie sich als %account an, um die E-Mail-Adresse zu ändern."
+
+#: email_confirm.module:175
+msgid "There was a problem verifying your change of e-mail request--please visit your account edit page and attempt the change again"
+msgstr "Es gab ein Problem bei der Überprüfung der E-Mail-Adressen Änderung. Bitte rufen Sie ihre Bearbeitungsseite des Benutzerkontos auf und versuchen es nochmals zu ändern."
+
+#: email_confirm.module:186
+msgid "Your e-mail address is now %mail."
+msgstr "Deine E-Mail-Adresse ist jetzt %mail."
+
+#: email_confirm.module:195
+msgid "You have tried to use a one-time e-mail change link which has either been used or has expired. Please request a new one."
+msgstr "Es wurde versucht einen einmaligen Link zur Änderung der E-Mail-Adresse zu verwenden, der aber schon verwendet wurde oder abgelaufen ist. Falls nötig muss der Vorgang wiederholt werden."
+
+#: email_confirm.module:278
+msgid "A confirmation email has been sent to your new email address. You must follow the link provided in that email within 24 hours in order to confirm the change to your account email address."
+msgstr "Eine E-Mail-Bestätigung ist an die neue E-Mail-Adresse versendet worden. Der enthaltende Link in der E-Mail muss innerhalb von 24 Stunden aufgerufen werden, damit die E-Mail-Adresse für das Benutzerkonto geändert werden kann."
+
+#: email_confirm.module:184
+msgid "User %name used one-time e-mail change link at time %timestamp."
+msgstr "Der Benutzer %name hat um %timestamp einen einmaligen Link zur Änderung seiner E-Mail-Adresse verwendet."
+
+#: email_confirm.module:25
+msgid "Change e-mail"
+msgstr "E-Mail-Adresse ändern"
+
+#: email_confirm.module:31
+msgid "Email change confirmation settings"
+msgstr "Einstellungen bei  Änderungen der E-Mail-Adresse"
+
+#: email_confirm.module:0
+msgid "email_confirm"
+msgstr "email_confirm"
+
+#: email_confirm.info:0
+msgid "Email Confirm"
+msgstr "Email Confirm"
+
+#: email_confirm.info:0
+msgid "Requires a user to verify changes to their email address"
+msgstr "Fordert einen Benutzer auf die Änderung seiner E-Mail zubestätigen."
+

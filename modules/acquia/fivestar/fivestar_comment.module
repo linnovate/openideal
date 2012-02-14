@@ -1,0 +1,203 @@
+<?php
+// $Id: fivestar_comment.module,v 1.1.2.7 2009/07/01 00:28:35 quicksketch Exp $
+
+define('FIVESTAR_COMMENT_DISABLED', 0);
+define('FIVESTAR_COMMENT_OPTIONAL', 1);
+define('FIVESTAR_COMMENT_REQUIRED', 2);
+
+/**
+ * Implementation of hook_theme().
+ */
+function fivestar_comment_theme() {
+  return array(
+    'fivestar_comment_view' => array(
+      'arguments' => array('comment' => NULL, 'fivestar' => NULL),
+    ),
+  );
+}
+
+/**
+ * Form alter specification for comments.
+ */
+function fivestar_comment_form_alter(&$form, &$form_state, $form_id) {
+  // Comment settings.
+  if ($form_id == 'node_type_form' && isset($form['identity']['type'])) {
+    $form['fivestar']['comment'] = array(
+      '#type' => 'fieldset',
+      '#title' => t('Comment widget'),
+      '#description' => t('Enabling Fivestar for comments will display a rating widget when a user posts a comment. The rating of the comment will affect its parent content.'),
+      '#weight' => 1,
+    );
+    $form['fivestar']['comment']['fivestar_comment'] = array(
+      '#type' => 'radios',
+      '#title' => t('Fivestar comment settings'),
+      '#options' => array(
+        FIVESTAR_COMMENT_DISABLED => t('Disabled'),
+        FIVESTAR_COMMENT_OPTIONAL => t('Optional rating'),
+        FIVESTAR_COMMENT_REQUIRED => t('Required rating'),
+      ),
+      '#default_value' => variable_get('fivestar_comment_'. $form['#node_type']->type, FIVESTAR_COMMENT_DISABLED),
+    );
+    $form['fivestar']['comment']['fivestar_comment_preview'] = array(
+      '#type' => 'item',
+      '#title' => t('Comment widget preview'),
+      '#value' => theme('fivestar_preview', 'compact', 'none', $form['fivestar']['fivestar_stars']['#default_value'], $form['fivestar']['comment']['fivestar_comment']['#default_value'] == 1 ? 1 : 0),
+    );
+    if (!$form['fivestar']['fivestar']['#default_value'] || !$form['fivestar']['comment']['fivestar_comment']['#default_value']) {
+      $form['fivestar']['comment']['fivestar_comment_preview']['#value'] = theme('fivestar_preview_wrapper', '', 'comment');
+    }
+    else {
+      $form['fivestar']['comment']['fivestar_comment_preview']['#value'] = theme('fivestar_preview_wrapper', $form['fivestar']['comment']['fivestar_comment_preview']['#value'], 'comment');
+    }
+  }
+
+  // Comment form. Do not allow ratings inside of threads.
+  if ($form_id == 'comment_form' && empty($form['pid']['#value']) && user_access('rate content')) {
+    $node = node_load($form['nid']['#value']);
+    if (variable_get('fivestar_comment_'. $node->type, FIVESTAR_COMMENT_DISABLED)) {
+      // Splice in the fivestar right before the body.
+      $new_form = array();
+      foreach ($form as $key => $element) {
+        if ($key == 'comment_filter') {
+          if ($form['cid']['#value']) {
+            $current_rating = fivestar_comment_load($form['cid']['#value'], $form['nid']['#value']);
+            $default_value = $current_rating['value'];
+          }
+          else {
+            $votes = fivestar_get_votes('node', $form['nid']['#value']);
+            $default_value = isset($votes['user']['value']) ? $votes['user']['value'] : 0;
+          }
+          $new_form['fivestar_rating'] = array(
+            '#type' => 'fivestar',
+            '#title' => t('Rating'),
+            '#stars' => variable_get('fivestar_stars_'. $node->type, 5),
+            '#allow_clear' => variable_get('fivestar_comment_'. $node->type, FIVESTAR_COMMENT_DISABLED) == FIVESTAR_COMMENT_OPTIONAL ? 1 : 0,
+            '#content_id' => $node->nid,
+            '#required' => variable_get('fivestar_comment_'. $node->type, FIVESTAR_COMMENT_DISABLED) == FIVESTAR_COMMENT_REQUIRED ? 1 : 0,
+            '#default_value' => $default_value,
+            '#labels' => variable_get('fivestar_labels_'. $node->type, array()),
+          );
+        }
+        $new_form[$key] = $element;
+      }
+      if ($new_form['fivestar_rating']) {
+        $form = $new_form;
+      }
+    }
+  }
+}
+
+/**
+ * Implementation of hook_comment().
+ */
+function fivestar_comment(&$comment, $op) {
+  if (is_array($comment) && is_numeric($comment['nid'])) {
+    $nid = $comment['nid'];
+  }
+  elseif (is_array($comment) && is_array($comment['nid']) && is_numeric($comment['nid']['#value'])) {
+    $nid = $comment['nid']['#value'];
+  }
+  elseif (is_object($comment) && is_numeric($comment->nid)) {
+    $nid = $comment->nid;
+  }
+
+  if (isset($nid)) {
+    $node = node_load($nid);
+    $fivestar_status = variable_get('fivestar_comment_'. $node->type, FIVESTAR_COMMENT_DISABLED);
+  }
+
+  switch ($op) {
+    case 'view':
+      if ($fivestar_status != FIVESTAR_COMMENT_DISABLED) {
+        if (!isset($comment->fivestar_rating)) {
+          $current_rating = fivestar_comment_load($comment->cid, $comment->nid);
+          $comment->fivestar_rating = isset($current_rating['value']) ? $current_rating['value'] : NULL;
+        }
+        $comment->fivestar_rating = $comment->fivestar_rating;
+        $comment->fivestar_view = theme('fivestar_static', $comment->fivestar_rating, variable_get('fivestar_stars_'. $node->type, 5));
+        if ($comment->fivestar_rating) {
+          // Implement the theme in template.php to change the order:
+          $comment->comment = theme('fivestar_comment_view', $comment->comment, $comment->fivestar_view);
+        }
+      }
+      break;
+    case 'insert':
+      if ($fivestar_status != FIVESTAR_COMMENT_DISABLED) {
+        $comment = (object)$comment; // Comment module is inconsistent about comment data structures.
+        if ($comment->fivestar_rating) {
+          fivestar_comment_insert($comment->cid, $comment->nid, $comment->uid, $comment->fivestar_rating);
+        }
+        $comment = (array)$comment;
+      }
+    case 'update':
+      if ($fivestar_status != FIVESTAR_COMMENT_DISABLED) {
+        $comment = (object)$comment; // Comment module is inconsistent about comment data structures.
+        $current_rating = fivestar_comment_load($comment->cid, $comment->nid);
+        if ($comment->fivestar_rating) {
+          if (isset($current_rating['value'])) {
+            fivestar_comment_update($comment->cid, $comment->nid, $comment->uid, $comment->fivestar_rating);
+          }
+          else {
+            fivestar_comment_insert($comment->cid, $comment->nid, $comment->uid, $comment->fivestar_rating);
+          }
+        }
+        elseif ($fivestar_status != FIVESTAR_COMMENT_DISABLED && isset($current_rating['value'])) {
+          fivestar_comment_delete($comment->cid, $comment->nid, $comment->uid);
+        }
+        $comment = (array)$comment;
+      }
+      break;
+    case 'delete':
+      $current_rating = fivestar_comment_load($comment->cid, $comment->nid);
+      if (isset($current_rating['value'])) {
+        fivestar_comment_delete($comment->cid, $comment->nid, $current_rating['vote_id']);
+      }
+      break;
+  }
+}
+
+/**
+ * Get a current rating for a comment.
+ */
+function fivestar_comment_load($cid, $nid, $reset = FALSE) {
+  global $user;
+  static $cids = array();
+  if (!isset($cids[$cid]) || $reset) {
+    $cids[$cid] = db_fetch_array(db_query('SELECT * FROM {fivestar_comment} WHERE cid = %d', $cid));
+  }
+  return $cids[$cid];
+}
+
+/**
+ * Update a fivestar comment value.
+ */
+function fivestar_comment_update($cid, $nid, $uid, $value) {
+  $vote = _fivestar_cast_vote('node', $nid, $value, 'vote', $uid);
+  db_query('UPDATE {fivestar_comment} SET value = %d, vote_id = %d WHERE cid = %d', $value, $vote['user']['vote_id'], $cid);
+}
+
+/**
+ * Insert a fivestar comment value.
+ */
+function fivestar_comment_insert($cid, $nid, $uid, $value) {
+  $vote = _fivestar_cast_vote('node', $nid, $value, 'vote', $uid);
+  db_query('INSERT INTO {fivestar_comment} (cid, vote_id, value) VALUES (%d, %d, %d)', $cid, $vote['user']['vote_id'], $value);
+}
+
+/**
+ * Delete any value for a comment and update their vote.
+ */
+function fivestar_comment_delete($cid, $nid, $vote_id) {
+  db_query('DELETE FROM {fivestar_comment} WHERE cid = %d', $cid);
+
+  $vote = array();
+  $vote['content_id'] = $nid;
+  $vote['content_type'] = 'node';
+  $vote['vote_id'] = $vote_id;
+  votingapi_delete_votes(array($vote));
+  votingapi_recalculate_results('node', $nid);
+}
+
+function theme_fivestar_comment_view($comment, $fivestar) {
+  return $fivestar . $comment;
+}

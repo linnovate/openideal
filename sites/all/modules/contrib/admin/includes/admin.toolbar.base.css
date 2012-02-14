@@ -1,0 +1,466 @@
+/* $Id: admin.toolbar.base.css,v 1.1.2.6 2010/08/01 03:23:49 yhahn Exp $ */
+
+/**
+ * Admin toolbar CSS resets ===========================================
+ */
+
+/* Text */
+#admin-toolbar,
+#admin-toolbar h1,
+#admin-toolbar h2,
+#admin-toolbar h3,
+#admin-toolbar h4,
+#admin-toolbar h5,
+#admin-toolbar h6,
+#admin-toolbar p,
+#admin-toolbar blockquote,
+#admin-toolbar pre,
+#admin-toolbar a,
+#admin-toolbar abbr,
+#admin-toolbar acronym,
+#admin-toolbar address,
+#admin-toolbar big,
+#admin-toolbar cite,
+#admin-toolbar code,
+#admin-toolbar del,
+#admin-toolbar dfn,
+#admin-toolbar em,
+#admin-toolbar font,
+#admin-toolbar img,
+#admin-toolbar ins,
+#admin-toolbar kbd,
+#admin-toolbar q,
+#admin-toolbar s,
+#admin-toolbar samp,
+#admin-toolbar small,
+#admin-toolbar strike,
+#admin-toolbar strong,
+#admin-toolbar sub,
+#admin-toolbar sup,
+#admin-toolbar tt,
+#admin-toolbar var,
+#admin-toolbar b,
+#admin-toolbar u,
+#admin-toolbar i,
+#admin-toolbar center,
+/* Common classes */
+#admin-toolbar .buttons,
+/* Lists */
+#admin-toolbar dl,
+#admin-toolbar dt,
+#admin-toolbar dd,
+#admin-toolbar ol,
+#admin-toolbar ul,
+#admin-toolbar li,
+/* Forms */
+#admin-toolbar fieldset,
+#admin-toolbar form,
+#admin-toolbar input,
+#admin-toolbar select,
+#admin-toolbar textarea,
+#admin-toolbar label,
+#admin-toolbar legend,
+/* Tables */
+#admin-toolbar table,
+#admin-toolbar caption,
+#admin-toolbar tbody,
+#admin-toolbar tfoot,
+#admin-toolbar thead,
+#admin-toolbar tr,
+#admin-toolbar th,
+#admin-toolbar td,
+/* Drupal: system.css */
+#admin-toolbar tr.even,
+#admin-toolbar tr.odd,
+#admin-toolbar tr.drag,
+#admin-toolbar tbody,
+#admin-toolbar tbody th,
+#admin-toolbar thead th,
+#admin-toolbar .breadcrumb,
+#admin-toolbar .error,
+#admin-toolbar div.error,
+#admin-toolbar tr.error,
+#admin-toolbar .warning,
+#admin-toolbar div.warning,
+#admin-toolbar tr.warning,
+#admin-toolbar .ok,
+#admin-toolbar div.ok,
+#admin-toolbar tr.ok,
+#admin-toolbar .item-list,
+#admin-toolbar .item-list .icon,
+#admin-toolbar .item-list .title,
+#admin-toolbar .item-list ul,
+#admin-toolbar .item-list ul li,
+#admin-toolbar ol.task-list li.active,
+#admin-toolbar .form-item,
+#admin-toolbar tr.odd .form-item,
+#admin-toolbar tr.even .form-item,
+#admin-toolbar tr.merge-down,
+#admin-toolbar tr.merge-up,
+#admin-toolbar .form-item .description,
+#admin-toolbar .form-item label,
+#admin-toolbar .form-item label.option,
+#admin-toolbar .form-checkboxes,
+#admin-toolbar .form-radios,
+#admin-toolbar .form-checkboxes .form-item,
+#admin-toolbar .form-radios .form-item,
+#admin-toolbar .marker,
+#admin-toolbar .form-required,
+#admin-toolbar .more-link,
+#admin-toolbar .more-help-link,
+#admin-toolbar .item-list .pager,
+#admin-toolbar .item-list .pager li,
+#admin-toolbar .pager-current,
+#admin-toolbar .tips,
+#admin-toolbar html.js fieldset.collapsible legend a,
+#admin-toolbar html.js fieldset.collapsed legend a,
+#admin-toolbar .resizable-textarea {
+  margin:0px;
+  padding:0px;
+  border:0px;
+  outline:0px;
+  font-size:100%;
+  vertical-align:baseline;
+  background:transparent;
+  line-height:inherit;
+  position:static;
+
+  -moz-box-shadow:none;
+  -webkit-box-shadow:none;
+  -moz-border-radius:none;
+  -webkit-border-radius:none;
+  }
+
+/**
+ * Base styles ========================================================
+ */
+div#admin-toolbar {
+  z-index:100;
+  position:fixed;
+  }
+
+/**
+ * Toggling ===========================================================
+ */
+div#admin-toolbar div.admin-blocks {
+  overflow:hidden;
+  display:none;
+  }
+
+  body.admin-expanded div#admin-toolbar div.admin-blocks { display:block; }
+
+  div#admin-toolbar.ne,
+  div#admin-toolbar.nw { top:0px; }
+
+  div#admin-toolbar.se,
+  div#admin-toolbar.sw { bottom:0px; }
+
+  div#admin-toolbar.nw,
+  div#admin-toolbar.sw,
+  div#admin-toolbar.nw span.admin-toggle,
+  div#admin-toolbar.sw span.admin-toggle { left:0px; }
+
+  div#admin-toolbar.ne,
+  div#admin-toolbar.se,
+  div#admin-toolbar.ne span.admin-toggle,
+  div#admin-toolbar.se span.admin-toggle { right:0px; }
+
+  /**
+   * Vertical =========================================================
+   */
+  div#admin-toolbar.vertical {
+    position:fixed;
+    bottom:0px;
+    top:0px;
+    }
+
+    div#admin-toolbar.vertical div.admin-blocks { width:0px; }
+    body.admin-expanded div#admin-toolbar.vertical div.admin-blocks { width:260px; }
+    div#admin-toolbar.vertical div.admin-block  { width:240px; }
+    div#admin-toolbar.vertical div.admin-tabs   { width:215px; }
+
+  body div#admin-toolbar.vertical div.admin-blocks { position:absolute; top:0px; bottom:0px; }
+
+    body.admin-expanded div#admin-toolbar.vertical.ne div.admin-blocks,
+    body.admin-expanded div#admin-toolbar.vertical.se div.admin-blocks { right:0px; }
+
+    body.admin-expanded div#admin-toolbar.vertical.nw div.admin-blocks,
+    body.admin-expanded div#admin-toolbar.vertical.sw div.admin-blocks { left:0px; }
+
+  body.admin-expanded.admin-vertical.admin-ne,
+  body.admin-expanded.admin-vertical.admin-se { margin-right:260px; }
+
+  body.admin-expanded.admin-vertical.admin-nw,
+  body.admin-expanded.admin-vertical.admin-sw { margin-left:260px; }
+
+  /**
+   * Horizontal =======================================================
+   */
+  div#admin-toolbar.horizontal { left:0px; right:0px; }
+  body.admin-expanded div#admin-toolbar.horizontal div.admin-blocks { height:260px; }
+
+  body.admin-expanded.admin-horizontal.admin-ne,
+  body.admin-expanded.admin-horizontal.admin-nw { margin-top:260px; }
+
+  body.admin-expanded.admin-horizontal.admin-sw,
+  body.admin-expanded.admin-horizontal.admin-se { margin-bottom:260px; }
+
+/**
+ * Toggler ============================================================
+ */
+div#admin-toolbar span.admin-toggle {
+  display:block;
+  width:35px;
+  height:35px;
+
+  cursor:pointer;
+  overflow:hidden;
+  text-indent:-999px;
+
+  position:absolute;
+  top:0px;
+  z-index:1000;
+  }
+
+  div#admin-toolbar.se span.admin-toggle,
+  div#admin-toolbar.sw span.admin-toggle {
+    position:fixed;
+    bottom:0px;
+    top:auto;
+    }
+
+  body.admin-expanded div#admin-toolbar span.admin-toggle {
+    position:absolute;
+    top:0px;
+    }
+
+/**
+ * Admin tabs =========================================================
+ */
+div#admin-toolbar.horizontal div.admin-tabs {
+  height:30px;
+  padding:5px 10px 0px;
+  overflow:hidden;
+  }
+
+div#admin-toolbar.vertical div.admin-tabs {
+  position:relative;
+  padding:5px 10px 25px;
+  }
+
+div#admin-toolbar.ne div.admin-tabs,
+div#admin-toolbar.se div.admin-tabs { padding-right:35px !important; }
+
+div#admin-toolbar.nw div.admin-tabs,
+div#admin-toolbar.sw div.admin-tabs { padding-left:35px !important; }
+
+div#admin-toolbar div.admin-tab,
+div#admin-toolbar div.admin-tab span,
+div#admin-toolbar div.admin-tab a {
+  list-style:none;
+  background:transparent;
+  padding:0px;
+  margin:0px;
+  }
+
+div#admin-toolbar div.admin-tab {
+  cursor:pointer;
+  padding:4px 19px;
+  height:15px;
+  border-width:1px;
+  border-style:solid;
+  }
+
+  div#admin-toolbar.vertical div.admin-tab {
+    overflow:hidden;
+    white-space:nowrap;
+
+    margin-bottom:5px;
+    padding-left:9px;
+    padding-right:9px;
+    width:195px;
+    }
+
+  div#admin-toolbar.horizontal div.admin-tab {
+    float:left;
+    margin-right:5px;
+    }
+
+div#admin-toolbar div.admin-tab-active {
+  border-width:1px 1px 0px;
+  padding-bottom:10px;
+  }
+
+  div#admin-toolbar.vertical div.admin-tab-active {
+    padding-bottom:5px;
+    position:absolute;
+    bottom:0px;
+    margin:0px;
+    }
+
+/**
+ * Admin blocks =======================================================
+ */
+div#admin-toolbar div.admin-block {
+  position:relative;
+  padding:10px;
+  display:none;
+  }
+
+  div#admin-toolbar div.block-content {
+    overflow-x:hidden;
+    overflow-y:auto;
+    position:absolute;
+    top:10px;
+    left:10px;
+    right:10px;
+    bottom:10px;
+    }
+
+  div#admin-toolbar div.admin-active { display:block; }
+
+  /**
+   * Horizontal =======================================================
+   */
+  div#admin-toolbar.horizontal div.block-content { height:200px; }
+
+  /**
+   * Vertical =========================================================
+   */
+  div#admin-toolbar.vertical div.admin-block { position:absolute; bottom:0px; left:0px; right:0px; }
+  div#admin-toolbar.vertical div.admin-blocks-1 div.admin-block { top:30px; }
+  div#admin-toolbar.vertical div.admin-blocks-2 div.admin-block { top:60px; }
+  div#admin-toolbar.vertical div.admin-blocks-3 div.admin-block { top:90px; }
+  div#admin-toolbar.vertical div.admin-blocks-4 div.admin-block { top:120px; }
+  div#admin-toolbar.vertical div.admin-blocks-5 div.admin-block { top:150px; }
+  div#admin-toolbar.vertical div.admin-blocks-6 div.admin-block { top:180px; }
+  div#admin-toolbar.vertical div.admin-blocks-7 div.admin-block { top:210px; }
+  div#admin-toolbar.vertical div.admin-blocks-8 div.admin-block { top:240px; }
+  div#admin-toolbar.vertical div.admin-blocks-9 div.admin-block { top:270px; }
+  div#admin-toolbar.vertical div.admin-blocks-10 div.admin-block { top:300px; }
+
+/**
+ * Lists ==============================================================
+ */
+#admin-toolbar div.item-list li {
+  padding:5px 0px 4px;
+  border-style:solid;
+  border-width:0px 0px 1px;
+  }
+
+/**
+ * Reasonable inline links
+ */
+#admin-toolbar ul.links {
+  -moz-border-radius:5px;
+  -webkit-border-radius:5px;
+  padding:5px;
+  }
+
+#admin-toolbar ul.links li a { padding:2px 10px; }
+
+/**
+ * Form elements ======================================================
+ */
+#admin-toolbar input.form-autocomplete,
+#admin-toolbar input.form-text,
+#admin-toolbar textarea.form-textarea,
+#admin-toolbar select.form-select {
+  padding:2px;
+  border-width:2px;
+  border-style:solid;
+  width:90%;
+  }
+
+#admin-toolbar input.form-submit {
+  cursor:pointer;
+  padding:2px 5px;
+  text-align:center;
+  font-weight:normal;
+  border-width:1px;
+  border-style:solid;
+  }
+
+#admin-toolbar.vertical div.admin-panes div.admin-pane,
+#admin-toolbar div.admin-panes div.admin-pane-active,
+#admin-toolbar div.fieldset,
+#admin-toolbar div.form-item {
+  position:relative;
+  margin:0px 0px 5px;
+  border-width:1px;
+  border-style:solid;
+  }
+
+  #admin-toolbar div.form-item { padding:4px; }
+
+#admin-toolbar div.form-item label {
+  margin:0px;
+  padding:0px;
+  font-weight:bold;
+  font-size:10px;
+  text-transform:uppercase;
+  }
+
+  #admin-toolbar div.form-item label.option {
+    text-transform:none;
+    font-size:11px;
+    }
+
+  #admin-toolbar div.form-item label.option input { vertical-align:middle; }
+
+  #admin-toolbar.vertical div.form-item div.description { font-size:10px; }
+
+/**
+ * Admin panes ========================================================
+ */
+#admin-toolbar div.admin-panes h2.admin-pane-title a {
+  display:block;
+  padding:4px;
+  }
+
+#admin-toolbar div.admin-panes div.admin-pane-content {
+  padding:4px;
+  display:none;
+  }
+
+  #admin-toolbar div.admin-panes div.admin-pane-active div.admin-pane-content { display:block; }
+
+  #admin-toolbar div.admin-pane div.form-item {
+    border:0px;
+    -moz-border-radius:0px;
+    -webkit-border-radius:0px;
+    padding:5px 0px;
+    margin:0px;
+    background:transparent;
+    }
+
+/**
+ * Horizontal layout.
+ */
+#admin-toolbar.horizontal div.admin-panes {
+  position:relative;
+  padding-left:200px;
+  }
+
+#admin-toolbar.horizontal div.admin-panes div.admin-pane {
+  -moz-border-radius:0px;
+  -webkit-border-radius:0px;
+  }
+
+#admin-toolbar.horizontal div.admin-panes div.admin-pane-content { padding:4px 9px; }
+
+#admin-toolbar.horizontal div.admin-panes div.admin-pane-tabs {
+  z-index:500;
+  position:absolute;
+  left:0px;
+  width:200px;
+  }
+
+#admin-toolbar.horizontal div.admin-panes div.admin-pane-tabs a { padding:5px; }
+
+#admin-toolbar.horizontal div.admin-panes div.admin-pane-tabs a.admin-pane-active {
+  padding:4px;
+  border-width:1px 0px 1px 1px;
+  border-style:solid;
+  margin-right:-1px;
+  }

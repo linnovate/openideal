@@ -1,0 +1,532 @@
+<?php
+// $Id: emvideo.install,v 1.1.2.31.2.4 2010/09/21 20:17:53 aaron Exp $
+
+/**
+ * @file
+ * Installation, configuration, and removal of the emvideo module.
+ */
+
+/**
+ * Implementation of hook_install().
+ */
+function emvideo_install() {
+  // Build any necessary tables.
+  drupal_load('module', 'content');
+  content_notify('install', 'emvideo');
+
+  // Fix up our mess from video_cck, if necessary.
+  return _emvideo_upgrade_from_video_cck();
+}
+
+/**
+ * Implementation of hook_uninstall().
+ */
+function emvideo_uninstall() {
+  drupal_load('module', 'content');
+  content_notify('uninstall', 'emvideo');
+}
+
+/**
+ * Implementation of hook_enable().
+ */
+function emvideo_enable() {
+  drupal_load('module', 'content');
+  content_notify('enable', 'emvideo');
+}
+
+/**
+ * Implementation of hook_disable().
+ */
+function emvideo_disable() {
+  drupal_load('module', 'content');
+  content_notify('disable', 'emvideo');
+}
+
+/**
+ *  Implementation of hook_requirements().
+ */
+// function emvideo_requirements($phase) {
+//   $requirements = array();
+//   // Ensure translations don't break at install time
+//   $t = get_t();
+//
+//   if ($phase == 'install') {
+//     if (drupal_get_installed_schema_version('content') < 6000) {
+//       drupal_set_message($t("Some updates are still pending. Please return to !update and run the remaining updates.", array('!update' => l($t('update.php'), 'update.php', array('query' => 'op=selection')))), 'warning');
+//       $requirements['cck'] = array(
+//         'title' => $t('CCK'),
+//         'description' => $t('Updates for content.module need to be run first.<br/>Please re-run the update script.'),
+//         'severity' => REQUIREMENT_ERROR,
+//       );
+//     }
+//   }
+//
+//   return $requirements;
+// }
+
+/**
+ *  Clean up our messes when migrating from video_cck.
+ */
+function _emvideo_upgrade_from_video_cck() {
+  $ret = array();
+
+  // Do nothing if this is a new install. We know that if there are no existing fields with video_cck type.
+  // if ($__TODO_REPLACE_WITH_PROPER_CHECK) {
+  //  return $ret;
+  // }
+
+
+  // Change any fields from 'video_cck' to 'emvideo' type.
+  db_query("UPDATE {content_node_field} SET type='emvideo' WHERE type='video_cck'");
+  db_query("UPDATE {content_node_field_instance} SET widget_type='emvideo_textfields' WHERE widget_type='video_cck_textfields'");
+
+
+  // Rebuild our content types.
+  content_clear_type_cache();
+
+  // Make sure the previous updates have been run. Some people may have been holding onto a really old version.
+  // On the one hand, we could tell them on the project page not to do that. But then we get to hear them complain
+  // in the issue queue. We're already half way there; I'd rather just take care of it.
+
+  // Load our existing fields.
+  $fields = content_fields();
+
+  // Some lazy folks may be upgrading from a pre-video_cck_update_2 site. Bad developer, bad!
+  // @TODO: decide if we want to figure this out or force people to update entirely in d5 first...
+//   foreach ($fields as $field) {
+//     switch ($field['type']) {
+//       case 'emvideo':
+//         $columns = array(
+//           'data' => array('type' => 'longtext', 'not null' => TRUE, 'default' => "''", 'sortable' => FALSE),
+//         );
+//         // The following line will actually trigger (negligible) warnings if we did things right.
+//         // Thus we suppress the warnings. Good developer, good!
+//         @content_alter_db_field(array(), array(), $field, $columns);
+//       break;
+//     }
+//   }
+
+  // Fix any provider variables. Note that we may be updating from a pre video_cck_update_3 site,
+  // so we fix those sites too. Shame on them for not updating d5 first...
+  drupal_load('module', 'emfield');
+  foreach (emfield_system_list('emvideo') as $provider) {
+    $test = variable_get('emfield_video_cck_allow_'. $provider->name, NULL);
+    $test = (isset($test)) ? $test : variable_get('video_cck_allow_'. $provider->name, NULL);
+    if (isset($test)) {
+      variable_set('emfield_emvideo_allow_'. $provider->name, $test);
+      variable_del('emfield_video_cck_allow_'. $provider->name);
+      variable_del('video_cck_allow_'. $provider->name);
+    }
+  }
+
+  // </Fancy Hand-Waving>
+  return TRUE;
+}
+
+/**
+ * We need to make sure to show our new 'embed code' filter on Views.
+ */
+function emvideo_update_1() {
+  return _emvideo_update_reset_cache();
+}
+
+/**
+ * We need a new data field for extra info stored by certain providers, such as blip.tv.
+ */
+function emvideo_update_2() {
+  $ret = array();
+
+  include_once('./'. drupal_get_path('module', 'content') .'/content.module');
+  include_once('./'. drupal_get_path('module', 'content') .'/includes/content.admin.inc');
+
+  content_clear_type_cache();
+  $fields = content_fields();
+
+  foreach ($fields as $field) {
+    switch ($field['type']) {
+      case 'emvideo':
+        $columns = array(
+          'data' => array('type' => 'longtext', 'not null' => TRUE, 'default' => "''", 'sortable' => FALSE),
+        );
+        // the following line will trigger (negligible) warnings if emvideo_update_2 was run before
+        // (column already exists)
+        @content_alter_db_field(array(), array(), $field, $columns);
+      break;
+    }
+  }
+  $ret = _emvideo_update_reset_cache();
+  $ret[] = update_sql("DELETE FROM {cache}");
+
+  return $ret;
+}
+
+/**
+ * Since we made our engine dependent on emfield, we need to change some variables accordingly.
+ */
+function emvideo_update_3() {
+  $ret = array();
+  foreach (emfield_system_list('emvideo') as $provider) {
+    // TODO: this will need some attention when we upgrade to d6
+    $test = variable_get('emvideo_allow_'. $provider->name, NULL);
+
+    if (isset($test)) {
+      variable_set('emfield_'. $module .'_allow_'. $provider->name, variable_get('emvideo_allow_'. $provider->name, TRUE));
+    }
+  }
+  $ret[] = array(
+    'query' => t('The Embedded Video Field allowed provider variables have been updated.'),
+    'success' => TRUE
+  );
+  $ret = array_merge($ret, _emvideo_update_reset_cache());
+
+  return $ret;
+}
+
+/**
+ * Oops. Cleanup from update 3 -- we don't want to accidentally reset our
+ * variables if we have to run update 3 again.
+ */
+function emvideo_update_4() {
+  $ret = array();
+  foreach (emfield_system_list('emvideo') as $provider) {
+    // TODO: this will need some attention when we upgrade to d6
+    $test = variable_get('emvideo_allow_'. $provider->name, NULL);
+    if (isset($test)) {
+      variable_set('emvideo_allow_'. $provider->name, NULL);
+    }
+  }
+  $ret[] = array(
+    'query' => t('The old Embedded Video Field allowed provider variables have been cleaned up.'),
+    'success' => TRUE
+  );
+
+  return $ret;
+}
+
+/**
+ * Changed the data structure for blip.tv
+ *
+ * TODO: This doesn't work. Thought data was cached?
+ */
+function emvideo_update_5() {
+  $ret = _emvideo_update_reset_cache();
+  $ret[] = update_sql("DELETE FROM {cache}");
+
+  return $ret;
+}
+
+function emvideo_update_6() {
+  $ret = _emvideo_update_reset_cache_views();
+
+  return $ret;
+}
+
+function emvideo_update_6001() {
+  // We added the archive.org provider file, so need to rebuild the theme.
+  drupal_rebuild_theme_registry();
+
+  $ret[] = array(
+    'query' => t('Rebuilt the theme to accommodate new third party video providers.'),
+    'success' => TRUE
+  );
+
+  return $ret;
+}
+
+function emvideo_update_6002() {
+  // We changed the YouTube provider theme arguments, so need to rebuild the theme.
+  drupal_rebuild_theme_registry();
+
+  $ret[] = array(
+    'query' => t('Rebuilt the theme to accommodate changes to the YouTube video provider theme.'),
+    'success' => TRUE
+  );
+
+  return $ret;
+}
+
+/**
+ *  Add new formatters for Lightbox2 & Shadowbox, and new menu callback.
+ */
+function emvideo_update_6003() {
+  return _emvideo_update_add_new_formatters();
+}
+
+/**
+ *  Add new formatters for link and duration.
+ */
+function emvideo_update_6004() {
+  $ret = _emvideo_update_add_new_formatters();
+  return $ret;
+}
+
+/**
+ *  Redo for new formatters for link and duration.
+ */
+function emvideo_update_6005() {
+  $ret = _emvideo_update_add_new_formatters();
+
+  // We no longer need the YouTube API secret key, which no longer exists.
+  $ret[] = update_sql("DELETE FROM {variable} WHERE name='emvideo_youtube_api_secret'");
+
+  return $ret;
+}
+
+/**
+ *  Add new formatters for link and duration.
+ */
+function emvideo_update_6006() {
+  $ret = _emvideo_update_add_new_formatters(t('Rebuilt the theme for modal iframes.'));
+  return $ret;
+}
+
+/**
+ *  Add a duration column to existing fields.
+ */
+function emvideo_update_6007() {
+  // This update was originally malformed, and did not always work properly.
+  // It's now redone in 6010.
+  return array();
+}
+
+/**
+ *  Add a duration column to existing fields.
+ */
+function emvideo_update_6008() {
+  // The previous update, upon which this depended, was originally malformed,
+  // and did not always work properly. It's now redone in 6011.
+  return array();
+}
+
+/**
+ *  Add new formatters for link and duration.
+ */
+function emvideo_update_6009() {
+  $ret = _emvideo_update_add_new_formatters(t('Rebuilt the theme for modal iframes.'));
+  return $ret;
+}
+
+/**
+ *  Botched update_6007, redo at 6013.
+ */
+function emvideo_update_6010() {
+  return array();
+}
+
+/**
+ *  Botched update, redo at 6016.
+ */
+function emvideo_update_6011() {
+  return array();
+}
+
+/**
+ *  Rebuild themes and views.
+ */
+function emvideo_update_6012() {
+  drupal_rebuild_theme_registry();
+  return _emvideo_update_reset_cache_views();
+}
+
+/**
+ *  Add a duration column to existing fields.
+ */
+function emvideo_update_6013() {
+  $ret = _emvideo_update_reset_cache();
+
+  include_once(drupal_get_path('module', 'content') .'/includes/content.admin.inc');
+
+  content_clear_type_cache(TRUE);
+
+  // Build a list of fields that need data updating.
+  $fields = array();
+  foreach (content_types_install() as $type_name => $type_fields) {
+    foreach ($type_fields as $field) {
+      if ($field['module'] == 'emvideo') {
+        // We only process a given field once.
+        $fields[$field['field_name']] = $field;
+      }
+    }
+  }
+
+  // Update database storage (add data column, remove description, set NOT NULL).
+  foreach ($fields as $field) {
+    $new_field = $field;
+
+    unset($field['duration']);
+    content_alter_db($field, $new_field);
+
+    $ret[] = array(
+      'query' => t('Added duration to the %field field.', array('%field' => $field['field_name'])),
+      'success' => TRUE,
+    );
+  }
+
+  content_associate_fields('emvideo');
+
+  $ret[] = update_sql("DELETE FROM {cache}");
+
+  return $ret;
+}
+
+/**
+ *  Botched update, redo at 6016.
+ */
+function emvideo_update_6014() {
+  return array();
+}
+
+/**
+ *  New formatters and theme functions.
+ */
+function emvideo_update_6015() {
+  return _emvideo_update_add_new_formatters();
+}
+
+/**
+ *  Add a duration column to existing fields.
+ */
+function emvideo_update_6016() {
+  $ret = array();
+
+  // Build a list of fields that need data updating.
+  $fields = array();
+  foreach (content_types_install() as $type_name => $type_fields) {
+    foreach ($type_fields as $field) {
+      if ($field['type'] == 'emvideo') {
+        // We only process a given field once.
+        $fields[$field['field_name']] = $field;
+      }
+    }
+  }
+
+  // Build a batch that grabs the duration for each video field.
+  $batch = array(
+    'title' => t('Importing duration.'),
+    'operations' => array(),
+    'file' => drupal_get_path('module', 'emvideo') .'/emvideo.install',
+  );
+  foreach ($fields as $field_name => $field) {
+    $batch['operations'][] = array('_emvideo_update_get_duration', array($field));
+    $ret[] = array(
+      'query' => t('Saved available video durations for the %field field.', array('%field' => $field['field_name'])),
+      'success' => TRUE,
+    );
+  }
+  batch_set($batch);
+
+  // Clear caches.
+  cache_clear_all('*', content_cache_tablename(), TRUE);
+  cache_clear_all('*', 'cache', TRUE);
+  return $ret;
+}
+
+/**
+ * New formatters for video thumbnail path & url & Colorbox support.
+ */
+function emvideo_update_6100() {
+  return _emvideo_update_add_new_formatters();
+}
+
+/**
+ * Rebuild the menu to check content access at emvideo/modal.
+ */
+function emvideo_update_6101() {
+  menu_rebuild();
+
+  return array();
+}
+
+/**
+ *  Batch function to grab the duration for each video field.
+ */
+function _emvideo_update_get_duration($field, &$context) {
+  // Setup the first through
+  if (!isset($context['sandbox']['progress'])) {
+    $db_info = content_database_info($field);
+    $context['sandbox']['db_info'] = $db_info;
+    $context['sandbox']['table'] = $db_info['table'];
+    $context['sandbox']['col_embed'] = $db_info['columns']['embed']['column'];
+    $context['sandbox']['col_value'] = $db_info['columns']['value']['column'];
+    $context['sandbox']['col_provider'] = $db_info['columns']['provider']['column'];
+    $context['sandbox']['col_data'] = $db_info['columns']['data']['column'];
+    $context['sandbox']['col_duration'] = $db_info['columns']['duration']['column'];
+    $context['sandbox']['max'] = db_result(db_query("SELECT COUNT(*) FROM {". $db_info['table'] ."} WHERE {$context['sandbox']['col_duration']} = 0"));
+    $context['sandbox']['progress'] = 0;
+    $context['sandbox']['current_node'] = 0;
+  }
+
+  // Work our way through the field values 50 rows at a time.
+  $limit = 50;
+  $result = db_query_range("SELECT * FROM {{$context['sandbox']['table']}} WHERE vid > %d AND {$context['sandbox']['col_duration']} = 0 ORDER BY vid ASC", $context['sandbox']['current_node'], 0, $limit);
+  while ($row = db_fetch_array($result)) {
+    // Fetch the duration from the provider.
+    $item = array(
+      'embed' => $row[$context['sandbox']['col_embed']],
+      'value' => $row[$context['sandbox']['col_value']],
+      'provider' => $row[$context['sandbox']['col_provider']],
+      'data' => unserialize($row[$context['sandbox']['col_data']]),
+      'duration' => $row[$context['sandbox']['col_duration']],
+    );
+    if ($item['provider'] && empty($item['duration'])) {
+      $duration = emfield_include_invoke('emvideo', $item['provider'], 'duration', $item);
+      if ($duration) {
+        db_query("UPDATE {{$context['sandbox']['table']}} SET {$context['sandbox']['col_duration']} = %d WHERE vid = %d", $duration, $row['vid']);
+      }
+    }
+
+    // Update our progress information.
+    $context['sandbox']['progress']++;
+    $context['sandbox']['current_node'] = $row['vid'];
+  }
+
+  // Inform the batch engine that we are not finished,
+  // and provide an estimation of the completion level we reached.
+  if ($context['sandbox']['progress'] != $context['sandbox']['max']) {
+    $context['finished'] = $context['sandbox']['progress'] / $context['sandbox']['max'];
+  }
+}
+
+/**
+ *  Rebuild the theme for new formatters.
+ */
+function _emvideo_update_add_new_formatters($message = NULL) {
+  if (!isset($message)) {
+    $message = t('Rebuilt the theme to accommodate new display formatters.');
+  }
+
+  // Adding new formatters, so need to rebuild the theme.
+  drupal_rebuild_theme_registry();
+
+  // Also need to make sure we grab the new formatters themselves.
+  $ret = _emvideo_update_reset_cache();
+
+  $ret[] = array(
+    'query' => $message,
+    'success' => TRUE,
+  );
+
+  return $ret;
+}
+
+/**
+ * Clear the Views cache.
+ */
+function _emvideo_update_reset_cache_views() {
+  $ret = array();
+  if (module_exists('views')) {
+    $ret[] = update_sql("DELETE FROM {cache_views}");
+  }
+
+  return $ret;
+}
+
+/**
+ *  Clear the content and views caches.
+ */
+function _emvideo_update_reset_cache() {
+  $ret = _emvideo_update_reset_cache_views();
+  $ret[] = update_sql("DELETE FROM {cache_content}");
+
+  return $ret;
+}

@@ -1,0 +1,10 @@
+// The drush commands
+One of the problems working with Git and features module, 
+is when you pulling from git before you update you feature changes to code.
+Well, now (let say you got some feature changes comming form the pull) you have to deside, 
+revert the feature and ignore all of your settings change or recreate the feature and override some else job.
+This drush command is tring to help you enforce the very basic procedures of 
+"Always UPDATE your feature to code BEFORE you pulling from git (drush fu)"
+"Always REVERT your feature from code AFTER the pulling (drush fr)"
+by checking the features state before pulling and stop you from continue.
+if you want to pull although not all features are in default state you can use the drush pull force command.

@@ -1,0 +1,29 @@
+<?php
+// $Id: l10n_client.install,v 1.1.4.2.2.1 2010/12/08 10:40:48 goba Exp $
+
+/**
+ * @file
+ *   Install, update and uninstall functions for the l10n_client module.
+ */
+
+/**
+ * Implements hook_uninstall().
+ */
+function l10n_client_uninstall() {
+  // Remove variables.
+  db_query("DELETE FROM {variable} WHERE name LIKE 'l10n_client_%%'");
+}
+
+/**
+ * Update for new l10n_client_server default value.
+ */
+function l10n_client_update_6001() {
+  $server_setting = variable_get('l10n_client_server', NULL);
+  if (!variable_get('l10n_client_use_server', FALSE) && empty($server_setting) && !is_null($server_setting)) {
+    // User saved empty translation server setting, and has sharing disabled now.
+    // Drop the setting to fall back on the new localize.drupal.org default.
+    // User will get new default when she enables sharing.
+    variable_del('l10n_client_server');
+  }
+  return array();
+}

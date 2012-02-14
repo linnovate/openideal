@@ -1,0 +1,2033 @@
+/**
+ * $Id: style.css,v 1.5.2.7 2009/12/27 20:02:46 jwolf Exp $
+ * Acquia Marina - by TopNotchThemes
+ */
+
+
+/***************************/
+/* RESET MARGINS & PADDING */
+/***************************/
+
+html, body, div, span,
+p, blockquote, pre, code,
+ul, ol, li,
+h1, h2, h3, h4, h5, h6,
+form, fieldset, legend, label, input, textarea,
+table, caption, tbody, tfoot, thead, tr, th, td {
+  margin: 0;
+  padding: 0;
+}
+
+img {
+  border: 0;
+}
+
+
+/**************/
+/* TYPOGRAPHY */
+/**************/
+
+body {
+  background: #FFF;
+  font-family: Tahoma, Verdana, Arial, Helvetica, sans-serif;     /* web safe fonts */
+  font-size: 75%;    /* 12px */
+  font-weight: normal;
+  line-height: 160%;    /* 19.2px */
+}
+
+
+/************/
+/* HEADINGS */
+/************/
+
+h1,h2 { font-weight: normal; }
+
+h1 {
+  font-size: 2em;
+  line-height: 1;
+  margin-bottom: 12px;
+}
+
+h2 {
+  font-size: 1.5em;
+  margin-bottom: 14px;
+}
+
+h3 {
+  font-size: 1.2em;
+  font-weight: bold;
+  line-height: 1;
+  margin-bottom: 14px;
+}
+
+h4 {
+  font-size: 1em;
+  font-weight: bold;
+  height: 1.25em;
+  line-height: 1.25;
+  margin-bottom: 14px;
+}
+
+h5 {
+  font-size: 1em;
+  font-weight: bold;
+  margin-bottom: 14px;
+}
+
+h6 {
+  font-size: 1em;
+  font-weight: bold;
+}
+
+
+/*****************/
+/* DEFAULT LINKS */
+/*****************/
+
+a,
+a:link,
+a:visited {
+  color: #27638C;
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+} 
+
+a:hover,
+a:active {
+  text-decoration: underline;
+}
+
+
+/**********/
+/* LAYOUT */
+/**********/
+
+html {
+  background: #F4F7E7;                               /* background & font color */
+  color: #666;
+  min-width: 975px;
+}
+
+#page {
+  margin: 0;
+  width: 100%;
+}
+
+p {
+  font-size: 1em;
+  font-weight: normal;
+  line-height: 1.5;
+  margin: 10px 0;
+}
+
+
+/*********/
+/* LISTS */
+/*********/
+
+ul {
+  margin: 6px 0 12px;
+  padding: 0;
+}
+
+ol {
+  margin: 10px 0 14px;
+  padding: 0;
+}
+
+ul.menu li,
+.item-list ul li {
+  margin: 2px 0 2px 6px;    /* LTR */
+}
+
+ul.menu ul, .item-list ul ul {
+  margin-left: 0;
+}
+
+ul li,
+ul.menu li,
+.item-list ul li,
+li.leaf {
+  margin: 2px 0;
+  padding: 2px 0 0 16px;    /* LTR */
+}
+
+ul li,
+ul.menu li,
+.item-list ul li,
+li.leaf {
+  background: url('images/raquo.png') no-repeat left 0.833em;    /* LTR */
+  list-style-image: none;
+  list-style-type: none;
+}
+
+ol li {
+  padding: 2px 0;
+  margin-left: 24px;    /* LTR */
+}
+
+div.block ul {
+  padding: 0 0 3px;
+}
+
+ul.links li,
+ul.links.inline {
+  background: transparent;
+}
+
+/* remove list styling on login block and taxonomy */
+#user-login-form div.item-list ul li,
+div.terms ul li {
+  list-style-type: none;
+  margin: 0;
+}
+
+/* adjust openid link */
+html.js #user-login-form li.openid-processed, 
+html.js #user-login li.openid-processed {
+  background: transparent;
+  font-weight: bold;
+  list-style-type: none;
+  margin: 10px 0 0;    /* LTR */
+  padding-left: 0;    /* LTR */
+  padding-top: 2px;
+}
+
+#preface-wrapper div.block ul li {
+  background: url('images/green-checkmark.png') no-repeat 0 0.222em;
+  list-style-image: none;
+  list-style-type: none;
+  padding: 18px 0 0 40px;    /* LTR */
+}
+
+#preface-wrapper div.block ol li {
+  list-style-image: none;
+  padding: 2px 0;
+}
+
+body.layout-main-last #sidebar-last li.leaf,
+body.layout-main-last #sidebar-last ul.menu li,
+body.layout-main-last #sidebar-last .item-list ul li,
+#content-content .node ul li,
+#content-bottom  ul li {
+  background: url('images/green-bullet.png') no-repeat left 0.50em;    /* LTR */
+  list-style-image: none;
+  list-style-type: none;
+  padding-left: 20px;    /* LTR */
+}
+
+/********/
+/* MISC */
+/********/
+
+hr {
+  border: 1px solid #D6DDB9;
+}
+
+div.content a.feed-icon img,
+div.content th img {
+  border: 0;             /* remove image borders where we don't want them */
+}
+
+/* format initial startup page list nicely */
+#first-time p {
+  clear: both;
+}
+
+#first-time ol {
+  list-style-position: outside;
+  margin-left: 24px;    /* LTR */
+}
+
+
+/********************/
+/* ALL PAGE REGIONS */
+/********************/
+
+/******************/
+/* HEADER REGIONS */
+/******************/
+
+#header-wrapper {
+  background-color: #fff;
+}
+
+#header {
+  background-color: inherit;
+  margin: 0 auto;
+  padding: 0;
+  width: 960px;
+}
+
+#header #search {
+  text-align: center;
+}
+
+#header #search-box {
+  background-color: #E1E1E1;
+  border: 1px solid #CCCCCC;
+  float: right;    /* LTR */
+  padding: 8px;
+  position: relative;
+  top: 0;
+  width: 20em;
+  -moz-border-radius-bottomleft: 12px;
+  -moz-border-radius-bottomright: 12px;
+  -webkit-border-bottom-left-radius: 10px;
+  -webkit-border-bottom-right-radius: 10px; 
+}
+
+#header #search-box input.form-text {
+  height: 14px;
+  padding: 4px 2px;
+  width: 166px;
+}
+
+
+/* theming for header search box */
+#header #search-box input.form-submit {
+  background: #EFEBE7;
+  border: 1px solid #ccc;
+  color: #194765;
+  cursor: pointer; 
+  font-family: Tahoma,Verdana,Arial,Helvetica,sans-serif;
+  font-size: 1.1em;
+  font-weight: normal;
+  outline: none;
+  padding: 3px 3px 2px;
+  text-transform: none;
+  -moz-border-radius: 0;
+  -moz-outline-radius: 0;
+  -webkit-border-radius: 0;
+}
+
+#header #search-box label,
+#header #search-box a.advanced-search-link {
+  display: none;
+}
+
+#header-first {
+  float: left;    /* LTR */
+  font-family: Myriad Pro, Myriad Web Pro Regular, Lucida Grande, Geneva, Trebuchet MS, sans-serif;
+  margin: 12px 30px 0 0;
+  width: 380px;
+}
+
+#header-first #logo {                            /* logo postion.  default image replaced if you upload your own */
+  float: left;    /* LTR */
+  margin: 0 14px 0 0;
+}
+
+#header-first h1 {    /* site name link */
+  font-size: 3em;
+  line-height: 1;
+  margin: 10px 0 0;
+}
+
+#header-first h1 a {    /* site name link */
+  text-decoration: none;
+}
+
+#header-first #slogan {                          /* site slogan */
+  display: block;
+  font-size: 1.166em;
+  margin: 4px 0;
+}
+
+#header-middle {
+  float: left;
+  margin: 10px 20px 0 0;    /* LTR */
+  width: 230px;
+}
+
+#header-last {
+  float: right;    /* LTR */
+  margin: 10px 0 0;
+  width: 300px;
+}
+
+#primary-menu-wrapper {
+  margin: 0 auto;
+  position: relative;
+  width: 960px;
+  z-index: 5;    /* fixes IE z-index bug */
+}
+
+
+/********************************/
+/* PREFACE REGIONS */
+/********************************/
+
+#preface {
+  background: #144A6E url('images/preface-wrapper-bg.png') repeat-x top;
+  min-height: 24px;
+}
+
+#preface-wrapper {
+  color: #fff;
+  font-family: Myriad Pro, Myriad Web Pro Regular, Lucida Grande, Geneva, Trebuchet MS, sans-serif;
+  font-size: 1.5em;
+  margin: 0 auto;
+  padding: 10px 0 8px 0;
+  width: 960px;
+}
+
+/* correct button font size */
+#preface-wrapper .form-submit {
+  font-size: 0.6em;
+}
+
+#preface-wrapper #preface-first {
+}
+
+#preface-wrapper #preface-middle {
+}
+
+#preface-wrapper #preface-last {
+}
+
+#preface-wrapper.prefaces-1 div.column {
+  float: left;    /* LTR */
+  width: 100%;
+}
+  
+#preface-wrapper.prefaces-2 div.column {
+  display: inline;
+  float: left;    /* LTR */
+  margin: 0 14px;
+  width: 47%;
+}
+  
+#preface-wrapper.prefaces-3 div.column {
+  display: inline;
+  float: left;    /* LTR */
+  margin: 0 14px;
+  width: 30%;
+} 
+
+#preface-wrapper a:link,
+#preface-wrapper a:visited {
+  color: #fff;
+  text-decoration: underline;
+}
+
+#preface-wrapper a:link:hover,
+#preface-wrapper a:visited:hover {
+  border-bottom: none;
+  text-decoration: none;
+}
+
+div.content > a:link img {
+  border-bottom: none;
+  margin: 0;
+  padding: 0;
+}
+
+
+/************************/
+/*  MAIN AREA WRAPPER   */
+/* (Sidebars + Content) */
+/************************/
+
+#main-wrapper {
+  background: #F4F7E7 url('images/content-gradient.png') repeat-x 0 1px;
+}
+
+#main {
+  margin: 0 auto;
+  width: 960px;
+}
+
+#main-wrapper a.active {
+  color: #144A6E;
+  text-decoration: underline;
+}
+
+/*******************/
+/* SIDEBAR REGIONS */
+/*******************/
+
+#sidebar-first {
+  float: left;    /* LTR */
+}
+
+#sidebar-last {
+  background: transparent;
+  float: right;    /* LTR */
+  margin: 0 0 0 10px;    /* LTR */
+}
+
+
+/*******************/
+/* CONTENT REGIONS */
+/*******************/
+
+#content-wrapper {
+  float: left;    /* LTR */
+}
+
+#content-top {
+  margin: 0 0 30px;
+}
+
+#content {
+  margin: 0 0 20px;               /* default spacing between content regions */
+}
+
+#content-inner {
+  clear: left;
+}
+
+#content-bottom {
+  clear: both;
+  margin: 20px 0 0;
+}
+
+
+/**********************************/
+/* POSTSCRIPT REGIONS  */
+/**********************************/
+
+#postscript-wrapper {
+  clear: both;
+  margin: 0 auto;
+  width: 960px;
+}
+
+#postscript-wrapper #postscript-first {
+  padding-left: 0;    /* LTR */
+}
+
+#postscript-wrapper #postscript-middle {
+}
+
+#postscript-wrapper #postscript-last {
+  padding-right: 0;    /* LTR */
+}
+
+#postscript-wrapper.postscripts-1 div.column {
+  float: left;    /* LTR */
+  width: 100%;
+}
+
+#postscript-wrapper.postscripts-2 div.column {
+  float: left;    /* LTR */
+  margin: 0 10px 0 8px;    /* LTR */
+  width: 48%;
+}
+
+#postscript-wrapper.postscripts-3 div.column {
+  float: left;    /* LTR */
+  padding: 0 8px;
+  width: 32.76%;
+} 
+
+
+/*****************/
+/* FOOTER REGION */
+/*****************/
+
+#footer {
+  border-bottom: 1px solid #D6DDB9;
+  border-top: 1px solid #D6DDB9;
+  clear: both;
+  display: block;
+  font-size: 0.9em;
+  margin: auto 0;
+  overflow: hidden;
+  padding: 10px 0;
+  text-align: center;
+  width: 960px;
+}
+
+#footer ul {
+  display: inline;
+  margin: 0;
+  padding: 0 0 0 9px;    /* LTR */
+}
+
+#footer ul li {
+  background: transparent none repeat;
+  border-left: 1px solid #CCC;    /* LTR */
+  display: inline;
+  padding: 0 5px 0 9px;    /* LTR */
+}
+
+#footer ul li.first {
+  border: none;
+}
+
+#legal-notice {
+  background: #F4F7E7;
+  clear: both;
+  color: #AAA;
+  display: block;
+  font-size: 0.9em;
+  padding: 10px 0;
+  text-align: center;
+  width: 100%;
+}
+
+#legal-notice a {
+  color: #6699CC;
+}
+
+
+/****************************************/
+/*          COLUMN LAYOUTS              */
+/*                                      */
+/* Classes for different column layouts */
+/* that are applied to the <body> tag.  */
+/****************************************/
+
+/************************/
+/* SINGLE COLUMN LAYOUT */
+/* (Main Content)       */
+/************************/
+
+body.layout-main #content-wrapper {
+  margin: 24px 0 0 0;    /* LTR */
+  width: 960px;
+}
+
+
+/**************************/
+/*   TWO COLUMN LAYOUT    */
+/* (Sidebar:Main Content) */
+/**************************/
+
+body.layout-first-main #sidebar-first {
+  margin: 24px 14px 0 0;
+  width: 240px;
+}
+
+body.layout-first-main #content-wrapper {
+  margin: 34px 0 0 0;    /* LTR */
+  width: 706px;
+}
+
+
+/**************************/
+/*   TWO COLUMN LAYOUT    */
+/* (Main Content:Sidebar) */
+/**************************/
+
+body.layout-main-last #content-wrapper {
+  margin: 32px 0 0 0;
+  position: relative;
+  width: 480px;
+  z-index: 1;
+}
+
+body.layout-main-last #sidebar-last {
+  background-color: transparent;
+  margin: 32px 0 0 0;
+  width: 460px;
+}
+
+
+/**********************************/
+/*      THREE COLUMN LAYOUT       */
+/* (Sidebar:Main Content:Sidebar) */
+/**********************************/
+
+body.layout-first-main-last #sidebar-first {
+  margin: 40px 20px 0 0;    /* LTR */
+  width: 240px;
+}
+
+body.layout-first-main-last #content-wrapper {
+  margin: 40px 0 0;
+  width: 700px;
+}
+
+body.layout-first-main-last #content-wrapper #content-inner {
+}
+
+body.layout-first-main-last #content-wrapper #sidebar-last {
+  background-color: #F4F7E7;
+  margin: 0;
+  padding: 0 0 0 20px;    /* LTR */
+  width: 280px;
+}
+
+body.full-node.layout-first-main-last #sidebar-last {
+  margin: 0;
+}
+
+
+/******************/
+/* HELPER CLASSES */
+/******************/
+
+.hide {
+  display: none;
+  visibility: hidden;
+}
+
+.left {
+  float: left;
+}
+
+.right {
+  float: right;
+}
+
+.clear {
+  clear: both;
+}
+
+.clearfix:after {                                 /* add .clearfix class to clear floats after an element */
+  clear: both;                                    /* (IE version is in ie6-fixes.css) */
+  content: "."; 
+  display: block;
+  font-size: 0;
+  height: 0; 
+  visibility: hidden;
+}
+
+
+/************/
+/* HEADINGS */
+/************/
+
+h1.title {                                        /* page titles */
+  border-bottom: 1px solid #D6DDB9;
+  clear: left;    /* LTR */
+  font-family: Myriad Pro, Myriad Web Pro Regular, Lucida Grande, Geneva, Trebuchet MS, sans-serif;
+  font-size: 1.833em;
+  font-weight: 600;
+  line-height: 1.2727em;
+}  
+
+h2.title {                                        /* block titles, node titles */
+  font-family: Myriad Pro, Myriad Web Pro Regular, Lucida Grande, Geneva, Trebuchet MS, sans-serif;
+  font-size: 1.333em;
+  font-weight: 600;
+  margin: 0;
+  text-transform: uppercase;
+}  
+
+h2.title a:link,
+h2.title a:visited {
+}  
+
+
+h2.title a:hover,
+h2.title a:active {
+  color: #619CBE;
+  text-decoration: none;
+}  
+
+div.node h2.title {
+  border-bottom: 1px solid #d6ddb9;
+}
+
+/*********/
+/* NODES */
+/*********/
+
+div.node {
+  margin: 0 0 30px;
+}
+
+div.node.sticky.teaser {
+  background-color: #EFF2E2;
+  border: 1px solid #E0E3D4;
+  padding: 8px;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+}
+
+#content-content .node ul.links li,
+#content-content .node ul.inline li,
+#content-content .node .links a {
+  background: transparent;
+  margin: 0;
+  padding: 0 14px 0 0;    /* LTR */
+}
+
+div.node .read-more a,
+div.node .more-link a,
+div.node .links a {
+  font-size: 0.9em;
+  font-weight: bold;
+  margin: 0;
+}  
+
+#content-content .node ul.links li.comment_forbidden a {
+  padding-right: 4px;    /* LTR */
+}
+
+.submitted,
+.terms {                                      /* styling for byline and tags */
+  font-size: 0.9em;
+}
+
+.vocab-name {
+  font-weight: bold;
+}
+
+.terms {
+  line-height: 130%;
+}
+
+#content-content .terms ul.taxonomy li {
+  background: transparent;
+  margin: 10px 0 5px;
+  padding: 0;
+}
+
+#content-content .terms ul.taxonomy ul.vocab-list,
+#content-content .terms ul.taxonomy li.vocab-term {
+  background: transparent;
+  display: inline;
+  padding: 0 0 0 2px;    /* LTR */
+}
+
+.submitted a:link {
+}
+
+.submitted a:visited,
+.submitted a:hover,
+.submitted a:active {
+}
+
+div.node.full-node div.content {
+  border-bottom: 1px solid #D6DDB9;
+}
+
+.node-form .standard {
+  clear: none;
+}
+
+.picture {
+  float: right;    /* LTR */
+  margin: 0 0 2px 4px;    /* LTR */
+  padding: 2px;
+}
+
+.node-unpublished {
+  background-color: #FFF0F0;
+  border: 1px solid #FFBABA;
+  padding: 8px;
+}
+
+.preview .node {
+  background-color: #FFFFDD;
+  border: 1px solid #ccc;
+  padding: 10px;
+}
+
+/**********/
+/* BLOCKS */
+/**********/
+
+div.block {
+  position: relative;
+}
+
+div.block-region {
+  background-color: #FFFF66;
+  color: #000;
+  font-family: Tahoma,Verdana,Arial,Helvetica,sans-serif;
+  font-size: 16px;
+  margin-bottom: 4px;
+  margin-top: 4px;
+  padding: 3px;
+  text-align: center;
+}
+
+div.block .title {
+}
+
+div.block .submitted {                               /* byline styles in blocks */
+}
+
+div.block .submitted a:link {
+}
+
+div.block .submitted a:visited,
+div.block .submitted a:hover,
+div.block .submitted a:active {
+}
+
+div.block-wrapper {                    /* spacing between blocks */
+  margin: 10px 0;
+}
+
+div.block div.content {
+}
+
+#user-login-form .item-list ul li,
+div.terms ul li {
+  list-style-type: none;
+  margin: 2px 0 0 16px;    /* LTR */
+}
+
+
+#header-middle h2.block-title,
+#header-last h2.block-title {
+  color: #51748C;
+  font-size: 1.833em;
+  margin: 0;
+  padding: 0;
+}
+
+#preface-wrapper h2.block-title {
+  background-color: transparent;
+  color: #94CE18;
+  font-size: 1em;
+  padding: 0;
+}
+
+#preface-wrapper .block .content {
+  margin: 10px 0 0;
+}
+
+body.layout-first-main-last #sidebar-first .block-wrapper,
+body.layout-first-main-last #sidebar-last .block-wrapper {
+  margin: 0 0 10px;
+}
+
+/* rounded blocks styles -= layout-first-main-last & layout-first-main blocks */
+#sidebar-first h2.block-title,
+#sidebar-last h2.block-title,
+#postscript-wrapper h2.block-title {
+  background-color: #94CE18;
+  color: #fff;
+  padding: 8px 8px 6px 46px;
+  text-align: right;
+  text-shadow: #545454 1px 1px; 
+  -moz-border-radius-topleft: 3px;
+  -moz-border-radius-topright: 3px;
+  -webkit-border-top-left-radius: 4px;
+  -webkit-border-top-right-radius: 4px;
+}
+
+#sidebar-first div.block div.content,
+#sidebar-last div.block div.content,
+#postscript-wrapper div.block div.content {
+  background: transparent url('images/block-gradient.png') no-repeat center bottom;
+  border-bottom: 3px solid #F1F5F7;
+  padding: 10px 10px 8px;
+  -moz-border-radius-bottomleft: 6px;
+  -moz-border-radius-bottomright: 6px;
+  -webkit-border-bottom-left-radius: 4px;
+  -webkit-border-bottom-right-radius: 4px; 
+}
+
+/* non-rounded blocks styles = prefaces & layout-main-last blocks */
+#preface-wrapper div.block div.content,
+body.layout-main-last #sidebar-last div.block div.content {
+  border: none;
+}
+
+body.layout-main-last #sidebar-last div.block-wrapper {
+  margin: 0 0 30px;
+}
+
+#preface-wrapper div.block div.content,
+body.layout-main-last #sidebar-last div.block div.content,
+#footer div.block div.content {
+  background: none;
+  border-bottom: none;
+  margin: 0;
+  padding: 0;
+}
+
+body.layout-main-last #sidebar-last div.block div.content {
+  padding: 6px;
+}
+
+body.layout-main-last #sidebar-last h2.block-title {
+  border-bottom: 1px solid #D6DDB9 ;
+  background-color: transparent;
+  color: #666;
+  padding: 0;
+  text-align: left;    /* LTR */
+  text-shadow: none;
+  width: 400px;
+}
+
+#footer h2.block-title {
+  background: transparent;
+  color: #666;
+}
+
+#sidebar-first #block-search-0 .form-item label,
+#sidebar-last #block-search-0 .form-item label {
+  display: none;
+}
+
+/***************/
+/* BLOCK MENUS */
+/***************/
+
+div.block ul li a,
+div.block ul.menu li a {								
+  font-size: 1em;
+  font-weight: bold;
+}
+
+div.block ul.menu li,
+div.block .item-list ul li {
+  margin: 0;
+}
+
+div.block ul.menu li a:link,
+div.block ul.menu li a:visited {
+}
+
+div.block ul.menu li a:hover,
+div.block ul.menu li a:active {
+}
+
+#footer div.block ul li a,
+#footer div.block ul.menu li a {
+  font-weight: normal;
+}
+
+
+/*****************************************/
+/* ROUNDED CORNERS FOR BLOCKS (optional) */
+/*****************************************/
+
+div.rounded-block {
+  margin-top: -1px;                               /* use negative margin to overlap stacked blocks */
+}
+
+p.rounded-topspace {
+  margin-top: -14px;                                  /* removes unwanted space */
+}
+
+p.rounded-bottomspace {
+  margin-bottom: -10px;                               /* removes unwanted space */
+}
+
+div.rounded-block-top-left, 
+div.rounded-block-top-right, 
+div.rounded-block-bottom-left, 
+div.rounded-block-bottom-right { 
+  background: transparent url('images/rounded-block.png') no-repeat;                         /* combined rounded corner image */
+  font-size: 2px;                                 /* IE div correction */
+  height: 11px;                                   /* height of an image corner */
+}
+
+body.layout-main-last #sidebar-last div.rounded-block-top-left, 
+body.layout-main-last #sidebar-last div.rounded-block-top-right, 
+body.layout-main-last #sidebar-last div.rounded-block-bottom-left, 
+body.layout-main-last #sidebar-last div.rounded-block-bottom-right { 
+  background: none;
+  font-size: inherit;
+  height: auto;
+}
+
+div.rounded-block-top-left, 
+div.rounded-block-bottom-left { 
+  margin-right: 11px;                             /* width of an image corner */
+}
+
+div.rounded-block-top-right {                        /* anchor image in top right */
+  background-position: 100% 0;
+}
+
+div.rounded-block-top-right,
+div.rounded-block-bottom-right { 
+  margin-left: 11px;                              /* width of an image corner */
+  margin-top: -11px;                              /* height of an image corner */
+}
+
+body.layout-main-last #sidebar-last div.rounded-block-top-right,
+body.layout-main-last #sidebar-last div.rounded-block-bottom-right { 
+  margin: 0;
+}
+
+div.rounded-block-bottom-left  { 
+  background-position: 0 -11px;                   /* negative height of an image corner */
+}
+
+div.rounded-block-bottom-right { 
+  background-position: 100% -11px;                /* negative height of an image corner */
+}
+
+div.rounded-outside,
+div.rounded-inside {
+  background: transparent url('images/rounded-block-inner.png') repeat-y right;
+  padding-right: 8px;
+}
+
+body.layout-main-last #sidebar-last div.rounded-outside,
+body.layout-main-last #sidebar-last div.rounded-inside {
+  background: none;
+  margin: 0;
+  padding: 0;
+}
+
+div.rounded-inside {
+  background-position: left;
+  padding: 0 0 0 8px;
+}
+
+
+/****************/
+/* PRIMARY MENU */
+/****************/
+
+#primary-menu {                                   /* menu layout */
+  display: block;
+  float: right;
+  font-family: Myriad Pro, Myriad Web Pro Regular, Lucida Grande, Geneva, Trebuchet MS, sans-serif;
+  font-size: 1em;
+  font-weight: bold;
+  margin-top: 12px;
+  padding: 0;
+  position: relative;
+  text-transform: uppercase;
+}
+  
+#primary-menu ul.links li {                       /* text styling for the top (primary) menu */
+}  
+
+#primary-menu ul.links li.first {                 /* .first and .last classes applied to first and last menu & list items */
+}
+  
+#primary-menu ul.links li.last {                  /* .first and .last classes applied to first and last menu & list items */
+}
+  
+#primary-menu ul.links li a:link,
+#primary-menu ul.links li a:visited {
+}
+
+#primary-menu ul.links li a:hover,
+#primary-menu ul.links li a:active {
+}  
+  
+
+/************************************/
+/* PRIMARY MENU WITH DROPDOWNS      */
+/* - used with menu_tree theming of */
+/* $primary_links in page.tpl.php   */
+/************************************/
+
+#primary-menu ul.menu li {                        /* top item layout */
+  background: transparent url('images/tab-left.png') no-repeat left 0;
+  display: block;
+  float: left;    /* LTR */
+  margin: 0 4px 0 0;
+  padding: 0 0 0 0.833em;    /* 0 0 0 10px */
+  position: relative;
+  width:  auto;
+}
+
+#primary-menu ul.menu li:hover,
+#primary-menu ul.menu li.hover,
+#primary-menu ul.menu li.active-trail {
+  background-position: left -29px;
+}
+
+#primary-menu ul.menu li a {
+  background: transparent url('images/tab-right.png') no-repeat right 0;
+  color: #154B70;
+  display: block;
+  padding: 0.416em 0.833em 0.083em 0;    /* 5px 10px 1px 0 */
+  text-decoration: none;
+}
+
+#primary-menu ul.menu li a:hover,
+#primary-menu ul.menu li:hover a,
+#primary-menu ul.menu li.hover a,
+#primary-menu ul.menu li.active-trail a {
+  background-position: right -29px;
+  color: #fff;
+}
+
+#primary-menu ul.menu li ul {
+  background: transparent url('images/drop-bottom.png') no-repeat 0 bottom;
+  left: -999em;
+  opacity: 0.95;
+  margin: 0 0 0 -10px;
+  padding: 2px 0 4px;
+  position: absolute;
+  width: 144px;
+  z-index: 2;
+}
+  
+#primary-menu ul.menu li:hover ul,
+#primary-menu ul.menu li.hover ul {
+  display: block;
+  left: auto;
+}
+  
+#primary-menu ul.menu li ul li {
+  background: #94CE18;
+  border-bottom: 1px solid #83A638;
+  float: left;
+  font-family: Tahoma, Verdana, Arial, Helvetica, sans-serif;
+  font-size: 0.916em;
+  height: auto;
+  margin: 0;
+}
+
+#primary-menu ul.menu li ul li.last {
+  border-bottom: none
+}
+
+#primary-menu ul.menu li ul li a,
+#primary-menu ul.menu li ul li a:link,
+#primary-menu ul.menu li ul li a:visited {
+  background: transparent;
+  color: #154B6F;
+  display: block;
+  margin: 0;
+  padding: 4px 0;
+  text-transform: none;
+  width: 135px;
+}
+
+#primary-menu ul.menu li ul li a:hover {
+  color: #fff;
+  display: block;
+  margin: 0;
+  padding: 4px 0;
+  text-decoration: none;
+}
+
+#primary-menu ul.menu li ul li ul.menu {
+  left: -999em;
+  margin: 0 0 0 -14px;    /* LTR */
+  padding: 6px 0 4px;
+}
+
+#primary-menu ul.menu li ul li:hover ul.menu,
+#primary-menu ul.menu li ul li.hover ul.menu {
+  display: block;
+  left: 154px;    /* LTR */
+  top: -6px;
+}
+
+#primary-menu ul.menu li ul li ul.menu li a {
+  padding: 4px;
+  width: 128px;
+}
+
+#primary-menu ul.menu li ul li ul.menu li ul.menu {
+  left: -999em;
+  margin: 0 0 0 -14px;
+  padding: 6px 0 4px;
+}
+
+#primary-menu ul.menu li ul li:hover ul.menu li:hover ul.menu,
+#primary-menu ul.menu li ul li.hover ul.menu li:hover ul.menu{
+  display: block;
+  left: 154px;    /* LTR */
+  top: -6px;
+}
+
+#primary-menu ul.menu li ul li ul.menu li ul.menu li a {
+  padding: 4px;
+  width: 128px;
+}
+
+#primary-menu ul.menu li ul li ul.menu li ul.menu li ul.menu{
+  left: -999em;
+  margin: 0 0 0 -14px;
+  padding: 6px 0 4px;
+}
+
+#primary-menu ul.menu li ul li:hover ul.menu li:hover ul.menu li:hover ul.menu,
+#primary-menu ul.menu li ul li.hover ul.menu li:hover ul.menu li:hover ul.menu{
+  display: block;
+  left: 154px;    /* LTR */
+  top: -6px;
+}
+
+#primary-menu ul.menu li ul li ul.menu li ul.menu li ul.menu li a {
+  padding: 4px;
+  width: 128px;
+}
+  
+/******************/
+/* SECONDARY MENU */
+/******************/
+
+#secondary-menu {
+}
+
+
+/***********/
+/* MISSION */
+/***********/
+
+#mission {
+  padding: 8px 0;
+}
+
+/***************/
+/* BREADCRUMBS */
+/***************/
+
+#breadcrumb {
+  font-size: 1em;
+  line-height: 100%;
+  left: 21.654em;    /* LTR */
+  position: relative;
+  top: 1.333em;
+  width: 700px;
+}
+
+body.layout-main-last #breadcrumb {
+  left: 0;    /* LTR */
+}
+
+.breadcrumb {
+  margin: 0;
+  padding: 0;
+}
+
+/********/
+/* TABS */
+/********/
+
+/* styling for node tabs (e.g., View, Edit) */
+#content-tabs {
+  background-color: transparent;
+  float: left;    /* LTR */
+  margin: 0 0 20px 0;
+  padding: 0;
+}
+
+#content-tabs ul.primary,
+#content-tabs ul.secondary {
+  border-bottom: 1px solid #bbb;
+  clear: left;    /* LTR */
+  float: left;    /* LTR */
+  margin: 0;
+  padding: 0 10px;
+  text-transform: uppercase;
+}
+
+#content-tabs ul.secondary {
+  border-bottom: 1px solid #bbb;
+  margin-top: 10px;
+  text-transform: lowercase;
+}
+
+#content-tabs ul.primary li,
+#content-tabs ul.secondary li {
+  background: transparent;
+  border-style: none;
+  display: inline;
+  float: left;    /* LTR */
+  list-style: none;
+  margin: 0 10px;
+  padding: 0;
+}
+
+#content-tabs ul.primary li a:link,
+#content-tabs ul.primary li a:visited,
+#content-tabs ul.secondary li a:link,
+#content-tabs ul.secondary li a:visited {
+  background-color: transparent;
+  border: none;
+  color: #27638C;
+  float: left;    /* LTR */
+  font-size: 1.1em;
+  line-height: 1.2em;
+  font-weight: bold;
+  margin: 0;
+  padding: 0 0 6px 0;
+  text-decoration: none;
+}
+
+#content-tabs ul.secondary li a:link,
+#content-tabs ul.secondary li a:visited {
+  color: #27638C;
+  font-size: 1em;
+  line-height: 1.1em;
+}
+
+#content-tabs ul.primary li a.active:link,
+#content-tabs ul.primary li a.active:visited {
+  border-bottom: 4px solid #94CE18;
+  color: #27638C;
+  padding-bottom: 2px;
+}
+
+#content-tabs ul.secondary li a.active:link,
+#content-tabs ul.secondary li a.active:visited {
+  border-bottom: 4px solid #94CE18;
+  color: #27638C;
+  padding-bottom: 2px;
+}
+
+#content-tabs ul.primary li a:hover,
+#content-tabs ul.secondary li a:hover {
+  border-bottom: 4px solid #94CE18;
+  color: #4A95C8;
+  padding-bottom: 2px;
+}
+
+/*********/
+/* FORMS */
+/*********/
+
+form {
+  margin: 0;
+  padding: 0;
+}
+
+select.form-select,
+input.form-text,
+textarea.form-textarea {                                      /* default styling for all text fields */
+  background: #F6F9FB url('images/form-bg.png') left top;
+  color: #666666;
+  border: 1px solid #9BABB0;
+  padding: 2px 0;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+}
+
+body.layout-first-main-last select.form-select,
+body.layout-first-main-last input.form-text,
+body.layout-first-main-last textarea.form-textarea,
+body.layout-first-main-last div.resizable-textarea,
+body.layout-first-main-last div.resizable-textarea .grippie {
+  max-width: 325px;
+}
+
+input.form-submit,
+input.teaser-button {                                    /* default styling for all form buttons */
+  background: transparent url('images/blue-button.png') no-repeat left center;
+  border: 1px solid #fff;
+  color: #fff;
+  cursor: pointer;
+  font-family: Tahoma, Verdana, Arial, Helvetica, sans-serif;
+  font-size: 0.916em;
+  font-weight: bold;
+  margin: 0 4px;
+  padding: 2px 4px;
+  text-transform: uppercase;
+  outline: 1px solid #9BABB0;
+  -moz-border-radius: 4px;
+  -moz-outline-radius: 4px;
+  -webkit-border-radius: 4px;
+}
+
+input.form-submit:hover,
+input.teaser-button:hover  {
+  background-position: right center;
+  cursor: pointer;
+}  
+
+fieldset {
+  border: 1px solid #D6DDB9;
+  margin: 15px 0;
+  padding: 10px;
+}
+
+fieldset.collapsed {
+}
+
+fieldset legend {
+  font-weight: bold;
+}
+
+html.js fieldset.collapsible legend a {
+  font-weight: bold;
+}
+
+form#system-theme-settings select,
+form#system-theme-settings input.form-text {
+  width: 95%;
+}
+
+#user-login-form {
+  text-align: left;    /* LTR */
+}
+
+div.form-item label {
+  font-weight: normal;
+}
+
+html.js input.form-autocomplete {
+  background-position: 100% 5px;    /* LTR */
+}
+
+
+/**********/
+/* PAGERS */
+/**********/
+#main-wrapper .item-list .pager {
+  clear: both;
+  margin: 0 0 20px;
+  text-align: center;
+}
+
+#preface-wrapper .item-list .pager li,
+#main-wrapper .item-list .pager li {
+  background-image: none;
+  display: inline;
+  list-style-type: none;
+  margin: 0;
+  padding: 2px;
+}
+
+#main-wrapper .item-list .pager a.active {
+  color: #27638C;
+  font-size: 1em;
+  font-weight: bold;
+  padding: 4px;
+  text-decoration: none; 
+}
+
+#main-wrapper .pager li.pager-current {
+  background-color: #D9DBCD;
+  border: 1px solid #266996;
+  color: #333;
+  margin: 0 4px;
+  padding: 4px;
+}
+
+#main-wrapper .pager-first,
+#main-wrapper .pager-next,
+#main-wrapper .pager-previous,
+#main-wrapper .pager-item,
+#main-wrapper .pager-last {
+  background-color:#FDFFEF;
+  border: 1px solid #266996;
+  margin: 0 4px;
+  padding: 4px;
+}
+
+#main-wrapper .pager-first:hover,
+#main-wrapper .pager-next:hover,
+#main-wrapper .pager-previous:hover,
+#main-wrapper .pager-item:hover,
+#main-wrapper .pager-previous:hover,
+#main-wrapper .pager-last:hover {
+  background-color: #EAEFCB;
+}
+
+
+/**********/
+/* TABLES */
+/**********/
+
+table {
+  border-collapse: collapse;
+  margin-bottom: 1em;
+  width: 100%;
+}
+
+.layout-first-main-last table {
+  border-collapse: collapse;
+  margin: 0 0 10px;
+  width: 57%;
+}
+
+th {
+  text-align: left;    /* LTR */
+  padding-right: 1em;
+  border-bottom: 3px solid #CCC;
+}
+
+tr {
+  padding: 0.1em 0.6em;
+}
+
+td {
+  padding: 3px;
+}
+
+td.active {
+  background: none;
+}
+
+th.active img {
+  display: inline;
+}
+
+tr.even {
+  background-color: #E3ECC0;
+  border-bottom: 1px solid #CCC;
+}
+
+tr.odd {
+  background-color: #FDFFEF;
+  border-bottom: 1px solid #CCC;
+}
+
+tr.selected {
+  color: #000
+}
+
+tbody {
+}
+
+tbody th {
+  border-bottom: 1px solid #ccc;
+}
+
+thead th {
+  color: #333;
+  text-align: left;    /* LTR */
+  padding-right: 1em;
+  border-bottom: 1px solid #ccc;
+}
+
+table.sticky-header {
+  background: #fff;
+}
+
+tfoot {
+  font-style: italic;
+}
+
+caption {
+  background: #eee;
+}
+
+tr.drag,
+tr.drag-previous,
+tr.selected td {
+  background: #FAFFC7;
+}
+
+
+/*******************/
+/* DRUPAL MESSAGES */
+/*******************/
+
+div.messages a:link,
+div.messages a:visited,
+.help a:link,
+.help a:visited,
+.help .more-help-link a:link,
+.help .more-help-link a:visited {
+  color: #0066B3;
+}
+
+div.messages a:hover,
+div.messages a:active,
+.help a:hover,
+.help a:active,
+.help .more-help-link a:hover,
+.help .more-help-link a:active {
+  color: #000;
+}
+
+div.messages,
+div.messages.status {
+  background-color: #EAF8E4;
+  border: 2px solid #8DC478;
+  color: #3E642F;
+  font-weight: 600;
+  font-size: 1em;
+  margin-bottom: 20px;
+  overflow: hidden;
+  padding: 14px;
+  -moz-border-radius: 6px;
+  -webkit-border-radius: 6px;
+}
+
+div.messages.warning {
+  background: #FFFFDD;
+  border: 2px solid #EED300;
+  color: #745500;
+  -moz-border-radius: 6px;
+  -webkit-border-radius: 6px;
+}
+
+div.messages a {
+}
+
+div.messages ul {
+  list-style-position: inside;
+}
+
+div.messages em {
+  color: #555;
+}
+
+div.error {
+  background-color: #FFF2F2;
+  border-color: #CC0000;
+  color: #B20000;
+  -moz-border-radius: 6px;
+  -webkit-border-radius: 6px;
+}
+
+.help {
+  background-color: #E4EEF8;
+  border: 2px solid #57718A;
+  color: #4C6278;
+  font-size: 1em;
+  margin-bottom: 20px;
+  overflow: hidden;
+  padding: 10px 16px;
+  -moz-border-radius: 6px;
+  -webkit-border-radius: 6px;
+}
+
+.help p {
+  font-weight: 600;
+}
+
+#content-wrapper ul.tips li {
+  background: transparent;
+  font-size: 1em;
+  list-style: disc;
+  list-style-image: none;
+  list-style-position: inside;
+}
+
+#help {
+  clear: left;
+}
+
+
+/*--------------------------------*/
+/*---- MODULE SPECIFIC STYLES ----*/
+/*--------------------------------*/
+
+/*******************/
+/* BOOK NAVIGATION */
+/*******************/
+
+.book-navigation .menu {
+  border-top: 1px solid #CCC;
+  padding: 1em 0 0 3em;    /* LTR */
+}
+.book-navigation .page-links {
+  border-top: 1px solid #CCC;
+  border-bottom: 1px solid #CCC;
+  text-align: center;
+  padding: 0.5em;
+}
+
+/********/
+/* BLOG */
+/********/
+
+
+/************/
+/* COMMENTS */
+/************/
+#comments {
+  clear: both;
+}
+
+#comments h2.comments {
+  background-color: #94CE18;
+  color: #fff;
+  font-family: Myriad Pro, Myriad Web Pro Regular, Lucida Grande, Geneva, Trebuchet MS, sans-serif;
+  font-size: 1.333em;
+  font-weight: 600;
+  padding: 6px 14px 6px 52px;    /* LTR */
+  text-shadow: #545454 1px 1px;
+  text-transform: uppercase;
+  -moz-border-radius-topleft: 3px;
+  -moz-border-radius-topright: 3px;
+  -webkit-border-top-left-radius: 4px;
+  -webkit-border-top-right-radius: 4px;
+}
+
+#comments .content {
+  background: transparent;
+  border: none;
+}
+
+#main-wrapper #comments a.active {
+  color: #27638C;
+  text-decoration: none;
+}
+
+.box {
+  padding: 10px;
+}
+
+#comment-form {
+  margin: 0 0 20px;
+  padding: 0 20px;
+}
+
+.comment {
+  border: none;
+  margin: 6px 0 0;
+  padding: 10px;
+}
+
+.comment h3.title {
+  font-weight: bold;
+  margin: 0 0 5px 0;
+}
+
+.comment .links a {
+  font-size: 0.9em;
+  text-align: right;    /* LTR */
+}
+
+#comments .odd {
+  background-color: #F4F7E7;
+  border: 1px solid #ddd;
+}
+
+#comments .even {
+  background-color: #fff;
+}
+
+#comments .comment-by-author {
+  background-color: #FFFFEA;
+}
+
+.comment ul.links {
+  text-align: right;    /* LTR */
+  clear: right;
+}
+
+#content-content .comment ul.links li {
+  background: transparent;
+  margin: 0 10px 0 0;    /* LTR */
+  padding: 0;
+}
+
+.signature p {
+  border-top: 1px solid #d6ddb9;
+  font-family: serif;
+  font-size: 0.916em;
+  margin: 10px 0;
+  padding: 0;
+}
+
+.content blockquote p {
+  font-style: italic;
+  margin: 0;
+  padding: 0 20px 8px;
+}
+
+blockquote {
+  background: url('images/close-quote.gif') no-repeat right bottom;    /* LTR */
+  color: #5A6A78;
+  margin: 10px 0;
+}
+
+blockquote :first-child {
+  background: url('images/open-quote.gif') no-repeat left top;    /* LTR */
+  padding: 10px 0 0 20px;    /* LTR */
+}
+
+blockquote * > :first-child {
+  background: transparent;
+  padding: 0;
+}
+
+blockquote a:link {
+  text-decoration: underline;
+}
+
+
+/**********/
+/* FORUMS */
+/**********/
+
+#forum .description {
+  font-size: 0.9em;
+  margin: 0.5em;
+}
+
+#forum td.created, 
+#forum td.posts, 
+#forum td.topics, 
+#forum td.last-reply,
+#forum td.replies, 
+#forum td.pager {
+  white-space: nowrap;
+}
+
+#forum td.posts, 
+#forum td.topics, 
+#forum td.replies, 
+#forum td.pager {
+  text-align: center;
+}
+
+.forum-topic-navigation {
+  padding: 1em 0 0 3em;    /* LTR */
+  border-top: 1px solid #888;
+  border-bottom: 1px solid #888;
+  text-align: center;
+  padding: 0.5em;
+}
+
+.forum-topic-navigation .topic-previous {
+  text-align: right;    /* LTR */
+  float: left;    /* LTR */
+  width: 46%;
+}
+
+.forum-topic-navigation .topic-next {
+  text-align: left;    /* LTR */
+  float: right;    /* LTR */
+  width: 46%;
+}
+
+
+/**********/
+/* PANELS */
+/**********/
+
+#panels-panel-context-edit-content h2 {
+  margin: 10px 0;
+}
+
+#panels-flexible-toggle-layout {
+  margin-bottom: 10px;
+}
+
+
+/*********/
+/* POLLS */
+/*********/
+
+.poll .bar {                                      /* styles for poll ratings */
+  background-color: #DDD;
+}
+
+.poll .bar .foreground {
+  background-color: #999;
+  float: none;
+}
+
+
+/************/
+/* PROFILES */
+/************/
+
+.profile {
+  clear: none;
+  margin: 12px 0;
+}
+
+.profile h2.title {
+  margin-top: 15px;
+  border-bottom: 1px solid;
+}
+
+.profile dt {
+  float: left;    /* LTR */
+  margin-bottom: -10px;
+  padding: 0 5px;
+  text-align: left;    /* LTR */
+  width: 185px;
+}
+
+.layout-first-main-last .profile dd {
+  margin: 15px 5px 0 120px;    /* LTR */
+}
+
+.layout-first-main-last .profile dt {
+  width: 100px;
+}
+
+/******************/
+/* SEARCH RESULTS */
+/******************/
+
+
+/*********/
+/* VIEWS */
+/*********/
+
+.view .view-comments-recent .views-field-subject {
+  font-weight: bold;
+}
+
+.view .view-style-node{
+}
+
+.view .view-style-teaser{
+}
+
+.view .view-style-list{
+}
+
+.view .view-style-table{
+}
+
+.view .views-admin-links li {
+  background: transparent !important;
+}
+
+
+/* Accessibility
+/-------------------------------------------------------------- */
+/* skip-link to main content */
+#skip a,
+#skip a:hover,
+#skip a:visited {
+  height: 1px;
+  left: 0px;
+  overflow: hidden;
+  position: absolute;
+  top: -500px;
+  width: 1px;
+}
+
+#skip a:active,
+#skip a:focus {
+  height: auto;
+  position: static;
+  width: auto;
+}
+
+
+/***************/
+/* PRINT STYLE */
+/***************/
+
+@media print {
+  body {
+    background: white;
+    font-size: 10pt;
+  }
+   
+  #header,
+  #header-top,
+  #header-wrapper,
+  #primary-menu-wrapper,
+  #sidebar-first,
+  #sidebar-last,
+  #preface-wrapper,
+  #content-tabs,
+  #mission,
+  #slogan,
+  #postscript-wrapper,
+  #footer-top,
+  #footer,
+  #primary-menu,
+  #search-box,
+  #logo {
+    display: none;
+  }
+
+  #page,
+  #main-wrapper,
+  #content-wrapper,
+  #content-top,
+  #content,
+  #content-bottom {
+    background: transparent none;
+    border: 0;
+    color: black;
+    float: none !important;
+    margin: 0;
+    padding: 0;
+    width: auto;
+  }
+  
+  #content-wrapper {
+    margin: 0 3%;
+  }
+}

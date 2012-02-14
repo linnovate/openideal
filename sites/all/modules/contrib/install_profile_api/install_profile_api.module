@@ -1,0 +1,44 @@
+<?php
+// $Id: install_profile_api.module,v 1.1.2.4 2008/12/14 04:41:19 dww Exp $
+
+/**
+ * @file
+ * Set of utility functions for helping to run your install profile.
+ * Drupal install profile API project: http://www.drupal.org/project/install_profile_api
+*/
+
+/**
+ * Include all the needed include files for modules that have been enabled.
+ *
+ * This function must be called as early as possible in the install profile. It
+ * is recommended to include these files within the hook_profile_tasks()
+ * function such as this:
+ *
+ * @code
+ * function [profile name]_profile_tasks() {
+ *   install_include([profile name]_profile_modules());
+ *
+ *   // Additional profile tasks.
+ *
+ * }
+ * @endcode
+ */
+function install_include($modules) {
+  // We intentionally avoid drupal_get_path() here, as it relies on the system
+  // database table. Avoiding drupal_get_path() allows this function to be
+  // called even when the database has not been initialized.
+  $path = dirname(__FILE__);
+
+  // Automatically include the required core modules, even if not specified.
+  $modules = array_unique(array_merge($modules, drupal_required_modules()));
+
+  foreach ($modules as $module) {
+    if (file_exists("$path/contrib/$module.inc")) {
+      include_once "$path/contrib/$module.inc";
+    }
+    elseif (file_exists("$path/core/$module.inc")) {
+      include_once "$path/core/$module.inc";
+    }
+  }
+}
+

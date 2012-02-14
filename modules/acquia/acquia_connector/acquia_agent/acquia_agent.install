@@ -1,0 +1,250 @@
+<?php
+// $Id: acquia_agent.install,v 1.4 2009/03/23 16:12:57 pwolanin Exp $
+
+/**
+ * The minimum PHP memory recommended to install Acquia Drupal.
+ */
+define('ACQUIA_DRUPAL_MINIMUM_PHP_MEMORY', '32M');
+
+// When update.php is being run, alter the list of updates according to
+// Acquia's preferences.
+if (defined('MAINTENANCE_MODE') && MAINTENANCE_MODE == 'update' && isset($_POST['start'])) {
+  acquia_agent_alter_module_updates($_POST['start']);
+}
+
+/**
+ * Implementation of hook_uninstall().
+ */
+function acquia_agent_uninstall() {
+  variable_del('acquia_identifier');
+  variable_del('acquia_key');
+  variable_del('acquia_network_address');
+  variable_del('acquia_subscription_data');
+}
+
+/**
+ * Implementation of hook_disable().
+ */
+function acquia_agent_disable() {
+  $mlid = db_result(db_query("SELECT mlid FROM {menu_links} WHERE link_title = 'acquia_subscription_status' AND menu_name = 'admin_menu'"));
+  if ($mlid) {
+     menu_link_delete($mlid);
+  }
+}
+
+/**
+ * Alter a list of module updates so that Acquia's updates run first.
+ */
+function acquia_agent_alter_module_updates(&$updates) {
+  uksort($updates, '_acquia_agent_alter_module_updates_cmp');
+}
+
+/**
+ * Comparison function for sorting module updates.
+ */
+function _acquia_agent_alter_module_updates_cmp($a, $b) {
+  // Preserve the Drupal core behavior where system.module's updates run
+  // first.
+  if ($a == 'system' || $b == 'system') {
+    return $a == 'system' ? -1 : 1;
+  }
+  // Make sure Acquia's updates run next, before any others.
+  elseif ($a == 'acquia_agent' || $b == 'acquia_agent') {
+    return $a == 'acquia_agent' ? -1 : 1;
+  }
+  // Otherwise we don't care what order the updates run in.
+  return 0;
+}
+
+/**
+ * Implementation of hook_requirements()
+ */
+function acquia_agent_requirements($phase) {
+  include_once 'acquia_agent.module';
+  acquia_agent_load_versions();
+
+  $requirements = array();
+  $has_credentials = acquia_agent_has_credentials();
+  $is_active = acquia_agent_subscription_is_active();
+  $memory_limit = ini_get('memory_limit');
+
+  switch ($phase) {
+    case 'runtime':
+      // Inform users on subscription status. Either we know they are active,
+      // or we know they have credentials but not active (not set up yet) or
+      // we have credentials but an inactive subscription (either bad
+      // credentials or expired subscription).
+      if ($is_active) {
+        $requirements['acquia_subscription_status'] = array(
+          'title' => t('Acquia Network subscription status'),
+          'severity' => REQUIREMENT_OK,
+          'value' => t('Active'),
+          'description' => t('You can also <a href="@refresh-status">manually refresh the subscription status</a>.', array('@refresh-status' => url('admin/settings/acquia-agent/refresh-status', array('query' => drupal_get_destination())))),
+        );
+      }
+      elseif (!$has_credentials) {
+        $requirements['acquia_subscription_status'] = array(
+          'title' => t('Acquia Network subscription status'),
+          'severity' => REQUIREMENT_WARNING,
+          'value' => t('Unknown'),
+          'description' => t('You did not complete your signup to the Acquia Network. You can provide the subscription identifier and the subscription key at the <a href="@settings">Acquia settings</a> page or try to <a href="@refresh-status">manually refresh the subscription status</a>.', array('@settings' => url('admin/settings/acquia-agent'), '@refresh-status' => url('admin/settings/acquia-agent/refresh-status', array('query' => drupal_get_destination()))))
+        );
+      }
+      else {
+        $subscription = variable_get('acquia_subscription_data', array('active' => FALSE));
+        $href = isset($subscription['href']) ? $subscription['href'] .'/health' : 'http://acquia.com/network';
+        $requirements['acquia_subscription_status'] = array(
+          'title' => t('Acquia Network subscription status'),
+          'severity' => REQUIREMENT_WARNING,
+          'value' => t('Inactive'),
+          'description' => t('Your subscription is expired or you are using an invalid identifier and key pair. You can check the subscription identifier and the subscription key at the <a href="@settings">Acquia settings</a> page. Check <a href="@acquia-network">your subscription on the Acquia Network</a> for further status information.', array('@settings' => url('admin/settings/acquia-agent'), '@acquia-network' => $href)),
+        );
+      }
+      
+      // During runtime, we can't override the PHP memory limit provided by
+      // Drupal core, so we supplement it with our own warning instead (but
+      // only when necessary to do so).
+      if (IS_ACQUIA_DRUPAL && $memory_limit && parse_size($memory_limit) < parse_size(ACQUIA_DRUPAL_MINIMUM_PHP_MEMORY)) {
+        $description = t('Drupal core requires @drupal_php_memory_limit, but to take advantage of all the features of Acquia Drupal, we recommend @acquia_php_memory_limit (or more).', array('@drupal_php_memory_limit' => DRUPAL_MINIMUM_PHP_MEMORY_LIMIT, '@acquia_php_memory_limit' => ACQUIA_DRUPAL_MINIMUM_PHP_MEMORY));
+        // Only append our instructions if they don't already have the ones
+        // from Drupal core appearing on the screen.
+        if (parse_size($memory_limit) >= parse_size(DRUPAL_MINIMUM_PHP_MEMORY_LIMIT)) {
+          if ($php_ini_path = get_cfg_var('cfg_file_path')) {
+            $description .= ' '. t('Increase the memory limit by editing the memory_limit parameter in the file %configuration-file and then restart your web server (or contact your system administrator or hosting provider for assistance).', array('%configuration-file' => $php_ini_path));
+          }
+          else {
+            $description .= ' '. t('Contact your system administrator or hosting provider for assistance with increasing your PHP memory limit.');
+          }
+        }
+        $requirements['acquia_php_memory_limit'] = array(
+          'title' => t('PHP memory limit (Acquia Drupal)'),
+          'description' => $description,
+          'severity' => REQUIREMENT_WARNING,
+          'value' => t('@memory_minimum_limit (or more) is recommended', array('@memory_minimum_limit' => ACQUIA_DRUPAL_MINIMUM_PHP_MEMORY)),
+        );
+      }
+      break;
+    case 'install':
+      $t = get_t();
+      if (IS_ACQUIA_DRUPAL && $memory_limit && parse_size($memory_limit) < parse_size(ACQUIA_DRUPAL_MINIMUM_PHP_MEMORY)) {
+        // Override the PHP memory limit warning provided by Drupal core.
+        $description = $t('Your PHP memory limit is currently set at %current_memory_limit. Increasing this to %memory_minimum_limit (or more) is recommended to help prevent errors in the installation process and later during operation of the site.', array('%current_memory_limit' => $memory_limit, '%memory_minimum_limit' => ACQUIA_DRUPAL_MINIMUM_PHP_MEMORY));
+        if ($php_ini_path = get_cfg_var('cfg_file_path')) {
+          $description .= ' '. $t('Increase the memory limit by editing the memory_limit parameter in the file %configuration-file and then restart your web server (or contact your system administrator or hosting provider for assistance).', array('%configuration-file' => $php_ini_path));
+        }
+        else {
+          $description .= ' '. $t('Contact your system administrator or hosting provider for assistance with increasing your PHP memory limit.');
+        }
+        $requirements['php_memory_limit'] = array(
+          'description' => $description,
+          'severity' => REQUIREMENT_WARNING,
+        );
+      }
+      // Ensure this module is compatible with the currently installed version of PHP.
+      if (version_compare(phpversion(), 5.0) < 0) {
+        $requirements['acquia_php_version'] = array(
+          'description' => $t('The Acquia Network Connector modules require a PHP version of at least 5.0.'),
+          'severity' => REQUIREMENT_ERROR,
+        );
+      }
+      break;
+  }
+
+  return $requirements;
+}
+
+/**
+ * Warn users who are upgrading from a pre-release version of CCK about any
+ * broken Views on their site.
+ */
+function acquia_agent_update_6000() {
+  $ret = array();
+  $broken_filters = array();
+  // To be safe, we require that CCK and Views both be enabled, and also
+  // perform many checks of their APIs during the course of this update.
+  if (module_exists('content') && module_exists('views') && function_exists('views_api_version') && views_api_version() == 2.0) {
+    // We also make sure only to print warnings in the case where the user
+    // has a pre-release CCK schema version, because otherwise they may have
+    // already made manual changes to their Views, and the warning messages
+    // here therefore would not be accurate.
+    $cck_schema_version = variable_get('content_schema_version', 0);
+    if ($cck_schema_version >= 6000 && $cck_schema_version <= 6008) {
+      // Search through all filters for all Views.
+      if (function_exists('views_get_all_views') && ($views = views_get_all_views()) && is_array($views)) {
+        foreach ($views as $view) {
+          if (method_exists($view, 'init_display')) {
+            $view->init_display();
+            if (is_array($view->display)) {
+              foreach ($view->display as $display_id => $display) {
+                if (method_exists($display->handler, 'is_defaulted') && !$display->handler->is_defaulted('filter') && method_exists($display->handler, 'get_handlers')) {
+                  $handlers = $display->handler->get_handlers('filter');
+                  if (is_array($handlers)) {
+                    foreach ($handlers as $handler_id => $handler) {
+                      // If the filter is on a CCK text or number field and
+                      // defines a list of allowed values, then it is broken.
+                      if (isset($handler->content_field)) {
+                        $field = $handler->content_field;
+                        if (isset($field['type']) && in_array($field['type'], array('text', 'number_integer', 'number_decimal', 'number_float'), TRUE)) {
+                          if (function_exists('content_allowed_values')) {
+                            $allowed_values = content_allowed_values($field);
+                            if (count($allowed_values) && isset($view->type)) {
+                              switch ($view->type) {
+                                case t('Normal'):
+                                  // The human-readable name is friendlier
+                                  // for Views accessible via the UI.
+                                  $broken_filters['database'][$view->name][] = t('Content: @label', array('@label' => $field['widget']['label']));
+                                  break;
+                                case t('Overriden'):
+                                case t('Default'):
+                                  // The machine-readable name is friendlier
+                                  // for Views stored in code.
+                                  $broken_filters['code'][$view->name][] = $field['field_name'];
+                                  break;
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  if (!empty($broken_filters)) {
+    // Convert the list of broken filters to a user-friendly format.
+    foreach ($broken_filters as $type => $views) {
+      foreach ($views as $view => $fields) {
+        $view_replacement = ($type == 'database') ? l($view, 'admin/build/views/edit/'. $view) : check_plain($view);
+        // Make sure we don't print the same field name twice.
+        $broken_filters[$type][$view] = t('!view (broken filters: %filters)', array('!view' => $view_replacement, '%filters' => implode(', ', array_unique($fields))));
+      }
+    }
+    $broken_database_filters = isset($broken_filters['database']) ? $broken_filters['database'] : array();
+    $broken_code_filters = isset($broken_filters['code']) ? $broken_filters['code'] : array();
+    $t_strings = array(
+      '!database_views' => '<li>'. implode('</li><li>', $broken_database_filters) .'</li>',
+      '!code_views' => '<li>'. implode('</li><li>', $broken_code_filters) .'</li>',
+      '@drupal_url' => 'http://drupal.org/node/330658',
+    );
+    if (!empty($broken_database_filters)) {
+      $text = 'The following Views on your site may not work correctly as a result of this upgrade:<ul>!database_views</ul>In particular, filters on CCK text or numeric fields that refer to a list of allowed values will need to be recreated. You may do this through the administrative interface by editing the "Filters" section of each View, removing the broken filters listed above, and replacing each with a new one of type "Content: ... Allowed values". Alternatively, you can edit an exported version of the View and then reimport it; <a href="@drupal_url">more information</a> on this option is available from the CCK issue queue on drupal.org.';
+      $message = t($text, $t_strings);
+      watchdog('acquia', $text, $t_strings, WATCHDOG_WARNING);
+      drupal_set_message($message, 'warning');
+      $ret[] = array('success' => TRUE, 'query' => $message);
+    }
+    if (!empty($broken_code_filters)) {
+      $text = 'The following Views on your site may not work correctly as a result of this upgrade:<ul>!code_views</ul>In particular, filters on CCK text or numeric fields that refer to a list of allowed values will need to be recreated. The Views listed above are defined in code and will need to be edited there. <a href="@drupal_url">More information</a> on how to do this is available from the CCK issue queue on drupal.org.';
+      $message = t($text, $t_strings);
+      watchdog('acquia', $text, $t_strings, WATCHDOG_WARNING);
+      drupal_set_message($message, 'warning');
+      $ret[] = array('success' => TRUE, 'query' => $message);
+    }
+  }
+  return $ret;
+}

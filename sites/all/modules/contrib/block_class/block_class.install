@@ -1,0 +1,24 @@
+<?php
+// $Id: block_class.install,v 1.4.4.2 2009/06/03 12:21:45 toddnienkerk Exp $
+
+function block_class_schema() {
+  $schema['block_class'] = array(
+      'fields' => array(
+           'module' => array('type' => 'varchar', 'length' => '50', 'not null' => TRUE),
+           'delta' => array('type' => 'varchar', 'length' => '32', 'not null' => TRUE),
+           'css_class' => array('type' => 'varchar', 'length' => '50', 'not null' => TRUE)),
+      'primary key' => array('module', 'delta'),
+  );
+  
+  return $schema;
+}
+
+
+function block_class_install() {
+  drupal_install_schema('block_class');
+}
+
+
+function block_class_uninstall() {
+  drupal_uninstall_schema('block_class');
+}

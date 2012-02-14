@@ -1,0 +1,121 @@
+<?php
+// $Id: voting_rules.module,v 1.1 2010/07/27 08:53:36 heydemo Exp $
+
+/**
+ * @file
+ * Provides Rules intregration for the Votingapi module
+ *
+ * Admins can schedule actions to occur when a user votes, deletes a vote, or
+ * when the results of the vote for a piece of content a calculated.
+ *
+ * @author: John De Mott <opentactics.com>
+ */
+
+/*******************************************************************************
+ * Hook Functions (Votingapi and Token)
+ ******************************************************************************/
+
+/**
+ * Implementation of hook_votingapi_insert().
+ */
+function voting_rules_votingapi_insert($votes) {
+  foreach ($votes as $vote) {
+    $content = voting_rules_load_content($vote['content_type'], $vote['content_id']);
+    if ($content) {
+      rules_invoke_event('voting_rules_insert_'. $vote['content_type'], $vote, $content);
+    }
+  }
+}
+
+/**
+ * Implementation of hook_votingapi_results().
+ */
+function voting_rules_votingapi_delete($votes) {
+  foreach ($votes as $vote) {
+    $content = voting_rules_load_content($vote['content_type'], $vote['content_id']);
+    if ($content) {
+      rules_invoke_event('voting_rules_delete_'. $vote['content_type'], $vote, $content);
+    }
+  }
+}
+
+/**
+ * Implementation of hook_votingapi_results().
+ */
+function voting_rules_votingapi_results($cached, $content_type, $content_id) {
+  $content = voting_rules_load_content($content_type, $content_id);
+  if ($content) {
+    rules_invoke_event('voting_rules_results_'. $content_type, $cached, $content);
+  }
+}
+
+/**
+ * Implementation of hook_token_values().
+ */
+function voting_rules_token_values($type, $object = NULL, $options = array()) {
+  $tokens = array();
+  if ($type == 'vote') {
+    $tokens = $object;
+  }
+  elseif ($type == 'vote_results') {
+    foreach ($object as $data) {
+      $tokens[$data['function']] = $data['value'];
+    }
+  }
+  return $tokens;
+}
+
+/**
+ * Implementation of hook_token_list().
+ */
+function voting_rules_token_list($type = 'all') {
+  $tokens = array();
+  if ($type == 'vote') {
+    $tokens['vote']['value'] = t("Value of the vote");
+    $tokens['vote']['value_type'] = t("Type of the vote value - e.g. points");
+    $tokens['vote']['tag'] = t("Tag of the vote");
+    $tokens['vote']['content_id'] = t("Id of the content being voted on (nid, uid, cid)");
+    $tokens['vote']['content_type'] = t("Type of the content being voted on (node, user, comment)");
+    $tokens['vote']['uid'] = t("User Id of the user");
+    $tokens['vote']['timestamp'] = t("Timestamp");
+    $tokens['vote']['vote_source'] = t("IP of the user");
+    $tokens['vote']['prepped'] = t("Prepped");
+    $tokens['vote']['vote_id'] = t("Id of the vote");
+  }
+  elseif ($type = 'vote_results') {
+    $tokens['vote_results']['count'] = t("Total number of votes");
+    $tokens['vote_results']['average'] = t("Average value of votes cast");
+    $tokens['vote_results']['sum'] = t("Sum of all votes cast");
+  }
+  return $tokens;
+}
+
+/*******************************************************************************
+ * Helper Functions
+ ******************************************************************************/
+
+/**
+ * Loads content of the specified type. Since Votingapi is built to support
+ * client defined content types, while Rules requires content types to be
+ * pre-defined, we use this helper function to encapsulate the loading of new
+ * content based on supported types (currently nodes, users, and comments)
+ *
+ * @param $content_type
+ *   String - e.g. node, user, comment
+ * @param $content_id
+ *   Integer - e.g. nid, uid, cid
+ */
+
+function voting_rules_load_content($content_type, $content_id) {
+  switch ($content_type) {
+    case 'node':
+      return node_load($content_id);
+      break;
+    case 'user':
+      return user_load($content_id);
+      break;
+    case 'comment':
+      return _comment_load($content_id);
+      break;
+  }
+}

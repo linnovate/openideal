@@ -1,0 +1,432 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Drupal LoginToboggan\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2007-04-16 20:34+0100\n"
+"Last-Translator: Jonas Alvarez <jonas@sysadm.org>\n"
+"Language-Team:  <jonas@sysadm.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Spanish\n"
+
+#: ../logintoboggan.module:37
+msgid ""
+"<p>The Login Toboggan module improves the Drupal login system by offering the following features:\n"
+"      <ol>\n"
+"      <li>Allow users to login using either their username OR their e-mail address.</li>\n"
+"      <li>Allow users to define their own password.</li>\n"
+"      <li>Allow users to login immediately.</li>\n"
+"      <li>Provide a login form on Access Denied pages for non-logged-in (anonymous) users.</li>\n"
+"      <li>The module provides two login block options: One uses JavaScript to display the form within the block immediately upon clicking \"log in\". The other brings the user to a separate page, but returns the user to their original page upon login.</li>\n"
+"      <li>Customize the registration form with two e-mail fields to ensure accuracy.</li>\n"
+"      <li>Optionally redirect the user to a specific page when using the 'immediate login' feature.</li>\n"
+"      <li>Optionally redirect the user to a specific page upon validation of their e-mail address.</li>\n"
+"      </ol>\n"
+"      These features may be turned on or off in the Login Toboggan <a href=\"%url\">settings</a>.</p>\n"
+"      <p>Because this module completely reorients the Drupal login process you will probably want to edit the welcome e-mail on the user settings page. For instance if you have enabled the \"Set password & Immediate Login\" option, you probably should not send the user's password out in the welcome e-mail (also note when the \"Set password & Immediate Login\" option is enabled, the %login_url becomes a verification url that the user MUST visit in order to enable authenticated status). The following is an example welcome e-mail:</p>\n"
+"      "
+msgstr ""
+"<p>El módulo Login Toboggan mejora el sistema de inicio de sesión de Drupal ofreciendo las siguientes características:\n"
+"      <ol>\n"
+"      <li>Permitir inciciar sesión a los usuarios empleando su nombre de usuario o su dirección e-mail.</li>\n"
+"      <li>Permitir a los usuarios definir su propia contraseña.</li>\n"
+"      <li>Permitir a los usuarios iniciar sesión inmediatemente.</li>\n"
+"      <li>Proporcionar un formulario de inicio de sesión en respuesta a páginas de Acceso Denegado para usuarios con la sesión no iniciada (anonymous).</li>\n"
+"      <li>El módulo provee de dos opciones de bloque de inicio de sesión: Una emplea Javascript para visualizar el formulario dentro del bloque inmediatamente después de clicar en \"Entrar\" . La otra lleva al usuario a una página distinta, pero retorna a la original después de iniciar la sesión..</li>\n"
+"      <li>Personalziar el formulario de registro con dos campos e-mail para evitar errores.</li>\n"
+"      <li>Redirigir opcionalmente al usuario a una página específica depués de emplear la opción 'inicio de sesión inmediato'.</li>\n"
+"      <li>Redirigir opcionalmente al usuario a una página específica después de validar su dirección e-mail..</li>\n"
+"      </ol>\n"
+"      Estas opciones pueden ser activadas y desactivadas en la <a href=\"%url\">configuración</a> de Login Toboggan.</p>\n"
+"      <p>Debido a que este módulo reorienta el proceso de inicio de sesión de Drupal, probablemente necesites editar el e-mail de bienvenida en la página de configuración de usuario. Por ejemplo si has activado la opción \"Establecer contraseña & Inicio de sesión inmediato\", probablmente no debas enviar la contraseña de usuario en el e-mail de bienvenida (fíjate también que si está activa la opción \"Establecer contraseña & Inicio de sesión inmediato\", la dirección %login_url se convierte en una dirección de verificación que usuario DEBE visitar para activar su cuenta). A continuación un ejemplo de e-mail de bienvenida:</p>\n"
+"      "
+
+#: ../logintoboggan.module:51
+msgid ""
+"\n"
+"%username,\n"
+"\n"
+"Thank you for registering at %site.\n"
+"\n"
+"IMPORTANT:\n"
+"For full site access, you will need to click on this link or copy and paste it in your browser:\n"
+"\n"
+"%login_url\n"
+"\n"
+"This will verify your account and log you into the site. In the future you will be able to log in using the username and password that you created during registration.\n"
+"\n"
+"Your new %site membership also enables to you to login to other Drupal powered websites (e.g. http://www.drupal.org/) without registering. Just use the following Drupal ID along with the password you've chosen:\n"
+"\n"
+"Drupal ID: %username@%uri_brief\n"
+"\n"
+"\n"
+"--  %site team"
+msgstr ""
+"\n"
+"%username,\n"
+"\n"
+"Gracias por registrarte en %site.\n"
+"\n"
+"IMPORTANTE:\n"
+"Para conseguir acceso completo al sitio, debes hacer click en este enlace o copiarlo en la barra de direcciones de tu navegador:\n"
+"\n"
+"%login_url\n"
+"\n"
+"Esto verificará tu cuenta e iniciarás sesión. En adelante, deberás podrás usar el nombre de usuario y la contraseña que has creado durante el proceso de registro..\n"
+"\n"
+"Tu nueva cuenta en %site también te posibilita entrar en otros sitios que funcionen con Drupal. (http://www.drupal.org/ por ejemplo) sin registrarte. Para ello emplea tu Drupal ID junto con la contraseña que has indicado:\n"
+"\n"
+"Drupal ID: %username@%uri_brief\n"
+"\n"
+"\n"
+"--  El equipo de %site"
+
+#: ../logintoboggan.module:75
+msgid "<p>Note that if you have set the \"Visitors can create accounts but administrator approval is required\" option for account approval, and are also using the \"Set password & Immediate Login\" feature of logintoboggan, the user will immediately receive the permissions of the pre-authorized user role--you may wish to set the pre-authorized role to \"anonymous user\" if you wish the newly created user to only have anonymous permissions.</p><p>When a site administrator unblocks a user who is awaiting administrator approval, they must also manually remove the user from the site's pre-authorized role in order for the user to receive \"authenticated user\" permissions (if you are using the \"Visitors can create accounts and no administrator approval is required\" option, removal of the pre-authorized role will happen automatically).</p><p>Also be aware that logintoboggan only affects registrations initiated by users--any user account created by an administrator will not use any logintoboggan functionality."
+msgstr "<p>Date cuenta de que si has elegido la opción \"Los visitantes pueden crear cuentas, pero se necesita la aprobación de un administrador\" para aceptar ingresos, y también empleas la opción \"Establecer contraseña & Inicio de sesión inmediato\" de logintoboggan, el usuario recibirá inmediatemebte del papel de usuarios preautorizados --puedes desear establecer el papel de preautorizados a \"anonymous user\" si deseas que los usuarios tengan los mismos privilegios que los usuarios anónimos.</p><p>Cuando un usuario desbloquea a un usuario que está esperando la aprobación de un administrador, debe borrar también al usario del paper de preautorizados para que reciban los permisos de los \"authenticated user\" (Si estás empleando la opción \"Los visitantes pueden crear cuentas, pero se necesita la aprobación de un administrador\", el borrado del papel ocurrirá de forma automática).</p><p>Date cuenta también de que logintoboggan sólo afecta a los registros iniciados por los usuarios--cualquier usuario creado por el administrador no empleará estas funcionalidades de logintoboggan."
+
+#: ../logintoboggan.module:79
+msgid "Improves Drupal's login system."
+msgstr "mejora el sistam de inició de sesión de Drupal."
+
+#: ../logintoboggan.module:82
+msgid "<p>Customize your login and registration system. More help can be found <a href=\"%url\">here</a>.</p>"
+msgstr "<p>Personalizar tu sistema de inicio de sesión y registro de usuario. Puedes encontrar más ayuda <a href=\"%url\">aquí</a>."
+
+#: ../logintoboggan.module:127
+msgid "If this user was created using the \"Immediate Login\" feature of Logintoboggan, and they are also awaiting adminstrator approval on their account, you must remove them from the site's pre-authorized role in the \"Roles\" section below, or they will not receive the authenticated users permissions!"
+msgstr "Si este usuario se creó empleando la opcion \"Inicio de sesión inmediato\" de Logintoboggan, y tambiñen se encuentra en espera de la aprobación de la cuenta por un administrador, debes borrarlos del papel preautorizados en la sección de \"Papeles\" de abajo, o no recibirán los permisos de usuario autentificado!"
+
+#: ../logintoboggan.module:134
+msgid "Username or e-mail address"
+msgstr "Nombre de usuario o dirección e-mail"
+
+#: ../logintoboggan.module:139
+msgid "Enter your %s username, e-mail address, or an ID from one of our affiliates: %a."
+msgstr "Escribe tu nombre de usuario %s, dirección e-mail, o un ID de alguno de nuestros afiliados: %a."
+
+#: ../logintoboggan.module:162
+msgid "Confirm e-mail address"
+msgstr "Confirmar dirección e-mail"
+
+#: ../logintoboggan.module:165
+msgid "Please re-type your e-mail address to confirm it is accurate."
+msgstr "Por favor, reescribe tu e-mail  para confirmar que es correcto."
+
+#: ../logintoboggan.module:173
+msgid "Password"
+msgstr "Contraseña"
+
+#: ../logintoboggan.module:176
+msgid "Please choose a password for your account; it must be between 6 and 30 characters and spaces are not allowed."
+msgstr "Escriba una contraseña para su cuenta; debe contener entre 6 y 30 caracteres y no se permiten espacios."
+
+#: ../logintoboggan.module:180
+msgid "Confirm Password"
+msgstr "Confimar contraseña"
+
+#: ../logintoboggan.module:183
+msgid "Please re-type your password to confirm it is accurate."
+msgstr "Por favor, reescribe tu contraseña para confirmar que es correcta."
+
+#: ../logintoboggan.module:231
+msgid "Detected malicious attempt to alter protected user fields."
+msgstr "Se ha detectado un intento malicioso de alterar campos de usuario protegidos."
+
+#: ../logintoboggan.module:240
+msgid "New user: %name %email."
+msgstr "Usuario nuevo: %name %email."
+
+#: ../logintoboggan.module:240
+msgid "edit"
+msgstr "editar"
+
+#: ../logintoboggan.module:247
+msgid "A validation e-mail has been sent to your e-mail address. In order to gain full access to the site, you will need to follow the instructions in that message."
+msgstr "Se ha enviado un correo de validación a tu dirección de e-mail. Para obtener acceso completo al sitio, deberás seguir las intrucciones de ese mensaje."
+
+#: ../logintoboggan.module:250
+msgid "Your password and further instructions have been sent to your e-mail address."
+msgstr "Tu contraseña y las instrucciones que debes seguir han sido enviadas a tu dirección de e-mail."
+
+#: ../logintoboggan.module:265
+msgid "Thank you for applying for an account. Your account is currently pending approval by the site administrator.<br />"
+msgstr "Gracias por solicitar una cuenta. Tu cuenta está todavía pendiente de ser aprobada por un administrador.<br />"
+
+#: ../logintoboggan.module:267
+msgid ""
+"%u has applied for an account.\n"
+"\n"
+"%uri"
+msgstr ""
+"%u ha solicitado una cuenta.\n"
+"\n"
+"%uri"
+
+#: ../logintoboggan.module:301
+msgid "The username %name has been blocked."
+msgstr "El usuario %name ha sido bloqueado."
+
+#: ../logintoboggan.module:305
+msgid "The name %name is a reserved username."
+msgstr "El nombre %name es un nombre de usuario reservado."
+
+#: ../logintoboggan.module:312
+msgid "Sorry. Unrecognized username or password."
+msgstr "Lo sentimos. Usuario o contraseña no reconocidos."
+
+#: ../logintoboggan.module:312
+msgid "Have you forgotten your password?"
+msgstr "¿Has olvidado tu contraseña?"
+
+#: ../logintoboggan.module:313
+msgid "Login attempt failed for %user: %error."
+msgstr "Error de inicio de sesión para %user: %error."
+
+#: ../logintoboggan.module:329
+msgid "This e-mail address has already been taken by another user."
+msgstr "Esta dirección e-mail ya ha sido empleado por otro usuario."
+
+#: ../logintoboggan.module:336
+msgid "Your e-mail address and confirmed e-mail address must match."
+msgstr "Tu dirección de correo y la dirección de correo de confirmación deben ser iguales."
+
+#: ../logintoboggan.module:343
+msgid "Your password and confirmed password must match."
+msgstr "Tu contraseña y la contraseña de confirmación deben ser iguales."
+
+#: ../logintoboggan.module:385
+msgid "validate e-mail address"
+msgstr "validar dirección e-mail"
+
+#: ../logintoboggan.module:395
+msgid "access denied"
+msgstr "acceso denegado"
+
+#: ../logintoboggan.module:403
+#: ;826
+msgid "re-send validation e-mail"
+msgstr "reenviado el e-mail de validación"
+
+#: ../logintoboggan.module:433
+msgid "LoginToboggan custom login"
+msgstr "Inicio de sesión personalizado LoginToboggan"
+
+#: ../logintoboggan.module:439
+msgid "Display the 'logged in' block"
+msgstr "Visualizar el bloque 'sesión iniciada'"
+
+#: ../logintoboggan.module:443
+msgid "Block type"
+msgstr "Tipo Bloque"
+
+#: ../logintoboggan.module:445
+msgid "Link"
+msgstr "Enlace"
+
+#: ../logintoboggan.module:445
+msgid "Collapsible Form"
+msgstr "Formulario colapsable"
+
+#: ../logintoboggan.module:448
+msgid "Set a custom message to appear at the top of your login block"
+msgstr "Establecer un mensaje personalizado que aparecerá en la parte superior del bloque de inicio de sesión"
+
+#: ../logintoboggan.module:477
+#: ;510
+msgid "Login/Register"
+msgstr "Entrar/Registrarse"
+
+#: ../logintoboggan.module:496
+msgid "log out"
+msgstr "desconectar"
+
+#: ../logintoboggan.module:540
+msgid "Login"
+msgstr "Entrar"
+
+#: ../logintoboggan.module:545
+msgid "Allow users to login using their e-mail address"
+msgstr "Permitir a los usuario iniciar sesión empleando su dirección e-mail"
+
+#: ../logintoboggan.module:547
+#: ;558;609;621
+msgid "Disabled"
+msgstr "Desactivado"
+
+#: ../logintoboggan.module:547
+#: ;558;609;621
+msgid "Enabled"
+msgstr "Activado"
+
+#: ../logintoboggan.module:548
+msgid "Users will be able to enter EITHER their username OR their e-mail address to log in. note: This will disallow users from registering using an e-mail address as their username."
+msgstr "Los usuarios serán capaces de indicar O su nombre de usuario O su dirección e-mail para iniciar sesión. nota; esto evitará que los usuarios empleen su dirección e-mail como nombre de usuario."
+
+#: ../logintoboggan.module:552
+msgid "Registration"
+msgstr "Registro"
+
+#: ../logintoboggan.module:556
+msgid "Use two e-mail fields on registration form"
+msgstr "Emplear dos campos e-mail en el formulario de registro"
+
+#: ../logintoboggan.module:559
+msgid "User will have to type the same e-mail address into both fields. This helps to confirm that they've typed the correct address."
+msgstr "El usuario deberá escribir la misma dirección e-mail en ambos campos. Esto ayuda a confirmar que la dirección que escriba sea correcta."
+
+#: ../logintoboggan.module:563
+msgid "Allow user to set their password during registration"
+msgstr "Permitir al usuario establecer su contraseña durante el proceso de registro"
+
+#: ../logintoboggan.module:565
+msgid "Disabled"
+msgstr "Desactivado"
+
+#: ../logintoboggan.module:565
+msgid "Set password & Immediate login"
+msgstr "Establecer contraseña & Inicio de sesión inmediato"
+
+#: ../logintoboggan.module:566
+msgid "This will allow users to choose their initial password when registering.  If 'Set password & Immediate login' is selected, users will be assigned to the role below and logged in immediately. They will not be assigned to the \"authenticated user\" role until they confirm their e-mail address by following the link in their registration e-mail. It is HIGHLY recommended that you set up a \"pre-authorized\" role with limited permissions for this purpose. <br />NOTE: If you enable either of this feature, you should edit the %settings--more help in writing the e-mail message can be found %help."
+msgstr "Esto permitirá a los usuarios elegir su contraseña al registrase.  Si la opción 'Establecer contraseña & Inicio de sesión inmediato' se encuentra seleccionada, los usuarios serás asignados al papel de abajo, e iniciarán sesión de manera inmediata. No se asignarán al papel de \"authenticated user\" hasta que confirmen su dirección de e-mail siguiendo el enlace del e-mail de registro. Es MUY recomendable crear un papel \"preautorizado\" con permisos limitados para este propósito. <br />NOTA: Si habilitas esta característica, deberías editar las %settings--se puede encontrar más ayuda para escribir el mensaje %help."
+
+#: ../logintoboggan.module:570
+msgid "Non-authenticated role"
+msgstr "Papel no-autenticado"
+
+#: ../logintoboggan.module:573
+msgid "If \"Set password & Immediate login\" is selected, users will be able to login before their e-mail address has been authenticated. Therefore, you must choose a role for new non-authenticated users. Users will be removed from this role and assigned to the \"authenticated user\" once they follow the link in their welcome e-mail. Add new roles <a href=\"%url\">here</a>."
+msgstr "Si \"Establecer contraseña & Inicio de sesión inmediato\" está seleccionado, los usuarios serán capaces de iniciar sesión antes de que su dirección e-mail haya sido comprobada. Por tanto, debes elegir un paper para los usuarios nuevos no autentificados. Los usuarios serán eliminados de este papel y asignados al de \"usuarios autenticados\" una vez que hayan seguido el enlace de su e-mail de bienvenida. Añade el nuevo papel <a href=\"%url\">aquí</a>."
+
+#: ../logintoboggan.module:578
+msgid "Redirections"
+msgstr "Redirecciones"
+
+#: ../logintoboggan.module:585
+msgid "Redirect path on registration"
+msgstr "Ruta de redirección al registrarse"
+
+#: ../logintoboggan.module:587
+msgid "Normally, after a user registers a new account, they will be taken to the front page, or to their user page if you specify <cite>Immediate login</cite> above. Leave this setting blank if you wish to keep the default behavior. If you wish the user to go to a page of your choosing, then enter the path for it here. For instance, you may redirect them to a static page such as <cite>node/35</cite>, or to the <cite>&lt;front&gt;</cite> page. <em>Note: this feature will not work if you have the user password creation feature disabled.</em>"
+msgstr "Habitualmente, cuando el usuario registra una nueva cuenta, es enviado a la página principal, o a su página de usuario si así se especifica en la sección <cite>Inicio de sesión inmediato</cite> de arriba. Dejar esto en blanco para mantener este comportamiento por defecto. Si deseas enviar al usuario a una página de tu elección, indica aqí su ruta. Por ejemplo, puedes redireccionarlos a una página estática tal que <cite>node/35</cite>, o a la página <cite>%lt;front&gt;</cite>. <em>Nota: esta característica no funcionará si tienes la opción de creación de contraseña desabilititada.</em>"
+
+#: ../logintoboggan.module:592
+msgid "Redirect path on confirmation"
+msgstr "Ruta de redirección tras la confirmación."
+
+#: ../logintoboggan.module:594
+msgid "Normally, after a user confirms their new account, they will be taken to their user page. Leave this setting blank if you wish to keep the default behavior. If you wish the user to go to a page of your choosing, then enter the path for it here. For instance, you may redirect them to a static page such as <cite>node/35</cite>, or to the <cite>&lt;front&gt;</cite> page."
+msgstr "Normalmente, depués de que un usuario confirma su nueva cuenta, será redireccionado a su página de usuario. Dejar esta opción en blanco para mantener el comportamiento por defecto. Si desea enviar al usuario a una página de tu elección, escribe aquí su ruta. Por ejemplo, puedes redirigirlos a una página estática, como <cite>node/35</cite>, o a la página <cite>&lt;front&gt;</cite>."
+
+#: ../logintoboggan.module:598
+msgid "Other"
+msgstr "Otros"
+
+#: ../logintoboggan.module:613
+msgid "Present login form on access denied (403)"
+msgstr "Presentar formulario de inicio de sesión en respuesta a acceso denegado (403)"
+
+#: ../logintoboggan.module:616
+msgid "Anonymous users will be presented with a login form along with an access denied message."
+msgstr "Se presentará a los usuarios anónimos un formulario de inicio de sesión junto con el mensaje de acceso denegado."
+
+#: ../logintoboggan.module:620
+msgid "Display login successful message"
+msgstr "Visualizar mensaje de Inicio de sesión correcto"
+
+#: ../logintoboggan.module:623
+msgid "If enabled, users will receive a 'Login successful' message upon login."
+msgstr "Si está activo, los usuarios recibirán un mensaje 'Inicio de sesión correcto' después de iniciar sesión."
+
+#: ../logintoboggan.module:661
+msgid "Access Denied / User Login"
+msgstr "Acceso denegado / Inicio de sesión de usuario"
+
+#: ../logintoboggan.module:662
+msgid "Access denied.  You may need to login below or register to access this page."
+msgstr "Acceso denegado. Deber iniciar sesión a continuación o registrate para obtener acceso a esta página."
+
+#: ../logintoboggan.module:665
+msgid "Access Denied"
+msgstr "Acceso denegado."
+
+#: ../logintoboggan.module:673
+msgid "You are not authorized to access this page."
+msgstr "No estás autorizado a acceder a esta página."
+
+#: ../logintoboggan.module:701
+msgid "You must enter a password."
+msgstr "Debes indicar una contraseña."
+
+#: ../logintoboggan.module:702
+msgid "The password cannot contain spaces."
+msgstr "La contraseña no puede contener espacios."
+
+#: ../logintoboggan.module:703
+#: ;713
+msgid "The password contains an illegal character."
+msgstr "La contraseña contiene algún caracter inválido."
+
+#: ../logintoboggan.module:715
+msgid "The password is too long: it must be less than 30 characters."
+msgstr "La contraseña es demasiado larga: debe ser menor de 30 caracteres."
+
+#: ../logintoboggan.module:716
+msgid "The password is too short: it must be greater than 6 characters."
+msgstr "La contraseña es demasiado corta: debe contener más de 6 caracteres."
+
+#: ../logintoboggan.module:741
+msgid "E-mail validation URL used for %name with timestamp %timestamp."
+msgstr "En la fecha %timestamp se ha enviado el correo con la URL de validación para el usuario %name"
+
+#: ../logintoboggan.module:758
+msgid " You will receive full site permissions after your account has been approved by a site administrator."
+msgstr "Recibirás acceso completo al sitio, una vez que tu cuenta la haya aprovado un administrador."
+
+#: ../logintoboggan.module:761
+msgid "You have successfully validated your e-mail address."
+msgstr "Tu dirección de correo se ha validado correctamente."
+
+#: ../logintoboggan.module:765
+msgid "Sorry, you can only use your validation link once for security reasons. Please %login with your username and password instead now."
+msgstr "Lo sentimos, sólamente se puede emplear una vez el enlace de validación. Por favor, %login, inicia con tu nombre de usuario y tu contraseña."
+
+#: ../logintoboggan.module:765
+msgid "login"
+msgstr "entrar"
+
+#: ../logintoboggan.module:784
+msgid "Session opened for %name."
+msgstr "Sesión de %name abierta."
+
+#: ../logintoboggan.module:822
+msgid "Account validation"
+msgstr "Validación de cuenta"
+
+#: ../logintoboggan.module:831
+msgid "Login successful."
+msgstr "Inicio de sesión correcto."
+
+#: ../logintoboggan.module:844
+msgid "If required, you may reset your password from: %url"
+msgstr "Si es necesario, puedes resetear tu contraseña en %url"
+
+#: ../logintoboggan.module:854
+msgid "A validation e-mail has been sent to your e-mail address. You will need to follow the instructions in that message in order to gain full access to the site."
+msgstr "Se ha enviado un mensaje de validación a tu dirección de correo electrónico. Debes seguir las instrucciones del mensaje para obtener acceso completo al sitio."
+
+#: ../logintoboggan.module:231
+msgid "security"
+msgstr "seguridad"
+
+#: ../logintoboggan.module:240
+#: ;313;741;784
+msgid "user"
+msgstr "usuario"
+
+#: ../logintoboggan.module:0
+msgid "logintoboggan"
+msgstr "logintoboggan"
+

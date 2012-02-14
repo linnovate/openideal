@@ -1,0 +1,540 @@
+<?php
+// $Id: acquia_agent.module,v 1.17.2.6 2010/09/15 21:39:18 pwolanin Exp $
+
+/**
+ * @file
+ *   Acquia Agent securely sends information to Acquia Network.
+ */
+
+/**
+ * XML-RPC errors defined by the Acquia Network.
+ */
+define('SUBSCRIPTION_NOT_FOUND'       , 1000);
+define('SUBSCRIPTION_KEY_MISMATCH'    , 1100);
+define('SUBSCRIPTION_EXPIRED'         , 1200);
+define('SUBSCRIPTION_REPLAY_ATTACK'   , 1300);
+define('SUBSCRIPTION_KEY_NOT_FOUND'   , 1400);
+define('SUBSCRIPTION_MESSAGE_FUTURE'  , 1500);
+define('SUBSCRIPTION_MESSAGE_EXPIRED' , 1600);
+define('SUBSCRIPTION_MESSAGE_INVALID' , 1700);
+define('SUBSCRIPTION_VALIDATION_ERROR', 1800);
+define('SUBSCRIPTION_PROVISION_ERROR' , 9000);
+
+/**
+ * Subscription message lifetime defined by the Acquia Network.
+ */
+define('SUBSCRIPTION_MESSAGE_LIFETIME', 15*60);
+
+/**
+ * Implementation of hook_menu().
+ */
+function acquia_agent_menu() {
+  $items['admin/settings/acquia-agent'] = array(
+    'title' => 'Acquia Network settings',
+    'description' => 'Connect your site to the Acquia Network.',
+    'page callback' => 'acquia_agent_settings_page',
+    'file' => 'acquia_agent.pages.inc',
+    'access arguments' => array('administer site configuration'),
+  );
+  $items['admin/settings/acquia-agent/refresh-status'] = array(
+    'title' => 'Manual update check',
+    'page callback' => 'acquia_agent_refresh_status',
+    'access arguments' => array('administer site configuration'),
+    'type' => MENU_CALLBACK,
+  );
+  return $items;
+}
+
+/**
+ * Implementation of hook_init().
+ */
+function acquia_agent_init() {
+  if (arg(2) != 'acquia-agent' && empty($_POST) && user_access('administer site configuration') && (!acquia_agent_has_credentials())) {
+    $message = t('Get a <a href="@acquia-free">free 30 day trial</a> of Drupal support, enhanced content search, comment spam blocking and more. If you have an Acquia Network subscription, <a href="@settings">connect now</a>.', array('@acquia-free' => url('admin/settings/acquia-agent'), '@settings' => url('admin/settings/acquia-agent/connection')));
+    if (arg(0) == 'admin') {
+      $message .= '<br />'. t('To turn this message off, disable the Acquia Network Connector <a href="@admin-modules">modules</a>.', array('@admin-modules' => url('admin/build/modules', array('fragment' => 'system-modules'))));
+    }
+    drupal_set_message($message, 'warning', FALSE);
+  }
+}
+
+/**
+ * Implementation of hook_theme().
+ */
+function acquia_agent_theme() {
+  return array(
+    'acquia_agent_banner_form' => array(
+      'arguments' => array('form' => NULL),
+      'file' => 'acquia_agent.pages.inc',
+    ),
+  );
+}
+
+/**
+ * Get subscription status from the Acquia Network, and store the result.
+ *
+ * This check also sends a heartbeat to the Acquia Network unless
+ * $params['no_heartbeat'] == 1.
+ */
+function acquia_agent_check_subscription($params = array()) {
+  // Default return value is FALSE.
+  $subscription = FALSE;
+  if (!acquia_agent_has_credentials()) {
+    // If there is not an identifier or key, delete any old subscription data.
+    variable_del('acquia_subscription_data');
+  }
+  else {
+    // There is an identifier and key, so attempt communication.
+
+    // Include version number information.
+    acquia_agent_load_versions();
+    if (IS_ACQUIA_DRUPAL) {
+      $params['version']  = ACQUIA_DRUPAL_VERSION;
+      $params['series']   = ACQUIA_DRUPAL_SERIES;
+      $params['branch']   = ACQUIA_DRUPAL_BRANCH;
+      $params['revision'] = ACQUIA_DRUPAL_REVISION;
+    }
+    // Include Acquia Search module version number.
+    if (module_exists('acquia_search')) {
+      $info = db_result(db_query("SELECT info FROM {system} WHERE name = 'acquia_search'"));
+      if ($info = unserialize($info)) {
+        $params['search_version'] = $info['version'];
+      }
+    }
+    $data = acquia_agent_call('acquia.agent.subscription', $params);
+    $subscription['timestamp'] = time();
+    if ($errno = xmlrpc_errno()) {
+      switch ($errno) {
+        case SUBSCRIPTION_NOT_FOUND:
+        case SUBSCRIPTION_EXPIRED:
+          variable_del('acquia_subscription_data');
+          break;
+      }
+    }
+    elseif (acquia_agent_valid_response($data)) {
+      $subscription += $data['result']['body'];
+      variable_set('acquia_subscription_data', $subscription);
+      // use: acquia_agent_settings('acquia_subscription_data');
+    }
+    else {
+      watchdog('acquia agent', 'HMAC validation error: <pre>@data</pre>', array('@data' => print_r($data, TRUE)), WATCHDOG_ERROR);
+    }
+  }
+  return $subscription;
+}
+
+function acquia_agent_report_xmlrpc_error() {
+  drupal_set_message(t('Error: @message (@errno)', array('@message' => xmlrpc_error_msg(), '@errno' => xmlrpc_errno())), 'error');
+}
+/**
+ * Implementation of hook_update_status_alter().
+ *
+ * This compares the array of computed information about projects that are
+ * missing available updates with the saved settings. If the settings specify
+ * that a particular project or release should be ignored, the status for that
+ * project is altered to indicate it is ignored because of settings.
+ *
+ * @param $projects
+ *   Reference to an array of information about available updates to each
+ *   project installed on the system.
+ *
+ * @see update_calculate_project_data()
+ */
+function acquia_agent_update_status_alter(&$projects) {
+
+  if (!$subscription = acquia_agent_has_update_service()) {
+    // Get subscription data or return if the service is not enabled.
+    return;
+  }
+
+  foreach ($projects as $project => $project_info) {
+    if ($project == 'drupal') {
+      if (isset($subscription['update'])) {
+        $projects[$project]['status'] = $subscription['update']['status'];
+        $projects[$project]['releases'] = $subscription['update']['releases'];
+        $projects[$project]['recommended'] = $subscription['update']['recommended'];
+        $projects[$project]['latest_version'] = $subscription['update']['latest_version'];
+        // Security updates are a separate piece of data.  If we leave it, then core
+        // security warnings from druapl.org will also be displayed on the update page.
+        unset($projects[$project]['security updates']);
+      }
+      else {
+        $projects[$project]['status'] = UPDATE_NOT_CHECKED;
+        $projects[$project]['reason'] = t('No information available from the Acquia Network');
+        unset($projects[$project]['releases']);
+        unset($projects[$project]['recommended']);
+      }
+      $projects[$project]['link'] = 'http://acquia.com/products-services/acquia-drupal';
+      $projects[$project]['title'] = 'Acquia Drupal';
+      $projects[$project]['existing_version'] = ACQUIA_DRUPAL_VERSION;
+      $projects[$project]['install_type'] = 'official';
+      unset($projects[$project]['extra']);
+    }
+    elseif ($project_info['datestamp'] == 'acquia drupal') {
+      $projects['drupal']['includes'][$project] = $project_info['title'];
+      unset($projects[$project]);
+    }
+  }
+}
+
+/**
+ * Implementation of hook_system_info_alter()
+ */
+function acquia_agent_system_info_alter(&$info) {
+  if (!$subscription = acquia_agent_has_update_service()) {
+    // Get subscription data or return if the service is not enabled.
+    return;
+  }
+  if (isset($info['acquia'])) {
+    // Slight hack - the datestamp field is carried thourgh by update.module.
+    $info['datestamp'] = 'acquia drupal';
+  }
+}
+
+/**
+ * Returns the stored subscription data if update service is enabled or FALSE otherwise.
+ */
+function acquia_agent_has_update_service() {
+  // Include version number information.
+  acquia_agent_load_versions();
+
+  $subscription = acquia_agent_settings('acquia_subscription_data');
+  if (!IS_ACQUIA_DRUPAL || !$subscription['active'] || (isset($subscription['update_service']) && empty($subscription['update_service']))) {
+    // We don't have update service if (1) this is not Acquia Drupal, (2) there
+    // is no subscription or (3) the update service was disabled on acquia.com.
+    // Requiring the update_service key and checking its value separately is
+    // important for backwards compatibility. Isset & empty tells us
+    // that the web service willingly told us to not do update notifications.
+    return FALSE;
+  }
+
+  return $subscription;
+}
+
+/**
+ * Implemetation of hook_menu_alter()
+ */
+function acquia_agent_menu_alter(&$items) {
+  if (isset($items['admin/reports/updates/check'])) {
+    $items['admin/reports/updates/check']['page callback'] = 'acquia_agent_manual_status';
+  }
+}
+
+/**
+ * Menu callback for 'admin/settings/acquia-agent/refresh-status'.
+ */
+function acquia_agent_refresh_status() {
+  // Refresh subscription information, so we are sure about our update status.
+  if (module_exists('acquia_spi')) {
+    acquia_spi_send_profile_info();
+  }
+  // We send a heartbeat here so that all of our status information gets
+  // updated locally via the return data.
+  acquia_agent_check_subscription();
+  // Return to the setting page (or destination)
+  drupal_goto('admin/settings/acquia-agent');
+}
+
+/**
+ * Substituted menu callback for 'admin/reports/updates/check'.
+ */
+function acquia_agent_manual_status() {
+  // Refresh subscription information, so we are sure about our update status.
+  if (module_exists('acquia_spi')) {
+    acquia_spi_send_profile_info();
+  }
+  // We send a heartbeat here so that all of our status information gets
+  // updated locally via the return data.
+  acquia_agent_check_subscription();
+  // This callback will only ever be available if update module is active.
+  update_manual_status();
+}
+
+/**
+ * Implementation of hook_cron().
+ */
+function acquia_agent_cron() {
+  // Check subscription and send a heartbeat to Acquia Network via XML-RPC.
+  acquia_agent_check_subscription();
+}
+
+/**
+ * Implementation of hook_watchdog().
+ */
+function acquia_agent_watchdog($log_entry) {
+  // Make sure that even when cron failures prevent hook_cron() from being
+  // called, we still send out a heartbeat.
+  $cron_failure_messages = array(
+    'Cron has been running for more than an hour and is most likely stuck.',
+    'Attempting to re-run cron while it is already running.',
+  );
+  if (in_array($log_entry['message'], $cron_failure_messages, TRUE)) {
+    acquia_agent_check_subscription();
+  }
+}
+
+/**
+ * @defgroup acquia_admin_menu Alter or add to the administration menu.
+ * @{
+ * The admin_menu module is enabled by default - we alter it to add our icon and
+ * subscription information.
+ */
+
+/**
+ * Implementation of hook_admin_menu().
+ */
+ function acquia_agent_admin_menu() {
+  // Add link to show current subscription status
+  $links[] = array(
+    'title' => 'acquia_subscription_status',
+    'path' => 'http://acquia.com',
+    'weight' => -80,
+    'parent_path' => '<root>',
+    'options' => array('extra class' => 'admin-menu-action acquia-subscription-status', 'html' => TRUE),
+  );
+
+  return $links;
+}
+
+/**
+ * Implementation of hook_translated_menu_link_alter().
+ *
+ * Here is where we make changes to links that need dynamic information such
+ * as the current page path or the number of users.
+ */
+function acquia_agent_translated_menu_link_alter(&$item, $map) {
+  global $user;
+
+  if (empty($user->uid) || ($item['module'] != 'admin_menu')) {
+    return;
+  }
+  if ($item['title'] == 'acquia_subscription_status') {
+    $subscription = acquia_agent_settings('acquia_subscription_data');
+    if (empty($subscription['timestamp']) || (time() - $subscription['timestamp'] > 60*60*24)) {
+      $subscription = acquia_agent_check_subscription(array('no_heartbeat' => 1));
+    }
+    if ($subscription['active']) {
+      $icon = '<img src="'. base_path() . 'misc/watchdog-ok.png" height="10" alt="ok" />';
+      $item['title'] = t("!icon Subscription active (expires !date)", array('!icon' => $icon, '!date' => format_date(strtotime($subscription['expiration_date']['value']), 'small')));
+      $item['localized_options']['extra class'] .= " acquia-active-subscription";
+      $item['localized_options']['attributes']['title'] = $subscription['product']['view'];
+      $item['href'] = $subscription['href'];
+    }
+    else {
+      $icon = '<img src="'. base_path() . 'misc/watchdog-error.png" height="10" alt="error" />';
+      $item['title'] = t("!icon Subscription not active", array('!icon' => $icon));
+      $item['localized_options']['extra class'] .= " acquia-inactive-subscription";
+      $item['href'] = 'http://acquia.com/network';
+    }
+  }
+}
+
+/**
+ * Implementation of hook_theme_registry_alter().
+ */
+function acquia_agent_theme_registry_alter(&$theme_registry) {
+  if (isset($theme_registry['admin_menu_icon'])) {
+    $theme_registry['admin_menu_icon']['function'] = 'acquia_agent_menu_icon';
+  }
+}
+
+/**
+ * Render an icon to display in the Administration Menu.
+ */
+function acquia_agent_menu_icon() {
+  return '<img class="admin-menu-icon" src="'. base_path() . drupal_get_path('module', 'acquia_agent') . '/acquia.ico" height = "16" alt="" />';
+}
+
+
+/**
+ * @} End of "acquia_admin_menu".
+ */
+
+/**
+ * Validate identifier/key pair via XML-RPC call to Acquia Network address.
+ *
+ * This is generaly only useful when actually entering the values in the form.
+ * Normally, use acquia_agent_check_subscription() since it also validates
+ * the response.
+ */
+function acquia_agent_valid_credentials($identifier, $key, $acquia_network_address = NULL) {
+  $data = acquia_agent_call('acquia.agent.validate', array(), $identifier, $key, $acquia_network_address);
+  return (bool)$data['result'];
+}
+
+/**
+ * Prepare and send a XML-RPC request to Acquia Network with an authenticator.
+ *
+ */
+function acquia_agent_call($method, $params, $identifier = NULL, $key = NULL, $acquia_network_address = NULL) {
+  $path = drupal_get_path('module', 'acquia_agent');
+  require_once $path .'/acquia_agent_streams.inc';
+
+  $acquia_network_address = acquia_agent_network_address($acquia_network_address);
+  $host = isset($_SERVER["SERVER_ADDR"]) ? $_SERVER["SERVER_ADDR"] : '';
+  $data = array(
+    'authenticator' => _acquia_agent_authenticator($params, $identifier, $key),
+    'host' => $host,
+    'body' => $params,
+  );
+  $data['result'] = _acquia_agent_request($acquia_network_address, $method, $data);
+  return $data;
+}
+
+/**
+ * Returns an error message for the most recent (failed) attempt to connect
+ * to the Acquia Network during the current page request. If there were no
+ * failed attempts, returns FALSE.
+ *
+ * This function assumes that the most recent XML-RPC error came from the
+ * Acquia Network; otherwise, it will not work correctly.
+ */
+function acquia_agent_connection_error_message() {
+  $errno = xmlrpc_errno();
+  if ($errno) {
+    switch ($errno) {
+      case SUBSCRIPTION_NOT_FOUND:
+        return t('The identifier you have provided does not exist in the Acquia Network or is expired. Please make sure you have used the correct value and try again.');
+        break;
+      case SUBSCRIPTION_EXPIRED:
+        return t('Your Acquia Network subscription has expired. Please renew your subscription so that you can resume using Acquia Network services.');
+        break;
+      case SUBSCRIPTION_MESSAGE_FUTURE:
+        return t('Your server is unable to communicate with the Acquia Network due to a problem with your clock settings. For security reasons, we reject messages that are more than @time ahead of the actual time recorded by our servers. Please fix the clock on your server and try again.', array('@time' => format_interval(SUBSCRIPTION_MESSAGE_LIFETIME)));
+        break;
+      case SUBSCRIPTION_MESSAGE_EXPIRED:
+        return t('Your server is unable to communicate with the Acquia Network due to a problem with your clock settings. For security reasons, we reject messages that are more than @time older than the actual time recorded by our servers. Please fix the clock on your server and try again.', array('@time' => format_interval(SUBSCRIPTION_MESSAGE_LIFETIME)));
+        break;
+      case SUBSCRIPTION_VALIDATION_ERROR:
+        return t('The identifier and key you have provided for the Acquia Network do not match. Please make sure you have used the correct values and try again.');
+        break;
+      default:
+        return t('There is an error communicating with the Acquia Network at this time. Please check your identifier and key and try again.');
+        break;
+    }
+  }
+  return FALSE;
+}
+
+/**
+ * Helper function to build the xmlrpc target address.
+ */
+function acquia_agent_network_address($acquia_network_address = NULL) {
+  if (empty($acquia_network_address)) {
+    $acquia_network_address = acquia_agent_settings('acquia_network_address');
+  }
+  // Strip protocol (scheme) from Network address
+  $uri = parse_url($acquia_network_address);
+  $port = isset($uri['port']) ? ':'. $uri['port'] : '';
+  $path = isset($uri['path']) ? $uri['path'] : '';
+  $acquia_network_address = $uri['host'] . $port . $path;
+  // Add a scheme based on PHP's capacity.
+  if (in_array('ssl', stream_get_transports(), TRUE) && !defined('ACQUIA_DEVELOPMENT_NOSSL')) {
+    // OpenSSL is available in PHP
+    $acquia_network_address = 'https://'. $acquia_network_address;
+  }
+  else {
+    $acquia_network_address = 'http://'. $acquia_network_address;
+  }
+  $acquia_network_address .= '/xmlrpc.php';
+  return $acquia_network_address;
+}
+
+/**
+ * Helper function to check if an identifer and key exist.
+ */
+function acquia_agent_has_credentials() {
+  return (bool)(variable_get('acquia_identifier', '') && variable_get('acquia_key', ''));
+}
+
+/**
+ * Helper function to check if the site has an active subscription.
+ */
+function acquia_agent_subscription_is_active() {
+  $active = FALSE;
+  // Subscription cannot be active if we have no credentials.
+  if (acquia_agent_has_credentials()) {
+    $subscription = acquia_agent_settings('acquia_subscription_data');
+    $active = !empty($subscription['active']);
+  }
+  return $active;
+}
+
+/**
+ * Helper function so that we don't need to repeat defaults.
+ */
+function acquia_agent_settings($variable_name) {
+  switch ($variable_name) {
+    case 'acquia_identifier':
+      return variable_get('acquia_identifier', '');
+    case 'acquia_key':
+      return variable_get('acquia_key', '');
+    case 'acquia_network_address':
+      return variable_get('acquia_network_address', 'https://rpc.acquia.com');
+    case 'acquia_subscription_data':
+      return variable_get('acquia_subscription_data', array('active' => FALSE));
+  }
+}
+
+/**
+ * Returns a string of highly randomized bytes (over the full 8-bit range).
+ *
+ * This function is better than simply calling mt_rand) or any other built-in
+ * PHP function because it can return a long string of bytes (compared to < 4
+ * bytes normally from mt_rand)) and uses the best available pseudo-random source.
+ *
+ * @param $count
+ *   The number of characters (bytes) to return in the string.
+ */
+function acquia_agent_random_bytes($count) {
+  static $random_state;
+  // We initialize with the somewhat random PHP process ID on the first call.
+  if (empty($random_state)) {
+    $random_state = getmypid();
+  }
+  $output = '';
+  // /dev/urandom is available on many *nix systems and is considered the best
+  // commonly available pseudo-random source.
+  if ($fh = @fopen('/dev/urandom', 'rb')) {
+    $output = fread($fh, $count);
+    fclose($fh);
+  }
+  // If /dev/urandom is not available or returns no bytes, this loop will
+  // generate a good set of pseudo-random bytes on any system.
+  while (strlen($output) < $count) {
+    $random_state = md5(microtime() . mt_rand() . $random_state);
+    $output .= pack('H*', md5(mt_rand() . $random_state));
+  }
+  return substr($output, 0, $count);
+}
+
+/**
+ * API function used by others to ensure version information is loaded.
+ *
+ * Saves us some cycles to not load it each time, when it is actually
+ * not needed. We store this in a separate file, so that the Acquia
+ * build process only needs to alter that file instead of the main
+ * module file.
+ */
+function acquia_agent_load_versions() {
+  // Include version number information.
+  include_once 'acquia_agent_drupal_version.inc';
+}
+
+/**
+ * Implementation of hook_form_[form_id]_alter()..
+ */
+function acquia_agent_form_system_modules_alter(&$form, &$form_state) {
+
+  if (isset($form['description']['acquia_search'])) {
+    $subscription = acquia_agent_settings('acquia_subscription_data');
+
+    if (!module_exists('acquia_search') && empty($subscription['active'])) {
+      $form['status']['#disabled_modules'][] = 'acquia_search';
+      $text = 'Acquia Search requires an <a href="@network-url">Acquia Network subscription</a>';
+      $message = t($text, array('@network-url' => 'http://acquia.com/products-services/acquia-search'));
+      $form['description']['acquia_search']['#value'] = '<div style="padding-left:5px; margin:8px 0px" class="messages warning" id="acquia-agent-no-search">' . $message . '</div>' . $form['description']['acquia_search']['#value'];
+    }
+  }
+}
+

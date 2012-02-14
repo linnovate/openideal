@@ -1,0 +1,101 @@
+<?php
+// $Id: image_gallery.install,v 1.20.2.1 2010/08/03 17:43:00 sun Exp $
+
+/**
+ * Implementation of hook_install().
+ */
+function image_gallery_install() {
+  // Notify the user of the existence of the suggested menu item.
+  $t = get_t();
+  drupal_set_message($t('Image gallery has been installed. You may want to enable the <a href="@navigation-menu-url">Image galleries menu item</a>.', array('@navigation-menu-url' => url('admin/build/menu-customize/navigation'))));
+}
+
+/**
+ * Implementation of hook_enable().
+ */
+function image_gallery_enable() {
+  if ($vocabulary = taxonomy_vocabulary_load(variable_get('image_gallery_nav_vocabulary', 0))) {
+    // Existing install. Add back image node type, if the image
+    // vocabulary still exists. Keep all other node types intact there.
+    $vocabulary = (array) $vocabulary;
+    $vocabulary['nodes']['image'] = 1;
+    taxonomy_save_vocabulary($vocabulary);
+  }
+  else {
+    // Create the image gallery vocabulary if it does not exist.
+    $vocabulary = array(
+      'name' => t('Image Galleries'),
+      'multiple' => 0,
+      'required' => 0,
+      'hierarchy' => 1,
+      'relations' => 0,
+      'module' => 'image_gallery',
+      'nodes' => array('image' => 1),
+    );
+    taxonomy_save_vocabulary($vocabulary);
+
+    variable_set('image_gallery_nav_vocabulary', $vocabulary['vid']);
+  }
+}
+
+/**
+ * Implementation of hook_uninstall().
+ */
+function image_gallery_uninstall() {
+  if ($vid = variable_get('image_gallery_nav_vocabulary', FALSE)) {
+    module_invoke('taxonomy', 'del_vocabulary', $vid);
+  }
+  variable_del('image_images_per_page');
+  variable_del('image_gallery_nav_vocabulary');
+  variable_del('image_gallery_node_info');
+  variable_del('image_gallery_sort_order');
+}
+
+/**
+ * Re-assign image vocabularies to image_gallery module.
+ */
+function image_gallery_update_1() {
+  $ret = array();
+  if ($vid = variable_get('image_nav_vocabulary', '')) {
+    $args = array($vid);
+    $query = "UPDATE {vocabulary} SET module = 'image_gallery' WHERE vid = %d";
+    _db_query_callback($args, TRUE);
+    $query = preg_replace_callback(DB_QUERY_REGEXP, '_db_query_callback', $query);
+    $ret[] = update_sql($query);
+  }
+  else {
+    $ret[] = update_sql("UPDATE {vocabulary} SET module = 'image_gallery' WHERE module = 'image'");
+  }
+  return $ret;
+}
+
+/**
+ * Rename permission "administer images" to "administer image galleries".
+ */
+function image_gallery_update_6100() {
+  $ret = array();
+  $result = db_query("SELECT rid, perm FROM {permission} ORDER BY rid");
+  while ($role = db_fetch_object($result)) {
+    $renamed_permission = strtr($role->perm, array('administer images' => 'administer image galleries'));
+    if ($renamed_permission != $role->perm) {
+      $args = array($renamed_permission, $role->rid);
+      $query = "UPDATE {permission} SET perm = '%s' WHERE rid = %d";
+      _db_query_callback($args, TRUE);
+      $query = preg_replace_callback(DB_QUERY_REGEXP, '_db_query_callback', $query);
+      $ret[] = update_sql($query);
+    }
+  }
+  return $ret;
+}
+
+/**
+ * Clear the Views cache so our new default views are picked up.
+ */
+function image_gallery_update_6101() {
+  $ret = array();
+  if (drupal_load('module', 'views')) {
+    views_invalidate_cache();
+  }
+  return $ret;
+}
+

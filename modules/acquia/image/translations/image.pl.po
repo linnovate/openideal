@@ -1,0 +1,839 @@
+# Polish translation of Drupal's image, image_gallery and image_attach modules
+# Copyright 2006-2007 archetwist <arche#letwist.net>
+msgid ""
+msgstr ""
+"Project-Id-Version: drupal PL arche\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2007-11-22 01:44+0100\n"
+"Last-Translator: archetwist\n"
+"Language-Team: archetwist\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Poedit-Language: Polish\n"
+"X-Poedit-Country: POLAND\n"
+
+#: image.imagemagick.inc:19
+msgid "ImageMagick Binary"
+msgstr "Plik binarny narzędzia ImageMagick"
+
+#: image.imagemagick.inc:21
+msgid "ImageMagick is a standalone program used to manipulate images. To use it, it must be installed on your server and you need to know where it is located. If you are unsure of the exact path consult your ISP or server administrator."
+msgstr "ImageMagick to osobny program, który umożliwia manipulację zdjęciami. By móc z niego korzystać, należy zainstalować go na serwerze i znać jego położenie. Jeśli masz wątpliwości co do ścieżki, skontaktuj się z administratorem serwera."
+
+#: image.imagemagick.inc:25
+msgid "Path to the \"convert\" binary"
+msgstr "Ścieżka do pliku binarnego biblioteki \"convert\""
+
+#: image.imagemagick.inc:28
+msgid "Specify the complete path to the ImageMagic <kbd>convert</kbd> binary. For example: <kbd>/usr/bin/convert</kbd> or <kbd>C:\\Program Files\\ImageMagick-6.3.4-Q16\\convert.exe</kbd>"
+msgstr "Wprowadź kompletną ścieżkę do pliku binarnego <kbd>convert</kbd> narzędzia ImageMagick. Przykładowo: <kbd>/usr/bin/convert</kbd> lub <kbd>C:\\Program Files\\ImageMagick-6.3.4-Q16\\convert.exe</kbd>."
+
+#: image.imagemagick.inc:32
+msgid "Display debugging information"
+msgstr "Wyświetlaj informacje pomocne w usuwaniu błędów"
+
+#: image.imagemagick.inc:34
+msgid "Checking this option will display the ImageMagick commands and ouput to users with the <em>administer site configuration</em> permission."
+msgstr "Zaznaczenie tej opcji spowoduje wyświetlanie poleceń i danych wyjściowych narzędzia ImageMagick użytkownikom z uprawnieniami do zarządzania konfiguracją witryny."
+
+#: image.imagemagick.inc:60
+msgid "No file %file could be found. PHP's <a href='!open-basedir'>open_basedir</a> security resriction is set to %open-basedir, which may be interfearing with the attempts to locate ImageMagick."
+msgstr "Nie udało się znaleźć pliku %file. Restrykcja bezpieczeństwa <a href='!open-basedir'>open_basedir</a> preprocesora PHP jest ustawiona na %open-basedir, co może powodować niemożność zlokalizowania ImageMagick."
+
+#: image.imagemagick.inc:63
+msgid "The specified ImageMagic path %file does not exist."
+msgstr "Podana ścieżka do ImageMagick %file jest nieprawidłowa."
+
+#: image.imagemagick.inc:141
+msgid "ImageMagick could not be found. The admin will need to set the path on the <a href='@image-toolkit-settings'>image toolkit page</a>."
+msgstr "ImageMagick nie został znaleziony. Administrator powinien podać ścieżkę do niego na <a href='@image-toolkit-settings'>stronie zestawu narzędzi do obsługi grafik</a>."
+
+#: image.imagemagick.inc:171
+msgid "ImageMagick command: @command"
+msgstr "Polecenie ImageMagick: @command"
+
+#: image.imagemagick.inc:172
+msgid "ImageMagick output: @output"
+msgstr "Dane wyjściowe ImageMagick: @output"
+
+#: image.imagemagick.inc:176
+msgid "ImageMagick reported an error: %error"
+msgstr "ImageMagick zgłosił błąd: %error"
+
+#: views.inc:12
+msgid "Image: Display Image"
+msgstr "Zdjęcia: wyświetl zdjęcie"
+
+#: views.inc:14
+#: image.module:42;261;273;531
+#: image.info:0;0
+#: contrib/image_attach/image_attach.module:302
+#: contrib/image_attach/image_attach.info:0
+#: contrib/image_gallery/image_gallery.info:0
+#: contrib/image_im_advanced/image_im_advanced.info:0
+#: contrib/image_import/image_import.info:0
+msgid "Image"
+msgstr "Zdjęcie"
+
+#: views.inc:15
+msgid "Image with link"
+msgstr "Zdjęcie wraz z odnośnikiem"
+
+#: image.module:22
+msgid "The image module is used to create and administer images for your site. Each image is stored as a post, with thumbnails of the original generated automatically. There are two default thumbnail sizes, thumbnail and preview. The thumbnail size is shown as the preview for image posts and when browsing image galleries. The preview is the default size when first displaying an image node."
+msgstr "Moduł image wykorzystywany jest do tworzenia i zarządzania zdjęciami lub innymi plikami graficznymi. Każde zdjęcie zachowywane jest w postaci segmentu, wraz z automatycznie tworzonymi miniaturkami. Domyślnie tworzone są miniaturki w dwóch wielkościach. Miniaturki te wykorzystywane są w innych segmentach i w galeriach."
+
+#: image.module:23
+msgid ""
+"Image administration allows the image directory and the image sizes to be set.</p><p>\n"
+"Image galleries are used to organize and display images in galleries.   The list tab allows users to edit existing image gallery names, descriptions, parents and relative position, known as a weight.  The add galleries tab allows you to create a new image gallery defining name, description, parent and weight."
+msgstr ""
+"Na stronie zarządzania modułem zdjęć (<em>image</em>) dostępne są ustawienia dotyczące katalogu służącego do przechowywania zdjęć oraz ich wymiarów.</p><p>\n"
+"Galerie wykorzystywane są do porządkowania i wyświetlania zdjęć. Karta \"przeglądaj\" pozwala użytkownikom edytować nazwy i opisy istniejących galerii, przypisywać je do innych galerii nadrzędnych oraz zmieniać ich \"wagę\", czyli decydować o kolejności ich wyświetlania. Karta \"dodaj galerię\" umożliwia stworzenie nowej galerii."
+
+#: image.module:25
+msgid ""
+"<p>You can</p>\n"
+"<ul>\n"
+"<li>view image handling messages in <a href=\"!admin-settings\">administer &gt;&gt; settings</a>.</li>\n"
+"<li>configure image sizes and file directories at <a href=\"!admin-settings-image\">administer &gt;&gt; settings &gt;&gt; image</a>.</li>\n"
+"<li>use the <a href=\"!external-http-drupal-org-project-img_assist\">image assist module</a> to upload and insert images into posts.</li>\n"
+msgstr ""
+"<p>Możesz</p>\n"
+"<ul>\n"
+"<li>zapoznać się z komunikatami dotyczącymi przetwarzania plików graficznych na stronie <a href=\"!admin-settings\">zarządzaj &gt;&gt; ustawienia</a></li>\n"
+"<li>zmienić wymiary zdjęć i katalogi, w których przechowywane są pliki, poprzez stronę <a href=\"!admin-settings-image\">zarządzaj &gt;&gt; ustawienia &gt;&gt; zdjęcie</a></li>\n"
+"<li>skorzystać z <a href=\"!external-http-drupal-org-project-img_assist\">modułu <q>Image Assist</q></a> do wysyłania i wstawiania zdjęć bezpośrednio do wpisów.</li>\n"
+
+#: image.module:31
+msgid "For more information please read the configuration and customization handbook <a href=\"!image\">Image page</a>."
+msgstr "By uzyskać więcej informacji, przeczytaj proszę <a href=\"!image\">stronę dotyczącą modułu <q>Image</q></a> w podręczniku konfiguracji."
+
+#: image.module:44
+msgid "An image (with thumbnail). This is ideal for publishing photographs or screenshots."
+msgstr "Obrazek (wraz z miniaturką). Idealne do zamieszczania zdjęć lub zrzutów ekranu."
+
+#: image.module:90
+msgid "File paths"
+msgstr "Ścieżki plików"
+
+#: image.module:94
+msgid "Default image path"
+msgstr "Domyślna ścieżka zdjęcia"
+
+#: image.module:96
+msgid "Subdirectory in the directory \"%dir\" where pictures will be stored. Do not include trailing slash."
+msgstr "Podkatalog (znajdujący się w katalogu \"%dir\"), do którego trafiać będą pliki zdjęć. Nie uwzględniaj ukośnika."
+
+#: image.module:101
+msgid "Maximum upload size"
+msgstr "Maksymalny rozmiar pliku."
+
+#: image.module:103
+msgid "KB"
+msgstr "KB"
+
+#: image.module:105
+msgid "Maximum file size for image uploads. When a maximum image dimensions is specified for original images the size is checked after resizing. "
+msgstr "Maksymalny rozmiar wysyłanych zdjęć. Jeżeli ustalono również maksymalne wymiary oryginalnego zdjęcia, rozmiar pliku jest sprawdzany po zmianie wymiarów zdjęcia."
+
+#: image.module:110
+msgid "Image sizes"
+msgstr "Wymiary zdjęć"
+
+#: image.module:113
+msgid "The dimensions on the \"Original\" image will be used to resize the images when they are first uploaded. If both dimensions are specified the image will be resized to fit with in that size. If only one dimension is specified the image will be resized to exactly that dimension with the other determined by the image aspect ratio."
+msgstr "Podczas wysyłania zdjęcia po raz pierwszy, jego wymiary zostaną zmienione tak, by odpowiadały ustawieniom wymiarów oryginalnych wersji zdjęć. Jeżeli podano zarówno żądaną szerokość, jak i wysokość, wymiary zdjęcia zostaną zmienione w taki sposób, by nie przekraczały tych ustaleń. Jeżeli natomiast podano, dla przykładu, tylko szerokość, wysokość zostanie określona z zachowaniem proporcji (analogicznie w przypadku podania jedynie wysokości)."
+
+#: image.module:118
+msgid "Hidden"
+msgstr "Ukryty"
+
+#: image.module:119
+msgid "Same window"
+msgstr "W tym samym oknie"
+
+#: image.module:120
+msgid "New window"
+msgstr "W nowym oknie"
+
+#: image.module:176
+msgid "Must specify a width or height."
+msgstr "Musisz ustalić szerokość lub wysokość."
+
+#: image.module:229
+msgid "Changes to the images sizes mean that the derivative images will need to be regenerated."
+msgstr "Zmiana ustawień wymiarów zdjęć spowoduje konieczność ponownego wygenerowania zdjęć z oryginałów."
+
+#: image.module:237
+msgid "Label"
+msgstr "Etykieta"
+
+#: image.module:237
+msgid "Width"
+msgstr "Szerokość"
+
+#: image.module:237
+msgid "Height"
+msgstr "Wysokość"
+
+#: image.module:237
+msgid "Link"
+msgstr "Odnośnik"
+
+#: image.module:266;640;0
+msgid "image"
+msgstr "zdjęcie"
+
+#: image.module:278
+msgid "Image module settings."
+msgstr "Ustawienia modułu zdjęć."
+
+#: image.module:304
+msgid "Rebuild image thumbnails"
+msgstr "Ponownie wygeneruj miniaturki zdjęć"
+
+#: image.module:316
+msgid "Rebuilding %node-title's resized images."
+msgstr "Ponowne generowanie zdjęć %node-title z oryginałów."
+
+#: image.module:334
+msgid "Uploaded file is not a valid image. Only JPG, PNG and GIF files are allowed."
+msgstr "Wysłany plik nie jest właściwym plikiem graficznym. Dozwolone są jedynie pliki JPG, PNG i GIF."
+
+#: image.module:352
+msgid "The original image was resized to fit within the maximum allowed resolution of %width x %height pixels."
+msgstr "Wymiary oryginalnego zdjęcia zostały zmienione tak, by nie przekraczały maksymalnej dopuszczalne rozdzielczości %width x %height pikseli."
+
+#: image.module:358
+msgid "The image you uploaded was too big. You are only allowed upload files less than %max_size but your file was %file_size."
+msgstr "Wysłane zdjęcie okazało się za duże. Wielkość wysłanego pliku wynosiła %file_size, a maksymalna dopuszczalna wielkość to %max_size."
+
+#: image.module:453;462
+msgid "Latest image"
+msgstr "Ostatnie zdjęcie"
+
+#: image.module:454;467
+msgid "Random image"
+msgstr "Losowe zdjęcie"
+
+#: image.module:481;974
+#: image.install:138
+#: contrib/image_attach/image_attach.module:134
+msgid "Thumbnail"
+msgstr "Miniaturka"
+
+#: image.module:533
+msgid "Click \"Browse...\" to select an image to upload."
+msgstr "Kliknij przycisk \"Wybierz\" by wybrać zdjęcie do wysłania."
+
+#: image.module:551
+msgid "You must upload an image."
+msgstr "Musisz wysłać zdjęcie."
+
+#: image.module:640
+msgid "Derivative images were regenerated for %title."
+msgstr "Zdjęcia dla %title zostały ponownie wygenerowane z oryginałów."
+
+#: image.module:640
+msgid "view"
+msgstr "przeglądaj"
+
+#: image.module:714
+msgid "The derivative images for <a href=\"!link\">%title</a> have been regenerated."
+msgstr "Zdjęcia dla <a href=\"!link\">%title</a> zostały ponownie wygenerowane z oryginałów."
+
+#: image.module:858
+msgid "No image toolkit is currently enabled. Without one the image module will not be able to resize your images. You can select one from the <a href=\"!link\">image toolkit settings page</a>."
+msgstr "Żaden zestaw narzędzi do obsługi plików graficznych nie jest włączony. Bez niego moduł zdjęć nie będzie w stanie zmieniać wymiarów wysyłanych zdjęć. Zestaw narzędzi można wybrać na <a href=\"!link\">stronie ustawień zestawu narzędzi dla grafik</a>."
+
+#: image.module:922
+msgid "Unable to create scaled %label image"
+msgstr "Nie udało się utworzyć przeskalowanego zdjęcia %label"
+
+#: image.module:973
+#: image.install:53
+msgid "Original"
+msgstr "Oryginał"
+
+#: image.module:975
+#: image.install:135
+msgid "Preview"
+msgstr "Podgląd"
+
+#: image.module:53
+msgid "create images"
+msgstr "tworzenie zdjęć"
+
+#: image.module:53
+msgid "view original images"
+msgstr "wyświetlanie oryginałów"
+
+#: image.module:53
+msgid "edit own images"
+msgstr "edytowanie własnych zdjęć"
+
+#: image.module:53
+msgid "edit images"
+msgstr "edytowanie zdjęć"
+
+#: image.install:128
+msgid ""
+"The original image size was missing so no changes were made. See this <a href='!link'>image module issue</a> for more information. Include the following:<br /><pre>@old_sizes\n"
+"</pre>"
+msgstr ""
+"Z powodu braku ustawień wymiarów oryginalnych zdjęć nie wprowadzono żadnych zmian. Więcej informacji w <a href='!link'>opisie problemu z modułem zdjęć</a>. Załącz następujące dane:<br /><pre>@old_sizes\n"
+"</pre>"
+
+#: image.info:0
+msgid "Allows uploading, resizing and viewing of images."
+msgstr "Umożliwia wysyłanie, zmianę wielkości oraz przeglądanie zdjęć."
+
+#: contrib/image_attach/image_attach.module:16
+#: contrib/image_attach/image_attach.info:0
+msgid "Allows easy attaching of image nodes to other content types."
+msgstr "Umożliwia łatwe załączanie segmentów ze zdjęciami do segmentów innego rodzaju."
+
+#: contrib/image_attach/image_attach.module:29
+msgid "Image Attachment View"
+msgstr "Wyświetlanie załączonego zdjęcia"
+
+#: contrib/image_attach/image_attach.module:36
+msgid "Image attach"
+msgstr "Załączanie zdjęć"
+
+#: contrib/image_attach/image_attach.module:37
+msgid "Enable image attach for content"
+msgstr "Włącz załączanie zdjęć do zawartości"
+
+#: contrib/image_attach/image_attach.module:53
+msgid "Attach existing images"
+msgstr "Załącz zdjęcie"
+
+#: contrib/image_attach/image_attach.module:56
+msgid "When enabled, will allow existing image nodes to be attached instead of uploading new images."
+msgstr "Umożliwia załączanie istniejących segmentów zdjęć zamiast wysyłania nowych."
+
+#: contrib/image_attach/image_attach.module:70
+msgid "<Hidden>"
+msgstr "<Ukryty>"
+
+#: contrib/image_attach/image_attach.module:77
+msgid "Image Attach settings"
+msgstr "Konfiguracja załączania zdjęć"
+
+#: contrib/image_attach/image_attach.module:82
+msgid "Attach Images"
+msgstr "Załącz zdjęcie"
+
+#: contrib/image_attach/image_attach.module:84
+msgid "Disabled"
+msgstr "Wyłączone"
+
+#: contrib/image_attach/image_attach.module:84
+msgid "Enabled"
+msgstr "Włączone"
+
+#: contrib/image_attach/image_attach.module:85
+msgid "Should this node allows users to upload an image?"
+msgstr "Czy segmenty tego rodzaju mają umożliwiać użytkownikom załączanie zdjęć?"
+
+#: contrib/image_attach/image_attach.module:89
+msgid "Teaser image size"
+msgstr "Wymiary zdjęcia w skrócie segmentu"
+
+#: contrib/image_attach/image_attach.module:92
+msgid "This determines the size of the image that appears when the node is displayed as a teaser. 'Hidden' will not show the image."
+msgstr "Określa wymiary zdjęcia, gdy jest ono wyświetlane w skrócie segmentu. Ukrycie zdjęcia spowoduje, że nie będzie ono wyświetlane."
+
+#: contrib/image_attach/image_attach.module:96
+msgid "Teaser image weight"
+msgstr "Waga zdjęcia w skrócie segmentu"
+
+#: contrib/image_attach/image_attach.module:98
+msgid "This value determines the order of the image when displayed in the teaser."
+msgstr "Wartość ta ma wpływ na położenie zdjęcia w skrócie segmentu."
+
+#: contrib/image_attach/image_attach.module:102
+msgid "Full node image size"
+msgstr "Wymiary zdjęcia w pełnej wersji segmentu"
+
+#: contrib/image_attach/image_attach.module:105
+msgid "This determines the size of the image that appears when the full node is displayed. 'Hidden' will not show the image."
+msgstr "Określa wymiary zdjęcia, gdy jest ono wyświetlane w pełnej wersji segmentu. Ukrycie zdjęcia spowoduje, że nie będzie ono wyświetlane."
+
+#: contrib/image_attach/image_attach.module:109
+msgid "Full node image weight"
+msgstr "Waga zdjęcia w pełnej wersji segmentu"
+
+#: contrib/image_attach/image_attach.module:111
+msgid "This value determines the order of the image when displayed in the body."
+msgstr "Wartość ta ma wpływ na położenie zdjęcia w pełnej wersji segmentu."
+
+#: contrib/image_attach/image_attach.module:126
+msgid "Attached Images"
+msgstr "Załącz zdjęcie"
+
+#: contrib/image_attach/image_attach.module:141
+msgid "Existing Image"
+msgstr "Istniejące zdjęcie"
+
+#: contrib/image_attach/image_attach.module:144
+msgid "Choose an image already existing on the server if you do not upload a new one."
+msgstr "Jeśli nie chcesz wysyłać nowego, wskaż zdjęcie, które już znajduje się na serwerze."
+
+#: contrib/image_attach/image_attach.module:148
+msgid "-or-"
+msgstr "lub"
+
+#: contrib/image_attach/image_attach.module:160
+msgid "Upload Image"
+msgstr "Wyślij zdjęcie"
+
+#: contrib/image_attach/image_attach.module:164
+msgid "Image title"
+msgstr "Nazwa zdjęcia"
+
+#: contrib/image_attach/image_attach.module:166
+msgid "The title the image will be shown with."
+msgstr "Tytuł zdjęcia."
+
+#: contrib/image_attach/image_attach.module:276
+msgid "None"
+msgstr "Brak"
+
+#: contrib/image_attach/image_attach.module:300
+msgid "Image Attach: Display Image"
+msgstr "Załączanie zdjęć: Wyświetl zdjęcie"
+
+#: contrib/image_attach/image_attach.module:303
+msgid "Image with link to attaching node"
+msgstr "Zdjęcie wraz z odnośnikiem do segmentu"
+
+#: contrib/image_attach/image_attach.module:304
+msgid "Image with link to attached image"
+msgstr "Zdjęcie wraz z odnośnikiem"
+
+#: contrib/image_attach/image_attach.module:315
+msgid "Image Attach: Attached image"
+msgstr "Załączanie zdjęć: Załączone zdjęcie"
+
+#: contrib/image_attach/image_attach.module:316
+msgid "Exists"
+msgstr "Istnieje"
+
+#: contrib/image_attach/image_attach.module:320
+msgid "Filter by whether or not the node has an attached image."
+msgstr "Brane będzie pod uwagę to, czy do segmentu załączono zdjęcie."
+
+#: contrib/image_attach/image_attach.module:0
+msgid "image_attach"
+msgstr "załączanie zdjęć"
+
+#: contrib/image_attach/image_attach.info:0
+msgid "Image Attach"
+msgstr "Załączanie zdjęć"
+
+#: contrib/image_gallery/image_gallery.module:7
+msgid "Image galleries can be used to organize and present groups of images. Galleries may be nested. To add a new gallery click the \"add gallery\" tab."
+msgstr "Galerie zdjęć mogą być wykorzystywane do porządkowania i prezentowania zbiorów zdjęć. Galerie mogą być osadzone. By dodać jedną z nich, kliknij kartę \"dodaj galerię\""
+
+#: contrib/image_gallery/image_gallery.module:21;28;167
+msgid "Image galleries"
+msgstr "Galerie zdjęć"
+
+#: contrib/image_gallery/image_gallery.module:31
+msgid "Create and manage image galleries."
+msgstr "Twórz i zarządzaj galeriami zdjęć."
+
+#: contrib/image_gallery/image_gallery.module:35
+msgid "List"
+msgstr "Przeglądaj"
+
+#: contrib/image_gallery/image_gallery.module:41
+msgid "Add gallery"
+msgstr "Dodaj galerię"
+
+#: contrib/image_gallery/image_gallery.module:48
+msgid "Image gallery"
+msgstr "Galeria zdjęć"
+
+#: contrib/image_gallery/image_gallery.module:52
+msgid "Configure appearance of image galleries."
+msgstr "Pozwala konfiguować wygląd galerii zdjęć."
+
+#: contrib/image_gallery/image_gallery.module:60
+msgid "Edit image gallery"
+msgstr "Edytuj galerię zdjęć"
+
+#: contrib/image_gallery/image_gallery.module:76
+msgid "Gallery settings"
+msgstr "Ustawienia galerii"
+
+#: contrib/image_gallery/image_gallery.module:80
+msgid "Images per page"
+msgstr "Zdjęć na stronę"
+
+#: contrib/image_gallery/image_gallery.module:83
+msgid "Sets the number of images to be displayed in a gallery page."
+msgstr "Zmienia liczbę zdjęć wyświetlanych na stronie galerii."
+
+#: contrib/image_gallery/image_gallery.module:87
+msgid "Display node info"
+msgstr "Wyświetlaj informacje o segmencie"
+
+#: contrib/image_gallery/image_gallery.module:89
+msgid "Checking this will display the \"Posted by\" node information on the gallery pages."
+msgstr "Wybranie tej opcji spowoduje wyświetlanie informacji o czasie dodania i autorze segmentu na stronach galerii."
+
+#: contrib/image_gallery/image_gallery.module:181
+#: contrib/image_import/image_import.module:152
+msgid "Name"
+msgstr "Nazwa"
+
+#: contrib/image_gallery/image_gallery.module:181
+msgid "Operations"
+msgstr "Działania"
+
+#: contrib/image_gallery/image_gallery.module:186
+msgid "edit gallery"
+msgstr "edytuj galerię"
+
+#: contrib/image_gallery/image_gallery.module:191
+msgid "No galleries available"
+msgstr "Bra galerii"
+
+#: contrib/image_gallery/image_gallery.module:196;245;279
+msgid "Delete"
+msgstr "Usuń"
+
+#: contrib/image_gallery/image_gallery.module:210
+msgid "Gallery name"
+msgstr "Nazwa galerii"
+
+#: contrib/image_gallery/image_gallery.module:214
+msgid "The name is used to identify the gallery."
+msgstr "Tytuł galerii zdjęć."
+
+#: contrib/image_gallery/image_gallery.module:219
+msgid "Description"
+msgstr "Opis"
+
+#: contrib/image_gallery/image_gallery.module:223
+msgid "The description can be used to provide more information about the image gallery."
+msgstr "Opis może zawierać dodatkowe informacje na temat galerii zdjęć."
+
+#: contrib/image_gallery/image_gallery.module:226
+msgid "Parent"
+msgstr "Nadrzędny"
+
+#: contrib/image_gallery/image_gallery.module:229
+msgid "Weight"
+msgstr "Waga"
+
+#: contrib/image_gallery/image_gallery.module:232
+msgid "When listing galleries, those with with light (small) weights get listed before containers with heavier (larger) weights. Galleries with equal weights are sorted alphabetically."
+msgstr "Podczas wyświetlania listy galerii, \"lżejsze\" galerie będą umieszczane wyżej, a \"cięższe\" niżej. Galerie o takiej samej \"wadze\" będą porządkowane alfabetycznie."
+
+#: contrib/image_gallery/image_gallery.module:240
+msgid "Submit"
+msgstr "Dodaj"
+
+#: contrib/image_gallery/image_gallery.module:261
+msgid "Created new gallery %term."
+msgstr "Utworzono nową galerię %term."
+
+#: contrib/image_gallery/image_gallery.module:264
+msgid "The gallery %term has been updated."
+msgstr "Galeria %term została zaktualizowana."
+
+#: contrib/image_gallery/image_gallery.module:267
+msgid "The gallery %term has been deleted."
+msgstr "Galeria %term została usnięta."
+
+#: contrib/image_gallery/image_gallery.module:279
+msgid "Are you sure you want to delete the image gallery %name?"
+msgstr "Jesteś pewien, że chcesz usunąć galerię %name?"
+
+#: contrib/image_gallery/image_gallery.module:279
+msgid "Deleting an image gallery will delete all sub-galleries. This action cannot be undone."
+msgstr "Usunięcie galerii spowoduje także nieodwracalne usunięcie wszystkich galerii podrzędnych."
+
+#: contrib/image_gallery/image_gallery.module:279
+msgid "Cancel"
+msgstr "Anuluj"
+
+#: contrib/image_gallery/image_gallery.module:284
+msgid "The image gallery %term and all sub-galleries have been deleted."
+msgstr "Galeria %term oraz wszystkie galerie w niej się znajdujące zostały usunięte."
+
+#: contrib/image_gallery/image_gallery.module:309
+msgid "root"
+msgstr "tytułowa"
+
+#: contrib/image_gallery/image_gallery.module:323
+msgid "Image galleries may be nested below other galleries."
+msgstr "Galerie mogą być umieszczane wewnątrz innych galerii."
+
+#: contrib/image_gallery/image_gallery.module:348
+msgid "Last updated: %date"
+msgstr "Ostatnio aktualizowano: %date"
+
+#: contrib/image_gallery/image_gallery.module:387
+msgid "Posted by: !name"
+msgstr "Zamieszczone przez: !name"
+
+#: contrib/image_gallery/image_gallery.module:406
+msgid "Image Galleries"
+msgstr "Galerie zdjęć"
+
+#: contrib/image_gallery/image_gallery.module:346;368
+msgid "There is 1 image in this gallery"
+msgid_plural "There are @count images in this gallery"
+msgstr[0] "W tej galerii znajduje się jedno zdjęcie"
+msgstr[1] "W tej galerii znajdują się @count zdjęcia"
+msgstr[2] "W tej galerii znajduje się @count zdjęć"
+
+#: contrib/image_gallery/image_gallery.module:12
+msgid "administer images"
+msgstr "zarządzanie zdjęciami"
+
+#: contrib/image_gallery/image_gallery.module:0
+msgid "image_gallery"
+msgstr "galeria zdjęć"
+
+#: contrib/image_gallery/image_gallery.info:0
+msgid "Image Gallery"
+msgstr "Galeria zdjęć"
+
+#: contrib/image_gallery/image_gallery.info:0
+msgid "Allows sorting and displaying of image galleries based on categories."
+msgstr "Umożliwia porządkowania i wyświetlanie galerii zdjęć na podstawie systemu kategorii."
+
+#: contrib/image_im_advanced/image_im_advanced.module:33
+#: contrib/image_im_advanced/image_im_advanced.info:0
+msgid "ImageMagick Advanced Options"
+msgstr "Zaawansowane ustawienia ImageMagick"
+
+#: contrib/image_im_advanced/image_im_advanced.module:35
+msgid "These settings let you control some of ImageMagick's more advanced options."
+msgstr "Ustawienia te pozwalają kontrolować niektóre z bardziej zaawansowanych opcji ImageMagick."
+
+#: contrib/image_im_advanced/image_im_advanced.module:41
+msgid "JPEG quality"
+msgstr "Jakość plików JPEG"
+
+#: contrib/image_im_advanced/image_im_advanced.module:45;81
+msgid "%"
+msgstr "%"
+
+#: contrib/image_im_advanced/image_im_advanced.module:46
+msgid "Define the image quality for JPEG manipulations. Ranges from 0 to 100. Higher values mean better image quality but bigger files. <a href=\"!link\">More information on -quality</a>"
+msgstr "Określ jakość plików JPEG, od 0 do 100. Wyższe wartości oznaczają lepszą jakość zdjęć, ale i większe pliki. <a href=\"!link\">Więcej informacji na temat opcji -quality</a>."
+
+#: contrib/image_im_advanced/image_im_advanced.module:50
+msgid "Strip metadata from images at this size and below"
+msgstr "Usuń metadane ze zdjęć o takich lub mniejszych wymiarach"
+
+#: contrib/image_im_advanced/image_im_advanced.module:52
+msgid "You may choose to strip all metadata, such as camera information and color profiles, from the processed images in order to reduce their file size. Please choose at what maximum size you want images to be stripped of their metadata. Example: \"150x150\". Enter \"0x0\" to disable this feature. This option requires ImageMagick 6.0.0 or higher. <a href=\"!link\">More information on -strip</a>"
+msgstr "Usunięcie z przetwarzanych zdjęć metadanych, takich jak informacje na temat aparatu fotograficznego czy profile kolorów, spowoduje zmiejszenie ich wielkości. Wskaż maksymalne wymiary zdjęć, które będą poddawane temu zabiegowi, np. \"150x150\". Wprowadź \"0x0\", by wyłączyć tę opcję. Wymaga ona ImageMagick w wersji 6.0.0 lub wyższej. <a href=\"!link\">Więcej informacji na temat opcji -strip</a>."
+
+#: contrib/image_im_advanced/image_im_advanced.module:56
+msgid "Convert colorspace"
+msgstr "Konwertuj przestrzeń kolorów"
+
+#: contrib/image_im_advanced/image_im_advanced.module:58
+msgid "<None>"
+msgstr "<Brak>"
+
+#: contrib/image_im_advanced/image_im_advanced.module:58
+msgid "RGB"
+msgstr "RGB"
+
+#: contrib/image_im_advanced/image_im_advanced.module:58
+msgid "Gray"
+msgstr "Odcienie szarości"
+
+#: contrib/image_im_advanced/image_im_advanced.module:59
+msgid "This option lets you convert images to the specified colorspace. This will be overridden by the Color profile option, if used. <a href=\"!link\">More information on -colorspace</a>"
+msgstr "Opcja pozwala przekonwertować zdjęcia do żądanej przestrzeni kolorów. Ustawienia tej opcji zostaną nadpisane przez ustawienia opcji profilów kolorów, jeśli takowe zostaną wprowadzone. <a href=\"!link\">Więcej informacji na temat opcji -colorspace</a>."
+
+#: contrib/image_im_advanced/image_im_advanced.module:63
+msgid "Change image resolution to 72 ppi"
+msgstr "Zmień rozdzielczość zdjęcia na 72 ppi"
+
+#: contrib/image_im_advanced/image_im_advanced.module:65
+msgid "If checked, this option will set the print resolution of the image to 72 pixels per inch, which is suitable for web use. This does not affect the pixel size or quality of the image.  <a href=\"!link\">More information on -density</a>"
+msgstr "Gdy włączona, opcja spowoduje ustawienie rozdzielczości zdjęcia na 72 piksele/cal, co doskonale nadaje się dla stron internetowych. Opcja nie wpływa na wymiary lub jakość zdjęcia. <a href=\"!link\">Więcej informacji na temat opcji -density</a>."
+
+#: contrib/image_im_advanced/image_im_advanced.module:70
+msgid "Sharpening filter"
+msgstr "Filtr wyostrzający"
+
+#: contrib/image_im_advanced/image_im_advanced.module:73
+msgid "The sharpness filter is used to regain some of the sharpness that is always lost when a digital photograph is scaled down. This is equivalent to the commonly used \"Unsharp Mask\" filter. It is important that these values are not set too high as it can easily make the images look artificial. <a href=\"!link\">More information on -unsharp</a>"
+msgstr "Filtr wyostrzający wykorzystywany jest do odzyskania części ostrości, która zmniejsza się zawsze, gdy wymiary cyfrowego zdjęcia ulegają zmniejszeniu. Filtr ten jest ekwiwalentny w stosunku do popularnego filtra <q>Maska wyostrzająca</q> (ang. <q>Unsharp Mask</q>). Należy zwrócić uwagę na to, by ustawienia filtra nie były zbyt wysokie, ponieważ może to znacząco pogorszyć jakość zdjęć. <a href=\"!link\">Więcej informacji na temat opcji -unsharp</a>."
+
+#: contrib/image_im_advanced/image_im_advanced.module:77
+msgid "Sharpness filter strength"
+msgstr "Siła filtra wyostrzającego"
+
+#: contrib/image_im_advanced/image_im_advanced.module:82
+msgid "Apply this percentage of sharpness when scaling. 90 is recommended, although values higher than 100 are also valid. Set to 0 to disable this feature."
+msgstr "Zastosuj dany procent wyostrzenia podczas zmiany wymiarów. 90 jest wartością zalecaną, jednak wartości wyższe niż 100 są również prawidłowe. Ustaw \"0\", by wyłączyć opcję."
+
+#: contrib/image_im_advanced/image_im_advanced.module:86
+msgid "Sharpness filter radius"
+msgstr "Promień filtra wyostrzającego"
+
+#: contrib/image_im_advanced/image_im_advanced.module:90
+msgid "Use this pixel radius for the sharpness filter. 0.9 is recommended."
+msgstr "Promień filtra wyostrzającego. Wartość \"0.9\" jest zalecana."
+
+#: contrib/image_im_advanced/image_im_advanced.module:95
+msgid "Color profile"
+msgstr "Profil kolorów"
+
+#: contrib/image_im_advanced/image_im_advanced.module:98
+msgid "Processed images may be converted to a color profile specified here. This is especially important when working with images that use a wide-gamut color profile such as ColorMatch or Adobe RGB, which is often the case with professional photography. sRGB (which may be downloaded from <a href=\"http://www.color.org/profiles.html\">ICC</a>) is recommended since it is likely to look good on most displays.<br />Note that this conversion is still useful even if you choose to strip all metadata from your images (see above). This is because the conversion happens first and changes the actual image data before the profile is stripped."
+msgstr "Przetwarzane zdjęcia mogą być konwertowane do wskazanego profilu kolorów. Jest to szczególnie istotne podczas pracy ze zdjęciami, które korzystają z profilu kolorów o dużym gamucie barwnym, takiego jak ColorMatch czy AdobeRGB. Profile takie są szczególnie popularne w fotografii profesjonalnej. Profil sRGB (który można pobrać ze <a href=\"http://www.color.org/profiles.html\">strony ICC</a>) jest zalecany, ponieważ prezentuje się dobrze na większości wyświetlaczy.<br />Zwróć uwagę, że konwersja ta jest użyteczna nawet w przypadku wybrania opcji usuwania metadanych (patrz wyżej). Dzieje się tak, ponieważ konwersja jest przeprowadzana jako pierwsza i dokonuje zmian w zdjęciach zanim informacje o profilu kolorów zostaną usunięte."
+
+#: contrib/image_im_advanced/image_im_advanced.module:102
+msgid "Path to color profile"
+msgstr "Ścieżka do profilu kolorów"
+
+#: contrib/image_im_advanced/image_im_advanced.module:104
+msgid "The path to a color profile file that all scaled down images will be converted to. Leave empty to disable."
+msgstr "Ścieżka do pliku z profilem kolorów, z którego będą korzystać wszystkie przetwarzane zdjęcia. Pozostaw pole pustym, by wyłączyć opcję."
+
+#: contrib/image_im_advanced/image_im_advanced.module:121
+msgid "The JPEG quality must be a positive number between 1 and 100."
+msgstr "Jakość JPEG musi być wyrażona liczbą dodatnią od 1 do 100."
+
+#: contrib/image_im_advanced/image_im_advanced.module:126
+msgid "The strip metadata threshold must be specified in the form <em>NxN</em>. Example: <em>150x150</em>."
+msgstr "Wymiary dla opcji usuwania metadanych muszą być zapisane w formie <em>NxN</em>. Przykładowo: <em>150x150</em>."
+
+#: contrib/image_im_advanced/image_im_advanced.module:132
+msgid "The sharpness amount must be specified as a positive number."
+msgstr "Procent wyostrzenia musi być wyrażony liczbą dodatnią."
+
+#: contrib/image_im_advanced/image_im_advanced.module:135
+msgid "The sharpness radius must be specified as a positive value."
+msgstr "Promień wyostrzenia musi być wyrażony wartością dodatnią."
+
+#: contrib/image_im_advanced/image_im_advanced.module:141
+msgid "The ICC profile could not be read."
+msgstr "Nie udało się odczytać profilu ICC."
+
+#: contrib/image_im_advanced/image_im_advanced.module:0
+msgid "image_im_advanced"
+msgstr "zaawansowane ustawienia ImageMagick"
+
+#: contrib/image_im_advanced/image_im_advanced.info:0
+msgid "Adds advanced options to the ImageMagick image toolkit."
+msgstr "Udostępnia zaawansowane opcje zestawu narzędzi ImageMagick."
+
+#: contrib/image_import/image_import.module:10
+msgid "Import multiple image files and save them as image nodes. The files will be moved from their location into the image module's files directory. "
+msgstr "Zaimportuj wiele plików ze zdjęciami naraz i zapisz je w postaci segmentów modułu zdjęć. Pliki zostaną przeniesione z ich dotychczasowej lokalizacji do katalogu plików modułu <q>Image</q>."
+
+#: contrib/image_import/image_import.module:11
+msgid "Searching for image files in %dirpath."
+msgstr "Sprawdzanie katalogu %dirpath w poszukiwaniu plików ze zdjęciami."
+
+#: contrib/image_import/image_import.module:14
+msgid "Configure the image import module's settings."
+msgstr "Dostosuj ustawienia modułu importu zdjęć."
+
+#: contrib/image_import/image_import.module:35;44
+msgid "Image import"
+msgstr "Import zdjęć"
+
+#: contrib/image_import/image_import.module:40
+msgid "Import images from the filesystem."
+msgstr "Zaimportuj zdjęcia z katalogu."
+
+#: contrib/image_import/image_import.module:49
+msgid "Change settings for the Image Import module."
+msgstr "Zmień ustawienia modułu importu zdjęć."
+
+#: contrib/image_import/image_import.module:61
+msgid "You need to configure the import directory on the image import module's <a href='!admin-settings-image_import'>settings page</a>."
+msgstr "Musisz skonfigurować katalog, z którego będą importowane zdjęcia, na <a href='!admin-settings-image_import'>stronie ustawień modułu importu zdjęć</a>."
+
+#: contrib/image_import/image_import.module:136;173
+msgid "Import"
+msgstr "Importuj"
+
+#: contrib/image_import/image_import.module:142
+msgid "No files were found"
+msgstr "Nie znaleziono żadnych plików."
+
+#: contrib/image_import/image_import.module:152
+msgid "Size"
+msgstr "Wielkość"
+
+#: contrib/image_import/image_import.module:152
+msgid "Dimensions"
+msgstr "Wymiary"
+
+#: contrib/image_import/image_import.module:152
+msgid "Title"
+msgstr "Tytuł"
+
+#: contrib/image_import/image_import.module:152
+msgid "Body"
+msgstr "Treść"
+
+#: contrib/image_import/image_import.module:195
+msgid "%filename as <a href=\"!node-link\">@node-title</a> <a href=\"!edit-link\">[edit]</a>"
+msgstr "plik %filename do segmentu <a href=\"!node-link\">@node-title</a> (<a href=\"!edit-link\">edycja</a>)"
+
+#: contrib/image_import/image_import.module:203
+msgid "Error importing %filename."
+msgstr "Błąd podczas importowania pliku %filename."
+
+#: contrib/image_import/image_import.module:210
+msgid "Successfully imported: "
+msgstr "Z powodzeniem zaimportowano:"
+
+#: contrib/image_import/image_import.module:213
+msgid "No image files were imported."
+msgstr "Żadne pliki zdjęć nie zostały zaimportowane."
+
+#: contrib/image_import/image_import.module:222
+msgid "Import path"
+msgstr "Ścieżka importowanych plików"
+
+#: contrib/image_import/image_import.module:225
+msgid "The directory to import image nodes from. Drupal will need to have write access to this directory so we can move the file."
+msgstr "Katalog, z którego mają być importowane zdjęcia. Drupal musi posiadać możliwość zapisu do tego katalogu, by móc przenieść plik."
+
+#: contrib/image_import/image_import.module:226
+msgid "<strong>Note:</strong> a path begining with a <kbd>/</kbd> indicates the path is relative to the server's root, not the website's root. One starting without a <kbd>/</kbd> specifies a path relative to Drupal's root. For example: <kbd>/tmp/image</kbd> would be the temp directory off the root while <kbd>tmp/image</kbd> would be inside Drupal's directory."
+msgstr "<strong>Uwaga!</strong> Ścieżka rozpoczynająca się od znaku <kbd>/</kbd> oznacza, że jest ona relatywna względem głównego katalogu serwera, nie witryny. Ścieżka, na której początku nie znajduje się ów znak, jest relatywna względem głównego katalogu Drupala. Dla przykładu: katalog <kbd>/tmp/image</kbd> byłby katalogiem <code>temp</code> serwera, natomiast katalog <kbd>tmp/image</kbd> - Drupala."
+
+#: contrib/image_import/image_import.module:245
+msgid "You can't import from the image module's directory. The import deletes the original files so you would just be asking for trouble."
+msgstr "Nie możesz importować plików z katalogu modułu zdjęć. Podczas importu usuwane są oryginalne pliki, co w takim wypadku byłoby co najmniej nieroztropne."
+
+#: contrib/image_import/image_import.module:24
+msgid "import images"
+msgstr "importowanie zdjęć"
+
+#: contrib/image_import/image_import.module:0
+msgid "image_import"
+msgstr "import zdjęć"
+
+#: contrib/image_import/image_import.info:0
+msgid "Image Import"
+msgstr "Import zdjęć"
+
+#: contrib/image_import/image_import.info:0
+msgid "Allows batches of images to be imported from a directory on the server."
+msgstr "Umożliwia importowanie wielu zdjęć z danego katalogu na serwerze naraz."
+

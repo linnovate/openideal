@@ -1,0 +1,1240 @@
+# $Id: sv.po,v 1.1.2.2 2009/05/03 21:35:08 seals Exp $
+#
+# Swedish translation of Drupal (rules)
+# Generated from files:
+#  rules.variables.inc,v 1.1.2.30 2009/04/19 15:03:44 fago
+#  rules.module,v 1.1.2.55 2009/04/19 15:03:44 fago
+#  rules.info,v 1.1.2.2 2008/07/10 08:15:04 fago
+#  system.rules.inc,v 1.1.2.13 2009/04/19 15:03:43 fago
+#  rules.install,v 1.1.2.21 2009/04/19 15:03:44 fago
+#  comment.rules.inc,v 1.1.2.5 2009/04/19 15:03:43 fago
+#  rules.rules.inc,v 1.1.2.30 2009/04/19 15:03:43 fago
+#  comment.rules_forms.inc,v 1.1.2.2 2009/04/19 15:03:43 fago
+#  node.rules.inc,v 1.1.2.33 2009/04/19 15:03:43 fago
+#  user.rules.inc,v 1.1.2.17 2009/04/19 15:03:43 fago
+#  path.rules.inc,v 1.1.2.5 2009/04/19 15:03:43 fago
+#  node.rules_forms.inc,v 1.1.2.16 2009/04/19 15:03:43 fago
+#  path.rules_forms.inc,v 1.1.2.4 2009/04/19 15:03:43 fago
+#  php.rules.inc,v 1.1.2.9 2009/04/19 15:03:43 fago
+#  php.rules_forms.inc,v 1.1.2.7 2009/04/19 15:03:43 fago
+#  rules.rules_forms.inc,v 1.1.2.4 2009/04/19 15:03:43 fago
+#  system.rules_forms.inc,v 1.1.2.9 2009/04/19 15:03:43 fago
+#  taxonomy.rules.inc,v 1.1.2.4 2009/04/19 15:03:43 fago
+#  taxonomy.rules_forms.inc,v 1.1.2.5 2009/04/19 15:03:43 fago
+#  user.rules_forms.inc,v 1.1.2.4 2009/04/19 15:03:43 fago
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Rules 6.x\n"
+"POT-Creation-Date: 2009-05-03 18:20+0000\n"
+"PO-Revision-Date: 2009-05-03 23:23+0100\n"
+"Last-Translator: Magnus Gunnarsson <seals@passagen.se>\n"
+"Language-Team: drupalsverige.se\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n!=1);\n"
+"X-Poedit-Language: Swedish\n"
+"X-Poedit-Country: SWEDEN\n"
+"X-Poedit-SourceCharset: utf-8\n"
+
+#: rules.variables.inc:60
+msgid "Warning: Unable to get variable %name."
+msgstr "Varning: Kunde inte få tag på variabeln %name."
+
+#: rules.variables.inc:99
+msgid "Warning: Unable to get argument %name."
+msgstr "Varning: Kunde inte få tag på argument %name."
+
+#: rules.variables.inc:158
+msgid "Element %name has not been executed. There are not all execution arguments needed by an input evaluator available."
+msgstr "Elementet %name har inte exekverats. Alla exekveringsargument som krävs av en inmatningsevaluerare finns inte tillgängliga."
+
+#: rules.variables.inc:173
+msgid "Element %name has not been executed. There are not all execution arguments available."
+msgstr "Elementet %name har inte exekverats. Alla exekveringsargument finns inte tillgängliga."
+
+#: rules.variables.inc:203
+msgid "Successfully added the new variable @arg"
+msgstr "Lade till nya variabeln @arg utan problem"
+
+#: rules.variables.inc:206
+msgid "Unknown variable name %var return by action %name."
+msgstr "Okänt variabelnamn %var returnerades av åtgärden %name."
+
+#: rules.variables.inc:319
+msgid "Loaded variable @arg"
+msgstr "Laddade variabel @arg"
+
+#: rules.variables.inc:355
+msgid "Saved variable @name of type @type."
+msgstr "Sparade variabel @name av typen @type."
+
+#: rules.variables.inc:361
+msgid "Failed saving variable @name of type @type."
+msgstr "Misslyckades spara variabel @name av typen @type."
+
+#: rules.module:291
+msgid "%label has been invoked."
+msgstr "%label har anropats."
+
+#: rules.module:302
+msgid "Evaluation of %label has been finished."
+msgstr "Evaluering av %label har slutförts."
+
+#: rules.module:400
+msgid "Not executing the rule %name on rule set %set to prevent recursion."
+msgstr "Exekverade inte regeln %name på regeluppsättningen %set för att förhindra tillbakasyftning."
+
+#: rules.module:405
+msgid "Executing the rule %name on rule set %set"
+msgstr "Exekverade regeln %name på regeluppsättningen %set"
+
+#: rules.module:456
+msgid "Action execution: @name"
+msgstr "Exekverade åtgärd: @name"
+
+#: rules.module:481
+msgid "Condition %name evaluated to @bool."
+msgstr "Villkoret %name evaluerades till @bool."
+
+#: rules.module:524
+msgid "OR"
+msgstr "OR"
+
+#: rules.module:525
+msgid "AND"
+msgstr "AND"
+
+#: rules.module:580
+msgid "unlabelled"
+msgstr "ej ettikerad"
+
+#: rules.module:858
+#: rules.info:0;0
+msgid "Rules"
+msgstr "Regler"
+
+#: rules.module:863
+msgid "Rule Sets"
+msgstr "Regeluppsättningar"
+
+#: rules.module:877
+msgid "Unable to find %type of name %name with the label %label. Perhaps the according module has been deactivated."
+msgstr "Kunde inte hitta %type av namn %name med etiketten %label. Kanske har tillhörande modul inaktiverats."
+
+#: rules.module:880
+msgid "Unable to find %type of name %name. Perhaps the according module has been deactivated."
+msgstr "Kunde inte hitta %type av namn %namel. Kanske har tillhörande modul inaktiverats."
+
+#: rules.module:893
+msgid "Show rule configuration"
+msgstr "Visa regelkonfiguration"
+
+#: rules.module:954
+msgid "Included @module.rules.inc files."
+msgstr "Inkluderade filerna @module.rules.inc."
+
+#: rules.module:0
+#: modules/system.rules.inc:115;162
+msgid "rules"
+msgstr "regler"
+
+#: rules.install:50
+msgid "The name of the item."
+msgstr "Namnet för alternativet."
+
+#: rules.install:57
+msgid "The whole, serialized item configuration."
+msgstr "Det hela, seriella alternativets konfiguration."
+
+#: rules.install:65
+msgid "Cache table for the rules engine to store configured items."
+msgstr "Cachetabell för regelmotorn att lagra konfigurerade alternativ."
+
+#: rules.install:88
+msgid "Successfully imported rule %label."
+msgstr "Importerade regeln %label utan problem."
+
+#: rules.install:93
+msgid "Failed importing the rule %label."
+msgstr "Misslyckades importera regeln %label."
+
+#: rules.install:164
+msgid "The now separated rules administration UI module has been enabled."
+msgstr "Den numera separerade modulen för administrering av regler, har aktiverats."
+
+#: rules.install:243
+msgid "No upgrade information for the element %name found. Aborting."
+msgstr "Ingen uppgraderingsinformation för elementet %name funnen. Avbryter."
+
+#: rules.info:0
+msgid "Lets you define conditionally executed actions based on occurring events."
+msgstr "Låter dig definiera villkorligt exekverade åtgärder baserade på förekomna händelser."
+
+#: modules/comment.rules.inc:16
+msgid "After saving a new comment"
+msgstr "Efter sparande av ny kommentar"
+
+#: modules/comment.rules.inc:18
+msgid "created comment"
+msgstr "skapade kommentar"
+
+#: modules/comment.rules.inc:21
+msgid "After saving an updated comment"
+msgstr "Efter sparande av uppdaterad kommentar"
+
+#: modules/comment.rules.inc:23
+msgid "updated comment"
+msgstr "uppdaterade kommentar"
+
+#: modules/comment.rules.inc:26
+msgid "After deleting a comment"
+msgstr "Efter radering av kommentar"
+
+#: modules/comment.rules.inc:28
+msgid "deleted comment"
+msgstr "raderade kommentar"
+
+#: modules/comment.rules.inc:31
+msgid "Comment is being viewed"
+msgstr "Kommentar visas"
+
+#: modules/comment.rules.inc:33
+msgid "viewed comment"
+msgstr "visade kommentar"
+
+#: modules/comment.rules.inc:36
+msgid "After publishing a comment"
+msgstr "Efter publicering av en kommentar"
+
+#: modules/comment.rules.inc:38
+msgid "published comment"
+msgstr "publicerade kommentar"
+
+#: modules/comment.rules.inc:41
+msgid "After unpublishing a comment"
+msgstr "Efter avpublicering av en kommentar"
+
+#: modules/comment.rules.inc:43
+msgid "unpublished comment"
+msgstr "avpublicerade kommentar"
+
+#: modules/comment.rules.inc:59
+msgid "author"
+msgstr "författare"
+
+#: modules/comment.rules.inc:64
+msgid "commented content"
+msgstr "kommenterade innehåll"
+
+#: modules/comment.rules.inc:69
+msgid "commented content author"
+msgstr "kommenterade innehållets författare"
+
+#: modules/comment.rules.inc:103
+msgid "Load comment by id"
+msgstr "Ladda kommentar genom ID"
+
+#: modules/comment.rules.inc:107
+msgid "Comment id"
+msgstr "ID för kommentar"
+
+#: modules/comment.rules.inc:114
+msgid "Loaded comment"
+msgstr "Laddade kommentar"
+
+#: modules/comment.rules.inc:136
+#: modules/rules.rules.inc:428
+msgid "Comment"
+msgstr "Kommentar"
+
+#: modules/comment.rules_forms.inc:14
+msgid "Comment with id @id"
+msgstr "Kommentera med ID @id"
+
+#: modules/node.rules.inc:16
+msgid "After saving new content"
+msgstr "Efter sparande av nytt innehåll"
+
+#: modules/node.rules.inc:18
+msgid "created content"
+msgstr "skapade innehåll"
+
+#: modules/node.rules.inc:18;23;28
+msgid "content's author"
+msgstr "innehållets författare"
+
+#: modules/node.rules.inc:21
+msgid "After updating existing content"
+msgstr "Efter uppdatering av ett existerande innehåll"
+
+#: modules/node.rules.inc:23
+msgid "updated content"
+msgstr "uppdaterade innehåll"
+
+#: modules/node.rules.inc:26
+msgid "Content is going to be saved"
+msgstr "Innehåll kommer att sparas"
+
+#: modules/node.rules.inc:28
+msgid "saved content"
+msgstr "sparade innehåll"
+
+#: modules/node.rules.inc:31
+msgid "Content is going to be viewed"
+msgstr "Innehåll kommer att visas"
+
+#: modules/node.rules.inc:33
+#: modules/user.rules.inc:31
+msgid "Note that if drupal's page cache is enabled, this event won't be generated for pages served from cache."
+msgstr "Observera att om Drupals sidcachning är aktiverat kommer inte denna händelse att genereras för sidor expedierade från cache."
+
+#: modules/node.rules.inc:34
+msgid "viewed content"
+msgstr "visade innehåll"
+
+#: modules/node.rules.inc:34;42
+msgid "content author"
+msgstr "författare till innehåll"
+
+#: modules/node.rules.inc:35
+msgid "Content is displayed as teaser"
+msgstr "Innehålls visas som förhandsgranskning"
+
+#: modules/node.rules.inc:36
+msgid "Content is displayed as page"
+msgstr "Innehålls visas som sida"
+
+#: modules/node.rules.inc:40
+msgid "After deleting content"
+msgstr "Efter radering av innehåll"
+
+#: modules/node.rules.inc:42
+msgid "deleted content"
+msgstr "raderade innehåll"
+
+#: modules/node.rules.inc:69
+msgid "unchanged content"
+msgstr "oförändrat innehåll"
+
+#: modules/node.rules.inc:74
+msgid "unchanged content's author"
+msgstr "författare till oförändrat innehåll"
+
+#: modules/node.rules.inc:111;168;176;190;312
+#: modules/path.rules.inc:57
+#: modules/rules.rules.inc:419
+#: modules/taxonomy.rules.inc:81;95
+msgid "Content"
+msgstr "Innehåll"
+
+#: modules/node.rules.inc:116
+msgid "Content has type"
+msgstr "Innehåll har typ"
+
+#: modules/node.rules.inc:117
+msgid "Evaluates to TRUE, if the given content has one of the selected content types."
+msgstr "Evalueras till TRUE, om det givna innehållet har en av valda innehållstyper."
+
+#: modules/node.rules.inc:120
+msgid "Content is published"
+msgstr "Innehåll är publicerat"
+
+#: modules/node.rules.inc:123
+msgid "Content is sticky"
+msgstr "Innehåll är klistrat"
+
+#: modules/node.rules.inc:126
+msgid "Content is promoted to frontpage"
+msgstr "Innehåll är flyttat till förstasidan"
+
+#: modules/node.rules.inc:166
+msgid "Set the content author"
+msgstr "Ange innehållets författare"
+
+#: modules/node.rules.inc:169;198
+msgid "User, who is set as author"
+msgstr "Användare, som är angiven som författare"
+
+#: modules/node.rules.inc:174
+msgid "Load the content author"
+msgstr "Ladda innehållets författare"
+
+#: modules/node.rules.inc:181
+msgid "Content author"
+msgstr "Innehållets författare"
+
+#: modules/node.rules.inc:188
+msgid "Set content title"
+msgstr "Ange innehållets titel"
+
+#: modules/node.rules.inc:191;201
+msgid "Title"
+msgstr "Titel"
+
+#: modules/node.rules.inc:196
+msgid "Add new content"
+msgstr "Lägg till nytt innehåll"
+
+#: modules/node.rules.inc:202
+msgid "The title of the newly created content."
+msgstr "Titeln för nyligen skapat innehåll."
+
+#: modules/node.rules.inc:208
+msgid "New content"
+msgstr "Nytt innehåll"
+
+#: modules/node.rules.inc:216
+msgid "Load content by id"
+msgstr "Ladda innehåll genom ID"
+
+#: modules/node.rules.inc:218
+msgid "Content ID"
+msgstr "ID för innehåll"
+
+#: modules/node.rules.inc:221
+msgid "Content Revision ID"
+msgstr "ID för revisionens innehåll"
+
+#: modules/node.rules.inc:222
+msgid "If you want to load a specific revision, specify it's revision id. Else leave it empty to load the current revision."
+msgstr "Om du vill ladda en specifik revision, specificera dess ID för revisionen. Eller lämna det tomt för att ladda nuvarande revision."
+
+#: modules/node.rules.inc:229
+msgid "Loaded content"
+msgstr "Laddade innehåll"
+
+#: modules/node.rules_forms.inc:15
+msgid "Content types"
+msgstr "Innehållstyper"
+
+#: modules/node.rules_forms.inc:28
+msgid "@node is @type"
+msgstr "@node är @type"
+
+#: modules/node.rules_forms.inc:32
+msgid "@node is published"
+msgstr "@node är publicerad"
+
+#: modules/node.rules_forms.inc:36
+msgid "@node is sticky"
+msgstr "@node är klistrad"
+
+#: modules/node.rules_forms.inc:40
+msgid "@node is promoted to frontpage"
+msgstr "@node är flyttad till förstasidan"
+
+#: modules/node.rules_forms.inc:47
+msgid "Set the author of @node to @author"
+msgstr "Ange författaren för @node till @author"
+
+#: modules/node.rules_forms.inc:54
+msgid "Load the @node author"
+msgstr "Ladda författaren till @node"
+
+#: modules/node.rules_forms.inc:61
+msgid "@node author"
+msgstr "författare till @node"
+
+#: modules/node.rules_forms.inc:68
+msgid "Set @node's title"
+msgstr "Ange titel för @node"
+
+#: modules/node.rules_forms.inc:77
+msgid "Content type to be used"
+msgstr "Innehållstyp som skall användas"
+
+#: modules/node.rules_forms.inc:80
+msgid "Select a content type that will be created when this action is invoked."
+msgstr "Välj en innehållstyp som skall skapas när denna åtgärd är anropad."
+
+#: modules/node.rules_forms.inc:85
+msgid "Create content only if the given author has access permission to do so"
+msgstr "Skapa enbart innehåll om den givna författaren har åtkomsträttigheter till att göra så"
+
+#: modules/node.rules_forms.inc:91
+msgid "New content of type @type"
+msgstr "Nytt innehåll av typen @type"
+
+#: modules/node.rules_forms.inc:98
+msgid "Content with id @id"
+msgstr "Innehåll med ID @id"
+
+#: modules/node.rules_forms.inc:106
+#: modules/rules.rules.inc:333
+msgid "content"
+msgstr "innehåll"
+
+#: modules/path.rules.inc:16
+msgid "Path has alias(es)"
+msgstr "Sökväg har alias"
+
+#: modules/path.rules.inc:21
+msgid "URL alias exists"
+msgstr "URL-alias existerar"
+
+#: modules/path.rules.inc:50
+msgid "Create or delete an URL alias"
+msgstr "Skapa eller radera ett URL-alias"
+
+#: modules/path.rules.inc:55
+msgid "Create or delete a content's URL alias"
+msgstr "Skapa eller radera ett innehålls URL-alias"
+
+#: modules/path.rules_forms.inc:12;46
+msgid "Existing system path"
+msgstr "Befintlig systemsökväg"
+
+#: modules/path.rules_forms.inc:15
+msgid "Specify the existing path for which you want to check if an URL alias exists."
+msgstr "Specificera den existerande sökvägen där du vill kontrollera om ett URL-alias existerar."
+
+#: modules/path.rules_forms.inc:25;54
+msgid "Path alias"
+msgstr "Sökvägalias"
+
+#: modules/path.rules_forms.inc:28
+msgid "Specify the path alias which you want to check if it already exists."
+msgstr "Specificera sökvägsalias där du vill kontrollera om det redan existerar."
+
+#: modules/path.rules_forms.inc:34
+msgid "Before checking, replace non ascii characters with"
+msgstr "Före kontroll, byt ut icke ascii-tecken mot"
+
+#: modules/path.rules_forms.inc:38;66
+msgid "Leave this textfield empty to disable the replacement of non ascii characters."
+msgstr "Lämna detta textfält tomt för att inaktivera ersättning av icke ascii-tecken"
+
+#: modules/path.rules_forms.inc:49
+msgid "Specify the existing path you wish to alias. For example: node/28, forum/1, taxonomy/term/1+2."
+msgstr "Ange den befintliga sökvägen som du vill skapa ett alias för. Exempelvis: node/28, forum/1, taxonomy/term/1+2."
+
+#: modules/path.rules_forms.inc:49
+msgid "Leave it empty to delete URL aliases pointing to the given path alias."
+msgstr "Lämna tomt för att radera URL-alias som pekar till det givna sökvägsaliaset."
+
+#: modules/path.rules_forms.inc:57
+msgid "Specify an alternative path by which this data can be accessed. For example, type \"about\" when writing an about page. Use a relative path and do not add a trailing slash or the URL alias will not work."
+msgstr "Specificera en alternativ sökväg där dessa data kan få åtkomst. Till exempel, skriv \"om\" när du skriver en sida \"om\". Använd en relativ sökväg och lägg inte till ett inledande snedstreck, annars kommer inte URL-aliaset att fungera."
+
+#: modules/path.rules_forms.inc:57
+msgid "Leave it empty to delete URL aliases pointing to the given system path."
+msgstr "Lämna tomt för att radera URL-alias som pekar mot den givna systemsökvägen."
+
+#: modules/path.rules_forms.inc:62
+msgid "Replace non ascii characters with"
+msgstr "Ersätt icke ascii-tecken mot"
+
+#: modules/path.rules_forms.inc:72
+msgid "You have to enter at least eiter an existing system path or a path alias."
+msgstr "Du måste ange antingen en existerande systemsökväg eller ett sökvägsalias."
+
+#: modules/path.rules_forms.inc:83
+msgid "Create or delete @node's URL alias"
+msgstr "Skapa eller radera URL-alias för @node"
+
+#: modules/path.rules_forms.inc:87
+msgid "This action only works if the acting user has %perm1 or %perm2 permsissions. If this does not suit, use the generic \"Create or delete an URL alias\" action together with the existing system path \"node/{ID}\"."
+msgstr "Denna åtgärd fungerar enbart om den givna användaren har rättigheterna %perm1 eller %perm2. Om detta inte passar, använd den vanliga åtgärden \"Skapa eller radera URL-alias\" tillsammans med den existerande systemsökvägen \"node/{ID}\"."
+
+#: modules/path.rules_forms.inc:87
+msgid "create url aliases"
+msgstr "skapa URL-alias"
+
+#: modules/path.rules_forms.inc:87
+msgid "administer url aliases"
+msgstr "administrera URL-alias"
+
+#: modules/php.rules.inc:17
+msgid "PHP Evaluation"
+msgstr "PHP-evaluering"
+
+#: modules/php.rules.inc:66
+msgid "PHP is not evaluated as there are not all necessary variables available."
+msgstr "PHP evaluerades inte eftersom inte alla nödvändiga variabler finns tillgängliga."
+
+#: modules/php.rules.inc:115;139
+msgid "Execute custom PHP code"
+msgstr "Exekvera anpassad PHP-kod"
+
+#: modules/php.rules_forms.inc:13
+msgid "PHP code inside of &lt;?php ?&gt; delimiters will be evaluated and replaced by its output. E.g. &lt;? echo 1+1?&gt; will be replaced by 2."
+msgstr "PHP-kod inuti skiljetecknen &lt;?php ?&gt; kommer att evalueras och ersättas av dess utmatning. Till exempel &lt;? echo 1+1?&gt; kommer att ersättas av 2."
+
+#: modules/php.rules_forms.inc:14
+msgid "Furthermore you can make use of the following variables:"
+msgstr "Dessutom kan du använda dig av följande variabler:"
+
+#: modules/php.rules_forms.inc:15
+msgid "Variable"
+msgstr "Variabel"
+
+#: modules/php.rules_forms.inc:15
+msgid "Type"
+msgstr "Typ"
+
+#: modules/php.rules_forms.inc:15
+msgid "Description"
+msgstr "Beskrivning"
+
+#: modules/php.rules_forms.inc:18
+msgid "Intelligent saving"
+msgstr "Logiskt sparande"
+
+#: modules/php.rules_forms.inc:30
+msgid "Yes"
+msgstr "Ja"
+
+#: modules/php.rules_forms.inc:33
+msgid "No"
+msgstr "Nej"
+
+#: modules/php.rules_forms.inc:41
+msgid "Note that variables are passed by reference, so you can change them."
+msgstr "Observera att variabler godkänns genom referens, så du kan ändra dem."
+
+#: modules/php.rules_forms.inc:42
+msgid "If you want to make the changes permanent, you can let rules intelligently save the changes when the variable's data type supports it."
+msgstr "Om du vill göra ändringarna permanenta, kan du låta regler spara logiska ändringar när variabelns datatyp stöder det."
+
+#: modules/php.rules_forms.inc:42
+msgid "To make use of \"intelligent saving\" just return an array of variables to save, e.g.: !code So variables are saved only once, even if modified multiple times."
+msgstr "För att dra nytta av \"logisk sparande\" återge en lista av variabler att spara, till exemepl: !code för att variabler enbart sparas en gång, även om de är modifierade flera gånger."
+
+#: modules/php.rules_forms.inc:53;79
+msgid "PHP Code"
+msgstr "PHP-kod"
+
+#: modules/php.rules_forms.inc:55;81
+msgid "The code that should be executed. Don't include &lt;?php ?&gt; delimiters."
+msgstr "Koden som skall exekveras. Inkludera inte skiljetecknen &lt;?php ?&gt;."
+
+#: modules/php.rules_forms.inc:81
+msgid "Be sure to always return a boolean value, e.g.: !code"
+msgstr "Var säker på att alltid returnera ett boolesk värde, till exempel: !code"
+
+#: modules/php.rules_forms.inc:93
+msgid "The code has to always return a boolean value."
+msgstr "Koden måste alltid returnera ett boolesk värde."
+
+#: modules/rules.rules.inc:18
+msgid "String"
+msgstr "Textsträng"
+
+#: modules/rules.rules.inc:24
+msgid "Number"
+msgstr "Nummer"
+
+#: modules/rules.rules.inc:30
+msgid "Date"
+msgstr "Datum"
+
+#: modules/rules.rules.inc:36;164
+msgid "Truth value"
+msgstr "Sanningsvärde"
+
+#: modules/rules.rules.inc:42
+msgid "A fixed value"
+msgstr "Ett låst värde"
+
+#: modules/rules.rules.inc:90
+msgid "Format: %format or other values known by the PHP !strtotime function like \"+1 day\". "
+msgstr "Format: %format eller andra värden kända för PHP-funktionen !strtotime såsom \"+1 day\"."
+
+#: modules/rules.rules.inc:91
+msgid "You may also enter a timestamp in GMT. E.g. use !code together with the PHP input evalutor to specify a date one day after the evaluation time. "
+msgstr "Du kan också ange en tidsstämpel i GMT. Till exempel använd !code tillsammans med inmatningsevalureraren av typen PHP för att specificera ett datum en dag efter evalueringstiden."
+
+#: modules/rules.rules.inc:111
+msgid "The argument %label is no valid date."
+msgstr "Argumentet %label är inget giltigt datum."
+
+#: modules/rules.rules.inc:126
+msgid "Just enter 1 for TRUE, 0 for FALSE or make use of an input evaluator."
+msgstr "Ange 1 för TRUE, 0 för FALSE eller använd en inmatningsevaluerare."
+
+#: modules/rules.rules.inc:144
+msgid "Textual comparison"
+msgstr "Textjämförelse"
+
+#: modules/rules.rules.inc:146
+msgid "Text 1"
+msgstr "Text 1"
+
+#: modules/rules.rules.inc:147
+msgid "Text 2"
+msgstr "Text 2"
+
+#: modules/rules.rules.inc:149
+msgid "TRUE is returned, if both texts are equal."
+msgstr "TRUE returneras om båda texterna är likadana."
+
+#: modules/rules.rules.inc:153
+msgid "Numeric comparison"
+msgstr "Numerisk jämförelse"
+
+#: modules/rules.rules.inc:155
+msgid "Number 1"
+msgstr "Nummer 1"
+
+#: modules/rules.rules.inc:156
+msgid "Number 2"
+msgstr "Nummer 2"
+
+#: modules/rules.rules.inc:158
+msgid "Select greater than, less than or equal to."
+msgstr "Välj större än, mindre än eller lika med."
+
+#: modules/rules.rules.inc:162
+msgid "Check a truth value"
+msgstr "Kontrollera ett sanningsvärde"
+
+#: modules/rules.rules.inc:229
+msgid "Add a new @type variable"
+msgstr "Lägg till en ny variabel @type"
+
+#: modules/rules.rules.inc:237
+msgid "Added @type"
+msgstr "Lade till @type"
+
+#: modules/rules.rules.inc:249
+msgid "Save a @type"
+msgstr "Spara en @type"
+
+#: modules/rules.rules.inc:333
+msgid "post"
+msgstr "skicka"
+
+#: modules/rules.rules.inc:374
+msgid "Permanently apply changes"
+msgstr "Lägg till ändringar permanent"
+
+#: modules/rules.rules.inc:375
+msgid "If checked, changes to the argument are saved automatically."
+msgstr "Ändringar till argumentet sparas automatiskt, om kontrollerad."
+
+#: modules/rules.rules.inc:437
+#: modules/user.rules.inc:97;265
+msgid "User"
+msgstr "Användare"
+
+#: modules/rules.rules_forms.inc:13
+msgid "Two texts to compare"
+msgstr "Två texter att jämföra"
+
+#: modules/rules.rules_forms.inc:17
+msgid "Evaluate the second text as a regular expression."
+msgstr "Evaluera den andra texten som ett vanligt uttryck."
+
+#: modules/rules.rules_forms.inc:31
+msgid "Operation"
+msgstr "Operation"
+
+#: modules/rules.rules_forms.inc:32
+msgid "Greater than"
+msgstr "Större än"
+
+#: modules/rules.rules_forms.inc:32
+msgid "Equal to"
+msgstr "Lika med"
+
+#: modules/rules.rules_forms.inc:32
+msgid "Less than"
+msgstr "Mindre än"
+
+#: modules/rules.rules_forms.inc:38
+msgid "Check a <a href=\"http://en.wikipedia.org/wiki/Logical_value\">truth value</a>, i.e. TRUE or FALSE."
+msgstr "Kontrollera ett <a href=\"http://en.wikipedia.org/wiki/Logical_value\">sanningsvärde</a>, till exempel SANT eller FALSKT."
+
+#: modules/rules.rules_forms.inc:47
+msgid "Force immediate saving."
+msgstr "Tvinga fram omedelbart sparande."
+
+#: modules/rules.rules_forms.inc:48
+msgid "If enabled, intelligent saving is bypassed to ensure immediate saving."
+msgstr "Om aktiverad så är logiskt sparande förbigått för att säkerställa omedelbart sparande."
+
+#: modules/rules.rules_forms.inc:55
+msgid "Usually you need not care about saving changes done by actions. However this action allows you to force saving changes, if no action does."
+msgstr "Vanligtvis behöver du inte bry dig om att spara ändringar gjorda av åtgärder. Däremot låter denna åtgärd dig tvinga fram sparande av ändringar, om ingen åtgärd gör det."
+
+#: modules/rules.rules_forms.inc:55
+msgid "Furthermore note that changes are saved intelligently, which means that changes are saved only once, even if multiple actions request saving changes."
+msgstr "Observera dessutom att ändringar sparas logiskt, vilket betyder att ändringar sparas enbart en gång, även om flera åtgärder kräver sparande av ändringar."
+
+#: modules/system.rules.inc:16
+msgid "User is going to view a page"
+msgstr "Användare kommer att visa en sida"
+
+#: modules/system.rules.inc:21
+msgid "Cron maintenance tasks are performed"
+msgstr "Schemalagda underhållsaktiviteter genomförs"
+
+#: modules/system.rules.inc:35
+msgid "Show a configurable message on the site"
+msgstr "Visa ett konfigurerbart meddelande på webbplatsen"
+
+#: modules/system.rules.inc:40
+msgid "Set breadcrumb"
+msgstr "Ange länkstig"
+
+#: modules/system.rules.inc:45
+msgid "Send a mail to a user"
+msgstr "Skicka ett e-postmeddelande till en användare"
+
+#: modules/system.rules.inc:47
+#: modules/system.rules_forms.inc:80
+msgid "Recipient"
+msgstr "Mottagare"
+
+#: modules/system.rules.inc:53
+msgid "Send a mail to an arbitrary mail address"
+msgstr "Skicka ett e-postmeddelande till en godtycklig e-postadress"
+
+#: modules/system.rules.inc:58
+msgid "Send a mail to all users of a role"
+msgstr "Skicka ett e-postmeddelande till alla användare för en roll"
+
+#: modules/system.rules.inc:63
+msgid "Page redirect"
+msgstr "Vidarebefordra sida"
+
+#: modules/system.rules.inc:69
+msgid "Log to watchdog"
+msgstr "Logga till vakthund"
+
+#: modules/system.rules.inc:87
+msgid "Home"
+msgstr "Hem"
+
+#: modules/system.rules.inc:115
+msgid "Successfully sent email to %recipient"
+msgstr "Skickade e-post till %recipient utan problem"
+
+#: modules/system.rules.inc:162
+msgid "Successfully sent email to the role(s) %roles."
+msgstr "Skickade e-post till roll/rollerna %roles utan problem."
+
+#: modules/system.rules_forms.inc:17;68;180
+msgid "Message"
+msgstr "Meddelande"
+
+#: modules/system.rules_forms.inc:19
+msgid "The message that should be displayed."
+msgstr "Meddelandet som skall visas."
+
+#: modules/system.rules_forms.inc:23
+msgid "Display as error message"
+msgstr "Visa som felmeddelande"
+
+#: modules/system.rules_forms.inc:35
+msgid "Titles"
+msgstr "Titlar"
+
+#: modules/system.rules_forms.inc:37
+msgid "A list of titles for the breadcrumb links, one on each line."
+msgstr "En lista av titlar för länkstigens länkar, en på varje rad."
+
+#: modules/system.rules_forms.inc:42
+msgid "Paths"
+msgstr "Sökvägar"
+
+#: modules/system.rules_forms.inc:44
+msgid "A list of Drupal paths for the breadcrumb links, one on each line."
+msgstr "En lista av sökvägar för Drupal för länkstigens länkar, en på varje rad."
+
+#: modules/system.rules_forms.inc:56
+msgid "Sender"
+msgstr "Avsändare"
+
+#: modules/system.rules_forms.inc:58
+msgid "The mail's from address. Leave it empty to use the site-wide configured address."
+msgstr "E-postmeddelandets avsändaradress. Lämna det tomt för att använda webbplatsens konfigurerade adress."
+
+#: modules/system.rules_forms.inc:62
+msgid "Subject"
+msgstr "Ämne"
+
+#: modules/system.rules_forms.inc:64
+msgid "The mail's subject."
+msgstr "E-postmeddelandets ämne."
+
+#: modules/system.rules_forms.inc:70
+msgid "The mail's message body."
+msgstr "E-postmeddelandets brödtext."
+
+#: modules/system.rules_forms.inc:82
+msgid "The mail's recipient address. You may separate multiple addresses with ','."
+msgstr "E-postmeddelandets mottagaradress. Du kan separera flera adresser med ','."
+
+#: modules/system.rules_forms.inc:98
+msgid "Recipient roles"
+msgstr "Roller för mottagare"
+
+#: modules/system.rules_forms.inc:99
+msgid "WARNING: This may cause problems if there are too many users of these roles on your site, as your server may not be able to handle all the mail requests all at once."
+msgstr "VARNING: Detta kan orsaka prolem om det finns för många användare för dessa roller på din webbplats, eftersom din server kanske inte kan hantera alla e-postförfrågningar på en och samma gång."
+
+#: modules/system.rules_forms.inc:103
+msgid "Select the roles whose users should receive this email."
+msgstr "Välj rollerna vars användare skall få detta e-postmeddelande."
+
+#: modules/system.rules_forms.inc:124
+msgid "To"
+msgstr "Till"
+
+#: modules/system.rules_forms.inc:146
+msgid "Force redirecting to the given path, even if a destination parameter is given"
+msgstr "Tvinga fram vidarebefordran till den givna sökvägen, även om en destinations parameter är angiven"
+
+#: modules/system.rules_forms.inc:147
+msgid "Per default drupal doesn't redirect to the given path, if a destination parameter is set. Instead it redirects to the given destination parameter. Most times, the destination parameter is set by appending it to the URL, e.g. !example_url"
+msgstr "Som standard vidarebefordrar inte Drupal till den givna sökvägen, om en destinations parameter är angiven. Istället vidarebefordrar det till den givna destinationens parameter. För det mesta anges destinationens parameter genom att läggas till URL:en, till exempel !example_url"
+
+#: modules/system.rules_forms.inc:153
+msgid "Immediately issue the page redirect"
+msgstr "Utför vidarebefordring av sökväg omedelbart"
+
+#: modules/system.rules_forms.inc:154
+msgid "Use this with <em>caution</em>! If checked, the path redirect is issued immediately, so the normal execution flow is interrupted."
+msgstr "Använd detta med <em>tillförsikt</em>! Om ikryssat kommer vidarebefordring av sökvägar att utföras omedelbar, så det normala exekveringsflödet avbryts."
+
+#: modules/system.rules_forms.inc:166
+msgid "Severity"
+msgstr "Grad"
+
+#: modules/system.rules_forms.inc:173
+msgid "Category"
+msgstr "Kategori"
+
+#: modules/system.rules_forms.inc:175
+msgid "The category to which this message belongs."
+msgstr "Kateregorin som detta meddelande hör till."
+
+#: modules/system.rules_forms.inc:182
+msgid "The message to log."
+msgstr "Meddelandet att logga."
+
+#: modules/system.rules_forms.inc:187
+msgid "Link (optional)"
+msgstr "Länk (valfri)"
+
+#: modules/system.rules_forms.inc:189
+msgid "A link to associate with the message."
+msgstr "En länk att associera med meddelandet."
+
+#: modules/taxonomy.rules.inc:17
+msgid "After saving a new term"
+msgstr "Efter sparande av en ny term"
+
+#: modules/taxonomy.rules.inc:19
+msgid "created term"
+msgstr "skapade term"
+
+#: modules/taxonomy.rules.inc:22
+msgid "After updating a term"
+msgstr "Efter uppdatering av en term"
+
+#: modules/taxonomy.rules.inc:24
+msgid "updated term"
+msgstr "uppdaterade term"
+
+#: modules/taxonomy.rules.inc:43
+msgid "unchanged term"
+msgstr "oförändrad term"
+
+#: modules/taxonomy.rules.inc:65
+msgid "Load a term"
+msgstr "Laddade term"
+
+#: modules/taxonomy.rules.inc:69;85;99;181
+msgid "Taxonomy term"
+msgstr "Taxonomi-term"
+
+#: modules/taxonomy.rules.inc:73
+msgid "Loading a taxonomy term will allow you to act on this term, for example you will be able to assign this term to a content."
+msgstr "Laddning av en taxonomiterm låter dig verka på denna term, till exempel kommer du att kunna tilldela denna term till ett innehåll."
+
+#: modules/taxonomy.rules.inc:77
+msgid "Assign a term to content"
+msgstr "Tilldela en term till innehåll"
+
+#: modules/taxonomy.rules.inc:91
+msgid "Remove a term from content"
+msgstr "Ta bort en term från innehåll"
+
+#: modules/taxonomy.rules.inc:106
+msgid "Load a vocabulary"
+msgstr "Ladda ett vokabulär"
+
+#: modules/taxonomy.rules.inc:110;122;188
+msgid "Taxonomy vocabulary"
+msgstr "Vokabulär för taxonomi"
+
+#: modules/taxonomy.rules.inc:114
+msgid "Loading a taxonomy vocabulary will allow you to act on this vocabulary."
+msgstr "Laddning av vokabulär för taxonomi låter dig verka på detta vokabulär."
+
+#: modules/taxonomy.rules.inc:118
+msgid "Add a new vocabulary"
+msgstr "Lägg till ett nytt vokabulär"
+
+#: modules/taxonomy.rules_forms.inc:23
+msgid "Vocabulary"
+msgstr "Vokabulär"
+
+#: modules/taxonomy.rules_forms.inc:25;90
+msgid "Select the vocabulary."
+msgstr "Välj vokabuläret."
+
+#: modules/taxonomy.rules_forms.inc:25;90
+msgid "There are no existing vocabularies, you should <a href=\"@add-url\">add</a> one."
+msgstr "Det finns inga existerande vokabulär, du måste <a href=\"@add-url\">lägga till</a> ett."
+
+#: modules/taxonomy.rules_forms.inc:37
+msgid "Continue"
+msgstr "Fortsätt"
+
+#: modules/taxonomy.rules_forms.inc:48
+msgid "!vocab's terms"
+msgstr "termer för !vocab"
+
+#: modules/taxonomy.rules_forms.inc:49
+msgid "There are no terms in the vocabulary, you should <a href=\"@add-url\">add</a> one."
+msgstr "Det finns inga termer i vokabuläret, du måste <a href=\"@add-url\">lägga till</a>  ett."
+
+#: modules/taxonomy.rules_forms.inc:49
+msgid "Select an existing term or manually enter the name of the term that should be added or removed from the content."
+msgstr "Välj en existerande term eller ange manuellt namnet för termen som skall läggas till eller tas bort från innehållet."
+
+#: modules/taxonomy.rules_forms.inc:55;96
+msgid "Select by term id"
+msgstr "Välj genom ID för termen"
+
+#: modules/taxonomy.rules_forms.inc:58
+msgid "Optional: enter the term id (<em>not the term name</em>) that should be loaded . If this field is used \"Select a term\" field will be ignored."
+msgstr "Valfritt: ange termens ID (<em>inte termens namn</em>) som skall laddas. Om detta fält används \"Välj en term\" kommer fältet att ignoreras."
+
+#: modules/taxonomy.rules_forms.inc:73
+msgid "- None selected -"
+msgstr "- Inga valda -"
+
+#: modules/taxonomy.rules_forms.inc:82
+msgid "Vocabulary selection"
+msgstr "Urval för vokabulär"
+
+#: modules/taxonomy.rules_forms.inc:87
+msgid "Select a vocabulary"
+msgstr "Välj ett vokabulär"
+
+#: modules/taxonomy.rules_forms.inc:99
+msgid "Optional: Enter the vocabulary id (<em>not the vocabulary name</em>) that should be loaded . If this field is used, the \"Select a vocabulary\" field will be ignored."
+msgstr "Valfritt: Ange vokabulärets ID (<em>inte vokabulärets namn</em>) som skall laddas. Om detta fält används \"Välj ett vokabulär\" kommer fältet att ignoreras."
+
+#: modules/taxonomy.rules_forms.inc:112
+msgid "Vocabulary settings"
+msgstr "Inställningar för vokabulär"
+
+#: modules/user.rules.inc:16
+msgid "User account has been created"
+msgstr "Användarkonto har skapats"
+
+#: modules/user.rules.inc:18
+msgid "registered user"
+msgstr "registrerad användare"
+
+#: modules/user.rules.inc:21
+msgid "User account details have been updated"
+msgstr "Kontodetaljer för användare har uppdaterats"
+
+#: modules/user.rules.inc:23
+msgid "updated user"
+msgstr "uppdaterade användare"
+
+#: modules/user.rules.inc:24
+msgid "unchanged user"
+msgstr "oförändrad användare"
+
+#: modules/user.rules.inc:28
+msgid "User page has been viewed"
+msgstr "Användarsida har visats"
+
+#: modules/user.rules.inc:30
+msgid "viewed user"
+msgstr "visade användare"
+
+#: modules/user.rules.inc:34
+msgid "User has been deleted"
+msgstr "Användare har raderats"
+
+#: modules/user.rules.inc:36
+msgid "deleted user"
+msgstr "raderade användare"
+
+#: modules/user.rules.inc:39
+msgid "User has logged in"
+msgstr "Användare har loggat in"
+
+#: modules/user.rules.inc:42
+msgid "logged in user"
+msgstr "inloggad användare"
+
+#: modules/user.rules.inc:46
+msgid "User has logged out"
+msgstr "Användare har loggat ut"
+
+#: modules/user.rules.inc:49
+msgid "logged out user"
+msgstr "utloggad användare"
+
+#: modules/user.rules.inc:59
+msgid "acting user"
+msgstr "verkande användare"
+
+#: modules/user.rules.inc:86
+msgid "Compare two users"
+msgstr "Jämför två användare"
+
+#: modules/user.rules.inc:88
+msgid "User account 1"
+msgstr "Användarkonto 1"
+
+#: modules/user.rules.inc:89
+msgid "User account 2"
+msgstr "Användarkonto 2"
+
+#: modules/user.rules.inc:91
+msgid "Evaluates to TRUE, if both given user accounts are the same."
+msgstr "Evaluera till TRUE om båda givna användarkonton är samma."
+
+#: modules/user.rules.inc:95
+msgid "User has role(s)"
+msgstr "Användare har roll(er)"
+
+#: modules/user.rules.inc:99
+msgid "Whether the user has the selected role(s)."
+msgstr "Huruvida användare har den givna rollen/rollerna."
+
+#: modules/user.rules.inc:144
+msgid "Add user role"
+msgstr "Lägg till användarroll"
+
+#: modules/user.rules.inc:146;153
+msgid "User whos roles should be changed"
+msgstr "Användare vars roll skall ändras"
+
+#: modules/user.rules.inc:151
+msgid "Remove user role"
+msgstr "Ta bort användarroll"
+
+#: modules/user.rules.inc:158
+msgid "Load a user account"
+msgstr "Ladda ett användarkonto"
+
+#: modules/user.rules.inc:160
+msgid "Loaded user"
+msgstr "Ladda användare"
+
+#: modules/user.rules.inc:162
+msgid "Enter an id or a name of the user to load."
+msgstr "Ange ett ID eller ett namn för användaren att ladda."
+
+#: modules/user.rules.inc:166
+msgid "Create a user"
+msgstr "Skapa en användare"
+
+#: modules/user.rules.inc:168
+#: modules/user.rules_forms.inc:72
+msgid "User name"
+msgstr "Användarnamn"
+
+#: modules/user.rules.inc:169
+msgid "User's E-mail"
+msgstr "Användarens e-post"
+
+#: modules/user.rules.inc:172
+msgid "New user"
+msgstr "Ny användare"
+
+#: modules/user.rules.inc:173
+msgid "New user's password"
+msgstr "Ny användares lösenord"
+
+#: modules/user.rules.inc:234
+msgid "No appropriate user name. No user has been created."
+msgstr "Inget lämpligt användarnamn. Ingen användare har skapats."
+
+#: modules/user.rules.inc:237
+msgid "The name %name has been denied access. No user has been created."
+msgstr "Namnet %name har nekats åtkomst. Ingen användare har skapats."
+
+#: modules/user.rules.inc:240
+msgid "User !name already exists. No user has been created."
+msgstr "Användare !name existerar redan. Ingen användare har skapats."
+
+#: modules/user.rules.inc:244
+msgid "No appropriate mail address. No user has been created."
+msgstr "Ingen lämplig e-postadress. Ingen användare har skapats."
+
+#: modules/user.rules.inc:247
+msgid "The e-mail address %email has been denied access. No user has been created."
+msgstr "E-postadressen %email har nekats åtkomst. Ingen användare har skapats."
+
+#: modules/user.rules.inc:250
+msgid "The e-mail address %email is already registered. No user has been created."
+msgstr "E-postadressen %email är redan registrerad. Ingen användare har skapats."
+
+#: modules/user.rules.inc:299
+msgid "Block a user"
+msgstr "Blockera en användare"
+
+#: modules/user.rules_forms.inc:16
+msgid "Match against any or all of the selected roles"
+msgstr "Matcha mot någon, eller alla valda roller"
+
+#: modules/user.rules_forms.inc:17
+msgid "any"
+msgstr "någon"
+
+#: modules/user.rules_forms.inc:17
+msgid "all"
+msgstr "alla"
+
+#: modules/user.rules_forms.inc:18
+msgid "If matching against all selected roles the user must have <em>all</em> the roles checked in the list above."
+msgstr "Om matchning mot alla valda roller måste användaren ha <em>alla</em> roller ikryssade i listan ovan."
+
+#: modules/user.rules_forms.inc:61
+msgid "Select role(s)"
+msgstr "Välj roll(er)"
+
+#: modules/user.rules_forms.inc:77
+msgid "Name of the user to be loaded."
+msgstr "Namn på användaren att ladda."
+
+#: modules/user.rules_forms.inc:81
+msgid "User id"
+msgstr "ID för användare"
+
+#: modules/user.rules_forms.inc:83
+msgid "Id of the user to be loaded."
+msgstr "ID för användaren att ladda."
+
+#: modules/user.rules_forms.inc:89
+msgid "You have to enter the user name or the user id."
+msgstr "Du måste ange användarnamnet eller ID för användaren."
+
+#~ msgid "Check a !truth, i.e. TRUE or FALSE."
+#~ msgstr "Kontrollera ett !truth, till exempel TRUE eller FALSE."
+#~ msgid "truth value"
+#~ msgstr "sanningsvärde"
+#~ msgid "Content which term will be assigned to"
+#~ msgstr "Innehåll som term kommer att tilldelas till"
+#~ msgid "Content which term will be removed from"
+#~ msgstr "Innehåll som term kommer att tas bort ifrån"
+#~ msgid "There are no existing vocabularies, you should !add one."
+#~ msgstr "Det finns inga existerande vokabulär, du bör !add ett."
+#~ msgid "add"
+#~ msgstr "lägga till"
+

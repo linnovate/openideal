@@ -1,0 +1,280 @@
+# $Id: ja.po,v 1.1 2008/11/12 04:26:51 pineray Exp $
+#
+# Japanese translation of Drupal (general)
+# Copyright YEAR NAME <EMAIL@ADDRESS>
+# Generated from files:
+#  imageapi.module,v 1.21 2008/07/14 20:40:49 drewish
+#  imageapi.info,v 1.3 2008/04/30 15:42:40 dopry
+#  imageapi_gd.module,v 1.12 2008/07/09 02:49:47 dopry
+#  imageapi_imagemagick.module,v 1.16 2008/08/08 18:03:16 drewish
+#  imageapi.install,v 1.6 2008/08/08 16:52:41 drewish
+#  imageapi_gd.install,v 1.8 2008/08/01 18:52:22 dopry
+#  imageapi_gd.info,v 1.4 2008/08/01 18:52:22 dopry
+#  imageapi_imagemagick.info,v 1.3 2008/08/01 18:52:22 dopry
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"POT-Creation-Date: 2008-11-12 12:48+0900\n"
+"PO-Revision-Date: 2008-11-12 12:48+0900\n"
+"Last-Translator: PineRay <matsudaterutaka@gmail.com>\n"
+"Language-Team: Japanese <EMAIL@ADDRESS>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n!=1);\n"
+
+#: imageapi.module:64
+msgid "ImageAPI toolkit missing settings form"
+msgstr "画像APIのツールキットの設定フォームが見当たりません"
+
+#: imageapi.module:78
+msgid "There are no image toolkit modules enabled. Toolkit modules can be enabled from the <a href=\"!admin-build-modules\">module configuration page</a>."
+msgstr ""
+"有効になっている画像ツールキットのモジュールがありません。<a "
+"href=\"!admin-build-modules\">モジュール設定ページ</a>でツールキットのモジュールを有効にすることができます。"
+
+#: imageapi.module:87
+msgid "The %toolkit module is the only enabled image toolkit. Drupal will use it for resizing, cropping and other image manipulations."
+msgstr "有効になっている画像ツールキットは%toolkitモジュールのみです。リサイズや切抜きその他の画像処理に、Drupalはこのツールキットを使用します。"
+
+#: imageapi.module:97
+msgid "Select a default image processing toolkit"
+msgstr "画像を処理するデフォルトのツールキットを選択"
+
+#: imageapi.module:100
+msgid "This setting lets you choose which toolkit Drupal uses resizing, cropping and other image manipulations."
+msgstr "リサイズや切り抜きその他の画像処理にDrupalがどのツールキットを使用するかを選択します。"
+
+#: imageapi.module:351;373;0
+msgid "imageapi"
+msgstr "imageapi"
+
+#: imageapi.module:351
+msgid "ImageAPI failed to open %file with %toolkit"
+msgstr "画像APIは %toolkit で %file を開くのに失敗しました。"
+
+#: imageapi.module:373
+msgid "Could not set permissons on destination file: %file"
+msgstr ""
+"保存先のファイルにパーミッションを設定できませんでした: "
+"%file"
+
+#: imageapi.module:23
+msgid "administer imageapi"
+msgstr "画像APIの管理"
+
+#: imageapi.module:32 imageapi.info:0
+msgid "ImageAPI"
+msgstr "画像API"
+
+#: imageapi.module:33
+msgid "Configure ImageAPI."
+msgstr "画像APIの設定"
+
+#: imageapi.module:42
+msgid "List"
+msgstr "リスト"
+
+#: imageapi.module:47
+msgid "Configure"
+msgstr "設定"
+
+#: imageapi_gd.module:23
+msgid "JPEG quality"
+msgstr "JPEGの品質"
+
+#: imageapi_gd.module:24
+msgid "Define the image quality for JPEG manipulations. Ranges from 0 to 100. Higher values mean better image quality, but bigger files."
+msgstr "JPEGを操作する際の画像のクオリティを設定します。0から100の範囲で指定します。より高い値を指定すると画像のクオリティが上がりますが、ファイルサイズが大きくなります。"
+
+#: imageapi_gd.module:0
+msgid "imageapi_gd"
+msgstr "imageapi_gd"
+
+#: imageapi_imagemagick.module:23
+msgid "Compression Quality"
+msgstr "圧縮のクオリティ"
+
+#: imageapi_imagemagick.module:24
+msgid "Ranges from 1 to 100. Higher values mean better image quality, but bigger files."
+msgstr "1から100の範囲で指定してください。より高い値を指定すると画像のクオリティが上がりますが、ファイルサイズが大きくなります。"
+
+#: imageapi_imagemagick.module:34
+msgid "ImageMagick Binary"
+msgstr "ImageMagikのバイナリ"
+
+#: imageapi_imagemagick.module:36
+msgid "ImageMagick is a standalone program used to manipulate images. To use it, it must be installed on your server and you need to know where it is located. If you are unsure of the exact path consult your ISP or server administrator."
+msgstr "ImageMagikは、画像の処理に使用するスタンドアローンのプログラムです。使用するには、サーバにインストールしなければならず、その場所を知っている必要があります。正確なパスが分からなければ、プロバイダまたはサーバ管理者に問い合せてください。"
+
+#: imageapi_imagemagick.module:44
+msgid "Path to the \"convert\" binary"
+msgstr "「convert」バイナリへのパス"
+
+#: imageapi_imagemagick.module:47
+msgid "Specify the complete path to the ImageMagic <kbd>convert</kbd> binary. For example: <kbd>/usr/bin/convert</kbd> or <kbd>C:\\Program Files\\ImageMagick-6.3.4-Q16\\convert.exe</kbd>"
+msgstr ""
+"ImageMagikの<kbd>convert</kbd>バイナリへの完全なパスを指定します。例: "
+"<kbd>/usr/bin/convert</kbd> または <kbd>C:\\Program "
+"Files\\ImageMagick-6.3.4-Q16\\convert.exe</kbd>"
+
+#: imageapi_imagemagick.module:53
+msgid "Display debugging information"
+msgstr "デバッグ情報を表示"
+
+#: imageapi_imagemagick.module:55
+msgid "Checking this option will display the ImageMagick commands and output to users with the <em>administer site configuration</em> permission."
+msgstr "このオプションにチェックがあると、<em>サイトの環境設定</em>の権限を持つユーザにImageMagikのコマンドと出力結果を表示します。"
+
+#: imageapi_imagemagick.module:74
+msgid "Version information"
+msgstr "バージョン情報"
+
+#: imageapi_imagemagick.module:76
+msgid "The ImageMagick <kbd>convert</kbd> binary was located and return this version information."
+msgstr "ImageMagikの<kbd>convert</kbd>バイナリが存在し、このバージョン情報を返しました。"
+
+#: imageapi_imagemagick.module:95
+msgid "Compression Quality must be a value between 1 and 100."
+msgstr "圧縮のクオリティは1から100までの間で指定してください。"
+
+#: imageapi_imagemagick.module:163
+msgid "The specified ImageMagick path %file does not exist."
+msgstr "指定されたImageMagikのパス %file が存在しません。"
+
+#: imageapi_imagemagick.module:166
+msgid "The specified ImageMagick path %file is not executable."
+msgstr "指定されたImageMagikのパス %file は実行できません。"
+
+#: imageapi_imagemagick.module:169
+msgid "PHP's <a href=\"!open-basedir\">open_basedir</a> security restriction is set to %open-basedir, which may be interfering with attempts to locate ImageMagick."
+msgstr ""
+"PHPの<a "
+"href=\"!open-basedir\">open_basedir</a>によるセキュリティ制限は "
+"%open-basedir "
+"に設定されており、ImageMagikを見つけるのを妨害しているかもしれません。"
+
+#: imageapi_imagemagick.module:207
+msgid "ImageMagick command: @command"
+msgstr "ImageMagickのコマンド: @command"
+
+#: imageapi_imagemagick.module:208
+msgid "ImageMagick output: @output"
+msgstr "ImageMagickの出力結果: @output"
+
+#: imageapi_imagemagick.module:212
+msgid "ImageMagick reported an error: %error"
+msgstr "ImageMagickが返したエラー: %error"
+
+#: imageapi_imagemagick.module:0
+msgid "imageapi_imagemagick"
+msgstr "imageapi_imagemagick"
+
+#: (duplicate) imageapi.install:23 
+msgid "ImageAPI Toolkit"
+msgstr "画像APIツールキット"
+
+#: (duplicate) imageapi.install:24 
+msgid "No ImageAPI toolkits available"
+msgstr "利用可能な画像APIツールキットがありません。"
+
+#: (duplicate) imageapi.install:26 
+msgid "ImageAPI requires a Toolkit such as ImageAPI GD or ImageAPI ImageMagick to function. Goto !modules and enable one of them."
+msgstr ""
+"画像APIを動作させるには、画像API GDや画像API "
+"ImageMagikといったツールキットが必要となります。!modulesでそれらを有効にしてください。"
+
+#: (duplicate) imageapi_gd.install:12 ;23 
+msgid "GD library"
+msgstr "GDライブラリ"
+
+#: (duplicate) imageapi_gd.install:13 ;33 
+msgid "Not installed"
+msgstr "未インストール"
+
+#: (duplicate) imageapi_gd.install:15 
+msgid "The GD library for PHP is missing or outdated. Please check the <a href=\"@url\">PHP image documentation</a> for information on how to correct this."
+msgstr ""
+"PHPのGDライブラリが見つからないか、または旧式です。 "
+"これを修正する方法についての情報は、<a "
+"href=\"@url\">PHPのイメージ関数リファレンス</a>を参照してください。"
+
+#: (duplicate) imageapi_gd.install:32 
+msgid "GD !format Support"
+msgstr "GDの!formatサポート"
+
+#: (duplicate) imageapi_gd.install:35 
+msgid "PHP GD was not compiled with %format support."
+msgstr ""
+"PHP "
+"GDが%formatのサポート付きでコンパイルされていません。"
+
+#: (duplicate) imageapi_gd.install:44 
+msgid "GD Image Rotation"
+msgstr "GD画像回転"
+
+#: (duplicate) imageapi_gd.install:45 ;54 
+msgid "Low Quality / Poor Performance"
+msgstr "低品質 / 低パフォーマンス"
+
+#: (duplicate) imageapi_gd.install:47 
+msgid "The installed version of PHP GD does not support image rotations. It was probably compiled using the official GD libraries from http://www.libgd.org instead of the GD library bundled with PHP. You should recompile PHP --with-gd using the bundled GD library. See: @url. An implementation of imagerotate in PHP will used in the interim."
+msgstr ""
+"インストールされているPHP "
+"GDのバージョンは画像の回転をサポートしていません。おそらくPHPにバンドルされているGDライブラリではなく、http://www.libgd.org "
+"にある公式のGDライブラリを用いてコンパイルされたものです。バンドルされているGDライブラリを用いて、--with-gd "
+"のオプションつきでPHPをコンパイルしなおさなければなりません。参考: "
+"@url。それまでの間、PHPのimagerotate関数が用いられます。"
+
+#: (duplicate) imageapi_gd.install:53 
+msgid "GD Image Filtering"
+msgstr "GD画像フィルタ"
+
+#: (duplicate) imageapi_gd.install:56 
+msgid "The installed version of PHP GD does not support image filtering(desaturate, blur, negate, etc). It was probably compiled using the official GD libraries from http://www.libgd.org instead of the GD library bundled with PHP. You should recompile PHP --with-gd using the bundled GD library. See @url. An implementation of imagefilter in PHP will be used in the interim."
+msgstr ""
+"インストールされているPHP "
+"GDのバージョンは画像のフィルタ "
+"(グレースケール変換、ぼかし、反転その他) "
+"をサポートしていません。おそらくPHPにバンドルされているGDライブラリではなく、http://www.libgd.org "
+"にある公式のGDライブラリを用いてコンパイルされたものです。バンドルされているGDライブラリを用いて、--with-gd "
+"のオプションつきでPHPをコンパイルしなおさなければなりません。参考: "
+"@url。それまでの間、PHPのimagefilter関数が用いられます。"
+
+#: (duplicate) imageapi_gd.install:64 
+msgid "ImageAPI GD Memory Limit"
+msgstr "画像API GD メモリ制限"
+
+#: (duplicate) imageapi_gd.install:67 
+msgid "It is highly recommended that you set you PHP memory_limit to 96M to use ImageAPI GD. A 1600x1200 images consumes ~45M of memory when decompressed and there are instances where ImageAPI GD is operating on two decompressed images at once."
+msgstr ""
+"画像API "
+"GDを使用するにあたって、PHPのmemory_limitを96M以上に設定することを強くオススメします。1600x1200の画像を処理するには最大45Mのメモリを消費しますし、画像API "
+"GDが1度に2つの処理を行う例もあります。"
+
+#: imageapi.info:0
+msgid "ImageAPI supporting multiple toolkits."
+msgstr "複数のツールキットをサポートしている画像API。"
+
+#: imageapi.info:0 imageapi_gd.info:0 imageapi_imagemagick.info:0
+msgid "ImageCache"
+msgstr "画像キャッシュ"
+
+#: imageapi_gd.info:0
+msgid "ImageAPI GD2"
+msgstr "画像API GD2"
+
+#: imageapi_gd.info:0
+msgid "Uses PHP's built-in GD2 image processing support."
+msgstr "PHPに組み込まれているGD2の画像処理サポートを使用します。"
+
+#: imageapi_imagemagick.info:0
+msgid "ImageAPI ImageMagick"
+msgstr "画像API ImageMagik"
+
+#: imageapi_imagemagick.info:0
+msgid "Command Line ImageMagick support."
+msgstr "コマンドラインでのImageMagikの操作をサポートします。"
+

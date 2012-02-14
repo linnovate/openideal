@@ -1,0 +1,78 @@
+<?php
+/* $Id: nodewords_nodetype.install,v 1.1.2.1 2009/12/04 22:50:20 hanoii Exp $ */
+
+/**
+ * Implementation of hook_schema().
+ */
+function nodewords_nodetype_schema() {
+  $schema['nodewords_nodetype_node'] = array(
+    'description' => 'A table for node specific configuration',
+    'fields' => array(
+      'nid' => array(
+        'description' => 'The {node} this revision belongs to.',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0),
+      'vid' => array(
+        'description' => 'The primary identifier for this node\'s revision.',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE),
+      'override' => array(
+        'description' => "Override the node type defaults with the specific node configuration",
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0)
+      ),
+    'indexes' => array(
+      'nid' => array('nid'),
+      ),
+    'primary key' => array('vid'),
+  );
+
+  return $schema;
+ }
+
+/**
+ * Implementation of hook_install().
+ */
+function nodewords_nodetype_install() {
+  drupal_install_schema('nodewords_nodetype');
+  // Set the weight of this module right after nodewords
+  $weight = db_result(db_query("SELECT weight FROM {system} WHERE name = 'nodewords' AND type = 'module'"));
+  $weight++;
+  $sql = "UPDATE {system} SET weight = " . db_escape_string($weight) . " WHERE name = 'nodewords_nodetype' AND type = 'module'";
+  db_query($sql);
+}
+
+/**
+ * Implementation of hook_uninstall().
+ */
+function nodewords_nodetype_uninstall() {
+  drupal_uninstall_schema('nodewords_nodetype');
+}
+
+/**
+ * Set the weight of this module right after nodewords
+ */
+function nodewords_nodetype_update_6001() {
+  $ret = array();
+  
+  // Set the weight of this module right after nodewords weight
+  $weight = db_result(db_query("SELECT weight FROM {system} WHERE name = 'nodewords' AND type = 'module'"));
+  $weight++;
+  $sql = "UPDATE {system} SET weight = " . db_escape_string($weight) . " WHERE name = 'nodewords_nodetype' AND type = 'module'";
+  $ret[] = update_sql($sql);
+
+  return $ret;
+}
+
+/**
+ * Creates new schema
+ */
+function nodewords_nodetype_update_6002() {
+  $ret = array();
+  $ret = drupal_install_schema('nodewords_nodetype');
+  return $ret;
+}

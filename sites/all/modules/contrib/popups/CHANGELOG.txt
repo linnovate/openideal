@@ -1,0 +1,95 @@
+6.x--2-0-ALPHA6
+Bug Fixes
+ * Don't show the drupal_set_message in a popup, unless it is the bottom of the stack.
+
+6.x--2-0-ALPHA5
+Features
+ * New options and options system.
+ ** Added updateMethod, updateSource, onUpdate, doneTest, skipDirtyCheck, and hijackDestination.
+ ** Removed noUpdate, reloadOnUpdate, forceReturn, nonModal and afterSubmit.
+ ** Default options are declared in popups.js
+ ** Options in on-popups-option attribute now override default and hook options, instead of replacing them.
+ * Popups.addedJS => Keeping track of JIT loaded JS files, so they are not reloaded.
+Bug Fixes
+ * Fixed tests #7 & #8.
+ * Fixing :input highlight in basic.css.
+ * http://drupal.org/node/406326 (sirkitree) - fixing facebook skin resize.
+Other
+ * Broke out Popups.clickPopupElement from Popups.attach
+ * Broke out Popups.activeLayerIsEdited from Popups.attach
+ * Broke out Popups.Popup.prototype.fill from Popups.open
+ * Popups.openContent -> Popups.openContentPath
+ * New properties added to Popups.Popup object.
+ * Abstracted Popups.activeLayerIsEdited.
+ * Abstracted Popups.offerToSave.
+ * Popups.formSuccess(popup, json) - parameters changed.
+ * SavePage function changed to saveFormOnLayer.
+Todo
+ * Improve Popups.activeLayerIsEdited
+ * Recapture the focus on popup if user tabs away.
+
+6.x--2-0-ALPHA4
+Features
+ * Broadcast "Popups Open Path Done" event.
+ * Huge change - Popup Stacking now works. Can have multiple Popups in the dom.
+ ** Skins change most ids to classes.
+ ** Introduced Popups.Popup object.
+Other
+ * Clean up.
+ * Using Drupal.parseJson instead of eval for encoded options.
+
+6.x--2-0-ALPHA3
+Bug Fixes
+ * Removing the jit css files on popups close.
+Other
+ * Removing additionalJavascript, additionalCSS and additionalJavascriptSettings.
+
+6.x--2-0-ALPHA2
+New Features
+ * http://drupal.org/node/336641 - Nate's big ol' just-in-time css and js loader patch
+Issues
+ * JIT loaded css and js are not unloaded when popup is dismissed
+ * File order is not maintained. JIT files are loaded after page's original pages.
+ * Inline scripts need more testing:
+ ** Should inline scripts be called before or after popup content is loaded?
+ *** Poll wants to go after
+ ** Should already loaded inlines be executed again?
+Todo
+ * Can I control order of css adds (modules vs themes)?
+ * What about multiple popups - can I flag the js files as already loaded?
+ ** Inlines will still want to be run again.
+ * Q: Why the heck is the poll script inlined and not a behavior?
+ * Drupal.popups.restorePage();
+ * Not working with Popup: A&R?
+
+6.x--2-0-ALPHA1
+New Features
+ * http://drupal.org/node/364712 (sirkitree) - Customize loading graphic.
+ * Using a small popup signifier icon instead of unicode char (pulled from D7 patch).
+ * http://drupal.org/node/372378 - sirkitree & Rob Loach - popup skin interface.
+ * Added Facebook skin by sirkitree
+ * Added Blue skin by Tj Holowaychuk
+ * Unskinned skin checks current theme for popups-skin.js
+ * http://drupal.org/node/373737 (Rob Loach) - Finally caching hook_popups hash (thanks Rob).
+ * http://drupal.org/node/386168 (Rob Loach) - adding hook_popups_alter and popups.api.php
+Bug Fixes
+ * http://drupal.org/node/366093 (mathiaz.sk) - Opera fix.
+ * Modified basic loading layer to work with #364712.
+ * http://drupal.org/node/361957 - breaking admin/build/block (fixed by removing popups-popup.tpl.php)
+ * Popups working on admin/build/block/list/*
+ * http://drupal.org/node/373702 (Rob Loach) - Better wording for auto close messages.
+ * Removing hook_theme and popup/save_dialog menu item.
+ * http://drupal.org/node/385732 (Rob Loach) - Bugs fixes in refocus().
+Other
+ * Removed popups-popup.tpl.php - theming html now done in my_theme.js or in a skin.
+
+6.x--1-2
+New Features
+ * http://drupal.org/node/336063 - Adding optional afterSubmit callback.
+ * Compatability with Popups: Add and Reference
+ ** Adding broadcasting of a couple of popup lifecycle events (popups_open_path, popups_form_success).
+Other
+ * Added a couple new comments and cleaned up some obsolete code in popups.js
+
+6.x--1-1
+ * Removed a couple non-working links from popups_admin.module.

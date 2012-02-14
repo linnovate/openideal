@@ -1,0 +1,1114 @@
+# $Id: image.ja.po,v 1.1 2008/12/27 11:16:44 hass Exp $
+#
+# Japanese translation of Drupal (general)
+# Copyright YEAR NAME <EMAIL@ADDRESS>
+# Generated from files:
+#  image.admin.inc,v 1.1 2008/02/04 00:34:22 drewish
+#  contrib/image_attach/image_attach_views_handler_field_iid.inc: n/a
+#  image.imagemagick.inc,v 1.22 2008/04/14 05:15:36 drewish
+#  image.views.inc,v 1.1 2008/06/16 18:06:01 drewish
+#  image.module,v 1.277 2008/09/02 16:41:56 drewish
+#  image.info,v 1.5 2008/01/06 22:15:24 drewish
+#  image_attach.info,v 1.4 2008/01/06 22:15:24 drewish
+#  image_gallery.info,v 1.5 2008/01/06 22:15:25 drewish
+#  image_im_advanced.info,v 1.2 2008/01/06 22:15:25 drewish
+#  image_import.info,v 1.4 2008/01/06 22:15:25 drewish
+#  image.install,v 1.15 2008/01/06 22:15:24 drewish
+#  image_attach.module,v 1.43 2008/10/20 23:52:48 drewish
+#  image_attach.views.inc,v 1.3 2008/10/20 23:52:48 drewish
+#  image_gallery.module,v 1.28 2008/08/17 09:04:19 drewish
+#  image_attach.install,v 1.12 2008/01/06 22:15:24 drewish
+#  image_import.admin.inc,v 1.1 2008/06/13 22:01:09 drewish
+#  image_gallery.install,v 1.8 2008/08/17 08:54:50 drewish
+#  image_im_advanced.module,v 1.5 2008/01/15 22:53:34 drewish
+#  image_im_advanced.install,v 1.1 2008/08/17 08:55:39 drewish
+#  image_import.module,v 1.17 2008/06/16 18:30:10 drewish
+#  image_import.install,v 1.5 2008/08/17 08:54:50 drewish
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"POT-Creation-Date: 2008-11-14 17:30+0900\n"
+"PO-Revision-Date: 2008-11-14 18:39+0900\n"
+"Last-Translator: PineRay <matsudaterutaka@gmail.com>\n"
+"Language-Team: Japanese <EMAIL@ADDRESS>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n!=1);\n"
+
+#: image.admin.inc:18
+msgid "Image file settings"
+msgstr "画像ファイルの設定"
+
+#: image.admin.inc:22
+msgid "Default image path"
+msgstr "デフォルトの画像パス"
+
+#: image.admin.inc:24
+msgid "Subdirectory in the directory \"%dir\" where pictures will be stored. Do not include trailing slash."
+msgstr "ディレクトリ「%dir」にある、画像を保存するサブディレクトリ。末尾のスラッシュを含めないでください。"
+
+#: image.admin.inc:29
+msgid "Maximum upload size"
+msgstr "最大アップロードサイズ"
+
+#: image.admin.inc:31
+msgid "KB"
+msgstr "KB"
+
+#: image.admin.inc:33
+msgid "Maximum file size for image uploads. When a maximum image dimensions is specified for original images the size is checked after resizing. "
+msgstr "画像をアップロードできる最大のファイルサイズ。オリジナルの画像に最大寸法が指定されていれば、リサイズした後でファイルサイズをチェックします。"
+
+#: image.admin.inc:38
+msgid "Image sizes"
+msgstr "画像サイズ"
+
+#: image.admin.inc:41
+msgid "The <em>Scale image</em> operation resizes images so that they fit with in the given dimensions. If only one dimension is specified the other dimension will be computed based on the image's aspect ratio. The <em>Scale and crop image</em> operation resizes images to be exactly the given dimensions. If only one dimension is specified the image will not be cropped, making this is equivalent to <em>Scale image</em>."
+msgstr "<em>画像の拡大縮小</em>は、指定した画像サイズに収まるように画像をリサイズします。画像サイズの一方だけが指定されている場合は、画像のアスペクト比を元にもう一方を自動的に計算します。<em>画像の拡大縮小と切り抜き</em>は、指定した画像サイズで正確に画像をリサイズします。画像サイズの一方だけが指定されている場合は、画像を切り抜かず、<em>画像の拡大縮小</em>と同様になります。"
+
+#: image.admin.inc:42
+msgid "Note: 'Original' dimensions will only be used to resize images when they are first uploaded. Existing originals will not be modified."
+msgstr "注意: 「オリジナル」の寸法は、画像を最初にアップロードした時にリサイズするためだけに使用します。既存のオリジナルには修正を加えません。"
+
+#: image.admin.inc:47
+msgid "Hidden"
+msgstr "非表示"
+
+#: image.admin.inc:48
+msgid "Same window"
+msgstr "同じウィンドウ"
+
+#: image.admin.inc:49
+msgid "New window"
+msgstr "新しいウィンドウ"
+
+#: image.admin.inc:82
+msgid "Scale image"
+msgstr "画像の拡大縮小"
+
+#: image.admin.inc:82
+msgid "Scale and crop image"
+msgstr "画像の拡大縮小と切り抜き"
+
+#: image.admin.inc:114
+msgid "You must specify width, height or both dimensions."
+msgstr "幅または高さ、あるいはその両方を指定しなければなりません。"
+
+#: image.admin.inc:167
+msgid "Changes to the images sizes mean that the derivative images will need to be regenerated."
+msgstr "画像のサイズを変更すると、派生画像の再生成が必要となります。"
+
+#: image.admin.inc:173
+msgid "Label"
+msgstr "ラベル"
+
+#: image.admin.inc:173
+msgid "Operation"
+msgstr "操作"
+
+#: image.admin.inc:173
+msgid "Width"
+msgstr "幅"
+
+#: image.admin.inc:173
+msgid "Height"
+msgstr "高さ"
+
+#: image.admin.inc:173
+#: contrib/image_attach/image_attach_views_handler_field_iid.inc:35
+msgid "Link"
+msgstr "リンク"
+
+#: image.imagemagick.inc:19
+msgid "ImageMagick Binary"
+msgstr "ImageMagikバイナリ"
+
+#: image.imagemagick.inc:21
+msgid "ImageMagick is a standalone program used to manipulate images. To use it, it must be installed on your server and you need to know where it is located. If you are unsure of the exact path consult your ISP or server administrator."
+msgstr "ImageMagikは画像を操作するために使用されるスタンドアローンのプログラムです。使用するには、サーバにインストールして、その位置を知る必要があります。正確なパスが分からなければ、プロバイダまたはサーバ管理者に相談してください。"
+
+#: image.imagemagick.inc:25
+msgid "Path to the \"convert\" binary"
+msgstr "「convert」バイナリへのパス"
+
+#: image.imagemagick.inc:28
+msgid "Specify the complete path to the ImageMagic <kbd>convert</kbd> binary. For example: <kbd>/usr/bin/convert</kbd> or <kbd>C:\\Program Files\\ImageMagick-6.3.4-Q16\\convert.exe</kbd>"
+msgstr "ImageMagikの<kbd>convert</kbd>バイナリへの完全なパスを指定します。例: <kbd>/usr/bin/convert</kbd> または <kbd>C:\\Program Files\\ImageMagick-6.3.4-Q16\\convert.exe</kbd>"
+
+#: image.imagemagick.inc:32
+msgid "Display debugging information"
+msgstr "デバッグ情報を表示"
+
+#: image.imagemagick.inc:34
+msgid "Checking this option will display the ImageMagick commands and ouput to users with the <em>administer site configuration</em> permission."
+msgstr "このオプションにチェックがあれば、<em>サイト設定の管理</em>権限を持つユーザにImageMagikのコマンドと出力結果を表示します。"
+
+#: image.imagemagick.inc:60
+msgid "No file %file could be found. PHP's <a href='!open-basedir'>open_basedir</a> security resriction is set to %open-basedir, which may be interfering with the attempts to locate ImageMagick."
+msgstr "ファイル %file が見つかりません。PHPの<a href='!open-basedir'>open_basedir</a>セキュリティ制限が %open-basedir に設定されています。それがImageMagikの位置を調べる邪魔をしているのかもしれません。"
+
+#: image.imagemagick.inc:63
+msgid "The specified ImageMagic path %file does not exist."
+msgstr "指定されたImageMagikのパス %file が存在しません。"
+
+#: image.imagemagick.inc:141
+msgid "ImageMagick could not be found. The admin will need to set the path on the <a href='@image-toolkit-settings'>image toolkit page</a>."
+msgstr "ImageMagikが見つかりません。<a href='@image-toolkit-settings'>画像ツールキットページ</a>でパスを設定する必要があります。"
+
+#: image.imagemagick.inc:171
+msgid "ImageMagick command: @command"
+msgstr "ImageMagikのコマンド: @command"
+
+#: image.imagemagick.inc:172
+msgid "ImageMagick output: @output"
+msgstr "ImageMagikの出力: @output"
+
+#: image.imagemagick.inc:176
+msgid "ImageMagick reported an error: %error"
+msgstr "ImageMagikからのエラー報告: %error"
+
+#: image.views.inc:12
+msgid "Image: Display Image"
+msgstr "画像: 画像表示"
+
+#: image.views.inc:14
+#: image.module:69;390
+#: image.info:0;0
+#: contrib/image_attach/image_attach.info:0
+#: contrib/image_gallery/image_gallery.info:0
+#: contrib/image_im_advanced/image_im_advanced.info:0
+#: contrib/image_import/image_import.info:0
+msgid "Image"
+msgstr "画像"
+
+#: image.views.inc:15
+msgid "Image with link"
+msgstr "リンク付き画像"
+
+#: image.views.inc:39
+msgid "Image: File Id"
+msgstr "画像: ファイルID"
+
+#: image.views.inc:41
+msgid "File Id which represents the file."
+msgstr "ファイルを表すファイルID。"
+
+#: image.views.inc:58
+msgid "Image: File name"
+msgstr "画像: ファイル名"
+
+#: image.views.inc:60
+msgid "Plain"
+msgstr "プレーン"
+
+#: image.views.inc:61
+msgid "With download link"
+msgstr "ダウンロードリンク付き"
+
+#: image.views.inc:66
+msgid "Display file name"
+msgstr "ファイル名を表示"
+
+#: image.views.inc:69
+msgid "Image: File path"
+msgstr "画像: ファイルパス"
+
+#: image.views.inc:71
+msgid "Display Path to File."
+msgstr "ファイルへのパスを表示。"
+
+#: image.views.inc:74
+msgid "Image: File size"
+msgstr "画像: ファイルサイズ"
+
+#: image.views.inc:77
+msgid "Display the file size of the associated file."
+msgstr "関連するファイルのファイルサイズを表示。"
+
+#: image.views.inc:80
+msgid "Image: Mime type"
+msgstr "画像: MIME型"
+
+#: image.views.inc:82
+msgid "This filter allows nodes to be filtered by mime type."
+msgstr "MIME型でノードを絞り込むことができるフィルタ。"
+
+#: image.module:18
+msgid "The image module is used to create and administer images for your site. Each image is stored as a post, with thumbnails of the original generated automatically. There are two default thumbnail sizes, thumbnail and preview. The thumbnail size is shown as the preview for image posts and when browsing image galleries. The preview is the default size when first displaying an image node."
+msgstr "imageモジュールを使用して、画像の作成や管理を行うことができます。それぞれの画像は、自動的に生成したサムネイル付きの投稿として保存します。デフォルトのサムネイルサイズは2つ有り、サムネイルとプレビューです。画像記事のプレビューとして、また画像ギャラリーを閲覧する際にサムネイルを表示します。プレビューは、画像ノードを最初に表示する際のデフォルトのサイズです。"
+
+#: image.module:19
+msgid ""
+"Image administration allows the image directory and the image sizes to be set.</p><p>\n"
+"Image galleries are used to organize and display images in galleries.   The list tab allows users to edit existing image gallery names, descriptions, parents and relative position, known as a weight.  The add galleries tab allows you to create a new image gallery defining name, description, parent and weight."
+msgstr ""
+"画像の管理セクションでは、画像ファイルを保存するディレクトリや画像サイズを設定することができます。</p>\n"
+"<p>画像ギャラリーを使用して、画像をギャラリーに分けて表示することができます。リストタブで、ユーザは既存のギャラリーの名前や説明、親ギャラリー、相対位置 (ウェイト) を編集することができます。ギャラリーの追加タブで、名前や説明、親ギャラリー、ウェイトを指定して新しい画像ギャラリーを作成することができます。"
+
+#: image.module:21
+msgid ""
+"<p>You can</p>\n"
+"<ul>\n"
+"<li>view image handling messages in <a href=\"!admin-settings\">administer &gt;&gt; settings</a>.</li>\n"
+"<li>configure image sizes and file directories at <a href=\"!admin-settings-image\">administer &gt;&gt; settings &gt;&gt; image</a>.</li>\n"
+"<li>use the <a href=\"!external-http-drupal-org-project-img_assist\">image assist module</a> to upload and insert images into posts.</li>\n"
+msgstr ""
+"<p>以下のことが可能になります。</p>\n"
+"<ul>\n"
+"<li><a href=\"!admin-settings\">管理セクション &gt;&gt; サイトの環境設定</a>で画像の処理に関するメッセージを閲覧できます。</li>\n"
+"<li><a href=\"!admin-settings-image\">管理セクション &gt;&gt; サイトの環境設定 &gt;&gt; 画像</a>で画像サイズやファイルディレクトリを設定できます。</li>\n"
+"<li><a href=\"!external-http-drupal-org-project-img_assist\">image assistモジュール</a> を使用して、画像をアップロードして記事に挿入することができます。</li>\n"
+
+#: image.module:27
+msgid "For more information please read the configuration and customization handbook <a href=\"!image\">Image page</a>."
+msgstr "より詳しい情報は、the configuration and customization handbookの<a href=\"!image\">Image page</a>を参照してください。"
+
+#: image.module:71
+msgid "An image (with thumbnail). This is ideal for publishing photographs or screenshots."
+msgstr "画像 (サムネイル付き)。写真やスクリーンショットに理想的です。"
+
+#: image.module:154
+msgid "Rebuild image thumbnails"
+msgstr "サムネイルの再生成"
+
+#: image.module:203
+msgid "The original image was resized to fit within the maximum allowed resolution of %width x %height pixels."
+msgstr "許可された最大解像度 %width x %height に収まるように、オリジナルの画像をリサイズします。"
+
+#: image.module:209
+msgid "The image you uploaded was too big. You are only allowed upload files less than %max_size but your file was %file_size."
+msgstr "アップロードした画像が大きすぎます。%max_size までのファイルをアップロードできますが、あなたのファイルは %file_size です。"
+
+#: image.module:311;320
+msgid "Latest image"
+msgstr "最新の画像"
+
+#: image.module:312;325
+msgid "Random image"
+msgstr "ランダム画像"
+
+#: image.module:337;880
+#: image.install:199
+#: contrib/image_attach/image_attach.module:194
+msgid "Thumbnail"
+msgstr "サムネイル"
+
+#: image.module:382
+msgid "Rebuild derivative images."
+msgstr "派生画像を再生成。"
+
+#: image.module:384
+msgid "Check this to rebuild the derivative images for this node."
+msgstr "このノードの派生画像を再生成するにはこちらをチェックします。"
+
+#: image.module:392
+msgid "Click \"Browse...\" to select an image to upload."
+msgstr "アップロードする画像を選択するには「参照...」をクリックします。"
+
+#: image.module:405
+msgid "You must upload an image."
+msgstr "画像をアップロードしなくてはなりません。"
+
+#: image.module:479
+msgid "%title's has an unneeded %key derivative images. The derivatives will be rebuilt to remove it."
+msgstr "%titleには必要のない%key派生画像があります。それらを削除するために派生画像を再生成します。"
+
+#: image.module:491
+msgid "%title's %key derivative image %filepath was missing. The derivatives will be rebuilt to regenerate it."
+msgstr "%titleの%key派生画像 %filepath が消失しています。派生画像を再生成します。"
+
+#: image.module:497
+msgid "%title's %key derivative image had a timestamp (%filetime) that predates the last changes to the image size settings (%vartime). The derivatives will be rebuilt to regenerate it."
+msgstr "%titleの%key派生画像には、 画像サイズの設定を最後に変更した日付 (%vartime) 以前のタイムスタンプ (%filetime) があります。派生画像を再生成します。"
+
+#: image.module:506
+msgid "view"
+msgstr "表示"
+
+#: image.module:583
+msgid "The derivative images for <a href=\"!link\">%title</a> have been regenerated."
+msgstr "<a href=\"!link\">%title</a>の派生画像を再生成しました。"
+
+#: image.module:740
+#: image.install:72
+msgid "No image toolkit is currently enabled. Without one the image module will not be able to resize your images. You can select one from the <a href=\"!link\">image toolkit settings page</a>."
+msgstr "有効な画像ツールキットがありません。そのため、imageモジュールは画像をリサイズできません。<a href=\"!link\">画像ツールキットの設定ページ</a>で選択することができます。"
+
+#: image.module:823
+msgid "Unable to create scaled %label image"
+msgstr "拡大縮小した %label 画像を作成不可"
+
+#: image.module:879
+#: image.install:114
+msgid "Original"
+msgstr "オリジナル"
+
+#: image.module:881
+#: image.install:196
+msgid "Preview"
+msgstr "プレビュー"
+
+#: image.module:506;110;0
+msgid "image"
+msgstr "画像"
+
+#: image.module:506
+msgid "Derivative images were regenerated for %title."
+msgstr "派生画像を %title として再生成しました。"
+
+#: image.module:80
+msgid "create images"
+msgstr "画像を作成"
+
+#: image.module:80
+msgid "view original images"
+msgstr "オリジナルの画像を表示"
+
+#: image.module:80
+msgid "edit own images"
+msgstr "自分の画像を編集"
+
+#: image.module:80
+msgid "edit images"
+msgstr "画像を編集"
+
+#: image.module:116
+msgid "Images"
+msgstr "画像"
+
+#: image.module:117
+msgid "Configure the location of image files and image sizes. Also, if enabled, configure image attachments and options for image galleries and image imports."
+msgstr "画像ファイルの位置および画像サイズを設定します。また、有効であれば、画像ギャラリーや画像インポートのオプションと画像添付を設定します。"
+
+#: image.module:125
+msgid "Files and sizes"
+msgstr "ファイルおよびサイズ"
+
+#: image.module:126
+msgid "Configure the location of image files and image sizes."
+msgstr "画像ファイルの位置および画像サイズについて設定します。"
+
+#: image.install:9
+msgid "Stores image files information."
+msgstr "画像ファイル情報の格納。"
+
+#: image.install:12
+msgid "Primary Key: The {node}.nid of the image node."
+msgstr "プライマリキー: 画像ノードの {node}.nid。"
+
+#: image.install:18
+msgid "Index: The {files}.fid of the image file."
+msgstr "インデックス: 画像ファイルの {files}.fid。"
+
+#: image.install:24
+msgid "Primary Key: The {files}.filename of the image file.  For image module this indicates the file size."
+msgstr "プライマリキー: 画像ファイルの {files}.filename。imageモジュールにはファイルサイズを示します。"
+
+#: image.install:64
+msgid "The %toolkit-name toolkit is installed"
+msgstr "%toolkit-name ツールキットはインストール済みです。"
+
+#: image.install:70
+msgid "Not installed"
+msgstr "未インストール"
+
+#: image.install:75
+msgid "Image toolkit"
+msgstr "画像ツールキット"
+
+#: image.install:83
+msgid "Missing directory"
+msgstr "ディレクトリ消失"
+
+#: image.install:85
+msgid "The image module's image directory %image-dir is missing."
+msgstr "imageモジュールの画像ディレクトリ %image-dir が消失しています。"
+
+#: image.install:90
+msgid "Missing temp directory"
+msgstr "一時ディレクトリ消失"
+
+#: image.install:92
+msgid "The image module's temp directory %temp-dir is missing."
+msgstr "imageモジュールの一時ディレクトリ %temp-dir が消失しています。"
+
+#: image.install:97
+msgid "Exists (%path)"
+msgstr "存在 (%path)"
+
+#: image.install:101
+msgid "Image module directories"
+msgstr "imageモジュールのディレクトリ"
+
+#: image.install:189
+msgid ""
+"The original image size was missing so no changes were made. See this <a href='!link'>image module issue</a> for more information. Include the following:<br /><pre>@old_sizes\n"
+"</pre>"
+msgstr ""
+"何の変更も行われなかったため、オリジナルの画像サイズが消失しています。より詳しい情報は<a href='!link'>image module issue</a>を参照してください。以下を含みます:<br /><pre>@old_sizes\n"
+"</pre>"
+
+#: image.info:0
+msgid "Allows uploading, resizing and viewing of images."
+msgstr "画像をアップロードしたりリサイズしたり表示することができるようになります。"
+
+#: contrib/image_attach/image_attach.views.inc:13
+#: contrib/image_attach/image_attach.module:33
+msgid "Image attach"
+msgstr "画像添付"
+
+#: contrib/image_attach/image_attach.views.inc:27
+msgid "Attached image"
+msgstr "添付画像"
+
+#: contrib/image_attach/image_attach.views.inc:32
+msgid "An image attached to a node."
+msgstr "ノードに添付した画像。"
+
+#: contrib/image_attach/image_attach_views_handler_field_iid.inc:28
+msgid "Image Size"
+msgstr "画像サイズ"
+
+#: contrib/image_attach/image_attach_views_handler_field_iid.inc:36
+msgid "No link"
+msgstr "リンクなし"
+
+#: contrib/image_attach/image_attach_views_handler_field_iid.inc:36
+msgid "Node"
+msgstr "ノード"
+
+#: contrib/image_attach/image_attach_views_handler_field_iid.inc:36
+msgid "Image Node"
+msgstr "画像ノード"
+
+#: contrib/image_attach/image_attach.module:16
+#: contrib/image_attach/image_attach.info:0
+msgid "Allows easy attaching of image nodes to other content types."
+msgstr "画像ノードを他のコンテンツタイプへ簡単に添付できるようになります。"
+
+#: contrib/image_attach/image_attach.module:49
+msgid "Attach existing images"
+msgstr "既存の画像を添付"
+
+#: contrib/image_attach/image_attach.module:52
+msgid "When enabled, will allow existing image nodes to be attached instead of uploading new images."
+msgstr "有効であれば、新しい画像をアップロードする代わりに既存の画像ノードを使用できます。"
+
+#: contrib/image_attach/image_attach.module:65;82;183
+msgid "Attached Images"
+msgstr "添付画像"
+
+#: contrib/image_attach/image_attach.module:99
+msgid "Image size"
+msgstr "画像サイズ"
+
+#: contrib/image_attach/image_attach.module:102
+msgid "This determines the size of the image that appears in the block."
+msgstr "ブロックに表示される画像の寸法。"
+
+#: contrib/image_attach/image_attach.module:126
+msgid "<Hidden>"
+msgstr "<非表示>"
+
+#: contrib/image_attach/image_attach.module:133
+msgid "Image Attach settings"
+msgstr "画像添付の設定"
+
+#: contrib/image_attach/image_attach.module:139
+msgid "Attach Images"
+msgstr "添付画像"
+
+#: contrib/image_attach/image_attach.module:141
+msgid "Disabled"
+msgstr "無効"
+
+#: contrib/image_attach/image_attach.module:141
+msgid "Enabled"
+msgstr "有効"
+
+#: contrib/image_attach/image_attach.module:142
+msgid "Should this node allows users to upload an image?"
+msgstr "ユーザがこのノードに画像をアップロードできるようにしますか？"
+
+#: contrib/image_attach/image_attach.module:146
+msgid "Teaser image size"
+msgstr "ティーザーの画像サイズ"
+
+#: contrib/image_attach/image_attach.module:149
+msgid "This determines the size of the image that appears when the node is displayed as a teaser. 'Hidden' will not show the image."
+msgstr "ノードがティーザーとして表示される際の画像の寸法。「非表示」を選択すると画像を表示しません。"
+
+#: contrib/image_attach/image_attach.module:153
+msgid "Teaser image weight"
+msgstr "ティーザーの画像のウェイト"
+
+#: contrib/image_attach/image_attach.module:155
+msgid "This value determines the order of the image when displayed in the teaser."
+msgstr "ティーザーで表示される際の画像の並び順を決定します。"
+
+#: contrib/image_attach/image_attach.module:159
+msgid "Full node image size"
+msgstr "完全ノードの画像のサイズ"
+
+#: contrib/image_attach/image_attach.module:162
+msgid "This determines the size of the image that appears when the full node is displayed. 'Hidden' will not show the image."
+msgstr "ノード全体が表示される際の画像のサイズを決定します。「非表示」を選択すると画像を表示しません。"
+
+#: contrib/image_attach/image_attach.module:166
+msgid "Full node image weight"
+msgstr "完全ノードの画像のウェイト"
+
+#: contrib/image_attach/image_attach.module:168
+msgid "This value determines the order of the image when displayed in the body."
+msgstr "ノード全体が表示される際の画像の並び順を決定します。"
+
+#: contrib/image_attach/image_attach.module:201
+msgid "Existing Image"
+msgstr "既存の画像"
+
+#: contrib/image_attach/image_attach.module:204
+msgid "Choose an image already existing on the server if you do not upload a new one."
+msgstr "新しい画像をアップロードしない場合は、サーバにすでに存在する画像を選択します。"
+
+#: contrib/image_attach/image_attach.module:208
+msgid "-or-"
+msgstr "-または-"
+
+#: contrib/image_attach/image_attach.module:220
+msgid "Upload Image"
+msgstr "画像アップロード"
+
+#: contrib/image_attach/image_attach.module:224
+#: contrib/image_gallery/image_gallery.module:95
+msgid "Image title"
+msgstr "画像のタイトル"
+
+#: contrib/image_attach/image_attach.module:226
+msgid "The title the image will be shown with."
+msgstr "画像と一緒に表示するタイトル。"
+
+#: contrib/image_attach/image_attach.module:247
+msgid "Created new image to attach to this node. !image_link"
+msgstr "新しい画像を作成して、このノードに添付しました。 !image_link"
+
+#: contrib/image_attach/image_attach.module:321
+msgid "None"
+msgstr "無し"
+
+#: contrib/image_attach/image_attach.module:27
+msgid "Image Attachment View"
+msgstr "画像添付の表示"
+
+#: contrib/image_attach/image_attach.module:34
+msgid "Enable image attach for content"
+msgstr "コンテンツへの画像添付を有効化"
+
+#: contrib/image_attach/image_attach.module:0
+msgid "image_attach"
+msgstr "image_attach"
+
+#: contrib/image_attach/image_attach.install:9
+msgid "Stores the image/node relationship."
+msgstr "画像とノードの関連性を保存。"
+
+#: contrib/image_attach/image_attach.install:12
+msgid "Primary Key: The {node}.nid of the node."
+msgstr "プライマリキー： ノードの{node}.nid"
+
+#: contrib/image_attach/image_attach.install:18
+msgid "TODO"
+msgstr "TODO"
+
+#: contrib/image_attach/image_attach.info:0
+msgid "Image Attach"
+msgstr "画像添付"
+
+#: contrib/image_gallery/image_gallery.module:12
+msgid "Image galleries can be used to organize and present groups of images. Galleries may be nested. To add a new gallery click the \"add gallery\" tab."
+msgstr "画像をグループ分けして表示するには画像ギャラリーを使用します。ギャラリーの中にさらにギャラリーを作成することもできます。新しいギャラリーを追加するには「ギャラリーの追加」タブをクリックします。"
+
+#: contrib/image_gallery/image_gallery.module:72
+msgid "Gallery settings"
+msgstr "ギャラリーの設定"
+
+#: contrib/image_gallery/image_gallery.module:76
+msgid "Images per page"
+msgstr "1ページあたりの画像の枚数"
+
+#: contrib/image_gallery/image_gallery.module:79
+msgid "Sets the number of images to be displayed in a gallery page."
+msgstr "ギャラリーページに表示する画像の数を設定します。"
+
+#: contrib/image_gallery/image_gallery.module:83
+msgid "Display node info"
+msgstr "ノードの情報を表示"
+
+#: contrib/image_gallery/image_gallery.module:85
+msgid "Checking this will display the \"Posted by\" node information on the gallery pages."
+msgstr "ここにチェックがあれば、ギャラリーページに「投稿者」のノード情報を表示します。"
+
+#: contrib/image_gallery/image_gallery.module:89
+msgid "Image display sort order"
+msgstr "画像表示の並び順"
+
+#: contrib/image_gallery/image_gallery.module:92
+msgid "Create date, newest first"
+msgstr "作成日、新しい順"
+
+#: contrib/image_gallery/image_gallery.module:93
+msgid "Create date, oldest first"
+msgstr "作成日、古い順"
+
+#: contrib/image_gallery/image_gallery.module:94
+msgid "File name"
+msgstr "ファイル名"
+
+#: contrib/image_gallery/image_gallery.module:130;198
+msgid "Home"
+msgstr "ホーム"
+
+#: contrib/image_gallery/image_gallery.module:199;24;30
+msgid "Image galleries"
+msgstr "画像ギャラリー"
+
+#: contrib/image_gallery/image_gallery.module:217
+#: contrib/image_import/image_import.admin.inc:101
+msgid "Name"
+msgstr "名前"
+
+#: contrib/image_gallery/image_gallery.module:217
+msgid "Operations"
+msgstr "操作"
+
+#: contrib/image_gallery/image_gallery.module:219
+msgid "edit gallery"
+msgstr "ギャラリーの編集"
+
+#: contrib/image_gallery/image_gallery.module:224
+msgid "No galleries available"
+msgstr "利用可能なギャラリーがありません。"
+
+#: contrib/image_gallery/image_gallery.module:229;286;320
+msgid "Delete"
+msgstr "削除"
+
+#: contrib/image_gallery/image_gallery.module:251
+msgid "Gallery name"
+msgstr "ギャラリー名"
+
+#: contrib/image_gallery/image_gallery.module:255
+msgid "The name is used to identify the gallery."
+msgstr "ギャラリーを特定するために使用する名前。"
+
+#: contrib/image_gallery/image_gallery.module:260
+msgid "Description"
+msgstr "説明"
+
+#: contrib/image_gallery/image_gallery.module:264
+msgid "The description can be used to provide more information about the image gallery."
+msgstr "画像ギャラリーについてのより詳しい情報を提供するために使用する説明。"
+
+#: contrib/image_gallery/image_gallery.module:267
+msgid "Parent"
+msgstr "上位"
+
+#: contrib/image_gallery/image_gallery.module:270
+msgid "Weight"
+msgstr "ウェイト"
+
+#: contrib/image_gallery/image_gallery.module:273
+msgid "When listing galleries, those with with light (small) weights get listed before containers with heavier (larger) weights. Galleries with equal weights are sorted alphabetically."
+msgstr "ギャラリーを一覧で表示すると、軽い (小さい) ウェイトのものが重い (大きい) ウェイトのコンテナより上に表示されます。同じウェイトのギャラリーはアルファベット順に並びます。"
+
+#: contrib/image_gallery/image_gallery.module:281
+msgid "Submit"
+msgstr "送信"
+
+#: contrib/image_gallery/image_gallery.module:302
+msgid "Created new gallery %term."
+msgstr "新しいギャラリー %term を作成しました。"
+
+#: contrib/image_gallery/image_gallery.module:305
+msgid "The gallery %term has been updated."
+msgstr "ギャラリー %term を更新しました。"
+
+#: contrib/image_gallery/image_gallery.module:308
+msgid "The gallery %term has been deleted."
+msgstr "ギャラリー %term を削除しました。"
+
+#: contrib/image_gallery/image_gallery.module:320
+msgid "Are you sure you want to delete the image gallery %name?"
+msgstr "画像ギャラリー %name を本当に削除しますか？"
+
+#: contrib/image_gallery/image_gallery.module:320
+msgid "Deleting an image gallery will delete all sub-galleries. This action cannot be undone."
+msgstr "画像ギャラリーを削除すると、そのサブギャラリーもすべて削除することになります。この操作は元に戻すことができません。"
+
+#: contrib/image_gallery/image_gallery.module:320
+msgid "Cancel"
+msgstr "キャンセル"
+
+#: contrib/image_gallery/image_gallery.module:325
+msgid "The image gallery %term and all sub-galleries have been deleted."
+msgstr "画像ギャラリー %term およびすべてのサブカテゴリを削除しました。"
+
+#: contrib/image_gallery/image_gallery.module:349
+msgid "root"
+msgstr "最上位"
+
+#: contrib/image_gallery/image_gallery.module:363
+msgid "Image galleries may be nested below other galleries."
+msgstr "画像ギャラリーは他のギャラリーの入れ子となることができます。"
+
+#: contrib/image_gallery/image_gallery.module:402
+msgid "Last updated: %date"
+msgstr "最終更新: %date"
+
+#: contrib/image_gallery/image_gallery.module:441
+msgid "Posted by: !name"
+msgstr "投稿者: !name"
+
+#: contrib/image_gallery/image_gallery.module:460
+msgid "Image Galleries"
+msgstr "画像ギャラリー"
+
+#: contrib/image_gallery/image_gallery.module:400;422
+msgid "There is 1 image in this gallery"
+msgid_plural "There are @count images in this gallery"
+msgstr[0] "このギャラリーには1枚の画像があります。"
+msgstr[1] "このギャラリーには@count枚の画像があります。"
+
+#: contrib/image_gallery/image_gallery.module:17
+msgid "administer images"
+msgstr "画像の管理"
+
+#: contrib/image_gallery/image_gallery.module:33
+msgid "Create and manage image galleries."
+msgstr "画像ギャラリーを作成して管理します。"
+
+#: contrib/image_gallery/image_gallery.module:36
+msgid "List"
+msgstr "リスト"
+
+#: contrib/image_gallery/image_gallery.module:42
+msgid "Add gallery"
+msgstr "ギャラリーの追加"
+
+#: contrib/image_gallery/image_gallery.module:48
+msgid "Edit image gallery"
+msgstr "画像ギャラリーの編集"
+
+#: contrib/image_gallery/image_gallery.module:56
+#: contrib/image_gallery/image_gallery.install:16
+msgid "Image gallery"
+msgstr "画像ギャラリー"
+
+#: contrib/image_gallery/image_gallery.module:60
+msgid "Configure appearance of image galleries."
+msgstr "画像ギャラリーの外観を設定します。"
+
+#: contrib/image_gallery/image_gallery.module:0
+msgid "image_gallery"
+msgstr "image_gallery"
+
+#: contrib/image_gallery/image_gallery.install:18
+msgid "Galleries defined"
+msgstr "ギャラリー定義済み"
+
+#: contrib/image_gallery/image_gallery.install:22
+msgid "No galleries defined"
+msgstr "定義済みギャラリーなし"
+
+#: contrib/image_gallery/image_gallery.install:24
+msgid "The Image gallery module is enabled, but no galleries have been created.  You should <a href=\"@create\">create</a> at least one image gallery."
+msgstr "画像ギャラリーモジュールが有効ですが、ギャラリーが作成されていません。少なくとも1つの画像ギャラリーを<a href=\"@create\">作成</a>しなければなりません。"
+
+#: contrib/image_gallery/image_gallery.info:0
+msgid "Image Gallery"
+msgstr "画像ギャラリー"
+
+#: contrib/image_gallery/image_gallery.info:0
+msgid "Allows sorting and displaying of image galleries based on categories."
+msgstr "画像ギャラリーを並び替えたり、カテゴリ別に表示したりできるようになります。"
+
+#: contrib/image_im_advanced/image_im_advanced.module:33
+#: contrib/image_im_advanced/image_im_advanced.info:0
+msgid "ImageMagick Advanced Options"
+msgstr "ImageMagikの高度なオプション"
+
+#: contrib/image_im_advanced/image_im_advanced.module:35
+msgid "These settings let you control some of ImageMagick's more advanced options."
+msgstr "これらの設定によって、ImageMagikのより高度なオプションを制御できるようになります。"
+
+#: contrib/image_im_advanced/image_im_advanced.module:41
+msgid "JPEG quality"
+msgstr "JPEGの品質"
+
+#: contrib/image_im_advanced/image_im_advanced.module:45;81
+msgid "%"
+msgstr "%"
+
+#: contrib/image_im_advanced/image_im_advanced.module:46
+msgid "Define the image quality for JPEG manipulations. Ranges from 0 to 100. Higher values mean better image quality but bigger files. <a href=\"!link\">More information on -quality</a>"
+msgstr "JPEGを扱う際の画像のクオリティを、0から100までの範囲で指定してください。より高い値を指定すると、画像のクオリティは上がりますが、ファイルサイズが大きくなります。<a href=\"!link\">より詳しい情報</a>"
+
+#: contrib/image_im_advanced/image_im_advanced.module:50
+msgid "Strip metadata from images at this size and below"
+msgstr "このサイズ以下になるよう画像からメタデータを削除"
+
+#: contrib/image_im_advanced/image_im_advanced.module:52
+msgid "You may choose to strip all metadata, such as camera information and color profiles, from the processed images in order to reduce their file size. Please choose at what maximum size you want images to be stripped of their metadata. Example: \"150x150\". Enter \"0x0\" to disable this feature. This option requires ImageMagick 6.0.0 or higher. <a href=\"!link\">More information on -strip</a>"
+msgstr "ファイルサイズを削減するために、カメラの情報やカラープロファイルといったメタデータを、処理する画像からすべて剥ぎ取ることを選択できます。メタデータを剥ぎ取る画像の最大サイズを選択してください。例: 「150x150」。「0x0」と入力すると、この機能が無効となります。このオプションにはImageMagik 6.0.0以上が必要となります。<a href=\"!link\">より詳しい情報</a>"
+
+#: contrib/image_im_advanced/image_im_advanced.module:56
+msgid "Convert colorspace"
+msgstr "カラースペースの変換"
+
+#: contrib/image_im_advanced/image_im_advanced.module:58
+msgid "<None>"
+msgstr "<なし>"
+
+#: contrib/image_im_advanced/image_im_advanced.module:58
+msgid "RGB"
+msgstr "RGB"
+
+#: contrib/image_im_advanced/image_im_advanced.module:58
+msgid "Gray"
+msgstr "グレー"
+
+#: contrib/image_im_advanced/image_im_advanced.module:59
+msgid "This option lets you convert images to the specified colorspace. This will be overridden by the Color profile option, if used. <a href=\"!link\">More information on -colorspace</a>"
+msgstr "指定したカラースペースに画像を変更できます。カラープロファイルのオプションでこの設定を上書きできます。<a href=\"!link\">より詳しい情報</a>"
+
+#: contrib/image_im_advanced/image_im_advanced.module:63
+msgid "Change image resolution to 72 ppi"
+msgstr "画像の解像度を72dpiに変更"
+
+#: contrib/image_im_advanced/image_im_advanced.module:65
+msgid "If checked, this option will set the print resolution of the image to 72 pixels per inch, which is suitable for web use. This does not affect the pixel size or quality of the image.  <a href=\"!link\">More information on -density</a>"
+msgstr "チェックがあれば、画像の解像度をウェブでの使用に最適な1インチ当たり72ピクセルに設定します。ピクセルサイズや画像の質には影響しません。<a href=\"!link\">より詳しい情報</a>"
+
+#: contrib/image_im_advanced/image_im_advanced.module:70
+msgid "Sharpening filter"
+msgstr "シャープフィルタ"
+
+#: contrib/image_im_advanced/image_im_advanced.module:73
+msgid "The sharpness filter is used to regain some of the sharpness that is always lost when a digital photograph is scaled down. This is equivalent to the commonly used \"Unsharp Mask\" filter. It is important that these values are not set too high as it can easily make the images look artificial. <a href=\"!link\">More information on -unsharp</a>"
+msgstr "シャープフィルタを使用することで、デジタル写真を縮小したときなどに失われがちなシャープさを取り戻します。「アンシャープマスク」フィルタとして一般に用いられているものと同じです。画像が人工的なものと見られやすくなるほど高い値を指定しないことが重要です。<a href=\"!link\">より詳しい情報</a>"
+
+#: contrib/image_im_advanced/image_im_advanced.module:77
+msgid "Sharpness filter strength"
+msgstr "シャープフィルタの強度"
+
+#: contrib/image_im_advanced/image_im_advanced.module:82
+msgid "Apply this percentage of sharpness when scaling. 90 is recommended, although values higher than 100 are also valid. Set to 0 to disable this feature."
+msgstr "拡大縮小の際にこのパーセンテージをシャープネスに適用します。100より高い値もまた有効です。この機能を無効にするには0を指定します。"
+
+#: contrib/image_im_advanced/image_im_advanced.module:86
+msgid "Sharpness filter radius"
+msgstr "シャープフィルタの半径"
+
+#: contrib/image_im_advanced/image_im_advanced.module:90
+msgid "Use this pixel radius for the sharpness filter. 0.9 is recommended."
+msgstr "シャープフィルタにこのピクセル単位の半径を使用します。推奨は0.9です。"
+
+#: contrib/image_im_advanced/image_im_advanced.module:95
+msgid "Color profile"
+msgstr "カラープロファイル"
+
+#: contrib/image_im_advanced/image_im_advanced.module:98
+msgid "Processed images may be converted to a color profile specified here. This is especially important when working with images that use a wide-gamut color profile such as ColorMatch or Adobe RGB, which is often the case with professional photography. sRGB (which may be downloaded from <a href=\"http://www.color.org/profiles.html\">ICC</a>) is recommended since it is likely to look good on most displays.<br />Note that this conversion is still useful even if you choose to strip all metadata from your images (see above). This is because the conversion happens first and changes the actual image data before the profile is stripped."
+msgstr "処理する画像をここで指定したカラープロﾌｧｲﾙへ変換することができます。プロフェッショナルな写真によく用いられるColorMatchやAdobe RGBといった色範囲の広いカラープロファイルを扱う際に、特に重要です。sRGB (<a href=\"http://www.color.org/profiles.html\">ICC</a>からダウンロード可能) は多くのディスプレイに適しているのでオススメです。<br />画像からすべてのメタデータを削除することを選択 (上記参照) したとしても、この変換が役立つことに注意してください。プロファイルを削除する前に変換がまず実行され、実際の画像データを変更するためです。"
+
+#: contrib/image_im_advanced/image_im_advanced.module:102
+msgid "Path to color profile"
+msgstr "カラープロファイルのパス"
+
+#: contrib/image_im_advanced/image_im_advanced.module:104
+msgid "The path to a color profile file that all scaled down images will be converted to. Leave empty to disable."
+msgstr "縮小画像を変換するカラープロファイルのファイルへのパス。無効にする場合は空欄にします。"
+
+#: contrib/image_im_advanced/image_im_advanced.module:121
+msgid "The JPEG quality must be a positive number between 1 and 100."
+msgstr "JPEGのクオリティには1から100までの正の値を指定してください。"
+
+#: contrib/image_im_advanced/image_im_advanced.module:126
+msgid "The strip metadata threshold must be specified in the form <em>NxN</em>. Example: <em>150x150</em>."
+msgstr "メタデータを削除するしきい値を<em>NxN</em>の書式で指定してください。例: <em>150x150</em>"
+
+#: contrib/image_im_advanced/image_im_advanced.module:132
+msgid "The sharpness amount must be specified as a positive number."
+msgstr "シャープの量には正の値を指定してください。"
+
+#: contrib/image_im_advanced/image_im_advanced.module:135
+msgid "The sharpness radius must be specified as a positive value."
+msgstr "シャープの半径には正の値を指定してください。"
+
+#: contrib/image_im_advanced/image_im_advanced.module:141
+msgid "The ICC profile could not be read."
+msgstr "ICCプロファイルを読み込めません。"
+
+#: contrib/image_im_advanced/image_im_advanced.module:0
+msgid "image_im_advanced"
+msgstr "image_im_advanced"
+
+#: contrib/image_im_advanced/image_im_advanced.install:13
+msgid "ImageMagick advanced options"
+msgstr "ImageMagikの高度なオプション"
+
+#: contrib/image_im_advanced/image_im_advanced.install:16
+msgid "ImageMagick image toolkit is not properly installed"
+msgstr "ImageMagik画像ツールキットが適切にインストールされていません。"
+
+#: contrib/image_im_advanced/image_im_advanced.install:17
+msgid "The <em>@toolkit_inc/image_imagemagick.inc</em> file must be copied to <em>@inc_dir in order for the ImageMagick image toolkit to function."
+msgstr "ImageMagik画像ツールキットを動作させるためには、<em>@toolkit_inc/image_imagemagick.inc</em>ファイルを<em>@inc_dir</em>にコピーしなくてはなりません。"
+
+#: contrib/image_im_advanced/image_im_advanced.install:24
+msgid "ImageMagic image toolkit is not selected"
+msgstr "ImageMagik画像ツールキットが選択されていません。"
+
+#: contrib/image_im_advanced/image_im_advanced.install:25
+msgid "The ImageMagic image toolkit is not selected.  The advanced options only apply to the ImageMagick toolkit.  Select the image toolkit <a href=\"@toolkit\">here</a>."
+msgstr "ImageMagik画像ツールキットが選択されていません。高度なオプションはImageMagikツールキットでのみ適用されます。<a href=\"@toolkit\">こちら</a>で画像ツールキットを選択してください。"
+
+#: contrib/image_im_advanced/image_im_advanced.install:32
+msgid "ImageMagick convert utility not found."
+msgstr "ImageMagik変換ユーティリティが存在しません。"
+
+#: contrib/image_im_advanced/image_im_advanced.install:33
+msgid "The ImageMagick image convert utility (@convert) does not exist.  If you have ImageMagick installed, click <a href=\"@toolkit\">here</a> to provide the path to the convert utility."
+msgstr "ImageMagikの画像変換ユーティリティ (@convert) が存在しません。ImageMagikがインストール済みであれば、<a href=\"@toolkit\">こちら</a>をクリックして、変換ユーティリティへのパスを指定してください。"
+
+#: contrib/image_im_advanced/image_im_advanced.install:37
+msgid "ImageMagick image toolkit is selected"
+msgstr "ImageMagik画像ツールキットが選択されています。"
+
+#: contrib/image_im_advanced/image_im_advanced.info:0
+msgid "Adds advanced options to the ImageMagick image toolkit."
+msgstr "ImageMagik画像ツールキットに高度なオプションを追加。"
+
+#: contrib/image_import/image_import.admin.inc:9
+msgid "You need to configure the import directory on the image import module's <a href='!admin-settings-image_import'>settings page</a>."
+msgstr "画像インポートモジュールの<a href='!admin-settings-image_import'>設定ページ</a>でインポートディレクトリを設定する必要があります。"
+
+#: contrib/image_import/image_import.admin.inc:84;122
+msgid "Import"
+msgstr "インポート"
+
+#: contrib/image_import/image_import.admin.inc:90
+msgid "No files were found"
+msgstr "ファイルが見つかりませんでした。"
+
+#: contrib/image_import/image_import.admin.inc:101
+msgid "Size"
+msgstr "サイズ"
+
+#: contrib/image_import/image_import.admin.inc:101
+msgid "Dimensions"
+msgstr "寸法"
+
+#: contrib/image_import/image_import.admin.inc:101
+msgid "Title"
+msgstr "タイトル"
+
+#: contrib/image_import/image_import.admin.inc:101
+msgid "Body"
+msgstr "本文"
+
+#: contrib/image_import/image_import.admin.inc:144
+msgid "%filename as <a href=\"!node-link\">@node-title</a> <a href=\"!edit-link\">[edit]</a>"
+msgstr "%filename を <a href=\"!node-link\">@node-title</a> として保存 <a href=\"!edit-link\">[編集]</a>"
+
+#: contrib/image_import/image_import.admin.inc:152
+msgid "Error importing %filename."
+msgstr "%filename をインポート中にエラー。"
+
+#: contrib/image_import/image_import.admin.inc:159
+msgid "Successfully imported: "
+msgstr "インポート成功: "
+
+#: contrib/image_import/image_import.admin.inc:162
+msgid "No image files were imported."
+msgstr "どのファイルもインポートされませんでした。"
+
+#: contrib/image_import/image_import.admin.inc:171
+msgid "Import path"
+msgstr "インポートパス"
+
+#: contrib/image_import/image_import.admin.inc:174
+msgid "The directory to import image nodes from. Drupal will need to have write access to this directory so we can move the file."
+msgstr "画像ノードをインポートするディレクトリ。ファイルを移動させるため、このディレクトリの書き込み権限が必要です。"
+
+#: contrib/image_import/image_import.admin.inc:175
+msgid "<strong>Note:</strong> a path begining with a <kbd>/</kbd> indicates the path is relative to the server's root, not the website's root. One starting without a <kbd>/</kbd> specifies a path relative to Drupal's root. For example: <kbd>/tmp/image</kbd> would be the temp directory off the root while <kbd>tmp/image</kbd> would be inside Drupal's directory."
+msgstr "<strong>注意:</strong> <kbd>/</kbd> で始まるパスはサーバのルートからの相対パスを表しており、ウェブサイトのルートではありません。 <kbd>/</kbd> で始まらないパスはDrupalのルートからの相対パスを表します。例: <kbd>/tmp/image</kbd> はルートからたどる一時ディレクトリを表しますが、<kbd>tmp/image</kbd> はDrupalのディレクトリ内にあります。"
+
+#: contrib/image_import/image_import.admin.inc:194
+msgid "You can't import from the image module's directory. The import deletes the original files so you would just be asking for trouble."
+msgstr "imageモジュールのディレクトリからインポートすることはできません。インポートはオリジナルのファイルを削除するため、きっと問題が発生することになります。"
+
+#: contrib/image_import/image_import.module:10
+msgid "Import multiple image files and save them as image nodes. The files will be moved from their location into the image module's files directory. "
+msgstr "複数の画像ファイルをインポートして、それらを画像ノードとして保存します。imageモジュールのファイルディレクトリにファイルを移動します。"
+
+#: contrib/image_import/image_import.module:11
+msgid "Searching for image files in %dirpath."
+msgstr "%dirpathの画像ファイルを検索中。"
+
+#: contrib/image_import/image_import.module:14
+msgid "Configure the image import module's settings."
+msgstr "画像インポートモジュールの設定を行います。"
+
+#: contrib/image_import/image_import.module:24
+msgid "import images"
+msgstr "画像をインポート"
+
+#: contrib/image_import/image_import.module:34;44
+#: contrib/image_import/image_import.install:10
+msgid "Image import"
+msgstr "画像インポート"
+
+#: contrib/image_import/image_import.module:40
+msgid "Import images from the filesystem."
+msgstr "ファイルシステムから画像をインポート。"
+
+#: contrib/image_import/image_import.module:50
+msgid "Change settings for the Image Import module."
+msgstr "Image Importモジュールの設定を変更します。"
+
+#: contrib/image_import/image_import.module:0
+msgid "image_import"
+msgstr "image_import"
+
+#: contrib/image_import/image_import.install:14
+msgid "Import directory has not been configured."
+msgstr "インポートディレクトリが設定されていません。"
+
+#: contrib/image_import/image_import.install:15
+msgid "The import directory must be <a href=\"@configure\">configured</a> and exist in order for the Image import module to function."
+msgstr "Image Importモジュールを動作させるためには、インポートディレクトリを<a href=\"@configure\">設定</a>して、それが存在していなければなりません。"
+
+#: contrib/image_import/image_import.install:20
+msgid "Import directory <em>@dirpath</em> does not exist or is not writable."
+msgstr "インポートディレクトリ <em>@dirpath</em> が存在しないか、書き込みできません。"
+
+#: contrib/image_import/image_import.install:21
+msgid "The import directory <em>@dirpath</em> either does not exist or does not grant the web container write permission.  Either <a href=\"@choose\">choose</a> a different directory or create the <em>@dirpath</em> directory and grant write permissions.  The Image import module will not function until this is corrected."
+msgstr "インポートディレクトリ <em>@dirpath</em> は存在しないか、または書き込み権限がありません。別のディレクトリを<a href=\"@choose\">選択</a>するか、または <em>@dirpath</em> ディレクトリを作成して書き込み権限を与えてください。これが正しく設定されるまでは画像インポートモジュールは動作しません。"
+
+#: contrib/image_import/image_import.install:25
+msgid "Import directory <em>@dirpath</em> exists"
+msgstr "インポートディレクトリ <em>@dirpath</em> は存在します"
+
+#: contrib/image_import/image_import.info:0
+msgid "Image Import"
+msgstr "画像インポート"
+
+#: contrib/image_import/image_import.info:0
+msgid "Allows batches of images to be imported from a directory on the server."
+msgstr "サーバのディレクトリから画像をインポートするバッチ処理を行えるようになります。"
+

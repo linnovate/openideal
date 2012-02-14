@@ -1,0 +1,40 @@
+<?php
+// $Id: image_import.install,v 1.7.2.1 2010/08/03 17:43:00 sun Exp $
+
+/**
+ * Implementation of hook_requirements().
+ */
+function image_import_requirements($phase) {
+  $requirements = array();
+  if ($phase == 'runtime') {
+    $requirements['image_import_dir'] = array('title' => t('Image import'));
+    $dirpath = variable_get('image_import_path', '');
+    // If the import directory has not been configured, indicate an error.
+    if ($dirpath == '') {
+      $requirements['image_import_dir']['value'] = t('Import directory has not been configured.');
+      $requirements['image_import_dir']['description'] = t('The import directory must be <a href="@configure">configured</a> and exist in order for the Image import module to function.', array('@configure' => url('admin/settings/image/image_import')));
+      $requirements['image_import_dir']['severity'] = REQUIREMENT_ERROR;
+    }
+    elseif (!file_check_directory($dirpath)) {
+      // The import directory does not exist, indicate an error.
+      $requirements['image_import_dir']['value'] = t('Import directory %dirpath does not exist or is not writable.', array('%dirpath' => $dirpath));
+      $requirements['image_import_dir']['description'] = t('The import directory %dirpath either does not exist or does not grant the web container write permission. Either <a href="@choose">choose</a> a different directory or create the %dirpath directory and grant write permissions. The Image import module will not function until this is corrected.', array('%dirpath' => $dirpath, '@choose' => url('admin/settings/image/image_import')));
+      $requirements['image_import_dir']['severity'] = REQUIREMENT_ERROR;
+    }
+    else {
+      $requirements['image_import_dir']['value'] = t('Import directory %dirpath exists.', array('%dirpath' => $dirpath));
+      $requirements['image_import_dir']['severity'] = REQUIREMENT_OK;
+    }
+  }
+  return $requirements;
+}
+
+function image_import_uninstall() {
+  variable_del('image_import_path');
+}
+
+function image_import_update_1() {
+  variable_del('image_import_extensions');
+  return array();
+}
+

@@ -1,0 +1,383 @@
+<?php
+// $Id: print.install,v 1.1.4.26 2010/08/17 23:10:43 jcnventura Exp $
+
+/**
+ * @file
+ * Install file of the print module
+ *
+ * @ingroup print
+ */
+
+/**
+ * Implementation of hook_install().
+ */
+function print_install() {
+  drupal_install_schema('print');
+
+  // Module weight
+  update_sql("UPDATE {system} SET weight = 0 WHERE name = 'print'");
+
+  $t = get_t();
+  drupal_set_message($t('Printer-friendly Page settings are available under !link',
+    array( '!link' => l($t('Administer > Site configuration > Printer-friendly Pages'),  'admin/settings/print' ) )
+  ));
+}
+
+/**
+ * Implementation of hook_uninstall().
+ */
+function print_uninstall() {
+  drupal_uninstall_schema('print');
+
+  variable_del('print_settings');
+  variable_del('print_sourceurl_settings');
+  variable_del('print_html_settings');
+  variable_del('print_robot_settings');
+  variable_del('print_logo_url');
+  variable_del('print_logo_options');
+  variable_del('print_css');
+  variable_del('print_urls');
+  variable_del('print_urls_anchors');
+  variable_del('print_comments');
+  variable_del('print_newwindow');
+  variable_del('print_sourceurl_enabled');
+  variable_del('print_sourceurl_date');
+  variable_del('print_sourceurl_forcenode');
+  variable_del('print_html_show_link');
+  variable_del('print_html_link_pos');
+  variable_del('print_html_link_teaser');
+  variable_del('print_html_node_link_visibility');
+  variable_del('print_html_node_link_pages');
+  variable_del('print_html_link_class');
+  variable_del('print_html_sys_link_visibility');
+  variable_del('print_html_sys_link_pages');
+  variable_del('print_html_book_link');
+  variable_del('print_html_new_window');
+  variable_del('print_html_sendtoprinter');
+  variable_del('print_html_windowclose');
+  variable_del('print_robots_noindex');
+  variable_del('print_robots_nofollow');
+  variable_del('print_robots_noarchive');
+  variable_del('print_footer_options');
+  variable_del('print_footer_user');
+  variable_del('print_html_link_text');
+  variable_del('print_html_link_use_alias');
+  variable_del('print_text_by');
+  variable_del('print_text_created');
+  variable_del('print_text_links');
+  variable_del('print_text_published');
+  variable_del('print_text_retrieved');
+  variable_del('print_text_source_url');
+  $settings = db_query("SELECT name FROM {variable} WHERE name LIKE 'print\_display\_%'");
+  while ($variable = db_fetch_object($settings)) {
+    variable_del($variable->name);
+  }
+}
+
+/**
+ * Implementation of hook_schema().
+ */
+function print_schema() {
+  $schema['print_node_conf'] = array(
+    'fields' => array(
+      'nid' => array(
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+      'link' => array(
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 1,
+        'size' => 'tiny',
+      ),
+      'comments' => array(
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 1,
+        'size' => 'tiny',
+      ),
+      'url_list' => array(
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 1,
+        'size' => 'tiny',
+      ),
+    ),
+    'primary key' => array('nid'),
+  );
+
+  $schema['print_page_counter'] = array(
+    'fields' => array(
+      'path' => array(
+        'type' => 'varchar',
+        'length' => 128,
+        'not null' => TRUE,
+      ),
+      'totalcount' => array(
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+        'size' => 'big',
+      ),
+      'timestamp' => array(
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+    ),
+    'primary key' => array('path'),
+  );
+
+  return $schema;
+}
+
+
+/**
+ * Update to version 6.x-1.0
+ */
+function print_update_6000() {
+  global $conf;
+  $ret = array();
+
+  $lastversion = drupal_get_installed_schema_version('print');
+  if (($lastversion >= 5300) && ($lastversion < 6000)) {
+    return $ret;
+  }
+
+  if (isset($conf['print_settings'])) {
+    $print_settings = variable_get('print_settings', '');
+    variable_set('print_logo_options', ($print_settings['logo_url'] ? 2 : 1));
+    variable_set('print_logo_url', $print_settings['logo_url']);
+    variable_set('print_css', $print_settings['css']);
+    variable_set('print_urls', $print_settings['urls']);
+    variable_set('print_comments', $print_settings['comments']);
+    variable_set('print_newwindow', $print_settings['newwindow']);
+    variable_del('print_settings');
+  }
+  if (isset($conf['print_sourceurl_settings'])) {
+    $print_sourceurl_settings = variable_get('print_sourceurl_settings', '');
+    variable_set('print_sourceurl_enabled', $print_sourceurl_settings['enabled']);
+    variable_set('print_sourceurl_date', $print_sourceurl_settings['date']);
+    variable_set('print_sourceurl_forcenode', $print_sourceurl_settings['forcenode']);
+    variable_del('print_sourceurl_settings');
+  }
+  if (isset($conf['print_html_settings'])) {
+    $print_html_settings = variable_get('print_html_settings', '');
+    variable_set('print_html_link_pos', array('link' => ($print_html_settings['show_link'] ? 'link' : 0) ));
+    variable_set('print_html_show_link', max(1, $print_html_settings['show_link']));
+    variable_set('print_html_node_link_visibility', $print_html_settings['node_link_visibility']);
+    variable_set('print_html_node_link_pages', $print_html_settings['node_link_pages']);
+    variable_set('print_html_link_class', $print_html_settings['link_class']);
+    variable_set('print_html_sys_link_visibility', $print_html_settings['sys_link_visibility']);
+    variable_set('print_html_sys_link_pages', $print_html_settings['sys_link_pages']);
+    variable_set('print_html_book_link', $print_html_settings['book_link']);
+    variable_set('print_html_new_window', $print_html_settings['new_window']);
+    variable_set('print_html_sendtoprinter', $print_html_settings['sendtoprinter']);
+    variable_del('print_html_settings');
+  }
+  if (isset($conf['print_robot_settings'])) {
+    $print_robot_settings = variable_get('print_robot_settings', '');
+    variable_set('print_robots_noindex', $print_robot_settings['noindex']);
+    variable_set('print_robots_nofollow', $print_robot_settings['nofollow']);
+    variable_set('print_robots_noarchive', $print_robot_settings['noarchive']);
+    variable_del('print_robot_settings');
+  }
+  return $ret;
+}
+
+/**
+ * Update to version 6.x-1.0
+ */
+function print_update_6001() {
+  $ret = array();
+  $lastversion = drupal_get_installed_schema_version('print');
+  if (($lastversion >= 5301) && ($lastversion < 6000)) {
+    return $ret;
+  }
+
+  menu_rebuild();
+  return $ret;
+}
+
+/**
+ * Update to version 6.x-1.1
+ */
+function print_update_6002() {
+  $ret = array();
+  $lastversion = drupal_get_installed_schema_version('print');
+  if (($lastversion >= 5302) && ($lastversion < 6000)) {
+    return $ret;
+  }
+
+  $schema['print_node_conf'] = array(
+    'fields' => array(
+      'nid' => array(
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+      'link' => array(
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => '1',
+        'size' => 'tiny',
+      ),
+      'comments' => array(
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => '1',
+        'size' => 'tiny',
+      ),
+      'url_list' => array(
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => '1',
+        'size' => 'tiny',
+      ),
+    ),
+    'primary key' => array('nid'),
+  );
+
+  $schema['print_page_counter'] = array(
+    'fields' => array(
+      'path' => array(
+        'type' => 'varchar',
+        'length' => 128,
+        'not null' => TRUE,
+      ),
+      'totalcount' => array(
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+        'size' => 'big',
+      ),
+      'timestamp' => array(
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+    ),
+    'primary key' => array('path'),
+  );
+
+  db_create_table($ret, 'print_node_conf', $schema['print_node_conf']);
+  db_create_table($ret, 'print_page_counter', $schema['print_page_counter']);
+  return $ret;
+}
+
+/**
+ * Update to version 6.x-1.2
+ */
+function print_update_6003() {
+  $ret = array();
+
+  $lastversion = drupal_get_installed_schema_version('print');
+  if (($lastversion >= 5303) && ($lastversion < 6000)) {
+    return $ret;
+  }
+
+  // Delete custom text strings set to the default
+  $vars = array(
+    'print_html_link_text' => 'Printer-friendly version',
+    'print_text_published' => 'Published on %site_name',
+    'print_text_by' => 'By %author',
+    'print_text_created' => 'Created %date',
+    'print_text_source_url' => 'Source URL',
+    'print_text_retrieved' => 'retrieved on %date',
+    'print_text_links' => 'Links',
+  );
+
+  $t = get_t();
+
+  foreach ($vars as $name => $default) {
+    if (variable_get($name, '') == $t($default)) {
+      variable_del($name);
+    }
+  }
+
+  menu_rebuild();
+  return $ret;
+}
+
+/**
+ * Update to version 6.x-1.11
+ */
+function print_update_6004() {
+  $ret = array();
+  // BLOCK_CACHE_PER_PAGE -> 4
+  $ret[] = update_sql("UPDATE {blocks} SET cache = 4 WHERE module = 'print' AND delta = '0'");
+  // BLOCK_CACHE_GLOBAL -> 8
+  $ret[] = update_sql("UPDATE {blocks} SET cache = 8 WHERE module = 'print' AND delta = '1'");
+  return $ret;
+}
+
+/**
+ * Update to version 6.x-1.11
+ */
+function print_update_6005() {
+  $ret = array();
+  // Module weight
+  $ret[] = update_sql("UPDATE {system} SET weight = 0 WHERE name = 'print'");
+  return $ret;
+}
+
+/**
+ * Update to version 6.x-1.11
+ */
+function print_update_6006() {
+  global $base_root, $base_path;
+
+  $ret = array();
+  $t = get_t();
+
+  $print_css = variable_get('print_css', '');
+  $pattern = "!(?:${base_root})?${base_path}(.*)!is";
+  if (preg_match($pattern, strtr($print_css, array('%b' => base_path())), $matches)) {
+    variable_set('print_css', $matches[1]);
+  }
+  elseif (!empty($print_css)) {
+    drupal_set_message($t('Please review your custom stylesheet path in the <a href="!url">print module settings</a>, as the path must now be relative to the base path of the site.', array('!url' => url('admin/settings/print/common'))));
+  }
+
+  return $ret;
+}
+
+/**
+ * Update to version 6.x-1.11
+ */
+function print_update_6007() {
+  $ret = array();
+
+  foreach (node_get_types() as $key => $value) {
+    $print_display = variable_get('print_display_'. $value->type, 1);
+    $print_display_comment = variable_get('print_display_comment_'. $value->type, 0);
+    $print_display_urllist = variable_get('print_display_urllist_'. $value->type, 1);
+
+    if (!$print_display || $print_display_comment || !$print_display_urllist) {
+      $result = db_query("SELECT n.nid, link, comments, url_list from {node} AS n LEFT JOIN {print_node_conf} AS pnc ON n.nid = pnc.nid WHERE type = '%s'", $value->type);
+      while ($conf = db_fetch_object($result)) {
+        if (($conf->link != NULL) && ($conf->comments != NULL) && ($conf->url_list != NULL)) {
+          $conf->link = !$print_display ? 0 : $conf->link;
+          $conf->comments = $print_display_comment ? 1 : $conf->comments;
+          $conf->url_list = !$print_display_urllist ? 0 : $conf->url_list;
+          $ret[] = update_sql("UPDATE {print_node_conf} SET link = $conf->link, comments = $conf->comments, url_list = $conf->url_list WHERE nid = $conf->nid");
+        }
+        else {
+          $ret[] = update_sql("INSERT INTO {print_node_conf} (nid, link, comments, url_list) VALUES ($conf->nid, $print_display, $print_display_comment, $print_display_urllist)");
+        }
+      }
+    }
+  }
+  return $ret;
+}

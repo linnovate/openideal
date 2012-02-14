@@ -1,0 +1,37 @@
+<?php
+// $Id: og_activity.install,v 1.1.2.2.2.4 2010/02/21 12:31:33 stalski Exp $
+
+/**
+ * @file
+ *   Installation file for organic group activity
+ */
+
+/**
+ * Implementation of hook_install().
+ */
+function og_activity_install() {
+  // Module weights in core: put heartbeat after heartbeat in the chain.
+  db_query("UPDATE {system} SET weight = 51 WHERE name = 'og_activity'");
+}
+
+/**
+ * Implementation of hook_disable().
+ */
+function og_activity_disable() {
+
+  variable_del('heartbeat_add_og_admins_to_personal');
+  variable_del('heartbeat_add_og_members_to_personal');
+  variable_del('heartbeat_add_og_related_to_personal');
+}
+
+/**
+ * Implementation of hook_enable().
+ */
+function og_activity_enable() {
+  variable_set('heartbeat_add_og_admins_to_personal', TRUE);
+  variable_set('heartbeat_add_og_members_to_personal', TRUE);
+  variable_set('heartbeat_add_og_related_to_personal', TRUE);
+
+  drupal_set_message(t('Please visit !messages_page to import default heartbeat messages from other modules.', array('!messages_page' => l(t('Heartbeat messages page'), 'admin/build/heartbeat'))));
+
+}

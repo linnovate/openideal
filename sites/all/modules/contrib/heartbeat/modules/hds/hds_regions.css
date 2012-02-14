@@ -1,0 +1,54 @@
+@CHARSET "UTF-8";
+
+.hds-region-header {
+  clear: both;
+}
+
+.hds-region-left {
+  display: inline;
+  float: left;
+}
+
+.hds-region-middle-wrapper {
+  display: inline;
+  float: left;
+  width: 100%;
+  margin-right: -100%;
+}
+
+.hds-region-right {
+  display: inline;
+  float: right;
+}
+
+.hds-region-footer {
+  clear: both;
+}
+
+/* default region dimensions */
+
+.hds-region-left {
+  width: 25%;
+}
+
+.hds-region-right {
+  width: 25%;
+}
+
+/* middle region */
+
+.hds-no-sidebars .hds-region-middle {
+}
+
+.hds-sidebar-left .hds-region-middle {
+  margin-left: 25%;
+}
+
+.hds-sidebar-right .hds-region-middle {
+  margin-right: 25%;
+}
+
+.hds-two-sidebars .hds-region-middle {
+  margin-left: 25%;
+  margin-right: 25%;
+}

@@ -1,0 +1,188 @@
+<?php
+// $Id: nodewords_ui.module,v 1.1.2.9 2010/04/18 14:08:39 kiam Exp $
+
+/**
+ * @file
+ * Implement the user interface visible to authenticated users.
+ */
+
+/**
+ * Implements hook_content_extra_fields().
+ * Allow the meta tags fields to be sorted in the node edit forms.
+ */
+function nodewords_ui_content_extra_fields() {
+  $extras = array();
+
+  $extras['nodewords'] = array(
+    'label' => t('Meta tags'),
+    'description' => t('Meta tags fieldset.'),
+    'weight' => 10,
+  );
+
+  return $extras;
+}
+
+/**
+ * Implements hook_form_alter().
+ */
+function nodewords_ui_form_alter(&$form, $form_state, $form_id) {
+  $bool = (
+    isset($form['type']) &&
+    isset($form['#node']) &&
+    $form_id == $form['type']['#value'] . '_node_form'
+  );
+  if ($bool) {
+    $node = $form['#node'];
+    $form['nodewords'] = nodewords_tags_edit_fields(
+      _nodewords_ui_get_node_metatags_type($node),
+      !empty($node->nodewords['metatags']) ? $node->nodewords['metatags'] : array(),
+      array(
+        'fieldset' => TRUE,
+        'tag options' => array('content type' => $form['type']['#value']),
+      )
+    );
+  }
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function nodewords_ui_form_nodewords_admin_settings_form_alter(&$form, $form_state) {
+  $enabled_options = array();
+  $user_pages = array(
+    NODEWORDS_TYPE_NODE,
+    NODEWORDS_TYPE_USER,
+  );
+  $tags_info = nodewords_get_possible_tags();
+
+  if (!empty($tags_info)) {
+    $form['enabled']['ui'] = array(
+      '#type' => 'fieldset',
+      '#title' => t('Meta tags enabled on other edit forms'),
+      '#weight' => 2,
+      '#theme' => 'nodewords_ui_enabled_metatags',
+    );
+
+    $select_options = array(
+      'never' => t('Never'),
+      'empty' => t('When the meta tag is empty'),
+      'always' => t('Always'),
+    );
+
+    foreach ($tags_info as $name => $info) {
+      $bool = (
+        (
+          !empty($info['context']['allowed']) &&
+          is_array($info['context']['allowed']) &&
+          count(array_intersect($user_pages, $info['context']['allowed']))
+        ) ||
+        (
+          !empty($info['context']['denied']) &&
+          is_array($info['context']['denied']) &&
+          (count(array_intersect($user_pages, $info['context']['denied'])) != count($user_pages))
+        )
+      );
+      if ($bool || empty($info['context']['allowed']) || empty($info['context']['allowed'])) {
+        $enabled_options[$name] = '';
+
+        $form['enabled']['ui']['nodewords_ui_use_default_value_' . $name] = array(
+          '#type' => 'select',
+          '#default_value' => variable_get('nodewords_ui_use_default_value_' . $name, 'empty'),
+            '#options' => $select_options,
+          '#multiple' => FALSE,
+        );
+      }
+    }
+
+    $form['enabled']['ui']['nodewords_ui_edit'] = array(
+      '#type' => 'checkboxes',
+      '#options' => $enabled_options,
+      '#default_value' => variable_get('nodewords_ui_edit', array()),
+      '#checkall' => variable_get('nodewords_enable_checkall', FALSE) ? 'nodewords-enabled-metatags-ui-edit-form' : FALSE,
+    );
+  }
+  else {
+    $form['nodewords_ui_edit'] = array(
+      '#type' => 'value',
+      '#value' => variable_get('nodewords_ui_edit', array()),
+    );
+  }
+}
+
+/**
+ * Implements hook_nodeapi().
+ */
+function nodewords_ui_nodeapi(&$node, $op, $teaser = NULL, $page = NULL) {
+  $bool = (
+    $op == 'prepare translation' &&
+    isset($node->translation_source->nodewords)
+  );
+  if ($bool) {
+    $node->nodewords = $node->translation_source->nodewords;
+  }
+}
+
+/**
+ * Implements hook_theme().
+ */
+function nodewords_ui_theme() {
+  return array(
+    'nodewords_ui_enabled_metatags' => array(
+      'arguments' => array('form' => array()),
+    ),
+  );
+}
+
+/**
+ * Implements hook_user().
+ */
+function nodewords_ui_user($op, &$edit, &$account, $category = NULL) {
+  global $user;
+
+  $bool = (
+    $op == 'form' &&
+    (
+      user_access('administer meta tags') ||
+      $user->uid == $account->uid
+    ) &&
+    $category == 'account'
+  );
+  if ($bool) {
+    $form['nodewords'] = nodewords_tags_edit_fields(
+      array('type' => NODEWORDS_TYPE_USER, 'id' => $account->uid),
+      isset($account->nodewords['metatags']) ? $account->nodewords['metatags'] : array()
+    );
+
+    return $form;
+  }
+}
+
+/**
+ * Render the list of enabled meta tags in non administrative forms.
+ */
+function theme_nodewords_ui_enabled_metatags($form) {
+  foreach (nodewords_get_possible_tags() as $name => $info) {
+    $row = array();
+
+    if (isset($form['nodewords_ui_edit'][$name])) {
+      $row[] = $info['label'];
+      $row[] = drupal_render($form['nodewords_ui_edit'][$name]);
+      $row[] = drupal_render($form['nodewords_ui_use_default_value_' . $name]);
+
+      $rows[] = $row;
+    }
+  }
+
+  $header[] = t('Meta tag');
+  $header[] = array(
+    'data' => t('Show in edit form'),
+    'class' => (variable_get('nodewords_enable_checkall', FALSE) && count($rows) > 1) ? 'nodewords-enabled-metatags-ui-edit-form' : '',
+  );
+  $header[] = t('Use the default value');
+
+  return theme('table', $header, $rows) . drupal_render($form);
+}
+
+function _nodewords_ui_get_node_metatags_type($node) {
+  return array('type' => NODEWORDS_TYPE_NODE, 'id' => $node->nid);
+}

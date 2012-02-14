@@ -1,0 +1,34 @@
+@CHARSET "UTF-8";
+
+div.beat-item blockquote {
+  background: #ffffff url('images/blockquote-start.gif') 0 0 no-repeat;
+  margin: 0 20px; padding: 0;
+}
+
+div.beat-item blockquote div {
+  background: #ffffff url('images/blockquote-end.gif') 100% 100% no-repeat;
+  padding: 30px 30px;
+  margin: 0px 25px;
+}
+
+span.heartbeat_times {
+  font-style: oblique;
+  font-size: 0.75em;
+}
+
+a.heartbeat-older-messages {
+  clear: both;
+  display: block;
+  width: 100%;
+}
+
+/*  Custom throbber */
+.heartbeat-messages-waiting a,
+.heartbeat-messages-waiting input {
+  opacity: 0.5;
+  filter: alpha(opacity=50); /* IE */
+}
+.heartbeat-messages-waiting .heartbeat-messages-throbber {
+  background: url(images/heartbeat-throbber.gif) no-repeat right center;
+  padding-right: 13px;
+}

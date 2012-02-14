@@ -1,0 +1,64 @@
+/* $Id: image_gallery.css,v 1.10 2009/08/27 12:10:57 joachim Exp $ */
+
+ul.galleries {
+  list-style-type : none;
+  margin : 0;
+  padding : 0;
+}
+
+ul.galleries li {
+  position : relative;
+  background: transparent none;
+  border : 1px #cccccc solid;
+  margin : 1em 0;
+  padding : 1em;
+}
+
+ul.galleries li img {
+  float : left;
+  position : relative;
+  padding-right : 4px;
+  margin-right : 4px;
+}
+
+ul.galleries li .count,
+ul.galleries li .last {
+  clear : left;
+  margin : 0;
+  padding : 0;
+  font-style : italic;
+}
+
+ul.galleries h3 {
+  margin : 0;
+  padding : 0;
+}
+
+ul.images {
+  list-style-type : none;
+  margin : 0;
+  padding : 0;
+}
+
+ul.images h3 { 
+  font-size:1em;
+}
+
+ul.images li {
+  float : left;
+  margin : 1em;
+  background: transparent none;
+  list-style: none;
+}
+
+/* Views: gallery terms style plugin. */
+.view .image-gallery-terms li {
+  background: transparent none;
+  border : 1px #cccccc solid;
+  margin : 1em 0;
+  padding : 1em;
+}
+.image-gallery-terms .image-gallery-view-cover-thumbnail {
+  float: left;
+  margin-right: 1em;
+}

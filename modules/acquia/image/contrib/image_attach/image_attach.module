@@ -1,0 +1,726 @@
+<?php
+// $Id: image_attach.module,v 1.76.2.10 2010/08/25 09:56:36 joachim Exp $
+
+/**
+ * @file image_attach.module
+ */
+
+define('IMAGE_ATTACH_HIDDEN', 'hidden');
+
+/**
+ * Implementation of hook_menu()
+ */
+function image_attach_menu() {
+  $items['image_attach'] = array(
+    'title' => 'Image attachment view',
+    'page callback' => 'image_attach_view_image',
+    'access arguments' => array('access content'),
+    'type' => MENU_CALLBACK,
+  );
+  $items['admin/settings/image/image_attach'] = array(
+    'title' => 'Image attach',
+    'description' => 'Enable image attach for content.',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('image_attach_admin_settings'),
+    'access arguments' => array('administer site configuration'),
+    'type' => MENU_LOCAL_TASK,
+  );
+  return $items;
+}
+
+/**
+ * Implementation of hook_perm()
+ */
+function image_attach_perm() {
+  return array('attach images');
+}
+
+function image_attach_admin_settings() {
+  $form['image_attach_existing'] = array(
+    '#type' => 'radios',
+    '#title' => t('Attach existing images'),
+    '#default_value' => variable_get('image_attach_existing', 1),
+    '#options' => array(
+      0 => t('Disabled'),
+      1 => t('Enabled'),
+    ),
+    '#description' => t('When enabled, will allow existing image nodes to be attached instead of uploading new images.'),
+  );
+
+  return system_settings_form($form);
+}
+
+/**
+ * Implementation of hook_block().
+ */
+function image_attach_block($op = 'list', $delta = 0, $edit = array()) {
+  switch ($op) {
+    case 'list':
+      $blocks[0] = array(
+        'info' => t('Attached images'),
+        'weight' => 0,
+        'visibility' => 1,
+        'pages' => 'node/*',
+      );
+      return $blocks;
+
+    case 'view':
+      if ($delta == 0) {
+        if (arg(0) == 'node' && is_numeric(arg(1))) {
+          $node = node_load(arg(1));
+          if (isset($node->iids)) {
+            $output['subject'] = t('Attached images');
+            foreach ($node->iids as $iid) {
+              $image = node_load($iid);
+              if (node_access('view', $image)) {
+                $image_nodes[] = $image;
+              }
+            }
+            $output['content'] = theme('image_attach_attached_images_block', $node->nid, $image_nodes);
+            return $output;
+          }
+        }
+      }
+      break;
+
+    case 'configure':
+      if ($delta == 0) {
+        $image_sizes = array();
+        foreach (image_get_sizes() as $key => $size) {
+          $image_sizes[$key] = $size['label'];
+        }
+        $form['image_attach_block_0_size'] = array(
+          '#type' => 'select',
+          '#title' => t('Image size'),
+          '#default_value' => variable_get('image_attach_block_0_size', IMAGE_THUMBNAIL),
+          '#options' => $image_sizes,
+          '#description' => t('This determines the size of the image that appears in the block.'),
+        );
+        return $form;
+      }
+      break;
+
+    case 'save':
+      if ($delta == 0) {
+        variable_set('image_attach_block_0_size', $edit['image_attach_block_0_size']);
+      }
+      break;
+  }
+}
+
+/**
+ * Implementation of hook_form_FORM_ID_alter().
+ *
+ * Add settings to the content type settings form.
+ */
+function image_attach_form_node_type_form_alter(&$form, $form_state) {
+  if ($form['#node_type']->type != 'image') {
+    _image_check_settings();
+
+    $image_sizes = array(IMAGE_ATTACH_HIDDEN => t('<Hidden>'));
+    foreach (image_get_sizes() as $key => $size) {
+      $image_sizes[$key] = $size['label'];
+    }
+
+    $form['image_attach'] = array(
+      '#type' => 'fieldset',
+      '#title' => t('Image Attach settings'),
+      '#collapsible' => TRUE,
+      '#collapsed' => TRUE,
+    );
+    $form['image_attach']['image_attach'] = array(
+      '#type' => 'radios',
+      '#title' => t('Attach images'),
+      '#default_value' => variable_get('image_attach_' . $form['#node_type']->type, 0),
+      '#options' => array(0 => t('Disabled'), 1 => t('Enabled')),
+      '#description' => t('Should this node allows users to upload an image?'),
+    );
+    $form['image_attach']['image_attach_maximum'] = array(
+      '#type' => 'select',
+      '#title' => t('Maximum number of images'),
+      '#default_value' => variable_get('image_attach_maximum_' . $form['#node_type']->type, 0),
+      '#options' => array(0 => t('Unlimited')) + drupal_map_assoc(range(1, 10)),
+      '#description' => t('The maximum number of images that may be attached to nodes of this type.'),
+    );
+    $form['image_attach']['image_attach_size_teaser'] = array(
+      '#type' => 'select',
+      '#title' => t('Teaser image size'),
+      '#default_value' => variable_get('image_attach_size_teaser_' . $form['#node_type']->type, IMAGE_THUMBNAIL),
+      '#options' => $image_sizes,
+      '#description' => t("This determines the size of the image that appears when the node is displayed as a teaser. 'Hidden' will not show the image."),
+    );
+    // Hide the weight if CCK is doing the weight for us.
+    if (!module_exists('content')) {
+      $form['image_attach']['image_attach_weight_teaser'] = array(
+        '#type' => 'weight',
+        '#title' => t('Teaser image weight'),
+        '#default_value' => variable_get('image_attach_weight_teaser_' . $form['#node_type']->type, 0),
+        '#description' => t('This value determines the order of the image when displayed in the teaser.'),
+      );
+    }
+    $form['image_attach']['image_attach_size_body'] = array(
+      '#type' => 'select',
+      '#title' => t('Full node image size'),
+      '#default_value' => variable_get('image_attach_size_body_' . $form['#node_type']->type, IMAGE_THUMBNAIL),
+      '#options' => $image_sizes,
+      '#description' => t("This determines the size of the image that appears when the full node is displayed. 'Hidden' will not show the image."),
+    );
+    if (!module_exists('content')) {
+      $form['image_attach']['image_attach_weight_body'] = array(
+        '#type' => 'weight',
+        '#title' => t('Full node image weight'),
+        '#default_value' => variable_get('image_attach_weight_body_' . $form['#node_type']->type, 0),
+        '#description' => t('This value determines the order of the image when displayed in the body.'),
+      );
+    }
+    if (module_exists('content')) {
+      $link = l(t('Manage fields'), $_GET['q'] . '/fields');
+      $form['image_attach']['#description'] = t('Since you installed CCK module, you can change the image weight in the !link page.', array('!link' => $link));
+    }
+  }
+}
+
+/**
+ * Implementation of hook_form_alter().
+ */
+function image_attach_form_alter(&$form, $form_state, $form_id) {
+  // Node edit form.
+  if (isset($form['type']['#value']) && $form['type']['#value'] != 'image') {
+    $type = $form['type']['#value'];
+    // If enabled adjust the form.
+    if ($form_id == $type . '_node_form' && variable_get('image_attach_' . $type, 0)) {
+      $node = $form['#node'];
+      _image_check_settings();
+      $value = !empty($node->new_image) ? '#value' : '#default_value';
+      $form['#attributes'] = array("enctype" => "multipart/form-data");
+      // Add a custom submit handler so we can handle image creation on-the-fly
+      $form['#validate'][] = 'image_attach_validate';
+      // Add a custom submit handler so we can clean up the selection box items.
+      $form['#submit'][] = 'image_attach_node_form_submit';
+
+      // Check permissions and settings
+      $may_attach          = user_access('attach images');
+      $may_attach_existing = variable_get('image_attach_existing', 1);
+      $may_upload          = user_access('create images');
+      $has_existing_images = !empty($node->iids);
+      $maximum_images      = variable_get('image_attach_maximum_' . $type, 0);
+
+      // Display the image attach form only if user can attach images, AND
+      // it is allowed to attach existing images or the user is allowed to create new images
+      if ($may_attach && ($may_attach_existing || $may_upload)) {
+        $form['image_attach'] = array(
+          '#type' => 'fieldset',
+          '#title' => t('Attached images'),
+          '#collapsible' => TRUE,
+          '#collapsed' => empty($node->iids),
+        );
+
+        if ($maximum_images) {
+          $form['image_attach']['#description'] = format_plural(
+            $maximum_images,
+            'You may attach 1 image.',
+            'You may attach up to @count images.'
+          );
+        }
+
+        if ($has_existing_images) {
+          foreach ($node->iids as $iid) {
+            $image = node_load($iid);
+            $form['image_attach']['image_thumbnail'][$iid] = array(
+              '#type' => 'item',
+              '#title' => t('Thumbnail'),
+              '#value' => image_display($image, 'thumbnail'),
+            );
+          }
+        }
+
+        // Only show selection box of image nodes if the user may attach some,
+        // or if there are existings ones that may be removed.
+        if ($may_attach_existing || $has_existing_images) {
+          $form['image_attach']['iids'] = array(
+            '#type' => 'select',
+            $value => empty($node->iids) ? NULL : $node->iids,
+            '#multiple' => TRUE,
+            '#size' => 6,
+            // Title, options and description are set just below.
+          );
+
+          // User may attach already existing images: show a selection box containing all images.
+          if ($may_attach_existing) {
+            $form['image_attach']['iids']['#title'] = t('Existing images');
+            $form['image_attach']['iids']['#options'] = _image_attach_get_image_nodes();
+            if ($may_upload) {
+              $form['image_attach']['iids']['#description'] = t('Choose existing images if you do not upload a new one.');
+            }
+            else {
+              $form['image_attach']['iids']['#description'] = t('Choose existing images to attach.');
+            }
+          }
+          // User may only upload new images: show a selection box containing only attached images.
+          else {
+            $form['image_attach']['iids']['#title'] = t('Attached images');
+            $form['image_attach']['iids']['#options'] = _image_attach_get_image_nodes($node->iids);
+            $form['image_attach']['iids']['#description'] = t('You can remove a previously attached image by unselecting it.');
+          }
+        }
+
+        // User may create images, add upload form elements.
+        if ($may_upload) {
+          $form['image_attach']['image'] = array(
+            '#type' => 'file',
+            '#size' => 40,
+            '#title' => t('Upload image'),
+          );
+          $form['image_attach']['image_title'] = array(
+            '#type' => 'textfield',
+            '#title' => t('Image title'),
+            $value => '',
+            '#description' => t('The title the image will be shown with. Leave blank to use the filename.'),
+          );
+          // Provide an additional submit button, which adds an image and redirects
+          // the user to the node edit form.
+          $form['image_attach']['image_attach_multiple'] = array(
+            '#type' => 'submit',
+            '#value' => t('Upload'),
+            '#validate' => array('image_attach_validate'),
+            '#submit' => array('image_attach_image_add_submit'),
+          );
+        }
+      }
+    }
+  }
+}
+
+/**
+ * Save attached image nids and rebuild form.
+ *
+ * This submit function adds the new images and returns to the
+ * node edit form directly afterwards, without creating the new node yet.
+ */
+function image_attach_image_add_submit(&$form, &$form_state) {
+  // Rebuild the attached image data.
+  if (isset($form_state['values']['iids'])) {
+    db_query("DELETE FROM {image_attach} WHERE nid = %d", $form['nid']['#value']);
+    if (count($form_state['values']['iids'])) {
+      $weight = 0;
+      foreach ($form_state['values']['iids'] as $iid) {
+        db_query("INSERT INTO {image_attach} (nid, iid, weight) VALUES (%d, %d, %d)", $form['nid']['#value'], $iid, $weight++);
+      }
+    }
+  }
+
+  // Convert taxonomy format from Preview to Object.
+  if (module_exists('taxonomy') && !empty($form_state['values']['taxonomy'])) {
+    $temp_node = new stdClass();
+    $temp_node->taxonomy = $form_state['values']['taxonomy'];
+    $form_state['values']['taxonomy'] = taxonomy_preview_terms($temp_node);
+    unset($temp_node);
+  }
+
+  // Rebuild the node edit form.
+  node_form_submit_build_node($form, $form_state);
+}
+
+/**
+ * Image attach validation handler for node edit form.
+ *
+ * Check that the number of images has not exceeded the maximum.
+ * Capture node form submission and immediately create an image if one has been
+ * uploaded.
+ * Note that the new image nodes are created even on preview. Taking several
+ * attempts may create trash.
+ */
+function image_attach_validate(&$form, &$form_state) {
+  // Validate the number of attached images. Filter out the 'None' with array_filter.
+  if ($maximum_images = variable_get('image_attach_maximum_' . $form['#node']->type, 0)) {
+    // Test for whether a file is being uploaded cribbed from file_save_upload().
+    $uploading_new_image = isset($_FILES['files']) && $_FILES['files']['name']['image'] && is_uploaded_file($_FILES['files']['tmp_name']['image']);
+    $num_images = count(array_filter($form_state['values']['iids']));
+
+    $node_type_label = node_get_types('name', $form['#node']->type);
+    if ($num_images >= $maximum_images && $uploading_new_image) {
+      // This error will be set when attempting to upload a new image.
+      // The number already selected may be equal to the maximum, in which case
+      // the error is just to alert the user that their upload has not been performed, and allow
+      // them to unselect an image and proceed to upload the new one.
+      form_set_error('iids', t('There are @count_images images already attached. A new image cannot be uploaded until one or more attached images are unselected.', array(
+        '@count_images' => format_plural($num_images, '1 image', '@count images'),
+        '@maximum'      => $maximum_images,
+        '%type'         => $node_type_label,
+      )));
+    }
+    elseif ($num_images > $maximum_images) {
+      form_set_error('iids', t('You have selected @count_images but the maximum for a %type is @maximum.', array(
+        '@count_images' => format_plural($num_images, '1 image', '@count images'),
+        '@maximum'      => $maximum_images,
+        '%type'         => $node_type_label,
+      )));
+    }
+  }
+
+  // Validate and save the uploaded image, providing that there are no errors set.
+  if (!count(form_get_errors())) {
+    $validators = array(
+      'file_validate_is_image' => array(),
+    );
+    if ($file = file_save_upload('image', $validators)) {
+      $image_title = $_POST['image_title'] ? $_POST['image_title'] : basename($file->filepath);
+      // Initialize an image properly.
+      $image = image_create_node_from($file->filepath, $image_title, '');
+      if ($image && !form_get_errors()) {
+        drupal_set_message(t("Created new image to attach to this node. !image_link", array('!image_link' => l($image_title, 'node/' . $image->nid))));
+        // Append image nid to array of images.
+        $form_state['values']['iids'][$image->nid] = $image->nid;
+      }
+    }
+    else {
+      // Only raise error if user clicked specific Upload button.
+      if ($uploading_new_image) {
+        form_set_error('image_attach', t('Invalid or missing image file for upload and attach.'));
+      }
+    }
+  }
+}
+
+/**
+ * Extra submit handler for node forms.
+ */
+function image_attach_node_form_submit(&$form, &$form_state) {
+  // Clear the 0 key in the iids array that arises from selecting the 'None'
+  // option. We do this here so image_attach_nodeapi() gets clean data.
+  unset($form_state['values']['iids'][0]);
+}
+
+/**
+ * Implementation of hook_nodeapi().
+ */
+function image_attach_nodeapi(&$node, $op, $teaser, $page) {
+  // Make sure that if an image is deleted it is detached from any nodes.
+  if ($node->type == 'image') {
+    switch ($op) {
+      case 'delete':
+        db_query("DELETE FROM {image_attach} WHERE iid = %d", $node->nid);
+    }
+    return;
+  }
+  else if (variable_get('image_attach_' . $node->type, 0) == 0) {
+    return;
+  }
+  switch ($op) {
+    case 'insert':
+    case 'update':
+      db_query("DELETE FROM {image_attach} WHERE nid = %d", $node->nid);
+      if (!empty($node->iids)) {
+        // Populate weight column with placeholder values.
+        $weight = 0;
+        foreach ($node->iids as $iid) {
+          db_query("INSERT INTO {image_attach} (nid, iid, weight) VALUES (%d, %d, %d)", $node->nid, $iid, $weight++);
+        }
+      }
+      break;
+
+    case 'delete':
+      db_query("DELETE FROM {image_attach} WHERE nid = %d", $node->nid);
+      break;
+
+    case 'load':
+      $res = db_query("SELECT iid FROM {image_attach} WHERE nid = %d ORDER BY weight", $node->nid);
+      $iids = array();
+      while ($iid = db_fetch_array($res)) {
+        $iids[] = $iid['iid'];
+      }
+      return array('iids' => $iids);
+
+    // Pass the body and teaser objects to the theme again to add the images.
+    case 'view':
+      if (!empty($node->iids)) {
+        $node->image_attach = _image_attach_node_load_attached($node->iids, $teaser);
+        $teaser_or_body = $teaser ? 'teaser' : 'body';
+        $img_size = variable_get('image_attach_size_' . $teaser_or_body . '_' . $node->type, IMAGE_THUMBNAIL);
+
+        // Don't show anything if the attached images are set to hidden.
+        if ($img_size == IMAGE_ATTACH_HIDDEN) {
+          return;
+        }
+
+        // Set weight, either from CCK or our own settings. Cribbed from signup!
+        if (module_exists('content')) {
+          // Due to a bug in CCK (http://drupal.org/node/363456), we need
+          // to call this function twice to ensure we get the real value.
+          // The bug is present when you first enable the setting to
+          // display in the node instead of a separate tab, or when you
+          // first upgrade to the version that contains this code.
+          content_extra_field_weight($node->type, 'image_attach');
+          $weight = content_extra_field_weight($node->type, 'image_attach');
+        }
+        else {
+          $weight = variable_get("image_attach_weight_{$teaser_or_body}_{$node->type}", 0);
+        }
+        $node->content['image_attach'] = array(
+          '#weight' => $weight,
+          '#value' => theme('image_attach_attached_images_node', $node->nid, $node->image_attach, $img_size, $teaser),
+        );
+      }
+      break;
+
+    case 'rss item':
+      $ret = array();
+      if (!empty($node->iids) && $image = node_load($node->iids[0])) {
+        $info = image_get_info(file_create_path($image->images[IMAGE_PREVIEW]));
+        $ret[] = array(
+          'key' => 'enclosure',
+          'attributes' => array(
+            'url' => url("image/view/{$node->iids[0]}/" . IMAGE_PREVIEW, array('absolute' => TRUE)),
+            'length' => $info['file_size'],
+            'type' => $info['mime_type'],
+          ),
+        );
+      }
+      return $ret;
+  }
+}
+
+/**
+ * Helper function for hook_nodeapi: view op.
+ * Loads all the required attached image nodes.
+ *
+ * @param $nids: an array of node ids.
+ * @param $teaser: if true, only load the first of the node ids.
+ *
+ * @return: An numerical array of node objects.
+ */
+function _image_attach_node_load_attached($attached_nids, $teaser = FALSE) {
+  // If teaser, we only want the first node.
+  if ($teaser) {
+    $attached_nids = array($attached_nids[0]);
+  }
+  foreach ($attached_nids as $nid) {
+    $nodes[] = node_load($nid);
+  }
+
+  return $nodes;
+}
+
+/**
+ * Fetch an array of all candidate referenced nodes, for use in presenting the
+ * selection form to the user.
+ *
+ * @param $nids
+ *  A list of nids to filter on. If not passed, all image nids are returned.
+ */
+function _image_attach_get_image_nodes($nids = array()) {
+  $placeholder = '';
+  // If $nids was passed, build placeholders to put in the query
+  if (count($nids)) {
+    $placeholder = 'AND n.nid IN (' . implode(', ', array_fill(0, sizeof($nids), '%d')) . ') ';
+  }
+
+  $rows = array(0 => t('- None -'));
+
+  $result = db_query(db_rewrite_sql("SELECT n.nid, n.title, n.sticky FROM {node} n WHERE n.status = 1 AND n.type = 'image' " . $placeholder . "ORDER BY n.sticky DESC, n.title ASC"), $nids);
+  while ($node = db_fetch_object($result)) {
+    $rows[$node->nid] = $node->title;
+  }
+
+  return $rows;
+}
+
+/**
+ * Views 2 API handler
+ */
+function image_attach_views_api() {
+  return array(
+    'api' => 2,
+    'path' => drupal_get_path('module', 'image_attach'),
+  );
+}
+
+/**
+ * Implementation of hook_theme() registry.
+ */
+function image_attach_theme() {
+  return array(
+    'image_attach_attached_images' => array(
+      'arguments' => array(
+        'nid' => 0,
+        'image_nodes' => array(),
+        'options' => array(),
+      ),
+    ),
+    'image_attach_attached_images_node' => array(
+      'arguments' => array(
+        'node' => new stdClass(),
+        'image_nodes' => array(),
+        'img_size' => IMAGE_THUMBNAIL,
+        'teaser' => FALSE,
+      ),
+    ),
+    'image_attach_attached_images_block' => array(
+      'arguments' => array(
+        'nid' => 0,
+        'image_nodes' => array(),
+      ),
+    ),
+  );
+}
+
+/**
+ * Theme attached images shown in nodes.
+ *
+ * @param $nid
+ *  The attaching node's id.
+ * @param $image_nodes
+ *   The node objects of the images to theme.
+ * @param $img_size
+ *   The size at which to show images.
+ * @param $teaser
+ *   Whether the $node is being shown as a teaser or not.
+ *
+ * Override this in template.php to include a case statement if you want different node types to appear differently.
+ * If you have additional image sizes you defined in image.module, you can use them by theming this function as well.
+ */
+function theme_image_attach_attached_images_node($nid, $image_nodes, $img_size, $teaser = FALSE) {
+  drupal_add_css(drupal_get_path('module', 'image_attach') . '/image_attach.css');
+
+  $options = array(
+    'size' => $img_size,
+    'link' => $teaser ? 'node' : 'image',
+    'attributes' => array(
+      'class' => 'image-attach-' . ($teaser ? 'teaser' : 'body'),
+    ),
+  );
+
+  // We take the images in reverse order because they are floated to the right,
+  // and we want the apparent left to right order to be correct.
+  $output = theme('image_attach_attached_images', $nid, array_reverse($image_nodes), $options);
+
+  // Wrap output of potentially multiple images in a DIV.
+  if ($output && !$teaser) {
+    $output = '<div class="all-attached-images">' . $output . '</div>';
+  }
+
+  return $output;
+}
+
+/**
+ * Theme the attached images block.
+ *
+ * @param $nid
+ *  The attaching node's id.
+ * @param $image_nodes
+ *  The attached image nodes.
+ */
+function theme_image_attach_attached_images_block($nid, $image_nodes = array()) {
+  // Only return block content if there are images.
+  if (is_array($image_nodes) && count($image_nodes)) {
+    $options = array(
+      'size' => variable_get('image_attach_block_0_size', IMAGE_THUMBNAIL),
+      'link' => 'image',
+    );
+
+    $output = theme('image_attach_attached_images', $nid, $image_nodes, $options);
+    $output = '<div class="all-attached-images">' . $output . '</div>';
+
+    return $output;
+  }
+}
+
+/**
+ * Generic theme function for any set of attached images.
+ *
+ * @param $nid
+ *  The id of the attaching node.
+ * @param $image_nodes
+ *  The fully loaded image nodes to theme. These do not need to be checked for
+ *  access: that happens in this function.
+ * @param $options
+ *  An associative array of options, with the following keys:
+ *    - 'size' (default IMAGE_THUMBNAIL)
+ *      The name of the image derivative size at which to show the images,
+ *      eg 'thumbnail'.
+ *    - 'link' (default 'image')
+ *      Whether and where the images should be linked. This should be one of:
+ *        - 'image': link to the image node. Default.
+ *        - 'node': link to the attaching node.
+ *        - 'none': no link.
+ *    - 'attributes'
+ *      Extra attributes for the div around each image.
+ */
+function theme_image_attach_attached_images($nid, $image_nodes = array(), $options = array()) {
+  // Merge in defaults.
+  $options += array(
+    'size' => IMAGE_THUMBNAIL,
+    'link' => 'image',
+  );
+
+  $img_size = $options['size'];
+  $link_destination = $options['link'];
+
+  // Link images to the attaching node.
+  if ($link_destination == 'node') {
+    $link_path = "node/$nid";
+  }
+
+  $output = '';
+  foreach ($image_nodes as $image) {
+    if (!node_access('view', $image)) {
+      // If the image is restricted, don't show it as an attachment.
+      continue;
+    }
+
+    // Link images to the image node.
+    if ($link_destination == 'image') {
+      $link_path = "node/$image->nid";
+    }
+
+    // Get a fresh copy of the attributes for each image node.
+    $div_attributes = $options['attributes'];
+
+    // Create CSS classes, beginning with those passed in to the function.
+    $classes = array();
+    if (isset($div_attributes['class'])) {
+      $classes[] = $div_attributes['class'];
+    }
+    // replace with base class in DIV
+    //$classes[] = 'image-attach-' . $teaser_or_body;
+    $classes[] = 'image-attach-node-' . $image->nid;
+    if (!$image->status) {
+      $classes[] = 'image-unpublished';
+    }
+    $div_attributes['class'] = implode(' ', $classes);
+
+    // Add the width as inline CSS.
+    $info = image_get_info(file_create_path($image->images[$img_size]));
+    if (!isset($div_attributes['style'])) {
+      $div_attributes['style'] = '';
+    }
+    $div_attributes['style'] .= 'width: ' . $info['width'] . 'px;';
+
+    $output .= '<div' . drupal_attributes($div_attributes) . '>';
+    $image_img = image_display($image, $img_size);
+    if ($link_path) {
+      $output .= l($image_img, $link_path, array('html' => TRUE));
+    }
+    else {
+      $output .= $image_img;
+    }
+    $output .= "</div>\n";
+  }
+
+  return $output;
+}
+
+/**
+ * Implementation of hook_content_extra_fields().
+ */
+function image_attach_content_extra_fields($type_name) {
+  if (variable_get('image_attach_' . $type_name, 0)) {
+    $extra['image_attach'] = array(
+      'label' => t('Attached images'),
+      'description' => t('Image Attach module form.'),
+      'weight' => 0,
+    );
+    return $extra;
+  }
+}
+

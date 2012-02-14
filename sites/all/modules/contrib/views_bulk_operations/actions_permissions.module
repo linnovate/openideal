@@ -1,0 +1,78 @@
+<?php
+// $Id: actions_permissions.module,v 1.1.2.3 2009/06/09 21:02:20 kratib Exp $
+
+/**
+ * Implementation of hook_perm().
+ */
+function actions_permissions_perm() {
+  $perms = array();
+  $actions = actions_list() + _actions_permissions_get_custom_actions();
+  foreach ($actions as $callback => $action) {
+    $perms[] = actions_permissions_get_perm($action['description'], $callback);
+  }
+  module_load_include('inc', 'node', 'node.admin');
+  foreach (array('node', 'user') as $type) {
+    foreach (module_invoke_all($type .'_operations') as $operation) {
+      if (is_array($operation['label']) || empty($operation['callback'])) continue;
+      $perms[] = actions_permissions_get_perm($operation['label'], $operation['callback']);
+    }
+  }
+  return $perms;
+}
+
+function _actions_permissions_get_custom_actions() {
+  $actions = array();
+  $static_actions = actions_list();
+  $result = db_query("SELECT * FROM {actions} WHERE parameters > ''");
+  while ($action = db_fetch_object($result)) {
+    $actions[$action->aid] = array(
+      'description' => $action->description,
+      'type' => $action->type,
+      'configurable' => FALSE,
+      'parameters' => unserialize($action->parameters),
+    );
+    $actions[$action->aid]['behavior'] = isset($static_actions[$action->callback]['behavior']) ? $static_actions[$action->callback]['behavior'] : null;
+  }
+  return $actions;
+}
+
+function actions_permissions_get_perm($label, $callback) {
+  return 'execute '. rt($label) .' ('. $callback .')';
+}
+
+/**
+ * Reverse translation: find English string given translated string.
+ * WARNING: Will not work for strings with params.
+ */
+function rt($string) {
+  global $language;
+  $langcode = $language->language;
+  
+  // 1. Lookup custom strings.
+  static $custom_strings;
+  if (!isset($custom_strings[$langcode])) {
+    $custom_strings[$langcode] = variable_get('locale_custom_strings_'. $langcode, array());
+  }
+  if ($source = array_search($string, $custom_strings[$langcode])) {
+    return $source;
+  }
+
+  // 2. Lookup locale translations.
+  if (!function_exists('locale') || $langcode == 'en') return $string;
+  if (variable_get('locale_cache_strings', 1) == 1) {
+    // Cache is on: this string is in the static cache for sure since we have its translated version.
+    $locale_t = locale();
+    if (isset($locale_t[$langcode]) && ($source = array_search($string, $locale_t[$langcode], TRUE))) {
+      return $source;
+    }
+    else {
+      return $string;
+    }
+  }
+  else {
+    // Cache is off: look it up in the database.
+    $source = db_result(db_query("SELECT s.source FROM {locales_source} s LEFT JOIN {locales_target} t ON s.lid = t.lid AND t.language = '%s' WHERE t.translation = '%s' AND s.textgroup = 'default'", $langcode, $string));
+    return $source ? $source : $string;
+  }
+}
+

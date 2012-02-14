@@ -1,0 +1,39 @@
+<?php
+// $Id: emwave.install,v 1.1.2.1 2009/10/13 13:26:44 aaron Exp $
+
+/**
+ * @file
+ * This is the emwave.module's install, configuration, and removal instructions.
+ */
+
+/**
+ * Implementation of hook_install().
+ */
+function emwave_install() {
+  drupal_load('module', 'content');
+  content_notify('install', 'emwave');
+}
+
+/**
+ * Implementation of hook_uninstall().
+ */
+function emwave_uninstall() {
+  drupal_load('module', 'content');
+  content_notify('uninstall', 'emwave');
+}
+
+/**
+ * Implementation of hook_enable().
+ */
+function emwave_enable() {
+  drupal_load('module', 'content');
+  content_notify('enable', 'emwave');
+}
+
+/**
+ * Implementation of hook_disable().
+ */
+function emwave_disable() {
+  drupal_load('module', 'content');
+  content_notify('disable', 'emwave');
+}

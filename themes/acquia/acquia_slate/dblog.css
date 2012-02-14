@@ -1,0 +1,53 @@
+/* $Id: dblog.css,v 1.1 2009/02/28 23:33:58 jwolf Exp $ */
+
+tr.selected a,
+#admin-dblog tbody a,
+table.system-status-report a,
+table.update a,
+.update table.version a {
+  color: #0D57A3;
+  text-decoration: none;
+}
+
+tr.selected a:hover,
+#admin-dblog tbody a:hover,
+table.system-status-report a:hover,
+table.update a:hover,
+.update table.version a:hover {
+  text-decoration: underline;
+}
+  
+table.system-status-report th {
+  border-bottom: 1px solid #000;
+}
+
+tr.info {
+  background: #4D4D4D;
+}
+
+tr.ok.even,
+tr.ok.odd {
+  background: #C2F5C2;
+  color: #000;
+}
+
+tr.dblog-notice {
+  background: #E4EEF8;
+  color: #000;
+}
+
+tr.warning.even,
+tr.warning.odd,
+tr.dblog-warning.even,
+tr.dblog-warning.odd {
+  background: #FFFFDD;
+  color: #000;
+}
+
+tr.error.even,
+tr.error.odd,
+tr.dblog-error.odd,
+tr.dblog-error.even {
+  background: #FBDBDB;
+  color: #8A1F11;
+}

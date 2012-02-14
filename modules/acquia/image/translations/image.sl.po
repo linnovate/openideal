@@ -1,0 +1,633 @@
+# $Id: image.sl.po,v 1.1 2008/12/27 11:16:44 hass Exp $
+#
+# Slovene translation of Drupal (general)
+# Copyright 2007 Gregor Rudolf <gregor.rudolf@gmail.com>
+# Generated from files:
+#  image.module,v 1.209.2.36 2007/07/06 15:22:19 drewish
+#  image.info,v 1.2 2006/11/20 04:22:27 walkah
+#  image.install,v 1.1.4.7 2007/07/07 20:29:53 drewish
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Drupal image-5.x-1.4 module\n"
+"POT-Creation-Date: 2007-08-12 21:30+0200\n"
+"PO-Revision-Date: 2007-08-21 18:02+0100\n"
+"Last-Translator: Gregor Rudolf <gregor.rudolf@gmail.com>\n"
+"Language-Team: Slovenian <gregor.rudolf@gmail.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n%100==4 ? 2 : 3;\n"
+"X-Poedit-Language: Slovenian\n"
+"X-Poedit-Country: SLOVENIA\n"
+
+#: image.module:18
+msgid "The image module is used to create and administer images for your site. Each image is stored as a post, with thumbnails of the original generated automatically. There are two default thumbnail sizes, thumbnail and preview. The thumbnail size is shown as the preview for image posts and when browsing image galleries. The preview is the default size when first displaying an image node."
+msgstr ""
+
+#: image.module:19
+msgid ""
+"Image administration allows the image directory and the image sizes to be set.</p><p>\n"
+"Image galleries are used to organize and display images in galleries.   The list tab allows users to edit existing image gallery names, descriptions, parents and relative position, known as a weight.  The add galleries tab allows you to create a new image gallery defining name, description, parent and weight."
+msgstr ""
+
+#: image.module:21
+msgid ""
+"<p>You can</p>\n"
+"<ul>\n"
+"<li>view image handling messages in <a href=\"!admin-settings\">administer &gt;&gt; settings</a>.</li>\n"
+"<li>configure image sizes and file directories at <a href=\"!admin-settings-image\">administer &gt;&gt; settings &gt;&gt; image</a>.</li>\n"
+"<li>use the <a href=\"!external-http-drupal-org-project-img_assist\">image assist module</a> to upload and insert images into posts.</li>\n"
+msgstr ""
+
+#: image.module:27
+msgid "For more information please read the configuration and customization handbook <a href=\"!image\">Image page</a>."
+msgstr "Za več informacij si preberite sekcijo <a href=\"!image\">Image</a> v priročniku za nastavitve in prilagoditve."
+
+#: image.module:38;227;239;476;600 image.info:0;0
+msgid "Image"
+msgstr "Slika"
+
+#: image.module:40
+msgid "An image (with thumbnail). This is ideal for publishing photographs or screenshots."
+msgstr "Slika (s predogledno sličico). Fotografije, ekranske slike..."
+
+#: image.module:86
+msgid "File paths"
+msgstr "Poti"
+
+#: image.module:90
+msgid "Default image path"
+msgstr "Privzeta pot do slik"
+
+#: image.module:92
+msgid "Subdirectory in the directory \"%dir\" where pictures will be stored. Do not include trailing slash."
+msgstr "Poddirektorij v direktoriju \"%dir\" kjer bodo slike shranjene. Brez poševnice (/) za imenom."
+
+#: image.module:97
+msgid "Maximum upload size"
+msgstr "Največja dovoljena velikost datoteke"
+
+#: image.module:99
+msgid "KB"
+msgstr "KB"
+
+#: image.module:101
+msgid "Maximum file size for image uploads. When a maximum image dimensions is specified for original images the size is checked after resizing. "
+msgstr "Maksimalna velikost datoteke za nalaganje slik. Če so določene tudi maksimalne dimenzije slike, se velikost preverja po pomanjšanju slike."
+
+#: image.module:106
+msgid "Image sizes"
+msgstr "Velikost slik"
+
+#: image.module:109
+msgid "The dimensions on the \"Original\" image will be used to resize the images when they are first uploaded. If both dimensions are specified the image will be resized to fit with in that size. If only one dimension is specified the image will be resized to exactly that dimension with the other determined by the image aspect ratio."
+msgstr "Dimenzije \"Original\" slike se uporabijo za pomanjšavo naložene datoteke. Če sta določeni obe dimenziji bo naložena datoteka pomanjšana tako, da bo stala v njen okvir. Če je določena le ena dimenzija, bo slika pomanjšana na točno to dimenzijo, druga pa bo določena iz razmerja širina/višina."
+
+#: image.module:114
+msgid "Hidden"
+msgstr "Skrit"
+
+#: image.module:115
+msgid "Same window"
+msgstr "Isto okno"
+
+#: image.module:116
+msgid "New window"
+msgstr "Novo okno"
+
+#: image.module:176
+msgid "Must specify a width or height."
+msgstr "Določiti morate širino ali višino."
+
+#: image.module:203
+msgid "Label"
+msgstr "Labela"
+
+#: image.module:203
+msgid "Width"
+msgstr "Širina"
+
+#: image.module:203
+msgid "Height"
+msgstr "Višina"
+
+#: image.module:203
+msgid "Link"
+msgstr "Povezava"
+
+#: image.module:232;0
+msgid "image"
+msgstr "slika"
+
+#: image.module:244
+msgid "Image module settings."
+msgstr "Nastavitve modula Image/Slika"
+
+#: image.module:270
+msgid "Rebuild image thumbnails"
+msgstr "Izgradi predogledne sličice"
+
+#: image.module:281
+msgid "Rebuilding %node-title's resized images."
+msgstr "Priprava pomanjšanih slik za %node-title."
+
+#: image.module:301
+msgid "Uploaded file is not a valid image. Only JPG, PNG and GIF files are allowed."
+msgstr "Poslana datoteka ni veljavna slika. Podprte so le JPG, PNG in GIF datoteke."
+
+#: image.module:319
+msgid "The original image was resized to fit within the maximum allowed resolution of %width x %height pixels."
+msgstr "Izvorna slika je bila pomanjšana v okvir maksimalne dimenzije %width x %height pikslov."
+
+#: image.module:325
+msgid "The image you uploaded was too big. You are only allowed upload files less than %max_size but your file was %file_size."
+msgstr "Slika, ki ste jo naložili, je prevelika. Največja dovoljena velikost je %max_size, velikost vaše slike pa je %file_size."
+
+#: image.module:398;407
+msgid "Latest image"
+msgstr "Najnovejša slika"
+
+#: image.module:399;412
+msgid "Random image"
+msgstr "Naključna slika"
+
+#: image.module:426;873
+msgid "Thumbnail"
+msgstr "Sličica"
+
+#: image.module:478
+msgid "Click \"Browse...\" to select an image to upload."
+msgstr "Kliknite \"Brskaj\" za izbiro slike, ki jo želite naložiti."
+
+#: image.module:496
+msgid "You must upload an image."
+msgstr "Poslati morate sliko."
+
+#: image.module:598
+msgid "Image: Display Image"
+msgstr "Slika: prikaži sliko"
+
+#: image.module:601
+msgid "Image with link"
+msgstr "Slika s povezavo"
+
+#: image.module:627
+msgid "The image %title had missing derivative image which has been regenerated."
+msgstr "Manjkajoče pomanjšane slike slike %title so bile pripravljene."
+
+#: image.module:768
+msgid "No image toolkit is currently enabled. Without one the image module will not be able to resize your images. You can select one from the <a href=\"!link\">image toolkit settings page</a>."
+msgstr "Nobeno orodje za obdelavo slik ni omogočeno. Brez njega slikam ni možno spremeniti velikosti. Orodje lahko izberete na strani <a href=\"!link\">Orodje za obdelavo slik</a>."
+
+#: image.module:803
+msgid "Unable to create scaled %label image"
+msgstr "Ni bilo možno pripraviti pomanjšane %label slike"
+
+#: image.module:872 image.install:46
+msgid "Original"
+msgstr "Original"
+
+#: image.module:874
+msgid "Preview"
+msgstr "Predogled"
+
+#: image.module:49
+msgid "create images"
+msgstr "ustvari slike"
+
+#: image.module:49
+msgid "view original images"
+msgstr "pokaži originalne slike"
+
+#: image.module:49
+msgid "edit own images"
+msgstr "uredi lastne slike"
+
+#: image.module:49
+msgid "edit images"
+msgstr "uredi slike"
+
+#: image.info:0
+msgid "Allows uploading, resizing and viewing of images."
+msgstr "Omogoča nalaganje, spreminjanje velikosti in ogled slik."
+
+#: image_attach.module:16 image_attach.info:0
+msgid "Allows easy attaching of image nodes to other content types."
+msgstr "Omogoča enostavno pripenjanje slikovnih vozlišč k drugim oblikam vsebine."
+
+#: image_attach.module:29
+msgid "Image Attachment View"
+msgstr ""
+
+#: image_attach.module:36
+msgid "Image attach"
+msgstr "Image Attach - Pripni sliko"
+
+#: image_attach.module:37
+msgid "Enable image attach for content"
+msgstr "Omogoči pripenjanje slik k vsebini"
+
+#: image_attach.module:53
+msgid "Attach existing images"
+msgstr "Pripni obstoječe slike"
+
+#: image_attach.module:56
+msgid "When enabled, will allow existing image nodes to be attached instead of uploading new images."
+msgstr "Če je omogočeno, dovoljuje tudi pripenjanje že obstoječih slikovnih vozlišč in ni omejen le na pošiljanje novih slik."
+
+#: image_attach.module:70
+msgid "<Hidden>"
+msgstr "<skrito>"
+
+#: image_attach.module:77
+msgid "Image Attach settings"
+msgstr "Image Attach nastavitve"
+
+#: image_attach.module:82
+msgid "Attach Images"
+msgstr "Pripni slike"
+
+#: image_attach.module:84
+msgid "Disabled"
+msgstr "Onemogočeno"
+
+#: image_attach.module:84
+msgid "Enabled"
+msgstr "Omogočeno"
+
+#: image_attach.module:85
+msgid "Should this node allows users to upload an image?"
+msgstr "Ali naj to vozlišče uporabnikom dovoli nalaganje slike?"
+
+#: image_attach.module:89
+msgid "Teaser image size"
+msgstr "\"Teaser\" velikost"
+
+#: image_attach.module:92
+msgid "This determines the size of the image that appears when the node is displayed as a teaser. 'Hidden' will not show the image."
+msgstr "Določa katera velikost slike naj bo prikazana v \"Teaser\" pogledu. <skrito> izključi prikaz slike."
+
+#: image_attach.module:96
+msgid "Teaser image weight"
+msgstr "Teža \"Teaser\" slike"
+
+#: image_attach.module:98
+msgid "This value determines the order of the image when displayed in the teaser."
+msgstr "Vrednost določa vrstni red prikaza slike v \"Teaser\" načinu."
+
+#: image_attach.module:102
+msgid "Full node image size"
+msgstr "Velikost slike"
+
+#: image_attach.module:105
+msgid "This determines the size of the image that appears when the full node is displayed. 'Hidden' will not show the image."
+msgstr "Določa katera velikost slike naj bo prikazana v polnem pogledu vozlišča. <skrito> izključi prikaz slike."
+
+#: image_attach.module:109
+msgid "Full node image weight"
+msgstr "Teža slike"
+
+#: image_attach.module:111
+msgid "This value determines the order of the image when displayed in the body."
+msgstr "Vrednost določa vrstni red prikaza slike. Nižje vrednosti so prikazane bližje začetku vozlišča, višje pa \"potonejo\" proti dnu."
+
+#: image_attach.module:126
+msgid "Attached Images"
+msgstr "Pripete slike"
+
+#: image_attach.module:141
+msgid "Existing Image"
+msgstr "Obstoječa slika"
+
+#: image_attach.module:144
+msgid "Choose an image already existing on the server if you do not upload a new one."
+msgstr "Izberite sliko, ki se že nahaja na strežniku."
+
+#: image_attach.module:148
+msgid "-or-"
+msgstr "-ali-"
+
+#: image_attach.module:160
+msgid "Upload Image"
+msgstr "Naloži sliko"
+
+#: image_attach.module:164
+msgid "Image title"
+msgstr "Naslov slike"
+
+#: image_attach.module:166
+msgid "The title the image will be shown with."
+msgstr "Naslov, ki je prikazan ob sliki"
+
+#: image_attach.module:267
+msgid "None"
+msgstr "Brez"
+
+#: image_attach.module:291
+msgid "Image Attach: Display Image"
+msgstr "Image Attach: Prikaži sliko"
+
+#: image_attach.module:294
+msgid "Image with link to attaching node"
+msgstr "Slika s povezavo do pripetega vozlišča"
+
+#: image_attach.module:295
+msgid "Image with link to attached image"
+msgstr "Slika s povezavo do pripete slike"
+
+#: image_attach.module:306
+msgid "Image Attach: Attached image"
+msgstr "Image Attach: Pripeta slika"
+
+#: image_attach.module:307
+msgid "Exists"
+msgstr "Obstaja"
+
+#: image_attach.module:311
+msgid "Filter by whether or not the node has an attached image."
+msgstr "Filtrira vozlišča glede na to ali imajo pripeto sliko ali ne."
+
+#: image_attach.module:0
+msgid "image_attach"
+msgstr ""
+
+#: image_attach.info:0
+msgid "Image Attach"
+msgstr "Image Attach - Pripni sliko"
+
+#: image_gallery.module:7
+msgid "Image galleries can be used to organize and present groups of images. Galleries may be nested. To add a new gallery click the \"add gallery\" tab."
+msgstr "Galerij slik so namenjene za organiziranje in prikaz skupin slik. Galerije slik lahko gnezdite. Za pripravo nove galerije kliknite na \"Dodaj galerijo\"."
+
+#: image_gallery.module:21;28;163
+msgid "Image galleries"
+msgstr "Galerije slik"
+
+#: image_gallery.module:31
+msgid "Create and manage image galleries."
+msgstr "Priprava in upravljanje galerij slik."
+
+#: image_gallery.module:35
+msgid "List"
+msgstr "Seznam"
+
+#: image_gallery.module:41
+msgid "Add gallery"
+msgstr "Dodaj galerijo"
+
+#: image_gallery.module:48
+msgid "Image gallery"
+msgstr "Image gallery - Galerija slik"
+
+#: image_gallery.module:52
+msgid "Configure appearance of image galleries."
+msgstr "Nastavitev videza galerije."
+
+#: image_gallery.module:60
+msgid "Edit image gallery"
+msgstr "Uredi galerijo slik"
+
+#: image_gallery.module:76
+msgid "Gallery settings"
+msgstr "Nastavitve galerije"
+
+#: image_gallery.module:80
+msgid "Images per page"
+msgstr "Slik na stran"
+
+#: image_gallery.module:83
+msgid "Sets the number of images to be displayed in a gallery page."
+msgstr "Določa število slik, ki so prikazane na posamezni strani galerije."
+
+#: image_gallery.module:87
+msgid "Display node info"
+msgstr "Prikaži informacije vozlišča"
+
+#: image_gallery.module:89
+msgid "Checking this will display the \"Posted by\" node information on the gallery pages."
+msgstr "Prikaže informacije o avtorju na straneh galerije."
+
+#: image_gallery.module:177
+msgid "Name"
+msgstr "Ime"
+
+#: image_gallery.module:177
+msgid "Operations"
+msgstr "Operacije"
+
+#: image_gallery.module:182
+msgid "edit gallery"
+msgstr "uredi galerijo"
+
+#: image_gallery.module:187
+msgid "No galleries available"
+msgstr "Ni galerij"
+
+#: image_gallery.module:192;241;275
+msgid "Delete"
+msgstr "Izbriši"
+
+#: image_gallery.module:206
+msgid "Gallery name"
+msgstr "Ime galerije"
+
+#: image_gallery.module:210
+msgid "The name is used to identify the gallery."
+msgstr "Ime služi identifikaciji galerije."
+
+#: image_gallery.module:215
+msgid "Description"
+msgstr "Opis"
+
+#: image_gallery.module:219
+msgid "The description can be used to provide more information about the image gallery."
+msgstr "V opisu so lahko podrobnejše informacije o galeriji slik."
+
+#: image_gallery.module:222
+msgid "Parent"
+msgstr "Starš"
+
+#: image_gallery.module:225
+msgid "Weight"
+msgstr "Teža"
+
+#: image_gallery.module:228
+msgid "When listing galleries, those with with light (small) weights get listed before containers with heavier (larger) weights. Galleries with equal weights are sorted alphabetically."
+msgstr "V seznamu galerij so tiste z nižjo težo prikazane prej. Galerije z isto težo so urejene abecedno."
+
+#: image_gallery.module:236
+msgid "Submit"
+msgstr "Pošlji"
+
+#: image_gallery.module:257
+msgid "Created new gallery %term."
+msgstr "Pripravljena nova galerija %term."
+
+#: image_gallery.module:260
+msgid "The gallery %term has been updated."
+msgstr "Galerija %term je bila posodobljena."
+
+#: image_gallery.module:263
+msgid "The gallery %term has been deleted."
+msgstr "Galerija %term je bila izbrisana."
+
+#: image_gallery.module:275
+msgid "Are you sure you want to delete the image gallery %name?"
+msgstr "Ali potrjujete brisanje galerije %name?"
+
+#: image_gallery.module:275
+msgid "Deleting an image gallery will delete all sub-galleries. This action cannot be undone."
+msgstr "Brisanje galerije izbriše tudi vse podgalerije. Operacije ni možno razveljaviti."
+
+#: image_gallery.module:275
+msgid "Cancel"
+msgstr "Prekliči"
+
+#: image_gallery.module:280
+msgid "The image gallery %term and all sub-galleries have been deleted."
+msgstr "Galerija %term in vse podgalerije so bile izbrisane."
+
+#: image_gallery.module:305
+msgid "root"
+msgstr "koren"
+
+#: image_gallery.module:319
+msgid "Image galleries may be nested below other galleries."
+msgstr "Galerije slik lahko vgnezdite v druge galerije slik."
+
+#: image_gallery.module:347
+msgid "Last updated: %date"
+msgstr "Nazadnje posodobljeno: %date"
+
+#: image_gallery.module:366
+msgid "Posted by: !name"
+msgstr "Od: !name"
+
+#: image_gallery.module:396
+msgid "Image Galleries"
+msgstr "Galerije slik"
+
+#: image_gallery.module:345;381
+msgid "There is 1 image in this gallery"
+msgid_plural "There are @count images in this gallery"
+msgstr[0] "V galeriji je @count slika"
+msgstr[1] "V galeriji sta @count sliki"
+msgstr[2] "V galeriji so @count slike"
+msgstr[3] "V galeriji je @count slik"
+
+#: image_gallery.module:12
+msgid "administer images"
+msgstr "upravljaj slike"
+
+#: image_gallery.module:0
+msgid "image_gallery"
+msgstr "image_gallery"
+
+#: image_gallery.info:0
+msgid "Image Gallery"
+msgstr "Galerija slik"
+
+#: image_gallery.info:0
+msgid "Allows sorting and displaying of image galleries based on categories."
+msgstr "Omogoča sortiranje in prikaz galerij po kategorijah."
+
+#: image_import.module:7
+msgid "Import multiple image files and save them as image nodes. The files will be moved from their location into the image module's files directory. "
+msgstr "Uvoz ene ali več slik iz datotečnega sistema na strežniku v slikovna vozlišča. Datoteke bodo premaknjene iz njihove lokacije v direktorij, določen v Image (Slika) modulu."
+
+#: image_import.module:8
+msgid "Searching for image files in %dirpath."
+msgstr "Iskanje datotek v %dirpath."
+
+#: image_import.module:11
+msgid "Configure the image import module's settings."
+msgstr "Nastavitve Image Import modula."
+
+#: image_import.module:26;35
+msgid "Image import"
+msgstr "Image import - Uvoz slik"
+
+#: image_import.module:31
+msgid "Import images from the filesystem."
+msgstr "Uvoz slik iz datotečnega sistema na strežniku."
+
+#: image_import.module:40
+msgid "Change settings for the Image Import module."
+msgstr "Spremenite nastavitve Image Import modula."
+
+#: image_import.module:52
+msgid "You need to configure the import directory on the image import module's <a href='!admin-settings-image_import'>settings page</a>."
+msgstr "V <a href='!admin-settings-image_import'>nastavitvah modula</a> morate določiti direktorij iz katerega bodo uvožene slike."
+
+#: image_import.module:127;164
+msgid "Import"
+msgstr "Uvoz"
+
+#: image_import.module:133
+msgid "No files were found"
+msgstr "Ni datotek"
+
+#: image_import.module:143
+msgid "Size"
+msgstr "Velikost"
+
+#: image_import.module:143
+msgid "Dimensions"
+msgstr "Dimenzije"
+
+#: image_import.module:143
+msgid "Title"
+msgstr "Naslov"
+
+#: image_import.module:143
+msgid "Body"
+msgstr "Telo"
+
+#: image_import.module:186
+msgid "%filename as <a href=\"!node-link\">@node-title</a> <a href=\"!edit-link\">[edit]</a>"
+msgstr "%filename v <a href=\"!node-link\">@node-title</a> <a href=\"!edit-link\">[uredi]</a>"
+
+#: image_import.module:194
+msgid "Error importing %filename."
+msgstr "Napaka pri uvozu %filename."
+
+#: image_import.module:201
+msgid "Successfully imported: "
+msgstr "Uspešno uvoženo:"
+
+#: image_import.module:204
+msgid "No image files were imported."
+msgstr "Nobena slika ni bila uvožena."
+
+#: image_import.module:213
+msgid "Import path"
+msgstr "Uvoz iz direktorija"
+
+#: image_import.module:216
+msgid "The directory to import image nodes from. Drupal will need to have write access to this directory so we can move the file."
+msgstr "Direktorij iz katerega bodo uvožene datoteke. Drupal mora v njem imeti dovoljenje za pisanje, da bo datoteke lahko iz njega premaknil."
+
+#: image_import.module:217
+msgid "<strong>Note:</strong> a path begining with a <kbd>/</kbd> indicates the path is relative to the server's root, not the website's root. One starting without a <kbd>/</kbd> specifies a path relative to Drupal's root. For example: <kbd>/tmp/image</kbd> would be the temp directory off the root while <kbd>tmp/image</kbd> would be inside Drupal's directory."
+msgstr ""
+
+#: image_import.module:236
+msgid "You can't import from the image module's directory. The import deletes the original files so you would just be asking for trouble."
+msgstr "Uvoz iz direktorija Image modula ni mogoč. Ker se pri uvozu izvorne datoteke izbrišejo bi si s tem nakopali kup preglavic."
+
+#: image_import.module:18
+msgid "import images"
+msgstr "uvoz slik"
+
+#: image_import.module:0
+msgid "image_import"
+msgstr "image_import"
+
+#: image_import.info:0
+msgid "Image Import"
+msgstr "Image Import"
+
+#: image_import.info:0
+msgid "Allows batches of images to be imported from a directory on the server."
+msgstr "Omogoča masovni uvoz slik iz datotečnega sistema na strežniku."

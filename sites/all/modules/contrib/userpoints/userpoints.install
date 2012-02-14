@@ -1,0 +1,273 @@
+<?php
+// $Id: userpoints.install,v 1.15.2.5 2009/10/08 23:35:55 kbahey Exp $
+
+/**
+ * Implementation of hook_schema().
+ */
+function userpoints_schema() {
+  $schema = array();
+  $schema['userpoints'] = array(
+    'description' => 'Holds the user points',
+    'fields' => array(
+      'pid' => array(
+        'description' => 'User ID',
+        'type' => 'serial',
+        'not null' => TRUE,
+      ),
+      'uid' => array(
+        'description' => 'User ID',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'points' => array(
+        'description' => 'Current Points',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'max_points' => array(
+        'description' => 'Out of a maximum points',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'last_update' => array(
+        'description' => 'Timestamp',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'tid' => array(
+        'description' => 'Category ID',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+    ),
+    'primary key' => array('pid'),
+    'indexes' => array(
+      'last_update' => array('last_update'),
+      'uid_tid' => array('uid', 'tid'),
+    ),
+  );
+  
+  $schema['userpoints_txn'] = array(
+    'description' => 'Userpoints Transactions',
+    'fields' => array(
+      'txn_id' => array(
+        'description' => 'Transaction ID',
+        'type' => 'serial',
+        'not null' => TRUE,
+      ),
+      'uid' => array(
+        'description' => 'User ID',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'approver_uid' => array(
+        'description' => 'Approving User ID',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'points' => array(
+        'description' => 'Points',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'time_stamp' => array(
+        'description' => 'Timestamp',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'changed' => array(
+        'description' => 'Effective timestamp of last action on this transaction, for tracking purposes.',
+        'type'        => 'int',
+        'not null'    => TRUE,
+        'default'     => 0,
+      ),
+      'status' => array(
+        'description' => 'Status',
+        'type' => 'int',
+        'size' => 'tiny',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'description' => array(
+        'description' => 'Description',
+        'type' => 'text',
+      ),
+      'reference' => array(
+        'description' => 'Reserved for module specific use',
+        'type' => 'varchar',
+        'length' => 128,
+      ),
+      'expirydate' => array(
+        'description' => 'Expirydate',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'expired' => array(
+        'description' => 'User ID',
+        'type' => 'int',
+        'size' => 'tiny',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'parent_txn_id' => array(
+        'description' => 'Parent Transaction ID',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'tid' => array(
+        'description' => 'Category ID',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'entity_id' => array(
+        'description' => 'ID of an entity in the Database',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'entity_type' => array(
+        'description' => 'Type of entity',
+        'type' => 'varchar',
+        'length' => 32,
+      ),
+      'operation' => array(
+        'description' => 'Operation being carried out',
+        'type' => 'varchar',
+        'length' => 32,
+      ),
+      
+    ),
+    'primary key' => array('txn_id'),
+    'indexes' => array(
+      'operation' => array('operation'),
+      'reference' => array('reference'),
+      'status' => array('status'),
+      //Optional as in update_6011
+      'changed' => array('changed'),
+    )
+  );
+  return $schema;
+}
+
+/**
+ * Install the initial schema.
+ */
+function userpoints_install() {
+  drupal_install_schema('userpoints');
+}
+
+/**
+ * Implementation of hook_uninstall().
+ */
+function userpoints_uninstall() {
+  drupal_uninstall_schema('userpoints');
+  db_query("DELETE FROM {variable} WHERE name like '%userpoints%'");
+  
+  $vid = db_result(db_query("SELECT vid FROM {vocabulary} WHERE module='userpoints'"));
+  if ($vid) {
+    taxonomy_del_vocabulary($vid);
+  }
+}
+
+function userpoints_update_1() {
+  return _system_update_utf8(array('userpoints'));
+}
+
+function userpoints_update_2() {
+  $ret = array();
+  db_add_field($ret, 'userpoints', 'max_points', array('type' => 'int', 'not null' => TRUE, 'default' => 0, 'length' => 10));
+  db_change_field($ret, 'userpoints', 'points', 'points', array('type' => 'int', 'unsigned' => TRUE, 'not null' => TRUE, 'default' => 0, 'length' => 10));
+  return $ret;
+}
+
+function userpoints_update_3() {
+  $ret = array();
+  db_add_field($ret, 'userpoints_txn', 'description', array('type' => 'text'));
+  return $ret;
+}
+
+function userpoints_update_4() {
+  $ret = array();
+  db_change_field($ret, 'userpoints_txn', 'event', 'event', array('type' => 'varchar', 'length' => 32 ));
+  db_change_field($ret, 'userpoints_txn', 'status', 'status', array('type' => 'int', 'unsigned' => TRUE, 'not null' => TRUE, 'default' => 0 ));
+  return $ret;
+}
+
+function userpoints_update_5() {
+  $ret = array();
+  db_add_field($ret, 'userpoints_txn', 'reference', array('type' => 'varchar', 'length' => 128));
+  db_add_index($ret, 'userpoints_txn', 'reference', array('reference'));
+  return $ret;
+}
+
+function userpoints_update_6() {
+  $ret = array();
+  db_add_field($ret, 'userpoints_txn', 'expirydate', array('type' => 'int', 'length' => 11, 'not null' => true));
+  db_add_field($ret, 'userpoints_txn', 'expired', array('type' => 'int', 'length' => 1, 'not null' => true, 'size' => 'tiny'));
+  db_add_field($ret, 'userpoints_txn', 'parent_txn_id', array('type' => 'int'));
+  db_add_field($ret, 'userpoints_txn', 'tid', array('type' => 'int'));
+
+  db_drop_primary_key($ret, 'userpoints');
+
+  db_add_field($ret, 'userpoints', 'tid', array('type' => 'int'));
+  db_add_field($ret, 'userpoints', 'pid', array('type' => 'serial', 'not null' => true));
+  db_add_primary_key($ret, 'userpoints', 'pid');
+  return $ret;
+}
+function userpoints_update_7() {
+  $ret = array();
+  db_add_field($ret, 'userpoints_txn', 'entity_id', array('type' => 'int', 'length' => 11, 'not null' => true));
+  db_add_field($ret, 'userpoints_txn', 'entity_type', array('type' => 'varchar', 'length' => 32));
+  db_change_field($ret, 'userpoints_txn', 'event', 'operation', array('type' => 'varchar'));
+  return $ret;
+}
+function userpoints_update_8() {
+  $ret = array();
+  db_change_field($ret, 'userpoints_txn', 'tid', 'tid', array('type' => 'int', 'not null' => true, 'default' => 0, 'length' => 11));
+  db_change_field($ret, 'userpoints', 'tid', 'tid', array('type' => 'int', 'not null' => true, 'default' => 0, 'length' => 11));
+  return $ret;
+}
+
+function userpoints_update_6009() {
+  $ret = array();
+  db_add_index($ret, 'userpoints', 'uid_tid', array('uid', 'tid'));
+  return $ret;
+}
+
+function userpoints_update_6010() {
+  $ret = array();
+  $ret[] = update_sql("UPDATE {permission} SET perm = REPLACE(perm, 'admin userpoints', 'administer userpoints') WHERE perm LIKE '%admin userpoints%'");
+  return $ret;
+}
+
+/*
+ * From: http://drupal.org/node/395500
+ * "time_stamp parameter is not considered in userpoints api"
+ */
+function userpoints_update_6011() {
+  $ret = array();
+  db_add_field($ret, 'userpoints_txn', 'changed', array(
+    'type'        => 'int',
+    'not null'    => TRUE,
+    'default'     => 0,
+    'description' => 'Effective timestamp of last action on this transaction, for tracking purposes.',
+    )
+  );
+//Optional: An index could help about tracking operations so it would be better to define here..
+  db_add_index($ret, 'userpoints_txn', 'changed', array('changed'));
+//Optional: update table information to mark each transaction as changed on creation only..
+  $ret[] = update_sql("UPDATE {userpoints_txn} SET changed = time_stamp");
+  return $ret;
+}

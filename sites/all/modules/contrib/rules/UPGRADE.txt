@@ -1,0 +1,48 @@
+$Id: UPGRADE.txt,v 1.1.2.3 2009/05/06 13:39:49 fago Exp $
+
+Upgrade from 5.x
+----------------
+This helps you upgrading from the drupal 5 compatible module workflow-ng.
+
+You can easily upgrade from drupal 5 installations with workflow-ng to rules 6.x. 
+First off install the rules module as usual, then go to update.php and run update 6001,
+which is the upgrade procedure. It will detect the old workflow-ng installation and 
+convert the workflow-ng rules to rules.
+
+Furthermore you can import exported workflow-ng rules with the normal rules import tool.
+It's a good idea to export all workflow-ng rules before upgrading to rules, so you can
+import an old workflow-ng at any time.
+
+
+Important notes when converting a workflow-ng rule:
+
+  * When converting a workflow-ng rule, you need to have support for all used
+    events, conditions or actions in 6.x too - otherwise the rule
+    conversion will fail.
+    
+    E.g. if you have used actions provided by the og module, install and upgrade
+    the og module first, then convert the rule.
+    
+    When the module conversion fails, make sure you have all involved modules upgraded
+    and try again. 
+
+
+  * Modules may help upgrading provided actions. E.g. the rules module provides
+    an upgrade path for upgrading from the workflow-ng "Make content (un)sticky"
+    action to the two core "Make content sticky" or "Make content unsticky" actions.
+
+    If a module has changed its actions, but doesn't provide an upgrade path, file
+    a bug report / feature request for this module. 
+
+  * The workflow-ng extension modules are not yet ported - or won't be.
+  
+      States: 
+        Deprecated in favour of using CCK, which comes with rules support.
+        Support for "states on users" is dropped for now.
+      Per entity logging:
+        It's not yet ported, but the port is planned right after rules 1.0
+        and will be released as a separate module.
+      CCLinks:
+        Deprecated by the flag module, which comes with nice rules support.
+        Scheduling support is built into rules itself.
+  

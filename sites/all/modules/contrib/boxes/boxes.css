@@ -1,0 +1,22 @@
+.script-placeholder {
+  padding:100px 0px;
+  text-align:center;
+  }
+
+/* Default state */
+.boxes-box-controls .cancel { display:none; }
+
+/* Editing state */
+.boxes-box-editing .boxes-box-controls .edit { display:none; }
+.boxes-box-editing .boxes-box-controls .cancel { display:block; }
+
+.boxes-box-editing .swirly {
+  background-image: url(swirly.gif);
+  width: 32px;
+  height: 32px;
+  margin: 0 auto;
+}
+
+.boxes-box-editor {
+  width: 100%;
+}

@@ -1,0 +1,39 @@
+/* $Id: excel-rtl.css,v 1.1.4.2 2010/08/27 18:38:35 katbailey Exp $ */
+
+/* RTL support */
+ul.quicktabs_tabs.quicktabs-style-excel li {
+  float: right;
+  padding: 0 10px 0 0;
+}
+
+ul.quicktabs_tabs.quicktabs-style-excel li a {
+  padding: 4px 12px 0px 22px;
+  background: transparent url(images/tab-right-sep-rtl.png) no-repeat left -38px;
+}
+
+/*override active tab*/
+ul.quicktabs_tabs.quicktabs-style-excel li.active {
+  background: transparent url(images/tab-left-sep-rtl.png) no-repeat right 0;
+}
+
+ul.quicktabs_tabs.quicktabs-style-excel li.active a {
+  background: transparent url(images/tab-right-sep-rtl.png) no-repeat left 0;
+}
+
+/*override first (most right) tab*/
+ul.quicktabs_tabs.quicktabs-style-excel li.first {
+  background: transparent url(images/tab-left-rtl.png) no-repeat right -38px;
+}
+
+ul.quicktabs_tabs.quicktabs-style-excel li.first.active {
+  background: transparent url(images/tab-left-rtl.png) no-repeat right 0px;
+}
+
+/*override last (most left) tab*/
+ul.quicktabs_tabs.quicktabs-style-excel li.last a {
+  background: transparent url(images/tab-right-rtl.png) no-repeat left -38px;
+}
+
+ul.quicktabs_tabs.quicktabs-style-excel li.last.active a {
+  background:transparent url(images/tab-right-rtl.png) no-repeat left 0px;
+}

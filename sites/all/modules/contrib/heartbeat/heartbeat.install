@@ -1,0 +1,531 @@
+<?php
+// $Id: heartbeat.install,v 1.1.2.6.2.10.2.29 2010/10/16 09:16:35 stalski Exp $
+
+/**
+ * @file
+ *   Installation file for the heartbeat module.
+ * @author
+ *   Jochen Stals - Menhir - www.menhir.be
+ */
+
+/**
+ * Implementation of hook_install().
+ */
+function heartbeat_install() {
+
+  variable_set('heartbeat_enabled', 1);
+  variable_set('heartbeat_debug', 0);
+  variable_set('heartbeat_show_time_grouped_items', 1);
+  variable_set('heartbeat_show_message_times', 1);
+  variable_set('message_access_types', array(
+    0 => 'private',
+    1 => 'public to all',
+    2 => 'actor and addressee only if exists',
+    3 => 'public to connections if exists'));
+  variable_set('heartbeat_types', array('summary', 'single', 'count'));
+
+  variable_set('heartbeat_activity_grouping_seconds', 7200);
+  variable_set('heartbeat_activity_grouping_how_many', 5);
+  $allowed_tags = array('h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'a', 'span', 'em', 'strong', 'ul', 'li', 'p', 'div', 'img', 'blockquote');
+  variable_set('heartbeat_allowed_tags', implode(',', $allowed_tags));
+  variable_set('heartbeat_activity_log_cron_delete', 2678400);
+  variable_set('heartbeat_access_types', array());
+  variable_set('heartbeat_stream_data', array(
+    'privateheartbeat' => array('profile' => 1),
+    'connectedheartbeat' => array('profile' => 1),
+    'publicheartbeat' => array('profile' => 0),
+  ));
+  variable_set('heartbeat_profile_message_templates', array());
+  // Disabling this means blocking user and node links by default
+  // The decision is based on the fact that it's a community module
+  variable_set('heartbeat_context_perm', 0);
+
+  // Create tables.
+  drupal_install_schema('heartbeat');
+
+  // Module weights in core: put heartbeat after most modules in the chain.
+  // especially core modules, rules, token and pathauto
+  db_query("UPDATE {system} SET weight = 50 WHERE name = 'heartbeat'");
+
+  drupal_load('module', 'heartbeat');
+  // Import access types
+  heartbeat_check_access_types();
+
+  // Import heartbeat messages
+  //heartbeat_messages_rebuild();
+  heartbeat_create_messages();
+}
+
+/**
+ * Initial insert of messages, before heartbeat exists in drupal as module
+ * Assumption made here that heartbeat is already included as file
+ */
+function heartbeat_create_messages() {
+
+  // Check existing modules for a heartbeat implementation of this hook
+  $defaults = module_invoke_all('heartbeat_message_info');
+
+  foreach ($defaults as $key => $default) {
+    heartbeat_message_insert($default);
+  }
+
+}
+
+/**
+ * Implementation of hook_uninstall().
+ */
+function heartbeat_uninstall() {
+
+  variable_del('heartbeat_enabled');
+  variable_del('heartbeat_debug');
+  variable_del('heartbeat_show_message_times');
+  variable_del('heartbeat_show_time_grouped_items');
+  variable_del('message_access_types');
+  variable_del('heartbeat_types');
+
+  variable_del('heartbeat_activity_grouping_seconds');
+  variable_del('heartbeat_activity_grouping_how_many');
+  variable_del('heartbeat_activity_log_cron_delete');
+  variable_del('heartbeat_access_types');
+  variable_del('heartbeat_profile_message_templates');
+
+  // Remove all tables so no need to delete the messages
+  drupal_uninstall_schema('heartbeat');
+
+  // This should clear the rules with a linkage to the heartbeat action
+  if (module_exists('rules')) {
+    menu_rebuild();
+    rules_clear_cache();
+  }
+}
+
+/**
+ * install basic variables
+ */
+function heartbeat_enable() {
+  drupal_set_message(t('Please visit !messages_page to import default heartbeat messages from other modules.', array('!messages_page' => l(t('Heartbeat messages page'), 'admin/build/heartbeat'))));
+}
+
+/**
+ * Implementation of hook_schema().
+ */
+function heartbeat_schema() {
+
+  $schema['heartbeat_messages'] = array(
+    'description' => t('Table that contains predefined messages that can be used in heartbeat views.'),
+    'fields' => array(
+      'hid' => array(
+        'type' => 'serial',
+        'not null' => TRUE,
+        'description' => t('Primary Key: Unique heartbeat_messages event ID.'),
+      ),
+      'message_id' => array(
+        'type' => 'varchar',
+        'length' => 250,
+        'not null' => FALSE,
+        'default' => '',
+        'description' => t('The message id which is unique to identify activity.'),
+      ),
+      'message' => array(
+        'type' => 'text',
+        'not null' => TRUE,
+        'size' => 'big',
+        'description' => t('Text of log message to be passed into the t() function.'),
+        'alias' => 'message_orig', // Internal heartbeat field/property
+      ),
+      'message_concat' => array(
+        'type' => 'text',
+        'not null' => TRUE,
+        'size' => 'big',
+        'description' => t('Text of translatable log message for in concatenated form.'),
+        'alias' => 'message_concat_orig', // Internal heartbeat field/property
+      ),
+      'concat_args' => array(
+        'type' => 'text',
+        'not null' => FALSE,
+        'size' => 'big',
+        'description' => t('Arguments for concatenation message.'),
+      ),
+      'perms' => array(
+        'type' => 'int',
+        'not null' => TRUE,
+        'size' => 'tiny',
+        'description' => t('Permissions for this message.'),
+        'default' => 0,
+      ),
+      'custom' => array(
+        'type' => 'int',
+        'not null' => TRUE,
+        'size' => 'tiny',
+        'description' => t('Custom message type.'),
+        'default' => 0,
+      ),
+      'description' => array(
+        'type' => 'text',
+        'not null' => FALSE,
+        'size' => 'big',
+        'description' => t('Description and/or help text.'),
+      ),
+      'variables' => array(
+        'type' => 'text',
+        'not null' => FALSE,
+        'size' => 'big',
+        'description' => t('Variables to parse into the message (used in message).'),
+      ),
+      'attachments' => array(
+        'type' => 'text',
+        'not null' => FALSE,
+        'size' => 'big',
+        'description' => t('Attachments on messages.'),
+      ),
+    ),
+    'primary key' => array('hid'),
+    'indexes' => array(
+      'message_id' => array('message_id'),
+    ),
+  );
+  $schema['heartbeat_mt'] = array(
+    'description' => t('Table links tags with messages to filter logging and viewing.'),
+    'fields' => array(
+      'mtid' => array(
+        'type' => 'serial',
+        'not null' => TRUE,
+        'description' => t('Primary Key: Unique  event ID - heartbeat message id.'),
+      ),
+      'htid' => array(
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+        'description' => t('The heartbeat tag id to link to.'),
+      ),
+      'hid' => array(
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+        'description' => t('The heartbeat message id to link to.'),
+      ),
+    ),
+    'primary key' => array('mtid'),
+    'indexes' => array(
+      'htid' => array('htid'),
+      'hid' => array('hid'),
+    ),
+  );
+  $schema['heartbeat_tags'] = array(
+    'description' => t('Table with heartbeat tags.'),
+    'fields' => array(
+      'htid' => array(
+        'type' => 'serial',
+        'not null' => TRUE,
+        'description' => t('Primary Key:heartbeat tag id.'),
+      ),
+      'name' => array(
+        'type' => 'varchar',
+        'length' => 150,
+        'not null' => FALSE,
+        'default' => '',
+        'description' => t('Tag name.'),
+      ),
+    ),
+    'primary key' => array('htid'),
+    'indexes' => array(),
+  );
+
+
+  $schema['heartbeat_activity'] = array(
+    'description' => t('Table that contains logs of all user triggerable actions.'),
+    'fields' => array(
+      'uaid' => array(
+        'type' => 'serial',
+        'not null' => TRUE,
+        'description' => t('Primary Key: Unique heartbeat_activity event ID.'),
+      ),
+      'uid' => array(
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+        'description' => t('The {users}.uid of the user who triggered the event (requester).'),
+      ),
+      'uid_target' => array(
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => FALSE,
+        'default' => 0,
+        'description' => t('The target User ID'),
+      ),
+      'nid' => array(
+        'description' => t('The Node ID.'),
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => FALSE,
+      ),
+      'nid_target' => array(
+        'description' => t('The target Node ID (E.g. Group id).'),
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => FALSE,
+      ),
+      'access' => array(
+        'type' => 'int',
+        'not null' => TRUE,
+        'size' => 'tiny',
+        'description' => t('Access for this message to others.'),
+        'default' => 0,
+      ),
+      'message_id' => array(
+        'type' => 'varchar',
+        'length' => 250,
+        'not null' => FALSE,
+        'default' => '',
+        'description' => t('The message id which links to the heartbeat message.'),
+      ),
+      'message' => array(
+        'type' => 'text',
+        'not null' => TRUE,
+        'size' => 'big',
+        'description' => t('Text of log message to be passed into the t() function.'),
+      ),
+      'message_concat' => array(
+        'type' => 'text',
+        'not null' => TRUE,
+        'size' => 'big',
+        'description' => t('Concatenated, grouped or merged text of log message to be passed into the t() function.'),
+      ),
+      'timestamp' => array(
+        'description' => t('The activity\'s unix timestamp when action occurred'),
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'language' => array(
+        'type' => 'varchar',
+        'length' => 12,
+        'not null' => FALSE,
+        'default' => 'en',
+        'description' => t('language for a log.'),
+      ),
+      'nid_info' => array(
+        'type' => 'varchar',
+        'length' => 128,
+        'not null' => FALSE,
+        'default' => '',
+        'description' => t('node access info.'),
+      ),
+      'nid_target_info' => array(
+        'type' => 'varchar',
+        'length' => 128,
+        'not null' => FALSE,
+        'default' => '',
+        'description' => t('node target access info.'),
+      ),
+      'uaid_comments' => array(
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => FALSE,
+        'default' => 0,
+        'description' => t('The comment count.'),
+      ),
+      'variables' => array(
+        'type' => 'text',
+        'not null' => FALSE,
+        'size' => 'big',
+        'description' => t('Serialized array of variables that match the message string and that is passed into the t() function.'),
+      ),
+    ),
+    'primary key' => array('uaid'),
+    'indexes' => array(
+      'timestamp' => array('timestamp'),
+      'uid' => array('uid'),
+      'message_id' => array('message_id'),
+      'uid_target' => array('uid_target'),
+      'nid' => array('nid'),
+      'nid_target' => array('nid_target'),
+      'language' => array('language'),
+    ),
+  );
+
+  $schema['heartbeat_translations'] = array(
+    'description' => t('Table that connects translations of the same activity.'),
+    'fields' => array(
+      'uaid' => array(
+        'type' => 'int',
+        'not null' => TRUE,
+        'description' => t('The uaid of the connection.'),
+      ),
+      'tuaid' => array(
+        'type' => 'int',
+        'not null' => TRUE,
+        'description' => t('The corresponding tuaid.'),
+      ),
+    ),
+  );
+
+  return $schema;
+}
+
+/**
+ * Update to branch 3.x
+ *
+ * @return sql statements array
+ */
+function heartbeat_update_3() {
+  $ret = array();
+  switch ($GLOBALS['db_type']) {
+    case 'mysql':
+    case 'mysqli':
+
+      $ret[] = update_sql("RENAME TABLE {user_activity} TO {hb_activity}");
+      $ret[] = update_sql("DELETE FROM {system} WHERE name = 'user_activity'");
+      $ret[] = update_sql("UPDATE {system} SET status = 1 WHERE name = 'hb_activity'");
+
+      break;
+  }
+  return $ret;
+}
+
+/**
+ * Update to branch 4.x
+ *
+ * @return sql statements array
+ */
+function heartbeat_update_4() {
+  $ret = array();
+  switch ($GLOBALS['db_type']) {
+    case 'mysql':
+    case 'mysqli':
+
+      $ret[] = update_sql("RENAME TABLE {hb_activity} TO {heartbeat_activity}");
+
+      $ret[] = update_sql("ALTER TABLE {heartbeat_messages} ADD custom TINYINT NOT NULL DEFAULT '0' AFTER perms");
+      $ret[] = update_sql("ALTER TABLE {heartbeat_messages} DROP module");
+      $ret[] = update_sql("ALTER TABLE {heartbeat_messages} DROP message_type");
+
+      $ret[] = update_sql("ALTER TABLE {heartbeat_messages} ADD attachments BLOB NULL AFTER variables");
+
+      break;
+  }
+  return $ret;
+}
+
+/**
+ * Update to version 4.3
+ *
+ * @return sql statements array
+ */
+function heartbeat_update_401() {
+  $ret = array();
+  switch ($GLOBALS['db_type']) {
+    case 'mysql':
+    case 'mysqli':
+      $ret[] = update_sql("ALTER TABLE {heartbeat_activity} ADD nid INT NOT NULL DEFAULT '0' AFTER uid_target");
+      break;
+  }
+  return $ret;
+}
+/**
+ * Update to version 4.6
+ *
+ * @return sql statements array
+ */
+function heartbeat_update_402() {
+
+  // Add a variable to set streams on profile pages
+  variable_set('heartbeat_stream_data', array(
+    'privateheartbeat' => array('profile' => 1),
+    'connectedheartbeat' => array('profile' => 1),
+    'publicheartbeat' => array('profile' => 0),
+  ));
+
+  // Add the translations table for multilingual comments
+  $ret = array();
+  switch ($GLOBALS['db_type']) {
+    case 'mysql':
+    case 'mysqli':
+      $ret[] = update_sql("CREATE TABLE {heartbeat_translations} (uaid int(11), tuaid int(11))");
+
+      $result = db_query("SELECT * FROM {heartbeat_messages}");
+      while ($row = db_fetch_object($result)) {
+        switch ($row->custom) {
+          case 2:
+            $custom = 4;
+            break;
+          case 1:
+            $custom = 2;
+            break;
+          case 0:
+          default:
+            $custom = 1;
+        }
+        $ret[] = update_sql("UPDATE {heartbeat_messages} SET custom = $custom WHERE hid = ". $row->hid);
+      }
+      break;
+  }
+  return $ret;
+}
+
+/**
+ * Update to version 4.6.9
+ *
+ * @return sql statements array
+ */
+function heartbeat_update_403() {
+
+  $tags = array();
+  $old_tags = explode(',', variable_get('heartbeat_allowed_tags', ''));
+  foreach ($old_tags as $tag) {
+    if (!in_array($tag, array('script', 'style', 'embed', 'object', 'param'))) {
+      $tags[] = $tag;
+    }
+  }
+
+  variable_set('heartbeat_allowed_tags', implode(',', $tags));
+
+  return array();
+}
+
+/**
+ * Update to version 4.10.x
+ *
+ * @return sql statements array
+ */
+function heartbeat_update_410() {
+
+  // Add the translations table for multilingual comments
+  $ret = array();
+  switch ($GLOBALS['db_type']) {
+    case 'mysql':
+    case 'mysqli':
+      $ret[] = update_sql("ALTER TABLE {heartbeat_activity} ADD nid_info VARCHAR(128) NULL DEFAULT '' AFTER language");
+      $ret[] = update_sql("ALTER TABLE {heartbeat_activity} ADD nid_target_info VARCHAR(128) NULL DEFAULT '' AFTER nid_info");
+      $ret[] = update_sql("ALTER TABLE {heartbeat_activity} ADD uaid_comments INT NULL DEFAULT 0 AFTER nid_target_info");
+      break;
+  }
+
+  $result = db_query("SELECT uaid, nid, nid_target FROM {heartbeat_activity} WHERE nid > 0");
+  while ($row = db_fetch_object($result)) {
+    $save_nid = array();
+    $save_nid_target = array();
+
+    $this_node = node_load($row->nid);
+    $save_nid = array();
+    $save_nid['uid'] = $this_node->uid;
+    $save_nid['type'] = $this_node->type;
+    $save_nid['format'] = $this_node->format;
+
+    if ($row->nid_target > 0) {
+      $this_node_target = node_load($row->nid_target);
+      $save_nid_target['uid'] = $this_node_target->uid;
+      $save_nid_target['type'] = $this_node_target->type;
+      $save_nid_target['format'] = $this_node_target->format;
+    }
+
+    $save_nid_ser = serialize($save_nid);
+    $save_nid_target_ser = serialize($save_nid_target);
+    $update_q = "UPDATE {heartbeat_activity} set nid_info = '%s', nid_target_info = '%s' WHERE uaid = %d";
+    db_query($update_q, $save_nid_ser, $save_nid_target_ser, $row->uaid);
+  }
+
+  return $ret;
+}

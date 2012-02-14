@@ -1,0 +1,68 @@
+<?php
+// $Id: apachesolr_image.module,v 1.1.2.1.2.6 2010/05/01 04:42:17 jpmckinney Exp $
+
+/**
+ * Implementation of hook_apachesolr_update_index().
+ */
+function apachesolr_image_apachesolr_update_index(&$document, $node, $namespace) {
+  if ($node->type == 'image' && $document->entity == 'node') {
+    $areas = array();
+    // A problem here - small images do not get a derived thumbnail.
+    $sizes = image_get_derivative_sizes($node->images['_original']);
+    foreach ($sizes as $name => $info) {
+      $areas[$name] = $info['width'] * $info['height'];
+    }
+    asort($areas);
+    $image_path = FALSE;
+    foreach ($areas as $preset => $size) {
+      $image_path = $node->images[$preset];
+      break;
+    }
+    if ($image_path) {
+      $document->ss_image_relative = $image_path;
+      // Support multi-site too.
+      $document->ss_image_absolute = file_create_url($image_path);
+    }
+  }
+}
+
+/**
+ * Implementation of hook_apachesolr_modify_query().
+ */
+function apachesolr_image_apachesolr_modify_query(&$query, &$params, $caller) {
+  // Also retrieve image thumbnail links.
+  $params['fl'] .= ',ss_image_relative';
+}
+
+/**
+ * Implementation of hook_apachesolr_process_results().
+ */
+function apachesolr_image_apachesolr_process_results(&$results) {
+  foreach ($results as $index => $item) {
+    if ($item['node']->type == 'image' && !empty($item['node']->ss_image_relative)) {
+      $results[$index]['snippet'] = theme('apachesolr_image_snippet', $item);
+    }
+  }
+}
+
+function theme_apachesolr_image_snippet($item) {
+  return '<span class="apachesolr-image-result">'. theme('image', $item['node']->ss_image_relative, $item['title'], $item['title'], array('align' => 'left')) .'</span>'. $item['snippet'] . '<br clear="all"/>';
+}
+
+/**
+ * Implementation of hook_theme().
+ */
+function apachesolr_image_theme() {
+  return array(
+    'apachesolr_image_snippet' => array(
+      'arguments' => array('item' => NULL),
+    ),
+  );
+}
+
+/**
+ * Implementation of hook_enable().
+ */
+function apachesolr_image_enable() {
+  drupal_set_message(t('The Apache Solr image integration module will not have any apparent effect until Image type nodes are indexed or re-indexed.'));
+}

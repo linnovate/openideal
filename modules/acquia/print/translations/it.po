@@ -1,0 +1,1076 @@
+# $Id: it.po,v 1.1.2.15 2010/08/22 02:24:03 jcnventura Exp $
+#
+# LANGUAGE translation of Drupal (general)
+# Copyright YEAR NAME <EMAIL@ADDRESS>
+# Generated from files:
+#  print.admin.inc,v 1.1.2.24 2009/02/05 00:37:43 jcnventura
+#  print.pages.inc,v 1.1.2.41 2009/01/21 01:11:51 jcnventura
+#  print_mail.admin.inc,v 1.1.2.10 2009/02/05 00:37:43 jcnventura
+#  print_pdf.admin.inc,v 1.1.2.13 2009/02/05 00:37:44 jcnventura
+#  print.module,v 1.25.2.58 2009/02/09 20:20:20 jcnventura
+#  print_mail.module,v 1.1.2.27 2009/02/09 20:59:32 jcnventura
+#  print_pdf.module,v 1.1.2.31 2009/02/09 20:20:20 jcnventura
+#  print.info,v 1.3.2.4 2008/08/21 22:03:39 jcnventura
+#  print_mail.info,v 1.1.2.2 2008/08/21 22:03:40 jcnventura
+#  print_pdf.info,v 1.1.2.2 2008/08/21 22:03:40 jcnventura
+#  print.install,v 1.1.4.14 2009/02/05 00:37:43 jcnventura
+#  print_mail.inc,v 1.2.2.15 2009/01/14 22:59:23 jcnventura
+#  print_pdf.pages.inc,v 1.3.2.26 2009/02/09 20:25:20 jcnventura
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"POT-Creation-Date: 2010-08-21 23:52+0100\n"
+"PO-Revision-Date: 2010-08-22 02:34-0000\n"
+"Last-Translator: Joao Ventura <joao at venturas.org>\n"
+"Language-Team: FAB <fabrizionospam@gmail.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+
+#: print.admin.inc:25
+msgid "File %file is not readable by the web server."
+msgstr ""
+
+#: print.admin.inc:31
+msgid "Common Settings"
+msgstr "Impostazioni comuni"
+
+#: print.admin.inc:36
+#, fuzzy
+msgid "Custom Stylesheet"
+msgstr "Url dei fogli di stile"
+
+#: print.admin.inc:40
+#, fuzzy
+msgid "The path to your custom print cascading stylesheet, if any. The path provided must be relative to the base path. When none is specified, the default module CSS file is used."
+msgstr "L' URL del tuo eventuale CSS. Se non specificato viene usato il CSS standard del modulo"
+
+#: print.admin.inc:41
+msgid "Macros: %t (path to theme: \"%theme\")"
+msgstr ""
+
+#: print.admin.inc:42
+msgid "Requires the <em>administer site configuration</em> permission."
+msgstr ""
+
+#: print.admin.inc:48
+msgid "Printer-friendly URLs list"
+msgstr "La lista degli URL di Printer-friendly"
+
+#: print.admin.inc:50
+msgid "If set, a list of the destination URLs for the page links will be displayed at the bottom of the page."
+msgstr "Se impostato, una lista degli URL di destinazione per la pagina dei link sarà mostrata in fondo alla pagina"
+
+#: print.admin.inc:51
+msgid "Note that you can enable/disable the URL list for each content type individually from the !url."
+msgstr "Puoi abilitare/disabilitare la lista degli URL per ogni tipo di contenuto uno per uno su !url."
+
+#: print.admin.inc:51
+msgid "Content Types page"
+msgstr "Pagina dei tipi di contenuto"
+
+#: print.admin.inc:56
+#, fuzzy
+msgid "Include named anchors in printer-friendly URLs list"
+msgstr "Includi i commenti nella versione stampabile"
+
+#: print.admin.inc:58
+#, fuzzy
+msgid "If set, the list of the URLs at the bottom of the page will include anchors links on the same page."
+msgstr "Se impostato, una lista degli URL di destinazione per la pagina dei link sarà mostrata in fondo alla pagina"
+
+#: print.admin.inc:63
+msgid "Include comments in printer-friendly version"
+msgstr "Includi i commenti nella versione stampabile"
+
+#: print.admin.inc:65
+msgid "When this option is active, user comments are also included in the printer-friendly version. Requires the comment module."
+msgstr "Quando questa opzione è attiva anche i commenti sono inclusi nella versione stampabile. Richiede che il modulo comment sia attivo"
+
+#: print.admin.inc:70
+msgid "New window method"
+msgstr "Metodo -nuova finestra-"
+
+#: print.admin.inc:71
+msgid "Use HTML target (does not validate as XHTML Strict)"
+msgstr "Usa HTML target (non valida come XHTML Strict"
+
+#: print.admin.inc:71
+msgid "Use Javascript (requires browser support)"
+msgstr "Usa i Javascript (richiede il supporto del browser)"
+
+#: print.admin.inc:73
+msgid "Choose the method used to open pages in a new window/tab."
+msgstr "Scegli il metodo da usare per aprire le pagine in una nuova finestra/scheda"
+
+#: print.admin.inc:78
+msgid "Logo options"
+msgstr "Opzioni Logo"
+
+#: print.admin.inc:85
+msgid "Logo type"
+msgstr "Tipi di Logo"
+
+#: print.admin.inc:86;117
+msgid "None (Disabled)"
+msgstr "No (disabilitato)"
+
+#: print.admin.inc:86
+msgid "Current theme's logo"
+msgstr "Attuale logo del tema vigente"
+
+#: print.admin.inc:86;117;124
+msgid "User-specified"
+msgstr "Indicato dall'utente"
+
+#: print.admin.inc:88
+msgid "Select the type of logo to display on the printer-friendly version. In case of a user-specified location, insert the path or URL below."
+msgstr "Seleziona il tipo di logo da mostrare sulla versione stampabile. Se specificato dall'utente inserisci il percorso oppure l' URL qui sotto"
+
+#: print.admin.inc:93
+msgid "Logo URL"
+msgstr "URL del Logo"
+
+#: print.admin.inc:101
+msgid "Upload logo"
+msgstr "Carica il Logo"
+
+#: print.admin.inc:104
+msgid "If you don't have direct file access to the server, use this field to upload your logo."
+msgstr "Se non hai accesso diretto ai file su server usa questo campo per caricare il tuo logo"
+
+#: print.admin.inc:109
+msgid "Footer options"
+msgstr "Opzioni del piè di pagina"
+
+#: print.admin.inc:116
+msgid "Footer type"
+msgstr "Tipo di piè di pagina"
+
+#: print.admin.inc:117
+msgid "Site's footer"
+msgstr "Piè di pagina del sito"
+
+#: print.admin.inc:119
+msgid "Select the type of footer to display on the printer-friendly version. In case of a user-specified footer, insert it below."
+msgstr "Selezione il tipo di più di pagina da mostrare sulla versione stampabile. Se il piè di pagina è specificato dall'utente inseriscilo qui sotto"
+
+#: print.admin.inc:132;377
+#: print.pages.inc:274
+msgid "Source URL"
+msgstr "URL di origine"
+
+#: print.admin.inc:139
+msgid "Display source URL"
+msgstr "Mostra l'origine dell'URL"
+
+#: print.admin.inc:141
+msgid "When this option is selected, the URL for the original page will be displayed at the bottom of the printer-friendly version."
+msgstr "Se questa opzione è selezionata l'URL per la pagina originale sarà mostrato in fondo alla versione stampabile"
+
+#: print.admin.inc:146
+msgid "Add current time/date to the source URL"
+msgstr "Aggiungi l'ora/data corrente nell' URL sorgente"
+
+#: print.admin.inc:148
+msgid "Display the current date and time in the Source URL line."
+msgstr "Mostra la data e l'ora corrente nella stringa dell'URL sorgente"
+
+#: print.admin.inc:153
+msgid "Force use of node ID in source URL"
+msgstr "Forza l'uso dell' ID del nodo nell' URL sorgente "
+
+#: print.admin.inc:155
+msgid "Drupal will attempt to use the page's defined alias in case there is one. To force the use of the fixed URL, activate this option."
+msgstr "Drupal proverà a usare gli alias definito della pagina in caso esista. Per forzare l'uso dell' URL stabilito attivare questa opzione"
+
+#: print.admin.inc:193
+msgid "Web page options"
+msgstr "Opzione delle pagina web"
+
+#: print.admin.inc:198
+msgid "Printer-friendly page link"
+msgstr "Link alla pagina stampabile"
+
+#: print.admin.inc:200
+#: print_mail/print_mail.admin.inc:32
+#: print_pdf/print_pdf.admin.inc:41
+msgid "Links area"
+msgstr "Area Link"
+
+#: print.admin.inc:200
+#: print_mail/print_mail.admin.inc:32
+#: print_pdf/print_pdf.admin.inc:41
+msgid "Content corner"
+msgstr "Angolo del contenuto"
+
+#: print.admin.inc:201
+msgid "Choose the location of the link(s) to the printer-friendly page. The Links area is usually below the node content, whereas the Content corner is placed in the upper-right corner of the node content. Unselect all options to disable the link. Even if the link is disabled, you can still view the print version of a node by going to !path/nid where nid is the numeric id of the node."
+msgstr "Scegli il posto del (dei) link alla pagina stampabile. L'area del Link è solitamente sotto il contenuto del nodo, mentre l'angolo del contenuto è posto nel contenuto del nodo in alto a destra. Deseleziona questa opzione per disabilitare il link. Anche se il link è disabilitato, puoi sempre vedere la versione stampabile del nodo andando !path/nid laddove il nid è il numero identificativo del nodo."
+
+#: print.admin.inc:206
+#, fuzzy
+msgid "Display printer-friendly link in teaser"
+msgstr "Mostra una versione stampabile di questa pagina."
+
+#: print.admin.inc:208
+#: print_mail/print_mail.admin.inc:40
+#: print_pdf/print_pdf.admin.inc:49
+#, fuzzy
+msgid "Enabling this will display the link in teaser mode."
+msgstr "Abilitando questo verrà creato il link utilizzando l' URL alias invece del numero del nodo"
+
+#: print.admin.inc:213
+#: print_mail/print_mail.admin.inc:45
+#: print_pdf/print_pdf.admin.inc:54
+msgid "Advanced link options"
+msgstr "Opzioni avanzate dei link"
+
+#: print.admin.inc:220
+#: print_mail/print_mail.admin.inc:52
+#: print_pdf/print_pdf.admin.inc:61
+msgid "Link style"
+msgstr "Stile dei Link"
+
+#: print.admin.inc:222
+#: print_mail/print_mail.admin.inc:54
+#: print_pdf/print_pdf.admin.inc:63
+msgid "Text only"
+msgstr "Solo testo"
+
+#: print.admin.inc:222
+#: print_mail/print_mail.admin.inc:54
+#: print_pdf/print_pdf.admin.inc:63
+msgid "Icon only"
+msgstr "Solo Icone"
+
+#: print.admin.inc:222
+#: print_mail/print_mail.admin.inc:54
+#: print_pdf/print_pdf.admin.inc:63
+msgid "Icon and Text"
+msgstr "Sia Icone che Testo"
+
+#: print.admin.inc:223
+#: print_mail/print_mail.admin.inc:55
+#: print_pdf/print_pdf.admin.inc:64
+msgid "Select the visual style of the link."
+msgstr "Seleziona lo stile di visualizzazione del link"
+
+#: print.admin.inc:228
+#: print_mail/print_mail.admin.inc:60
+#: print_pdf/print_pdf.admin.inc:69
+msgid "Use URL alias instead of node ID"
+msgstr "Usa gli URL alias invece del numero del nodo"
+
+#: print.admin.inc:230
+#: print_mail/print_mail.admin.inc:62
+#: print_pdf/print_pdf.admin.inc:71
+msgid "Enabling this will create the link using the URL alias instead of the node ID."
+msgstr "Abilitando questo verrà creato il link utilizzando l' URL alias invece del numero del nodo"
+
+#: print.admin.inc:235
+#: print_mail/print_mail.admin.inc:67
+#: print_pdf/print_pdf.admin.inc:76
+msgid "Link class"
+msgstr "Classe del Link"
+
+#: print.admin.inc:239
+#: print_mail/print_mail.admin.inc:71
+#: print_pdf/print_pdf.admin.inc:80
+msgid "This can be used by themers to change the link style or by jQuery modules to open in a new window (e.g. greybox or thickbox). Multiple classes can be specified, separated by spaces."
+msgstr "Questo può essere usato dagli sviluppatori dei temi per cambiare lo stile del link o anche dal modulo jQuery per aprire contenuti in nuove finestre (ad es. greybox o thickbox). Per specificare classi molteplici separale da spazi"
+
+#: print.admin.inc:244
+#: print_mail/print_mail.admin.inc:76
+#: print_pdf/print_pdf.admin.inc:85
+msgid "Link visibility"
+msgstr "Visibilità dei Link"
+
+#: print.admin.inc:246;271
+#: print_mail/print_mail.admin.inc:78;103
+#: print_pdf/print_pdf.admin.inc:87;112
+msgid "Show on every page except the listed pages."
+msgstr "Mostra su ogni pagina tranne quelle elencate"
+
+#: print.admin.inc:246;271
+#: print_mail/print_mail.admin.inc:78;103
+#: print_pdf/print_pdf.admin.inc:87;112
+msgid "Show on only the listed pages."
+msgstr "Mostra solo sulle pagine elencate"
+
+#: print.admin.inc:253;279
+#: print_mail/print_mail.admin.inc:85;111
+#: print_pdf/print_pdf.admin.inc:94;120
+msgid "Enter one page per line as Drupal paths. The '*' character is a wildcard. Example paths are %blog for the blog page and %blog-wildcard for every personal blog. %front is the front page."
+msgstr "Scrivi una pagina per ogni riga in forma di percorso Drupal. Il carattere asterisco '*' fa da jolly. Ad esempio %blog per il blog e %blog-jolly per ogni pagina personale del blog. %front è la home page"
+
+#: print.admin.inc:263;287
+#: print_mail/print_mail.admin.inc:95;119
+#: print_pdf/print_pdf.admin.inc:104;128
+msgid "Show if the following PHP code returns <code>TRUE</code> (PHP-mode, experts only)."
+msgstr "Mostra se il seguente codice PHP ritorna <code>TRUE</code> (PHP-mode, attenzione! solo per esperti)."
+
+#: print.admin.inc:264;288
+#: print_mail/print_mail.admin.inc:96;120
+#: print_pdf/print_pdf.admin.inc:105;129
+msgid "If the PHP-mode is chosen, enter PHP code between %php. Note that executing incorrect PHP-code can break your Drupal site."
+msgstr "Se viene scelto il metodo PHP-mode, scrivi il codice fra %php. Fai attenzione perchè codice PHP non corretto può compromettere la tua installazione Drupal."
+
+#: print.admin.inc:269
+#: print_mail/print_mail.admin.inc:101
+#: print_pdf/print_pdf.admin.inc:110
+msgid "Show link in system (non-content) pages"
+msgstr "Mostra i link nelle pagine di sistema (non quelle dei contenuti)"
+
+#: print.admin.inc:278
+msgid "Setting this option will add a printer-friendly version page link on pages created by Drupal or the enabled modules."
+msgstr "Impostando queste opzioni verrà aggiunto una pagina di link alla versione stampabile sulle pagine create da Drupal o dai moduli abilitati a farlo"
+
+#: print.admin.inc:293
+#: print_mail/print_mail.admin.inc:125
+#: print_pdf/print_pdf.admin.inc:134
+msgid "Link in book hierarchy nodes"
+msgstr "Link nei nodi della Gerarchia Libro"
+
+#: print.admin.inc:295
+msgid "Book module link not modified"
+msgstr "Link al modulo Libro non modificato"
+
+#: print.admin.inc:295
+#: print_mail/print_mail.admin.inc:127
+#: print_pdf/print_pdf.admin.inc:136
+msgid "Current page and sub-pages"
+msgstr "Le pagine correnti e le sotto-pagine"
+
+#: print.admin.inc:295
+#: print_mail/print_mail.admin.inc:127
+#: print_pdf/print_pdf.admin.inc:136
+msgid "Current page only"
+msgstr "Solo la pagina corrente"
+
+#: print.admin.inc:300
+msgid "Open the printer-friendly version in a new window"
+msgstr "Apri la versione stampabile in una nuova finestra"
+
+#: print.admin.inc:302
+msgid "Setting this option will make the printer-friendly version open in a new window/tab."
+msgstr "Imposta queste opzioni per far si che la versione stampabile si apra in una nuova pagina/scheda"
+
+#: print.admin.inc:307
+msgid "Send to printer"
+msgstr "Invia alla stampante"
+
+#: print.admin.inc:309
+msgid "Automatically calls the browser's print function when the printer-friendly version is displayed."
+msgstr "Chiama automaticamente la funzione di stampa del browser quando la versione stampabile viene mostrata"
+
+#: print.admin.inc:314
+msgid "Close window after sending to printer"
+msgstr ""
+
+#: print.admin.inc:316
+msgid "When the above options are enabled, this option will close the window after its contents are printed."
+msgstr ""
+
+#: print.admin.inc:321
+msgid "Robots META tags"
+msgstr "Robots META tags"
+
+#: print.admin.inc:328
+msgid "Add noindex"
+msgstr "Aggiungi noindex"
+
+#: print.admin.inc:330
+msgid "Instruct robots to not index printer-friendly pages. Recommended for good search engine karma."
+msgstr "Istruisce i motori a non indicizzare le pagine stampabili. Raccomandato per un buon funzionamento dei motori di indicizzazione"
+
+#: print.admin.inc:335
+msgid "Add nofollow"
+msgstr "Aggiungi nofollow"
+
+#: print.admin.inc:337
+msgid "Instruct robots to not follow outgoing links on printer-friendly pages."
+msgstr "Istruisce i motori a non seguire i link esterni sulle versioni stampabili."
+
+#: print.admin.inc:342
+msgid "Add noarchive"
+msgstr "Aggiungi noarchive"
+
+#: print.admin.inc:344
+msgid "Non-standard tag to instruct search engines to not show a \"Cached\" link for your printer-friendly pages. Recognized by Googlebot."
+msgstr "I tag non-standard per istruire i motori di ricerca a non mostrare i link \"Cached\" per le versioni stampabili. Riconosciuto da Googlebot"
+
+#: print.admin.inc:356;397
+#: print_mail/print_mail.admin.inc:184
+#: print_pdf/print_pdf.admin.inc:293
+msgid "Saving these strings will disable their translation via Drupal's language system. Use the reset button to return them to the original state."
+msgstr "Salvando queste stringhe disabiliterai la loro traduzione creata da Drupal. Usa questo pulsante per farle ritornare allo stato originale"
+
+#: print.admin.inc:360;401
+#: print.module:187;210
+#: print_mail/print_mail.admin.inc:188
+#: print_mail/print_mail.module:86
+#: print_pdf/print_pdf.admin.inc:297
+#: print_pdf/print_pdf.module:111
+msgid "Text strings"
+msgstr "Stringhe di testo"
+
+#: print.admin.inc:365
+#: print.pages.inc:250
+msgid "Published on %site_name"
+msgstr "Pubblicata su  %site_name"
+
+#: print.admin.inc:369
+#: print.pages.inc:285
+msgid "By %author"
+msgstr "Da %author"
+
+#: print.admin.inc:373
+#: print.pages.inc:289
+msgid "Created %date"
+msgstr "Creata il %date"
+
+#: print.admin.inc:381
+#: print.pages.inc:270
+msgid "retrieved on %date"
+msgstr "Salvata il %date"
+
+#: print.admin.inc:385
+#: print.pages.inc:326
+msgid "Links"
+msgstr "Links"
+
+#: print.admin.inc:406
+#: print_mail/print_mail.admin.inc:193
+#: print_pdf/print_pdf.admin.inc:302
+msgid "Link text"
+msgstr "Testo Link"
+
+#: print.admin.inc:407
+#: print.module:439;645
+msgid "Printer-friendly version"
+msgstr "Versione stampabile"
+
+#: print.admin.inc:408
+msgid "Text used in the link to the printer-friendly version."
+msgstr "Testo usato nel link per la versione stampabile"
+
+#: print.pages.inc:286
+msgid "Anonymous"
+msgstr "Non registrato"
+
+#: print.pages.inc:565
+msgid "Post new comment"
+msgstr "Scrivi un nuovo commento"
+
+#: print.module:228;430;474;169
+#: print.info:0
+#: print_mail/print_mail.info:0
+#: print_pdf/print_pdf.info:0
+msgid "Printer, e-mail and PDF versions"
+msgstr "Stampante, e-mail e versione PDF"
+
+#: print.module:230;260
+msgid "Most printed"
+msgstr "I più stampati"
+
+#: print.module:444
+#: print_mail/print_mail.module:249
+#: print_pdf/print_pdf.module:339
+msgid "Show link"
+msgstr "Mostra link"
+
+#: print.module:448
+#: print_mail/print_mail.module:253
+#: print_pdf/print_pdf.module:343
+msgid "Show link in individual comments"
+msgstr "Mostra i link nei singoli commenti."
+
+#: print.module:452
+#: print_mail/print_mail.module:257
+#: print_pdf/print_pdf.module:347
+msgid "Show Printer-friendly URLs list"
+msgstr "Mostra la lista degli URL di Printer-friendly"
+
+#: print.module:475
+msgid "Print module form."
+msgstr ""
+
+#: print.module:487;490
+#, fuzzy
+msgid "Print"
+msgstr "stampa"
+
+#: print.module:648
+msgid "Display a printer-friendly version of this page."
+msgstr "Mostra una versione stampabile di questa pagina."
+
+#: print.module:88
+msgid "access print"
+msgstr "Accedi alla stampa"
+
+#: print.module:88
+msgid "administer print"
+msgstr "amministra stampa"
+
+#: print.module:88
+msgid "node-specific print configuration"
+msgstr "Configurazione della stampa specifica del nodo"
+
+#: print.module:88
+msgid "use PHP for link visibility"
+msgstr "Usa il PHP per la visibilità del link"
+
+#: print.module:159
+msgid "Printer-friendly"
+msgstr "Printer-friendly"
+
+#: print.module:170
+#: print.info:0
+msgid "Adds a printer-friendly version link to content and administrative pages."
+msgstr "Aggiungi un link alla versione stampabile alle pagine di amministrazione e dei contenuti"
+
+#: print.module:177
+msgid "Web page"
+msgstr "Web page"
+
+#: print.module:182;205
+#: print_mail/print_mail.module:81
+#: print_pdf/print_pdf.module:106
+msgid "Options"
+msgstr "Opzioni"
+
+#: print.module:196
+msgid "Settings"
+msgstr "Impostazioni"
+
+#: (duplicate) print.install:21
+msgid "Printer-friendly Page settings are available under !link"
+msgstr "La pagina delle impostazioni di Printer-friendly sono disponibili su !link"
+
+#: (duplicate) print.install:22
+msgid "Administer > Site configuration > Printer-friendly Pages"
+msgstr "Administer > Site configuration > Printer-friendly Pages"
+
+#: (duplicate) print.install:350
+msgid "Please review your custom stylesheet path in the <a href=\"!url\">print module settings</a>, as the path must now be relative to the base path of the site."
+msgstr ""
+
+#: print.info:0
+#, fuzzy
+msgid "Printer-friendly pages"
+msgstr "Link alla pagina stampabile"
+
+#: print_mail/print_mail.admin.inc:25
+msgid "Send by e-mail options"
+msgstr "Opzione -manda per email-"
+
+#: print_mail/print_mail.admin.inc:30
+msgid "Send by e-mail link"
+msgstr "Link -manda pe remail-"
+
+#: print_mail/print_mail.admin.inc:33
+msgid "Choose the location of the link(s) to the send by e-mail page. The Links area is usually below the node content, whereas the Content corner is placed in the upper-right corner of the node content. Unselect all options to disable the link. Even if the link is disabled, you can still send a node by e-mail by going to !path/nid where nid is the numeric id of the node."
+msgstr "Scegli il posto del link della pagina -manda per email-. L'area del link è solitamente sotto il contenuto del nodo, mentre l'angolo del contenuto è posto nell'angolo in alto a destra del nodo. Deseleziona tutte le opzioni per disabilitare il link. Anche se il link è disabilitato puoi comunque inviare il nodo per e-mail andando su !path/nid dove nid è l'identificativo numerico del nodo."
+
+#: print_mail/print_mail.admin.inc:38
+#, fuzzy
+msgid "Display send by e-mail link in teaser"
+msgstr "Link -manda pe remail-"
+
+#: print_mail/print_mail.admin.inc:110
+msgid "Setting this option will add a send by e-mail link on pages created by Drupal or the enabled modules."
+msgstr "Impostando queste opzioni viene aggiunto un link -manda per email- sulle pagine create da Drupal o dai moduli autorizzati a farlo."
+
+#: print_mail/print_mail.admin.inc:127
+#: print_pdf/print_pdf.admin.inc:136
+msgid "No link"
+msgstr "No link"
+
+#: print_mail/print_mail.admin.inc:132
+msgid "Hourly threshold"
+msgstr "Soglia Oraria"
+
+#: print_mail/print_mail.admin.inc:135
+msgid "The maximum number of e-mails a user can send per hour."
+msgstr "Il massimo numero di e-mail che un utente può inviare in un'ora"
+
+#: print_mail/print_mail.admin.inc:140
+#: print_mail/print_mail.inc:120
+msgid "Send only the teaser"
+msgstr "Invia solo il teaser"
+
+#: print_mail/print_mail.admin.inc:142
+msgid "If selected, the default choice will be to send only the node's teaser instead of the full content."
+msgstr "Se selezionato la scelta standard sarà quella di inviare solo il teaser del nodo invece che l'intero contenuto"
+
+#: print_mail/print_mail.admin.inc:147
+msgid "Enable teaser/full mode choice"
+msgstr "Attiva la scelta -teaser/intero nodo-"
+
+#: print_mail/print_mail.admin.inc:149
+msgid "If checked, the user will be able to choose between sending the full content or only the teaser at send time."
+msgstr "Se vistato, l'utente potrà scegliere fra inviare l'intero contenuto o solo il teaser al momento dell'invio."
+
+#: print_mail/print_mail.admin.inc:154
+msgid "Default e-mail sending format"
+msgstr ""
+
+#: print_mail/print_mail.admin.inc:157
+#: print_mail/print_mail.inc:102
+#, fuzzy
+msgid "Link"
+msgstr "Links"
+
+#: print_mail/print_mail.admin.inc:158
+#: print_mail/print_mail.inc:103
+msgid "Inline HTML"
+msgstr ""
+
+#: print_mail/print_mail.admin.inc:162
+#: print_mail/print_mail.inc:107
+msgid "Inline HTML with Attachment"
+msgstr ""
+
+#: print_mail/print_mail.admin.inc:163
+#: print_mail/print_mail.inc:108
+msgid "Plain Text with Attachment"
+msgstr ""
+
+#: print_mail/print_mail.admin.inc:169
+msgid "Send e-mails using Job Queue"
+msgstr ""
+
+#: print_mail/print_mail.admin.inc:171
+msgid "Selecting this option, e-mail delivery will be performed by the Job Queue module during each cron run. Leaving this unselected, the e-mail will be sent immediately, but the site will take slightly longer to reply to the user."
+msgstr ""
+
+#: print_mail/print_mail.admin.inc:194
+#: print_mail/print_mail.module:279;361
+msgid "Send to friend"
+msgstr "Invia a un amico"
+
+#: print_mail/print_mail.admin.inc:195
+msgid "Text used in the link to the send by-email form."
+msgstr "Testo da usare nel modulo -invia per email-"
+
+#: print_mail/print_mail.admin.inc:200
+msgid "Message Subject"
+msgstr "Oggetto messaggio"
+
+#: print_mail/print_mail.admin.inc:201
+#: print_mail/print_mail.inc:154
+msgid "!user has sent you a message from !site"
+msgstr "!user ti ha inviato un messaggio da !site"
+
+#: print_mail/print_mail.admin.inc:202
+#, fuzzy
+msgid "e-mail subject line. The sender's name will appear in place of !user in the subject. The web site name will be inserted in place of !site. The page title replaces !title."
+msgstr "Riga oggetto e-mail. Il nome del mittente apparirà nell'oggetto al posto di !user. Il nome del sito sarà inserito al posto di !site. The page title replaces !title."
+
+#: print_mail/print_mail.admin.inc:206
+msgid "Message Preamble"
+msgstr "Introduzione al messaggio"
+
+#: print_mail/print_mail.admin.inc:207
+#: print_mail/print_mail.inc:260
+msgid "Message from sender"
+msgstr "Messaggio dal mittente"
+
+#: print_mail/print_mail.admin.inc:208
+msgid "e-mail message preamble. The sender will be able to add their own message after this."
+msgstr "Introduzione al messaggio e-mail. Il mittente potrà aggiungerei propri messaffi dopo questo"
+
+#: print_mail/print_mail.admin.inc:212
+msgid "Message Content"
+msgstr "Contenuto del messaggio"
+
+#: print_mail/print_mail.admin.inc:214
+msgid "Set the default contents of the message."
+msgstr "Imposta il contenuto standard del messaggio"
+
+#: print_mail/print_mail.admin.inc:218
+msgid "Thank You Message"
+msgstr "Messaggio di ringraziamento"
+
+#: print_mail/print_mail.admin.inc:219
+#: print_mail/print_mail.inc:316
+msgid "Thank you for spreading the word about !site."
+msgstr "Grazie per aver promosso !site."
+
+#: print_mail/print_mail.admin.inc:220
+msgid "This message will be displayed after the user successfully submits the form."
+msgstr "Questo messaggio sarà mostrato dopo che l'utente ha inviato il modulo"
+
+#: print_mail/print_mail.inc:32
+msgid "You cannot send more than %number messages per hour. Please try again later."
+msgstr "Non puoi inviare più di %number messaggi in un'ora. Per favore riprova più tardi"
+
+#: print_mail/print_mail.inc:67
+msgid "Your e-mail"
+msgstr "La tua e-mail"
+
+#: print_mail/print_mail.inc:73
+msgid "Your name"
+msgstr "Il tuo nome"
+
+#: print_mail/print_mail.inc:78
+msgid "Send to"
+msgstr "Invia a"
+
+#: print_mail/print_mail.inc:81
+msgid "Enter multiple addresses separated by commas and/or different lines."
+msgstr "Inserisci più indirizzi separati da virgole o su righe differenti"
+
+#: print_mail/print_mail.inc:86
+msgid "Subject"
+msgstr "Oggetto"
+
+#: print_mail/print_mail.inc:93
+msgid "Page to be sent"
+msgstr ""
+
+#: print_mail/print_mail.inc:94
+msgid "View page"
+msgstr ""
+
+#: print_mail/print_mail.inc:99
+#, fuzzy
+msgid "Send page as"
+msgstr "Invia la pagina per e-mail"
+
+#: print_mail/print_mail.inc:112
+msgid "Your message"
+msgstr "Il tuo messaggio"
+
+#: print_mail/print_mail.inc:131
+msgid "Send e-mail"
+msgstr "Invia una e-mail"
+
+#: print_mail/print_mail.inc:135
+msgid "Clear form"
+msgstr "Pulisci il modulo"
+
+#: print_mail/print_mail.inc:140
+msgid "Cancel"
+msgstr "Cancella"
+
+#: print_mail/print_mail.inc:151
+msgid "Someone"
+msgstr "Qualcuno"
+
+#: print_mail/print_mail.inc:153
+msgid "an interesting site"
+msgstr "Un sito interessante"
+
+#: print_mail/print_mail.inc:229
+#, fuzzy
+msgid "You cannot send more than %number messages per hour. Please reduce the number of recipients."
+msgstr "Non puoi inviare più di %number messaggi in un'ora. The page title replaces !title."
+
+#: print_mail/print_mail.inc:298
+msgid "print_mail: From %from"
+msgstr ""
+
+#: print_mail/print_mail.inc:315
+msgid "us"
+msgstr "noi"
+
+#: print_mail/print_mail.inc:314
+msgid "print_mail"
+msgstr "print_mail"
+
+#: print_mail/print_mail.inc:314
+msgid "%name [%from] sent %page to [%to]"
+msgstr "%name [%from] ha inviato %page a [%to]"
+
+#: print_mail/print_mail.module:104;115
+msgid "Most emailed"
+msgstr "Miglior destinatario"
+
+#: print_mail/print_mail.module:244
+#: print_mail/print_mail.info:0
+msgid "Send by e-mail"
+msgstr "Invia per e-mail"
+
+#: print_mail/print_mail.module:364
+msgid "Send this page by e-mail."
+msgstr "Manda questa pagina per e-mail"
+
+#: print_mail/print_mail.module:35
+#, fuzzy
+msgid "access send to friend"
+msgstr "Invia a un amico"
+
+#: print_mail/print_mail.module:60
+msgid "Send page by e-mail"
+msgstr "Invia la pagina per e-mail"
+
+#: print_mail/print_mail.module:72
+msgid "e-mail"
+msgstr "e-mail"
+
+#: print_mail/print_mail.info:0
+msgid "Provides the capability to send the web page by e-mail"
+msgstr "Permette di inviare la pagina web per e-mail "
+
+#: print_pdf/print_pdf.admin.inc:26
+msgid "PDF options"
+msgstr "Opzioni PDF"
+
+#: (duplicate) print_pdf/print_pdf.admin.inc:31
+#: print_pdf/print_pdf.module:177
+msgid "PDF generation tool"
+msgstr "Strumento di generazione del PDF"
+
+#: print_pdf/print_pdf.admin.inc:34
+msgid "This option selects the PDF generation tool being used by this module to create the PDF version."
+msgstr "Questa opzione seleziona quale strumento di generazione del PDF debba essere usato da questo modulo per creare le versioni PDF"
+
+#: print_pdf/print_pdf.admin.inc:39
+msgid "PDF version link"
+msgstr "Link alla versione PDF"
+
+#: print_pdf/print_pdf.admin.inc:42
+msgid "Choose the location of the link(s) to the PDF version. The Links area is usually below the node content, whereas the Content corner is placed in the upper-right corner of the node content. Unselect all options to disable the link. Even if the link is disabled, you can still view the PDF version of a node by going to !path/nid where nid is the numeric id of the node."
+msgstr "Scegli il posto del link alla versione PDF. L'area del link è solitamente in basso nel nodo, mentre l'angolo del contenuto di trova nell'angolo in alto a destra del nodo. Deseleziona tutte le opzioni per disabilitare il link. Anche se il link è disabilitato, puoi comunque vedere la versione PDF del nodo andando !path/nid dove il nid è il riferimento numerico del nodo."
+
+#: print_pdf/print_pdf.admin.inc:47
+#, fuzzy
+msgid "Display link to the PDF version in teaser"
+msgstr "Mostra una versione PDF di questa pagina"
+
+#: print_pdf/print_pdf.admin.inc:119
+msgid "Setting this option will add a PDF version page link on pages created by Drupal or the enabled modules."
+msgstr "Impostando queste opzioni aggiungerai una link alla versione PDF delle pagine generate da drupal e dai moduli abilitati a farlo."
+
+#: print_pdf/print_pdf.admin.inc:141
+msgid "Open PDF in"
+msgstr "Apri PDF in"
+
+#: print_pdf/print_pdf.admin.inc:142
+msgid "Same browser window"
+msgstr "Qualche finestra del browser"
+
+#: print_pdf/print_pdf.admin.inc:142
+msgid "New browser window"
+msgstr "Un anuova finestra del browser"
+
+#: print_pdf/print_pdf.admin.inc:142
+msgid "Save dialog"
+msgstr "Salva il log"
+
+#: print_pdf/print_pdf.admin.inc:144
+msgid "Select the desired method for opening the PDF in the user's browser."
+msgstr "Seleziona il metodo per aprire il PDF nel browser degli utenti"
+
+#: print_pdf/print_pdf.admin.inc:149
+msgid "Paper size"
+msgstr "Dimensione carta"
+
+#: print_pdf/print_pdf.admin.inc:166
+msgid "Choose the paper size of the generated PDF."
+msgstr "SCegli la dimensione della carte del PDF generato"
+
+#: print_pdf/print_pdf.admin.inc:171
+msgid "Page orientation"
+msgstr "Orientamento foglio"
+
+#: print_pdf/print_pdf.admin.inc:172
+msgid "Portrait"
+msgstr "Ritratto"
+
+#: print_pdf/print_pdf.admin.inc:172
+msgid "Landscape"
+msgstr "Paesaggio"
+
+#: print_pdf/print_pdf.admin.inc:174
+msgid "Choose the page orientation of the generated PDF."
+msgstr "Scegli l'orientamento del DF generato."
+
+#: print_pdf/print_pdf.admin.inc:178
+msgid "Auto-configure the PDF tool settings"
+msgstr ""
+
+#: print_pdf/print_pdf.admin.inc:180
+msgid "If you disable this option, the pdf tool settings must be configured manually. For TCDPF, edit the tcpdf/config/tcpdf_config.php file. For dompdf, edit the dompdf/dompdf_config.inc.php file."
+msgstr ""
+
+#: print_pdf/print_pdf.admin.inc:184
+msgid "Font Family"
+msgstr "Font del carattere"
+
+#: print_pdf/print_pdf.admin.inc:188
+msgid "(TCPDF only) Set the font family to be used. Examples: %examples."
+msgstr "(solo TCPDF) Imposta il font del carattere da usare. Esempio: %examples."
+
+#: print_pdf/print_pdf.admin.inc:189
+msgid "CAUTION: TCPDF embeds the complete font in the generated PDF. If you're not using Unicode, then helvetica or times are safe choices that will keep the PDF small. Unicode fonts can increase the size of the PDF to the 1MB region."
+msgstr "ATTENZIONE: TCPDF incorpora il font completo nel PDF generato. Se non stai usando UNICODE allora helvetica o times sono scelte sicure manterranno il PDF leggero. I font UNICODE possono ingrandire la dimensione del PDF oltre 1MB"
+
+#: print_pdf/print_pdf.admin.inc:193
+msgid "Font Size"
+msgstr "Grandezza del carattere"
+
+#: print_pdf/print_pdf.admin.inc:197
+msgid "(TCPDF only) Set the font size to be used for normal text. This is the base value for the scaling applied to other text styles."
+msgstr "(solo TCPDF) Imposta la grandezza del carattere da usare per il testo normale. Questo è il valore di base per applicare la scalatura agli altri stili di testo"
+
+#: print_pdf/print_pdf.admin.inc:201
+msgid "Use dompdf's Unicode Mode"
+msgstr ""
+
+#: print_pdf/print_pdf.admin.inc:203
+msgid "If enabled, dompdf's Unicode mode is used. If not, the module will attempt to convert some non-ASCII chars to ISO-8859-1."
+msgstr ""
+
+#: print_pdf/print_pdf.admin.inc:207
+#, fuzzy
+msgid "wkhtmltopdf options"
+msgstr "Opzioni wkhtmltopdf"
+
+#: print_pdf/print_pdf.admin.inc:211
+msgid "(wkhtmltopdf only) Set any additional options to be passed to the wkhtmltopdf executable. Tokens may be used in these options (see list below)."
+msgstr ""
+
+#: print_pdf/print_pdf.admin.inc:217
+msgid "PDF File Name"
+msgstr "Nome del file PDF"
+
+#: print_pdf/print_pdf.admin.inc:219
+msgid "If left empty the generated filename defaults to the node's path. Tokens may be used to build the filename (see following list). The .pdf extension will be appended automatically."
+msgstr "Se lasciato vuoto il nome del file generato di default sarà quello del percorso del nodo. Il modulo Token può essere usato per costruire il nome (guarda la seguente lista). L'estensione .pdf sarà aggiunta automaticamente"
+
+#: print_pdf/print_pdf.admin.inc:223
+msgid "Replacement Patterns"
+msgstr "Patterns sostitutivo"
+
+#: print_pdf/print_pdf.admin.inc:237
+msgid "No PDF generation tool found! Please dowload a supported PHP PDF generation tool. Check this module's INSTALL.txt for more details."
+msgstr "Nessun generatore di PDF trovato! Scarica uno generatore PDF supportato. Controlla il file INSTALL.txt di questo modulo per maggiori dettagli "
+
+#: (duplicate) print_pdf/print_pdf.admin.inc:249
+#: print_pdf/print_pdf.module:169
+msgid "No PDF tool selected"
+msgstr "Nessun generatore di PDF selezionato."
+
+#: print_pdf/print_pdf.admin.inc:252
+msgid "Font size must be at least 1."
+msgstr "La grandezza del FOnt deve essere almeno 1"
+
+#: print_pdf/print_pdf.admin.inc:303
+#: print_pdf/print_pdf.module:334;413
+#: print_pdf/print_pdf.info:0
+msgid "PDF version"
+msgstr "Versione PDF"
+
+#: print_pdf/print_pdf.admin.inc:304
+msgid "Text used in the link to the PDF version."
+msgstr "Testo usato nel link alla versione PDF."
+
+#: print_pdf/print_pdf.pages.inc:562
+msgid "Page !n of !total"
+msgstr "Pagina !n di !total"
+
+#: print_pdf/print_pdf.module:129;140
+msgid "Most PDFd"
+msgstr "Most PDFd"
+
+#: print_pdf/print_pdf.module:416
+msgid "Display a PDF version of this page."
+msgstr "Mostra una versione PDF di questa pagina"
+
+#: (duplicate) print_pdf/print_pdf.module:168
+#, fuzzy
+msgid "PDF generation library"
+msgstr "Strumento di generazione del PDF"
+
+#: (duplicate) print_pdf/print_pdf.module:170
+msgid "Please configure it in the <a href=\"@url\">PDF settings page</a>."
+msgstr "Per favore configuralo in <a href=\"@url\">Pagina delle impostazioni PDF</a> "
+
+#: (duplicate) print_pdf/print_pdf.module:178
+msgid "File not found"
+msgstr ""
+
+#: (duplicate) print_pdf/print_pdf.module:179
+msgid "The currently selected PDF generation library (%file) is no longer accessible."
+msgstr ""
+
+#: (duplicate) print_pdf/print_pdf.module:187
+msgid "DOMPDF font cache directory"
+msgstr ""
+
+#: (duplicate) print_pdf/print_pdf.module:188
+msgid "Non-writable permissions"
+msgstr ""
+
+#: (duplicate) print_pdf/print_pdf.module:189
+msgid "You must change the %fontdir permissions to be writable, as dompdf requires write-access to that directory."
+msgstr ""
+
+#: (duplicate) print_pdf/print_pdf.module:197
+#: ;207
+#, fuzzy
+msgid "wkhtmltopdf library"
+msgstr "Opzioni wkhtmltopdf"
+
+#: (duplicate) print_pdf/print_pdf.module:198
+msgid "Non-executable permissions"
+msgstr ""
+
+#: (duplicate) print_pdf/print_pdf.module:199
+msgid "You must modify the permissions of the wkhtmltopdf file (%file) to make it executable."
+msgstr ""
+
+#: (duplicate) print_pdf/print_pdf.module:208
+msgid "Unsupported version"
+msgstr ""
+
+#: (duplicate) print_pdf/print_pdf.module:209
+msgid "The currently selected version of wkhtmltopdf (@version) is not supported. Please update to a <a href=\"@url\">newer version</a>."
+msgstr ""
+
+#: print_pdf/print_pdf.module:42
+#, fuzzy
+msgid "access PDF version"
+msgstr "Versione PDF"
+
+#: print_pdf/print_pdf.module:87
+msgid "Printer-friendly PDF"
+msgstr "PDF Printer-friendly"
+
+#: print_pdf/print_pdf.module:97
+msgid "PDF"
+msgstr "PDF"
+
+#: print_pdf/print_pdf.info:0
+msgid "Adds the capability to export pages as PDF."
+msgstr "Aggiunge la possibilità di esportare pagine in PDF"
+
+#~ msgid ""
+#~ "The settings below only apply in case the corresponding type-specific "
+#~ "setting is also enabled (except for the \"Show link in individual comments"
+#~ "\")."
+#~ msgstr ""
+#~ "Le impostazioni sottostanti si applicano solo in caso in cui le "
+#~ "corrispondenti impostazini specifiche per tipo sono anch'esse abilitate "
+#~ "(tranne per \"Mostra link nei singoli commenti\")."
+
+#~ msgid "Printer-friendly pages (core)"
+#~ msgstr "Pagine Printer-friendly (core)"
+
+#~ msgid "You must enter a subject."
+#~ msgstr "Devi inserire un oggetto"
+
+#~ msgid "You must enter a message."
+#~ msgstr "Devi inserire un messaggio"
+
+#, fuzzy
+#~ msgid "Xvfb options"
+#~ msgstr "Opzioni Xvfb"
+
+#~ msgid "print_pdf"
+#~ msgstr "print_pdf"

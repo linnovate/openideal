@@ -1,0 +1,155 @@
+<?php
+
+function nodequeue_generate_menu() {
+  $items['admin/content/generate_nodequeue'] = array(
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('nodequeue_generate_form'),
+    'description' => 'Bulk add nodes into queues',
+    'title' => 'Generate nodequeue assignments',
+    'access callback' => 'user_access',
+    'access arguments' => array('manipulate all queues'),
+  );
+  return $items;
+}
+
+function nodequeue_generate_form() {
+  $form['help'] = array('#value' => '<p>'. t('Select which nodequeues shall be <strong>emptied</strong> and re-populated with new nodes.'). '</p>');
+
+  $queues = nodequeue_load_queues(nodequeue_get_all_qids(25));
+  if (empty($queues)) {
+    form_set_error('', t('No nodequeues exist.'));
+    return array();
+  }
+
+  $qids = array();
+  // For every queue that has exactly 1 subqueue,
+  foreach ($queues as $queue) {
+    if ($queue->subqueues == 1) {
+      $qids[] = $queue->qid;
+    }
+  }
+
+  $subqueues = nodequeue_load_subqueues_by_queue($qids);
+  // Relate all the subqueues we loaded back to our queues.
+  foreach ($subqueues as $subqueue) {
+    $queues[$subqueue->qid]->subqueue = $subqueue;
+  }
+
+  foreach ($queues as $queue) {
+    $sub_text = $queue->subqueues;
+    if ($sub_text == 1) {
+      $sub_text .= " (" . nodequeue_subqueue_size_text($queue->size, $queue->subqueue->count) . ")";
+    }
+    $form['rows']['cb'][$queue->qid] = array('#type' => 'checkbox', '#default_value' => 0);
+    $form['rows'][$queue->qid]['nodequeue-title'] = array('#value' => check_plain($queue->title));
+    $form['rows'][$queue->qid]['nodequeue-max-nodes'] = array('#value' => $queue->size == 0 ? t('Infinite') : $queue->size);
+    $form['rows'][$queue->qid]['nodequeue-subqueues'] = array('#value' => $sub_text);
+    $form['rows'][$queue->qid]['limit'] = array('#type' => 'value', '#value' => ($queue->size == 0 || $queue->size > 20) ? 10 : $queue->size);
+  }
+
+  $form['qids'] = array('#type' => 'value', '#value' => array_keys($queues));
+  $form['submit'] = array(
+    '#type' => 'submit',
+    '#value' => t('Generate'),
+  );
+  $form['#tree'] = TRUE;
+  return $form;
+}
+
+/**
+ * Implements hook_theme
+ *
+ * @return unknown
+ */
+function nodequeue_generate_theme() {
+  return array(
+    'nodequeue_generate_form' => array(
+      'arguments' => array('form' => NULL),
+    ),
+  );
+}
+
+function theme_nodequeue_generate_form($form) {
+  $output = drupal_render($form['help']);
+  $children = element_children($form['rows']);
+  unset($children[array_search('cb', $children)]);
+  foreach ($children as $qid) {
+    $rows[] = array(
+      drupal_render($form['rows']['cb'][$qid]),
+      drupal_render($form['rows'][$qid]['nodequeue-title']),
+      drupal_render($form['rows'][$qid]['nodequeue-max-nodes']),
+      drupal_render($form['rows'][$qid]['nodequeue-subqueues']),
+    );
+  }
+  $header = array(theme('table_select_header_cell'), t('Title'), t('Max nodes'), t('Subqueues'));
+  $output .= theme('table', $header, $rows);
+  $output .= theme('pager', NULL, 25);
+  $output .= drupal_render($form);
+
+  return $output;
+}
+
+function nodequeue_generate_form_submit($form, &$form_state) {
+  $qids = array_keys(array_filter($form_state['values']['rows']['cb']));
+  // Empty the queue
+  $placeholders = implode(', ', array_fill(0, count($qids), '%d'));
+  db_query("DELETE FROM {nodequeue_nodes} WHERE qid IN ($placeholders)", $qids);
+
+  $queues = nodequeue_load_queues($qids);
+  $subqueues = nodequeue_load_subqueues_by_queue($qids);
+  // TODO: handle non smart_taxonomy subqueues.
+  foreach ($subqueues as $subqueue) {
+    // dpr($queues[$subqueue->qid]);
+    // we don't know what kind of nodes to out in, so skip. is this a good idea?
+    if (empty($queues[$subqueue->qid]->types)) {
+      next;
+    }
+
+    $placeholders = implode(', ', array_fill(0, count($queues[$subqueue->qid]->types), '\'%s\''));
+    $args = $queues[$subqueue->qid]->types;
+    // smartqueue_taxonomy pulls nodes from the proper terms. nodequeue type queues don't care about taxo.
+    if ($queues[$subqueue->qid]->owner == 'nodequeue') {
+      $sql = "SELECT n.nid FROM {node} n WHERE n.status = 1 AND n.type IN ($placeholders) ORDER BY RAND()";
+      $result = db_query_range($sql, $args, 0, $form_state['values']['rows'][$subqueue->qid]['limit']);
+      while ($row = db_fetch_object($result)) {
+        nodequeue_subqueue_add($subqueue, $subqueue, $row->nid);
+      }
+    }
+    elseif ($queues[$subqueue->qid]->owner == 'smartqueue_taxonomy') {
+      $args[] = $subqueue->reference;
+      $sql = "SELECT tn.nid FROM {term_node} tn INNER JOIN {node} n ON tn.nid=n.nid WHERE n.status = 1 AND n.type IN ($placeholders) AND tn.tid = %d ORDER BY RAND()";
+      $result = db_query_range($sql, $args, 0, $form_state['values']['rows'][$subqueue->qid]['limit']);
+      while ($row = db_fetch_object($result)) {
+        nodequeue_subqueue_add($subqueue, $subqueue, $row->nid);
+      }
+    }
+  }
+
+  drupal_set_message(format_plural(count($qids), '1 queue populated', '@count queues populated.'));
+}
+
+/**
+ * Rebuild all smartqueue_taxonomy queues. Useful after a data migration has wiped your terms.
+ * When more smartqueue modules arrive, revisit this function.
+ *
+ * @param vids
+ *   An array of vocabulary ids.
+**/
+function nodequeue_generate_rehash($vids) {
+  // Delete existing smartqueue taxonomy subqueues
+  db_query("DELETE ns FROM nodequeue_subqueue ns INNER JOIN nodequeue_queue nq ON ns.qid=nq.qid WHERE nq.owner = 'smartqueue_taxonomy'");
+
+  // Re-add those subqueues
+  $node = new stdClass;
+  $tree = array();
+  foreach ($vids as $vid) {
+    $tree += taxonomy_get_tree($vid);
+  }
+  $node->taxonomy = $tree;
+  $queues = nodequeue_load_queues(nodequeue_get_all_qids(200));
+  foreach ($queues as $queue) {
+    if ($queue->owner == 'smartqueue_taxonomy') {
+      nodequeue_api_subqueues($queue, $node);
+    }
+  }
+}

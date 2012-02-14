@@ -1,0 +1,145 @@
+<?php
+// $Id: acquia_search.install 5187 2010-02-03 05:34:47Z buildbot $
+
+/**
+ * Implementation of hook_requirements().
+ */
+function acquia_search_requirements($phase) {
+  $requirements = array();
+  // Ensure translations don't break at install time
+  $t = get_t();
+
+  // Skip install checks if install.php is running. The weak install profile
+  // API means install.php calls hook_requirements for every module in a profile.
+  if ($phase == 'install' && MAINTENANCE_MODE != 'install') {
+    if (module_invoke('acquia_agent', 'has_credentials')) {
+      $severity = REQUIREMENT_OK;
+    }
+    else {
+      $severity = REQUIREMENT_ERROR;
+    }
+    $requirements['acquia_search_credentials'] = array(
+      'description' => $t('In order to use Acquia search module you must have an Acquia Network subscription. Please enter your Acquia Network subscription keys.'),
+      'severity' => $severity,
+    );
+
+    require_once drupal_get_path('module', 'acquia_agent') .'/acquia_agent_streams.inc';
+
+    $requirements['acquia_connector_https'] = array (
+      'description' => $t('Your version of the Acquia Agent module in the Acquia Network Connector package is out of date.  You must have version 6.x-1.1 to install Acquia Search.'),
+      'severity' => function_exists('acquia_agent_stream_context_create') ?  REQUIREMENT_OK : REQUIREMENT_ERROR,
+    );
+
+  }
+  // Check SSL support.
+  if (in_array('ssl', stream_get_transports(), TRUE)) {
+    $severity = REQUIREMENT_OK;
+    $requirements['acquia_search'] = array(
+      'description' => $t('The Acquia Search module is using SSL to protect the privacy of your content.'),
+    );
+  }
+  else {
+    $severity = REQUIREMENT_WARNING;
+    $requirements['acquia_search'] = array(
+      'description' => $t('In order to protect the privacy of your content with the Acquia Search module you must have SSL support enabled in PHP on your host.'),
+    );
+  }
+  $requirements['acquia_search']['title'] = $t('Acquia Search');
+  $requirements['acquia_search']['severity'] = $severity;
+
+  return $requirements;
+}
+
+/**
+ * Implementation of hook_install().
+ */
+function acquia_search_install() {
+
+  $facets = _acquia_search_get_default_facets();
+
+  variable_set('apachesolr_enabled_facets', $facets);
+
+  $theme_key = variable_get('theme_default', 'garland');
+  $block_regions = array_keys(system_region_list($theme_key));
+  $region = _acquia_search_find_block_region($block_regions);
+
+  if (empty($region)) {
+    drupal_set_message(t('We were unable to auto-detect where to put the filter blocks for your faceted search engine. To get started adding blocks, go to the <a href="@active_filter_config_form">filter configuration screen</a>.', array('@active_filter_config_form' => url('admin/settings/apachesolr/active_filters'))));
+    return;
+  }
+
+  foreach ($facets['apachesolr_search'] as $delta => $facet_field) {
+    $blocks[] = array (
+      'module' => 'apachesolr_search',
+      'delta' => $delta,
+    );
+  }
+
+  $blocks[] = array (
+    'module' => 'apachesolr',
+    'delta' => 'sort',
+    'weight' => -1
+  );
+
+  foreach ($blocks as $block) {
+    $block['cache'] = BLOCK_CACHE_PER_PAGE;
+    $block['theme'] = $theme_key;
+    $block['region'] = $region;
+    $block['status'] = 1;
+    // {block}.pages is type 'text', so it cannot have a
+    // default value, and is not null, so we must provide one.
+    $block['pages']  = '';
+    // Make sure the block does not already exist.
+    if (!db_result(db_query("SELECT 1 FROM {blocks} WHERE theme = '%s' AND module = '%s' AND delta = '%s'", $block['theme'], $block['module'], $block['delta']))) {
+      drupal_write_record('blocks', $block);
+    }
+  }
+}
+
+/**
+ * Helper function for hook_install().
+ */
+function _acquia_search_find_block_region($block_regions = array()) {
+  $regions_to_look_for = array (
+     'left', /* garland & zen */
+     'sidebar_first', /* acquia */
+  );
+
+  if ($matches = array_intersect($block_regions, $regions_to_look_for)) {
+    return array_shift($matches);
+  }
+}
+
+/**
+ * Helper function for hook_install().
+ */
+function _acquia_search_get_default_facets() {
+
+  $default_enabled_facets['apachesolr_search']['type'] = 'type';
+  $default_enabled_facets['apachesolr_search']['uid'] =  'uid';
+
+  if (module_exists('taxonomy')) {
+    $vocabs = taxonomy_get_vocabularies();
+    foreach ($vocabs as $vid => $vocab) {
+      $delta = 'imfield_vid_'. $vid;
+        $default_enabled_facets['apachesolr_search'][$delta] = $delta;
+    }
+  }
+  return $default_enabled_facets;
+}
+
+
+/**
+ * Implementation of hook_uninstall().
+ */
+function acquia_search_uninstall() {
+  // Nothing to do, but allows the module to be uninstalled.
+}
+
+/**
+ * Enable Apache Solr Search as default.
+ */
+function acquia_search_update_6000() {
+  variable_set('apachesolr_search_make_default', 1);
+  return array();
+}

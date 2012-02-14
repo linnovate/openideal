@@ -1,0 +1,654 @@
+p:last-child { margin:0px; }
+
+hr { display:none; }
+
+/**
+ * Toggleables ========================================================
+ */
+.toggleable { display:none; }
+
+/**
+ * Generic ============================================================
+ */
+.page-content dl dt {}
+.page-content dl dd,
+.page-content dl dl {
+  margin-left:20px;
+  margin-bottom:10px;
+  }
+
+/**
+ * Console ============================================================
+ */
+div.messages {
+  padding:15px;
+  color:#036;
+  background-color:#f8f8f8;
+  border:5px solid #fff;
+  }
+
+table tr.warning th,
+div.warning {
+  color:#a84;
+  background-color:#fff4c0;
+  }
+
+table tr.error th,
+div.error {
+  color:#965;
+  background-color:#ffe4e0;
+  }
+
+table tr.ok th,
+table tr.info th,
+div.status {
+  color:#687;
+  background-color:#ecf8f4;
+  }
+
+  div.error   { border-color:#fff8f4; }
+  div.warning { border-color:#fffce4; }
+  div.status  { border-color:#f8fffc; }
+
+/**
+ * Pagers =============================================================
+ */
+.pager {
+  font-weight:normal;
+  font-size:11px;
+  }
+
+  .pager ul.pager-list { float:left; }
+  .pager ul.pager-links { float:right; }
+
+/**
+ * Menus, lists =======================================================
+ */
+.help-items ul li,
+.confirmation ul li,
+.item-list ul li,
+.prose .item-list li,
+.menu li {
+  float:none;
+  display:block;
+  padding:5px 10px 4px;
+  border-bottom:1px solid #f4f4f4;
+  }
+
+  .help-items ul li:last-child,
+  .confirmation ul li:last-child,
+  .item-list ul li:last-child,
+  .prose .item-list li:last-child,
+  .menu li:last-child {
+    border-bottom:0px;
+    padding-bottom:5px;
+    }
+
+.admin-list li a span.icon {
+  position:absolute;
+  left:10px;
+  top:10px;
+  }
+
+  .admin-list-compact li a span.icon { top:5px; }
+
+.node-type-list li,
+.admin-list li {
+  position:relative;
+  padding:10px 5px 9px 50px;
+  margin:0px;
+  border-bottom:1px solid #e8e8e8;
+  }
+
+  .node-type-list li:last-child,
+  .admin-list li:last-child {
+    padding-bottom:10px;
+    border:0px;
+    }
+
+  ul.node-type-list label { font-size:15px; }
+
+/**
+ * Tables =============================================================
+ */
+table {
+  width:100%;
+  font-size:11px;
+  line-height:15px;
+  margin:0px 0px 10px;
+  background-color:#fff;
+
+  border-collapse:collapse;
+  border-color:#ccc #ddd #eee;
+  border-width:1px;
+  border-style:solid;
+  }
+
+  .fieldset table { margin:0px; }
+
+table td,
+table th {
+  vertical-align:top;
+  border-width:1px 0px;
+  border-style:solid;
+  border-color:#ddd;
+  padding:5px;
+  }
+
+table th {
+  text-align:left;
+  font-weight:normal;
+  color:#666;
+  background:#eee;
+  }
+
+  table thead th { border-top-color:#ccc; }
+
+table td.active { background:#e4f0f8; }
+table tr.odd td.active { background:#ecf8fc; }
+
+table tr.selected td.active,
+table tr.selected td {
+  background:#ffc;
+  border-color:#eeb;
+  }
+
+/* Block administration */
+table tr.region td { background:#f8f8f8; }
+
+/* Hide tabledrag markers */
+table tr.draggable span.tabledrag-changed { display:none; }
+
+/**
+ * Forms ==============================================================
+ */
+.block,
+.item-list,
+.help-items ul,
+.form-item,
+.confirmation ul,
+.admin-list,
+.node-type-list,
+.admin-panel {
+  background:#fff;
+  margin:0px 0px 10px;
+
+  border-width:1px;
+  border-style:solid;
+  border-color:#ccc #ddd #eee;
+  }
+
+  .form-item {
+    position:relative;
+    padding:9px;
+    }
+
+  .admin-list { margin:0px; }
+
+.block .item-list,
+.block .form-item,
+.admin-panel .admin-list,
+.teaser-checkbox .form-item,
+.form-item .form-item,
+.fieldset .form-item,
+table .form-item {
+  background:transparent;
+  padding:5px;
+  margin:0px;
+  border:0px;
+  }
+
+  .block .item-list,
+  .admin-panel .admin-list,
+  .form-item .form-item-filter { padding:0px; }
+
+.form-item label {
+  margin:0px;
+  padding:0px;
+  color:#999;
+  font-weight:bold;
+  font-size:10px;
+  text-transform:uppercase;
+  }
+
+  .form-item label.option {
+    text-transform:none;
+    font-size:11px;
+    }
+
+  .form-item label.option input { vertical-align:middle; }
+
+.page-content .password-description,
+.page-content .password-strength,
+.page-content .description,
+.page-content .form-item .description {
+  line-height:15px;
+  font-size:11px;
+  white-space:normal;
+  }
+
+  .admin-panel p.description {
+    background:#eee;
+    border-top:1px solid #ddd;
+    border-bottom:1px solid #fff;
+    line-height:20px;
+    font-size:11px;
+    padding:4px 9px;
+    margin:0px;
+    }
+
+.fieldset .description { margin:0px 0px 10px; }
+
+.page-content .form-item .description {
+  position:absolute;
+  bottom:100%;
+  right:-15px;
+  z-index:5;
+
+  color:#687;
+  background:url(images/popup.png) 50% 100% no-repeat;
+  border-top:1px solid #d8e4e0;
+
+  width:240px;
+  margin:0px 0px -15px;
+  padding:9px 10px 20px;
+  display:none;
+  }
+
+  .page-content .form-item:hover {
+    z-index:1;
+    height:auto; /* Fix for flicker in IE7 */
+    }
+
+  .page-content .form-item:hover > .description { display:block; }
+
+input.teaser-button,
+input.form-submit {
+  cursor:pointer;
+  padding:2px 10px;
+  color:#333;
+
+  text-align:center;
+
+  font-weight:normal;
+  border-width:1px;
+  border-style:solid;
+  border-color:#ddd #ddd #ccc;
+  background:#f4f4f4 url(images/bleeds.png) 0px -41px repeat-x;
+  }
+
+  input.form-submit:hover {
+    border-color:#999 #999 #888;
+    background:#888 url(images/bleeds.png) 0px 0px repeat-x;
+    color:#fff;
+    }
+
+  input.form-submit:active {
+    background:#666;
+    color:#fff;
+    }
+
+  /* Teaser splitter */
+  .teaser-checkbox {
+    position:relative;
+    z-index:2;
+    }
+
+  .teaser-checkbox div { margin:5px 0px 0px; }
+
+  input.teaser-button {
+    padding:0px 5px;
+    font-size:11px;
+    }
+
+  form input#edit-delete { color:#ccc; }
+
+/* Filter form */
+.filter-options .form-item,
+.filter-options .filter-help {
+  font-size:11px;
+  margin:10px 10px 0px 0px;
+  padding:0px;
+  float:left;
+  }
+
+  .filter-options .form-item:hover > .description { display:none; }
+
+input.form-autocomplete,
+input.form-text,
+textarea.form-textarea,
+select.form-select {
+  padding:2px;
+  border-width:2px;
+  border-style:solid;
+  border-color:#e8e8e8 #f0f0f0 #f8f8f8;
+  background:#fff;
+  color:#666;
+  max-width:100%;
+  }
+
+  input.form-autocomplete:hover,
+  input.form-text:hover,
+  textarea.form-textarea:hover,
+  select.form-select:hover,
+  input.form-autocomplete:focus,
+  input.form-text:focus,
+  textarea.form-textarea:focus,
+  select.form-select:focus {
+    color:#333;
+    border-color:#ace;
+    }
+
+  input.fluid {
+    -moz-box-sizing:border-box;
+    -webkit-box-sizing:border-box;
+    width:100%;
+    }
+
+    table input.fluid { width:auto; }
+
+  html.js input.form-autocomplete { background-position:100% 7px; }
+  html.js input.throbbing { background-position:100% -13px; }
+
+  /* Exceptions */
+  #diff-inline-form select,
+  #content .filter-options select { padding:0px; }
+
+/* Fieldsets */
+.fieldset,
+.fieldset-title,
+.fieldset-title a,
+.fieldset-content { display:block; }
+
+.fieldset { margin:0px 0px 10px; }
+
+.fieldset.titled {
+  display:block;
+  position:relative;
+  min-height:30px;
+  }
+
+.fieldset-title {
+  display:block;
+  position:absolute;
+  left:0px;
+  right:0px;
+  top:0px;
+  border-width:1px;
+  border-style:solid;
+  border-color:#ccc #ddd #eee;
+  }
+
+.container-inline .fieldset-title .fieldset-content,
+.fieldset.titled .fieldset-content {
+  display:block;
+  padding-top:40px;
+  }
+
+.item-list h3,
+.block .block-title,
+.admin-panel h3,
+.fieldset-title,
+.collapsible .fieldset-title a {
+  display:block;
+  font-size:11px;
+  margin:0px;
+  padding:4px 9px 5px;
+  color:#333;
+  background:#f4f4f4;
+  }
+
+  .fieldset-title,
+  .collapsible .fieldset-title a { padding-bottom:4px; }
+
+  /* Explicit height for IE */
+  .collapsible .fieldset-title a { height:20px; }
+
+  .admin-panel h3 { background:#eee; }
+
+  .collapsible .fieldset-title span.icon {
+    position:absolute;
+    left:-20px;
+    top:4px;
+    background:url(images/sprite.png) 0px -20px no-repeat;
+    width:20px;
+    height:20px;
+    display:block;
+    cursor:pointer;
+    }
+
+    html.js .collapsed .fieldset-title span.icon { background-position:0px 0px; }
+
+    .fieldset .collapsible .fieldset-title span.icon { display:none; }
+
+  .collapsed .fieldset-title a {
+    background:#eee;
+    color:#999;
+    }
+
+  .collapsed .fieldset-title a:hover { color:#666; }
+
+  .collapsible .fieldset-title {
+    padding:0px;
+    background:transparent;
+    }
+
+  .collapsed .fieldset-title a { padding-bottom:4px; }
+
+.block .block-content,
+.container-inline .fieldset-content,
+.fieldset-content {
+  padding:10px 9px 9px;
+  background:#fff;
+  }
+
+  .container-inline .fieldset-content,
+  .fieldset-content {
+    border-width:1px;
+    border-style:solid;
+    border-color:#ccc #ddd #eee;
+    }
+
+  .titled .fieldset-content { border-width:0px 1px 1px; }
+
+  html.js .collapsed .fieldset-content { display:none; }
+
+  .fieldset .fieldset .fieldset-content { background:#fff; }
+
+/**
+ * Form layout: Default ===============================================
+ */
+.form-layout-default { background:url(images/vrule.png) 65% 0% repeat-y; }
+
+.column-main {
+  float:left;
+  width:65%;
+  }
+
+  .column-main .column-wrapper { padding-right:10px; }
+
+.column-side {
+  float:right;
+  width:34.99%;
+  }
+
+  .column-side .column-wrapper { padding-left:10px; }
+
+.column-footer { clear:both; }
+
+form .buttons {
+  background:#eee;
+  border:1px solid #ddd;
+  padding:9px;
+  }
+
+  .form-layout-default .column-main .buttons { display:none; }
+  .form-layout-default .column-side .buttons { margin:0px 0px 10px; }
+  .form-layout-default .column-side .buttons input.form-submit { margin:1px 0px; }
+
+/**
+ * "Boxes" aka generic wrappers =======================================
+ */
+.box-title {
+  font-weight:normal;
+  font-size:10px;
+  text-transform:uppercase;
+
+  background:#eee;
+  border:1px solid #ddd;
+  padding:4px 9px;
+  margin:0px 0px 10px;
+  }
+
+/**
+ * System =============================================================
+ */
+.admin .right {
+  padding-left:5px;
+  float:right;
+  }
+
+.admin .left {
+  padding-right:5px;
+  float:left;
+  }
+
+.admin .right,
+.admin .left {
+  box-sizing:border-box;
+  -moz-box-sizing:border-box;
+  -webkit-box-sizing:border-box;
+  width:50%;
+  margin:0px;
+  }
+
+/* admin/content/node & admin/user/user */
+#content dl.multiselect,
+#content dl.multiselect dt,
+#content dl.multiselect dd { margin:0px 10px 0px 0px; }
+
+#content dl.multiselect select {
+  font-size:11px;
+  background:#fff;
+  border-style:solid;
+  border-width:2px;
+  border-color:#e8e8e8 #f0f0f0 #f8f8f8;
+  }
+
+/* update options */
+.admin-options {
+  background:#f8f8f8;
+  line-height:30px;
+  height:30px;
+  padding:9px;
+  border:1px solid #ddd;
+  margin:0px 0px 10px;
+  }
+
+.admin-options label,
+.admin-options .form-item {
+  margin-right:10px;
+  float:left;
+  }
+
+.admin-options .form-item {
+  padding:0px;
+  border:0px;
+  }
+
+/* dependency colors */
+.admin-dependencies,
+.admin-required { color: #666; }
+.admin-disabled { color: #900; }
+.admin-enabled { color: #099; }
+.admin-missing { color: #c30; }
+
+/**
+ * Help pages =========================================================
+ */
+.help-items { float:left; width:25%; }
+.help-items ul { margin:10px 5px; }
+
+/**
+ * Admin toolbar ======================================================
+ */
+body.rubik #admin-toolbar a.menu-hover span.menu-description { padding-left:50px; }
+
+body.rubik #admin-toolbar a.menu-hover span.menu-description span.icon {
+  position:absolute;
+  left:10px;
+  top:0px;
+  }
+
+/**
+ * Form description exceptions ========================================
+ */
+
+/**
+ * Some form elements are either too weirdly positioned or really benefit
+ * from persistent descriptions. Reset for all of these.
+ */
+.ctools-export-ui-row .form-item,
+.ctools-export-ui-row .form-item .description,
+.multiselect .form-item,
+.multiselect .form-item .description,
+.page-content table .form-item,
+.page-content table .form-item .description,
+.page-content .form-item .widget-edit .description,
+#upload-attachments .description,
+#views-ajax-pad .form-item,
+#views-ajax-pad .form-item .description {
+  width:auto;
+  padding:0px;
+  margin:0px;
+  border:0px;
+  background:transparent;
+  position:static;
+  display:block;
+  }
+
+.ctools-export-ui-row .form-item:hover,
+.multiselect .form-item:hover,
+.page-content table .form-item:hover,
+#views-ajax-pad .form-item:hover { position:static; }
+
+.page-content table .form-item .description,
+#upload-attachments .description,
+#views-ajax-pad .form-item .description {
+  padding:0px;
+  color:#666;
+  display:block;
+  max-width:none;
+  }
+
+/**
+ * Form containers ====================================================
+ */
+.container-inline div {
+  display:inline;
+  border:0px;
+  padding:0px;
+  background:transparent;
+  }
+
+.container-inline { margin:0px 0px 10px; }
+
+.buttons .container-inline { margin:0px; }
+
+/**
+ * ORPHANED MARKUP ====================================================
+ * The following selectors target markup generated by Drupal that have
+ * exactly 1 or extremely few instances. It will make a great future
+ * hitlist of markup to consolidate and generalize.
+ */
+.compact-link {
+  font-size:11px;
+  margin:0px 0px 10px;
+  }
+
+.compact-link a {
+  border:1px solid #ddd;
+  padding:4px 9px;
+  color:#666;
+  background:#fff;
+  }

@@ -1,0 +1,229 @@
+# @author Stalski
+# @legend
+# BUGFIX: Bug fixes reported in the issue queue or bugs found by maintainers
+# FEATURE: Feature requests from issue queue and features by the maintainers
+#
+#############################################################################
+
+---------------------------------------------------------------
+# @date 10/05/2010 For release DRUPAL-6--4-10
+---------------------------------------------------------------
+- Refactoring to improve perfomance
+  * Changed the order of execution of the heartbeat_load hook.
+  * Cached the friends of a user with a static variable.
+  * Changed the node_access checks to a better way (Swentel):
+    Added fields nid_info and nid_target_info to fasten the node_access.
+  * Cached get_latest_shout message in a static variable.
+  * Added a field for comment count 
+  * Altered the comment count calculation for node comments
+  * Made sure no extra queries were run due to "comment_count = 0".
+  * Cached the message entry output on activity row base(html output)
+    cleared when actions occur that involve this activity.
+
+
+---------------------------------------------------------------
+# @date 10/05/2010 For release DRUPAL-6--4-9
+---------------------------------------------------------------
+- Security Update!
+  When shouts are displayed, the content is now sanitized with filter_xss
+  to filter the user input.
+  Actions:
+    - Upgraded heartbeat.install so the default allowed tags are more secure.
+    There is a left-over img attack but the code where this filtering is done,
+    is managed by a higher level permission. Before heartbeat messages,
+    heartbeat comments (and shouts) were sanitized with this tags match. It is 
+    only needed and handy for the per UI manipulatable heartbeat messages. This 
+    means that heartbeat comments and shouts will follow the normal filter_xss 
+    approach within standard drupal.
+    - Added the filter_xss for shouts module when fetching the shouts from database
+    - Tipped by David Rothstein, I moved the filter_xss for heartbeat_messages to a 
+    earlier point so it's not theme-overriable (thus possibly leading to XSS attack)
+- Change to hds_regions.css following the DS releases.
+- Added basic features integration.
+- Fixed a couple of issues from the d.o queue.
+- Refactored the comment rules integration so it can take the original author as well.
+- Added update hook for this install.
+  
+---------------------------------------------------------------
+# @date 19/04/2010 For release DRUPAL-6--4-8
+---------------------------------------------------------------
+- bugfixes and feature request from issuequeue.
+
+---------------------------------------------------------------
+# @date 17/05/2010 For release DRUPAL-6--4-7
+---------------------------------------------------------------
+- bugfixes and feature request from issuequeue.
+
+---------------------------------------------------------------
+# @date 14/04/2010 For release DRUPAL-6--4-6
+---------------------------------------------------------------
+- moved connectedheartbeat to friendlist_activity module where it 
+  belongs.
+- fixed some bugs
+- Added throbber to ajax loads
+- improved views integration module
+- Added some examples and documentation on heartbeat.menhireffect.be
+
+---------------------------------------------------------------
+# @date 14/03/2010 For release DRUPAL-6--4-6
+---------------------------------------------------------------
+- Friendlist_activity module will now take three user relations defining modules
+  as api to make a choice on what defines heartbeat user relations. 
+- Cleared d.o. issues and support request untill satisfied.
+
+
+
+---------------------------------------------------------------
+# @date 11/02/2010
+---------------------------------------------------------------
+- Refactored hds to follow releases of display suite
+- Added check box on the stream configuration page so we can choose
+  to have filters on block and/or page in stead of always enabled at once.
+- Fixed some issue on d.o
+- Fixed a bug on the page pager setting. 
+
+---------------------------------------------------------------
+# @date 01/02/2010
+---------------------------------------------------------------
+- Improved and added tests
+
+---------------------------------------------------------------
+# @date 31/01/2010
+---------------------------------------------------------------
+- Updated hds to be compatible with updated DS module
+- Removed all notices and warnings from the postings(shouts, comments)
+- Added a shout rules data type, so custom shout tokens can be used. With this
+  change, rules export files are renewed.
+
+
+---------------------------------------------------------------
+# @date 28/01/2010
+---------------------------------------------------------------
+- Changed friendlist_activity to take options to define which user relation 
+  api will be used.
+- Debug and fixround through the issue queue on drupal.org
+- Updated views integration back to normal
+- Improved scalability of a stream bigtime by adding a variable to maximize
+  the sql. This is a rather weird configuration as it takes a little of playing
+  with numbers.
+
+
+---------------------------------------------------------------
+# @date 2/12/2009
+---------------------------------------------------------------
+- Changed HeartbeatActivity object to hold a HeartbeatMessageTemplate
+  object as composition. This way the objects live separately as it should.
+- Altered and added defaults to HDS module.
+- Added a heartbeat_examples module to show developers what can be achieved 
+  by implementing hooks, overriding methods and classes.
+
+---------------------------------------------------------------
+# @date 27/11/2009
+---------------------------------------------------------------
+- Moved heartbeat rules to modules as submodule. As heartbeat is an API
+  users are free to use it with custom code or install directly to let it 
+  work with UI only (with hrules enabled).
+- Added submodule hds as implementation of Display suite. We use it a lot 
+  at work and heartbeat could benefit from it, putting the theming to 
+  UI as well. again users are free to override theme functions with code,
+  implement the hook_heartbeat_theme_alter function or using hrules submodule
+  to theme their activity objects to the stream.
+
+
+---------------------------------------------------------------
+# @date 09/11/2009
+---------------------------------------------------------------
+- Added poll for more messages
+- Altered the theme_heartbeat_filters function. So take care if you 
+  were overriding this function!!!
+- Changed (removed) the autoload function to speed up and handle 
+  class instances differently. Creating a stream should go with the 
+  function "heartbeat_stream_view" from now on.
+  
+---------------------------------------------------------------
+# @date 20/10/2009
+---------------------------------------------------------------
+- Added heartbeat filters hook with callback to decrement the messages.
+- Changed shout to a full commenting/reactions module to add a comment
+  form on messages or commenting the nodes in the messages.
+
+---------------------------------------------------------------
+# @date 26/09/2009
+---------------------------------------------------------------
+- Added nid_target and changed nid_target into nid (for normal node contexts)
+  nid_target can be used for instance for og.
+  
+  
+---------------------------------------------------------------
+# @date 26/07/2009
+---------------------------------------------------------------
+- Changed functionality so messages are fetched by number of records and not by timestamp. 
+- Added pager property to info so the messagebuilder knows more on how it should display things.
+- Added a per-message  property to overrule the maximum number of messages to merge together. The 
+  global setting is overruled if the message specific one is set. For instance, when uploading images, 
+  layout-wise we want to show 5 images in the summary. But if pages are the context of activity, then i 
+  will only show 3 of them.
+- TODO Make the pager ajax compatible and add settings for each access type
+
+---------------------------------------------------------------
+# @date 23/07/2009
+---------------------------------------------------------------
+- Changed activity stream settings so we can set max items separately per 
+  heartbeat access type.
+  
+---------------------------------------------------------------
+# @date 22/07/2009
+---------------------------------------------------------------
+- Changed some code on message attachments so it can work more generic
+- Posted new picture and plan to recreate some blog posts, maybe roadmap
+- Added commenting to the attachments via shouts module. You can shout globally 
+  or you could react with a shout on a message user activity stream id.
+- Added a field to the messages that is very important to always have the merging 
+  go correct. If we know the message part that has to be summarized and now we 
+  know the variable in the message that is used to group by, we can always group 
+  messages together without having problems on actor vs logged-in user shit. 
+  This is difficult to explain in detail.
+
+---------------------------------------------------------------
+# @date 20/07/2009
+---------------------------------------------------------------
+- FEATURE: Added heartbeat message tags as a comma separated list of values
+  we can use to filter our activity streams on. This will be available in views as well, 
+  but mainly a default tagged page display will be provided as well within heartbeat
+- Removed the code for module and message_type because has become unneccesairy with the introduction
+  of tags. They were only there to use in views to limit specific contained messages (E.g. friendlist stuff)
+  Now all of this is available with displays on a tag basis.
+  
+---------------------------------------------------------------
+# @date 19/07/2009
+---------------------------------------------------------------
+- Rechecked and changed the default message exports to work with the current format. (issue queue)
+- Deleted the columns module and type from the list overview. 
+- Added revert option on heartbeat messages, such as in rules. This way default messages
+  can be altered but put back to codebase (after export for instance) easily.
+- FEATURE: Added logic to the heartbeatmessagebuilder to check the access that is now introduced on 
+  a per heartbeat-message base. This is an global setting that leads or has higher priority 
+  in comparison to the heartbeatAccessState the messages are built with.
+  E.g. Lists composed with PublicHeartbeatAccess State object can hide/display message types 
+  as they were set in the message configuration.
+
+---------------------------------------------------------------
+# @date 13/07/2009
+---------------------------------------------------------------
+- FEATURE: Added integration in heartbeat messages to have flags, using the submodule "flag_heartbeat". Two things that have to 
+  be done here: 1/ change the way the heartbeat message edit form is altered. 2/ Delete the flag property and change this
+  POC to a real concept with attachments per message. Flags would be an attachment, but others will come, like comments...
+- added a custom field to db heartbeat_messages to know how a message was installed/added
+
+---------------------------------------------------------------
+# @date 13/06/2009
+# Changed features from 6.3 to 6.4
+---------------------------------------------------------------
+- BUGFIX: Added node_type (if available) to the logic of merging messages
+- removed the heartbeat-flag code because i intend to integrate with the nice module "flag"
+- Deleted unused variables and even used ones that did not have much purpose anymore
+- Moved heartbeat states to separate files, making it possible to use a custom heartbeat state 
+  in contributes modules
+- Removed the menu items in the navigation. (This should not be done by heartbeat by default imho)
+- removed module heartbeat_activity and added codebase to heartbeat because it did not make sense to separate 
+  them if you can cant use one as standalone module

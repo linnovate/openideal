@@ -1,0 +1,825 @@
+<?php
+// $Id: emvideo.module,v 1.1.2.30.2.7 2010/10/10 21:07:12 aaron Exp $
+
+/**
+ * @file
+ * Embedded Video module is a handler for 3rd party video files.
+ */
+
+/**
+ *  Define our constants and default variables.
+ */
+define('EMVIDEO_DEFAULT_VIDEO_WIDTH', 425);
+define('EMVIDEO_DEFAULT_VIDEO_HEIGHT', 350);
+define('EMVIDEO_DEFAULT_PREVIEW_WIDTH', 425);
+define('EMVIDEO_DEFAULT_PREVIEW_HEIGHT', 350);
+define('EMVIDEO_DEFAULT_THUMBNAIL_WIDTH', 120);
+define('EMVIDEO_DEFAULT_THUMBNAIL_HEIGHT', 90);
+
+/**
+ * Implementation of hook_menu().
+ */
+function emvideo_menu() {
+  $items = emfield_provider_menus('emvideo');
+
+  $items['emvideo/modal/%node'] = array(
+    'page callback' => 'emvideo_modal',
+    'page arguments' => array(2),
+    'access callback' => 'node_access',
+    'access arguments' => array('view', 2),
+    'type' => MENU_CALLBACK,
+  );
+
+  return $items;
+}
+
+/**
+ * Implementation of hook_emfield_info().
+ */
+function emvideo_emfield_info() {
+  $name = t('Embedded Video Field');
+  return array(
+    '#name' => $name,
+    '#settings_title' => t('Videos'),
+    '#settings_description' => t('The following settings configure content with any fields controlled by @name.', array('@name' => $name)),
+  );
+}
+
+/**
+ * Implementation of hook_theme().
+ */
+function emvideo_theme() {
+  $themes = array(
+    'emvideo_video_embed' => array(
+      'arguments' => array('field' => NULL, 'item' => NULL, 'formatter' => NULL, 'node' => NULL, 'options' => array()),
+      'file' => 'emvideo.theme.inc',
+    ),
+    'emvideo_video_thumbnail' => array(
+      'arguments' => array('field' => NULL, 'item' => NULL, 'formatter' => NULL, 'node' => NULL, 'no_link' => FALSE, 'options' => array()),
+      'file' => 'emvideo.theme.inc',
+    ),
+    'emvideo_video_thumbnail_no_link' => array(
+      'arguments' => array('field' => NULL, 'item' => NULL, 'formatter' => NULL, 'node' => NULL, 'options' => array()),
+      'file' => 'emvideo.theme.inc',
+    ),
+    'emvideo_video_thumbnail_provider_link' => array(
+      'arguments' => array('field' => NULL, 'item' => NULL, 'formatter' => NULL, 'node' => NULL, 'options' => array()),
+      'file' => 'emvideo.theme.inc',
+    ),
+    'emvideo_video_thumbnail_path' => array(
+      'arguments' => array('field' => NULL, 'item' => NULL, 'formatter' => NULL, 'node' => NULL, 'no_link' => FALSE, 'options' => array()),
+      'file' => 'emvideo.theme.inc',
+    ),
+    'emvideo_video_thumbnail_url' => array(
+      'arguments' => array('field' => NULL, 'item' => NULL, 'formatter' => NULL, 'node' => NULL, 'no_link' => FALSE, 'options' => array()),
+      'file' => 'emvideo.theme.inc',
+    ),
+    'emvideo_video_video' => array(
+      'arguments' => array('field' => NULL, 'item' => NULL, 'formatter' => NULL, 'node' => NULL, 'options' => array()),
+      'file' => 'emvideo.theme.inc',
+    ),
+    'emvideo_default' => array(
+      'arguments' => array('field' => NULL, 'item' => NULL, 'formatter' => NULL, 'node' => NULL, 'options' => array()),
+      'file' => 'emvideo.theme.inc',
+    ),
+    'emvideo_video_preview' => array(
+      'arguments' => array('field' => NULL, 'item' => NULL, 'formatter' => NULL, 'node' => NULL, 'options' => array()),
+      'file' => 'emvideo.theme.inc',
+    ),
+    'emvideo_video_replace' => array(
+      'arguments' => array('field' => NULL, 'item' => NULL, 'formatter' => NULL, 'node' => NULL, 'options' => array()),
+      'file' => 'emvideo.theme.inc',
+    ),
+    'emvideo_video_replace_preview' => array(
+      'arguments' => array('field' => NULL, 'item' => NULL, 'formatter' => NULL, 'node' => NULL, 'options' => array()),
+      'file' => 'emvideo.theme.inc',
+    ),
+    'emvideo_video_link' => array(
+      'arguments' => array('field' => NULL, 'item' => NULL, 'formatter' => NULL, 'node' => NULL, 'options' => array()),
+      'file' => 'emvideo.theme.inc',
+    ),
+    'emvideo_video_url' => array(
+      'arguments' => array('field' => NULL, 'item' => NULL, 'formatter' => NULL, 'node' => NULL, 'options' => array()),
+      'file' => 'emvideo.theme.inc',
+    ),
+    'emvideo_video_duration' => array(
+      'arguments' => array('field' => NULL, 'item' => NULL, 'formatter' => NULL, 'node' => NULL, 'options' => array()),
+      'file' => 'emvideo.theme.inc',
+    ),
+    'emvideo_modal_generic' => array(
+      'arguments' => array('field' => NULL, 'item' => NULL, 'formatter' => NULL, 'node' => NULL, 'options' => array()),
+      'file' => 'emvideo.theme.inc'
+    ),
+    'emvideo_colorbox' => array(
+      'arguments' => array('field' => NULL, 'item' => NULL, 'formatter' => NULL, 'node' => NULL, 'options' => array()),
+      'file' => 'emvideo.theme.inc'
+    ),
+    'emvideo_thickbox' => array(
+      'arguments' => array('field' => NULL, 'item' => NULL, 'formatter' => NULL, 'node' => NULL, 'options' => array()),
+      'file' => 'emvideo.theme.inc'
+    ),
+    'emvideo_lightbox2' => array(
+      'arguments' => array('field' => NULL, 'item' => NULL, 'formatter' => NULL, 'node' => NULL, 'options' => array()),
+      'file' => 'emvideo.theme.inc'
+    ),
+    'emvideo_shadowbox' => array(
+      'arguments' => array('field' => NULL, 'item' => NULL, 'formatter' => NULL, 'node' => NULL, 'options' => array()),
+      'file' => 'emvideo.theme.inc'
+    ),
+    'emvideo_formatter_video_video' => array(
+      'arguments' => array('element' => NULL),
+      'file' => 'emvideo.theme.inc'
+    ),
+    'emvideo_formatter_video_thumbnail' => array(
+      'arguments' => array('element' => NULL),
+      'file' => 'emvideo.theme.inc'
+    ),
+    'emvideo_formatter_video_thumbnail_no_link' => array(
+      'arguments' => array('element' => NULL),
+      'file' => 'emvideo.theme.inc'
+    ),
+    'emvideo_formatter_video_thumbnail_provider_link' => array(
+      'arguments' => array('element' => NULL),
+      'file' => 'emvideo.theme.inc'
+    ),
+    'emvideo_formatter_video_thumbnail_path' => array(
+      'arguments' => array('element' => NULL),
+      'file' => 'emvideo.theme.inc'
+    ),
+    'emvideo_formatter_video_thumbnail_url' => array(
+      'arguments' => array('element' => NULL),
+      'file' => 'emvideo.theme.inc'
+    ),
+    'emvideo_formatter_video_link' => array(
+      'arguments' => array('element' => NULL),
+      'file' => 'emvideo.theme.inc'
+    ),
+    'emvideo_formatter_video_url' => array(
+      'arguments' => array('element' => NULL),
+      'file' => 'emvideo.theme.inc'
+    ),
+    'emvideo_formatter_video_duration' => array(
+      'arguments' => array('element' => NULL),
+      'file' => 'emvideo.theme.inc'
+    ),
+    'emvideo_formatter_video_embed' => array(
+      'arguments' => array('element' => NULL),
+      'file' => 'emvideo.theme.inc'
+    ),
+    'emvideo_formatter_video_preview' => array(
+      'arguments' => array('element' => NULL),
+      'file' => 'emvideo.theme.inc'
+    ),
+    'emvideo_formatter_default' => array(
+      'arguments' => array('element' => NULL),
+      'file' => 'emvideo.theme.inc'
+    ),
+    'emvideo_formatter_colorbox' => array(
+      'arguments' => array('element' => NULL),
+      'file' => 'emvideo.theme.inc'
+    ),
+    'emvideo_formatter_thickbox' => array(
+      'arguments' => array('element' => NULL),
+      'file' => 'emvideo.theme.inc'
+    ),
+    'emvideo_formatter_lightbox2' => array(
+      'arguments' => array('element' => NULL),
+      'file' => 'emvideo.theme.inc'
+    ),
+    'emvideo_formatter_shadowbox' => array(
+      'arguments' => array('element' => NULL),
+      'file' => 'emvideo.theme.inc'
+    ),
+    'emvideo_formatter_video_replace' => array(
+      'arguments' => array('element' => NULL),
+      'file' => 'emvideo.theme.inc'
+    ),
+    'emvideo_formatter_video_replace_preview' => array(
+      'arguments' => array('element' => NULL),
+      'file' => 'emvideo.theme.inc'
+    ),
+    'emvideo_modal_iframe' => array(
+      'arguments' => array('content' => ''),
+      'file' => 'emvideo.theme.inc',
+      'template' => 'emvideo_modal_iframe',
+    ),
+    'emvideo_handler_field_duration' => array(
+      'arguments' => array('item' => NULL, 'field' => NULL, 'node' => NULL, 'values' => NULL, 'format' => NULL),
+    ),
+  );
+
+  $themes += emfield_provider_themes('emvideo');
+
+  return $themes;
+
+}
+
+/**
+ * Implementation of hook_emfield_settings().
+ *
+ * This would be to add any extra settings (besides providers) to the emfield
+ * settings configuration page.
+ */
+function emvideo_emfield_settings() {
+  $form = array();
+
+  return $form;
+}
+
+/**
+ * Implementation of hook_field_info().
+ */
+function emvideo_field_info() {
+  $fields = array(
+    'emvideo' => array(
+      'label' => t('Embedded Video'),
+      'description' => t('Automatically parse and display a third party video from its URL or embed code.'),
+      'callbacks' => array(
+        'tables' => CONTENT_CALLBACK_DEFAULT,
+        'arguments' => CONTENT_CALLBACK_DEFAULT,
+      ),
+    ),
+  );
+
+  return $fields;
+}
+
+/**
+ *  Implementation of hook_field_settings().
+ */
+function emvideo_field_settings($op, $field) {
+  switch ($op) {
+    case 'views data':
+      $data = emfield_emfield_field_settings($op, $field);
+      $table_alias = content_views_tablename($field);
+      $field_duration = $field['field_name'] .'_duration';
+      $data[$table_alias][$field_duration] = $data[$table_alias][$field['field_name'] .'_embed'];
+      $data[$table_alias][$field_duration]['title'] .= t(' - Duration');
+      $data[$table_alias][$field_duration]['field']['title'] = $data[$table_alias][$field_duration]['title'];
+      $data[$table_alias][$field_duration]['title short'] = t('Duration');
+      $data[$table_alias][$field_duration]['field']['title short'] = $data[$table_alias][$field_duration]['title short'];
+      $data[$table_alias][$field_duration]['field']['field'] = $field_duration;
+      $data[$table_alias][$field_duration]['field']['handler'] = 'emvideo_handler_field_duration';
+      $data[$table_alias][$field_duration]['argument']['field'] = $field_duration;
+      $data[$table_alias][$field_duration]['argument']['handler'] = 'emvideo_handler_argument_duration';
+      $data[$table_alias][$field_duration]['filter']['field'] = $field_duration;
+      $data[$table_alias][$field_duration]['filter']['handler'] = 'content_handler_filter_numeric';
+      $data[$table_alias][$field_duration]['sort']['field'] = $field_duration;
+      return $data;
+    case 'database columns':
+      $columns = emfield_emfield_field_settings($op, $field);
+      // Store duration in its own column for views.
+      $columns = array_merge(
+        $columns,
+        array('duration' =>
+          array(
+            'description' => t('Store the duration of a video in seconds.'),
+            'type' => 'int',
+            'unsigned' => TRUE,
+            'not null' => TRUE,
+            'default' => 0),
+          )
+      );
+      return $columns;
+    default:
+      return emfield_emfield_field_settings($op, $field);
+  }
+}
+
+/**
+ * Implementation of hook_content_is_empty().
+ */
+function emvideo_content_is_empty($item, $field) {
+  return emfield_emfield_content_is_empty($item, $field);
+}
+
+/**
+ * Implementation of hook_field().
+ */
+function emvideo_field($op, &$node, $field, &$items, $teaser, $page) {
+  $ret = emfield_emfield_field($op, $node, $field, $items, $teaser, $page, 'emvideo');
+  if ($op == 'presave') {
+    foreach ($items as $delta => $item) {
+      $duration = emfield_include_invoke('emvideo', $item['provider'], 'duration', $item);
+      $items[$delta]['duration'] = $duration ? $duration : 0;
+    }
+  }
+  return $ret;
+}
+
+/**
+ * Implementation of hook_field_formatter_info()
+ */
+function emvideo_field_formatter_info() {
+  $types = array('emvideo');
+  $formats = array(
+    'default' => array(
+      'label' => t('Default'),
+      'field types' => $types,
+    ),
+    'video_video' => array(
+      'label' => t('Full Size Video'),
+      'field types' => $types,
+    ),
+    'video_preview' => array(
+      'label' => t('Preview Video'),
+      'field types' => $types,
+    ),
+    'video_thumbnail_no_link' => array(
+      'label' => t('Image Thumbnail'),
+      'field types' => $types,
+    ),
+    'video_thumbnail' => array(
+      'label' => t('Image Thumbnail (linked to node)'),
+      'field types' => $types,
+    ),
+    'video_thumbnail_provider_link' => array(
+      'label' => t('Image Thumbnail (linked to original video)'),
+      'field types' => $types,
+    ),
+    'video_thumbnail_path' => array(
+      'label' => t('Image Thumbnail (path to thumbnail)'),
+      'field types' => $types,
+    ),
+    'video_thumbnail_url' => array(
+      'label' => t('Image Thumbnail (absolute url to thumbnail)'),
+      'field types' => $types,
+    ),
+    'video_link' => array(
+      'label' => t('Link to original video'),
+      'field types' => $types,
+    ),
+    'video_url' => array(
+      'label' => t('URL to original video'),
+      'field types' => $types,
+    ),
+    'video_duration' => array(
+      'label' => t('Video duration'),
+      'field types' => $types,
+    ),
+    'video_embed' => array(
+      'label' => t('Embed Code'),
+      'field types' => $types,
+    ),
+    'video_replace' => array(
+      'label' => t('Thumbnail -> Full Size Video inline replacement'),
+      'field types' => $types,
+    ),
+    'video_replace_preview' => array(
+      'label' => t('Thumbnail -> Preview Size Video inline replacement'),
+      'field types' => $types,
+    ),
+  );
+
+  // Add colorbox formatter if colorbox module exists.
+  if (module_exists('colorbox')) {
+    $formats['colorbox'] = array(
+      'label' => t('Colorbox: Image Thumbnail -> Full Size Video'),
+      'field types' => $types,
+    );
+  }
+
+  // Add thickbox formatter if thickbox module exists.
+  if (module_exists('thickbox')) {
+    $formats['thickbox'] = array(
+      'label' => t('Thickbox: Image Thumbnail -> Full Size Video'),
+      'field types' => $types,
+      );
+  }
+  if (module_exists('lightbox2')) {
+    $formats['lightbox2'] = array(
+      'label' => t('Lightbox2: Image Thumbnail -> Full Size Video'),
+      'field types' => $types,
+    );
+  }
+  if (module_exists('shadowbox')) {
+    $formats['shadowbox'] = array(
+      'label' => t('Shadowbox: Image Thumbnail -> Full Size Video'),
+      'field types' => $types,
+    );
+  }
+
+  return $formats;
+}
+
+/**
+ * Implementation of hook_field_formatter().
+ */
+function emvideo_field_formatter($field, $item, $formatter, $node) {
+  return emfield_emfield_field_formatter($field, $item, $formatter, $node, 'emvideo');
+}
+
+/** Widgets **/
+
+/**
+ * Implementation of hook_widget_info
+ */
+function emvideo_widget_info() {
+  return array(
+    'emvideo_textfields' => array(
+      'label' => '3rd Party Video',
+      'field types' => array('emvideo'),
+      'multiple values' => CONTENT_HANDLE_CORE,
+      'callbacks' => array(
+        'default value' => CONTENT_CALLBACK_DEFAULT,
+        ),
+    ),
+  );
+}
+
+function emvideo_widget_settings($op, $widget) {
+  switch ($op) {
+    case 'form':
+      if ($widget['type'] == 'emvideo_textfields') {
+        $form = (array)emfield_emfield_widget_settings('form', $widget, 'emvideo');
+        $width = variable_get('emvideo_default_video_width', EMVIDEO_DEFAULT_VIDEO_WIDTH);
+        $height = variable_get('emvideo_default_video_height', EMVIDEO_DEFAULT_VIDEO_HEIGHT);
+        $form['video'] = array(
+          '#type' => 'fieldset',
+          '#title' => t('Video Display Settings'),
+          '#description' => t('These settings control how this video is displayed in its full size, which defaults to @widthx@height.', array('@width' => $width, '@height' => $height)),
+          '#collapsible' => TRUE,
+          '#collapsed' => FALSE,
+        );
+        $form['video']['video_width'] = array(
+          '#type' => 'textfield',
+          '#title' => t('Video display width'),
+          '#default_value' => empty($widget['video_width']) ? $width : $widget['video_width'],
+          '#required' => TRUE,
+          '#description' => t('The width of the video. It defaults to @width.', array('@width' => $width)),
+        );
+        $form['video']['video_height'] = array(
+          '#type' => 'textfield',
+          '#title' => t('Video display height'),
+          '#default_value' => empty($widget['video_height']) ? $height : $widget['video_height'],
+          '#required' => TRUE,
+          '#description' => t('The height of the video. It defaults to @height.', array('@height' => $height)),
+        );
+        $form['video']['video_autoplay'] = array(
+          '#type' => 'checkbox',
+          '#title' => t('Autoplay'),
+          '#default_value' => empty($widget['video_autoplay']) ? '' : $widget['video_autoplay'],
+          '#description' => t('If supported by the provider, checking this box will cause the video to automatically begin after the video loads when in its full size.'),
+        );
+
+        $width = variable_get('emvideo_default_preview_width', EMVIDEO_DEFAULT_PREVIEW_WIDTH);
+        $height = variable_get('emvideo_default_preview_height', EMVIDEO_DEFAULT_PREVIEW_HEIGHT);
+        $form['preview'] = array(
+          '#type' => 'fieldset',
+          '#title' => t('Video Preview Settings'),
+          '#description' => t('These settings control how this video is displayed in its preview size, which defaults to @widthx@height.', array('@width' => $width, '@height' => $height)),
+          '#collapsible' => TRUE,
+          '#collapsed' => FALSE,
+        );
+        $form['preview']['preview_width'] = array(
+          '#type' => 'textfield',
+          '#title' => t('Video preview width'),
+          '#default_value' => empty($widget['preview_width']) ? $width : $widget['preview_width'],
+          '#required' => TRUE,
+          '#description' => t('The width of the preview video. It defaults to @width.', array('@width' => $width)),
+        );
+        $form['preview']['preview_height'] = array(
+          '#type' => 'textfield',
+          '#title' => t('Video preview height'),
+          '#default_value' => empty($widget['preview_height']) ? $height : $widget['preview_height'],
+          '#required' => TRUE,
+          '#description' => t('The height of the preview video. It defaults to @height.', array('@height' => $height)),
+        );
+        $form['preview']['preview_autoplay'] = array(
+          '#type' => 'checkbox',
+          '#title' => t('Autoplay'),
+          '#default_value' => empty($widget['preview_autoplay']) ? '' : $widget['preview_autoplay'],
+          '#description' => t('If supported by the provider, checking this box will cause the video to automatically begin after the video loads when in its preview size.'),
+        );
+
+        $width = variable_get('emvideo_default_thumbnail_width', EMVIDEO_DEFAULT_THUMBNAIL_WIDTH);
+        $height = variable_get('emvideo_default_thumbnail_height', EMVIDEO_DEFAULT_THUMBNAIL_HEIGHT);
+        $form['tn'] = array(
+          '#type' => 'fieldset',
+          '#title' => t('Thumbnail'),
+          '#description' => t('When displayed as a thumbnail, these settings control the image returned. Note that not all 3rd party video content providers offer thumbnails, and others may require an API key or other requirements. More information from the <a href="@settings">settings page</a>. The default size for thumbnails is @widthx@height.', array('@settings' => url('admin/content/emfield'), '@width' => $width, '@height' => $height)),
+          '#collapsible' => TRUE,
+          '#collapsed' => FALSE,
+        );
+        $form['tn']['thumbnail_width'] = array(
+          '#type' => 'textfield',
+          '#title' => t('Thumbnail width'),
+          '#default_value' => empty($widget['thumbnail_width']) ? $width : $widget['thumbnail_width'],
+          '#required' => TRUE,
+          '#description' => t('The width of the thumbnail. It defaults to @width.', array('@width' => $width)),
+        );
+        $form['tn']['thumbnail_height'] = array(
+          '#type' => 'textfield',
+          '#title' => t('Thumbnail height'),
+          '#default_value' => empty($widget['thumbnail_height']) ? $height : $widget['thumbnail_height'],
+          '#required' => TRUE,
+          '#description' => t('The height of the thumbnail. It defaults to @height.', array('@height' => $height)),
+        );
+        // Construct the description, hinting of Embedded Media Thumbnail if it
+        // is not enabled.
+        $default_path = variable_get('emvideo_default_thumbnail_path', '');
+        $description = t("Path to a local default thumbnail image for cases when a thumbnail can't be found. For example, you might have a default thumbnail at %files.", array('%files' => 'files/thumbnail.png'));
+        if (!module_exists('emthumb')) {
+          $description .= ' '. t('You may be interested in activating the Embedded Media Thumbnails module as well, which will allow you to specify custom thumbnails on a per-node basis.');
+        }
+        $form['tn']['thumbnail_default_path'] = array(
+          '#type' => 'textfield',
+          '#title' => t('Default thumbnail path'),
+          '#default_value' => empty($widget['thumbnail_default_path']) ? $default_path : $widget['thumbnail_default_path'],
+          '#description' => $description,
+        );
+        $form['tn']['thumbnail_link_title'] = array(
+          '#type' => 'textfield',
+          '#title' => t('Thumbnail title'),
+          '#default_value' => isset($widget['thumbnail_link_title']) ? $widget['thumbnail_link_title'] : variable_get('emvideo_default_thumbnail_link_title', t('See video')),
+          '#description' => t("The title/alt to display when hovering over a thumbnail, or if an image is broken."),
+        );
+        if (module_exists('token')) {
+          $form['tn']['thumbnail_link_title']['#suffix'] = theme('token_help', 'global');
+        }
+
+        $form['meta_data'] = array(
+          '#type' => 'fieldset',
+          '#title' => t('Additional fields'),
+          '#description' => t('Makes addition fields available for describing your content.'),
+          '#collapsible' => TRUE,
+          '#collapsed' => FALSE,
+        );
+        $form['meta_data']['meta_fields'] = array(
+          '#type' => 'checkboxes',
+          '#title' => t('Additional fields'),
+          '#multiple' => TRUE,
+          '#default_value' => is_array($widget['meta_fields']) ? $widget['meta_fields'] : array(),
+          '#options' => array('title' => t('Title'), 'description' => t('Description')),
+        );
+
+      }
+      return $form;
+
+    case 'validate':
+      if ($widget['type'] == 'emvideo_textfields') {
+        if (!is_numeric($widget['video_width']) || intval($widget['video_width']) != $widget['video_width'] || $widget['video_width'] < 1) {
+          form_set_error('video_width', t('"Video width" must be a positive integer.'));
+        }
+        if (!is_numeric($widget['video_height']) || intval($widget['video_height']) != $widget['video_height'] || $widget['video_height'] < 1) {
+          form_set_error('video_height', t('"Video height" must be a positive integer.'));
+        }
+        if (!is_numeric($widget['preview_width']) || intval($widget['preview_width']) != $widget['preview_width'] || $widget['preview_width'] < 1) {
+          form_set_error('preview_width', t('"Preview width" must be a positive integer.'));
+        }
+        if (!is_numeric($widget['preview_height']) || intval($widget['preview_height']) != $widget['preview_height'] || $widget['preview_height'] < 1) {
+          form_set_error('preview_height', t('"Preview height" must be a positive integer.'));
+        }
+        if (!is_numeric($widget['thumbnail_width']) || intval($widget['thumbnail_width']) != $widget['thumbnail_width'] || $widget['thumbnail_width'] < 1) {
+          form_set_error('thumbnail_width', t('"Thumbnail width" must be a positive integer.'));
+        }
+        if (!is_numeric($widget['thumbnail_height']) || intval($widget['thumbnail_height']) != $widget['thumbnail_height'] || $widget['thumbnail_height'] < 1) {
+          form_set_error('thumbnail_height', t('"Thumbnail height" must be a positive integer.'));
+        }
+      }
+      break;
+
+    case 'save':
+      if ($widget['widget_type'] == 'emvideo_textfields') {
+        $columns = array('video_width', 'video_height', 'video_autoplay', 'preview_width', 'preview_height', 'preview_autoplay', 'thumbnail_width', 'thumbnail_height', 'thumbnail_default_path', 'thumbnail_link_title', 'meta_fields');
+        $columns = array_merge($columns, emfield_emfield_widget_settings('save', $widget, 'emvideo'));
+        return $columns;
+      }
+      break;
+  }
+}
+
+/**
+ * Implementation of hook_widget()
+ */
+function emvideo_widget(&$form, &$form_state, $field, $items, $delta = 0) {
+  return emfield_emfield_widget($form, $form_state, $field, $items, $delta, 'emvideo');
+}
+
+function emvideo_embed_form($form_state = NULL, $field, $item, $formatter, $node, $options = array(), $other = array()) {
+  $embed = $item['value'];
+  $width = !empty($options['width']) ? $options['width'] : $field['widget']['video_width'];
+  $height = !empty($options['height']) ? $options['height'] : $field['widget']['video_height'];
+  $autoplay = !empty($options['autoplay']) ? $options['autoplay'] : $field['widget']['video_autoplay'];
+  $title = !empty($options['title']) ? $options['title'] : t('Embed Code');
+  $description = !empty($options['description']) ? $options['description'] : t('To embed this video on your own site, simply copy and paste the html code from this text area.');
+  $text = emfield_include_invoke('emvideo', $item['provider'], 'video', $embed, $width, $height, $field, $item, $node, $autoplay, $options);
+  $form = array();
+  $form['emvideo_embed'] = array(
+    '#type' => 'textarea',
+    '#title' => $title,
+    '#description' => $description,
+    '#default_value' => $text,
+  );
+
+  return $form;
+}
+
+/**
+ * Providers may supply an enclosure for rss feeds. This expects something in a
+ * file format, so would be an object in the format of $file->filepath,
+ * $file->filesize, and $file->filemime.
+ * Calls the providers hook EMVIDEO_PROVIDER_RSS($item, $teaser).
+ */
+function emvideo_emfield_rss($node, $items = array(), $teaser = NULL) {
+  $rss_data = array();
+  foreach ($items as $item) {
+    // note only the first $item will get an RSS enclosure, other items may have media: data in the feed however
+    if ($item['value'] && $item['provider']) {
+      $rss_data[] = emfield_include_invoke('emvideo', $item['provider'], 'rss', $item, $teaser);
+    }
+  }
+
+  return $rss_data;
+}
+
+function emvideo_handler_arg_provider($op, &$query, $argtype, $arg = '') {
+  $ret = _emfield_handler_arg_provider($op, $query, $argtype, $arg, 'emvideo');
+  return $ret;
+}
+
+/**
+ * Page callback for emvideo/thickbox/shadowbox.
+ * This will display our video in a modal window defined by the corresponding
+ * modal module.
+ * As it's a direct callback, it displays no HTML other than the video.
+ *  @param $node
+ *    The video node object.
+ *  @param $width
+ *    The width, in pixels, of the video.
+ *  @param $height
+ *    The height, in pixels, of the video.
+ *  @param $field_name
+ *    The name of the field to display
+ *  @param $provider
+ *    The provider of the video.
+ *  @param $code
+ *    The video code to display.
+ *  @param $extra
+ *    Some video codes have a '/' character, so we have to accomodate in the URL.
+ */
+function emvideo_modal($node, $width, $height, $field_name, $provider, $code, $extra = NULL) {
+  $field = content_fields($field_name);
+  $field['widget']['video_width'] = $width;
+  $field['widget']['video_height'] = $height;
+  $field['widget']['video_autoplay'] = 1;
+
+  // Respect any field access permissions.
+  if (!content_access('view', $field, NULL, $node)) {
+    drupal_access_denied();
+    return;
+  }
+
+  // If the URL has an extra bit, then append that to the video code.
+  // This broke shadowbox, which needs index.php to register as iFrame.
+  if (isset($extra) && ($extra != 'index.php')) {
+    $code .= '/'. $extra;
+  }
+  foreach ($node->{$field_name} as $video) {
+    if ($video['provider'] == $provider && $video['value'] == $code) {
+      $item = $video;
+    }
+  }
+
+  // Suppress the Admin Menu, if that module/fuction exists.
+  if (function_exists('admin_menu_suppress')) {
+    admin_menu_suppress();
+  }
+
+  $output = theme('emvideo_video_video', $field, $item, 'video_video', $node, array('iframe' => TRUE));
+  print theme('emvideo_modal_iframe', $output);
+}
+
+function emvideo_convert_to_seconds($time) {
+  module_load_include('inc', 'emvideo', 'emvideo.theme');
+  return _emvideo_convert_to_seconds($time);
+}
+
+function emvideo_seconds_to_time($time) {
+  module_load_include('inc', 'emvideo', 'emvideo.theme');
+  return _emvideo_seconds_to_time($time);
+}
+
+/**
+*  Implements hook_emfield_field_columns_extra().
+*  This is called to add 2 extra columns to the database to store the title and description.
+*/
+
+function emvideo_emfield_field_columns_extra(){
+  $columns = array(
+    'title' => array('type' => 'varchar', 'length' => 255, 'not null' => FALSE, 'sortable' => TRUE),
+    'description' => array('type' => 'varchar', 'length' => 255, 'not null' => FALSE, 'sortable' => TRUE),
+    );
+  return $columns;
+}
+
+/**
+*  Implements hook_emfield_field_extra().
+*  This is called on field operations to allow us to act on emvideos.
+*/
+function emvideo_emfield_field_extra($op, &$node, $field, &$items, $teaser, $page, $module) {
+  switch ($op) {
+    case 'validate':
+      // Title and Description should be optional.
+      break;
+    case 'insert':
+    case 'update':
+      // Called before content.module defaults.
+      foreach ($items as $delta => $item) {
+        if (isset($item['emvideo']['delete']) && $item['emvideo']['delete']) {
+          $items[$delta]['embed'] = NULL;
+          $items[$delta]['value'] = NULL;
+          $items[$delta]['provider'] = NULL;
+          $items[$delta]['data'] = NULL;
+          $items[$delta]['embed'] = NULL;
+          $items[$delta]['version'] = 0;
+          $items[$delta]['duration'] = 0;
+          $items[$delta]['title'] = NULL;
+          $items[$delta]['description'] = NULL;
+        }
+        else {
+          // Add alt text and alt title
+          if (!empty($items[$delta]['emvideo']['title'])) {
+            $items[$delta]['title'] = $items[$delta]['emvideo']['title'];
+          }
+          if (!empty($items[$delta]['emvideo']['description'])) {
+            $items[$delta]['description'] = $items[$delta]['emvideo']['description'];
+          }
+        }
+      }
+      // We're saving in the data property so delete emvideo
+      if (isset($items[$delta]['emvideo'])) {
+        unset($items[$delta]['emvideo']);
+      }
+      // FIX FOR STATUS FIELD
+      if (!isset($items[$delta]['status'])) {
+        $items[$delta]['status'] = EMFIELD_STATUS_AVAILABLE;
+      }
+      // FIX FOR DATA NOT EMPTY
+      if (empty($items[$delta]['data'])) {
+         unset($items[$delta]['data']);
+      }
+      // Compact deltas.
+      $items = array_values($items);
+      break;
+  }
+}
+
+/**
+*  Implements hook_emfield_widget_extra().
+*/
+function emvideo_emfield_widget_extra($form, $form_state, $field, $items, $delta = 0, $module) {
+  $element = array();
+  if ($module == 'emvideo') {
+    // Add a title field, but only if the field is allowed.
+    // If the title is already being used allow it for editing even if it is disabled.
+    if ($field['widget']['meta_fields']['title'] || !empty($items[$delta]['title'])) {
+      $element['title'] = array(
+        '#type' => 'textfield',
+        '#title' => t('Video Title'),
+        '#default_value' => isset($items[$delta]['title']) ? $items[$delta]['title'] : '',
+        '#size' => 60,
+        '#maxlength' => 35,
+        '#description' => t('The title for the video.'),
+      );
+    }
+    // Add a description field, but only if the field is allowed.
+    // If the description is already being used allow it for editing even if it is disabled.
+    if ($field['widget']['meta_fields']['description'] || !empty($items[$delta]['description'])) {
+      $element['description'] = array(
+        '#type' => 'textfield',
+        '#title' => t('Video Description'),
+        '#default_value' => isset($items[$delta]['description']) ? $items[$delta]['description'] : '',
+        '#size' => 60,
+        '#maxlength' => 100,
+        '#description' => t('The description for the video.  Provide text for visitors who can not see the images in page.'),
+      );
+    }
+    if (!empty($items[$delta]['embed'])) {
+      $element['delete'] = array(
+        '#type' => 'checkbox',
+        '#title' => t('Delete the Video'),
+        '#description' => t("Checking this field will delete the video."),
+        '#default_value' => 0,
+        );
+    }
+  }
+  return $element;
+}
+
+/**
+ * Implementation of hook_views_api().
+ */
+function emvideo_views_api() {
+  return array(
+    'api' => 2,
+    'path' => drupal_get_path('module', 'emvideo') . '/includes/views',
+  );
+}
+
+/**
+ * Implementation of hook_content_generate().
+ */
+function emvideo_content_generate($node, $field) {
+  return emfield_content_generate($node, $field);
+}

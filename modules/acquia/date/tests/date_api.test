@@ -1,0 +1,79 @@
+<?php
+// $Id: date_api.test,v 1.5.6.4 2009/03/18 10:27:19 karens Exp $
+/**
+ * Test Date API functions
+ */
+class DateAPITestCase extends DrupalWebTestCase {
+  function getInfo() {
+    return array(
+      'name' => t('Date API'),
+      'description' => t('Test Date API functions like date_convert(), date_part_extract(), date_is_valid(), date_last_day_of_month(), date_first_day_of_week().') ,
+      'group' => t('Date'),
+    );
+  }
+  
+  /**
+   * Implementation of setUp().
+   */
+  function setUp() {
+    // Load the date_api module.
+    parent::setUp('date_api');
+  }
+
+  function testDateAPI() {
+    variable_set('date_first_day', 1);
+    $expected = array ( 0 => t('Mon'), 1 => t('Tue'), 2 => t('Wed'), 3 => t('Thu'), 4 => t('Fri'), 5 => t('Sat'), 6 => t('Sun'), );
+    $days = date_week_days_ordered(date_week_days_abbr(1));
+    $this->assertEqual($expected, $days, 'Test that date_week_days_ordered() array starts on Monday when the site first day is on Monday.');
+    variable_set('date_first_day', 0);
+    $expected = array ( 0 => t('Sun'), 1 => t('Mon'), 2 => t('Tue'), 3 => t('Wed'), 4 => t('Thu'), 5 => t('Fri'), 6 => t('Sat'), );
+    $days = date_week_days_ordered(date_week_days_abbr(1));
+    $this->assertEqual($expected, $days, 'Test that date_week_days_ordered() array starts on Sunday when the site first day is on Sunday.');
+
+    $value = '2007-12-05 23:59';
+    $this->assertEqual(TRUE, date_part_extract($value, 'year'), "Test date_part_extract(". $value .", year), results ". date_part_extract($value, 'year'));
+    $this->assertEqual(TRUE, date_part_extract($value, 'month'), "Test date_part_extract(". $value .", mon), results ". date_part_extract($value, 'month'));
+    $this->assertEqual(TRUE, date_part_extract($value, 'day'), "Test date_part_extract(". $value .", mday), results ". date_part_extract($value, 'day'));
+
+    $this->assertEqual(FALSE, date_is_valid($value), "Test date_is_valid(". $value .")");
+    $value = '2007-00-00 00:00';
+    $this->assertNotEqual(TRUE, date_is_valid($value), "Test for invalid date_is_valid(". $value .")");
+    $value = '0000-00-00 00:00';
+    $this->assertNotEqual(TRUE, date_is_valid($value), "Test for invalid date_is_valid(". $value .")");
+    $value = '-100';
+    $this->assertNotEqual(TRUE, date_is_valid($value), "Test for invalid date_is_valid(". $value .")");
+    $value = '2007-00-00T00:00';
+    $this->assertEqual(TRUE, date_is_valid($value, DATE_ISO), "Test ISO exception to date_is_valid(". $value .", DATE_ISO)");
+
+    $expected = 28;
+    $value = date_days_in_month(2005, 2);
+    $this->assertEqual($expected, $value, 'Test date_days_in_month(2, 2005), results '.$value);
+    $expected = 29;
+    $value = date_days_in_month(2004, 2);
+    $this->assertEqual($expected, $value, 'Test date_days_in_month(2, 2004), results '.$value);
+    $expected = 28;
+    $value = date_days_in_month(2003, 2);
+    $this->assertEqual($expected, $value, 'Test date_days_in_month(2, 2003), results '.$value);
+
+    $dates = array(
+      '2007-01-01 00:00:00',
+      '1970-01-01 00:00:00',
+      '1900-01-01 00:00:00',
+      '1600-01-01 00:00:00',
+      '0100-01-01 00:00:00');
+    foreach ($dates as $date) {
+      $unix = date_convert($date, DATE_DATETIME, DATE_UNIX);
+      $datetime = date_convert($unix, DATE_UNIX, DATE_DATETIME);
+      $this->assertEqual($date, $datetime, 'Test roundtrip using date_convert() from DATE_DATETIME to DATE_UNIX back to DATE_DATETIME, results '.$date.' >> '.$unix.' >> '.$datetime);
+    }
+
+  }
+  
+  /**
+   * Implementation of tearDown().
+   */
+  function tearDown() {
+    variable_del('date_first_day');
+    parent::tearDown();
+  }
+}

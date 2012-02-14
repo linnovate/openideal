@@ -1,0 +1,270 @@
+<?php
+// $Id: acquia_spi.module,v 1.2.2.2 2010/06/17 03:17:46 pwolanin Exp $
+
+/**
+ * @file
+ *   Send site profile information (SPI) and system data to Acquia Network.
+ */
+
+/**
+ * Implementation of hook_help()
+ */
+function acquia_spi_help($path, $arg) {
+  $welcome_nid = variable_get('acquia_welcome', 0);
+  if ($path == 'admin/help#acquia_spi' && $welcome_nid) {
+    // Only provide help text if the welcome message is avalailable.
+    if ($nid = db_result(db_query('SELECT nid FROM {node} where nid = %d', $welcome_nid))) {
+      $txt = 'The !acquia_welcome provides information about how to '
+      .'quickly get your site up and running.  Also there are instructions for '
+      .'setting the site theme as well as many other configuration tasks.';
+      $link = l('Acquia Drupal welcome page', 'node/' . $nid);
+      return '<p>'. t($txt, array('!acquia_welcome' => $link)). '<p>';
+    }
+  }
+}
+
+/**
+ * Implementation of hook_cron().
+ */
+function acquia_spi_cron() {
+  $last = variable_get('acquia_spi_cron_last', 0);
+  // 8 hour interval for sending site profile.
+  $interval = variable_get('acquia_spi_cron_interval', 8*60*60);
+  $now = time();
+  if ($now - $last > $interval) {
+    acquia_spi_send_profile_info();
+    variable_set('acquia_spi_cron_last', $now);
+  }
+}
+
+/**
+ * Implementation of hook_form_[form_id]_alter().
+ */
+function acquia_spi_form_acquia_agent_settings_form_alter(&$form) {
+  $form['buttons']['submit']['#submit'][] = 'acquia_spi_agent_settings_submit';
+}
+
+/**
+ * Added submit function for acquia_agent_settings form.
+ */
+function acquia_spi_agent_settings_submit($form, &$form_state) {
+  // Send information as soon as the key/identifier pair is submitted.
+  acquia_spi_send_profile_info();
+}
+
+/**
+ * Send site profile information to Acquia Network via XML-RPC.
+ */
+function acquia_spi_send_profile_info() {
+  // Do nothing unless we have credentials.
+  if (acquia_agent_has_credentials()) {
+    $spi = acquia_spi_get();
+    return acquia_agent_call('acquia.spi.update', $spi);
+  }
+}
+
+/**
+ * Gather site profile information about this site.
+ *
+ * @return
+ *   An associative array keyed by types of information.
+ */
+function acquia_spi_get() {
+  // Include version number information.
+  acquia_agent_load_versions();
+  $acquia_version = $hashes = $fileinfo = array();
+  $hashes_string = '';
+  if (IS_ACQUIA_DRUPAL) {
+    $acquia_version = array('version' => ACQUIA_DRUPAL_VERSION, 'series' => ACQUIA_DRUPAL_SERIES,  'branch' => ACQUIA_DRUPAL_BRANCH, 'revision' => ACQUIA_DRUPAL_REVISION);
+    // Get file hashes and compute serialized version.
+    list($hashes, $fileinfo) = acquia_spi_file_hashes();
+    $hashes_string = serialize($hashes);
+  }
+  return array(
+    'modules'        => acquia_spi_get_modules(),
+    'platform'       => acquia_spi_get_platform(),
+    'quantum'        => acquia_spi_get_quantum(),
+    'file_hashes'    => $hashes,
+    'hashes_md5'     => md5($hashes_string),
+    'hashes_sha1'    => sha1($hashes_string),
+    'fileinfo'       => $fileinfo,
+    'acquia_version' => $acquia_version,
+  );
+}
+
+/**
+ * Gather platform specific information.
+ *
+ * @return
+ *   An associative array keyed by a platform information type.
+ */
+function acquia_spi_get_platform() {
+  // Database detection depends on the structure starting with the database
+  // 'type-name' => array('title' => 'name', 'value' => 'version-info') data.
+  $database = db_status_report('');
+  $database_type = array_shift(array_keys($database));
+  // Webserver detection is based on name being before the slash, and
+  // version being after the slash.
+  preg_match('!^([^/]+)(/.+)?$!', $_SERVER['SERVER_SOFTWARE'], $webserver);
+  $platform = array(
+    'php'               => PHP_VERSION,
+    'webserver_type'    => $webserver[1],
+    'webserver_version' => $webserver[2],
+    'database_type'     => $database_type,
+    'database_version'  => $database[$database_type]['value'],
+    'system_type'       => php_uname('s'),
+    // php_uname() only accepts one character, so we need to concatenate ourselves.
+    'system_version'    => php_uname('r') .' '. php_uname('v') .' '. php_uname('m') .' '. php_uname('n'),
+  );
+  // Never send NULL (or FALSE?) - that causes hmac errors.
+  foreach ($platform as $key => $value) {
+    if (empty($platform[$key])) {
+      $platform[$key] = '';
+    }
+  }
+  return $platform;
+}
+  
+/**
+ * Gather information about modules on the site.
+ *
+ * @return
+ *   An associative array keyed by filename of associative arrays with
+ *   information on the modules.
+ */
+function acquia_spi_get_modules() {
+  $modules = module_rebuild_cache();
+  $result = array();
+  $keys_to_send = array('name', 'version', 'package', 'core', 'project');
+  foreach ($modules as $filename => $file) {
+    $info = array();
+    $info['status'] = $file->status;
+    foreach ($keys_to_send as $key) {
+      $info[$key] = isset($file->info[$key]) ? $file->info[$key] : '';
+    }
+    $info['filename'] = $file->filename;
+    $result[] = $info;
+  }
+  return $result;
+}
+
+
+/**
+ * Gather information about nodes, users and comments.
+ *
+ * @return
+ *   An associative array.
+ */
+function acquia_spi_get_quantum() {
+  $quantum = array();
+  // Get only published nodes.
+  $quantum['nodes'] =  db_result(db_query("SELECT COUNT(nid) FROM {node} WHERE status = 1"));
+  // Get only active users.
+  $quantum['users'] = db_result(db_query("SELECT COUNT(uid) FROM {users} WHERE status = 1"));
+  // Get only active comments. NOTE: in case of comments, 0 is the active comment!
+  $quantum['comments'] = db_result(db_query("SELECT COUNT(cid) FROM {comments} WHERE status = 0"));
+  return $quantum;
+}
+
+/**
+ * Gather hashes of all important files, ignoring line ending and CVS Ids
+ *
+ * @param $excuded_dirs
+ *   Optional array of directory paths to be excluded.
+ * 
+ * @return
+ *   An associative array keyed by filename of hashes.
+ */
+function acquia_spi_file_hashes($exclude_dirs = array()) {
+  // The list of directories for the third parameter are the only ones that
+  // will be recursed into.  Thus, we avoid sending hashes for any others.
+  list($hashes, $fileinfo) = _acquia_spi_generate_hashes('.', $exclude_dirs, array('modules', 'profiles', 'themes', 'includes', 'misc', 'scripts'));
+  ksort($hashes);
+  return array($hashes, $fileinfo);
+}
+
+/**
+ * Recursive helper function for acquia_spi_file_hashes().
+ */
+function _acquia_spi_generate_hashes($dir, $exclude_dirs, $limit_dirs = array()) {
+  $hashes = array();
+  $fileinfo = array();
+  if (is_dir($dir) && $handle = opendir($dir)) {
+    while ($file = readdir($handle)) {
+      if (!in_array($file, array('.', '..', 'CVS', '.svn'))) {
+        $path = ($dir == '.')?$file:"$dir/$file";
+
+        if (is_dir($path) && !in_array($path, $exclude_dirs) && (empty($limit_dirs) || in_array($path, $limit_dirs)) && ($file != 'translations')) {
+          list($sub_hashes, $sub_fileinfo) =  _acquia_spi_generate_hashes($path, $exclude_dirs);
+          $hashes = array_merge($sub_hashes, $hashes);
+          $fileinfo = array_merge($sub_fileinfo, $fileinfo);
+          $hashes[$path] = acquia_spi_hash_path($path);
+        }
+        elseif (acquia_spi_is_manifest_type($file)) {
+          $hashes[$path] = acquia_spi_hash_path($path);
+          $owner = fileowner($path);
+          if (function_exists('posix_getpwuid')) {
+            $userinfo = posix_getpwuid($owner);
+            $owner = $userinfo['name'];
+          }
+          $fileinfo[$path] = 'mt:'. filemtime($path) .'$p:'. substr(sprintf('%o', fileperms($path)), -4) . '$o:'. $owner .'$s:'. filesize($path);
+        }
+      }
+    }
+    closedir($handle);
+  }
+  return array($hashes, $fileinfo);
+}
+
+/**
+ * Determine if a path is a file type we care about for modificaitons.
+ */
+function acquia_spi_is_manifest_type($path) {
+  $extensions = array(
+    'php'=> 1,
+    'php4' => 1,
+    'php5' => 1,
+    'module'=> 1,
+    'inc'=> 1,
+    'install'=> 1,
+    'test'=> 1,
+    'theme'=> 1,
+    'engine'=> 1,
+    'profile'=> 1,
+    'css'=> 1,
+    'js'=> 1,
+    'info'=> 1,
+    'sh'=> 1,
+    // SSL certificates
+    'pem' => 1,
+    'pl'=> 1,
+    'pm'=> 1,
+  );
+  $pathinfo = pathinfo($path);
+  return isset($pathinfo['extension']) && isset($extensions[$pathinfo['extension']]);
+}
+
+/**
+ * Calculate the sha1 hash for a path.
+ *
+ * @param $path
+ *   The name of the file or a directory.
+ * @return
+ *   bas64 encoded sha1 hash. 'hash' is an empty string for directories.
+ */
+function acquia_spi_hash_path($path = '') {
+  $hash = '';
+  if (file_exists($path)) {
+    if (!is_dir($path)) {
+      $string = file_get_contents($path);
+      // Remove trailing whitespace
+      $string = rtrim($string);
+      // Replace all line endings and CVS/svn Id tags
+      $string = preg_replace('/\$Id[^;<>{}\(\)\$]*\$/', 'x$'.'Id$', $string);
+      $string = preg_replace('/\r\n|\n|\r/', ' ', $string);
+      $hash =  base64_encode(pack("H*",sha1($string)));
+    }
+  }
+  return $hash;
+}
+

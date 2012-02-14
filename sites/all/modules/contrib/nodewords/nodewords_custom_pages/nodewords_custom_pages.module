@@ -1,0 +1,135 @@
+<?php
+// $Id: nodewords_custom_pages.module,v 1.1.2.8 2010/04/18 14:16:48 kiam Exp $
+
+/**
+ * @file
+ * Allow to set meta tags for any pages for which is known the URL.
+ */
+
+/**
+ *  Implemenation of hook_help().
+ */
+function nodewords_custom_pages_help($path, $arg) {
+  if ($path == 'admin/content/nodewords/custom')
+    $output = '<p>' . t('On this page you can enter the meta tags for other pages of your site. The meta tags set in these page are used before the ones set for nodes or user profiles, and they can ovverride those meta tags.') . '</p>';
+  else {
+    $output = '';
+  }
+
+  return $output;
+}
+
+/**
+ * Implements hook_menu_alter().
+ */
+function nodewords_custom_pages_menu_alter(&$items) {
+  $admin_access = array('administer meta tags');
+
+  if (module_exists('nodewords_admin')) {
+    $items['admin/content/nodewords/custom'] = array(
+      'title' => 'Custom pages meta tags',
+      'page callback' => 'drupal_get_form',
+      'page arguments' => array('nodewords_custom_pages_overview'),
+      'access arguments' => $admin_access,
+      'type' => MENU_LOCAL_TASK,
+      'weight' => 5,
+      'file' => 'nodewords_custom_pages.admin.inc',
+      'module' => 'nodewords_custom_pages',
+    );
+
+    $items['admin/content/nodewords/custom/list'] = array(
+      'title' => 'List',
+      'access arguments' => $admin_access,
+      'type' => MENU_DEFAULT_LOCAL_TASK,
+      'weight' => -1,
+      'file' => 'nodewords_custom_pages.admin.inc',
+      'module' => 'nodewords_custom_pages',
+    );
+
+    $items['admin/content/nodewords/custom/add'] = array(
+      'title' => 'Add',
+      'page callback' => 'drupal_get_form',
+      'page arguments' => array('nodewords_custom_pages_edit'),
+      'access arguments' => $admin_access,
+      'type' => MENU_LOCAL_TASK,
+      'file' => 'nodewords_custom_pages.admin.inc',
+      'module' => 'nodewords_custom_pages',
+    );
+
+    $items['admin/content/nodewords/custom/%nodewords_custom_pages/delete'] = array(
+      'title' => 'Delete custom pages meta tags',
+      'page callback' => 'drupal_get_form',
+      'page arguments' => array('nodewords_custom_pages_confirm_delete', 4),
+      'access arguments' => $admin_access,
+      'parent' => 'admin/content/nodewords/custom',
+      'type' => MENU_CALLBACK,
+      'file' => 'nodewords_custom_pages.admin.inc',
+      'module' => 'nodewords_custom_pages',
+    );
+
+    $items['admin/content/nodewords/custom/%nodewords_custom_pages/edit'] = array(
+      'title' => 'Edit custom pages meta tags',
+      'page callback' => 'drupal_get_form',
+      'page arguments' => array('nodewords_custom_pages_edit', 4),
+      'access arguments' => $admin_access,
+      'parent' => 'admin/content/nodewords/custom',
+      'type' => MENU_CALLBACK,
+      'file' => 'nodewords_custom_pages.admin.inc',
+      'module' => 'nodewords_custom_pages',
+    );
+  }
+}
+
+/**
+ * Implements hook_nodewords_api().
+ */
+function nodewords_custom_pages_nodewords_api() {
+  return array(
+    'api' => '1.12',
+    'path' => '',
+  );
+}
+
+/**
+ * Implements hook_theme().
+ */
+function nodewords_custom_pages_theme() {
+  return array(
+    'nodewords_custom_pages_overview' => array(
+      'arguments' => array('form' => array()),
+      'file' => 'nodewords_custom_pages.admin.inc',
+    ),
+  );
+}
+
+/**
+ * Menu callback loader.
+ */
+function nodewords_custom_pages_load($pid) {
+  return _nodewords_custom_pages_load_data($pid);
+}
+
+/**
+ * Load the page meta tags data from the database.
+ *
+ * @param $id
+ *   The ID of the page to load; by default the function loads all the custom
+ *   pages data.
+ */
+function _nodewords_custom_pages_load_data($id = NULL) {
+  static $pages;
+
+  if (!isset($pages)) {
+    $pages = array();
+    $result = db_query("SELECT * FROM {nodewords_custom} ORDER BY weight ASC");
+
+    while ($page = db_fetch_object($result)) {
+      $page->tags = nodewords_load_tags(array(
+        'type' => NODEWORDS_TYPE_PAGE, 'id' => $page->pid
+      ));
+      $pages[$page->pid] = $page;
+    }
+  }
+
+  return isset($id) ? (isset($pages[$id]) ? $pages[$id] : FALSE) : $pages;
+}

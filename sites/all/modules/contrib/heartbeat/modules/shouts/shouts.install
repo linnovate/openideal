@@ -1,0 +1,103 @@
+<?php
+// $Id: shouts.install,v 1.1.2.2.2.7 2010/02/21 22:45:27 stalski Exp $
+
+/**
+ * @file
+ *   shouts.install
+ *   Installation file for shouts module
+ */
+
+/**
+ * Implementation of hook_install().
+ */
+function shouts_install() {
+  drupal_install_schema('shouts');
+}
+
+/**
+ * Implementation of hook_uninstall().
+ */
+function shouts_uninstall() {
+  drupal_uninstall_schema('shouts');
+}
+
+/**
+ * Implementation of hook_schema().
+ */
+function shouts_schema() {
+  $schema['shouts'] = array(
+    'description' => t('Stores shouts of users.'),
+    'fields' => array(
+      'shout_id' => array(
+        'description' => t('The primary identifier for the shout.'),
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE),
+      'uid' => array(
+        'description' => t('The user_id from the user that shouted the message.'),
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      /* 'uaid' => array(
+        'description' => t('heartbeat user activity id if there is one.'),
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ), */
+      'message' => array(
+        'description' => t('Message of the shout'),
+        'type' => 'text',
+        'not null' => FALSE,
+        'size' => 'big',
+      ),
+      'cleared' => array(
+        'description' => t('Did the user clear this message?'),
+        'type' => 'int',
+        'size' => 'tiny',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'time' => array(
+        'description' => t('Timestamp when the shout has been posted'),
+        'type' => 'datetime',
+        'not null' => TRUE,
+      ),
+    ),
+    'primary key' => array('shout_id'),
+  );
+  return $schema;
+}
+
+/**
+ * Update to branch 4.x
+ *
+ * @return sql statements array
+ */
+function shouts_update_4() {
+  $ret = array();
+  switch ($GLOBALS['db_type']) {
+    case 'mysql':
+    case 'mysqli':
+      $ret[] = update_sql("ALTER TABLE {shouts} ADD uaid INT NOT NULL DEFAULT '0' AFTER uid");
+      break;
+  }
+  return $ret;
+}
+
+/**
+ * Update to branch 4.x
+ *
+ * @return sql statements array
+ */
+function shouts_update_44() {
+  $ret = array();
+  switch ($GLOBALS['db_type']) {
+    case 'mysql':
+    case 'mysqli':
+      $ret[] = update_sql("ALTER TABLE {shouts} DROP uaid");
+      break;
+  }
+  return $ret;
+}
+

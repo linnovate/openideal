@@ -1,0 +1,963 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Webform Drupal 5.1\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2007-05-28 16:32+0300\n"
+"Last-Translator: Yurg <y@gomankov.ru>\n"
+"Language-Team: Gomankov <ygomankov@gmail.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Russian\n"
+"X-Poedit-Country: RUSSIAN FEDERATION\n"
+
+#: webform.inc:17
+#: webform.module:473
+msgid "Title"
+msgstr "Заголовок"
+
+#: webform.inc:18
+#: webform_report.inc:39
+msgid "View"
+msgstr "Просмотр"
+
+#: webform.inc:20
+#: webform_report.inc:29
+#: ;32
+msgid "Operations"
+msgstr "Операции"
+
+#: webform.inc:28
+#: webform.module:282
+msgid "submissions"
+msgstr "Результаты заполнения"
+
+#: webform.inc:29
+#: webform.module:287
+msgid "analysis"
+msgstr "Анализировать"
+
+#: webform.inc:30
+#: webform.module:292
+msgid "table"
+msgstr "Таблица"
+
+#: webform.inc:31
+#: webform.module:297
+msgid "download"
+msgstr "Скачать"
+
+#: webform.inc:32
+msgid "edit"
+msgstr "Редактировать"
+
+#: webform.inc:33
+#: webform.module:302
+msgid "clear"
+msgstr "Очистить"
+
+#: webform.inc:49
+msgid "Clear Form Submissions"
+msgstr "Очистить результаты заполнения форм"
+
+#: webform.inc:53
+msgid "Are you sure you want to delete all submissions for this form?"
+msgstr "Уверены, что хотите удалить результаты?"
+
+#: webform.inc:55
+msgid "Clear"
+msgstr "Очистить"
+
+#: webform.inc:55
+#: ;84
+msgid "Cancel"
+msgstr "Отмена"
+
+#: webform.inc:65
+msgid "Webform %title entries cleared."
+msgstr "Результаты заполнения  %title удалены."
+
+#: webform.inc:77
+msgid "Delete Form Submission"
+msgstr "Удалить результаты заполнения"
+
+#: webform.inc:82
+msgid "Are you sure you want to delete this submission?"
+msgstr "Уверены, что хотите удалить эту запись,"
+
+#: webform.inc:84
+#: webform_report.inc:42
+msgid "Delete"
+msgstr "Удалить"
+
+#: webform.inc:94
+msgid "Submission deleted."
+msgstr "Удалено."
+
+#: webform.inc:154
+msgid "Submitted on"
+msgstr "Дата заполнения"
+
+#: webform.inc:158
+msgid "Submitted by user"
+msgstr "Заполнено пользователем"
+
+#: webform.inc:161
+msgid "Submitted by anonymous user"
+msgstr "Заполнено анонимно"
+
+#: webform.inc:193
+msgid "Submitted values are"
+msgstr "Ответы: "
+
+#: webform.inc:197
+msgid "The results of this submission may be viewed at:"
+msgstr "Ответы могут быть просмотрены тут:"
+
+#: webform.inc:67
+#: webform.module:274
+#: ;307;144;980;1109;1117;1199;1217;0
+msgid "webform"
+msgstr "форма"
+
+#: webform_report.inc:26
+#: ;62
+msgid "#"
+msgstr "#"
+
+#: webform_report.inc:27
+msgid "Submitted"
+msgstr "Отправлено"
+
+#: webform_report.inc:63
+msgid "Time"
+msgstr "Время"
+
+#: webform_report.inc:64
+msgid "IP Address"
+msgstr "IP адрес"
+
+#: webform_report.inc:208
+msgid "Q"
+msgstr "Вопр."
+
+#: webform_report.inc:209
+msgid "responses"
+msgstr "ответов"
+
+#: webform.module:25
+msgid "Webforms are forms and questionnaires. To add one select <strong>create content -&gt; webform</strong>. Below you can set different security and debug options."
+msgstr "С помощью Опросника можно создавать тесты, опросы, формы для отправки и т.д. Ниже можно сделать некоторые предварительные настройки."
+
+#: webform.module:28
+msgid ""
+"<p>This module lets you create forms or questionnaires and define their content. Submissions from these forms are stored in the database and optionally also sent by e-mail to a predefined address.</p>\n"
+"      <p>Here is how to create one:</p>\n"
+"      <ul>\n"
+"       <li>Go to Create Content and add a webform</li>\n"
+"       <li>Add a description to be displayed as a teaser and above the actual form.</li>\n"
+"       <li>Add a confirmation message or redirect node that is to be displayed after successful submission.</li>\n"
+"       <li>Add one or more components to your form.</li>\n"
+"       <li>Optionally add an e-mail address to which submissions will be sent. If no email address is specified, no e-mail will be sent when submissions are made through the form.</li>\n"
+"       <li>Optionally select an e-mail (or hidden) component that will be used to populate the return e-mail address on any sent e-mail.</li>\n"
+"       <li>Optionally select a textfield (or hidden) component that will be used to populate the subject e-mail field on any sent e-mail.</li>\n"
+"      </ul>\n"
+"      <p>Help on adding and configuring the components will be shown after you add your first component.</p>\n"
+"      <p>The content of submitted forms is stored in the database table <i>webform_submitted_data</i> as key-value pairs.</p>\n"
+"      "
+msgstr ""
+
+#: webform.module:44
+msgid "A webform can be a questionnaires, contact or request forms. It can be used to let visitors make contact, register for a event or to enable a complex survey."
+msgstr "Можно использовать для создания анкет, тестов, форм обратной связи и т.д."
+
+#: webform.module:47
+msgid "Available variables are: %username, %useremail, %site, %date."
+msgstr "Доступные операторы: %username, %useremail, %site, %date."
+
+#: webform.module:48
+msgid "You can also use %server[key] to add any of the special PHP <a href=\"http://www.php.net/reserved.variables#reserved.variables.server\">$_SERVER</a> variables and %get[key] to create prefilled forms from the <a href=\"http://www.php.net/reserved.variables#reserved.variables.get\">URL</a> (e.g. %server[HTTP_USER_AGENT] or %get[id])."
+msgstr "Можно использовать %server[key] для добавления PHP-команд  <a href=\"http://www.php.net/reserved.variables#reserved.variables.server\">$_SERVER</a> и  %get[key] чтобы создать формы с предварительно заполненным полем <a href=\"http://www.php.net/reserved.variables#reserved.variables.get\">URL</a> (т.е. %server[HTTP_USER_AGENT] или %get[id])."
+
+#: webform.module:50
+msgid "If you are using the profiles module, you can also access all profile data using the syntax %profile[form_name]. If you for example have a profile value named profile_city, add the variable %profile[profile_city]."
+msgstr "Если используется модуль <em> profile </em>, vможн подставлять данные из полей модуля, используя синтаксис  %profile[form_name]. Например, если в профайлах есть поле profile_city, просто добавьте параметр  %profile[profile_city]."
+
+#: webform.module:75
+#: ;243;260
+msgid "Webform"
+msgstr "Опросник"
+
+#: webform.module:77
+msgid "Create a new form or questionnaire accessible to users. Submission results and statistics are recorded and accessible to privileged users."
+msgstr "Создайте новую форму или опросник. Результаты заполнения и статистика будет записана и передана для просмотра пользователям с соответствующими правами доступа. "
+
+#: webform.module:168
+msgid "Available Components"
+msgstr "Доступные компоненты"
+
+#: webform.module:171
+msgid "Below is a list of supported field types available for webform. You may disable any of these components by unchecking its corresponding box. Only checked components will be available in existing or new webforms."
+msgstr "Список поддерживаемых типов полей в опроснике. Можно отключить любое из них, просто убрав соответствующую галочку. Только отмеченные компоненты будут доступны в существующих или вновь создаваемых формах опросника."
+
+#: webform.module:188
+msgid "Advanced Options"
+msgstr "Продвинутые настройки"
+
+#: webform.module:196
+msgid "Allow Cookies for Tracking Submissions"
+msgstr "Разрешить записывать действия пользователя в cookie."
+
+#: webform.module:198
+msgid "<a href=\"http://www.wikipedia.org/wiki/HTTP_cookie\">Cookies</a> can be used to help prevent the same user from repeatedly submitting a webform. This feature is not needed for limiting submissions per user, though it can increase accuracy in some situations. Besides cookies, webform also uses IP addresses and site usernames to prevent repeated submissions."
+msgstr "<a href=\"http://www.wikipedia.org/wiki/HTTP_cookie\">Cookies</a> используются для записи и предотвращения многочисленных отправок формы одним и тем же полльзователем.Эта настройка работает независимо от механизма ограничения количества заполнений, но в некоторых случаях может повысить аккуратность регулятора отправок. Помимо cookies, опросник также использует запись IP- адресов для предотвращения множественных отправок."
+
+#: webform.module:203
+msgid "Webforms Debug"
+msgstr "Отладка опросника"
+
+#: webform.module:206
+msgid "Set this option to \"Log submissions\" to log all submissions in the watchdog. Set it to \"Full debug\" to print debug info on submission. You probably want to leave this option on \"OFF\"."
+msgstr "Включите  \"Log submissions\" чтобы записывать все заполнения формы в логи системы. Включите  \"Full debug\" чтобы выводить служебные сообщения в ходе заполнения прямо на экран. Эту опцию лучше выставить в \"OFF\"."
+
+#: webform.module:222
+#: ;777;859
+msgid "Name"
+msgstr "Название"
+
+#: webform.module:222
+#: ;481;867
+msgid "Description"
+msgstr "Описание"
+
+#: webform.module:222
+msgid "Enabled"
+msgstr "Вкл."
+
+#: webform.module:250
+msgid "Webforms"
+msgstr "Опросники"
+
+#: webform.module:253
+msgid "View and edit all the available webforms on your site."
+msgstr "Просмотр всех опросников"
+
+#: webform.module:264
+msgid "Global configuration of webform functionality."
+msgstr "Глобальные настройки системы опросников"
+
+#: webform.module:278
+#: ;1217
+msgid "Results"
+msgstr "Результаты"
+
+#: webform.module:326
+msgid "Go to form"
+msgstr "Пререйти к форме"
+
+#: webform.module:328
+msgid "View this form."
+msgstr "просмотреть эту форму."
+
+#: webform.module:349
+#: ;433;533
+msgid "Delete Selected"
+msgstr "Удалить отмеченное"
+
+#: webform.module:359
+#: ;927
+msgid "Done"
+msgstr "Готово"
+
+#: webform.module:387
+msgid "The form component has been changed. Remember to press Submit on the bottom of this form to save your changes."
+msgstr "Компонент формы был изменён. Обязательно нажмите кнопку внизу формы, чтобы  изменения вступили в силу."
+
+#: webform.module:389
+#: ;446;969;1007 components/markup.inc:38
+msgid "Preview"
+msgstr "Просмотр"
+
+#: webform.module:417
+#: ;554
+msgid "Add"
+msgstr "Добавить"
+
+#: webform.module:425
+#: ;538;795
+msgid "Edit Selected"
+msgstr "Редактировать отмеченное"
+
+#: webform.module:438
+msgid "Field deleted, form must be submitted to save changes"
+msgstr "Поле удалено, нужно сохранить форму, чтобы имзенения вступили в силу."
+
+#: webform.module:441
+msgid "A component must be selected to delete"
+msgstr "Нужно выбрать компонент для удаления."
+
+#: webform.module:445
+#: ;1060
+msgid "Submit"
+msgstr "Отправить"
+
+#: webform.module:450
+msgid "Submission limit must be a number"
+msgstr "Ограничитель отправок должен быть числом"
+
+#: webform.module:466
+msgid "Webform Settings"
+msgstr "Настройки Опросников"
+
+#: webform.module:482
+msgid "Text to be shown as teaser and before the form."
+msgstr "Текст перед полями опросника."
+
+#: webform.module:491
+msgid "Confirmation message or redirect URL"
+msgstr "Сообщение с подтверждением заполнения или ссылка, на которую будет переправлен пользователь, после заполнения опросника. "
+
+#: webform.module:492
+msgid "Message to be shown upon successful submission or a path to a redirect page. Redirect pages must start with <em>http://</em> for external sites or <em>internal:</em> for an internal path. i.e. <em>http://www.example.com</em> or <em>internal:node/10</em>"
+msgstr "Сообщение с подтверждением заполнения или ссылка, на которую будет переправлен пользователь, после заполнения опросника. Ссылку обязательно начните с символов <em>http://</em>для внешних ссылок или <em>internal:</em> для внутренних.то есть <em>http://www.example.com</em> или <em>internal:node/10</em>"
+
+#: webform.module:506
+msgid "Components"
+msgstr "компоненты"
+
+#: webform.module:546
+msgid "Add a new component"
+msgstr "Добавить новый компонент"
+
+#: webform.module:549
+msgid "Each component adds a new field to the form. Any number components (even of the same type) may be added to the form. Select a component type to add above."
+msgstr "Каждый компонент добавляет новое поле к форме. К форме может быть добавлено любое количество полей для заполнения, даже одинаковых."
+
+#: webform.module:563
+msgid "Mail Settings"
+msgstr "Настройки отправок по email"
+
+#: webform.module:571
+msgid "E-mail to address"
+msgstr "Кому"
+
+#: webform.module:573
+msgid "Form submissions will be e-mailed to this address. Leave blank for none."
+msgstr "Результаты заполнения будут отправлены на этот email. Оставьте пустое поле, чтобы результаты не отправлялись."
+
+#: webform.module:577
+#: ;578
+msgid "Default"
+msgstr "По-умолчанию"
+
+#: webform.module:594
+msgid "E-mail from address"
+msgstr "От кого"
+
+#: webform.module:597
+msgid "After adding components to this form, any email or hidden form element may be selected as the sender for e-mails."
+msgstr "После добавления компонентов \"скрытое поле\" или \"email\", можно сделать содержимое добавленных полей темой отправляемого письма."
+
+#: webform.module:603
+msgid "E-mail subject"
+msgstr "Тема письма"
+
+#: webform.module:606
+msgid "After adding components to this form, any textfield or hidden form element may be selected as the subject line for e-mails."
+msgstr "После добавления компонентов \"скрытое поле\" или \"email\", можно сделать содержимое добавленных полей темой отправляемого письма."
+
+#: webform.module:616
+msgid "Advanced Settings"
+msgstr "Расширенные настройки"
+
+#: webform.module:624
+msgid "Limit the number of submissions a user may send within a specified time period"
+msgstr "Ограничить количество заполнений опросника, которые может сделать отвечающий в единицу времени."
+
+#: webform.module:643
+msgid "Limit to "
+msgstr "Оглраничить до"
+
+#: webform.module:651
+msgid "submission(s)"
+msgstr "отправок"
+
+#: webform.module:662
+msgid "ever"
+msgstr "каждый (период времени)"
+
+#: webform.module:663
+msgid "every hour"
+msgstr "каждый час"
+
+#: webform.module:664
+msgid "every day"
+msgstr "каждый день"
+
+#: webform.module:665
+msgid "every week"
+msgstr "каждая неделя"
+
+#: webform.module:677
+msgid "Enter PHP code to perform additional validation for this form. Include the &lt;?php ?&gt; tags. $form_id and $form_values are available variables. If validation fails, use the form_set_error function to prevent the form from being submitted. Use the same syntax as a _validate function used in the <a href=\"http://api.drupal.org/api/file/developer/topics/forms_api.html\">Forms API</a>."
+msgstr "Использовать php для дополнительной обработки.  Включите  &lt;?php ?&gt; в код. Доступные операторы: $form_id и $form_values"
+
+#: webform.module:686
+msgid "Enter PHP code to perform additional processing for this form (after the validation). Include the &lt;?php ?&gt; tags. $form_id and $form_values are available variables, use the same syntax as a _submit function used in the <a href=\"http://api.drupal.org/api/file/developer/topics/forms_api.html\">Forms API</a>."
+msgstr "Использовать php для дополнительной обработки.  Включите  &lt;?php ?&gt; в код. Доступные операторы: $form_id и $form_values"
+
+#: webform.module:705
+msgid "Redirect POST Values"
+msgstr "Перенаправлять POST - запросы"
+
+#: webform.module:706
+msgid "Forward the contents of the POST array to the redirect URL. Use this option for custom processing of the form information. No processing will be done by webform. The confirmation option above MUST be a full redirect URL for this option to have an effect."
+msgstr "Перенаправлять POST - запросы"
+
+#: webform.module:778
+msgid "Type"
+msgstr "Тип"
+
+#: webform.module:779
+#: components/markup.inc:16
+msgid "Value"
+msgstr "Значение"
+
+#: webform.module:780
+#: ;876
+msgid "Mandatory"
+msgstr "Обязательное поле?"
+
+#: webform.module:781
+#: ;902
+msgid "Weight"
+msgstr "Вес"
+
+#: webform.module:800
+msgid "Component not found"
+msgstr "компонент не найден"
+
+#: webform.module:840
+msgid "Field Details"
+msgstr "Детали"
+
+#: webform.module:860
+msgid "Name of the field. This is used as a descriptive label and as the key when saving data in the database."
+msgstr "Имя поля. Используется пр ипоказе пользователям и при сохранении в БД."
+
+#: webform.module:869
+msgid "A short description of the field used as help for the user when he/she uses the form."
+msgstr "Короткое описание/подсказка пользователю, как заполнить это поле."
+
+#: webform.module:878
+msgid "Check this option if the user must enter a value."
+msgstr "Если хотите сделать это поле обязательным, установите галочку тут."
+
+#: webform.module:891
+msgid "Parent Fieldset"
+msgstr "Родительский набор полей"
+
+#: webform.module:893
+msgid "Optional. You may organize your form by placing this component inside another fieldset."
+msgstr "Опционально. Вы можете группировать компоненты в логические наборы, группируя их."
+
+#: webform.module:904
+msgid "Optional. In the menu, the heavier items will sink and the lighter items will be positioned nearer the top."
+msgstr "Опционально. Более тяженлые пункты опустятся вниз, лёгкие - будут показаны сверху."
+
+#: webform.module:916
+#: ;1084
+msgid "The webform component"
+msgstr "Компонент формы"
+
+#: webform.module:916
+msgid " does not have an edit function defined"
+msgstr " не имеет настроек редактирования"
+
+#: webform.module:980
+msgid "Unauthorized webform access attempt"
+msgstr " Аааа!!!! Держи его!!! Несанкционированная попытка доступа к Опроснику."
+
+#: webform.module:1084
+msgid "is not able to be displayed"
+msgstr "не получилось отобразить"
+
+#: webform.module:1109
+msgid "The authenticated user <a href=\"%userURL\">%username</a> attempted to submit more entries than allowed on the <a href=\"%webformURL\">%webformTitle</a> webform"
+msgstr "Зарегистрированный пользователь<a href=\"%userURL\">%username</a> пытался отправить форму <a href=\"%webformURL\">%webformTitle</a> больше раз, чем это разрешено в настройках. "
+
+#: webform.module:1117
+msgid "An anonymous user with IP address %ip attempted to submit more entries than allowed on the <a href=\"%webformURL\">%webformTitle</a> webform"
+msgstr "Пользователь с IP-адресом  %ip пытался отправить форму бОльшее количество раз, чем разрешено в настройках <a href=\"%webformURL\">%webformTitle</a>"
+
+#: webform.module:1125
+msgid "You have submitted the maximum number of entries. Check submission guidelines."
+msgstr "Вы отправили ответы максимально разрешенное количество раз."
+
+#: webform.module:1173
+msgid "Form submission from: "
+msgstr "Результат заполнения от:"
+
+#: webform.module:1199
+msgid "Possible spam attempt from @remote_addr"
+msgstr "Кажется, попытка заспамить (ответить неразрешенное количество раз) опросник от: @remote_addr"
+
+#: webform.module:1200
+msgid "Illegal information. Data not submitted."
+msgstr "Неверная информация. Данные не приняты."
+
+#: webform.module:1217
+msgid "Submission posted to "
+msgstr "Есть новое заполнение"
+
+#: webform.module:1268
+msgid "No node with the id '%nid' could be found"
+msgstr "Не найдено страницы с таким  '%nid'"
+
+#: webform.module:1280
+msgid "Go back to the form"
+msgstr "Вернуться к форме"
+
+#: webform.module:66
+msgid "create webforms"
+msgstr "создавать опросники"
+
+#: webform.module:66
+msgid "edit own webforms"
+msgstr "редактировать созданные опросники"
+
+#: webform.module:66
+msgid "edit webforms"
+msgstr "редактировать все опросники"
+
+#: webform.module:66
+msgid "access webform results"
+msgstr "доступ к результатам заполнения опросника"
+
+#: webform.module:66
+msgid "clear webform results"
+msgstr "удаление результатов опросника"
+
+#: webform.module:66
+msgid "use PHP for additional processing"
+msgstr "использовать PHP для дополнительной обработки."
+
+#: webform.install:117
+msgid "Webform module installed module tables successfully."
+msgstr "Модуль Опросников установлен успешно."
+
+#: webform.install:120
+msgid "The installation of webform module was unsuccessful."
+msgstr "Модуль Опросников установить не удалось :("
+
+#: components/date.inc:15
+#: components/hidden.inc:15
+#: components/select.inc:25
+#: components/textarea.inc:15
+#: components/textfield.inc:15
+#: components/time.inc:15
+msgid "Default value"
+msgstr "Значение по-умолчанию"
+
+#: components/date.inc:17
+#: components/hidden.inc:17
+#: components/textarea.inc:17
+#: components/textfield.inc:17
+#: components/time.inc:17
+msgid "The default value of the field."
+msgstr "Значение поля по-умолчанию"
+
+#: components/date.inc:17
+msgid "Accepts any date in any <a href=\"http://www.gnu.org/software/tar/manual/html_chapter/Date-input-formats.html\">GNU Date Input Format</a>. Strings such as today, +2 months, and Dec 9 2004 are all valid."
+msgstr "Можно ввести любую дату в любом формате (см. примеры на <a href=\"http://www.gnu.org/software/tar/manual/html_chapter/Date-input-formats.html\">GNU Date Input Format</a> ). Можно вводить, например, дату, как \"сегодня\", \"+2 дня\" или \"9 декабря 2004 года\" (всё без кавычек)."
+
+#: components/date.inc:24
+#: components/time.inc:25
+msgid "Timezone"
+msgstr "Часовой пояс"
+
+#: components/date.inc:26
+msgid "Adjust the date according to a specific timezone. Website timezone is defined in the <a href=\"%settings\">Site Settings</a> and is the default."
+msgstr "Настройки времени согласно глобальным настройкам часовых поясов сайта. Глобально время для сайта настраивается в <a href=\"%settings\">Настройках сайта</a>."
+
+#: components/date.inc:32
+#: components/time.inc:33
+msgid "Observe Daylight Savings"
+msgstr "Просмотр отправок за день"
+
+#: components/date.inc:35
+#: components/time.inc:36
+msgid "Automatically adjust the time during daylight savings."
+msgstr "Автоматически подстраивать время при сохранениях и отправках"
+
+#: components/date.inc:70
+msgid "month"
+msgstr "месяц"
+
+#: components/date.inc:70
+msgid "January"
+msgstr "Январь"
+
+#: components/date.inc:70
+msgid "February"
+msgstr "Февраль"
+
+#: components/date.inc:70
+msgid "March"
+msgstr "март"
+
+#: components/date.inc:70
+msgid "April"
+msgstr "Апрель"
+
+#: components/date.inc:70
+msgid "May"
+msgstr "Май"
+
+#: components/date.inc:70
+msgid "June"
+msgstr "Июнь"
+
+#: components/date.inc:70
+msgid "July"
+msgstr "Июль"
+
+#: components/date.inc:70
+msgid "August"
+msgstr "Август"
+
+#: components/date.inc:70
+msgid "September"
+msgstr "Сентябрь"
+
+#: components/date.inc:70
+msgid "October"
+msgstr "Октябрь"
+
+#: components/date.inc:70
+msgid "November"
+msgstr "Ноябрь"
+
+#: components/date.inc:70
+msgid "December"
+msgstr "Декабрь"
+
+#: components/date.inc:71
+msgid "day"
+msgstr "день"
+
+#: components/date.inc:87
+#: components/time.inc:102
+msgid "This field is required."
+msgstr "Обязательное поле"
+
+#: components/date.inc:126
+msgid " field required"
+msgstr " обяязательно"
+
+#: components/date.inc:139
+msgid "Entered %name is not a valid date"
+msgstr "Введено неверное значение %name"
+
+#: components/date.inc:187
+msgid "Presents month, day, and year fields."
+msgstr "Поля дней, месяцев и лет"
+
+#: components/date.inc:241
+#: components/email.inc:135
+#: components/file.inc:308
+#: components/textarea.inc:130
+#: components/textfield.inc:131
+#: components/time.inc:243
+msgid "Left Blank"
+msgstr "Оставить пустым"
+
+#: components/date.inc:242
+#: components/email.inc:136
+#: components/textarea.inc:131
+#: components/textfield.inc:132
+#: components/time.inc:244
+msgid "User entered value"
+msgstr "Значение, вводимое пользователем"
+
+#: components/email.inc:15
+msgid "User email as default"
+msgstr "emzil пользователя по-умолчанию"
+
+#: components/email.inc:18
+msgid "Set the default value of this field to the user email, if he/she is logged in."
+msgstr "В это поле автоматически пишется email зарегистрированного поетителя. Для анонимных размещений не играет роли."
+
+#: components/email.inc:23
+msgid "CC submission to this email"
+msgstr "Отправлять копию на этот адрес email "
+
+#: components/email.inc:26
+msgid "Check this option if the email specified in this component should get a CC submission."
+msgstr "На введенный в это поле email можно тправлять копии результатов заполнения опросника."
+
+#: components/email.inc:27
+msgid "Note that this opens the risk that the form can be used to send emails to any address and might be missused as a spam gateway."
+msgstr "Обратите внимание! Эта настройка открывает возможность для спаммеров отправлять письма на любые адреса и может быть использована для спаммерских рассылок."
+
+#: components/email.inc:31
+#: components/textarea.inc:24
+#: components/textfield.inc:24
+msgid "Width"
+msgstr "Ширина"
+
+#: components/email.inc:33
+#: components/textarea.inc:26
+#: components/textfield.inc:26
+msgid "Width of the textfield."
+msgstr "Ширина текстового поля"
+
+#: components/email.inc:80
+msgid "%value is not a valid email address."
+msgstr "Введён неверный адрес:  '%value'. Исправьте адрес email. "
+
+#: components/email.inc:105
+msgid "A textfield that automatically fills in logged-in users e-mail."
+msgstr "Поле для ввода email"
+
+#: components/email.inc:137
+#: components/hidden.inc:101
+#: components/textarea.inc:132
+#: components/textfield.inc:133
+msgid "Average submission length in words (ex blanks)"
+msgstr "Среднее количество слов в отправленном тексте ( включая пробелы)"
+
+#: components/fieldset.inc:15
+msgid "Collapsible"
+msgstr "Сворачиваемое"
+
+#: components/fieldset.inc:17
+msgid "If this fieldset is collapsible, the user may open or close the fieldset."
+msgstr "Если отмечено, набор можно сворачивать или разворачивать нажатием на ссылку в заголовке набора"
+
+#: components/fieldset.inc:22
+msgid "Collapsed by Default"
+msgstr "Сворачиваемое по-умолчанию"
+
+#: components/fieldset.inc:24
+msgid "Collapsible fieldsets are \"open\" by default. Select this option to default the fieldset to \"closed.\""
+msgstr "Сворачиваемые наборы по-умолчанию развёрнуты. Поставьте галочку тут, если хотите, чтобы наборы полей были по-умолчанию свёрнуты."
+
+#: components/fieldset.inc:74
+msgid "Fieldsets allow you to organize complex webforms into groups of fields."
+msgstr "Наборы полей помогают организовать поля в логические группы."
+
+#: components/file.inc:18
+msgid "Select the types of uploads you would like to allow."
+msgstr "Выберите тип отправлений файлов, который вы хотите позволить."
+
+#: components/file.inc:22
+msgid "Web Images"
+msgstr "Картинки и фотографии для интернета"
+
+#: components/file.inc:28
+msgid "Desktop Images"
+msgstr "Картинки больших размеров"
+
+#: components/file.inc:34
+msgid "Documents"
+msgstr "ДОкументы"
+
+#: components/file.inc:40
+msgid "Media"
+msgstr "Медиа-файлы"
+
+#: components/file.inc:46
+msgid "Archives"
+msgstr "Архивы"
+
+#: components/file.inc:52
+msgid "Additional Extensions"
+msgstr "Другие файлы"
+
+#: components/file.inc:54
+msgid "Enter a list of additional file extensions for this upload field, seperated by commas.<br /> Entered extensions will be appended to checked items above."
+msgstr "Ведите список позволенных расширений файлов через запятую. Эти расширения будут добавлены к вышеуказанному списку."
+
+#: components/file.inc:61
+msgid "Max Upload Size"
+msgstr "Макс. размер файла"
+
+#: components/file.inc:63
+msgid "Enter the max file size a user may upload (in KB)."
+msgstr "Введите максимально разрешенный размер файла (в Килобайтах)"
+
+#: components/file.inc:70
+msgid "Upload Directory"
+msgstr "Папка для размещения файлов"
+
+#: components/file.inc:72
+msgid "Webform uploads are always saved in the site files directory. You may optionally specify a subfolder to store your files."
+msgstr "Файлы опросника всегда сохраняются в папке /files/ Вашего сайта. Вы можете указать папку внутри /files/ для того, чтобы отделить файлы опросника от остальных"
+
+#: components/file.inc:154
+msgid "Category"
+msgstr "Категория"
+
+#: components/file.inc:154
+msgid "Types"
+msgstr "Типы"
+
+#: components/file.inc:198
+msgid "%field field is required."
+msgstr "Необходимо указать %field."
+
+#: components/file.inc:231
+msgid "Files with the '%ext' extension are not allowed, please upload a file with a %exts extension."
+msgstr "Файлы с расширением '%ext' нельзя загружать, пожалуйста, загружайте файлы с позволенными расширениями: %exts."
+
+#: components/file.inc:236
+msgid "The file '%filename' is too large (%filesize KB). Please upload a file %maxsize KB or smaller."
+msgstr "Файл  '%filename' слишком большой (%filesize KB). Пожалуйста, загружайте файлы размером %maxsize KB или меньше."
+
+#: components/file.inc:253
+msgid "The uploaded file %filename was unable to be saved. The destination directory may not be writable."
+msgstr "Файл %filename не удалось загрузить. Папка назначения закрыта для записи."
+
+#: components/file.inc:259
+msgid "The uploaded file %filename was unable to be saved. The destination directory does not exist."
+msgstr "Файл %filename не удалось загрузить. Папка назначения отсутствует или не определена в настройках."
+
+#: components/file.inc:309
+msgid "User uploaded file"
+msgstr "Пфайлы, загруженные пользователями"
+
+#: components/file.inc:310
+msgid "Average uploaded file size"
+msgstr "Средний размер загружаемых файлов"
+
+#: components/hidden.inc:69
+msgid "Create a field which is not visible to the user, but is recorded with the submission."
+msgstr "Создаёт невидимое для пользователя поле."
+
+#: components/hidden.inc:99
+msgid "Empty"
+msgstr "Пустое"
+
+#: components/hidden.inc:100
+msgid "Non-empty"
+msgstr "Не пустое"
+
+#: components/markup.inc:18
+msgid "Markup allows you to enter custom HTML or PHP logic into your form."
+msgstr "Разметка - разрешен  HTML или PHP в этом  поле."
+
+#: components/markup.inc:73
+msgid "Presents a markup area of text. Does not render a field."
+msgstr "Поле для ввода символов разметки. Не записывает значения в базу, служит для оформления."
+
+#: components/select.inc:15
+msgid "Options"
+msgstr "Варианты"
+
+#: components/select.inc:17
+msgid "A list of selectable options. One option per line."
+msgstr "Введите минимум одно значение. Каждое значение должно быть введено с новой строки"
+
+#: components/select.inc:27
+msgid "The default value of the field. For multiple selects use commas to separate multiple defaults."
+msgstr "Значение поля по-умолчанию. Для множества значений, разделяйте введённые значения запятой"
+
+#: components/select.inc:34
+msgid "Multiple"
+msgstr "Множественный выбор"
+
+#: components/select.inc:37
+msgid "Check this option if the user should be allowed to choose multiple values."
+msgstr "Чтобы позволить пользователю отмечать несколько значений, поставьте галочку здесь."
+
+#: components/select.inc:41
+msgid "Listbox"
+msgstr "Выпадающий список"
+
+#: components/select.inc:44
+msgid "Check this option if you want the select component to be of listbox type instead of radiobuttons or checkboxes."
+msgstr "Чтобы показывать значения в виде выпадающего списка, поставьте галочку здесь"
+
+#: components/select.inc:69
+msgid "select..."
+msgstr "выбор..."
+
+#: components/select.inc:219
+msgid "Allows creation of checkboxes, radio buttons, or select menus."
+msgstr "Позволяет создавать поля с галочками, радиокнопки или выпадающий список значений"
+
+#: components/textarea.inc:32
+msgid "Height"
+msgstr "Высота"
+
+#: components/textarea.inc:34
+msgid "Height of the textfield."
+msgstr "Высота текстового поля (в рядах)"
+
+#: components/textarea.inc:40
+#: components/textfield.inc:42
+msgid "Disabled"
+msgstr "Выкл."
+
+#: components/textarea.inc:42
+#: components/textfield.inc:44
+msgid "Make this field non-editable. Useful for setting an unchangeable default value."
+msgstr "Запретить редактирование. Полезно для ввода и показа значения по-умолчанию"
+
+#: components/textarea.inc:100
+msgid "A large text area that allows for multiple lines of input."
+msgstr "Большое текстовое поле, куда можно вводить значения в несколько рядов"
+
+#: components/textfield.inc:33
+msgid "Maxlength"
+msgstr "Максимальная длина"
+
+#: components/textfield.inc:35
+msgid "Maxlength of the textfield."
+msgstr "Максимальная длина поля"
+
+#: components/textfield.inc:101
+msgid "Basic textfield type."
+msgstr "Базовое текстовое поле"
+
+#: components/time.inc:17
+msgid "Accepts a time in any <a href=\"http://www.gnu.org/software/tar/manual/html_chapter/Date-input-formats.html\">GNU Date Input Format</a>. Strings such as now, +2 hours, and 10:30pm are all valid."
+msgstr "Можно ввести любую дату в любом формате (см. примеры на <a href=\"http://www.gnu.org/software/tar/manual/html_chapter/Date-input-formats.html\">GNU Date Input Format</a> ). Можно вводить, например, дату, как \"сегодня\", \"+2 дня\" или \"9 декабря 2004 года\" (всё без кавычек)."
+
+#: components/time.inc:27
+msgid "Adjust the time according to a specific timezone. Website timezone is defined in the <a href=\"%settings\">Site Settings</a> and is the default."
+msgstr "Настройки времени согласно глобальным настройкам часовых поясов сайта. Глобально время для сайта настраивается в <a href=\"%settings\">Настройках сайта</a>."
+
+#: components/time.inc:41
+msgid "Time Format"
+msgstr "Формат времени"
+
+#: components/time.inc:43
+msgid "Format the display of the time in 12 or 24 hours."
+msgstr "Формат вывода времени: 24-часовой или 12-часовой"
+
+#: components/time.inc:88
+msgid "hour"
+msgstr "час"
+
+#: components/time.inc:89
+msgid "minute"
+msgstr "минута"
+
+#: components/time.inc:92
+msgid "am"
+msgstr "am"
+
+#: components/time.inc:92
+msgid "pm"
+msgstr "pm"
+
+#: components/time.inc:135
+msgid " field is required"
+msgstr " обябзательное поле"
+
+#: components/time.inc:193
+msgid "Presents the user with hour and minute fields. Optional am/pm fields."
+msgstr "Поля для ввода времени в формате \"часы\" и \"минуты\". Дополнительно можно ввести am/pm значения для времени."
+

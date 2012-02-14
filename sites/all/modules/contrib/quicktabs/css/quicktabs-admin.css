@@ -1,0 +1,114 @@
+/* $Id: quicktabs-admin.css,v 1.1.6.2 2010/08/27 18:00:53 katbailey Exp $ */
+
+/* Admin form */
+
+#qt-tablist-table label {
+  float: left;
+  clear: left;
+  width: 120px;
+}
+#qt-tablist-table .form-item {
+  margin-bottom: 5px;
+}
+#qt-tablist-table .form-item .description {
+  margin-top: 3px;
+}
+#qt-tablist-table .qt-tab-title {
+  width: 130px;
+  height: 125px;
+}
+#qt-tablist-table .qt-tab-type,
+#qt-tablist-table .qt-tab-remove {
+  width: 100px;
+}
+
+#qt-tablist-table .description {
+  white-space: normal;
+}
+
+#qt-tablist-table .qt-tab-title .form-item .form-text {
+  width: 80px;
+}
+#qt-tablist-table .qt-tab-type label.option {
+  width: auto;
+}
+#qt-tablist-table .qt-tab-content .form-item .form-text {
+  width: 150px;
+}
+#qt-tablist-table .qt-tab-view-content input.form-submit {
+  display: none;
+}
+#qt-tablist-table .qt-tab-content {
+  display: none;
+}
+
+#qt-tablist-table .qt-tab-remove label,
+#quicktabs-form #add-more-tabs-button label {
+  font-weight: bold;
+  float: left;
+  clear: left;
+  width: auto;
+}
+#quicktabs-form #add-more-tabs-button {
+  width: 100px;
+  display: block;
+  margin-top: 20px;
+  float: right;
+}
+#quicktabs-form .add-tab,
+#qt-tablist-table .delete-tab {
+  display: block;
+  overflow: hidden;
+  width: 39px;
+  height: 23px;
+  padding: 0;
+  margin: 0;
+  border: 0;
+  text-indent: -9999px;
+  cursor: pointer; /* hand-shaped cursor */
+  cursor: hand; /* for IE 5.x */
+}
+
+#quicktabs-form .add-tab {
+  background: transparent url(../add-tab.gif) no-repeat 0 -3px;
+}
+#quicktabs-form .delete-tab {
+  background: transparent url(../delete-tab.gif) no-repeat 0 0;
+}
+
+/* QT style selection form */
+
+div.quicktabs-preview {
+  border: none;
+  width: 280px;
+  height: 80px;
+}
+
+#quicktabs-settings .quicktabs-tabstyles .form-item {
+  width: 280px;
+  float: left;
+  margin: 0 10px 10px 0;
+  border: 1px solid #ccc;
+  background-color: #fff;
+}
+#quicktabs-settings .quicktabs-tabstyles .form-item .option {
+  display: block;
+  background-color: #bfe3ff;
+  font: bold 12px/18px verdana;
+  color: #0a5793;
+}
+#quicktabs-settings .quicktabs-tabstyles .form-item .option:hover {
+  background-color: #aadaff;
+  cursor: pointer;
+  color: #003863;
+}
+#quicktabs-settings .quicktabs-tabstyles .form-item .option .form-radio {
+  margin-right: 5px;
+  float: left;
+  height: 15px;
+  margin-top: 2px;
+}
+#quicktabs-settings .quicktabs_wrapper {
+  margin: 5px;
+  font: bold 12px/170% Verdana;
+}

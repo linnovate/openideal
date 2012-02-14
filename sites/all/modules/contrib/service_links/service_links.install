@@ -1,0 +1,17 @@
+<?php
+// $Id: service_links.install,v 1.4.4.3 2010/09/17 12:06:18 thecrow Exp $
+
+/**
+ * @file
+ * Installation file for service links module.
+ */
+
+/**
+ * Implementation of hook_uninstall().
+ */
+function service_links_uninstall() {
+  $result = db_query('SELECT name FROM {variable} v WHERE LOCATE("service_links_",v.name) > 0');
+  while ($row = db_fetch_object($result)) {
+    variable_del($row->name);
+  }
+}

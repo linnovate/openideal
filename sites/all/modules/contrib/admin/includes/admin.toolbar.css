@@ -1,0 +1,185 @@
+/* $Id: admin.toolbar.css,v 1.1.2.8 2009/12/16 06:16:04 yhahn Exp $ */
+
+/**
+ * Base styles ========================================================
+ */
+div#admin-toolbar,
+div#admin-toolbar * {
+  font:normal 11px/15px "Lucida Grande",Tahoma,Verdana,sans-serif;
+  color:#ccc;
+  }
+
+div#admin-toolbar a {
+  text-decoration:none;
+  color:#fff;
+  font-weight:normal;
+  }
+
+/**
+ * Toolbar background =================================================
+ */
+div#admin-toolbar div.admin-blocks { background:url(../images/black.png) 0px 35px repeat-x; }
+div#admin-toolbar.vertical div.admin-blocks { background-color:#000; }
+
+/**
+ * Toggle =============================================================
+ */
+div#admin-toolbar span.admin-toggle { background:url(../images/sprite.png) 0px 0px no-repeat; }
+
+  /* Positions */
+  div#admin-toolbar.nw span.admin-toggle { background-position:0px 0px; }
+  div#admin-toolbar.ne span.admin-toggle { background-position:-35px 0px; }
+  div#admin-toolbar.se span.admin-toggle { background-position:-70px 0px; }
+  div#admin-toolbar.sw span.admin-toggle { background-position:-105px 0px; }
+
+  /* Expanded */
+  body.admin-expanded div#admin-toolbar span.admin-toggle { background-position:0px -35px; }
+
+/**
+ * Tabs ===============================================================
+ */
+div#admin-toolbar div.admin-tabs { background:#222 url(../images/bleeds.png) 0px 100% repeat-x; }
+
+div#admin-toolbar div.admin-tab {
+  -moz-border-radius:5px;
+  -moz-box-shadow: #333 0px 1px 0px;
+  -webkit-border-radius:5px;
+  -webkit-box-shadow: #333 0px 1px 0px;
+  text-shadow: #222 0px 1px 0px;
+
+  background:url(../images/bleeds.png) 0px 0px repeat-x;
+  cursor:pointer;
+  border-color:#111;
+  }
+
+  div#admin-toolbar div.admin-tab,
+  div#admin-toolbar div.admin-tab a { color:#999; }
+
+div#admin-toolbar div.admin-tab-active {
+  -moz-border-radius:5px 5px 0px 0px;
+  -moz-box-shadow: none;
+
+  -webkit-border-radius:0px;
+  -webkit-border-top-left-radius:5px;
+  -webkit-border-top-right-radius:5px;
+  -webkit-box-shadow: none;
+
+  background:#000;
+  border-color:#555 #333;
+  }
+
+  div#admin-toolbar div.admin-tab:hover,
+  div#admin-toolbar div.admin-tab-active,
+  div#admin-toolbar div.admin-tab-active a { color:#fff; }
+
+/**
+ * Drupal elements ====================================================
+ */
+
+/* Lists */
+#admin-toolbar div.item-list li { border-color:#222; }
+
+/* Links */
+#admin-toolbar ul.links { background:#111; }
+
+#admin-toolbar ul.links li a {
+  -moz-border-radius:3px;
+  -webkit-border-radius:3px;
+  background:#333;
+  }
+
+#admin-toolbar ul.links li a:hover {
+  background:#eee;
+  color:#333;
+  }
+
+/**
+ * Form elements ======================================================
+ */
+#admin-toolbar input.form-autocomplete,
+#admin-toolbar input.form-text,
+#admin-toolbar textarea.form-textarea,
+#admin-toolbar select.form-select {
+  border-color:#000;
+  background:#000;
+  color:#999;
+  }
+
+  #admin-toolbar input.form-autocomplete:hover,
+  #admin-toolbar input.form-text:hover,
+  #admin-toolbar textarea.form-textarea:hover,
+  #admin-toolbar select.form-select:hover,
+  #admin-toolbar div.form-item:hover input.form-autocomplete,
+  #admin-toolbar div.form-item:hover input.form-text,
+  #admin-toolbar div.form-item:hover textarea.form-textarea,
+  #admin-toolbar div.form-item:hover select.form-select,
+  #admin-toolbar input.form-autocomplete:focus,
+  #admin-toolbar input.form-text:focus,
+  #admin-toolbar textarea.form-textarea:focus,
+  #admin-toolbar select.form-select:focus {
+    color:#fff;
+    border-color:#333;
+    }
+
+#admin-toolbar input.form-submit {
+  color:#999;
+  border-color:#555 #444 #333;
+  background:#222 url(../images/bleeds.png) 0px 100% repeat-x;
+  -moz-border-radius:3px;
+  -webkit-border-radius:3px;
+  }
+
+  #admin-toolbar input.form-submit:hover {
+    border-color:#aaa #888 #666;
+    background:#444 url(../images/bleeds.png) 0px 0px repeat-x;
+    color:#fff;
+    }
+
+  #admin-toolbar input.form-submit:active {
+    border-color:#333;
+    background:#111;
+    color:#fff;
+    }
+
+#admin-toolbar.vertical div.admin-panes div.admin-pane,
+#admin-toolbar div.admin-panes div.admin-pane-active,
+#admin-toolbar div.fieldset,
+#admin-toolbar div.form-item {
+  background:#111;
+  border-color:#222;
+  -moz-border-radius:3px;
+  -webkit-border-radius:3px;
+  }
+
+#admin-toolbar div.form-item { padding:4px; }
+
+#admin-toolbar div.form-item div.description,
+#admin-toolbar div.form-item label { color:#999; }
+
+/**
+ * Admin panes ========================================================
+ */
+#admin-toolbar div.admin-panes div.admin-pane:hover,
+#admin-toolbar div.admin-panes div.admin-pane-active,
+#admin-toolbar.vertical div.admin-panes div.admin-pane-active {
+  background:#222;
+  border-color:#333;
+  }
+
+#admin-toolbar div.admin-panes h2.admin-pane-title a { color:#666; }
+#admin-toolbar div.admin-panes h2.admin-pane-title a:hover,
+#admin-toolbar div.admin-panes h2.admin-pane-title a.admin-pane-active { color:#fff; }
+
+#admin-toolbar div.admin-pane div.item-list li { border-color:#333; }
+
+/* Horizontal */
+#admin-toolbar.horizontal div.admin-panes div.admin-pane-tabs a {
+  -moz-border-radius:3px 0px 0px 3px;
+  -webkit-border-top-left-radius:3px;
+  -webkit-border-bottom-left-radius:3px;
+  }
+
+#admin-toolbar.horizontal div.admin-panes div.admin-pane-tabs a.admin-pane-active {
+  background:#222;
+  border-color:#333;
+  }

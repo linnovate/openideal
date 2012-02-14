@@ -1,0 +1,162 @@
+/* $Id: ie6-fixes.css,v 1.1 2009/02/28 23:33:58 jwolf Exp $ */
+
+/****************************/
+/* IE6 FIXES                */
+/****************************/
+
+/* primary menu */
+#primary-menu ul.links li.hover {
+  background: transparent url('images/pri-hover-left.png') no-repeat left;
+}
+
+#primary-menu ul.links li.hover a {
+  background: transparent url('images/pri-hover-right.png') no-repeat right;
+  color: #fff;
+}
+
+/* establish hasLayout */
+#content-top,
+#content-top .block-wrapper,
+.block .content {
+  height: 1%;
+}
+
+/* hide search label */
+#header-wrapper .search_submit {
+  padding-left: 20px;
+  width: 20px;
+}
+
+/* keep top block border visible */
+.front #sidebar-first,
+.front #sidebar-last {
+  padding-top: 1px;
+}
+
+.rounded-block .content p {
+  margin-bottom: 0;
+  margin-top: 0;
+}
+
+/* block list items alignment fix*/
+.block li {
+  list-style-position: outside;
+  list-style-type: none;
+}
+
+/* rounded corners for node links  */
+div.corner.top-left, 
+div.corner.top-right, 
+div.corner.bottom-left, 
+div.corner.bottom-right {
+  font-size: 2px;
+  height: 7px;
+}
+
+.corner.bottom-left,
+.corner.bottom-right {
+  top: -7px;
+}
+
+div.node .links,
+div.node .links .inner {
+  background-color: #444444;
+  height: 100%;
+  position: relative;
+}
+
+/* form graphic buttons */
+span.button-wrapper.hover span.button {
+  background-position: right -33px;
+}
+
+span.button-wrapper.hover span.button span {
+  background-position: left -33px;
+}
+
+#sidebar-first span.button-wrapper.hover span.button,
+#sidebar-last span.button-wrapper.hover span.button {
+  background-position: right -24px;
+}
+
+#sidebar-first span.button-wrapper.hover span.button span,
+#sidebar-last span.button-wrapper.hover span.button span {
+  background-position: left -24px;
+}
+
+/* block admin */
+tr.draggable.odd {
+  background-color: #303030;
+  color: #fff;
+}
+
+tr.draggable.even {
+  background-color: #242424;
+  color: #fff;
+}
+
+tr.draggable.drag-previous {
+  background-color: #525252;
+}
+
+/* fieldset & ledgend fix */
+* html fieldset {
+  margin-top: 1em;
+  padding-top: 1em;
+  position: relative;
+}
+
+* html legend {
+  left: .5em;
+  position: absolute;
+  top: -.7em;
+}
+
+/* fix region labels on block admin page */
+div.block-region {
+  height: 1%;
+}
+
+
+/**************************/
+/* ALPHA TRANSPARENCY FIX */
+/**************************/
+div#logo img,
+div.pngfix { 
+  behavior: url(/themes/acquia/acquia_slate/iepngfix.htc);   /* change path here and in iepngfix.htc to match theme location */ 
+} 
+
+/* adjust openid link */
+html.js #user-login-form li.openid-processed, 
+html.js #user-login li.openid-link {
+  padding-left: 20px;
+}
+
+/******************/
+/* HELPER CLASSES */
+/******************/
+.clearfix {                                       /* add .clearfix class to clear floats after an element */
+  display: block;
+  height: 1%;
+}
+
+/* stop wide content pushing down sidebar */
+#content-wrapper {
+  overflow: hidden;
+}
+
+div#content-tabs,                                 /* fix tab layout */
+div#content-tabs ul.primary,
+div#content-tabs ul.secondary {
+  display: block;
+  float: none;
+  height: 1%;
+}
+
+/* limit width of form inputs */
+textarea, 
+#content-wrapper input.form-text,
+.form-item .resizable-textarea,
+.form-item .resizable-textarea .grippie {
+  width: expression((this.parentNode.clientWidth > 330) ? "300px" : "auto");
+}

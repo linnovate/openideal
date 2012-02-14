@@ -1,0 +1,450 @@
+<?php
+// $Id: nodequeue.install,v 1.20 2010/03/15 00:49:31 ezrag Exp $
+
+function nodequeue_schema() {
+  $schema['nodequeue_queue'] = array(
+    'description' => t('Base table for queues, storing global information for each queue'),
+    'fields' => array(
+      'qid' => array(
+        'description' => t('The primary identifier for a queue.'),
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE
+      ),
+      'title' => array(
+        'description' => t('Title of a queue.'),
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+      ),
+      'subqueue_title' => array(
+        'description' => '',
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+      ),
+      'size' => array(
+        'description' => t('How many nodes this queue will hold'),
+        'type' => 'int',
+        'default' => 0,
+      ),
+      'link' => array(
+        'description' => t('The link text to show under a node to add it to the queue.'),
+        'type' => 'varchar',
+        'length' => 40,
+      ),
+      'link_remove' => array(
+        'description' => t('The link text to show under a node to remove it from the queue.'),
+        'type' => 'varchar',
+        'length' => 40,
+      ),
+      'owner' => array(
+        'description' => '',
+        'type' => 'varchar',
+        'length' => 255,
+      ),
+      'show_in_ui' => array(
+        'description' => '',
+        'type' => 'int',
+        'size' => 'tiny',
+        'default' => 1,
+      ),
+      'show_in_tab' => array(
+        'description' => '',
+        'type' => 'int',
+        'size' => 'tiny',
+        'default' => 1,
+      ),
+      'show_in_links' => array(
+        'description' => '',
+        'type' => 'int',
+        'size' => 'tiny',
+        'default' => 1,
+      ),
+      'reference' => array(
+        'description' => '',
+        'type' => 'varchar',
+        'length' => 255,
+        'default' => '0',
+      ),
+      'reverse' => array(
+        'description' => '',
+        'type' => 'int',
+        'size' => 'tiny',
+      ),
+      'i18n' => array(
+        'description' => '',
+        'type' => 'int',
+        'size' => 'tiny',
+        'default' => 1,
+      ),
+    ), // fields
+    'primary key' => array('qid'),
+  ); // nodequeue_queue.
+  $schema['nodequeue_roles'] = array(
+    'description' => t('Defines the roles which are allowed to use a particular nodequeue.'),
+    'fields' => array(
+      'qid' => array(
+        'description' => t('Primary key for {nodequeue_queue}'),
+        'type' => 'int',
+        'size' => 'big',
+        'unsigned' => TRUE,
+        'not null' => TRUE
+      ),
+      'rid' => array(
+        'description' => t('Primary key for roles'),
+        'type' => 'int',
+        'size' => 'big',
+        'unsigned' => TRUE,
+        'not null' => TRUE
+      ),
+    ), // fields
+    'indexes' => array(
+      '{nodequeue_roles}_qid_idx' => array('qid'),
+      '{nodequeue_roles}_rid_idx' => array('rid'),
+    ), // indexes
+  ); // nodequeue_roles
+  $schema['nodequeue_types'] = array(
+    'description' => t('Defines the node types which are allowed in each queue'),
+    'fields' => array(
+      'qid' => array(
+        'description' => t('Primary key for {nodequeue_queue}'),
+        'type' => 'int',
+        'size' => 'big',
+        'unsigned' => TRUE,
+        'not null' => TRUE
+      ),
+      'type' => array(
+        'description' => t('Node Type'),
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => FALSE
+      ),
+    ), // fields
+    'indexes' => array(
+      '{nodequeue_types}_qid_idx' => array('qid'),
+      '{nodequeue_types}_type_idx' => array('type'),
+    ), // indexes
+  ); // nodequeue_types
+  
+  // Subqueues are minor queues that inherit all of the properties of
+  // the parent queue. A parent queue must have at least 1 subqueue
+  // to do anything. Reference is for the use of whatever is creating
+  // the subqueues in order to link it to some other ID easily.
+  $schema['nodequeue_subqueue'] = array(
+    'description' => t('Subqueues are minor queues that inherit all of the properties of the parent queue. A parent queue must have at least 1 subqueue to do anything. Reference is for the use of whatever is creating the subqueues in order to link it to some other ID easily.'),
+    'fields' => array(
+      'sqid' => array(
+        'description' => t('Subqueue identifier'),
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+      'qid' => array(
+        'description' => t('Queue identifier.'),
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+      'reference' => array(
+        'description' => '',
+        'type' => 'varchar',
+        'length' => 255,
+        'default' => '0',
+        'not null' => FALSE
+      ),
+      'title' => array(
+        'description' => '',
+        'type' => 'varchar',
+        'length' => 255,
+        'default' => '',
+        'not null' => FALSE
+      ),
+    ), // fields
+    'primary key' => array('sqid'),
+    'indexes' => array(
+      '{nodequeue_subqueue}_qid_idx' => array('qid'),
+      '{nodequeue_subqueue}_reference_idx' => array('reference'),
+      '{nodequeue_subqueue}_title_idx' => array('title'),
+    ), // indexes
+  ); // nodequeue_subqueue
+
+  $schema['nodequeue_nodes'] = array(
+    'description' => t('Indicates which nodes are in which queues/subqueues.'),
+    'fields' => array(
+      'qid' => array(
+        'description' => t('Queue id'),
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+      'sqid' => array(
+        'description' => t('Subqueue this node is in'),
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+      'nid' => array(
+        'description' => t('Node id in this subqueue'),
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => FALSE
+      ),
+      'position' => array(
+        'description' => t('The position of the node in this subqueue.'),
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => FALSE
+      ),
+      'timestamp' => array(
+        'description' => t(''),
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+    ), // fields
+    'indexes' => array(
+      '{nodequeue_nodes}_sqid_idx' => array('sqid', 'position'),
+      '{nodequeue_subqueue}_nid_idx' => array('nid'),
+      '{nodequeue_nodes}_qid_nid_idx' => array('qid', 'nid'),
+    ), // indexes
+  ); // nodequeue_nodes
+  
+  return $schema;
+}
+
+// TODO: Figure out what to fix here?
+function nodequeue_update_1() {
+  if ($GLOBALS['db_type'] == 'pgsql') {
+    db_query("CREATE SEQUENCE nodequeue_queue_qid_seq INCREMENT 1 START 1");
+  }
+}
+
+function nodequeue_update_5000() {
+  $ret = array();
+  $ret[] = array('success' => TRUE, 'query' => t('Some of the following queries may appear to fail. This is not a problem.'));
+
+  db_add_field($ret, "nodequeue_queue", "link", array(
+        'description' => t('The link text to show under a node to add it to the queue.'),
+        'type' => 'varchar',
+        'length' => 40,
+      ));
+  db_add_field($ret, "nodequeue_queue", "link_remove", array(
+        'description' => t('The link text to show under a node to remove it from the queue.'),
+        'type' => 'varchar',
+        'length' => 40,
+      ));
+  //$ret[] = update_sql("ALTER TABLE {nodequeue_queue} ADD COLUMN link VARCHAR(40) DEFAULT '' NOT NULL");
+  //$ret[] = update_sql("ALTER TABLE {nodequeue_queue} ADD COLUMN link_remove VARCHAR(40) DEFAULT '' NOT NULL");
+
+  db_add_index($ret, 'nodequeue_roles', "{nodequeue_roles}_qid", array('qid'));
+  db_add_index($ret, "nodequeue_roles", "{nodequeue_roles}_rid", array('rid'));
+  db_add_index($ret, "nodequeue_types", "{nodequeue_types}_qid", array('qid'));
+  db_add_index($ret, "nodequeue_nodes", "{nodequeue_nodes}_qid", array('qid', 'position'));
+  db_add_index($ret, "nodequeue_nodes", "{nodequeue_nodes}_nid", array('nid'));
+  //$ret[] = update_sql("CREATE INDEX {nodequeue_roles}_qid_idx ON {nodequeue_roles} (qid)");
+  //$ret[] = update_sql("CREATE INDEX {nodequeue_roles}_rid_idx ON {nodequeue_roles} (rid)");
+  //$ret[] = update_sql("CREATE INDEX {nodequeue_types}_qid_idx ON {nodequeue_types} (qid)");
+  //$ret[] = update_sql("CREATE INDEX {nodequeue_nodes}_qid_idx ON {nodequeue_nodes} (qid, position)");
+  //$ret[] = update_sql("CREATE INDEX {nodequeue_nodes}_nid_idx ON {nodequeue_nodes} (nid)");
+
+  // TODO: Figure out how to fix this?
+  //$ret[] = _system_update_utf8(array('nodequeue_queue', 'nodequeue_roles', 'nodequeue_types', 'nodequeue_nodes'));
+  return $ret;
+}
+
+function nodequeue_update_5001() {
+  $ret = array();
+  /*switch ($GLOBALS['db_type']) {
+    case 'mysql':
+    case 'mysqli':
+      $ret[] = update_sql("ALTER TABLE {nodequeue_nodes} ADD COLUMN timestamp int DEFAULT '0' NOT NULL");
+      break;
+    case 'pgsql':
+      db_add_column($ret, 'nodequeue_nodes', 'timestamp', 'integer', array('default' => 0, 'not null' => TRUE));
+      break;
+  }*/
+  db_add_column($ret, 'nodequeue_nodes', 'timestamp', array('type' => 'int', 'default' => 0, 'not null' => TRUE));
+  return $ret;
+}
+
+function nodequeue_update_5201() {
+  $ret = array();
+  // Add new columns to the nodequeue_queue table.
+  db_add_column($ret, 'nodequeue_queue', 'owner', array('type' => 'varchar', 'length' => 255, 'default' => "'nodequeue'"));
+  db_add_column($ret, 'nodequeue_queue', 'show_in_ui', array('type' => 'int', 'default' => 1));
+  db_add_column($ret, 'nodequeue_queue', 'show_in_tab', array('type' => 'int', 'default' => 1));
+  db_add_column($ret, 'nodequeue_queue', 'show_in_links', array('type' => 'int', 'default' => 1));
+  db_add_column($ret, 'nodequeue_queue', 'reference', array('type' => 'varchar', 'length' => 255, 'default' => 0));
+
+  // Create the nodequeue_subqueue table.
+  $ret[] = update_sql("UPDATE {nodequeue_queue} SET owner = 'nodequeue', show_in_ui = 1, show_in_tab = 1, show_in_links = 1, reference = 0");
+  
+  db_create_table($ret, 'nodequeue_subqueue', array(
+    'description' => t('Subqueues are minor queues that inherit all of the properties of the parent queue. A parent queue must have at least 1 subqueue to do anything. Reference is for the use of whatever is creating the subqueues in order to link it to some other ID easily.'),
+    'fields' => array(
+      'sqid' => array(
+        'description' => t('Subqueue identifier'),
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+      'qid' => array(
+        'description' => t('Queue identifier.'),
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+      'reference' => array(
+        'description' => '',
+        'type' => 'varchar',
+        'length' => 255,
+        'default' => '0',
+      ),
+      'title' => array(
+        'description' => '',
+        'type' => 'varchar',
+        'length' => 255,
+        'default' => '',
+      ),
+    ), // fields
+    'primary key' => array('sqid'),
+    'indexes' => array(
+      '{nodequeue_subqueue}_qid_idx' => array('qid'),
+      '{nodequeue_subqueue}_reference_idx' => array('reference'),
+      '{nodequeue_subqueue}_title_idx' => array('title'),
+    ), // indexes
+  ));
+
+  // Populate the nodequeue_subqueue table.
+  $result = db_query("SELECT * FROM {nodequeue_queue}");
+  while ($queue = db_fetch_object($result)) {
+    // Keep the qid so that we can update our sequence table later on.
+    $last_qid = $queue->qid;
+    $ret[] = update_sql("INSERT INTO {nodequeue_subqueue} (sqid, qid, reference, title) VALUES (%d, %d, %d, '%s')", $queue->qid, $queue->qid, $queue->qid, $queue->title);
+  }
+
+  // Transform the nodequeue_nodes table.
+  db_add_field($ret, 'nodequeue_nodes', 'sqid', array('type' => 'int'));
+  $ret[] = update_sql("UPDATE {nodequeue_nodes} SET sqid = qid");
+  db_add_index($ret, 'nodequeue_nodes', '{nodequeue_nodes}_sqid', array('sqid', 'position'));
+  //$ret[] = update_sql("CREATE INDEX {nodequeue_nodes}_sqid_idx ON {nodequeue_nodes} (sqid, position)");
+
+  return $ret;
+}
+
+function nodequeue_update_5202() {
+  $ret = array();
+  db_add_field($ret, 'nodequeue_queue', 'subqueue_title', array('type' => 'varchar', 'length' => 255));
+  return $ret;
+}
+
+function nodequeue_update_5203() {
+  $ret = array();
+  db_add_field($ret, 'nodequeue_queue', 'reverse', array(type => 'int'));
+  return $ret;
+}
+
+function nodequeue_update_5204() {
+  $ret = array();
+  db_change_field($ret, 'nodequeue_queue', 'reverse', 'reverse', array('type' => 'int', 'size' => 'tiny'));
+  return $ret;
+}
+
+function nodequeue_update_5205() {
+  $ret = array();
+  db_drop_primary_key($ret, 'nodequeue_queue');
+  db_change_field($ret, 'nodequeue_queue', 'qid', 'qid',
+  array('type' => 'serial', 'not null' => TRUE),
+  array('primary key' => array('qid')));
+
+  db_drop_primary_key($ret, 'nodequeue_subqueue');
+  db_change_field($ret, 'nodequeue_subqueue', 'sqid', 'sqid',
+  array('type' => 'serial', 'not null' => TRUE),
+  array('primary key' => array('sqid')));
+  //When these quries don't fail, the function fails to return the empty array, causing an array merge error in update.php on line 174.
+  if (empty($ret)) {
+    return array();
+  }
+  return $ret;
+}
+/**
+ * There was a discrepancy between the link/link_remove fields created with node_install/node_schema, and the ones created with nodequeue_update_5000.  This forces everyone to 40 characters.
+ *
+ */
+function nodequeue_update_6000() {
+  $ret = array();
+  db_change_field($ret, 'nodequeue_queue', 'link', 'link', array('type' => 'varchar', 'length' => 40));
+  db_change_field($ret, 'nodequeue_queue', 'link_remove', 'link_remove', array('type' => 'varchar', 'length' => 40));
+  return $ret;
+}
+
+function nodequeue_update_6001() {
+  $ret = array();
+  db_add_field($ret, 'nodequeue_queue', 'i18n', array('description' => '', 'type' => 'int', 'size' => 'tiny', 'default' => 1));
+  return $ret;
+}
+
+//The previous 6002 update has been moved to 5205.
+
+/*
+ * Remove invalid entries from the nodequeue_nodes table created as a result of bugs like http://drupal.org/node/593858.
+ */
+function nodequeue_update_6003() {
+  $ret = array();
+  $invalid = db_result(db_query("SELECT count(nid) FROM {nodequeue_nodes} WHERE nid = 0"));
+  if (!empty($invalid)) {
+    db_query("DELETE FROM {nodequeue_nodes} WHERE nid = 0");
+    $t = get_t();
+    $ret[] = array('success' => TRUE, 'query' => $t("Deleted @invalid invalid entries from the {nodequeue_nodes} table.", array('@invalid' => $invalid)));
+  }
+  else {
+    $ret[] = array('success' => TRUE, 'query' => "No invalid entries found in the {nodequeue_nodes} table.");
+  }
+  return $ret;
+}
+
+/**
+ * Add a new index to {nodequeue_nodes}
+ */
+function nodequeue_update_6004() {
+  $ret = array();
+  db_add_index($ret, 'nodequeue_nodes', '{nodequeue_nodes}_qid_nid_idx', array('qid', 'nid'));
+  return $ret;
+}
+
+/*
+ * Rename the 'nodequeue_automatic_views_generation'
+ * to 'nodequeue_view_per_queue'.
+ */
+function nodequeue_update_6005() {
+  $ret = array();
+  $ret[] = update_sql("UPDATE {system} set name = 'nodequeue_view_per_queue' where name = 'nodequeue_automatic_views_generation'");
+  return $ret;
+}
+
+function nodequeue_install() {
+  drupal_install_schema('nodequeue');
+}
+
+function nodequeue_uninstall() {
+  drupal_uninstall_schema('nodequeue');
+}
+
+/**
+ * Implementation of hook_requirements().
+ *
+ * We need the translation_helpers module to enable internationalization for queues.
+ */
+function nodequeue_requirements($phase) {
+  $requirements = array();
+  $t = get_t();
+  if (($phase == 'install' || $phase == 'runtime') && module_exists('translation') && !module_exists('translation_helpers')) {
+    $requirements['nodequeue_translation']['title'] = $t('Nodequeue');
+    $requirements['nodequeue_translation']['severity'] = REQUIREMENT_WARNING;
+    $requirements['nodequeue_translation']['description'] = $t('To have the nodequeue module work with translations, you need to install and enable the !url module.', array('!url' => l('translation_helpers', 'http://drupal.org/project/translation_helpers')));
+    $requirements['nodequeue_translation']['value'] = $t('Translation helpers module not found.');
+  }
+  return $requirements;
+}

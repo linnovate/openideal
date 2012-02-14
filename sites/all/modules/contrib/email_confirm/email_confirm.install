@@ -1,0 +1,13 @@
+<?php
+// $Id: email_confirm.install,v 1.1 2008/04/17 11:18:01 jaydub Exp $
+
+/**
+ * Implementation of hook_uninstall().
+ */
+function email_confirm_uninstall() {
+  variable_del('email_confirm_confirmation_email_subject');
+  variable_del('email_confirm_confirmation_email_author');
+  variable_del('email_confirm_confirmation_email_bcc');
+  variable_del('email_confirm_confirmation_email_body');
+  variable_del('email_confirm_confirmation_original_email_body');
+}

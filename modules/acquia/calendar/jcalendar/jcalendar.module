@@ -1,0 +1,92 @@
+<?php
+// $Id: jcalendar.module,v 1.1.4.16 2009/07/28 21:38:07 karens Exp $
+
+/**
+ * @file
+ * jQuery Calendar UI features.
+ */
+
+/**
+* Display help and module information
+* @param section which section of the site we're displaying help
+* @return help text for section
+*/
+function jcalendar_help($path, $arg) {
+  $output = '';
+  switch ($path) {
+    case "admin/help#jcalendar":
+      $output = '<p>'. t("Creates a popup for calendar dates.") .'</p>';
+      break;
+  }
+  return $output;
+} // function jcalendar_help
+
+/**
+* Get calendar node for popup
+* @param integer nid Node id.
+* @param string id Date field unique id.
+* @return string HTML for node
+*/
+function get_calendar_node($nid, $id) {
+  $GLOBALS['devel_shutdown'] = FALSE;
+  if (is_numeric($nid)) {
+    if ($node = node_load($nid)) {
+      if (node_access("view", $node)) {
+        $node->date_id = $id;
+        $node->date_repeat_show = FALSE;
+        print theme('jcalendar_view', $node);
+      }
+    }
+  }}
+
+/**
+* Implemetation of hook_menu()
+*/
+function jcalendar_menu() {
+
+  $items['jcalendar/getnode'] = array(
+    'title' => 'Get Calendar Node',
+    'page callback' => 'get_calendar_node',
+    'page arguments' => array(2, 3),
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
+  );
+  return $items;
+}
+
+/**
+* Override the calendar view to inject javascript.
+* @param view Which view we are using.
+* @return unknown as of yet.
+*/
+function jcalendar_views_pre_view(&$view, &$display_id) {
+  foreach ($view->display as $display) {
+    if ($display->display_plugin == 'calendar') {
+      $path = drupal_get_path('module', 'jcalendar');
+      drupal_add_js('var var_path = '. drupal_to_js(base_path() . $path) .";", 'inline');
+      drupal_add_js('var var_base_path = '. drupal_to_js((base_path())) .";", 'inline');
+      drupal_add_js($path .'/jcalendar.js');
+      drupal_add_css($path .'/jcalendar.css');
+    }
+  }
+}
+
+/**
+ * Implementation of hook_theme().
+ */
+function jcalendar_theme() {
+ return array(
+   'jcalendar_view' => array('arguments' => array('node' => NULL)),
+   );
+}
+
+/**
+ * Overrideable theme for the jcalendar popup view.
+ * 
+ * Defaults to show the standard teaser view of the node.
+ */
+function theme_jcalendar_view($node) {
+  $output = node_view($node, TRUE);
+  $output .= '<div id="nodelink">'. l(t('more', array(), $node->language), calendar_get_node_link($node)) .'</div>';
+  return $output;
+}

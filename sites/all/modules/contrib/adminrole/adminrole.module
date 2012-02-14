@@ -1,0 +1,89 @@
+<?php
+// $Id: adminrole.module,v 1.2.2.8.2.11 2010/08/14 17:59:20 davereid Exp $
+
+/**
+ * @file
+ * This module simply gives a designated role all permissions every time the
+ * modules page is submitted.
+ */
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function adminrole_form_user_admin_settings_alter(&$form, $form_state) {
+  // Administrative role option.
+  $form['admin_role'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Administrator role'),
+  );
+
+  // Do not allow users to set the anonymous or authenticated user roles as the
+  // administrator role.
+  $roles = user_roles();
+  unset($roles[DRUPAL_ANONYMOUS_RID]);
+  unset($roles[DRUPAL_AUTHENTICATED_RID]);
+
+  $form['admin_role']['user_admin_role'] = array(
+    '#type' => 'select',
+    '#title' => t('Administrator role'),
+    '#default_value' => variable_get('user_admin_role', 0),
+    '#options' => array(0 => t('Disabled')) + $roles,
+    '#description' => t('This role will be automatically assigned new permissions whenever a module is enabled.'),
+  );
+
+  // Ensure the save/reset buttons have a lower weight than our fieldset.
+  $form['buttons'] += array('#weight' => 100);
+}
+
+/**
+ * Implements hook_form_alter().
+ */
+function adminrole_form_alter(&$form, $form_state, $form_id) {
+  if (in_array($form_id, array('system_modules', 'user_admin_settings'))) {
+    $form['#submit'][] = 'adminrole_update_permissions';
+  }
+}
+
+/**
+ * Implements hook_content_fieldapi().
+ *
+ * Respond to fields being
+ */
+function adminrole_content_fieldapi($op, $field) {
+  switch ($op) {
+    case 'create instance':
+    case 'update instance':
+    case 'delete instance':
+      adminrole_update_permissions();
+  }
+}
+
+/**
+ * Implements hook_node_type().
+ */
+function adminrole_node_type($op, $node_type) {
+  adminrole_update_permissions();
+}
+
+/**
+ * Implements hook_menu_alter().
+ */
+function adminrole_menu_alter(&$items) {
+  //adminrole_update_permissions();
+}
+
+/**
+ * Update the admin role with all current available permissions.
+ */
+function adminrole_update_permissions() {
+  if ($rid = variable_get('user_admin_role', 0)) {
+    $permissions = module_invoke_all('perm');
+    if ($excluded = variable_get('adminrole_exclude_permissions', array())) {
+      $permissions = array_diff($permissions, $excluded);
+    }
+    db_query('DELETE FROM {permission} WHERE rid = %d', $rid);
+    if ($permissions) {
+      db_query("INSERT INTO {permission} (rid, perm) VALUES (%d, '%s')", $rid, implode(', ', $permissions));
+    }
+  }
+}

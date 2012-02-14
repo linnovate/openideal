@@ -1,0 +1,357 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Drupal Image module\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2008-04-14 20:15+0200\n"
+"PO-Revision-Date: 2008-04-16 18:31+0300\n"
+"Last-Translator: Alexander <storm@rustex.ru>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Russian\n"
+"X-Poedit-SourceCharset: iso-8859-1\n"
+"X-Poedit-KeywordsList: t\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SearchPath-0: Q:/drupal6/sites/all/modules/image\n"
+
+#: image.admin.inc:18
+msgid "Image file settings"
+msgstr "Параметры закачиваемого файла"
+
+#: image.admin.inc:22
+msgid "Default image path"
+msgstr "Путь к картинкам по умолчанию"
+
+#: image.admin.inc:24
+msgid "Subdirectory in the directory \"%dir\" where pictures will be stored. Do not include trailing slash."
+msgstr "Поддиректория в директории \"%dir\" где будут храниться картинки. Символ слеша в конце не нужен."
+
+#: image.admin.inc:29
+msgid "Maximum upload size"
+msgstr "Максимальный размер закачиваемого файла"
+
+#: image.admin.inc:31
+msgid "KB"
+msgstr "KB"
+
+#: image.admin.inc:33
+msgid "Maximum file size for image uploads. When a maximum image dimensions is specified for original images the size is checked after resizing. "
+msgstr "Максимальный размер закачиваемой картинки. Если определено максимальное разрешение закачиваемых картинок (что означает сжатие оригиналов изображений), размер проверяется после сжатия."
+
+#: image.admin.inc:38
+msgid "Image sizes"
+msgstr "Размеры картинок"
+
+#: image.admin.inc:41
+msgid "The <em>Scale image</em> operation resizes images so that they fit with in the given dimensions. If only one dimension is specified the other dimension will be computed based on the image's aspect ratio. The <em>Scale and crop image</em> operation resizes images to be exactly the given dimensions. If only one dimension is specified the image will not be cropped, making this is equivalent to <em>Scale image</em>."
+msgstr "Действие <em>Сжать картинку</em> изменяет размер картинки таким образом, чтобы она умещалась в заданные пределы. Если указано только одно число, второе вычисляется пропорционально размерам оригинала. Действие <em>Сжать и обрезать картинку</em> сожмёт и обрежет картинку по краям таким образом, чтобы она точно соответствовала требуемому размеру. Если указано только одно число, картинка не будет обрезана, и действие будет аналогичным простому сжатию."
+
+#: image.admin.inc:42
+msgid "Note: 'Original' dimensions will only be used to resize images when they are first uploaded. Existing originals will not be modified."
+msgstr "Заметка: Размеры 'Оригинала' изменфяются только в момент закачки картинки. Изображения, закачанные ранее, не будут модифицированы."
+
+#: image.admin.inc:47
+msgid "Hidden"
+msgstr "Скрыто"
+
+#: image.admin.inc:48
+msgid "Same window"
+msgstr "В том же окне"
+
+#: image.admin.inc:49
+msgid "New window"
+msgstr "В новом окне"
+
+#: image.admin.inc:82
+msgid "Scale image"
+msgstr "Сжать картинку"
+
+#: image.admin.inc:82
+msgid "Scale and crop image"
+msgstr "Сжать и обрезать картинку"
+
+#: image.admin.inc:114
+msgid "You must specify width, height or both dimensions."
+msgstr "Введите ширину, высоту, или оба параметра картинки."
+
+#: image.admin.inc:167
+msgid "Changes to the images sizes mean that the derivative images will need to be regenerated."
+msgstr "Изменения размеров означают, что производные картинки будут созданы заново, в соответствии с новыми требованиями."
+
+#: image.admin.inc:173
+msgid "Label"
+msgstr "Метка"
+
+#: image.admin.inc:173
+msgid "Operation"
+msgstr "Действие"
+
+#: image.admin.inc:173
+msgid "Width"
+msgstr "Ширина"
+
+#: image.admin.inc:173
+msgid "Height"
+msgstr "Высота"
+
+#: image.admin.inc:173
+msgid "Link"
+msgstr "Ссылка"
+
+#: image.imagemagick.inc:19
+msgid "ImageMagick Binary"
+msgstr "Параметры программы ImageMagick"
+
+#: image.imagemagick.inc:21
+msgid "ImageMagick is a standalone program used to manipulate images. To use it, it must be installed on your server and you need to know where it is located. If you are unsure of the exact path consult your ISP or server administrator."
+msgstr "ImageMagick - это пакет утилит для обработки изображений. Чтобы его использовать, он должен быть установлен на Вашем сервере, и Вы должны знать к нему путь. Если Вы не уверены, установлен ли он и где находится, проконсультируйтесь с Вашим хостером или администратором сервера."
+
+#: image.imagemagick.inc:25
+msgid "Path to the \"convert\" binary"
+msgstr "Путь к утилите \"convert\""
+
+#: image.imagemagick.inc:28
+msgid "Specify the complete path to the ImageMagic <kbd>convert</kbd> binary. For example: <kbd>/usr/bin/convert</kbd> or <kbd>C:\\Program Files\\ImageMagick-6.3.4-Q16\\convert.exe</kbd>"
+msgstr "Введите полный путь к утилите <kbd>convert</kbd>. Например: <kbd>/usr/bin/convert</kbd> или <kbd>C:\\Program Files\\ImageMagick-6.3.4-Q16\\convert.exe</kbd>"
+
+#: image.imagemagick.inc:32
+msgid "Display debugging information"
+msgstr "Отображать отладочную информацию"
+
+#: image.imagemagick.inc:34
+msgid "Checking this option will display the ImageMagick commands and ouput to users with the <em>administer site configuration</em> permission."
+msgstr "Включив эту опцию, пользователь с администраторскими правами будет видеть все команды ImageMagick, которые будет выполнит сервер."
+
+#: image.imagemagick.inc:60
+msgid "No file %file could be found. PHP's <a href='!open-basedir'>open_basedir</a> security resriction is set to %open-basedir, which may be interfering with the attempts to locate ImageMagick."
+msgstr "Файл %file не найден.  Настройка PHP <a href='!open-basedir'>open_basedir</a> установлена в \"%open-basedir\". Если она настроена неправильно, это может влиять на попытки обнаружить ImageMagick."
+
+#: image.imagemagick.inc:63
+msgid "The specified ImageMagic path %file does not exist."
+msgstr "Указанный путь к ImageMagic %file не существует"
+
+#: image.imagemagick.inc:141
+msgid "ImageMagick could not be found. The admin will need to set the path on the <a href='@image-toolkit-settings'>image toolkit page</a>."
+msgstr "ImageMagick не найден.  Администратор должен определить путь к программе обработки изображений на странице <a href='@image-toolkit-settings'>настройки обработки изображений</a>."
+
+#: image.imagemagick.inc:171
+msgid "ImageMagick command: @command"
+msgstr "ImageMagick, команда: @command"
+
+#: image.imagemagick.inc:172
+msgid "ImageMagick output: @output"
+msgstr "ImageMagick, ответ: @output"
+
+#: image.imagemagick.inc:176
+msgid "ImageMagick reported an error: %error"
+msgstr "ImageMagick, ошибка: %error"
+
+#: image.info:0;0
+#: image.module:73;387;120
+msgid "Image"
+msgstr "Картинки"
+
+#: image.info:0
+msgid "Allows uploading, resizing and viewing of images."
+msgstr "Позволяет закачивать, изменять размеры и просматривать картинки."
+
+#: image.install:9
+msgid "Stores image files information."
+msgstr "Хранить информацию о картинках"
+
+#: image.install:12
+msgid "Primary Key: The {node}.nid of the image node."
+msgstr "Главный идентификатор: {node}.nid материала данной картинки."
+
+#: image.install:18
+msgid "Index: The {files}.fid of the image file."
+msgstr "Индекс: {files}.fid файла картинки."
+
+#: image.install:24
+msgid "Primary Key: The {files}.filename of the image file.  For image module this indicates the file size."
+msgstr "Главный идентификатор: {files}.filename файла картинки. Для модуля картинок показывается размер файла."
+
+#: image.install:64
+msgid "The %toolkit-name toolkit is installed"
+msgstr "Установлен набор инструментов %toolkit"
+
+#: image.install:70
+msgid "Not installed"
+msgstr "Не установлено"
+
+#: image.install:72
+#: image.module:731
+msgid "No image toolkit is currently enabled. Without one the image module will not be able to resize your images. You can select one from the <a href=\"!link\">image toolkit settings page</a>."
+msgstr "Не включено ни одного обработчика изображений. Без него модуль image не сможет сжимать или обрезать картинки. Вы можете включить обработчик на странице <a href=\"!link\">обработки изображений</a>."
+
+#: image.install:75
+msgid "Image toolkit"
+msgstr "Набор инструментов для обработки картинок"
+
+#: image.install:83
+msgid "Missing directory"
+msgstr "Отсутствующая директория"
+
+#: image.install:85
+msgid "The image module's image directory %image-dir is missing."
+msgstr "Директория для хранения картинок %image-dir отсутствует."
+
+#: image.install:90
+msgid "Missing temp directory"
+msgstr "Отсутствует директория временных файлов"
+
+#: image.install:92
+msgid "The image module's temp directory %temp-dir is missing."
+msgstr "Директория для хранения временных файлов и картинок %temp-dir отсутствует"
+
+#: image.install:97
+msgid "Exists (%path)"
+msgstr "Существует (%path)"
+
+#: image.install:101
+msgid "Image module directories"
+msgstr "Директории модуля image"
+
+#: image.install:114
+#: image.module:867
+msgid "Original"
+msgstr "Оригинал"
+
+#: image.install:189
+msgid ""
+"The original image size was missing so no changes were made. See this <a href='!link'>image module issue</a> for more information. Include the following:<br /><pre>@old_sizes\n"
+"</pre>"
+msgstr "Размеры оригинала картинки отсутствуют, поэтому никаких изменений сделано не было. Больше информации смотрите в <a href='!link'>описании модуля image</a>. Включая следующее:<br /><pre>@old_sizes\n"
+
+#: image.install:196
+#: image.module:869
+msgid "Preview"
+msgstr "Просмотр"
+
+#: image.install:199
+#: image.module:334;868
+msgid "Thumbnail"
+msgstr "Миниатюра"
+
+#: image.module:22
+msgid "The image module is used to create and administer images for your site. Each image is stored as a post, with thumbnails of the original generated automatically. There are two default thumbnail sizes, thumbnail and preview. The thumbnail size is shown as the preview for image posts and when browsing image galleries. The preview is the default size when first displaying an image node."
+msgstr "Модуль image используется для создания и администрирования картинок на Вашем сайте. Каждая картинка хранится как отдельная нода (материал), с присоединенными к ней миниатюрами для предпросмотра и прочими размерами, определенными в настройках. По умолчанию определены два размера картинок: \"миниатюра\" и \"просмотр\". Миниатюры показываются в анонсах материалов, на страницах галерей и т.п. Просмотр - основная картинка, показывается по умолчанию на странице открытого материала."
+
+#: image.module:23
+msgid ""
+"Image administration allows the image directory and the image sizes to be set.</p><p>\n"
+"Image galleries are used to organize and display images in galleries.   The list tab allows users to edit existing image gallery names, descriptions, parents and relative position, known as a weight.  The add galleries tab allows you to create a new image gallery defining name, description, parent and weight."
+msgstr ""
+"Администрирование картинок позволяет изменить директорию для хранения картинок и их размеры</p><p>\n"
+"Галереи служат для организации и показа картинок в форме галереи. В закладке \"Список\" пользователи могут редактировать имена, описания и расположение существующих галерей. Закладка \"Добавить\" позволяет создать новую галерею."
+
+#: image.module:25
+msgid ""
+"<p>You can</p>\n"
+"<ul>\n"
+"<li>view image handling messages in <a href=\"!admin-settings\">administer &gt;&gt; settings</a>.</li>\n"
+"<li>configure image sizes and file directories at <a href=\"!admin-settings-image\">administer &gt;&gt; settings &gt;&gt; image</a>.</li>\n"
+"<li>use the <a href=\"!external-http-drupal-org-project-img_assist\">image assist module</a> to upload and insert images into posts.</li>\n"
+msgstr ""
+"<p>Вы можете</p>\n"
+"<ul>\n"
+"<li>отредактировать размеры картинок и директорию, в которой они будут храниться на <a href=\"!admin-settings-image\">Управление &gt;&gt; Настройки &gt;&gt; Картинки</a>.</li>\n"
+"<li>использовать <a href=\"!external-http-drupal-org-project-img_assist\">модуль image assist</a> для того, чтобы прикреплять и вставлять картинки в другие материалы.</li>\n"
+
+#: image.module:31
+msgid "For more information please read the configuration and customization handbook <a href=\"!image\">Image page</a>."
+msgstr "Для получения более подробной информации, смотрите <a href=\"!image\">страницу модуля Image</a> на оффициальном сайте."
+
+#: image.module:75
+msgid "An image (with thumbnail). This is ideal for publishing photographs or screenshots."
+msgstr "Изображение (с миниатюрой, для предпросмотра). Используется для публикации фотографий и скриншотов."
+
+#: image.module:151
+msgid "Rebuild image thumbnails"
+msgstr "Создать заново миниатюры для картинок."
+
+#: image.module:200
+msgid "The original image was resized to fit within the maximum allowed resolution of %width x %height pixels."
+msgstr "Оригинал картинки был сжат таким образом, чтобы умещаться в максимально допустимые размеры %width x %height"
+
+#: image.module:206
+msgid "The image you uploaded was too big. You are only allowed upload files less than %max_size but your file was %file_size."
+msgstr "Картинка, которую Вы закачали, слишком большая. Вы можете закачивать файлы не более чем %max_size, а закачанный Вами файл имеет размер %file_size."
+
+#: image.module:308;317
+msgid "Latest image"
+msgstr "Самая последняя картинка"
+
+#: image.module:309;322
+msgid "Random image"
+msgstr "Случайная картинка"
+
+#: image.module:379
+msgid "Rebuild derivative images."
+msgstr "Создать заново все производные картинки"
+
+#: image.module:381
+msgid "Check this to rebuild the derivative images for this node."
+msgstr "Создать заново все производные картинки для этого материала"
+
+#: image.module:389
+msgid "Click \"Browse...\" to select an image to upload."
+msgstr "Нажмите \"Обзор...\" для того, чтобы выбрать закачиваемую картинку."
+
+#: image.module:402
+msgid "You must upload an image."
+msgstr "Вы должны закачать картинку."
+
+#: image.module:475
+msgid "%title's has an unneeded %key derivative images. The derivatives will be rebuilt to remove it."
+msgstr "Материал %title имеет ненужные (%key) производные картинки. Они будут удалены."
+
+#: image.module:485
+msgid "%title's %key derivative image %filepath was missing. The derivatives will be rebuilt to regenerate it."
+msgstr "Картинка \"%key\" материала %title не существует по адресу %filepath. Она будет создана заново."
+
+#: image.module:489
+msgid "%title's %key derivative image had a timestamp (%filetime) that predates the last changes to the image size settings (%vartime). The derivatives will be rebuilt to regenerate it."
+msgstr "Картинка %key материала %title устарела. Она будет создана заново."
+
+#: image.module:497
+msgid "view"
+msgstr "просмотр"
+
+#: image.module:574
+msgid "The derivative images for <a href=\"!link\">%title</a> have been regenerated."
+msgstr "Производные картинки для <a href=\"!link\">%title</a> были созданы заново."
+
+#: image.module:814
+msgid "Unable to create scaled %label image"
+msgstr "Не удалось создать сжатую %label картинку"
+
+#: image.module:497;114;0
+msgid "image"
+msgstr "картинка"
+
+#: image.module:497
+msgid "Derivative images were regenerated for %title."
+msgstr "Для материала %title производные картинки были созданы заново."
+
+#: image.module:84
+msgid "create images"
+msgstr "создавать картинки"
+
+#: image.module:84
+msgid "view original images"
+msgstr "смотреть оригиналы картинок"
+
+#: image.module:84
+msgid "edit own images"
+msgstr "редактировать свои картинки"
+
+#: image.module:84
+msgid "edit images"
+msgstr "редактировать картинки"
+
+#: image.module:121
+msgid "Image module settings."
+msgstr "Настройки модуля картинок"
+

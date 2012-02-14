@@ -1,0 +1,50 @@
+
+/* $Id: emvideo.custom-url.css,v 1.1.4.3 2010/05/18 21:36:39 aaron Exp $ */
+
+/**
+ *  @file
+ *  A Play button overlay for Flowplayer thumbnails.
+ */
+
+/**
+ *  The outer wrapper must be relative for the overlay to work.
+ *  When overriding this style in your own stylesheet,
+ *  you'll probably want to add the video's height and width here,
+ *  so that you avoid the div dropping momentarily while the thumnbail
+ *  is replaced by the video.
+ */
+.emvideo-zzz_custom_url .flowplayer {
+  position: relative;
+  display: block;
+  cursor: pointer;
+}
+
+/* This is the overlay of a play button on the video thumbnail. */
+/* The span is created automatically with jQuery. */
+.emvideo-zzz_custom_url .flowplayer span {
+  display: block;
+
+  /* This is the overlay image for use as a play button. */
+  background: url(play_large.png) no-repeat;
+
+  /* This is the size of our button. DOES NOT WORK WITH DEFAULT THUMB SIZE! */
+  width: 83px;
+  height: 83px;
+
+  /* Absolute positioning in the relative wrapper creates the overlay. */
+  position: absolute;
+}
+
+/* Subtract half of the width of the thumbnail by half of the width of the play
+   button, and again for the height, to get these numbers, and the next. */
+.emvideo-zzz_custom_url .flowplayer span {
+  left: 171px;
+  top: 134px;
+}
+
+/* This is centered for the default placement of full-sized videos,
+   which is 425x350. */
+.emvideo-zzz_custom_url .flowplayer span {
+  left: 171px;
+  top: 134px;
+}

@@ -1,0 +1,177 @@
+/* $Id: CHANGELOG.txt,v 1.30.2.39 2009/07/15 22:58:07 sun Exp $ */
+
+Img_Assist x.x-x.x, xxxx-xx-xx
+------------------------------
+
+
+Img_Assist 6.x-2.x, xxxx-xx-xx
+------------------------------
+
+
+Img_Assist 6.x-2.0-ALPHA4, 2009-07-15
+-------------------------------------
+#520564 by smk-ka: Fixed improper access checks and escaping in popup window.
+#469530 by sun: Fixed compatibility with Wysiwyg API 2.x.
+#497436 by iva2k: Fixed Image assist's button not showing up in Wysiwyg API 3.x.
+#428936 by sun: Fixed wrong default derivative image creation option value.
+#362128 by jonathan1055, sun: Fixed image count not displayed in select list.
+
+
+Img_Assist 6.x-2.0-ALPHA-3, 2009-03-09
+--------------------------------------
+by sun: Added Administration menu suppression.
+#247992 by Grugnog2, sun: Fixed file permissions of server-generated files.
+#293909 by alienbrain, sun: Fixed always adding thumbnail when image preset
+  width or height is unspecified.
+#319363 by sun: Follow-up: Synced 2.x with 3.x where possible.
+#356454 by sun: Fixed missing DB table placeholder tags for new count query.
+
+
+Img_Assist 6.x-2.0-ALPHA-1, 2009-01-18
+--------------------------------------
+#352015 by sun: Fixed inserting images without clean URLs not working.
+#179712 by sun: Partially reverted changes for #wysiwyg FAPI property.
+#356454 by scroogie: Performance: Count nodes instead of executing view for
+  taxonomy dropdown list.
+#300591 by zoo33: Fixed CSS for the new Views-based popup window.
+#245799 by sun: Added support for TinyMCE 3; dropped support for TinyMCE 2.
+#322731 by sun: Fixed improper use of t() in module install file.
+#326640 by Anselm Heaton, sun: Fixed wysiwyg_editor renamed to wysiwyg module.
+#308005 by sun: Moved includes into /includes, theme includes into /theme.
+#295946 by smk-ka: Fixed module settings cannot be saved without Token module.
+#304094 by toniw: Fixed image resizing in TinyMCE when using IE.
+#303648 by jsm174, sun: Updated to new Views 2 API.
+#277324 by sun: Usability: Fixed visibility options are not always displayed.
+#295269 by wwalc: Fixed other CSS classes on textareas are removed.
+#289654 by smk-ka, sun: Added Token support for image caption title/description.
+#289647 by smk-ka, sun: Added display of CCK fields of Image nodes in property
+  window.
+#289657 by smk-ka: Changed fieldset titles on settings page.
+#286271 by smk-ka: Fixed popup CSS should not be preprocessed.
+#285013 by zoo33, sun: Added docs about Views integration.
+#246385 by smk-ka, zoo33, sun: Fixed teaser splitter, separated popup JS/CSS.
+#285009 by zoo33: Fixed missing pager in view img_assist_browser.
+#282184 by zoo33: Fixed default option in view select list and URL for exposed
+  filter form in thumbnail browser.
+#282184 by zoo33, sun: Replaced thumbnail browser with Views integration.
+Documentation clean-up.
+Code clean-up.
+#216978 by zoo33: Allow embedding the same image in different sizes.
+#179712 by sun, zoo33: Added implementation of hook_wysiwyg_plugin().
+#241527 by zoo33: Fixed wrong implementation of hook_help() and changes in
+  taxonomy_node_get_terms().
+#241527 by zoo33, sun: Fixed PHP notices.
+#250128 by bursalia2k, sun: Fixed improper SQL queries.
+
+
+Img_Assist 6.x-1.0-BETA1, 2008-04-10
+------------------------------------
+Removed add-image.psd (solely in HEAD now).
+#208414 by thom01, zoo33, smk-ka: Port to 6.x (based on patches #30 + #43).
+Fixed img_assist.css not loaded in popup.
+Fixed some XHTML invalid element properties in Image Assist popup.
+
+
+Img_Assist 5.x-1.6, 2008-02-24
+------------------------------
+#216300 by AsciiKewl: Fixed PHP warning in img_assist_map_save().
+#176196 by sun: Fixed private files and RSS feed support.
+#202463 by sun: Fixed fatal error when taxonomy module is disabled.
+#205512 by sun: Added note about <code> tags for drupalimage plugin.
+#196944 by dww: Fixed stale module description in img_assist_help().
+
+
+Img_Assist 5.x-1.5, 2007-11-19
+------------------------------
+Noteworthy changes since 5.x-1.4:
+
+* drupalimage plugin in the TinyMCE plugins folder needs to be updated, unless
+  hook_wysiwyg_plugin() (http://drupal.org/node/179712) is not committed.
+* Inline image containers have changed from
+  <span class="inline[ left|right|center]">...</span>
+  to
+  <span class="inline inline-left|inline-right|inline-center|inline-none">
+  ...</span>.
+* The CSS class of inline images has changed from '<size>' to 'image-<size>',
+  i.e. 'thumbnail' becomes 'image-thumbnail'.
+* Text align clearing tag <br class="clear" /> has been replaced by
+  <div class="clear-image"></div>.
+* The border of inline images was removed from CSS.
+* img_assist_map_image_delete() was renamed to img_assist_map_delete().
+* get_image_vocabs() has been removed.
+
+All changes:
+
+#177538 by sun: Fixed javascript calls using wrong form id.
+#181137 by sun: Fixed filter tag breaks with newline character and MySQL5.
+#180990 by sun: Removed CSS margin and padding for img tags.
+#176451 by sun: Fixed arbitrary images deleted from database.
+#179092 by sun: Fixed link type 'Go To URL' does not work.
+#64259 by sun: Fixed Settings accept malformed value for max inline image size.
+#130114 by jari, zoo33: Fixed CCK support for img_assist_map.
+  Additionally fixed img_assist_map references are not deleted.
+#158594 by sun: Removed CSS inline image border.
+Re-factored README.txt and INSTALL.txt.
+#158340 by JirkaRybka, sun: Added wildcard support for textarea id.
+#176786 by sun: Code clean-up.
+#167824 by sun: Fixed missing gettext strings for image alignment.
+Fixed XHTML-validation in popup window.
+#158968 by vomc8one, JohnAlbin: Fixed Link URL missing with HTML Code insert
+  mode.
+#108267 by sun: Fixed HTML of TinyMCE and Img_Assist buttons differ.
+#109380 by sun: Fixed absolute image src paths do not work on multi-site setups.
+#110169 by sun: get_image_vocabs() clean-up.
+#173454 by zoo33: Fixed attached images vanish when updated with a new image
+  file.
+#171290 by JirkaRybka: Fixed broken CSS class on form button.
+#171771 by sun: Fixed divisions by zero.
+#116998 by wrunt: IE image align fix.
+#62472 by jpetso and sun: Use DIV instead of BR to clear text align after
+  inline images.
+#152324 by Lapino: New naming convention for image classes.
+#123203 by keve, zoo33: TinyMCE plugin works only in main modules directory.
+#158341 by JirkaRybka: Missing t().
+#159924 by zoo33: Fixed a problem where the Paths textarea on the settings page
+  would disappear when it shouldn't.
+#157005 by jaredwiltshire: Added href for popup link.
+#156246 by jaredwiltshire: Image not inserted when using image 5.x-1.3.
+Changed layout of CHANGELOG.txt and added missing entries.
+
+
+Img_Assist 5.x-1.4, 2007-06-18
+------------------------------
+Fixed improperly tagged files of 5.x-1.3.
+#152556 by MarcoZ: Added alt attribute to "Add..." image.
+
+
+Img_Assist 5.x-1.3, 2007-06-17
+------------------------------
+#131327 by grendzy: Fixed a bug where custom derivative sizes would overwrite
+  standard derivative sizes, such as thumbnails.
+
+
+Img_Assist 5.x-1.0, 2007-03-09
+------------------------------
+  * Updated module to Drupal 5
+  * Fixed various bugs, mostly related to the Drupal 5 update
+  * Cleaned up the implementation of the image upload form
+  * Fixed a problem with original images not being recognized
+  * Tweaked the CSS
+
+
+May 4, 2005
+------------
+  * Made changes to image_display() (http://drupal.org/node/60126)
+  * Fixed default size bug (img_assist_default_label variable)
+  * Moved br clear to a themeable function ()
+  * Fixed clean URLs popup bug (http://drupal.org/node/55832)
+  * Fixed "No images were found" bug (http://drupal.org/node/59123)
+
+March 23, 2005
+--------------
+  * Removed tinymce.module from distribution.
+  * Addded install file and removed img_assist.mysql and img_assist.pgsql
+
+March 15, 2005
+--------------
+  * Completely rewritten by BenShell for Drupal 4.7

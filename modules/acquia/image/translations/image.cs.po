@@ -1,0 +1,852 @@
+# Czech translation of OpenOffice.org
+# Copyright (c) 2004 Christof <rambousek@gmail.com>
+# Adam Rambousek <xrambous@fi.muni.cz>, 2004, 2005.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: ncs\n"
+"POT-Creation-Date: 2004-02-17 14:32+0100\n"
+"PO-Revision-Date: 2005-06-20 10:20GMT+1\n"
+"Last-Translator: Adam Rambousek <xrambous@fi.muni.cz>\n"
+"Language-Team: Czech\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms:  nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Generator: KBabel 1.9.1\n"
+
+#: image.module:7
+msgid ""
+"<p>Admins may create many image nodes at once by uploading all images to a "
+"folder on the server. This upload happens outside of Drupal, usually using "
+"an FTP client.</p>"
+msgstr ""
+"<p>Administrátor může vytvořit mnoho uzlů s obrázky tak, že nahraje soubory "
+"do adresáře na serveru (mimo Drupal, obvykle přes FTP klienta).</p>"
+
+#: image.module:10
+msgid "Allows uploading of images and creating image galleries."
+msgstr "Umožňuje upload obrázků a vytváření galerií."
+
+#: image.module:12
+msgid ""
+"An image (with thumbnail). This is ideal for publishing photographs or "
+"screenshots."
+msgstr "Obrázek (s náhledem). Ideální pro zveřejňování fotografií a screenshotů."
+
+#: image.module:14
+msgid ""
+"Image galleries can be used to organize and present groups of images. "
+"Galleries may be nested. To add a new gallery click the \"add gallery\" tab."
+msgstr "Galerie obrázků se používají k organizaci a zveřejňování skupin obrázků. Galerie mohou být vnořené. Chcete-li přidat novou galerii, klikněte na záložku \"přidat galerii\"."
+
+#: image.module:30
+msgid "Below is a status of image module's current configuration."
+msgstr "Níže vidíte stav aktuální konfigurace modulu image."
+
+#: image.module:33
+msgid ""
+"\n"
+"      <h4>Fast Mode</h4><ul>\n"
+"      <li>Creates all image nodes at once without user interaction.</li>\n"
+"      <li>Applies the same taxonomy term(s) to each node, thus creating a "
+"gallery.</li>\n"
+"      <li>If IPTC data is present in the image, the headline and caption "
+"fields are used to populate the title and body respectively.</li>\n"
+"      <li>If the image dimensions are bigger than the maximum allowed, the "
+"image is automatically scaled down.</li></ul>"
+msgstr ""
+"\n"
+"      <h4>Rychlý režim</h4><ul>\n"
+"      <li>Vytvoří všechny uzly s obrázky najednou bez interakce uživatele.</"
+"li>\n"
+"      <li>Na každý uzel aplikuje stejný termíny(y) taxonomie a tak vytvoří "
+"galerii.</li>\n"
+"      <li>Pokud obrázek obsahuje IPTC data, použije se nadpis a popis.</li>\n"
+"      <li>Pokud jsou rozměry obrázku větší než maximální povolené, obrázek "
+"se automaticky zmenší.</li></ul>"
+
+#: image.module:41
+msgid ""
+"\n"
+"      <h4>Slow Mode</h4><ul>\n"
+"      <li>Manipulate each image individually (i.e. crop, rotate, etc.).</"
+"li>\n"
+"      <li>Add custom titles, descriptions, etc.</li></ul>"
+msgstr ""
+"\n"
+"      <h4>Pomalý režim</h4><ul>\n"
+"      <li>Manipulujete s každým obrázkem zvlášť (tj. otáčení, ořez apod.).</"
+"li>\n"
+"      <li>Můžete přidat titulek, popis atd.</li></ul>"
+
+#: image.module:47
+msgid ""
+"Allow users to upload images and to display them in shared and personal "
+"image galleries."
+msgstr ""
+"Dovoluje uživatelům nahrávat obrázky a zobrazovat je ve sdílených a osobních "
+"galeriích."
+
+#: image.module:50
+msgid ""
+"Images can be uploaded into either shared or personal galleries. Once images "
+"are uploaded they can be manipulated.  The image system will auto-generate "
+"thumbnails for all images to be used in other nodes via filters and in "
+"gallery navigation.  These settings allow you to control where images are "
+"placed, how they are displayed, and any restrictions that should be enforced."
+msgstr ""
+"Obrázky lze nahrát buď do sdílené nebo osobní galerie. Po nahrání lze s "
+"obrázky manipulovat. Systém automaticky vygeneruje náhledy, které je možno "
+"použít v jiných uzlech nebo zobrazit v galerii. Zde můžete nastavit, kde se "
+"obrázky ukládají, jak se zobrazují a jaká omezení se mají uplatňovat."
+
+#: image.module:53
+msgid "An image you can insert into nodes, or see in image galleries."
+msgstr "Obrázek, který můžete vložit do uzlů nebo zobrazit v galerii."
+
+#: image.module:57
+msgid ""
+"You may link to images on this site <a href=\"%explanation-url\">using a "
+"special syntax</a>"
+msgstr ""
+"Obrázky můžete odkazovat <a href=\"%explanation-url\">pomocí zvláštní "
+"syntaxe</a>"
+
+#: image.module:59
+msgid "Default image path"
+msgstr "Implicitní adresář obrázků"
+
+#: image.module:59
+msgid "Subdirectory in the directory \"%dir\" where pictures will be stored."
+msgstr "Podadresář v adresáři \"%dir\", ve kterém budou uloženy obrázky."
+
+#: image.module:60
+msgid "File paths"
+msgstr "Cesty souborů"
+
+#: image.module:61
+msgid ""
+"<p>You may quickly link to image nodes using a special syntax. The image code"
+"(s) will be replaced by thumbnail linked to full size image node. Syntax: "
+"<code>[image:node_id,(left|right|top|middle|bottom|absmiddle|texttop|"
+"baseline),hspace,vspace,border]</code>. Every parameter except node_id is "
+"<em>optional</em>.</p>"
+msgstr ""
+"<p>Pomocí zvláštní syntaxe můžete rychle odkázat na uzly s obrázky. Kód "
+"obrázku se nahradí náhledem a odkazem na obrázek v plné velikosti. Syntaxe "
+"<code>[image:node_id,(left|right|top|middle|bottom|absmiddle|texttop|baseline),hspace,vspace,border]</code>. Všechny parametry kromě node_id jsou <em>nepovinné</em>.</p>"
+
+#: image.module:72 ;207;1550;0
+msgid "image"
+msgstr "obrázek"
+
+#: image.module:79
+msgid "Label"
+msgstr "Popis"
+
+#: image.module:79
+msgid "Width"
+msgstr "Šířka"
+
+#: image.module:79
+msgid "Height"
+msgstr "Výška"
+
+#: image.module:80
+msgid "Select various pixel dimensions, \"thumbnail\" and \"preview\" are required."
+msgstr "Určete různé rozměry v pixelech, vyžadovány jsou \"thumbnail\" a \"preview\"."
+
+#: image.module:81
+msgid "Allow users to view original image"
+msgstr "Uživatelé mohou zobrazit původní obrázek"
+
+#: image.module:82
+msgid "Image sizes"
+msgstr "Velikosti obrázku"
+
+#: image.module:84
+msgid "Images per page"
+msgstr "Obrázků na stránku"
+
+#: image.module:84
+msgid "Sets the number of images to be displayed in a gallery page."
+msgstr "Počet obrázků zobrazených na jedné stránce galerie."
+
+#: image.module:85
+msgid "Gallery settings"
+msgstr "Nastavení galerie"
+
+#: image.module:87
+msgid "Explanation or submission guidelines"
+msgstr "Vysvětlení nebo rady pro posílání"
+
+#: image.module:87
+msgid ""
+"This text will be displayed at the top of the image submission form.  It is "
+"useful for helping or instructing your users."
+msgstr ""
+"Tento text se zobrazí nad formulářem pro odeslání obrázků. Můžete zde napsat "
+"rady a pokyny pro uživatele."
+
+#: image.module:89
+msgid ""
+"Default path for uploaded images relative to your Drupal installation; it "
+"must be writeable and visible from the web. Don't forget the slash (/) at "
+"the end."
+msgstr ""
+"Cesta k adresáři s nahranými obrázky relativní k instalaci Drupalu; musí být "
+"povolen zápis a musí být viditelný z webu. Nezapomeňte na lomítko (/) na "
+"konci."
+
+#: image.module:92
+msgid "Default thumb path"
+msgstr "Implicitní adresář náhledů"
+
+#: image.module:92
+msgid ""
+"Default path for thumbnails relative to your Drupal installation; it must be "
+"writeable and visible from the web. Don't forget the slash (/) at the end."
+msgstr ""
+"Cesta k adresáři s náhledy relativní k instalaci Drupalu; musí být povolen "
+"zápis a musí být viditelný z webu. Nezapomeňte na lomítko (/) na konci."
+
+#: image.module:95
+msgid "Temporary image path"
+msgstr "Dočasný adresář"
+
+#: image.module:95
+msgid ""
+"Path for working directory relative to your Drupal installation; it must be "
+"writeable and visible from the web. Don't forget the slash (/) at the end."
+msgstr ""
+"Cesta k dočasnému pracovnímu adresáři relativní k instalaci Drupalu; musí "
+"být povolen zápis a musí být viditelný z webu. Nezapomeňte na lomítko (/) na "
+"konci."
+
+#: image.module:96
+msgid "Maximum temporary image directory size"
+msgstr "Maximální velikost dočasného adresáře"
+
+#: image.module:96
+msgid "MBytes."
+msgstr "MB"
+
+#: image.module:98
+msgid "Stored images filenames"
+msgstr "Jméno uložených souborů"
+
+#: image.module:98
+msgid ""
+"The filename of an image stored on the server could be based on an unique "
+"random string or include the original filename. In the later case, the node "
+"id will be appended to the filename."
+msgstr ""
+"Jméno souboru uloženého na serveru může být buď náhodný řetězec nebo jméno "
+"původního souboru. V druhém případě bude ke jménu připojeno číslo uzlu."
+
+#: image.module:100
+msgid "Default max image size"
+msgstr "Maximální velikost souboru"
+
+#: image.module:100
+msgid "KBytes."
+msgstr "KB"
+
+#: image.module:101
+msgid "Default max image resolution"
+msgstr "Implicitní maximální rozlišení obrázku"
+
+#: image.module:101
+msgid "Example: 800x600."
+msgstr "Příklad:  800x600"
+
+#: image.module:103
+msgid "Default thumbnail resolution"
+msgstr "Implicitní rozlišení náhledů"
+
+#: image.module:103
+msgid ""
+"Default size of thumbnails: format will be the same as original image. Use "
+"just one dimension, and put a \"x\" to specify height. Examples: \"100\" for "
+"width of 100; \"x200\" for height of 200."
+msgstr ""
+"Implicitní rozlišení náhledů: formát bude stejný jako u původního obrázku. "
+"Použijte jen jeden rozměr, pro určení výšky přidejte \"x\". Příklad: \"100\" "
+"znamená šířka 100; \"x200\" znamená výška 200."
+
+#: image.module:110
+msgid "list"
+msgstr "seznam"
+
+#: image.module:113
+msgid "add gallery"
+msgstr "přidat galerii"
+
+#: image.module:116
+msgid "Image library"
+msgstr "Grafická knihovna"
+
+#: image.module:116
+msgid ""
+"Select the image library to be used during thumbnail generation and image "
+"manipulation.  Use ImageMagick if you can; GD produces worse thumbnails, "
+"might not support GIF and this module doesn't support image editing (rotate, "
+"crop etc) with it."
+msgstr ""
+"Vyberte knihovnu, která se použije pro vytváření náhledů a manipulaci s "
+"obrázky. Pokud můžete použijte ImageMagick; GD vytváří horší náhledy, nemusí "
+"podporovat GIF a nepodporuje editaci obrázků (otáčení, ořez apod.)."
+
+#: image.module:118
+msgid "Imagemagick Convert path"
+msgstr "Cesta ImageMagick convert"
+
+#: image.module:118
+msgid ""
+"Absolute path to ImageMagick convert file. Include the 'convert.exe' (or "
+"other filename) at the end. Leave it blank if you have selected GD library."
+msgstr ""
+"Absolutní cesta k souboru convert z ImageMagick. Na konci nezapomeňte jméno "
+"souboru (např. convert.exe). Pokud jste vybral GD knihovnu, ponechte prázdné."
+
+#: image.module:121
+msgid "Background Color"
+msgstr "Barva pozadí"
+
+#: image.module:121
+msgid "Color used to fill in background when rotating images."
+msgstr "Barva použitá k vyplnění pozadí při otáčení obrázků."
+
+#: image.module:128
+msgid "jhead path"
+msgstr "cesta jhead"
+
+#: image.module:128
+msgid "Absolute path of jhead, for EXIF parsing; blank to disable."
+msgstr ""
+"Absolutní cesta k jhead, pro parsování EXIF; pokud ponecháte prázdné, vypne "
+"se."
+
+#: image.module:133
+msgid "<none>"
+msgstr "<žádný>"
+
+#: image.module:135
+msgid "Gallery Navigation Vocabulary"
+msgstr "Slovník navigace galerie"
+
+#: image.module:135
+msgid ""
+"One of the taxonomy vocabularies will be the navigation tree. Select it "
+"here. Make sure that a term from this vocabulary is required."
+msgstr ""
+"Jeden ze slovníků taxonomie bude tvořit navigační strom galerie. Zde jej "
+"můžete vybrat. "
+
+#: image.module:137
+msgid "Gallery Thumbnails"
+msgstr "Náhled galerie"
+
+#: image.module:137
+msgid "Set the thumbnail to be dislayed on the gallery page."
+msgstr "Určuje, který náhled se zobrazí u popisu galerie."
+
+#: image.module:138
+msgid "Specify how many rows of thumbnails in each page of the gallery."
+msgstr "Kolik řádků má být na každé stránce galerie."
+
+#: image.module:139
+msgid "Gallery Columns"
+msgstr "Sloupců galerie"
+
+#: image.module:139
+msgid "Specify how many columns of thumbnails in each page of the gallery."
+msgstr "Kolik sloupců má být na každé stránce galerie."
+
+#: image.module:140
+msgid "Gallery Order"
+msgstr "Pořadí galerie"
+
+#: image.module:140
+msgid ""
+"Order of thumbnails within a gallery. Lighter and heavier refer to weight "
+"property."
+msgstr "Pořadí náhledů v galerie. Lehčí a těžší se vztahují k váze obrázků."
+
+#: image.module:142
+msgid "Personal Image Galleries"
+msgstr "Osobní galerie obrázků"
+
+#: image.module:142
+msgid ""
+"Activate/deactivate personal image galleries site-wide.  When enabled you "
+"can use the \"has personal image gallery\" permission to control which roles "
+"have personal galleries."
+msgstr ""
+"Aktivuje/deaktivuje osobní galerie. Když je povolíte, můžete pomocí "
+"oprávnění \"mít osobní galerii\" určovat, která role může mít osobní galerie."
+
+#: image.module:144
+msgid "Personal Gallery Picture Limit"
+msgstr "Limit osobní galerie"
+
+#: image.module:144
+msgid "Set how many pictures users are allowed."
+msgstr "Kolik obrázků má každý uživatel povoleno."
+
+#: image.module:145
+msgid "Uploaded file is not a valid image"
+msgstr "Uploadovaný soubor není platný obrázek"
+
+#: image.module:145
+msgid "Personal Gallery Picture Limit Per Role"
+msgstr "Limit osobní galerie podle role"
+
+#: image.module:145
+msgid "Enabling this will allow for setting a maximum number of pictures per role."
+msgstr "Při zapnutí je možno nastavit maximální počet obrázků každé roli."
+
+#: image.module:150
+msgid "Personal Gallery Size Limit"
+msgstr "Limit velikosti osobní galerie"
+
+#: image.module:150
+msgid "Set a maximum number of kilobytes allowed per user."
+msgstr "Maximální počet kilobajtů pro každého uživatele."
+
+#: image.module:153
+msgid "Disable Image Caching"
+msgstr "Vypnout cache obrázků"
+
+#: image.module:153
+msgid ""
+"Enabling this will add random parameters to image URIs which will prevent "
+"the browser from caching."
+msgstr ""
+"Při zapnutí této vlastnosti se k URI obrázků přidá náhodný parametr, který "
+"prohlížeči zabrání uložit obrázek do cache."
+
+#: image.module:193 ;216
+msgid "image galleries"
+msgstr "Galerie"
+
+#: image.module:198
+msgid "view original"
+msgstr "zobrazit originál"
+
+#: image.module:200
+msgid "images"
+msgstr "obrázky"
+
+#: image.module:201
+msgid "directory upload: slow"
+msgstr "upload adresáře: pomalý"
+
+#: image.module:202
+msgid "directory upload: fast"
+msgstr "upload adresáře: rychlý"
+
+#: image.module:212
+msgid "my image gallery"
+msgstr "moje galerie obrázků"
+
+#: image.module:213 ;222
+msgid "Latest image"
+msgstr "Nejnovější obrázek"
+
+#: image.module:214 ;227
+msgid "Random image"
+msgstr "Náhodný obrázek"
+
+#: image.module:224
+msgid "edit this image"
+msgstr "upravit tento obrázek"
+
+#: image.module:224
+msgid "Edit this image."
+msgstr "Upravit tento obrázek."
+
+#: image.module:229
+msgid "%u's image gallery"
+msgstr "Galerie obrázků uživatele %u"
+
+#: image.module:229
+msgid "View %u's image gallery."
+msgstr "Prohlédnout galerii obrázků uživatele %u."
+
+#: image.module:254
+msgid "Thumbnail"
+msgstr "Náhled"
+
+#: image.module:258
+msgid "Image"
+msgstr "Obrázek"
+
+#: image.module:259 ;471
+msgid "Description"
+msgstr "Popis"
+
+#: image.module:259
+msgid "%t image gallery"
+msgstr "Galerie %t"
+
+#: image.module:259
+msgid "View %t image gallery."
+msgstr "Prohlédnout galerii %t"
+
+#: image.module:288
+msgid "previous image"
+msgstr "Předchozí obrázek"
+
+#: image.module:292
+msgid "next image"
+msgstr "Další obrázek"
+
+#: image.module:307
+msgid "Image gallery"
+msgstr "Galerie obrázků"
+
+#: image.module:370
+msgid "EXIF data"
+msgstr "EXIF data"
+
+#: image.module:374
+msgid "IPTC data"
+msgstr "IPTC data"
+
+#: image.module:382
+msgid "Click \"Browse...\" to select an image to upload."
+msgstr "Klikněte na \"Procházet...\" a vyberte obrázek."
+
+#: image.module:388
+msgid "Weight"
+msgstr "Váha"
+
+#: image.module:388
+msgid ""
+"Weight of image used to sort thumbnails.  Heavier thumbnails will fall to "
+"the bottom of the gallery."
+msgstr "Váha se používá k řazení náhledů. Těžší náhledy spadnou v galerii níže."
+
+#: image.module:392
+msgid "Personal"
+msgstr "Osobní"
+
+#: image.module:392
+msgid "A personal image can only be seen in the user's image gallery."
+msgstr "Osobní obrázky se zobrazí jen v osobní galerii uživatele."
+
+#: image.module:439 ;443
+msgid "The image file you are trying to upload is too big."
+msgstr "Soubor, který chcete nahrát, je příliš velký."
+
+#: image.module:447
+msgid "The image file was only partially uploaded. Please try again."
+msgstr "Soubor byl nahrán jen částečně. Zkuste to prosím znovu."
+
+#: image.module:451
+msgid "You must select an image for upload."
+msgstr "Musíte vybrat obrázek pro upload."
+
+#: image.module:464 ;523
+msgid "Error processing image file."
+msgstr "Chyba při práci s obrázkem."
+
+#: image.module:486
+msgid "Uploaded file was not an image."
+msgstr "Nahraný soubor nebyl obrázek."
+
+#: image.module:489
+msgid "image type '%type' is not supported."
+msgstr "typ '%type' není podporován."
+
+#: image.module:496
+msgid "The uploaded image(%ax%b) is too large (max %cx%d)."
+msgstr "Obrázek je příliš velký (%ax%b); maximální velikost je %cx%d."
+
+#: image.module:651 ;666
+msgid "Image filter"
+msgstr "Filtr obrázků"
+
+#: image.module:665
+msgid "Image codes"
+msgstr "Kód obrázku"
+
+#: image.module:665
+msgid ""
+"When enabled, image codes will be replaced by thumb linked to real node. "
+"Syntax: [image:node_id,(left|right|top|middle|bottom|absmiddle|texttop|"
+"baseline),hspace,vspace,border]; every param but node_id is optional."
+msgstr ""
+"Když je zapnuto, kód obrázku bude nahrazen náhledem s odkazem na obrázek. "
+"Syntaxe: image:node_id,(left|right|top|middle|bottom|absmiddle|texttop|"
+"baseline),hspace,vspace,border]; všechny parametry kromě node_id jsou "
+"nepovinné."
+
+#: image.module:715 ;720;745;750
+msgid "Cannot save image."
+msgstr "Nelze uložit obrázek."
+
+#: image.module:734
+msgid "Cannot delete old image."
+msgstr "Nelze smazat starý obrázek."
+
+#: image.module:737
+msgid "Cannot delete old thumb."
+msgstr "Nelze smazat starý náhled."
+
+#: image.module:934
+msgid ""
+"Cannot create thumbnail. Current GD library has no read support for '%type' "
+"image format."
+msgstr ""
+"Nelze vytvořit náhled. Aktuální verze GD knihovny nepodporuje čtení formátu "
+"'%type'."
+
+#: image.module:965
+msgid ""
+"Cannot create thumbnail. Current GD library has no support for '%type' "
+"format image creation."
+msgstr ""
+"Nelze vytvořit náhled. Aktuální verze GD knihovny nepodporuje vytváření "
+"formátu '%type'."
+
+#: image.module:978
+msgid "Imagemagick: you have to set <code>convert</code> path."
+msgstr "Imagemagick: musíte nastavit cestu ke <code>convert</code>."
+
+#: image.module:1032
+msgid "You can have at most %a images in your gallery."
+msgstr "Ve své galerii můžete mít maximálně %a obrázků."
+
+#: image.module:1038
+msgid "You have %a kb for your gallery."
+msgstr "Máte k dispozici %a kb pro svou galerii."
+
+#: image.module:1045
+msgid "File is too big (max %a kbytes)"
+msgstr "Soubor je příliš velký (maximálně %a kB)"
+
+#: image.module:1053
+msgid "Upload directory is full."
+msgstr "Adresář pro upload je plný."
+
+#: image.module:1102
+msgid "Resize/Crop"
+msgstr "Změnit velikost/Oříznout"
+
+#: image.module:1112
+msgid "keep prop"
+msgstr "zachovat poměr"
+
+#: image.module:1116
+msgid "Rotate"
+msgstr "Rotace"
+
+#: image.module:1119
+msgid "clockwise"
+msgstr "vpravo"
+
+#: image.module:1120
+msgid "background"
+msgstr "pozadí"
+
+#: image.module:1120
+msgid "white"
+msgstr "bílá"
+
+#: image.module:1120
+msgid "black"
+msgstr "černá"
+
+#: image.module:1124
+msgid "Convert"
+msgstr "Konverze"
+
+#: image.module:1125
+msgid "Quality (1-100)"
+msgstr "Kvalita (1-100)"
+
+#: image.module:1161 ;1196
+msgid "Home"
+msgstr "Domů"
+
+#: image.module:1164
+msgid "%u's Image Gallery"
+msgstr "Galerie uživatele %u"
+
+#: image.module:1195
+msgid "Image galleries"
+msgstr "Galerie"
+
+#: image.module:1204
+msgid "Access Denied"
+msgstr "Přístup zamítnut"
+
+#: image.module:1327
+msgid "There is 1 image in this album."
+msgstr "V této galerii je 1 obrázek."
+
+#: image.module:1329
+msgid "There are no images in this album."
+msgstr "V této galerii nejsou žádné obrázky."
+
+#: image.module:1332
+msgid "Last updated: "
+msgstr "Poslední změna:"
+
+#: image.module:1425
+msgid "Directory to scan"
+msgstr "Prohledat adresář"
+
+#: image.module:1425
+msgid ""
+"The path to the directory which holds the source image files. This path "
+"should be relative to Drupal root directory - don't forget the slash (/) at "
+"the end."
+msgstr ""
+"Cesta k adresáři, kde jsou uloženy zdrojové obrázky. Cesta by měla být "
+"relativní ke kořenovému adresáři Drupalu - nezapomeňte na lomítko (/) na "
+"konci."
+
+#: image.module:1427
+msgid "Show resized image. Use only if you have large bandwidth."
+msgstr "Ukázat obrázek po změně velikosti. Používejte jen, pokud máte rychlou linku."
+
+#: image.module:1430
+msgid "Delete images after insert"
+msgstr "Smazat obrázky po vložení"
+
+#: image.module:1430
+msgid ""
+"If instructed, Drupal will delete all files in the above directory after "
+"creating the image nodes."
+msgstr ""
+"Je-li vybráno, Drupal po vytvoření obrázkových uzlů smaže všechny soubory v "
+"daném adresáři."
+
+#: image.module:1434
+msgid "Add new gallery"
+msgstr "Přidat novou galerii"
+
+#: image.module:1434
+msgid ""
+"If needed, create a new term for this gallery by clicking on one of these "
+"vocabularies"
+msgstr ""
+"Pokud je potřeba, vytvořte pro tuto galerii nový termín kliknutím na některý "
+"ze slovníků"
+
+#: image.module:1437
+msgid "Directory upload"
+msgstr "Upload adresáře"
+
+#: image.module:1444
+msgid "is not a directory"
+msgstr "není adresář"
+
+#: image.module:1452
+msgid "is not writable. Change permissions on server"
+msgstr "není přístupný pro zápis. Změňte práva na serveru"
+
+#: image.module:1542
+msgid "You may wish to view your new images:"
+msgstr "Můžete se podívat na své nové obrázky:"
+
+#: image.module:1545
+msgid "gallery"
+msgstr "galerie"
+
+#: image.module:1555
+msgid "is not an image."
+msgstr "není obrázek."
+
+#: image.module:1558
+msgid "image type is not supported."
+msgstr "typ obrázků není podporován."
+
+#: image.module:1705
+msgid "Role"
+msgstr "Role"
+
+#: image.module:1705
+msgid "Limit"
+msgstr "Limit"
+
+#: image.module:1713
+msgid ""
+"Set how many pictures each role listed above is allowed. \"Personal Gallery "
+"Picture Limit\" will be the default value for new roles."
+msgstr ""
+"Nastavuje, kolik obrázků má každá role dovoleno \"Limit osobní galerie\" "
+"bude implicitní hodnota pro nové role."
+
+#: image.module:79
+msgid "has personal image gallery"
+msgstr "mít osobní galerii"
+
+#: image.module:79
+msgid "manipulate images"
+msgstr "manipulace s obrázky"
+
+#: image.module:79
+msgid "access images"
+msgstr "přístup k obrázkům"
+
+#: image.module:79
+msgid "create images"
+msgstr "vytvářet obrázky"
+
+#: image.module:79
+msgid "administer images"
+msgstr "administrace obrázků"
+
+#: image.module:456
+msgid "edit gallery"
+msgstr "upravit galerii"
+
+#: image.module:461
+msgid "No galleries available"
+msgstr "Žádné galerie"
+
+#: image.module:470
+msgid "Gallery name"
+msgstr "Název galerie"
+
+#: image.module:470
+msgid "The name is used to identify the gallery."
+msgstr "Jméno popisující galerii."
+
+#: image.module:517
+msgid "Last updated: %date"
+msgstr "Poslední změna: %date"
+
+#: image.module:537
+msgid "Posted by: %name"
+msgstr "Vložil: %name"
+
+#: image.module:607
+msgid "Unable to create %label image"
+msgstr "Nelze vytvořit obrázek %label"
+
+#: image.module:654
+msgid "thumbnail"
+msgstr "thumbnail"
+
+#: image.module:655
+msgid "preview"
+msgstr "preview"
+
+#: image.module:712
+msgid "Image Galleries"
+msgstr "Galerie"
+
+#: image.module:515 ;550
+msgid "There is 1 image in this gallery"
+msgid_plural "There are %count images in this gallery"
+msgstr[0] "V této galerii je 1 obrázek"
+msgstr[1] "V této galerii jsou %count obrázky."
+msgstr[2] "V této galerii je %count obrázků."
+

@@ -1,0 +1,43 @@
+; $Id: acquia_marina.info,v 1.2.2.1 2009/05/25 09:33:09 jwolf Exp $
+
+name = Acquia Marina
+description = <a href="http://www.acquia.com">Acquia's</a> Marina theme is ideal for blogs and community sites. Includes advanced theme settings and 15 flexible content regions for a variety of layouts. By <a href="http://www.topnotchthemes.com">TopNotchThemes</a>
+
+core = 6.x
+engine = phptemplate
+stylesheets[all][] = style.css
+stylesheets[all][] = icons.css
+stylesheets[all][] = dblog.css
+regions[sidebar_first] = sidebar first
+regions[sidebar_last] = sidebar last
+regions[header_middle] = header middle
+regions[header_last] = header last
+regions[preface_first] = preface first
+regions[preface_middle] = preface middle
+regions[preface_last] = preface last
+regions[content_top] = content top
+regions[content_bottom] = content bottom
+regions[postscript_first] = postscript first
+regions[postscript_middle] = postscript middle
+regions[postscript_last] = postscript last
+regions[footer_top] = footer top
+regions[footer] = footer
+regions[node_bottom] = node bottom
+plugins[panels][layouts] = plugins/layouts
+plugins[panels][styles] = plugins/styles
+features[] = logo
+features[] = name
+features[] = slogan
+features[] = mission
+features[] = node_user_picture
+features[] = comment_user_picture
+features[] = search
+features[] = favicon
+features[] = primary_links
+
+; Information added by Acquia.com packaging script
+version = "6.x-2.0"
+core = "6.x"
+project = "acquia_marina"
+acquia = "1"
+

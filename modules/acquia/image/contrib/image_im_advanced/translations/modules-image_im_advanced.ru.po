@@ -1,0 +1,146 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Drupal Image module\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2008-04-14 20:17+0200\n"
+"PO-Revision-Date: 2008-04-16 18:40+0300\n"
+"Last-Translator: Alexander <storm@rustex.ru>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Russian\n"
+"X-Poedit-SourceCharset: iso-8859-1\n"
+"X-Poedit-KeywordsList: t\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SearchPath-0: Q:/drupal6/sites/all/modules/image\n"
+
+#: image_im_advanced.module:33
+#: image_im_advanced.info:0
+msgid "ImageMagick Advanced Options"
+msgstr "Дополнительные настройки ImageMagick"
+
+#: image_im_advanced.module:35
+msgid "These settings let you control some of ImageMagick's more advanced options."
+msgstr "Эти настройки "
+
+#: image_im_advanced.module:41
+msgid "JPEG quality"
+msgstr "Качество JPEG"
+
+#: image_im_advanced.module:45;81
+msgid "%"
+msgstr "%"
+
+#: image_im_advanced.module:46
+msgid "Define the image quality for JPEG manipulations. Ranges from 0 to 100. Higher values mean better image quality but bigger files. <a href=\"!link\">More information on -quality</a>"
+msgstr "Определите качество картинок, с которыми будет происходить сжатие в JPEG. От 1 до 100. Более высокое значение означает лучшее качество. <a href=\"!link\">Прочитать подробнее об опции -quality</a>"
+
+#: image_im_advanced.module:50
+msgid "Strip metadata from images at this size and below"
+msgstr "Вырезать мета-данные из картинок, имеющих размеры меньшие или равные указанным."
+
+#: image_im_advanced.module:52
+msgid "You may choose to strip all metadata, such as camera information and color profiles, from the processed images in order to reduce their file size. Please choose at what maximum size you want images to be stripped of their metadata. Example: \"150x150\". Enter \"0x0\" to disable this feature. This option requires ImageMagick 6.0.0 or higher. <a href=\"!link\">More information on -strip</a>"
+msgstr "Вы можете удалять все мета-данные, такие как информация о камере, цветовые профили и т.п. из обрабатываемых картинок для того, чтобы уменьшить их размер. Укажите максимальный размер картинок, мета-данные которых будут удалены. Например: \"150x150\". Введите  \"0x0\", если хотите заблокировать удаление мета-данных. Для этой возможности требуется ImageMagick версии 6.0.0 или выше. <a href=\"!link\">Больше информации об опции -strip</a>"
+
+#: image_im_advanced.module:56
+msgid "Convert colorspace"
+msgstr "Конвертировать цветовое пространство"
+
+#: image_im_advanced.module:58
+msgid "<None>"
+msgstr "<Ничего>"
+
+#: image_im_advanced.module:58
+msgid "RGB"
+msgstr "RGB"
+
+#: image_im_advanced.module:58
+msgid "Gray"
+msgstr "Серый"
+
+#: image_im_advanced.module:59
+msgid "This option lets you convert images to the specified colorspace. This will be overridden by the Color profile option, if used. <a href=\"!link\">More information on -colorspace</a>"
+msgstr "Здесь Вы можете настроить конвертацию картинок в определенное цветовое пространство. Эта настройка перекрывается настройками цветовых профилей, если они определены.  <a href=\"!link\">Больше информации об опции -colorspace</a>"
+
+#: image_im_advanced.module:63
+msgid "Change image resolution to 72 ppi"
+msgstr "Изменить разрешение картинки на 72ppi"
+
+#: image_im_advanced.module:65
+msgid "If checked, this option will set the print resolution of the image to 72 pixels per inch, which is suitable for web use. This does not affect the pixel size or quality of the image.  <a href=\"!link\">More information on -density</a>"
+msgstr "Если выбрана, эта опция установит разрешение для печати картинки в 72 пикселя на дюйм. Не влияет на размер или качество отображаемой картинки. <a href=\"!link\">Больше информации о -density</a>"
+
+#: image_im_advanced.module:70
+msgid "Sharpening filter"
+msgstr "Фильтр резкости"
+
+#: image_im_advanced.module:73
+msgid "The sharpness filter is used to regain some of the sharpness that is always lost when a digital photograph is scaled down. This is equivalent to the commonly used \"Unsharp Mask\" filter. It is important that these values are not set too high as it can easily make the images look artificial. <a href=\"!link\">More information on -unsharp</a>"
+msgstr "Фильтр резкости используется для того, чтобы восстановить немного резкости, которая почти всегда теряется, когда цифровые фотографии сжимаются в размерах. Действие эквивалентно популярному фильтру \"Unsharp Mask\". Важно не устанавливать это значение слишком большим, так как это может повредить внешний вид генерируемой картинки. <a href=\"!link\">Больше информации об опции -unsharp</a>"
+
+#: image_im_advanced.module:77
+msgid "Sharpness filter strength"
+msgstr "Мощность фильтра резкости"
+
+#: image_im_advanced.module:82
+msgid "Apply this percentage of sharpness when scaling. 90 is recommended, although values higher than 100 are also valid. Set to 0 to disable this feature."
+msgstr "При сжатии картинок будет применен указанный процент резкости. Рекомендованное значение: 90, хотя Вы можете указать значения и больше 100, если есть желание. Значение 0 отключает эту опцию."
+
+#: image_im_advanced.module:86
+msgid "Sharpness filter radius"
+msgstr "Радиус фильтра резкости"
+
+#: image_im_advanced.module:90
+msgid "Use this pixel radius for the sharpness filter. 0.9 is recommended."
+msgstr "Радиус, на который действует фильтр резкости. Рекомендованное значение: 0.9"
+
+#: image_im_advanced.module:95
+msgid "Color profile"
+msgstr "Цветовой профиль"
+
+#: image_im_advanced.module:98
+msgid "Processed images may be converted to a color profile specified here. This is especially important when working with images that use a wide-gamut color profile such as ColorMatch or Adobe RGB, which is often the case with professional photography. sRGB (which may be downloaded from <a href=\"http://www.color.org/profiles.html\">ICC</a>) is recommended since it is likely to look good on most displays.<br />Note that this conversion is still useful even if you choose to strip all metadata from your images (see above). This is because the conversion happens first and changes the actual image data before the profile is stripped."
+msgstr "Цвета обрабатываемых картинки могут преобразовываться с определенным цветовым профилем. Особенно это актуально при работе с картинками, использующими расширенный цветовой диапазон, такой как ColorMatch или Adobe RGB, которые часто используются в профессиональной фотографии. Рекомендуется к использованию профиль sRGB (который можно скачать <a href=\"http://www.color.org/profiles.html\">отсюда</a>), т.к. он хорошо выглядит на большинстве мониторов.<br />Заметим, что это преобразование используется даже если вы настроили удаление всех мета-данных из ваших картинок (см. выше), так как преобразование происходит до того, как мета-данные будут удалены."
+
+#: image_im_advanced.module:102
+msgid "Path to color profile"
+msgstr "Путь к цветовому профилю"
+
+#: image_im_advanced.module:104
+msgid "The path to a color profile file that all scaled down images will be converted to. Leave empty to disable."
+msgstr "Путь к файлу цветового профиля, с применением которого будут созданы все генерируемые картинки. Оставьте поле пустым, чтобы не использовать цветовые профили."
+
+#: image_im_advanced.module:121
+msgid "The JPEG quality must be a positive number between 1 and 100."
+msgstr "Качество JPEG должно быть натуральным числом от 1 до 100"
+
+#: image_im_advanced.module:126
+msgid "The strip metadata threshold must be specified in the form <em>NxN</em>. Example: <em>150x150</em>."
+msgstr "Предел размеров картинок, для которых нужно удалять мета-данные, должен быть определен в формате <em>NxN</em>. Например: <em>150x150</em>."
+
+#: image_im_advanced.module:132
+msgid "The sharpness amount must be specified as a positive number."
+msgstr "Количество резкости должно быть натуральным числом"
+
+#: image_im_advanced.module:135
+msgid "The sharpness radius must be specified as a positive value."
+msgstr "Радиус резкости должен быть натуральным числом"
+
+#: image_im_advanced.module:141
+msgid "The ICC profile could not be read."
+msgstr "Не удалось прочитать ICC профайл"
+
+#: image_im_advanced.module:0
+msgid "image_im_advanced"
+msgstr "image_im_advanced"
+
+#: image_im_advanced.info:0
+msgid "Adds advanced options to the ImageMagick image toolkit."
+msgstr "Добавление дополнительных опций к набору инструментов ImageMagick."
+
+#: image_im_advanced.info:0
+msgid "Image"
+msgstr "Картинки"
+

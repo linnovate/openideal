@@ -1,0 +1,15 @@
+; $Id: share_services.info,v 1.1.2.2 2009/04/11 18:10:52 thecrow Exp $
+name = "Share Services"
+description = "Provide the integration with Share module"
+core = 6.x
+package = Share - tabs
+dependencies[] = service_links
+dependencies[] = share
+dependencies[] = share_widget
+
+; Information added by drupal.org packaging script on 2010-10-08
+version = "6.x-2.0"
+core = "6.x"
+project = "service_links"
+datestamp = "1286532364"
+

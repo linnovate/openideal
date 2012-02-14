@@ -1,0 +1,258 @@
+<?php
+// $Id: hierarchical_select.install,v 1.15 2010/09/08 14:58:57 wimleers Exp $
+
+/**
+ * @file
+ * Install file for the Hierarchical Select module.
+ */
+
+
+/**
+ * Implementation of hook_install().
+ */
+function hierarchical_select_install() {
+  // Ensure the Hierarchical Select module runs after the Taxonomy and Content
+  // Taxonomy modules! This should not be necessary to do, but apparently some
+  // idiot module developer is changing the weight of the Taxonomy module...
+  $weight = db_result(db_query("SELECT weight FROM {system} WHERE name = 'taxonomy'"));
+  $weight = max($weight, db_result(db_query("SELECT weight FROM {system} WHERE name = 'content_taxonomy'")));
+  // Also ensure the Hierarchical Select module runs after the i18ntaxonomy
+  // module.
+  $weight = max($weight, db_result(db_query("SELECT weight FROM {system} WHERE name = 'i18ntaxonomy'")));
+  // Also ensure the Hierarchical Select module runs after the og_vocab module.
+  $weight = max($weight, db_result(db_query("SELECT weight FROM {system} WHERE name = 'og_vocab'")));
+  // If none of these modules was already enabled, the weight will still be
+  // incorrect. Therefore, let's make the minimum weight of Hierarchical
+  // Select 15.
+  $weight = max($weight, 15);
+
+  // Set the weight one higher than the highest weight we've encountered, so
+  // that Hierarchical Select will run after it.
+  $weight++;
+
+  db_query("UPDATE {system} SET weight = %d WHERE name  = '%s'", $weight, 'hierarchical_select');
+
+  drupal_install_schema('hierarchical_select');
+}
+
+/**
+ * Implementation of hook_uninstall().
+ */
+function hierarchical_select_uninstall() {
+  drupal_uninstall_schema('hierarchical_select');
+  db_query("DELETE FROM {variable} WHERE name LIKE 'hs_config_%'");
+}
+
+/**
+ * Implementation of hook_schema().
+ */
+function hierarchical_select_schema() {
+  $schema['cache_hierarchical_select'] = drupal_get_schema_unprocessed('system', 'cache');
+  return $schema;
+}
+
+
+//----------------------------------------------------------------------------
+// Schema updates.
+
+// Update module weight.
+function hierarchical_select_update_1() {
+  $ret = array();
+
+  // Ensure the Hierarchical Select module runs after the Taxonomy and Content
+  // Taxonomy modules! This should not be necessary to do, but apparently some
+  // idiot module developer is changing the weight of the Taxonomy module...
+  $weight = db_result(db_query("SELECT weight FROM {system} WHERE name = 'taxonomy'"));
+  $weight = max($weight, db_result(db_query("SELECT weight FROM {system} WHERE name = 'content_taxonomy'")));
+  $weight++;
+  $ret[] = update_sql("UPDATE {system} SET weight = $weight WHERE name = 'hierarchical_select'");
+
+  return $ret;
+}
+
+// Update module weight again, this time for i18ntaxonomy compatibility.
+function hierarchical_select_update_2() {
+  $ret = array();
+
+  $weight = db_result(db_query("SELECT weight FROM {system} WHERE name = 'taxonomy'"));
+  $weight = max($weight, db_result(db_query("SELECT weight FROM {system} WHERE name = 'content_taxonomy'")));
+  $weight = max($weight, db_result(db_query("SELECT weight FROM {system} WHERE name = 'i18ntaxonomy'")));
+  $weight++;
+  $ret[] = update_sql("UPDATE {system} SET weight = $weight WHERE name = 'hierarchical_select'");
+
+  return $ret;
+}
+
+// Helper function for update 3.
+function hierarchical_select_update_3_taxonomy_hierarchical_select_get_depth($vid) {
+  $tree = taxonomy_get_tree($vid);
+  foreach ($tree as $term) {
+    if ($term->depth > $depth) {
+      $depth = $term->depth;
+    }
+  }
+  return $depth;
+}
+
+// Convert the Hierarchical Select settings for each vocabulary to the
+// standardized format.
+function hierarchical_select_update_3() {
+  $ret = array();
+
+  $vocabularies = taxonomy_get_vocabularies();
+  foreach ($vocabularies as $vid => $vocabulary) {
+    $config = array();
+
+    // Generate the config_id.
+    $config['config_id'] = "taxonomy-$vid";
+
+    // save_lineage and enforce_deepest settings.
+    foreach (array('save_lineage', 'enforce_deepest') as $setting) {
+      $var = "hierarchical_select_{$setting}_{$vid}";
+      $config[$setting] = (int) variable_get($var, 0);
+      variable_del($var);
+    }
+
+    // Level labels.
+    $var = "hierarchical_select_level_labels_status_{$vid}";
+    $config['level_labels']['status'] = variable_get($var, 0);
+    variable_del($var);
+    $config['level_labels']['labels'] = array();
+    for ($depth = 0; $depth < hierarchical_select_update_3_taxonomy_hierarchical_select_get_depth($vid); $depth++) {
+      $var = "hierarchical_select_level_{$depth}_{$vid}";
+      $config['level_labels']['labels'][$depth] = variable_get($var, '');
+      variable_del($var);
+    }
+
+    // Dropbox settings.
+    $var = "hierarchical_select_multiple_{$vid}";
+    $config['dropbox']['status'] = variable_get($var, 0);
+    variable_del($var);
+    foreach (array('title', 'limit') as $setting) {
+      $var = "hierarchical_select_dropbox_{$setting}_{$vid}";
+      $config['dropbox'][$setting] = variable_get($var, 0);
+      variable_del($var);
+    }
+    $config['dropbox']['reset_hs'] = 1;
+    variable_set('hierarchical_select_config_'. $config['config_id'], $config);
+
+    // Rename the variable that indicates if a vocabulary is using
+    // Hierarchical Select or not.
+    $var = "hierarchical_select_status_$vid";
+    variable_set("taxonomy_hierarchical_select_$vid", variable_get($var, 0));
+    variable_del($var);
+
+    drupal_set_message('Migrated Hierarchical Select settings for vocabulary '. $vid .'.');
+  }
+
+  return $ret;
+}
+
+// Shorter prefix for storing the config variables.
+function hierarchical_select_update_4() {
+  $ret = array();
+
+  // Single query that could do the same, if it weren't for "Currently, you
+  // cannot update a table and select from the same table in a subquery."
+  //   source: http://dev.mysql.com/doc/refman/5.0/en/update.html
+  // UPDATE `variable` SET name = CONCAT('hs_config_', SUBSTRING(name, 28)) WHERE name IN (SELECT name FROM `variable` WHERE name LIKE 'hierarchical_select_config_%')
+
+  $result = db_query("SELECT SUBSTRING(name, 28) AS config_id FROM {variable} WHERE name LIKE 'hierarchical_select_config_%'");
+  while ($row = db_fetch_object($result)) {
+    $config_id = $row->config_id;
+    $value = variable_get("hierarchical_select_config_$config_id", serialize(array()));
+    variable_set("hs_config_$config_id", $value);
+    variable_del("hierarchical_select_config_$config_id");
+  }
+
+  return $ret;
+}
+
+// Increase the length of the "name" field in the "variable" table to 128. The
+// Hierarchical Select module needs this for some of its variables. This does
+// NOT break updates to Drupal 6!
+// See http://drupal.org/node/259962.
+function hierarchical_select_update_5() {
+  $ret = array();
+
+  $ret[] = update_sql("ALTER TABLE {variable} MODIFY name varchar(128) NOT NULL default ''");
+
+  return $ret;
+}
+
+// Several modules were renamed for consistency. Only one of these needs a
+// change in its config variables.
+function hierarchical_select_update_6() {
+  $ret = array();
+
+  // hs_views_taxonomy -> hs_taxonomy_views
+  $result = db_query("SELECT SUBSTRING(name, 26) AS config_id FROM {variable} WHERE name LIKE 'hs_config_views-taxonomy_%'");
+  while ($row = db_fetch_object($result)) {
+    $config_id = $row->config_id;
+    $value = variable_get("hs_config_views-taxonomy_$config_id", serialize(array()));
+    variable_set("hs_config_taxonomy-views_$config_id", $value);
+    variable_del("hs_config_views-taxonomy_$config_id");
+  }
+
+  return $ret;
+}
+
+// Rename 'node_count' as 'entity_count'.
+function hierarchical_select_update_7() {
+  $ret = array();
+
+  $result = db_query("SELECT name AS config_id, value AS config FROM {variable} WHERE name LIKE 'hs_config_%'");
+  while ($row = db_fetch_object($result)) {
+    $config_id = $row->config_id;
+    $config = unserialize($row->config);
+    if (isset($config['node_count'])) {
+      $config['entity_count'] = $config['node_count'];
+      unset($config['node_count']);
+      db_query("UPDATE {variable} SET value = '%s' WHERE name = '%s'", serialize($config), $config_id);
+    }
+  }
+
+  return $ret;
+}
+
+// Update module weight again, this time for og_vocab compatibility.
+function hierarchical_select_update_8() {
+  $ret = array();
+
+  // Ensure the Hierarchical Select module runs after the Taxonomy and Content
+  // Taxonomy modules! This should not be necessary to do, but apparently some
+  // idiot module developer is changing the weight of the Taxonomy module...
+  $weight = db_result(db_query("SELECT weight FROM {system} WHERE name = 'taxonomy'"));
+  $weight = max($weight, db_result(db_query("SELECT weight FROM {system} WHERE name = 'content_taxonomy'")));
+  // Also ensure the Hierarchical Select module runs after the i18ntaxonomy
+  // module.
+  $weight = max($weight, db_result(db_query("SELECT weight FROM {system} WHERE name = 'i18ntaxonomy'")));
+  // Also ensure the Hierarchical Select module runs after the og_vocab module.
+  $weight = max($weight, db_result(db_query("SELECT weight FROM {system} WHERE name = 'og_vocab'")));
+  // If none of these modules was already enabled, the weight will still be
+  // incorrect. Therefore, let's make the minimum weight of Hierarchical
+  // Select 15.
+  $weight = max($weight, 15);
+
+  // Set the weight one higher than the highest weight we've encountered, so
+  // that Hierarchical Select will run after it.
+  $weight++;
+
+  $ret[] =  update_sql("UPDATE {system} SET weight = $weight  WHERE name  = 'hierarchical_select'");
+
+  return $ret;
+}
+
+// Update module weight again, this time for create a separate cache table for
+// Hierarchical Select.
+function hierarchical_select_update_9() {
+  $ret = array();
+
+  $schema = hierarchical_select_schema();
+  db_create_table($ret, 'cache_hierarchical_select', $schema['cache_hierarchical_select']);
+
+  // Force a rebuild of the schema.
+  drupal_get_schema(NULL, TRUE);
+
+  return $ret;
+}

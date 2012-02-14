@@ -1,0 +1,72 @@
+/**
+ * $Id: ie7-fixes.css,v 1.2.2.1 2009/05/25 09:33:09 jwolf Exp $
+ * Acquia Marina
+ */
+
+/*************/
+/* IE7 FIXES */
+/*************/
+
+/* fix tabs from floating */
+#primary-menu-wrapper {
+  height: 1%;
+}
+
+/* prevent dropdown menus from disappearing behind preface blocks */
+#preface div.block {
+  position: static;
+}
+
+body.layout-main-last #sidebar-last ul li,
+#content-bottom ul li {
+  background-position: left 0.5em;
+}
+
+/* adjust pager spacing */
+#main .item-list ul.pager li {
+  margin: 0 2px;
+}
+
+#main .item-list .pager a.active {
+  padding: 1px 0 2px 3px;
+}
+
+#search-box {
+  padding: 8px 0 8px 8px;
+  width: 255px;
+}
+
+#search-box .search_submit {
+  padding: 2px 0 0;
+}
+
+input.form-submit,
+input.teaser-button {
+  border: 1px solid #225A82;
+  margin: 0;
+  padding: 3px 2px;
+}
+
+/* limit legend width to text length */
+form fieldset legend {
+  display: inline-block !important;
+}
+
+/* adjust openid link */
+html.js #user-login-form li.openid-processed, 
+html.js #user-login li.openid-processed {
+  padding-left: 8px;
+}
+
+.layout-main-last #sidebar-last .block-wrapper {
+  margin: 10px 0 30px;
+}
+
+.block {
+  position: relative;
+}
+
+/* prevent comment form background from disappearing */
+#comments .content {
+  zoom: 1;
+}

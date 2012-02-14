@@ -1,0 +1,15 @@
+; $Id $
+name = Heartbeat example module
+description = Advanced features of heartbeat explained and demonstrated. This module is not for production usage.
+package = Heartbeat
+dependencies[] = heartbeat
+; To make sure this cannot be enabled as module.
+dependencies[] = not_for_production_modules
+core = 6.x
+php = 5.0
+; Information added by drupal.org packaging script on 2010-10-28
+version = "6.x-4.10"
+core = "6.x"
+project = "heartbeat"
+datestamp = "1288291547"
+

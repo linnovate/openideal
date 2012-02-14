@@ -1,0 +1,32 @@
+<?php
+// $Id: calendar_ical.module,v 1.1.2.6 2008/11/24 15:48:15 karens Exp $
+
+/**
+ * Implementation of hook_views_api().
+ *
+ * This one is used as the base to reduce errors when updating.
+ */
+function calendar_ical_views_api() {
+  return array(
+    'api' => 2,
+    'path' => drupal_get_path('module', 'calendar_ical'),
+  );
+}
+
+/**
+ * @file
+ * Adds ical functionality to Calendar.
+ */
+function calendar_ical_theme() {
+  return array(
+    'calendar_ical_icon' => array(
+      'arguments' => array('url'),
+      ),
+    );
+}
+
+function theme_calendar_ical_icon($url) {
+  if ($image = theme('image', drupal_get_path('module', 'date_api') .'/images/ical16x16.gif', t('Add to calendar'), t('Add to calendar'))) {
+    return '<div style="text-align:right"><a href="'. check_url($url) .'" class="ical-icon" title="ical">'. $image .'</a></div>';
+  }
+}

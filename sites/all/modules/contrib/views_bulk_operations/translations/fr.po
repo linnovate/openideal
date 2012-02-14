@@ -1,0 +1,286 @@
+# $Id: fr.po,v 1.1.2.2 2009/04/06 18:13:47 kratib Exp $
+#
+# French translation of Drupal (general)
+# Copyright YEAR NAME <EMAIL@ADDRESS>
+# Generated from files:
+#  delete.action.inc,v 1.1.2.5 2009/02/17 22:16:59 kratib
+#  script.action.inc,v 1.1.2.1 2009/02/12 23:09:49 kratib
+#  taxonomy.action.inc: n/a
+#  views_bulk_operations.views.inc,v 1.1.2.8 2008/09/21 07:13:30 kratib
+#  views_bulk_operations_plugin_style.inc,v 1.1.2.22 2009/02/24 05:31:04 kratib
+#  views_bulk_operations.module,v 1.29.2.9.2.61 2009/02/26 21:12:48 kratib
+#  views_bulk_operations.info,v 1.2.4.1.2.1 2008/07/25 07:12:52 kratib
+#  views_bulk_operations.js,v 1.1.4.14 2009/02/20 23:16:49 kratib
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: french translation for drupal6 views_bulk_operations module\n"
+"POT-Creation-Date: 2009-04-03 11:02+0200\n"
+"PO-Revision-Date: 2009-04-03 11:43+0100\n"
+"Last-Translator: Sylvain Moreau <sylvain.moreau@ows.fr>\n"
+"Language-Team: Sylvain Moreau/Franck Deroche, OWS <sylvain.moreau@ows.fr>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n!=1);\n"
+
+#: delete.action.inc:8
+msgid "Delete node"
+msgstr "Supprimer le noeud"
+
+#: delete.action.inc:13
+msgid "Delete user"
+msgstr "Supprimer l'utilisateur"
+
+#: delete.action.inc:18
+msgid "Delete comment"
+msgstr "Supprimer le commentaire"
+
+#: script.action.inc:8
+msgid "Execute arbitrary PHP script"
+msgstr "Exécuter un code PHP arbitraire"
+
+#: script.action.inc:28
+msgid "PHP script"
+msgstr "Script PHP"
+
+#: script.action.inc:29
+msgid ""
+"Type the PHP snippet that will run upon execution of this action. You can use variables <code>&$object</code> and <code>$context</code> in your snippet.\n"
+"                         Note that it is up to the script to save the node once it's done modifying it."
+msgstr ""
+"Saisissez le snippet PHP qui s'exécutera lors de l'exécution de cette action. Vous pouvez utiliser les variables <code>&$object</code> et <code>$context</code> dans votre snippet.\n"
+" Notez que c'est au script d'enregistrer le noeud une fois qu'il a fini de le modifier."
+
+#: taxonomy.action.inc:12
+msgid "Modify node taxonomy terms"
+msgstr "Modifier les termes de taxonomies du noeud"
+
+#: taxonomy.action.inc:74
+msgid "The selected nodes are not associated with any vocabulary. Please select other nodes and try again."
+msgstr "Les noeuds sélectionnés ne sont associés à aucun vocabulaire. Veuillez sélectionner d'autres noeuds et ré-essayer."
+
+#: taxonomy.action.inc:84
+msgid "Terms"
+msgstr "Termes"
+
+#: taxonomy.action.inc:89
+msgid "Choose the terms you want to associate with the nodes."
+msgstr "Choisissez les termes que vous voulez associer aux noeuds."
+
+#: taxonomy.action.inc:94
+msgid "Action to take"
+msgstr "Action à prendre"
+
+#: taxonomy.action.inc:97
+msgid "Add the selected terms"
+msgstr "Ajouter les termes sélectionnés"
+
+#: taxonomy.action.inc:98
+msgid "Replace existing terms with selected ones"
+msgstr "Remplacer les termes existant par ceux sélectionnés"
+
+#: taxonomy.action.inc:99
+msgid "Replace terms within same vocabulary"
+msgstr "Remplacer les termes au sein du même vocabulaire"
+
+#: taxonomy.action.inc:100
+msgid "Delete selected terms"
+msgstr "Supprimer les termes sélectionnés"
+
+#: taxonomy.action.inc:117
+msgid "You did not select any term nor did you choose to replace existing terms. Please select one or more terms or choose to replace the terms."
+msgstr "Vous n'avez sélectionné aucun terme, ou n'avez pas choisi de remplacer des termes existant. Veuillez choisir un ou plusieurs termes, ou choisir de remplacer les termes."
+
+#: views_bulk_operations.views.inc:8
+msgid "Bulk Operations"
+msgstr "Opérations en masse"
+
+#: views_bulk_operations.views.inc:9
+msgid "Displays rows with checkmarks for bulk actions."
+msgstr "Affiche devant chaque ligne une case à cocher pour des actions en masse."
+
+#: views_bulk_operations_plugin_style.inc:23
+msgid "Invoke them directly"
+msgstr "Les invoquer directement"
+
+#: views_bulk_operations_plugin_style.inc:24
+msgid "Use Batch API"
+msgstr "Utiliser l'API Batch"
+
+#: views_bulk_operations_plugin_style.inc:27
+msgid "Use <a href=\"@jobqueue\">Job Queue</a>"
+msgstr "Utiliser <a href=\"@jobqueue\">Job Queue</a>"
+
+#: views_bulk_operations_plugin_style.inc:31
+msgid "To execute operations"
+msgstr "Pour exécuter les opérations"
+
+#: views_bulk_operations_plugin_style.inc:37
+msgid "Display operations as"
+msgstr "Afficher les opérations en tant que"
+
+#: views_bulk_operations_plugin_style.inc:40
+msgid "Dropdown selectbox with Submit button"
+msgstr "Menu déroulant de sélection avec un bouton Soumettre"
+
+#: views_bulk_operations_plugin_style.inc:41
+msgid "Each action as a separate button"
+msgstr "Chaque action dans un bouton séparé"
+
+#: views_bulk_operations_plugin_style.inc:46
+msgid "Skip confirmation step"
+msgstr "Passer l'étape de confirmation"
+
+#: views_bulk_operations_plugin_style.inc:47
+msgid "Check this box to skip the confirmation page on this view and directly execute the operation."
+msgstr "Cochez cette case pour passer la page de confirmation sur cette vue et exécuter directement l'opération."
+
+#: views_bulk_operations_plugin_style.inc:52
+msgid "Display processing result"
+msgstr "Afficher le résultat du traitement"
+
+#: views_bulk_operations_plugin_style.inc:53
+msgid "Check this box to let Drupal display a message with the result of processing the selected objects."
+msgstr "Cochez cette case pour permettre à Drupal d'afficher un message contenant le résultat du traitement des objets sélectionnés."
+
+#: views_bulk_operations_plugin_style.inc:58
+msgid "Merge single action's form with node selection view"
+msgstr "Fusionner le formulaire d'action unique avec le vue de sélections des noeuds"
+
+#: views_bulk_operations_plugin_style.inc:59
+msgid "In case only one action is selected *and* this action is configurable, display its action form along with the node selection view."
+msgstr "Dans le cas où une action est sélectionnées *et* que cette action est configurable, afficher le formulaire d'action correspondant à côté de la vue de sélection des noeuds."
+
+#: views_bulk_operations_plugin_style.inc:64
+msgid "Selected operations"
+msgstr "Opérations sélectionnées"
+
+#: views_bulk_operations.module:98
+msgid "All <strong>!objects</strong> rows on this page are selected."
+msgstr "Les <strong>!objects</strong> lignes sur cette page seulement ont été sélectionnées."
+
+#: views_bulk_operations.module:99
+msgid "Select all !objects rows in this view."
+msgstr "Sélectionner les !objects lignes sur cette vue."
+
+#: views_bulk_operations.module:100
+msgid "All <strong>!objects</strong> rows in this view are selected."
+msgstr "Les <strong>!objects</strong> lignes sur cette vue ont été sélectionnées."
+
+#: views_bulk_operations.module:101
+msgid "Select only !objects rows on this page."
+msgstr "Sélectionner les !objects lignes sur cette page seulement."
+
+#: views_bulk_operations.module:219
+msgid "Bulk operations"
+msgstr "Opérations en masse"
+
+#: views_bulk_operations.module:236
+msgid "- Choose an operation -"
+msgstr "- Choisir une opération -"
+
+#: views_bulk_operations.module:243
+msgid "Execute"
+msgstr "Exécuter"
+
+#: views_bulk_operations.module:295
+msgid "Next"
+msgstr "Suivant"
+
+#: views_bulk_operations.module:300
+msgid "<a href=\"@view\">Cancel</a>"
+msgstr "<a href=\"@view\">Annuler</a>"
+
+#: views_bulk_operations.module:302
+msgid "Set parameters for '%action'"
+msgstr "Définir les paramètres pour '%action'"
+
+#: views_bulk_operations.module:311
+msgid "Are you sure you want to perform '%action' on selected rows?"
+msgstr "Etes-vous sûr(e) de vouloir exécuter '%action' sur les lignes sélectionnées ?"
+
+#: views_bulk_operations.module:343;354
+msgid "No row selected. Please select one or more rows."
+msgstr "Aucune ligne sélectionnée. Veuillez sélectionner une ou plusieurs rangées."
+
+#: views_bulk_operations.module:349
+msgid "No operation selected. Please select an operation to perform."
+msgstr "Aucune opération sélectionnée. Veuillez sélectionner une opération à exécuter."
+
+#: views_bulk_operations.module:440
+msgid "Performing %action on selected rows..."
+msgstr "Exécution de %action sur les lignes sélectionnées..."
+
+#: views_bulk_operations.module:460
+msgid "Perform %action on object %oid."
+msgstr "Exécuter %action sur l'objet %oid."
+
+#: views_bulk_operations.module:464
+msgid "Enqueued %action on objects %oid. Check the <a href=\"@queue\">queued jobs page</a>."
+msgstr "Mise en file d'attente (queue) de %action sur les objets %oid. Consultez la <a href=\"@queue\">page des tâches en file d'attente</a>."
+
+#: views_bulk_operations.module:508;522
+msgid "Performed %action on object %title."
+msgstr "%action a été exécutée sur l'objet %title."
+
+#: views_bulk_operations.module:533
+msgid "Performed %action on objects %oids."
+msgstr "%action a été exécutée sur les objets %oids."
+
+#: views_bulk_operations.module:543
+msgid "!results rows processed:"
+msgstr "!results lignes traitées : "
+
+#: views_bulk_operations.module:550
+msgid "An error occurred while processing @operation with arguments: @arguments"
+msgstr "Une erreur est survenue lors du traitement de @operation avec les arguments : @arguments"
+
+#: views_bulk_operations.module:599
+msgid "You selected !count rows of an unknown object type."
+msgstr "Vous avez sélectionné !count lignes d'un type d'objet inconnu."
+
+#: views_bulk_operations.module:602
+msgid "You selected the following !count rows:"
+msgstr "Vous avez sélectionné  les !count lignes suivantes :"
+
+#: views_bulk_operations.module:606
+msgid "...and !remaining more."
+msgstr "... et il en reste !remaining"
+
+#: views_bulk_operations.module:700
+msgid "Your PHP installation is too old. Views Bulk Operations requires at least PHP %version."
+msgstr "Votre installation de PHP est trop ancienne. Views Bulk Operations requiert au minimum PHP %version."
+
+#: views_bulk_operations.module:679;686;0
+msgid "views_bulk_operations"
+msgstr "views_bulk_operations"
+
+#: views_bulk_operations.module:679
+msgid "Could not find object info for view table @table."
+msgstr "Le système n'a pas pu trouver d'information objet pour la table de vue @table."
+
+#: views_bulk_operations.module:686
+msgid "Could not find object info for type @type."
+msgstr "Le système n'a pas pu trouver d'information objet pour le type @type."
+
+#: views_bulk_operations.info:0
+msgid "Views Bulk Operations"
+msgstr "Views Bulk Operations"
+
+#: views_bulk_operations.info:0
+msgid "Exposes new Views style 'Bulk Operations' for selecting multiple nodes and applying operations on them."
+msgstr "Expose un nouveau style de Vues 'Opérations en masse', afin de sélectionner plusieurs noeuds et leur appliquer des opérations."
+
+#: views_bulk_operations.info:0
+msgid "Views"
+msgstr "Vues"
+
+#: views_bulk_operations.js:0
+msgid "Select all rows in this table"
+msgstr "Sélectionner toutes les lignes du tableau"
+
+#: views_bulk_operations.js:0
+msgid "Deselect all rows in this table"
+msgstr "Désélectionner toutes les lignes du tableau"
+

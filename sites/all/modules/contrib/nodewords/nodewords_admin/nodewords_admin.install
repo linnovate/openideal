@@ -1,0 +1,71 @@
+<?php
+// $Id: nodewords_admin.install,v 1.1.2.6 2010/04/17 14:49:29 kiam Exp $
+
+/**
+ * @file
+ * Install, update and uninstall functions for the Administration interface for Nodewords module.
+ */
+
+/**
+ * Implements hook_install().
+ */
+function nodewords_admin_install() {
+  $value = variable_get('nodewords_edit', NULL);
+  if (isset($value)) {
+    variable_set('nodewords_admin_edit', $value);
+  }
+
+  $value = variable_get('nodewords_global_keywords', NULL);
+  if (isset($value)) {
+    variable_set('nodewords_first_keywords', $value);
+    variable_del('nodewords_global_keywords');
+  }
+
+  variable_del('nodewords');
+  variable_del('nodewords-repeat');
+  variable_del('nodewords-use_front');
+  variable_del('nodewords_collapse_fieldset');
+  variable_del('nodewords_enable_user_metatags');
+  variable_del('nodewords_metatags_generation_method');
+  variable_del('nodewords_metatags_generation_source');
+  variable_del('nodewords_update_6113');
+  variable_del('nodewords_update_6139');
+  variable_del('nodewords_update_6145');
+  variable_del('nodewords_update_6147');
+  variable_del('nodewords_update_6156');
+  variable_del('nodewords_update_6159');
+  variable_del('nodewords_update_6162');
+  variable_del('nodewords_update_6163');
+  variable_del('nodewords_update_6164');
+  variable_del('nodewords_update_6166');
+  variable_del('nodewords_use_teaser');
+
+  $node_types = array_keys(node_get_types('names'));
+  $variables = array(
+    'nodewords_metatags_generation_method_',
+    'nodewords_metatags_generation_source_',
+    'nodewords_edit_metatags_',
+    'nodewords_use_teaser_',
+  );
+
+  foreach ($node_types as $node_type) {
+    foreach ($variables as $variable) {
+      variable_del($variable . $node_type);
+    }
+  }
+}
+
+/**
+ * Implements hook_update_N().
+ */
+function nodewords_admin_update_6100() {
+  $ret = array();
+
+  variable_del('nodewords_admin_installed');
+  $ret[] = array(
+    'success' => TRUE,
+    'query' => 'Removed obsolete persistent variables',
+  );
+
+  return $ret;
+}

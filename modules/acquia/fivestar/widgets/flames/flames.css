@@ -1,0 +1,34 @@
+/* Static View-only Star Version */
+div.fivestar-widget-static .star {
+  width: 20px;
+  height: 26px;
+  background: url(flame.png) no-repeat 0 0;
+}
+
+div.fivestar-widget-static .star span.on {
+  background: url(flame.png) no-repeat 0 -52px;
+}
+
+div.fivestar-widget-static .star span.off {
+  background: url(flame.png) no-repeat 0 0;
+}
+
+/* Javascript Star Version */
+div.fivestar-widget .cancel, div.fivestar-widget .star {
+  width: 17px;
+  height: 26px;
+}
+div.fivestar-widget .cancel, div.fivestar-widget .cancel a {
+  background: url(delete.png) no-repeat 0 0;
+}
+
+div.fivestar-widget .star, div.fivestar-widget .star a {
+  background: url(flame.png) no-repeat 0 0;
+}
+
+div.fivestar-widget div.on a {
+  background-position: 0 -26px;
+}
+div.fivestar-widget div.hover a, div.rating div a:hover {
+  background-position: 0 -52px;
+}

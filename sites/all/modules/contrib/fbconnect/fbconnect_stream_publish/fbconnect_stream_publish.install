@@ -1,0 +1,34 @@
+<?php
+// $Id: fbconnect_stream_publish.install,v 1.1.2.2 2010/10/12 15:07:18 vectoroc Exp $
+
+/**
+ * Implementation of hook_update_6201().
+ *
+ * Change content type activation variable
+ */
+function fbconnect_stream_publish_update_6201() {
+  $ret = array();
+
+  foreach (array_keys(node_get_types('names')) as $type_name) {
+    //Old variable format variable_get('fbconnect_' . $form['#node_type']->type . '_onoff', 0)
+    $old_format = 'fbconnect_' . $type_name . '_onoff';
+    $new_format = 'fbconnect_stream_publish_onoff_' . $type_name;
+    $value = variable_get($old_format, 'NULL');
+    // if old variable is set, set new one and delete old one, if it wasn't set then $old_value = 'NULL'
+    if ($value !== 'NULL') {
+      variable_set($new_format, $value);
+      variable_del($old_format);
+    }
+  }
+  // Delete any old existing variable
+  db_query("DELETE FROM {variable} WHERE name LIKE 'fbconnect\_%\_onoff'");
+
+  return $ret;
+}
+
+/**
+ * Implement hook_uninstall().
+ */
+function fbconnect_stream_publish_uninstall() {
+  db_query("DELETE FROM {variable} WHERE name LIKE 'fbconnect\_stream\_publish\_onoff\_%'");
+}

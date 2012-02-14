@@ -1,0 +1,48 @@
+/* $Id: voting.css,v 1.1.2.6 2010/10/23 02:18:33 marvil07 Exp $  */
+/* voting widget CSS files */
+
+.vud-widget-ohel {
+  border: 1px solid #999999;
+  clear: left;
+  float: left;
+  height: auto;
+  margin: 5px 6px 1px 0;
+  min-width: 40px;
+  overflow: hidden;
+  padding: 0 4px 5px;
+  width: auto;
+}
+.vud-widget-ohel .ohel-votes-display {
+  border: none;
+  font-family: Arial, FreeSans, sans-serif;
+  font-size: 22px;
+  font-weight: bold;
+  height: 26px;
+  padding: 2px;
+  text-align: center;
+}
+.vud-widget-ohel .up-active, 
+.vud-widget-ohel .up-inactive {
+  background: url("../../images/thumb.png") no-repeat 0 0 transparent;
+  height: 34px;
+  margin: 3px auto 0;
+  width: 30px;
+  overflow: hidden;
+  text-indent: -9999px;
+}
+.vud-widget-ohel .up-active, 
+.vud-widget-ohel .up-inactive:hover {
+  background-position: 0 -40px;
+}
+.vud-widget-ohel .ctools-ajaxing {
+  padding-right: 0 !important;
+  display: block;
+  margin: 3px auto 0;
+  width: 30px;
+  height: 34px;
+  background-position: center;
+  float: none;
+}
+.vud-widget-ohel .ctools-ajaxing div {
+  display: none;
+}

@@ -1,0 +1,34 @@
+<?php
+// $Id: share_services.module,v 1.1.2.3 2010/10/04 16:11:15 thecrow Exp $
+
+/**
+ * @file
+ * Provide the integration with Share module.
+ */
+
+/**
+ * Implementation of hook_share_info().
+ */
+function share_services_share_info() {
+  $info = array(
+    'tab' => array(
+      'module' => 'share_services',
+      'title' => t('Social web'),
+      'enabled' => TRUE,
+      'weight' => 0,
+    )
+  );
+  return $info;
+}
+
+/**
+ * Implementation of hook_share_tab().
+ */
+function share_services_share_tab($op, $args, $node = NULL) {
+  switch ($op) {
+    case 'process':
+      if (is_object($node)) {
+        return theme('service_links_node_format', service_links_render($node, TRUE));
+      }
+  }
+}

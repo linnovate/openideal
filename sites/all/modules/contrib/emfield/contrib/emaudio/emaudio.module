@@ -1,0 +1,392 @@
+<?php
+// $Id: emaudio.module,v 1.1.4.23.2.2 2010/07/19 16:25:59 aaron Exp $
+
+/**
+ * @file
+ * Embedded Audio module is a handler for mp3 and similar audio files, hosted on 3rd party sites.
+ */
+
+define('EMAUDIO_DEFAULT_AUDIO_WIDTH', 425);
+define('EMAUDIO_DEFAULT_AUDIO_HEIGHT', 350);
+define('EMAUDIO_DEFAULT_PREVIEW_WIDTH', 425);
+define('EMAUDIO_DEFAULT_PREVIEW_HEIGHT', 350);
+define('EMAUDIO_DEFAULT_THUMBNAIL_WIDTH', 120);
+define('EMAUDIO_DEFAULT_THUMBNAIL_HEIGHT', 90);
+define('EMAUDIO_DEFAULT_THUMBNAIL_PATH', '');
+
+/**
+ * Implementation of hook_menu().
+ */
+function emaudio_menu() {
+  $items = module_invoke('emfield', 'provider_menus', 'emaudio');
+  return $items;
+}
+
+/**
+ *  Implement hook_emfield_info
+ */
+function emaudio_emfield_info() {
+  $name = t('Embedded Audio Field');
+  return array(
+    '#name' => $name,
+    '#settings_title' => t('Audio'),
+    '#settings_description' => t('The following settings configure content with any fields controlled by @name.', array('@name' => $name)),
+  );
+}
+
+/**
+ * Implement hook_settings
+ */
+function emaudio_emfield_settings() {
+  $form = array();
+  return $form;
+}
+
+/**
+ * Implementation of hook_field_info().
+ */
+function emaudio_field_info() {
+  $fields = array(
+    'emaudio' => array(
+      'label' => t('Embedded Audio'),
+	  'description' => t('Automatically parse and display audio from a 3rd party by submitting its URL or embed code.'),
+      'callbacks' => array(
+        'tables' => CONTENT_CALLBACK_DEFAULT,
+        'arguments' => CONTENT_CALLBACK_DEFAULT,
+      ),
+    ),
+  );
+
+  return $fields;
+}
+
+/**
+ * Implementation of hook_field_settings().
+ */
+function emaudio_field_settings($op, $field) {
+  switch ($op) {
+    case 'database columns':
+      return module_invoke('emfield', 'field_columns', $field);
+      break;
+  }
+}
+
+function emaudio_handler_arg_provider($op, &$query, $argtype, $arg = '') {
+  return _emfield_handler_arg_provider($op, $query, $argtype, $arg, 'emaudio');
+}
+
+/**
+ * Implementation of hook_field().
+ */
+function emaudio_field($op, &$node, $field, &$items, $teaser, $page) {
+  if (module_hook('emfield', 'emfield_field')) {
+    return emfield_emfield_field($op, $node, $field, $items, $teaser, $page, 'emaudio');
+  }
+}
+
+/**
+ * Implementation of hook_content_is_empty().
+ */
+function emaudio_content_is_empty($item, $field) {
+  return module_invoke('emfield', 'emfield_content_is_empty', $item, $field);
+}
+
+/**
+ * Implementation of hook_field_formatter_info().
+ */
+function emaudio_field_formatter_info() {
+  $types = array('emaudio', );
+  $formats = array(
+    'default' => array(
+      'label' => t('Default'),
+      'field types' => $types,
+    ),
+    'audio_audio' => array(
+      'label' => t('Full Size Audio Player'),
+      'field types' => $types,
+    ),
+    'audio_preview' => array(
+      'label' => t('Preview Size Audio Player'),
+      'field types' => $types,
+    ),
+    'audio_thumbnail' => array(
+      'label' => t('Image Thumbnail'),
+      'field types' => $types,
+    ),
+    'audio_embed' => array(
+      'label' => t('Embed Code'),
+      'field types' => $types,
+    ),
+  );
+
+  return $formats;
+}
+
+/**
+ * Implementation of hook_field_formatter().
+ */
+function emaudio_field_formatter($field, $item, $formatter, $node) {
+  return module_invoke('emfield', 'emfield_field_formatter', $field, $item, $formatter, $node, 'emaudio');
+}
+
+/** Widgets **/
+
+/**
+ * Implementation of hook_widget_info().
+ */
+function emaudio_widget_info() {
+  return array(
+    'emaudio_textfields' => array(
+      'label' => t('3rd Party Audio'),
+      'field types' => array('emaudio', ),
+      'multiple values' => CONTENT_HANDLE_CORE,
+      'callbacks' => array(
+        'default value' => CONTENT_CALLBACK_DEFAULT,
+        ),
+    ),
+  );
+}
+
+function emaudio_widget_settings($op, $widget) {
+  switch ($op) {
+    case 'form':
+      if ($widget['type'] == 'emaudio_textfields') {
+        $form = (array)module_invoke('emfield', 'emfield_widget_settings', 'form', $widget, 'emaudio');
+        $width = variable_get('emaudio_default_audio_width', EMAUDIO_DEFAULT_AUDIO_WIDTH);
+        $height = variable_get('emaudio_default_audio_height', EMAUDIO_DEFAULT_AUDIO_HEIGHT);
+        $form['audio'] = array(
+          '#type' => 'fieldset',
+          '#title' => t('Audio Display Settings'),
+          '#description' => t('These settings control how this audio player is displayed in its full size, which defaults to @widthx@height.', array('@width' => $width, '@height' => $height)),
+          '#collapsible' => TRUE,
+          '#collapsed' => FALSE,
+        );
+        $form['audio']['audio_width'] = array(
+          '#type' => 'textfield',
+          '#title' => t('Audio display width'),
+          '#default_value' => empty($widget['audio_width']) ? $width : $widget['audio_width'],
+          '#required' => TRUE,
+          '#description' => t('The width of the audio. It defaults to @width.', array('@width' => $width)),
+        );
+        $form['audio']['audio_height'] = array(
+          '#type' => 'textfield',
+          '#title' => t('Audio display height'),
+          '#default_value' => empty($widget['audio_height']) ? $height : $widget['audio_height'],
+          '#required' => TRUE,
+          '#description' => t('The height of the audio. It defaults to @height.', array('@height' => $height)),
+        );
+        $form['audio']['audio_autoplay'] = array(
+          '#type' => 'checkbox',
+          '#title' => t('Autoplay'),
+          '#default_value' => empty($widget['audio_autoplay']) ? '' : $widget['audio_autoplay'],
+          '#description' => t('If supported by the provider, checking this box will cause the audio player to automatically begin after it loads when in its full size.'),
+        );
+
+        $width = variable_get('emaudio_default_preview_width', EMAUDIO_DEFAULT_PREVIEW_WIDTH);
+        $height = variable_get('emaudio_default_preview_height', EMAUDIO_DEFAULT_PREVIEW_HEIGHT);
+        $form['preview'] = array(
+          '#type' => 'fieldset',
+          '#title' => t('Audio Preview Settings'),
+          '#description' => t('These settings control how this audio is displayed in its preview size, which defaults to @widthx@height.', array('@width' => $width, '@height' => $height)),
+          '#collapsible' => TRUE,
+          '#collapsed' => FALSE,
+        );
+        $form['preview']['preview_width'] = array(
+          '#type' => 'textfield',
+          '#title' => t('Audio preview width'),
+          '#default_value' => empty($widget['preview_width']) ? $width : $widget['preview_width'],
+          '#required' => TRUE,
+          '#description' => t('The width of the preview audio. It defaults to @width.', array('@width' => $width)),
+        );
+        $form['preview']['preview_height'] = array(
+          '#type' => 'textfield',
+          '#title' => t('Audio preview height'),
+          '#default_value' => empty($widget['preview_height']) ? $height : $widget['preview_height'],
+          '#required' => TRUE,
+          '#description' => t('The height of the preview audio. It defaults to @height.', array('@height' => $height)),
+        );
+        $form['preview']['preview_autoplay'] = array(
+          '#type' => 'checkbox',
+          '#title' => t('Autoplay'),
+          '#default_value' => empty($widget['preview_autoplay']) ? '' : $widget['preview_autoplay'],
+          '#description' => t('If supported by the provider, checking this box will cause the audio player to automatically begin after it loads when in its preview size.'),
+        );
+
+        $width = variable_get('emaudio_default_thumbnail_width', EMAUDIO_DEFAULT_THUMBNAIL_WIDTH);
+        $height = variable_get('emaudio_default_thumbnail_height', EMAUDIO_DEFAULT_THUMBNAIL_HEIGHT);
+        $form['tn'] = array(
+          '#type' => 'fieldset',
+          '#title' => t('Thumbnail'),
+          '#description' => t('When displayed as a thumbnail, these settings control the image returned. Note that not all 3rd party audio content providers offer thumbnails, and others may require an API key or other requirements. More information from the <a href="@settings">settings page</a>. The default size for thumbnails is @widthx@height.', array('@settings' => url('admin/content/emfield'), '@width' => $width, '@height' => $height)),
+          '#collapsible' => TRUE,
+          '#collapsed' => FALSE,
+        );
+        $form['tn']['thumbnail_width'] = array(
+          '#type' => 'textfield',
+          '#title' => t('Audio width'),
+          '#default_value' => empty($widget['thumbnail_width']) ? $width : $widget['thumbnail_width'],
+          '#required' => TRUE,
+          '#description' => t('The width of the thumbnail. It defaults to @width.', array('@width' => $width)),
+        );
+        $form['tn']['thumbnail_height'] = array(
+          '#type' => 'textfield',
+          '#title' => t('Thumbnail height'),
+          '#default_value' => empty($widget['thumbnail_height']) ? $height : $widget['thumbnail_height'],
+          '#required' => TRUE,
+          '#description' => t('The height of the thumbnail. It defaults to @height.', array('@height' => $height)),
+        );
+        // Construct the description of the default path, hinting about the
+        // Embedded Media Thumbnail module if it's not enabled.
+        $description = t("Path to a local default thumbnail image for cases when a thumbnail can't be found. For example, you might have a default thumbnail at %files.", array('%files' => 'files/thumbnail.png'));
+        if (!module_exists('emthumb')) {
+          $description = ' '. t('You may be interested in activating the Embedded Media Thumbnails module as well, which will allow you to specify custom thumbnails on a per-node basis.');
+        }
+        $default_path = variable_get('emaudio_default_thumbnail_path', EMAUDIO_DEFAULT_THUMBNAIL_PATH);
+        $form['tn']['thumbnail_default_path'] = array(
+          '#type' => 'textfield',
+          '#title' => t('Default thumbnail path'),
+          '#default_value' => empty($widget['thumbnail_default_path']) ? $default_path : $widget['thumbnail_default_path'],
+          '#description' => $description,
+        );
+      }
+
+      return $form;
+
+    case 'validate':
+      if ($widget['type'] == 'emaudio_textfields') {
+        if (!is_numeric($widget['audio_width']) || intval($widget['audio_width']) != $widget['audio_width'] || $widget['audio_width'] < 1) {
+          form_set_error('audio_width', t('"Audio width" must be a positive integer.'));
+        }
+        if (!is_numeric($widget['audio_height']) || intval($widget['audio_height']) != $widget['audio_height'] || $widget['audio_height'] < 1) {
+          form_set_error('audio_height', t('"Audio height" must be a positive integer.'));
+        }
+        if (!is_numeric($widget['preview_width']) || intval($widget['preview_width']) != $widget['preview_width'] || $widget['preview_width'] < 1) {
+          form_set_error('preview_width', t('"Preview width" must be a positive integer.'));
+        }
+        if (!is_numeric($widget['preview_height']) || intval($widget['preview_height']) != $widget['preview_height'] || $widget['preview_height'] < 1) {
+          form_set_error('preview_height', t('"Preview height" must be a positive integer.'));
+        }
+        if (!is_numeric($widget['thumbnail_width']) || intval($widget['thumbnail_width']) != $widget['thumbnail_width'] || $widget['thumbnail_width'] < 1) {
+          form_set_error('thumbnail_width', t('"Thumbnail width" must be a positive integer.'));
+        }
+        if (!is_numeric($widget['thumbnail_height']) || intval($widget['thumbnail_height']) != $widget['thumbnail_height'] || $widget['thumbnail_height'] < 1) {
+          form_set_error('thumbnail_height', t('"Thumbnail height" must be a positive integer.'));
+        }
+      }
+      break;
+
+    case 'save':
+      if ($widget['widget_type'] == 'emaudio_textfields') {
+        $columns = array('audio_width', 'audio_height', 'audio_autoplay', 'preview_width', 'preview_height', 'preview_autoplay', 'thumbnail_width', 'thumbnail_height', 'thumbnail_default_path', );
+        $columns = array_merge($columns, module_invoke('emfield', 'emfield_widget_settings', 'save', $widget, 'emaudio'));
+
+        return $columns;
+      }
+      break;
+  }
+}
+
+/**
+ * Implementation of hook_widget().
+ */
+function emaudio_widget(&$form, &$form_state, $field, $items, $delta = 0) {
+  if (module_hook('emfield', 'emfield_widget')) {
+    return emfield_emfield_widget($form, $form_state, $field, $items, $delta, 'emaudio');
+  }
+}
+
+function emaudio_embed_form($field, $item, $formatter, $node, $options = array()) {
+  $embed = $item['value'];
+  $width = $options['width'] ? $options['width'] : $field['widget']['audio_width'];
+  $height = $options['height'] ? $options['height'] : $field['widget']['audio_height'];
+  $autoplay = $options['autoplay'] ? $options['autoplay'] : $field['widget']['audio_autoplay'];
+  $description = $options['description'] ? $options['description'] : t('To embed this audio on your own site, simply copy and paste the html code from this text area.');
+  $title = $options['title'] ? $options['title'] : t('Embed Code');
+  $text = module_invoke('emfield', 'include_invoke', 'emaudio', $item['provider'], 'audio', $embed, $width, $height, $field, $item, $autoplay);
+  $form = array();
+  $form['emaudio_embed'] = array(
+    '#type' => 'textarea',
+    '#title' => $title,
+    '#description' => $description,
+    '#default_value' => $text,
+  );
+
+  return $form;
+}
+
+/**
+ * Providers may supply an enclosure for rss feeds. This expects something in a
+ * file format, so would be an object in the format of $file->filepath,
+ * $file->filesize, and $file->filemime.
+ * Calls the providers hook emaudio_PROVIDER_rss($item, $teaser).
+ */
+function emaudio_emfield_rss($node, $items = array(), $teaser = NULL) {
+  $rss_data = array();
+  foreach ($items as $item) {
+    // note only the first $item will get an RSS enclosure, other items may have media: data in the feed however
+    if ($item['value'] && $item['provider']) {
+      $rss_data[] = module_invoke('emfield', 'include_invoke', 'emaudio', $item['provider'], 'rss', $item, $teaser);
+    }
+  }
+
+  return $rss_data;
+}
+
+/**
+ *  Impelements hook_theme().
+ */
+function emaudio_theme() {
+  $themes = array(
+    'emaudio_audio_embed' => array(
+       'arguments' => array('field' => NULL, 'item' => NULL, 'formatter' => NULL, 'node' => NULL, 'options' => array()),
+       'file' => 'emaudio.theme.inc'
+    ),
+    'emaudio_audio_flash' => array(
+      'arguments' => array('field' => NULL, 'item' => NULL, 'formatter' => NULL, 'node' => NULL, 'options' => array()),
+      'file' => 'emaudio.theme.inc'
+    ),
+    'emaudio_audio_thumbnail' => array(
+      'arguments' => array('field' => NULL, 'item' => NULL, 'formatter' => NULL, 'node' => NULL, 'options' => array()),
+      'file' => 'emaudio.theme.inc'
+    ),
+    'emaudio_audio_audio' => array(
+      'arguments' => array('field' => NULL, 'item' => NULL, 'formatter' => NULL, 'node' => NULL, 'options' => array()),
+      'file' => 'emaudio.theme.inc'
+    ),
+    'emaudio_audio_preview' => array(
+      'arguments'	=> array('field' => NULL, 'item' => NULL, 'formatter' => NULL, 'node' => NULL, 'options' => array()),
+      'file' => 'emaudio.theme.inc'
+    ),
+    'emaudio_default' => array(
+      'arguments'	=> array('field' => NULL, 'item' => NULL, 'formatter' => NULL, 'node' => NULL, 'options' => array()),
+      'file' => 'emaudio.theme.inc'
+    ),
+    'emaudio_formatter_audio_embed' => array(
+      'arguments' => array('element' => NULL),
+      'file' => 'emaudio.theme.inc'
+    ),
+    'emaudio_formatter_audio_thumbnail' => array(
+      'arguments' => array('element' => NULL),
+      'file' => 'emaudio.theme.inc'
+    ),
+    'emaudio_formatter_audio_audio' => array(
+      'arguments' => array('element' => NULL),
+      'file' => 'emaudio.theme.inc'
+    ),
+    'emaudio_formatter_audio_preview' => array(
+      'arguments'	=> array('element' => NULL),
+      'file' => 'emaudio.theme.inc'
+    ),
+    'emaudio_formatter_audio_flash' => array(
+      'arguments'	=> array('element' => NULL),
+      'file' => 'emaudio.theme.inc'
+    ),
+    'emaudio_formatter_default' => array(
+      'arguments'	=> array('element' => NULL),
+      'file' => 'emaudio.theme.inc'
+    ),
+  );
+  $themes += emfield_provider_themes('emaudio');
+
+  return $themes;
+}

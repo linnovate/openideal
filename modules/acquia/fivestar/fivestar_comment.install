@@ -1,0 +1,52 @@
+<?php
+// $Id: fivestar_comment.install,v 1.1.2.2 2008/10/05 21:09:00 quicksketch Exp $
+
+/**
+ * @file
+ * Installation file for Fivestar Comment module.
+ */
+
+function fivestar_comment_schema() {
+  $schema['fivestar_comment'] = array(
+    'fields' => array(
+      'cid' => array('type' => 'serial', 'unsigned' => TRUE, 'not null' => TRUE),
+      'vote_id' => array('type' => 'int', 'unsigned' => TRUE, 'not null' => TRUE, 'default' => 0),
+      'value' => array('type' => 'int', 'size' => 'tiny', 'unsigned' => TRUE, 'not null' => TRUE, 'default' => 0),
+    ),
+    'primary key' => array('cid'),
+    'indexes' => array(
+      'vote_id' => array('vote_id'),
+    ),
+  );
+  return $schema;
+}
+
+function fivestar_comment_install() {
+  drupal_install_schema('fivestar_comment');
+}
+
+function fivestar_comment_uninstall() {
+  drupal_uninstall_schema('fivestar_comment');
+  db_query("DELETE FROM {variable} WHERE name LIKE 'fivestar_comment_%'");
+}
+
+/**
+ * Add vote_id column to the fivestar_comment table. This update will only
+ * be run when upgrading to fivestar schema 6103.
+ */
+function fivestar_comment_update_6100() {
+  $ret = array();
+
+  // This update will already be run as fivestar_comment_update_5100 on Drupal 5.
+  if (FIVESTAR_VERSION >= 6100) {
+    db_add_field($ret, 'fivestar_comment', 'vote_id', array('type' => 'int', 'unsigned' => TRUE, 'not null' => TRUE, 'default' => 0));
+    db_add_index($ret, 'fivestar_comment', 'vote_id', array('vote_id'));
+
+    $comments = db_query('SELECT fc.cid, fc.value, v.vote_id FROM {fivestar_comment} fc INNER JOIN {comments} c ON fc.cid = c.cid INNER JOIN {votingapi_vote} v ON fc.value = v.value AND c.nid = v.content_id AND c.uid = v.uid WHERE v.tag = "vote" AND v.value_type = "percent" AND v.content_type = "node"');
+    while ($comment = db_fetch_object($comments)) {
+      db_query('UPDATE {fivestar_comment} SET vote_id = %d WHERE cid = %d', $comment->vote_id, $comment->cid);
+    }
+  }
+
+  return $ret;
+}

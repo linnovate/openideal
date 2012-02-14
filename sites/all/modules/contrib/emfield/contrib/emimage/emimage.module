@@ -1,0 +1,443 @@
+<?php
+// $Id: emimage.module,v 1.1.2.14.2.4 2010/11/17 17:07:01 aaron Exp $
+
+/**
+ * @file
+ * Embedded Image module is a handler for images hosted on an external site.
+ */
+
+define('EMIMAGE_LINK_NONE', 0);
+define('EMIMAGE_LINK_CONTENT', 'node');
+define('EMIMAGE_LINK_PROVIDER', 'provider');
+define('EMIMAGE_DEFAULT_FULL_WIDTH', 500);
+define('EMIMAGE_DEFAULT_FULL_HEIGHT', 800);
+define('EMIMAGE_DEFAULT_FULL_LINK', EMIMAGE_LINK_PROVIDER);
+define('EMIMAGE_DEFAULT_PREVIEW_WIDTH', 240);
+define('EMIMAGE_DEFAULT_PREVIEW_HEIGHT', 360);
+define('EMIMAGE_DEFAULT_PREVIEW_LINK', EMIMAGE_LINK_CONTENT);
+define('EMIMAGE_DEFAULT_THUMBNAIL_WIDTH', 100);
+define('EMIMAGE_DEFAULT_THUMBNAIL_HEIGHT', 180);
+define('EMIMAGE_DEFAULT_THUMBNAIL_LINK', EMIMAGE_LINK_CONTENT);
+
+/**
+ * Implementation of hook_menu().
+ */
+function emimage_menu() {
+  $items = module_invoke('emfield', 'provider_menus', 'emimage');
+
+  return $items;
+}
+
+/**
+ *  Implement hook_emimage_info
+ */
+function emimage_emfield_info() {
+  return array(
+    '#name' => t('Embedded Image Field'),
+    '#settings_title' => t('Images'),
+    '#settings_description' => t('The following settings configure content with any fields controlled by Embedded Image Field.'),
+  );
+}
+
+/**
+ * Implement hook_emimage_settings
+ */
+function emimage_emfield_settings() {
+  $form = array();
+  return $form;
+}
+
+/**Implementation of hook_field_info  **/
+
+function emimage_field_info() {
+  $fields = array(
+    'emimage' => array(
+      'label' => t('Embedded Image'),
+      'callbacks' => array(
+        'tables' => CONTENT_CALLBACK_DEFAULT,
+        'arguments' => CONTENT_CALLBACK_DEFAULT,
+      ),
+    ),
+  );
+  return $fields;
+}
+
+/** Implementation of hook_field_settings **/
+function emimage_field_settings($op, $field) {
+  switch ($op) {
+    case 'database columns':
+      return module_invoke('emfield', 'field_columns', $field);
+  }
+}
+
+function emimage_handler_arg_provider($op, &$query, $argtype, $arg = '') {
+  return _emfield_handler_arg_provider($op, $query, $argtype, $arg, 'emimage');
+}
+
+/** Implementation of hook_field **/
+function emimage_field($op, &$node, $field, &$items, $teaser, $page) {
+  if (module_hook('emfield', 'emfield_field')) {
+    return emfield_emfield_field($op, $node, $field, $items, $teaser, $page, 'emimage');
+  }
+}
+
+/**
+ *  implement hook_content_is_empty
+ */
+function emimage_content_is_empty($item, $field) {
+  return module_invoke('emfield', 'emfield_content_is_empty', $item, $field);
+}
+
+/** Implementation of hook_emfield_field_formatter_info **/
+function emimage_field_formatter_info() {
+  $types = array('emimage', );
+  $formats = array(
+    'default' => array(
+      'label' => t('Default'),
+      'field types' => $types,
+    ),
+    'image_full' => array(
+      'label' => t('Full Size Image'),
+      'field types' => $types,
+    ),
+    'image_preview' => array(
+      'label' => t('Preview Size Image'),
+      'field types' => $types,
+    ),
+    'image_thumbnail' => array(
+      'label' => t('Image Thumbnail'),
+      'field types' => $types,
+    ),
+    'image_embed' => array(
+      'label' => t('Embed Code'),
+      'field types' => $types,
+    ),
+    'image_link' => array(
+      'label' => t('Link to Image'),
+      'field types' => $types,
+    ),
+  );
+  return $formats;
+}
+
+function emimage_field_formatter($field, $item, $formatter, $node) {
+  return module_invoke('emfield', 'emfield_field_formatter', $field, $item, $formatter, $node, 'emimage');
+}
+
+/** Widgets **/
+
+/** Implementation of hook_widget_info **/
+function emimage_widget_info() {
+  return array(
+    'emimage_textfields' => array(
+      'label' => t('3rd Party Image'),
+      'field types' => array('emimage', ),
+      'multiple values' => CONTENT_HANDLE_CORE,
+      'callbacks' => array(
+        'default value' => CONTENT_CALLBACK_DEFAULT,
+        ),
+    ),
+  );
+}
+
+function emimage_widget_settings($op, $widget) {
+  switch ($op) {
+    case 'form':
+      $form = (array)module_invoke('emfield', 'emfield_widget_settings', 'form', $widget, 'emimage');
+      if ($widget['type'] == 'emimage_textfields') {
+        $link_options = array(
+          EMIMAGE_LINK_NONE => t('No link'),
+          EMIMAGE_LINK_CONTENT => t('Link to content'),
+          EMIMAGE_LINK_PROVIDER => t('Link to provider'),
+        );
+        $width = variable_get('emimage_default_full_width', EMIMAGE_DEFAULT_FULL_WIDTH);
+        $height = variable_get('emimage_default_full_height', EMIMAGE_DEFAULT_FULL_HEIGHT);
+        $form['full'] = array(
+          '#type' => 'fieldset',
+          '#title' => t('Full size display settings'),
+          '#description' => t('These settings control how this image is displayed in its full size, which defaults to @widthx@height. Note that if one of the dimensions is 0, then the image will be resized to be no larger than the other dimension.', array('@width' => $width, '@height' => $height)),
+          '#collapsible' => true,
+          '#collapsed' => false,
+        );
+        $form['full']['full_width'] = array(
+          '#type' => 'textfield',
+          '#title' => t('Full size display width'),
+          '#default_value' => is_null($widget['full_width']) ? $width : $widget['full_width'],
+          '#description' => t('The width of the image. It defaults to @width. Set it to 0 or blank if you want to leave the image at its original aspect ratio.', array('@width' => $width)),
+        );
+        $form['full']['full_height'] = array(
+          '#type' => 'textfield',
+          '#title' => t('Full size display height'),
+          '#default_value' => is_null($widget['full_height']) ? $height : $widget['full_height'],
+          '#description' => t('The height of the image. It defaults to @height. Set it to 0 or blank if you want to leave the image at its original aspect ratio.', array('@height' => $height)),
+        );
+        $full_link = variable_get('emimage_default_full_link', EMIMAGE_DEFAULT_FULL_LINK);
+        $form['full']['full_link'] = array(
+          '#type' => 'select',
+          '#title' => t('Full size link'),
+          '#description' => t("Where the image will link when displayed in its full size. 'Content' links to the content page, 'provider' links to the provider's image page, and 'none' displays the image with no link."),
+          '#options' => $link_options,
+          '#default_value' => is_null($widget['full_link']) ? $full_link : $widget['full_link'],
+        );
+
+        $width = variable_get('emimage_default_preview_width', EMIMAGE_DEFAULT_PREVIEW_WIDTH);
+        $height = variable_get('emimage_default_preview_height', EMIMAGE_DEFAULT_PREVIEW_HEIGHT);
+        $form['preview'] = array(
+          '#type' => 'fieldset',
+          '#title' => t('Image Preview Settings'),
+          '#description' => t('These settings control how this image is displayed in its preview size, which defaults to @widthx@height. Note that if one of the dimensions is 0, then the image will be resized to be no larger than the other dimension.', array('@width' => $width, '@height' => $height)),
+          '#collapsible' => true,
+          '#collapsed' => false,
+        );
+        $form['preview']['preview_width'] = array(
+          '#type' => 'textfield',
+          '#title' => t('Image preview width'),
+          '#default_value' => is_null($widget['preview_width']) ? $width : $widget['preview_width'],
+          '#description' => t('The width of the image preview. It defaults to @width. Set it to 0 or blank if you want to leave the image at its original aspect ratio.', array('@width' => $width)),
+        );
+        $form['preview']['preview_height'] = array(
+          '#type' => 'textfield',
+          '#title' => t('Image preview height'),
+          '#default_value' => is_null($widget['preview_height']) ? $height : $widget['preview_height'],
+          '#description' => t('The height of the image preview. It defaults to @height. Set it to 0 or blank if you want to leave the image at its original aspect ratio.', array('@height' => $height)),
+        );
+        $preview_link = variable_get('emimage_default_preview_link', EMIMAGE_DEFAULT_PREVIEW_LINK);
+        $form['preview']['preview_link'] = array(
+          '#type' => 'select',
+          '#title' => t('Preview size link'),
+          '#description' => t("Where the image will link when displayed in its preview size. 'Content' links to the content page, 'provider' links to the provider's image page, and 'none' displays the image with no link."),
+          '#options' => $link_options,
+          '#default_value' => isset($widget['preview_link']) ? $widget['preview_link'] : $preview_link,
+        );
+        $width = variable_get('emimage_default_thumbnail_width', EMIMAGE_DEFAULT_THUMBNAIL_WIDTH);
+        $height = variable_get('emimage_default_thumbnail_height', EMIMAGE_DEFAULT_THUMBNAIL_HEIGHT);
+        $form['tn'] = array(
+          '#type' => 'fieldset',
+          '#title' => t('Thumbnail'),
+          '#description' => t('When displayed as a thumbnail, these settings control the image returned. The default size for thumbnails is @widthx@height. Note that if one of the dimensions is 0, then the image will be resized to be no larger than the other dimension.', array('@width' => $width, '@height' => $height)),
+          '#collapsible' => true,
+          '#collapsed' => false,
+        );
+        $form['tn']['thumbnail_width'] = array(
+          '#type' => 'textfield',
+          '#title' => t('Image thumbnail width'),
+          '#default_value' => is_null($widget['thumbnail_width']) ? $width : $widget['thumbnail_width'],
+          '#description' => t('The width of the image thumbnail. It defaults to @width. Set it to 0 or blank if you want to leave the image at its original aspect ratio.', array('@width' => $width)),
+        );
+        $form['tn']['thumbnail_height'] = array(
+          '#type' => 'textfield',
+          '#title' => t('Image thumbnail height'),
+          '#default_value' => is_null($widget['thumbnail_height']) ? $height : $widget['thumbnail_height'],
+          '#description' => t('The height of the image thumbnail. It defaults to @height. Set it to 0 or blank if you want to leave the image at its original aspect ratio.', array('@height' => $height)),
+        );
+        $thumb_link = variable_get('emimage_default_thumbnail_link', EMIMAGE_DEFAULT_THUMBNAIL_LINK);
+        $form['tn']['thumbnail_link'] = array(
+          '#type' => 'select',
+          '#title' => t('Image thumbnail link'),
+          '#description' => t("Where the image will link when displayed as a thumbnail. 'Content' links to the content page, 'provider' links to the provider's image page, and 'none' displays the image with no link."),
+          '#options' => $link_options,
+          '#default_value' => is_null($widget['thumbnail_link']) ? $thumb_link : $widget['thumbnail_link'],
+        );
+      }
+      return $form;
+
+    case 'validate':
+      if ($widget['type'] == 'emimage_textfields') {
+        if (!is_numeric($widget['full_width']) || intval($widget['full_width']) != $widget['full_width'] || $widget['full_width'] < 0) {
+          form_set_error('full_width', t('"Full size width" must be an integer.'));
+        }
+        if (!is_numeric($widget['full_height']) || intval($widget['full_height']) != $widget['full_height'] || $widget['full_height'] < 0) {
+          form_set_error('full_height', t('"Full size height" must be an integer.'));
+        }
+        if (!is_numeric($widget['preview_width']) || intval($widget['preview_width']) != $widget['preview_width'] || $widget['preview_width'] < 0) {
+          form_set_error('preview_width', t('"Preview width" must be an integer.'));
+        }
+        if (!is_numeric($widget['preview_height']) || intval($widget['preview_height']) != $widget['preview_height'] || $widget['preview_height'] < 0) {
+          form_set_error('preview_height', t('"Preview height" must be an integer.'));
+        }
+        if (!is_numeric($widget['thumbnail_width']) || intval($widget['thumbnail_width']) != $widget['thumbnail_width'] || $widget['thumbnail_width'] < 0) {
+          form_set_error('thumbnail_width', t('"Thumbnail width" must be an integer.'));
+        }
+        if (!is_numeric($widget['thumbnail_height']) || intval($widget['thumbnail_height']) != $widget['thumbnail_height'] || $widget['thumbnail_height'] < 0) {
+          form_set_error('thumbnail_height', t('"Thumbnail height" must be an integer.'));
+        }
+      }
+      break;
+
+    case 'save':
+      if ($widget['widget_type'] == 'emimage_textfields') {
+        $columns = array('full_width', 'full_height', 'full_link', 'preview_width', 'preview_height', 'preview_link', 'thumbnail_width', 'thumbnail_height', 'thumbnail_link', );
+        $columns = array_merge($columns, module_invoke('emfield', 'emfield_widget_settings', 'save', $widget, 'emimage'));
+
+        return $columns;
+      }
+      break;
+  }
+}
+
+function emimage_widget(&$form, &$form_state, $field, $items, $delta = 0) {
+  if (module_hook('emfield', 'emfield_widget')) {
+    return emfield_emfield_widget($form, $form_state, $field, $items, $delta, 'emimage');
+  }
+}
+
+function emimage_embed_form($field, $item, $formatter, $node) {
+  $embed = $item['value'];
+  $width = $field['widget']['full_width'];
+  $height = $field['widget']['full_height'];
+  $text = module_invoke('emfield', 'include_invoke', 'emimage', $item['provider'], 'image_full', $embed, $width, $height, $field, $item);
+  $form = array();
+  $form['emimage_embed'] = array(
+    '#type' => 'textarea',
+    '#title' => t('Embed Code'),
+    '#description' => t('To embed this image on your own site, simply copy and paste the html code from this text area.'),
+    '#default_value' => $text,
+  );
+  return $form;
+}
+
+function emimage_theme(){
+  $themes = array(
+    'emimage_image' => array(
+        'arguments' => array(
+          'field' => NULL,
+          'item' => NULL,
+          'formatter' => NULL,
+          'node' => NULL,
+          'code' => NULL,
+          'width' => NULL,
+          'height' => NULL,
+          'title' => NULL,
+          'link' => NULL,
+          'options' => array(),
+        ),
+    'file' => 'emimage.theme.inc',
+    ),
+    'emimage_image_embed' => array(
+      'arguments' => array(
+        'field' => NULL,
+        'item' => NULL,
+        'formatter' => NULL,
+        'node' => NULL,
+        'options' => array(),
+      ),
+      'file' => 'emimage.theme.inc',
+    ),
+    'emimage_image_link' => array(
+        'arguments' => array('element' => NULL),
+        'file' => 'emimage.theme.inc'
+    ),
+    'emimage_formatter_image_link' => array(
+        'arguments' => array('element' => NULL),
+        'file' => 'emimage.theme.inc'
+    ),
+    'emimage_image_image' => array(
+      'arguments' => array(
+        'field' => NULL,
+        'item' => NULL,
+        'formatter' => NULL,
+        'node' => NULL,
+        'code' => NULL,
+        'width' => NULL,
+        'height' => NULL,
+        'title' => '',
+        'link' => NULL,
+        'options' => array(),
+      ),
+      'file' => 'emimage.theme.inc',
+    ),
+    'emimage_image_thumbnail' => array(
+      'arguments' => array(
+        'field' => NULL,
+        'item' => NULL,
+        'formatter' => NULL,
+        'node' => NULL,
+        'options' => array(),
+      ),
+      'file' => 'emimage.theme.inc',
+    ),
+    'emimage_image_full' => array(
+      'arguments' => array(
+        'field' => NULL,
+        'item' => NULL,
+        'formatter' => NULL,
+        'node' => NULL,
+        'options' => array(),
+      ),
+      'file' => 'emimage.theme.inc',
+    ),
+    'emimage_image_preview' => array(
+      'arguments' => array(
+        'field' => NULL,
+        'item' => NULL,
+        'formatter' => NULL,
+        'node' => NULL,
+        'options' => array(),
+      ),
+      'file' => 'emimage.theme.inc',
+    ),
+    'emimage_default' => array(
+      'arguments' => array(
+        'field' => NULL,
+        'item' => NULL,
+        'formatter' => NULL,
+        'node' => NULL,
+        'options' => array(),
+      ),
+      'file' => 'emimage.theme.inc',
+    ),
+    'emimage_formatter_image_image' => array(
+      'arguments' => array('element' => NULL),
+      'file' => 'emimage.theme.inc',
+    ),
+    'emimage_formatter_image_thumbnail' => array(
+      'arguments' => array('element' => NULL),
+      'file' => 'emimage.theme.inc',
+    ),
+    'emimage_formatter_image_embed' => array(
+        'arguments' => array('element' => NULL),
+        'file' => 'emimage.theme.inc',
+    ),
+    'emimage_formatter_image_preview' => array(
+        'arguments' => array('element' => NULL),
+        'file' => 'emimage.theme.inc',
+    ),
+    'emimage_formatter_image_full' => array(
+        'arguments' => array('element' => NULL),
+        'file' => 'emimage.theme.inc',
+    ),
+    'emimage_formatter_default' => array(
+        'arguments' => array('element' => NULL),
+        'file' => 'emimage.theme.inc',
+    )
+  );
+
+  $themes += module_invoke('emfield', 'provider_themes', 'emimage');
+
+  return $themes;
+}
+
+/**
+ * Return the URL to the emimage field specified.
+ *
+ * This will be a local image if emthumb is enabled, or the remote image.
+ */
+function emimage_image_url($field, $item, $formatter, $node, $code, $width = NULL, $height = NULL, $options = array()) {
+  // Get a thumbnail URL. This can be an override through $options['thumbnail_url'],
+  // defined by the provider (the usual case), or a default image.
+  if (isset($options['thumbnail_url']) || ($item['value'] && $item['provider'])) {
+    // If we've set $options['thumbnail_url'], then we'll just use that.
+    $url = isset($options['thumbnail_url']) ? $options['thumbnail_url'] : '';
+
+    // Otherwise, if we have emthumb installed, then give it a chance to override our thumbnail.
+    if (empty($url) && function_exists('emthumb_thumbnail_path')) {
+      $url = emthumb_thumbnail_path($item);
+    }
+
+    // If we don't have a custom thumbnail, then see if the provider gives us a thumbnail.
+    if (empty($url)) {
+      $url = emfield_include_invoke('emimage', $item['provider'], 'image_url', $code, $width, $height, $formatter, $field, $item, $node);
+    }
+    return $url;
+  }
+}

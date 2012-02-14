@@ -1,0 +1,1437 @@
+# $Id: fi.po,v 1.1.2.1 2009/11/06 01:48:33 quicksketch Exp $
+#
+# LANGUAGE translation of Drupal (general)
+# Copyright YEAR NAME <EMAIL@ADDRESS>
+# Generated from files:
+#  webform_components.inc,v 1.1.2.36 2008/10/08 19:51:44 quicksketch
+#  webform.module,v 1.113.2.70.2.73 2008/10/14 21:51:45 quicksketch
+#  file.inc,v 1.2.2.19.2.22 2008/10/08 19:51:44 quicksketch
+#  markup.inc,v 1.3.2.4.2.9 2008/09/06 20:51:36 quicksketch
+#  webform_report.inc,v 1.15.2.11.2.13 2008/10/08 19:51:44 quicksketch
+#  webform_submissions.inc,v 1.1.2.23 2008/10/08 19:51:44 quicksketch
+#  webform_export.inc,v 1.1.2.1 2008/09/21 03:20:46 quicksketch
+#  webform.info: n/a
+#  webform.install,v 1.14.2.16.2.24 2008/10/06 05:55:37 quicksketch
+#  date.inc,v 1.13.2.15.2.13 2008/10/08 19:51:44 quicksketch
+#  email.inc,v 1.16.2.7.2.11 2008/10/06 05:45:41 quicksketch
+#  hidden.inc,v 1.11.2.3.2.12 2008/09/06 20:51:36 quicksketch
+#  select.inc,v 1.18.2.19.2.24 2008/10/22 19:38:59 quicksketch
+#  textarea.inc,v 1.11.2.4.2.7 2008/09/06 20:51:36 quicksketch
+#  textfield.inc,v 1.11.2.7.2.8 2008/10/14 18:20:02 quicksketch
+#  time.inc,v 1.14.2.6.2.8 2008/10/08 19:51:44 quicksketch
+#  fieldset.inc,v 1.3.4.4.2.5 2008/09/06 20:51:36 quicksketch
+#  grid.inc,v 1.1.2.3.2.13 2008/10/08 19:51:44 quicksketch
+#  pagebreak.inc,v 1.1.2.3.2.6 2008/09/06 20:51:36 quicksketch
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"POT-Creation-Date: 2008-12-10 14:38+0100\n"
+"PO-Revision-Date: 2009-01-25 18:44+0200\n"
+"Last-Translator: Petri Tonteri <scope.note a gmail.com>\n"
+"Language-Team: finnish\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: webform_components.inc:39;127;352
+msgid "Weight"
+msgstr "Paino"
+
+#: webform_components.inc:44;127;317
+msgid "Mandatory"
+msgstr "Pakollinen"
+
+#: webform_components.inc:50;127
+msgid "E-mail"
+msgstr "Sähköposti"
+
+#: webform_components.inc:92
+msgid "Add"
+msgstr "Lisää"
+
+#: webform_components.inc:98;385
+#: webform.module:1281;1300;1317;1420
+msgid "Submit"
+msgstr "Lähetä"
+
+#: webform_components.inc:104;241
+msgid "Publish"
+msgstr "Julkaise"
+
+#: webform_components.inc:127
+#: webform.module:710;1152
+#: components/file.inc:522
+msgid "Name"
+msgstr "Nimi"
+
+#: webform_components.inc:127
+#: webform.module:711
+msgid "Type"
+msgstr "Tyyppi"
+
+#: webform_components.inc:127
+#: components/markup.inc:34
+msgid "Value"
+msgstr "Arvo"
+
+#: webform_components.inc:127
+#: webform_report.inc:44
+#: webform.module:1957
+msgid "Operations"
+msgstr "Toiminnot"
+
+#: webform_components.inc:132
+msgid "New component name"
+msgstr "Uusi komponentin nimi"
+
+#: webform_components.inc:188
+#: webform_report.inc:75
+#: webform.module:220;1968
+msgid "Edit"
+msgstr "Muokkaa"
+
+#: webform_components.inc:189
+msgid "Clone"
+msgstr "Kloonaa"
+
+#: webform_components.inc:190;475
+#: webform_report.inc:76
+#: webform_submissions.inc:117
+#: webform.module:229
+msgid "Delete"
+msgstr "Poista"
+
+#: webform_components.inc:212
+msgid "No Components, add a component below."
+msgstr "Ei komponentteja. Lisää komponentti alempana."
+
+#: webform_components.inc:244
+msgid "Your webform has been published."
+msgstr "Verkkolomakkeesi on julkaistu."
+
+#: webform_components.inc:254
+msgid "The component positions and mandatory values have been updated."
+msgstr "Osan sijainnit ja pakolliset arvot on päivitetty."
+
+#: webform_components.inc:259
+msgid "Edit component: @name (@type)"
+msgstr "Muokkaa osaa: @name (@type)"
+
+#: webform_components.inc:285
+msgid "Label"
+msgstr "Otsikko"
+
+#: webform_components.inc:286
+msgid "This is used as a descriptive label when displaying this form element."
+msgstr "Tätä käytetään kuvailevana otsikkona, kun näytetään tämä lomakekomponentti."
+
+#: webform_components.inc:294
+#: webform.module:486;1152
+msgid "Description"
+msgstr "Kuvaus"
+
+#: webform_components.inc:295
+msgid "A short description of the field used as help for the user when he/she uses the form."
+msgstr "Lyhyt kentän kuvaus, joka näytetään käyttäjälle, kun hän käyttää lomaketta."
+
+#: webform_components.inc:301
+msgid "Advanced settings"
+msgstr "Edistyneet asetukset"
+
+#: webform_components.inc:310
+msgid "Field Key"
+msgstr "Kentän avain"
+
+#: webform_components.inc:311
+msgid "Enter a machine readable key for this form element. May contain only lowercase alphanumeric characters and underscores. This key will be used as the name attribute of the form element. This value has no effect on the way data is saved, but may be helpful if using Additional Processing or Validation code."
+msgstr "Anna koneluettava avain lomakkeen tälle komponentille. Avain saa sisältää vain numeroita, pieniä kirjaimia ja alaviivoja. Tätä avainta käytetään nimimääritteenä tälle komponentille. Arvolla ei ole vaikutusta tapaan, jolla data tallennetaan, mutta voi olla hyödyllistä käyttää Lisäprosessointia (Additional Processing) tai Tarkistuskoodia (Validation code)."
+
+#: webform_components.inc:319
+msgid "Check this option if the user must enter a value."
+msgstr "Valitse tämä, jos haluat, että arvon antaminen on pakollista."
+
+#: webform_components.inc:325
+msgid "Include in e-mails"
+msgstr "Liitä sähköposteihin"
+
+#: webform_components.inc:327
+msgid "If checked, submitted values from this component will be included in e-mails."
+msgstr "Jos tämä on valittuna, tämän komponentin lähetetyt arvot sisällytetään sähköposteihin."
+
+#: webform_components.inc:333
+msgid "Root"
+msgstr "Juurikansio"
+
+#: webform_components.inc:341
+msgid "Parent Fieldset"
+msgstr "Emokenttäjoukko"
+
+#: webform_components.inc:343
+msgid "Optional. You may organize your form by placing this component inside another fieldset."
+msgstr "Valinnainen. Voit järjestää lomakkeesi sijoittamalla tämän komponentin toiseen kenttäjoukkoon."
+
+#: webform_components.inc:354
+msgid "Optional. In the menu, the heavier items will sink and the lighter items will be positioned nearer the top."
+msgstr "Valinnainen. Menussa raskaammat kohdat uppoavat ja kevyemmät kohdat sijoittuvat lähelle valikon yläpäätä."
+
+#: webform_components.inc:366
+msgid "The webform component of type @type does not have an edit function defined."
+msgstr "Verkkolomakkeen komponenttityyppiin @type ei ole liitetty  muokkaustoimintoa."
+
+#: webform_components.inc:399
+msgid "The field key %field_key is invalid. Please include only lowercase alphanumeric characters and underscores."
+msgstr "Kenttäavain %field_key on virheellinen. Ole hyvä ja käytä vain numeroita, pieniä kirjaimia ja alaviivoja."
+
+#: webform_components.inc:404
+msgid "The field key %field_key is already in use by the field labeled %existing_field. Please use a unique key."
+msgstr "Kenttäavainta %field_key käyttää jo kenttä %existing_field. Ole hyvä ja anna yksilöllinen avain."
+
+#: webform_components.inc:438
+msgid "Component %name cloned."
+msgstr "Komponentti %name on kloonattu."
+
+#: webform_components.inc:442
+msgid "Component %name updated."
+msgstr "Komponentti %name on päivitetty."
+
+#: webform_components.inc:446
+msgid "New component %name added."
+msgstr "Uusi komponentti %name on lisätty."
+
+#: webform_components.inc:467
+msgid "Delete the %name fieldset?"
+msgstr "Poistetaanko %name-kenttäjoukko?"
+
+#: webform_components.inc:468
+msgid "This will immediately delete the %name fieldset and all children elements within %name from the %webform webform. This cannot be undone."
+msgstr "Toiminto poistaa välittömästi %name-kenttäjoukon ja kaikki sen alaiset komponentit %webform-verkkolomakkeen tästä kenttäjoukosta. Toimintoa ei voi perua."
+
+#: webform_components.inc:471
+msgid "Delete the %name component?"
+msgstr "Poistetaanko %name-niminen komponentti?"
+
+#: webform_components.inc:472
+msgid "This will immediately delete the %name component from the %webform webform. This cannot be undone."
+msgstr "Tämä toiminto poistaa välittömästi %name-nimisen komponentin %webform-verkkolomakkeesta. Toimintoa ei voi perua."
+
+#: webform_components.inc:479
+msgid "Component %name deleted."
+msgstr "Komponentti %name on poistettu."
+
+#: webform_export.inc:21
+msgid "Delimited text"
+msgstr "Eroteltu teksti"
+
+#: webform_export.inc:22
+msgid "A plain text file delimited by commas, tabs, or other characters."
+msgstr "Perustekstitiedosto eroteltuna pilkuilla, tabulaattorilla tai muilla merkeillä."
+
+#: webform_export.inc:26
+msgid "Microsoft Excel"
+msgstr ""
+
+#: webform_export.inc:27
+msgid "A file readable by Microsoft Excel."
+msgstr "Microsoft Excelin luettavissa oleva tiedosto."
+
+#: webform_report.inc:20
+msgid "Submissions for %user"
+msgstr "Käyttäjälle %user lähetetyt lomakkeet"
+
+#: webform_report.inc:37;111
+msgid "#"
+msgstr ""
+
+#: webform_report.inc:38;112
+msgid "Submitted"
+msgstr "Lähetetty"
+
+#: webform_report.inc:41;113
+msgid "User"
+msgstr "Käyttäjä"
+
+#: webform_report.inc:42;114;311
+msgid "IP Address"
+msgstr "IP-osoite"
+
+#: webform_report.inc:73
+#: webform.module:211;1956
+msgid "View"
+msgstr "Katsele"
+
+#: webform_report.inc:85;165;403
+msgid "There are no submissions for this form. <a href=\"!url\">View this form</a>."
+msgstr "Tämän lomakkeen lähetyksiä ei ole. <a href=\"!url\">Katso lomaketta</a>."
+
+#: webform_report.inc:90
+#: webform.module:1715
+msgid "Go back to the form"
+msgstr "Palaa lomakkeeseen"
+
+#: webform_report.inc:192
+msgid "Clear Form Submissions"
+msgstr "Poista lähetetyt lomakkeet"
+
+#: webform_report.inc:196
+msgid "Are you sure you want to delete all submissions for this form?"
+msgstr "Oletko varma, että haluat poistaa kaikki tämän lomakkeen lähetykset?"
+
+#: webform_report.inc:198
+#: webform.module:181;1969
+msgid "Clear"
+msgstr "Tyhjennä"
+
+#: webform_report.inc:198
+#: webform_submissions.inc:117
+msgid "Cancel"
+msgstr "Peruuta"
+
+#: webform_report.inc:206
+msgid "Webform %title entries cleared."
+msgstr "Lähetetyt %title-verkkolomakkeet on poistettu."
+
+#: webform_report.inc:227
+msgid "Export format"
+msgstr "Vientimuoto"
+
+#: webform_report.inc:234
+msgid "Delimited text format"
+msgstr "Eroteltu tekstimuoto"
+
+#: webform_report.inc:235
+#: webform.module:1118
+msgid "This is the delimiter used in the CSV/TSV file when downloading Webform results. Using tabs in the export is the most reliable method for preserving non-latin characters. You may want to change this to another character depending on the program with which you anticipate importing results."
+msgstr "Tätä erotinta käytetään CSV/TSV-tiedostoissa ladattaessa palvelimelta verkkolomaketuloksia. Tuonnissa tabulaattori on luotettavin erottelutapa ei-latinalaisten merkkien säilyttämiseksi. Jos haluat, voit muuttaa tiedoston muulle merkistölle riippuen ohjelmasta, jolla käsittelet tuotuja tuloksia."
+
+#: webform_report.inc:238
+#: webform.module:1121
+msgid "Comma (,)"
+msgstr "Pilkku (,)"
+
+#: webform_report.inc:239
+#: webform.module:1122
+msgid "Tab (\\t)"
+msgstr "Tabulaattori (\\t)"
+
+#: webform_report.inc:240
+#: webform.module:1123
+msgid "Semicolon (;)"
+msgstr "Puolipiste (;)"
+
+#: webform_report.inc:241
+#: webform.module:1124
+msgid "Colon (:)"
+msgstr "Kaksoispiste (:)"
+
+#: webform_report.inc:242
+#: webform.module:1125
+msgid "Pipe (|)"
+msgstr ""
+
+#: webform_report.inc:243
+#: webform.module:1126
+msgid "Period (.)"
+msgstr "Piste (.)"
+
+#: webform_report.inc:244
+#: webform.module:1127
+msgid "Space ( )"
+msgstr "Välilyönti ( )"
+
+#: webform_report.inc:250
+#: webform.module:172;1967
+msgid "Download"
+msgstr "Lataa"
+
+#: webform_report.inc:310
+msgid "Submission Details"
+msgstr "Lähetyksen tiedot"
+
+#: webform_report.inc:311
+msgid "Serial"
+msgstr ""
+
+#: webform_report.inc:311
+msgid "SID"
+msgstr ""
+
+#: webform_report.inc:311
+msgid "Time"
+msgstr "Aika"
+
+#: webform_report.inc:311
+msgid "UID"
+msgstr ""
+
+#: webform_report.inc:311
+msgid "Username"
+msgstr "Käyttäjänimi"
+
+#: webform_report.inc:382
+msgid "Q"
+msgstr ""
+
+#: webform_report.inc:383
+msgid "responses"
+msgstr "vastaukset"
+
+#: webform_report.inc:208
+#: webform.module:1580;1619;0
+msgid "webform"
+msgstr "verkkolomake"
+
+#: webform_submissions.inc:110
+msgid "Delete Form Submission"
+msgstr "Poistetaan lähetetty lomake"
+
+#: webform_submissions.inc:115
+msgid "Are you sure you want to delete this submission?"
+msgstr "Oletko varma, että haluat poistaa tämän lähetyksen?"
+
+#: webform_submissions.inc:122
+msgid "Submission deleted."
+msgstr "Lähetys poistettu."
+
+#: webform.module:22
+msgid "Webforms are forms and questionnaires. To add one, select <a href=\"!url\">Create content -&gt; Webform</a>."
+msgstr "Verkkolomakkeet ovat lomakkeita ja kyselyitä. Lisätäksesi uuden, valitse <a href=\"!url\">Luo sisältöä -&gt; Verkkolomake</a>."
+
+#: webform.module:25
+msgid ""
+"<p>This module lets you create forms or questionnaires and define their content. Submissions from these forms are stored in the database and optionally also sent by e-mail to a predefined address.</p>\n"
+"      <p>Here is how to create one:</p>\n"
+"      <ul>\n"
+"       <li>Go to Create Content and add a webform</li>\n"
+"       <li>Add a description to be displayed as a teaser and above the actual form.</li>\n"
+"       <li>Add a confirmation message or redirect node that is to be displayed after successful submission.</li>\n"
+"       <li>Add one or more components to your form.</li>\n"
+"       <li>Optionally add an e-mail address to which submissions will be sent. If no email address is specified, no e-mail will be sent when submissions are made through the form.</li>\n"
+"       <li>Optionally select an e-mail (or hidden) component that will be used to populate the return e-mail address on any sent e-mail.</li>\n"
+"       <li>Optionally select a textfield (or hidden) component that will be used to populate the subject e-mail field on any sent e-mail.</li>\n"
+"      </ul>\n"
+"      <p>Help on adding and configuring the components will be shown after you add your first component.</p>\n"
+"      <p>The content of submitted forms is stored in the database table <i>webform_submitted_data</i> as key-value pairs.</p>\n"
+"      "
+msgstr ""
+"<p>Tämä moduuli sallii sinun luoda lomakkeita tai kyselyjä. Lähetetyt lomakkeet varastoidaan tietokantaan ja valinnaisesti lähetetään myös sähköpostilla etukäteen määriteltyyn osoitteeseen.</p>\n"
+"      <p>Näin luot uuden lomakkeen/kyselyn:</p>\n"
+"      <ul>\n"
+"       <li>Mene Luo sisältöä ja lisää verkkolomake</li>\n"
+"       <li>Lisää kuvaus, joka esitetään teaserina ja varsinaisen lomakkeen yläpuolella.</li>\n"
+"       <li>Lisää vahvistusviesti tai uudelleen ohjaus -solmu, joka näytetään onnistuneen lähetyksen jälkeen.</li>\n"
+"       <li>Lisää yksi tai useampi komponentti lomakkeeseesi.</li>\n"
+"       <li>Valinnaisesti lisää sähköpostiosoite, johon lähetetyt lomakkeet edelleen lähetetään. Jos sähköpostiosoitetta ei ole määritelty, sähköpostia ei lähetetä, kun käyttäjä on lähettänyt täytetyn lomakkeen.</li>\n"
+"       <li>Valitse joko sähköpostiosoite tai (piilotettu) komponentti, joka täytetään palautussähköpostiosoitekenttään lähetettävissä sähköposteissa.</li>\n"
+"       <li>Valitse tekstikenttä tai (piilotettu) komponentti, jolla täytetään sähköpostin Aihe-kenttä lähetetyissä sähköposteissa.</li>\n"
+"      </ul>\n"
+"      <p>Lisätietoa komponenttien lisäämisestä ja muokkaamisesta näytetään, kun olet lisännyt ensimmäisen komponentin.</p>\n"
+"      <p>Lähetetyn lomakkeen sisältö tallennetaan tietokannan tauluun <i>webform_submitted_data</i> avain-arvo-parina.</p>\n"
+
+#: webform.module:41
+msgid "A webform can be a questionnaires, contact or request forms. It can be used to let visitors make contact, register for a event or to enable a complex survey."
+msgstr "Verkkolomake voi olla esimerkiksi kysely- tai yhteydenottolomake. Lomakkeiden avulla voit tarjota sivuston käyttäjälle yhteydenotto- tai tapahtumiin rekisteröitymismahdollisuuden. Lomakkeilla voit tehdä myös verkkokyselyjä."
+
+#: webform.module:58
+msgid "This page displays all the components currently configured for this webform node. You may add any number of components to the form, even multiple of the same type. To add a new component, fill in a name and select a type from the fields at the bottom of the table. Submit the form to create the new component or update any changed form values."
+msgstr "Tällä sivulla näet kaikki komponentit, jotka ovat tällä hetkellä määritellyt osaksi tätä verkkolomaketta. Voit lisätä lomakkeeseen uusia komponentteja kuinka paljon tahansa, jopa useita samaa tyyppiä olevia komponentteja. Lisätäksesi uuden komponentin, täytä nimikenttä ja valitse komponentin tyyppi taulukon alaosassa olevista kentistä. Lähetä lomake luodaksesi uuden komponentin tai päivittääksesi tehdyn muutoksen lomakkeen arvoihin."
+
+#: webform.module:59
+msgid "Click on any existing component's name to edit its settings."
+msgstr "Klikkaa missä tahansa jo olemassa olevan komponentin nimessä editoidaksesi komponentin asetuksia."
+
+#: webform.module:76
+msgid "Webforms"
+msgstr "Verkkolomakkeet"
+
+#: webform.module:79
+msgid "View and edit all the available webforms on your site."
+msgstr "Tarkastele ja muokkaa kaikkia sivustollasi saatavilla olevia verkkolomakkeita."
+
+#: webform.module:86;256
+#: webform.info:0
+msgid "Webform"
+msgstr ""
+
+#: webform.module:90
+msgid "Global configuration of webform functionality."
+msgstr "Yleiset verkkolomakkeiden toiminnallisuutta määrittelevät asetukset."
+
+#: webform.module:112
+msgid "Webform confirmation"
+msgstr "Verkkolomakkeen hyväksyminen"
+
+#: webform.module:119
+msgid "Configuration"
+msgstr "Asetukset"
+
+#: webform.module:127
+msgid "Form components"
+msgstr "Lomakekomponentit"
+
+#: webform.module:136;1619
+msgid "Results"
+msgstr "Tulokset"
+
+#: webform.module:145;190;1964
+msgid "Submissions"
+msgstr "Lähetetyt lomakkeet"
+
+#: webform.module:154;1965
+msgid "Analysis"
+msgstr "Analyysi"
+
+#: webform.module:163;1966
+msgid "Table"
+msgstr "Taulukko"
+
+#: webform.module:203
+msgid "Webform submission"
+msgstr "Verkkolomakkeen lähetys"
+
+#: webform.module:258
+msgid "Create a new form or questionnaire accessible to users. Submission results and statistics are recorded and accessible to privileged users."
+msgstr "Luo uusi lomake tai kysely. Lähetettyjen lomakkeiden tulokset ja tilastot tallennetaan ja ovat siihen oikeutettujen käyttäjien nähtävillä."
+
+#: webform.module:432
+msgid "Go to form"
+msgstr "Mene lomakkeeseen"
+
+#: webform.module:434
+msgid "View this form."
+msgstr "Tarkastele tätä lomaketta."
+
+#: webform.module:468
+msgid "Webform Settings"
+msgstr "Verkkolomakkeen asetukset"
+
+#: webform.module:477;1955
+msgid "Title"
+msgstr "Otsikko"
+
+#: webform.module:487
+msgid "Text to be shown as teaser and before the form."
+msgstr "Teksti, joka esitetään teaserina ja ennen lomaketta."
+
+#: webform.module:496
+msgid "Confirmation message or redirect URL"
+msgstr "Vahvistusviesti tai URL-uudelleenohjaus"
+
+#: webform.module:497
+msgid "Message to be shown upon successful submission or a path to a redirect page. Redirect pages must start with <em>http://</em> for external sites or <em>internal:</em> for an internal path. i.e. <em>http://www.example.com</em> or <em>internal:node/10</em>"
+msgstr "Onnistuneen lähetyksen jälkeen näytettävä viesti tai sivun osoite, jolle käyttäjä uudelleenohjataan. Uudelleenohjaussivun osoitteen täytyy alkaa <em>http://</em>, jos uudelleenohjaus vie muulle sivustolle. Jos uudelleenohjaus vie sivuston sisällä toiselle sivulle, osoitteen täytyy alkaa <em>internal:</em>. Esimerkiksi <em>http://www.esimerkki.fi</em> tai <em>internal:node/10</em>."
+
+#: webform.module:509
+msgid "Webform access control"
+msgstr "Verkkolomakkeen käyttöoikeusmääritykset"
+
+#: webform.module:514
+msgid "These permissions affect which roles can submit this webform. It does not prevent access to the webform page. If needing to prevent access to the webform page entirely, use a content access module such as <a href=\"http://drupal.org/project/taxonomy_access\">Taxonomy Access</a> or <a href=\"http://drupal.org/project/node_privacy_byrole\">Node Privacy by Role</a>."
+msgstr "Nämä oikeudet vaikuttavat siihen, mitkä roolit voivat lähettää tämän verkkolomakkeen. Nämä oikeudet eivät estä pääsyä verkkolomakesivulle. Jos haluat estää täysin pääsyn verkkolomakesivulle, käytä erilaisia pääsyoikeusmoduuleja, kuten <a href=\"http://drupal.org/project/taxonomy_access\">Taxonomy Access</a> tai <a href=\"http://drupal.org/project/node_privacy_byrole\">Node Privacy by Role</a>."
+
+#: webform.module:521
+msgid "Roles that can submit this webform"
+msgstr "Roolit, jotka voivat lähettää tämän verkkolomakkeen."
+
+#: webform.module:522
+msgid "Uncheck all roles to prevent new submissions. The %authenticated role applies to any user signed into the site, regardless of other assigned roles."
+msgstr "Estääksesi uudet lähetykset poista kaikki oikeudet kaikilta rooleilta. %authenticated-rooli pätee keneen tahansa käyttäjään, joka on sisäänkirjautunut sivustolle, huolimatta muista käyttäjään liitetyistä rooleista."
+
+#: webform.module:529
+msgid "Webform mail settings"
+msgstr "Verkkolomakkeen postitusasetukset"
+
+#: webform.module:539
+msgid "E-mail to address"
+msgstr "Sähköposti, johon lähetetään"
+
+#: webform.module:541
+msgid "Form submissions will be e-mailed to this address. Leave blank for none. Multiple e-mail addresses may be separated by commas."
+msgstr "Lomakelähetykset sähköpostitetaan tähän osoitteeseen. Jätä kenttä tyhjäksi, jos et halua sähköpostittaa lähetyksiä edelleen. Jos annat useita sähköpostiosoitteita, erottele ne pilkuin."
+
+#: webform.module:549
+msgid "Conditional e-mail recipients"
+msgstr "Vaihtoehtoiset sähköpostin vastaanottajat"
+
+#: webform.module:550
+msgid "The settings below allow you to send e-mails to multiple recipients based off the value of a component."
+msgstr "Alempana olevat asetukset sallivat sähköpostituksen useille vastaanottajille. Postitus perustuu tiettyjen komponenttien arvoihin."
+
+#: webform.module:574
+msgid "E-mail from name"
+msgstr "Sähköpostin lähettäjä"
+
+#: webform.module:575
+msgid "After adding components to this form any email, select, or hidden form element may be selected as the sender's name for e-mails."
+msgstr "Tähän lomakkeeseen tehtyjen komponenttien lisäämisten jälkeen mikä tahansa sähköposti, valittu tai piilotettu lomakekomponentti voidaan valita lähettäjän nimeksi sähköposteihin."
+
+#: webform.module:579
+msgid "E-mail from address"
+msgstr "Sähköpostin lähetysosoite"
+
+#: webform.module:580
+msgid "After adding components to this form any textfield, select, or hidden form element may be selected as the sender's e-mail address."
+msgstr "Tähän lomakkeeseen tehtyjen komponenttien lisäämisten jälkeen mikä tahansa tekstikenttä, valittu tai piilotettu lomakekomponentti voidaan valita lähettäjän sähköpostiosoitteeksi."
+
+#: webform.module:584
+msgid "E-mail subject"
+msgstr "Sähköpostin otsikko"
+
+#: webform.module:585
+msgid "After adding components to this form any textfield, select, or hidden form element may be selected as the subject for e-mails."
+msgstr "Tähän lomakkeeseen tehtyjen komponenttien lisäämisten jälkeen mikä tahansa tekstikenttä, valittu tai piilotettu lomakekomponentti voidaan valita sähköpostin otsikoksi."
+
+#: webform.module:620
+msgid "Webform advanced settings"
+msgstr "Verkkolomakkeen lisäasetukset"
+
+#: webform.module:628
+msgid "Show complete form in teaser"
+msgstr "Näytä koko lomake teaserissa"
+
+#: webform.module:630
+msgid "Display the entire form in the teaser display of this node."
+msgstr "Näytä koko lomake tämän solmun teaser-näytössä."
+
+#: webform.module:634
+msgid "Limit the number of submissions a user may send within a specified time period"
+msgstr "Rajoitus, kuinka monta kertaa käyttäjä voi lähettää lomakkeen määritellyn aikajakson sisällä"
+
+#: webform.module:639
+msgid "Unlimited"
+msgstr "Rajoittamaton"
+
+#: webform.module:653
+msgid "ever"
+msgstr "ei koskaan"
+
+#: webform.module:654
+msgid "every hour"
+msgstr "tunnissa"
+
+#: webform.module:655
+msgid "every day"
+msgstr "päivässä"
+
+#: webform.module:656
+msgid "every week"
+msgstr "viikossa"
+
+#: webform.module:663
+msgid "Submit button text"
+msgstr "Lähetyspainikkeen teksti"
+
+#: webform.module:665
+msgid "By default the submit button on this form will have the label <em>Submit</em>. Enter a new title here to override the default."
+msgstr "Oletusarvoisesti tämän lomakkeen lähetyspainikkeen otsikkona on <em>Lähetä</em>. Anna uusi otsikko muuttaaksesi oletusarvon."
+
+#: webform.module:670
+msgid "Additional Validation"
+msgstr "Lisätarkistus"
+
+#: webform.module:671
+msgid "Enter PHP code to perform additional validation for this form. Include the &lt;?php ?&gt; tags. $form_id and $form_values are available variables. If validation fails, use the form_set_error function to prevent the form from being submitted. Use the same syntax as a _validate function used in the <a href=\"http://api.drupal.org/api/file/developer/topics/forms_api.html\">Forms API</a>."
+msgstr "Lisää PHP-koodi tämän lomakkeen lisätarkistuksen suorittamiseksi. Sisällytä &lt;?php ?&gt; -tagit. $form_id ja $form_values ovat käytettävissä olevia muuttujia. Jos tarkistus epäonnistuu, käytä form_set_error-funktiota lomakkeen lähettämisen estämiseen. Käytä samaa syntaksia kuin _validate-funktiossa, jota käytetään <a href=\"http://api.drupal.org/api/file/developer/topics/forms_api.html\">Forms API</a>:ssa."
+
+#: webform.module:679
+msgid "Additional Processing"
+msgstr "Lisäprosessointi"
+
+#: webform.module:680
+msgid "Enter PHP code to perform additional processing for this form (after the validation). Include the &lt;?php ?&gt; tags. $form_id and $form_values are available variables, use the same syntax as a _submit function used in the <a href=\"http://api.drupal.org/api/file/developer/topics/forms_api.html\">Forms API</a>."
+msgstr "Lisää PHP-koodi tämän lomakkeen lisäprosessoinnin suorittamiseksi (joka tehdään tarkistuksen jälkeen). Sisällytä &lt;?php ?&gt; -tagit. $form_id ja $form_values ovat käytettävissä olevia muuttujia. Käytä samaa syntaksia kuin _submit-funktiossa, jota käytetään <a href=\"http://api.drupal.org/api/file/developer/topics/forms_api.html\">Forms API</a>:ssa."
+
+#: webform.module:709
+msgid "To"
+msgstr "Vastaanottaja"
+
+#: webform.module:724
+msgid "No components yet in this webform."
+msgstr "Tällä verkkolomakkeella ei ole vielä yhtään komponenttia."
+
+#: webform.module:739
+msgid "Custom"
+msgstr "Muokattu"
+
+#: webform.module:739
+msgid "Component"
+msgstr "Komponentti"
+
+#: webform.module:750
+msgid "Default"
+msgstr "Oletusarvo"
+
+#: webform.module:771
+msgid "Limit to !count submission(s) !timespan"
+msgstr "Rajoita lähetysten määrä !count kertaan !timespan aikana"
+
+#: webform.module:784;791
+msgid "The entered email address %address is not a valid address."
+msgstr "Annettu sähköpostiosoite %address ei ole kelvollinen osoite."
+
+#: webform.module:866
+msgid "The new webform %title has been created. Add new fields to your webform with the form below."
+msgstr "Uusi verkkolomake %title on luotu. Lisää uusia kenttiä verkkolomakkeeseesi alempana."
+
+#: webform.module:869
+msgid "This webform is currently unpublished. After finishing your changes to the webform, use the <em>Publish</em> button below."
+msgstr "Tämä verkkolomake on tällä hetkellä julkaisematon. Kun olet viimeistellyt muutoksesi lomakkeeseen, saat julkaistua lomakkeesi <em>Julkaise</em>-painikkeella."
+
+#: webform.module:892
+#: components/markup.inc:58
+msgid "Preview"
+msgstr "Esikatselu"
+
+#: webform.module:998
+msgid "Submissions for this form are closed."
+msgstr "Tämän lomakkeen lähetystoiminto on asetettu pois päältä."
+
+#: webform.module:1002
+msgid "You must <a href=\"!login\">login</a> or <a href=\"!register\">register</a> to view this form."
+msgstr "Sinun täytyy <a href=\"!login\">kirjautua sisään</a> tai <a href=\"!register\">rekisteröityä</a> voidaksesi tarkastella tätä lomaketta."
+
+#: webform.module:1006
+msgid "You do not have permission to view this form."
+msgstr "Sinulla ei ole oikeuksia tarkastella tätä lomaketta."
+
+#: webform.module:1013
+msgid "You have submitted this form the maximum number of times (@count)."
+msgstr "Olet lähettänyt tätä lomaketta enimmäismäärän (@count)."
+
+#: webform.module:1016;1027
+msgid "You have already submitted this form."
+msgstr "Olet jo lähettänyt tämän lomakkeen."
+
+#: webform.module:1019
+msgid "You may not submit another entry at this time."
+msgstr "Et voi tällä hetkellä lähettää toista kertaa."
+
+#: webform.module:1027;1030
+msgid "<a href=\"!url\">View your previous submissions</a>."
+msgstr "<a href=\"!url\">Tarkastele aikaisempia lähetyksiäsi</a>."
+
+#: webform.module:1047
+msgid "Available components"
+msgstr "Käytettävissä olevat komponentit"
+
+#: webform.module:1050
+msgid "These are the available field types for your installation of Webform. You may disable any of these components by unchecking its corresponding box. Only checked components will be available in existing or new webforms."
+msgstr "Nämä ovat Webform-moduulin asennuksesi käytettävissä olevat kenttätyypit. Voit poistaa käytöstä minkä tahansa näistä komponenteista poistamalla valinnan niiden kohdalla. Vain valitut komponentit ovat käytettävissä olemassa olevissa tai uusissa verkkolomakkeissa."
+
+#: webform.module:1067
+msgid "Default e-mail values"
+msgstr "Oletuksena olevat sähköpostiasetukset"
+
+#: webform.module:1074
+msgid "From address"
+msgstr "Lähettäjän osoite"
+
+#: webform.module:1076
+msgid "The default sender address for emailed webform results; often the e-mail address of the maintainer of your forms."
+msgstr "Oletusarvoinen lähettäjän osoite sähköpostitetuissa verkkolomaketuloksissa. Useimmiten kyse on lomakkeidesi ylläpitäjän sähköpostiosoitteesta."
+
+#: webform.module:1081
+msgid "From name"
+msgstr "Lähettäjän nimi"
+
+#: webform.module:1083
+msgid "The default sender name which is used along with the default from address."
+msgstr "Oletusarvoinen lähettäjän nimi, jota käytetään oletusarvoisen lähettävän osoitteen yhteydessä."
+
+#: webform.module:1088
+msgid "Default subject"
+msgstr "Aihe"
+
+#: webform.module:1089;2064
+msgid "Form submission from: %title"
+msgstr "Lomakelähetys otsikolla: %title"
+
+#: webform.module:1090
+msgid "The default subject line of any e-mailed results."
+msgstr "Minkä tahansa sähköpostitetun tuloksen oletusarvoinen otsikko."
+
+#: webform.module:1095
+msgid "Advanced options"
+msgstr "Lisävalinnat"
+
+#: webform.module:1103
+msgid "Allow cookies for tracking submissions"
+msgstr "Salli evästeet lähetysten seuraamiseen"
+
+#: webform.module:1105
+msgid "<a href=\"http://www.wikipedia.org/wiki/HTTP_cookie\">Cookies</a> can be used to help prevent the same user from repeatedly submitting a webform. This feature is not needed for limiting submissions per user, though it can increase accuracy in some situations. Besides cookies, Webform also uses IP addresses and site usernames to prevent repeated submissions."
+msgstr "<a href=\"http://fi.wikipedia.org/wiki/Eväste\">Evästeitä</a> voit käyttää apuna estämään samaa käyttäjää lähettämästä toistuvasti verkkolomaketta. Tämä ominaisuus ei ole tarpeen lähetysmäärän rajoittamisessa käyttäjäkohtaisesti, vaikka evästetoiminto voikin lisätä tietyissä tilanteissa rajoittamisen tarkkuutta. Evästeiden lisäksi Webform-moduuli käyttää myös IP-osoitteita ja sivuston käyttäjänimiä toistuvien lähetysten estämisessä."
+
+#: webform.module:1110
+msgid "Default export format"
+msgstr "Oletusarvoinen vientimuoto"
+
+#: webform.module:1117
+msgid "Default export delimiter"
+msgstr "Oletusarvoinen erotin viennissä"
+
+#: webform.module:1133
+msgid "Webforms debug"
+msgstr "Verkkolomakkeiden virheiden jäljitys"
+
+#: webform.module:1135
+msgid "Off"
+msgstr "Pois päältä"
+
+#: webform.module:1135
+msgid "Log submissions"
+msgstr "Lähetysten loki"
+
+#: webform.module:1135
+msgid "Full debug"
+msgstr "Täydellinen virheenjäljittäminen"
+
+#: webform.module:1136
+msgid "Set to \"Log submissions\" to log all submissions in the watchdog. Set to \"Full debug\" to print debug info on submission."
+msgstr "Ota käyttöön \"Lähetysten loki\", jotta watchdogissa kirjoitetaan lokiin jokainen lähetys. Ota käyttöön \"Täydellinen virheenjäljittäminen\", jotta lähetyksestä tulostetaan virheenjäljitystiedot."
+
+#: webform.module:1152
+msgid "Enabled"
+msgstr "Sallittu"
+
+#: webform.module:1186
+msgid "Submission #@sid"
+msgstr "Lähetys #@sid"
+
+#: webform.module:1206;1206
+msgid "Previous submission"
+msgstr "Edellinen lähetys"
+
+#: webform.module:1209;1209
+msgid "Next submission"
+msgstr "Seuraava lähetys"
+
+#: webform.module:1213
+msgid "Submission Information"
+msgstr "Lähetysinformaatio"
+
+#: webform.module:1222
+msgid "Form: !form"
+msgstr "Lomake: !form"
+
+#: webform.module:1225
+msgid "Submitted by !name"
+msgstr "Lähettäjä !name"
+
+#: webform.module:1265
+msgid "Next Page >"
+msgstr "Seuraava sivu >"
+
+#: webform.module:1266
+msgid "< Previous Page"
+msgstr "< Edellinen sivu"
+
+#: webform.module:1384
+msgid "The webform component @type is not able to be displayed"
+msgstr "Verkkolomakkeen komponenttia @type ei voida näyttää"
+
+#: webform.module:1580
+msgid "Possible spam attempt from @remote_addr"
+msgstr "Mahdollinen roskapostitusyritys osoitteesta @remote_addr"
+
+#: webform.module:1581
+msgid "Illegal information. Data not submitted."
+msgstr "Laiton informaatio. Dataa ei lähetetty."
+
+#: webform.module:1619
+msgid "Submission posted to %title"
+msgstr "Lähetys postitettu %title"
+
+#: webform.module:1624
+msgid "Submission updated."
+msgstr "Lähetys päivitetty."
+
+#: webform.module:1708
+msgid "Thank you, your submission has been received."
+msgstr "Kiitos. Olemme vastaanottaneet lähettämäsi lomakkeen."
+
+#: webform.module:1744
+msgid "Submitted on"
+msgstr "Lähetetty"
+
+#: webform.module:1748
+msgid "Submitted by user"
+msgstr "Käyttäjän lähettämä"
+
+#: webform.module:1751
+msgid "Submitted by anonymous user"
+msgstr "Anonyymin käyttäjän lähettämä"
+
+#: webform.module:1755
+msgid "Submitted values are:"
+msgstr "Lähetetyt arvot ovat:"
+
+#: webform.module:1759
+msgid "The results of this submission may be viewed at:"
+msgstr "Tämän lähetyksen tuloksia voi tarkastella täällä:"
+
+#: webform.module:2076;2077;2078;2079;2080;2083
+msgid "key"
+msgstr "avain"
+
+#: webform.module:2087
+msgid "You may use special tokens in this field that will be replaced with dynamic values."
+msgstr "Voit käyttää tässä kentässä tiettyjä merkkejä, jotka korvautuvat dynaamisilla arvoilla."
+
+#: webform.module:2089
+msgid "You can use %server[key] to add any of the special PHP <a href=\"http://www.php.net/reserved.variables#reserved.variables.server\">$_SERVER</a> variables, %session[key] to add any of the special PHP <a href=\"http://www.php.net/reserved.variables#reserved.variables.session\">$_SESSION</a> variables and %get[key] to create prefilled forms from the <a href=\"http://www.php.net/reserved.variables#reserved.variables.get\">URL</a>. %cookie, %request and %post also work with their respective PHP variables. For example %server[HTTP_USER_AGENT], %session[id], or %get[q]."
+msgstr ""
+
+#: webform.module:2091
+msgid "If you are using the profiles module, you can also access all profile data using the syntax %profile[form_name]. If you for example have a profile value named profile_city, add the variable %profile[profile_city]."
+msgstr ""
+
+#: webform.module:2095
+msgid "Token values"
+msgstr "Merkkiarvot"
+
+#: webform.module:247
+msgid "create webforms"
+msgstr "verkkolomakkeiden luominen"
+
+#: webform.module:247
+msgid "edit own webforms"
+msgstr "omien verkkolomakkeiden muokkaaminen"
+
+#: webform.module:247
+msgid "edit webforms"
+msgstr "verkkolomakkeiden muokkaaminen"
+
+#: webform.module:247
+msgid "access webform results"
+msgstr "pääsy verkkolomaketuloksiin"
+
+#: webform.module:247
+msgid "clear webform results"
+msgstr "verkkolomaketulosten tyhjentäminen"
+
+#: webform.module:247
+msgid "access own webform submissions"
+msgstr "pääsy omiin verkkolomakelähetyksiin"
+
+#: webform.module:247
+msgid "edit own webform submissions"
+msgstr "omien verkkolomakelähetysten muokkaaminen"
+
+#: webform.module:247
+msgid "edit webform submissions"
+msgstr "verkkolomakelähetysten muokkaaminen"
+
+#: webform.module:247
+msgid "use PHP for additional processing"
+msgstr "PHP:n käyttäminen lisäprosessointiin"
+
+#: webform.install:146
+msgid "Webform module installed module tables successfully."
+msgstr "Webform-moduuli asensi moduulitaulut onnistuneesti."
+
+#: webform.install:149
+msgid "The installation of webform module was unsuccessful."
+msgstr "Webform-moduulin asennus epäonnistui."
+
+#: webform.info:0
+msgid "Enables the creation of forms and questionnaires."
+msgstr "Sallii lomakkeiden ja kyselyjen luomisen."
+
+#: components/date.inc:37
+#: components/email.inc:38
+#: components/hidden.inc:33
+#: components/select.inc:49
+#: components/textarea.inc:39
+#: components/textfield.inc:41
+#: components/time.inc:36
+msgid "Default value"
+msgstr "Oletusarvo"
+
+#: components/date.inc:39
+#: components/email.inc:40
+#: components/hidden.inc:35
+#: components/textarea.inc:41
+#: components/textfield.inc:43
+#: components/time.inc:38
+msgid "The default value of the field."
+msgstr "Kentän oletusarvo."
+
+#: components/date.inc:39
+msgid "Accepts any date in any <a href=\"http://www.gnu.org/software/tar/manual/html_node/tar_109.html\">GNU Date Input Format</a>. Strings such as today, +2 months, and Dec 9 2004 are all valid."
+msgstr "Mikä tahansa päivämäärä missä tahansa <a href=\"http://www.gnu.org/software/tar/manual/html_node/tar_109.html\">GNU Date Input Format</a> -muodossa on hyväksyttyä. Kelvollisia ovat merkkijonot kuten tänään, +2 kuukautta ja Dec 9 2004."
+
+#: components/date.inc:46
+#: components/time.inc:46
+msgid "Timezone"
+msgstr "Aikavyöhyke"
+
+#: components/date.inc:48
+msgid "Adjust the date according to a specific timezone. Website timezone is defined in the <a href=\"!settings\">Site Settings</a> and is the default."
+msgstr "Säädä päivämäärää tietyn aikavyöhykkeen mukaan. Sivuston aikavyöhyke on määritelty <a href=\"!settings\">Sivuston asetukset</a> -sivulla, ja tuo aikavyöhyke on oletusarvona."
+
+#: components/date.inc:49
+msgid "Website timezone"
+msgstr "Sivuston aikavyöhyke"
+
+#: components/date.inc:49
+msgid "User timezone"
+msgstr "Käyttäjän aikavyöhyke"
+
+#: components/date.inc:49
+msgid "GMT"
+msgstr "Greenwichin aika (GMT)"
+
+#: components/date.inc:54
+#: components/time.inc:54
+msgid "Observe Daylight Savings"
+msgstr "Huomioi kesäaika"
+
+#: components/date.inc:57
+#: components/time.inc:57
+msgid "Automatically adjust the time during daylight savings."
+msgstr "Ajan säätäminen automaattisesti kesäajan mukaan."
+
+#: components/date.inc:63
+msgid "Start year"
+msgstr "Aloittava vuosi"
+
+#: components/date.inc:65
+msgid "The first year that is allowed to be entered."
+msgstr "Ensimmäinen vuosi, joka on sallittua antaa."
+
+#: components/date.inc:72
+msgid "End year"
+msgstr "Lopettava vuosi"
+
+#: components/date.inc:74
+msgid "The last year that is allowed to be entered."
+msgstr "Viimeinen vuosi, joka on sallittua antaa."
+
+#: components/date.inc:81
+msgid "Use a textfield for year"
+msgstr "Käytä tekstikenttää vuosimerkinnälle"
+
+#: components/date.inc:83
+msgid "If checked, the generated date field will use a textfield for the year. Otherwise it will use a select list."
+msgstr "Jos tämä on valittuna, luotava päivämääräkenttä käyttää tekstikenttää vuosimerkinnälle. Muuten käytössä on valintalista."
+
+#: components/date.inc:188
+msgid "Year"
+msgstr "Vuosi"
+
+#: components/date.inc:205
+msgid "!name field is required."
+msgstr "!name-kenttä on pakollinen."
+
+#: components/date.inc:212
+msgid "Entered !name is not a valid date."
+msgstr "Annettu !name ei ole kelvollinen päivämäärä."
+
+#: components/date.inc:219
+msgid "The entered date needs to be between the years @start and @end."
+msgstr "Annetun päivämäärän täytyy sijoittua vuosien @start ja @end välille."
+
+#: components/date.inc:292
+msgid "Presents month, day, and year fields."
+msgstr "Esittää kuukausi-, päivä- ja vuosikentän."
+
+#: components/date.inc:349
+#: components/email.inc:196
+#: components/file.inc:476
+#: components/textarea.inc:158
+#: components/textfield.inc:203
+#: components/time.inc:297
+msgid "Left Blank"
+msgstr "Jätetty vastaamatta"
+
+#: components/date.inc:350
+#: components/email.inc:197
+#: components/textarea.inc:159
+#: components/textfield.inc:204
+#: components/time.inc:298
+msgid "User entered value"
+msgstr "Käyttäjän antama arvo"
+
+#: components/email.inc:49
+msgid "User email as default"
+msgstr "Oletusarvona on käyttäjän sähköposti"
+
+#: components/email.inc:51
+msgid "Set the default value of this field to the user email, if he/she is logged in."
+msgstr "Jos tämä on valittuna, oletusarvona tässä kentässä on sisäänkirjautuneen käyttäjän sähköpostiosoite."
+
+#: components/email.inc:58
+#: components/file.inc:122
+#: components/textarea.inc:48
+#: components/textfield.inc:50
+msgid "Width"
+msgstr "Leveys"
+
+#: components/email.inc:60
+#: components/textarea.inc:50
+#: components/textfield.inc:52
+msgid "Width of the textfield."
+msgstr "Tekstikentän leveys"
+
+#: components/email.inc:60
+#: components/file.inc:124
+#: components/textarea.inc:50;58
+#: components/textfield.inc:52
+msgid "Leaving blank will use the default size."
+msgstr "Jos kenttä on tyhjä, käytetään oletusarvoista kokoa."
+
+#: components/email.inc:66
+#: components/hidden.inc:46
+#: components/select.inc:72
+msgid "E-mail a submission copy"
+msgstr "Sähköpostita kopio lähetyksestä"
+
+#: components/email.inc:69
+#: components/hidden.inc:49
+#: components/select.inc:75
+msgid "Check this option if this component contains an e-mail address that should get a copy of the submission. Emails are sent individually so other emails will not be shown to the recipient."
+msgstr "Valitse tämä, jos komponentti sisältää sähköpostiosoitteen, johon pitää lähettää kopio lähetetystä lomakkeesta. Sähköpostit lähetetään yksilöllisesti, joten muut sähköpostit eivät näy vastaanottajalle."
+
+#: components/email.inc:73
+#: components/textarea.inc:64
+#: components/textfield.inc:86
+msgid "Disabled"
+msgstr "Pois päältä"
+
+#: components/email.inc:75
+#: components/textarea.inc:66
+#: components/textfield.inc:88
+msgid "Make this field non-editable. Useful for setting an unchangeable default value."
+msgstr "Määrittele tämä kenttä ei-muokattavaksi. Toiminto on käytännöllinen kiinteiden oletusarvojen asettamisessa."
+
+#: components/email.inc:134
+msgid "%value is not a valid email address."
+msgstr "%value ei ole kelvollinen sähköpostiosoite."
+
+#: components/email.inc:163
+msgid "A textfield that automatically fills in a logged-in user's e-mail."
+msgstr "Tekstikenttä, johon automaattisesti täytetään sisäänkirjautuneen käyttäjän sähköpostiosoite."
+
+#: components/email.inc:198
+#: components/hidden.inc:139
+#: components/textarea.inc:160
+#: components/textfield.inc:205
+msgid "Average submission length in words (ex blanks)"
+msgstr ""
+
+#: components/fieldset.inc:34
+msgid "Collapsible"
+msgstr "Supistettavissa"
+
+#: components/fieldset.inc:36
+msgid "If this fieldset is collapsible, the user may open or close the fieldset."
+msgstr "Jos tämä kenttäjoukko on suåistettavissa, käyttäjä voi avata tai sulkea kenttäjoukon."
+
+#: components/fieldset.inc:41
+msgid "Collapsed by Default"
+msgstr "Supistettuna oletusarvoisesti"
+
+#: components/fieldset.inc:43
+msgid "Collapsible fieldsets are \"open\" by default. Select this option to default the fieldset to \"closed.\""
+msgstr "Supistettavat kenttäjoukot ovat oletusarvoisesti \"avoinna\". Valitse tämä, jos haluat kenttäjoukon olevan oletusarvoisesti \"suljettuna.\""
+
+#: components/fieldset.inc:95
+msgid "Fieldsets allow you to organize multiple fields into groups."
+msgstr "Kenttäjoukot sallivat, että voit järjestää useita kenttiä ryhmiksi."
+
+#: components/file.inc:44
+msgid "Upload Filtering"
+msgstr "Lataa suodatus"
+
+#: components/file.inc:45
+msgid "Select the types of uploads you would like to allow."
+msgstr "Valitse lataustyypit, jotka haluat sallia."
+
+#: components/file.inc:55
+msgid "Web Images"
+msgstr "Web-kuvat"
+
+#: components/file.inc:63
+msgid "Desktop Images"
+msgstr "Työpöytäkuvat"
+
+#: components/file.inc:71
+msgid "Documents"
+msgstr "Dokumentit"
+
+#: components/file.inc:79
+msgid "Media"
+msgstr ""
+
+#: components/file.inc:87
+msgid "Archives"
+msgstr "Arkistot"
+
+#: components/file.inc:94
+msgid "Additional Extensions"
+msgstr "Muut tiedostopäätteet"
+
+#: components/file.inc:96
+msgid "Enter a list of additional file extensions for this upload field, seperated by commas.<br /> Entered extensions will be appended to checked items above."
+msgstr "Syötä lista muista tiedostopäätteistä tälle latauskentälle. Erottele pilkuin.<br />Syötetyt tiedostopäätteet lisätään valittuihin kohtiin ylempänä."
+
+#: components/file.inc:104
+msgid "Max Upload Size"
+msgstr "Latauksen enimmäiskoko"
+
+#: components/file.inc:106
+msgid "Enter the max file size a user may upload (in KB)."
+msgstr "Syötä kilotavuissa tiedoston enimmäiskoko, jonka käyttäjä voi ladata."
+
+#: components/file.inc:113
+msgid "Upload Directory"
+msgstr "Latauskansio"
+
+#: components/file.inc:115
+msgid "Webform uploads are always saved in the site files directory. You may optionally specify a subfolder to store your files."
+msgstr "Verkkolomakkeen lataukset tallennetaan aina sivuston files-kansioon. Voit halutessasi määritellä alakansion, johon tiedostosi tallennetaan."
+
+#: components/file.inc:124
+msgid "Width of the file field."
+msgstr "Tiedostokentän leveys."
+
+#: components/file.inc:139
+msgid "The save directory %directory could not be created. Check that the webform files directory is writtable."
+msgstr "Tallennuskansiota %directory ei voi luoda. Tarkista, että verkkolomakkeen files-kansioon on kirjoitusoikeus."
+
+#: components/file.inc:242
+msgid "Category"
+msgstr "Kategoria"
+
+#: components/file.inc:242
+msgid "Types"
+msgstr "Tyypit"
+
+#: components/file.inc:291
+#: components/time.inc:166
+msgid "%field field is required."
+msgstr "%field-kenttä on pakollinen."
+
+#: components/file.inc:324
+msgid "Files with the '%ext' extension are not allowed, please upload a file with a %exts extension."
+msgstr "'%ext'-päätteiset tiedostot eivät ole sallittuja. Lataa tiedosto %exts-muotoisena."
+
+#: components/file.inc:329
+msgid "The file '%filename' is too large (%filesize KB). Please upload a file %maxsize KB or smaller."
+msgstr "Tiedosto '%filename' on liian iso (%filesize kt). Lataa tiedosto enimmäiskooltaan %maxsize kilotavuisena tai pienempänä."
+
+#: components/file.inc:357
+msgid "The uploaded file %filename was unable to be saved. The destination directory may not be writable."
+msgstr "Ladattua tiedostoa %filename ei voitu tallentaa. Kohdekansioon ei ollut kirjoitusoikeutta."
+
+#: components/file.inc:365
+msgid "The uploaded file was unable to be saved. The destination directory does not exist."
+msgstr "Ladattua tiedostoa ei voitu tallentaa. Kohdekansiota ei ole."
+
+#: components/file.inc:411
+msgid "Uploading a new file will replace the current file."
+msgstr "Uusi ladattava tiedosto korvaa olemassa olevan tiedoston."
+
+#: components/file.inc:442
+msgid "Allow users to submit files of the configured types."
+msgstr "Sallii käyttäjien lähettää määritellyntyyppisiä tiedostoja."
+
+#: components/file.inc:477
+msgid "User uploaded file"
+msgstr "Käyttäjän lataama tiedosto"
+
+#: components/file.inc:478
+msgid "Average uploaded file size"
+msgstr "Keskimääräinen ladattujen tiedostojen koko"
+
+#: components/file.inc:522
+msgid "Filesize (KB)"
+msgstr "Tiedostokoko (kt)"
+
+#: components/grid.inc:37
+#: components/select.inc:39
+msgid "Options"
+msgstr "Valinnat"
+
+#: components/grid.inc:39
+msgid "Options to select across the top. One option per line. Key-value pairs may be entered seperated by pipes. i.e. safe_key|Some readable option"
+msgstr ""
+
+#: components/grid.inc:47
+msgid "Questions"
+msgstr "Kysymykset"
+
+#: components/grid.inc:49
+msgid "Questions list down the left side. One question per line."
+msgstr "Kysymykset listataan vasempaan laitaan. Yksi kysymys per rivi."
+
+#: components/grid.inc:57
+msgid "Randomize Options"
+msgstr "Satunnaistetut vaihtoehdot"
+
+#: components/grid.inc:59
+msgid "Randomizes the order of options on the top when they are displayed in the form."
+msgstr "Satunnaistaa valintavaihtoehtojen järjestyksen, kun ne esitetään lomakkeessa."
+
+#: components/grid.inc:63
+msgid "Randomize Questions"
+msgstr "Satunnaista kysymykset"
+
+#: components/grid.inc:65
+msgid "Randomize the order of the questions on the side when they are displayed in the form."
+msgstr "Satunnaistaa kysymysten järjestyksen, kun ne esitetään lomakkeessa."
+
+#: components/grid.inc:208
+msgid "Allows creation of grid questions, denoted by radio buttons."
+msgstr ""
+
+#: components/hidden.inc:92
+msgid "@name (hidden)"
+msgstr "@name (piilotettu)"
+
+#: components/hidden.inc:104
+msgid "A field which is not visible to the user, but is recorded with the submission."
+msgstr "Kenttä, joka ei ole näkyvissä käyttäjälle, mutta on tallennettavissa lähetyksen yhteydessä."
+
+#: components/hidden.inc:137
+msgid "Empty"
+msgstr "Tyhjä"
+
+#: components/hidden.inc:138
+msgid "Non-empty"
+msgstr "Ei tyhjä"
+
+#: components/markup.inc:36
+msgid "Markup allows you to enter custom HTML or PHP logic into your form."
+msgstr "Merkintä (markup) sallii sinun lisätä muokattua HTML- tai PHP-logiikkaa lomakkeeseesi."
+
+#: components/markup.inc:98
+msgid "Displays text as HTML in the form; does not render a field."
+msgstr "Näyttää lomakkeessa tekstin HTML-muotoisena. Tämä ei hahmonna (render) kenttää."
+
+#: components/pagebreak.inc:27
+msgid "Use caution when combining the pagebreak and file components. File components will not be submitted unless they are after the last pagebreak in the form."
+msgstr "Käytä harkiten yhdistäessäsi sivunvaihto- ja tiedostokomponentin. Tiedostokomponentteja ei lähetetä elleivät ne ole lomakkeessa sijoitettuna viimeisen sivunvaihdon jälkeen."
+
+#: components/pagebreak.inc:54
+msgid "Break up a multi-page form."
+msgstr "Purkaa osiin monisivuinen lomake."
+
+#: components/select.inc:41
+msgid "A list of selectable options. One option per line. Key-value pairs may be entered seperated by pipes. i.e. safe_key|Some readable option"
+msgstr "Lista valittavissa olevista vaihtoehdoista. Yksi valinta per rivi. Avain-arvo-parit voidaan syöttää eroteltuna |-merkillä, esimerkiksi safe_key|Jokin luettava valinta"
+
+#: components/select.inc:51
+msgid "The default value of the field. For multiple selects use commas to separate multiple defaults."
+msgstr "Kentän oletusarvoinen arvo. Monivalintaa varten käytä pilkkuja erotellaksesi oletusarvot, joissa on monta kohtaa."
+
+#: components/select.inc:58
+msgid "Multiple"
+msgstr "Monivalinta"
+
+#: components/select.inc:61
+msgid "Check this option if the user should be allowed to choose multiple values."
+msgstr "Valitse tämä, jos käyttäjän on sallittua valita useita arvoja."
+
+#: components/select.inc:65
+msgid "Listbox"
+msgstr ""
+
+#: components/select.inc:68
+msgid "Check this option if you want the select component to be of listbox type instead of radiobuttons or checkboxes."
+msgstr "Valitse tämä, jos haluat esittää valittavat komponentit listbox-tyyppisesti radiobutton- tai checkbox-esitystavan sijaan."
+
+#: components/select.inc:76
+msgid "To use the option with a select component, you must use key-value pairs seperated by pipes. i.e. user@example.com|Sample user."
+msgstr "Käyttääksesi valintaa komponentille, sinun on annettava avain-arvo-pari eroteltuna |-merkillä, esimerkiksi user@example.com|Esimerkkikäyttäjä."
+
+#: components/select.inc:110
+msgid "select..."
+msgstr "valitse..."
+
+#: components/select.inc:271
+msgid "Allows creation of checkboxes, radio buttons, or select menus."
+msgstr "Sallii erilaisten valintalistojen luomisen."
+
+#: components/textarea.inc:56
+msgid "Height"
+msgstr "Korkeus"
+
+#: components/textarea.inc:58
+msgid "Height of the textfield."
+msgstr "Tekstikentän korkeus."
+
+#: components/textarea.inc:125
+msgid "A large text area that allows for multiple lines of input."
+msgstr "Isot tekstialueet, jotka sallivat tekstin syöttämisen monirivisesti."
+
+#: components/textfield.inc:59
+msgid "Maxlength"
+msgstr "Enimmäispituus"
+
+#: components/textfield.inc:61
+msgid "Maxlength of the textfield."
+msgstr "Tekstikentän enimmäispituus."
+
+#: components/textfield.inc:68
+msgid "Label placed to the left of the textfield"
+msgstr "Sijoita otsikko tekstikentän vasemmalle puolelle"
+
+#: components/textfield.inc:70
+msgid "Examples: $, #, -."
+msgstr "Esimerkit $, #, -."
+
+#: components/textfield.inc:77
+msgid "Label placed to the right of the textfield"
+msgstr "Sijoita otsikko tekstikentän oikealle puolelle"
+
+#: components/textfield.inc:79
+msgid "Examples: lb, kg, %."
+msgstr "Esimerkit lb, kg, %."
+
+#: components/textfield.inc:170
+msgid "Basic textfield type."
+msgstr "Perustyyppinen tekstikenttä."
+
+#: components/time.inc:38
+msgid "Accepts a time in any <a href=\"http://www.gnu.org/software/tar/manual/html_node/tar_109.html\">GNU Date Input Format</a>. Strings such as now, +2 hours, and 10:30pm are all valid."
+msgstr "Voit syöttää ajan missä tahansa <a href=\"http://www.gnu.org/software/tar/manual/html_node/tar_109.html\">GNU Date Input Format</a> -syöttömuodossa. Merkkijonot, kuten nyt, +2 tuntia ja 10:30pm, ovat kelvollisia."
+
+#: components/time.inc:48
+msgid "Adjust the time according to a specific timezone. Website timezone is defined in the <a href=\"!settings\">Site Settings</a> and is the default."
+msgstr "Säädä aikaa aikavyöhykkeen mukaan. Sivuston aikavyöhyke on määritelty <a href=\"!settings\">Sivuston asetukset</a> -sivulla, ja tuo aikavyöhyke on oletusarvona."
+
+#: components/time.inc:62
+msgid "Time Format"
+msgstr "Aikamuoto"
+
+#: components/time.inc:64
+msgid "Format the display of the time in 12 or 24 hours."
+msgstr "Ajan esitysmuoto, 12- tai 24-tuntinen esitysmuoto."
+
+#: components/time.inc:118
+msgid "hour"
+msgstr "tunti"
+
+#: components/time.inc:119
+msgid "minute"
+msgstr "minuutti"
+
+#: components/time.inc:122
+msgid "am"
+msgstr ""
+
+#: components/time.inc:122
+msgid "pm"
+msgstr ""
+
+#: components/time.inc:174
+msgid "Entered %name is not a valid time."
+msgstr "Syötetty %name ei ole kelvollinen aika."
+
+#: components/time.inc:243
+msgid "Presents the user with hour and minute fields. Optional am/pm fields."
+msgstr ""
+

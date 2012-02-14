@@ -1,0 +1,82 @@
+# $Id: API.txt,v 1.1.2.23 2010/04/18 12:25:43 kiam Exp $
+# This file contains a log of changes to the API.
+
+API version 1.1
+* The module uses hook_nodewords_tags_info(), and hook_nodewords_api().
+* Functions that before were private are now public.
+
+API version 1.3
+* The module uses hook_nodewords_type_id().
+* The function nodewords_output_tags() has been changed from
+  nodewords_output_tags($tags) to
+  nodewords_output_tags($tags, $output_type = 'head').
+* The function nodewords_unique() has been changed from
+  nodewords_unique($text, $max_items = 0, $separator = ',') to
+  nodewords_unique($text, $separator = ',', $max_items = -1).
+
+API version 1.4
+* The function nodewords_metatag_from_teaser() has been changed from
+  nodewords_metatag_from_teaser($text, $format, $alt_attribute, $size = 0) to
+  nodewords_metatag_from_teaser($text, $format, $options = array()).
+
+API version 1.5
+* Changed the name of the constants from NODEWORDS_MT_TYPE_* to
+  NODEWORDS_TYPE_*.
+
+API version 1.6
+* Changed the function nodewords_get_tags() from
+  nodewords_get_tags($type, $ids = array(''), $filtered = TRUE) to
+  nodewords_get_tags($type, $ids = array(''), $options = array()).
+
+API version 1.7
+* The module uses hook_nodewords_tags_output_alter().
+* The identifier passed to <meta_tag_hander>_settings_form() for the meta tags
+  settings form is now the form identifier as used by Drupal
+  (nodewords_settings_form).
+
+API version 1.8
+* The module uses hook_nodewords_tags_alter().
+* The function nodewords_mass_delete_tags() cannot be used to delete meta tags
+  associated with custom pages anymore.
+
+API version 1.9
+* The function nodewords_metatag_from_teaser($text, $format, $options = array())
+  has been replaced by
+  nodewords_metatag_from_node_content($node, $content, $options = array()).
+
+API version 1.10
+* The function nodewords_mass_update() has been added.
+
+API version 1.11
+* All the functions nodewords_pages_*() have been renamed
+  nodewords_custom_pages_*().
+* A new costant has been introduced (NODEWORDS_TYPE_OFFLINE).
+* The function nodewords_get_tags() has been removed.
+* The function nodewords_output_tags() is now a private function.
+* The function nodewords_unique() has been renamed nodewords_unique_values().
+* The parameters for the function nodewords_get_term() have been changed from
+  nodewords_get_term($tid) to nodewords_get_term($tid, $account = NULL).
+* Added the function nodewords_url($path, $options = array()).
+
+API version 1.12
+* The value expected from hook_nodewords_tags_info() has been changed.
+* New functions have been added: nodewords_check_api_version(),
+  nodewords_load_include(), nodewords_load_all_includes().
+* The function nodewords_form() has been renamed nodewords_tags_edit_fields();
+  the first parameter of the function has been changed.
+* The function nodewords_replace_tokens() has been added.
+* The function nodewords_delete_tags() has been changed from
+  nodewords_delete_tags($type, $id) to
+  nodewords_delete_tags($options = array()).
+* The module uses hook_nodewords_tags_info_alter(), and
+  hook_nodewords_delete_tags(), hook_nodewords_tag_permission_alter(), and
+  hook_nodewords_default_value_alter().
+* The function nodewords_save_tags() has been changed from
+  nodewords_save_tags($type, $id, $tags, $log_message = FALSE) to
+  nodewords_save_tags($tags, $options = array()).
+* The functions nodewords_admin_tags_form*() have been renamed
+  nodewords_admin_tags_edit_form*().
+* The function nodewords_admin_tags_form() has been changed from
+  nodewords_admin_tags_form(&$form_state, $type = NODEWORDS_TYPE_DEFAULT, $id = 0)
+  to
+  nodewords_admin_tags_edit_form(&$form_state, $options).

@@ -1,0 +1,367 @@
+# #-#-#-#-#  general.pot (PROJECT VERSION)  #-#-#-#-#
+# LANGUAGE translation of Drupal (nodewords.install)
+# Copyright YEAR NAME <EMAIL@ADDRESS>
+# Generated from files:
+#  nodewords.install,v 1.9 2006/09/04 08:05:13 robrechtj
+#  abstract.inc,v 1.2 2006/09/13 09:38:27 robrechtj
+#  copyright.inc,v 1.2 2006/09/13 09:38:27 robrechtj
+#  description.inc,v 1.3 2006/10/19 10:04:37 robrechtj
+#  geourl.inc,v 1.2 2006/09/13 09:38:27 robrechtj
+#  keywords.inc,v 1.3 2006/10/21 08:56:54 robrechtj
+#  robots.inc,v 1.2 2006/09/13 09:38:27 robrechtj
+#
+# #-#-#-#-#  nodewords-module.pot (PROJECT VERSION)  #-#-#-#-#
+# LANGUAGE translation of Drupal (nodewords.module)
+# Copyright YEAR NAME <EMAIL@ADDRESS>
+# Generated from files:
+#  nodewords.module,v 1.53 2006/10/22 09:14:13 robrechtj
+#  nodewords.info,v 1.2 2006/10/22 09:14:13 robrechtj
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: German translation for Nodewords\n"
+"POT-Creation-Date: 2009-10-06 00:22+0200\n"
+"PO-Revision-Date: 2009-10-06 00:39+0100\n"
+"Last-Translator: Alexander Haß <http://drupal.org/user/85918>\n"
+"Language-Team: Alexander Hass\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n!=1);\n"
+"X-Poedit-Language: German\n"
+"X-Poedit-Country: GERMANY\n"
+"X-Poedit-SourceCharset: utf-8\n"
+
+#: nodewords.admin.inc:28
+msgid "Are you sure you want to delete the meta tags for %path?"
+msgstr "Sollen die Meta-Tags für %path wirklich gelöscht werden?"
+
+#: nodewords.admin.inc:30
+msgid "This action cannot be undone."
+msgstr "Diese Aktion kann nicht rückgängig gemacht werden."
+
+#: nodewords.admin.inc:31
+msgid "Delete"
+msgstr "Löschen"
+
+#: nodewords.admin.inc:32
+msgid "Cancel"
+msgstr "Abbrechen"
+
+#: nodewords.admin.inc:45;118;239;444
+#, fuzzy
+msgid "The configuration options have been saved."
+msgstr "Die Einstellungen wurden gespeichert."
+
+#: nodewords.admin.inc:79
+msgid "edit"
+msgstr "Bearbeiten"
+
+#: nodewords.admin.inc:82
+msgid "delete"
+msgstr "Löschen"
+
+#: nodewords.admin.inc:97;195
+msgid "Save"
+msgstr "Speichern"
+
+#: nodewords.admin.inc:143
+msgid "Path"
+msgstr "Pfad"
+
+# English: Enter one page per line as Drupal paths. The '*' character is a wildcard. Example paths are %blog for the blog page and %blog-wildcard for every personal blog. %front is the front page.
+#: nodewords.admin.inc:144
+#, fuzzy
+msgid "Enter the Drupal path of the page. The '*' character is a wildcard. Example paths are <em>blog</em> for the blog page and <em>blog/*</em> for every personal blog."
+msgstr "Einen Drupal-Pfad von der Seite angeben. Das ‚*‘-Zeichen ist ein Platzhalter. Beispielpfade sind <em>blog</em> für die Blog-Seite und <em>blog/*</em> für jedes einzelne Blog."
+
+#: nodewords.admin.inc:153;487
+msgid "Weight"
+msgstr "Reihenfolge"
+
+#: nodewords.admin.inc:154
+msgid "Pages with lower weight will be considered first. Only the first matching page will be used."
+msgstr ""
+
+#: nodewords.admin.inc:161;491;497
+msgid "Enabled"
+msgstr "Aktiviert"
+
+#: nodewords.admin.inc:176;397
+msgid "No meta tags have been enabled for editing; enable them on the <a href=\"@settings_page\">settings page</a>."
+msgstr ""
+
+#: nodewords.admin.inc:177;398
+msgid "There are no modules that define meta tags."
+msgstr "Es sind keine Module vorhanden, die Meta-Tags definieren."
+
+#: nodewords.admin.inc:209
+msgid "The path must not start with a slash."
+msgstr "Der Pfad darf nicht mit einem Schrägstrich anfangen."
+
+# English may be buggy
+#: nodewords.admin.inc:221
+#, fuzzy
+msgid "The path is already used."
+msgstr "Der Pfad wird bereits verwendet."
+
+#: nodewords.admin.inc:225
+msgid "The path must not contain only spaces."
+msgstr "Der Pfad darf nicht nur Leerzeichen enthalten."
+
+#: nodewords.admin.inc:263
+#, fuzzy
+msgid "Tags to show on edit forms"
+msgstr "Tags, die in „Bearbeiten“-Formularen angezeigt werden sollen"
+
+#: nodewords.admin.inc:264
+#, fuzzy
+msgid "Select the meta tags you want to be able to edit on the node edit forms, and user profiles. The meta tag edit fields will always be shown in the administration settings pages."
+msgstr "Die Meta-Tags auswählen, welche auf der „Bearbeiten“-Seite von Beiträgen, Begriffen und Vokabularen bearbeitet werden können."
+
+#: nodewords.admin.inc:278
+msgid "Tags to output in HTML"
+msgstr "Tags, die im HTML-Quellcode ausgegeben werden sollen"
+
+#: nodewords.admin.inc:279
+msgid "Select the meta tags you want to appear in the HEAD section of the HTML pages."
+msgstr "Meta-Tags auswählen, die im HEAD-Bereich der HTML-Seiten angezeigt werden sollen."
+
+#: nodewords.admin.inc:301
+msgid "Taxonomy"
+msgstr "Taxonomie"
+
+#: nodewords.admin.inc:306
+msgid "Auto-keywords vocabularies"
+msgstr "Automatische Schlüsselwort-Vokabulare"
+
+#: nodewords.admin.inc:307
+msgid "Select the vocabularies which contain terms you want to add to the keywords meta tag for nodes. The terms of these vocabularies are added before the global keywords but after the page-specific keywords."
+msgstr "Auswahl der Vokabulare mit Begriffen, die zu den Schlüsselwörter-Meta-Tags der Beträge hinzugefügt werden sollen. Die Begriffe dieser Vokabulare werden vor den globalen Schlüsselwörtern, aber nach den seitenspezifischen Schlüsselwörtern hinzugefügt."
+
+#: nodewords.admin.inc:325
+msgid "Advanced options"
+msgstr "Erweiterte Optionen"
+
+#: nodewords.admin.inc:331
+#, fuzzy
+msgid "Enable the user profile meta tags"
+msgstr "Meta-Tags für Benutzerprofile aktivieren"
+
+#: nodewords.admin.inc:337
+msgid "Repeat meta tags for lists"
+msgstr "Meta-Tags bei Listen wiederholen"
+
+#: nodewords.admin.inc:338
+msgid "Some search engines punish sites that use the same meta tags on different pages. Uncheck this option if you want to suppress the repetition of the same meta tags on pages that use the pager - if unchecked, Drupal will only display the meta tags for the first page and not for subsequent pages. If unsure, select this option."
+msgstr "Einige Suchmaschinen bestrafen Websites, die gleiche Meta-Tags auf unterschiedlichen Seiten verwenden. Deaktivieren Sie diese Option, wenn die Wiederholung der gleichen Meta-Tags auf Seiten mit einer Seitennavigation unterdrückt werden soll. Sobald deaktiviert, wird Drupal die Meta-Tags nur auf der ersten Seite anzeigen und nicht auf nachfolgenden Seiten. Diese Option sollte bei Unsicherheiten aktiviert werden."
+
+#: nodewords.admin.inc:344
+msgid "Use front page meta tags"
+msgstr "Die Meta-Tags der Hauptseite verwenden"
+
+#: nodewords.admin.inc:345
+msgid "Check this option if you want to use the <a href=\"@front-page-url\" title=\"Meta tags for front page\">meta tags for the front page</a> even if the <a href=\"@site-settings-url\" title=\"Site information\">default front page</a> specified is a view, panel or node - in this case, the meta tags specified for the view, panel or node will be ignored. If you want to use the meta tags of the view, panel or node instead, uncheck this option. If unsure, select this option and specify the meta tags you want on the <a href=\"@front-page-url\" title=\"Meta tags for front page\">meta tags for the front page</a>."
+msgstr "Diese Option sollte aktiviert werden, wenn <a href=\"@front-page-url\" title=\"Meta-Tags für die Startseite\">Meta-Tags für die Startseite</a> verwendet werden, auch wenn die <a href=\"@site-settings-url\" title=\"Website-Informationen\">Standard-Startseite</a> als Ansicht, Panel oder Beitrag festgelegt ist. In diesem Fall werden die Meta-Tags der Ansicht, des Panels oder Beitrags ignoriert. Diese Option sollte deaktiviert werden, wenn stattdessen die Meta-Tags der Ansicht, des Panels oder Beitrags verwendet werden sollen. Diese Option sollte bei Unsicherheiten aktiviert und die <a href=\"@front-page-url\" title=\"Meta-Tags für die Startseite\">Meta-Tags für die Startseite</a> angegeben werden."
+
+#: nodewords.admin.inc:351
+msgid "Always show the meta tags fieldset as collapsed"
+msgstr "Die Meta-Tag-Feldgruppen immer zusammengeklappt anzeigen"
+
+#: nodewords.admin.inc:352
+msgid "Check this option if you want to always show the meta tags fieldset as collapsed."
+msgstr ""
+
+#: nodewords.admin.inc:358
+msgid "Maximum meta tags length"
+msgstr "Maximallänge für Meta-Tags"
+
+#: nodewords.admin.inc:359
+msgid "The maximum length to use for the meta tags form fields."
+msgstr ""
+
+#: nodewords.admin.inc:416
+msgid "Save configuration"
+msgstr "Konfiguration speichern"
+
+#: nodewords.admin.inc:422
+msgid "Reset to defaults"
+msgstr "Zurücksetzen"
+
+#: nodewords.admin.inc:436
+msgid "The configuration options have been reset to their default values."
+msgstr "Die Einstellungen wurden auf ihre Standardwerte zurückgesetzt."
+
+#: nodewords.admin.inc:480
+#, fuzzy
+msgid "There are currently no meta tags defined."
+msgstr "Derzeit sind keine Meta-Tags definiert."
+
+#: nodewords.admin.inc:486
+msgid "Drupal path"
+msgstr "Drupal-Pfad"
+
+#: nodewords.admin.inc:502
+msgid "Operations"
+msgstr "Operationen"
+
+#: nodewords.module:41;543;231
+#: nodewords.info:0
+#: nodewords_basic/nodewords_basic.info:0
+#: nodewords_custom/nodewords_custom.info:0
+#: nodewords_extra/nodewords_extra.info:0
+#: nodewords_verification_tags/nodewords_verification_tags.info:0
+msgid "Meta tags"
+msgstr "Meta-Tags"
+
+#: nodewords.module:42
+#, fuzzy
+msgid "Meta tags fieldset."
+msgstr "Meta-Tags Feldgruppe."
+
+#: nodewords.module:93
+#, fuzzy
+msgid "Meta tags settings"
+msgstr "Meta-Tags Einstellungen"
+
+#: nodewords.module:100
+msgid "Allow editing of meta tags"
+msgstr "Bearbeitung von Meta-Tags zulassen"
+
+#: nodewords.module:101
+msgid "If selected, the node edit form will allow the users with the right permissions to edit the meta tags associated with nodes of this content type."
+msgstr ""
+
+#: nodewords.module:189
+msgid "On this page you can enter the default values for the meta tags of your site."
+msgstr "Auf dieser Seite können die Standardwerte für die Meta-Tags der Website angegeben werden."
+
+#: nodewords.module:193
+msgid "On this page you can enter the meta tags for the access denied error page of your site."
+msgstr "Auf dieser Seite können die Meta-Tags für die „Zugriff verweigert“-Fehlerseite der Website angegeben werden."
+
+#: nodewords.module:197
+msgid "On this page you can enter the meta tags for the page not found error page of your site."
+msgstr "Auf dieser Seite können die Meta-Tags für die „Seite wurde nicht gefunden“-Fehlerseite der Website angegeben werden."
+
+#: nodewords.module:201
+msgid "On this page you can enter the meta tags for the front page of your site."
+msgstr "Auf dieser Seite können Meta-Tags für die Startseite der Website angegeben werden."
+
+#: nodewords.module:205
+msgid "On this page you can enter the meta tags for your site when it is offline."
+msgstr ""
+
+# Satzstellung des zweiten Satzes im Kontext nicht optimal
+#: nodewords.module:209
+#, fuzzy
+msgid "On this page you can enter the meta tags for other pages of your site. <a href=\"@add_metatags\">Add meta tags</a> for a new page."
+msgstr "Auf dieser Seite können die Meta-Tags für weitere Seiten der Website angegeben werden. <a href=\"@add_metatags\">Meta-Tags hinzufügen</a> für eine neue Seite."
+
+#: nodewords.module:213
+msgid "On this page you can enter the meta tags for tracker pages of your site."
+msgstr ""
+
+#: nodewords.module:348;502
+msgid "Delete meta tags"
+msgstr "Meta-Tags löschen"
+
+#: nodewords.module:808
+msgid "The update has been performed."
+msgstr "Die Aktualisierung wurde durchgeführt."
+
+#: nodewords.module:981
+msgid "nodewords"
+msgstr "nodewords"
+
+#: nodewords.module:981
+msgid "%name changed the meta tags for %type (%id)."
+msgstr "%name hat die Meta-Tags für %type (%id) geändert."
+
+#: nodewords.module:404
+msgid "administer meta tags"
+msgstr "Meta-Tags verwalten"
+
+#: nodewords.module:234
+msgid "Configure HTML meta tags for all the content."
+msgstr "HTML-Meta-Tags für den gesamten Inhalt konfigurieren."
+
+#: nodewords.module:241
+msgid "Settings"
+msgstr "Einstellungen"
+
+#: nodewords.module:249
+msgid "Global meta tags"
+msgstr "Allgemeine Meta-Tags"
+
+#: nodewords.module:258
+msgid "Default values"
+msgstr "Standardwerte"
+
+#: nodewords.module:265
+msgid "Front page"
+msgstr "Startseite"
+
+#: nodewords.module:274
+msgid "Error 403 page"
+msgstr "403-Fehlerseite"
+
+#: nodewords.module:283
+msgid "Error 404 page"
+msgstr "404-Fehlerseite"
+
+#: nodewords.module:292
+msgid "Tracker pages"
+msgstr ""
+
+#: nodewords.module:301
+msgid "Other pages"
+msgstr "Weitere Seiten"
+
+#: nodewords.module:311
+msgid "Add page meta tags"
+msgstr "Meta-Tags der Seite hinzufügen"
+
+#: nodewords.module:320
+msgid "Delete page meta tags"
+msgstr "Meta-Tags der Seite löschen"
+
+#: nodewords.module:330
+msgid "Edit page meta tags"
+msgstr "Meta-Tags der Seite bearbeiten"
+
+#: nodewords.install:18
+msgid "Nodewords does not create meta tags anymore; it is just a module that implements a public API used from the modules that create meta tags. You need to enable at least one module between basic_metatags.module, extra_metatags.module, and site_verification.module that are listed under <em>Nodewords</em> in the modules page."
+msgstr ""
+
+#: nodewords.install:20
+msgid "Enable the <a href=\"@url\">meta tag modules</a>."
+msgstr "Die <a href=\"@url\">Meta-Tags Module</a> aktivieren."
+
+#: nodewords.install:236
+msgid "The default meta tags values have been reset; you can change them in the <a href=\"@settings_page\">module settings page</a>."
+msgstr "Die standardmäßigen Meta-Tags wurden zurückgesetzt. Diese können jetzt auf der <a href=\"@settings_page\">Modul-Einstellungsseite</a> geändert werden."
+
+#: nodewords.install:502
+msgid "The support for Views, and Panels have been changed; visit the <a href=\"@admin_page\">administration page</a> to edit the meta tags for those pages."
+msgstr ""
+
+#: nodewords.install:706
+msgid "The Nodewords modules has been renamed. Visit the <a href=\"@modules\">modules page</a> to re-enable them."
+msgstr ""
+
+#: nodewords.info:0
+msgid "Nodewords"
+msgstr "Meta-Tags"
+
+#: nodewords.info:0
+msgid "Allows users to add meta tags, e.g. keywords or description. This module doesn't actually implement any meta tags, but requires other modules to implement them."
+msgstr ""
+
+#~ msgid "Nodewords settings"
+#~ msgstr "Meta-Tags Einstellungen"
+#~ msgid "administer nodewords"
+#~ msgstr "Meta-Tags verwalten"
+#~ msgid "widget:permission"
+#~ msgstr "Steuerelement:Berechtigung"
+

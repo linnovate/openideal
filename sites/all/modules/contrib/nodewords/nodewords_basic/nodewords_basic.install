@@ -1,0 +1,122 @@
+<?php
+// $Id: nodewords_basic.install,v 1.1.2.13 2010/03/29 16:01:10 kiam Exp $
+
+/**
+ * @file
+ * Install, update and uninstall functions for the Basic meta tags module.
+ */
+
+/**
+ * Implements hook_install().
+ */
+function nodewords_basic_install() {
+  db_query("UPDATE {system} SET weight = 12 WHERE name = 'nodewords_basic' AND type = 'module'");
+}
+
+/**
+ * Implements hook_update_N().
+ */
+function nodewords_basic_update_6107() {
+  $ret = array();
+
+  $value = variable_get('nodewords_list_robots', NULL);
+  if (isset($value) && is_array($value)) {
+    $robots_value = array_filter($value);
+    $value = array_values($robots_value);
+
+    $index_follow = in_array('noindex', $value) ? 'noindex' : 'index';
+    $index_follow .= in_array('nofollow', $value) ? 'nofollow' : 'follow';
+
+    unset($robots_value['noindex']);
+    unset($robots_value['nofollow']);
+
+    variable_set('nodewords_list_robots_index_follow', $index_follow);
+    variable_set('nodewords_list_robots_value', $robots_value);
+
+    $ret[] = array(
+      'success' => TRUE,
+      'query' => 'Update module settings',
+    );
+  }
+
+  return $ret;
+}
+
+/**
+ * Implements hook_update_N().
+ */
+function nodewords_basic_update_6108(&$sandbox) {
+  $ret = array();
+
+  if (!isset($sandbox['progress'])) {
+    $sandbox['progress'] = 0;
+    $sandbox['max'] = (int) db_result(db_query("SELECT COUNT(*) FROM {nodewords} WHERE name = 'robots'"));
+    $sandbox['current_mtid'] = 0;
+  }
+
+  if ($sandbox['max']) {
+    $metatags = db_query_range("SELECT * FROM {nodewords} WHERE name = 'robots' AND mtid > %d ORDER BY mtid ASC", $sandbox['current_mtid'], 0, 20);
+
+    while ($metatag = db_fetch_object($metatags)) {
+      // The errors are suppressed to allow the update function to fix as
+      // much rows as possible; if the call to unserialize returns an error,
+      // then the content of that row is possibly corrupted.
+      if (($content = @unserialize($metatag->content)) !== FALSE) {
+        if (empty($content['index_follow']) && !empty($content['value']) && is_array($content['value'])) {
+          $robots_value = array_filter($content['value']);
+          $value = array_values($robots_value);
+
+          $index_follow = in_array('noindex', $value) ? 'noindex' : 'index';
+          $index_follow .= in_array('nofollow', $value) ? 'nofollow' : 'follow';
+
+          unset($robots_value['noindex']);
+          unset($robots_value['nofollow']);
+
+          $content['index_follow'] = $index_follow;
+          $content['value'] = $robots_value;
+
+          db_query(
+            "UPDATE {nodewords} SET content = '%s' WHERE mtid = %d",
+            serialize($content), $metatag->mtid
+          );
+        }
+      }
+
+      $sandbox['current_mtid'] = $metatag->mtid;
+      $sandbox['progress']++;
+    }
+  }
+
+  $ret['#finished'] = empty($sandbox['max']) ? 1 : ($sandbox['progress'] / $sandbox['max']);
+
+  if ($ret['#finished'] == 1) {
+    $ret[] = array(
+      'success' => TRUE,
+      'query' => 'Corrected the values saved in the database',
+    );
+  }
+
+  return $ret;
+}
+
+/**
+ * Implements hook_uninstall().
+ */
+function nodewords_basic_uninstall() {
+  if (db_table_exists('nodewords')) {
+    $metatags = array(
+      'abstract',
+      'canonical',
+      'copyright',
+      'description',
+      'keywords',
+      'revisit-after',
+      'robots'
+    );
+
+    db_query("DELETE FROM {nodewords} WHERE name IN (" . db_placeholders($metatags, 'varchar') . ")", $metatags);
+  }
+
+  variable_del('nodewords_list_robots_index_follow');
+  variable_del('nodewords_list_robots_value');
+}

@@ -1,0 +1,284 @@
+# $Id$
+#
+# Swedish translation of Drupal (general)
+# Copyright YEAR NAME <EMAIL@ADDRESS>
+# Generated from files:
+#  link.module,v 1.24.4.23 2010/03/01 01:13:29 jcfiala
+#  link.info,v 1.2 2008/03/31 06:50:42 quicksketch
+#  link_views_handler_argument_target.inc,v 1.1.4.2 2009/07/04 19:07:42 jcfiala
+#  link.views.inc,v 1.1.4.2 2009/07/04 19:07:42 jcfiala
+#  link_views_handler_filter_protocol.inc,v 1.1.4.2 2009/07/04 19:07:42 jcfiala
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Link 6.x\n"
+"POT-Creation-Date: 2010-03-17 16:05+0100\n"
+"PO-Revision-Date: 2010-03-17 22:02+0100\n"
+"Last-Translator: Magnus Gunnarsson <magnus.gunnarsson76@gmail.com>\n"
+"Language-Team: drupalsverige.se\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n!=1);\n"
+"X-Poedit-Language: Swedish\n"
+"X-Poedit-Country: SWEDEN\n"
+"X-Poedit-SourceCharset: utf-8\n"
+
+#: link.module:47;643
+#: link.info:0
+msgid "Link"
+msgstr "Länk"
+
+#: link.module:48
+msgid "Store a title, href, and attributes in the database to assemble a link."
+msgstr "Lagrar en titel, href och attribut i databasen för att sätta ihop en länk."
+
+#: link.module:65
+msgid "Optional URL"
+msgstr "Frivillig URL"
+
+#: link.module:68
+msgid "If checked, the URL field is optional and submitting a title alone will be acceptable. If the URL is omitted, the title will be displayed as plain text."
+msgstr "Om ikryssad så kommer fältet URL att vara frivilligt och skickas enbart en titel så accepteras det. Om URL:en utelämnas så kommer titeln att visas som ren text."
+
+#: link.module:72
+msgid "Optional Title"
+msgstr "Frivillig"
+
+#: link.module:73
+msgid "Required Title"
+msgstr "Krävd"
+
+#: link.module:74
+msgid "Static Title: "
+msgstr "Statisk:"
+
+#: link.module:75
+msgid "No Title"
+msgstr "Ingen"
+
+#: link.module:80
+msgid "Link Title"
+msgstr "Titel på länk"
+
+#: link.module:83
+msgid "If the link title is optional or required, a field will be displayed to the end user. If the link title is static, the link will always use the same title. If <a href=\"http://drupal.org/project/token\">token module</a> is installed, the static title value may use any other node field as its value. Static and token-based titles may include most inline XHTML tags such as <em>strong</em>, <em>em</em>, <em>img</em>, <em>span</em>, etc."
+msgstr "Om länktiteln är valfri eller krävd så kommer ett fält att visas för slutanvändaren. Om länktiteln är statisk så kommer länken alltid att använda samma titel. Om <a href=\"http://drupal.org/project/token\">modulen Token</a> är installerad så kan det statiska titelvärdet använda andra valfria nodfält som dess värde. Titlar baserade på Token eller som är statiska får innehålla de flesta radvisa XHTML-taggarna såsom <em>strong</em>, <em>em</em>, <em>img</em>, <em>span</em>, och så vidare."
+
+#: link.module:98
+msgid "Placeholder tokens"
+msgstr "Symboler för platshållare"
+
+#: link.module:99
+msgid "The following placeholder tokens can be used in both paths and titles. When used in a path or title, they will be replaced with the appropriate values."
+msgstr "Följande platshållarsymboler kan användas både i sökvägar och titlar. När de används i en sökväg eller titel så kommer de att ersättas med de tillhörande värdena."
+
+#: link.module:107
+msgid "Allow user-entered tokens"
+msgstr "Tillåt symboler angivna av användare"
+
+#: link.module:109
+msgid "Checking will allow users to enter tokens in URLs and Titles on the node edit form. This does not affect the field settings on this page."
+msgstr "Kryssat detta i så tillåts användare att ange symboler i URL:er och titlar i redigeringsformuläret för noden. Detta påverkar inte fältinställningarna på denna sida."
+
+#: link.module:118
+msgid "URL Display Cutoff"
+msgstr "Avkortad visning av URL"
+
+#: link.module:120
+msgid "If the user does not include a title for this link, the URL will be used as the title. When should the link title be trimmed and finished with an elipsis (&hellip;)? Leave blank for no limit."
+msgstr "Om användaren inte har med en titel för denna länk så kommer URL:en att användas som titel. När skall titeln på länken förkortas och avslutas med tre punkter (&hellip;)?"
+
+#: link.module:126
+msgid "Default (no target attribute)"
+msgstr "Förvalt (inget målattribut)"
+
+#: link.module:127
+msgid "Open link in window root"
+msgstr "Öppna länk i samma fönster"
+
+#: link.module:128
+msgid "Open link in new window"
+msgstr "Öppna länk i ett nytt fönster"
+
+#: link.module:129
+msgid "Allow the user to choose"
+msgstr "Låt användaren välja"
+
+#: link.module:136
+msgid "Link Target"
+msgstr "Mål för länk"
+
+#: link.module:142
+msgid "Rel Attribute"
+msgstr "Relaterat attribut"
+
+#: link.module:143
+msgid "When output, this link will have this rel attribute. The most common usage is <a href=\"http://en.wikipedia.org/wiki/Nofollow\">rel=&quot;nofollow&quot;</a> which prevents some search engines from spidering entered links."
+msgstr "Vid utmatning så kommer denna länk ha detta relaterade attribut. Den vanligaste användningen är <a href=\"http://en.wikipedia.org/wiki/Nofollow\">rel=&quot;nofollow&quot;</a> vilket hindrar några sökmotorer från att indexera angivna länkar."
+
+#: link.module:151
+msgid "Additional CSS Class"
+msgstr "Ytterligare CSS-klass"
+
+#: link.module:152
+msgid "When output, this link will have this class attribute. Multiple classes should be separated by spaces."
+msgstr "Vid utmatning så kommer denna länk att ha detta klassattribut. Används flera klasser skall de separeras med mellanslag."
+
+#: link.module:156
+msgid "Link 'title' Attribute"
+msgstr "Länkattribut 'title'"
+
+#: link.module:160
+msgid "When output, links will use this \"title\" attribute (when different from the link text). Read <a href=\"http://www.w3.org/TR/WCAG10-HTML-TECHS/#links\">WCAG 1.0 Guidelines</a> for links comformances. Tokens values will be evaluated."
+msgstr "Vid utmatning så kommer länkar använda detta attribut för \"titel\" (om annan än länktexten). Läs <a href=\"http://www.w3.org/TR/WCAG10-HTML-TECHS/#links\">WCAG 1.0 Guidelines</a> för likheter med länkar. Symboliska värden kommer att evalueras."
+
+#: link.module:167
+msgid "A default title must be provided if the title is a static value"
+msgstr "En förvald titel måste anges om titeln är ett statistk värde"
+
+#: link.module:226
+msgid "At least one title or URL must be entered."
+msgstr "Åtminstone en titel eller URL måste anges."
+
+#: link.module:305
+msgid "Not a valid URL."
+msgstr "Inte en giltig URL."
+
+#: link.module:309
+msgid "Titles are required for all links."
+msgstr "Titel krävs för alla länkar."
+
+#: link.module:314
+msgid "You cannot enter a title without a link url."
+msgstr "Du kan inte ange en titel utan en URL för länk."
+
+#: link.module:540
+msgid "URL"
+msgstr "URL"
+
+#: link.module:549
+#: views/link_views_handler_argument_target.inc:31
+msgid "Title"
+msgstr "Titel"
+
+#: link.module:565
+msgid "Open URL in a New Window"
+msgstr "Öppna URL i ett nytt fönster"
+
+#: link.module:579
+msgid "Title, as link (default)"
+msgstr "Titel, som länk (förvalt)"
+
+#: link.module:584
+msgid "URL, as link"
+msgstr "URL, som länk"
+
+#: link.module:589
+msgid "URL, as plain text"
+msgstr "URL, som ren text"
+
+#: link.module:594
+msgid "Short, as link with title \"Link\""
+msgstr "Kort, som länk med titel \"Länk\""
+
+#: link.module:599
+msgid "Label, as link with label as title"
+msgstr "Etikett, som länk med etikkett som titel"
+
+#: link.module:604
+msgid "Separate title and URL"
+msgstr "Separera titel och URL"
+
+#: link.module:675
+msgid "Link URL"
+msgstr "URL för länk"
+
+#: link.module:676
+msgid "Link title"
+msgstr "Titel för länk"
+
+#: link.module:677
+msgid "Formatted html link"
+msgstr "Formaterad HTML-länk"
+
+#: link.info:0
+msgid "Defines simple link field types."
+msgstr "Definierar enkla länkfältstyper."
+
+#: link.info:0
+msgid "CCK"
+msgstr "CCK"
+
+#: views/link.views.inc:41
+msgid "@label URL"
+msgstr "URL för @label"
+
+#: views/link.views.inc:47;80;97
+msgid "Content"
+msgstr "Innehåll"
+
+#: views/link.views.inc:48;61
+msgid "@label title"
+msgstr "titel för @label"
+
+#: views/link.views.inc:81;85
+msgid "@label protocol"
+msgstr "protokoll för @label"
+
+#: views/link.views.inc:98;102
+msgid "@label target"
+msgstr "mål för @target"
+
+#: views/link_views_handler_argument_target.inc:33
+msgid "The title to use when this argument is present; it will override the title of the view and titles from previous arguments. You can use percent substitution here to replace with argument titles. Use \"%1\" for the first argument, \"%2\" for the second, etc."
+msgstr "Titel att använda när detta argumentet framförs. Den kommer åsidosätta titeln på denna vy och titlar från tidigare argument. Du kan använda procentsersättning här för att ersätta med argumenttitlar. Använd \"%1\" för det första argumentet, \"%2\" för det andra argumentet o.s.v."
+
+#: views/link_views_handler_argument_target.inc:46
+msgid "Action to take if argument is not present"
+msgstr "Åtgärd att ta till då det inte framförs något argument."
+
+#: views/link_views_handler_argument_target.inc:58
+msgid "Wildcard"
+msgstr "Jokertecken"
+
+#: views/link_views_handler_argument_target.inc:61
+msgid "If this value is received as an argument, the argument will be ignored; i.e, \"all values\""
+msgstr "Om detta värdet är mottaget som ett argument kommer det bli ignorerat. Det vill säga. \"alla värden\""
+
+#: views/link_views_handler_argument_target.inc:67
+msgid "Wildcard title"
+msgstr "Titel för jokertecken"
+
+#: views/link_views_handler_argument_target.inc:70
+msgid "The title to use for the wildcard in substitutions elsewhere."
+msgstr "Titeln att använda för jokertecknet i ersättandet på andra ställen."
+
+#: views/link_views_handler_argument_target.inc:93
+msgid "Validator"
+msgstr "Bekräftare"
+
+#: views/link_views_handler_argument_target.inc:97
+msgid "<Basic validation>"
+msgstr "<Grundläggande bekräftning>"
+
+#: views/link_views_handler_argument_target.inc:133
+msgid "Action to take if argument does not validate"
+msgstr "Åtgärd att ta till om argumentet inte bekräftas"
+
+#: views/link_views_handler_filter_protocol.inc:29
+msgid "Is one of"
+msgstr "Är en av"
+
+#: views/link_views_handler_filter_protocol.inc:30
+msgid "="
+msgstr "="
+
+#: views/link_views_handler_filter_protocol.inc:63
+msgid "Protocol"
+msgstr "Protokoll"
+
+#: views/link_views_handler_filter_protocol.inc:68
+msgid "The protocols displayed here are those globally available. You may add more protocols by modifying the <em>filter_allowed_protocols</em> variable in your installation."
+msgstr "Protokollen som visas här är de som globalt finns tillgängliga. Du kan lägga till fler protokoll genom att modifiera variabeln <em>filter_allowed_protocols</em>  i din installation."
+

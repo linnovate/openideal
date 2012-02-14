@@ -1,0 +1,345 @@
+# $Id: pl.po,v 1.2.2.2 2010/05/22 23:41:32 hass Exp $
+#
+# Polski / Polish translation of Drupal (google_analytics.module)
+# Copyright 2008 <bartlomiej.opajdowski@optionall.pl>
+# Generated from files:
+#  googleanalytics.admin.inc,v 1.4.2.12 2009/03/08 11:38:26 hass
+#  googleanalytics.module,v 1.19.2.9 2009/03/29 11:03:01 hass
+#  googleanalytics.info,v 1.7.2.2 2008/09/18 18:39:45 hass
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: google_analytics 6.x-2.x-dev\n"
+"POT-Creation-Date: 2008-12-29 07:49-0600\n"
+"PO-Revision-Date: 2008-12-30 11:00+0100\n"
+"Last-Translator: Tomasz Kulig <tomasz.kulig _a_ kuling.pl>\n"
+"Language-Team: optionall.pl <bartlomiej.opajdowski@optionall.pl>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Poedit-Language: Polish\n"
+"X-Poedit-Country: POLAND\n"
+
+#: googleanalytics.admin.inc:15
+msgid "General settings"
+msgstr "Ustawienia podstawowe"
+
+#: googleanalytics.admin.inc:21
+msgid "Google Analytics account number"
+msgstr "Numer konta Google Analytics"
+
+#: googleanalytics.admin.inc:26
+msgid "The account number is unique to the websites domain. Click the <strong>Edit</strong> link in your Google Analytics account next to the appropriate profile on the <strong>Analytics Settings</strong> page, then select <strong>Check Status</strong> at the top-right of the table to find the account number (UA-xxxx-x) of your site. You can obtain a user account from the <a href=\"@url\">Google Analytics</a> website."
+msgstr "Numer konta jest unikalny dla domeny. Na stronie Google Analytics w <strong>Ustawieniach Analytics</strong> kliknij <strong>Edytuj</strong> dla wybranego profilu witryny, następnie wybierz <strong>Sprawdź status</strong> znajdujący się w prawej górnej części tabeli i znajdź numer (UA-xxxx-x). Konto możesz utworzyć na <a href=\"@url\">Google Analytics</a>."
+
+#: googleanalytics.admin.inc:32
+msgid "User specific tracking settings"
+msgstr "Ustawienia dotyczące śledzenia użytkowników"
+
+#: googleanalytics.admin.inc:37
+msgid "Custom tracking settings"
+msgstr "Ustawienia śledzenia"
+
+#: googleanalytics.admin.inc:39
+msgid "Users cannot control whether they are tracked or not."
+msgstr "Użytkownicy nie mogą kontrolować, czy będą śledzeni czy nie."
+
+#: googleanalytics.admin.inc:40
+msgid "Track users by default, but let individual users to opt out."
+msgstr "Domyślnie śledzi użytkowników, ale zezwala poszczególnym użytkownikom tą opcję wyłączyć."
+
+#: googleanalytics.admin.inc:41
+msgid "Do not track users by default, but let individual users to opt in."
+msgstr "Domyślnie nie śledzi użytkowników, ale zezwala poszczególnym użytkownikom tą opcję włączyć. "
+
+#: googleanalytics.admin.inc:43
+msgid "Allow individual users to customize the visibility of tracking in their account settings. Only users with %permission permission are allowed to set their own preference."
+msgstr "Zezwala użytkownikom na konfigurowanie śledzenia w formularzu edycji ustawień konta. Tylko użytkownicy z uprawnieniami %permission mogą dostosowywać swoje profile zgodnie z preferencjami."
+
+#: googleanalytics.admin.inc:43
+#: googleanalytics.module:23
+msgid "opt-in or out of tracking"
+msgstr "włączanie lub wyłączanie śledzenia"
+
+#: googleanalytics.admin.inc:50
+msgid "Role specific tracking settings"
+msgstr "Ustawień śledzenia dla określonych ról"
+
+#: googleanalytics.admin.inc:61
+msgid "Add tracking for specific roles"
+msgstr "Dodaj śledzenie dla określonych ról"
+
+#: googleanalytics.admin.inc:64
+msgid "Add tracking only for the selected role(s). If none of the roles are selected, all users will be tracked. If a user has any of the roles checked, that user will be tracked."
+msgstr "Śledzi tylko wybrane role. Jeśli nie zostanie wybrana żadna rola, wówczas wszyscy użytkownicy będą śledzeni. Jeśli użytkownik ma zaznaczoną którąkolwiek ze swoich ról, będzie śledzony."
+
+#: googleanalytics.admin.inc:70
+msgid "Page specific tracking settings"
+msgstr "Ustawienia śledzenia dla określonych stron"
+
+#: googleanalytics.admin.inc:85
+msgid "Add to every page except the listed pages."
+msgstr "Dodaje kod do każdej strony poza tymi z listy."
+
+#: googleanalytics.admin.inc:85
+msgid "Add to the listed pages only."
+msgstr "Dodaj kod tylko do tych z listy."
+
+#: googleanalytics.admin.inc:86
+msgid "Enter one page per line as Drupal paths. The '*' character is a wildcard. Example paths are %blog for the blog page and %blog-wildcard for every personal blog. %front is the front page."
+msgstr "Adres każdej strony wprowadza się w osobnej linii, podając ścieżki w formacie Drupala. Znak '*' zastępuje dowolną ilość znaków. Przykłady ścieżek: %blog dla strony bloga i %blog-wildcard dla każdego osobistego bloga użytkowników. %front oznacza stronę główną."
+
+#: googleanalytics.admin.inc:89
+msgid "Add if the following PHP code returns <code>TRUE</code> (PHP-mode, experts only)."
+msgstr "Dodaj jeśli następujący kod PHP zwraca <code>Prawda</code> (tryb PHP tylko dla ekspertów)."
+
+#: googleanalytics.admin.inc:90
+msgid "If the PHP-mode is chosen, enter PHP code between %php. Note that executing incorrect PHP-code can break your Drupal site."
+msgstr "Jeśli wybrano tryb PHP, kod należy umieścić wewnątrz znaków %php. Warto wiedzieć, że uruchamianie niepoprawnie napisanego kodu PHP może spowodować poważne błędy w witrynie."
+
+#: googleanalytics.admin.inc:94
+msgid "Add tracking to specific pages"
+msgstr "Dodaj kod śledzenia dla określonych stron"
+
+#: googleanalytics.admin.inc:100
+msgid "Pages"
+msgstr "Strony"
+
+#: googleanalytics.admin.inc:110
+msgid "User segmentation settings"
+msgstr "Ustawienia podziału użytkowników"
+
+#: googleanalytics.admin.inc:115
+msgid "User roles"
+msgstr "Role użytkownika"
+
+#: googleanalytics.admin.inc:125
+msgid "Add segmentation information to tracking code"
+msgstr "Dodaje informację o podziałach do kodu śledzenia"
+
+#: googleanalytics.admin.inc:126
+msgid "Segment users based on different properties, additionally to the basic IP address based tracking provided by Google Analytics."
+msgstr "Dzieli użytkowników bazując na ich właściwościach, dodatkowo do podstawowego śledzenia bazującego na IP użytkownika dostarczanego przez Google Analytics."
+
+#: googleanalytics.admin.inc:126
+msgid "<a href=\"@module_list\">Enable the profile module</a> to be able to use profile fields for more granular tracking."
+msgstr "<a href=\"@module_list\">Włącz moduł Profile</a>, aby móc używać pól profilu do bardziej szczegółowego śledzenia."
+
+#: googleanalytics.admin.inc:126
+msgid "Make sure you will not associate (or permit any third party to associate) any data gathered from Your Website(s) (or such third parties' website(s)) with any personally identifying information from any source as part of Your use (or such third parties' use) of the Google Analytics service. For more information see section 8.1 in the <a href=\"@ga_tos\">Google Analytics terms of use</a>."
+msgstr "Upewnij się, że nie będziesz łączył (ani nie zezwolisz żadnej osobie trzeciej na łączenie) jakichkolwiek danych zbieranych z Witryny Internetowej (Witryn Internetowych) (lub z witryny internetowej (witryn internetowych) takich osób trzecich) z żadnymi informacjami umożliwiającymi identyfikację danej osoby z jakiegokolwiek źródła w ramach korzystania z Usługi Google Analytics przez ciebie lub osoby trzecie. W celu uzyskania dalszych informacji zapoznaj się z rozdziałem 8.1 znajdującym się w <a href=\"@ga_tos\">Google Analytics terms of use</a>."
+
+#: googleanalytics.admin.inc:126
+msgid "Selecting one or more values is supported. To select multiple items, hold down CTRL (PC) or &#8984; (Mac) while selecting fields."
+msgstr "Możesz wybrać jedną bądź wiele wartości. Aby wybrać wiele elementów przytrzymaj klawisz CTRL (PC) lub &#8984; (Mac) podczas zaznaczania."
+
+#: googleanalytics.admin.inc:136
+msgid "Link tracking settings"
+msgstr "Ustawienia śledzenia odnośników"
+
+#: googleanalytics.admin.inc:142
+msgid "Track outgoing links"
+msgstr "Śledź odnośniki do stron zewnętrznych"
+
+#: googleanalytics.admin.inc:144
+msgid "Enables tracking of clicks on outgoing links."
+msgstr "Włącza śledzenie kliknięć na odnośniki zewnętrzne."
+
+#: googleanalytics.admin.inc:148
+msgid "Track mailto links"
+msgstr "Śledź odnośniki mailto"
+
+#: googleanalytics.admin.inc:150
+msgid "Enables tracking of clicks on mailto links."
+msgstr "Włącza śledzenie kliknięć na odnośniki mailto."
+
+#: googleanalytics.admin.inc:154
+msgid "Track download links"
+msgstr "Śledź odnośniki pobrań"
+
+#: googleanalytics.admin.inc:156
+msgid "Enables tracking of clicks on links to files based on the file extensions list below."
+msgstr "Włącza śledzenie kliknięć na odnośniki do plików posiadających następujące rozszerzenia."
+
+#: googleanalytics.admin.inc:160
+msgid "File extensions to track"
+msgstr "Rozszerzenia plików do śledzenia"
+
+#: googleanalytics.admin.inc:162
+msgid "A pipe separated list of file extensions that should be tracked when clicked with regular expression support. Example: !extensions"
+msgstr "Lista rozszerzeń plików oddzielona znakiem fajki '|', które powinny być śledzone podczas kliknięcia. Dozwolone jest użycie wyrażeń regularnych. Przykład: !extensions"
+
+#: googleanalytics.admin.inc:169
+msgid "Advanced settings"
+msgstr "Ustawienia zaawansowane"
+
+#: googleanalytics.admin.inc:176
+msgid "Cache tracking code file locally"
+msgstr "Zapisz kod śledzenia do lokalnej pamięci podręcznej"
+
+#: googleanalytics.admin.inc:177
+msgid "If checked, the tracking code file is retrieved from Google Analytics and cached locally. It is updated daily from Google's servers to ensure updates to tracking code are reflected in the local copy. Do not activate this until after Google Analytics has confirmed your tracker!"
+msgstr "Gdy zaznaczysz, plik kodu śledzenia będzie pobierany z Google Analytics i przechowywany w lokalnej pamięci podręcznej. Będzie uaktualniany codziennie z serwera Google, tak aby zapewnić aktualizacje kodu śledzenia dla lokalnej kopi. Nie aktywuj, dopóki Google Analytics nie potwierdzi działania twojego kodu śledzenia!"
+
+#: googleanalytics.admin.inc:182
+msgid "<a href=\"@url\">Public file transfers</a> must be enabled to allow local caching."
+msgstr "<a href=\"@url\">Publiczne przesyłanie plików</a> musi być włączone, aby zezwolić na używanie lokalnej pamięci podręcznej."
+
+#: googleanalytics.admin.inc:189
+msgid "Track translation sets as one unit"
+msgstr "Śledź zestawy tłumaczeń jako jedną jednostkę"
+
+#: googleanalytics.admin.inc:190
+msgid "When a node is part of a translation set, record statistics for the originating node instead. This allows for a translation set to be treated as a single unit."
+msgstr "Kiedy segment jest częścią zbioru tłumaczeń, nagrywaj statystyki dla oryginalnego segmentu. W taki sposób zestaw tłumaczeń będzie traktowany jak pojedyncza jednostka. "
+
+#: googleanalytics.admin.inc:196
+msgid "Depends on: !dependencies"
+msgstr "Zależy od: !dependencies"
+
+#: googleanalytics.admin.inc:196
+msgid "@module (<span class=\"admin-disabled\">disabled</span>)"
+msgstr "@module (<span class=\"admin-disabled\">wyłączony</span>)"
+
+#: googleanalytics.admin.inc:196
+msgid "@module (<span class=\"admin-enabled\">enabled</span>)"
+msgstr "@module (<span class=\"admin-enabled\">włączony</span>)"
+
+#: googleanalytics.admin.inc:203
+msgid "Track internal search"
+msgstr "Śledź wewnętrzne wyszukiwanie"
+
+#: googleanalytics.admin.inc:204
+msgid "If checked, internal search keywords are tracked. You must configure your Google account to use the internal query parameter <strong>search</strong>. For more information see <a href=\"@url\">How do I set up Site Search for my profile</a>."
+msgstr "W przypadku zaznaczenia, słowa kluczowe używane w wewnętrznej wyszukiwarce będą śledzone. Należy skonfigurować konto Google Analitycs tak, aby jako wewnętrzny parametr zapytania używało słowa kluczowego <strong>search</strong>. W celu uzyskania dalszych informacji zapoznaj się z <a href=\"@url\">Jak skonfigurować wyszukiwanie w witrynie w moim profilu</a>."
+
+#: googleanalytics.admin.inc:211
+#, fuzzy
+msgid "Track AdSense ads"
+msgstr "Śledź reklamy AdSense"
+
+#: googleanalytics.admin.inc:212
+#, fuzzy
+msgid "If checked, your AdSense ads will be tracked in your Google Analytics account."
+msgstr "Jeśli zaznaczone, twoje reklamy AdSense będą śledzone na twoim koncie Google Analytics."
+
+#: googleanalytics.admin.inc:218
+msgid "Custom JavaScript code"
+msgstr "Własny kod JavaScript"
+
+#: googleanalytics.admin.inc:221
+msgid "You can add custom Google Analytics <a href=\"@snippets\">code snippets</a> here. These will be added to every page that Google Analytics appears on. Before you add custom code to the below textarea's you should read <a href=\"@ga_concepts_overview\">Google Analytics Tracking Code - Functional Overview</a> and the <a href=\"@ga_js_api\">Google Analytics Tracking API</a> documentation. <strong>Do not include the &lt;script&gt; tags</strong>, and always end your code with a semicolon (;)."
+msgstr "Można dodać dodatkowe <a href=\"@snippets\">kawałki kodu</a> Google Analytics. Zostaną one dodane do każdej strony na której będzie umieszczony kod Google Analytics. Przed umieszczeniem kodu w poniższych okienkach testowych należy zapoznać się z <a href=\"@ga_concepts_overview\">Google Analytics Tracking Code - Functional Overview</a> oraz z dokumentacją <a href=\"@ga_js_api\">Google Analytics Tracking API</a>. <strong>Nie należy używać znaczników &lt;script&gt;</strong>. Kod należy zakończyć średnikiem (;)."
+
+#: googleanalytics.admin.inc:225
+msgid "Code snippet (before)"
+msgstr "Kawałek kodu (przed)"
+
+#: googleanalytics.admin.inc:229
+msgid "Code in this textarea will be added <strong>before</strong> pageTracker._trackPageview()."
+msgstr "Kod znajdujący się w tym polu edycyjnym zostanie dodany <strong>przed</strong> pageTracker._trackPageview()."
+
+#: googleanalytics.admin.inc:233
+msgid "Code snippet (after)"
+msgstr "Kawałek kodu (po)"
+
+#: googleanalytics.admin.inc:237
+msgid "Code in this textarea will be added <strong>after</strong> pageTracker._trackPageview(). This is useful if you'd like to track a site in two accounts."
+msgstr "Kod znajdujący się w tym polu edycyjnym zostanie dodany <strong>po</strong> pageTracker._trackPageview(). Może być to użyteczne jeśli chcesz śledzić stronę za pomocą dwóch kont."
+
+#: googleanalytics.admin.inc:242
+msgid "JavaScript scope"
+msgstr "Miejsce JavaScript"
+
+#: googleanalytics.admin.inc:243
+msgid "<strong>Warning:</strong> Google recommends adding the external JavaScript files to footer for performance reasons."
+msgstr "<strong>Ostrzeżenie</strong> Ze względu na wydajność, Google poleca dodawanie zewnętrznych skryptów JavaScript do stopki."
+
+#: googleanalytics.admin.inc:245
+msgid "Footer"
+msgstr "Stopka"
+
+#: googleanalytics.admin.inc:246
+msgid "Header"
+msgstr "Nagłówek"
+
+#: googleanalytics.admin.inc:256
+msgid "A valid Google Analytics account number is case sensitive and formatted like UA-xxxxxx-x."
+msgstr "Prawidłowy numer konta Google Analytics jest wrażliwy na wielkość liter i ma format UA-xxxxxx-x."
+
+#: googleanalytics.admin.inc:261;264
+msgid "Do not add the tracker code provided by Google into the javascript code snippets! This module already builds the tracker code based on your Google Analytics account number and settings."
+msgstr "Nie dodawaj kodu śledzącego dostarczonego przez Google do fragmentów kodu javascript! Ten moduł sam tworzy odpowiedni kod w oparciu o twoje ustawienia oraz numer konta Google Analytics."
+
+#: googleanalytics.admin.inc:267;270
+msgid "Do not include the &lt;script&gt; tags in the javascript code snippets."
+msgstr "Nie używaj znaczników &lt;script&gt; w próbkach kodu javascript."
+
+#: googleanalytics.module:18
+msgid "<a href=\"@ga_url\">Google Analytics</a> is a free statistics package based on the excellent Urchin system. This module provides services to better integrate Drupal with Google Analytics."
+msgstr "<a href=\"@ga_url\">Google Analytics</a> jest darmowym narzędziem statystycznym bazującym na doskonałym systemie Urchin. Ten moduł umożliwia lepszą integrację Drupala z Google Analytics."
+
+#: googleanalytics.module:186
+msgid "Google Analytics configuration"
+msgstr "Konfiguracja Google Analytics"
+
+#: googleanalytics.module:194
+msgid "Disable user tracking"
+msgstr "Wyłącz śledzenie użytkownika"
+
+#: googleanalytics.module:195
+#, fuzzy
+msgid "Users are tracked by default, but you are able to opt out."
+msgstr "Użytkownicy są domyślnie śledzeni, ale masz możliwość rezygnacji."
+
+#: googleanalytics.module:199
+msgid "Enable user tracking"
+msgstr "Włącz śledzenie użytkownika"
+
+#: googleanalytics.module:200
+#, fuzzy
+msgid "Users are <em>not</em> tracked by default, but you are able to opt in."
+msgstr "Użytkownicy <em>nie</em> są domyślnie śledzeni, ale masz możliwość rezygnacji."
+
+#: googleanalytics.module:228
+msgid "Google Analytics module"
+msgstr "Moduł Google Analytics"
+
+#: googleanalytics.module:229
+msgid "Google Analytics module has not been configured yet. Please configure its settings from the <a href=\"@url\">Google Analytics settings page</a>."
+msgstr "Moduł Google Analytics nie został jeszcze skonfigurowany. Skonfiguruj go na stronie <a href=\"@url\">ustawień Google Analytics</a>."
+
+#: googleanalytics.module:231
+msgid "Not configured"
+msgstr "Nie skonfigurowano"
+
+#: googleanalytics.module:23
+msgid "administer google analytics"
+msgstr "zarządzaj google analytics"
+
+#: googleanalytics.module:23
+msgid "use PHP for tracking visibility"
+msgstr "użycie PHP do określenia widoczności kodu śledzenia"
+
+#: googleanalytics.module:28
+#: googleanalytics.info:0
+msgid "Google Analytics"
+msgstr "Google Analytics"
+
+#: googleanalytics.module:29
+msgid "Configure the settings used to generate your Google Analytics tracking code."
+msgstr "Skonfiguruj ustawienia używane do generowania Twojego kodu śledzenia Google Analytics."
+
+#: googleanalytics.module:0
+msgid "googleanalytics"
+msgstr "googleanalytics"
+
+#: googleanalytics.info:0
+msgid "Adds Google Analytics javascript tracking code to all your site's pages."
+msgstr "Dodaje kod śledzenia Google Analytics w formacie javascript do wszystkich stron twojej witryny."
+
+#: googleanalytics.info:0
+msgid "Statistics"
+msgstr "Statystyki"
+

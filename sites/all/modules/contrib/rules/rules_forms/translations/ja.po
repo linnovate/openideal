@@ -1,0 +1,348 @@
+# $Id: ja.po,v 1.1.2.1 2009/10/09 07:47:00 pineray Exp $
+#
+# Japanese translation of Drupal (general)
+# Copyright PineRay <matsudaterutaka@gmail.com>
+# Generated from files:
+#  rules_forms.admin.inc,v 1.1.2.2 2009/08/14 09:52:51 klausi
+#  rules_forms.rules.inc,v 1.1.2.7 2009/09/01 20:32:56 klausi
+#  rules_forms.rules_forms.inc,v 1.1.2.3 2009/08/14 09:52:51 klausi
+#  rules_forms.module,v 1.1.2.5 2009/09/01 20:32:56 klausi
+#  rules_forms.info,v 1.1.2.1 2009/07/30 18:53:40 fago
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"POT-Creation-Date: 2009-09-19 19:21+0900\n"
+"PO-Revision-Date: 2009-10-09 15:51+0900\n"
+"Last-Translator: PineRay <matsudaterutaka@gmail.com>\n"
+"Language-Team: Japanese <EMAIL@ADDRESS>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n!=1);\n"
+
+#: rules_forms.admin.inc:17
+msgid "Enable event activation messages on forms"
+msgstr "フォームのイベントを有効にする際のメッセージを有効化"
+
+#: rules_forms.admin.inc:19
+msgid "If checked, there will be a message on each form containing a link to activate events for the form. Only visible for your currently logged in user account."
+msgstr "チェックがあれば、イベントを有効にするためのリンクが含まれたメッセージを各フォームに表示します。あなたが現在ログイン中のユーザーアカウントにだけ表示されます。"
+
+#: rules_forms.admin.inc:23
+msgid "Display form element IDs"
+msgstr "フォームのエレメントIDを表示"
+
+#: rules_forms.admin.inc:25
+msgid "If checked, the identifier of every single form element will be displayed on event-activated forms. Only visible for your currently logged in user account."
+msgstr "チェックがあれば、各フォームエレメントの識別子をイベントが有効となっているフォームに表示します。あなたが現在ログイン中のユーザーアカウントにだけ表示されます。"
+
+#: rules_forms.admin.inc:29
+msgid "Save settings"
+msgstr "設定の保存"
+
+#: rules_forms.admin.inc:36
+msgid "Forms where events are activated"
+msgstr "イベントが有効なフォーム"
+
+#: rules_forms.admin.inc:38
+msgid "Forms that currently invoke events. Select forms to deactivate events on them."
+msgstr "現在、イベントが有効になっているフォームの一覧です。イベントを無効にするフォームを選択してください。"
+
+#: rules_forms.admin.inc:42
+msgid "Deactivate events"
+msgstr "イベントを無効化"
+
+#: rules_forms.admin.inc:58
+msgid "The settings have been saved."
+msgstr "設定を保存しました"
+
+#: rules_forms.admin.inc:71
+msgid "The event settings have been saved."
+msgstr "イベントの設定を保存しました。"
+
+#: rules_forms.admin.inc:80
+msgid "Events for %form_id have already been activated."
+msgstr "%form_id のイベントはすでに有効となっています。"
+
+#: rules_forms.admin.inc:93
+msgid "Custom form label"
+msgstr "カスタムフォームラベル"
+
+#: rules_forms.admin.inc:96
+msgid "Enter a custom label to better recognize the form in the administration user interface."
+msgstr "管理インターフェースでフォームを見分けやすくするために、カスタムラベルを入力してください。"
+
+#: rules_forms.admin.inc:104
+msgid "Are you sure you want to activate events for %form?"
+msgstr "%form のイベントを本当に有効にしますか？"
+
+#: rules_forms.admin.inc:105
+msgid "Once the activation is confirmed, events on this form can be used to trigger rules."
+msgstr "有効になれば、このフォームのイベントをトリガーのルールで使用することができます。"
+
+#: rules_forms.admin.inc:106
+msgid "Activate"
+msgstr "有効化"
+
+#: rules_forms.admin.inc:106
+msgid "Cancel"
+msgstr "キャンセル"
+
+#: rules_forms.admin.inc:116
+msgid "%form has been activated."
+msgstr "%form が有効となりました。"
+
+#: rules_forms.rules.inc:21
+msgid "@form is being built"
+msgstr "@form がビルド中"
+
+#: rules_forms.rules.inc:26
+msgid "@form is submitted"
+msgstr "@form が送信された"
+
+#: rules_forms.rules.inc:31
+msgid "@form is being validated"
+msgstr "@form がバリデート中"
+
+#: rules_forms.rules.inc:44;58;69;81;93;110;132;149;368
+msgid "Form"
+msgstr "フォーム"
+
+#: rules_forms.rules.inc:45;369
+msgid "Form state"
+msgstr "フォームステート"
+
+#: rules_forms.rules.inc:46
+msgid "Form ID"
+msgstr "フォームID"
+
+#: rules_forms.rules.inc:56
+msgid "Set the redirect target of the form"
+msgstr "フォームのリダイレクト先を設定"
+
+#: rules_forms.rules.inc:59
+msgid "Path"
+msgstr "パス"
+
+#: rules_forms.rules.inc:60
+msgid "Query"
+msgstr "クエリ"
+
+#: rules_forms.rules.inc:61
+msgid "Fragment"
+msgstr "フラグ"
+
+#: rules_forms.rules.inc:64
+msgid "Enter a Drupal path, path alias, or external URL to redirect to. Enter (optional) queries after \"?\" and (optional) anchor after \"#\"."
+msgstr "リダイレクト先のDrupalパスまたはパスエイリアス、もしくは外部のURLを入力します。「?」の後にクエリを入力したり、「#」の後にアンカーを入力することもできます。"
+
+#: rules_forms.rules.inc:67
+msgid "Hide an element of the form"
+msgstr "フォームエレメントを非表示"
+
+#: rules_forms.rules.inc:72;84;96;113;135;152;372
+msgid "Form element ID"
+msgstr "フォームエレメントID"
+
+#: rules_forms.rules.inc:73
+msgid "The element that should not appear."
+msgstr "非表示にするエレメント。"
+
+#: rules_forms.rules.inc:79
+msgid "Disable an element of the form"
+msgstr "フォームエレメントを無効化"
+
+#: rules_forms.rules.inc:85
+msgid "The element that should be disabled."
+msgstr "無効化するエレメント。"
+
+#: rules_forms.rules.inc:91
+msgid "Adjust weight of an element in the form"
+msgstr "フォームエレメントのウェイトを調整"
+
+#: rules_forms.rules.inc:97
+msgid "The element that should be adjusted."
+msgstr "調整するエレメント。"
+
+#: rules_forms.rules.inc:101
+msgid "Element weight"
+msgstr "エレメントのウェイト"
+
+#: rules_forms.rules.inc:102
+msgid "Low numbers make the element bubble up, high numbers sink it down."
+msgstr "数字が低いほど上位に表示され、数字が高いほど下位に表示されます。"
+
+#: rules_forms.rules.inc:108
+msgid "Insert HTML prefix/suffix code"
+msgstr "前後にHTMLを挿入"
+
+#: rules_forms.rules.inc:114;373
+msgid "ID of the form element to be targeted."
+msgstr "対象のフォームエレメントID。"
+
+#: rules_forms.rules.inc:118
+msgid "Prefixed HTML"
+msgstr "前に記述するHTML"
+
+#: rules_forms.rules.inc:119
+msgid "HTML inserted before."
+msgstr "フォームの前に挿入するHTML。"
+
+#: rules_forms.rules.inc:123
+msgid "Suffixed HTML"
+msgstr "後に記述するHTML"
+
+#: rules_forms.rules.inc:124
+msgid "HTML inserted after."
+msgstr "フォームの後に挿入するHTML。"
+
+#: rules_forms.rules.inc:130
+#: rules_forms.rules_forms.inc:146
+msgid "Set a form error"
+msgstr "フォームエラーを設定"
+
+#: rules_forms.rules.inc:136
+msgid "The element that should be marked."
+msgstr "マークを付けるエレメント。"
+
+#: rules_forms.rules.inc:140
+msgid "Message"
+msgstr "メッセージ"
+
+#: rules_forms.rules.inc:141
+msgid "The message that should be displayed to the user."
+msgstr "ユーザーに表示するメッセージ。"
+
+#: rules_forms.rules.inc:147
+msgid "Set the default value of a form element"
+msgstr "フォームエレメントのデフォルト値を設定"
+
+#: rules_forms.rules.inc:153
+msgid "The element that should be targeted."
+msgstr "対象のエレメント。"
+
+#: rules_forms.rules.inc:157
+msgid "Default value"
+msgstr "デフォルトの値"
+
+#: rules_forms.rules.inc:158
+msgid "The value(s) that will be displayed as default. If the form element allows multiple values, enter one value per line."
+msgstr "デフォルトとして表示する値。フォームエレメントが複数の値を持つことができる場合は、1行につきひとつの値を入力します。"
+
+#: rules_forms.rules.inc:167
+msgid "Examples on the \"Create Story\" form: \"title\" for the title field or \"body_field[body]\" for the body field."
+msgstr "「ストーリーの作成」フォームの例: タイトルフィールドには「title」または本文フィールドには「body_field[body]」"
+
+#: rules_forms.rules.inc:176
+msgid "form"
+msgstr "フォーム"
+
+#: rules_forms.rules.inc:184
+msgid "form state"
+msgstr "フォームステート"
+
+#: rules_forms.rules.inc:366
+msgid "Form element has value"
+msgstr "フォームエレメントが値を持っている"
+
+#: rules_forms.rules.inc:377
+msgid "Value(s)"
+msgstr "値"
+
+#: rules_forms.rules.inc:378
+msgid "Value(s) assigned to the form element. If the form element allows multiple values, enter one value per line."
+msgstr "フォームエレメントに割り当てる値。フォームエレメントが複数の値を持つことができる場合は、1行につきひとつの値を入力します。"
+
+#: rules_forms.rules_forms.inc:19
+msgid "To"
+msgstr "宛先"
+
+#: rules_forms.rules_forms.inc:56
+msgid "ID of the form element to be targeted. Leave empty to apply prefix/suffix code to the whole form."
+msgstr "対象のフォームエレメントID。空欄にすると、フォーム全体の前後にHTMLを挿入します。"
+
+#: rules_forms.rules_forms.inc:82
+msgid "You have to specify at least the prefix or suffix field."
+msgstr "前後いずれかのフィールドを必ず入力してください。"
+
+#: rules_forms.rules_forms.inc:98
+msgid "Adjust weight of form element '@element' to @weight"
+msgstr "フォームエレメント「@element」のウェイトを @weight に調整"
+
+#: rules_forms.rules_forms.inc:105
+msgid "Hide form element '@element'"
+msgstr "フォームエレメント「@element」を非表示"
+
+#: rules_forms.rules_forms.inc:112
+msgid "Disable form element '@element'"
+msgstr "フォームエレメント「@element」を無効化"
+
+#: rules_forms.rules_forms.inc:126
+msgid "Set form redirect target to '@redirect'"
+msgstr "フォームのリダイレクト先を「@redirect」に設定"
+
+#: rules_forms.rules_forms.inc:134
+msgid "Insert HTML prefix/suffix code on form"
+msgstr "フォームの前後にHTMLを挿入"
+
+#: rules_forms.rules_forms.inc:137
+msgid "Insert HTML prefix/suffix code on '@element'"
+msgstr "「@element」の前後にHTMLを挿入"
+
+#: rules_forms.rules_forms.inc:148
+msgid "Set form error on element '@element'"
+msgstr "フォームエレメント「@element」にフォームエラーを設定"
+
+#: rules_forms.rules_forms.inc:155
+msgid "Set default value on form element '@element'"
+msgstr "フォームエレメント「@element」にデフォルトの値を設定"
+
+#: rules_forms.rules_forms.inc:162
+msgid "Form element '@element' value check"
+msgstr "フォームエレメント「@element」の値をチェック"
+
+#: rules_forms.module:19
+msgid "Settings and overview of form events."
+msgstr "フォームイベントの設定と概要。"
+
+#: rules_forms.module:65
+msgid "Activate events for "
+msgstr "次のイベントを有効化: "
+
+#: rules_forms.module:107
+msgid "Hidden element ID: %elem"
+msgstr "非表示のエレメントID: %elem"
+
+#: rules_forms.module:110
+msgid "Element ID: %elem"
+msgstr "エレメントID: %elem"
+
+#: rules_forms.module:115
+msgid "Container element ID: %elem"
+msgstr "コンテナーエレメントID: %elem"
+
+#: rules_forms.module:29
+msgid "Form events"
+msgstr "フォームイベント"
+
+#: rules_forms.module:30
+msgid "Configure Rules forms events."
+msgstr "ルールのフォームイベントを設定します。"
+
+#: rules_forms.module:39
+msgid "Activate events for a form"
+msgstr "フォームのイベントを有効化"
+
+#: rules_forms.info:0
+msgid "Rules Forms support"
+msgstr ""
+
+#: rules_forms.info:0
+msgid "Provides events, conditions and actions for rule-based form customization."
+msgstr "イベントや条件、アクションといったルールの機能でフォームをカスタマイズできるようになります。"
+
+#: rules_forms.info:0
+msgid "Rules"
+msgstr "ルール"
+

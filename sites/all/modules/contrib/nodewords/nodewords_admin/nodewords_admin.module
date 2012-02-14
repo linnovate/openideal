@@ -1,0 +1,257 @@
+<?php
+// $Id: nodewords_admin.module,v 1.1.2.8 2010/04/18 14:08:39 kiam Exp $
+
+/**
+ * @file
+ * Administration interface for Nodewords.
+ */
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function nodewords_admin_form_taxonomy_form_term_alter(&$form, &$form_state) {
+  $bool = (
+    !isset($form_state['confirm_delete']) &&
+    !isset($form_state['confirm_parents'])
+  );
+  if ($bool) {
+    if (!empty($form_state['values']['nodewords'])) {
+      $tags = $form_state['values']['nodewords'];
+    }
+    elseif (isset($form['tid']['#value']) && is_numeric($form['tid']['#value'])) {
+      $id = $form['tid']['#value'];
+      $tags = nodewords_load_tags(array(
+        'type' => NODEWORDS_TYPE_TERM, 'id' => $id
+      ));
+    }
+    else {
+      $tags = array();
+    }
+
+    $form['nodewords'] = nodewords_tags_edit_fields(
+      array( 'type' => NODEWORDS_TYPE_TERM, 'id' => isset($id) ? $id : 0),
+      $tags,
+      array('fieldset' => TRUE)
+    );
+
+    $form['submit']['#weight'] = 45;
+    $form['delete']['#weight'] = 50;
+  }
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function nodewords_admin_form_taxonomy_form_vocabulary_alter(&$form, &$form_state) {
+  if (isset($form['vid']['#value'])) {
+    $id = $form['vid']['#value'];
+
+    if (!empty($form_state['values']['nodewords'])) {
+      $tags = $form_state['values']['nodewords'];
+    }
+    elseif (isset($id) && is_numeric($id)) {
+      $tags = nodewords_load_tags(array(
+        'type' => NODEWORDS_TYPE_VOCABULARY, 'id' => $id
+      ));
+    }
+    else {
+      $tags = array();
+    }
+
+    $form['nodewords'] = nodewords_tags_edit_fields(
+      array('type' => NODEWORDS_TYPE_VOCABULARY, 'id' => $id),
+      $tags,
+      array('fieldset' => TRUE)
+    );
+
+    $form['submit']['#weight'] = 45;
+    $form['delete']['#weight'] = 50;
+  }
+}
+
+/**
+ *  Implemenation of hook_help().
+ */
+function nodewords_admin_help($path, $arg) {
+  switch ($path) {
+    case 'admin/content/nodewords/meta-tags':
+      $output = '<p>' . t('On this page you can enter the default values for the meta tags of your site.') . '</p>';
+      break;
+
+    case 'admin/content/nodewords/meta-tags/errorpage_403':
+      $output = '<p>' . t('On this page you can enter the meta tags for the <q>access denied</q> error page of your site.') . '</p>';
+      break;
+
+    case 'admin/content/nodewords/meta-tags/errorpage_404':
+      $output = '<p>' . t('On this page you can enter the meta tags for the <q>page not found</q> error page of your site.') . '</p>';
+      break;
+
+    default:
+      $output = '';
+      break;
+  }
+
+  return $output;
+}
+
+/**
+ * Implements hook_menu().
+ */
+function nodewords_admin_menu() {
+  $admin_access = array('administer meta tags');
+  $items = array();
+
+  $items['admin/content/nodewords'] = array(
+    'title' => 'Meta tags',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('nodewords_admin_settings_form'),
+    'description' => 'Configure HTML meta tags for all the content.',
+    'access arguments' => $admin_access,
+    'type' => MENU_NORMAL_ITEM,
+    'file' => 'nodewords_admin.admin.inc',
+  );
+
+  $items['admin/content/nodewords/settings'] = array(
+    'title' => 'General settings',
+    'access arguments' => $admin_access,
+    'type' => MENU_DEFAULT_LOCAL_TASK,
+    'weight' => -1,
+    'file' => 'nodewords_admin.admin.inc',
+  );
+
+  $items['admin/content/nodewords/default'] = array(
+    'title' => 'Default meta tags',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array(
+      'nodewords_admin_tags_edit_form', array(
+        'type' => NODEWORDS_TYPE_DEFAULT,
+      )
+    ),
+    'access arguments' => $admin_access,
+    'type' => MENU_LOCAL_TASK,
+    'file' => 'nodewords_admin.admin.inc',
+  );
+
+  $items['admin/content/nodewords/meta-tags'] = array(
+    'title' => 'Specific meta tags',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array(
+      'nodewords_admin_tags_edit_form', array(
+        'type' => NODEWORDS_TYPE_ERRORPAGE, 'id' => 403,
+      )
+    ),
+    'access arguments' => $admin_access,
+    'type' => MENU_LOCAL_TASK,
+    'file' => 'nodewords_admin.admin.inc',
+  );
+
+  $items['admin/content/nodewords/meta-tags/errorpage_403'] = array(
+    'title' => 'Error 403 page',
+    'access arguments' => $admin_access,
+    'type' => MENU_DEFAULT_LOCAL_TASK,
+    'file' => 'nodewords_admin.admin.inc',
+  );
+
+  $items['admin/content/nodewords/meta-tags/errorpage_404'] = array(
+    'title' => 'Error 404 page',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array(
+      'nodewords_admin_tags_edit_form', array(
+        'type' => NODEWORDS_TYPE_ERRORPAGE, 'id' => 404,
+      )
+    ),
+    'access arguments' => $admin_access,
+    'type' => MENU_LOCAL_TASK,
+    'file' => 'nodewords_admin.admin.inc',
+  );
+
+  return $items;
+}
+
+/**
+ * Implements hook_node_operations().
+ */
+function nodewords_admin_node_operations() {
+  $operations = array(
+    'delete_metatags' => array(
+      'label' => t('Delete meta tags'),
+      'callback' => 'nodewords_admin_mass_update',
+      'callback arguments' => array('type' => NODEWORDS_TYPE_NODE, 'operation' => 'delete'),
+    ),
+  );
+
+  return $operations;
+}
+
+/**
+ * Implements hook_theme().
+ */
+function nodewords_admin_theme() {
+  return array(
+    'nodewords_admin_enabled_metatags' => array(
+      'arguments' => array('form' => array()),
+      'file' => 'nodewords_admin.admin.inc',
+    ),
+    'nodewords_admin_output_metatags' => array(
+      'arguments' => array('form' => array()),
+      'file' => 'nodewords_admin.admin.inc',
+    ),
+  );
+}
+
+/**
+ * Implements hook_user_operations().
+ */
+function nodewords_admin_user_operations() {
+  $operations = array(
+    'delete_metatags' => array(
+      'label' => t('Delete meta tags'),
+      'callback' => 'nodewords_admin_mass_update',
+      'callback arguments' => array('type' => NODEWORDS_TYPE_USER, 'operation' => 'delete'),
+    ),
+  );
+
+  return $operations;
+}
+
+/**
+ * Delete the nodes meta tags.
+ *
+ * @param $ids
+ *  An array of IDs.
+ * @param $type
+ *  The type of the object associated with the IDs (NODEWORDS_TYPE_NODE, NODEWORDS_TYPE_USER,
+ *  NODEWORDS_TYPE_PAGER, NODEWORDS_TYPE_PAGE, ...).
+ * @param $operation
+ *  The operation to execute (currently implemented: delete).
+ */
+function nodewords_admin_mass_update($ids, $type, $operation = 'delete') {
+  if ($operation == 'delete') {
+    if (($count = count($ids))) {
+      if ($count <= 10) {
+        db_query("DELETE FROM {nodewords} WHERE id IN (" . db_placeholders($ids, 'int') . ") AND type = %d",
+          array_merge($ids, array($type))
+        );
+
+        if ($type == NODEWORDS_TYPE_PAGE) {
+          db_query("DELETE FROM {nodewords_custom} WHERE pid IN (" . db_placeholders($ids, 'int') . ")", $ids);
+        }
+
+        drupal_set_message(t('The update has been performed.'));
+      }
+      else {
+        $batch = array(
+          'operations' => array(
+            array('_nodewords_mass_delete_batch_process', array($ids, $type))
+          ),
+          'finished' => '_nodewords_admin_mass_update_batch_finished',
+          'title' => t('Processing'),
+          'progress_message' => '',
+          'error_message' => t('The update has encountered an error.'),
+          'file' => drupal_get_path('module', 'nodewords_admin') .'/nodewords_admin.admin.inc',
+        );
+        batch_set($batch);
+      }
+    }
+  }
+}

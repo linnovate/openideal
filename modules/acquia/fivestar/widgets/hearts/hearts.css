@@ -1,0 +1,34 @@
+/* Static View-only Star Version */
+div.fivestar-widget-static .star {
+  width: 17px;
+  height: 15px;
+  background: url(heart.png) no-repeat 0 0px;
+}
+
+div.fivestar-widget-static .star span.on {
+  background: url(heart.png) no-repeat 0 -32px;
+}
+
+div.fivestar-widget-static .star span.off {
+  background: url(heart.png) no-repeat 0 0;
+}
+
+/* Javascript Star Version */
+div.fivestar-widget .cancel, div.fivestar-widget .star {
+  width: 17px;
+  height: 15px;
+}
+div.fivestar-widget .cancel, div.fivestar-widget .cancel a {
+  background: url(heart_broken.png) no-repeat 0 0;
+}
+
+div.fivestar-widget .star, div.fivestar-widget .star a {
+  background: url(heart.png) no-repeat 0 0;
+}
+
+div.fivestar-widget div.on a {
+  background-position: 0 -16px;
+}
+div.fivestar-widget div.hover a, div.rating div a:hover {
+  background-position: 0 -32px;
+}

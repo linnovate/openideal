@@ -1,0 +1,162 @@
+<?php
+// $Id: image_attach.install,v 1.22.2.1 2010/08/03 17:43:00 sun Exp $
+
+/**
+ * Implementation of hook_schema().
+ */
+function image_attach_schema() {
+  $schema['image_attach'] = array(
+    'description' => 'Stores the image/node relationship.',
+    'fields' => array(
+      'nid' => array(
+        'description' => 'The {node}.nid of the node.',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'iid' => array(
+        'description' => 'The {image}.nid of the image file.',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'weight' => array(
+        'description' => 'The display order of attached images.',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+    ),
+    'primary key' => array('nid', 'iid'),
+    'indexes' => array(
+      'iid' => array('iid'),
+    ),
+  );
+  return $schema;
+}
+
+/**
+ * Implementation of hook_install().
+ */
+function image_attach_install() {
+  drupal_install_schema('image_attach');
+}
+
+/**
+ * Implementation of hook_uninstall().
+ */
+function image_attach_uninstall() {
+  drupal_uninstall_schema('image_attach');
+  variable_del('image_attach_existing');
+  variable_del('image_attach_block_0_size');
+}
+
+/**
+ * Add an index to the image id field.
+ */
+function image_attach_update_1() {
+  $ret = array();
+  switch ($GLOBALS['db_type']) {
+    case 'mysql':
+    case 'mysqli':
+      $ret[] = update_sql("ALTER TABLE {image_attach} ADD KEY (iid)");
+      break;
+
+    case 'pgsql':
+      $ret[] = update_sql("CREATE INDEX {image_attach}_iid_idx ON {image_attach}(iid)");
+      break;
+  }
+  return $ret;
+}
+
+/**
+ * Remove attach records that point to a missing image.
+ */
+function image_attach_update_2() {
+  $ret = array();
+  switch ($GLOBALS['db_type']) {
+    case 'mysqli':
+    case 'mysql':
+      $ret[] = update_sql("DELETE FROM {image_attach} USING {image_attach} LEFT JOIN {node} n ON {image_attach}.iid = n.nid WHERE n.nid IS NULL OR n.type <> 'image'");
+      break;
+
+    case 'pgsql':
+      $ret[] = update_sql("DELETE FROM {image_attach} USING {node} n WHERE {image_attach}.iid = n.nid AND (n.nid IS NULL OR n.type <> 'image')");
+      break;
+  }
+  return $ret;
+}
+
+/**
+ * Add primary key and index on 'iid' to {image_attach} table.
+ */
+function image_attach_update_6100() {
+  $ret = array();
+  db_change_field($ret, 'image_attach', 'nid', 'nid', array(
+    'type' => 'int',
+    'unsigned' => TRUE,
+    'not null' => TRUE,
+    'default' => 0,
+  ));
+  db_change_field($ret, 'image_attach', 'iid', 'iid', array(
+    'type' => 'int',
+    'unsigned' => TRUE,
+    'not null' => TRUE,
+    'default' => 0,
+  ));
+
+  /**
+   * We remove and re-add primary keys and indexes because the column types
+   * are changed.
+   * Sometimes however these don't exist in the first place (@see
+   * <http://drupal.org/node/562810>; the @ takes care of suppressing the
+   * error message this causes.
+   */
+  @db_drop_primary_key($ret, 'image_attach');
+  db_add_primary_key($ret, 'image_attach', array('nid'));
+  @db_drop_index($ret, 'image_attach', 'iid');
+  db_add_index($ret, 'image_attach', 'iid', array('iid'));
+
+  // Notify the user that they may get harmless fail messages here.
+  $ret[] = array('success' => TRUE, 'query' => t('If you see a message of the form "Failed: ALTER TABLE {image_attach} DROP PRIMARY KEY" or "DROP INDEX iid" here it is harmless.'));
+  return $ret;
+}
+
+/**
+ * Delete bad entry in {blocks} table due to old bug.
+ * Next visit to blocks admin page will rehash and show the block.
+ * @see <http://drupal.org/node/426724>
+ */
+function image_attach_update_6101() {
+  $ret = array();
+  $ret[] = update_sql("DELETE FROM {blocks} WHERE module = 'image_attach' AND delta = '0'");
+
+  return $ret;
+}
+
+/**
+ * Adjust primary key on {image_attach} to allow multiple attachments.
+ */
+function image_attach_update_6102() {
+  $ret = array();
+  db_drop_primary_key($ret, 'image_attach');
+  db_add_primary_key($ret, 'image_attach', array('nid', 'iid'));
+  db_add_field($ret, 'image_attach', 'weight', array(
+    'type' => 'int',
+    'not null' => TRUE,
+    'default' => 0,
+  ));
+  return $ret;
+}
+
+/**
+ * Remove erroneous data inside image_attach table, where iid = 0.
+ */
+function image_attach_update_6103() {
+  $ret = array();
+  $ret[] = update_sql("DELETE FROM {image_attach} WHERE iid = 0");
+  return $ret;
+}
+

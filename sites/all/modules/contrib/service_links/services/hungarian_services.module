@@ -1,0 +1,23 @@
+<?php
+// $Id: hungarian_services.module,v 1.1.2.1 2010/10/01 07:56:59 thecrow Exp $
+
+/**
+ * @file
+ * Hungarian services that extend Service Links module
+ * by Denes Szabo
+ */
+
+/**
+ * Implementation of hook_service_links().
+ */
+function hungarian_services_service_links() {
+  $links = array();
+
+  $links['_hu_iwiw'] = array(
+    'name' => 'IWIW',
+    'description' => t('Add to iWiW.'),
+    'link' => 'http://iwiw.hu/pages/share/share.jsp?u=<encoded-url>&t=<encoded-title>',
+  );
+
+  return $links;
+}

@@ -1,0 +1,53 @@
+<?php
+// $Id: italian_services.module,v 1.1.2.3 2010/09/17 12:06:18 thecrow Exp $
+
+/**
+ * @file
+ * Italian services that extend Service Links module
+ * Collected by TheCrow
+ */
+
+/**
+ * Implementation of hook_service_links().
+ */
+function italian_services_service_links() {
+  $links = array();
+
+  $links['_it_diggita'] = array(
+    'name' => 'Diggita',
+    'description' => t('Add a news on Diggita'),
+    'link' => 'http://www.diggita.it/submit.php?url=<encoded-url>&title=<encoded-title>',
+  );
+  $links['_it_ziczac'] = array(
+    'name' => 'ZicZac',
+    'description' => t('Add a news on ZicZac'),
+    'link' => 'http://ziczac.it/a/segnala/?url=<encoded-url>&title=<encoded-title>',
+  );
+  $links['_it_oknotizie'] = array(
+    'name' => 'OkNotizie',
+    'description' => t('Add a news on OkNotizie'),
+    'link' => 'http://oknotizie.alice.it/post.html.php?url=<encoded-url>&title=<encoded-title>',
+  );
+  $links['_it_segnalo'] = array(
+    'name' => 'Segnalo.com',
+    'description' => t('Add a news on Segnalo.com'),
+    'link' => 'http://segnalo.alice.it/post.html.php?url=<encoded-url>&title=<encoded-title>',
+  );
+  $links['_it_technotizie'] = array(
+    'name' => 'TechNotizie',
+    'description' => t('Post it on TechNotizie'),
+    'link' => 'http://www.technotizie.it/posta_ok?action=f2&url=<encoded-url>&title=<encoded-title>',
+  );
+  $links['_it_meemi'] = array(
+    'name' => 'meemi',
+    'description' => t('Add a noise on meemi'),
+    'link' => 'http://meemi.com/s/?p/3&u=<encoded-url>&s=<encoded-title>',
+  );
+  $links['_it_wikio'] = array(
+    'name' => 'Wikio',
+    'description' => t('Vote on Wikio'),
+    'link' => 'http://www.wikio.it/vote?url=<encoded-url>',
+  );
+
+  return $links;
+}

@@ -1,0 +1,188 @@
+<?php
+// $Id: nodewords_custom_pages.install,v 1.1.2.7 2010/04/17 13:11:50 kiam Exp $
+
+/**
+ * @file
+ * Install, update and uninstall functions for the Meta tags for custom pages module.
+ */
+
+/**
+ * Implements hook_requirements().
+ */
+function nodewords_custom_pages_requirements($phase) {
+  $requirements = array();
+
+  if ($phase == 'runtime') {
+    if (module_exists('nodewords_bypath')) {
+      $requirements['nodewords_custom_pages'] = array(
+        'title' => t('Meta tags for custom pages'),
+        'description' => t('The feature implemented in %metatags_by_path is implemented also in %nodewords; the module %metatags_by_path should be disabled to avoid possible conflicts.', array('%metatags_by_path' => 'Meta Tags by Path', '%nodewords' => 'Nodewords')),
+        'severity' => REQUIREMENT_ERROR,
+        'value' => t('Disable the module in the<a href="@url">modules page</a>.', array('@url' => url('admin/build/modules'))),
+      );
+    }
+  }
+
+  return $requirements;
+}
+
+/**
+ * Implements hook_schema().
+ */
+function nodewords_custom_pages_schema() {
+  $schema = array();
+
+  $schema['nodewords_custom'] = array(
+    'description' => 'The table containing data for custom pages.',
+    'fields' => array(
+      'pid' => array(
+        'description' => 'The primary key.',
+        'type' => 'serial',
+        'not null' => TRUE,
+      ),
+      'name' => array(
+        'description' => 'The page name as shown in the list of custom pages.',
+        'type' => 'varchar',
+        'length' => 60,
+        'not null' => TRUE,
+        'default' => '',
+      ),
+      'path' => array(
+        'description' => 'The page path.',
+        'type' => 'text',
+        'size' => 'medium',
+        'not null' => TRUE,
+      ),
+      'weight' => array(
+        'description' => 'The weight of the page.',
+        'type' => 'int',
+        'size' => 'small',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'enabled' => array(
+        'description' => 'A flag set when the page is enabled.',
+        'type' => 'int',
+        'size' => 'small',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 1,
+      ),
+    ),
+    'primary key' => array('pid'),
+  );
+
+  return $schema;
+}
+
+/**
+ * Implements hook_install().
+ */
+function nodewords_custom_pages_install() {
+  if (!db_table_exists('nodewords_custom')) {
+    drupal_install_schema('nodewords_custom_pages');
+  }
+
+  db_query("UPDATE {system} SET weight = -10 WHERE name = 'nodewords_custom_pages' AND type = 'module'");
+}
+
+/**
+ * Implements hook_update_N().
+ */
+function nodewords_custom_pages_update_6100() {
+  $ret = array();
+
+  $bool = (
+    !db_column_exists('nodewords_custom', 'enabled') ||
+    !db_column_exists('nodewords_custom', 'weight')
+  );
+  if ($bool) {
+    db_drop_table($ret, 'nodewords_custom');
+    drupal_install_schema('nodewords_custom_pages');
+  }
+
+  return $ret;
+}
+
+/**
+ * Implements hook_update_N().
+ */
+function nodewords_custom_pages_update_6101(&$sandbox) {
+  $ret = array();
+
+  if (!isset($sandbox['progress'])) {
+    $sandbox['progress'] = 0;
+    $sandbox['current_pid'] = 0;
+    $sandbox['max'] = db_result(db_query("SELECT COUNT(*) FROM {nodewords_custom} WHERE name = ''"));
+  }
+
+  if ($sandbox['max']) {
+    $pages = db_query_range(
+      "SELECT * FROM {nodewords_custom} WHERE name = '' AND pid > %d ORDER BY pid ASC",
+      $sandbox['current_pid'], 0, 10
+    );
+
+    while ($page = db_fetch_object($pages)) {
+      $ret[] = update_sql(
+        "UPDATE {nodewords_custom} SET name = '" . db_escape_string("Custom page #{$sandbox['progress']}") . "' WHERE pid = " . $page->pid
+      );
+
+      $sandbox['current_pid'] = $page->pid;
+      $sandbox['progress']++;
+    }
+  }
+
+  $ret['#finished'] = empty($sandbox['max']) ? 1 : ($sandbox['progress'] / $sandbox['max']);
+
+  return $ret;
+}
+
+/**
+ * Implements hook_update_N().
+ */
+function nodewords_custom_pages_update_6102() {
+  $ret = array();
+
+  drupal_load('module', 'nodewords');
+  $bool = (
+    db_result(
+      db_query_range("SELECT 1 FROM {nodewords} WHERE type = %d", NODEWORDS_TYPE_TRACKER, 0, 1)
+    ) &&
+    !db_result(
+      db_query_range("SELECT 1 FROM {nodewords_custom} WHERE name = 'tracker'", 0, 1)
+    )
+  );
+  if ($bool) {
+    $row = new stdClass();
+    $row->name = 'tracker';
+    $row->path = "user/*/track\ntracker\ntracker/*";
+
+    if (drupal_write_record('nodewords_custom', $row)) {
+      $ret[] = update_sql(
+        "UPDATE {nodewords} SET type = " . NODEWORDS_TYPE_PAGE . ", id = " . $row->pid . " WHERE type = " . NODEWORDS_TYPE_TRACKER
+      );
+    }
+  }
+
+  $bool = (
+    db_result(
+      db_query_range("SELECT 1 FROM {nodewords} WHERE type = %d", NODEWORDS_TYPE_FRONTPAGE, 0, 1)
+    ) &&
+    !db_result(
+      db_query_range("SELECT 1 FROM {nodewords_custom} WHERE name = 'front page'", 0, 1)
+    )
+  );
+  if ($bool) {
+    $row = new stdClass();
+    $row->name = 'front page';
+    $row->path = "<front>";
+
+    if (drupal_write_record('nodewords_custom', $row)) {
+      $ret[] = update_sql(
+        "UPDATE {nodewords} SET type = " . NODEWORDS_TYPE_PAGE . ", id = " . $row->pid . " WHERE type = " . NODEWORDS_TYPE_TRACKER
+      );
+    }
+  }
+
+  return $ret;
+}

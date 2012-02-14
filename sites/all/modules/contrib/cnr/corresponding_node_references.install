@@ -1,0 +1,70 @@
+<?php
+/**
+ * Implementation of hook_install()
+ */ 
+function corresponding_node_references_install() {
+  drupal_install_schema('corresponding_node_references');
+}
+
+/**
+ * Implementation of hook_schema()
+ */ 
+function corresponding_node_references_schema() {
+  $schema['corresponding_node_references'] = array(
+    'description' => t('Saves the content types and node reference fields for which the corresponding node reference is enabled'),
+    'fields' => array (
+      'node_types_content_fields' => array('type' => 'varchar','length' => 200,'not null' => TRUE,'default' => ''),
+      'enabled' => array('type' => 'int', 'unsigned' => TRUE, 'not null' => TRUE, 'default' => 0),      
+    ),
+    'primary key' => array('node_types_content_fields'),
+  );
+  
+  return $schema; 
+}
+
+/**
+ * Implementation of hook_uninstall
+ */ 
+function corresponding_node_references_uninstall() {
+  drupal_uninstall_schema('corresponding_node_references');
+}
+
+/**
+ * Add a new field to the database table allows single nodereferences
+ */
+function corresponding_node_references_update_6200() {
+  $ret = array();
+  if (db_table_exists('corresponding_node_references')) {
+    $spec = array('type' => 'int', 'unsigned' => TRUE, 'not null' => TRUE, 'default' => 0);
+    db_add_field($ret, 'corresponding_node_references', 'single', $spec); 
+  }
+  
+  return $ret;
+}
+
+/**
+ * Add a new field to the database table allows single nodereferences
+ */
+function corresponding_node_references_update_6300() {
+  $ret = array();
+  if (db_table_exists('corresponding_node_references')) {
+    $spec = array('type' => 'int', 'unsigned' => TRUE, 'not null' => TRUE, 'default' => 0);
+    db_add_field($ret, 'corresponding_node_references', 'single2', $spec); 
+    db_query("UPDATE {corresponding_node_references} SET single2 = 1 WHERE single = 1");
+  }
+  
+  return $ret;
+}
+
+/**
+ * Add a new field to the database table allows single nodereferences
+ */
+function corresponding_node_references_update_6400() {
+  $ret = array();
+  if (db_table_exists('corresponding_node_references')) {
+    db_drop_field($ret, 'corresponding_node_references', 'single');
+    db_drop_field($ret, 'corresponding_node_references', 'single2');
+  }
+  
+  return $ret;
+}

@@ -1,0 +1,721 @@
+# $Id: de.po,v 1.1.2.3 2009/08/03 16:42:25 fago Exp $
+#
+# German translation of Drupal (general)
+# Copyright YEAR NAME <EMAIL@ADDRESS>
+# Generated from files:
+#  rules_admin.export.inc,v 1.1.2.5 2009/04/20 11:26:45 fago
+#  rules_admin.module,v 1.1.2.5 2009/04/19 21:21:31 fago
+#  rules_admin.inc,v 1.1.2.10 2009/04/20 11:45:58 fago
+#  rules_admin.rule_forms.inc,v 1.1.2.8 2009/04/19 21:21:31 fago
+#  rules_admin.sets.inc,v 1.1.2.7 2009/04/19 20:21:53 fago
+#  rules_admin.render.inc,v 1.1.2.2 2009/04/19 15:03:43 fago
+#  rules_admin.info,v 1.1.2.2 2009/03/30 17:34:26 fago
+#  rules_admin.install,v 1.1.2.4 2009/04/19 18:19:06 fago
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"POT-Creation-Date: 2009-05-18 14:11+0200\n"
+"PO-Revision-Date: 2009-05-18 14:11+0200\n"
+"Last-Translator: NAME <EMAIL@ADDRESS>\n"
+"Language-Team: German <EMAIL@ADDRESS>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n!=1);\n"
+
+#: rules_admin.export.inc:18
+msgid "Configuration to import"
+msgstr "Zu importierende Konfiguration"
+
+#: rules_admin.export.inc:19
+msgid "Just paste your exported configuration here."
+msgstr "Hier kann eine exportierte Konfiguration eingefügt werden."
+
+#: rules_admin.export.inc:23 rules_admin.module:111
+msgid "Import"
+msgstr "Importieren"
+
+#: rules_admin.export.inc:40
+msgid "Imported %label."
+msgstr "%label importiert."
+
+#: rules_admin.export.inc:46
+msgid "Import failed."
+msgstr "Import fehlgeschlagen."
+
+#: rules_admin.export.inc:110
+msgid "Successfully imported the workflow-ng rule %label."
+msgstr "Die Regel %label von workflow-ng wurde erfolgreich importiert."
+
+#: rules_admin.export.inc:113
+msgid "Failed importing the workflow-ng rule %label."
+msgstr "Die Regel %label von workflow-ng konnte nicht importiert werden."
+
+#: rules_admin.export.inc:132
+msgid "Select the %label to export"
+msgstr "%label zum Export auswählen"
+
+#: rules_admin.export.inc:139
+msgid "There are no %label to be exported."
+msgstr ""
+
+#: rules_admin.export.inc:147
+msgid "Export by category"
+msgstr "Nach Kategorie exportieren"
+
+#: rules_admin.export.inc:153 rules_admin.module:106
+msgid "Export"
+msgstr "Exportieren"
+
+#: rules_admin.export.inc:159
+msgid "Exported rule configurations"
+msgstr "Regel-Konfigurationen exportiert"
+
+#: rules_admin.export.inc:160
+msgid "Copy these data and paste them into the import page, to import."
+msgstr ""
+"Zum Importieren, kopieren Sie diese Daten und fügen Sie diese in die "
+"Import-Seite ein."
+
+#: rules_admin.export.inc:197
+msgid "Please select the items to export."
+msgstr "Es müssen die zu exportierenden Elemente ausgewählt werden."
+
+#: rules_admin.inc:37
+msgid "Description"
+msgstr "Beschreibung"
+
+#: rules_admin.inc:296 rules_admin.rule_forms.inc:112;423;481;679 rules_admin.sets.inc:16;141;276;344
+msgid "Label"
+msgstr "Bezeichnung"
+
+#: rules_admin.inc:296
+msgid "Set"
+msgstr "Satz"
+
+#: rules_admin.inc:296 rules_admin.rule_forms.inc:132
+msgid "Event"
+msgstr "Ereignis"
+
+#: rules_admin.inc:296 rules_admin.sets.inc:16
+msgid "Category"
+msgstr "Kategorie"
+
+#: rules_admin.inc:296 rules_admin.sets.inc:16
+msgid "Status"
+msgstr "Status"
+
+#: rules_admin.inc:296 rules_admin.sets.inc:16
+msgid "Operations"
+msgstr "Operationen"
+
+#: rules_admin.inc:307 rules_admin.sets.inc:25
+msgid "delete"
+msgstr "Löschen"
+
+#: rules_admin.inc:310 rules_admin.sets.inc:28
+msgid "revert"
+msgstr "zurücksetzen"
+
+#: rules_admin.inc:312
+msgid "clone"
+msgstr "klonen"
+
+#: rules_admin.inc:334
+msgid "None"
+msgstr "Keines"
+
+#: rules_admin.inc:342
+msgid "This rule has been provided by a module, but has been modified."
+msgstr ""
+"Diese Regel wurde von einem Modul bereitgestellt, wurde aber "
+"verändert."
+
+#: rules_admin.inc:343
+msgid "Modified"
+msgstr "Angepasst"
+
+#: rules_admin.inc:346
+msgid "This rule has been provided by a module and can't be customized."
+msgstr ""
+"Diese Regel wurde von einem Modul bereitgestellt und kann nicht "
+"angepasst werden."
+
+#: rules_admin.inc:347
+msgid "Fixed"
+msgstr "Fixiert"
+
+#: rules_admin.inc:350
+msgid "A custom defined rule."
+msgstr "Eine benutzerdefinierte Regel"
+
+#: rules_admin.inc:351
+msgid "Custom"
+msgstr "Benutzerdefiniert"
+
+#: rules_admin.inc:353
+msgid "This rule has been provided by a module."
+msgstr "Diese Regel wurde von einem Modul bereitgestellt."
+
+#: rules_admin.inc:354
+msgid "Default"
+msgstr "Standard"
+
+#: rules_admin.inc:363 rules_admin.module:173
+msgid "Rule sets"
+msgstr "Regel-Sets"
+
+#: rules_admin.inc:368 rules_admin.module:52
+msgid "Triggered rules"
+msgstr "Reaktive Regeln"
+
+#: rules_admin.render.inc:20
+msgid "Conditions"
+msgstr "Bedingungen"
+
+#: rules_admin.render.inc:26
+msgid "AND"
+msgstr "UND"
+
+#: rules_admin.render.inc:28
+msgid "Actions"
+msgstr "Aktionen"
+
+#: rules_admin.render.inc:34
+msgid "Add a condition"
+msgstr "Bedingung hinzufügen"
+
+#: rules_admin.render.inc:35
+msgid "Add an action"
+msgstr "Aktion hinzufügen"
+
+#: rules_admin.render.inc:76
+msgid "Indent this condition by adding a logical operation."
+msgstr ""
+"Rücken Sie diese Bedingung ein, indem Sie eine logische Operation "
+"hinzufügen."
+
+#: rules_admin.render.inc:78;138
+msgid "NOT"
+msgstr "NICHT"
+
+#: rules_admin.render.inc:118
+msgid "Empty"
+msgstr "Leer"
+
+#: rules_admin.render.inc:139
+msgid "!not%label group"
+msgstr "!not Gruppe %label"
+
+#: rules_admin.render.inc:140
+msgid "Add another condition to this group"
+msgstr "Bedingung zu dieser Gruppe hinzufügen"
+
+#: rules_admin.render.inc:141
+msgid "Edit this condition group"
+msgstr "Bedingungsgruppe bearbeiten"
+
+#: rules_admin.rule_forms.inc:20;36
+msgid "Filter"
+msgstr "Filter"
+
+#: rules_admin.rule_forms.inc:26
+msgid "Filter by event"
+msgstr "Nach Ereignis filtern"
+
+#: rules_admin.rule_forms.inc:32
+msgid "Filter by category"
+msgstr "Nach Kategorie filtern"
+
+#: rules_admin.rule_forms.inc:41 rules_admin.sets.inc:118
+msgid "Active rules"
+msgstr "Aktive Regeln"
+
+#: rules_admin.rule_forms.inc:44 rules_admin.sets.inc:121
+msgid "Inactive rules"
+msgstr "Inaktive Regeln"
+
+#: rules_admin.rule_forms.inc:48 rules_admin.sets.inc:125
+msgid "Fixed rules"
+msgstr "Fixierte Regeln"
+
+#: rules_admin.rule_forms.inc:67
+msgid "If you install the token module from !href, token replacements will be supported. <a href=\"@hide\">Hide this message.</a>"
+msgstr ""
+"Wenn das Token-Modul von !href installiert wird, werden Ersetzungen "
+"von Token unterstützt. <a href=\"@hide\">Diese Nachricht nicht mehr "
+"anzeigen.</a>"
+
+#: rules_admin.rule_forms.inc:95
+msgid "The rule %label has been added. You can start adding some conditions or actions now."
+msgstr ""
+
+#: rules_admin.rule_forms.inc:108
+msgid "Rule settings"
+msgstr "Regel-Einstellungen"
+
+#: rules_admin.rule_forms.inc:114
+msgid "Choose an appropriate label for this rule."
+msgstr "Wählen Sie eine passende Bezeichnung für diese Regel"
+
+#: rules_admin.rule_forms.inc:125
+msgid "Rule set"
+msgstr "Regel-Set"
+
+#: rules_admin.rule_forms.inc:127
+msgid "Select to which rule set this rule should belong."
+msgstr "Wählen Sie aus, zu welchem Regel-Set diese Regel gehören soll."
+
+#: rules_admin.rule_forms.inc:134
+msgid "Select the event on which you want to evaluate this rule."
+msgstr "Wählen Sie das Ereignis aus, dass die Regel auslösen soll."
+
+#: rules_admin.rule_forms.inc:139 rules_admin.sets.inc:158
+msgid "Categories"
+msgstr "Kategorien"
+
+#: rules_admin.rule_forms.inc:141
+msgid "A comma-separated list of terms describing this rule. Example: funny, bungee jumping."
+msgstr ""
+"Eine durch Kommata getrennte Liste von Begriffen, die diese Regel "
+"beschreiben. Beispiel: lustig, Bungee-Jumping."
+
+#: rules_admin.rule_forms.inc:145
+msgid "This rule is active and should be evaluated when the associated event occurs."
+msgstr ""
+"Diese Regel ist aktiv und soll ausgewertet werden, wenn das "
+"zugehörige Ereignis stattfindet."
+
+#: rules_admin.rule_forms.inc:150;434;498;563
+msgid "Weight"
+msgstr "Reihenfolge"
+
+#: rules_admin.rule_forms.inc:152
+msgid "Adjust the weight to customize the evaluation order of rules."
+msgstr "Dies erlaubt das Anpassen der Auswertungsreihenfolge von Regeln."
+
+#: rules_admin.rule_forms.inc:155 rules_admin.sets.inc:163
+msgid "Save changes"
+msgstr "Änderungen speichern"
+
+#: rules_admin.rule_forms.inc:177
+msgid "<em>Warning</em>: This rule has been provided by another module. <br />Be aware that any changes made through this interface might be overwritten once the providing module updates the rule."
+msgstr ""
+
+#: rules_admin.rule_forms.inc:182
+msgid "Rule elements"
+msgstr "Regel-Elemente"
+
+#: rules_admin.rule_forms.inc:203
+msgid "The rule %label has been updated."
+msgstr "Die Regel %label wurde aktualisiert"
+
+#: rules_admin.rule_forms.inc:261
+msgid "Select an action to add"
+msgstr "Wählen Sie eine Aktion, die hinzugefügt werden soll"
+
+#: rules_admin.rule_forms.inc:270
+msgid "The following actions aren't available in this context because they require arguments that don't exist in your rule. If you want to use any of these actions, you must first add some action that adds variables of this kind, or have an event that passes the required variables."
+msgstr ""
+"Die folgenden Aktionen sind in diesem Kontext nicht verfügbar, da sie "
+"Argumente benötigen, die in dieser Regel nicht existieren. Wenn eine "
+"dieser Aktionen verwendet werden soll, muss zuerst eine Aktion "
+"hinzugefügt werden, die die benötigten Variablen hinzufügt, oder "
+"ein Ereignis existieren, die die erforderlichen Variabeln "
+"bereitstellt."
+
+#: rules_admin.rule_forms.inc:283;323
+msgid "Next"
+msgstr "nächste Seite"
+
+#: rules_admin.rule_forms.inc:301
+msgid "Select the condition to add"
+msgstr "Wählen Sie eine Bedingung, die hinzugefügt werden soll"
+
+#: rules_admin.rule_forms.inc:310
+msgid "The following conditions aren't available in this context because they require arguments that don't exist in your rule. If you want to use any of these conditions, you must first add some action that adds variables of this kind in a previous rule, or have an event that passes the required variables."
+msgstr ""
+"Die folgenden Bedingungen sind in diesem Kontext nicht verfügbar, da "
+"sie Argumente benötigen, die in dieser Regel nicht existieren. Wenn "
+"eine dieser Bedinungen verwendet werden soll, muss zuerst eine Aktion "
+"hinzugefügt werden, die solche Variablen in einer vorherigen Regel "
+"hinzufügt, oder ein Ereignis, das die erforderlichen Variablen "
+"bereitstellt."
+
+#: rules_admin.rule_forms.inc:425
+msgid "Customize the label for this action."
+msgstr "Bezeichnung für diese Aktion anpassen."
+
+#: rules_admin.rule_forms.inc:431
+msgid "Editing action %label"
+msgstr "Aktion %label bearbeiten"
+
+#: rules_admin.rule_forms.inc:436
+msgid "Adjust the weight to customize the ordering of actions."
+msgstr "Auswertungsreihenfolge von Aktionen"
+
+#: rules_admin.rule_forms.inc:443;507;571 rules_admin.sets.inc:219
+msgid "Save"
+msgstr "Speichern"
+
+#: rules_admin.rule_forms.inc:450;514;578;807 rules_admin.sets.inc:62 rules_admin.module:77;156
+msgid "Delete"
+msgstr "Löschen"
+
+#: rules_admin.rule_forms.inc:472
+msgid "The action %label has been saved."
+msgstr "Die Aktion %label wurde gespeichert."
+
+#: rules_admin.rule_forms.inc:483
+msgid "Customize the label for this condition."
+msgstr "Anpassen der Bezeichnung für diese Bedingung."
+
+#: rules_admin.rule_forms.inc:489
+msgid "Editing condition %label"
+msgstr "Bedingung %label bearbeiten"
+
+#: rules_admin.rule_forms.inc:492;549
+msgid "Negate"
+msgstr "Negieren"
+
+#: rules_admin.rule_forms.inc:494
+msgid "If checked, the condition returns TRUE, if it evaluates to FALSE."
+msgstr ""
+"Wenn aktiviert, liefert die Bedingung WAHR zurück, wenn sie auf "
+"FALSCH ausgewertet wird."
+
+#: rules_admin.rule_forms.inc:500
+msgid "Adjust the weight to customize the ordering of conditions."
+msgstr "Auswertungsreihenfolge von Bedingungen."
+
+#: rules_admin.rule_forms.inc:540
+msgid "The condition %label has been saved."
+msgstr "Die Bedingung %label wurde gespeichert."
+
+#: rules_admin.rule_forms.inc:547
+msgid "Editing condition group %label"
+msgstr "Bedingungsgruppe %label bearbeiten"
+
+#: rules_admin.rule_forms.inc:551
+msgid "If checked, the operation will be negated. E.g. AND would be handled as NOT AND."
+msgstr ""
+"Wenn aktiviert, wird die Operation umgekehrt. Logisches UND bird z.B. "
+"ans NICHT UND behandelt."
+
+#: rules_admin.rule_forms.inc:555
+msgid "Operation"
+msgstr "Operation"
+
+#: rules_admin.rule_forms.inc:557
+msgid "The logical operation of this condition group. E.g. if you select AND, this condition group will only evaluate to TRUE if all conditions of this group evaluate to TRUE."
+msgstr ""
+"Die logische Operation dieser Bedingungsgruppe. Wenn Sie z.B. UND "
+"wählen wird diese Bedinungsgruppe nur WAHR liefern, wenn alls "
+"Bedingungen der Gruppe WAHR zurückgeben."
+
+#: rules_admin.rule_forms.inc:565
+msgid "Adjust the weight to customize the ordering."
+msgstr "Passen Sie die Gewichtung an, um die Reihenfolge anzupassen."
+
+#: rules_admin.rule_forms.inc:594
+msgid "The condition group %label has been saved."
+msgstr "Die Bedinungsgruppe %label wurde gespeichert."
+
+#: rules_admin.rule_forms.inc:672
+msgid "Variable @label settings"
+msgstr "Einstellungen für Variable @label"
+
+#: rules_admin.rule_forms.inc:685 rules_admin.sets.inc:291
+msgid "Machine readable variable name"
+msgstr "Maschinenlesbarer Variablen-Name"
+
+#: rules_admin.rule_forms.inc:686 rules_admin.sets.inc:151
+msgid "Specify a unique name containing only alphanumeric characters, and underscores."
+msgstr ""
+"Geben Sie einen eindeutigen Namen an, der nur aus alphanumerischen "
+"Zeichen und Unterstrichen besteht."
+
+#: rules_admin.rule_forms.inc:706
+msgid "A variable with this name does already exist. Please choose another name."
+msgstr ""
+"Eine Variable mit diesem Namen besteht bereits. Ein anderer Name muss "
+"gewählt werden."
+
+#: rules_admin.rule_forms.inc:709
+msgid "The name contains not allowed characters."
+msgstr "Der Name beinhaltet unerlaubte Zeichen."
+
+#: rules_admin.rule_forms.inc:768
+msgid "Arguments configuration"
+msgstr "Argument-Konfiguration"
+
+#: rules_admin.rule_forms.inc:802
+msgid "Are you sure you want to delete the logical operation %label?"
+msgstr ""
+"Sind Sie sicher, dass Sie die logische Operation %label löschen "
+"möchten?"
+
+#: rules_admin.rule_forms.inc:805 rules_admin.sets.inc:60
+msgid "Are you sure you want to delete %label?"
+msgstr "Sind Sie sicher, dass Sie %label löschen möchten?"
+
+#: rules_admin.rule_forms.inc:807 rules_admin.sets.inc:62;87
+msgid "This action cannot be undone."
+msgstr "Dieser Vorgang kann nicht rückgängig gemacht werden."
+
+#: rules_admin.rule_forms.inc:807 rules_admin.sets.inc:62;87
+msgid "Cancel"
+msgstr "Abbrechen"
+
+#: rules_admin.rule_forms.inc:816
+msgid "The logical operation %label has been deleted."
+msgstr "Die logische Operation %label wurde gelöscht."
+
+#: rules_admin.rule_forms.inc:821 rules_admin.sets.inc:69
+msgid "%label has been deleted."
+msgstr "%label wurde gelöscht."
+
+#: rules_admin.rule_forms.inc:840
+msgid "Alter the settings for the cloned rule."
+msgstr "Ändern Sie die Einstellungen für die geklonte Regel."
+
+#: rules_admin.rule_forms.inc:901
+msgid "@group module"
+msgstr "@group-Modul"
+
+#: rules_admin.rule_forms.inc:949
+msgid "Debug rule evaluation"
+msgstr "Regelauswertung debuggen"
+
+#: rules_admin.rule_forms.inc:951
+msgid "When activated, debugging information is shown when rules are evaluated."
+msgstr ""
+"Wenn aktiviert, werden Debugging-Informationen angezeigt, wenn Regeln "
+"ausgewertet werden."
+
+#: rules_admin.rule_forms.inc:955
+msgid "Show fixed rules and rule sets"
+msgstr "Fixierte Regeln und Regel-Sets anzeigen"
+
+#: rules_admin.rule_forms.inc:957
+msgid "When activated, fixed items provided by modules are shown in the admin center too."
+msgstr ""
+"Wenn aktiviert, werden fixierte Elemente, die von anderen Modulen "
+"bereitgestellt werden, auch im Verwaltungsbereich angezeigt."
+
+#: rules_admin.rule_forms.inc:961
+msgid "Ignore missing token module"
+msgstr "Fehlendes Token-Modul ignorieren"
+
+#: rules_admin.rule_forms.inc:963
+msgid "Rules can use the token module to provide token replacements; if this module is not present rules will complain, unless this setting is checked."
+msgstr ""
+"Regeln können das Token-Modul verwenden, um Ersetzungen von Tokens zu "
+"unterstützen; wenn das Modul nicht aktiviert ist, meldet ‚Regeln‘ "
+"dies solange diese Einstellung aktiv ist."
+
+#: rules_admin.rule_forms.inc:269
+msgid "1 action is not configurable"
+msgid_plural "@count actions are not configurable"
+msgstr[0] "1 Aktion ist nicht konfigurierbar"
+msgstr[1] "@count Aktionen sind nicht konfigurierbar"
+
+#: rules_admin.rule_forms.inc:309
+msgid "1 condition is not configurable"
+msgid_plural "@count conditions are not configurable"
+msgstr[0] "1 Bedingung ist nicht konfigurierbar"
+msgstr[1] "@count Bedingungen sind nicht konfigurierbar"
+
+#: rules_admin.rule_forms.inc:905
+msgid "Unavailable argument: @arguments"
+msgid_plural "Unavailable arguments: @arguments"
+msgstr[0] "Nicht verfügbares Argument: @arguments"
+msgstr[1] "Nicht verfügbare Argumente: @arguments"
+
+#: rules_admin.sets.inc:16
+msgid "Name"
+msgstr "Name"
+
+#: rules_admin.sets.inc:42
+msgid "There are no rule sets."
+msgstr "Es gibt keine Regel-Sets."
+
+#: rules_admin.sets.inc:85
+msgid "Are you sure you want to revert %label?"
+msgstr "Soll %label wirklich umgekehrt werden?"
+
+#: rules_admin.sets.inc:87 rules_admin.module:86
+msgid "Revert"
+msgstr "Zurücksetzen"
+
+#: rules_admin.sets.inc:94
+msgid "%label has been reverted."
+msgstr "%label wurde umgekehrt."
+
+#: rules_admin.sets.inc:137
+msgid "Rule set settings"
+msgstr "Regel-Set-Einstellungen"
+
+#: rules_admin.sets.inc:143
+msgid "Choose an appropriate label for this rule set."
+msgstr "Wählen Sie eine passende Bezeichnung für dieses Regel-Set"
+
+#: rules_admin.sets.inc:149;346
+msgid "Machine readable name"
+msgstr "Maschinenlesbarer Name"
+
+#: rules_admin.sets.inc:160
+msgid "A comma-separated list of terms describing this rule set. Example: funny, bungee jumping."
+msgstr ""
+"Eine durch Kommata getrennte Liste von Begriffen, die dieses Regel-Set "
+"beschreiben. Beispiel: lustig, Bungee-Jumping."
+
+#: rules_admin.sets.inc:176
+msgid "The rule set %label has been updated."
+msgstr "Das Regel-Set %label wurde aktualisiert."
+
+#: rules_admin.sets.inc:192
+msgid "Arguments"
+msgstr "Argumente"
+
+#: rules_admin.sets.inc:198
+msgid "You may specify some arguments, which have to be passed to the rule set when it is invoked. For each argument you have to specify a certain data type, a label and a unique machine readable name containing only alphanumeric characters, and underscores."
+msgstr ""
+"Es können Argumente angegeben werden, die beim Aufruf an das "
+"Regel-Set übergeben werden. Für jedes Argument muss ein "
+"bestimmter Datentyp, eine Bezeichnung und ein eindeutiger "
+"maschinenlesbarer Name (der nur alphanumerische Zeichen und "
+"Unterstriche enthält) angegeben werden."
+
+#: rules_admin.sets.inc:209
+msgid "More arguments"
+msgstr "Weitere Argumente"
+
+#: rules_admin.sets.inc:210
+msgid "If the amount of boxes above isn't enough, click here to add more arguments."
+msgstr ""
+"Wenn oben nicht genug KÄSTCHEN sind, kann hier geklickt werden um "
+"weitere Argumente hinzuzufügen."
+
+#: rules_admin.sets.inc:229;242
+msgid "The name may contain only digits, numbers and underscores."
+msgstr "Der Name darf nur Buchstaben, Ziffern und Unterstriche enthalten."
+
+#: rules_admin.sets.inc:238
+msgid "All fields of an argument are required."
+msgstr "Alle Felder eines Arguments sind erforderlich."
+
+#: rules_admin.sets.inc:256
+msgid "Each name may be used only once."
+msgstr "Jeder Name darf nur einmal verwendet werden."
+
+#: rules_admin.sets.inc:285;345
+msgid "Data type"
+msgstr "Datentyp"
+
+#: rules_admin.sets.inc:381
+msgid "The rule set %label has been added."
+msgstr "Das Regel-Set %label wurde hinzugefügt."
+
+#: rules_admin.module:23
+msgid "Rule sets are similar in concept to subroutines and can be invoked by actions or manually by code or another module."
+msgstr ""
+"Regel-Sets sind vom Konzept her ähnlich wie Unterprogramme und "
+"können durch Aktionen, manuell durch Code oder durch ein anderes "
+"Modul aufgerufen werden."
+
+#: rules_admin.module:26
+msgid "This is an overview about rules that are triggered by a certain event. A rule may contain conditions and actions, which are executed only when the conditions are met."
+msgstr ""
+"Dies ist eine Übersicht über Regeln, die von einem bestimmten "
+"Ereignis ausgelöst werden. Eine Regel kann Bedingungen und Aktionen "
+"enthalten, die nur ausgeführt werden, wenn die Bedingungen erfüllt "
+"sind."
+
+#: rules_admin.module:276
+msgid "administer rules"
+msgstr "Regeln verwalten"
+
+#: rules_admin.module:36 rules_admin.info:0
+msgid "Rules"
+msgstr "Regeln"
+
+#: rules_admin.module:37
+msgid "Rules administration links."
+msgstr "Links für die Verwaltung der Regeln"
+
+#: rules_admin.module:53
+msgid "Customize your site by configuring rules that are evaluated on events."
+msgstr ""
+"Passen Sie Ihre Website an, indem Sie Regeln konfigurieren, die bei "
+"Ereignissen ausgewertet werden."
+
+#: rules_admin.module:62;182;213
+msgid "Overview"
+msgstr "Übersicht"
+
+#: rules_admin.module:67;219
+msgid "Add a new rule"
+msgstr "Neue Regel hinzufügen"
+
+#: rules_admin.module:97
+msgid "Import / Export"
+msgstr "Import / Export"
+
+#: rules_admin.module:120
+msgid "Settings"
+msgstr "Einstellungen"
+
+#: rules_admin.module:139
+msgid "Add"
+msgstr "Hinzufügen"
+
+#: rules_admin.module:147
+msgid "Edit"
+msgstr "Bearbeiten"
+
+#: rules_admin.module:165
+msgid "Clone rule"
+msgstr "Regel klonen"
+
+#: rules_admin.module:174
+msgid "Create and manage rule sets."
+msgstr "Regel-Sets erstellen und verwalten."
+
+#: rules_admin.module:187
+msgid "Add a new rule set"
+msgstr "Neues Regel-Set hinzufügen"
+
+#: rules_admin.module:0
+msgid "rules_admin"
+msgstr ""
+
+#: rules_admin.install:29
+msgid "Example rule: When viewing an unpublished page, publish it."
+msgstr ""
+
+#: rules_admin.install:37
+msgid "Viewed content is published"
+msgstr ""
+
+#: rules_admin.install:43
+msgid "Viewed content is Page"
+msgstr ""
+
+#: rules_admin.install:49
+msgid "Publish viewed content"
+msgstr ""
+
+#: rules_admin.install:59
+msgid "Example: Empty rule set working with content"
+msgstr ""
+
+#: rules_admin.info:0
+msgid "Rules Administration UI"
+msgstr ""
+
+#: rules_admin.info:0
+msgid "Provides the administration UI for rules."
+msgstr ""

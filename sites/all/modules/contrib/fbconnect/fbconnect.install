@@ -1,0 +1,184 @@
+<?php
+// $Id: fbconnect.install,v 1.14.4.5 2010/10/10 12:39:10 vectoroc Exp $
+
+/**
+ * Implementation of hook_requirements().
+ */
+function fbconnect_requirements($phase) {
+  $requirements = array(); 
+  $t = get_t(); 
+  
+  if (!function_exists('curl_init')) {
+    $requirements['curl']['title'] = $t('cURL library');
+    $requirements['curl']['value'] = $t('Not installed');
+    $requirements['curl']['severity'] = REQUIREMENT_ERROR;
+    $requirements['curl']['description'] = $t('The cURL library is not installed. Please check the <a href="@url">PHP cURL documentation</a> for information on how to correct this.', array('@url' => 'http://www.php.net/manual/en/curl.setup.php'));
+  }
+  
+  if (!function_exists('json_decode')) {
+    $requirements['json']['title'] = $t('JSON extension');
+    $requirements['json']['value'] = $t('Not installed');
+    $requirements['json']['severity'] = REQUIREMENT_ERROR;
+    $requirements['json']['description'] = $t('The JSON library is not installed. Facebook needs the JSON PHP extension');
+  }
+  
+  if ($phase == 'runtime') {
+    drupal_load('module', 'fbconnect');
+    _facebook_client_load_include();
+    
+    $requirements['facebook-php-sdk']['title'] = $t('Facebook PHP sdk');
+    if (!class_exists('Facebook')) {
+      $requirements['facebook-php-sdk']['value'] = $t('Not installed');
+      $requirements['facebook-php-sdk']['severity'] = REQUIREMENT_ERROR;
+      $requirements['facebook-php-sdk']['description'] = $t('Fbconnect : Facebook PHP library not found. See README.txt');
+    }
+    elseif (!constant('Facebook::VERSION')) {
+      $requirements['facebook-php-sdk']['value'] = $t('Outdated version');
+      $requirements['facebook-php-sdk']['severity'] = REQUIREMENT_ERROR;
+      $requirements['facebook-php-sdk']['description'] = $t('Fbconnect : Installed Facebook PHP library is outdated. See README.txt');
+    }
+    else {
+      $requirements['facebook-php-sdk']['value'] = l(constant('Facebook::VERSION'), 'http://github.com/facebook/php-sdk', array('external' => TRUE));
+      $requirements['facebook-php-sdk']['severity'] = REQUIREMENT_OK;
+      
+//      $sdk_include_path_1 = drupal_get_path('module', 'fbconnect') .'/facebook-php-sdk/src/facebook.php';
+//      $sdk_include_path_2 = module_invoke('libraries', 'get_path', 'facebook-php-sdk') .'/src/facebook.php';
+//
+//      if (!file_exists($sdk_include_path_1) || !file_exists($sdk_include_path_2)) {
+//        $requirements['facebook-php-sdk']['severity'] = REQUIREMENT_WARNING;
+//        $requirements['facebook-php-sdk']['value'] .= ' '. $t('You installed Facebook PHP sdk in deprecated path. See README.txt');
+//      }      
+    }
+    
+    if (!fbconnect_get_config()) {
+      $requirements['fbconnect_conf'] = array(
+        'title' => $t('FBConnect'),
+        'value' => $t('Not configured'),
+        'severity' => REQUIREMENT_WARNING,
+        'description' => $t('Please ensure that you entered Application ID and Secret Key. !link', array('!link' => l($t('Settings page'), 'admin/settings/fbconnect'))),
+      );
+    }
+  }
+
+  return $requirements;
+}
+
+
+/**
+ * @file
+ * Implementation of hook_install().
+ */
+function fbconnect_install() {
+  drupal_install_schema('fbconnect'); 
+  _fbconnect_change_user_mail_field();
+}
+ 
+/** 
+ * Implementation of hook_uninstall(). 
+ */ 
+function fbconnect_uninstall() { 
+  drupal_uninstall_schema('fbconnect');
+  _fbconnect_change_user_mail_field('uninstall');
+  // Delete our module's variable from the variables table.
+  variable_del('fbconnect_appid');
+  variable_del('fbconnect_skey');  
+  variable_del('fbconnect_base_domaine');
+  variable_del('fbconnect_connect_url');
+  variable_del('fbconnect_language_code');
+  variable_del('fbconnect_debug');
+  
+  variable_del('fbconnect_fast_reg');
+  variable_del('fbconnect_reg_options');
+  variable_del('fbconnect_loginout_mode');
+  variable_del('fbconnect_invite_msg');
+  variable_del('fbconnect_invite_name');  
+  variable_del('fbconnect_invite_dest');
+  variable_del('fbconnect_button');  
+  variable_del('fbconnect_button_text');
+  variable_del('fbconnect_pic_allow');
+  variable_del('fbconnect_pic_size');
+  variable_del('fbconnect_pic_logo');
+}
+
+/** 
+ * Implementation of hook_schema(). 
+ */ 
+function fbconnect_schema() { 
+  $schema['fbconnect_users'] = array( 
+    'fields' => array( 
+      'uid'            => array('type' => 'int', 'unsigned' => TRUE, 'not null' => TRUE, 'default' => 0), 
+      'fbuid'          => array('type' => 'int', 'unsigned' => TRUE, 'not null' => TRUE, 'default' => 0, 'size' => 'big'),
+      'timestamp'      => array('type' => 'int', 'unsigned' => TRUE, 'not null' => TRUE, 'default' => 0),
+    ), 
+    'primary key' => array('fbuid'), 
+  );
+    
+  return $schema; 
+}
+
+function fbconnect_update_6002() {
+//  variable_set('fbconnect_reg_feed_id', FBCONNECT_REG_FEED_BUNDLEID);
+//  variable_set('fbconnect_com_feed_id', FBCONNECT_COMMENT_FEED_BUNDLEID);
+
+  $ret = array();
+  db_drop_field($ret, 'fbconnect_users', 'import_setting');
+  db_drop_field($ret, 'fbconnect_users', 'avatar');
+  db_drop_field($ret, 'fbconnect_users', 'visibility');
+
+  return $ret;
+}
+
+/**
+ * Alter fbuid field to allow for 64-bit facebook ids
+ */
+function fbconnect_update_6003() {
+  $ret = array();
+  db_drop_primary_key($ret, 'fbconnect_users');
+  db_change_field($ret, 'fbconnect_users', 'fbuid', 'fbuid',
+    array('type' => 'int', 'unsigned' => TRUE, 'not null' => TRUE, 'default' => 0, 'size' => 'big'),
+    array('primary key' => array('fbuid'))
+  );
+  return $ret;
+}
+
+function fbconnect_update_6004() {
+  return _fbconnect_change_user_mail_field();
+}
+
+
+/**
+ * delete unnesessary bundle_ids from system table
+ */
+function fbconnect_update_6005() {
+  $res = array();
+  variable_del('fbconnect_reg_feed_id');
+  variable_del('fbconnect_com_feed_id');
+  return $res;
+}
+
+function fbconnect_update_6200() {
+  $res = array();
+  $res[] = update_sql("UPDATE {variable} SET name = 'fbconnect_appid' WHERE name = 'fbconnect_key'");
+  $res[] = update_sql('UPDATE {blocks} SET module = "fbconnect_invite" WHERE module = "fbconnect" AND delta = 0');
+  
+  return $res;
+}
+
+/**
+ * Implementation of hook_schema_alter()
+ * @param array $schema
+ * @todo remove it / create updating tool 
+ */
+function fbconnect_schema_alter(&$schema) {
+  $schema['users']['fields']['mail']['length'] = 320;
+}
+
+/**
+ * Extend maximum email length to 320 chars
+ */
+function _fbconnect_change_user_mail_field($action = 'install') {
+  $schema = array('users' => drupal_get_schema('users'));
+  if ($action == 'install') fbconnect_schema_alter($schema);
+  db_change_field($res, 'users', 'mail', 'mail', $schema['users']['fields']['mail']);
+  return $res;
+}

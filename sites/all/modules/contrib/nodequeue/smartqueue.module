@@ -1,0 +1,305 @@
+<?php
+// $Id: smartqueue.module,v 1.10 2010/03/15 00:47:00 ezrag Exp $
+
+/**
+ * Implementation of hook_nodequeue_info()
+ */
+function smartqueue_nodequeue_info() {
+  return array('smartqueue_taxonomy' => array(
+    'title' => t('Taxonomy queue'),
+    'description' => t('Each particular grouping of taxonomy terms from the selected vocabularies have their own unique subqueue. You can place nodes into any of these subqueues based on which terms that node has been tagged with. Using this with large or too many taxonomies may degrade performance.'),
+    ));
+}
+
+/**
+ * Implementation of hook_nodequeue_form()
+ */
+function smartqueue_taxonomy_nodequeue_form($queue, &$form) {
+  foreach (taxonomy_get_vocabularies() as $vid => $vocabulary) {
+    $options[$vid] = check_plain($vocabulary->name);
+  }
+  $form['placeholder']['vocabularies'] = array(
+    '#type' => 'checkboxes',
+    '#title' => t('Vocabularies'),
+    '#description' => t('Select which vocabularies to use; each unique combination of terms from all of these vocabularies will have a subqueue.'),
+    '#options' => $options,
+  );
+
+  $form['placeholder']['use_parents'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Assume parent term for hierarchical vocabs'),
+    '#description' => t("Instead of using the node's terms for nodequeue assignment use the top-most parents of a term. This has no effect if there in non-hierarchical vocabularies."),
+    '#default_value' => isset($queue->use_parents) ? $queue->use_parents : 0,
+  );  
+
+  $form['subqueue_title'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Subqueue title'),
+    '#default_value' => $queue->subqueue_title,
+    '#size' => 50,
+    '#maxlength' => 64,
+    '#description' => t('What to display for the subqueue title; use %subqueue to embed the actual subqueue title. This is used to distinguish multiple nodequeues with subqueues from each other, as internal subqueue title is filled automatically.'),
+  );
+
+
+  if ($queue->qid) {
+    $form['placeholder']['vocabularies']['#disabled'] = TRUE;
+    $form['placeholder']['vocabularies']['#default_value'] = explode('-', $queue->reference);
+  }
+}
+
+/**
+ * Implementation of hook_nodequeue_form_validate()
+ */
+function smartqueue_taxonomy_nodequeue_form_validate($queue, &$form_state, &$form) {
+  if (!isset($queue->qid)) {
+    $vids = array_keys(array_filter($form_state['values']['vocabularies']));
+    if (empty($vids)) {
+      form_error($form['placeholder']['vocabularies'], t('You must select at least one vocabulary.'));
+    }
+
+    // Convert this to our reference.
+    form_set_value($form['reference'], implode('-', $vids), $form_state);
+  }
+}
+
+/**
+ * Implementation of hook_nodequeue_form_submit_finish()
+ */
+function smartqueue_taxonomy_nodequeue_form_submit_finish($queue, $form_state) {
+  $qid = db_result(db_query('SELECT qid FROM {smartqueue} WHERE qid = %d', $queue->qid));
+  if ($qid) {
+    db_query('UPDATE {smartqueue} SET use_parents = %d  WHERE qid = %d', $form_state['values']['use_parents'], $queue->qid);
+  }
+  else {
+    db_query('INSERT INTO {smartqueue} (qid, use_parents) VALUES (%d, %d)', $queue->qid, $form_state['values']['use_parents']);
+  }
+}
+
+/**
+ * Implementation of hook_nodequeue_subqueues()
+ */
+function smartqueue_taxonomy_nodequeue_subqueues(&$queue, $node) {
+  foreach (explode('-', $queue->reference) as $vid) {
+    $vids[$vid] = array();
+  }
+
+  foreach ($node->taxonomy as $key => $value) {
+    // This unfortunate scar is needed because $node->taxonomy looks different when saving a node versus loading.
+    if (!is_object($value)) {
+      // $node comes from a node form submission
+      foreach ((array)$value as $tid) {
+        if (isset($vids[$key])) {
+          $vids[$key][] = $tid;
+        }
+      }
+    }
+    else {
+      // $node comes from node_load()
+      if (isset($vids[$value->vid])) {
+        $vids[$value->vid][] = $value->tid;
+      }
+    }
+  }
+
+  if ($queue->use_parents) {
+    // Replace taxonomy IDs by their parents'
+    foreach ($vids as $vid => &$tids) {
+      $tids = smartqueue_taxonomy_get_parents($tids);
+    }
+  }
+
+  // Forbid NO terms being set, but allow
+  // various non-terms to be set.
+
+  $empty = TRUE;
+  foreach ($vids as $vid => $tids) {
+    if (!empty($tids)) {
+      $empty = FALSE;
+    }
+    if (!count($vids[$vid])) {
+      $vids[$vid][] = 0;
+    }
+  }
+
+  if ($empty) {
+    return;
+  }
+
+  $references = smartqueue_build_string(array_filter($vids));
+  // Because of how we built this, the last one will always be all zeros. Lose it.
+  //array_pop($references);
+
+  // We're returning an array of references for efficiency, but we also have
+  // to check to see if the references we've generated exist. If they don't,
+  // we have to create them.
+  $exists = array();
+  $subqueues = nodequeue_load_subqueues_by_reference(array($queue->qid => $references));
+  foreach ($subqueues as $subqueue) {
+    $exists[$subqueue->reference] = TRUE;
+  }
+
+  foreach ($references as $reference) {
+    if (empty($exists[$reference])) {
+      nodequeue_add_subqueue($queue, smartqueue_taxonomy_nodequeue_subqueue_title($queue, $reference), $reference);
+    }
+  }
+  return $references;
+}
+
+/**
+ * Implementation of hook_nodequeue_alter
+ */
+function smartqueue_nodequeue_alter(&$data, $type) {
+  switch ($type) {
+    case 'load_queues':
+      $qids = array_keys($data);
+      $placeholders = db_placeholders($qids);
+      $result = db_query("SELECT qid, use_parents FROM {smartqueue} WHERE qid IN ($placeholders)", $qids);
+      while ($queue = db_fetch_object($result)) {
+        $data[$queue->qid]->use_parents = $queue->use_parents;
+      }
+      break;
+  }
+}
+
+/**
+ * Build an array of strings that represents all of the possible term
+ * combinations
+ */
+function smartqueue_build_string($arrays) {
+  $array = array_shift($arrays);
+  $term = '';
+  if (empty($arrays))  {
+    return $array;
+  }
+
+  $substrings = smartqueue_build_string($arrays);
+  $strings = array();
+
+  foreach ($array as $term) {
+    foreach ($substrings as $string) {
+      $strings[] = "$term-$string";
+    }
+  }
+
+  return $strings;
+}
+
+function smartqueue_taxonomy_nodequeue_subqueue_title($queue, $reference) {
+  $vids = explode('-', $queue->reference);
+  $tids = explode('-', $reference);
+  foreach ($vids as $vid) {
+    $tid = array_shift($tids);
+    // $tid can be 0, specifically meaning this term is unset.
+    if ($tid) {
+      $terms = smartqueue_taxonomy_get_terms($vid);
+      $titles[$tid] = $terms[$tid];
+    }
+  }
+  return implode('-', $titles);
+}
+
+/**
+ * Get a list of terms
+ */
+function smartqueue_taxonomy_get_terms($vid) {
+  static $cache = array();
+  if (!isset($cache[$vid])) {
+    $cache[$vid] = array();
+    $result = db_query("SELECT tid, name FROM {term_data} WHERE vid = %d", $vid);
+    while ($term = db_fetch_object($result)) {
+      $cache[$vid][$term->tid] = $term->name;
+    }
+  }
+  return $cache[$vid];
+}
+
+
+// TODO:
+// * Handle vocabulary changes (maybe?)
+/**
+ * Implementation of hook_taxonomy.
+ */
+function smartqueue_taxonomy($op, $type, $array = NULL) {
+  switch ($type) {
+    case 'term':
+      switch ($op){
+        // If a term was updated, we need to update any relevant nodequeue titles.
+        case 'update':
+          $tid = $array['tid'];
+          // Find subqueues that contain this term.
+          $result = db_query(
+            "SELECT nq.reference AS reference, sq.reference AS sqref, sq.sqid
+            FROM {nodequeue_queue} nq
+            INNER JOIN {nodequeue_subqueue} sq ON nq.qid = sq.qid
+            WHERE nq.owner = 'smartqueue_taxonomy'
+            AND (sq.reference = '%d'
+              OR sq.reference LIKE '%%-%d'
+              OR sq.reference LIKE '%d-%%'
+              OR sq.reference LIKE '%%-%d-%%')",
+            $tid, $tid, $tid, $tid
+          );
+          while ($row = db_fetch_object($result)) {
+            // Note that $row already contains the needed $row->reference.
+            $title = smartqueue_taxonomy_nodequeue_subqueue_title($row, $row->sqref);
+            nodequeue_subqueue_update_title($row->sqid, $title);
+          }
+          break;
+
+        // If a term was deleted, we need to delete any subqueues containing it.
+        case 'delete':
+          $tid = $array['tid'];
+          if (empty($tid)) {
+            // Don't proceed and delete all subqueues.
+            return;
+          }
+          // Find subqueues that contain this term.
+          $result = db_query(
+            "SELECT sq.sqid FROM {nodequeue_subqueue} sq
+            INNER JOIN {nodequeue_queue} nq ON sq.qid = nq.qid
+            WHERE nq.owner = 'smartqueue_taxonomy'
+            AND (sq.reference = '%d'
+              OR sq.reference LIKE '%%-%d'
+              OR sq.reference LIKE '%d-%%'
+              OR sq.reference LIKE '%%-%d-%%')",
+            $tid, $tid, $tid, $tid
+          );
+          while ($row = db_fetch_object($result)) {
+            nodequeue_remove_subqueue($row->sqid);
+          }
+          break;
+      }
+    case 'vocabulary':
+      break;
+  }
+}
+
+/**
+ * Get the top-level parents of the given taxonomy terms.
+ *
+ * @param $tids, an array of taxonomy IDs
+ * 
+ * @return an array of taxonomy IDs 
+ */
+function smartqueue_taxonomy_get_parents($tids) {
+  if ($tids) {
+    $placeholders = db_placeholders($tids);
+    $result = db_query(db_rewrite_sql("SELECT t.tid, t.* FROM {term_data} t INNER JOIN {term_hierarchy} h ON h.parent = t.tid WHERE h.tid IN ($placeholders) ORDER BY weight, name", 't', 'tid'), $tids);
+    $parents = array();
+    // this will filter out duplicates.
+    while ($parent = db_fetch_object($result)) {
+      $parents[$parent->tid] = $parent->tid;
+    }
+    if (count($parents)) {
+      return smartqueue_taxonomy_get_parents($parents);
+    }
+    // we there weren't any matches, hand back the original tids.
+    else {
+      return $tids;
+    }
+  }
+  else {
+    return array();
+  }
+}

@@ -1,0 +1,63 @@
+/* $Id: emvideo.thumbnail-replacement.css,v 1.1.2.6 2009/09/10 19:47:49 aaron Exp $ */
+
+/**
+ *  @file
+ *  A Play button overlay for thumbnail -> video replacement.
+ */
+
+/**
+ *  The outer wrapper must be relative for the overlay to work.
+ *  When overriding this style in your own stylesheet,
+ *  you'll probably want to add the video's height and width here,
+ *  so that you avoid the div dropping momentarily while the thumnbail
+ *  is replaced by the video.
+ */
+.emvideo-thumbnail-replacement {
+  position: relative;
+  display: block;
+  /* width: 425px; */
+  /* height: 350px; */
+}
+
+/* This is the overlay of a play button on the video thumbnail. */
+/* The span is created automatically with jQuery. */
+.emvideo-thumbnail-replacement span {
+  display: block;
+
+  /* This is the overlay image for use as a play button. */
+  background: url(emvideo-play.png) no-repeat;
+
+  /* This is the size of our button. DOES NOT WORK WITH DEFAULT THUMB SIZE! */
+  width: 85px;
+  height: 112px;
+
+  /* Absolute positioning in the relative wrapper creates the overlay. */
+  position: absolute;
+}
+
+.emvideo-thumbnail-replacement span:hover {
+  background-position: -85px 0px;
+}
+
+/* This is centered for the default placement of video thumbnails,
+   which is 120x90. Note that this button image doesn't work for those,
+   because it's too big. We try anyway...
+   Subtract half of the width of the thumbnail by half of the width of the play
+   button, and again for the height, to get these numbers, and the next. */
+.emvideo-thumbnail-replacement span {
+  left: 17px;
+  top: 0px;
+}
+
+/* This is centered for the default placement of full-sized videos,
+   which is 425x350. */
+.emvideo-thumbnail-replace-full .emvideo-thumbnail-replacement span {
+  left: 170px;
+  top: 119px;
+}
+
+/* This is centered for the default placement of full-sized videos. */
+.emvideo-thumbnail-replace-preview .emvideo-thumbnail-replacement span {
+  left: 170px;
+  top: 119px;
+}

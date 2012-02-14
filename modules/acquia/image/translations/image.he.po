@@ -1,0 +1,801 @@
+# translation of image.po to Hebrew
+# Hebrew translation of drupal-event
+# Copyright 2004 Haggai Eran <he3@bezeqint.net>
+#
+# Haggai Eran <haggai.eran@gmail.com>, 2006.
+msgid ""
+msgstr ""
+"Project-Id-Version: image\n"
+"POT-Creation-Date: 2004-02-17 14:32+0100\n"
+"PO-Revision-Date: 2006-10-18 00:26+0200\n"
+"Last-Translator: Haggai Eran <haggai.eran@gmail.com>\n"
+"Language-Team: Hebrew <he@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms:  nplurals=2; plural=(n != 1);\n"
+"X-Generator: KBabel 1.11.4\n"
+
+#: image.module:7
+msgid ""
+"<p>Admins may create many image nodes at once by uploading all images to a "
+"folder on the server. This upload happens outside of Drupal, usually using "
+"an FTP client.</p>"
+msgstr ""
+"<p>מנהלים יכולים ליצור פריטי תמונה רבים "
+"בבת אחת על ידי טעינת כל התמונות לתיקיה "
+"המתאימה על השרת. טעינה זו מתבצעת מחוץ "
+"לדרופל, בדרך כלל תוך שימוש ב-FTP. </p>"
+
+#: image.module:10
+msgid "Allows uploading of images and creating image galleries."
+msgstr "מאפשר לטעון תמונות וליצור גלריות של תמונות."
+
+#: image.module:12
+msgid ""
+"An image (with thumbnail). This is ideal for publishing photographs or "
+"screenshots."
+msgstr ""
+"תמונה (עם תמונת אצבע). אידיאלי לפרסום "
+"תמונות או צילומי מסך."
+
+#: image.module:14
+msgid ""
+"Image galleries can be used to organize and present groups of images. "
+"Galleries may be nested. To add a new gallery click the \"add gallery\" tab."
+msgstr ""
+"גלריה משמשת לארגון קבוצת תמונות "
+"ולהצגתן. גלריה יכולה להכיל גלריות "
+"אחרות. כדי להוסיף גלריה חדשה לחץ על "
+"הלשונית \"הוסף גלריה\"."
+
+#: image.module:30
+msgid "Below is a status of image module's current configuration."
+msgstr ""
+
+#: image.module:33
+msgid ""
+"\n"
+"      <h4>Fast Mode</h4><ul>\n"
+"      <li>Creates all image nodes at once without user interaction.</li>\n"
+"      <li>Applies the same taxonomy term(s) to each node, thus creating a "
+"gallery.</li>\n"
+"      <li>If IPTC data is present in the image, the headline and caption "
+"fields are used to populate the title and body respectively.</li>\n"
+"      <li>If the image dimensions are bigger than the maximum allowed, the "
+"image is automatically scaled down.</li></ul>"
+msgstr ""
+
+#: image.module:41
+msgid ""
+"\n"
+"      <h4>Slow Mode</h4><ul>\n"
+"      <li>Manipulate each image individually (i.e. crop, rotate, etc.).</"
+"li>\n"
+"      <li>Add custom titles, descriptions, etc.</li></ul>"
+msgstr ""
+
+#: image.module:47
+msgid ""
+"Allow users to upload images and to display them in shared and personal "
+"image galleries."
+msgstr ""
+"מאפשר למשתמשים לטעון תמונות ולהציג "
+"אותן בגלריות משותפות ואישיות."
+
+#: image.module:50
+msgid ""
+"Images can be uploaded into either shared or personal galleries. Once images "
+"are uploaded they can be manipulated.  The image system will auto-generate "
+"thumbnails for all images to be used in other nodes via filters and in "
+"gallery navigation.  These settings allow you to control where images are "
+"placed, how they are displayed, and any restrictions that should be enforced."
+msgstr ""
+
+#: image.module:53
+msgid "An image you can insert into nodes, or see in image galleries."
+msgstr ""
+
+#: image.module:57
+msgid ""
+"You may link to images on this site <a href=\"%explanation-url\">using a "
+"special syntax</a>"
+msgstr ""
+"ניתן לקשר לתמונות באתר תוך שימוש <a "
+"href=\"%explanation-url\">בתחביר מיוחד</a>."
+
+#: image.module:59
+msgid "Default image path"
+msgstr "ברירת מחדל למיקום תמונות"
+
+#: image.module:59
+msgid "Subdirectory in the directory \"%dir\" where pictures will be stored."
+msgstr "תיקיית משנה בתוך התיקייה <span dir=ltr>\"%dir\"</span>, שבה יאוחסנו התמונות."
+
+#: image.module:60
+msgid "File paths"
+msgstr "מיקומי קבצים"
+
+#: image.module:61
+msgid ""
+"<p>You may quickly link to image nodes using a special syntax. The image code"
+"(s) will be replaced by thumbnail linked to full size image node. Syntax: "
+"<code>[image:node_id,(left|right|top|middle|bottom|absmiddle|texttop|"
+"baseline),hspace,vspace,border]</code>. Every parameter except node_id is "
+"<em>optional</em>.</p>"
+msgstr ""
+
+#: image.module:72;207;1550;0
+msgid "image"
+msgstr "תמונה"
+
+#: image.module:79
+msgid "Label"
+msgstr "כותרת"
+
+#: image.module:79
+msgid "Width"
+msgstr "רוחב"
+
+#: image.module:79
+msgid "Height"
+msgstr "גובה"
+
+#: image.module:80
+msgid "Select various pixel dimensions, \"thumbnail\" and \"preview\" are required."
+msgstr ""
+"ניתן להגדיר גדלים שונים לתמונות, לפי "
+"הצורך. הגדלים \"תמונת אצבע\" ו-\"תצוגה מקדימה\" נדרשים."
+
+#: image.module:81
+msgid "Allow users to view original image"
+msgstr "מאפשר לחברים לצפות בתמונה מקורית"
+
+#: image.module:82
+msgid "Image sizes"
+msgstr "גדלי תמונות"
+
+#: image.module:84
+msgid "Images per page"
+msgstr "תמונות בעמוד"
+
+#: image.module:84
+msgid "Sets the number of images to be displayed in a gallery page."
+msgstr ""
+
+#: image.module:85
+msgid "Gallery settings"
+msgstr "הגדרות גלריה"
+
+#: image.module:87
+msgid "Explanation or submission guidelines"
+msgstr "הסבר או הנחיות לשולחים"
+
+#: image.module:87
+msgid ""
+"This text will be displayed at the top of the image submission form.  It is "
+"useful for helping or instructing your users."
+msgstr ""
+"הודעה זו תוצג בראש טופס הגשת תמונות. היא שימושית כדי לעזור לחברי "
+"האתר או כדי להנחות אותם."
+
+#: image.module:89
+msgid ""
+"Default path for uploaded images relative to your Drupal installation; it "
+"must be writeable and visible from the web. Don't forget the slash (/) at "
+"the end."
+msgstr ""
+
+#: image.module:92
+msgid "Default thumb path"
+msgstr "ברירת המחדל למיקום תמונות אצבע"
+
+#: image.module:92
+msgid ""
+"Default path for thumbnails relative to your Drupal installation; it must be "
+"writeable and visible from the web. Don't forget the slash (/) at the end."
+msgstr ""
+
+#: image.module:95
+msgid "Temporary image path"
+msgstr "תיקיה זמנית לתמונות"
+
+#: image.module:95
+msgid ""
+"Path for working directory relative to your Drupal installation; it must be "
+"writeable and visible from the web. Don't forget the slash (/) at the end."
+msgstr ""
+
+#: image.module:96
+msgid "Maximum temporary image directory size"
+msgstr "גודל מירבי לתיקית התמונות הזמנית"
+
+#: image.module:96
+msgid "MBytes."
+msgstr ""
+
+#: image.module:98
+msgid "Stored images filenames"
+msgstr ""
+
+#: image.module:98
+msgid ""
+"The filename of an image stored on the server could be based on an unique "
+"random string or include the original filename. In the later case, the node "
+"id will be appended to the filename."
+msgstr ""
+
+#: image.module:100
+msgid "Default max image size"
+msgstr "ברירת מחדל לגודל תמונה מירבי"
+
+#: image.module:100
+msgid "KBytes."
+msgstr ""
+
+#: image.module:101
+msgid "Default max image resolution"
+msgstr "ברירת מחדל לרזולוצית תמונה מירבית"
+
+#: image.module:101
+msgid "Example: 800x600."
+msgstr ""
+
+#: image.module:103
+msgid "Default thumbnail resolution"
+msgstr "ברירת המחדל לרזולוצית תמונות אצבע"
+
+#: image.module:103
+msgid ""
+"Default size of thumbnails: format will be the same as original image. Use "
+"just one dimension, and put a \"x\" to specify height. Examples: \"100\" for "
+"width of 100; \"x200\" for height of 200."
+msgstr ""
+
+#: image.module:110
+msgid "list"
+msgstr "רשימה"
+
+#: image.module:113
+msgid "add gallery"
+msgstr "הוסף גלריה"
+
+#: image.module:116
+msgid "Image library"
+msgstr "ספריית תמונה"
+
+#: image.module:116
+msgid ""
+"Select the image library to be used during thumbnail generation and image "
+"manipulation.  Use ImageMagick if you can; GD produces worse thumbnails, "
+"might not support GIF and this module doesn't support image editing (rotate, "
+"crop etc) with it."
+msgstr ""
+
+#: image.module:118
+msgid "Imagemagick Convert path"
+msgstr ""
+
+#: image.module:118
+msgid ""
+"Absolute path to ImageMagick convert file. Include the 'convert.exe' (or "
+"other filename) at the end. Leave it blank if you have selected GD library."
+msgstr ""
+
+#: image.module:121
+msgid "Background Color"
+msgstr "צבע הרקע"
+
+#: image.module:121
+msgid "Color used to fill in background when rotating images."
+msgstr ""
+
+#: image.module:128
+msgid "jhead path"
+msgstr ""
+
+#: image.module:128
+msgid "Absolute path of jhead, for EXIF parsing; blank to disable."
+msgstr ""
+
+#: image.module:133
+msgid "<none>"
+msgstr "<ללא>"
+
+#: image.module:135
+msgid "Gallery Navigation Vocabulary"
+msgstr ""
+
+#: image.module:135
+msgid ""
+"One of the taxonomy vocabularies will be the navigation tree. Select it "
+"here. Make sure that a term from this vocabulary is required."
+msgstr ""
+
+#: image.module:137
+msgid "Gallery Thumbnails"
+msgstr ""
+
+#: image.module:137
+msgid "Set the thumbnail to be dislayed on the gallery page."
+msgstr ""
+
+#: image.module:138
+msgid "Specify how many rows of thumbnails in each page of the gallery."
+msgstr ""
+
+#: image.module:139
+msgid "Gallery Columns"
+msgstr ""
+
+#: image.module:139
+msgid "Specify how many columns of thumbnails in each page of the gallery."
+msgstr ""
+
+#: image.module:140
+msgid "Gallery Order"
+msgstr ""
+
+#: image.module:140
+msgid ""
+"Order of thumbnails within a gallery. Lighter and heavier refer to weight "
+"property."
+msgstr ""
+
+#: image.module:142
+msgid "Personal Image Galleries"
+msgstr ""
+
+#: image.module:142
+msgid ""
+"Activate/deactivate personal image galleries site-wide.  When enabled you "
+"can use the \"has personal image gallery\" permission to control which roles "
+"have personal galleries."
+msgstr ""
+
+#: image.module:144
+msgid "Personal Gallery Picture Limit"
+msgstr ""
+
+#: image.module:144
+msgid "Set how many pictures users are allowed."
+msgstr ""
+
+#: image.module:145
+msgid "Uploaded file is not a valid image"
+msgstr "הקובץ שהתקבל במערכת אינו תמונה."
+
+#: image.module:145
+msgid "Personal Gallery Picture Limit Per Role"
+msgstr ""
+
+#: image.module:145
+msgid "Enabling this will allow for setting a maximum number of pictures per role."
+msgstr ""
+
+#: image.module:150
+msgid "Personal Gallery Size Limit"
+msgstr ""
+
+#: image.module:150
+msgid "Set a maximum number of kilobytes allowed per user."
+msgstr ""
+
+#: image.module:153
+msgid "Disable Image Caching"
+msgstr ""
+
+#: image.module:153
+msgid ""
+"Enabling this will add random parameters to image URIs which will prevent "
+"the browser from caching."
+msgstr ""
+
+#: image.module:193;216
+msgid "image galleries"
+msgstr "גלריות תמונה"
+
+#: image.module:198
+msgid "view original"
+msgstr "הצגת התמונה המקורית"
+
+#: image.module:200
+msgid "images"
+msgstr "תמונות"
+
+#: image.module:201
+msgid "directory upload: slow"
+msgstr ""
+
+#: image.module:202
+msgid "directory upload: fast"
+msgstr ""
+
+#: image.module:212
+msgid "my image gallery"
+msgstr ""
+
+#: image.module:213;222
+msgid "Latest image"
+msgstr "תמונה אחרונה"
+
+#: image.module:214;227
+msgid "Random image"
+msgstr "תמונה אקראית"
+
+#: image.module:224
+msgid "edit this image"
+msgstr "ערוך את התמונה"
+
+#: image.module:224
+msgid "Edit this image."
+msgstr "ערוך את התמונה."
+
+#: image.module:229
+msgid "%u's image gallery"
+msgstr ""
+
+#: image.module:229
+msgid "View %u's image gallery."
+msgstr ""
+
+#: image.module:254
+msgid "Thumbnail"
+msgstr "תמונת אצבע"
+
+#: image.module:258
+msgid "Image"
+msgstr "תמונה"
+
+#: image.module:259;471
+msgid "Description"
+msgstr "תיאור"
+
+#: image.module:259
+msgid "%t image gallery"
+msgstr ""
+
+#: image.module:259
+msgid "View %t image gallery."
+msgstr ""
+
+#: image.module:288
+msgid "previous image"
+msgstr "לתמונה הקודמת"
+
+#: image.module:292
+msgid "next image"
+msgstr "לתמונה הבאה"
+
+#: image.module:307
+msgid "Image gallery"
+msgstr ""
+
+#: image.module:370
+msgid "EXIF data"
+msgstr ""
+
+#: image.module:374
+msgid "IPTC data"
+msgstr ""
+
+#: image.module:382
+msgid "Click \"Browse...\" to select an image to upload."
+msgstr "לחצו על כפתור \"עיין...\" כדי לבחור תמונה שברצונכם לטעון לאתר."
+
+#: image.module:388
+msgid "Weight"
+msgstr "משקל"
+
+#: image.module:388
+msgid ""
+"Weight of image used to sort thumbnails.  Heavier thumbnails will fall to "
+"the bottom of the gallery."
+msgstr ""
+
+#: image.module:392
+msgid "Personal"
+msgstr "אישי"
+
+#: image.module:392
+msgid "A personal image can only be seen in the user's image gallery."
+msgstr ""
+
+#: image.module:439;443
+msgid "The image file you are trying to upload is too big."
+msgstr "התמונה שהנך מנסה להעלות גדולה מדי."
+
+#: image.module:447
+msgid "The image file was only partially uploaded. Please try again."
+msgstr ""
+
+#: image.module:451
+msgid "You must select an image for upload."
+msgstr "עליך לבחור תמונה להעלאה."
+
+#: image.module:464;523
+msgid "Error processing image file."
+msgstr "שגיאה בעת עיבוד קובץ התמונה."
+
+#: image.module:486
+msgid "Uploaded file was not an image."
+msgstr "הקובץ שהתקבל במערכת אינו תמונה."
+
+#: image.module:489
+msgid "image type '%type' is not supported."
+msgstr "סוג תמונה '%type' אינו נתמך."
+
+#: image.module:496
+msgid "The uploaded image(%ax%b) is too large (max %cx%d)."
+msgstr "התמונה שהתקבלה במערכת (%ax%b) גדולה מדי (המקסימום הוא %cx%d)."
+
+#: image.module:651;666
+msgid "Image filter"
+msgstr "מסנן תמונה"
+
+#: image.module:665
+msgid "Image codes"
+msgstr ""
+
+#: image.module:665
+msgid ""
+"When enabled, image codes will be replaced by thumb linked to real node. "
+"Syntax: [image:node_id,(left|right|top|middle|bottom|absmiddle|texttop|"
+"baseline),hspace,vspace,border]; every param but node_id is optional."
+msgstr ""
+
+#: image.module:715;720;745;750
+msgid "Cannot save image."
+msgstr ""
+
+#: image.module:734
+msgid "Cannot delete old image."
+msgstr ""
+
+#: image.module:737
+msgid "Cannot delete old thumb."
+msgstr "לא ניתן למחוק תמונת אצבע ישנה."
+
+#: image.module:934
+msgid ""
+"Cannot create thumbnail. Current GD library has no read support for '%type' "
+"image format."
+msgstr ""
+
+#: image.module:965
+msgid ""
+"Cannot create thumbnail. Current GD library has no support for '%type' "
+"format image creation."
+msgstr ""
+
+#: image.module:978
+msgid "Imagemagick: you have to set <code>convert</code> path."
+msgstr ""
+
+#: image.module:1032
+msgid "You can have at most %a images in your gallery."
+msgstr "בגלריה ניתן לשים לכל היותר %a תמונות."
+
+#: image.module:1038
+msgid "You have %a kb for your gallery."
+msgstr "לרשותך %akb עבור הגלריה שלך."
+
+#: image.module:1045
+msgid "File is too big (max %a kbytes)"
+msgstr ""
+
+#: image.module:1053
+msgid "Upload directory is full."
+msgstr ""
+
+#: image.module:1102
+msgid "Resize/Crop"
+msgstr ""
+
+#: image.module:1112
+msgid "keep prop"
+msgstr ""
+
+#: image.module:1116
+msgid "Rotate"
+msgstr "סובב"
+
+#: image.module:1119
+msgid "clockwise"
+msgstr "בכיוון השעון"
+
+#: image.module:1120
+msgid "background"
+msgstr "רקע"
+
+#: image.module:1120
+msgid "white"
+msgstr "לבן"
+
+#: image.module:1120
+msgid "black"
+msgstr "שחור"
+
+#: image.module:1124
+msgid "Convert"
+msgstr "המר"
+
+#: image.module:1125
+msgid "Quality (1-100)"
+msgstr "איכות (1-100)"
+
+#: image.module:1161;1196
+msgid "Home"
+msgstr "בית"
+
+#: image.module:1164
+msgid "%u's Image Gallery"
+msgstr "גלרית התמונות של %u"
+
+#: image.module:1195
+msgid "Image galleries"
+msgstr "גלריות תמונה"
+
+#: image.module:1204
+msgid "Access Denied"
+msgstr "גישה חסומה"
+
+#: image.module:1327
+msgid "There is 1 image in this album."
+msgstr "יש תמונה אחת בגלריה זו."
+
+#: image.module:1327
+msgid "There are %a images in this album."
+msgstr "יש %a תמונות בגלריה זו."
+
+#: image.module:1329
+msgid "There are no images in this album."
+msgstr "אין תמונות בגלריה זו."
+
+#: image.module:1332
+msgid "Last updated: "
+msgstr "עדכון אחרון:"
+
+#: image.module:1425
+msgid "Directory to scan"
+msgstr ""
+
+#: image.module:1425
+msgid ""
+"The path to the directory which holds the source image files. This path "
+"should be relative to Drupal root directory - don't forget the slash (/) at "
+"the end."
+msgstr ""
+
+#: image.module:1427
+msgid "Show resized image. Use only if you have large bandwidth."
+msgstr ""
+
+#: image.module:1430
+msgid "Delete images after insert"
+msgstr ""
+
+#: image.module:1430
+msgid ""
+"If instructed, Drupal will delete all files in the above directory after "
+"creating the image nodes."
+msgstr ""
+
+#: image.module:1434
+msgid "Add new gallery"
+msgstr "הוסף גלריה חדשה"
+
+#: image.module:1434
+msgid ""
+"If needed, create a new term for this gallery by clicking on one of these "
+"vocabularies"
+msgstr ""
+
+#: image.module:1437
+msgid "Directory upload"
+msgstr ""
+
+#: image.module:1444
+msgid "is not a directory"
+msgstr "איננה תיקיה"
+
+#: image.module:1452
+msgid "is not writable. Change permissions on server"
+msgstr "איננה ניתנת לכתיבה. יש לבדוק את ההרשאות על השרת"
+
+#: image.module:1542
+msgid "You may wish to view your new images:"
+msgstr "ניתן לצפות בתמונות החדשות שלך:"
+
+#: image.module:1545
+msgid "gallery"
+msgstr "גלריה"
+
+#: image.module:1555
+msgid "is not an image."
+msgstr "איננה תמונה."
+
+#: image.module:1558
+msgid "image type is not supported."
+msgstr "סוג התמונה אינו נתמך."
+
+#: image.module:1705
+msgid "Role"
+msgstr "תפקיד"
+
+#: image.module:1705
+msgid "Limit"
+msgstr ""
+
+#: image.module:1713
+msgid ""
+"Set how many pictures each role listed above is allowed. \"Personal Gallery "
+"Picture Limit\" will be the default value for new roles."
+msgstr ""
+
+#: image.module:79
+msgid "has personal image gallery"
+msgstr ""
+
+#: image.module:79
+msgid "manipulate images"
+msgstr ""
+
+#: image.module:79
+msgid "access images"
+msgstr "גישה לתמונות"
+
+#: image.module:79
+msgid "create images"
+msgstr "יצירת תמונות"
+
+#: image.module:79
+msgid "administer images"
+msgstr "ניהול תמונות"
+
+#: image.module:456
+msgid "edit gallery"
+msgstr "עריכת גלריה"
+
+#: image.module:461
+msgid "No galleries available"
+msgstr "אין גלריות"
+
+#: image.module:470
+msgid "Gallery name"
+msgstr "שם הגלריה"
+
+#: image.module:470
+msgid "The name is used to identify the gallery."
+msgstr "השם המשמש לזיהוי הגלריה."
+
+#: image.module:517
+msgid "Last updated: %date"
+msgstr "עדכון אחרון: %date"
+
+#: image.module:537
+msgid "Posted by: %name"
+msgstr "פורסמה ע\"י: %name"
+
+#: image.module:607
+msgid "Unable to create %label image"
+msgstr ""
+
+#: image.module:654
+msgid "thumbnail"
+msgstr "תמונת אצבע"
+
+#: image.module:655
+msgid "preview"
+msgstr "תצוגה מקדימה"
+
+#: image.module:712
+msgid "Image Galleries"
+msgstr "גלריות תמונה"
+
+#: image.module:515;550
+msgid "There is 1 image in this gallery"
+msgid_plural "There are %count images in this gallery"
+msgstr[0] ""
+msgstr[1] ""
+

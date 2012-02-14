@@ -1,0 +1,97 @@
+<?php
+
+// $Id:
+
+/**
+ * @file
+ *   features_download module
+ */
+
+/**
+ * Implementation of hook_form_alter().
+ */
+function features_download_form_alter(&$form, $form_state, $form_id) {
+  
+  if ($form_id == 'features_export_form') {
+    $form['buttons']['create'] = array(
+      '#type' => 'submit',
+      '#value' => t('Auto create feature'),
+      '#weight' => 10,
+      '#submit' => array('features_download_export_build_form_submit'),
+    );
+    $form['features_download_dest'] = array(
+      '#title' => t('Custom module path inside sites/all/modules/'),
+      '#description' => t('the root folder will be sites/all/modules/'),
+      '#type' => 'textfield',
+      '#default_value' => $form['#feature']->name ? drupal_get_path('module', $form['#feature']->name) : 'sites/all/modules',
+    );
+    //TODO: I think this should be automatic: on creation ON and on recreation OFF
+//    $form['features_download_create_machine_dir'] = array(
+//      '#type' => 'checkbox',
+//      '#title' => t('Create machine name dir'),
+//      '#description' => t('Put the feature in is machine name dir'),
+//      '#default_value' => true,
+//    );
+  }
+}
+function features_download_export_build_form_submit($form, &$form_state) {
+  module_load_include('inc', 'features', 'features.export');
+  features_include();
+
+  // Assemble the combined component list
+  $stub = array();
+  $components = array_keys(features_get_components());
+  foreach ($components as $component) {
+    // User-selected components take precedence.
+    if (!empty($form_state['values']['sources'][$component])) {
+      $stub[$component] = features_dom_decode_options(array_filter($form_state['values']['sources'][$component]));
+    }
+    // Only fallback to an existing feature's values if there are no export options for the component.
+    else if (!empty($form['#feature']->info['features'][$component])) {
+      $stub[$component] = $form['#feature']->info['features'][$component];
+    }
+  }
+
+  // Generate populated feature
+  $module_name = $form_state['values']['module_name'];
+  $export = features_populate($stub, $form_state['values']['sources']['dependencies'], $module_name);
+
+  // Directly copy the following attributes
+  $attr = array('name', 'description');
+  foreach ($attr as $key) {
+    $export[$key] = isset($form_state['values'][$key]) ? $form_state['values'][$key] : NULL;
+  }
+  // If either update status-related keys are provided, add a project key
+  // corresponding to the module name.
+  if (!empty($form_state['values']['version']) || !empty($form_state['values']['project_status_url'])) {
+    $export['project'] = $form_state['values']['module_name'];
+  }
+  if (!empty($form_state['values']['version'])) {
+    $export['version'] = $form_state['values']['version'];
+  }
+  if (!empty($form_state['values']['project_status_url'])) {
+    $export['project status url'] = $form_state['values']['project_status_url'];
+  }
+  // Generate download
+  $directory = '';
+  $dest = $form_state['values']['features_download_dest'];
+  if ($dest) {
+    $directory .= $dest . '/'; 
+  }
+  //TODO: find a better term then arg(3) to finf if we are on create page or recreat.
+  if (arg(3) == 'create'/*$form_state['values']['features_download_create_machine_dir']*/) {
+    $directory .=  $module_name;
+  }
+  if ($files = features_export_render($export, $module_name, TRUE)) {
+    if(!file_exists($directory)) {
+      mkdir($directory,0777,true);
+    }
+    foreach ($files as $extension => $file_contents) {
+      if (!in_array($extension, array('module', 'info'))) {
+        $extension .= '.inc';
+      }
+      file_put_contents("{$directory}/{$module_name}.$extension", $file_contents);
+    }
+//    watchdog("Created module: !module in !directory", array('!module' => $module_name, '!directory' => $directory));
+  }
+}

@@ -1,0 +1,579 @@
+/* $Id: 960.css,v 1.1.2.1 2009/06/20 19:25:54 dvessel Exp $ */
+
+/*
+  960 Grid System ~ Core CSS.
+  Learn more ~ http://960.gs/
+
+  Licensed under GPL and MIT.
+
+  Modified for Drupal.
+*/
+
+/* `Containers
+----------------------------------------------------------------------------------------------------*/
+
+.container-12,
+.container-16 {
+  margin-left: auto;
+  margin-right: auto;
+  width: 960px;
+}
+
+/* `Grid >> Global
+----------------------------------------------------------------------------------------------------*/
+
+.grid-1,
+.grid-2,
+.grid-3,
+.grid-4,
+.grid-5,
+.grid-6,
+.grid-7,
+.grid-8,
+.grid-9,
+.grid-10,
+.grid-11,
+.grid-12,
+.grid-13,
+.grid-14,
+.grid-15,
+.grid-16 {
+  display: inline;
+  float: left;
+  position: relative;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.container-12 .grid-3,
+.container-16 .grid-4 {
+  width: 220px;
+}
+
+.container-12 .grid-6,
+.container-16 .grid-8 {
+  width: 460px;
+}
+
+.container-12 .grid-9,
+.container-16 .grid-12 {
+  width: 700px;
+}
+
+.container-12 .grid-12,
+.container-16 .grid-16 {
+  width: 940px;
+}
+
+/* `Grid >> Children (Alpha ~ First, Omega ~ Last)
+----------------------------------------------------------------------------------------------------*/
+
+.alpha {
+  margin-left: 0;
+}
+
+.omega {
+  margin-right: 0;
+}
+
+/* `Grid >> 12 Columns
+----------------------------------------------------------------------------------------------------*/
+
+.container-12 .grid-1 {
+  width: 60px;
+}
+
+.container-12 .grid-2 {
+  width: 140px;
+}
+
+.container-12 .grid-4 {
+  width: 300px;
+}
+
+.container-12 .grid-5 {
+  width: 380px;
+}
+
+.container-12 .grid-7 {
+  width: 540px;
+}
+
+.container-12 .grid-8 {
+  width: 620px;
+}
+
+.container-12 .grid-10 {
+  width: 780px;
+}
+
+.container-12 .grid-11 {
+  width: 860px;
+}
+
+/* `Grid >> 16 Columns
+----------------------------------------------------------------------------------------------------*/
+
+.container-16 .grid-1 {
+  width: 40px;
+}
+
+.container-16 .grid-2 {
+  width: 100px;
+}
+
+.container-16 .grid-3 {
+  width: 160px;
+}
+
+.container-16 .grid-5 {
+  width: 280px;
+}
+
+.container-16 .grid-6 {
+  width: 340px;
+}
+
+.container-16 .grid-7 {
+  width: 400px;
+}
+
+.container-16 .grid-9 {
+  width: 520px;
+}
+
+.container-16 .grid-10 {
+  width: 580px;
+}
+
+.container-16 .grid-11 {
+  width: 640px;
+}
+
+.container-16 .grid-13 {
+  width: 760px;
+}
+
+.container-16 .grid-14 {
+  width: 820px;
+}
+
+.container-16 .grid-15 {
+  width: 880px;
+}
+
+/* `Prefix Extra Space >> Global
+----------------------------------------------------------------------------------------------------*/
+
+.container-12 .prefix-3,
+.container-16 .prefix-4 {
+  padding-left: 240px;
+}
+
+.container-12 .prefix-6,
+.container-16 .prefix-8 {
+  padding-left: 480px;
+}
+
+.container-12 .prefix-9,
+.container-16 .prefix-12 {
+  padding-left: 720px;
+}
+
+/* `Prefix Extra Space >> 12 Columns
+----------------------------------------------------------------------------------------------------*/
+
+.container-12 .prefix-1 {
+  padding-left: 80px;
+}
+
+.container-12 .prefix-2 {
+  padding-left: 160px;
+}
+
+.container-12 .prefix-4 {
+  padding-left: 320px;
+}
+
+.container-12 .prefix-5 {
+  padding-left: 400px;
+}
+
+.container-12 .prefix-7 {
+  padding-left: 560px;
+}
+
+.container-12 .prefix-8 {
+  padding-left: 640px;
+}
+
+.container-12 .prefix-10 {
+  padding-left: 800px;
+}
+
+.container-12 .prefix-11 {
+  padding-left: 880px;
+}
+
+/* `Prefix Extra Space >> 16 Columns
+----------------------------------------------------------------------------------------------------*/
+
+.container-16 .prefix-1 {
+  padding-left: 60px;
+}
+
+.container-16 .prefix-2 {
+  padding-left: 120px;
+}
+
+.container-16 .prefix-3 {
+  padding-left: 180px;
+}
+
+.container-16 .prefix-5 {
+  padding-left: 300px;
+}
+
+.container-16 .prefix-6 {
+  padding-left: 360px;
+}
+
+.container-16 .prefix-7 {
+  padding-left: 420px;
+}
+
+.container-16 .prefix-9 {
+  padding-left: 540px;
+}
+
+.container-16 .prefix-10 {
+  padding-left: 600px;
+}
+
+.container-16 .prefix-11 {
+  padding-left: 660px;
+}
+
+.container-16 .prefix-13 {
+  padding-left: 780px;
+}
+
+.container-16 .prefix-14 {
+  padding-left: 840px;
+}
+
+.container-16 .prefix-15 {
+  padding-left: 900px;
+}
+
+/* `Suffix Extra Space >> Global
+----------------------------------------------------------------------------------------------------*/
+
+.container-12 .suffix-3,
+.container-16 .suffix-4 {
+  padding-right: 240px;
+}
+
+.container-12 .suffix-6,
+.container-16 .suffix-8 {
+  padding-right: 480px;
+}
+
+.container-12 .suffix-9,
+.container-16 .suffix-12 {
+  padding-right: 720px;
+}
+
+/* `Suffix Extra Space >> 12 Columns
+----------------------------------------------------------------------------------------------------*/
+
+.container-12 .suffix-1 {
+  padding-right: 80px;
+}
+
+.container-12 .suffix-2 {
+  padding-right: 160px;
+}
+
+.container-12 .suffix-4 {
+  padding-right: 320px;
+}
+
+.container-12 .suffix-5 {
+  padding-right: 400px;
+}
+
+.container-12 .suffix-7 {
+  padding-right: 560px;
+}
+
+.container-12 .suffix-8 {
+  padding-right: 640px;
+}
+
+.container-12 .suffix-10 {
+  padding-right: 800px;
+}
+
+.container-12 .suffix-11 {
+  padding-right: 880px;
+}
+
+/* `Suffix Extra Space >> 16 Columns
+----------------------------------------------------------------------------------------------------*/
+
+.container-16 .suffix-1 {
+  padding-right: 60px;
+}
+
+.container-16 .suffix-2 {
+  padding-right: 120px;
+}
+
+.container-16 .suffix-3 {
+  padding-right: 180px;
+}
+
+.container-16 .suffix-5 {
+  padding-right: 300px;
+}
+
+.container-16 .suffix-6 {
+  padding-right: 360px;
+}
+
+.container-16 .suffix-7 {
+  padding-right: 420px;
+}
+
+.container-16 .suffix-9 {
+  padding-right: 540px;
+}
+
+.container-16 .suffix-10 {
+  padding-right: 600px;
+}
+
+.container-16 .suffix-11 {
+  padding-right: 660px;
+}
+
+.container-16 .suffix-13 {
+  padding-right: 780px;
+}
+
+.container-16 .suffix-14 {
+  padding-right: 840px;
+}
+
+.container-16 .suffix-15 {
+  padding-right: 900px;
+}
+
+/* `Push Space >> Global
+----------------------------------------------------------------------------------------------------*/
+
+.container-12 .push-3,
+.container-16 .push-4 {
+  left: 240px;
+}
+
+.container-12 .push-6,
+.container-16 .push-8 {
+  left: 480px;
+}
+
+.container-12 .push-9,
+.container-16 .push-12 {
+  left: 720px;
+}
+
+/* `Push Space >> 12 Columns
+----------------------------------------------------------------------------------------------------*/
+
+.container-12 .push-1 {
+  left: 80px;
+}
+
+.container-12 .push-2 {
+  left: 160px;
+}
+
+.container-12 .push-4 {
+  left: 320px;
+}
+
+.container-12 .push-5 {
+  left: 400px;
+}
+
+.container-12 .push-7 {
+  left: 560px;
+}
+
+.container-12 .push-8 {
+  left: 640px;
+}
+
+.container-12 .push-10 {
+  left: 800px;
+}
+
+.container-12 .push-11 {
+  left: 880px;
+}
+
+/* `Push Space >> 16 Columns
+----------------------------------------------------------------------------------------------------*/
+
+.container-16 .push-1 {
+  left: 60px;
+}
+
+.container-16 .push-2 {
+  left: 120px;
+}
+
+.container-16 .push-3 {
+  left: 180px;
+}
+
+.container-16 .push-5 {
+  left: 300px;
+}
+
+.container-16 .push-6 {
+  left: 360px;
+}
+
+.container-16 .push-7 {
+  left: 420px;
+}
+
+.container-16 .push-9 {
+  left: 540px;
+}
+
+.container-16 .push-10 {
+  left: 600px;
+}
+
+.container-16 .push-11 {
+  left: 660px;
+}
+
+.container-16 .push-13 {
+  left: 780px;
+}
+
+.container-16 .push-14 {
+  left: 840px;
+}
+
+.container-16 .push-15 {
+  left: 900px;
+}
+
+/* `Pull Space >> Global
+----------------------------------------------------------------------------------------------------*/
+
+.container-12 .pull-3,
+.container-16 .pull-4 {
+  left: -240px;
+}
+
+.container-12 .pull-6,
+.container-16 .pull-8 {
+  left: -480px;
+}
+
+.container-12 .pull-9,
+.container-16 .pull-12 {
+  left: -720px;
+}
+
+/* `Pull Space >> 12 Columns
+----------------------------------------------------------------------------------------------------*/
+
+.container-12 .pull-1 {
+  left: -80px;
+}
+
+.container-12 .pull-2 {
+  left: -160px;
+}
+
+.container-12 .pull-4 {
+  left: -320px;
+}
+
+.container-12 .pull-5 {
+  left: -400px;
+}
+
+.container-12 .pull-7 {
+  left: -560px;
+}
+
+.container-12 .pull-8 {
+  left: -640px;
+}
+
+.container-12 .pull-10 {
+  left: -800px;
+}
+
+.container-12 .pull-11 {
+  left: -880px;
+}
+
+/* `Pull Space >> 16 Columns
+----------------------------------------------------------------------------------------------------*/
+
+.container-16 .pull-1 {
+  left: -60px;
+}
+
+.container-16 .pull-2 {
+  left: -120px;
+}
+
+.container-16 .pull-3 {
+  left: -180px;
+}
+
+.container-16 .pull-5 {
+  left: -300px;
+}
+
+.container-16 .pull-6 {
+  left: -360px;
+}
+
+.container-16 .pull-7 {
+  left: -420px;
+}
+
+.container-16 .pull-9 {
+  left: -540px;
+}
+
+.container-16 .pull-10 {
+  left: -600px;
+}
+
+.container-16 .pull-11 {
+  left: -660px;
+}
+
+.container-16 .pull-13 {
+  left: -780px;
+}
+
+.container-16 .pull-14 {
+  left: -840px;
+}
+
+.container-16 .pull-15 {
+  left: -900px;
+}

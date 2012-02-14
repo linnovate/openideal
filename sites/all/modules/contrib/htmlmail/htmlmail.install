@@ -1,0 +1,29 @@
+<?php
+// $Id: htmlmail.install,v 1.1.2.4 2010/02/27 12:52:22 chrisherberte Exp $
+
+/**
+ * @file
+ * Installation for HTML Mail
+ */
+
+/**
+ * Implementation of hook_install().
+ */
+function htmlmail_install() {
+  db_query("UPDATE {system} SET weight = 1 WHERE name = 'htmlmail'");
+}
+
+/**
+ * Implementation of hook_uninstall().
+ */
+function htmlmail_uninstall() {
+  db_query("DELETE FROM {variable} WHERE name LIKE 'htmlmail_%'");
+  cache_clear_all('variables', 'cache');
+}
+
+/**
+ * Remove feature for storing queries. Cleanup deprecated tables and variables.
+ */
+function htmlmail_update_6001() {
+  db_query("UPDATE {system} SET weight = 1 WHERE name = 'htmlmail'");
+}

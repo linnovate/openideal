@@ -1,0 +1,65 @@
+<?php
+
+// For local testing, don't try to use SSL.
+if (!defined('ACQUIA_DEVELOPMENT_NOSSL')) {
+  define('ACQUIA_DEVELOPMENT_NOSSL', 1);
+}
+
+class AcquiaSearchTest extends DrupalTestCase {
+  function get_info() {
+    return array(
+      'name' => t('Acquia Search'),
+      'desc' => t('Acquia Search unit and functional tests.'),
+      'group' => t('Acquia'),
+    );
+  }
+  function setUp() {
+  	parent::setUp('acquia_agent', 'search', 'apachesolr', 'apachesolr_search', 'acquia_search');
+  }
+
+  function testHMAC() {
+    $this->DrupalVariableSet('acquia_identifier', 'valid_identifier');
+    $this->DrupalVariableSet('acquia_key', 'valid_key');
+    $this->DrupalVariableSet('acquia_subscription_data', array('active' => TRUE));
+
+    $key = $this->randomName();
+    $time = time();
+    $nonce = md5($this->randomName());
+    $string = $time . $nonce . $this->randomName();
+    $hash1 = hash_hmac('sha1', $string, $key); 
+    $hash2 = _acquia_search_hmac($key, $string);
+    // The results of these two hmac function must be equal if
+    // ours is correct.  We don't use the PHP built-in since for
+    // the module since it may be missing depending on compile
+    // options.
+    $this->assertEqual($hash1, $hash2, 'Same result using hash_hmac() and _acquia_search_hmac().');
+    $derived_key = _acquia_search_derived_key();
+    // The response is cehcked using the derived key, so construct another hmac.
+    $hash3 = hash_hmac('sha1', $nonce . $string, $derived_key);
+    $this->assertTrue(acquia_search_valid_response($hash3, $nonce, $string), 'Response HMAC would be accepted as valid.');
+  }
+  
+  function testDefaultBlocksEnable() {
+    
+    require_once drupal_get_path('module','acquia_search') . '/acquia_search.install';
+    $themes_regions = array (
+      'garland' => 'left',
+      'acquia_marina' => 'sidebar_first',
+      'madeuptheme' => null
+    );
+    foreach ($themes_regions as $theme => $expected_region) {
+      
+      if ($theme == 'madeuptheme') {
+        $block_regions = array('something', 'or', 'theother');
+      } else {
+        $block_regions = array_keys(system_region_list($theme));
+      }
+      $region = _acquia_search_find_block_region($block_regions);
+      $this->assertEqual($region, $expected_region);
+    }
+    
+    $facets = _acquia_search_get_default_facets();
+    $this->assertNotEqual($facets,array());
+  }
+}
+

@@ -1,0 +1,337 @@
+# translation of Google Analytics module to Greek
+# $Id: el.po,v 1.1.6.2 2010/05/22 23:41:32 hass Exp $
+# Generated from files:
+#  googleanalytics.admin.inc,v 1.9 2009/03/08 11:40:15 hass
+#  googleanalytics.module,v 1.25 2009/03/08 11:40:15 hass
+#  googleanalytics.info,v 1.9 2008/11/28 00:32:58 hass
+#
+# Vasileios Lourdas <drupal@lourdas.name>, 2009.
+msgid ""
+msgstr ""
+"Project-Id-Version: el\n"
+"POT-Creation-Date: 2009-03-29 14:19+0200\n"
+"PO-Revision-Date: 2009-03-29 19:49+0300\n"
+"Last-Translator: Vasileios Lourdas <drupal@lourdas.name>\n"
+"Language-Team:  <en@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms:  nplurals=2; plural=(n != 1);\n"
+"X-Generator: KBabel 1.11.4\n"
+
+#: googleanalytics.admin.inc:15
+msgid "General settings"
+msgstr "Γενικές ρυθμίσεις"
+
+#: googleanalytics.admin.inc:21
+msgid "Google Analytics account number"
+msgstr "Αριθμός λογαριασμού Google Analytics"
+
+#: googleanalytics.admin.inc:26
+msgid "The account number is unique to the websites domain. Click the <strong>Edit</strong> link in your Google Analytics account next to the appropriate profile on the <strong>Analytics Settings</strong> page, then select <strong>Check Status</strong> at the top-right of the table to find the account number (UA-xxxx-x) of your site. You can obtain a user account from the <a href=\"@url\">Google Analytics</a> website."
+msgstr "Ο αριθμός λογαριασμού είναι μοναδικός μεταξύ των ιστοτόπων. Κάντε κλικ στο σύνδεσμο <strong>Edit</strong> στο λογαριασμό του Google Analytics δίπλα στο κατάλληλο προφίλ στη σελίδα <strong>Analytics Settings</strong>, μετά επιλέξτε το <strong>Check Status</strong> πάνω δεξιά στον πίνακα για να βρείτε τον αριθμό λογαριασμού (UA-xxxx-x) του ιστοτόπου σας. Μπορείτε να αποκτήσετε λογαριασμό χρήστη στον ιστοτόπο του <a href=\"@url\">Google Analytics</a>."
+
+#: googleanalytics.admin.inc:32
+msgid "User specific tracking settings"
+msgstr "Ρυθμίσεις χρήστη παρακολούθησης"
+
+#: googleanalytics.admin.inc:37
+msgid "Custom tracking settings"
+msgstr "Προσαρμοσμένες ρυθμίσεις παρακολούθησης"
+
+#: googleanalytics.admin.inc:39
+msgid "Users cannot control whether they are tracked or not."
+msgstr "Οι χρήστες δεν μπορούν να ελέγχουν αν παρακολουθούνται ή όχι."
+
+#: googleanalytics.admin.inc:40
+msgid "Track users by default, but let individual users to opt out."
+msgstr "Να παρακολουθούνται οι χρήστες εξ' ορισμού, αλλά να επιτρέπεται σε ορισμένους χρήστες να εξαιρούνται της παρακολούθησης."
+
+#: googleanalytics.admin.inc:41
+msgid "Do not track users by default, but let individual users to opt in."
+msgstr "Να μην παρακολουθούνται οι χρήστες εξ' ορισμού, αλλά να επιτρέπεται σε ορισμένους χρήστες να περιλαμβάνονται στην παρακολούθηση."
+
+#: googleanalytics.admin.inc:43
+msgid "Allow individual users to customize the visibility of tracking in their account settings. Only users with %permission permission are allowed to set their own preference."
+msgstr "Να επιτρέπεται οι χρήστες να καθορίζουν την ορατότητα της παρακολούθησης στις ρυθμίσεις του λογαριασμού τους. Μόνο χρήστες με την άδεια %permission θα μπορούν να αλλάξουν την προτίμησή τους."
+
+#: googleanalytics.admin.inc:43 googleanalytics.module:23
+msgid "opt-in or out of tracking"
+msgstr "συμπερίληψη ή εξαίρεση από την παρακολούθηση"
+
+#: googleanalytics.admin.inc:50
+msgid "Role specific tracking settings"
+msgstr "Ρυθμίσεις παρακολούθησης ανά ρόλο"
+
+#: googleanalytics.admin.inc:61
+msgid "Add tracking for specific roles"
+msgstr "Προσθήκη παρακολούθησης για ορισμένους ρόλους"
+
+#: googleanalytics.admin.inc:64
+msgid "Add tracking only for the selected role(s). If none of the roles are selected, all users will be tracked. If a user has any of the roles checked, that user will be tracked."
+msgstr "Προσθήκη παρακολούθησης μόνο για τους επιλεγμένους ρόλους. Αν δεν επιλεγεί ρόλος, όλοι οι χρήστες θα παρακολουθούνται. Αν ένας χρήστης έχει έναν από τους επιλεγμένους ρόλους, τότε θα παρακολουθείται."
+
+#: googleanalytics.admin.inc:70
+msgid "Page specific tracking settings"
+msgstr "Ρυθμίσεις παρακολούθησης ανά σελίδα"
+
+#: googleanalytics.admin.inc:85
+msgid "Add to every page except the listed pages."
+msgstr "Να προστίθεται σε κάθε σελίδα εκτός από τις παρακάτω."
+
+#: googleanalytics.admin.inc:85
+msgid "Add to the listed pages only."
+msgstr "Να προστίθεται στις παρακάτω σελίδες μόνο."
+
+#: googleanalytics.admin.inc:86
+msgid "Enter one page per line as Drupal paths. The '*' character is a wildcard. Example paths are %blog for the blog page and %blog-wildcard for every personal blog. %front is the front page."
+msgstr "Εισάγετε μία σελίδα ανά γραμμή ως διαδρομή του Drupal. Το '*' είναι χαρακτήρας μπαλαντέρ. Παραδείγματα διαδρομών είναι %blog για τη σελίδα ιστολογίου και %blog-wildcard για κάθε προσωπικό ιστολόγιο. Το %front είναι η αρχική σελίδα."
+
+#: googleanalytics.admin.inc:89
+msgid "Add if the following PHP code returns <code>TRUE</code> (PHP-mode, experts only)."
+msgstr "Προσθήκη αν ο παρακάτω κώδικας PHP επιστρέφει <code>ΑΛΗΘΕΙΑ</code> (κατάσταση PHP, για ειδικούς μόνο)."
+
+#: googleanalytics.admin.inc:90
+msgid "If the PHP-mode is chosen, enter PHP code between %php. Note that executing incorrect PHP-code can break your Drupal site."
+msgstr "Αν επιλεγεί η κατάσταση PHP, εισάγετε κώδικα PHP μεταξύ των %php. Πρέπει να σημειωθεί ότι η εκτέλεση εσφαλμένου κώδικα PHP μπορεί να δημιουργήσει πρόβλημα στον ιστοτόπο σας."
+
+#: googleanalytics.admin.inc:94
+msgid "Add tracking to specific pages"
+msgstr "Να προστίθεται παρακολούθηση σε συγκεκριμένες σελίδες"
+
+#: googleanalytics.admin.inc:100
+msgid "Pages"
+msgstr "Σελίδες"
+
+#: googleanalytics.admin.inc:110
+msgid "User segmentation settings"
+msgstr "Ρυθμίσεις κατάτμησης χρήστη"
+
+#: googleanalytics.admin.inc:115
+msgid "User roles"
+msgstr "Ρόλοι χρηστών"
+
+#: googleanalytics.admin.inc:125
+msgid "Add segmentation information to tracking code"
+msgstr "Προσθήκη πληροφοριών κατάτμησης στον κώδικα παρακολούθησης"
+
+#: googleanalytics.admin.inc:126
+msgid "Segment users based on different properties, additionally to the basic IP address based tracking provided by Google Analytics."
+msgstr "Να κατατμίζονται οι χρήστες βάσει διαφορετικών ιδιοτήτων, πρόσθετα με τη βασική παρακολούθηση του Google Analytics βάσει της διεύθυνσης IP."
+
+#: googleanalytics.admin.inc:126
+msgid "<a href=\"@module_list\">Enable the profile module</a> to be able to use profile fields for more granular tracking."
+msgstr "<a href=\"@module_list\">Ενεργοποίηση της μονάδας προφίλ</a> για να χρησιμοποιούνται πεδία προφίλ για ποιο λεπτομερή παρακολούθηση."
+
+#: googleanalytics.admin.inc:126
+msgid "Make sure you will not associate (or permit any third party to associate) any data gathered from Your Website(s) (or such third parties' website(s)) with any personally identifying information from any source as part of Your use (or such third parties' use) of the Google Analytics service. For more information see section 8.1 in the <a href=\"@ga_tos\">Google Analytics terms of use</a>."
+msgstr "Δεν πρέπει να συνδέσετε (ή επιτρέπετε οποιονδήποτε τρίτο να συνδέσει) δεδομένα που συλλέγονται από τους ιστοτόπους σας (ή ιστοτόπους τρίτων) με οποιεσδήποτε πληροφορίες που ταυτοποιούν άτομα από οποιαδήποτε πηγή, ως μέρος της χρήσης σας (ή της χρήσης τρίτων) της υπηρεσίας του Google Analytics. Για περισσότερες πληροφορίες, δείτε το τμήμα 8.1 στους <a href=\"@ga_tos\">όρους χρήσης του Google Analytics</a>."
+
+#: googleanalytics.admin.inc:126
+msgid "Selecting one or more values is supported. To select multiple items, hold down CTRL (PC) or &#8984; (Mac) while selecting fields."
+msgstr "Υποστηρίζεται η επιλογή ενός ή περισσοτέρων τιμών. Για την επιλογή πολλαπλών στοιχείων, κρατήστε πατημένο το πλήκτρο CTRL (PC) ή &#8984; (Mac) κατά την επιλογή των πεδίων."
+
+#: googleanalytics.admin.inc:136
+msgid "Link tracking settings"
+msgstr "Ρυθμίσεις παρακολούθησης συνδέσμων"
+
+#: googleanalytics.admin.inc:142
+msgid "Track outgoing links"
+msgstr "Παρακολούθηση των προς εξωτερικό συνδέσμων "
+
+#: googleanalytics.admin.inc:144
+msgid "Enables tracking of clicks on outgoing links."
+msgstr "Επιτρέπει την παρακολούθηση των κλικ προς εξωτερικούς συνδέσμους."
+
+#: googleanalytics.admin.inc:148
+msgid "Track mailto links"
+msgstr "Παρακολούθηση των συνδέσμων mailto"
+
+#: googleanalytics.admin.inc:150
+msgid "Enables tracking of clicks on mailto links."
+msgstr "Επιτρέπει την παρακολούθηση των κλικ σε συνδέσμους mailto."
+
+#: googleanalytics.admin.inc:154
+msgid "Track download links"
+msgstr "Παρακολούθηση των συνδέσμων λήψης"
+
+#: googleanalytics.admin.inc:156
+msgid "Enables tracking of clicks on links to files based on the file extensions list below."
+msgstr "Επιτρέπει την παρακολούθηση των κλικ σε συνδέσμους αρχείων βάσει των επεκτάσεων αρχείων που υπάρχουν παρακάτω."
+
+#: googleanalytics.admin.inc:160
+msgid "File extensions to track"
+msgstr "Επεκτάσεις αρχείων που θα παρακολουθούνται"
+
+#: googleanalytics.admin.inc:162
+msgid "A pipe separated list of file extensions that should be tracked when clicked with regular expression support. Example: !extensions"
+msgstr "Μια λίστα επεκτάσεων αρχείων χωρισμένες με το χαρακτήρα '|' που θα παρακολουθούνται κατά το κλικ, με υποστήριξη για κανονικές εκφράσεις. Παράδειγμα: !extensions"
+
+#: googleanalytics.admin.inc:169
+msgid "Advanced settings"
+msgstr "Ρυθμίσεις για προχωρημένους"
+
+#: googleanalytics.admin.inc:176
+msgid "Cache tracking code file locally"
+msgstr "Αποθήκευση του κώδικα παρακολούθησης στην λανθάνουσα μνήμη"
+
+#: googleanalytics.admin.inc:177
+msgid "If checked, the tracking code file is retrieved from Google Analytics and cached locally. It is updated daily from Google's servers to ensure updates to tracking code are reflected in the local copy. Do not activate this until after Google Analytics has confirmed your tracker!"
+msgstr "Αν είναι ενεργοποιημένο, ο κώδικας λαμβάνεται από το Google Analytics και αποθηκεύεται στην λανθάνουσα μνήμη. Ενημερώνεται σε καθημερινή βάση από τους διακομιστές του Google Analytics ώστε οποιεσδήποτε αλλαγές να συμπεριλαμβάνονται στο τοπικό αντίγραφο. Μην ενεργοποιείτε αυτή την επιλογή μέχρις ότου το Google Analytics να επαληθεύσει τον κωδικό παρακολούθησής σας."
+
+#: googleanalytics.admin.inc:182
+msgid "<a href=\"@url\">Public file transfers</a> must be enabled to allow local caching."
+msgstr "Η <a href=\"@url\">δημόσια μεταφορά αρχείων</a> πρέπει να είναι ενεργοποιημένη για να δίνεται η δυνατότητα αποθήκευσης στην τοπική λανθάνουσα μνήμη."
+
+#: googleanalytics.admin.inc:189
+msgid "Track translation sets as one unit"
+msgstr "Παρακολούθηση των συνόλων μεταφράσεων ως μια μονάδα"
+
+#: googleanalytics.admin.inc:190
+msgid "When a node is part of a translation set, record statistics for the originating node instead. This allows for a translation set to be treated as a single unit."
+msgstr "Όταν ένας κόμβος είναι μέρος ενός συνόλου μετάφρασης, να καταγράφονται στατιστικά από τον αρχικό κόμβο. Αυτό επιτρέπει στα σύνολα μεταφράσεων να εκλαμβάνονται ως μια μονάδα."
+
+#: googleanalytics.admin.inc:196
+msgid "Depends on: !dependencies"
+msgstr "Εξαρτάται από: !dependencies"
+
+#: googleanalytics.admin.inc:196
+msgid "@module (<span class=\"admin-enabled\">enabled</span>)"
+msgstr "@module (<span class=\"admin-enabled\">ενεργοποιημένο/span>)"
+
+#: googleanalytics.admin.inc:196
+msgid "@module (<span class=\"admin-disabled\">disabled</span>)"
+msgstr "@module (<span class=\"admin-disabled\">απενεργοποιημένο/span>)"
+
+#: googleanalytics.admin.inc:203
+msgid "Track internal search"
+msgstr "Παρακολούθηση της εσωτερικής αναζήτησης"
+
+#: googleanalytics.admin.inc:204
+msgid "If checked, internal search keywords are tracked. You must configure your Google account to use the internal query parameter <strong>search</strong>. For more information see <a href=\"@url\">How do I set up Site Search for my profile</a>."
+msgstr "Αν είναι ενεργοποιημένο, οι λέξεις κλειδιά της αναζήτησης παρακολουθούνται. Θα πρέπει να ρυθμίσετε στο λογαριασμό σας του Google να χρησιμοποιεί την εσωτερική παράμετρο αναζήτησης <strong>search</strong>. Για περισσότερες πληροφορίες, δείτε το <a href=\"@url\">How do I set up Site Search for my profile</a>."
+
+#: googleanalytics.admin.inc:211
+msgid "Track AdSense ads"
+msgstr "Παρακολούθηση των διαφημίσεων AdSense"
+
+#: googleanalytics.admin.inc:212
+msgid "If checked, your AdSense ads will be tracked in your Google Analytics account."
+msgstr "Αν είναι ενεργοποιημένο, οι διαφημίσεις AdSense θα παρακολουθούνται στον λογαριασμό σας του Google Analytics."
+
+#: googleanalytics.admin.inc:218
+msgid "Custom JavaScript code"
+msgstr "Προσαρμοσμένος κώδικας JavaScript"
+
+#: googleanalytics.admin.inc:221
+msgid "You can add custom Google Analytics <a href=\"@snippets\">code snippets</a> here. These will be added to every page that Google Analytics appears on. Before you add custom code to the below textarea's you should read <a href=\"@ga_concepts_overview\">Google Analytics Tracking Code - Functional Overview</a> and the <a href=\"@ga_js_api\">Google Analytics Tracking API</a> documentation. <strong>Do not include the &lt;script&gt; tags</strong>, and always end your code with a semicolon (;)."
+msgstr "Μπορείτε εδώ να προσθέσετε προσαρμοσμένα <a href=\"@snippets\">τμήματα κώδικα</a> για το Google Analytics. Αυτά τα τμήματα κώδικα θα προστίθενται σε κάθε σελίδα όπου υπάρχει το Google Analytics. Προτού προσθέσετε το δικό σας προσαρμοσμένο κώδικα στις παρακάτω περιοχές κειμένου θα πρέπει να διαβάσετε την τεκμηρίωση <a href=\"@ga_concepts_overview\">Google Analytics Tracking Code - Functional Overview</a> και <a href=\"@ga_js_api\">Google Analytics Tracking API</a>. <strong>Μην συμπεριλαμβάνετε τις σημάνσεις &lt;script&gt;</strong> και πάντα να τελειώνετε τον κώδικα με ένα ερωτηματικό (;)."
+
+#: googleanalytics.admin.inc:225
+msgid "Code snippet (before)"
+msgstr "Τμήμα κώδικα (πριν)"
+
+#: googleanalytics.admin.inc:229
+msgid "Code in this textarea will be added <strong>before</strong> pageTracker._trackPageview()."
+msgstr "Ο κώδικας σε αυτή την περιοχή κειμένου θα προστίθεται <strong>πριν</strong> το pageTracker._trackPageview()."
+
+#: googleanalytics.admin.inc:233
+msgid "Code snippet (after)"
+msgstr "Τμήμα κώδικα (μετά)"
+
+#: googleanalytics.admin.inc:237
+msgid "Code in this textarea will be added <strong>after</strong> pageTracker._trackPageview(). This is useful if you'd like to track a site in two accounts."
+msgstr "Ο κώδικας σε αυτή την περιοχή κειμένου θα προστίθεται <strong>μετά</strong> το pageTracker._trackPageview(). Αυτό χρησιμεύει στην περίπτωση που θέλετε να παρακολουθείτε ένα ιστοτόπο από δύο λογαριασμούς."
+
+#: googleanalytics.admin.inc:242
+msgid "JavaScript scope"
+msgstr "Εύρος JavaScript"
+
+#: googleanalytics.admin.inc:243
+msgid "<strong>Warning:</strong> Google recommends adding the external JavaScript files to footer for performance reasons."
+msgstr "<strong>Προσοχή:</strong> Το Google προτείνει η πρόσθεση των εξωτερικών αρχείων JavaScript να γίνεται στο υποσέλιδο για λόγους απόδοσης."
+
+#: googleanalytics.admin.inc:245
+msgid "Footer"
+msgstr "Υποσέλιδο"
+
+#: googleanalytics.admin.inc:246
+msgid "Header"
+msgstr "Κεφαλίδα"
+
+#: googleanalytics.admin.inc:256
+msgid "A valid Google Analytics account number is case sensitive and formatted like UA-xxxxxx-x."
+msgstr "Ένας έγκυρος αριθμός λογαριασμού Google Analytics έχει διάκριση σε κεφαλαία-πεζά και μορφοποιείται ως UA-xxxxxx-x."
+
+#: googleanalytics.admin.inc:261;264
+msgid "Do not add the tracker code provided by Google into the javascript code snippets! This module already builds the tracker code based on your Google Analytics account number and settings."
+msgstr "Μην συμπεριλαμβάνετε τον κώδικα παρακολούθησης που δίνει το Google στα τμήματα κώδικα JavaScript! Η μονάδα ήδη δημιουργεί τον κώδικα παρακολούθησης βάσει του αριθμού λογαριασμού του Google Analytics και των ρυθμίσεων."
+
+#: googleanalytics.admin.inc:267;270
+msgid "Do not include the &lt;script&gt; tags in the javascript code snippets."
+msgstr "Να μην συμπεριλαμβάνονται οι σημάνσεις &lt;script&gt; στον κώδικα javascript."
+
+#: googleanalytics.module:18
+msgid "<a href=\"@ga_url\">Google Analytics</a> is a free statistics package based on the excellent Urchin system. This module provides services to better integrate Drupal with Google Analytics."
+msgstr "Το <a href=\"@ga_url\">Google Analytics</a> είναι ένα δωρεάν πακέτο στατιστικών βασισμένο στο εξαιρετικό σύστημα Urchin. Η μονάδα παρέχει υπηρεσίες για την καλύτερη ενσωμάτωση του Drupal με το Google Analytics."
+
+#: googleanalytics.module:186
+msgid "Google Analytics configuration"
+msgstr "Ρυθμίσεις Google Analytics"
+
+#: googleanalytics.module:194
+msgid "Disable user tracking"
+msgstr "Απενεργοποίηση παρακολούθησης χρήστη"
+
+#: googleanalytics.module:195
+msgid "Users are tracked by default, but you are able to opt out."
+msgstr "Οι χρήστες εξ' ορισμού παρακολουθούνται, αλλά επιτρέπεται να ορίσετε ως επιλογή να μην παρακολουθούνται."
+
+#: googleanalytics.module:199
+msgid "Enable user tracking"
+msgstr "Ενεργοποίηση παρακολούθησης χρήστη"
+
+#: googleanalytics.module:200
+msgid "Users are <em>not</em> tracked by default, but you are able to opt in."
+msgstr "Οι χρήστες εξ' ορισμού <em>δεν</em> παρακολουθούνται, αλλά επιτρέπεται να ορίσετε ως επιλογή να παρακολουθούνται."
+
+#: googleanalytics.module:228
+msgid "Google Analytics module"
+msgstr "Μονάδα Google Analytics"
+
+#: googleanalytics.module:229
+msgid "Google Analytics module has not been configured yet. Please configure its settings from the <a href=\"@url\">Google Analytics settings page</a>."
+msgstr "Η μονάδα Google Analytics δεν έχει διευθετηθεί ακόμη. Διευθετήστε τις ρυθμίσεις του στη <a href=\"@url\">σελίδα ρυθμίσεων του Google Analytics</a>."
+
+#: googleanalytics.module:231
+msgid "Not configured"
+msgstr "Δεν έχει διευθετηθεί"
+
+#: googleanalytics.module:23
+msgid "administer google analytics"
+msgstr "διαχείριση του google analytics"
+
+#: googleanalytics.module:23
+msgid "use PHP for tracking visibility"
+msgstr "χρήση της PHP για την ορατότητα παρακολούθησης"
+
+#: googleanalytics.module:28 googleanalytics.info:0
+msgid "Google Analytics"
+msgstr "Google Analytics"
+
+#: googleanalytics.module:29
+msgid "Configure the settings used to generate your Google Analytics tracking code."
+msgstr "Διευθέτηση των ρυθμίσεων που χρησιμοποιούνται για τη δημιουργία του κώδικα παρακολούθησης του Google Analytics."
+
+#: googleanalytics.module:0
+msgid "googleanalytics"
+msgstr "googleanalytics"
+
+#: googleanalytics.info:0
+msgid "Adds Google Analytics javascript tracking code to all your site's pages."
+msgstr "Προσθέτει κώδικα παρακολούθησης σε javascript για το Google Analytics σε όλες τις σελίδες του ιστοτόπου."
+
+#: googleanalytics.info:0
+msgid "Statistics"
+msgstr "Στατιστικά"
+

@@ -1,0 +1,42 @@
+<?php
+// $Id: contextphp.module,v 1.1.2.1 2010/03/28 23:42:32 dixon Exp $
+
+/**
+ * Implementation of hook_context_registry().
+ */
+function contextphp_context_registry() {
+  $registry = array();
+  $registry['conditions'] = array(
+    'php' => array(
+      'title' => t('PHP code'),
+      'plugin' => 'contextphp_condition_php',
+    ),
+  );
+  return $registry;
+}
+
+/**
+ * Implementation of hook_context_plugins().
+ */
+function contextphp_context_plugins() {
+  $plugins = array();
+  $plugins['contextphp_condition_php'] = array(
+    'handler' => array(
+      'path' => drupal_get_path('module', 'contextphp') .'/plugins',
+      'file' => 'contextphp_condition_php.inc',
+      'class' => 'contextphp_condition_php',
+      'parent' => 'context_condition',
+    ),
+  );
+  return $plugins;
+}
+
+/**
+ * Implementation of hook_init().
+ */
+function contextphp_init() {
+  $map = context_condition_map();
+  if (!empty($map['php']) && $plugin = context_get_plugin('condition', 'php')) {
+    $plugin->execute();
+  }
+}

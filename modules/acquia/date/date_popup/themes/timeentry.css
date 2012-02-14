@@ -1,0 +1,17 @@
+/* timeEntry styles */
+.timeEntry_control {
+	vertical-align: middle;
+	margin-left: 2px;
+}
+* html .timeEntry_control { /* IE only */
+	margin-top: -4px;
+}
+/* Make sure background colors from other styles don't obscure the current element highlight */
+.timeEntry {
+  background-color:transparent !important;
+}
+/* This is to keep FF from offering a drop-down list of previous values. */
+/* For some reason hiding the div where the image belongs keeps that from happening. */
+.timeEntry_control {
+  display:none;
+}

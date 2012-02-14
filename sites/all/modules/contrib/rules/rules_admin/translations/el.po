@@ -1,0 +1,1732 @@
+# translation of rules to Greek
+# $Id: el.po,v 1.1.2.2 2009/08/03 16:42:25 fago Exp $
+# Generated from files:
+#  rules.admin.inc,v 1.1.2.61 2008/10/24 10:53:17 fago
+#  rules_admin.sets.inc,v 1.1.2.10 2008/09/02 14:47:52 fago
+#  system.rules_forms.inc,v 1.1.2.7 2008/10/03 10:21:04 fago
+#  rules.module,v 1.1.2.39 2008/10/03 10:21:04 fago
+#  rules.rules_forms.inc,v 1.1.2.3 2008/08/29 12:02:55 fago
+#  php.rules_forms.inc,v 1.1.2.6 2008/10/03 10:21:04 fago
+#  rules.admin_export.inc,v 1.1.2.7 2008/08/21 08:18:16 fago
+#  rules.admin_render.inc,v 1.1.2.6 2008/10/17 12:46:42 fago
+#  rules.variables.inc,v 1.1.2.22 2008/09/24 16:49:13 fago
+#  rules.info,v 1.1.2.2 2008/07/10 08:15:04 fago
+#  rules_scheduler.info,v 1.1.2.1 2008/08/14 11:29:48 fago
+#  rules_test.info,v 1.1.2.3 2008/07/23 15:42:06 fago
+#  system.rules.inc,v 1.1.2.10 2008/10/17 10:28:25 fago
+#  rules.install,v 1.1.2.17 2008/10/20 11:45:16 fago
+#  rules_scheduler.install,v 1.1.2.3 2008/10/03 10:21:04 fago
+#  comment.rules.inc,v 1.1.2.2 2008/08/25 15:29:08 fago
+#  rules.rules.inc,v 1.1.2.27 2008/10/17 12:46:42 fago
+#  node.rules.inc,v 1.1.2.28 2008/10/03 10:21:04 fago
+#  user.rules.inc,v 1.1.2.13 2008/10/17 10:34:06 fago
+#  path.rules.inc,v 1.1.2.4 2008/10/03 10:21:04 fago
+#  node.rules_forms.inc,v 1.1.2.13 2008/08/19 09:12:03 fago
+#  path.rules_forms.inc,v 1.1.2.3 2008/10/03 10:21:04 fago
+#  php.rules.inc,v 1.1.2.7 2008/08/25 15:29:08 fago
+#  taxonomy.rules.inc,v 1.1.2.1 2008/10/17 12:46:42 fago
+#  taxonomy.rules_forms.inc,v 1.1.2.2 2008/10/17 13:24:31 fago
+#  user.rules_forms.inc,v 1.1.2.2 2008/07/14 15:48:28 fago
+#  rules_scheduler.rules.inc,v 1.1.2.3 2008/10/03 10:21:04 fago
+#  rules_scheduler.module,v 1.1.2.3 2008/08/19 11:58:21 fago
+#  rules_test.rules_defaults.inc,v 1.1.2.13 2008/08/01 17:17:57 fago
+#  rules_test.module,v 1.1.2.3 2008/07/11 11:21:09 fago
+#
+# Vasileios Lourdas <drupal@lourdas.name>, 2008, 2009.
+msgid ""
+msgstr ""
+"Project-Id-Version: el\n"
+"POT-Creation-Date: 2008-10-27 11:36+0200\n"
+"PO-Revision-Date: 2009-01-12 23:42+0200\n"
+"Last-Translator: Vasileios Lourdas <drupal@lourdas.name>\n"
+"Language-Team: Greek <el@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms:  nplurals=2; plural=(n != 1);\n"
+"X-Generator: KBabel 1.11.4\n"
+
+#: rules/rules.admin.inc:15
+msgid "Rule sets are similar in concept to subroutines and can be invoked by actions or manually by code or another module."
+msgstr "Τα σύνολα κανόνων είναι παρόμοια σε ιδέα με τις υπορουτίνες και μπορούν να κληθούν από ενέργειες ή χειροκίνητα μέσω κώδικα ή άλλης μονάδας."
+
+#: rules/rules.admin.inc:17
+msgid "This is an overview about rules that are triggered by a certain event. A rule may contain conditions and actions, which are executed only when the conditions are met."
+msgstr "Αυτή είναι μια σύνοψη σχετικά με τους κανόνες που εκτελούνται από ένα συγκεκριμένο συμβάν. Ένας κανόνας μπορεί να περιέχει καταστάσεις και ενέργειες, που εκτελούνται μόνο όταν υπάρξουν οι κατάλληλες συνθήκες."
+
+#: rules/rules.admin.inc:30;46
+msgid "Filter"
+msgstr "Φίλτρο"
+
+#: rules/rules.admin.inc:36
+msgid "Filter by event"
+msgstr "Φίλτρο ανά συμβάν"
+
+#: rules/rules.admin.inc:42
+msgid "Filter by category"
+msgstr "Φίλτρο ανά κατηγορία"
+
+#: rules/rules.admin.inc:51 rules/rules_admin.sets.inc:123
+msgid "Active rules"
+msgstr "Ενεργοί κανόνες"
+
+#: rules/rules.admin.inc:54 rules/rules_admin.sets.inc:126
+msgid "Inactive rules"
+msgstr "Ανενεργοί κανόνες"
+
+#: rules/rules.admin.inc:58 rules/rules_admin.sets.inc:130
+msgid "Fixed rules"
+msgstr "Σταθεροί κανόνες"
+
+#: rules/rules.admin.inc:85;197;461;519;717 rules/rules_admin.sets.inc:17;147;275;343
+msgid "Label"
+msgstr "Ετικέτα"
+
+#: rules/rules.admin.inc:85
+msgid "Set"
+msgstr "Σύνολο"
+
+#: rules/rules.admin.inc:85;217
+msgid "Event"
+msgstr "Συμβάν"
+
+#: rules/rules.admin.inc:85 rules/rules_admin.sets.inc:17 rules/modules/system.rules_forms.inc:173
+msgid "Category"
+msgstr "Κατηγορία"
+
+#: rules/rules.admin.inc:85 rules/rules_admin.sets.inc:17
+msgid "Status"
+msgstr "Κατάσταση"
+
+#: rules/rules.admin.inc:85 rules/rules_admin.sets.inc:17
+msgid "Operations"
+msgstr "Λειτουργίες"
+
+#: rules/rules.admin.inc:96 rules/rules_admin.sets.inc:26
+msgid "edit"
+msgstr "επεξεργασία"
+
+#: rules/rules.admin.inc:99 rules/rules_admin.sets.inc:29
+msgid "delete"
+msgstr "διαγραφή"
+
+#: rules/rules.admin.inc:102 rules/rules_admin.sets.inc:32
+msgid "revert"
+msgstr "επαναφορά"
+
+#: rules/rules.admin.inc:104
+msgid "clone"
+msgstr "κλωνοποίηση"
+
+#: rules/rules.admin.inc:121
+msgid "None"
+msgstr "Κανένα"
+
+#: rules/rules.admin.inc:133
+msgid "If you install the token module from !href, token replacements will be supported. <a href=\"@hide\">Hide this message.</a>"
+msgstr "Αν εγκαταστήσετε τη μονάδα Token από τη διεύθυνση !href, θα υποστηρίζονται οι αντικαταστάσεις λέξεων-κλειδιών. <a href=\"@hide\">Απόκρυψη αυτού του μηνύματος.</a>"
+
+#: rules/rules.admin.inc:142
+msgid "This rule has been provided by a module, but has been modified."
+msgstr "Ο κανόνας αυτός παρέχεται από μια μονάδα, αλλά έχει τροποποιηθεί."
+
+#: rules/rules.admin.inc:143
+msgid "Modified"
+msgstr "Τροποποιήθηκε"
+
+#: rules/rules.admin.inc:146
+msgid "This rule has been provided by a module and can't be customized."
+msgstr "Ο κανόνας αυτός παρέχεται από μια μονάδα και δεν μπορεί να προσαρμοστεί."
+
+#: rules/rules.admin.inc:147
+msgid "Fixed"
+msgstr "Σταθερό"
+
+#: rules/rules.admin.inc:150
+msgid "A custom defined rule."
+msgstr "Ένας προσαρμόσιμος κανόνας."
+
+#: rules/rules.admin.inc:151
+msgid "Custom"
+msgstr "Προσαρμογή"
+
+#: rules/rules.admin.inc:153
+msgid "This rule has been provided by a module."
+msgstr "Ο κανόνας αυτός παρέχεται από μια μονάδα."
+
+#: rules/rules.admin.inc:154
+msgid "Default"
+msgstr "Εξ' ορισμού"
+
+#: rules/rules.admin.inc:180
+msgid "The rule %label has been added."
+msgstr "Ο κανόνας %label προστέθηκε."
+
+#: rules/rules.admin.inc:193
+msgid "Rule settings"
+msgstr "Ρυθμίσεις κανόνα"
+
+#: rules/rules.admin.inc:199
+msgid "Choose an appropriate label for this rule."
+msgstr "Επιλέξτε μια κατάλληλη ετικέτα για αυτόν τον κανόνα."
+
+#: rules/rules.admin.inc:210
+msgid "Rule set"
+msgstr "Σύνολο κανόνων"
+
+#: rules/rules.admin.inc:212
+msgid "Select to which rule set this rule should belong."
+msgstr "Επιλέξτε σε ποιο σύνολο κανόνων θα ανήκει αυτός ο κανόνας."
+
+#: rules/rules.admin.inc:219
+msgid "Select the event on which you want to evaluate this rule."
+msgstr "Επιλέξτε το συμβάν κατά το οποίο θα αξιολογείται αυτός ο κανόνας."
+
+#: rules/rules.admin.inc:223
+msgid "This rule is active and should be evaluated when the associated event occurs."
+msgstr "Ο κανόνας είναι ενεργός και θα αξιολογείται όταν θα λαμβάνει χώρα το σχετιζόμενο συμβάν."
+
+#: rules/rules.admin.inc:228;472;536;601
+msgid "Weight"
+msgstr "Βάρος"
+
+#: rules/rules.admin.inc:230
+msgid "Adjust the weight to customize the ordering of rules."
+msgstr "Ρύθμιση του βάρους για την προσαρμογή της σειράς των κανόνων."
+
+#: rules/rules.admin.inc:233 rules/rules_admin.sets.inc:162
+msgid "Save changes"
+msgstr "Αποθήκευση αλλαγών"
+
+#: rules/rules.admin.inc:255
+msgid "Rule elements"
+msgstr "Στοιχεία κανόνων"
+
+#: rules/rules.admin.inc:275
+msgid "The rule %label has been updated."
+msgstr "Ο κανόνας %label ενημερώθηκε."
+
+#: rules/rules.admin.inc:331
+msgid "Select an action to add"
+msgstr "Επιλέξτε μια ενέργεια για προσθήκη"
+
+#: rules/rules.admin.inc:338;361
+msgid "Forward"
+msgstr "Επόμενο"
+
+#: rules/rules.admin.inc:354
+msgid "Select the condition to add"
+msgstr "Επιλέξτε μια συνθήκη για προσθήκη"
+
+#: rules/rules.admin.inc:463
+msgid "Customize the label for this action."
+msgstr "Προσαρμογή της ετικέτας για αυτή την ενέργεια."
+
+#: rules/rules.admin.inc:469
+msgid "Editing action %label"
+msgstr "Επεξεργασία της ενέργειας %label"
+
+#: rules/rules.admin.inc:474
+msgid "Adjust the weight to customize the ordering of actions."
+msgstr "Ρύθμιση του βάρους για την προσαρμογή της σειράς των ενεργειών."
+
+#: rules/rules.admin.inc:481;545;609 rules/rules_admin.sets.inc:218
+msgid "Save"
+msgstr "Αποθήκευση"
+
+#: rules/rules.admin.inc:488;552;616;875 rules/rules_admin.sets.inc:66 rules/rules.module:68;147
+msgid "Delete"
+msgstr "Διαγραφή"
+
+#: rules/rules.admin.inc:509
+msgid "The action %label has been saved."
+msgstr "Η ενέργεια %label αποθηκεύθηκε."
+
+#: rules/rules.admin.inc:521
+msgid "Customize the label for this condition."
+msgstr "Προσαρμογή της ετικέτας για αυτή τη συνθήκη."
+
+#: rules/rules.admin.inc:527
+msgid "Editing condition %label"
+msgstr "Επεξεργασία της συνθήκης %label"
+
+#: rules/rules.admin.inc:530;587
+msgid "Negate"
+msgstr "Αναίρεση"
+
+#: rules/rules.admin.inc:532
+msgid "If checked, the condition returns TRUE, if it evaluates to FALSE."
+msgstr "Αν είναι επιλεγμένο, η συνθήκη επιστρέφει ΑΛΗΘΕΙΑ, αν αξιολογηθεί σε ΨΕΥΔΟΣ."
+
+#: rules/rules.admin.inc:538
+msgid "Adjust the weight to customize the ordering of conditions."
+msgstr "Ρύθμιση του βάρους για την προσαρμογή της σειράς των συνθηκών."
+
+#: rules/rules.admin.inc:578
+msgid "The condition %label has been saved."
+msgstr "Η συνθήκη %label αποθηκεύθηκε."
+
+#: rules/rules.admin.inc:585
+msgid "Editing condition group %label"
+msgstr "Επεξεργασία της ομάδας συνθηκών %label"
+
+#: rules/rules.admin.inc:589
+msgid "If checked, the operation will be negated. E.g. AND would be handled as NOT AND."
+msgstr "Αν είναι επιλεγμένο, η λειτουργία θα αντιστραφεί. Για παράδειγμα, το ΚΑΙ θα χειριστεί ως ΟΧΙ ΚΑΙ."
+
+#: rules/rules.admin.inc:593 rules/modules/rules.rules_forms.inc:29
+msgid "Operation"
+msgstr "Λειτουργία"
+
+#: rules/rules.admin.inc:595
+msgid "The logical operation of this condition group. E.g. if you select AND, this condition group will only evaluate to TRUE if all conditions of this group evaluate to TRUE."
+msgstr "Η λογική λειτουργία αυτής της ομάδας συνθηκών. Για παράδειγμα, αν επιλέξετε το ΚΑΙ, θα γίνει επαλήθευση της ομάδας συνθηκών σε ΑΛΗΘΕΙΑ μόνο αν όλες οι συνθήκες της ομάδας επαληθευτούν σε ΑΛΗΘΕΙΑ."
+
+#: rules/rules.admin.inc:603
+msgid "Adjust the weight to customize the ordering."
+msgstr "Ρύθμιση του βάρους για την προσαρμογή της σειράς."
+
+#: rules/rules.admin.inc:632
+msgid "The condition group %label has been saved."
+msgstr "Η ομάδα συνθηκών %label αποθηκεύθηκε."
+
+#: rules/rules.admin.inc:710
+msgid "Variable @label settings"
+msgstr "Ρυθμίσεις μεταβλητής @label"
+
+#: rules/rules.admin.inc:723 rules/rules_admin.sets.inc:289
+msgid "Machine readable variable name"
+msgstr "Όνομα αναγνώσιμο από τη μηχανή της μεταβλητής"
+
+#: rules/rules.admin.inc:724 rules/rules_admin.sets.inc:157
+msgid "Specify a unique name containing only alphanumeric characters, and underscores."
+msgstr "Καθορισμός ενός μοναδικού ονόματος που περιέχει μόνο αλφαριθμητικούς χαρακτήρες και το χαρακτήρα '_' (underscore)."
+
+#: rules/rules.admin.inc:740
+msgid "A variable with this name does already exist. Please choose another name."
+msgstr "Υπάρχει ήδη μεταβλητή με αυτό το όνομα. Επιλέξτε ένα άλλο όνομα."
+
+#: rules/rules.admin.inc:743
+msgid "The name contains not allowed characters."
+msgstr "Το όνομα περιέχει μη επιτρεπόμενους χαρακτήρες."
+
+#: rules/rules.admin.inc:803
+msgid "Arguments configuration"
+msgstr "Ρύθμιση παραμέτρων"
+
+#: rules/rules.admin.inc:848 rules/modules/php.rules_forms.inc:13
+msgid "Description"
+msgstr "Περιγραφή"
+
+#: rules/rules.admin.inc:870
+msgid "Are you sure you want to delete the logical operation %label?"
+msgstr "Είστε σίγουροι για τη διαγραφή της λογικής λειτουργίας %label;"
+
+#: rules/rules.admin.inc:873 rules/rules_admin.sets.inc:64
+msgid "Are you sure you want to delete %label?"
+msgstr "Είστε σίγουροι για τη διαγραφή του %label;"
+
+#: rules/rules.admin.inc:875 rules/rules_admin.sets.inc:66;91
+msgid "This action cannot be undone."
+msgstr "Η ενέργεια είναι μη αναστρέψιμη."
+
+#: rules/rules.admin.inc:875 rules/rules_admin.sets.inc:66;91
+msgid "Cancel"
+msgstr "Άκυρο"
+
+#: rules/rules.admin.inc:884
+msgid "The logical operation %label has been deleted."
+msgstr "Η λογική λειτουργία %label διαγράφηκε."
+
+#: rules/rules.admin.inc:889 rules/rules_admin.sets.inc:73
+msgid "%label has been deleted."
+msgstr "Το %label διαγράφηκε."
+
+#: rules/rules.admin.inc:908
+msgid "Alter the settings for the cloned rule."
+msgstr "Τροποποίηση των ρυθμίσεων για τον κλωνοποιημένο κανόνα."
+
+#: rules/rules.admin.inc:1180
+msgid "Debug rule evaluation"
+msgstr "Αποσφαλμάτωση επαλήθευσης κανόνα"
+
+#: rules/rules.admin.inc:1182
+msgid "When activated, debugging information is shown when rules are evaluated."
+msgstr "Όταν είναι ενεργοποιημένο, εμφανίζονται πληροφορίες αποσφαλμάτωσης όταν γίνεται επαλήθευση των κανόνων."
+
+#: rules/rules.admin.inc:1186
+msgid "Show fixed rules and rule sets"
+msgstr "Εμφάνιση σταθερών κανόνων και συνόλων κανόνων"
+
+#: rules/rules.admin.inc:1188
+msgid "When activated, fixed items provided by modules are shown in the admin center too."
+msgstr "Όταν είναι ενεργοποιημένο, εμφανίζονται επίσης στο κέντρο διαχείρισης σταθερά αντικείμενα που παρέχουν οι μονάδες."
+
+#: rules/rules.admin.inc:1192
+msgid "Ignore missing token module"
+msgstr "Αγνόηση της μονάδας Token που δεν υπάρχει"
+
+#: rules/rules.admin.inc:1194
+msgid "Rules can use the token module to provide token replacements; if this module is not present rules will complain, unless this setting is checked."
+msgstr "Οι κανόνες μπορούν να χρησιμοποιήσουν τη μονάδα Token για να παρέχουν αντικαταστάσεις λέξεων κλειδιών· αν η μονάδα δεν υπάρχει, η μονάδα Rules θα παραπονιέται, εκτός αν ενεργοποιηθεί αυτή η ρύθμιση."
+
+#: rules/rules.admin_export.inc:17
+msgid "Configuration to import"
+msgstr "Αρχείο ρυθμίσεων για εισαγωγή"
+
+#: rules/rules.admin_export.inc:18
+msgid "Just paste your exported configuration here."
+msgstr "Επικολλήστε εδώ το αρχείο ρυθμίσεων που έγινε εξαγωγή."
+
+#: rules/rules.admin_export.inc:22 rules/rules.module:102
+msgid "Import"
+msgstr "Εισαγωγή"
+
+#: rules/rules.admin_export.inc:39
+msgid "Imported %label."
+msgstr "Το %label εισήχθηκε."
+
+#: rules/rules.admin_export.inc:45
+msgid "Import failed."
+msgstr "Η εισαγωγή απέτυχε."
+
+#: rules/rules.admin_export.inc:103
+msgid "Successfully imported the workflow-ng rule %label."
+msgstr "Η εισαγωγή του κανόνα %label του workflow-ng έγινε με επιτυχία."
+
+#: rules/rules.admin_export.inc:106
+msgid "Failed importing the workflow-ng rule %label."
+msgstr "Η εισαγωγή του κανόνα %label του workflow-ng απέτυχε."
+
+#: rules/rules.admin_export.inc:125
+msgid "Select the %label to export"
+msgstr "Επιλέξτε το %label για εξαγωγή"
+
+#: rules/rules.admin_export.inc:131 rules/rules.module:97
+msgid "Export"
+msgstr "Εξαγωγή"
+
+#: rules/rules.admin_export.inc:137
+msgid "Exported rule configurations"
+msgstr "Οι ρυθμίσεις των κανόνων εξάχθηκαν"
+
+#: rules/rules.admin_export.inc:138
+msgid "Copy these data and paste them into the import page, to import."
+msgstr "Για να γίνει εισαγωγή, αντιγράψτε αυτά τα δεδομένα και επικολλήστε τα στη σελίδα εισαγωγής."
+
+#: rules/rules.admin_export.inc:161
+msgid "Please select the items to export."
+msgstr "Επιλέξτε τα αντικείμενα για εξαγωγή."
+
+#: rules/rules.admin_render.inc:19
+msgid "Conditions"
+msgstr "Συνθήκες"
+
+#: rules/rules.admin_render.inc:23 rules/rules.module:758
+msgid "AND"
+msgstr "ΚΑΙ"
+
+#: rules/rules.admin_render.inc:25
+msgid "Actions"
+msgstr "Ενέργειες"
+
+#: rules/rules.admin_render.inc:31
+msgid "Add a condition"
+msgstr "Προσθήκη συνθήκης"
+
+#: rules/rules.admin_render.inc:32
+msgid "Add an action"
+msgstr "Προσθήκη ενέργειας"
+
+#: rules/rules.admin_render.inc:73
+msgid "Indent this condition by adding a logical operation."
+msgstr "Δημιουργήστε εσοχή στη συνθήκη με την προσθήκη μιας λογικής λειτουργίας."
+
+#: rules/rules.admin_render.inc:75;135
+msgid "NOT"
+msgstr "ΟΧΙ"
+
+#: rules/rules.admin_render.inc:115
+msgid "Empty"
+msgstr "Άδειο"
+
+#: rules/rules.admin_render.inc:136
+msgid "!not%label group"
+msgstr "Ομάδα !not%label"
+
+#: rules/rules.admin_render.inc:137
+msgid "Add another condition to this group"
+msgstr "Προσθήκη κι άλλης συνθήκης στην ομάδα"
+
+#: rules/rules.admin_render.inc:138
+msgid "Edit this condition group"
+msgstr "Επεξεργασία της ομάδας συνθηκών"
+
+#: rules/rules_admin.sets.inc:17
+msgid "Name"
+msgstr "Όνομα"
+
+#: rules/rules_admin.sets.inc:46
+msgid "There are no rule sets."
+msgstr "Δεν υπάρχουν σύνολα κανόνων."
+
+#: rules/rules_admin.sets.inc:89
+msgid "Are you sure you want to revert %label?"
+msgstr "Είστε σίγουροι για την επαναφορά του %label;"
+
+#: rules/rules_admin.sets.inc:91 rules/rules.module:77
+msgid "Revert"
+msgstr "Επαναφορά"
+
+#: rules/rules_admin.sets.inc:98
+msgid "%label has been reverted."
+msgstr "Το %label επαναφέρθηκε."
+
+#: rules/rules_admin.sets.inc:143
+msgid "Rule set settings"
+msgstr "Ρυθμίσεις συνόλου κανόνων"
+
+#: rules/rules_admin.sets.inc:149
+msgid "Choose an appropriate label for this rule set."
+msgstr "ΕΠιλέξτε μια κατάλληλη ετικέτα για το σύνολο κανόνων."
+
+#: rules/rules_admin.sets.inc:155;345
+msgid "Machine readable name"
+msgstr "Αναγνωρίσιμο από τη μηχανή όνομα"
+
+#: rules/rules_admin.sets.inc:174
+msgid "The rule set %label has been updated."
+msgstr "Το σύνολο κανόνων %label ενημερώθηκε."
+
+#: rules/rules_admin.sets.inc:191
+msgid "Arguments"
+msgstr "Παράμετροι"
+
+#: rules/rules_admin.sets.inc:197
+msgid "You may specify some arguments, which have to be passed to the rule set when it is invoked. For each argument you have to specify a certain data type, a label and a unique machine readable name containing only alphanumeric characters, and underscores."
+msgstr "Μπορείτε να ορίσετε ορισμένες παραμέτρους, που θα περνιούνται στο σύνολο κανόνων όταν αυτό καλείται. Για κάθε παράμετρο, πρέπει να ορίσετε μια ετικέτα, ένα συγκεκριμένο τύπο δεδομένων και ένα μοναδικό αναγνωρίσιμο από τη μηχανή όνομα που να περιέχει μόνο αλφαριθμητικούς χαρακτήρες και το χαρακτήρα '_' (underscore)."
+
+#: rules/rules_admin.sets.inc:208
+msgid "More arguments"
+msgstr "Περισσότερες παραμέτρους"
+
+#: rules/rules_admin.sets.inc:209
+msgid "If the amount of boxes above isn't enough, click here to add more arguments."
+msgstr "Αν τα πεδία παραπάνω δεν είναι αρκετά, πατήστε εδώ για την προσθήκη περισσότερων παραμέτρων."
+
+#: rules/rules_admin.sets.inc:228;241
+msgid "The name may contain only digits, numbers and underscores."
+msgstr "Το όνομα μπορεί να περιέχει μόνο αλφαβητικούς χαρακτήρες, αριθμούς και '_' (underscore)."
+
+#: rules/rules_admin.sets.inc:237
+msgid "All fields of an argument are required."
+msgstr "Είναι απαραίτητα όλα τα πεδία της παραμέτρου."
+
+#: rules/rules_admin.sets.inc:255
+msgid "Each name may be used only once."
+msgstr "Κάθε όνομα μπορεί να χρησιμοποιηθεί μόνο μία φορά."
+
+#: rules/rules_admin.sets.inc:283;344
+msgid "Data type"
+msgstr "Τύπος δεδομένων"
+
+#: rules/rules_admin.sets.inc:380
+msgid "The rule set %label has been added."
+msgstr "Το σύνολο κανόνων %label προστέθηκε."
+
+#: rules/rules.variables.inc:116
+msgid "Element %name has not been executed. There are not all execution arguments needed by an input evaluator available."
+msgstr "Το στοιχείο %name εκτελέστηκε. Δεν υπάρχουν διαθέσιμες όλες οι παράμετροι εκτέλεσης που απαιτούνται για την επαλήθευση εισόδου."
+
+#: rules/rules.variables.inc:133
+msgid "Element %name has not been executed. There are not all execution arguments available."
+msgstr "Το στοιχείο %name δεν εκτελέστηκε. Δεν υπάρχουν διαθέσιμες όλες οι παράμετροι εκτέλεσης."
+
+#: rules/rules.variables.inc:161
+msgid "Successfully added the new variable @arg"
+msgstr "Η νέα μεταβλητή @arg προστέθηκε με επιτυχία."
+
+#: rules/rules.variables.inc:164
+msgid "Unknown variable name %var return by action %name."
+msgstr "Η ενέργεια %name επέστρεψε την άγνωστη μεταβλητή με όνομα %var."
+
+#: rules/rules.variables.inc:273
+msgid "Loaded variable @arg"
+msgstr "Η μεταβλητή @arg φορτώθηκε στη μνήμη"
+
+#: rules/rules.variables.inc:312
+msgid "Saved variable @name of type @type."
+msgstr "Η μεταβλητή @name του τύπου @type αποθηκεύθηκε."
+
+#: rules/rules.variables.inc:315
+msgid "Failed saving variable @name of type @type."
+msgstr "Η αποθήκευση της μεταβλητής @name του τύπου @type απέτυχε."
+
+#: rules/rules.module:518
+msgid "%label has been invoked."
+msgstr "Το %label κλήθηκε."
+
+#: rules/rules.module:530
+msgid "Evaluation of %label has been finished."
+msgstr "Η επαλήθευση του %label τελείωσε."
+
+#: rules/rules.module:635
+msgid "Not executing the rule %name on rule set %set to prevent recursion."
+msgstr "Ο κανόνας %name του συνόλου κανόνων %set δεν εκτελέστηκε για την αποφυγή αναδρομής."
+
+#: rules/rules.module:640
+msgid "Executing the rule %name on rule set %set"
+msgstr "Εκτέλεση του κανόνα %name του συνόλου κανόνων %set"
+
+#: rules/rules.module:689
+msgid "Action execution: @name"
+msgstr "Εκτέλεση της ενέργειας: @name"
+
+#: rules/rules.module:713
+msgid "Condition %name evaluated to @bool."
+msgstr "Η συνθήκη %name επαληθεύτηκε σε @bool."
+
+#: rules/rules.module:757
+msgid "OR"
+msgstr "Η"
+
+#: rules/rules.module:813
+msgid "unlabelled"
+msgstr "χωρίς ετικέτα"
+
+#: rules/rules.module:913
+msgid "An error occured during rule evaluation. This is the evaluation log:"
+msgstr "Υπήρξε σφάλμα κατά την επαλήθευση του κανόνα. Το ημερολόγιο της επαλήθευσης είναι:"
+
+#: rules/rules.module:1077;33 rules/rules.info:0;0 rules_scheduler/rules_scheduler.info:0 rules_test/rules_test.info:0
+msgid "Rules"
+msgstr "Κανόνες"
+
+#: rules/rules.module:1082
+msgid "Rule Sets"
+msgstr "Σύνολα Κανόνων"
+
+#: rules/rules.module:1096
+msgid "Unable to find %type of name %name with the label %label. Perhaps the according module has been deactivated."
+msgstr "Δεν ήταν δυνατή η εύρεση του %type του ονόματος %name με ετικέτα %label. Πιθανόν να έχει απενεργοποιηθεί η αντίστοιχη μονάδα."
+
+#: rules/rules.module:1099
+msgid "Unable to find %type of name %name. Perhaps the according module has been deactivated."
+msgstr "Δεν ήταν δυνατή η εύρεση του %type του ονόματος %name. Πιθανόν να έχει απενεργοποιηθεί η αντίστοιχη μονάδα."
+
+#: rules/rules.module:1112
+msgid "Show rule configuration"
+msgstr "Εμφάνιση παραμετροποίησης κανόνα"
+
+#: rules/rules.module:268
+msgid "administer rules"
+msgstr "διαχείριση κανόνων"
+
+#: rules/rules.module:34
+msgid "Rules administration links."
+msgstr "Σύνδεσμοι διαχείρισης κανόνων."
+
+#: rules/rules.module:43
+msgid "Triggered rules"
+msgstr "Κανόνες που εν δυνάμει εκτελούνται"
+
+#: rules/rules.module:44
+msgid "Customize your site by configuring rules that are evaluated on events."
+msgstr "Προσαρμογή του ιστοτόπου σας με την παραμετροποίηση κανόνων που επαληθεύονται σε συμβάντα."
+
+#: rules/rules.module:53;173;204
+msgid "Overview"
+msgstr "Σύνοψη"
+
+#: rules/rules.module:58;210
+msgid "Add a new rule"
+msgstr "Προσθήκη νέου κανόνα"
+
+#: rules/rules.module:88
+msgid "Import / Export"
+msgstr "Εισαγωγή / Εξαγωγή"
+
+#: rules/rules.module:111
+msgid "Settings"
+msgstr "Ρυθμίσεις"
+
+#: rules/rules.module:130
+msgid "Add"
+msgstr "Προσθήκη"
+
+#: rules/rules.module:138
+msgid "Edit"
+msgstr "Επεξεργασία"
+
+#: rules/rules.module:156
+msgid "Clone rule"
+msgstr "Κλωνοποίηση κανόνα"
+
+#: rules/rules.module:164
+msgid "Rule sets"
+msgstr "Σύνολα κανόνων"
+
+#: rules/rules.module:165
+msgid "Create and manage rule sets."
+msgstr "Δημιουργία και διαχείριση συνόλων κανόνων."
+
+#: rules/rules.module:178
+msgid "Add a new rule set"
+msgstr "Προσθήκη νέου συνόλου κανόνων"
+
+#: rules/rules.module:0 rules/modules/system.rules.inc:115;165
+msgid "rules"
+msgstr "κανόνες"
+
+#: rules/rules.install:44
+msgid "The name of the item."
+msgstr "Το όνομα του αντικειμένου."
+
+#: rules/rules.install:51 rules_scheduler/rules_scheduler.install:49
+msgid "The whole, serialized item configuration."
+msgstr "Ολόκληρη η παραμετροποίηση του αντικειμένου, σειριοποιημένη."
+
+#: rules/rules.install:59
+msgid "Cache table for the rules engine to store configured items."
+msgstr "Πίνακας προσωρινής μνήμης για την αποθήκευση των παραμετροποιημένων αντικειμένων από τη μηχανή κανόνων."
+
+#: rules/rules.install:84
+msgid "Successfully imported rule %label."
+msgstr "Ο κανόνας %label εισήχθηκε με επιτυχία."
+
+#: rules/rules.install:89
+msgid "Failed importing the rule %label."
+msgstr "Απέτυχε η εισαγωγή του κανόνα %label."
+
+#: rules/rules.install:182
+msgid "No upgrade information for the element %name found. Aborting."
+msgstr "Δεν υπάρχουν πληροφορίες αναβάθμισης για το στοιχείο %name. Ακυρώθηκε."
+
+#: rules/rules.info:0
+msgid "Lets you define conditionally executed actions based on occurring events."
+msgstr "Επιτρέπει τον ορισμό ενεργειών εκτελούμενες βάσει συνθηκών σε επαναλαμβανόμενα συμβάντα."
+
+#: rules/modules/comment.rules.inc:15
+msgid "After saving a new comment"
+msgstr "Μετά την αποθήκευση νέου σχολίου"
+
+#: rules/modules/comment.rules.inc:17
+msgid "created comment"
+msgstr "σχόλιο δημιουργήθηκε"
+
+#: rules/modules/comment.rules.inc:21
+msgid "After saving an updated comment"
+msgstr "Μετά την αποθήκευση ενημερωμένου σχολίου"
+
+#: rules/modules/comment.rules.inc:23
+msgid "updated comment"
+msgstr "σχόλιο ενημερώθηκε"
+
+#: rules/modules/comment.rules.inc:27
+msgid "After deleting a comment"
+msgstr "Μετά τη διαγραφή σχολίου"
+
+#: rules/modules/comment.rules.inc:29
+msgid "deleted comment"
+msgstr "σχόλιο διαγράφηκε"
+
+#: rules/modules/comment.rules.inc:33
+msgid "Comment is being viewed"
+msgstr "Το σχόλιο αναγνώσκεται"
+
+#: rules/modules/comment.rules.inc:35
+msgid "viewed comment"
+msgstr "σχόλιο αναγνώστηκε"
+
+#: rules/modules/comment.rules.inc:38
+msgid "After publishing a comment"
+msgstr "Μετά τη δημοσίευση σχολίου"
+
+#: rules/modules/comment.rules.inc:40
+msgid "published comment"
+msgstr "σχόλιο δημοσιεύθηκε"
+
+#: rules/modules/comment.rules.inc:44
+msgid "After unpublishing a comment"
+msgstr "Μετά την άρση δημοσίευσης σχολίου"
+
+#: rules/modules/comment.rules.inc:46
+msgid "unpublished comment"
+msgstr "έγινε άρση δημοσίευσης σχολίου"
+
+#: rules/modules/comment.rules.inc:63
+msgid "author"
+msgstr "συγγραφέας"
+
+#: rules/modules/comment.rules.inc:68
+msgid "commented content"
+msgstr "περιεχόμενο που σχολιάστηκε"
+
+#: rules/modules/comment.rules.inc:73
+msgid "commented content author"
+msgstr "συγγραφέας του περιεχόμενο που σχολιάστηκε"
+
+#: rules/modules/comment.rules.inc:105 rules/modules/rules.rules.inc:393
+msgid "Comment"
+msgstr "Σχόλιο"
+
+#: rules/modules/node.rules.inc:14
+msgid "After saving new content"
+msgstr "Μετά την αποθήκευση νέας ύλης"
+
+#: rules/modules/node.rules.inc:16
+msgid "created content"
+msgstr "ύλη δημιουργήθηκε"
+
+#: rules/modules/node.rules.inc:16;22;28
+msgid "content's author"
+msgstr "συγγραφέας της ύλης"
+
+#: rules/modules/node.rules.inc:20
+msgid "After updating existing content"
+msgstr "Μετά την ενημέρωση υπάρχουσας ύλης"
+
+#: rules/modules/node.rules.inc:22
+msgid "updated content"
+msgstr "ύλη ενημερώθηκε"
+
+#: rules/modules/node.rules.inc:26
+msgid "Content is going to be saved"
+msgstr "Ύλη πρόκειται να αποθηκευθεί"
+
+#: rules/modules/node.rules.inc:28
+msgid "saved content"
+msgstr "ύλη αποθηκεύθηκε"
+
+#: rules/modules/node.rules.inc:32
+msgid "Content is going to be viewed"
+msgstr "Ύλη πρόκειται να αναγνωστεί"
+
+#: rules/modules/node.rules.inc:34 rules/modules/user.rules.inc:31
+msgid "Note that if drupal's page cache is enabled, this event won't be generated for pages served from cache."
+msgstr "Πρέπει να σημειωθεί ότι όταν η λανθάνουσα μνήμη του Drupal είναι ενεργοποιημένη, το συμβάν δε θα λάβει χώρα για σελίδες που εξυπηρετούνται από τη λανθάνουσα μνήμη."
+
+#: rules/modules/node.rules.inc:35
+msgid "viewed content"
+msgstr "ύλη αναγνώστηκε"
+
+#: rules/modules/node.rules.inc:35;43
+msgid "content author"
+msgstr "συγγραφέας ύλης"
+
+#: rules/modules/node.rules.inc:36
+msgid "Content is displayed as teaser"
+msgstr "Η ύλη εμφανίζεται ως περίληψη"
+
+#: rules/modules/node.rules.inc:37
+msgid "Content is displayed as page"
+msgstr "Η ύλη εμφανίζεται ως σελίδα"
+
+#: rules/modules/node.rules.inc:41
+msgid "After deleting content"
+msgstr "Μετά τη διαγραφή ύλης"
+
+#: rules/modules/node.rules.inc:43
+msgid "deleted content"
+msgstr "ύλη διαγράφηκε"
+
+#: rules/modules/node.rules.inc:70
+msgid "unchanged content"
+msgstr "μη αλλαγμένη ύλη"
+
+#: rules/modules/node.rules.inc:75
+msgid "unchanged content's author"
+msgstr "συγγραφέας μη αλλαγμένης ύλης"
+
+#: rules/modules/node.rules.inc:114;172;285 rules/modules/path.rules.inc:56 rules/modules/rules.rules.inc:384
+msgid "Content"
+msgstr "Ύλη"
+
+#: rules/modules/node.rules.inc:119
+msgid "Content has type"
+msgstr "Η ύλη έχει τύπο"
+
+#: rules/modules/node.rules.inc:120
+msgid "Evaluates to TRUE, if the given content has one of the selected content types."
+msgstr "Επαληθεύει σε ΑΛΗΘΕΙΑ, αν το δοθέν περιεχόμενο είναι ενός από τους επιλεγμένους τύπους ύλης."
+
+#: rules/modules/node.rules.inc:123
+msgid "Content is published"
+msgstr "Το περιεχομένο είναι δημοσιευμένο"
+
+#: rules/modules/node.rules.inc:126
+msgid "Content is sticky"
+msgstr "Το περιεχόμενο είναι "
+
+#: rules/modules/node.rules.inc:129
+msgid "Content is promoted to frontpage"
+msgstr "Το περιεχόμενο προβιβάζεται στην κεντρική σελίδα"
+
+#: rules/modules/node.rules.inc:170
+msgid "Set the content author"
+msgstr "Ορισμός του συγγραφέα του περιεχομένου"
+
+#: rules/modules/node.rules.inc:173;180
+msgid "User, which is set as author"
+msgstr "Χρήστης, που ορίζεται ως συγγραφέας"
+
+#: rules/modules/node.rules.inc:178
+msgid "Add new content"
+msgstr "Προσθήκη νέου σχολίου"
+
+#: rules/modules/node.rules.inc:183
+msgid "Title"
+msgstr "Τίτλος"
+
+#: rules/modules/node.rules.inc:184
+msgid "The title of the newly created content."
+msgstr "Ο τίτλος του νεο-δημιουργηθέντος περιεχομένου."
+
+#: rules/modules/node.rules.inc:190
+msgid "New content"
+msgstr "Νέο περιεχόμενο"
+
+#: rules/modules/node.rules.inc:198
+msgid "Load content by id"
+msgstr "Φόρτωση περιεχομένου με το αναγνωριστικό"
+
+#: rules/modules/node.rules.inc:200
+msgid "Content ID"
+msgstr "Αναγνωριστικό περιεχομένου"
+
+#: rules/modules/node.rules.inc:203
+msgid "Content Revision ID"
+msgstr "Αναγνωριστικό αναθεώρησης περιεχομένου"
+
+#: rules/modules/node.rules.inc:204
+msgid "If you want to load a specific revision, specify it's revision id. Else leave it empty to load the current revision."
+msgstr "Αν επιθυμείτε να φορτώσετε μια συγκεκριμένη αναθεώρηση, ορίστε το αναγνωριστικό της. Διαφορετικά αφήστε το κενό για να φορτωθεί η τρέχουσα αναθεώρηση."
+
+#: rules/modules/node.rules.inc:211
+msgid "Loaded content"
+msgstr "Το περιεχόμενο φορτώθηκε"
+
+#: rules/modules/node.rules_forms.inc:13
+msgid "Content types"
+msgstr "Τύποι ύλης"
+
+#: rules/modules/node.rules_forms.inc:26
+msgid "@node is @type"
+msgstr "Το @node είναι του τύπου @type"
+
+#: rules/modules/node.rules_forms.inc:29
+msgid "@node is published"
+msgstr "Το @node είναι δημοσιευμένο"
+
+#: rules/modules/node.rules_forms.inc:32
+msgid "@node is sticky"
+msgstr "Το @node είναι μόνιμο στην κορυφή"
+
+#: rules/modules/node.rules_forms.inc:35
+msgid "@node is promoted to frontpage"
+msgstr "Το @node είναι προβιβασμένο στην κεντρική σελίδα"
+
+#: rules/modules/node.rules_forms.inc:42
+msgid "Set the author of @node to @author"
+msgstr "Ορισμός του συγγραφέα του @node ο @author"
+
+#: rules/modules/node.rules_forms.inc:51
+msgid "Content type to be used"
+msgstr "Τύπος ύλης που θα χρησιμοποιηθεί"
+
+#: rules/modules/node.rules_forms.inc:54
+msgid "Select a content type that will be created when this action is invoked."
+msgstr "Επιλέξτε ένα τύπο ύλης που θα δημιουργηθεί όταν προκληθεί αυτή η ενέργεια."
+
+#: rules/modules/node.rules_forms.inc:59
+msgid "Create content only if the given author has access permission to do so"
+msgstr "Να δημιουργηθεί το περιεχόμενο αν ο συγγραφέας που ορίζεται έχει την άδεια πρόσβασης να το κάνει"
+
+#: rules/modules/node.rules_forms.inc:65
+msgid "New content of type @type"
+msgstr "Νέο περιεχόμενο του τύπου @type"
+
+#: rules/modules/node.rules_forms.inc:72
+msgid "Content with id @id"
+msgstr "Περιεχόμενο με αναγνωριστικό @id"
+
+#: rules/modules/node.rules_forms.inc:80 rules/modules/rules.rules.inc:308
+msgid "content"
+msgstr "περιεχόμενο"
+
+#: rules/modules/path.rules.inc:15
+msgid "Path has alias(es)"
+msgstr "Η διαδρομή έχει ψευδώνυμο(α)"
+
+#: rules/modules/path.rules.inc:20
+msgid "URL alias exists"
+msgstr "Υπάρχει ψευδώνυμο URL"
+
+#: rules/modules/path.rules.inc:49
+msgid "Create or delete an URL alias"
+msgstr "Δημιουργία ή διαγραφή ενός ψευδώνυμου URL"
+
+#: rules/modules/path.rules.inc:54
+msgid "Create or delete a content's URL alias"
+msgstr "Δημιουργία ή διαγραφή του ψευδώνυμου URL της ύλης"
+
+#: rules/modules/path.rules_forms.inc:12;48
+msgid "Existing system path"
+msgstr "Υπάρχουσα διαδρομή συστήματος"
+
+#: rules/modules/path.rules_forms.inc:15
+msgid "Specify the existing path for which you want to check if an URL alias exists."
+msgstr "Ορισμός της υπάρχουσας διαδρομής για την οποία θέλετε να ελέγξετε αν υπάρχει ψευδώνυμο URL."
+
+#: rules/modules/path.rules_forms.inc:25;57
+msgid "Path alias"
+msgstr "Ψευδώνυμο διαδρομής"
+
+#: rules/modules/path.rules_forms.inc:28
+msgid "Specify the path alias which you want to check if it already exists."
+msgstr "Ορισμός του ψευδώνυμου διαδρομής για το οποίο θέλετε να ελέγξετε αν υπάρχει ήδη"
+
+#: rules/modules/path.rules_forms.inc:34
+msgid "Before checking, replace non ascii characters with"
+msgstr "Πριν τον έλεγχο, να αντικατασταθούν οι μη ascii χαρακτήρες με"
+
+#: rules/modules/path.rules_forms.inc:38;70
+msgid "Leave this textfield empty to disable the replacement of non ascii characters."
+msgstr "Αφήστε το πεδίο κειμένου άδειο για να απενεργοποιήσετε την αντικατάσταση των μη ascii χαρακτήρων"
+
+#: rules/modules/path.rules_forms.inc:51
+msgid "Specify the existing path you wish to alias. For example: node/28, forum/1, taxonomy/term/1+2."
+msgstr "Ορισμός της υπάρχουσας διαδρομής για την οποία θέλετε να δημιουργήσετε ψευδώνυμο. Για παράδειχμα: node/28, forum/1, taxonomy/term/1+2."
+
+#: rules/modules/path.rules_forms.inc:52
+msgid "Leave it empty to delete URL aliases pointing to the given path alias."
+msgstr "Αφήστε το κενό για να διαγραφούν τα ψευδώνυμα URL που δείχνουν στο συγκεκριμένο ψευδώνυμο διαδρομής."
+
+#: rules/modules/path.rules_forms.inc:60
+msgid "Specify an alternative path by which this data can be accessed. For example, type \"about\" when writing an about page. Use a relative path and do not add a trailing slash or the URL alias will not work."
+msgstr "Ορισμός μιας εναλλακτικής διαδρομής μέσω της οποίας θα προσπελαστούν τα δεδομένα. Για παράδειγμα, εισάγετε \"σχετικά\" όταν συντάσσετε μια σελίδα σχετικά. Χρησιμοποιήστε μια σχετική διαδρομή και μην εισάγετε κάθετο στο τέλος, διαφορετικά το ψευδώνυμο URL δε θα λειτουργήσει."
+
+#: rules/modules/path.rules_forms.inc:61
+msgid "Leave it empty to delete URL aliases pointing to the given system path."
+msgstr "Αφήστε το κενό για να διαγραφούν τα ψευδώνυμα URL που δείχνουν στη συγκεκριμένη διαδρομή συστήματος."
+
+#: rules/modules/path.rules_forms.inc:66
+msgid "Replace non ascii characters with"
+msgstr "Αντικατάσταση των μη ascii χαρακτήρων με"
+
+#: rules/modules/path.rules_forms.inc:77
+msgid "You have to enter at least eiter an existing system path or a path alias."
+msgstr "Πρέπει να εισάγετε τουλάχιστον μια υπάρχουσα διαδρομή συστήματος ή ένα ψευδώνυμο διαδρομής."
+
+#: rules/modules/path.rules_forms.inc:89
+msgid "Create or delete @node's URL alias"
+msgstr "Δημιουργία ή διαγραφή του ψευδώνυμου URL του @node"
+
+#: rules/modules/path.rules_forms.inc:93
+msgid "This action only works if the acting user has %perm1 or %perm2 permsissions. If this does not suit, use the generic \"Create or delete an URL alias\" action together with the existing system path \"node/{ID}\"."
+msgstr "Η ενέργεια δουλεύει αν ο ενεργός χρήστης έχει τις άδειες %perm1 ή %perm2. Αν αυτό δεν ταιριάζει, χρησιμοποιήστε τη γενική ενέργεια \"Δημιουργία ή διαγραφή ενός ψευδώνυμου URL\" μαζί με μια υπάρχουσα διαδρομή συστήματος \"node/{ID}\"."
+
+#: rules/modules/path.rules_forms.inc:93
+msgid "create url aliases"
+msgstr "δημιουργία ψευδώνυμων url"
+
+#: rules/modules/path.rules_forms.inc:93
+msgid "administer url aliases"
+msgstr "διαχείριση ψευδώνυμων url"
+
+#: rules/modules/php.rules.inc:15
+msgid "PHP Evaluation"
+msgstr "Επαλήθευση PHP"
+
+#: rules/modules/php.rules.inc:63
+msgid "PHP is not evaluated as there are not all necessary variables available."
+msgstr "Η PHP δεν επαληθεύεται καθώς δεν υπάρχουν διαθέσιμες όλες οι απαραίτητες μεταβλητές."
+
+#: rules/modules/php.rules.inc:111;135
+msgid "Execute custom PHP code"
+msgstr "Εκτέλεση προσαρμοσμένου κώδικα PHP"
+
+#: rules/modules/php.rules_forms.inc:11
+msgid "PHP code inside of &lt;?php ?&gt; delimiters will be evaluated and replaced by its output. E.g. &lt;? echo 1+1?&gt; will be replaced by 2."
+msgstr "Κώδικας PHP μέσα στους διαχωριστές &lt;?php ?&gt; θα επαληθευτεί και θα αντικατασταθεί από την έξοδό του. Π.χ. το &lt;? echo 1+1?&gt; θα αντικατασταθεί από το 2."
+
+#: rules/modules/php.rules_forms.inc:12
+msgid "Furthermore you can make use of the following variables:"
+msgstr "Επιπρόσθετα, μπορείτε να κάνετε χρήση των παρακάτω μεταβλητών:"
+
+#: rules/modules/php.rules_forms.inc:13
+msgid "Variable"
+msgstr "Μεταβλητή"
+
+#: rules/modules/php.rules_forms.inc:13
+msgid "Type"
+msgstr "Τύπος"
+
+#: rules/modules/php.rules_forms.inc:15
+msgid "Intelligent saving"
+msgstr "Έξυπνη αποθήκευση"
+
+#: rules/modules/php.rules_forms.inc:27
+msgid "Yes"
+msgstr "Ναι"
+
+#: rules/modules/php.rules_forms.inc:30
+msgid "No"
+msgstr "Όχι"
+
+#: rules/modules/php.rules_forms.inc:38
+msgid "Note that variables are passed by reference, so you can change them."
+msgstr "Πρέπει να σημειωθεί ότι οι μεταβλητές περνιούνται με αναφορά, για να μπορείτε να τις αλλάζετε."
+
+#: rules/modules/php.rules_forms.inc:39
+msgid "If you want to make the changes permanent, you can let rules intelligently save the changes when the variable's data type supports it."
+msgstr "Αν θέλετε να κάνετε τις αλλαγές μόνιμες, μπορείτε να αφήσετε τη μονάδα rules να αποθηκεύει με έξυπνο τρόπο τις αλλαγές όταν ο τύπος δεδομένων της μεταβλητής το υποστηρίζει."
+
+#: rules/modules/php.rules_forms.inc:40
+msgid "To make use of \"intelligent saving\" just return an array of variables to save, e.g.: !code So variables are saved only once, even if modified multiple times."
+msgstr "Για να κάνετε χρήση της \"έξυπνης αποθήκευσης\" απλά να γίνεται επιστροφή ενός πίνακα μεταβλητών για αποθήκευση, πχ. !code Έτσι οι μεταβλητές αποθηκεύονται μόνο μία φορά, ακόμα και αν τροποποιούνται πολλές φορές."
+
+#: rules/modules/php.rules_forms.inc:52;78
+msgid "PHP Code"
+msgstr "Κώδικας PHP"
+
+#: rules/modules/php.rules_forms.inc:54;80
+msgid "The code that should be executed. Don't include &lt;?php ?&gt; delimiters."
+msgstr "Ο κώδικας που θα εκτελείται. Μην συμπεριλάβετε τους διαχωριστές &lt;?php ?&gt;."
+
+#: rules/modules/php.rules_forms.inc:80
+msgid "Be sure to always return a boolean value, e.g.: !code"
+msgstr "Πρέπει να επιστρέφετε πάντα μια τιμή τύπου boolean, πχ. !code"
+
+#: rules/modules/php.rules_forms.inc:92
+msgid "The code has to always return a boolean value."
+msgstr "Ο κώδικας πρέπει να επιστρέφει πάντα μια τιμή τύπου boolean."
+
+#: rules/modules/rules.rules.inc:16
+msgid "String"
+msgstr "Αλφαριθμητικό"
+
+#: rules/modules/rules.rules.inc:22
+msgid "Number"
+msgstr "Αριθμός"
+
+#: rules/modules/rules.rules.inc:28
+msgid "Date"
+msgstr "Ημερομηνία"
+
+#: rules/modules/rules.rules.inc:34;167
+msgid "Truth value"
+msgstr "Τιμή αλήθειας"
+
+#: rules/modules/rules.rules.inc:40
+msgid "A fixed value"
+msgstr "Μια σταθερή τιμή"
+
+#: rules/modules/rules.rules.inc:90
+msgid "Format: %format or other values known by the PHP !strtotime function like \"+1 day\". "
+msgstr "Μορφοποίηση: %format ή άλλες τιμές που αναγνωρίζει η συνάρτηση !strtotime της PHP, όπως \"+1 day\"."
+
+#: rules/modules/rules.rules.inc:91
+msgid "You may also enter a timestamp in GMT. E.g. use !code together with the PHP input evalutor to specify a date one day after the evaluation time. "
+msgstr "Μπορείτε επίσης να εισάγετε μια ετικέτα χρονικής στιγμής σε GMT. Πχ. χρησιμοποιήστε !code μαζί με τον επαληθευτή εισόδου της PHP για τον ορισμό μιας ημερομηνίας μίας ημέρας μετά την ημερομηνία επαλήθευσης."
+
+#: rules/modules/rules.rules.inc:111
+msgid "The argument %label is no valid date."
+msgstr "Η παράμετρος %label είναι μη έγκυρη ημερομηνία."
+
+#: rules/modules/rules.rules.inc:128
+msgid "Just enter 1 for TRUE, 0 for FALSE or make use of an input evaluator."
+msgstr "Εισάγετε 1 για ΑΛΗΘΕΙΑ, 0 για ΨΕΥΔΟΣ ή κάντε χρήση του επαληθευτή εισόδου."
+
+#: rules/modules/rules.rules.inc:147
+msgid "Textual comparison"
+msgstr "Σύγκριση κειμένου"
+
+#: rules/modules/rules.rules.inc:149
+msgid "Text 1"
+msgstr "Κείμενο 1"
+
+#: rules/modules/rules.rules.inc:150
+msgid "Text 2"
+msgstr "Κείμενο 2"
+
+#: rules/modules/rules.rules.inc:152
+msgid "TRUE is returned, if both texts are equal."
+msgstr "Επιστρέφεται ΑΛΗΘΕΙΑ, αν τα δύο κείμενα είναι το ίδιο."
+
+#: rules/modules/rules.rules.inc:156
+msgid "Numeric comparison"
+msgstr "Σύγκριση αριθμών"
+
+#: rules/modules/rules.rules.inc:158
+msgid "Number 1"
+msgstr "Αριθμός 1"
+
+#: rules/modules/rules.rules.inc:159
+msgid "Number 2"
+msgstr "Αριθμός 2"
+
+#: rules/modules/rules.rules.inc:161
+msgid "Select greater than, less than or equal to."
+msgstr "Επιλέξτε το μεγαλύτερο από, μικρότερο από ή το ίσο με."
+
+#: rules/modules/rules.rules.inc:165
+msgid "Check a truth value"
+msgstr "Επιλέξτε μια τιμή αλήθειας"
+
+#: rules/modules/rules.rules.inc:234
+msgid "Add a new @type variable"
+msgstr "Προσθήκη νέας μεταβλητής τύπου @type"
+
+#: rules/modules/rules.rules.inc:242
+msgid "Added @type"
+msgstr "Ο τύπος @type προστέθηκε"
+
+#: rules/modules/rules.rules.inc:254
+msgid "Save a @type"
+msgstr "Αποθήκευση ενός τύπου @type"
+
+#: rules/modules/rules.rules.inc:349
+msgid "Permanently apply changes"
+msgstr "Μόνιμη εφαρμογή αλλαγών"
+
+#: rules/modules/rules.rules.inc:350
+msgid "If checked, changes to the argument are saved automatically."
+msgstr "Αν επιλεχτεί, οι αλλαγές στην παράμετρο θα αποθηκεύονται αυτόματα."
+
+#: rules/modules/rules.rules.inc:402 rules/modules/user.rules.inc:102;277
+msgid "User"
+msgstr "Χρήστης"
+
+#: rules/modules/rules.rules_forms.inc:11
+msgid "Two texts to compare"
+msgstr "Δύο κείμενα προς σύγκριση"
+
+#: rules/modules/rules.rules_forms.inc:15
+msgid "Evaluate the second text as a regular expression."
+msgstr "Επαλήθευση του δεύτερου κειμένου ως κανονική έκφραση."
+
+#: rules/modules/rules.rules_forms.inc:30
+msgid "Greater than"
+msgstr "Μεγαλύτερο από"
+
+#: rules/modules/rules.rules_forms.inc:30
+msgid "Equal to"
+msgstr "Ίσο με"
+
+#: rules/modules/rules.rules_forms.inc:30
+msgid "Less than"
+msgstr "Μικρότερο από"
+
+#: rules/modules/rules.rules_forms.inc:36
+msgid "Check a !truth, i.e. TRUE or FALSE."
+msgstr "Επιλέξτε αλήθεια, πχ. ΑΛΗΘΕΙΑ ή ΨΕΥΔΟΣ."
+
+#: rules/modules/rules.rules_forms.inc:36
+msgid "truth value"
+msgstr "τιμή αλήθειας"
+
+#: rules/modules/rules.rules_forms.inc:40
+msgid "Usually you need not care about saving changes done by actions. However this action allows you to force saving changes, if no action does."
+msgstr "Συνήθως δε χρειάζεται να φροντίζετε για την αποθήκευση αλλαγών που γίνονται από τις ενέργειες. Ωστόσο, η ενέργεια αυτή σας επιτρέπει να εξαναγκάζετε την αποθήκευση των αλλαγών, αν δεν το κάνει καμία ενέργεια."
+
+#: rules/modules/rules.rules_forms.inc:41
+msgid "Furthermore note that changes are saved intelligently, which means that changes are saved only once, even if multiple actions request saving changes."
+msgstr "Επίσης, πρέπει να σημειωθεί ότι οι αλλαγές σώζονται με έξυπνο τρόπο, που σημαίνει ότι οι αλλαγές αποθηκεύονται μόνο μία φορά, ακόμη και αν πολλαπλές ενέργειες ζητούν την αποθήκευση των αλλαγών."
+
+#: rules/modules/system.rules.inc:15
+msgid "User is going to view a page"
+msgstr "Ο χρήστης πρόκειται να δει μια σελίδα"
+
+#: rules/modules/system.rules.inc:20
+msgid "Cron maintenance tasks are performed"
+msgstr "Εκτελούνται οι ενέργειες συντήρησης του cron"
+
+#: rules/modules/system.rules.inc:35
+msgid "Show a configurable message on the site"
+msgstr "Εμφάνιση ενός παραμετροποιήσιμου μηνύματος στον ιστοτόπο"
+
+#: rules/modules/system.rules.inc:40
+msgid "Set breadcrumb"
+msgstr "Ορισμός ίχνου διαδρομής"
+
+#: rules/modules/system.rules.inc:45
+msgid "Send a mail to a user"
+msgstr "Αποστολή ηλ. ταχυδρομείου σε ένα χρήστη"
+
+#: rules/modules/system.rules.inc:47 rules/modules/system.rules_forms.inc:78
+msgid "Recipient"
+msgstr "Αποδέκτης"
+
+#: rules/modules/system.rules.inc:53
+msgid "Send a mail to an arbitrary mail address"
+msgstr "Αποστολή ενός μηνύματος ηλ. ταχυδρομείου σε μια αυθαίρετη διεύθυνση e-mail"
+
+#: rules/modules/system.rules.inc:58
+msgid "Send a mail to all users of a role"
+msgstr "Αποστολή ενός μηνύματος ηλ. ταχυδρομείου σε όλους τους χρήστες ενός ρόλου"
+
+#: rules/modules/system.rules.inc:63
+msgid "Page redirect"
+msgstr "Ανακατεύθυνση σελίδας"
+
+#: rules/modules/system.rules.inc:69
+msgid "Log to watchdog"
+msgstr "Καταγραφή στο ημερολόγιο"
+
+#: rules/modules/system.rules.inc:87
+msgid "Home"
+msgstr "Αρχική σελίδα"
+
+#: rules/modules/system.rules.inc:115
+msgid "Successfully sent email to %recipient"
+msgstr "Στάλθηκε με επιτυχία e-mail στο %recipient"
+
+#: rules/modules/system.rules.inc:165
+msgid "Successfully sent email to the role(s) %roles."
+msgstr "Στάλθηκε με επιτυχία e-mail στο(υς) ρόλο(υς) %roles."
+
+#: rules/modules/system.rules_forms.inc:15;66;180
+msgid "Message"
+msgstr "Μήνυμα"
+
+#: rules/modules/system.rules_forms.inc:17
+msgid "The message that should be displayed."
+msgstr "Το μήνυμα που θα εμφανιστεί."
+
+#: rules/modules/system.rules_forms.inc:21
+msgid "Display as error message"
+msgstr "Εμφάνιση ως μήνυμα λάθους"
+
+#: rules/modules/system.rules_forms.inc:33
+msgid "Titles"
+msgstr "Τίτλοι"
+
+#: rules/modules/system.rules_forms.inc:35
+msgid "A list of titles for the breadcrumb links, one on each line."
+msgstr "Μια λίστα τίτλων για τους συνδέσμους του ίχνους διαδρομής, ένας σε κάθε γραμμή."
+
+#: rules/modules/system.rules_forms.inc:40
+msgid "Paths"
+msgstr "Διαδρομές"
+
+#: rules/modules/system.rules_forms.inc:42
+msgid "A list of Drupal paths for the breadcrumb links, one on each line."
+msgstr "Μια λίστα διαδρομών του Drupal για τους συνδέσμους ιχνών, καθεμιά σε ξεχωριστή γραμμή."
+
+#: rules/modules/system.rules_forms.inc:54
+msgid "Sender"
+msgstr "Αποστολέας"
+
+#: rules/modules/system.rules_forms.inc:56
+msgid "The mail's from address. Leave it empty to use the site-wide configured address."
+msgstr "Η διεύθυνση από του e-mail. Αφήστε το κενό για να χρησιμοποιηθεί η καθολική διεύθυνση του συστήματος."
+
+#: rules/modules/system.rules_forms.inc:60
+msgid "Subject"
+msgstr "Θέμα"
+
+#: rules/modules/system.rules_forms.inc:62
+msgid "The mail's subject."
+msgstr "Το θέμα του e-mail."
+
+#: rules/modules/system.rules_forms.inc:68
+msgid "The mail's message body."
+msgstr "Το σώμα του μηνύματος του e-mail."
+
+#: rules/modules/system.rules_forms.inc:80
+msgid "The mail's recipient address. You may separate multiple addresses with ','."
+msgstr "Η διεύθυνση του παραλήπτη του e-mail. Μπορείτε να χωρίσετε πολλαπλές διευθύνσεις με το ','."
+
+#: rules/modules/system.rules_forms.inc:96
+msgid "Recipient roles"
+msgstr "Ρόλοι παραληπτών"
+
+#: rules/modules/system.rules_forms.inc:97
+msgid "WARNING: This may cause problems if there are too many users of these roles on your site, as your server may not be able to handle all the mail requests all at once."
+msgstr "ΠΡΟΣΟΧΗ: Αυτό μπορεί να δημιουργήσει προβλήματα αν υπάρχουν πάρα πολλοί χρήστες αυτών των ρόλων στον ιστοτόπο σας, καθώς ο διακομιστής ενδέχεται να μην μπορέσει να χειριστεί όλες τις αιτήσεις e-mail με τη μία."
+
+#: rules/modules/system.rules_forms.inc:101
+msgid "Select the roles whose users should receive this email."
+msgstr "Επιλέξτε τους ρόλους των χρηστών που θα λαμβάνουν το e-mail."
+
+#: rules/modules/system.rules_forms.inc:123
+msgid "To"
+msgstr "Προς"
+
+#: rules/modules/system.rules_forms.inc:145
+msgid "Force redirecting to the given path, even if a destination parameter is given"
+msgstr "Εξαναγκασμός ανακατεύθυνσης στη συγκεκριμένη διαδρομή, ακόμη και αν δίνεται παράμετρος προορισμού"
+
+#: rules/modules/system.rules_forms.inc:146
+msgid "Per default drupal doesn't redirect to the given path, if a destination parameter is set. Instead it redirects to the given destination parameter. Most times, the destination parameter is set by appending it to the URL, e.g. !example_url"
+msgstr "Εξ' ορισμού, το Drupal δεν ανακατευθύνει στη δοθείσα διαδρομή, αν έχει δοθεί παράμετρος προορισμού. Αντίθετα, ανακατευθύνει στη δοθείσα παράμετρο προορισμού. Τις περισσότερες φορές, η παράμετρος προορισμού δίνεται προσθέτοντάς την στη διεύθυνση URL, πχ. !example_url"
+
+#: rules/modules/system.rules_forms.inc:152
+msgid "Override another path redirect by setting the destination parameter"
+msgstr "Παραμερισμός άλλης ανακατεύθυνσης διαδρομής με τον ορισμό της παραμέτρου προορισμού"
+
+#: rules/modules/system.rules_forms.inc:153
+msgid "If checked, the path redirect isn't initiated by this action, but the destination parameter gets set. So if something else redirects, the redirect will use the configured path."
+msgstr "Αν είναι επιλεγμένο, η ανακατεύθυνση διαδρομής δεν τίθεται σε λειτουργία από αυτή την ενέργεια, αλλά ορίζεται η παράμετρος προορισμού. Έτσι, αν υπάρξει από αλλού ανακατεύθυνση, θα χρησιμοποιηθεί η διαδρομή που έχει οριστεί."
+
+#: rules/modules/system.rules_forms.inc:166
+msgid "Severity"
+msgstr "Σοβαρότητα"
+
+#: rules/modules/system.rules_forms.inc:175
+msgid "The category to which this message belongs."
+msgstr "Η κατηγορία στην οποία ανήκει το μήνυμα."
+
+#: rules/modules/system.rules_forms.inc:182
+msgid "The message to log."
+msgstr "Το μήνυμα για καταγραφή."
+
+#: rules/modules/system.rules_forms.inc:187
+msgid "Link (optional)"
+msgstr "Σύνδεσμος (προαιρετικός)"
+
+#: rules/modules/system.rules_forms.inc:189
+msgid "A link to associate with the message."
+msgstr "Ένας σύνδεσμος για συσχέτιση με το μήνυμα."
+
+#: rules/modules/taxonomy.rules.inc:16
+msgid "Load a term"
+msgstr "Φόρτωση ενός όρου"
+
+#: rules/modules/taxonomy.rules.inc:20;36;50;93
+msgid "Taxonomy term"
+msgstr "Όρος ταξινόμησης"
+
+#: rules/modules/taxonomy.rules.inc:24
+msgid "Loading a taxonomy term will allow you to act on this term, for example you will be able to assign this term to a content."
+msgstr "Η φόρτωση ενός όρου ταξινόμησης θα σας επιτρέπει να ενεργήσετε σε αυτό τον όρο, για παράδειγμα θα μπορείτε να ορίσετε τον όρο αυτόν σε κάποιο περιεχόμενο."
+
+#: rules/modules/taxonomy.rules.inc:28
+msgid "Assign a term to content"
+msgstr "Ορισμός ενός όρου σε περιεχόμενο"
+
+#: rules/modules/taxonomy.rules.inc:32
+msgid "Content which term will be assigned to"
+msgstr "Περιεχόμενο στο οποίο θα οριστεί ο όρος"
+
+#: rules/modules/taxonomy.rules.inc:42
+msgid "Remove a term from content"
+msgstr "Αφαίρεση ενός όρου από περιεχόμενο"
+
+#: rules/modules/taxonomy.rules.inc:46
+msgid "Content which term will be removed from"
+msgstr "Περιεχόμενο από το οποίο θα αφαιρεθεί ο όρος"
+
+#: rules/modules/taxonomy.rules_forms.inc:26
+msgid "Vocabulary"
+msgstr "Λεξιλόγιο"
+
+#: rules/modules/taxonomy.rules_forms.inc:28
+msgid "Select the vocabulary."
+msgstr "Επιλογή λεξιλογίου."
+
+#: rules/modules/taxonomy.rules_forms.inc:28
+msgid "There are no existing vocabularies, you should !add one."
+msgstr "Δεν υπάρχουν λεξιλόγια, θα πρέπει να προσθέσετε ένα (!add)."
+
+#: rules/modules/taxonomy.rules_forms.inc:28;51
+msgid "add"
+msgstr "προσθήκη"
+
+#: rules/modules/taxonomy.rules_forms.inc:39
+msgid "Continue"
+msgstr "Συνέχεια"
+
+#: rules/modules/taxonomy.rules_forms.inc:50
+msgid "!vocab's terms"
+msgstr "οι όροι του !vocab"
+
+#: rules/modules/taxonomy.rules_forms.inc:51
+msgid "There are no terms in the vocabulary, you should !add one."
+msgstr "Δεν υπάρχουν όροι σε αυτό το λεξιλόγιο, θα πρέπει να προσθέσετε έναν (!add)."
+
+#: rules/modules/taxonomy.rules_forms.inc:51
+msgid "Select an existing term or manually enter the name of the term that should be added or removed from the content."
+msgstr "Επιλέξτε ένα υπάρχοντα όρο ή εισάγετε το όνομα του όρου που θα πρέπει να προστεθεί ή αφαιρεθεί από το περιεχόμενο."
+
+#: rules/modules/taxonomy.rules_forms.inc:57
+msgid "Select by term id"
+msgstr "Επιλογή με το αναγνωριστικό του όρου"
+
+#: rules/modules/taxonomy.rules_forms.inc:60
+msgid "Optional: enter the term id (<em>not the term name</em>) that should be loaded . If this field is used \"Select a term\" field will be ignored."
+msgstr "Προαιρετικό: εισάγετε το αναγνωριστικό του όρου (<em>όχι το όνομα του όρου</em>) που θα φορτωθεί. Αν χρησιμοποιηθεί αυτό το πεδίο, τότε το πεδίο \"Επιλογή όρου\" θα αγνοηθεί."
+
+#: rules/modules/taxonomy.rules_forms.inc:75
+msgid "- Please choose -"
+msgstr "- Παρακαλώ επιλέξτε -"
+
+#: rules/modules/taxonomy.rules_forms.inc:75
+msgid "- None selected -"
+msgstr "- Κανένα επιλεγμένο -"
+
+#: rules/modules/user.rules.inc:14
+msgid "User account has been created"
+msgstr "Ο λογαριασμός χρήστη έχει δημιουργηθεί"
+
+#: rules/modules/user.rules.inc:16
+msgid "registered user"
+msgstr "εγγεγραμμένος χρήστης"
+
+#: rules/modules/user.rules.inc:20
+msgid "User account details have been updated"
+msgstr "Οι λεπτομέρειες του λογαριασμού χρήστη ενημερώθηκαν"
+
+#: rules/modules/user.rules.inc:22
+msgid "updated user"
+msgstr "ο χρήστης ενημερώθηκε"
+
+#: rules/modules/user.rules.inc:23
+msgid "unchanged user"
+msgstr "ο χρήστης δεν άλλαξε"
+
+#: rules/modules/user.rules.inc:28
+msgid "User page has been viewed"
+msgstr "Η σελίδα του χρήστη αναγνώστηκε"
+
+#: rules/modules/user.rules.inc:30
+msgid "viewed user"
+msgstr "χρήστης αναγνώστηκε"
+
+#: rules/modules/user.rules.inc:34
+msgid "User has been deleted"
+msgstr "Ο χρήστης διαγράφηκε"
+
+#: rules/modules/user.rules.inc:36
+msgid "deleted user"
+msgstr "χρήστης διαγράφηκε"
+
+#: rules/modules/user.rules.inc:40
+msgid "User has logged in"
+msgstr "Ο χρήστης έκανε είσοδο στο σύστημα"
+
+#: rules/modules/user.rules.inc:43
+msgid "logged in user"
+msgstr "χρήστης έκανε είσοδο"
+
+#: rules/modules/user.rules.inc:48
+msgid "User has logged out"
+msgstr "Ο χρήστης έκανε έξοδο από το σύστημα"
+
+#: rules/modules/user.rules.inc:51
+msgid "logged out user"
+msgstr "χρήστης έκανε έξοδο"
+
+#: rules/modules/user.rules.inc:62
+msgid "acting user"
+msgstr "χρήστης προς ενέργεια"
+
+#: rules/modules/user.rules.inc:91
+msgid "Compare two users"
+msgstr "Σύγκριση δύο χρηστών"
+
+#: rules/modules/user.rules.inc:93
+msgid "User account 1"
+msgstr "Λογαριασμός χρήστη 1"
+
+#: rules/modules/user.rules.inc:94
+msgid "User account 2"
+msgstr "Λογαριασμός χρήστη 2"
+
+#: rules/modules/user.rules.inc:96
+msgid "Evaluates to TRUE, if both given user accounts are the same."
+msgstr "Επαληθεύει σε ΑΛΗΘΕΙΑ, αν οι δοθέντες λογαριασμοί χρηστών είναι οι ίδιοι."
+
+#: rules/modules/user.rules.inc:100
+msgid "User has role(s)"
+msgstr "Ο χρήστης έχει το(υς) ρόλο(υς)"
+
+#: rules/modules/user.rules.inc:104
+msgid "Whether the user has the selected role(s)."
+msgstr "Αν ο χρήστης έχει τον(τους) επιλεγμένο(υς) ρόλο(υς)."
+
+#: rules/modules/user.rules.inc:148
+msgid "Add user role"
+msgstr "Προσθήκη ρόλου χρήστη"
+
+#: rules/modules/user.rules.inc:150;157
+msgid "User whos roles should be changed"
+msgstr "Ο χρήστης του οποίου ο ρόλος θα πρέπει να αλλαχθεί"
+
+#: rules/modules/user.rules.inc:155
+msgid "Remove user role"
+msgstr "Αφαίρεση ρόλου χρήστη"
+
+#: rules/modules/user.rules.inc:162
+msgid "Load a user account"
+msgstr "Φόρτωση ενός λογαριασμού χρήστη"
+
+#: rules/modules/user.rules.inc:164
+msgid "Loaded user"
+msgstr "Ο χρήστης φορτώθηκε"
+
+#: rules/modules/user.rules.inc:166
+msgid "Enter an id or a name of the user to load."
+msgstr "Εισάγετε ένα αναγνωριστικό ή όνομα χρήστη για φόρτωση."
+
+#: rules/modules/user.rules.inc:170
+msgid "Create User"
+msgstr "Δημιουργία Χρήστη"
+
+#: rules/modules/user.rules.inc:172 rules/modules/user.rules_forms.inc:71
+msgid "User name"
+msgstr "Όνομα χρήστη"
+
+#: rules/modules/user.rules.inc:173
+msgid "User's E-mail"
+msgstr "E-mail χρήστη"
+
+#: rules/modules/user.rules.inc:178
+msgid "New user"
+msgstr "Νέος χρήστης"
+
+#: rules/modules/user.rules.inc:182
+msgid "New user's password"
+msgstr "Συνθηματικό νέου χρήστη"
+
+#: rules/modules/user.rules.inc:244
+msgid "No appropriate user name. No user has been created."
+msgstr "Μη έγκυρο όνομα χρήστη. Δε δημιουργήθηκε χρήστης."
+
+#: rules/modules/user.rules.inc:247
+msgid "The name %name has been denied access. No user has been created."
+msgstr "Απαγορεύτηκε η πρόσβαση στο όνομα %name. Δε δημιουργήθηκε χρήστης."
+
+#: rules/modules/user.rules.inc:250
+msgid "User !name already exists. No user has been created."
+msgstr "Ο χρήστης !name υπάρχει ήδη. Δε δημιουργήθηκε χρήστης."
+
+#: rules/modules/user.rules.inc:254
+msgid "No appropriate mail address. No user has been created."
+msgstr "Μη έγκυρη διεύθυνση e-mail. Δε δημιουργήθηκε χρήστης."
+
+#: rules/modules/user.rules.inc:257
+msgid "The e-mail address %email has been denied access. No user has been created."
+msgstr "Απαγορεύτηκε η πρόσβαση στη διεύθυνση %email. Δε δημιουργήθηκε χρήστης."
+
+#: rules/modules/user.rules.inc:260
+msgid "The e-mail address %email is already registered. No user has been created."
+msgstr "Η διεύθυνση e-mail %email είναι ήδη καταγεγραμμένη. Δε δημιουργήθηκε χρήστης."
+
+#: rules/modules/user.rules.inc:313
+msgid "Block a user"
+msgstr "Αποκλεισμός χρήστη"
+
+#: rules/modules/user.rules_forms.inc:14
+msgid "Match against any or all of the selected roles"
+msgstr "Ταίριασμα με οποιονδήποτε ή όλους τους επιλεγμένους ρόλους"
+
+#: rules/modules/user.rules_forms.inc:15
+msgid "any"
+msgstr "οποιοσδήποτε"
+
+#: rules/modules/user.rules_forms.inc:15
+msgid "all"
+msgstr "όλοι"
+
+#: rules/modules/user.rules_forms.inc:16
+msgid "If matching against all selected roles the user must have <em>all</em> the roles checked in the list above."
+msgstr "Αν το ταίριασμα γίνει με όλους τους επιλεγμένους ρόλους, ο χρήστης θα πρέπει να έχει <em>όλους</em> τους ρόλους που είναι επιλεγμένοι στη λίστα παραπάνω."
+
+#: rules/modules/user.rules_forms.inc:60
+msgid "Select role(s)"
+msgstr "Επιλογή ρόλου(ων)"
+
+#: rules/modules/user.rules_forms.inc:76
+msgid "Name of the user to be loaded."
+msgstr "Όνομα χρήστη για φόρτωση."
+
+#: rules/modules/user.rules_forms.inc:80
+msgid "User id"
+msgstr "Αναγνωριστικό χρήστη"
+
+#: rules/modules/user.rules_forms.inc:82
+msgid "Id of the user to be loaded."
+msgstr "Αναγνωριστικό χρήστη που θα φορτωθεί."
+
+#: rules/modules/user.rules_forms.inc:88
+msgid "You have to enter the user name or the user id."
+msgstr "Πρέπει να εισάγετε το όνομα ή το αναγνωριστικό χρήστη."
+
+#: rules_scheduler/rules_scheduler.rules.inc:20
+msgid "Schedule @set"
+msgstr "Πρόγραμμα @set"
+
+#: rules_scheduler/rules_scheduler.rules.inc:24
+msgid "Scheduled evaluation date"
+msgstr "Προγραμματίστηκε ημερομηνία για επαλήθευση"
+
+#: rules_scheduler/rules_scheduler.rules.inc:46
+msgid "Packing arguments for scheduling the rule set %set failed."
+msgstr "Το πακετάρισμα παραμέτρων για τον προγραμματισμό του συνόλου κανόνων %set απέτυχε."
+
+#: rules_scheduler/rules_scheduler.rules.inc:61
+msgid "The evaluation of the rule set is going to be scheduled by cron. So make sure you have configured cron correctly by checking your site's !status."
+msgstr "Η επαλήθευση του συνόλου κανόνων θα προγραμματιστεί από το cron. Για το λόγο αυτό, σιγουρευτείτε για την ύπαρξη σωστά ρυθμισμένου cron ελέγχοντας το !status του ιστοτόπου σας."
+
+#: rules_scheduler/rules_scheduler.rules.inc:62
+msgid "Also note that the scheduling time accuracy depends on your configured cron interval."
+msgstr "Πρέπει να σημειωθεί ότι η ακρίβεια της ώρας προγραμματισμού εξαρτάται από το καθορισμένο διάστημα του cron."
+
+#: rules_scheduler/rules_scheduler.module:0
+msgid "rules_scheduler"
+msgstr "rules_scheduler"
+
+#: rules_scheduler/rules_scheduler.install:25
+msgid "Stores a schedule for rule sets."
+msgstr "Αποθηκεύει ένα πρόγραμμα για σύνολα κανόνων."
+
+#: rules_scheduler/rules_scheduler.install:31
+msgid "The scheduled task\\s id."
+msgstr "Το αναγνωριστικό της προγραμματισμένης εργασίας."
+
+#: rules_scheduler/rules_scheduler.install:38
+msgid "The scheduled rule set's name."
+msgstr "Το όνομα του προγραμματισμένου συνόλου κανόνων."
+
+#: rules_scheduler/rules_scheduler.install:43
+msgid "When the task is to be scheduled."
+msgstr "Πότε έχει προγραμματιστεί η εργασία."
+
+#: rules_scheduler/rules_scheduler.info:0
+msgid "Rules Scheduler"
+msgstr "Πρόγραμμα Κανόνων"
+
+#: rules_scheduler/rules_scheduler.info:0
+msgid "Schedule the execution of rule sets."
+msgstr "Προγραμματισμός εκτέλεσης συνόλου κανόνων."
+
+#: rules_test/rules_test.rules_defaults.inc:17
+msgid "Test altering arguments by reference"
+msgstr "Δοκιμή τροποποίησης παραμέτρων με αναφορά"
+
+#: rules_test/rules_test.rules_defaults.inc:42;82
+msgid "Test changing arguments per action"
+msgstr "Δοκιμή αλλαγής παραμέτρων ανά ενέργεια"
+
+#: rules_test/rules_test.rules_defaults.inc:60
+msgid "Test changing arguments per action - check"
+msgstr "Δοκιμή αλλαγής παραμέτρων ανά ενέργεια - έλεγχος"
+
+#: rules_test/rules_test.rules_defaults.inc:104
+msgid "Test adding a new variable"
+msgstr "Δοκιμή προσθήκης νέας μεταβλητής"
+
+#: rules_test/rules_test.module:0
+msgid "rules_test"
+msgstr "rules_test"
+
+#: rules_test/rules_test.info:0
+msgid "Rules Simpletest"
+msgstr "Rules Simpletest"
+
+#: rules_test/rules_test.info:0
+msgid "Tests the functionality of the rule engine"
+msgstr "Δοκιμάζει τη λειτουργικότητα της μηχανής κανόνων"
+

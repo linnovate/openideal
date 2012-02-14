@@ -1,0 +1,54 @@
+div.dev-query,
+div.dev-timer,
+div.dev-memory-usage,
+div.devel-querylog { display:none; }
+
+.devel-hide { display:none !important; }
+
+/**
+ * Admin devel block ==================================================
+ */
+#block-admin-devel div.dev-info strong {
+  color:#fff;
+  font-weight:bold;
+  }
+
+#block-admin-devel input.dev-querylog-show,
+#block-admin-devel input.dev-querylog-hide { margin-top:5px; }
+#block-admin-devel input.dev-querylog-hide { display:none; }
+
+#block-admin-devel .marker {
+  color:#f40;
+  font-weight:bold;
+  }
+
+/* Override menu styling */
+#admin-toolbar #block-admin-devel { padding-bottom:10px; }
+
+/**
+ * Query list =========================================================
+ */
+div.devel-querylog {
+  border-bottom:1px solid #181818;
+  background:#080808;
+  color:#999;
+  font-size:11px;
+  line-height:15px;
+  position:relative;
+  display:none;
+  }
+
+div.devel-querylog-header {
+  border:0px;
+  font-weight:bold;
+  }
+
+div.devel-querylog .marker {
+  color:#f40;
+  font-weight: bold;
+  }
+
+div.devel-querylog a { color:#fff; }
+
+div.devel-querylog-even { background:#0c0c0c; }
+div.devel-querylog-odd { background:#101010; }

@@ -1,0 +1,408 @@
+<?php
+// $Id: emwave.module,v 1.1.2.1.2.1 2009/12/08 21:19:21 aaron Exp $
+
+/**
+ * @file
+ * Embedded Wave module is a handler for waves hosted on an external site.
+ */
+
+define('EMWAVE_LINK_NONE', 0);
+define('EMWAVE_LINK_CONTENT', 'node');
+define('EMWAVE_LINK_PROVIDER', 'provider');
+define('EMWAVE_DEFAULT_FULL_WIDTH', 0);
+define('EMWAVE_DEFAULT_FULL_HEIGHT', 800);
+define('EMWAVE_DEFAULT_FULL_LINK', EMWAVE_LINK_PROVIDER);
+define('EMWAVE_DEFAULT_PREVIEW_WIDTH', 360);
+define('EMWAVE_DEFAULT_PREVIEW_HEIGHT', 240);
+define('EMWAVE_DEFAULT_PREVIEW_LINK', EMWAVE_LINK_CONTENT);
+define('EMWAVE_DEFAULT_BG_COLOR', 'white');
+define('EMWAVE_DEFAULT_COLOR', 'black');
+define('EMWAVE_DEFAULT_FONT', 'Arial');
+define('EMWAVE_DEFAULT_FONT_SIZE', '12');
+
+/**
+ * Implementation of hook_menu().
+ */
+function emwave_menu() {
+  $items = array();
+
+  $items += module_invoke('emfield', 'provider_menus', 'emwave');
+
+  return $items;
+}
+
+/**
+ *  Implement hook_emwave_info
+ */
+function emwave_emfield_info() {
+  return array(
+    '#name' => t('Embedded Wave Field'),
+    '#settings_title' => t('Waves'),
+    '#settings_description' => t('The following settings configure content with any fields controlled by Embedded Wave Field.'),
+  );
+}
+
+/**
+ * Implement hook_emwave_settings
+ */
+function emwave_emfield_settings() {
+  $form = array();
+  return $form;
+}
+
+/**Implementation of hook_field_info  **/
+
+function emwave_field_info() {
+  $fields = array(
+    'emwave' => array(
+      'label' => t('Embedded Wave'),
+      'callbacks' => array(
+        'tables' => CONTENT_CALLBACK_DEFAULT,
+        'arguments' => CONTENT_CALLBACK_DEFAULT,
+      ),
+    ),
+  );
+  return $fields;
+}
+
+/** Implementation of hook_field_settings **/
+function emwave_field_settings($op, $field) {
+  switch ($op) {
+    case 'database columns':
+      return module_invoke('emfield', 'field_columns', $field);
+  }
+}
+
+function emwave_handler_arg_provider($op, &$query, $argtype, $arg = '') {
+  return _emfield_handler_arg_provider($op, $query, $argtype, $arg, 'emwave');
+}
+
+/** Implementation of hook_field **/
+function emwave_field($op, &$node, $field, &$items, $teaser, $page) {
+  if (module_hook('emfield', 'emfield_field')) {
+    return emfield_emfield_field($op, $node, $field, $items, $teaser, $page, 'emwave');
+  }
+}
+
+/**
+ *  implement hook_content_is_empty
+ */
+function emwave_content_is_empty($item, $field) {
+  return module_invoke('emfield', 'emfield_content_is_empty', $item, $field);
+}
+
+/** Implementation of hook_emfield_field_formatter_info **/
+function emwave_field_formatter_info() {
+  $types = array('emwave', );
+  $formats = array(
+    'default' => array(
+      'label' => t('Default'),
+      'field types' => $types,
+    ),
+    'wave_full' => array(
+      'label' => t('Full Size Wave'),
+      'field types' => $types,
+    ),
+    'wave_preview' => array(
+      'label' => t('Preview Size Wave'),
+      'field types' => $types,
+    ),
+    'wav_embed' => array(
+      'label' => t('Embed Code'),
+      'field types' => $types,
+    ),
+  );
+  return $formats;
+}
+
+function emwave_field_formatter($field, $item, $formatter, $node) {
+  return module_invoke('emfield', 'emfield_field_formatter', $field, $item, $formatter, $node, 'emwave');
+}
+
+/** Widgets **/
+
+/** Implementation of hook_widget_info **/
+function emwave_widget_info() {
+  return array(
+    'emwave_textfields' => array(
+      'label' => t('3rd Party Wave'),
+      'field types' => array('emwave', ),
+      'multiple values' => CONTENT_HANDLE_CORE,
+      'callbacks' => array(
+        'default value' => CONTENT_CALLBACK_DEFAULT,
+        ),
+    ),
+  );
+}
+
+function emwave_widget_settings($op, $widget) {
+  switch ($op) {
+    case 'form':
+      $form = (array)module_invoke('emfield', 'emfield_widget_settings', 'form', $widget, 'emwave');
+      if ($widget['type'] == 'emwave_textfields') {
+        $link_options = array(
+          EMWAVE_LINK_NONE => t('No link'),
+          EMWAVE_LINK_CONTENT => t('Link to content'),
+          EMWAVE_LINK_PROVIDER => t('Link to provider'),
+        );
+        $width = variable_get('emwave_default_full_width', EMWAVE_DEFAULT_FULL_WIDTH);
+        $height = variable_get('emwave_default_full_height', EMWAVE_DEFAULT_FULL_HEIGHT);
+        $form['full'] = array(
+          '#type' => 'fieldset',
+          '#title' => t('Full size display settings'),
+          '#description' => t('These settings control how this wave is displayed in its full size, which defaults to @widthx@height. Note that if one of the dimensions is 0, then the wave will be resized to be no larger than the other dimension.', array('@width' => $width, '@height' => $height)),
+          '#collapsible' => true,
+          '#collapsed' => false,
+        );
+        $form['full']['full_width'] = array(
+          '#type' => 'textfield',
+          '#title' => t('Full size display width'),
+          '#default_value' => is_null($widget['full_width']) ? $width : $widget['full_width'],
+          '#description' => t('The width of the wave. It defaults to @width. Set it to 0 or blank if you want to leave the wave at its original aspect ratio.', array('@width' => $width)),
+        );
+        $form['full']['full_height'] = array(
+          '#type' => 'textfield',
+          '#title' => t('Full size display height'),
+          '#default_value' => is_null($widget['full_height']) ? $height : $widget['full_height'],
+          '#description' => t('The height of the wave. It defaults to @height. Set it to 0 or blank if you want to leave the wave at its original aspect ratio.', array('@height' => $height)),
+        );
+        $full_link = variable_get('emwave_default_full_link', EMWAVE_DEFAULT_FULL_LINK);
+        $form['full']['full_link'] = array(
+          '#type' => 'select',
+          '#title' => t('Full size link'),
+          '#description' => t("Where the wave will link when displayed in its full size. 'Content' links to the content page, 'provider' links to the provider's wave page, and 'none' displays the wave with no link."),
+          '#options' => $link_options,
+          '#default_value' => is_null($widget['full_link']) ? $full_link : $widget['full_link'],
+        );
+
+        $width = variable_get('emwave_default_preview_width', EMWAVE_DEFAULT_PREVIEW_WIDTH);
+        $height = variable_get('emwave_default_preview_height', EMWAVE_DEFAULT_PREVIEW_HEIGHT);
+        $form['preview'] = array(
+          '#type' => 'fieldset',
+          '#title' => t('Preview Settings'),
+          '#description' => t('These settings control how this wave is displayed in its preview size, which defaults to @widthx@height. Note that if one of the dimensions is 0, then the wave will be resized to be no larger than the other dimension.', array('@width' => $width, '@height' => $height)),
+          '#collapsible' => true,
+          '#collapsed' => false,
+        );
+        $form['preview']['preview_width'] = array(
+          '#type' => 'textfield',
+          '#title' => t('Preview width'),
+          '#default_value' => is_null($widget['preview_width']) ? $width : $widget['preview_width'],
+          '#description' => t('The width of the wave preview. It defaults to @width. Set it to 0 or blank if you want to leave the wave at its original aspect ratio.', array('@width' => $width)),
+        );
+        $form['preview']['preview_height'] = array(
+          '#type' => 'textfield',
+          '#title' => t('Preview height'),
+          '#default_value' => is_null($widget['preview_height']) ? $height : $widget['preview_height'],
+          '#description' => t('The height of the wave preview. It defaults to @height. Set it to 0 or blank if you want to leave the wave at its original aspect ratio.', array('@height' => $height)),
+        );
+        $preview_link = variable_get('emwave_default_preview_link', EMWAVE_DEFAULT_PREVIEW_LINK);
+        $form['preview']['preview_link'] = array(
+          '#type' => 'select',
+          '#title' => t('Preview size link'),
+          '#description' => t("Where the wave will link when displayed in its preview size. 'Content' links to the content page, 'provider' links to the provider's wave page, and 'none' displays the wave with no link."),
+          '#options' => $link_options,
+          '#default_value' => isset($widget['preview_link']) ? $widget['preview_link'] : $preview_link,
+        );
+        $bg_color = variable_get('emwave_default_thumbnail_width', EMWAVE_DEFAULT_BG_COLOR);
+        $color = variable_get('emwave_default_thumbnail_height', EMWAVE_DEFAULT_COLOR);
+        $font = variable_get('emwave_default_thumbnail_height', EMWAVE_DEFAULT_FONT);
+        $font_size = variable_get('emwave_default_thumbnail_height', EMWAVE_DEFAULT_FONT_SIZE);
+
+        $form['style'] = array(
+          '#type' => 'fieldset',
+          '#title' => t('Style Settings'),
+          '#description' => t('These settings control of look of the embedded wave.'),
+          '#collapsible' => true,
+          '#collapsed' => false,
+        );
+        $form['style']['bg_color'] = array(
+          '#type' => 'textfield',
+          '#title' => t('Background Color'),
+          '#default_value' => is_null($widget['bg_color']) ? $bg_color : $widget['bg_color'],
+          '#description' => t('The background color to use, e.g. \'white\''),
+        );
+        $form['style']['color'] = array(
+          '#type' => 'textfield',
+          '#title' => t('Font Color'),
+          '#default_value' => is_null($widget['color']) ? $color : $widget['color'],
+          '#description' => t('The font color to use, e.g. \'black\''),
+        );
+        $form['style']['font'] = array(
+          '#type' => 'textfield',
+          '#title' => t('Font'),
+          '#description' => t('The font to use, e.g. \'Arial\''),
+          '#default_value' => is_null($widget['font']) ? $font : $widget['font'],
+        );
+        $form['style']['font_size'] = array(
+          '#type' => 'textfield',
+          '#title' => t('Font Size'),
+          '#default_value' => is_null($widget['font_size']) ? $font_size : $widget['font_size'],
+          '#description' => t('The font size to use in points(pt.), e.g. \'12\'.'),
+        );
+        // Add integration settings
+        $form['integration'] = array(
+          '#type' => 'fieldset',
+          '#title' => t('Integration Settings'),
+          '#description' => t('**DISABLED FOR NOW**These settings control of level of integration with the embedded wave.'),
+          '#collapsible' => true,
+          '#collapsed' => true,
+        );
+        $form['integration']['participants'] = array(
+          '#type' => 'checkboxes',
+          '#title' => t('Participant Settings'),
+          '#description' => t('These settings control how other users interact with the embedded wave.'),
+          '#options' => array(
+            'node' => t('Anyone with permission to edit the node can add themselves to the wave.'),
+            'comment' => t('Anyone with permission to comment on node can add themselves to the wave.'),
+          ),
+          '#default_value'=> is_null($widget['participants']) ? NULL : $widget['participants'],
+          '#disabled'=> true,
+        );
+        $form['integration']['comments'] = array(
+          '#type' => 'radios',
+          '#title' => t('Comment Settings'),
+          '#description' => t('These settings control how comments interact with the embedded wave.'),
+          '#options' => array(
+            'none' => t('No Synchoronization'),
+            'synchonized' => t('Synchonized. Keep both the wave and the node\'s comments synchronized.'),
+            'wave' => t('Add wave comments to node. Add all wave comments to this wave\'s node.'),
+            'drupal' => t('Add node commments to wave. Add all node comments to this wave.'),
+          ),
+          '#default_value'=> is_null($widget['comments']) ? NULL : $widget['comments'],
+          '#disabled'=> true,
+        );
+      }
+      return $form;
+
+    case 'validate':
+      if ($widget['type'] == 'emwave_textfields') {
+        if (!is_numeric($widget['full_width']) || intval($widget['full_width']) != $widget['full_width'] || $widget['full_width'] < 0) {
+          form_set_error('full_width', t('"Full size width" must be an integer.'));
+        }
+        if (!is_numeric($widget['full_height']) || intval($widget['full_height']) != $widget['full_height'] || $widget['full_height'] < 0) {
+          form_set_error('full_height', t('"Full size height" must be an integer.'));
+        }
+        if (!is_numeric($widget['preview_width']) || intval($widget['preview_width']) != $widget['preview_width'] || $widget['preview_width'] < 0) {
+          form_set_error('preview_width', t('"Preview width" must be an integer.'));
+        }
+        if (!is_numeric($widget['preview_height']) || intval($widget['preview_height']) != $widget['preview_height'] || $widget['preview_height'] < 0) {
+          form_set_error('preview_height', t('"Preview height" must be an integer.'));
+        }
+       // @TODO Add validators for color and font settings.
+
+       // @TODO Add validators for comment and participant settings.
+      }
+      break;
+
+    case 'save':
+      if ($widget['widget_type'] == 'emwave_textfields') {
+        $columns = array('full_width', 'full_height', 'full_link', 'preview_width', 'preview_height', 'preview_link', 'bg_color', 'color', 'font', 'font_size', 'participants', 'comments', );
+        $columns = array_merge($columns, module_invoke('emfield', 'emfield_widget_settings', 'save', $widget, 'emwave'));
+
+        return $columns;
+      }
+      break;
+  }
+}
+
+function emwave_widget(&$form, &$form_state, $field, $items, $delta = 0) {
+  if (module_hook('emfield', 'emfield_widget')) {
+    return emfield_emfield_widget($form, $form_state, $field, $items, $delta, 'emwave');
+  }
+}
+
+function emwave_embed_form($field, $item, $formatter, $node) {
+  $embed = $item['value'];
+  $width = $field['widget']['full_width'];
+  $height = $field['widget']['full_height'];
+  $text = module_invoke('emfield', 'include_invoke', 'emwave', $item['provider'], 'wave_full', $embed, $width, $height, $field, $item);
+  $form = array();
+  $form['emwave_embed'] = array(
+    '#type' => 'textarea',
+    '#title' => t('Wave Id'),
+    '#description' => t('To embed this wave on your own site, simply copy and paste the html code from this text area.'),
+    '#default_value' => $text,
+  );
+  return $form;
+}
+
+function emwave_theme(){
+  $themes = array(
+    'emwave_wave' => array(
+        'arguments' => array(
+          'field' => NULL,
+          'item' => NULL,
+          'formatter' => NULL,
+          'node' => NULL,
+          'code' => NULL,
+          'width' => NULL,
+          'height' => NULL,
+          'bg_color' => NULL,
+          'color' => NULL,
+          'font' => NULL,
+          'font_size' => NULL,
+          'title' => NULL,
+          'link' => NULL,
+        ),
+	  'file' => 'emwave.theme.inc',
+    ),
+    'emwave_wave_embed' => array(
+      'arguments' => array(
+        'field' => NULL,
+        'item' => NULL,
+        'formatter' => NULL,
+        'node' => NULL,
+        'bg_color' => NULL,
+        'color' => NULL,
+        'font' => NULL,
+        'font_size' => NULL,
+      ),
+	  'file' => 'emwave.theme.inc',
+    ),
+    'emwave_wave_full' => array(
+      'arguments' => array(
+        'field' => NULL,
+        'item' => NULL,
+        'formatter' => NULL,
+        'node' => NULL),
+	  'file' => 'emwave.theme.inc',
+    ),
+    'emwave_wave_preview' => array(
+      'arguments' => array(
+        'field' => NULL,
+        'item' => NULL,
+        'formatter' => NULL,
+        'node' => NULL),
+	  'file' => 'emwave.theme.inc',
+    ),
+    'emwave_default' => array(
+      'arguments' => array(
+        'field' => NULL,
+        'item' => NULL,
+        'formatter' => NULL,
+        'node' => NULL),
+	  'file' => 'emwave.theme.inc',
+    ),
+    'emwave_formatter_wave_embed' => array(
+        'arguments' => array('element' => NULL),
+		'file' => 'emwave.theme.inc',
+    ),
+    'emwave_formatter_wave_preview' => array(
+        'arguments' => array('element' => NULL),
+		'file' => 'emwave.theme.inc',
+    ),
+    'emwave_formatter_wave_full' => array(
+        'arguments' => array('element' => NULL),
+		'file' => 'emwave.theme.inc',
+    ),
+    'emwave_formatter_default' => array(
+        'arguments' => array('element' => NULL),
+		'file' => 'emwave.theme.inc',
+    )
+  );
+
+  $themes += module_invoke('emfield', 'provider_themes', 'emwave');
+
+  return $themes;
+}

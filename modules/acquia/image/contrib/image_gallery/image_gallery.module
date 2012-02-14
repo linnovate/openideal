@@ -1,0 +1,230 @@
+<?php
+// $Id: image_gallery.module,v 1.46.2.1 2010/08/03 17:43:00 sun Exp $
+
+define('IMAGE_GALLERY_SORT_CREATE_DESC', 0);
+define('IMAGE_GALLERY_SORT_CREATE_ASC', 1);
+define('IMAGE_GALLERY_SORT_FILENAME', 2);
+define('IMAGE_GALLERY_SORT_TITLE', 3);
+
+/**
+ * Implementation of hook_help().
+ */
+function image_gallery_help($path, $arg) {
+  switch ($path) {
+    case 'admin/help#image_gallery':
+      $output = '<p>' . t('The Image gallery module allows you to organize your image nodes into galleries. Images are placed into galleries in the same way as nodes are given taxonomy terms.') . '</p>';
+      $output .= '<p>' . t('You can:') . '</p>';
+      $output .= '<ul>';
+      $output .= '<li>' . t('View your <a href="@image-gallery-url">galleries</a>.', array('@image-gallery-url' => url('image'))) . '</li>';
+      $output .= '<li>' . t('Add or change galleries at <a href="@image-gallery-admin-url">Administer &raquo; Content &raquo; Image galleries</a>.', array('@image-gallery-admin-url' => url('admin/content/image'))) . '</li>';
+      $output .= '<li>' . t('Configure gallery settings at <a href="@image-gallery-settings-url">Administer &raquo; Site configuration &raquo; Image &raquo; Image gallery</a>.', array('@image-gallery-settings-url' => url('admin/settings/image/image_gallery'))) . '</li>';
+      $output .= '</ul>';
+      $output .= '<p>' . t('For more information, see the online handbook entry for <a href="@image-url">Image module</a> and its related submodules.', array('@image-url' => 'http://drupal.org/handbook/modules/image')) . '</p>';
+      return $output;
+
+    case 'admin/content/image':
+      $output = '<p>' . t('<a href="@image-gallery-url">Image galleries</a> can be used to organize and present groups of images. Galleries may be nested. To add a new gallery click the "add gallery" tab.', array('@image-gallery-url' => url('image'))) . '</p>';
+      return $output;
+  }
+}
+
+/**
+ * Implementation of hook_perm().
+ */
+function image_gallery_perm() {
+  return array('administer image galleries');
+}
+
+/**
+ * Implementation of hook_menu().
+ */
+function image_gallery_menu() {
+  $items = array();
+
+  $items['image'] = array(
+    'title' => 'Image galleries',
+    'access arguments' => array('access content'),
+    'type' => MENU_SUGGESTED_ITEM,
+    'page callback' => 'image_gallery_page',
+    'file' => 'image_gallery.pages.inc',
+  );
+  $items['admin/content/image'] = array(
+    'title' => 'Image galleries',
+    'access arguments' => array('administer image galleries'),
+    'page callback' => 'image_gallery_admin',
+    'file' => 'image_gallery.admin.inc',
+    'description' => 'Create and manage image galleries.',
+  );
+  $items['admin/content/image/list'] = array(
+    'title' => 'List',
+    'access arguments' => array('administer image galleries'),
+    'type' => MENU_DEFAULT_LOCAL_TASK,
+    'weight' => -10,
+  );
+  $items['admin/content/image/add'] = array(
+    'title' => 'Add gallery',
+    'access arguments' => array('administer image galleries'),
+    'page callback' => 'image_gallery_admin_edit',
+    'file' => 'image_gallery.admin.inc',
+    'type' => MENU_LOCAL_TASK,
+  );
+  $items['admin/content/image/edit/%'] = array(
+    'title' => 'Edit image gallery',
+    'page callback' => 'image_gallery_admin_edit',
+    'page arguments' => array(4),
+    'file' => 'image_gallery.admin.inc',
+    'access arguments' => array('administer image galleries'),
+    'type' => MENU_CALLBACK,
+  );
+
+  $items['admin/settings/image/image_gallery'] = array(
+    'title' => 'Image gallery',
+    'access arguments' => array('administer site configuration'),
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('image_gallery_admin_settings'),
+    'file' => 'image_gallery.admin.inc',
+    'description' => 'Configure appearance of image galleries.',
+    'type' => MENU_LOCAL_TASK,
+  );
+
+  return $items;
+}
+
+/**
+ * Implementation of hook_taxonomy. If our vocabulary gets deleted, delete our
+ * variable pointing to it.
+ */
+function image_gallery_taxonomy($op, $type, $array) {
+  if ($op == 'delete' && $type == 'vocabulary') {
+    $vid = variable_get('image_gallery_nav_vocabulary', '');
+    if ($vid == $array['vid']) {
+      variable_set('image_gallery_nav_vocabulary', '');
+    }
+  }
+}
+
+/**
+ * Implementation of hook_term_path().
+ */
+function image_gallery_term_path($term) {
+  return 'image/tid/' . $term->tid;
+}
+
+/**
+ * Implementation of hook_nodeapi().
+ */
+function image_gallery_nodeapi(&$node, $op, $teaser = NULL, $page = NULL) {
+  switch ($op) {
+    case 'view':
+      if ($page && !$teaser && $node->type == 'image') {
+        $vid   = _image_gallery_get_vid();
+        $terms = taxonomy_node_get_terms_by_vocabulary($node, $vid);
+        $term  = array_pop($terms);
+        if ($term) {
+          $vocabulary = taxonomy_vocabulary_load($vid);
+          // Breadcrumb navigation
+          $breadcrumb   = array();
+          $breadcrumb[] = l(t('Home'), NULL);
+          $breadcrumb[] = l($vocabulary->name, 'image');
+          if ($parents = taxonomy_get_parents_all($term->tid)) {
+            $parents = array_reverse($parents);
+            foreach ($parents as $parent) {
+              $breadcrumb[] = l($parent->name, 'image/tid/' . $parent->tid);
+            }
+          }
+          drupal_set_breadcrumb($breadcrumb);
+        }
+      }
+      break;
+  }
+}
+
+/**
+ * Implementation of hook_theme() registry.
+ **/
+function image_gallery_theme() {
+  return array(
+    'image_gallery' => array(
+      'arguments' => array('galleries' => NULL, 'images' => NULL),
+    ),
+    'image_gallery_count' => array(
+      'arguments' => array('count' => 0),
+    ),
+    'image_gallery_updated' => array(
+      'arguments' => array('timestamp' => 0),
+    ),
+    'image_gallery_img' => array(
+      'arguments' => array('image' => NULL, 'size' => NULL),
+    ),
+  );
+}
+
+/**
+ * Theme the count of gallery items on a gallery list.
+ */
+function theme_image_gallery_count($count) {
+  return format_plural(
+    $count,
+    'There is 1 image in this gallery',
+    'There are @count images in this gallery'
+  );
+}
+
+/**
+ * Theme the gallery last updated time on a gallery list.
+ */
+function theme_image_gallery_updated($timestamp) {
+  return t('%date', array('%date' => format_date($timestamp))) . "\n";
+}
+
+/**
+ * Returns (and possibly creates) a new vocabulary for Image galleries.
+ */
+function _image_gallery_get_vid() {
+  $vid = variable_get('image_gallery_nav_vocabulary', NULL);
+  // This is invoked from many locations and only D7 ensures that required
+  // modules are installed/enabled first.
+  // @todo Perhaps also disable image_gallery module and report an error?
+  if (!module_exists('taxonomy')) {
+    return $vid;
+  }
+  if (empty($vid) || !($vocabulary = taxonomy_vocabulary_load($vid))) {
+    // Check to see if an image gallery vocabulary exists.
+    $vid = db_result(db_query("SELECT vid FROM {vocabulary} WHERE module = 'image_gallery'"));
+    if (!$vid && !$vocabulary) {
+      $vocabulary = array(
+        'name' => t('Image Galleries'),
+        'multiple' => 0,
+        'required' => 0,
+        'hierarchy' => 1,
+        'relations' => 0,
+        'module' => 'image_gallery',
+        'nodes' => array('image' => 1),
+      );
+      taxonomy_save_vocabulary($vocabulary);
+      $vid = $vocabulary['vid'];
+    }
+    elseif ($vocabulary) {
+      // Existing install; ensure that image node type is still assigned.
+      // Keep all other node types intact there.
+      $vocabulary = (array) $vocabulary;
+      $vocabulary['nodes']['image'] = 1;
+      taxonomy_save_vocabulary($vocabulary);
+      $vid = $vocabulary['vid'];
+    }
+    variable_set('image_gallery_nav_vocabulary', $vid);
+  }
+
+  return $vid;
+}
+
+/**
+ * Implementation of hook_views_api().
+ */
+function image_gallery_views_api() {
+  return array(
+    'api' => 2,
+    'path' => drupal_get_path('module', 'image_gallery') . '/views',
+  );
+}
+

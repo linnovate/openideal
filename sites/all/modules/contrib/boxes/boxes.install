@@ -1,0 +1,169 @@
+<?php
+// $Id: boxes.install,v 1.2.2.5 2010/06/21 20:57:22 jmiccolis Exp $
+
+/**
+ * Implemenation of hook_install().
+ */
+function boxes_install() {
+  drupal_install_schema('boxes');
+}
+
+/**
+ * Implemenation of hook_uninstall().
+ */
+function boxes_uninstall() {
+  drupal_uninstall_schema('boxes');
+}
+
+/**
+ * Implemenation of hook_schema().
+ */
+function boxes_schema() {
+  $schema = array();
+  $schema['box'] = array(
+    'description' => 'Stores contents of custom-made blocks.',
+    'fields' => array(
+      'delta' => array(
+        'type' => 'varchar',
+        'length' => 32,
+        'not null' => TRUE,
+        'description' => "The block's {blocks}.delta.",
+      ),
+      'plugin_key' => array(
+        'type' => 'varchar',
+        'length' => 64,
+        'not null' => TRUE,
+        'description' => "The plugin responsible for this block.",
+      ),
+      'title' => array(
+        'type' => 'varchar',
+        'length' => 64,
+        'not null' => TRUE,
+        'description' => "Block title.",
+      ),
+      'description' => array(
+        'type' => 'varchar',
+        'length' => 255,
+        'default' => '',
+        'description' => 'Block description.',
+      ),
+     'options' => array(
+        'type' => 'text',
+        'not null' => FALSE,
+        'size' => 'big',
+        'serialize' => TRUE,
+        'description' => 'Block content configuration.',
+      ),
+    ),
+    'primary key' => array('delta'),
+    'export' => array(
+      'key' => 'delta',
+      'identifier' => 'box',
+      'api' => array(
+        'owner' => 'boxes',
+        'api' => 'box',
+        'minimum_version' => 1,
+        'current_version' => 1,
+      ),
+    ),
+  );
+  return $schema;
+}
+
+/**
+ * Make boxes content pluggable, move body/format into a serialized options
+ * array, add plugin key field.
+ */
+function boxes_update_6100() {
+  $ret = array();
+  $result = db_query("SELECT delta, body, format FROM {box}");
+  while ($box = db_fetch_object($result)) {
+    $body = array(
+      'body' => $box->body,
+      'format' => $box->format,
+    );
+    $box->body = serialize($body);
+    drupal_write_record('box', $box, 'delta');
+  }
+  $spec =  array(
+    'type' => 'text',
+    'not null' => FALSE,
+    'size' => 'big',
+    'serialize' => TRUE,
+    'description' => 'Block content configuration.',
+  );
+  db_change_field($ret, 'box', 'body', 'options', $spec);
+  db_drop_field($ret, 'box', 'format');
+  $spec = array(
+    'type' => 'varchar',
+    'length' => 64,
+    'not null' => TRUE,
+    'description' => "The plugin responsible for this block.",
+  );
+  db_add_field($ret, 'box', 'plugin_key', $spec);
+  db_query("UPDATE {box} SET plugin_key = 'simple'");
+  return $ret;
+}
+
+/**
+ * If Spaces is installed update existing spaces overrides.
+ */
+function boxes_update_6101() {
+  $ret = array();
+  if (module_exists('spaces')) {
+    $result = db_query("SELECT * FROM {spaces_overrides} WHERE object_type = 'boxes'");
+    while ($row = db_fetch_object($result)) {
+      $v = unserialize($row->value);
+      $v->plugin_key = 'simple';
+      $v->options = array(
+        'body' => $v->body,
+        'format' => $v->format,
+      );
+      unset($v->body);
+      unset($v->format);
+      $row->value = (array)$v;
+      drupal_write_record('spaces_overrides', $row, array('type', 'id', 'object_type', 'object_id'));
+    }
+    $ret[] = array('success' => true, 'query' => 'Updated Spaces overrides');
+  }
+  return $ret;
+}
+
+/**
+ * Make the box.delta column definition match blocks.delta
+ */
+function boxes_update_6102() {
+  $ret = array();
+  $result = db_result(db_query('SELECT delta FROM {box} WHERE CHAR_LENGTH(delta) > 32'));
+  if (empty($result)) {
+    db_drop_primary_key($ret, 'box');
+    $spec = array(
+      'type' => 'varchar',
+      'length' => 32,
+      'not null' => TRUE,
+    );
+    $new_keys = array('primary key' => array('delta'));
+    db_change_field($ret, 'box', 'delta', 'delta', $spec, $new_keys);
+  }
+  else {
+    $ret['#abort'] = array('success' => FALSE, 'query' => "Could not resize the `box.delta` field. Some entries are larger than 32 characters and must be manually truncated.");
+  }
+  return $ret;
+}
+
+/**
+ * Ensure that Spaces overrides are stored as an object, not  an array.
+ */
+function boxes_update_6103() {
+  $ret = array();
+  if (module_exists('spaces')) {
+    $result = db_query("SELECT * FROM {spaces_overrides} WHERE object_type = 'boxes'");
+    while ($row = db_fetch_object($result)) {
+      $v = unserialize($row->value);
+      $row->value = (object)$v;
+      drupal_write_record('spaces_overrides', $row, array('type', 'id', 'object_type', 'object_id'));
+    }
+    $ret[] = array('success' => true, 'query' => 'Updated Spaces overrides');
+  }
+  return $ret;
+}

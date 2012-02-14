@@ -1,0 +1,63 @@
+# $Id: date_php4.de.po,v 1.1.2.4 2009/03/08 09:32:12 hass Exp $
+#
+# LANGUAGE translation of Drupal (general)
+# Copyright YEAR NAME <EMAIL@ADDRESS>
+# Generated from files:
+#  date_php4.module,v 1.4.6.1 2008/08/30 13:57:39 karens
+#  date_php4.info,v 1.3 2008/02/18 19:32:28 karens
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: 2009-03-07 19:12+0100\n"
+"PO-Revision-Date: 2009-03-07 19:47+0100\n"
+"Last-Translator: Alexander Haß\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"X-Poedit-Language: German\n"
+"X-Poedit-Country: GERMANY\n"
+
+#: date_php4/date_php4.module:44
+msgid "Date PHP4 Settings"
+msgstr "Einstellungen für PHP4-Datum"
+
+#: date_php4/date_php4.module:47
+msgid "TRUE"
+msgstr "TRUE"
+
+#: date_php4/date_php4.module:47
+msgid "FALSE"
+msgstr "FALSE"
+
+#: date_php4/date_php4.module:49
+msgid "Use PHP default timezone"
+msgstr "Standardmäßige PHP-Zeitzone verwenden"
+
+#: date_php4/date_php4.module:50
+msgid "Getting date computations working correctly in PHP versions earlier than PHP 5.2 involves extra computations that add a lot of overhead. These computations are needed because the timezone PHP uses on date computations may not match the site or user timezone or other date-specific timezones. We can speed processing up if we assume that PHP is using the correct timezone, but need to do more time-intensive processing if it is not. If timezone adjustments do not seem to be working correctly in your setup, you can set this option to FALSE to force the system to use the more accurate, but slower, timezone computations."
+msgstr ""
+
+#: date_php4/date_php4.module:20
+msgid "administer date_php4 settings"
+msgstr "PHP4-Datumseinstellungen verwalten"
+
+#: date_php4/date_php4.module:29
+#: date_php4/date_php4.info:0
+msgid "Date PHP4"
+msgstr "PHP4-Datum"
+
+#: date_php4/date_php4.module:30
+msgid "Date PHP4 setup."
+msgstr "Setup für PHP4-Datum."
+
+#: date_php4/date_php4.module:0
+msgid "date_php4"
+msgstr "date_php4"
+
+#: date_php4/date_php4.info:0
+msgid "Emulate PHP 5.2 date functions in PHP 4.x, PHP 5.0, and PHP 5.1. Required when using the Date API with PHP versions less than PHP 5.2."
+msgstr "Emuliert die PHP 5.2 Datumsfunktionen in PHP 4.x, PHP 5.0, und PHP 5.1. Erforderlich für die Verwendung des Datum-API's mit PHP-Versionen die kleiner als PHP 5.2 sind."
+

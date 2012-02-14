@@ -1,0 +1,226 @@
+<?php
+
+/**
+ * @file
+ * Page for testing the Popups API.
+ */
+
+
+// **************************************************************************
+// CORE HOOK FUNCTIONS   ****************************************************
+// **************************************************************************
+
+/**
+ * Implementation of hook_menu().
+ *
+ * @return array of new menu items.
+ */
+function popups_test_menu() {
+  // Items for testing.
+  $items['popups/test'] = array(
+    'title' => 'Popup Test',
+    'page callback' => '_popups_test_popups',
+    'type' => MENU_CALLBACK,
+    'access callback' => TRUE,
+  );
+  $items['popups/test/response'] = array(
+    'page callback' => '_popups_test_response',
+    'type' => MENU_CALLBACK,
+    'access callback' => TRUE,
+  );
+  $items['popups/test/namechange'] = array(
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('_popups_test_namechange'),
+    'type' => MENU_CALLBACK,
+    'access callback' => TRUE,
+  );
+  $items['popups/test/old'] = array(
+    'title' => 'Popup Test',
+    'page callback' => '_popups_test_popups_old',
+    'type' => MENU_CALLBACK,
+    'access callback' => TRUE,
+  );
+  return $items;
+}
+
+/**
+ *  Implementation of hook_popups().
+ *
+ * This implements hook_popups, defined in popups_get_popups.
+ * See the comments in popups_add_popups for explination of the options.
+ * Adding popup behavior to the core admin pages has been moved to popups_admin.
+ *
+ * @return: Array of link selectors to apply popup behavior to.
+ *          Keyed by path or form_id.
+ */
+function popups_test_popups() {
+  return array(
+    'popups/test' => array( // test page.
+//    '*' => array( // test page.
+      '#test-popup' => array(
+//        'additionalJavascript' => array('misc/collapse.js'),
+//        'forceReturn' => 'node/add/story',
+      ),
+    ),
+  );
+}
+
+// **************************************************************************
+// TESTING   ****************************************************************
+// **************************************************************************
+
+function _popups_test_popups() {
+  popups_add_popups();
+  $output = '<ol id="test-list">';
+  $output .= '<li>'. l("Pop up entire local page.", 'popups/test/response',
+               array('attributes' => array('class' => 'popups')));
+  $output .= "<li>". l("Pop with options (href override).", 'popups/test/',
+               array('attributes' => array('class' => 'popups', 'on-popups-options' => '{href: "test/response"}')));
+  $output .= "<li>". l("Pop with options (width=200px).", 'popups/test/response',
+               array('attributes' => array('class' => 'popups', 'on-popups-options' => '{width: "200px"}')));
+  $output .= "<li class=\"popups\" on-popups-options=\"{href: 'test/response'}\">Non-link popup</li>";
+  $output .= '<li>'. l("Add Story (hook)", 'node/add/story',
+               array( 'attributes' => array('id' => 'test-popup')));
+  $output .= '<li>'. l("Add Story (attribute).", 'node/add/story',
+               array( 'attributes' => array('class' => 'popups-form')));
+
+  $output .= '<li>'. l("Change Settings and ajax update entire content area: ",
+                       'admin/settings/popups',
+                       array( 'attributes' => array('class' => 'popups-form'),
+                     ));
+  $output .= " (Auto Fade checkbox is: " . (variable_get('popups_autoclose_final_message', 1) ? 'on' : 'off') . ')';
+
+  $output .= '<li>'. l("Change Settings and ajax update only single target.", 'admin/settings/popups',
+               array( 'attributes' => array('id' => 'reload-target'),
+               ));
+  $output .= "<span id='response2'> (Auto Fade checkbox is: " . (variable_get('popups_autoclose_final_message', 1) ? 'on' : 'off') . ')</span>';
+  popups_add_popups(array('#reload-target' => array('targetSelectors' => array('#response2'))));
+
+  $output .= '<li>'. l("Change Settings and ajax update multiple targets with data from other page (tricky!).", 'admin/settings/popups',
+             array( 'attributes' => array(
+                'id' => 'foo',
+                'class' => 'popups-form',
+                'on-popups-options' => '{targetSelectors: {"#edit-popups-always-scan-wrapper": "#foo", "#edit-popups-popup-final-message-wrapper": "#test-list li:first"}, forceReturn: "admin/settings/popups"}')));
+
+  $output .= '<li>'. l("Change Settings and reload entire page.",
+                       'admin/settings/popups',
+                       array( 'attributes' => array('class' => 'popups-form-reload'),
+                     ));
+
+  $output .= '<li>'. l("Pop up defined by popups_add_popups rule.", 'popups/test/response',
+                     array('attributes' => array('id' => 'rule-test')));
+  popups_add_popups(array('#rule-test' => array('width' => '300px')));
+  $output .= '<li>'. l('Ajax update just Page Title (only works if you theme uses id="page-title")', 'popups/test/namechange',
+                     array('attributes' => array('id' => 'title-test')));
+  popups_add_popups(array('#title-test' => array('titleSelectors' => array('#page-title'), 'noUpdate' => TRUE, 'forceReturn' => 'popups/test/namechange')));
+
+  global $user;
+  $output .= "<li>You are user number $user->uid</li>";
+  if ($user->uid == 0) {
+    $output .= '<li>'. l("Login and ajax refresh content area.", 'user',
+                       array('attributes' => array('class' => 'popups-form')));
+    $output .= '<li>'. l("Login and reload entire page.", 'user',
+                       array('attributes' => array('class' => 'popups-form-reload')));
+    $output .= '<li>'. l("Login and do not reload anything.", 'user',
+                       array('attributes' => array('class' => 'popups-form-noupdate')));
+  }
+  else {
+    $output .= '<li>'. l("Logout (need to surpress warning b/c session is dumped)", 'logout',
+                     array('attributes' => array('id' => 'logout')));
+  }
+  // Need to have the rule outside the else, or it won't get loaded on ajax reload.
+  popups_add_popups(array('#logout' => array('noUpdate' => TRUE, 'reloadOnError' => TRUE)));
+
+  $output .= '<li>'. l("Add Poll (test inline)", 'node/add/poll',
+                       array('attributes' => array('class' => 'popups-form')));
+
+  $output .= "</ol>";
+  return $output;
+}
+
+function _popups_test_popups_old() {
+//  drupal_set_message('Popup Test Page: If you edit your page.tpl.php to wrap the print $messages in a div with id="popit", this message will popup on page load');
+  popups_add_popups();
+  $output = '<ul id="test-list">';
+  $output .= '<li>'. l("Pop up entire local page.", 'popups/test/response',
+               array('attributes' => array('class' => 'popups')));
+  $output .= "<li>". l("Pop with options (href override).", 'popups/test/',
+               array('attributes' => array('class' => 'popups', 'on-popups-options' => '{href: "test/response"}')));
+  $output .= "<li>". l("Pop with options (width=200px).", 'popups/test/response',
+               array('attributes' => array('class' => 'popups', 'on-popups-options' => '{width: "200px"}')));
+  $output .= "<li class=\"popups\" on-popups-options=\"{href: 'test/response'}\">Non-link popup</li>";
+  $output .= '<li>'. l("Add Story (hook)", 'node/add/story',
+               array( 'attributes' => array('id' => 'test-popup')));
+  $output .= '<li>'. l("Add Story (attribute).", 'node/add/story',
+               array( 'attributes' => array('class' => 'popups-form')));
+
+  $output .= '<li>'. l("Change Settings and ajax update entire content area: ",
+                       'admin/settings/popups',
+                       array( 'attributes' => array('class' => 'popups-form'),
+                     ));
+  $output .= " (Auto Fade checkbox is: " . (variable_get('popups_popup_final_message', 1) ? 'on' : 'off') . ')';
+
+  $output .= '<li>'. l("Change Settings and ajax update only single target.", 'admin/settings/popups',
+               array( 'attributes' => array('id' => 'reload-target'),
+               ));
+  $output .= "<span id='response2'> (Auto Fade checkbox is: " . (variable_get('popups_popup_final_message', 1) ? 'on' : 'off') . ')</span>';
+  popups_add_popups(array('#reload-target' => array('targetSelectors' => array('#response2'))));
+
+  $output .= '<li>'. l("Change Settings and ajax update multiple targets with data from other page (tricky!).", 'admin/settings/popups',
+             array( 'attributes' => array(
+                'id' => 'foo',
+                'class' => 'popups-form',
+                'on-popups-options' => '{targetSelectors: {"#edit-popups-always-scan-wrapper": "#foo", "#edit-popups-popup-final-message-wrapper": "#test-list li:first"}, forceReturn: "admin/settings/popups"}')));
+
+  $output .= '<li>'. l("Change Settings and reload entire page.",
+                       'admin/settings/popups',
+                       array( 'attributes' => array('class' => 'popups-form-reload'),
+                     ));
+
+  $output .= '<li>'. l("Pop up defined by popups_add_popups rule.", 'popups/test/response',
+                     array('attributes' => array('id' => 'rule-test')));
+  popups_add_popups(array('#rule-test' => array('width' => '300px')));
+  $output .= '<li>'. l('Ajax update just Page Title (only works if you theme uses id="page-title")', 'popups/test/namechange',
+                     array('attributes' => array('id' => 'title-test')));
+  popups_add_popups(array('#title-test' => array('titleSelectors' => array('#page-title'), 'noUpdate' => TRUE, 'forceReturn' => 'popups/test/namechange')));
+
+  global $user;
+  $output .= "<li>You are user number $user->uid</li>";
+  if ($user->uid == 0) {
+    $output .= '<li>'. l("Login and ajax refresh content area.", 'user',
+                       array('attributes' => array('class' => 'popups-form')));
+    $output .= '<li>'. l("Login and reload entire page.", 'user',
+                       array('attributes' => array('class' => 'popups-form-reload')));
+    $output .= '<li>'. l("Login and do not reload anything.", 'user',
+                       array('attributes' => array('class' => 'popups-form-noupdate')));
+  }
+  else {
+    $output .= '<li>'. l("Logout (need to surpress warning b/c session is dumped)", 'logout',
+                     array('attributes' => array('id' => 'logout')));
+  }
+  // Need to have the rule outside the else, or it won't get loaded on ajax reload.
+  popups_add_popups(array('#logout' => array('noUpdate' => TRUE, 'reloadOnError' => TRUE)));
+
+  $output .= '<li>'. l("Add Poll (test inline)", 'node/add/poll',
+                       array('attributes' => array('class' => 'popups-form')));
+
+  $output .= "</ul>";
+  return $output;
+}
+
+function _popups_test_response() {
+  drupal_set_title("Popup Test Two");
+  return '<div>Hello World</div><a href="#" class="popups">Popup chaining test</a>';
+}
+
+function _popups_test_namechange() {
+  drupal_set_title("New Name for Test Page");
+  $form = array();
+
+  $form['popups_popup_final_message'] = array(
+    '#type' => 'submit',
+    '#value' => t('Test Name Change'),
+  );
+
+  return $form;
+}

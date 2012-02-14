@@ -1,0 +1,22 @@
+
+<ol>
+<li>Create a new calendar by enabling the default calendar view and changing it to use whatever date you want in your calendar. You can create multiple calendars by cloning the default calendar view as many times as necessary.</li>
+
+<li>The calendar uses the <a href="topic:date_api/date-argument">Generic Date argument</a>. This argument has an option to select one or more Views date fields to filter on, automatically adds them to the view, and then filters the view by the value of the selected field(s). This argument can be used on any view, not just calendar views.</li>
+
+<li> Unlike previous versions of the Calendar module, there is just a single argument instead of year, month, and day arguments. The argument value will be YYYY-MM-DD for a day, YYYY-MM for a month, YYYY for a year, and YYYY-W99 for a week. There is a default option to set the argument to the current date when the argument is empty.</li>
+
+<li>A calendar display creates calendar navigation and links to multiple displays for the year, month, day, or week views. The actual displays are created by attaching calendar views that use whatever styles are desired for those pages.</li>
+
+<li> Calendar views are attachments <a href="#note1">(note 1)</a> to create the year, month, day, and week displays. They can be set to use any style, either a calendar style or any other Views style, like teasers or lists. They can each have their own fields and formatting. They must be attached to the main calendar page or to a calendar block.</li>
+
+<li>If you don't want to have a link to a week display, just remove the week display from the view. Ditto for any other displays you don't want to use. The links will automatically disappear for any displays that are not defined in the view.</li>
+
+<li>A calendar block will create a calendar block for the view results. This block requires the calendar argument to do its work, and uses one of the year, month, day, or week calendar view attachments created above. </li>
+
+<li>Earlier versions required that you add the date field to the 'Fields' section of the view, but this version does not require that. Add the field to the view if you want it displayed in the results, otherwise you can leave it out. The Calendar no longer over-writes normal formatting for that field, it will be displayed however you set it up in the view.</li>
+
+<li>There are templates for the top of the calendar (the links and navigation), the year, month, day, and week displays, and the individual month, week, and day nodes, so you can easily style them.</li>
+
+</ol>
+

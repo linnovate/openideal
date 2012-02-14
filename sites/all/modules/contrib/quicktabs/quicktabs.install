@@ -1,0 +1,133 @@
+<?php
+// $Id: quicktabs.install,v 1.4.6.2 2010/08/27 18:00:53 katbailey Exp $
+
+/**
+ * Implementation of hook_schema().
+ */
+function quicktabs_schema() {
+  $schema['quicktabs'] = array(
+    'description' => 'The quicktabs table.',
+    // Optional CTools export.inc integration
+    'export' => array(
+      'key' => 'machine_name',
+      'identifier' => 'quicktabs',
+      'default hook' => 'quicktabs_default_quicktabs',
+      'api' => array(
+        'owner' => 'quicktabs',
+        'api' => 'quicktabs',
+        'minimum_version' => 1,
+        'current_version' => 1,
+      ),
+    ),
+    'fields' => array(
+      'machine_name' => array(
+        'description' => 'The primary identifier for a qt block.',
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+      ),
+      'ajax' => array(
+        'description' => 'Whether this is an ajax views block.',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'hide_empty_tabs' => array(
+        'description' => 'Whether this tabset hides empty tabs.',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'default_tab' => array(
+        'description' => 'Default tab.',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'size' => 'tiny',
+        'not null' => TRUE,
+      ),
+      'title' => array(
+        'description' => 'The title of this quicktabs block.',
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+      ),
+      'tabs' => array(
+        'description' => 'A serialized array of the contents of this qt block.',
+        'type' => 'text',
+        'size' => 'medium',
+        'not null' => TRUE,
+        'serialize' => TRUE,
+      ),
+      'style' => array(
+        'description' => 'The tab style.',
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+      ),
+    ),
+    'primary key' => array('machine_name'),
+  );
+  return $schema;
+}
+
+ /**
+ * Implementation of hook_install().
+ */
+function quicktabs_install() {
+  drupal_install_schema('quicktabs');
+}
+
+ /**
+ * Implementation of hook_uninstall().
+ */
+function quicktabs_uninstall() {
+  drupal_uninstall_schema('quicktabs');
+  // Delete any variables that have been set.
+  $result = db_query("SELECT name FROM {variable} WHERE name LIKE 'quicktabs_%'");
+  while ($row = db_fetch_object($result)) {
+    variable_del($row->name);
+  }
+}
+
+
+/**
+ * Update to 6.x-3.x
+ * Migrate existing quicktabs over to new schema.
+ */
+function quicktabs_update_6300() {
+  $ret = array();
+
+  // Pull all existing quicktabs, and then delete existing quicktabs. We will reinsert.
+  $result = db_query("SELECT * FROM {quicktabs}");
+  $ret[] = update_sql("DELETE FROM {quicktabs}");
+
+  db_drop_field($ret, 'quicktabs', 'qtid');
+  $new_field = array(
+    'description' => 'The primary identifier for a qt block.',
+    'type' => 'varchar',
+    'length' => 255,
+    'not null' => TRUE,
+  );
+  db_add_field($ret, 'quicktabs', 'machine_name', $new_field);
+  db_add_primary_key($ret, 'quicktabs', array('machine_name'));
+
+  $used = array();
+  while ($row = db_fetch_array($result)) {
+    // Generate a machine-readable string
+    $qt_name = strtolower(preg_replace('/[^a-zA-Z0-9_]+/', '_', $row['title']));
+    $i = 0;
+    while (in_array($i == 0 ? $qt_name : "{$qt_name}_{$i}", $used)) {
+      $i++;
+    }
+    $row['machine_name'] = $used[] = $i == 0 ? $qt_name : "{$qt_name}_{$i}";
+    unset($row['qtid']);
+    $placeholders = implode(', ', array_keys($row));
+    $tokens = implode(', ', array_fill(0, count($row), "'%s'"));
+    db_query("INSERT INTO {quicktabs} ($placeholders) VALUES($tokens)", $row);
+
+    $ret[] = "Converted quicktab {$row['machine_name']}.";
+  }
+  return $ret;
+}

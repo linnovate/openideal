@@ -1,0 +1,510 @@
+# $Id: logintoboggan.pot,v 1.1.2.3 2010/03/19 03:39:45 thehunmonkgroup Exp $
+#
+# LANGUAGE translation of Drupal (general)
+# Copyright YEAR NAME <EMAIL@ADDRESS>
+# Generated from files:
+#  logintoboggan.module,v 1.159 2009/10/16 14:30:49 thehunmonkgroup
+#  logintoboggan.info,v 1.5 2007/11/20 13:07:43 thehunmonkgroup
+#  logintoboggan.install,v 1.17 2009/10/16 14:30:49 thehunmonkgroup
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"POT-Creation-Date: 2009-10-16 10:46-0400\n"
+"PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
+"Last-Translator: NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+
+#: logintoboggan.module:60
+msgid "<p>The Login Toboggan module improves the Drupal login system by offering the following features:\n      <ol>\n      <li>Allow users to login using either their username OR their e-mail address.</li>\n      <li>Allow users to login immediately.</li>\n      <li>Provide a login form on Access Denied pages for non-logged-in (anonymous) users.</li>\n      <li>The module provides two login block options: One uses JavaScript to display the form within the block immediately upon clicking 'log in'. The other brings the user to a separate page, but returns the user to their original page upon login.</li>\n      <li>Customize the registration form with two e-mail fields to ensure accuracy.</li>\n      <li>Optionally redirect the user to a specific page when using the 'Immediate login' feature.</li>\n      <li>Optionally redirect the user to a specific page upon validation of their e-mail address.</li>\n      <li>Optionally display a user message indicating a successful login.</li>\n      <li>Optionally have unvalidated users purged from the system at a pre-defined interval (please read the CAVEATS section of INSTALL.txt for important information on configuring this feature!).</li>\n      </ol>\n      These features may be turned on or off in the Login Toboggan <a href=\"!url\">settings</a>.</p>\n      <p>Because this module completely reorients the Drupal login process you will probably want to edit the welcome e-mail on the <a href=\"!user_settings\">user settings</a> page. For instance if you have enabled the 'Set password' option, you probably should not send the user's password out in the welcome e-mail (also note when the 'Set password' option is enabled, the !login_url becomes a verification url that the user MUST visit in order to enable authenticated status). The following is an example welcome e-mail:</p>\n      "
+msgstr ""
+
+#: logintoboggan.module:76
+msgid "<p>Note that if you have set the 'Visitors can create accounts but administrator approval is required' option for account approval, and are also using the 'Set password' feature of LoginToboggan, the user will immediately receive the permissions of the pre-authorized user role -- you may wish to create a pre-authorized role with the exact same permissions as the anonymous user if you wish the newly created user to only have anonymous permissions.</p><p>In order for a site administrator to unblock a user who is awaiting administrator approval, they must either click on the validation link they receive in their notification e-mail, or manually remove the user from the site's pre-authorized role -- afterwards the user will then receive 'authenticated user' permissions. In either case, the user will receive an account activated e-mail if it's enabled on the user settings page -- it's recommended that you edit the default text of the activation e-mail to match LoginToboggan's workflow as described. </p><p>If you are using the 'Visitors can create accounts and no administrator approval is required' option, removal of the pre-authorized role will happen automatically when the user validates their account via e-mail.</p><p>Also be aware that LoginToboggan only affects registrations initiated by users--any user account created by an administrator will not use any LoginToboggan functionality."
+msgstr ""
+
+#: logintoboggan.module:81
+msgid "More help can be found at <a href=\"!help\">LoginToboggan help</a>."
+msgstr ""
+
+#: logintoboggan.module:96
+msgid "\n!username,\n\nThank you for registering at !site.\n\nIMPORTANT:\nFor full site access, you will need to click on this link or copy and paste it in your browser:\n\n!login_url\n\nThis will verify your account and log you into the site. In the future you will be able to log in to !login_uri using the username and password that you created during registration:\n\n--  !site team"
+msgstr ""
+
+#: logintoboggan.module:129
+msgid "<strong>Note:</strong> Logintoboggan module is installed. If you are using one of the custom login block types below, it is recommended that you set this to <em>&lt;none&gt;</em>."
+msgstr ""
+
+#: logintoboggan.module:132
+msgid "Block type"
+msgstr ""
+
+#: logintoboggan.module:134
+msgid "Standard"
+msgstr ""
+
+#: logintoboggan.module:134
+msgid "Link"
+msgstr ""
+
+#: logintoboggan.module:134
+msgid "Collapsible form"
+msgstr ""
+
+#: logintoboggan.module:135
+msgid "'Standard' is a standard login block, 'Link' is a login link that returns the user to the original page after logging in, 'Collapsible form' is a javascript collaspible login form."
+msgstr ""
+
+#: logintoboggan.module:139
+msgid "Set a custom message to appear at the top of the login block"
+msgstr ""
+
+#: logintoboggan.module:165
+msgid "If this user was created using the \"Immediate Login\" feature of LoginToboggan, and they are also awaiting adminstrator approval on their account, you must remove them from the site's pre-authorized role in the \"Roles\" section below, or they will not receive authenticated user permissions!"
+msgstr ""
+
+#: logintoboggan.module:167
+msgid "The user is assigned LoginToboggan's pre-authorized role, and is not currently receiving authenticated user permissions."
+msgstr ""
+
+#: logintoboggan.module:242
+msgid "Confirm e-mail address"
+msgstr ""
+
+#: logintoboggan.module:245
+msgid "Please re-type your e-mail address to confirm it is accurate."
+msgstr ""
+
+#: logintoboggan.module:265
+msgid "between !min and"
+msgstr ""
+
+#: logintoboggan.module:265
+msgid "no more than"
+msgstr ""
+
+#: logintoboggan.module:266
+msgid "Please choose a password for your account; it must be !length 30 characters."
+msgstr ""
+
+#: logintoboggan.module:274
+msgid "Add a role to the selected users"
+msgstr ""
+
+#: logintoboggan.module:290;943
+msgid "You have successfully validated your e-mail address."
+msgstr ""
+
+#: logintoboggan.module:350
+msgid "edit"
+msgstr ""
+
+#: logintoboggan.module:357
+msgid "A validation e-mail has been sent to your e-mail address. In order to gain full access to the site, you will need to follow the instructions in that message."
+msgstr ""
+
+#: logintoboggan.module:363
+msgid "Your password and further instructions have been sent to your e-mail address."
+msgstr ""
+
+#: logintoboggan.module:376
+msgid "Thank you for applying for an account. Your account is currently pending approval by the site administrator.<br />Once it has been approved, you will receive an e-mail containing further instructions."
+msgstr ""
+
+#: logintoboggan.module:419
+msgid "Your e-mail address and confirmed e-mail address must match."
+msgstr ""
+
+#: logintoboggan.module:600
+msgid "LoginToboggan logged in block"
+msgstr ""
+
+#: logintoboggan.module:653
+msgid "Disabled"
+msgstr ""
+
+#: logintoboggan.module:654
+msgid "Enabled"
+msgstr ""
+
+#: logintoboggan.module:658;1407
+msgid "Login"
+msgstr ""
+
+#: logintoboggan.module:664
+msgid "Allow users to login using their e-mail address"
+msgstr ""
+
+#: logintoboggan.module:667
+msgid "Users will be able to enter EITHER their username OR their e-mail address to log in."
+msgstr ""
+
+#: logintoboggan.module:672
+msgid "Registration"
+msgstr ""
+
+#: logintoboggan.module:677
+msgid "Use two e-mail fields on registration form"
+msgstr ""
+
+#: logintoboggan.module:680
+msgid "User will have to type the same e-mail address into both fields. This helps to confirm that they've typed the correct address."
+msgstr ""
+
+#: logintoboggan.module:684
+msgid " More help in writing the e-mail message can be found at <a href=\"!help\">LoginToboggan help</a>."
+msgstr ""
+
+#: logintoboggan.module:691
+msgid "Set password"
+msgstr ""
+
+#: logintoboggan.module:693
+msgid "This will allow users to choose their initial password when registering (note that this setting is merely a mirror of the <a href=\"!settings\">Require e-mail verification when a visitor creates an account</a> setting, and is merely here for convenience).  If selected, users will be assigned to the role below. They will not be assigned to the 'authenticated user' role until they confirm their e-mail address by following the link in their registration e-mail. It is HIGHLY recommended that you set up a 'pre-authorized' role with limited permissions for this purpose. <br />NOTE: If you enable this feature, you should edit the <a href=\"!settings\">Welcome, no approval required</a> text."
+msgstr ""
+
+#: logintoboggan.module:701
+msgid "Non-authenticated role"
+msgstr ""
+
+#: logintoboggan.module:704
+msgid "If \"Set password\" is selected, users will be able to login before their e-mail address has been authenticated. Therefore, you must choose a role for new non-authenticated users. Users will be removed from this role and assigned to the \"authenticated user\" role once they follow the link in their welcome e-mail. <a href=\"!url\">Add new roles</a>. <strong>WARNING: changing this setting after initial site setup can cause undesirable results, including unintended deletion of users -- change with extreme caution!</strong>"
+msgstr ""
+
+#: logintoboggan.module:708
+msgid "Never delete"
+msgstr ""
+
+#: logintoboggan.module:709
+msgid "1 Day"
+msgstr ""
+
+#: logintoboggan.module:710
+msgid "2 Days"
+msgstr ""
+
+#: logintoboggan.module:711
+msgid "3 Days"
+msgstr ""
+
+#: logintoboggan.module:712
+msgid "4 Days"
+msgstr ""
+
+#: logintoboggan.module:713
+msgid "5 Days"
+msgstr ""
+
+#: logintoboggan.module:714
+msgid "6 Days"
+msgstr ""
+
+#: logintoboggan.module:715
+msgid "1 Week"
+msgstr ""
+
+#: logintoboggan.module:716
+msgid "2 Weeks"
+msgstr ""
+
+#: logintoboggan.module:717
+msgid "1 Month"
+msgstr ""
+
+#: logintoboggan.module:718
+msgid "3 Months"
+msgstr ""
+
+#: logintoboggan.module:719
+msgid "6 Months"
+msgstr ""
+
+#: logintoboggan.module:720
+msgid "1 Year"
+msgstr ""
+
+#: logintoboggan.module:725
+msgid "Delete unvalidated users after"
+msgstr ""
+
+#: logintoboggan.module:728
+msgid "If enabled, users that are still in the 'Non-authenticated role' set above will be deleted automatically from the system, if the set time interval since their initial account creation has passed. This can be used to automatically purge spambot registrations. Note: this requires cron, and also requires that the 'Set password' option above is enabled. <strong>WARNING: changing this setting after initial site setup can cause undesirable results, including unintended deletion of users -- change with extreme caution! (please read the CAVEATS section of INSTALL.txt for important information on configuring this feature)</strong>"
+msgstr ""
+
+#: logintoboggan.module:733
+msgid "Immediate login"
+msgstr ""
+
+#: logintoboggan.module:735
+msgid "If set, the user will be logged in immediately after registering. Note this only applies if the 'Set password' option above is enabled."
+msgstr ""
+
+#: logintoboggan.module:740
+msgid "Redirections"
+msgstr ""
+
+#: logintoboggan.module:747
+msgid "Redirect path on registration"
+msgstr ""
+
+#: logintoboggan.module:749
+msgid "Normally, after a user registers a new account, they will be taken to the front page, or to their user page if you specify <cite>Immediate login</cite> above. Leave this setting blank if you wish to keep the default behavior. If you wish the user to go to a page of your choosing, then enter the path for it here. For instance, you may redirect them to a static page such as <cite>node/35</cite>, or to the <cite>&lt;front&gt;</cite> page. You may also use <em>%uid</em> as a variable, and the user's user ID will be substituted in the path."
+msgstr ""
+
+#: logintoboggan.module:754
+msgid "Redirect path on confirmation"
+msgstr ""
+
+#: logintoboggan.module:756
+msgid "Normally, after a user confirms their new account, they will be taken to their user page. Leave this setting blank if you wish to keep the default behavior. If you wish the user to go to a page of your choosing, then enter the path for it here. For instance, you may redirect them to a static page such as <cite>node/35</cite>, or to the <cite>&lt;front&gt;</cite> page. You may also use <em>%uid</em> as a variable, and the user's user ID will be substituted in the path. In the case where users are not creating their own passwords, it is suggested to use <cite>user/%uid/edit</cite> here, so the user may set their password immediately after validating their account."
+msgstr ""
+
+#: logintoboggan.module:760
+msgid "Override destination parameter"
+msgstr ""
+
+#: logintoboggan.module:762
+msgid "Normally, when a Drupal redirect is performed, priority is given to the 'destination' parameter from the originating URL. With this setting enabled, LoginToboggan will attempt to override this behavior with any values set above."
+msgstr ""
+
+#: logintoboggan.module:766
+msgid "Other"
+msgstr ""
+
+#: logintoboggan.module:781
+msgid "Present login form on access denied (403)"
+msgstr ""
+
+#: logintoboggan.module:784
+msgid "Anonymous users will be presented with a login form along with an access denied message."
+msgstr ""
+
+#: logintoboggan.module:788
+msgid "Display login successful message"
+msgstr ""
+
+#: logintoboggan.module:791
+msgid "If enabled, users will receive a 'Login successful' message upon login."
+msgstr ""
+
+#: logintoboggan.module:793
+msgid "None"
+msgstr ""
+
+#: logintoboggan.module:799
+msgid "Minimum password length"
+msgstr ""
+
+#: logintoboggan.module:802
+msgid "LoginToboggan automatically performs basic password validation for illegal characters. If you would additionally like to have a mimimum password length requirement, select the length here, or set to 'None' for no password length validation."
+msgstr ""
+
+#: logintoboggan.module:819
+msgid "Access Denied / User Login"
+msgstr ""
+
+#: logintoboggan.module:820
+msgid "Access denied.  You may need to login below or register to access this page."
+msgstr ""
+
+#: logintoboggan.module:823
+msgid "Access Denied"
+msgstr ""
+
+#: logintoboggan.module:878
+msgid "You must enter a password."
+msgstr ""
+
+#: logintoboggan.module:879;889
+msgid "The password contains an illegal character."
+msgstr ""
+
+#: logintoboggan.module:891
+msgid "The password is too long: it must be less than 30 characters."
+msgstr ""
+
+#: logintoboggan.module:893
+msgid "The password is too short: it must be at least %min_length characters."
+msgstr ""
+
+#: logintoboggan.module:946
+msgid "Your account is currently blocked -- login cancelled."
+msgstr ""
+
+#: logintoboggan.module:965;973
+msgid "You have successfully validated %user."
+msgstr ""
+
+#: logintoboggan.module:979
+msgid "Sorry, you can only use your validation link once for security reasons. Please !login with your username and password instead now."
+msgstr ""
+
+#: logintoboggan.module:979
+msgid "login"
+msgstr ""
+
+#: logintoboggan.module:1047
+msgid "You have just used your one-time login link. It is no longer possible to use this link to login. Please change your password."
+msgstr ""
+
+#: logintoboggan.module:1089
+msgid "Account validation"
+msgstr ""
+
+#: logintoboggan.module:1093
+msgid "re-send validation e-mail"
+msgstr ""
+
+#: logintoboggan.module:1112
+msgid "This name has already been taken by another user."
+msgstr ""
+
+#: logintoboggan.module:1116
+msgid "This e-mail has already been taken by another user."
+msgstr ""
+
+#: logintoboggan.module:1155
+msgid "If required, you may reset your password from: !url"
+msgstr ""
+
+#: logintoboggan.module:1165
+msgid "A validation e-mail has been sent to the user's e-mail address."
+msgstr ""
+
+#: logintoboggan.module:1168
+msgid "A validation e-mail has been sent to your e-mail address. You will need to follow the instructions in that message in order to gain full access to the site."
+msgstr ""
+
+#: logintoboggan.module:1292
+msgid "(!site) Account application for !username"
+msgstr ""
+
+#: logintoboggan.module:1295
+msgid "!username has applied for an account, and has automatically received the permissions of the LoginToboggan validating role.  To give the user full site permissions, click the link below:\n\n!validating_url\n\nAlternatively, you may visit their user account listed below and remove them from the validating role.\n\n!edit_uri"
+msgstr ""
+
+#: logintoboggan.module:1298
+msgid "!username has applied for an account.\n\n!edit_uri"
+msgstr ""
+
+#: logintoboggan.module:1330
+msgid "Username or e-mail address"
+msgstr ""
+
+#: logintoboggan.module:1335
+msgid "Username or e-mail"
+msgstr ""
+
+#: logintoboggan.module:1348
+msgid "You may login with either your assigned username or your e-mail address."
+msgstr ""
+
+#: logintoboggan.module:1351;1378
+msgid ""
+msgstr ""
+
+#: logintoboggan.module:1362
+msgid "Password"
+msgstr ""
+
+#: logintoboggan.module:1373
+msgid "The password field is case sensitive."
+msgstr ""
+
+#: logintoboggan.module:1387
+msgid "You are not authorized to access this page."
+msgstr ""
+
+#: logintoboggan.module:1395
+msgid "Log out"
+msgstr ""
+
+#: logintoboggan.module:1404
+msgid "Login/Register"
+msgstr ""
+
+#: logintoboggan.module:1418
+msgid "Login successful."
+msgstr ""
+
+#: logintoboggan.module:48
+msgid "logintoboggan"
+msgstr ""
+
+#: logintoboggan.module:48
+msgid "Purged the following unvalidated users: !purged_users"
+msgstr ""
+
+#: logintoboggan.module:328
+msgid "security"
+msgstr ""
+
+#: logintoboggan.module:328
+msgid "Detected malicious attempt to alter protected user fields."
+msgstr ""
+
+#: logintoboggan.module:350;922;1033;1046
+msgid "user"
+msgstr ""
+
+#: logintoboggan.module:350
+msgid "New user: %name (%email)."
+msgstr ""
+
+#: logintoboggan.module:922
+msgid "E-mail validation URL used for %name with timestamp @timestamp."
+msgstr ""
+
+#: logintoboggan.module:1033
+msgid "Session opened for %name."
+msgstr ""
+
+#: logintoboggan.module:1046
+msgid "User %name used one-time login link at time %timestamp."
+msgstr ""
+
+#: logintoboggan.module:501 logintoboggan.info:0
+msgid "LoginToboggan"
+msgstr ""
+
+#: logintoboggan.module:502
+msgid "Set up custom login options like instant login, login redirects, pre-authorized validation roles, etc."
+msgstr ""
+
+#: logintoboggan.module:511
+msgid "Validate e-mail address"
+msgstr ""
+
+#: logintoboggan.module:521
+msgid "Access denied"
+msgstr ""
+
+#: logintoboggan.module:527
+msgid "Re-send validation e-mail"
+msgstr ""
+
+#: logintoboggan.install:34
+msgid "logintoboggan cleaning of user data successful"
+msgstr ""
+
+#: logintoboggan.install:56
+msgid "Your previous setting for the logintoboggan pre-auth role was the anonymous user role, which is no longer allowed.  The pre-auth role has now been set to the authenticated user role for your site. <em>Because of this change, all unvalidated users on your site now have authenticated user permissions!</em> If you wish to retain the previous functionality, create a new user role with the same access permissions as the anonymous user, and set the logintoboggan pre-auth role to the newly created role. You will also need to manually add any previously unvalidated users to the newly created pre-auth role."
+msgstr ""
+
+#: logintoboggan.install:95
+msgid "logintoboggan cleaning of user/profile data successful"
+msgstr ""
+
+#: logintoboggan.install:155
+msgid "Please note that the behavior of LoginToboggan's <cite>Redirect path on confirmation</cite> setting has changed in the case where users are NOT setting their own password on registration. The previous behavior was to automatically redirect the user to <cite>user/%uid/edit</cite>, with a final destination of the <cite>Redirect path on confirmation</cite> setting. This behavior has been removed. To replicate it, the path must be explicitly declared now. Ex: to have the user visit their edit page, with a final destination of node/foo, you would use <cite>user/%uid/edit?destination=node/foo</cite>."
+msgstr ""
+
+#: logintoboggan.info:0
+msgid "Improves Drupal's login system."
+msgstr ""
+

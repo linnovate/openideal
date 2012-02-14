@@ -1,0 +1,47 @@
+<?php
+// $Id: nodewords_ui.install,v 1.1.2.6 2010/04/18 12:25:43 kiam Exp $
+
+/**
+ * @file
+ * Install, update and uninstall functions for the User interface for Nodewords module.
+ */
+
+/**
+ * Implements hook_install().
+ */
+function nodewords_ui_install() {
+  $value = variable_get('nodewords_edit', NULL);
+  if (isset($value)) {
+    variable_set('nodewords_ui_edit', $value);
+  }
+
+  db_query("UPDATE {system} SET weight = 12 WHERE name = 'nodewords_ui' AND type = 'module'");
+}
+
+/**
+ * Implements hook_update_N().
+ */
+function nodewords_ui_update_6102() {
+  $ret = array();
+
+  variable_del('nodewords_ui_installed');
+  variable_del('nodewords_edit');
+  $ret[] = array(
+    'success' => TRUE,
+    'query' => 'Removed obsolete persistent variables',
+  );
+
+  return $ret;
+}
+
+/**
+ * Implements hook_update_N().
+ */
+function nodewords_ui_update_6103() {
+  $ret = array();
+
+  $ret[] = update_sql("UPDATE {system} SET weight = 12 WHERE name = 'nodewords_ui' AND type = 'module'");
+
+  return $ret;
+}
+

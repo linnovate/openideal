@@ -1,0 +1,91 @@
+<?php
+// $Id: solr_base_query.test,v 1.1.4.11 2010/05/01 03:32:03 jpmckinney Exp $
+
+
+/***
+ * JacobSingh: Warning! This test is totally broken because of the addition of the "hash" in apachesolr_search.module.
+ * Needs to be moved out.
+ *
+ */
+
+
+class DrupalSolrQueryTests extends DrupalWebTestCase {
+  function getInfo() {
+    return array(
+      'name' => 'Query handling',
+      'description' => 'Throw various queries at the query object and make sure they all parse correctly.',
+      'group' => 'ApacheSolr'
+    );
+  }
+
+  function setUp() {
+    parent::setUp('search', 'apachesolr');
+  }
+
+  private $queries = array(
+    'foo',
+    'foo bar',
+    'foo bar "hubba baz"',
+    'uid:1',
+    'uid:1 uid:2',
+    'foo bar uid:1 uid:2',
+    'foo bar "I love you"',
+    'foo bar baz -hubba',
+    'foo -bar -term:31',
+    'foo*',
+    'foo?',
+    'somefield:"I love you"',
+  );
+
+  function testParseSimple() {
+    foreach ($this->queries as $string) {
+      $query = apachesolr_drupal_query($string);
+      // force the query to be rebuilt without removing any fields.
+      $query->remove_filter('fake-field-name');
+      $this->assertEqual($string, $query->get_query_basic());
+    }
+  }
+
+  function testAddTerm() {
+    foreach ($this->queries as $string) {
+      $query = apachesolr_drupal_query($string);
+      $query->add_filter('wham', '1');
+      $this->assertEqual($string, $query->get_query_basic());
+      $this->assertEqual(array('filters' => 'wham:1'), $query->get_url_queryvalues());
+    }
+  }
+
+  function testRemoveTerm() {
+    $string = 'foo';
+    $query = apachesolr_drupal_query($string);
+    $query->remove_filter('', 'foo');
+    $this->assertEqual('foo', $query->get_query_basic());
+
+    $string = 'foo bar';
+    $query = apachesolr_drupal_query($string);
+    $query->remove_filter('', 'foo');
+    $this->assertEqual('foo bar', $query->get_query_basic());
+
+    $string = 'foo bar';
+    $query = apachesolr_drupal_query($string, 'uid:1');
+    $query->remove_filter('uid', '1');
+    $this->assertEqual('foo bar', $query->get_query_basic());
+
+    $string = 'foo bar';
+    $query = apachesolr_drupal_query($string);
+    $query->remove_filter('uid', 'uid:1');
+    $this->assertEqual('foo bar', $query->get_query_basic());
+
+    $string = 'foo bar';
+    $query = apachesolr_drupal_query($string, 'uid:1 uid:2 tid:3');
+    $query->remove_filter('uid', '1');
+    $this->assertEqual('foo bar', $query->get_query_basic());
+    $this->assertEqual(array('filters' => 'uid:2 tid:3'), $query->get_url_queryvalues());
+
+    $string = 'foo bar';
+    $query = apachesolr_drupal_query($string, 'uid:1 uid:2 tid:3');
+    $query->remove_filter('uid');
+    $this->assertEqual('foo bar', $query->get_query_basic());
+    $this->assertEqual(array('filters' => 'tid:3'), $query->get_url_queryvalues());
+  }
+}

@@ -1,0 +1,1381 @@
+# $Id: de.po,v 1.1.2.9 2009/05/18 12:27:06 fago Exp $
+#
+# German translation of Drupal (general)
+# Copyright YEAR NAME <EMAIL@ADDRESS>
+# Generated from files:
+#  rules.api.php,v 1.1.2.4 2009/05/18 12:05:20 fago
+#  system.rules.inc,v 1.1.2.15 2009/05/18 09:31:26 fago
+#  system.rules_forms.inc,v 1.1.2.10 2009/05/15 13:03:12 fago
+#  node.rules_forms.inc,v 1.1.2.18 2009/05/18 11:40:57 fago
+#  user.rules_forms.inc,v 1.1.2.5 2009/05/15 13:03:12 fago
+#  rules.rules.inc,v 1.1.2.37 2009/05/18 12:05:20 fago
+#  user.rules.inc,v 1.1.2.19 2009/05/18 12:05:20 fago
+#  node.rules.inc,v 1.1.2.37 2009/05/18 12:05:20 fago
+#  php.rules.inc,v 1.1.2.11 2009/05/15 13:03:12 fago
+#  path.rules.inc,v 1.1.2.6 2009/05/15 13:03:12 fago
+#  taxonomy.rules.inc,v 1.1.2.8 2009/05/18 12:05:20 fago
+#  rules.variables.inc,v 1.1.2.32 2009/04/30 11:58:30 fago
+#  rules.module,v 1.1.2.61 2009/05/15 13:03:12 fago
+#  rules.info,v 1.1.2.2 2008/07/10 08:15:04 fago
+#  rules.install,v 1.1.2.24 2009/04/30 09:48:39 fago
+#  comment.rules.inc,v 1.1.2.7 2009/05/18 12:05:20 fago
+#  comment.rules_forms.inc,v 1.1.2.3 2009/05/15 13:03:12 fago
+#  path.rules_forms.inc,v 1.1.2.5 2009/05/15 13:03:12 fago
+#  php.rules_forms.inc,v 1.1.2.8 2009/05/15 13:03:12 fago
+#  rules.rules_forms.inc,v 1.1.2.7 2009/05/15 13:03:12 fago
+#  taxonomy.rules_forms.inc,v 1.1.2.7 2009/05/15 13:03:12 fago
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"POT-Creation-Date: 2009-05-18 14:27+0200\n"
+"PO-Revision-Date: 2009-05-18 14:27+0200\n"
+"Last-Translator: NAME <EMAIL@ADDRESS>\n"
+"Language-Team: German <EMAIL@ADDRESS>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n!=1);\n"
+
+#: rules.api.php:116 modules/system.rules.inc:46
+msgid "Send a mail to a user"
+msgstr "Eine E-Mail an einen Benutzer senden"
+
+#: rules.api.php:118 modules/system.rules.inc:48 modules/system.rules_forms.inc:83
+msgid "Recipient"
+msgstr "Empfänger"
+
+#: rules.api.php:186 modules/node.rules_forms.inc:18
+msgid "Content types"
+msgstr "Inhaltstypen"
+
+#: rules.api.php:213 modules/user.rules_forms.inc:92
+msgid "You have to enter the user name or the user id."
+msgstr "Es muss der Benutzername oder die Benutzer-ID eingegeben werden."
+
+#: rules.api.php:254
+msgid "This help text is going to be displayed during action configuration."
+msgstr ""
+
+#: rules.api.php:278 modules/rules.rules.inc:141
+msgid "Textual comparison"
+msgstr "Text-Vergleich"
+
+#: rules.api.php:280 modules/rules.rules.inc:143
+msgid "Text 1"
+msgstr "Text 1"
+
+#: rules.api.php:281 modules/rules.rules.inc:144
+msgid "Text 2"
+msgstr "Text 2"
+
+#: rules.api.php:283 modules/rules.rules.inc:146
+msgid "TRUE is returned, if both texts are equal."
+msgstr "Es wird WAHR zurückgegeben, wenn beide Texte gleich sind."
+
+#: rules.api.php:341 modules/user.rules.inc:18
+msgid "User account has been created"
+msgstr "Benutzer wurde erstellt"
+
+#: rules.api.php:343 modules/user.rules.inc:20
+msgid "registered user"
+msgstr "registrierter Benutzer"
+
+#: rules.api.php:346 modules/user.rules.inc:23
+msgid "User account details have been updated"
+msgstr "Details eines Benutzerkontos wurden aktualisiert"
+
+#: rules.api.php:348 modules/user.rules.inc:25
+msgid "updated user"
+msgstr "aktualisierter Benutzer"
+
+#: rules.api.php:349 modules/user.rules.inc:26
+msgid "unchanged user"
+msgstr "unveränderter Benutzer"
+
+#: rules.api.php:353 modules/user.rules.inc:30
+msgid "User page has been viewed"
+msgstr "Benutzerseite wurde aufgerufen"
+
+#: rules.api.php:355 modules/user.rules.inc:32
+msgid "viewed user"
+msgstr "angezeigter Benutzer"
+
+#: rules.api.php:356 modules/node.rules.inc:35 modules/user.rules.inc:33
+msgid "Note that if drupal's page cache is enabled, this event won't be generated for pages served from cache."
+msgstr ""
+"Beachten Sie, dass dieses Ereignis bei aktiviertem Cache von Drupal "
+"nicht erzeugt wird für Seiten, die aus dem Cache aufgerufen werden."
+
+#: rules.api.php:359 modules/user.rules.inc:36
+msgid "User has been deleted"
+msgstr "Benutzer wurde gelöscht"
+
+#: rules.api.php:361 modules/user.rules.inc:38
+msgid "deleted user"
+msgstr "gelöschter Benutzer"
+
+#: rules.api.php:364 modules/user.rules.inc:41
+msgid "User has logged in"
+msgstr "Benutzer hat sich angemeldet"
+
+#: rules.api.php:367 modules/user.rules.inc:44
+msgid "logged in user"
+msgstr "angemeldeter Benutzer"
+
+#: rules.api.php:371 modules/user.rules.inc:48
+msgid "User has logged out"
+msgstr "Benutzer hat sich abgemeldet"
+
+#: rules.api.php:374 modules/user.rules.inc:51
+msgid "logged out user"
+msgstr "abgemeldeter Benutzer"
+
+#: rules.api.php:427 modules/node.rules.inc:310 modules/node.rules_forms.inc:109 modules/rules.rules.inc:329
+msgid "content"
+msgstr "Inhalt"
+
+#: rules.api.php:459 modules/php.rules.inc:19
+msgid "PHP Evaluation"
+msgstr "PHP-Auswertung"
+
+#: rules.api.php:527
+msgid "Replacement patterns for @name"
+msgstr ""
+
+#: rules.api.php:607 modules/node.rules.inc:112;168;176;190 modules/path.rules.inc:58 modules/rules.rules.inc:414 modules/taxonomy.rules.inc:82;96
+msgid "Content"
+msgstr "Inhalt"
+
+#: rules.variables.inc:60
+msgid "Warning: Unable to get variable %name."
+msgstr "Warnung: Variable %name konnte nicht ermittelt werden"
+
+#: rules.variables.inc:99
+msgid "Warning: Unable to get argument %name."
+msgstr "Warnung: Variable %name konnte nicht ermittelt werden."
+
+#: rules.variables.inc:158
+msgid "Element %name has not been executed. There are not all execution arguments needed by an input evaluator available."
+msgstr ""
+"Element %name wurde nicht ausgeführt. Es sind nicht alle Argumente "
+"für die Ausführung verfügbar, die von einer Eingabe-Prüfung "
+"benötigt werden."
+
+#: rules.variables.inc:173
+msgid "Element %name has not been executed. There are not all execution arguments available."
+msgstr ""
+"Element %name wurde nicht ausgeführt. Es sind nicht alle Argumente "
+"für die Ausführung verfügbar."
+
+#: rules.variables.inc:203
+msgid "Successfully added the new variable @arg"
+msgstr "Neue Variable @arg erfolgreich hinzugefügt"
+
+#: rules.variables.inc:206
+msgid "Unknown variable name %var return by action %name."
+msgstr "Unbekannter Variablen-Name %var zurückgegeben durch Aktion %name."
+
+#: rules.variables.inc:319
+msgid "Loaded variable @arg"
+msgstr "Variable @arg geladen"
+
+#: rules.variables.inc:355
+msgid "Saved variable @name of type @type."
+msgstr "Variable @name vom Typ @type gespeichert."
+
+#: rules.variables.inc:361
+msgid "Failed saving variable @name of type @type."
+msgstr "Speichern der Variable @name vom Typ @type fehlgeschlagen."
+
+#: rules.module:290
+msgid "%label has been invoked."
+msgstr "%label wurde aufgerufen."
+
+#: rules.module:301
+msgid "Evaluation of %label has been finished."
+msgstr "Auswertung von %label abgeschlossen."
+
+#: rules.module:399
+msgid "Not executing the rule %name on rule set %set to prevent recursion."
+msgstr ""
+"Regel %name vom Regel-Set %set nicht ausgeführt, um Rekursion zu "
+"vermeiden."
+
+#: rules.module:404
+msgid "Executing the rule %name on rule set %set"
+msgstr "Regel %name vom Regel-Set %set wird ausgeführt"
+
+#: rules.module:455
+msgid "Action execution: @name"
+msgstr "Aktion @name wird ausgeführt"
+
+#: rules.module:480
+msgid "Condition %name evaluated to @bool."
+msgstr "Bedingung %name ausgewertet auf @bool."
+
+#: rules.module:523
+msgid "OR"
+msgstr "ODER"
+
+#: rules.module:524
+msgid "AND"
+msgstr "UND"
+
+#: rules.module:579
+msgid "unlabelled"
+msgstr "ohne Bezeichnung"
+
+#: rules.module:857 rules.info:0;0
+msgid "Rules"
+msgstr "Regeln"
+
+#: rules.module:862
+msgid "Rule Sets"
+msgstr "Regel-Sets"
+
+#: rules.module:876
+msgid "Unable to find %type of name %name with the label %label. Perhaps the according module has been deactivated."
+msgstr ""
+"Kann %type mit Namen %name und der Bezeichnung %label nicht finden. "
+"Möglicherweise wurde das zugehörige Modul deaktiviert."
+
+#: rules.module:879
+msgid "Unable to find %type of name %name. Perhaps the according module has been deactivated."
+msgstr ""
+"Kann %type mit Namen %name nicht finden. Möglicherweise wurd das "
+"zugehörige Modul deaktiviert."
+
+#: rules.module:892
+msgid "Show rule configuration"
+msgstr "Regel-Konfiguration anzeigen"
+
+#: rules.module:953
+msgid "Included @module.rules.inc files."
+msgstr ""
+
+#: rules.module:0 modules/system.rules.inc:116;163
+msgid "rules"
+msgstr "Regeln"
+
+#: rules.install:50
+msgid "The name of the item."
+msgstr "Der Name dieses Objekts"
+
+#: rules.install:57
+msgid "The whole, serialized item configuration."
+msgstr "Die gesamte angeordnete Element-Konfiguration"
+
+#: rules.install:65
+msgid "Cache table for the rules engine to store configured items."
+msgstr ""
+"Cache-Tabelle, in der die Regel-Engine konfigurierte Elemente "
+"speichert."
+
+#: rules.install:88
+msgid "Successfully imported rule %label."
+msgstr "Regel %label erfolgreich importiert."
+
+#: rules.install:93
+msgid "Failed importing the rule %label."
+msgstr "Die Regel %label konnte nicht importiert werden."
+
+#: rules.install:164
+msgid "The now separated rules administration UI module has been enabled."
+msgstr ""
+"Das jetzt getrennte Module ‚Rules administration UI‘ wurde "
+"aktiviert."
+
+#: rules.install:243
+msgid "No upgrade information for the element %name found. Aborting."
+msgstr ""
+"Keine Aktualisierungsinformationen für das Element %name gefunden. "
+"Abbruch."
+
+#: rules.info:0
+msgid "Lets you define conditionally executed actions based on occurring events."
+msgstr ""
+"Erlaubt das bedingte Ausführen von Aktionen bei auftretenden "
+"Ereignissen."
+
+#: modules/comment.rules.inc:18
+msgid "After saving a new comment"
+msgstr "Nach dem Speichern eines neuen Kommentars"
+
+#: modules/comment.rules.inc:20
+msgid "created comment"
+msgstr "Kommentar erstellt"
+
+#: modules/comment.rules.inc:23
+msgid "After saving an updated comment"
+msgstr "Nach dem Speichern eines aktualislierten Kommentars"
+
+#: modules/comment.rules.inc:25
+msgid "updated comment"
+msgstr "aktualisierter Kommentar"
+
+#: modules/comment.rules.inc:28
+msgid "After deleting a comment"
+msgstr "Nach dem Löschen eines Kommentars"
+
+#: modules/comment.rules.inc:30
+msgid "deleted comment"
+msgstr "gelöschter Kommentar"
+
+#: modules/comment.rules.inc:33
+msgid "Comment is being viewed"
+msgstr "Kommentar wird angezeigt"
+
+#: modules/comment.rules.inc:35
+msgid "viewed comment"
+msgstr "angezeigter Inhalt"
+
+#: modules/comment.rules.inc:38
+msgid "After publishing a comment"
+msgstr "Nach dem Veröffentlichen eines Kommentars"
+
+#: modules/comment.rules.inc:40
+msgid "published comment"
+msgstr "veröffentlichter Kommentar"
+
+#: modules/comment.rules.inc:43
+msgid "After unpublishing a comment"
+msgstr "Nach der Rücknahme der Veröffentlichung eines Kommentars"
+
+#: modules/comment.rules.inc:45
+msgid "unpublished comment"
+msgstr "unveröffentlichter Kommentar"
+
+#: modules/comment.rules.inc:61
+msgid "author"
+msgstr "Autor"
+
+#: modules/comment.rules.inc:66
+msgid "commented content"
+msgstr "kommentierter Inhalt"
+
+#: modules/comment.rules.inc:71
+msgid "commented content author"
+msgstr "Autor des kommentierten Inhalts"
+
+#: modules/comment.rules.inc:104
+msgid "Load comment by id"
+msgstr "Kommentar nach ID laden"
+
+#: modules/comment.rules.inc:108
+msgid "Comment id"
+msgstr "Kommentar-ID"
+
+#: modules/comment.rules.inc:115
+msgid "Loaded comment"
+msgstr "Geladener Kommentar"
+
+#: modules/comment.rules.inc:137
+msgid "comment"
+msgstr "Kommentar"
+
+#: modules/comment.rules_forms.inc:17
+msgid "Comment with id @id"
+msgstr "Kommentar mit der ID @id"
+
+#: modules/node.rules.inc:18
+msgid "After saving new content"
+msgstr "Nach dem Speichern von neuem Inhalt"
+
+#: modules/node.rules.inc:20
+msgid "created content"
+msgstr "Inhalt erstellt"
+
+#: modules/node.rules.inc:20;25;30
+msgid "content's author"
+msgstr "Autor des Inhalts"
+
+#: modules/node.rules.inc:23
+msgid "After updating existing content"
+msgstr "Nach dem Aktualisieren bestehenden Inhalts"
+
+#: modules/node.rules.inc:25
+msgid "updated content"
+msgstr "Inhalt aktualisiert"
+
+#: modules/node.rules.inc:28
+msgid "Content is going to be saved"
+msgstr "Inhalt soll gespeichert werden"
+
+#: modules/node.rules.inc:30
+msgid "saved content"
+msgstr "gespeicherter Inhalt"
+
+#: modules/node.rules.inc:33
+msgid "Content is going to be viewed"
+msgstr "Inhalt soll angezeigt werden"
+
+#: modules/node.rules.inc:36
+msgid "viewed content"
+msgstr "angezeigter Inhalt"
+
+#: modules/node.rules.inc:36;44
+msgid "content author"
+msgstr "Autor des Inhalts"
+
+#: modules/node.rules.inc:37
+msgid "Content is displayed as teaser"
+msgstr "Inhalt wird als Anriss angezeigt"
+
+#: modules/node.rules.inc:38
+msgid "Content is displayed as page"
+msgstr "Inhalt wird als Seite angezeigt"
+
+#: modules/node.rules.inc:42
+msgid "After deleting content"
+msgstr "Nach dem Löschen von Inhalt"
+
+#: modules/node.rules.inc:44
+msgid "deleted content"
+msgstr "gelöschter Inhalt"
+
+#: modules/node.rules.inc:71
+msgid "unchanged content"
+msgstr "unveränderter Inhalt"
+
+#: modules/node.rules.inc:76
+msgid "unchanged content's author"
+msgstr "Autor von unverändertem Inhalt"
+
+#: modules/node.rules.inc:117
+msgid "Content has type"
+msgstr "Inhalt hat den Typ"
+
+#: modules/node.rules.inc:118
+msgid "Evaluates to TRUE, if the given content has one of the selected content types."
+msgstr ""
+"Gibt WAHR zurück, wenn ein bestimmter Inhalt einer der ausgewählten "
+"Inhaltstypen ist."
+
+#: modules/node.rules.inc:121
+msgid "Content is published"
+msgstr "Inhalt ist veröffentlicht"
+
+#: modules/node.rules.inc:124
+msgid "Content is sticky"
+msgstr "Inhalt ist oben in Listen"
+
+#: modules/node.rules.inc:127
+msgid "Content is promoted to frontpage"
+msgstr "Inhalt wird auf der Startseite angezeigt"
+
+#: modules/node.rules.inc:166
+msgid "Set the content author"
+msgstr "Autor des Inhalts festlegen"
+
+#: modules/node.rules.inc:169;198
+msgid "User, who is set as author"
+msgstr "Benutzer, der als Autor eingestellt ist"
+
+#: modules/node.rules.inc:174
+msgid "Load the content author"
+msgstr "Autor des Inhalts laden"
+
+#: modules/node.rules.inc:181
+msgid "Content author"
+msgstr "Inhalts-Autor"
+
+#: modules/node.rules.inc:188
+msgid "Set content title"
+msgstr "Titel des Inhalts festlegen"
+
+#: modules/node.rules.inc:191;201
+msgid "Title"
+msgstr "Titel"
+
+#: modules/node.rules.inc:196
+msgid "Add new content"
+msgstr "Neuen Inhalt hinzufügen"
+
+#: modules/node.rules.inc:202
+msgid "The title of the newly created content."
+msgstr "Der Titel des neu erstellten Inhalts"
+
+#: modules/node.rules.inc:208
+msgid "New content"
+msgstr "Neuer Inhalt"
+
+#: modules/node.rules.inc:216
+msgid "Load content by id"
+msgstr "Inhalt laden nach ID"
+
+#: modules/node.rules.inc:218
+msgid "Content ID"
+msgstr "Inhalts-ID"
+
+#: modules/node.rules.inc:221
+msgid "Content Revision ID"
+msgstr "Inhalts-Revisions-ID"
+
+#: modules/node.rules.inc:222
+msgid "If you want to load a specific revision, specify it's revision id. Else leave it empty to load the current revision."
+msgstr ""
+"Wenn einen bestimmte Revision geladen werden soll, muss die "
+"Revisions-ID angegeben werden. Ansonsten leer lassen, um die aktuelle "
+"Revision zu laden."
+
+#: modules/node.rules.inc:229
+msgid "Loaded content"
+msgstr "Geladener Inhalt"
+
+#: modules/node.rules_forms.inc:31
+msgid "@node is @type"
+msgstr "@node hat den Typ @type"
+
+#: modules/node.rules_forms.inc:31
+msgid "or"
+msgstr "oder"
+
+#: modules/node.rules_forms.inc:35
+msgid "@node is published"
+msgstr "@node ist veröffentlicht"
+
+#: modules/node.rules_forms.inc:39
+msgid "@node is sticky"
+msgstr "@node ist oben in Listen"
+
+#: modules/node.rules_forms.inc:43
+msgid "@node is promoted to frontpage"
+msgstr "@node wird auf der Startseite angezeigt"
+
+#: modules/node.rules_forms.inc:50
+msgid "Set the author of @node to @author"
+msgstr "@author als Autor von @node festlegen."
+
+#: modules/node.rules_forms.inc:57
+msgid "Load the @node author"
+msgstr "Autor von @node laden"
+
+#: modules/node.rules_forms.inc:64
+msgid "@node author"
+msgstr "Autor von @node"
+
+#: modules/node.rules_forms.inc:71
+msgid "Set @node's title"
+msgstr "@node-Titel festlegen"
+
+#: modules/node.rules_forms.inc:80
+msgid "Content type to be used"
+msgstr "Inhaltstyp, der verwendet werden soll"
+
+#: modules/node.rules_forms.inc:83
+msgid "Select a content type that will be created when this action is invoked."
+msgstr "Inhaltstyp, der erstellt wird, wenn diese Aktion aufgerufen wird."
+
+#: modules/node.rules_forms.inc:88
+msgid "Create content only if the given author has access permission to do so"
+msgstr "Inhalt nur erstellen, wenn der angegebene Autor das Recht dafür hat"
+
+#: modules/node.rules_forms.inc:94
+msgid "New content of type @type"
+msgstr "Neuer Inhalt vom Typ @type"
+
+#: modules/node.rules_forms.inc:101
+msgid "Content with id @id"
+msgstr "Inhalt mit der ID @id"
+
+#: modules/path.rules.inc:18
+msgid "Path has alias(es)"
+msgstr "Pfad hat Alias(se)"
+
+#: modules/path.rules.inc:23
+msgid "URL alias exists"
+msgstr "URL-Alias existiert"
+
+#: modules/path.rules.inc:51
+msgid "Create or delete an URL alias"
+msgstr "Einen URL-Alias erstellen oder löschen"
+
+#: modules/path.rules.inc:56
+msgid "Create or delete a content's URL alias"
+msgstr "Den URL-Alias von Inhalt erstellen oder löschen"
+
+#: modules/path.rules_forms.inc:16;50
+msgid "Existing system path"
+msgstr "Bestehender Systempfad"
+
+#: modules/path.rules_forms.inc:19
+msgid "Specify the existing path for which you want to check if an URL alias exists."
+msgstr ""
+"Es muss ein bestehender Pfad angegeben werden, der darauf überprüft "
+"werden soll, ob ein URL-Alias existiert."
+
+#: modules/path.rules_forms.inc:29;58
+msgid "Path alias"
+msgstr "Pfad-Alias"
+
+#: modules/path.rules_forms.inc:32
+msgid "Specify the path alias which you want to check if it already exists."
+msgstr ""
+"Angabe des Pfad-Alias, für den geprüft werden soll, ob er schon "
+"existiert."
+
+#: modules/path.rules_forms.inc:38
+msgid "Before checking, replace non ascii characters with"
+msgstr "Vor der Prüfung ACSII-Zeichen ersetzen durch"
+
+#: modules/path.rules_forms.inc:42;70
+msgid "Leave this textfield empty to disable the replacement of non ascii characters."
+msgstr ""
+"Dieses Textfeld leerlassen, um das Ersetzen von Nicht-ASCII-Zeichen zu "
+"deaktivieren.­"
+
+#: modules/path.rules_forms.inc:53
+msgid "Specify the existing path you wish to alias. For example: node/28, forum/1, taxonomy/term/1+2."
+msgstr ""
+"Angabe des bestehenden Pfads, für den ein Alias erstellt werden soll. "
+"Beispiele: node/28, forum/1, taxonomy/term/1+2."
+
+#: modules/path.rules_forms.inc:53
+msgid "Leave it empty to delete URL aliases pointing to the given path alias."
+msgstr ""
+"Leer lassen, um URL-Aliasse zu löschen, die auf den angegebenen "
+"Pfad-Alias zeigen."
+
+#: modules/path.rules_forms.inc:61
+msgid "Specify an alternative path by which this data can be accessed. For example, type \"about\" when writing an about page. Use a relative path and do not add a trailing slash or the URL alias will not work."
+msgstr ""
+"Angabe eines alternativen Pfads, über den auf diese Daten zugegriffen "
+"werden kann. Es kann z.B. „Impressum“ eingegeben werden, wenn "
+"über ein Impressum geschrieben wird. Es muss ein relativer Pfad ohne "
+"führenden Schrägstrich angegeben werden., sonst funktionert der "
+"URL-Alias nicht."
+
+#: modules/path.rules_forms.inc:61
+msgid "Leave it empty to delete URL aliases pointing to the given system path."
+msgstr ""
+"Leer lassen, um auf den angegebenen Pfad zeigende URL-Aliasse zu "
+"löschen."
+
+#: modules/path.rules_forms.inc:66
+msgid "Replace non ascii characters with"
+msgstr "Nicht-ASCII-Zeichen ersetzen durch"
+
+#: modules/path.rules_forms.inc:76
+msgid "You have to enter at least eiter an existing system path or a path alias."
+msgstr ""
+"Es muss mindestens ein bestehender Systempfad oder ein Pfad-Alias "
+"angegeben werden."
+
+#: modules/path.rules_forms.inc:87
+msgid "Create or delete @node's URL alias"
+msgstr "URL-Alias für Beitrag @node erstellen oder löschen"
+
+#: modules/path.rules_forms.inc:91
+msgid "This action only works if the acting user has %perm1 or %perm2 permsissions. If this does not suit, use the generic \"Create or delete an URL alias\" action together with the existing system path \"node/{ID}\"."
+msgstr ""
+"Diese Aktion funktioniert nur, wenn der handelnde Benutzer die "
+"Berechtigung %perm1 oder %perm2 hat. Wenn das nicht passt, sollte die "
+"generische Aktion „Einen URL-Alias erstellen oder löschen“ "
+"zusammen mit dem bestehenden Systempfad „node/{ID}“ verwendet "
+"werden."
+
+#: modules/path.rules_forms.inc:91
+msgid "create url aliases"
+msgstr "URL-Aliasse erstellen"
+
+#: modules/path.rules_forms.inc:91
+msgid "administer url aliases"
+msgstr "URL-Aliasse verwalten"
+
+#: modules/php.rules.inc:68
+msgid "PHP is not evaluated as there are not all necessary variables available."
+msgstr ""
+"PHP wird nicht ausgewertet, da nicht alle nötigen Variablen "
+"verfügbar sind."
+
+#: modules/php.rules.inc:116;139
+msgid "Execute custom PHP code"
+msgstr "Benutzerdefinierten PHP-Code ausführen"
+
+#: modules/php.rules_forms.inc:16
+msgid "PHP code inside of &lt;?php ?&gt; delimiters will be evaluated and replaced by its output. E.g. &lt;? echo 1+1?&gt; will be replaced by 2."
+msgstr ""
+"PHP-Code innerhalb der Begrenzer &lt;?php ?&gt wird ausgewertet und "
+"durch seine Ausgabe ersetzt. &lt;? echo 1+1?&gt; wird zum Beispiel "
+"durch ‚2‘ ersetzt."
+
+#: modules/php.rules_forms.inc:17
+msgid "Furthermore you can make use of the following variables:"
+msgstr "Außerdem können folgende Variablen verwendet werden:"
+
+#: modules/php.rules_forms.inc:18
+msgid "Variable"
+msgstr "Variable"
+
+#: modules/php.rules_forms.inc:18
+msgid "Type"
+msgstr "Typ"
+
+#: modules/php.rules_forms.inc:18
+msgid "Description"
+msgstr "Beschreibung"
+
+#: modules/php.rules_forms.inc:21
+msgid "Intelligent saving"
+msgstr "Intelligentes Speichern"
+
+#: modules/php.rules_forms.inc:33
+msgid "Yes"
+msgstr "Ja"
+
+#: modules/php.rules_forms.inc:36
+msgid "No"
+msgstr "Nein"
+
+#: modules/php.rules_forms.inc:44
+msgid "Note that variables are passed by reference, so you can change them."
+msgstr ""
+"Zu beachten ist, dass Variablen von der Referenz übergeben werden, "
+"daher können sie gändert werden."
+
+#: modules/php.rules_forms.inc:45
+msgid "If you want to make the changes permanent, you can let rules intelligently save the changes when the variable's data type supports it."
+msgstr ""
+"Wenn die Änderungen dauerhaft erfolgen sollen, können Regeln "
+"intelligent die Änderungen speichern, wenn der Datentyp der Variablen "
+"dies unterstützt. Um „intelligentes Speichern“ zu verwenden, muss "
+"ein Array zu speichernder Variablen zurückgegeben werden. Dadurch "
+"werden Variablen nur einmal gespeichert, selbst wenn sie mehrfach "
+"geändert werden."
+
+#: modules/php.rules_forms.inc:45
+msgid "To make use of \"intelligent saving\" just return an array of variables to save, e.g.: !code So variables are saved only once, even if modified multiple times."
+msgstr ""
+"Um „intelligentes Speichern“ zu verwenden muss einfach ein Array "
+"zu speichernder Variablen zurückgegeben werden, z.B. !code. Dadurch "
+"werden Variablen nur einmal gespeichert, selbst wenn sie mehrfach "
+"geändert werden."
+
+#: modules/php.rules_forms.inc:56;82
+msgid "PHP Code"
+msgstr "PHP-Code"
+
+#: modules/php.rules_forms.inc:58;84
+msgid "The code that should be executed. Don't include &lt;?php ?&gt; delimiters."
+msgstr "Der auszuführende Code ohne die Begrenzungen &lt;?php ?&gt."
+
+#: modules/php.rules_forms.inc:84
+msgid "Be sure to always return a boolean value, e.g.: !code"
+msgstr ""
+"Es muss sichergestellt werden, dass immer nur ein boolescher Wert "
+"zurückgegeben wird, z.B. !code."
+
+#: modules/php.rules_forms.inc:96
+msgid "The code has to always return a boolean value."
+msgstr "Der Code muss immer einen booleschen Wert zurückgeben."
+
+#: modules/rules.rules.inc:20
+msgid "string"
+msgstr "Zeichenkette"
+
+#: modules/rules.rules.inc:26
+msgid "number"
+msgstr "Zahl"
+
+#: modules/rules.rules.inc:32
+msgid "date"
+msgstr "Datum"
+
+#: modules/rules.rules.inc:38
+msgid "truth value"
+msgstr "Wahrheitswert"
+
+#: modules/rules.rules.inc:44
+msgid "a fixed value"
+msgstr ""
+
+#: modules/rules.rules.inc:89
+msgid "Format: %format or other values known by the PHP !strtotime function like \"+1 day\". "
+msgstr ""
+"Format: %format oder andere Werte die von der PHP-Funktion !strtotime "
+"erkannt werden, wie „+1 day“."
+
+#: modules/rules.rules.inc:90
+msgid "You may also enter a timestamp in GMT. E.g. use !code together with the PHP input evalutor to specify a date one day after the evaluation time. "
+msgstr ""
+"Es kann auch ein Zeitstempel in GMT eingegeben werden. !code kann z.B. "
+"zusammen mit dem PHP-Eingabe-Auswerter verwendet werden, um ein Datum "
+"einen Tag nach der Auswertungszeit anzugeben."
+
+#: modules/rules.rules.inc:110
+msgid "The argument %label is no valid date."
+msgstr "Das Argument %label ist kein gültiges Datum."
+
+#: modules/rules.rules.inc:124
+msgid "Just enter 1 for TRUE, 0 for FALSE or make use of an input evaluator."
+msgstr ""
+"Einfach 1 für WAHR eingeben oder 0 für FALSCH oder einen "
+"Eingabe-Auswerter einsetzen."
+
+#: modules/rules.rules.inc:150
+msgid "Numeric comparison"
+msgstr "Numerischer Vergleich"
+
+#: modules/rules.rules.inc:152
+msgid "Number 1"
+msgstr "Zahl 1"
+
+#: modules/rules.rules.inc:153
+msgid "Number 2"
+msgstr "Zahl 2"
+
+#: modules/rules.rules.inc:155
+msgid "Select greater than, less than or equal to."
+msgstr "Es muss größer als, kleiner als oder gleich ausgewählt werden."
+
+#: modules/rules.rules.inc:159
+msgid "Check a truth value"
+msgstr "Wahrheitswert prüfen"
+
+#: modules/rules.rules.inc:161
+msgid "Truth value"
+msgstr "Wahrheitswert"
+
+#: modules/rules.rules.inc:225
+msgid "Add a new @type variable"
+msgstr "Neue @type-Variabel hinzufügen"
+
+#: modules/rules.rules.inc:233
+msgid "Added @type"
+msgstr "@type hinzugefügt"
+
+#: modules/rules.rules.inc:245
+msgid "Save a @type"
+msgstr "@type speichern"
+
+#: modules/rules.rules.inc:329
+msgid "post"
+msgstr "speichern"
+
+#: modules/rules.rules.inc:370
+msgid "Permanently apply changes"
+msgstr "Änderungen dauerhaft übernehmen."
+
+#: modules/rules.rules.inc:371
+msgid "If checked, changes to the argument are saved automatically."
+msgstr "Wenn aktiviert werden Änderungen am Argument automatisch gespeichert."
+
+#: modules/rules.rules.inc:423
+msgid "Comment"
+msgstr "Kommentar"
+
+#: modules/rules.rules.inc:432 modules/user.rules.inc:98
+msgid "User"
+msgstr "Benutzer"
+
+#: modules/rules.rules_forms.inc:16
+msgid "Two texts to compare"
+msgstr "Zwei zu vergleichende Texte"
+
+#: modules/rules.rules_forms.inc:20
+msgid "Evaluate the second text as a regular expression."
+msgstr "Den zweiten Text als regulären Ausdruck auswerten."
+
+#: modules/rules.rules_forms.inc:34
+msgid "Operation"
+msgstr "Operation"
+
+#: modules/rules.rules_forms.inc:35
+msgid "Greater than"
+msgstr "Größer als"
+
+#: modules/rules.rules_forms.inc:35
+msgid "Equal to"
+msgstr "Gleich"
+
+#: modules/rules.rules_forms.inc:35
+msgid "Less than"
+msgstr "Kleiner als"
+
+#: modules/rules.rules_forms.inc:41
+msgid "Check a <a href=\"http://en.wikipedia.org/wiki/Logical_value\">truth value</a>, i.e. TRUE or FALSE."
+msgstr ""
+
+#: modules/rules.rules_forms.inc:50
+msgid "Force immediate saving."
+msgstr "Sofortiges Speichern erzwingen."
+
+#: modules/rules.rules_forms.inc:51
+msgid "If enabled, intelligent saving is bypassed to ensure immediate saving."
+msgstr ""
+"Wenn aktiviert wird das intelligente Speichern umgangen um sofortiges "
+"Speichern sicherzustellen."
+
+#: modules/rules.rules_forms.inc:58
+msgid "Usually you need not care about saving changes done by actions. However this action allows you to force saving changes, if no action does."
+msgstr ""
+"Normalerweise muss man sich nicht um das Speichern von Änderungen "
+"kümmern, die von Aktionen vorgenommen wurden. Diese Aktion jedoch "
+"erlaubt das Speichern von Änderungen zu erzwingen, wenn es keine "
+"Aktion tut."
+
+#: modules/rules.rules_forms.inc:58
+msgid "Furthermore note that changes are saved intelligently, which means that changes are saved only once, even if multiple actions request saving changes."
+msgstr ""
+"Zu beachten ist außerdem, dass Änderungen intelligent gespeichert "
+"werden, was bedeutet, dass Änderungen nur einmal gespeichert werden, "
+"selbst wenn mehrere Aktionen das Speichern von Änderungen anfordern."
+
+#: modules/system.rules.inc:18
+msgid "User is going to view a page"
+msgstr "Benutzer will eine Seite anzeigen"
+
+#: modules/system.rules.inc:23
+msgid "Cron maintenance tasks are performed"
+msgstr "Cron-Wartungsaufgaben werden durchgeführt"
+
+#: modules/system.rules.inc:36
+msgid "Show a configurable message on the site"
+msgstr "Anzeige einer anpassbaren Nachricht auf der Website"
+
+#: modules/system.rules.inc:41
+msgid "Set breadcrumb"
+msgstr "Breadcrumb festlegen"
+
+#: modules/system.rules.inc:54
+msgid "Send a mail to an arbitrary mail address"
+msgstr "Eine E-Mail an eine beliebige E-Mail-Adresse senden"
+
+#: modules/system.rules.inc:59
+msgid "Send a mail to all users of a role"
+msgstr "Eine E-Mail an alle Benutzer mit einer bestimmten Rolle senden"
+
+#: modules/system.rules.inc:64
+msgid "Page redirect"
+msgstr "Seiten-Weiterleitung"
+
+#: modules/system.rules.inc:67
+msgid "Enter a Drupal path, path alias, or external URL to redirect to. Enter (optional) queries after \"?\" and (optional) anchor after \"#\"."
+msgstr ""
+"Es kann ein Drupal-Pfad, ein Pfad-Alias oder auch ein externer URL "
+"angegeben werden. Ein optionaler Query-String kann nach dem \"?\" "
+"angegeben werden, sowie ein optionales Fragement nach \"#\". "
+
+#: modules/system.rules.inc:70
+msgid "Log to watchdog"
+msgstr "Im Wächter protokollieren"
+
+#: modules/system.rules.inc:88
+msgid "Home"
+msgstr "Startseite"
+
+#: modules/system.rules.inc:116
+msgid "Successfully sent email to %recipient"
+msgstr "E-Mail erfolgreich an %recipient versandt"
+
+#: modules/system.rules.inc:163
+msgid "Successfully sent email to the role(s) %roles."
+msgstr "E-Mail erfolgreich an die Rolle(n) %roles versandt."
+
+#: modules/system.rules_forms.inc:20;71;183
+msgid "Message"
+msgstr "Nachricht"
+
+#: modules/system.rules_forms.inc:22
+msgid "The message that should be displayed."
+msgstr "Die Nachricht, die angezeigt werden soll."
+
+#: modules/system.rules_forms.inc:26
+msgid "Display as error message"
+msgstr "Als Fehlermeldung anzeigen"
+
+#: modules/system.rules_forms.inc:38
+msgid "Titles"
+msgstr "Titel"
+
+#: modules/system.rules_forms.inc:40
+msgid "A list of titles for the breadcrumb links, one on each line."
+msgstr "Eine Liste von Titeln für die Breadcrumb-Verweise, einer pro Zeile."
+
+#: modules/system.rules_forms.inc:45
+msgid "Paths"
+msgstr "Pfade"
+
+#: modules/system.rules_forms.inc:47
+msgid "A list of Drupal paths for the breadcrumb links, one on each line."
+msgstr ""
+"Eine Liste von Drupal-Pfaden für die Breadcrumb-Verweise, einer pro "
+"Zeile."
+
+#: modules/system.rules_forms.inc:59
+msgid "Sender"
+msgstr "Absender"
+
+#: modules/system.rules_forms.inc:61
+msgid "The mail's from address. Leave it empty to use the site-wide configured address."
+msgstr ""
+"Die Absenderadresse der E-Mail. Wenn sie leergelassen wird, wird die "
+"für die Website konfigurierte Adresse verwendet."
+
+#: modules/system.rules_forms.inc:65
+msgid "Subject"
+msgstr "Betreff"
+
+#: modules/system.rules_forms.inc:67
+msgid "The mail's subject."
+msgstr "Betreff der E-Mail."
+
+#: modules/system.rules_forms.inc:73
+msgid "The mail's message body."
+msgstr "Textkörper der E-Mail."
+
+#: modules/system.rules_forms.inc:85
+msgid "The mail's recipient address. You may separate multiple addresses with ','."
+msgstr ""
+"Die Adresse des E-Mail-Empfängers. Mehrere Adressen können mit "
+"Kommata getrennt werden."
+
+#: modules/system.rules_forms.inc:101
+msgid "Recipient roles"
+msgstr "Empfänger-Rolle(n)"
+
+#: modules/system.rules_forms.inc:102
+msgid "WARNING: This may cause problems if there are too many users of these roles on your site, as your server may not be able to handle all the mail requests all at once."
+msgstr ""
+"ACHTUNG: Es kann Probleme geben, wenn es in dieser Website zuviele "
+"Benutzer mit dieser Rolle gibt, da der Server möglicherweise nicht in "
+"der Lage ist, alle E-Mail-Anforderungen auf einmal zu bearbeiten."
+
+#: modules/system.rules_forms.inc:106
+msgid "Select the roles whose users should receive this email."
+msgstr ""
+"Es müssen die Rollen ausgewählt werden, deren Benutzer diese E-Mail "
+"erhalten sollen."
+
+#: modules/system.rules_forms.inc:127
+msgid "To"
+msgstr "An"
+
+#: modules/system.rules_forms.inc:149
+msgid "Force redirecting to the given path, even if a destination parameter is given"
+msgstr ""
+"Erzwingt die Weiterleitung an einen bestimmten Pfad, selbst wenn ein "
+"Ziel-Parameter übergeben wird"
+
+#: modules/system.rules_forms.inc:150
+msgid "Per default drupal doesn't redirect to the given path, if a destination parameter is set. Instead it redirects to the given destination parameter. Most times, the destination parameter is set by appending it to the URL, e.g. !example_url"
+msgstr ""
+"Standardmäßig leitet Drupal nicht auf den angegebenen Pfad weiter, "
+"wenn ein Ziel-Parameter eingestellt ist. Stattdessen erfolgt die "
+"Weiterleitung zum angegebenen Ziel-Parameter. Meistens wird der "
+"Zielparamter durch Anhängen an die URL eingestellt, z.B. !example_url"
+
+#: modules/system.rules_forms.inc:156
+msgid "Immediately issue the page redirect"
+msgstr "Seiten-Weiterleitung sofort ausführen"
+
+#: modules/system.rules_forms.inc:157
+msgid "Use this with <em>caution</em>! If checked, the path redirect is issued immediately, so the normal execution flow is interrupted."
+msgstr ""
+"<em>Vorsicht!</em> Ist dies aktiviert, wird die Weiterleitung sofort "
+"ausgeführt und so der normale Seitenausführungsablauf unterbrochen."
+
+#: modules/system.rules_forms.inc:169
+msgid "Severity"
+msgstr "Schwere"
+
+#: modules/system.rules_forms.inc:176
+msgid "Category"
+msgstr "Kategorie"
+
+#: modules/system.rules_forms.inc:178
+msgid "The category to which this message belongs."
+msgstr "DIe Kategorie, zu der diese Nachricht gehört."
+
+#: modules/system.rules_forms.inc:185
+msgid "The message to log."
+msgstr "Die zu protokollierende Nachricht."
+
+#: modules/system.rules_forms.inc:190
+msgid "Link (optional)"
+msgstr "Verweis (optional)"
+
+#: modules/system.rules_forms.inc:192
+msgid "A link to associate with the message."
+msgstr "Ein Verweis zur Verbindung mit der Nachricht."
+
+#: modules/taxonomy.rules.inc:18
+msgid "After saving a new term"
+msgstr "Nach dem Speichern eines neuen Begriffs"
+
+#: modules/taxonomy.rules.inc:20
+msgid "created term"
+msgstr "erstellter Begriff"
+
+#: modules/taxonomy.rules.inc:23
+msgid "After updating a term"
+msgstr "Nach dem Aktualisieren eines Begriffs"
+
+#: modules/taxonomy.rules.inc:25
+msgid "updated term"
+msgstr "aktualisierter Begriff"
+
+#: modules/taxonomy.rules.inc:44
+msgid "unchanged term"
+msgstr "unveränderter Begriff"
+
+#: modules/taxonomy.rules.inc:66
+msgid "Load a term"
+msgstr "Einen Begriff laden"
+
+#: modules/taxonomy.rules.inc:70;86;100
+msgid "Taxonomy term"
+msgstr "Taxonomie-Begriff"
+
+#: modules/taxonomy.rules.inc:74
+msgid "Loading a taxonomy term will allow you to act on this term, for example you will be able to assign this term to a content."
+msgstr ""
+"Das Laden eines Taxonomie-Begriffs ermöglicht, mit diesem Begriff "
+"umzugehen, zum Beispiel einem Inhalt diesen Begriff hinzuzufügen."
+
+#: modules/taxonomy.rules.inc:78
+msgid "Assign a term to content"
+msgstr "Inhalt einen Begriff zuweisen"
+
+#: modules/taxonomy.rules.inc:92
+msgid "Remove a term from content"
+msgstr "Vom Inhalt einen Begriff entfernen"
+
+#: modules/taxonomy.rules.inc:107
+msgid "Load a vocabulary"
+msgstr "Vokabular laden"
+
+#: modules/taxonomy.rules.inc:111;123
+msgid "Taxonomy vocabulary"
+msgstr "Taxonomie-Vokabular"
+
+#: modules/taxonomy.rules.inc:115
+msgid "Loading a taxonomy vocabulary will allow you to act on this vocabulary."
+msgstr ""
+"Das Laden eines Taxonomie-Vokabulars ermöglicht es, dieses Vokabular "
+"zu behandeln."
+
+#: modules/taxonomy.rules.inc:119
+msgid "Add a new vocabulary"
+msgstr "Neues Vokabular hinzufügen"
+
+#: modules/taxonomy.rules.inc:183
+msgid "taxonomy term"
+msgstr "Taxonomie-Begriff"
+
+#: modules/taxonomy.rules.inc:190
+msgid "taxonomy vocabulary"
+msgstr "Taxonomie-Vokabular"
+
+#: modules/taxonomy.rules_forms.inc:25
+msgid "Vocabulary"
+msgstr "Vokabular"
+
+#: modules/taxonomy.rules_forms.inc:27;92
+msgid "Select the vocabulary."
+msgstr "Das Vokabular auswählen."
+
+#: modules/taxonomy.rules_forms.inc:27;92
+msgid "There are no existing vocabularies, you should <a href=\"@add-url\">add</a> one."
+msgstr ""
+"Es existieren keine Vokabulare, Sie sollten eines <a "
+"href=\"!taxonomy-add-vocabulary\">hinzufügen</a>."
+
+#: modules/taxonomy.rules_forms.inc:39
+msgid "Continue"
+msgstr "Fortfahren"
+
+#: modules/taxonomy.rules_forms.inc:50
+msgid "!vocab's terms"
+msgstr "Begriffe in !vocab"
+
+#: modules/taxonomy.rules_forms.inc:51
+msgid "There are no terms in the vocabulary, you should <a href=\"@add-url\">add</a> one."
+msgstr "Im Vokabular sind keine Begriffe, Sie sollten einen !add."
+
+#: modules/taxonomy.rules_forms.inc:51
+msgid "Select an existing term or manually enter the name of the term that should be added or removed from the content."
+msgstr ""
+"Es muss ein bestehender Begriff ausgewählt oder der der Name des "
+"Begriffs manuell eingegeben werden, der dem Inhalt hinzugefügt oder "
+"davon entfernt werden soll."
+
+#: modules/taxonomy.rules_forms.inc:57;98
+msgid "Select by term id"
+msgstr "Begriff nach ID auswählen"
+
+#: modules/taxonomy.rules_forms.inc:60
+msgid "Optional: enter the term id (<em>not the term name</em>) that should be loaded . If this field is used \"Select a term\" field will be ignored."
+msgstr ""
+"Optional: Eingabe einer ID (<em>nicht des Begriffsnamens</em>) der "
+"geladen werden soll. Wenn dieses Feld verwendet wird, wird das Feld "
+"„Begriff auswählen“ ignoriert"
+
+#: modules/taxonomy.rules_forms.inc:75
+msgid "- None selected -"
+msgstr "- Keine ausgewählt -"
+
+#: modules/taxonomy.rules_forms.inc:84
+msgid "Vocabulary selection"
+msgstr "Vokabular-Auswahl"
+
+#: modules/taxonomy.rules_forms.inc:89
+msgid "Select a vocabulary"
+msgstr "Ein Vokabular auswählen."
+
+#: modules/taxonomy.rules_forms.inc:101
+msgid "Optional: Enter the vocabulary id (<em>not the vocabulary name</em>) that should be loaded . If this field is used, the \"Select a vocabulary\" field will be ignored."
+msgstr ""
+"Optional: Eingabe einer ID (<em>nicht den Vokabular-Namen</em>) der "
+"geladen werden soll. Wenn dieses Feld verwendet wird, wird das Feld "
+"„Vokabular auswählen“ ignoriert"
+
+#: modules/taxonomy.rules_forms.inc:114
+msgid "Vocabulary settings"
+msgstr "Vokabular-Einstellungen"
+
+#: modules/user.rules.inc:61
+msgid "acting user"
+msgstr "handelnder Benutzer"
+
+#: modules/user.rules.inc:87
+msgid "Compare two users"
+msgstr "Zwei Benutzer vergleichen"
+
+#: modules/user.rules.inc:89
+msgid "User account 1"
+msgstr "Benutzerkonto 1"
+
+#: modules/user.rules.inc:90
+msgid "User account 2"
+msgstr "Benutzerkonto 2"
+
+#: modules/user.rules.inc:92
+msgid "Evaluates to TRUE, if both given user accounts are the same."
+msgstr "Gibt WAHR zurück, wenn beide Benutzerkonten identisch sind."
+
+#: modules/user.rules.inc:96
+msgid "User has role(s)"
+msgstr "Benutzer besitzt Rolle(n)"
+
+#: modules/user.rules.inc:100
+msgid "Whether the user has the selected role(s)."
+msgstr "Ob der Benutzer die ausgewählte(n) Rolle(n) besitzt."
+
+#: modules/user.rules.inc:145
+msgid "Add user role"
+msgstr "Benutzerrolle hinzufügen"
+
+#: modules/user.rules.inc:147;154
+msgid "User whos roles should be changed"
+msgstr "Benutzer, dessen Rollen geändert werden sollen"
+
+#: modules/user.rules.inc:152
+msgid "Remove user role"
+msgstr "Benutzerrolle entfernen"
+
+#: modules/user.rules.inc:159
+msgid "Load a user account"
+msgstr "Benutzerkonto laden"
+
+#: modules/user.rules.inc:161
+msgid "Loaded user"
+msgstr "Geladener Benutzer"
+
+#: modules/user.rules.inc:163
+msgid "Enter an id or a name of the user to load."
+msgstr "Geben Sie eine ID oder einen Namen an, den Benutzer laden"
+
+#: modules/user.rules.inc:167
+msgid "Create a user"
+msgstr "Benutzer erstellen"
+
+#: modules/user.rules.inc:169 modules/user.rules_forms.inc:75
+msgid "User name"
+msgstr "Benutzername"
+
+#: modules/user.rules.inc:170
+msgid "User's E-mail"
+msgstr "E-Mail des Benutzers"
+
+#: modules/user.rules.inc:173
+msgid "New user"
+msgstr "Neuer Benutzer"
+
+#: modules/user.rules.inc:174
+msgid "New user's password"
+msgstr "Passwort des neuen Benutzers"
+
+#: modules/user.rules.inc:235
+msgid "No appropriate user name. No user has been created."
+msgstr "Kein geeigneter Benutzername. Es wurde kein Benutzer erstellt."
+
+#: modules/user.rules.inc:238
+msgid "The name %name has been denied access. No user has been created."
+msgstr ""
+"Dem Namen %name wurde der Zugriff verweigert. Es wurde kein Benutzer "
+"erstellt."
+
+#: modules/user.rules.inc:241
+msgid "User !name already exists. No user has been created."
+msgstr "Benutzer !name existiert bereits. Es wurde kein Benutzer erstellt."
+
+#: modules/user.rules.inc:245
+msgid "No appropriate mail address. No user has been created."
+msgstr "Keine geeignete E-Mail-Adresse. Es wurde kein Benutzer erstellt."
+
+#: modules/user.rules.inc:248
+msgid "The e-mail address %email has been denied access. No user has been created."
+msgstr ""
+"Der E-Mail-Adresse %email wurde der Zugriff verweigert. Es wurde kein "
+"Benutzer erstellt."
+
+#: modules/user.rules.inc:251
+msgid "The e-mail address %email is already registered. No user has been created."
+msgstr ""
+"Die E-Mail-Adresse %email ist bereits registriert. Es wurde kein "
+"Benutzer erstellt."
+
+#: modules/user.rules.inc:265
+msgid "user"
+msgstr "Benutzer"
+
+#: modules/user.rules.inc:297
+msgid "Block a user"
+msgstr "Einen Benutzer sperren"
+
+#: modules/user.rules_forms.inc:19
+msgid "Match against any or all of the selected roles"
+msgstr "Vergleiche mit einer oder allen der ausgewählten Rollen"
+
+#: modules/user.rules_forms.inc:20
+msgid "any"
+msgstr "irgendeine"
+
+#: modules/user.rules_forms.inc:20
+msgid "all"
+msgstr "alle"
+
+#: modules/user.rules_forms.inc:21
+msgid "If matching against all selected roles the user must have <em>all</em> the roles checked in the list above."
+msgstr ""
+"Ist alle ausgewählt, muss der Benutzer <em>alle</em> gewählten "
+"Rollen haben."
+
+#: modules/user.rules_forms.inc:64
+msgid "Select role(s)"
+msgstr "Rolle(n) auswählen"
+
+#: modules/user.rules_forms.inc:80
+msgid "Name of the user to be loaded."
+msgstr "Name des zu ladenden Benutzers."
+
+#: modules/user.rules_forms.inc:84
+msgid "User id"
+msgstr "Benutzer-ID"
+
+#: modules/user.rules_forms.inc:86
+msgid "Id of the user to be loaded."
+msgstr "ID des zu ladenden Benutzers."

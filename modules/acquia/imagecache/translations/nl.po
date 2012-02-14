@@ -1,0 +1,562 @@
+# $Id: nl.po,v 1.2 2009/06/02 22:50:58 drewish Exp $
+#
+# Dutch translation of Drupal (general)
+# Copyright YEAR NAME <EMAIL@ADDRESS>
+# Generated from files:
+#  imagecache_actions.inc,v 1.21 2009/04/17 02:57:25 drewish
+#  imagecache.module,v 1.100 2009/04/14 00:01:21 drewish
+#  imagecache_ui.pages.inc,v 1.2 2009/04/14 00:01:21 drewish
+#  imagecache_ui.module,v 1.30 2009/03/31 03:11:26 drewish
+#  imagecache.info,v 1.5 2008/05/30 15:46:59 dopry
+#  imagecache_ui.info,v 1.5 2008/08/08 17:05:12 drewish
+#  imagecache.install,v 1.25 2009/01/06 19:48:59 drewish
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"POT-Creation-Date: 2009-05-29 14:46+0200\n"
+"PO-Revision-Date: 2009-05-29 15:23+0100\n"
+"Last-Translator: L.B. Cohn <lichai@999games.nl>\n"
+"Language-Team: Dutch <EMAIL@ADDRESS>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n!=1);\n"
+
+#: imagecache_actions.inc:12
+msgid "Allow Upscaling"
+msgstr "Sta vergroten toe"
+
+#: imagecache_actions.inc:13
+msgid "Let scale make images larger than their original size"
+msgstr "Laat foto's groter worden dan hun oorspronkelijk maat"
+
+#: imagecache_actions.inc:20;216
+msgid "Yes"
+msgstr "Ja"
+
+#: imagecache_actions.inc:20;216
+msgid "No"
+msgstr "Nee"
+
+#: imagecache_actions.inc:64
+msgid "<strong>Inside dimensions</strong>: Final dimensions will be less than or equal to the entered width and height. Useful for ensuring a maximum height and/or width."
+msgstr "<strong>Afmetingen van de binnenkant</strong>: uiteindelijke afmetingen zullen minder dan of gelijk aan de ingevoerde breedte en hoogte zijn. Handig om een maximale hoogte of breedte te houden."
+
+#: imagecache_actions.inc:65
+msgid "<strong>Outside dimensions</strong>: Final dimensions will be greater than or equal to the entered width and height. Ideal for cropping the result to a square."
+msgstr "<strong>Afmetingen van de buitenkant</strong>: uiteindelijke afmetingen zullen minder dan of gelijk aan de ingevoerde breedte en hoogte zijn. Handig om een maximale hoogte of breedte te houden."
+
+#: imagecache_actions.inc:70
+msgid "Scale to fit"
+msgstr "Schaal om te passen"
+
+#: imagecache_actions.inc:71;93
+msgid "Inside dimensions"
+msgstr "Afmetingen binnenkant"
+
+#: imagecache_actions.inc:71;93
+msgid "Outside dimensions"
+msgstr "Afmetingen buitenkant"
+
+#: imagecache_actions.inc:78;128
+#: imagecache.module:817
+msgid "Width"
+msgstr "Breedte"
+
+#: imagecache_actions.inc:80;130
+#: imagecache.module:819
+msgid "Enter a width in pixels or as a percentage. i.e. 500 or 80%."
+msgstr "Voer een breedte in pixels of als een percentage in. Bijvoorbeeld 500 of 80%."
+
+#: imagecache_actions.inc:84;134
+#: imagecache.module:823
+msgid "Height"
+msgstr "Hoogte"
+
+#: imagecache_actions.inc:86;136
+#: imagecache.module:825
+msgid "Enter a height in pixels or as a percentage. i.e. 500 or 80%."
+msgstr "Voer een hoogte in pixels of als een percentage in. Bijvoorbeeld 500 of 80%."
+
+#: imagecache_actions.inc:140
+msgid "X offset"
+msgstr "X-afstand"
+
+#: imagecache_actions.inc:142
+msgid "Enter an offset in pixels or use a keyword: <em>left</em>, <em>center</em>, or <em>right</em>."
+msgstr "Voer een afstand in pixels in of gebruik een trefwoord: <em>left</em>, <em>center</em> of <em>right</em>"
+
+#: imagecache_actions.inc:146
+msgid "Y offset"
+msgstr "Y-afstand"
+
+#: imagecache_actions.inc:148
+msgid "Enter an offset in pixels or use a keyword: <em>top</em>, <em>center</em>, or <em>bottom</em>."
+msgstr "Voer een afstand in pixels in of gebruik een trefwoord: <em>top</em>, <em>center</em>, or <em>bottom</em>."
+
+#: imagecache_actions.inc:196
+msgid "Rotation angle"
+msgstr "Draaihoek"
+
+#: imagecache_actions.inc:197
+msgid "The number of degrees the image should be rotated. Positive numbers are clockwise, negative are counter-clockwise."
+msgstr "Het aantal graden dat de foto moet worden gedraaid. Positieve getallen zullen met de klok mee gedraaid worden, negatieve tegen de klok in."
+
+#: imagecache_actions.inc:202
+msgid "Randomize"
+msgstr "Willekeurig"
+
+#: imagecache_actions.inc:203
+msgid "Randomize the rotation angle for each image. The angle specified above is used as a maximum."
+msgstr "Neem een willekeurige draaihoek voor iedere foto. De hoek hierboen wordt als maximum gebruikt."
+
+#: imagecache_actions.inc:208
+msgid "Background color"
+msgstr "Achtergrondkleur"
+
+#: imagecache_actions.inc:209
+msgid "The background color to use for exposed areas of the image. Use web-style hex colors (#FFFFFF for white, #000000 for black). An empty value will cause images that support transparency to have transparent backgrounds, otherwise it will be white."
+msgstr "De achtergrondkleur die wordt gebruikt voor de verschenen delen van de foto. Gebruik hexadecimale getallen, zoals bijvoorbeeld #FFFFFF voor wit, #FF0000 voor rood, of #000000 voor zwart. Een lege waarde zal foto's die transparantie ondersteunen een transparante achtergrond geven, anders zullen zij wit zijn."
+
+#: imagecache_actions.inc:215
+msgid "degrees:"
+msgstr "graden:"
+
+#: imagecache_actions.inc:216
+msgid "randomize:"
+msgstr "willekeurig:"
+
+#: imagecache_actions.inc:217
+msgid "background:"
+msgstr "achtergrond:"
+
+#: imagecache_actions.inc:217
+msgid "Transparent/white"
+msgstr "Transparant/wit"
+
+#: imagecache_actions.inc:254
+msgid "<strong>NOTE:</strong> The sigma parameter below is currently <em>only</em> used when the Imagemagick toolkit is active."
+msgstr "<strong>Merk op:</strong> De sigma parameter hier onder wordt op dit moment <em>alleen</em> alleen gebruikt als Imagemagick actief is."
+
+#: imagecache_actions.inc:259
+msgid "Radius"
+msgstr "Straal"
+
+#: imagecache_actions.inc:260
+msgid "The radius of the gaussian, in pixels, not counting the center pixel. If you're using Imagemagick, you can set this to 0 to let Imagemagick select a suitable radius. Typically 0.5 to 1 for screen resolutions. (default 0.5)"
+msgstr "De straal van de gausseaan in pixels zonder de middelste pixel mee te rekenen. Als je Imagemagick gebruikt kun je dit op 0 zetten om Imagemagick te laten kiezen. Normaal gesproken is 0.5 tot 1 voor schermresoluties. (Standaard 0.5)"
+
+#: imagecache_actions.inc:265
+msgid "Sigma"
+msgstr "Sigma"
+
+#: imagecache_actions.inc:266
+msgid "The standard deviation of the gaussian, in pixels. General rule of thumb: if radius < 1 then sigma = radius, else sigma = sqrt(radius). (default 0.5)"
+msgstr "De standaard afwijking van de gausseaan in pixels. Een vuistregel: als de straal kleiner is dan 1 dan is de sigma gelijk aan de straal, anders is de sigma de wortel van de straal. (Standaard 0.5)"
+
+#: imagecache_actions.inc:271
+msgid "Amount"
+msgstr "Aantal"
+
+#: imagecache_actions.inc:272
+msgid "The percentage of the difference between the original and the blur image that is added back into the original. Typically 50 to 200. (default 100)."
+msgstr "Het percentage van het verschil tussen het origineel en de vervaagde foto die is teruggeplaats in de originele foto. Normaal gesproken 50 tot 200. (Standaard 100)"
+
+#: imagecache_actions.inc:277
+msgid "Threshold"
+msgstr "Drempel"
+
+#: imagecache_actions.inc:278
+msgid "The threshold, as a fraction of max RGB levels, needed to apply the difference amount.  Typically 0 to 0.2. (default 0.05)."
+msgstr "De drempel, als een fractie van de maximale RGB-niveau's, is benodigd om de verschilgroottes te gebruiken. Normaal gesproken 0 tot 0.2. (Standaard 0.05)"
+
+#: imagecache_actions.inc:284
+msgid "radius:"
+msgstr "straal:"
+
+#: imagecache_actions.inc:285
+msgid "sigma:"
+msgstr "sigma:"
+
+#: imagecache_actions.inc:286
+msgid "amount:"
+msgstr "aantal:"
+
+#: imagecache_actions.inc:287
+msgid "threshold:"
+msgstr "drempel:"
+
+#: imagecache_actions.inc:29;50;108;160;181;243;299
+#: imagecache.module:412;429;454;526;553;560;760;808;0
+msgid "imagecache"
+msgstr "fotocache"
+
+#: imagecache_actions.inc:29
+msgid "imagecache_scale_image failed. image: %image, data: %data."
+msgstr "imagecache_scale_image niet gelukt. foto: %image, data: %data."
+
+#: imagecache_actions.inc:50
+msgid "imagecache_scale_and_crop failed. image: %image, data: %data."
+msgstr "imagecache_scale_and_crop niet gelukt. foto: %image, data: %data."
+
+#: imagecache_actions.inc:108
+msgid "imagecache_deprecated_scale failed. image: %image, data: %data."
+msgstr "imagecache_deprecated_scale niet gelukt. foto: %image, data: %data."
+
+#: imagecache_actions.inc:160
+msgid "imagecache_crop failed. image: %image, data: %data."
+msgstr "imagecache_crop niet gelukt. foto: %image, data: %data."
+
+#: imagecache_actions.inc:181
+msgid "imagecache_desaturate failed. image: %image, data: %data."
+msgstr "imagecache_desaturate niet gelukt. foto: %image, data: %data."
+
+#: imagecache_actions.inc:243
+msgid "imagecache_rotate_image failed. image: %image, data: %data."
+msgstr "imagecache_rotate_image niet gelukt. foto: %image, data: %data."
+
+#: imagecache_actions.inc:299
+msgid "imagecache_sharpen_image failed. image: %image, data: %data."
+msgstr "imagecache_sharpen_image niet gelukt. foto: %image, data: %data."
+
+#: imagecache_ui.pages.inc:8
+msgid "Preset Name"
+msgstr "Instellingnaam"
+
+#: imagecache_ui.pages.inc:8
+msgid "Storage"
+msgstr "Opslag"
+
+#: imagecache_ui.pages.inc:8;215
+msgid "Actions"
+msgstr "Actions"
+
+#: imagecache_ui.pages.inc:17
+msgid "Default"
+msgstr "Standaard"
+
+#: imagecache_ui.pages.inc:18
+msgid "View"
+msgstr "View"
+
+#: imagecache_ui.pages.inc:19;25;32;127
+msgid "Flush"
+msgstr "Spoel schoon"
+
+#: imagecache_ui.pages.inc:22
+msgid "Override"
+msgstr "Overschrijf"
+
+#: imagecache_ui.pages.inc:23;30
+msgid "Edit"
+msgstr "Bewerken"
+
+#: imagecache_ui.pages.inc:24
+msgid "Revert"
+msgstr "Terugzetten"
+
+#: imagecache_ui.pages.inc:26;33
+msgid "Export"
+msgstr "Exporteren"
+
+#: imagecache_ui.pages.inc:29
+msgid "Normal"
+msgstr "Normaal"
+
+#: imagecache_ui.pages.inc:31;100;261;479
+msgid "Delete"
+msgstr "Verwijderen"
+
+#: imagecache_ui.pages.inc:49;192;201
+msgid "Preset Namespace"
+msgstr "Instellingnaam"
+
+#: imagecache_ui.pages.inc:51
+msgid "The namespace is used in URLs for images to tell imagecache how to process an image. Please only use alphanumeric characters, underscores (_), and hyphens (-) for preset names."
+msgstr "De naam wordt in URL's gebruikt voor foto's om FotoCache te vertellen hoe een foto moet worden bewerkt. Gebruik alleen alfanumerieke karakters, underscores en liggende streepjes voor instellingnamen."
+
+#: imagecache_ui.pages.inc:56
+msgid "Create New Preset"
+msgstr "Maak nieuwe instelling"
+
+#: imagecache_ui.pages.inc:66
+msgid "The namespace you have chosen is already in use."
+msgstr "De naam die je hebt gekozen wordt al gebruikt."
+
+#: imagecache_ui.pages.inc:73
+msgid "Please only use alphanumeric characters, underscores (_), and hyphens (-) for preset names."
+msgstr "Gebruik alleen alfanumerieke karakters, underscores en liggende streepjes voor instellingnamen."
+
+#: imagecache_ui.pages.inc:80
+msgid "Preset %name (ID: @id) was created."
+msgstr "Instelling %name (IDL @id) is gemaakt."
+
+#: imagecache_ui.pages.inc:87;114;144
+msgid "The specified preset was not found"
+msgstr "De gegeven instelling is niet gevonden"
+
+#: imagecache_ui.pages.inc:95
+msgid "Are you sure you want to delete the preset %preset?"
+msgstr "Weet je zeker dat je instelling %preset wilt verwijderen?"
+
+#: imagecache_ui.pages.inc:99;126;478
+msgid "This action cannot be undone."
+msgstr "Deze actie kan niet ongedaan worden gemaakt."
+
+#: imagecache_ui.pages.inc:100;127;479
+msgid "Cancel"
+msgstr "Annuleren"
+
+#: imagecache_ui.pages.inc:107
+msgid "Preset %name (ID: @id) was deleted."
+msgstr "Instelling %name(ID: @id) is verwijderd."
+
+#: imagecache_ui.pages.inc:122
+msgid "Are you sure you want to flush the preset %preset?"
+msgstr "Weet je zeker dat je instelling %preset wilt schoonspoelen?"
+
+#: imagecache_ui.pages.inc:134
+msgid "Preset %name (ID: @id) was flushed."
+msgstr "Instelling %name (ID: @id) is schoongespoeld."
+
+#: imagecache_ui.pages.inc:177
+msgid "The specified preset was not found."
+msgstr "De opgegeven instelling is niet gevonen."
+
+#: imagecache_ui.pages.inc:203
+msgid "The namespace is used in URL's for images to tell imagecache how to process an image. Please only use alphanumeric characters, underscores (_), and hyphens (-) for preset names."
+msgstr "De naam wordt in URL's gebruikt voor foto's om FotoCache te vertellen hoe een foto moet worden bewerkt. Gebruik alleen alfanumerieke karakters, underscores en liggende streepjes voor instellingnamen."
+
+#: imagecache_ui.pages.inc:257
+msgid "Configure"
+msgstr "Configureren"
+
+#: imagecache_ui.pages.inc:270
+msgid "New Actions"
+msgstr "Nieuwe acties"
+
+#: imagecache_ui.pages.inc:282
+msgid "Add !action"
+msgstr "Voeg !action toe"
+
+#: imagecache_ui.pages.inc:323
+msgid "Override Defaults"
+msgstr "Overschrijf de standaard"
+
+#: imagecache_ui.pages.inc:323
+msgid "Update Preset"
+msgstr "Vernieuw instelling"
+
+#: imagecache_ui.pages.inc:340
+msgid "Preview"
+msgstr "Voorbeeldweergave"
+
+#: imagecache_ui.pages.inc:369
+msgid "Action"
+msgstr "Actie"
+
+#: imagecache_ui.pages.inc:369
+msgid "Settings"
+msgstr "Instellingen"
+
+#: imagecache_ui.pages.inc:383;507
+msgid "Weight"
+msgstr "Gewicht"
+
+#: imagecache_ui.pages.inc:416;462
+msgid "Unknown Action."
+msgstr "Onbekende actie."
+
+#: imagecache_ui.pages.inc:421;466
+msgid "Unknown Preset."
+msgstr "Onbekende instelling."
+
+#: imagecache_ui.pages.inc:441
+msgid "Update Action"
+msgstr "Vernieuw actie"
+
+#: imagecache_ui.pages.inc:450
+msgid "The action was succesfully updated."
+msgstr "De actie is succesvol vernieuwd"
+
+#: imagecache_ui.pages.inc:454
+msgid "Unknown Action: @action_id"
+msgstr "Onbekende actie: @action_id"
+
+#: imagecache_ui.pages.inc:474
+msgid "Are you sure you want to delete the !action action from preset !preset?"
+msgstr "Weet je zeker dat je actie !action van instelling !preset wilt verwijderen?"
+
+#: imagecache_ui.pages.inc:486
+msgid "The action has been deleted."
+msgstr "De actie is verwijderd"
+
+#: imagecache_ui.pages.inc:513
+msgid "Add Action"
+msgstr "Voeg actie toe"
+
+#: imagecache.module:608
+msgid "@preset image"
+msgstr "@preset foto"
+
+#: imagecache.module:612
+msgid "@preset image linked to node"
+msgstr "@preset foto gelinkt naar node"
+
+#: imagecache.module:616
+msgid "@preset image linked to image"
+msgstr "@preset foto gelinkt naar foto"
+
+#: imagecache.module:620
+msgid "@preset file path"
+msgstr "@preset bestandspad"
+
+#: imagecache.module:624
+msgid "@preset URL"
+msgstr "@preset URL"
+
+#: imagecache.module:412
+msgid "ImageCache already generating: %dst, Lock file: %tmp."
+msgstr "FotoCache maakt al %dst, blokker bestand %tmp."
+
+#: imagecache.module:429
+msgid "Failed generating an image from %image using imagecache preset %preset."
+msgstr "Het maken van een foto van %image is niet gelukt met FotoCache-instelling %preset."
+
+#: imagecache.module:454
+msgid "non-existant action %action"
+msgstr "Niet bestaande actie %action"
+
+#: imagecache.module:526
+msgid "Failed to create imagecache directory: %dir"
+msgstr "Het maken van de FotoCache-map %dir is niet gelukt"
+
+#: imagecache.module:553
+msgid "action(id:%id): %action failed for %src"
+msgstr "actie %action (ID: %id) is niet gelukt voor %src"
+
+#: imagecache.module:560
+msgid "Cached image file %dst already exists. There may be an issue with your rewrite configuration."
+msgstr "De gecachte foto %dst bestaat al. Wellicht is er iets mis met je rewrite-configuratie."
+
+#: imagecache.module:760
+msgid "Unknown file type(%path) stat: %stat "
+msgstr "Onbekend bestandstype (%path) stat: %stat"
+
+#: imagecache.module:808
+msgid "imagecache_resize_image failed. image: %image, data: %data."
+msgstr "imagecache_resize_image niet gelukt. foto: %image, data: %data."
+
+#: imagecache.module:57
+msgid "administer imagecache"
+msgstr "beheer fotocache"
+
+#: imagecache.module:57
+msgid "flush imagecache"
+msgstr "spoel fotocache schoon"
+
+#: imagecache.module:59
+msgid "view imagecache "
+msgstr "bekijk fotocache"
+
+#: imagecache.module:59
+msgid "presetname"
+msgstr "instellingnaam"
+
+#: imagecache_ui.module:15
+msgid "Manage ImageCache presets."
+msgstr "Beheer FotoCache-instellingen"
+
+#: imagecache_ui.module:17
+msgid "Place the following snippet in your module as part of <code>hook_imagecache_default_presets()</code>."
+msgstr "Plaats de volgende code in je module als onderdeel van <code>hook_imagecache_default_presets()</code>."
+
+#: imagecache_ui.module:27
+#: imagecache.info:0;0
+#: imagecache_ui.info:0
+msgid "ImageCache"
+msgstr "FotoCache"
+
+#: imagecache_ui.module:29
+msgid "Administer imagecache presets and actions."
+msgstr "Beheer FotoCache-instellingen en -acties."
+
+#: imagecache_ui.module:34
+msgid "List"
+msgstr "Lijst"
+
+#: imagecache_ui.module:40
+msgid "Add new preset"
+msgstr "Voeg nieuwe instelling toe"
+
+#: imagecache_ui.module:0
+msgid "imagecache_ui"
+msgstr "imagecache_ui"
+
+#: imagecache.install:52;73;261
+msgid "The primary identifier for an imagecache_preset."
+msgstr "De primaire idetificatie van een imagecache_preset."
+
+#: imagecache.install:57
+msgid "The primary identifier for a node."
+msgstr "De primaire identificatie van een node."
+
+#: imagecache.install:68;272
+msgid "The primary identifier for an imagecache_action."
+msgstr "De primaire idetificatie van een imagecache_action."
+
+#: imagecache.install:79
+msgid "The weight of the action in the preset."
+msgstr "Het gewicht van de actie in de instelling."
+
+#: imagecache.install:85;278
+msgid "The module that defined the action."
+msgstr "De module die de actie levert."
+
+#: imagecache.install:90
+msgid "The unique ID of the action to be executed."
+msgstr "De unieke ID van de actie om uit te voeren."
+
+#: imagecache.install:95
+msgid "The configuration data for the action."
+msgstr "De configuratiedata voor de actie."
+
+#: (duplicate) imagecache.install:15
+#: ;22 ;29
+msgid "ImageCache Directory"
+msgstr "FotoCache-map"
+
+#: (duplicate) imagecache.install:16
+msgid "%p does not a directory or is not readable by the webserver."
+msgstr "%p is geen map of is niet beschrijfbaar door de server."
+
+#: (duplicate) imagecache.install:23
+#: ;40
+msgid "%p is not writeable by the webserver."
+msgstr "%p is niet beschrijfbaar door de server."
+
+#: (duplicate) imagecache.install:30
+msgid "An unknown error occured."
+msgstr "Een onbekende fout is opgetreden."
+
+#: (duplicate) imagecache.install:31
+msgid "An unknown error occured trying to verify %p is a directory and is writable."
+msgstr "Een onbekende fout is opgetreden tijdens het kijken of %p een map is en beschrijfbaar is."
+
+#: (duplicate) imagecache.install:39
+msgid "ImageCache Temp Directory"
+msgstr "Tijdelijk map voor FotoCache"
+
+#: imagecache.info:0
+msgid "Dynamic image manipulator and cache."
+msgstr "Dynamische fotomanipulatie en -cache"
+
+#: imagecache_ui.info:0
+msgid "ImageCache UI"
+msgstr "FotoCache UI"
+
+#: imagecache_ui.info:0
+msgid "ImageCache User Interface."
+msgstr "FotoCache UI"
+

@@ -1,0 +1,449 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Drupal FAQ-Modul\n"
+"POT-Creation-Date: 2008-05-04 22:12+0100\n"
+"PO-Revision-Date: \n"
+"Last-Translator: rastatt <rastatt@drupal.org>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: German\n"
+
+#: faq.module:19
+msgid "This module allows users with the 'administer faq' permission to create question and answer pairs which will be displayed on the 'faq' page.  The 'faq' page is automatically generated from the FAQ nodes configured and the layout of this page can be modified on the settings page.  Users will need the 'view faq' permission in order to view the 'faq' page."
+msgstr "Dieses Modul erlaubt es Benutzern mit dem Recht 'FAQ verwalten', Frage- und Antwortpaare zu erstellen, die auf der FAQ-Seite dargestellt werden. Die FAQ-Seite wird automatisch aus FAQ-Beiträgen erzeugt, das Layout der Seite kann auf der Einstellungen-Seite angepasst werden. Benutzer benötigen das Recht 'FAQ lesen' , um die FAQ-Seite zu sehen."
+
+#: faq.module:20
+msgid "To create a question and answer, the user must create a 'FAQ' node (Create content >> FAQ).  This screen allows the user to edit the question and answer text.  If the 'Taxonomy' module is enabled and there are some terms configured for the FAQ node type, it will also be possible to put the questions into different categories when editing."
+msgstr "Um eine Frage- und Antwortpaar zu erstellen muss ein Benutzer einen FAQ-Beitrag erstellen (Inhalt erstellen >> FAQ). Diese Maske erlaubt es dem Benutzer, den Frage- und Antworttext zu bearbeiten. Wenn das Modul 'Taxonomie' aktiviert ist und dort Begriffe für den Inhaltstyp 'FAQ' definiert sind, können Fragen auch in verschiedene Kategorien einsortiert werden."
+
+#: faq.module:21
+msgid "The 'Frequently Asked Questions' settings configuration screen will allow users with 'administer faq' permissions to specify different layouts of the questions and answers."
+msgstr "Die Seite Einstellungen für 'FAQ' ermöglicht Benutzern mit dem Recht 'FAQ verwalten' verschiedene Ansichten der Fragen und Antworten einzustellen."
+
+#: faq.module:22
+msgid "All users with 'view faq' permissions will be able to view the generated FAQ page at 'www.example.com/faq'."
+msgstr "Alle Benutzer mit dem Recht 'FAQ lesen' können die erzeugte FAQ-Seite unter 'www.example.de/faq' sehen."
+
+#: faq.module:25;87;104
+msgid "Allows the user to configure the layout of questions and answers on a FAQ page."
+msgstr "Ermöglicht dem Benutzer, die Anzeige der Fragen und Antworten auf einer FAQ-Seite festzulegen."
+
+#: faq.module:27
+msgid "Add a question and answer to a FAQ list."
+msgstr "Fügen Sie der FAQ-Liste eine Frage und eine Antwort hinzu."
+
+#: faq.module:146;159
+msgid "FAQ"
+msgstr "FAQ"
+
+#: faq.module:148
+msgid "A frequently asked question and its answer."
+msgstr "Eine häufig gestellte Frage und die Antwort darauf"
+
+#: faq.module:149
+msgid "Question"
+msgstr "Frage"
+
+#: faq.module:150
+msgid "Answer"
+msgstr "Antwort"
+
+#: faq.module:184
+msgid "Question to be answered"
+msgstr "Zu beantwortende Frage"
+
+#: faq.module:189
+msgid "This is that answer to the question.  It will be filtered according to the input format."
+msgstr "Dies ist die Antwort zur Frage. Sie wird entsprechend dem Eingabeformat gefiltert."
+
+#: faq.module:289;802
+msgid "Home"
+msgstr "Startseite"
+
+#: faq.module:326
+msgid "Title"
+msgstr "Titel"
+
+#: faq.module:332
+msgid "FAQ Description"
+msgstr "FAQ-Beschreibung"
+
+#: faq.module:334
+msgid "Your FAQ description.  This will be placed at the top of the page, above the questions and can serve as an introductory text."
+msgstr "Ihre FAQ-Beschreibung. Diese wird am Anfang der Seite über der Frage platziert und kann als einleitender Text dienen."
+
+#: faq.module:341;710
+msgid "Save configuration"
+msgstr "Konfiguration speichern"
+
+#: faq.module:359
+msgid "Questions inline"
+msgstr "Fragen nacheinander"
+
+#: faq.module:360
+msgid "Clicking on question takes user to answer further down the page"
+msgstr "Wenn Benutzer auf Fragen klicken kommen sie zur Antwort weiter unten auf der Seite"
+
+#: faq.module:361
+msgid "Clicking on question opens/hides answer under question"
+msgstr "Wenn Benutzer auf Fragen klicken erscheint die Antwort unter der Frage"
+
+#: faq.module:362
+msgid "Clicking on question opens the answer in a new page"
+msgstr "Wenn Benutzer auf Fragen klicken öffnet sich die Antwort auf einer neuen Seite"
+
+#: faq.module:367
+msgid "Page layout"
+msgstr "Einrichtung der Seite"
+
+#: faq.module:368
+msgid "This controls how the questions and answers are displayed on the page and what happens when someone clicks on the question."
+msgstr "Dies legt fest, wie Fragen und Antworten auf der Seite dargestellt werden und was passiert, wenn jemand auf die Frage klickt."
+
+#: faq.module:374;485
+msgid "Miscellaneous layout settings"
+msgstr "Verschiedene Einstellungen"
+
+#: faq.module:381
+msgid "Questions listing style"
+msgstr "Stil der Frage-Liste"
+
+#: faq.module:382
+msgid "This allows to select how the questions listing is presented.  It only applies to the layouts: 'Clicking on question takes user to answer further down the page' and 'Clicking on question opens the answer in a new page'.  An ordered listing would number the questions, whereas an unordered list will have a bullet to the left of each question."
+msgstr "Dies ermöglicht es auszuwählen, wie die Frageliste dargestellt wird. Es bezieht sich nur auf die Einstellungen 'Wenn Benutzer auf Fragen klicken kommen sie zur Antwort weiter unten auf der Seite' und 'Wenn Benutzer auf Fragen klicken öffnet sich die Antwort auf einer neuen Seite'. Eine sortierte Liste zeigt die Anzahl der Fragen, wogegen eine unsortierte Liste einen Marker links von der Frage hat."
+
+#: faq.module:388
+msgid "Label questions and answers"
+msgstr "Kennzeichen für Fragen und Antworten"
+
+#: faq.module:389
+msgid "This option is only valid for the \"Questions Inline\" layout.  It labels all questions on the faq page with the \"question label\" setting and all answers with the \"answer label\" setting.  For example these could be set to \"Q:\" and \"A:\"."
+msgstr "Diese Option ist nur gültig für die Einstellung 'Fragen nacheinander' . Sie benennt alle Fragen auf der FAQ-Seite mit der Einstellung 'Frage-Kennzeichen' und alle Antworten mit der Einstellung 'Antwort-Kennzeichen'. Diese können z.B. eingestellt werden auf 'F:' und 'A:'."
+
+#: faq.module:395
+msgid "Question Label"
+msgstr "Frage-Kennzeichen"
+
+#: faq.module:396
+msgid "The label to pre-pend to the question text in the \"Questions Inline\" layout if labelling is enabled."
+msgstr "Das Kennzeichen, das der Frage bei der Einstellung 'Fragen nacheinander' vorangestellt wird, wenn das Kennzeichnen aktiviert ist."
+
+#: faq.module:402
+msgid "Answer Label"
+msgstr "Antwort-Kennzeichen"
+
+#: faq.module:403
+msgid "The label to pre-pend to the answer text in the \"Questions Inline\" layout if labelling is enabled."
+msgstr "Das Kennzeichen, das der Antwort bei der Einstellung 'Fragen nacheinander' vorangestellt wird, wenn das Kennzeichnen aktiviert ist."
+
+#: faq.module:409
+msgid "Use answer teaser"
+msgstr "Aufmacher verwenden"
+
+#: faq.module:410
+msgid "This enables the display of the answer teaser text instead of the full answer when using the 'Questions inline' or 'Clicking on question takes user to answer further down the page' display options.  This is useful when you have long descriptive text.  The user can see the full answer by clicking on the question."
+msgstr "Dies aktiviert die Anzeige des Antwort-Aufmachers anstelle der vollständigen Antworten bei den Einstellungen 'Fragen nacheinander' und 'Wenn Benutzer auf Fragen klicken kommen sie zur Antwort weiter unten auf der Seite'. Dies ist nützlich, wenn der beschreibende Text lang ist. Der Benutzer kann die vollständige Antwort aufrufen, indem er auf die Frage klickt."
+
+#: faq.module:416
+msgid "Show node links"
+msgstr "Links zu den Beiträgen zeigen"
+
+#: faq.module:417
+msgid "This enables the display of links under the answer text on the faq page.  Examples of these links include \"Read more\", \"Add comment\"."
+msgstr "Dies aktiviert die Anzeige von Links auf der FAQ-Seite. Beispiele für solche Links sind 'Mehr lesen' und 'Kommentar hinzufügen'."
+
+#: faq.module:423
+msgid "\"Back to Top\" link text"
+msgstr "Text des 'Zum Seitenanfang'-Links"
+
+#: faq.module:424
+msgid "This allows the user to change the text displayed for the links which return the user to the top of the page on certain page layouts.  Defaults to \"Back to Top\".  Leave blank to have no link."
+msgstr "Dies erlaubt dem Benutzer, den Text für die Links zu ändern, die den Benutzer bei bestimmten Seitendarstellungen an den Seitenanfang bringen. Standardmäßig auf 'Zum Seitenanfang' gesetzt. Wenn leer, wird kein Link angezeigt."
+
+#: faq.module:430
+msgid "Disable question links to nodes"
+msgstr "Frage-Links zu Beiträgen verhindern"
+
+#: faq.module:431
+msgid "This allows the user to prevent the questions being links to the faq node in all layouts except \"Clicking on question opens the answer in a new page\"."
+msgstr "Dies erlaubt dem Benutzer zu verhindern, dass Fragen Links auf den FAQ-Beitrag sind in allen Darstellungen außer 'Wenn Benutzer auf Fragen klicken öffnet sich die Antwort auf einer neuen Seite'."
+
+#: faq.module:437
+msgid "Default Sorting for Non-Weighted FAQs"
+msgstr "Standard-Sortierung für nicht-gewichtete FAQs"
+
+#: faq.module:438
+msgid "Date Descending"
+msgstr "absteigendes Datum"
+
+#: faq.module:438
+msgid "Date Ascending"
+msgstr "aufsteigendes Datum"
+
+#: faq.module:439
+msgid "This controls the default weighting behaviour for new FAQ nodes which haven't been assigned a weight."
+msgstr "Dies steuert das Standard-Gewichtungsverhalten für neue FAQ-Beiträge, denen kein Gewicht zugewiesen wurde."
+
+#: faq.module:454
+msgid "Categorization of questions will not work without the \"taxonomy\" module being enabled."
+msgstr "Das Kategorisieren von Fragen funktioniert nicht, wenn das Modul \"Taxonomie\" nicht aktiviert ist."
+
+#: faq.module:466
+msgid "Categorize questions"
+msgstr "Fragen kategorisieren"
+
+#: faq.module:467
+msgid "This allows the user to display the questions according to the categories configured on the add/edit FAQ page.  Use of sub-categories is only recommended for large lists of questions.  The Taxonomy module must be enabled."
+msgstr "Dies erlaubt dem Benutzer die Fragen entsprechend der konfigurierten Kategorien auf der Hinzufügen- bzw. Bearbeiten-Seite darzustellen. Die Verwendung von Unterkategorien ist nur für große Fragelisten empfohlen. Das Modul 'Taxonomie' muss aktiviert sein."
+
+#: faq.module:471
+msgid "Categories inline"
+msgstr "Kategorien nacheinander"
+
+#: faq.module:472
+msgid "Clicking on category opens/hides questions and answers under category"
+msgstr "Das Klicken auf eine Kategorie öffnet/schließt die Fragen und Antworten unter dieser Kategorie"
+
+#: faq.module:473
+msgid "Clicking on category opens the questions/answers in a new page"
+msgstr "Das Klicken auf eine Kategorie öffnet/schließt die Fragen und Antworten auf einer neuen Seite"
+
+#: faq.module:478
+msgid "Categories layout"
+msgstr "Kategorie-Darstellung"
+
+#: faq.module:479
+msgid "This controls how the categories are displayed on the page and what happens when someone clicks on the category."
+msgstr "Dies legt fest, wir die Kategoriend auf der Seite dargestellt werden und was passiert, wenn man auf eine Kategorie klickt"
+
+#: faq.module:491
+msgid "Ordered list"
+msgstr "Sortierte Liste"
+
+#: faq.module:491
+msgid "Unordered list"
+msgstr "unsortierte Liste"
+
+#: faq.module:492
+msgid "Categories listing style"
+msgstr "Art der Kategorien-Liste"
+
+#: faq.module:493
+msgid "This allows to select how the categories listing is presented.  It only applies to the 'Clicking on category opens the questions/answers in a new page' layout.  An ordered listing would number the categories, whereas an unordered list will have a bullet to the left of each category."
+msgstr "Dies ermöglicht die Auswahl, wie die Kategorien dargestellt werden. Es bezieht sich nur auf die Einstellung 'Das Klicken auf eine Kategorie öffnet/schließt die Fragen und Antworten auf einer neuen Seite'. Eine sortierte Aufzählung zeigt die Anzahl der Kategorien, wogegen eine unsortierte Aufzählung einen Marker links von jeder Kategorie hat."
+
+#: faq.module:499
+msgid "Show FAQ count"
+msgstr "Anzahl FAQs zeigen"
+
+#: faq.module:500
+msgid "This displays the number of questions in a category after the category name."
+msgstr "Dies zeigt die Anzahl von Fragen in einer Kategorie nach dem Namen der Kategorie an."
+
+#: faq.module:506
+msgid "Display category name for answers"
+msgstr "Kategorienamen für Antworten anzeigen"
+
+#: faq.module:507
+msgid "This allows the user to toggle the visibility of the category name above each answer section for the 'Clicking on question takes user to answer further down the page' question/answer display."
+msgstr "Dies ermöglicht dem Benutzer die Sichtbarkeit des Kategorienamens über jeder Antwort ein- und auszuschalten bei der Darstellung 'Wenn Benutzer auf Fragen klicken kommen sie zur Antwort weiter unten auf der Seite'."
+
+#: faq.module:513
+msgid "Group questions and answers for 'Categories inline'"
+msgstr "Fragen und Antworten gruppieren für 'Kategorien nacheinander'"
+
+#: faq.module:514
+msgid "This controls how categories are implemented with the 'Clicking on question takes user to answer further down the page' question/answer display."
+msgstr "Dies steuert wie Kategorien implementiert werden bei der Darstellung 'Wenn Benutzer auf Fragen klicken kommen sie zur Antwort weiter unten auf der Seite'."
+
+#: faq.module:520
+msgid "Only show sub-categories when parent category is selected"
+msgstr "Unterkategorien nur anzeigen, wenn die übergeordnete Kategorie ausgewählt ist"
+
+#: faq.module:521
+msgid "This allows the user more control over how and when sub-categories are displayed.  It does not affect the 'Categories inline' display."
+msgstr "Dies erlaubt dem Benutzer mehr Kontrolle darüber, wie Unterkategorien dargestellt werden. Es beeinflusst nnicht die Darstellung 'Kategorien nacheinander'."
+
+#: faq.module:527
+msgid "Show sub-categories on FAQ category pages"
+msgstr "Unterkategorien auf Seiten mit FAQ-Kategorien anzeigen"
+
+#: faq.module:528
+msgid "Sub-categories with 'faq' nodes will be displayed on the per category FAQ page.  This will also happen if 'Only show sub-categories when parent category is selected' is set."
+msgstr "Unterkategorien mit FAQ-Beiträgen werden auf der FAQ-Seite nach Kategorien angezeigt. Das geschieht auch, wenn 'Unter-Kategorien nur anzeigen, wenn die übergeordnete Kategorie ausgewählt ist' gesetzt ist."
+
+#: faq.module:534
+msgid "Advanced category settings"
+msgstr "Erweiterte Kategorie-Einstellungen"
+
+#: faq.module:546
+msgid "Omit vocabulary"
+msgstr "Wegzulassendes Vokabular"
+
+#: faq.module:547
+msgid "Terms from these vocabularies will be excluded from the FAQ pages."
+msgstr "Begriffe aus diesem Vokabular werden aus der FAQ-Seiten ausgeschlossen."
+
+#: faq.module:600
+msgid "Choose a category"
+msgstr "Wählen Sie eine Kategorie"
+
+#: faq.module:601
+msgid "Choose a category that you wish to order the questions for."
+msgstr "Wählen Sie die Kategorie, deren Fragen Sie sortieren möchten."
+
+#: faq.module:608
+msgid "Search"
+msgstr "Suchen"
+
+#: faq.module:669
+msgid "Question Order"
+msgstr "Reihenfolge der Fragen"
+
+#: faq.module:670
+msgid "This determines the order of the questions and answers on the FAQ page.  Just select one or more questions and use the arrows to change their position in the list.  You can also order the list by the question creation date !desc or !asc."
+msgstr "Dies bestimmt die Reihenfolge der Fragen und Antworten auf der FAQ-Seite. Wählen Sie einfach ein oder mehrere Fragen aus und verwenden Sie die Pfeile und ihre Position in der Liste zu verändern. Sie können die Liste auch absteigend oder aufsteigend nach den Erstellungsdatum sortieren."
+
+#: faq.module:690;744
+msgid "Save order"
+msgstr "Reihenfolge speichern"
+
+#: faq.module:716;763
+msgid "Configuration has been updated."
+msgstr "Die Konfiguration wurde aktualisiert."
+
+#: faq.module:781;71;78;86
+#: faq.info:0
+msgid "Frequently Asked Questions"
+msgstr "Frequently Asked Questions"
+
+#: faq.module:781
+msgid "Back to Top"
+msgstr "Zum Seitenanfang"
+
+#: faq.module:781
+msgid "Q:"
+msgstr "F:"
+
+#: faq.module:781
+msgid "A:"
+msgstr "A:"
+
+#: faq.module:1709;1732
+msgid "FAQ Categories"
+msgstr "FAQ-Kategorien"
+
+#: faq.module:1710;1746
+msgid "Recent FAQs"
+msgstr "Neueste FAQs"
+
+#: faq.module:1711;1752
+msgid "Random FAQs"
+msgstr "Zufällige FAQs"
+
+#: faq.module:1770;1780
+msgid "Number of FAQs to show"
+msgstr "Anzahl der FAQs, die gezeigt werden"
+
+#: faq.module:1771
+msgid "This controls the number of FAQs that appear in the 'Recent FAQs' block"
+msgstr "Dies liegt die Anzahl der FAQs fest, die im Block 'Neueste FAQs' angezeigt wird."
+
+#: faq.module:1781
+msgid "This controls the number of FAQs that appear in the 'Random FAQs' block"
+msgstr "Dies liegt die Anzahl der FAQs fest, die im Block 'Zufällige FAQs' angezeigt wird."
+
+#: faq.module:1830;1857
+msgid "All FAQs"
+msgstr "Alle FAQs"
+
+#: faq.module:2152
+msgid "Go back to the top of the page."
+msgstr "Zurück zum Seitenanfang"
+
+#: faq.module:36
+msgid "administer faq"
+msgstr "FAQ verwalten"
+
+#: faq.module:36
+msgid "view faq"
+msgstr "FAQ lesen"
+
+#: faq.module:36
+msgid "edit own faq"
+msgstr "Eigene FAQ bearbeiten"
+
+#: faq.module:36
+msgid "edit faq"
+msgstr "FAQ bearbeiten"
+
+#: faq.module:36
+msgid "create faq"
+msgstr "FAQ erstellen"
+
+#: faq.module:93
+msgid "General"
+msgstr "Allgemein"
+
+#: faq.module:94
+msgid "Allows the user to configure the header and descriptive text for the FAQ page."
+msgstr "Erlaubt dem Benutzer, die Kopfzeile und den beschreibenden Text einer FAQ-Seite festzulegen."
+
+#: faq.module:103
+msgid "Questions"
+msgstr "Fragen"
+
+#: faq.module:113
+msgid "Categories"
+msgstr "Kategorien"
+
+#: faq.module:114
+msgid "Allows the user to configure the layout of questions and answers using categories on a FAQ page."
+msgstr "Erlaubt dem Benutzer, die Darstellung von Fragen und Antworten mittels Kategorien auf einer FAQ-Seite festzulegen."
+
+#: faq.module:123
+msgid "Weight"
+msgstr "Gewichtung"
+
+#: faq.module:124
+msgid "Allows the user to configure the order of questions and answers on a FAQ page."
+msgstr "Erlaubt dem Benutzer, die Reihenfolge von Fragen und Antworten auf der FAQ-Seite festzulegen."
+
+#: faq.module:0
+msgid "faq"
+msgstr "FAQ"
+
+#: faq.install:17;105
+msgid "A table containing the weight of each faq node by category."
+msgstr "Eine Tabelle die das Gewicht jedes FAQ-Beitrags nach Kategorie beinhaltet."
+
+#: faq.install:19
+msgid "The primary identifier for a term or category.  This will be 0 for non-categorized nodes."
+msgstr "Der pimäre Schlüssel für einen Begriff oder eine Kategorie. Er ist 0 für nicht-kategorisierte Beiträge."
+
+#: faq.install:20;29;131
+msgid "The primary identifier for a node."
+msgstr "Der primäre Schlüssel für einen Beitrag."
+
+#: faq.install:21
+msgid "A number representing the weight of a node.  Nodes with lower weight values will appear above those with higher weight values."
+msgstr "Eine Zahl die die Gewichtung eines Beitrags darstellt. Beiträge mit niedrigerer Gewichtswerten erscheinen über solchen mit größeren Gewichtswerten."
+
+#: faq.install:27;129
+msgid "A table containing the long question text of each faq node revision."
+msgstr "Eine Tabelle, die den langen Fragetext jeder Revision eines FAQ-Beitrags enthält."
+
+#: faq.install:30;132
+msgid "The primary identifier for a node revision."
+msgstr "Der primäre schlüssel für eine Beitragsüberarbeitung."
+
+#: faq.install:31;133
+msgid "The faq long question text."
+msgstr "Der lange FAQ-Frage-Text."
+
+#: faq.info:0
+msgid "Manages configuration of questions for a FAQ page."
+msgstr "Verwaltet die Konfiguration für Fragen auf der FAQ-Seite."
+

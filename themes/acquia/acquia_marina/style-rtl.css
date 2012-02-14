@@ -1,0 +1,486 @@
+/* $Id: style-rtl.css,v 1.2.4.3 2009/12/27 20:03:06 jwolf Exp $ */
+
+html {
+  direction: rtl; 
+}
+
+body {
+  direction: rtl;
+}
+
+/*********/
+/* LISTS */
+/*********/
+
+ol li, ul li {
+  margin: 0.4em 0.5em 0.4em 0;
+}
+
+ul.menu li,
+.item-list ul li {
+  margin: 0.15em 0.5em 0.15em 0;
+}
+
+ul.menu ul, .item-list ul ul {
+  margin-right: 0;
+}
+
+ol li,
+ul li,
+ul.menu li,
+.item-list ul li,
+li.leaf {
+  padding: 0.2em 1.333em 0 0;
+}
+
+ul li,
+ul.menu li,
+.item-list ul li,
+li.leaf {
+  background: transparent url('images/raquo-rtl.png') no-repeat right 0.833em;
+}
+
+ol li {
+  margin-left: 0;
+  margin-right: 2em;
+}
+
+/* adjust openid link */
+html.js #user-login-form li.openid-processed, 
+html.js #user-login li.openid-processed {
+  font-weight: bold;
+  list-style-type: none;
+  margin: 10px -6px 0 0;
+  padding-left: 0;
+  padding-right: 20px;
+
+}
+
+#preface-wrapper div.block ul li {
+  background: transparent url('images/green-checkmark.png') no-repeat 100% 0.222em;
+  padding: 1em 2.222em 0 0;
+}
+
+body.layout-main-last #sidebar-last li.leaf,
+body.layout-main-last #sidebar-last ul.menu li,
+body.layout-main-last #sidebar-last .item-list ul li,
+#content-content .node ul li,
+#content-bottom  ul li {
+  background: transparent url('images/green-bullet-rtl.png') no-repeat right 0.333em;
+  padding-left: 0;
+  padding-right: 1.666em;
+}
+
+/********/
+/* MISC */
+/********/
+#first-time ol {
+  list-style-position: outside;
+  margin-left: 0;
+  margin-right: 2em;
+}
+
+
+/********************/
+/* ALL PAGE REGIONS */
+/********************/
+
+/******************/
+/* HEADER REGIONS */
+/******************/
+
+#header {
+  background-color: #fff;
+  padding-right: 15px;
+}
+
+#header #search-box {
+  float: left;
+}
+
+#header-first {
+  float: right;
+  margin: 12px 0 0 30px;
+
+}
+
+#header-first #logo {                            /* logo postion.  default image replaced if you upload your own */
+  float: right;
+  margin: 0 0 0 14px;
+}
+
+
+#header-middle {
+  float: left;
+  margin: 10px 0 0 20px;
+  width: 230px;
+}
+
+#header-last {
+  float: left;
+}
+
+/********************************/
+/* PREFACE REGIONS */
+/********************************/
+
+#preface {
+  padding-left: 0;
+  padding-right: 15px;
+}
+
+#preface-wrapper.prefaces-1 div.column {
+  float: right;
+}
+  
+#preface-wrapper.prefaces-2 div.column {
+  float: right;
+}
+  
+#preface-wrapper.prefaces-3 div.column {
+  float: right;
+}
+
+
+/************************/
+/*  MAIN AREA WRAPPER   */
+/* (Sidebars + Content) */
+/************************/
+
+#main {
+  background: transparent url('images/content-gradient.png') repeat-x 100% 1px;
+  padding-left: 0;
+  padding-right: 15px;
+}
+
+/*******************/
+/* SIDEBAR REGIONS */
+/*******************/
+
+#sidebar-first {
+  float: right;
+}
+
+#sidebar-last {
+  float: left;
+  margin: 0 10px 0 0;
+}
+
+
+/*******************/
+/* CONTENT REGIONS */
+/*******************/
+
+#content-wrapper {
+  float: right;
+}
+
+/**********************************/
+/* POSTSCRIPT REGIONS  */
+/**********************************/
+
+#postscript-wrapper #postscript-first {
+  padding-right: 0;
+}
+
+#postscript-wrapper #postscript-last {
+  padding-left: 0;
+}
+
+#postscript-wrapper.postscripts-1 div.column {
+  float: right;
+}
+
+#postscript-wrapper.postscripts-2 div.column {
+  float: right;
+  margin: 0 8px 0 10px;
+
+}
+
+#postscript-wrapper.postscripts-3 div.column {
+  float: right;
+} 
+
+
+/*****************/
+/* FOOTER REGION */
+/*****************/
+#footer ul {
+  padding: 0 9px 0 0;
+}
+
+#footer ul li {
+  border-left: none;
+  border-right: 1px solid #CCC;
+  padding: 0 9px 0 5px;
+}
+
+/****************************************/
+/*          COLUMN LAYOUTS              */
+/*                                      */
+/* Classes for different column layouts */
+/* that are applied to the <body> tag.  */
+/****************************************/
+
+/**************************/
+/*   TWO COLUMN LAYOUT    */
+/* (Sidebar:Main Content) */
+/**************************/
+
+body.layout-first-main #sidebar-first {
+  margin: 24px 0 0 14px;
+}
+
+/**************************/
+/*   TWO COLUMN LAYOUT    */
+/* (Main Content:Sidebar) */
+/**************************/
+
+body.layout-main-last #content-wrapper {
+  margin: 32px 0 0 20px;
+}
+
+/**********************************/
+/*      THREE COLUMN LAYOUT       */
+/* (Sidebar:Main Content:Sidebar) */
+/**********************************/
+
+body.layout-first-main-last #sidebar-first {
+  margin: 40px 0 0 20px;
+}
+
+body.layout-first-main-last #content-wrapper #sidebar-last {
+  padding: 0 20px 0 0;
+}
+
+/******************/
+/* HELPER CLASSES */
+/******************/
+
+.right {
+  float: left !important;
+}
+
+.left {
+  float: right !important;
+}
+
+/************/
+/* HEADINGS */
+/************/
+
+h1.title {                                        /* page titles */
+  clear: right;
+}  
+
+/*********/
+/* NODES */
+/*********/
+
+#content-content .node ul.links li,
+#content-content .node ul.inline li,
+#content-content .node .links a {
+  padding: 0 0 0 14px;
+}
+
+#content-content .node ul.links li.comment_forbidden a {
+  padding-right: 0;
+  padding-left: 4px;
+}
+
+#content-content .terms ul.taxonomy ul.vocab-list,
+#content-content .terms ul.taxonomy li.vocab-term {
+  padding: 0 2px 0 0;
+}
+
+.picture {
+  float: left;
+  margin: 0 4px 2px 0;
+}
+
+/**********/
+/* BLOCKS */
+/**********/
+
+#user-login-form .item-list ul li,
+div.terms ul li {
+  margin: 2px 16px 0 0;
+}
+
+body.layout-main-last #sidebar-last h2.block-title {
+  text-align: right;
+}
+
+
+/************************************/
+/* PRIMARY MENU WITH DROPDOWNS      */
+/* - used with menu_tree theming of */
+/* $primary_links in page.tpl.php   */
+/************************************/
+
+#primary-menu {
+  float: left;
+}
+  
+#primary-menu ul.menu li ul li ul.menu {
+  margin: 0 -14px 0 0;
+}
+
+#primary-menu ul.menu li ul li:hover ul.menu,
+#primary-menu ul.menu li ul li.hover ul.menu {
+  right: 154px;
+}
+
+#primary-menu ul.menu li ul li a,
+#primary-menu ul.menu li ul li a:link,
+#primary-menu ul.menu li ul li a:visited {
+  padding: 4px 4px 0 0;
+  width: 131px;
+}
+
+
+/***************/
+/* BREADCRUMBS */
+/***************/
+
+#breadcrumb {
+  right: 21.654em;
+}
+
+body.layout-main-last #breadcrumb {
+  right: 0;
+}
+
+/********/
+/* TABS */
+/********/
+
+/* styling for node tabs (e.g., View, Edit) */
+#content-tabs {
+  float: right;
+}
+
+#content-tabs ul.primary,
+#content-tabs ul.secondary {
+  border-bottom: 1px solid #bbb;
+  clear: right;
+  float: right;
+}
+
+#content-tabs ul.primary li,
+#content-tabs ul.secondary li {
+  background: transparent;
+  border-style: none;
+  float: right;
+}
+
+#content-tabs ul.primary li a:link,
+#content-tabs ul.primary li a:visited,
+#content-tabs ul.secondary li a:link,
+#content-tabs ul.secondary li a:visited {
+  float: right;
+}
+
+/*********/
+/* FORMS */
+/*********/
+
+#user-login-form {
+  text-align: right;
+}
+
+html.js input.form-autocomplete {
+  background-position: 0 5px;
+}
+
+
+/**********/
+/* TABLES */
+/**********/
+
+th {
+  text-align: right;
+  padding-right: 0;
+  padding-left: 1em;
+}
+
+thead th {
+  text-align: right;
+  padding-right: 0;
+  padding-left: 1em;
+}
+
+
+/*--------------------------------*/
+/*---- MODULE SPECIFIC STYLES ----*/
+/*--------------------------------*/
+
+/*******************/
+/* BOOK NAVIGATION */
+/*******************/
+
+.book-navigation .menu {
+  padding: 1em 0 3em 0;
+}
+
+
+/************/
+/* COMMENTS */
+/************/
+
+#comments h2.comments {
+  padding: 6px 52px 6px 14px;
+}
+
+.comment .links a {
+  text-align: left;
+}
+
+.comment ul.links {
+  text-align: left;
+  clear: left;
+}
+
+#content-content .comment ul.links li {
+  margin: 0 0 0 10px;
+}
+
+blockquote {
+  background: url('images/close-quote.gif') no-repeat left bottom;
+}
+
+blockquote :first-child {
+  background: url('images/open-quote.gif') no-repeat right top;
+  padding: 10px 20px 0 0;
+}
+
+/**********/
+/* FORUMS */
+/**********/
+
+.forum-topic-navigation {
+  padding: 1em 3em 0 0;
+}
+
+.forum-topic-navigation .topic-previous {
+  text-align: left;
+  float: right;
+}
+.forum-topic-navigation .topic-next {
+  text-align: right;
+  float: left;
+}
+
+/************/
+/* PROFILES */
+/************/
+
+.profile dt {
+  float: right;
+  text-align: right;
+}
+
+.layout-first-main-last .profile dd {
+  margin: 15px 120px 0 5px;
+}
+

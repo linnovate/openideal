@@ -1,0 +1,625 @@
+# $Id: CHANGELOG.txt,v 1.1.2.237 2010/04/18 12:25:43 kiam Exp $
+# All the dates reported here are referred to UTC.
+
+Nodewords 6.x-1 2010-04-18
+--------------------------
+#774350 by kiam: Fatal error: Call to undefined function nodewords_check_api_version().
+
+Nodewords 6.x-1 2010-04-17
+--------------------------
+#660746 by kiam: Robots tag not displayed, but on <front>.
+#708530 by kiam: Description & Keywords for taxonomy terms aren't getting saved.
+#753702 by kiam: Location is not shown.
+#772474 by kiam: Parse error: syntax error, unexpected ')' in /sites/all/modules/nodewords/nodewords_ui/nodewords_ui.module.
+
+Nodewords 6.x-1 2010-04-14
+--------------------------
+#771226 by kiam: README.txt contains outdated information.
+
+Nodewords 6.x-1 2010-04-11
+--------------------------
+#767764 by kiam: Token for the front page URL should return the base URL.
+#767760 by kiam: Can't delete meta tags for custom pages.
+#767612 by TravisCarden: The link in the post-installation message is not correct.
+
+Nodewords 6.x-1 2010-04-10
+--------------------------
+#767492 by kiam: Token is not replaced for custom pages.
+#767190 by kiam: Token [metatags-url-alias] does not return the path alias.
+#767406 by yettyn: Warning - Cannot modify header information.
+
+Nodewords 6.x-1 2010-04-08
+--------------------------
+#665042 by kiam: If the front page is a node, meta tags fieldset should not be shown for the node.
+
+Nodewords 6.x-1 2010-04-07
+--------------------------
+#761690 by kiam: Syntax error on line 13.
+
+Nodewords 6.x-1 2010-04-03
+--------------------------
+#760588 by kiam: Database error after installation.
+
+Nodewords 6.x-1 2010-03-25
+--------------------------
+#691852 by kiam: Meta tags are sometime output multiple times.
+
+Nodewords 6.x-1 2010-03-23
+--------------------------
+#748958 by kiam: Default and specific tags are not saved.
+
+Nodewords 6.x-1 2010-03-22
+--------------------------
+#748828 by kiam: update error | nodewords_basic.install.
+#748846 by kiam: Parse error on nodewords_tokens.module.
+
+Nodewords 6.x-1 2010-03-21
+--------------------------
+#706630 by kiam: Implement the hooks necessary to add more tokens.
+#735148 by kiam: Variables not deleted after uninstall.
+
+Nodewords 6.x-1 2010-03-12
+--------------------------
+#740520 by kiam: Change the form field for meta tags ROBOTS.
+
+Nodewords 6.x-1 2010-03-07
+--------------------------
+#630184 by kiam: Remove verification tag checkboxes for "edit forms" since they ONLY appear on the front page.
+#644102 by kiam: Re-organize the sub-modules.
+#696652 by kiam: Meta tags that are generated should not be shown in the editing form.
+#696650 by kiam: Change the settings fields for the meta tags generation.
+
+Nodewords 6.x-1 2010-03-04
+--------------------------
+#731664 by kiam: Put the settings to enable the meta tags, and to select the meta tags to output in the same fieldset.
+
+Nodewords 6.x-1 2010-02-24
+--------------------------
+#672262 by Lars Pohlmann: Meta tags for "other pages" are not used.
+
+Nodewords 6.x-1 2010-02-23
+--------------------------
+#698582 by jenlampton: Meta tags form fields are missing when adding a new taxonomy term.
+#721642 by AlexisWilke: PostgreSQL update.
+
+Nodewords 6.x-1 2010-02-18
+--------------------------
+#717892 by maximpodorov: Parameter 2 to nodewords_form_alter() expected to be a reference, value given.
+
+Nodewords 6.x-1 2010-02-15
+--------------------------
+#715170 by kiamlaluno: Warning: "Unknown column 'n.0' in 'where clause' query" during search indexing.
+
+Nodewords 6.x-1 2010-02-08
+--------------------------
+#707722 by zxs: Custom regexp does't filter node teaser.
+
+Nodewords 6.x-1 2010-02-05
+--------------------------
+#705128 by kiamlaluno: Improper check for node form generates PHP warning.
+
+Nodewords 6.x-1 2010-02-01
+--------------------------
+#701248 by kiamlaluno: Show a message after the module is installed.
+
+Nodewords 6.x-1 2010-01-30
+--------------------------
+#699904 by kiamlaluno: Change the module description.
+
+Nodewords 6.x-1 2010-01-29
+--------------------------
+#698956 by kiamlaluno: Change the message reported from hook_reports().
+
+Nodewords 6.x-1 2010-01-28
+--------------------------
+#695322 by kiamlaluno: Nodewords keeps logging error on the database.
+
+Nodewords 6.x-1 2010-01-20
+--------------------------
+#690304 by kiamlaluno: It is not possible to set the value for the meta tag PICS-LABEL to use in the front page.
+
+Nodewords 6.x-1 2010-01-11
+--------------------------
+#668446 by kiamlaluno: Change the options to allow setting keywords that are put before, and after all the others.
+#681080 by kiamlaluno: Update function changes the field id into a smallint.
+
+Nodewords 6.x-1 2010-01-10
+--------------------------
+#672068 by suvisor, kiamlaluno: Update fails passing from 6.x-1.3 to 6.x-1.11.
+#679466 by kiamlaluno: Update from Nodewords 6.x-1.3-alpha2 to 6.x-1.11 fails because of Update #6151.
+
+Nodewords 6.x-1 2010-01-06
+--------------------------
+#675110 by kiamlaluno: Add '#wysiwyg' => FALSE to textareas.
+#675920 by kiamlaluno: Bad rewriting of the $variables['head'] in hook_preprocess_page().
+
+Nodewords 6.x-1 2010-01-05
+--------------------------
+#673624 by kiamlaluno: Node meta tag description does not correctly work.
+
+Nodewords 6.x-1 2010-01-03
+--------------------------
+#673214 by kiamlaluno: Meta tags for other pages are not correctly loaded from the database.
+#672976 by kiamlaluno: Syntax error on line 322.
+
+Nodewords 6.x-1 2010-01-02
+--------------------------
+#672096 by Summit, kiamlaluno: Meta tags are not saved for taxomony terms or vocabularies.
+#672346 by kiamlaluno: Remove the settings that have an equivalent setting for content types.
+#672262 by kiamlaluno: Meta tags for "other pages" are not used.
+#672072 by kiamlaluno: Meta tag content generation always use the node body content.
+
+Nodewords 6.x-1 2010-01-01
+--------------------------
+#671926 by kiamlaluno: Node operations are probably not compatible with VBO.
+
+Nodewords 6.x-1 2009-12-31
+--------------------------
+#671128 by kiamlaluno: Bing authentication failure.
+
+Nodewords 6.x-1 2009-12-30
+--------------------------
+#669896 by kiamlaluno: Meta tag DESCRIPTION content is not correctly shown.
+#670342 by kiamlaluno: Special pages settings are not deleted.
+
+Nodewords 6.x-1 2009-12-29
+--------------------------
+#669728 by kiamlaluno: Option "Auto-keywords vocabularies" is not used when node meta tags editing is not enabled.
+#669684 by kiamlaluno: Change the code that verify if there are modules implementing meta tags for the current API version.
+
+Nodewords 6.x-1 2009-12-28
+--------------------------
+#668804 by kiamlaluno: Meta tags content for specific pages are wrongly saved.
+#669272 by kiamlaluno: "There are no modules that implement meta tags" message.
+#667636 by kiamlaluno: Pull Description from body if metatag field and teaser are both empty.
+
+Nodewords 6.x-1 2009-12-20
+--------------------------
+#660136 by beeradb: Canonical URL does not allow to use äöü.
+
+Nodewords 6.x-1 2009-12-14
+--------------------------
+#659814 by kiamlaluno: The table shown in the other pages settings doesn't have the rows draggable anymore.
+#651898 by kiamlaluno: {nodewords_custom}.path is copied in {nodewords}.id.
+
+Nodewords 6.x-1 2009-12-13
+--------------------------
+#658630 by kiamlaluno: Generated canonical URL is not correct.
+
+Nodewords 6.x-1 2009-12-12
+--------------------------
+#650362 by ao2: Canonical URL doesn't use the path alias (and URL is relative when base_url is empty).
+
+Nodewords 6.x-1 2009-12-09
+--------------------------
+#655012 by Dave Reid: Update vertical_tabs integration.
+
+Nodewords 6.x-1 2009-12-08
+--------------------------
+#653696 by kiamlaluno: Users with administration permissions should always be able to edit the meta tags content.
+
+Nodewords 6.x-1 2009-12-07
+--------------------------
+#653812 by kiamamluno: Change the way the meta tags content is saved in the database.
+
+Nodewords 6.x-1 2009-12-06
+--------------------------
+#651896 by kiamlaluno: Meta tag ROBOTS for lists is not used.
+
+Nodewords 6.x-1 2009-12-05
+--------------------------
+#652210 by kiamlaluno: Meta tag SCHEMA.DC is always output.
+#651208 by kiamlaluno: Error while updating.
+#650790 by kiamlaluno: Prepopulation of nodewords on translated nodes.
+
+Nodewords 6.x-1 2009-12-04
+--------------------------
+#650718 by fenstrat: Auto meta description generation: third-party modules filter regex is broken.
+
+Nodewords 6.x-1 2009-12-03
+--------------------------
+#650362 by kiamlaluno: Canonical URL doesn't use the path alias.
+#650164 by a02: Code incorrectly uses the revision ID instead of the node ID.
+#649748 by kiamlaluno: Correct the implementation of hook_form_alter().
+
+Nodewords 6.x-1 2009-12-02
+--------------------------
+#646964 by kiamlaluno: Meta tag DC.CREATOR always uses the Drupal username.
+#648414 by kiamlaluno: Error while accessing the property of a not object, and an undefined variable.
+
+Nodewords 6.x-1 2009-12-01
+--------------------------
+#647356 by kiamlaluno: Wrong implementation of hook_theme().
+
+Nodewords 6.x-1 2009-11-30
+--------------------------
+#646996 by kiamlaluno: Hook implemented in nodewords_extra.module doesn't have the correct name.
+#646966 by kiamlaluno: nodewords_pages_edit_validate() reports the error for the wrong form field.
+#646710 by kiamlaluno: Incorrect database schema when updating from a previous version.
+#646656 by kiamlaluno: When there are no vocabularies, the option for the meta tag KEYWORDS to populate it with taxonomy terms doesn't appear.
+
+Nodewords 6.x-1 2009-11-26
+--------------------------
+#640716 by ilo, kiamlaluno: Admin settings when no tags module is enabled.
+#628868 by kiamlaluno: Meta tags content is not indexed from the search module.
+#640906 by ilo: Readme.txt file is completely outdated.
+
+Nodewords 6.x-1 2009-11-23
+--------------------------
+#640278 by KiamLaLuno: Change the order the settings for other pages are used.
+
+Nodewords 6.x-1 2009-11-22
+--------------------------
+#639392 by KiamLaLuno: Wildcards not working in "Other Pages".
+#638962 by KiamLaLuno: Unsupported operand types.
+
+Nodewords 6.x-1 2009-11-19
+--------------------------
+#637396 by maximpodorov: Meta tags don't appear because a bug in the function that detects the page being viewed.
+#636798 by KiamLaLuno: Re-add the call to drupal_alter('nodewords_tags').
+#636978 by KiamLaLuno: Ubercart catalog page support.
+
+Nodewords 6.x-1 2009-11-17
+--------------------------
+#635386 by KiamLaLuno: Add more options to filter the text present in the node teaser used as meta tag content.
+#634174 by KiamLaLuno: Updating from 6100 to 6113 fails under PostgreSQL.
+
+Nodewords 6.x-1 2009-11-15
+--------------------------
+#634106 by KiamLaLuno: Strip the text added by Image Browser.
+
+Nodewords 6.x-1 2009-11-15
+--------------------------
+#632856 by dkruglyak: Error with version_compare().
+
+Nodewords 6.x-1 2009-11-14
+--------------------------
+#620408 by KiamLaLuno: Default value assigned to a parameter passed by reference.
+
+Nodewords 6.x-1 2009-11-13
+--------------------------
+#556014 by KiamLaLuno: Allow third-party modules to help in detecting the type of the page shown.
+
+Nodewords 6.x-1 2009-11-11
+--------------------------
+#629588 by KiamLaLuno: User profile meta tags are output even when they are not enabled.
+#629564 by KiamLaLuno: Meta tags are not properly filtered.
+#628868 by 63reasons-YP, KiamLaLuno: nodewords_nodeapi('update index') is bugged.
+
+Nodewords 6.x-1 2009-11-10
+--------------------------
+#625816 by KiamLaLuno: Strip Image_Assist filter tags from description when set automatically from teaser.
+
+Nodewords 6.x-1 2009-11-09
+--------------------------
+#626964 by KiamLaLuno: Merge nodewords - vertical tabs into main module.
+
+Nodewords 6.x-1 2009-11-08
+--------------------------
+#626310 by Dave Reid: Undefined index: value in nodewords_basic.module.
+
+Nodewords 6.x-1 2009-11-07
+--------------------------
+#626180 by KiamLaLuno: Form field is not included in the right fieldset.
+#626162 by KiamLaLuno: Integration with Vertical tabs.
+
+Nodewords 6.x-1 2009-11-06
+--------------------------
+#625054 by KiamLaLuno: <meta name="robots" content="noindex, 0, 0, 0, 0, 0" />.
+
+Nodewords 6.x-1 2009-11-05
+--------------------------
+#624696 by Dmitriy.trt: Broken message for nodewords_bypath.
+#623952 by KiamLaLuno: Automatically use node teaser for meta tag description if the meta tag DESCRIPTION form field is left empty.
+#623962 by KiamLaLuno: Meta tag description from teaser does not work together with excerpt module.
+
+Nodewords 6.x-1 2009-11-04
+--------------------------
+#622404 by KiamLaLuno: The meta tags are not shown for a page using the pager.
+
+Nodewords 6.x-1 2009-10-31
+--------------------------
+#619846 by KiamLaLuno: Define base URL for canonical URLs.
+#617600 by KiamLaLuno: Missing a way to add pages to 'other pages' setting.
+
+Nodewords 6.x-1 2009-10-30
+--------------------------
+#618576 by KiamLaLuno: Invalid argument supplied for foreach.
+
+Nodewords 6.x-1 2009-10-28
+--------------------------
+#616394 by KiamLaLuno: Upgrade from D5 ends with disabled nodewords module, but enabled submodules.
+
+Nodewords 6.x-1 2009-10-27
+--------------------------
+#613376 by hass, KiamLaLuno: How to downgrade broken nodewords 1.1+ to 1.0 for a smooth upgrade to 1.3.
+
+Nodewords 6.x-1 2009-10-25
+--------------------------
+#601436 by KiamLaLuno: When the option "Repeat meta tags for lists" is not selected, the canonical URL is not used.
+
+Nodewords 6.x-1 2009-10-24
+--------------------------
+#613350 by KiamLaLuno: Rename the tab "Global and default meta tags".
+#610458 by hass, KiamLaLuno: Extend default max meta description length to 350 characters.
+#613360 by KiamLaLuno: Remove backup table "nodewords_10".
+#613410 by KiamLaLuno: Code wrongly uses Drupal variables nodewords_basic_user_teaser_$content_type.
+
+Nodewords 6.x-1 2009-10-23
+--------------------------
+#612976 by KiamLaLuno: "edit" and "head" array is not upgraded (settings lost).
+#612978 by KiamLaLuno: Setting "Use the node teaser if the description meta tag is not set" lost after upgrade (setting lost).
+#612210 by KiamLaLuno: Global settings not shown on settings page.
+#587070 by KiamLaLuno: Meta tags form fields are always shown in the administration pages even if they are not selected to appear in the edit forms.
+
+Nodewords 6.x-1 2009-10-22
+--------------------------
+#611686 by KiamLaLuno: Add the support for <link rel="meta" title="ICRA labels" />.
+#611042 by KiamLaLuno: Global geourl is lost after upgrade (data loss).
+
+Nodewords 6.x-1 2009-10-19
+--------------------------
+#591538 by hass, KiamLaLuno: Upgrade path for new submodule names is broken.
+
+Nodewords 6.x-1 2009-10-17
+--------------------------
+#604160 by KiamLaLuno: Call to undefined function drupal_get_install_files() in nodewords.module line 1084.
+
+Nodewords 6.x-1 2009-10-13
+--------------------------
+#588946 by nonsie: Unable to edit the node meta tags unless the user has permission "administer nodes".
+#603530 by KiamLaLuno: Error while uninstalling the modules.
+
+Nodewords 6.x-1 2009-10-11
+--------------------------
+ by KiamLaLuno: Allow to use a different set of meta tags for the pager pages.
+#600756 by KiamLaLuno: Change the tab title from "Global meta tags" to "Global and default meta tags".
+
+Nodewords 6.x-1 2009-10-10
+--------------------------
+#600460 by KiamLaLuno: Upgrade path for robots tag is missing (data loss).
+#591538 by KiamLaLuno: Upgrade path for new submodule names is broken.
+#600462 by KiamLaLuno: Upgrade path for global nodeword settings is missing.
+#591524 by KiamLaLuno: Caching issues are still present.
+#600464 by KiamLaLuno: Code is suppressing errors in many places of install files.
+#600468 by KiamLaLuno: Uninstall in nodewords_basic delete wrong variables from variables table.
+
+Nodewords 6.x-1 2009-10-04
+--------------------------
+#595734 by KiamLaLuno: Dash in variable names.
+#591538 by KiamLaLuno: Submodule names not prefixed with base module name.
+#593148 by andypost, KiamLaLuno: array_filter() error.
+
+Nodewords 6.x-1 2009-10-02
+--------------------------
+#587260 by KiamLaLuno: Errors when upgrading from 6.x.1.0 to 6.x.1.2.
+
+Nodewords 6.x-1 2009-09-30
+--------------------------
+#591706 by andypost: Wrong Google site verification meta tag.
+
+Nodewords 6.x-1 2009-09-29
+--------------------------
+#587152 by KiamLaLuno: colspan counter wrong.
+#588716 by hass, KiamLaLuno: Use drupal_set_html_head() for $variables['head'].
+#590474 by KiamLaLuno: Permission strings are not translatable.
+
+Nodewords 6.x-1 2009-09-28
+--------------------------
+#590222 by KiamLaLuno: Implement hook_node_type().
+#588716 by KiamLaLuno: Use drupal_set_html_head() for $variables['head'].
+#590054 by KiamLaLuno: Small typo.
+#587046 by KiamLaLuno: update.php may fail on big sites for PHP timeout and/or memory reasons.
+#589814 by KiamLaLuno: Invalid argument supplied for foreach in nodewords.module at line 385.
+
+Nodewords 6.x-1 2009-09-27
+--------------------------
+#588946 by KiamLaLuno: Unable to edit the node meta tags unless the user has permission "administer nodes".
+#586448 by KiamLaLuno: Allow to set a default value for the location meta tags as it was allowed before.
+#588462 by KiamLaLuno: Add an option to disable the meta tags for specific content types.
+#587744 by KiamLaLuno: Auto description from node teaser: the maximum length is not respected.
+#588620 by KiamLaLuno: Code shows only the first character of the meta tag content.
+
+Nodewords 6.x-1 2009-09-26
+--------------------------
+#587248 by mikeytown2, KiamLaLuno: Meta tags content is not correctly encoded/filtered.
+
+Nodewords 6.x-1 2009-09-25
+--------------------------
+#588156 by hass: Translatable string review.
+#587514 by KiamLaLuno: Reintroduce the global keywords as in the previous version of the module.
+#587710 by KiamLaLuno: Auto description from node teaser: when the attribute alt is empty, the tag img is replaced by [].
+#587108 by KiamLaLuno: nodewords_unique() should not change text to lower case.
+#587120 by KiamLaLuno: Rename menu item 'Nodewords' to 'Meta tags'.
+#587656 by KiamLaLuno: Remove the call to drupal_alter('nodewords_tags').
+#584720 by KiamLaLuno: Allow the meta tag "Description" to be generated from the node teaser.
+
+Nodewords 6.x-1 2009-09-24
+--------------------------
+#587060 by KiamLaLuno: Remove the settings for the offline site.
+#560022 by KiamLaLuno: Meta tags "Revisit after" and "Robots" are not output.
+#586434 by KiamLaLuno: Implement hook_requirements().
+#585358 by plj, KiamLaLuno: SQL queries contain {{.
+#586168 by KiamLaLuno: The "noodp" robots meta tag is misspelled.
+
+Nodewords 6.x-1 2009-09-23
+--------------------------
+#585908 by KiamLaLuno: Add the documentation on how to add custom meta tags through extra_metatags.module.
+#587084 by KiamLaLuno: Typo in "lenght".
+
+Nodewords 6.x-1 2009-09-22
+--------------------------
+#584810 by KiamLaLuno: Use db_rewrite_sql() when getting a taxonomy term.
+#584720 by KiamLaLuno: Remove the possibility to generate the meta tag "Description" from the node teaser.
+
+Nodewords 6.x-1 2009-09-21
+--------------------------
+#558622 by KiamLaLuno: Change the way the module checks if a module is supporting the current API version.
+#558192 by KiamLaLuno: Cache the meta tags definition data obtained from third-party modules.
+#573192 by KiamLaLuno: SQL errors on module install.
+
+Nodewords 6.x-1 2009-08-22
+--------------------------
+#556240 by KiamLaLuno: Wrong implementations of hook_form_FORM_ID_alter().
+#556094 by AlexisWilke, KiamLaLuno: Document the argument for _nodewords_custom_pages_load_data().
+#556278 by KiamLaLuno: Undefined offset: 1.
+
+Nodewords 6.x-1 2009-08-20
+--------------------------
+#542078: Integration with CheckAll.
+
+Nodewords 6.x-1 2009-08-15
+--------------------------
+#518140 by KiamLaLuno: Add the support for node / user bulk operations.
+
+Nodewords 6.x-1 2009-08-14
+--------------------------
+#236833 by KiamLaLuno: Add more settings pages for the global meta tags.
+
+Nodewords 6.x-1 2009-08-12
+--------------------------
+#547956 by KiamLaLuno: Meta tag keywords doesn't show any keywords in the page output.
+#546968 by KiamLaLuno: Nothing is saved in database.
+#546806 by jcmarco: Missing semicolon.
+
+Nodewords 6.x-1 2009-08-11
+--------------------------
+#546314 by jcmarco: Syntax error in SQL query.
+#545102 by jcmarco: Site verification tags are not added.
+
+Nodewords 6.x-1 2009-08-07
+--------------------------
+#542688 by KiamLaLuno: Error in the table name.
+#542074 by KiamLaLuno: Add a page for the error pages meta tags.
+
+Nodewords 6.x-1 2009-07-30
+--------------------------
+#537984 by manarth: Integrate with CCK content-type forms.
+
+Nodewords 6.x-1 2009-07-30
+--------------------------
+#535100 by KiamLaLuno: Validation function uses incorrect values for the longitude.
+
+Nodewords 6.x-1 2009-07-22
+--------------------------
+#523536 by KiamLaLuno: Sort the meta tags fields shown in the edit page.
+#526796 by KiamLaLuno: Update function calls update_sql() without to first escape the strings passed to the function.
+
+Nodewords 6.x-1 2009-07-20
+--------------------------
+#524570 by KiamLaLuno: Add support for NOSNIPPET.
+#523948 by KiamLaLuno: Unchecking all robots meta tag options the meta tag is not output.
+
+Nodewords 6.x-1 2009-07-18
+--------------------------
+#523526 by KiamLaLuno: Split nodewords.module into nodewords.module, basic_metatags.module, and extra_metatags.module.
+#522992 by KiamLaLuno: Create a sub-module for the site verification meta tags.
+#523272 by KiamLaLuno: Problems setting meta tags configuration up.
+
+Nodewords 6.x-1 2009-07-17
+--------------------------
+#296963 by KiamLaLuno: Support for site verification meta tag.
+
+Nodewords 6.x-1 2009-07-16
+--------------------------
+#521794 by KiamLaLuno: Call to undefined function nodewords_add_html_head() while accessing a view generated page.
+#517480 by KiamLaLuno: Add the validation code for the meta tag form fields.
+By KiamLaLuno: Reverted the changes made with #509910.
+
+Nodewords 6.x-1 2009-07-14
+--------------------------
+#517464 by KiamLaLuno: Reorganize the settings page.
+#518146 by KiamLaLuno: Rename "Global meta tags" as "Default meta tags".
+#510200 by KiamLaLuno: Global meta tags should be saved in the database as the other meta tags.
+#516662 by KiamLaLuno: "collapsed" property should not always be set to TRUE.
+#518342 by KiamLaLuno: The module doesn't output all the meta tags.
+
+Nodewords 6.x-1 2009-07-13
+--------------------------
+#509802 by KiamLaLuno: Allow multiple values per meta tag.
+
+Nodewords 6.x-1 2009-07-11
+--------------------------
+#516518 by KiamLaLuno: _nodewords_get_possible_tags(TRUE) is not returning the list of meta tags.
+#516506 by KiamLaLuno: Invalid argument supplied for foreach().
+#516500 by KiamLaLuno: Missing argument for nodewords_nodewords_tags_list_alter().
+
+Nodewords 6.x-1 2009-07-10
+--------------------------
+#515836 by KiamLaLuno: Error while saving the front page meta tags.
+#515180 by KiamLaLuno: Use different Drupal variables for the settings.
+
+Nodewords 6.x-1 2009-07-05
+--------------------------
+#510424 by KiamLaLuno: array_key_exists() argument error.
+
+Nodewords 6.x-1 2009-07-04
+--------------------------
+#509910 by KiamLaLuno: Remove the option for the meta tags that can be edited.
+#509836 by KiamLaLuno: Add additional checks for the user permissions.
+#509826 by KiamLaLuno: The global meta tags field set is shown on the bottom of the form.
+
+Nodewords 6.x-1 2009-07-03
+--------------------------
+#313057 by KiamLaLuno: Support for PICS meta tags.
+#354821 by KiamLaLuno: Use existing node location from location module for GeoURL/ICBM Meta Tag.
+#508922 by KiamLaLuno: Global meta tags values should be the default values used when the module cannot use a specific value.
+#508894 by KiamLaLuno: Allow the user to edit the global value for each meta tag.
+#300180 by KiamLaLuno: Add permissions to edit each meta tag.
+
+Nodewords 6.x-1 2009-07-02
+--------------------------
+#507798 by KiamLaLuno: Use node_teaser().
+
+Nodewords 6.x-1 2009-07-01
+--------------------------
+#507514 by Kiam@avpnet.org: Support for NOOPD, and NOYDIR.
+
+Nodewords 6.x-1 2009-06-30
+--------------------------
+#506640 by Kiam@avpnet.org: The module handles paths that are not used by Drupal.
+#492728 by Kiam@avpnet.org: Meta tags field set is show in each tab present in the editing form for the user profile.
+#506474 by Island Usurper: Replace nodewords_init() with nodewords_preprocess_page().
+
+Nodewords 6.x-1 2009-06-25
+--------------------------
+#374049 by Kiam@avpnet.org: Add a default value for the node canonical URL.
+
+Nodewords 6.x-1 2009-06-21
+--------------------------
+#497580 by Kiam@avpnet.org: Settings page doesn't list any meta tag.
+
+Nodewords 6.x-1 2009-06-19
+--------------------------
+#495352 by Kiam@avpnet.org: Change the default for 'use the node teaser for the description meta tag' to FALSE, and add a warning.
+#494398 by Kiam@avpnet.org: Wrong call to drupal_alter().
+#374049 by Kiam@avpnet.org: Add the support for <link rel="canonical">.
+
+Nodewords 6.x-1 2009-06-02
+--------------------------
+#478990 by Kiam@avpnet.org: Add the support for more meta tags setting fields.
+#253324 by Kiam@avpnet.org: Add the support for the NOARCHIVE option for the robots meta tag.
+#478988 by Robrecht Jacques, Kiam@avpnet.org: Change the way the list of supported meta tags is created.
+
+Nodewords 6.x-1 2009-06-01
+--------------------------
+#395460 by Kiam@avpnet.org: Create dc_title.inc, and geourl.inc from geourl.inc.
+#476602 by Robrecht Jacques, Kiam@avpnet.org: Informations about meta tags should come only from the .inc files.
+
+Nodewords 6.x-1 2009-05-31
+--------------------------
+#393844 by SeroSero: Convert &amp; to & in _nodewords_check_content().
+#178307 by deviantintegral, joestewart@drupal.org, Kiam@avpnet.org: Handling of ALT attributes.
+
+Nodewords 6.x-1 2009-05-29
+--------------------------
+#216262 by mrfelton, Kiam@avpnet.org: Meta tags are not added to all the views.
+By Kiam@avpnet.org: Replaced multiple call to arg(NN) with a single call to arg().
+#428356 by lastnico, Kiam@avpnet.org: Poll results page has not meta tags.
+#445464 by Kiam@avpnet.org: Add the option to disable the meta tags editing for users.
+
+Nodewords 6.x-1 2009-05-28
+--------------------------
+#428348 by lastnico: Allow hook_nodewords() to override existing tags.
+#388516 by psynaptic, clarkburbidge: Default to collapsed fieldset on form pages.
+#474766 by Kiam@avpnet.org: Optimize the code.

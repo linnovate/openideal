@@ -1,0 +1,121 @@
+<?php
+// $Id: nodewords_pagetitle.module,v 1.2 2010/06/19 19:57:30 brian294 Exp $
+/**
+ * @file
+ * Set the page title using nodewords custom pages.
+ *
+ * Leverage the power of nodewords custom pages to set the page title 
+ * using wildcard paths and tokens.  Great for tough-to-reach page titles in 
+ * Views, Panels, and other non-node paths!
+*/
+
+/**
+ * The hook is used from nodewords.module to know which API is supported by the
+ * the module.
+ *
+ * @return
+ * An array containing the following indexes:
+ *
+ *   - api - the API version used by the module; basing on this value
+ *     Nodewords will take the necessary steps to assure to keep the module
+ *     compatible with Nodewords, The minimum API currently supported by the
+ *     module is contained in the constant NODEWORDS_MINIMUM_API_VERSION, and
+ *     the current API version is contained in the constant
+ *     NODEWORDS_API_VERSION.
+ *   - path - the path where the files for the integration with Nodewords are
+ *     placed.
+*/
+function nodewords_pagetitle_nodewords_api() {
+  return array('api' => '1.12', 'path' => '');
+}
+
+/**
+ * This hook declares the meta tags implemented by the module.
+ *
+ *
+ * @return
+ *   An array containing the following values:
+ *
+ *  - attributes - the tag attributes used when outputting the tag on HTML HEAD.
+ *  - callback - the string used to built the name of the functions called for
+ *    any meta tags operations.
+ *  - context - the contexts in which the meta tags are allowed (and denied).
+ *  - label - the label used as title in the fieldset for the form field
+ *    shown in the form to edit the meta tags values.
+ *  - templates - the templates used when the meta tag is output.
+ *  - weight - the weight used to order the meta tags before to output them;
+ *    the lighter meta tag will be output first.
+ *
+ */
+function nodewords_pagetitle_nodewords_tags_info() {
+  $tags = array(
+    'page.title' => array(
+      'callback' => 'nodewords_pagetitle_page_title',
+      'context' => array(
+        'allowed' => array(
+          NODEWORDS_TYPE_PAGE,
+        ),
+      ),
+      'templates' => array(
+        'head' => array(
+          'page.title' => NODEWORDS_META
+        ),
+      ),
+      'label' => t('Page title'),
+      'tokens' => TRUE,
+    ),
+  );
+
+  return $tags;
+}
+
+
+/**
+ * Set the form fields used to implement the options for the meta tag.
+ */
+function nodewords_pagetitle_page_title_form(&$form, $content, $options) {
+  $form['page.title'] = array(
+    '#tree' => TRUE,
+  );
+
+  $form['page.title']['value'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Page title'),
+    '#description' => t('Enter a page title.') . $options['description'],
+    '#default_value' => empty($content['value']) ? '' : $content['value'],
+    '#maxlength' => variable_get('nodewords_max_size', 350),
+  );
+}
+
+
+// nodewords_pagetitle_page_title_prepare not needed because it puts the meta tag into variable that will output it with the rest of the metatags.
+// Since this is not a metatag, we can skip it!
+//function nodewords_pagetitle_page_title_prepare(&$tags, $content, $options) {
+//  if (!empty($content['value'])) {
+//	  $tags['page.title'] = nodewords_replace_tokens($content['value'], $options);
+//  }
+//}
+
+// hook_page_title_alter().
+// Set the title variable.  Called by the page_title module..
+function nodewords_pagetitle_page_title_alter(&$title) {
+	// Try to guess the $type and $id by looking at $_GET['q'].
+	// Private function borrowed from nodewords module.
+	if (function_exists('_nodewords_detect_type_and_id')) {
+		// Depreciated with Nodewords API 1.14
+		$options = _nodewords_detect_type_and_id();
+	}
+	else {
+		$options = nodewords_detect_type_id();
+	}
+	
+	switch ($options['type']) {
+		// NODEWORDS_TYPE_PAGE
+		case 10:
+			// Load the page meta tags data from the database.
+			// Private function borrowed from nodewords_custom_pages	
+			$page_data = _nodewords_custom_pages_load_data($options['id']);
+			$title = $page_data->tags['page.title']['value'];
+			break;
+	}
+}

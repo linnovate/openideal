@@ -1,0 +1,162 @@
+/* $Id: fluid.css,v 1.1.2.2 2009/12/27 22:09:59 jwolf Exp $ */
+
+/*******************/
+/* Fluid width CSS */
+/*******************/
+
+#header-wrapper,
+#primary-menu-wrapper,
+#preface,
+#main-wrapper {
+  padding: 0 10px;
+}
+
+
+#header {
+  width: 100%;
+  min-width: 960px;
+}
+
+#header-first {
+  width: 40%;
+  min-width: 380px;
+}
+
+#header-middle {
+  width: 24%;
+  min-width: 230px;
+}
+
+#header-last {
+  width: 30%;
+  min-width: 300px;
+}
+
+#primary-menu-wrapper {
+  width: 98%;
+  min-width: 960px;
+}
+
+#preface-wrapper {
+  width: 100%;
+  min-width: 960px;
+}
+
+#main {
+  width: 100%;
+  min-width: 960px;
+}
+
+#postscript-wrapper {
+  width: 100%;
+  min-width: 960px;
+}
+
+#footer {
+  width: 100%;
+  min-width: 960px;
+}
+
+/* Preface
+-------------------------------------------------------------- */
+#preface-wrapper.prefaces-3 div.column {
+  margin: 0 24px 0 0;
+  width: 31.65%;
+}
+
+#preface-wrapper.prefaces-2 div.column {
+  margin: 0 24px 0 0;
+  width: 48.75%;
+}
+
+#preface-wrapper #preface-first {
+  margin-left: 0;
+}
+
+#preface-wrapper #preface-last {
+  margin-right: 0;
+}
+
+
+/* layout-main
+-------------------------------------------------------------- */
+body.layout-main #content-wrapper {
+  width: 100%;
+  min-width: 960px;
+}
+
+
+/* layout-first-main
+-------------------------------------------------------------- */
+body.layout-first-main #sidebar-first {
+  margin-right: -240px;
+  min-width: 240px;
+  width: 25%;
+}
+
+body.layout-first-main #content-wrapper {
+  margin-left: 254px;
+  min-width: 706px;
+  width: 73.35%;
+}
+
+
+/* layout-first-main-last
+-------------------------------------------------------------- */
+body.layout-first-main-last #sidebar-first {
+  margin-right: -240px;
+  min-width: 240px;
+  width: 25%;
+}
+
+body.layout-first-main-last #content-wrapper {
+  margin-left: 250px;
+  min-width: 700px;
+  width: 73.95%;
+}
+
+body.layout-first-main-last #content-wrapper #sidebar-last {
+  background-color: #F4F7E7;
+  margin: 0;
+  padding: 0 0 0 20px;    /* LTR */
+}
+
+
+/* layout-main-last
+-------------------------------------------------------------- */
+body.layout-main-last #content-wrapper {
+  min-width: 480px;
+  /*width: 45%;*/
+}
+
+body.layout-main-last #sidebar-last {
+  min-width: 460px;
+  /*width: 45%;*/
+}
+
+body.layout-main-last #content-wrapper,
+body.layout-main-last #sidebar-last {
+  width: 49%;
+}
+
+body.layout-main-last #sidebar-last h2.block-title {
+  width: auto;
+}
+
+
+/* Postscripts
+-------------------------------------------------------------- */
+#postscript-wrapper.postscripts-2 div.column {
+  margin: 0 10px 0 0;
+  width: 48.95%;
+}
+
+#postscript-wrapper.postscripts-3 div.column {
+  margin: 0 4px 0 0;
+  padding: 0;
+  width: 33%;
+}
+
+#postscript-wrapper #postscript-last {
+  margin-right: 0;
+}

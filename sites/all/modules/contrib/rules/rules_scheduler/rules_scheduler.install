@@ -1,0 +1,86 @@
+<?php
+// $Id: rules_scheduler.install,v 1.1.2.6 2009/07/13 13:34:27 fago Exp $
+
+
+/**
+ * @file
+ * Rules Scheduler - Installation file.
+ */
+
+/**
+ * Implementation of hook_install().
+ */
+function rules_scheduler_install() {
+  drupal_install_schema('rules_scheduler');
+}
+
+/**
+ * Implementation of hook_uninstall().
+ */
+function rules_scheduler_uninstall() {
+  drupal_uninstall_schema('rules_scheduler');
+}
+
+/**
+ * Implementation of hook_schema().
+ */
+function rules_scheduler_schema() {
+
+  $schema['rules_scheduler'] = array(
+    'description' => t('Stores a schedule for rule sets.'),
+    'fields' => array(
+      'tid' => array(
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'description' => t("The scheduled task's id."),
+      ),
+      'set_name' => array(
+        'type' => 'varchar',
+        'length' => '255',
+        'default' => '',
+        'not null' => TRUE,
+        'description' => t("The scheduled rule set's name."),
+      ),
+      'date' => array(
+        'type' => 'datetime',
+        'not null' => TRUE,
+        'description' => t('When the task is to be scheduled.'),
+      ),
+      'arguments' => array(
+        'type' => 'text',
+        'not null' => FALSE,
+        'serialize' => TRUE,
+        'description' => t('The whole, serialized item configuration.'),
+      ),
+      'identifier' => array(
+        'type' => 'varchar',
+        'length' => '255',
+        'default' => '',
+        'not null' => FALSE,
+        'description' => t('The user defined string identifying this task.'),
+      ),
+    ),
+    'primary key' => array('tid'),
+    'indexes' => array('date' => array('date')),
+  );
+  return $schema;
+}
+
+/**
+ * Implementation of hook_update_N(). Adds an identifier field to the table.
+ */
+function rules_scheduler_update_6100() {
+  $spec = array(
+    'type' => 'varchar',
+    'length' => '255',
+    'default' => '',
+    'not null' => FALSE,
+    'description' => t('The user defined string identifying this task.'),
+  );
+  $ret = array();
+  db_add_field($ret, 'rules_scheduler', 'identifier', $spec);
+  drupal_set_message(t('Notice: concrete scheduling dates have to be specified in GMT now, so be aware to add out your local timezone!'));
+  return $ret;
+}
+

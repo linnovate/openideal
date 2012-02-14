@@ -1,0 +1,66 @@
+A gallery's cover image is a single image from that gallery, selected according to a particular criterion. For example, the cover for each gallery might be the most recent image in that gallery.
+
+If a gallery has no descendant galleries, this is a simple procedure. However, what to do when the gallery itself contains galleries is a more complicated matter.
+
+There are three ways to handle descendant galleries when getting a cover image for a gallery.
+
+<dl>
+  <dt>Plain</dt>
+  <dd>Do not go into any descendant galleries: only consider images in the gallery itself. If the gallery itself has no images, then there will be no cover node.
+  </dd>
+
+  <dt>Flat</dt>
+  <dd>Consider the gallery itself and its descendants to a given depth as one single pool of images from which to select the cover.
+  </dd>
+
+  <dt>Recursion</dt>
+  <dd>Consider first the gallery itself, and if it is empty, consider each child gallery one at a time (in weight order). The recusion depth sets how far to go into a child gallery's own children before giving up and moving to the next child gallery. Be warned that this is potentially a time-consuming procedure!</dd>
+
+</dl>
+
+These methods are illustrated in this example.
+
+Consider the following tree of galleries: the numbers are the term IDs that make the galleries and the letters are the titles of the image nodes.
+
+<pre>
+  - 1: empty
+    - 2: empty
+      - 6: nodes G, H
+    - 3: nodes M, N
+    - 4: nodes D, E, F
+    - 5: nodes X, Y, Z
+      - 7: nodes A, B
+</pre>
+
+Suppose our sort criterion for the cover is the image node title in alphabetical order. What cover image will gallery 1 have?
+
+<dl>
+  <dt>Plain</dt>
+  <dd>Term 1 has no nodes: there is no cover image.
+  </dd>
+
+  <dt>Flat depth 0; Recursion depth 0</dt>
+  <dd>Depth 0 means we don't go into child galleries: so this is the same as plain and there is no cover image.
+  </dd>
+
+  <dt>Flat depth 1</dt>
+  <dd>We consider all nodes in the galleries 1, 2, 3, 4, 5.
+  The first node by name is D.
+  </dd>
+
+  <dt>Flat depth 2</dt>
+  <dd>We consider all nodes in the galleries 1, 2, 3, 4, 5, 6, 7.
+  The first node by name is A.
+  </dd>
+
+  <dt>Recursion depth 1</dt>
+  <dd>We find the gallery itself empty, so look in gallery 2.
+  That's empty too, so we look in gallery 3.
+  Here we find nodes, and M is the first by name: so the cover is M.</dd>
+
+  <dt>Recursion depth 2</dt>
+  <dd>We find the gallery itself empty, so look in gallery 2.
+  That's empty too, and so we go one level deeper to gallery 6.
+  Here we find nodes, and G is the first by name: so the cover is G.
+  Node A is a better fit at this depth, but we consider child galleries one by one, by weight, and we found something in gallery 6.</dd>
+</dl>

@@ -1,0 +1,318 @@
+# $Id: fr.po,v 1.1.4.2 2010/08/27 18:00:53 katbailey Exp $
+#
+# French translation of Quicktabs module
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: quicktabs (6.x-2.0-rc3)\n"
+"PO-Revision-Date: 2009-11-12 15:42+0100\n"
+"Last-Translator: Florent VRECORD-MITEL <florent.vrecord-mitel@capgemini.com>\n"
+"Language-Team: Capgemini Drupal Factory <drupal-factory@capgemini.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n>1);\n"
+
+#: quicktabs.module:10
+msgid ""
+"<p>The Quick Tabs module allows you to create blocks of tabbed content. Clicking on the tabs makes the corresponding content display instantly (it uses jQuery). The content for each tabbed section can be either a node, view, block or another quicktab. It is an ideal way to do something like the Most Popular / Most Emailed stories tabs you see on many news websites.</p>\n"
+"<p>Once created, the quicktab block show up in your block listing, ready to be configured and enabled like other blocks. Multiple quicktabs can be placed on a single page.</p>\n"
+"<p>Visit the <a href=\"@configuration\">configuration page</a> to see the available styles and select the default style for your quicktabs.</p>"
+msgstr ""
+"<p>Le module QuickTabs vous permet de créer des blocs de contenus tabulés. Le fait de cliquer sur les onglets affiche le contenu correspondant de manière instantanée (ce module utilise jQuery). Le contenu de onglet peut être soit un noeud, une vue, un bloc ou bien un autre quicktab. C'est la manière idéale de réaliser des onglets du style \" Articles les plus consultés / commentés \" que vous pouvez apercevoir sur les sites d'informations.<p>\n"
+"<p>Une fois crée, le bloc quicktab apparaît dans la liste des blocs, prêt à être configuré et activé comme n'importe quel autre bloc. Plusieurs quicktabs peuvent être placés dans une page simple.</p>\n"
+"<p>Visitez la <a href=\"@configuration\">page de configuration</a> pour voir les différents styles disponibles et choisir le style par défaut de vos quicktabs.</p>"
+
+#: quicktabs.module:14
+msgid "Here you can create a new quicktab block. Once you have created this block you can configure and enable it on the <a href=\"@overview\">blocks</a> page."
+msgstr "Créez ici un nouveau bloc QuickTabs. Une fois le bloc crée, vous pouvez le configurer et l'activer sur la page <a href=\"@overview\">blocs</a>."
+
+#: quicktabs.module:463;500
+msgid "You are not authorized to access this content."
+msgstr "Vous n'êtes pas autorisés à accéder à ce contenu."
+
+#: quicktabs.module:469
+msgid "Views module not enabled, cannot display tab content."
+msgstr "Le module Views n'est pas activé, impossible d'afficher le contenu."
+
+#: quicktabs.module:132
+msgid "administer quicktabs"
+msgstr "Gérer quicktabs"
+
+#: quicktabs.module:45;91
+msgid "Quicktabs"
+msgstr "QuickTabs"
+
+#: quicktabs.module:46
+msgid "Create blocks of tabbed content."
+msgstr "Créer des blocs de contenu tabulés."
+
+#: quicktabs.module:54
+msgid "List"
+msgstr "Liste"
+
+#: quicktabs.module:58
+msgid "New QT block"
+msgstr "Nouveau bloc QT"
+
+#: quicktabs.module:66
+msgid "Edit QT block"
+msgstr "Editer le bloc QT"
+
+#: quicktabs.module:74
+msgid "Delete QT block"
+msgstr "Supprimer le bloc QT"
+
+#: quicktabs.module:82
+msgid "Clone QT block"
+msgstr "Cloner le bloc QT"
+
+#: quicktabs.module:92
+#: includes/admin.inc:492
+msgid "Select the default style for quicktabs."
+msgstr "Sélectionnez le style par défaut pour vos QuickTabs."
+
+#: quicktabs.install:87
+msgid "Whether this is an ajax views block"
+msgstr "Si c'est un bloc de vues ajax"
+
+#: quicktabs.info:0
+msgid "Quick Tabs"
+msgstr "Quick Tabs"
+
+#: quicktabs.info:0
+msgid "Create blocks of tabbed views, blocks and nodes."
+msgstr "Crée des blocs tabulés de vues, blocs, et noeuds."
+
+#: includes/admin.inc:10;251
+msgid "Quicktab"
+msgstr "QuickTab"
+
+#: includes/admin.inc:11;296
+msgid "Operations"
+msgstr "Opérations"
+
+#: includes/admin.inc:27
+msgid "Click on the \"New QT block\" tab to get started."
+msgstr "Cliquez sur l'onglet  \"Nouveau bloc QT\" pour démarrer."
+
+#: includes/admin.inc:81
+msgid "Block title"
+msgstr "titre du bloc"
+
+#: includes/admin.inc:83
+msgid "This will appear as the name of this block in administer >> site building >> blocks."
+msgstr "Ceci apparaîtra comme le nom de ce bloc dans administrer >> construction du site >> blocs."
+
+#: includes/admin.inc:96
+msgid "Style"
+msgstr "Style"
+
+#: includes/admin.inc:97;490
+msgid "No style"
+msgstr "Pas de style"
+
+#: includes/admin.inc:97
+msgid "Default style"
+msgstr "Style par défaut"
+
+#: includes/admin.inc:99
+msgid "Choose the quicktab style."
+msgstr "Choisissez le style pour votre quicktab"
+
+#: includes/admin.inc:105
+msgid "Ajax"
+msgstr "Ajax"
+
+#: includes/admin.inc:107
+msgid "Yes"
+msgstr "Oui"
+
+#: includes/admin.inc:107
+msgid "Tab content will be loaded at tab click."
+msgstr "Le contenu de l'onglet sera chargé lors du clic sur l'onglet."
+
+#: includes/admin.inc:108
+msgid "No"
+msgstr "Non"
+
+#: includes/admin.inc:108
+msgid "All tabs will be loaded at page load."
+msgstr "Tous les onglets seront chargés au chargement de la page."
+
+#: includes/admin.inc:111
+msgid "Choose how the content of tabs should be loaded."
+msgstr "Choisissez comment le contenu des onglets doit être chargé."
+
+#: includes/admin.inc:133
+msgid "Add tab"
+msgstr "Ajouter un onglet"
+
+#: includes/admin.inc:134
+msgid "More tabs"
+msgstr "Plus d'onglets"
+
+#: includes/admin.inc:135
+msgid "Click here to add more tabs."
+msgstr "Cliquez ici pour ajouter plus d'onglets."
+
+#: includes/admin.inc:149;497
+msgid "Save"
+msgstr "Sauvegarder"
+
+#: includes/admin.inc:174
+msgid "Block"
+msgstr "Bloc"
+
+#: includes/admin.inc:175;232
+msgid "Node"
+msgstr "Noeud"
+
+#: includes/admin.inc:176
+msgid "QTab"
+msgstr "QTab"
+
+#: includes/admin.inc:182
+msgid "View!translate_as_list_of_content"
+msgstr ""
+
+#: includes/admin.inc:189
+msgid "Select a view"
+msgstr "Sélectionnez une vue"
+
+#: includes/admin.inc:209
+msgid "Additional arguments to send to the view as if they were part of the URL in the form of arg1/arg2/arg3. You may use %0, %1, ..., %N to grab arguments from the URL."
+msgstr "Arguments additionnels à envoyer à la vue comme, si cela faisait partie de l'URL, sous la forme arg1/arg2/arg3. Vous devriez utiliser %0, %1,  ..., %N pour récupérer les arguments depuis l'URL."
+
+#: includes/admin.inc:222
+msgid "Select a block"
+msgstr "Sélectionnez un bloc"
+
+#: includes/admin.inc:226
+msgid "Hide the title of this block"
+msgstr "Masquer le titre du bloc"
+
+#: includes/admin.inc:233
+msgid "The node ID of the node."
+msgstr "Identifiant du nœud."
+
+#: includes/admin.inc:240
+msgid "Teaser view"
+msgstr "Vue d'introduction "
+
+#: includes/admin.inc:245
+msgid "Hide the title of this node"
+msgstr "Masquer le titre du noeud"
+
+#: includes/admin.inc:252
+msgid "The quicktab ID."
+msgstr "L'identifiant (ID) QuickTab."
+
+#: includes/admin.inc:252
+msgid "Different styles may not work when putting an ajax quicktab inside ajax quicktab."
+msgstr "Les styles différents ne peuvent pas foncitonner lorsqu'on insère un quicktab ajax à l'intérieur d'un quicktab ajax."
+
+#: includes/admin.inc:267;462
+msgid "Delete"
+msgstr "Supprimer"
+
+#: includes/admin.inc:269
+msgid "Click here to delete this tab."
+msgstr "Cliquez ici pour supprimer cet onglet"
+
+#: includes/admin.inc:292
+msgid "Tab title"
+msgstr "Titre de l'onglet"
+
+#: includes/admin.inc:293
+msgid "Tab weight"
+msgstr "Poids de l'onglet"
+
+#: includes/admin.inc:294
+msgid "Tab type"
+msgstr "Type d'onglet"
+
+#: includes/admin.inc:295
+msgid "Tab content"
+msgstr "Contenu de l'onglet"
+
+#: includes/admin.inc:410
+msgid "Title is required for the quicktab block."
+msgstr "Le titre est obligatoire pour le bloc quicktab."
+
+#: includes/admin.inc:414
+msgid "At least one tab should be created."
+msgstr "Un onglet doit au moins être crée."
+
+#: includes/admin.inc:418
+msgid "Title is required for each tab."
+msgstr "Le titre est obligatoire pour chaque onglet."
+
+#: includes/admin.inc:421
+msgid "You cannot put a quicktab inside itself."
+msgstr "Vous ne pouvez pas mettre un objet quicktab à l'intérieru de lui-même."
+
+#: includes/admin.inc:443
+msgid "The quicktab block has been updated."
+msgstr "Le bloc QuickTabs a été mis à jour."
+
+#: includes/admin.inc:449
+msgid "The quicktab block has been created."
+msgstr "Le bloc QuickTab a été crée."
+
+#: includes/admin.inc:462
+msgid "Are you sure you want to delete the quicktab block %name?"
+msgstr "Êtes-vous sûr de vouloir supprimer le bloc QuickTabs %name ?"
+
+#: includes/admin.inc:462
+msgid "Cancel"
+msgstr "Annuler"
+
+#: includes/admin.inc:470
+msgid "The quicktab block %name has been removed."
+msgstr "Le bloc QuickTabs %name a été supprimé."
+
+#: includes/admin.inc:489
+msgid "Quicktab styles"
+msgstr "Styles de quicktab"
+
+#: includes/admin.inc:507
+msgid "The default quicktab style has been saved."
+msgstr "Le style par défaut de QuickTabs a été sauvegardé."
+
+#: includes/admin.inc:518
+msgid "One"
+msgstr "Un"
+
+#: includes/admin.inc:518
+msgid "First tab"
+msgstr "1er onglet"
+
+#: includes/admin.inc:519
+msgid "Two"
+msgstr "Deux"
+
+#: includes/admin.inc:519
+msgid "Second tab"
+msgstr "2ème onglet"
+
+#: includes/admin.inc:520
+msgid "Three"
+msgstr "Trois"
+
+#: includes/admin.inc:520
+msgid "Third tab"
+msgstr "3ème onglet"
+
+#: includes/admin.inc:529
+msgid "%style preview"
+msgstr "Apercu %style"
+
+#: js/quicktabs.js:0
+msgid "Loading"
+msgstr "Chargement"
+
+#: js/quicktabs.js:0
+msgid "An error occurred at @path."
+msgstr "Un erreur est apparue à @path."
+

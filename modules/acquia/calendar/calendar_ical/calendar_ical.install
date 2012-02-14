@@ -1,0 +1,59 @@
+<?php
+// $Id: calendar_ical.install,v 1.1.2.5 2008/10/15 13:34:00 karens Exp $
+/**
+ * Implementation of hook_install().
+ */
+function calendar_ical_install() {
+  db_query("UPDATE {system} SET weight = 1 WHERE name = 'calendar_ical'");
+}
+
+/**
+ * Make sure handlers for disabled Calendar iCal module don't get saved in the view.
+ */
+function calendar_ical_uninstall() {
+  $displays = array(
+    'ical', 
+    );
+  db_query("DELETE FROM {views_display} WHERE display_plugin IN ('". implode("','", $displays) ."')");
+  db_query("DELETE FROM {cache_views}");
+}
+
+function calendar_ical_enable() {
+  db_query("DELETE FROM {cache_views}");
+}
+
+/**
+ * Make sure handlers for disabled Calendar iCal module don't get saved in the view.
+ */
+function calendar_ical_disable() {
+  db_query("DELETE FROM {cache_views}");
+}
+
+function calendar_ical_update_1() {
+  $ret = array();
+  $ret[] = update_sql("UPDATE {system} SET weight = 1 WHERE name = 'calendar_ical'");
+  if (db_table_exists('cache_calendar_ical')) {
+    $ret[] = update_sql("INSERT INTO {cache} (cid, data, expire, created, headers) SELECT cid, data, expire, created, headers FROM {cache_calendar_ical}");
+    $ret[] = update_sql('DROP TABLE {cache_calendar_ical}');
+  }
+  return $ret;
+}
+
+function calendar_ical_update_6000() {
+  $ret = array();
+  $result = db_query("SELECT * FROM {views_display} d LEFT JOIN {views_view} v ON d.vid = v.vid");
+  drupal_load('module', 'views');
+  while ($row = db_fetch_array($result)) {
+    if ($row['display_plugin'] == 'ical') {
+      $options = unserialize($row['display_options']);
+      $options['displays'] = array('calendar_1' => 'calendar_1', 'default' => 0, 'calendar_block_1' => 'calendar_block_1');
+      $row['display_plugin'] = 'calendar_period';
+      $row['display_options'] = serialize($options);
+      db_query("UPDATE {views_display} SET id='%s', display_plugin='%s', display_options='%s' WHERE id='%s'", 'calendar_ical_1', 'calendar_ical', $row['display_options'], $row['id']);
+      db_query("DELETE FROM {views_object_cache} WHERE name = '%s'", $row['name']);
+    }
+  }
+  $ret[] = array('success' => TRUE, 'query' => 'Updated calendar ical displays to use new handlers and ids.');
+  views_invalidate_cache();
+  return $ret;
+}

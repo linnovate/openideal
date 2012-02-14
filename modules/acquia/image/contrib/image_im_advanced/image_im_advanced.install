@@ -1,0 +1,41 @@
+<?php
+// $Id: image_im_advanced.install,v 1.4.2.1 2010/08/03 17:43:00 sun Exp $
+
+/**
+ * Implementation of hook_requirements().
+ */
+function image_im_advanced_requirements($phase) {
+  $requirements = array();
+  if ($phase == 'runtime') {
+    // If the image.imagemagick.inc file is not in the includes directory,
+    // indicate an error.
+    $toolkits = image_get_available_toolkits();
+    $requirements['imagemagick'] = array('title' => t('ImageMagick advanced options'));
+    if (!isset($toolkits['imagemagick'])) {
+      $requirements['imagemagick']['value'] = t('ImageMagick image toolkit is not properly installed');
+      $requirements['imagemagick']['description'] = t('The %toolkit_inc file must be copied to %inc_dir in order for the ImageMagick image toolkit to function.', array('%toolkit_inc' => drupal_get_path('module', 'image') . '/image.imagemagick.inc', '%inc_dir' => 'includes'));
+      $requirements['imagemagick']['severity'] = REQUIREMENT_ERROR;
+      return $requirements;
+    }
+    // If the image_im_advanced module is installed but the ImageMagick image
+    // toolkit is not selected, indicate an error.
+    if (image_get_toolkit() != 'imagemagick') {
+      $requirements['imagemagick']['value'] = t('ImageMagic image toolkit is not selected.');
+      $requirements['imagemagick']['description'] = t('The ImageMagic image toolkit is not selected. The advanced options only apply to the ImageMagick toolkit. Select the image toolkit <a href="@toolkit">here</a>.', array('@toolkit' => url('admin/settings/image-toolkit')));
+      $requirements['imagemagick']['severity'] = REQUIREMENT_WARNING;
+      return $requirements;
+    }
+    // If the imagemagick convert utility does not exist, indicate an error.
+    $convert_path = variable_get('image_imagemagick_convert', '/usr/bin/convert');
+    if (!file_exists($convert_path)) {
+      $requirements['imagemagick']['value'] = t('ImageMagick convert utility not found.');
+      $requirements['imagemagick']['description'] = t('The ImageMagick image convert utility (@convert) does not exist. If you have ImageMagick installed, click <a href="@toolkit">here</a> to provide the path to the convert utility.', array('@convert' => $convert_path, '@toolkit' => url('admin/settings/image-toolkit')));
+      $requirements['imagemagick']['severity'] = REQUIREMENT_ERROR;
+      return $requirements;
+    }
+    $requirements['imagemagick']['value'] = t('ImageMagick image toolkit is selected.');
+    $requirements['imagemagick']['severity'] = REQUIREMENT_OK;
+  }
+  return $requirements;
+}
+

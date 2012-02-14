@@ -1,0 +1,233 @@
+# $Id: rules_scheduler.pot,v 1.1.2.5 2009/08/28 20:03:00 fago Exp $
+#
+# LANGUAGE translation of Drupal (general)
+# Copyright YEAR NAME <EMAIL@ADDRESS>
+# Generated from files:
+#  rules_scheduler.admin.inc,v 1.1.2.1 2009/07/13 13:34:27 fago
+#  rules_scheduler.views.inc,v 1.1.2.1 2009/07/13 13:34:27 fago
+#  rules_scheduler.rules.inc,v 1.1.2.5 2009/07/13 13:34:27 fago
+#  rules_scheduler.rules_forms.inc,v 1.1.2.3 2009/08/25 14:52:52 fago
+#  rules_scheduler.module,v 1.1.2.5 2009/07/13 13:34:27 fago
+#  rules_scheduler.install,v 1.1.2.6 2009/07/13 13:34:27 fago
+#  rules_scheduler.info,v 1.1.2.1 2008/08/14 11:29:48 fago
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"POT-Creation-Date: 2009-08-28 12:52+0200\n"
+"PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
+"Last-Translator: NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+
+#: rules_scheduler.admin.inc:23
+msgid "To display scheduled tasks you have to install the <a href=\"http://drupal.org/project/views\">Views</a> module."
+msgstr ""
+
+#: rules_scheduler.admin.inc:33
+msgid "Manual scheduling of rule sets without arguments"
+msgstr ""
+
+#: rules_scheduler.admin.inc:39
+msgid "There are currently no rule sets without arguments available."
+msgstr ""
+
+#: rules_scheduler.admin.inc:43;81 includes/rules_scheduler.views.inc:56
+msgid "Rule set name"
+msgstr ""
+
+#: rules_scheduler.admin.inc:49 rules_scheduler.rules.inc:32;46
+msgid "Identifier"
+msgstr ""
+
+#: rules_scheduler.admin.inc:51
+msgid "User provided string to identify the task. Existing tasks for this rule set with the same identifier will be replaced."
+msgstr ""
+
+#: rules_scheduler.admin.inc:57
+msgid "Schedule"
+msgstr ""
+
+#: rules_scheduler.admin.inc:72
+msgid "Delete tasks by rule set name"
+msgstr ""
+
+#: rules_scheduler.admin.inc:77
+msgid "There are currently no scheduled tasks available to delete."
+msgstr ""
+
+#: rules_scheduler.admin.inc:88;151
+msgid "Delete"
+msgstr ""
+
+#: rules_scheduler.admin.inc:114
+msgid "The rule set %name has been scheduled on %date (GMT)."
+msgstr ""
+
+#: rules_scheduler.admin.inc:123
+msgid "All tasks associated with %ruleset have been deleted."
+msgstr ""
+
+#: rules_scheduler.admin.inc:136
+msgid "Are you sure you want to delete task %tid?"
+msgstr ""
+
+#: rules_scheduler.admin.inc:138
+msgid "This task refers to the custom identifier %id and rule set %ruleset, it will be executed on %date. The delete action cannot be undone."
+msgstr ""
+
+#: rules_scheduler.admin.inc:145
+msgid "This task refers to the rule set %ruleset and will be executed on %date. The delete action cannot be undone."
+msgstr ""
+
+#: rules_scheduler.admin.inc:151
+msgid "Cancel"
+msgstr ""
+
+#: rules_scheduler.admin.inc:159
+msgid "Task %label has been deleted."
+msgstr ""
+
+#: rules_scheduler.rules.inc:23
+msgid "Schedule "@set""
+msgstr ""
+
+#: rules_scheduler.rules.inc:27
+msgid "Scheduled evaluation date"
+msgstr ""
+
+#: rules_scheduler.rules.inc:33
+msgid "User provided string to identify the task. Existing tasks for this rule set with the same identifier will be replaced"
+msgstr ""
+
+#: rules_scheduler.rules.inc:40
+msgid "Delete scheduled tasks"
+msgstr ""
+
+#: rules_scheduler.rules.inc:47
+msgid "All tasks that are annotated with this user provided identifier will be deleted."
+msgstr ""
+
+#: rules_scheduler.rules.inc:51
+msgid "Rule set"
+msgstr ""
+
+#: rules_scheduler.rules.inc:52
+msgid "All tasks that execute this rule set will be deleted."
+msgstr ""
+
+#: rules_scheduler.rules.inc:82
+msgid "The evaluation of the rule set is going to be scheduled by cron. So make sure you have configured cron correctly by checking your site's !status."
+msgstr ""
+
+#: rules_scheduler.rules.inc:82
+msgid "Also note that the scheduling time accuracy depends on your configured cron interval."
+msgstr ""
+
+#: rules_scheduler.rules.inc:108
+msgid "This action allows you to cancel scheduled tasks that are waiting for future execution."
+msgstr ""
+
+#: rules_scheduler.rules.inc:108
+msgid "They can be addressed by an identifier or by the rule set name, if both are specified only tasks fulfilling both requirements will be deleted."
+msgstr ""
+
+#: rules_scheduler.rules_forms.inc:30
+msgid "You have to specify at least one field."
+msgstr ""
+
+#: rules_scheduler.module:112
+msgid "Packing arguments for scheduling the rule set %set failed."
+msgstr ""
+
+#: rules_scheduler.module:41
+msgid "Scheduling"
+msgstr ""
+
+#: rules_scheduler.module:48
+msgid "Delete a scheduled task"
+msgstr ""
+
+#: rules_scheduler.module:0
+msgid "rules_scheduler"
+msgstr ""
+
+#: rules_scheduler.install:30
+msgid "Stores a schedule for rule sets."
+msgstr ""
+
+#: rules_scheduler.install:36
+msgid "The scheduled task's id."
+msgstr ""
+
+#: rules_scheduler.install:43
+msgid "The scheduled rule set's name."
+msgstr ""
+
+#: rules_scheduler.install:48
+msgid "When the task is to be scheduled."
+msgstr ""
+
+#: rules_scheduler.install:54
+msgid "The whole, serialized item configuration."
+msgstr ""
+
+#: rules_scheduler.install:61;79
+msgid "The user defined string identifying this task."
+msgstr ""
+
+#: rules_scheduler.install:83
+msgid "Notice: concrete scheduling dates have to be specified in GMT now, so be aware to add out your local timezone!"
+msgstr ""
+
+#: rules_scheduler.info:0
+msgid "Rules Scheduler"
+msgstr ""
+
+#: rules_scheduler.info:0
+msgid "Schedule the execution of rule sets."
+msgstr ""
+
+#: rules_scheduler.info:0
+msgid "Rules"
+msgstr ""
+
+#: includes/rules_scheduler.views.inc:37
+msgid "Scheduled rule sets"
+msgstr ""
+
+#: includes/rules_scheduler.views.inc:38
+msgid "Scheduled rules that are executed based on time and cron"
+msgstr ""
+
+#: includes/rules_scheduler.views.inc:43
+msgid "Tid"
+msgstr ""
+
+#: includes/rules_scheduler.views.inc:44
+msgid "The internal ID of the scheduled rule set"
+msgstr ""
+
+#: includes/rules_scheduler.views.inc:57
+msgid "The name of the rule set"
+msgstr ""
+
+#: includes/rules_scheduler.views.inc:69
+msgid "Scheduled date"
+msgstr ""
+
+#: includes/rules_scheduler.views.inc:70
+msgid "Scheduled date and time stamp"
+msgstr ""
+
+#: includes/rules_scheduler.views.inc:83
+msgid "User provided identifier"
+msgstr ""
+
+#: includes/rules_scheduler.views.inc:84
+msgid "ID to recognize this specific scheduled task"
+msgstr ""

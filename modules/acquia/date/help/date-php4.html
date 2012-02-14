@@ -1,0 +1,41 @@
+<p><strong>Note:</strong> The Date API is designed to use the new PHP date and timezone functions that are available in PHP 5.2 and above. If you're using an earlier version of PHP, you'll need to enable the Date PHP4 module which provides some wrapper code to emulate those functions. The wrapper code is slower and less efficient than the native date functions, so if at all possible, you will want to run on a server that uses PHP 5.2 or higher for the best performance. Some distros, like Red Hat, use PHP 5.1 instead. See <a href="http://bluhaloit.wordpress.com/2008/03/13/installing-php-52x-on-redhat-es5-centos-5-etc/">Installing PHP 5.2 on RedHat</a> for ideas on how to update that.</p>
+
+<p>PHP 4 substitutions for the PHP 5 date functions are supplied if the Date PHP4 module is enabled. Use the PHP 5 
+functions in your code as they would normally be used and the PHP 4 
+alternatives will be automatically be substituted in when needed. 
+</p>
+<p>
+You cannot do everything with these functions that can be done in PHP 5, but 
+you can create dates, find timezone offsets, and format the results. 
+Timezone handling uses native PHP 5 functions when available and degrades 
+automatically for PHP 4 to use substitutions like those 
+provided in previous versions of the Date and Event modules.
+</p>
+<p>
+Read the doxygen documentation in this module for more information 
+about using the functions in ways that will work in PHP 4.
+</p>
+<p>
+The following functions are emulated in PHP4:
+</p>
+<ul style="color: rgb(0, 0, 187);">
+<li>
+date_create()
+</li><li>
+date_date_set()
+</li><li>
+date_format()
+</li><li>
+date_offset_get()
+</li><li>
+date_timezone_set()
+</li><li>
+timezone_abbreviations_list()
+</li><li>
+timezone_identifiers_list()
+</li><li>
+timezone_offset_get()
+</li><li>
+timezone_open()
+</li>
+</ul>

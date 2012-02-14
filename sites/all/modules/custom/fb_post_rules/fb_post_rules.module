@@ -1,0 +1,144 @@
+<?php
+// $Id: fb_post_rules.module
+
+/**
+ * @file
+ * The fb_post_rules module allows users to post their nodes to their Facebook walls.
+ */
+
+/**
+ * Implements hook_perm().
+ */
+function fb_post_rules_perm() {
+  return array('post nodes to facebook');
+}
+
+
+/**
+* Implementation of hook_rules_action_info().
+*/
+function fb_post_rules_rules_action_info() {
+  return array(
+    'post_node_to_facebook' => array(
+      'label' => t('Posting node to Facebook wall'),
+      'arguments' => array(
+        'node' => array('type' => 'node', 'label' => t('Posted content')),
+      ),
+      'module' => 'Post to Facebook wall',
+      'eval input' => array('fb_post_user_message', 'fb_post_read_more_text', 'fb_post_media', 'post_to_app_page'),
+    )
+  );
+}
+
+
+/**
+ * Action form.
+ */
+function post_node_to_facebook_form($settings = array(), &$form) {
+  $form['settings']['fb_post_user_message'] = array(
+    '#type' => 'textarea',
+    '#title' => t('User message displayed on Facebook post'),
+    '#default_value' => $settings['fb_post_user_message'] ? $settings['fb_post_user_message'] : t('Check out my latest post on !site...',
+       array('!site' => variable_get('site_name', t('my Drupal for Facebook powered site')))),
+    '#description' => t('User message displayed on Facebook post.'),
+  );
+  $form['settings']['fb_post_read_more_text'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Read more link text'),
+    '#default_value' => $settings['fb_post_read_more_text'] ? $settings['fb_post_read_more_text'] : t('Read More...'),
+    '#description' => t('Read more link, displayed at the post\s bottom row.'),
+  );
+  $form['settings']['fb_post_media'] = array(
+    '#type' => 'textfield',
+    '#title' => t('URL to any image'),
+    '#default_value' => $settings['fb_post_media'],
+  );
+  $form['settings']['post_to_app_page'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Post node on apllication page as well'),
+    '#default_value' => $settings['post_to_app_page'],
+  );
+}
+
+
+/**
+ * Action callback.
+ */
+function post_node_to_facebook($node, $settings) {
+  try {
+    $fb = new Facebook(array(
+      'appId'  => variable_get('fbconnect_appid', NULL),
+      'secret' => variable_get('fbconnect_skey', NULL),
+      'cookie' => true,
+    ));
+  }
+  catch (Exception $e) {
+    drupal_set_message(t('Post failed! Please make sure your Facebook !link_app_id and !link_app_secret values are set correct.', array(
+      '!link_app_id' => l(t('Application ID'), 'admin/settings/fbconnect/api-keys', array('fragment' => 'edit-fbconnect-appid-wrapper')),
+      '!link_app_secret' => l(t('Application Secret'), 'admin/settings/fbconnect/api-keys', array('fragment' => 'edit-fbconnect-skey-wrapper')),
+    )));
+    return;
+  }
+  
+  $attachment = array(
+    'name' => $node->title,
+    'href' => url('node/' . $node->nid, array('absolute' => TRUE)),
+    'caption' => date('d-m-Y', $node->created),
+		'description' => check_plain(strip_tags($node->teaser)),    
+  );
+  
+  if ($settings['fb_post_media']) {
+    $attachment['media'] = array(array(
+      'type' => 'image',
+      "src"=> $settings['fb_post_media'],
+      "href"=> url('node/'.$node->nid, array('absolute' => TRUE)),
+    ));
+  }
+
+  $user_message = $settings['fb_post_user_message'];
+  $actions = array();
+  $actions[] = array(
+    'text' => $settings['fb_post_read_more_text'],
+    'href' => url('node/'.$node->nid, array('absolute' => TRUE)),
+  );
+  
+  try {
+    $fb->api(array(
+      'method'       => 'stream.publish',
+      'message'      => $user_message,
+      'attachment' => $attachment,
+      'action_links' => json_encode($actions),
+    ));
+    drupal_set_message(t('Post published successfuly.'));
+  } 
+  catch (Exception $e) {
+    drupal_set_message(t('Post failed.') . ' ' . $e->getMessage());
+  }
+}
+
+
+/**
+* Implementation of hook_theme_registry_alter()
+* */
+function fb_post_rules_theme_registry_alter(&$theme_registry) {
+ $path = drupal_get_path('module', 'fb_post_rules');
+ 
+ $theme_registry['fbconnect_login_button'] = array(
+   'function' => 'custom_fbconnect_login_button',
+ );
+ 
+}
+
+
+/**
+* hook_theme_registry_alter() callback
+* */
+function custom_fbconnect_login_button($text, $attr) {
+ if (isset($attr['perms'])) {
+   $attr['perms'] .= ',publish_stream';
+ }
+ else {
+   $attr['perms'] = 'publish_stream';
+ }
+ return '<fb:login-button ' . drupal_attributes($attr) . '>' . $text . '</fb:login-button>';  
+}

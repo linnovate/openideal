@@ -1,0 +1,62 @@
+<?php
+// $Id: image_import.module,v 1.21.2.1 2010/08/03 17:43:00 sun Exp $
+
+/**
+ * Implementation of hook_help().
+ */
+function image_import_help($path, $arg) {
+  switch ($path) {
+    case 'admin/content/image_import':
+      $output = '<p>';
+      $output .= t("Import multiple image files and save them as image nodes. The files will be moved from their location into the image module's files directory. Searching for image files in %dirpath.", array(
+        '%dirpath' => realpath(variable_get('image_import_path', '')),
+      ));
+      $output .= '</p>';
+      return $output;
+  }
+}
+
+/**
+ * Implementation of hook_perm().
+ */
+function image_import_perm() {
+  return array('import images');
+}
+
+/**
+ * Implementation of hook_menu().
+ */
+function image_import_menu() {
+  $items['admin/content/image_import'] = array(
+    'title' => 'Image import',
+    'description' => 'Import image from the filesystem.',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('image_import_form'),
+    'file' => 'image_import.pages.inc',
+    'access arguments' => array('import images'),
+    'type' => MENU_NORMAL_ITEM,
+  );
+  $items['admin/settings/image/image_import'] = array(
+    'title' => 'Image import',
+    'description' => 'Change settings for the Image Import module.',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('image_import_admin_settings'),
+    'file' => 'image_import.admin.inc',
+    'access arguments' => array('administer site configuration'),
+    'type' => MENU_LOCAL_TASK,
+  );
+  return $items;
+}
+
+/**
+ * Implementation of hook_theme().
+ */
+function image_import_theme() {
+  return array(
+    'image_import_form' => array(
+      'arguments' => array('form'),
+      'file' => 'image_import.admin.inc',
+    ),
+  );
+}
+

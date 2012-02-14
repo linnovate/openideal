@@ -1,0 +1,272 @@
+# $Id: link.pot,v 1.1.4.1 2009/10/07 22:10:41 hass Exp $
+#
+# LANGUAGE translation of Drupal (general)
+# Copyright YEAR NAME <EMAIL@ADDRESS>
+# Generated from files:
+#  link.module,v 1.24.4.5 2009/09/25 02:31:37 herc
+#  link.info,v 1.2 2008/03/31 06:50:42 quicksketch
+#  link_views_handler_argument_target.inc,v 1.1.4.2 2009/07/04 19:07:42 jcfiala
+#  link.views.inc,v 1.1.4.2 2009/07/04 19:07:42 jcfiala
+#  link_views_handler_filter_protocol.inc,v 1.1.4.2 2009/07/04 19:07:42 jcfiala
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"POT-Creation-Date: 2009-10-08 00:09+0200\n"
+"PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
+"Last-Translator: NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+
+#: link.module:26;591 link.info:0
+msgid "Link"
+msgstr ""
+
+#: link.module:27
+msgid "Store a title, href, and attributes in the database to assemble a link."
+msgstr ""
+
+#: link.module:44
+msgid "Optional URL"
+msgstr ""
+
+#: link.module:47
+msgid "If checked, the URL field is optional and submitting a title alone will be acceptable. If the URL is ommitted, the title will be displayed as plain text."
+msgstr ""
+
+#: link.module:51
+msgid "Optional Title"
+msgstr ""
+
+#: link.module:52
+msgid "Required Title"
+msgstr ""
+
+#: link.module:53
+msgid "Static Title: "
+msgstr ""
+
+#: link.module:54
+msgid "No Title"
+msgstr ""
+
+#: link.module:59
+msgid "Link Title"
+msgstr ""
+
+#: link.module:62
+msgid "If the link title is optional or required, a field will be displayed to the end user. If the link title is static, the link will always use the same title. If <a href=\"http://drupal.org/project/token\">token module</a> is installed, the static title value may use any other node field as its value. Static and token-based titles may include most inline XHTML tags such as <em>strong</em>, <em>em</em>, <em>img</em>, <em>span</em>, etc."
+msgstr ""
+
+#: link.module:77
+msgid "Placeholder tokens"
+msgstr ""
+
+#: link.module:78
+msgid "The following placeholder tokens can be used in both paths and titles. When used in a path or title, they will be replaced with the appropriate values."
+msgstr ""
+
+#: link.module:86
+msgid "Allow user-entered tokens"
+msgstr ""
+
+#: link.module:88
+msgid "Checking will allow users to enter tokens in URLs and Titles on the node edit form. This does not affect the field settings on this page."
+msgstr ""
+
+#: link.module:97
+msgid "URL Display Cutoff"
+msgstr ""
+
+#: link.module:99
+msgid "If the user does not include a title for this link, the URL will be used as the title. When should the link title be trimmed and finished with an elipsis (&hellip;)? Leave blank for no limit."
+msgstr ""
+
+#: link.module:105
+msgid "Default (no target attribute)"
+msgstr ""
+
+#: link.module:106
+msgid "Open link in window root"
+msgstr ""
+
+#: link.module:107
+msgid "Open link in new window"
+msgstr ""
+
+#: link.module:108
+msgid "Allow the user to choose"
+msgstr ""
+
+#: link.module:115
+msgid "Link Target"
+msgstr ""
+
+#: link.module:121
+msgid "Rel Attribute"
+msgstr ""
+
+#: link.module:122
+msgid "When output, this link will have this rel attribute. The most common usage is <a href=\"http://en.wikipedia.org/wiki/Nofollow\">rel=&quot;nofollow&quot;</a> which prevents some search engines from spidering entered links."
+msgstr ""
+
+#: link.module:130
+msgid "Additional CSS Class"
+msgstr ""
+
+#: link.module:131
+msgid "When output, this link will have have this class attribute. Multiple classes should be separated by spaces."
+msgstr ""
+
+#: link.module:138
+msgid "A default title must be provided if the title is a static value"
+msgstr ""
+
+#: link.module:197
+msgid "At least one title or URL must be entered."
+msgstr ""
+
+#: link.module:276
+msgid "Not a valid URL."
+msgstr ""
+
+#: link.module:280
+msgid "Titles are required for all links."
+msgstr ""
+
+#: link.module:285
+msgid "You cannot enter a title without a link url."
+msgstr ""
+
+#: link.module:488
+msgid "URL"
+msgstr ""
+
+#: link.module:497 views/link_views_handler_argument_target.inc:31
+msgid "Title"
+msgstr ""
+
+#: link.module:513
+msgid "Open URL in a New Window"
+msgstr ""
+
+#: link.module:527
+msgid "Title, as link (default)"
+msgstr ""
+
+#: link.module:532
+msgid "URL, as link"
+msgstr ""
+
+#: link.module:537
+msgid "URL, as plain text"
+msgstr ""
+
+#: link.module:542
+msgid "Short, as link with title \"Link\""
+msgstr ""
+
+#: link.module:547
+msgid "Label, as link with label as title"
+msgstr ""
+
+#: link.module:552
+msgid "Separate title and URL"
+msgstr ""
+
+#: link.module:620
+msgid "Link URL"
+msgstr ""
+
+#: link.module:621
+msgid "Link title"
+msgstr ""
+
+#: link.module:622
+msgid "Formatted html link"
+msgstr ""
+
+#: link.info:0
+msgid "Defines simple link field types."
+msgstr ""
+
+#: link.info:0
+msgid "CCK"
+msgstr ""
+
+#: views/link.views.inc:41
+msgid "@label URL"
+msgstr ""
+
+#: views/link.views.inc:47;80;97
+msgid "Content"
+msgstr ""
+
+#: views/link.views.inc:48;61
+msgid "@label title"
+msgstr ""
+
+#: views/link.views.inc:81;85
+msgid "@label protocol"
+msgstr ""
+
+#: views/link.views.inc:98;102
+msgid "@label target"
+msgstr ""
+
+#: views/link_views_handler_argument_target.inc:33
+msgid "The title to use when this argument is present; it will override the title of the view and titles from previous arguments. You can use percent substitution here to replace with argument titles. Use \"%1\" for the first argument, \"%2\" for the second, etc."
+msgstr ""
+
+#: views/link_views_handler_argument_target.inc:46
+msgid "Action to take if argument is not present"
+msgstr ""
+
+#: views/link_views_handler_argument_target.inc:58
+msgid "Wildcard"
+msgstr ""
+
+#: views/link_views_handler_argument_target.inc:61
+msgid "If this value is received as an argument, the argument will be ignored; i.e, \"all values\""
+msgstr ""
+
+#: views/link_views_handler_argument_target.inc:67
+msgid "Wildcard title"
+msgstr ""
+
+#: views/link_views_handler_argument_target.inc:70
+msgid "The title to use for the wildcard in substitutions elsewhere."
+msgstr ""
+
+#: views/link_views_handler_argument_target.inc:93
+msgid "Validator"
+msgstr ""
+
+#: views/link_views_handler_argument_target.inc:97
+msgid "<Basic validation>"
+msgstr ""
+
+#: views/link_views_handler_argument_target.inc:133
+msgid "Action to take if argument does not validate"
+msgstr ""
+
+#: views/link_views_handler_filter_protocol.inc:29
+msgid "Is one of"
+msgstr ""
+
+#: views/link_views_handler_filter_protocol.inc:30
+msgid "="
+msgstr ""
+
+#: views/link_views_handler_filter_protocol.inc:63
+msgid "Protocol"
+msgstr ""
+
+#: views/link_views_handler_filter_protocol.inc:68
+msgid "The protocols displayed here are those globally available. You may add more protocols by modifying the <em>filter_allowed_protocols</em> variable in your installation."
+msgstr ""
+

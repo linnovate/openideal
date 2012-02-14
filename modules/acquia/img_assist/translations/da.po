@@ -1,0 +1,497 @@
+# Danish translation of Drupal (img_assist.module)
+# Copyright 2005-2007 Morten Wulff <wulff@ratatosk.net>
+msgid ""
+msgstr ""
+"Project-Id-Version: Danish translation of Drupal (img_assist.module) $Id: da.po,v 1.1.4.2 2008/10/15 11:27:37 sun Exp $\n"
+"POT-Creation-Date: 2006-10-04 21:21+0200\n"
+"PO-Revision-Date: 2007-09-26 00:47+0100\n"
+"Last-Translator: Morten Wulff <wulff@ratatosk.net>\n"
+"Language-Team: Danish <l10n@drupaldanmark.dk>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-Language: Danish\n"
+"X-Poedit-Country: DENMARK\n"
+
+#: img_assist.module:26
+msgid "Enables users easily upload and insert images into content."
+msgstr "Gør det muligt at overføre og indsætte billeder i indhold."
+
+#: img_assist.module:44
+msgid "Image Assist"
+msgstr "Billedhjælp"
+
+#: img_assist.module:52
+msgid "Image Assist Header"
+msgstr "Billedhjælp overskrift"
+
+#: img_assist.module:59
+msgid "Image Assist Thumbnails"
+msgstr "Billedhjælp miniaturer"
+
+#: img_assist.module:66
+msgid "Image Assist Upload"
+msgstr "Billedhjælp overfør"
+
+#: img_assist.module:73
+msgid "Image Assist Properties"
+msgstr "Indstillinger for billedhjælp"
+
+#: img_assist.module:81
+msgid "Popup Image"
+msgstr "Popop billede"
+
+#: img_assist.module:89
+msgid "Insert Callback"
+msgstr "Indsæt tilbagekald"
+
+#: img_assist.module:96
+#: img_assist.info:0
+msgid "Image assist"
+msgstr "Billedhjælp"
+
+#: img_assist.module:97
+msgid "Change settings for the Image assist module."
+msgstr "Skift indstillinger for billedhjælp."
+
+#: img_assist.module:156
+msgid "Image reference"
+msgstr "Billedreference"
+
+#: img_assist.module:165
+msgid "This image appears in..."
+msgstr "Dette billede optræder i..."
+
+#: img_assist.module:181
+msgid "Access settings"
+msgstr "Tilgå indstillinger"
+
+#: img_assist.module:187
+msgid "Display Image assist on paths"
+msgstr "Vis billedhjælper på stier"
+
+#: img_assist.module:189
+msgid "on specific paths"
+msgstr "på bestemte stier"
+
+#: img_assist.module:189
+msgid "not on specific paths"
+msgstr "ikke på bestemte stier"
+
+#: img_assist.module:189
+msgid "all paths"
+msgstr "alle stier"
+
+#: img_assist.module:194
+msgid "Paths"
+msgstr "Stier"
+
+#: img_assist.module:198
+msgid "Enter one page per line as Drupal paths. The '*' character is a wildcard. Example paths are %blog for the blog page and %blog-wildcard for every personal blog. %front is the front page."
+msgstr "Indtast én sti pr. linje som Drupal-stier. Brug '*'-tegnet som joker. Indtast f.eks. %blog for blogsiden og %blog-wildcard for alle personlige blogs. %front er forsiden."
+
+#: img_assist.module:203
+msgid "Display Image assist on text areas"
+msgstr "Vis billedhjælper på tekstområder"
+
+#: img_assist.module:205
+msgid "Show on every textarea except the listed textareas."
+msgstr "Vis på alle tekstområder undtagen de nævnte."
+
+#: img_assist.module:205
+msgid "Show on only the listed textareas."
+msgstr "Vis kun på de nævnte tekstområder."
+
+#: img_assist.module:205
+msgid "Show on all textareas."
+msgstr "Vis på alle tekstområder."
+
+#: img_assist.module:210
+msgid "Text areas"
+msgstr "Tekstområder"
+
+#: img_assist.module:214
+msgid "Enter one text area form-id per line. Form-id's are used by Drupal to typify them, which allows themers and coders to modify certain form fields, but not all. Find form-id's using this method: view the source of the webpage, then search for the string that's just above the text area and you'll see the form-id nearby. The '*' character is a wildcard. For example, you can specify all CCK fields as %cck-example."
+msgstr "Indtast et tekstområde formular id pr. linje. Du kan finde form id'et for en bestemt formular ved at kigge i kilden til den side hvor formularen vises."
+
+#: img_assist.module:219
+msgid "Textarea image link"
+msgstr "Billedelink"
+
+#: img_assist.module:221
+msgid "Show icon"
+msgstr "Vis ikon"
+
+#: img_assist.module:221
+msgid "Show text link"
+msgstr "Vis teksthenvisning"
+
+#: img_assist.module:221
+msgid "Do not show a link"
+msgstr "Vis ikke henvisning"
+
+#: img_assist.module:222
+msgid "Choose what to show under the textareas for which Image assist is enabled."
+msgstr "Vælg hvad der vises under de tekstområder hvor img_assist er aktiveret."
+
+#: img_assist.module:225
+#: ;906
+msgid "none"
+msgstr "ingen"
+
+#: img_assist.module:233
+msgid "Select the vocabularies to use for Image assist"
+msgstr "Vælg ordforråd til brug med img_assist"
+
+#: img_assist.module:236
+msgid "Select the vocabularies you want to be able to filter thumbnails by. This setting changes the behavior of Image assist at startup from loading all image thumbnails to displaying a list of image names until a filter is chosen."
+msgstr "Vælg hvilke ordforråd du ønsker at filtrere miniaturer efter. Denne indstilling ændrer img_assist's opførsel fra at vise alle billeder til i stedet at vise en liste af billednavne indtil et filter vælges."
+
+#: img_assist.module:244
+msgid "Image settings"
+msgstr "Billedindstillinger"
+
+#: img_assist.module:250
+msgid "Maximum number of thumbnails per page"
+msgstr "Maksimalt antal miniaturer pr. side"
+
+#: img_assist.module:254
+msgid "Enter the number of images to display in the thumbnail browser. If there are more images, next and previous links will be displayed."
+msgstr "Antallet af billeder der vises ved gennemsyn af minaturer. Hvis der er flere billeder vises 'næste'- og 'forrige'-links."
+
+#: img_assist.module:258
+msgid "Maximum inline image size allowed"
+msgstr "Maksimal størrelse af indlejrede billeder"
+
+#: img_assist.module:262
+msgid "Enter the number of maximum image dimensions to display with Image assist. This is a way to prevent users from breaking your layouts. This is applied when the filter tag is processed, so it will affect existing images. If an existing image exceeds these dimensions, a smaller derivative of the image will be substituted (or a smaller version will be created if you have allowed Image assist to create its own derivatives)."
+msgstr "Indtast de billeddimensioner der skal bruges med img_assist. Det er en måde til at forhindre at brugerne ødelægger dine sideopsætninger. Begrænsningen træder i kraft når indholdet bliver kørt gennem filtret, så eksisterende billeder vil også blive berørt. Hvis et eksisterende billede overskrider dimensionerne vil det blive erstattet med et billede i den korrekte størrelse (eller en mindre udgave vil blive oprettet afhængig af indstillingerne)."
+
+#: img_assist.module:284
+msgid "Popup size"
+msgstr "Popup størrelse"
+
+#: img_assist.module:287
+msgid "Select the size of the image that is popped up."
+msgstr "Vælg størrelse på billede i popup."
+
+#: img_assist.module:293
+msgid "Default size for inline images"
+msgstr "Standardstørrelse af indlejrede billeder"
+
+#: img_assist.module:296
+msgid "Select a derivative to be used by default for inline images."
+msgstr "Vælg hvilken afledet billedstørrelse der bruges som standard for indlejrede billeder."
+
+#: img_assist.module:301
+msgid "Creation of image derivatives"
+msgstr "Oprettelse af afledte billeder"
+
+#: img_assist.module:304
+msgid "Create 200x200 images for the image properties window (useful if the thumbnail size is small)."
+msgstr "Opret midlertidige billeder på 200x200 pixels til vinduet med egenskaber (nyttigt hvis miniaturestørrelsen er lille)."
+
+#: img_assist.module:305
+msgid "Allow users with %access permission to create custom size inline images."
+msgstr "Tillad brugere med tilladelsen %access at oprette indlejrede billeder af valgfri størrelse."
+
+#: img_assist.module:306
+msgid "Allow all users to create custom size inline images."
+msgstr "Tillad alle brugere at oprette indlejrede billeder af valgfri størrelse."
+
+#: img_assist.module:308
+msgid "These options allow Image assist to generate its custom image sizes (in the same manner as image.module) when a user would prefer a different size from the default image sizes defined in the image.module settings."
+msgstr "Disse valg lader img_assist oprette sine egne tilpassede billedstørrelser (på samme måde som image-modulet) når en bruger foretrækker en anden størrelse end standardstørrelserne i image-modulet."
+
+#: img_assist.module:314
+msgid "Other Properties"
+msgstr "Andre egenskaber"
+
+#: img_assist.module:320
+msgid "Default link behavior"
+msgstr "Standard-opførsel for henvisninger"
+
+#: img_assist.module:322
+#: ;919
+msgid "Not a link"
+msgstr "Ikke en henvisning"
+
+#: img_assist.module:322
+#: ;919
+msgid "Link to image page"
+msgstr "Henvis til billedside"
+
+#: img_assist.module:322
+#: ;919
+msgid "Open in popup window"
+msgstr "Åben popop vindue"
+
+#: img_assist.module:322
+#: ;919
+msgid "Go to URL"
+msgstr "Gå til URL"
+
+#: img_assist.module:323
+#: ;338
+msgid "The link behavior can be overriden when inserting images by users with the proper permissions, but these defaults will still be used for everyone else."
+msgstr "Henvisningstypen kan tilsidesættes af brugere med den rette tilladelse, mens denne indstilling vil gælde for alle andre."
+
+#: img_assist.module:327
+msgid "Default URL"
+msgstr "Standard URL"
+
+#: img_assist.module:331
+msgid "The default URL is used when Go to URL is choosen as the link behavior."
+msgstr "Standard-URLen bruges når Gå til URL er valg som henvisningstype."
+
+#: img_assist.module:335
+msgid "Default insert mode"
+msgstr "Standard indsætnings-metode"
+
+#: img_assist.module:337
+#: ;957
+msgid "Filter Tag"
+msgstr "Filtermærke"
+
+#: img_assist.module:337
+#: ;957
+msgid "HTML Code"
+msgstr "HTML kode"
+
+#: img_assist.module:342
+msgid "Preload image title"
+msgstr "Indlæs billedtitel"
+
+#: img_assist.module:344
+#: ;351
+msgid "Disabled"
+msgstr "Deaktiveret"
+
+#: img_assist.module:344
+#: ;351
+msgid "Enabled"
+msgstr "Aktiveret"
+
+#: img_assist.module:345
+msgid "If enabled, the title from the image will be loaded as the bolded caption by default."
+msgstr "Billedets titel vises som standard billedtekst."
+
+#: img_assist.module:349
+msgid "Preload image description"
+msgstr "Indlæs billedbeskrivelse"
+
+#: img_assist.module:352
+msgid "If enabled, the body text from the image will be loaded as the caption by default."
+msgstr "Beskrivelsen af billedet bruges som standard billedtekst."
+
+#: img_assist.module:358
+msgid "Display settings"
+msgstr "Indstilinger for visning"
+
+#: img_assist.module:364
+msgid "Include img_assist.css on all pages for styling inline images?"
+msgstr "Medtag img_assist.css på alle sider for at bestemme visning af indlejrede billeder?"
+
+#: img_assist.module:366
+msgid "yes"
+msgstr "ja"
+
+#: img_assist.module:366
+msgid "no"
+msgstr "nej"
+
+#: img_assist.module:367
+msgid "Advanced users can customize their theme's CSS file so that inclusion of the img_assist.css file will not be necessary. See notes at the bottom of img_assist.css for details."
+msgstr "Erfarne brugere kan tilpasse temaets CSS fil, så det ikke er nødvendigt at medtage img_assist.css. Se noterne i bunden af img_assist.css for yderligere information."
+
+#: img_assist.module:379
+msgid "Allowed maximum inline image size has to indicate width and height, for example %example."
+msgstr "Tilladt maksimal indlejret størrelse skal angive bredde og højde, f.eks. %example."
+
+#: img_assist.module:389
+msgid "Inline images"
+msgstr "Indlejrede billeder"
+
+#: img_assist.module:392
+msgid "Add images to your posts with Image assist."
+msgstr "Tilføj billeder til indlæg med img_assist."
+
+#: img_assist.module:412
+msgid "Images can be added to this post."
+msgstr "Billeder kan ikke tilføjes til dette indlæg."
+
+#: img_assist.module:467
+#: ;1563;1566
+msgid "Add image"
+msgstr "Tilføj billede"
+
+#: img_assist.module:506
+msgid "Upload: "
+msgstr "Overfør:"
+
+#: img_assist.module:506
+msgid "Fill in the form below to upload a new image."
+msgstr "Udfyld formularen herunder for at overføre et nyt billede."
+
+#: img_assist.module:510
+#: ;522
+msgid "Start Over"
+msgstr "Start forfra"
+
+#: img_assist.module:518
+msgid "Properties: "
+msgstr "Egenskaber:"
+
+#: img_assist.module:518
+msgid "Change how the image is displayed."
+msgstr "Bestem hvordan billedet vises."
+
+#: img_assist.module:531
+msgid "Browse Images: "
+msgstr "Gennemse billeder:"
+
+#: img_assist.module:536
+msgid "My Images"
+msgstr "Mine billeder"
+
+#: img_assist.module:543
+msgid "All Images"
+msgstr "Alle billeder"
+
+#: img_assist.module:580
+msgid "or"
+msgstr "eller"
+
+#: img_assist.module:581
+msgid "Upload"
+msgstr "Overfør"
+
+#: img_assist.module:582
+msgid "a new image"
+msgstr "et nyt billede"
+
+#: img_assist.module:590
+#: ;991
+msgid "Cancel"
+msgstr "Annuller"
+
+#: img_assist.module:625
+#: ;728
+msgid "The image module must be enabled to use Image assist."
+msgstr "Du skal aktivere image-modulet for at bruge img_assist."
+
+#: img_assist.module:628
+msgid "Your account does not have image uploading privileges."
+msgstr "Du har ikke tilladelse til at overføre billeder."
+
+#: img_assist.module:721
+msgid "No images were found. Please upload a new image or browse images by a different category."
+msgstr "Ingen billeder fundet. Overfør et nyt billeder eller gennemse billederne i en anden kategori."
+
+#: img_assist.module:753
+msgid "Image ID not found"
+msgstr "Billed-ID ikke fundet"
+
+#: img_assist.module:768
+msgid "Properties"
+msgstr "Egenskaber"
+
+#: img_assist.module:827
+msgid "Other"
+msgstr "Anden"
+
+#: img_assist.module:855
+msgid "Title (optional)"
+msgstr "Titel (valgfri)"
+
+#: img_assist.module:864
+msgid "Description (optional)"
+msgstr "Beskrivelse (valgfri)"
+
+#: img_assist.module:875
+msgid "Size: (orig @widthx@height, max @maxsize)"
+msgstr "Størrelse: (original @widthx@height, maks. @maxsize)"
+
+#: img_assist.module:904
+msgid "Alignment"
+msgstr "Justering"
+
+#: img_assist.module:906
+msgid "left"
+msgstr "venstre"
+
+#: img_assist.module:906
+msgid "right"
+msgstr "højre"
+
+#: img_assist.module:906
+msgid "center"
+msgstr "centreret"
+
+#: img_assist.module:917
+msgid "Link"
+msgstr "Henvisning"
+
+#: img_assist.module:955
+msgid "Insert mode"
+msgstr "Indsæt metode"
+
+#: img_assist.module:986
+msgid "Update"
+msgstr "Opdater"
+
+#: img_assist.module:986
+msgid "Insert"
+msgstr "Indsæt"
+
+#: img_assist.module:1187
+msgid "Unable to create %label image"
+msgstr "Kan ikke finde billedet %label"
+
+#: img_assist.module:1326
+msgid "Custom"
+msgstr "Tilpasset"
+
+#: img_assist.module:1571
+msgid "Click here to add images"
+msgstr "Klik her for at tilføje billeder"
+
+#: img_assist.module:290
+msgid "1 image size is not being shown because it exceeds the the maximum inline image size setting (see above)."
+msgid_plural "@count image sizes are not being shown because they exceed the the maximum inline image size setting (see above)."
+msgstr[0] "1 billedstørrelse vises ikke, da den overskrider begrænsningen for indlejrede billeder."
+msgstr[1] "@count billedstørrelser vises ikke, da de overskrider begrænsningen for indlejrede billeder."
+
+#: img_assist.module:119
+msgid "access img_assist"
+msgstr "tilgå img_assiset"
+
+#: img_assist.module:119
+msgid "access all images"
+msgstr "Tilgå alle billeder"
+
+#: img_assist.module:119
+msgid "access advanced options"
+msgstr "Tilgå avancerede indstillinger"
+
+#: img_assist.module:119
+msgid "use original size"
+msgstr "brug original størrelse"
+
+#: img_assist.module:0
+msgid "img_assist"
+msgstr "img_assist"
+
+#: img_assist.install:27
+msgid "Image assist has been setup."
+msgstr "Billedhjælp konfigureret."
+
+#: img_assist.info:0
+msgid "This module allows users to upload and insert inline images into posts. It automatically generates an Add image link under the textarea fields of your choice."
+msgstr "Modulet lader brugerne overføre og indsætte billeder i indlæg. Det laver automatisk et 'tilføj billede'-link under de tekstområder, som du vælger."
+
+#: img_assist.info:0
+msgid "Image"
+msgstr "Billede"
+

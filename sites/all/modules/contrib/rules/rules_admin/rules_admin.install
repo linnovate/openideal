@@ -1,0 +1,106 @@
+<?php
+// $Id: rules_admin.install,v 1.1.2.4 2009/04/19 18:19:06 fago Exp $
+
+
+/**
+ * @file Rules Admin UI - Installation file.
+ */
+
+/**
+ * Implementation of hook_install().
+ *
+ * We just add some example rules and rule sets here. They aren't added as default rules,
+ * so users can delete them.
+ */
+function rules_admin_install() {
+  // Make sure the rules module is loaded. Important when both modules are installed at
+  // the same time.
+  drupal_load('module', 'rules');
+
+  _rules_admin_install_example_rules();
+  _rules_admin_install_example_rule_sets();
+  rules_clear_cache();
+}
+
+function _rules_admin_install_example_rules() {
+  $rule = array(
+    '#type' => 'rule',
+    '#set' => 'event_node_view',
+    '#label' => t('Example rule: When viewing an unpublished page, publish it.'),
+    '#status' => 'custom',
+    '#categories' => array('example'),
+    '#active' => 0,
+  );
+  $condition1 = rules_use_condition('rules_condition_content_is_published', array(
+      '#settings' => array('#argument map' => array('node' => 'node')),
+      '#negate' => 1,
+    ), t('Viewed content is published'));
+  $condition2 = rules_use_condition('rules_condition_content_is_type', array(
+      '#settings' => array(
+        '#argument map' => array('node' => 'node'),
+        'type' => array('page'),
+      ),
+    ), t('Viewed content is Page'));
+  $action1 = rules_use_action('rules_core_node_publish_action', array(
+      '#settings' => array(
+        '#argument map' => array('node' => 'node'),
+        'auto_save' => TRUE,
+      ),
+    ), t('Publish viewed content'));
+  $rule += array(
+    '#conditions' => array($condition1, $condition2),
+    '#actions' => array($action1),
+  );
+  rules_item_save('rules', 'rules_example_1', $rule);
+}
+
+function _rules_admin_install_example_rule_sets() {
+  $set = array(
+    'label' => t('Example: Empty rule set working with content'),
+    'arguments' => array('node' => array('type' => 'node', 'label' => 'Content')),
+    'categories' => array('example'),
+    'status' => 'custom',
+  );
+  rules_item_save('rule_sets', 'rules_set_1', $set);
+}
+
+/**
+ * Update 6001
+ * Example rules are now added by hook_install() instead of using default rules.
+ *
+ * If the default rules have been altered, mark them as custom now. Else the examples
+ * would be gone, so we add them now.
+ */
+function rules_admin_update_6001() {
+  $rules = rules_get_configured_items('rules');
+  if (isset($rules['rules_default_rule_1']['#status']) && $rules['rules_default_rule_1']['#status'] == 'altered') {
+    $rules['rules_default_rule_1']['#status'] = 'custom';
+    rules_item_delete('rules', 'rules_default_rule_1');
+    rules_item_save('rules', 'rules_example_1', $rules['rules_default_rule_1']);
+  }
+  elseif (!isset($rules['rules_example_1'])) {
+    _rules_admin_install_example_rules();
+  }
+
+  $sets = rules_get_configured_items('rule_sets');
+  if (isset($sets['rules_set_1']) && $sets['rules_set_1']['status'] == 'altered') {
+    $sets['rules_set_1']['status'] = 'custom';
+    rules_item_save('rule_sets', 'rules_set_1', $sets['rules_set_1']);
+  }
+  elseif (!isset($sets['rules_set_1'])) {
+    _rules_admin_install_example_rule_sets();
+  }
+
+  rules_clear_cache();
+  return array();
+}
+
+/**
+ * Update 6002: Rebuild the menu cache and the theme registry.
+ */
+function rules_admin_update_6002() {
+  menu_rebuild();
+  drupal_rebuild_theme_registry();
+  return array();
+}
+

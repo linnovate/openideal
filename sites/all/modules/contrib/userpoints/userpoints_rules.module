@@ -1,0 +1,19 @@
+<?php
+// $Id: userpoints_rules.module,v 1.1.2.6 2009/09/13 02:47:01 kbahey Exp $
+
+/**
+ * @file
+ * Rules integration for the user points module.
+ */
+
+/**
+ * Rules events -Trigger event when user points awarded.
+ */
+function userpoints_rules_userpoints($op, $params='') {
+  switch ($op) {
+  case 'points after':
+    $account = user_load($params['uid']);
+    rules_invoke_event('userpoints_event_points_awarded', $account, $params['points']);
+    break;
+  }
+}

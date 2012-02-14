@@ -1,0 +1,495 @@
+<?php
+// $Id: calendar.module,v 1.121.2.38 2009/03/17 18:03:36 karens Exp $
+define('CALENDAR_SHOW_ALL', 0);
+define('CALENDAR_HIDE_ALL', -1);
+
+/**
+ * Implementation of hook_views_api().
+ *
+ * This one is used as the base to reduce errors when updating.
+ */
+function calendar_views_api() {
+  return array(
+    'api' => 2,
+    'path' => drupal_get_path('module', 'calendar') .'/includes',
+  );
+}
+
+/**
+ * @file
+ * Adds calendar filtering and displays to Views.
+ */
+/**
+ * Implementation of hook_help().
+ */
+function calendar_help($section, $arg) {
+  switch ($section) {
+    case 'admin/help#calendar':
+      return t("<p>View complete documentation at !link.</p>", array('!link' => 'http://drupal.org/node/120710'));
+  }
+}
+
+function calendar_init() {
+  drupal_add_css(drupal_get_path('module', 'calendar') .'/calendar.css');
+  // The css for Farbtastic color picker, painless to add it here 
+  // even though it isn't needed everywhere.
+  drupal_add_css('misc/farbtastic/farbtastic.css');
+
+  require_once('./'. drupal_get_path('module', 'calendar') .'/theme/theme.inc');
+}
+
+function calendar_theme() {
+  $path = drupal_get_path('module', 'calendar');
+  require_once "./$path/theme/theme.inc";
+
+  $base = array(
+    'file' => 'theme.inc',
+    'path' => "$path/theme",
+  );
+  return array(
+    'calendar_day_node' => $base + array(
+       'template' => 'calendar-day-node',
+       'arguments' => array('node' => NULL, 'view' => NULL),
+       ),
+    'calendar_month_node' => $base + array(
+      'template' => 'calendar-month-node',
+      'arguments' => array('node' => NULL, 'view' => NULL),
+      ),
+    'calendar_week_node' => $base + array(
+      'template' => 'calendar-week-node',
+      'arguments' => array('node' => NULL, 'view' => NULL),
+      ),
+    'calendar_month_multiple_node' => $base + array(
+      'template' => 'calendar-month-multiple-node',
+      'arguments' => array('curday' => NULL, 'count' => NULL, 'view' => NULL, 'types' => NULL),
+      ),
+    'calendar_week_multiple_node' => $base + array(
+      'template' => 'calendar-week-multiple-node',
+      'arguments' => array('curday' => NULL, 'count' => NULL, 'view' => NULL, 'types' => NULL),
+      ),
+    'calendar_datebox' => $base + array(
+      'template' => 'calendar-datebox',
+      'arguments' => array(
+        'date' => NULL, 'view' => NULL, 'items' => NULL, 'selected' => NULL),
+      ),
+    'calendar_date_combo' => $base + array(
+      'arguments' => array('node', 'lable', 'view'),
+      ),
+    'calendar_empty_day' => $base + array(
+      'arguments' => array('curday', 'view'),
+      ),
+    'calendar_stripe_legend' => $base + array(
+      'arguments' => array('stripe_labels'),
+      ),
+    'calendar_stripe_stripe' => $base + array(
+      'arguments' => array('node'),
+      ),
+    'calendar_colorpicker' => $base + array(
+      'arguments' => array('element'),
+      ),
+    'calendar_colorfield' => $base + array(
+      'arguments' => array('element'),
+      ),
+    'calendar_time_row_heading' => $base + array(
+      'arguments' => array('start_time', 'next_start_time', 'curday_date'),
+      ),  
+    );
+}
+
+/**
+ *  TODO need to identify type of timezone handling needed for each date field
+ */
+function calendar_offset($field_name) {
+  $default_offset = variable_get('date_default_timezone', 0);
+  $configurable_zones = variable_get('configurable_timezones', 1);
+}
+
+/**
+ *  A function to test the validity of various date parts
+ */
+function calendar_part_is_valid($value, $type) {
+  if ( !preg_match('/^[0-9]*$/', $value) ) {
+    return false;
+  }
+  $value = intval($value);
+  if ($value <= 0) return false;
+  switch ($type) {
+    case 'year':
+      if ($value < DATE_MIN_YEAR) return false;
+      break;
+    case 'month':
+      if ($value < 0 || $value > 12) return false;
+      break;
+    case 'day':
+      if ($value < 0 || $value > 31) return false;
+      break;
+    case 'week':
+      if ($value < 0 || $value > 53) return false;
+  }
+  return true;
+}
+
+/**
+ *  implementation of hook_block()
+ */
+function calendar_block($op = 'list', $delta = 0) {
+  switch ($op) {
+    case 'list' :
+      $blocks[0]['info'] = t('Calendar Legend.');
+      return $blocks;
+      break;
+    case 'view' :
+      switch ($delta) {
+      case 0:
+        $block['subject'] = t('Calendar Legend');
+        $content = theme('calendar_stripe_legend');
+        $block['content'] = !empty($content) ? '<div class="calendar legend">'. $content .'</div>' : '';
+        return $block;
+    }
+  }
+}
+
+/**
+ * Calendar display types
+ */
+function calendar_display_types() {
+  return array('year' => t('Year'), 'month' => t('Month'), 'day' => t('Day'), 'week' => t('Week'));  
+}
+
+/**
+ * Figure out which type of display to use, 
+ * based on the current argument.
+ *
+ * @return year, month, day, or week.
+ */
+function calendar_current_type($view) {
+  if (!is_object($view) || !isset($view->argument) || !is_array($view->argument)) {
+    if (!empty($view->date_info->default_display)) {
+      return $view->date_info->default_display;
+    }
+    return FALSE;
+  }
+  $i = 0;
+  $date_handler = new date_sql_handler();
+  foreach ($view->argument as $argument) {
+    if ($argument['id'] == 'date_argument') {
+      $parts = array_keys($date_handler->arg_parts($view->args[$i]));
+      break;
+    }
+    $i++;
+  }
+  return array_pop($parts);
+}
+
+/**
+ * Create a stripe.
+ *
+ * @param $node - the node object
+ * @param $query_name - the views queryname for this date field
+ * @param $delta - the delta for this field, used to distinguish fields that appear more than once in the calendar
+ * @param $stripe - the hex code for this stripe.
+ * @param $label - the label to give this stripe.
+ * 
+ * TODO Reconsider use of $GLOBALS as a method of triggering the legend, there
+ * may be a better way.
+ */
+function calendar_node_stripe($view, &$node, $query_name, $delta, $stripe = NULL, $label = '') {
+  $colors = isset($view->date_info->calendar_colors) ? $view->date_info->calendar_colors : array();
+  if (empty($colors)) {
+    return;
+  }
+
+  $type_names = node_get_types('names');
+  $type = $node->raw->node_type;
+  if(!(isset($node->stripe))){
+    $node->stripe = array();
+    $node->stripe_label = array();
+  }  
+  if (!$label && array_key_exists($type, $type_names)) {
+    $label = $type_names[$type];
+  }
+  if (!$stripe) {
+    if (array_key_exists($type, $colors)) {
+      $stripe = $colors[$type];
+    }
+    else {
+      $stripe = '';
+    }
+  }
+
+  $node->stripe[] = $stripe;
+  $node->stripe_label[] = $label;
+  $GLOBALS['calendar_stripe_labels'][][$type] = array('stripe' => $stripe, 'label' => $label);
+  return $stripe;
+}
+
+ /**
+ * Create a stripe based on a taxonomy term.
+ *
+ * @param $node - the node object
+ * @param $query_name - the views queryname for this date field
+ * @param $delta - the delta for this field, used to distinguish fields that appear more than once in the calendar
+ * @param $stripe - the hex code for this stripe.
+ * @param $label - the label to give this stripe.
+ * 
+ * TODO Reconsider use of $GLOBALS as a method of triggering the legend, there
+ * may be a better way.
+ */
+
+function calendar_node_taxonomy_stripe($view, &$node, $query_name, $delta, $stripe = NULL, $label = '') {
+  $colors_taxonomy = isset($view->date_info->calendar_colors_taxonomy) ? $view->date_info->calendar_colors_taxonomy : array();
+  if (empty($colors_taxonomy)) {
+    return;
+  }
+  
+  // Rename the vid added by Views to the normal name that 
+  // taxonomy will expect, it's in the raw results.
+  $node->vid = $node->raw->node_vid;
+  $terms_for_node = taxonomy_node_get_terms($node);
+  if(!(isset($node->stripe))){
+    $node->stripe = array();
+    $node->stripe_label = array();
+  }
+  if (count($terms_for_node)){
+    foreach($terms_for_node as $term_for_node){
+      if (!array_key_exists($term_for_node->tid, $colors_taxonomy)) {
+        continue;
+      }
+      $stripe = $colors_taxonomy[$term_for_node->tid];
+      $stripe_label = $term_for_node->name;
+      $node->stripe[] = $stripe;
+      $node->stripe_label[] = $stripe_label;
+      $GLOBALS['calendar_stripe_labels'][][$term_for_node->tid] = array('stripe' => $stripe, 'label' => $stripe_label);
+    }
+  }
+  else {
+    $node->stripe[] = '';
+    $node->stripe_label[] = '';
+  } 
+  return;
+}
+
+
+/**
+ * Helper function to figure out a group gid to use in blocks.
+ *
+ * @return an array of group nodes that are relevant.
+ * @todo this may need more work.
+ */
+function calendar_og_groups($view) {
+  if (!$groupnode = og_get_group_context()) {
+    global $user;
+    $groupnodes = array_keys($user->og_groups);
+  }
+  else {
+    $groupnodes = array($groupnode->nid);
+  }
+  return $groupnodes;
+}
+
+/**
+ * A selector to jump to a new date in the calendar.
+ *
+ * @param unknown_type $view
+ * @return unknown
+ */
+function calendar_date_select($view) {
+  return '<div class="calendar-date-select">'. drupal_get_form('calendar_date_select_form', $view) .'</div>';
+}
+
+/**
+ * The date selector form.
+ *
+ * @param object $view
+ * @return the form element
+ *
+ * @TODO is the title desired here or does it take up too much space??
+ */
+function calendar_date_select_form(&$form_state, $view) {
+  $format = date_limit_format(variable_get('date_format_short', 'm/d/Y - H:i'), array('year', 'month', 'day'));
+  $form['calendar_goto'] = array(
+    //'#title' => t('Calendar date'),
+    '#type' => module_exists('date_popup') ? 'date_popup' : 'date_select',
+    '#default_value' => date_format($view->date_info->min_date, 'Y-m-d'),
+    '#date_timezone' => date_default_timezone_name(),
+    '#date_format' => $format,
+    );
+  $form['calendar_type'] = array(
+    '#type' => 'hidden',
+    '#value' => $view->date_info->calendar_type,
+    );
+  $form['view_name'] = array(
+    '#type' => 'hidden',
+    '#value' => $view->name,
+    );
+  $form['view_url'] = array(
+    '#type' => 'hidden',
+    '#value' => $view->get_url(),
+    );
+  $pos = calendar_arg_position($view);  
+  $form['calendar_previous_arg'] = array(
+    '#type' => 'hidden',
+    '#value' => $view->args[$pos],
+    );
+  $form['submit'] = array(
+    '#type' => 'submit',
+    '#value' => t('Change date'),
+    );
+  return $form;
+}
+
+function calendar_arg_position($view) {
+  $pos = 0;
+  foreach ($view->argument as $argument) {
+    if ($argument->definition['handler'] == 'date_api_argument_handler') {
+      return $pos;
+    }
+    $pos++;
+  }
+}
+/**
+ * Get the url for a calendar node.
+ * 
+ * @param $node - a calendar node object
+ * @param $default - a default url to use when nothing specific is provided.
+ */
+function calendar_get_node_link($node, $default = NULL) {
+  if (isset($node->url)) {
+    return url($node->url, array('absolute' => TRUE));
+  }
+  elseif (empty($node->remote) && is_numeric($node->nid)) {
+    return url("node/$node->nid", array('absolute' => TRUE));
+  }
+  elseif (!empty($default)) {
+    return url($default, array('absolute' => TRUE));
+  }
+}
+
+function calendar_groupby_times($type = '') {
+  $times = array();
+  switch ($type) {
+    case 'hour':
+      for ($i = 0; $i <= 23; $i++) {
+        $times[] = date_pad($i) .':00:00';
+      }
+      break;
+    case 'half':
+      for ($i = 0; $i <= 23; $i++) {
+        $times[] = date_pad($i) .':00:00';
+        $times[] = date_pad($i) .':30:00';
+      }
+      break;
+    default:
+      break;
+  }
+  return $times;
+}
+
+/**
+ * Define some error messages.
+ */
+function calendar_errors($error) {
+  switch ($error) {
+    case 'missing_argument_default':
+      return t("The Date argument in this view must be set up to provide a default value set to the current date. Edit the argument, find 'Action to take if argument is not present.', choose 'Provide default argument', then select 'Current date'.");
+  }
+}
+/**
+ * Implementation of hook_elements.
+ * 
+ * Much of the colorpicker code was adapted from the Colorpicker module.
+ * That module has no stable release yet nor any D6 branch.
+ * 
+ * TODO Consider dropping the duplicate code and adding a dependency
+ * when that module is more stable, if calendar module customizations will 
+ * work in it.
+ */
+function calendar_elements() {
+  // the Farbtastic colorpicker
+  $type['calendar_colorpicker'] = array(
+    '#attributes' => array('class' => 'calendar_colorpicker'), 
+    '#input' => TRUE,
+  );
+  
+  // a textfield to associate with the Farbtastic colorpicker
+  $type['calendar_colorfield'] = array(
+    '#attributes' => array('class' => 'calendar_colorfield'), 
+	  '#input' => TRUE,
+	  '#validate' => array('calendar_validate_hex_color' => array())
+  );
+  return $type;
+}
+
+/**
+ *  Check to make sure the user has entered a valid 6 digit hex color.
+ */
+function calendar_validate_hex_color($element) {
+  if (!$element['#required'] && empty($element['#value'])) {
+    return;
+  }
+  if (!preg_match('/^#(?:(?:[a-f\d]{3}){1,2})$/i', $element['#value'])) {
+    form_error($element, "'". check_plain($element['#value']) ."'". t(' is not a valid hex color'));
+  }
+  else {
+    form_set_value($element, $element['#value']);
+  }
+}
+
+/**
+ * Format calendar_colorpicker.
+ */
+function theme_calendar_colorpicker($element) {
+
+  $output = '';
+  $output .= '<div id="'. $element['#id'] .'" '. drupal_attributes($element['#attributes']) .' ></div>';
+  return theme('form_element', $element, $output);
+}
+
+/**
+ * Format calendar_color textfield.
+ */
+function theme_calendar_colorfield($element) {
+  $size = isset($element['#size']) ? ' size="' . $element['#size'] . '"' : '';
+  $maxlength = isset($element['#maxlength']) ?  'maxlength="'.$element['#maxlength'] .'"' : '';
+  $output = '';
+  if (isset($element['#calendar_colorpicker'])) {
+    $element['#attributes']['class'] .= ' edit-'. str_replace("_", "-", $element['#calendar_colorpicker']);
+  }
+  $output .= '<input type="text" name="'. $element['#name'] .'" id="'. $element['#id'] .'" '. $maxlength . $size .' value="'. check_plain($element['#value']) .'"'. drupal_attributes($element['#attributes']) .' />';
+  return theme('form_element', $element, $output);
+}
+
+/**
+ * Add link to calendar to nodes.
+ * 
+ * Controlled by value of 'calendar_date_link' in the view.
+ */
+function calendar_link($type, $object, $teaser = FALSE) {
+  if ($type == 'node' && !$teaser) {
+    $path = variable_get('calendar_date_link_'. $object->type, NULL);
+    if (!empty($path)) {
+      return array('calendar_link' => array(
+        'title' => t('Calendar'),
+        'href' => $path,
+        'attributes' => array('title' => t('View the calendar.')),
+        ));
+    }
+  }
+}
+
+/**
+ * Callback to remove a default calendar from the system.
+ */
+function calendar_remove($view_name) {
+  // Remove any variable that creates a default view with this name.
+  $calendar_options = variable_get('calendar_default_view_options', array());
+  if (array_key_exists($view_name, $calendar_options)) {
+    unset($calendar_options[$view_name]);
+  }
+  variable_set('calendar_default_view_options', $calendar_options);
+  // Delete it from the database, if stored there.
+  if ($view = views_get_view($view_name)) {
+    $view->delete();
+  }
+  views_invalidate_cache();
+}

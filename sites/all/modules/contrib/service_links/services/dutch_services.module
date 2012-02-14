@@ -1,0 +1,33 @@
+<?php
+// $Id: dutch_services.module,v 1.1.2.2 2010/09/24 16:25:25 thecrow Exp $
+
+/**
+ * @file
+ * Dutch services that extend Service Links module
+ * Collected by Kasper Souren
+ */
+
+/**
+ * Implementation of hook_service_links().
+ */
+function dutch_services_service_links() {
+  $links = array();
+
+  $links['_nl_nujij'] = array(
+    'name' => 'Nujij',
+    'description' => t('Add to nujij.'),
+    'link' => 'http://nujij.nl/jij.lynkx?t=<encoded-title>&u=<encoded-url>',
+  );
+  $links['_nl_ekudos'] = array(
+    'name' => 'eKudos',
+    'description' => t('Bookmark this post on eKudos.'),
+    'link' => 'http://www.ekudos.nl/artikel/nieuw?url=<encoded-url>&title=<encoded-title>',
+  );
+  $links['_nl_hyves'] = array(
+    'name' => 'Hyves',
+    'description' => t('Tip this on Hyves.'),
+    'link' => 'http://www.hyves-share.nl/button/tip/?tipcategoryid=12&rating=5&title=<encoded-title>&body=Bron%3A%20%5Burl%3D<encoded-url>%5D<encoded-url>%5B%2Furl%5D',
+  );
+
+  return $links;
+}

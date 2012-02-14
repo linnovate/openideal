@@ -1,0 +1,40 @@
+<?php
+// $Id: friendlist_activity.install,v 1.1.2.2.2.5 2010/02/21 22:45:27 stalski Exp $
+// by Jochen Stals - Menhir - www.menhir.be
+
+/**
+ * @file
+ *   Install file for friendlist_activity
+ */
+
+/**
+ * Implementation of hook_install().
+ */
+function friendlist_activity_install() {
+
+  variable_set('heartbeat_relations_api', 'none');
+
+  // Module weights in core: put heartbeat after heartbeat in the chain.
+  db_query("UPDATE {system} SET weight = 51 WHERE name = 'friendlist_activity'");
+}
+
+/**
+ * Implementation of hook_disable().
+ */
+function friendlist_activity_disable() {
+
+  // Delete left over messages
+  db_query("DELETE FROM {heartbeat_messages} WHERE message_id = 'heartbeat_become_friends' || message_id = 'heartbeat_add_FL_OW_relation'");
+
+}
+
+/**
+ * Implementation of hook_enable().
+ */
+function friendlist_activity_enable() {
+
+  variable_del('heartbeat_relations_api');
+
+  drupal_set_message(t('Please visit !messages_page to import default heartbeat messages for friends activity.', array('!messages_page' => l(t('Heartbeat messages page'), 'admin/build/heartbeat'))));
+
+}
