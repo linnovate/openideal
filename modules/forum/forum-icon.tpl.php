@@ -1,24 +1,24 @@
 <?php
 
 /**
- * @file forum-icon.tpl.php
- * Display an appropriate icon for a forum post.
+ * @file
+ * Default theme implementation to display an appropriate icon for a forum post.
  *
  * Available variables:
  * - $new_posts: Indicates whether or not the topic contains new posts.
- * - $icon: The icon to display. May be one of 'hot', 'hot-new', 'new',
+ * - $icon_class: The icon to display. May be one of 'hot', 'hot-new', 'new',
  *   'default', 'closed', or 'sticky'.
+ * - $first_new: Indicates whether this is the first topic with new posts.
  *
  * @see template_preprocess_forum_icon()
  * @see theme_forum_icon()
  */
 ?>
-<?php if ($new_posts): ?>
-  <a name="new">
+<div class="topic-status-<?php print $icon_class ?>" title="<?php print $icon_title ?>">
+<?php if ($first_new): ?>
+  <a id="new"></a>
 <?php endif; ?>
 
-<?php print theme('image', "misc/forum-$icon.png") ?>
+  <span class="element-invisible"><?php print $icon_title ?></span>
 
-<?php if ($new_posts): ?>
-  </a>
-<?php endif; ?>
+</div>

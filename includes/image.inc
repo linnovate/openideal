@@ -8,23 +8,27 @@
 /**
  * @defgroup image Image toolkits
  * @{
+ * Functions for image file manipulations.
+ *
  * Drupal's image toolkits provide an abstraction layer for common image file
  * manipulations like scaling, cropping, and rotating. The abstraction frees
  * module authors from the need to support multiple image libraries, and it
  * allows site administrators to choose the library that's best for them.
  *
  * PHP includes the GD library by default so a GD toolkit is installed with
- * Drupal. Other toolkits like ImageMagic are available from contrib modules.
+ * Drupal. Other toolkits like ImageMagick are available from contrib modules.
  * GD works well for small images, but using it with larger files may cause PHP
  * to run out of memory. In contrast the ImageMagick library does not suffer
  * from this problem, but it requires the ISP to have installed additional
  * software.
  *
- * Image toolkits are installed by copying the image.ToolkitName.inc file into
- * Drupal's includes directory. The toolkit must then be enabled using the
- * admin/settings/image-toolkit form.
+ * Image toolkits are discovered based on the associated module's
+ * hook_image_toolkits. Additionally the image toolkit include file
+ * must be identified in the files array in the module.info file. The
+ * toolkit must then be enabled using the admin/config/media/image-toolkit
+ * form.
  *
- * Only one toolkit maybe selected at a time. If a module author wishes to call
+ * Only one toolkit may be selected at a time. If a module author wishes to call
  * a specific toolkit they can check that it is installed by calling
  * image_get_available_toolkits(), and then calling its functions directly.
  */
@@ -33,18 +37,17 @@
  * Return a list of available toolkits.
  *
  * @return
- *   An array of toolkit name => descriptive title.
+ *   An array with the toolkit names as keys and the descriptions as values.
  */
 function image_get_available_toolkits() {
-  $toolkits = file_scan_directory('includes', 'image\..*\.inc$');
+  // hook_image_toolkits returns an array of toolkit names.
+  $toolkits = module_invoke_all('image_toolkits');
 
   $output = array();
-  foreach ($toolkits as $file => $toolkit) {
-    include_once "./$file";
-    $function = str_replace('.', '_', $toolkit->name) .'_info';
-    if (function_exists($function)) {
-      $info = $function();
-      $output[$info['name']] = $info['title'];
+  foreach ($toolkits as $name => $info) {
+    // Only allow modules that aren't marked as unavailable.
+    if ($info['available']) {
+      $output[$name] = $info['title'];
     }
   }
 
@@ -60,14 +63,14 @@ function image_get_available_toolkits() {
 function image_get_toolkit() {
   static $toolkit;
 
-  if (!$toolkit) {
+  if (!isset($toolkit)) {
+    $toolkits = image_get_available_toolkits();
     $toolkit = variable_get('image_toolkit', 'gd');
-    $toolkit_file = './includes/image.'. $toolkit .'.inc';
-    if (isset($toolkit) && file_exists($toolkit_file)) {
-      include_once $toolkit_file;
-    }
-    elseif (!image_gd_check_settings()) {
-      $toolkit = FALSE;
+    if (!isset($toolkits[$toolkit]) || !function_exists('image_' . $toolkit . '_load')) {
+      // The selected toolkit isn't available so return the first one found. If
+      // none are available this will return FALSE.
+      reset($toolkits);
+      $toolkit = key($toolkits);
     }
   }
 
@@ -79,191 +82,353 @@ function image_get_toolkit() {
  *
  * @param $method
  *   A string containing the method to invoke.
+ * @param $image
+ *   An image object returned by image_load().
  * @param $params
  *   An optional array of parameters to pass to the toolkit method.
+ *
  * @return
  *   Mixed values (typically Boolean indicating successful operation).
  */
-function image_toolkit_invoke($method, $params = array()) {
-  if ($toolkit = image_get_toolkit()) {
-    $function = 'image_'. $toolkit .'_'. $method;
-    if (function_exists($function)) {
-      return call_user_func_array($function, $params);
-    }
-    else {
-      watchdog('php', 'The selected image handling toolkit %toolkit can not correctly process %function.', array('%toolkit' => $toolkit, '%function' => $function), WATCHDOG_ERROR);
-      return FALSE;
-    }
+function image_toolkit_invoke($method, stdClass $image, array $params = array()) {
+  $function = 'image_' . $image->toolkit . '_' . $method;
+  if (function_exists($function)) {
+    array_unshift($params, $image);
+    return call_user_func_array($function, $params);
   }
+  watchdog('image', 'The selected image handling toolkit %toolkit can not correctly process %function.', array('%toolkit' => $image->toolkit, '%function' => $function), WATCHDOG_ERROR);
+  return FALSE;
 }
-
 
 /**
  * Get details about an image.
  *
- * Drupal only supports GIF, JPG and PNG file formats.
+ * Drupal supports GIF, JPG and PNG file formats when used with the GD
+ * toolkit, and may support others, depending on which toolkits are
+ * installed.
+ *
+ * @param $filepath
+ *   String specifying the path of the image file.
+ * @param $toolkit
+ *   An optional image toolkit name to override the default.
  *
  * @return
  *   FALSE, if the file could not be found or is not an image. Otherwise, a
  *   keyed array containing information about the image:
- *    'width'     - Width in pixels.
- *    'height'    - Height in pixels.
- *    'extension' - Commonly used file extension for the image.
- *    'mime_type' - MIME type ('image/jpeg', 'image/gif', 'image/png').
- *    'file_size' - File size in bytes.
+ *   - "width": Width, in pixels.
+ *   - "height": Height, in pixels.
+ *   - "extension": Commonly used file extension for the image.
+ *   - "mime_type": MIME type ('image/jpeg', 'image/gif', 'image/png').
+ *   - "file_size": File size in bytes.
  */
-function image_get_info($file) {
-  // Proceed no further if this file doesn't exist. Some web servers (IIS) may
-  // not pass is_file() for newly uploaded files, so we need two checks here.
-  if (!is_file($file) && !is_uploaded_file($file)) {
-    return FALSE;
+function image_get_info($filepath, $toolkit = FALSE) {
+  $details = FALSE;
+  if (!is_file($filepath) && !is_uploaded_file($filepath)) {
+    return $details;
   }
 
-  $details = FALSE;
-  $data = @getimagesize($file);
-  $file_size = @filesize($file);
-
-  if (isset($data) && is_array($data)) {
-    $extensions = array('1' => 'gif', '2' => 'jpg', '3' => 'png');
-    $extension = array_key_exists($data[2], $extensions) ?  $extensions[$data[2]] : '';
-    $details = array('width'     => $data[0],
-                     'height'    => $data[1],
-                     'extension' => $extension,
-                     'file_size' => $file_size,
-                     'mime_type' => $data['mime']);
+  if (!$toolkit) {
+    $toolkit = image_get_toolkit();
+  }
+  if ($toolkit) {
+    $image = new stdClass();
+    $image->source = $filepath;
+    $image->toolkit = $toolkit;
+    $details = image_toolkit_invoke('get_info', $image);
+    if (isset($details) && is_array($details)) {
+      $details['file_size'] = filesize($filepath);
+    }
   }
 
   return $details;
 }
 
 /**
- * Scales an image to the exact width and height given. Achieves the
- * target aspect ratio by cropping the original image equally on both
- * sides, or equally on the top and bottom.  This function is, for
- * example, useful to create uniform sized avatars from larger images.
+ * Scales an image to the exact width and height given.
+ *
+ * This function achieves the target aspect ratio by cropping the original image
+ * equally on both sides, or equally on the top and bottom. This function is
+ * useful to create uniform sized avatars from larger images.
  *
  * The resulting image always has the exact target dimensions.
  *
- * @param $source
- *   The file path of the source image.
- * @param $destination
- *   The file path of the destination image.
+ * @param $image
+ *   An image object returned by image_load().
  * @param $width
  *   The target width, in pixels.
  * @param $height
  *   The target height, in pixels.
+ *
  * @return
- *   TRUE or FALSE, based on success.
+ *   TRUE on success, FALSE on failure.
+ *
+ * @see image_load()
+ * @see image_resize()
+ * @see image_crop()
  */
-function image_scale_and_crop($source, $destination, $width, $height) {
-  $info = image_get_info($source);
+function image_scale_and_crop(stdClass $image, $width, $height) {
+  $scale = max($width / $image->info['width'], $height / $image->info['height']);
+  $x = ($image->info['width'] * $scale - $width) / 2;
+  $y = ($image->info['height'] * $scale - $height) / 2;
 
-  $scale = max($width / $info['width'], $height / $info['height']);
-  $x = round(($info['width'] * $scale - $width) / 2);
-  $y = round(($info['height'] * $scale - $height) / 2);
-
-  if (image_toolkit_invoke('resize', array($source, $destination, $info['width'] * $scale, $info['height'] * $scale))) {
-    return image_toolkit_invoke('crop', array($destination, $destination, $x, $y, $width, $height));
+  if (image_resize($image, $image->info['width'] * $scale, $image->info['height'] * $scale)) {
+    return image_crop($image, $x, $y, $width, $height);
   }
   return FALSE;
 }
 
 /**
- * Scales an image to the given width and height while maintaining aspect
- * ratio.
+ * Scales image dimensions while maintaining aspect ratio.
  *
- * The resulting image can be smaller for one or both target dimensions.
+ * The resulting dimensions can be smaller for one or both target dimensions.
  *
- * @param $source
- *   The file path of the source image.
- * @param $destination
- *   The file path of the destination image.
+ * @param $dimensions
+ *   Dimensions to be modified - an array with components width and height, in
+ *   pixels.
  * @param $width
- *   The target width, in pixels.
+ *   The target width, in pixels. If this value is NULL then the scaling will be
+ *   based only on the height value.
  * @param $height
- *   The target height, in pixels.
+ *   The target height, in pixels. If this value is NULL then the scaling will
+ *   be based only on the width value.
+ * @param $upscale
+ *   Boolean indicating that images smaller than the target dimensions will be
+ *   scaled up. This generally results in a low quality image.
+ *
  * @return
- *   TRUE or FALSE, based on success.
+ *   TRUE if $dimensions was modified, FALSE otherwise.
+ *
+ * @see image_scale()
  */
-function image_scale($source, $destination, $width, $height) {
-  $info = image_get_info($source);
+function image_dimensions_scale(array &$dimensions, $width = NULL, $height = NULL, $upscale = FALSE) {
+  $aspect = $dimensions['height'] / $dimensions['width'];
 
-  // Don't scale up.
-  if ($width >= $info['width'] && $height >= $info['height']) {
+  // Calculate one of the dimensions from the other target dimension,
+  // ensuring the same aspect ratio as the source dimensions. If one of the
+  // target dimensions is missing, that is the one that is calculated. If both
+  // are specified then the dimension calculated is the one that would not be
+  // calculated to be bigger than its target.
+  if (($width && !$height) || ($width && $height && $aspect < $height / $width)) {
+    $height = (int) round($width * $aspect);
+  }
+  else {
+    $width = (int) round($height / $aspect);
+  }
+
+  // Don't upscale if the option isn't enabled.
+  if (!$upscale && ($width >= $dimensions['width'] || $height >= $dimensions['height'])) {
     return FALSE;
   }
 
-  $aspect = $info['height'] / $info['width'];
-  if ($aspect < $height / $width) {
-    $width = (int)min($width, $info['width']);
-    $height = (int)round($width * $aspect);
-  }
-  else {
-    $height = (int)min($height, $info['height']);
-    $width = (int)round($height / $aspect);
+  $dimensions['width'] = $width;
+  $dimensions['height'] = $height;
+  return TRUE;
+}
+
+/**
+ * Scales an image while maintaining aspect ratio.
+ *
+ * The resulting image can be smaller for one or both target dimensions.
+ *
+ * @param $image
+ *   An image object returned by image_load().
+ * @param $width
+ *   The target width, in pixels. This value is omitted then the scaling will
+ *   based only on the height value.
+ * @param $height
+ *   The target height, in pixels. This value is omitted then the scaling will
+ *   based only on the width value.
+ * @param $upscale
+ *   Boolean indicating that files smaller than the dimensions will be scaled
+ *   up. This generally results in a low quality image.
+ *
+ * @return
+ *   TRUE on success, FALSE on failure.
+ *
+ * @see image_dimensions_scale()
+ * @see image_load()
+ * @see image_scale_and_crop()
+ */
+function image_scale(stdClass $image, $width = NULL, $height = NULL, $upscale = FALSE) {
+  $dimensions = $image->info;
+
+  // Scale the dimensions - if they don't change then just return success.
+  if (!image_dimensions_scale($dimensions, $width, $height, $upscale)) {
+    return TRUE;
   }
 
-  return image_toolkit_invoke('resize', array($source, $destination, $width, $height));
+  return image_resize($image, $dimensions['width'], $dimensions['height']);
 }
 
 /**
  * Resize an image to the given dimensions (ignoring aspect ratio).
  *
- * @param $source
- *   The file path of the source image.
- * @param $destination
- *   The file path of the destination image.
+ * @param $image
+ *   An image object returned by image_load().
  * @param $width
  *   The target width, in pixels.
  * @param $height
  *   The target height, in pixels.
-  * @return
- *   TRUE or FALSE, based on success.
+ *
+ * @return
+ *   TRUE on success, FALSE on failure.
+ *
+ * @see image_load()
+ * @see image_gd_resize()
  */
-function image_resize($source, $destination, $width, $height) {
-  return image_toolkit_invoke('resize', array($source, $destination, $width, $height));
+function image_resize(stdClass $image, $width, $height) {
+  $width = (int) round($width);
+  $height = (int) round($height);
+
+  return image_toolkit_invoke('resize', $image, array($width, $height));
 }
 
 /**
  * Rotate an image by the given number of degrees.
  *
- * @param $source
- *   The file path of the source image.
- * @param $destination
- *   The file path of the destination image.
+ * @param $image
+ *   An image object returned by image_load().
  * @param $degrees
  *   The number of (clockwise) degrees to rotate the image.
  * @param $background
- *   An hexidecimal integer specifying the background color to use for the
+ *   An hexadecimal integer specifying the background color to use for the
  *   uncovered area of the image after the rotation. E.g. 0x000000 for black,
- *   0xff00ff for magenta, and 0xffffff for white.
+ *   0xff00ff for magenta, and 0xffffff for white. For images that support
+ *   transparency, this will default to transparent. Otherwise it will
+ *   be white.
+ *
  * @return
- *   TRUE or FALSE, based on success.
+ *   TRUE on success, FALSE on failure.
+ *
+ * @see image_load()
+ * @see image_gd_rotate()
  */
-function image_rotate($source, $destination, $degrees, $background = 0x000000) {
-  return image_toolkit_invoke('rotate', array($source, $destination, $degrees, $background));
+function image_rotate(stdClass $image, $degrees, $background = NULL) {
+  return image_toolkit_invoke('rotate', $image, array($degrees, $background));
 }
 
 /**
  * Crop an image to the rectangle specified by the given rectangle.
  *
- * @param $source
- *   The file path of the source image.
- * @param $destination
- *   The file path of the destination image.
+ * @param $image
+ *   An image object returned by image_load().
  * @param $x
- *   The top left co-ordinate, in pixels, of the crop area (x axis value).
+ *   The top left coordinate, in pixels, of the crop area (x axis value).
  * @param $y
- *   The top left co-ordinate, in pixels, of the crop area (y axis value).
+ *   The top left coordinate, in pixels, of the crop area (y axis value).
  * @param $width
  *   The target width, in pixels.
  * @param $height
  *   The target height, in pixels.
+ *
  * @return
- *   TRUE or FALSE, based on success.
+ *   TRUE on success, FALSE on failure.
+ *
+ * @see image_load()
+ * @see image_scale_and_crop()
+ * @see image_gd_crop()
  */
-function image_crop($source, $destination, $x, $y, $width, $height) {
-  return image_toolkit_invoke('crop', array($source, $destination, $x, $y, $width, $height));
+function image_crop(stdClass $image, $x, $y, $width, $height) {
+  $aspect = $image->info['height'] / $image->info['width'];
+  if (empty($height)) $height = $width / $aspect;
+  if (empty($width)) $width = $height * $aspect;
+
+  $width = (int) round($width);
+  $height = (int) round($height);
+
+  return image_toolkit_invoke('crop', $image, array($x, $y, $width, $height));
+}
+
+/**
+ * Convert an image to grayscale.
+ *
+ * @param $image
+ *   An image object returned by image_load().
+ *
+ * @return
+ *   TRUE on success, FALSE on failure.
+ *
+ * @see image_load()
+ * @see image_gd_desaturate()
+ */
+function image_desaturate(stdClass $image) {
+  return image_toolkit_invoke('desaturate', $image);
+}
+
+
+/**
+ * Load an image file and return an image object.
+ *
+ * Any changes to the file are not saved until image_save() is called.
+ *
+ * @param $file
+ *   Path to an image file.
+ * @param $toolkit
+ *   An optional, image toolkit name to override the default.
+ *
+ * @return
+ *   An image object or FALSE if there was a problem loading the file. The
+ *   image object has the following properties:
+ *    - 'source' - The original file path.
+ *    - 'info' - The array of information returned by image_get_info()
+ *    - 'toolkit' - The name of the image toolkit requested when the image was
+ *      loaded.
+ *   Image toolkits may add additional properties. The caller is advised not to
+ *   monkey about with them.
+ *
+ * @see image_save()
+ * @see image_get_info()
+ * @see image_get_available_toolkits()
+ * @see image_gd_load()
+ */
+function image_load($file, $toolkit = FALSE) {
+  if (!$toolkit) {
+    $toolkit = image_get_toolkit();
+  }
+  if ($toolkit) {
+    $image = new stdClass();
+    $image->source = $file;
+    $image->info = image_get_info($file, $toolkit);
+    if (isset($image->info) && is_array($image->info)) {
+      $image->toolkit = $toolkit;
+      if (image_toolkit_invoke('load', $image)) {
+        return $image;
+      }
+    }
+  }
+  return FALSE;
+}
+
+/**
+ * Close the image and save the changes to a file.
+ *
+ * @param $image
+ *   An image object returned by image_load(). The object's 'info' property
+ *   will be updated if the file is saved successfully.
+ * @param $destination
+ *   Destination path where the image should be saved. If it is empty the
+ *   original image file will be overwritten.
+ *
+ * @return
+ *   TRUE on success, FALSE on failure.
+ *
+ * @see image_load()
+ * @see image_gd_save()
+ */
+function image_save(stdClass $image, $destination = NULL) {
+  if (empty($destination)) {
+    $destination = $image->source;
+  }
+  if ($return = image_toolkit_invoke('save', $image, array($destination))) {
+    // Clear the cached file size and refresh the image information.
+    clearstatcache();
+    $image->info = image_get_info($destination, $image->toolkit);
+
+    if (drupal_chmod($destination)) {
+      return $return;
+    }
+  }
+  return FALSE;
 }
 
 /**

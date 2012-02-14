@@ -8,18 +8,7 @@
 /**
  * Form builder for the update settings tab.
  */
-function update_settings() {
-  $form = array();
-
-  $notify_emails = variable_get('update_notify_emails', array());
-  $form['update_notify_emails'] = array(
-    '#type' => 'textarea',
-    '#title' => t('E-mail addresses to notify when updates are available'),
-    '#rows' => 4,
-    '#default_value' => implode("\n", $notify_emails),
-    '#description' => t('Whenever your site checks for available updates and finds new releases, it can notify a list of users via e-mail. Put each address on a separate line. If blank, no e-mails will be sent.'),
-  );
-
+function update_settings($form) {
   $form['update_check_frequency'] = array(
     '#type' => 'radios',
     '#title' => t('Check for updates'),
@@ -29,6 +18,21 @@ function update_settings() {
       '7' => t('Weekly'),
     ),
     '#description' => t('Select how frequently you want to automatically check for new releases of your currently installed modules and themes.'),
+  );
+
+  $form['update_check_disabled'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Check for updates of disabled modules and themes'),
+    '#default_value' => variable_get('update_check_disabled', FALSE),
+  );
+
+  $notify_emails = variable_get('update_notify_emails', array());
+  $form['update_notify_emails'] = array(
+    '#type' => 'textarea',
+    '#title' => t('E-mail addresses to notify when updates are available'),
+    '#rows' => 4,
+    '#default_value' => implode("\n", $notify_emails),
+    '#description' => t('Whenever your site checks for available updates and finds new releases, it can notify a list of users via e-mail. Put each address on a separate line. If blank, no e-mails will be sent.'),
   );
 
   $form['update_notification_threshold'] = array(
@@ -43,7 +47,7 @@ function update_settings() {
   );
 
   $form = system_settings_form($form);
-  // Custom valiation callback for the email notification setting.
+  // Custom validation callback for the email notification setting.
   $form['#validate'][] = 'update_settings_validate';
   // We need to call our own submit callback first, not the one from
   // system_settings_form(), so that we can process and save the emails.
@@ -86,22 +90,31 @@ function update_settings_validate($form, &$form_state) {
 
 /**
  * Submit handler for the settings tab.
+ *
+ * Also invalidates the cache of available updates if the "Check for updates
+ * of disabled modules and themes" setting is being changed. The available
+ * updates report need to refetch available update data after this setting
+ * changes or it would show misleading things (e.g. listing the disabled
+ * projects on the site with the "No available releases found" warning).
  */
 function update_settings_submit($form, $form_state) {
   $op = $form_state['values']['op'];
 
-  if ($op == t('Reset to defaults')) {
-    unset($form_state['notify_emails']);
+  if (empty($form_state['notify_emails'])) {
+    variable_del('update_notify_emails');
   }
   else {
-    if (empty($form_state['notify_emails'])) {
-      variable_del('update_notify_emails');
-    }
-    else {
-      variable_set('update_notify_emails', $form_state['notify_emails']);
-    }
-    unset($form_state['notify_emails']);
-    unset($form_state['values']['update_notify_emails']);
+    variable_set('update_notify_emails', $form_state['notify_emails']);
   }
+  unset($form_state['notify_emails']);
+  unset($form_state['values']['update_notify_emails']);
+
+  // See if the update_check_disabled setting is being changed, and if so,
+  // invalidate all cached update status data.
+  $check_disabled = variable_get('update_check_disabled', FALSE);
+  if ($form_state['values']['update_check_disabled'] != $check_disabled) {
+    _update_cache_clear();
+  }
+
   system_settings_form_submit($form, $form_state);
 }

@@ -12,46 +12,33 @@
  */
 
 /**
- * Implementation of hook_help().
+ * Implements hook_help().
  */
 function dblog_help($path, $arg) {
   switch ($path) {
     case 'admin/help#dblog':
-      $output = '<p>'. t('The dblog module monitors your system, capturing system events in a log to be reviewed by an authorized individual at a later time. This is useful for site administrators who want a quick overview of activities on their site. The logs also record the sequence of events, so it can be useful for debugging site errors.') .'</p>';
-      $output .= '<p>'. t('The dblog log is simply a list of recorded events containing usage data, performance data, errors, warnings and operational information. Administrators should check the dblog report on a regular basis to ensure their site is working properly.') .'</p>';
-      $output .= '<p>'. t('For more information, see the online handbook entry for <a href="@dblog">Dblog module</a>.', array('@dblog' => 'http://drupal.org/handbook/modules/dblog/')) .'</p>';
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('The Database logging module logs system events in the Drupal database. For more information, see the online handbook entry for the <a href="@dblog">Database logging module</a>.', array('@dblog' => 'http://drupal.org/handbook/modules/dblog')) . '</p>';
+      $output .= '<h3>' . t('Uses') . '</h3>';
+      $output .= '<dl>';
+      $output .= '<dt>' . t('Monitoring your site') . '</dt>';
+      $output .= '<dd>' . t('The Database logging module allows you to view an event log on the <a href="@dblog">Recent log messages</a> page. The log is a chronological list of recorded events containing usage data, performance data, errors, warnings and operational information. Administrators should check the log on a regular basis to ensure their site is working properly.', array('@dblog' => url('admin/reports/dblog'))) . '</dd>';
+      $output .= '<dt>' . t('Debugging site problems') . '</dt>';
+      $output .= '<dd>' . t('In case of errors or problems with the site, the <a href="@dblog">Recent log messages</a> page can be useful for debugging, since it shows the sequence of events. The log messages include usage information, warnings, and errors.', array('@dblog' => url('admin/reports/dblog'))) . '</dd>';
+      $output .= '</dl>';
       return $output;
     case 'admin/reports/dblog':
-      return '<p>'. t('The dblog module monitors your website, capturing system events in a log to be reviewed by an authorized individual at a later time. The dblog log is simply a list of recorded events containing usage data, performance data, errors, warnings and operational information. It is vital to check the dblog report on a regular basis as it is often the only way to tell what is going on.') .'</p>';
+      return '<p>' . t('The Database logging module monitors your website, capturing system events in a log (shown here) to be reviewed by an authorized individual at a later time. This log is a list of recorded events containing usage data, performance data, errors, warnings and operational information. It is vital to check the Recent log messages report on a regular basis, as it is often the only way to tell what is going on.') . '</p>';
   }
 }
 
 /**
- * Implementation of hook_theme()
- */
-function dblog_theme() {
-  return array(
-    'dblog_filters' => array(
-      'arguments' => array('form' => NULL),
-    ),
-  );
-}
-
-/**
- * Implementation of hook_menu().
+ * Implements hook_menu().
  */
 function dblog_menu() {
-  $items['admin/settings/logging/dblog'] = array(
-    'title' => 'Database logging',
-    'description' => 'Settings for logging to the Drupal database logs. This is the most common method for small to medium sites on shared hosting. The logs are viewable from the admin pages.',
-    'page callback' => 'drupal_get_form',
-    'page arguments' => array('dblog_admin_settings'),
-    'access arguments' => array('administer site configuration'),
-    'file' => 'dblog.admin.inc',
-  );
-
   $items['admin/reports/dblog'] = array(
-    'title' => 'Recent log entries',
+    'title' => 'Recent log messages',
     'description' => 'View events that have recently been logged.',
     'page callback' => 'dblog_overview',
     'access arguments' => array('access site reports'),
@@ -79,38 +66,58 @@ function dblog_menu() {
     'page callback' => 'dblog_event',
     'page arguments' => array(3),
     'access arguments' => array('access site reports'),
-    'type' => MENU_CALLBACK,
     'file' => 'dblog.admin.inc',
   );
+
+  if (module_exists('search')) {
+    $items['admin/reports/search'] = array(
+      'title' => 'Top search phrases',
+      'description' => 'View most popular search phrases.',
+      'page callback' => 'dblog_top',
+      'page arguments' => array('search'),
+      'access arguments' => array('access site reports'),
+      'file' => 'dblog.admin.inc',
+    );
+  }
+
   return $items;
 }
 
+/**
+ * Implements hook_init().
+ */
 function dblog_init() {
   if (arg(0) == 'admin' && arg(1) == 'reports') {
     // Add the CSS for this module
-    drupal_add_css(drupal_get_path('module', 'dblog') .'/dblog.css', 'module', 'all', FALSE);
+    drupal_add_css(drupal_get_path('module', 'dblog') . '/dblog.css');
   }
 }
 
-
-
 /**
- * Implementation of hook_cron().
+ * Implements hook_cron().
  *
  * Remove expired log messages and flood control events.
  */
 function dblog_cron() {
-  // Cleanup the watchdog table
-  $max = db_result(db_query('SELECT MAX(wid) FROM {watchdog}'));
-  db_query('DELETE FROM {watchdog} WHERE wid <= %d', $max - variable_get('dblog_row_limit', 1000));
-}
+  // Cleanup the watchdog table.
+  $row_limit = variable_get('dblog_row_limit', 1000);
 
-/**
- * Implementation of hook_user().
- */
-function dblog_user($op, &$edit, &$user) {
-  if ($op == 'delete') {
-    db_query('UPDATE {watchdog} SET uid = 0 WHERE uid = %d', $user->uid);
+  // For row limit n, get the wid of the nth row in descending wid order.
+  // Counting the most recent n rows avoids issues with wid number sequences,
+  // e.g. auto_increment value > 1 or rows deleted directly from the table.
+  if ($row_limit > 0) {
+    $min_row = db_select('watchdog', 'w')
+      ->fields('w', array('wid'))
+      ->orderBy('wid', 'DESC')
+      ->range($row_limit - 1, 1)
+      ->execute()->fetchField();
+
+    // Delete all table entries older than the nth row, if nth row was found.
+    if ($min_row) {
+      db_delete('watchdog')
+        ->condition('wid', $min_row, '<')
+        ->execute();
+    }
   }
 }
 
@@ -118,7 +125,7 @@ function _dblog_get_message_types() {
   $types = array();
 
   $result = db_query('SELECT DISTINCT(type) FROM {watchdog} ORDER BY type');
-  while ($object = db_fetch_object($result)) {
+  foreach ($result as $object) {
     $types[] = $object->type;
   }
 
@@ -126,41 +133,52 @@ function _dblog_get_message_types() {
 }
 
 /**
- * Implementation of hook_watchdog().
+ * Implements hook_watchdog().
+ *
+ * Note some values may be truncated for database column size restrictions.
  */
-function dblog_watchdog($log = array()) {
-  $current_db = db_set_active();
-  db_query("INSERT INTO {watchdog}
-    (uid, type, message, variables, severity, link, location, referer, hostname, timestamp)
-    VALUES
-    (%d, '%s', '%s', '%s', %d, '%s', '%s', '%s', '%s', %d)",
-    $log['user']->uid,
-    $log['type'],
-    $log['message'],
-    serialize($log['variables']),
-    $log['severity'],
-    $log['link'],
-    $log['request_uri'],
-    $log['referer'],
-    $log['ip'],
-    $log['timestamp']);
+function dblog_watchdog(array $log_entry) {
+  // The user object may not exist in all conditions, so 0 is substituted if needed.
+  $user_uid = isset($log_entry['user']->uid) ? $log_entry['user']->uid : 0;
 
-  if ($current_db) {
-    db_set_active($current_db);
-  }
+  Database::getConnection('default', 'default')->insert('watchdog')
+    ->fields(array(
+      'uid' => $user_uid,
+      'type' => substr($log_entry['type'], 0, 64),
+      'message' => $log_entry['message'],
+      'variables' => serialize($log_entry['variables']),
+      'severity' => $log_entry['severity'],
+      'link' => substr($log_entry['link'], 0, 255),
+      'location' => $log_entry['request_uri'],
+      'referer' => $log_entry['referer'],
+      'hostname' => substr($log_entry['ip'], 0, 128),
+      'timestamp' => $log_entry['timestamp'],
+    ))
+    ->execute();
 }
 
 /**
- * Theme dblog administration filter selector.
- *
- * @ingroup themeable
+ * Implements hook_form_FORM_ID_alter().
  */
-function theme_dblog_filters($form) {
-  $output = '';
-  foreach (element_children($form['status']) as $key) {
-    $output .= drupal_render($form['status'][$key]);
-  }
-  $output .= '<div id="dblog-admin-buttons">'. drupal_render($form['buttons']) .'</div>';
-  return $output;
+function dblog_form_system_logging_settings_alter(&$form, $form_state) {
+  $form['dblog_row_limit'] = array(
+    '#type' => 'select',
+    '#title' => t('Database log messages to keep'),
+    '#default_value' => variable_get('dblog_row_limit', 1000),
+    '#options' => array(0 => t('All')) + drupal_map_assoc(array(100, 1000, 10000, 100000, 1000000)),
+    '#description' => t('The maximum number of messages to keep in the database log. Requires a <a href="@cron">cron maintenance task</a>.', array('@cron' => url('admin/reports/status')))
+  );
+  $form['actions']['#weight'] = 1;
 }
 
+/**
+ * Implements hook_theme().
+ */
+function dblog_theme() {
+  return array(
+    'dblog_message' => array(
+      'variables' => array('event' => NULL, 'link' => FALSE),
+      'file' => 'dblog.admin.inc',
+    ),
+  );
+}

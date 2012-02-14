@@ -9,107 +9,132 @@
  * Displays the content type admin overview page.
  */
 function node_overview_types() {
-  $types = node_get_types();
-  $names = node_get_types('names');
-  $header = array(t('Name'), t('Type'), t('Description'), array('data' => t('Operations'), 'colspan' => '2'));
+  $types = node_type_get_types();
+  $names = node_type_get_names();
+  $field_ui = module_exists('field_ui');
+  $header = array(t('Name'), array('data' => t('Operations'), 'colspan' => $field_ui ? '4' : '2'));
   $rows = array();
 
   foreach ($names as $key => $name) {
     $type = $types[$key];
-    if (node_hook($type, 'form')) {
+    if (node_hook($type->type, 'form')) {
       $type_url_str = str_replace('_', '-', $type->type);
-      $row = array(
-        l($name, 'admin/content/node-type/'. $type_url_str),
-        check_plain($type->type),
-        filter_xss_admin($type->description),
-      );
+      $row = array(theme('node_admin_overview', array('name' => $name, 'type' => $type)));
       // Set the edit column.
-      $row[] = array('data' => l(t('edit'), 'admin/content/node-type/'. $type_url_str));
+      $row[] = array('data' => l(t('edit'), 'admin/structure/types/manage/' . $type_url_str));
+
+      if ($field_ui) {
+        // Manage fields.
+        $row[] = array('data' => l(t('manage fields'), 'admin/structure/types/manage/' . $type_url_str . '/fields'));
+
+        // Display fields.
+        $row[] = array('data' => l(t('manage display'), 'admin/structure/types/manage/' . $type_url_str . '/display'));
+      }
 
       // Set the delete column.
       if ($type->custom) {
-        $row[] = array('data' => l(t('delete'), 'admin/content/node-type/'. $type_url_str .'/delete'));
+        $row[] = array('data' => l(t('delete'), 'admin/structure/types/manage/' . $type_url_str . '/delete'));
       }
       else {
         $row[] = array('data' => '');
       }
+
       $rows[] = $row;
     }
   }
 
-  if (empty($rows)) {
-    $rows[] = array(array('data' => t('No content types available.'), 'colspan' => '5', 'class' => 'message'));
-  }
+  $build['node_table'] = array(
+    '#theme' => 'table',
+    '#header' => $header,
+    '#rows' => $rows,
+    '#empty' => t('No content types available. <a href="@link">Add content type</a>.', array('@link' => url('admin/structure/types/add'))),
+  );
 
-  return theme('table', $header, $rows);
+  return $build;
 }
 
 /**
- * Generates the node type editing form.
+ * Returns HTML for a node type description for the content type admin overview page.
+ *
+ * @param $variables
+ *   An associative array containing:
+ *   - name: The human-readable name of the content type.
+ *   - type: An object containing the 'type' (machine name) and 'description' of
+ *     the content type.
+ *
+ * @ingroup themeable
  */
-function node_type_form(&$form_state, $type = NULL) {
+function theme_node_admin_overview($variables) {
+  $name = $variables['name'];
+  $type = $variables['type'];
+
+  $output = check_plain($name);
+  $output .= ' <small>' . t('(Machine name: @type)', array('@type' => $type->type)) . '</small>';
+  $output .= '<div class="description">' . filter_xss_admin($type->description) . '</div>';
+  return $output;
+}
+
+/**
+ * Form constructor for the node type editing form.
+ *
+ * @param $type
+ *   (optional) The machine name of the node type when editing an existing node
+ *   type.
+ *
+ * @see node_type_form_validate()
+ * @see node_type_form_submit()
+ * @ingroup forms
+ */
+function node_type_form($form, &$form_state, $type = NULL) {
   if (!isset($type->type)) {
-    $type = new stdClass();
-    $type->type = $type->name = $type->module = $type->description = $type->help = '';
-    $type->min_word_count = 0;
-    $type->has_title = TRUE;
-    $type->has_body = TRUE;
-    $type->title_label = t('Title');
-    $type->body_label = t('Body');
-    $type->custom = TRUE;
-    $type->modified = FALSE;
-    $type->locked = FALSE;
+    // This is a new type. Node module managed types are custom and unlocked.
+    $type = node_type_set_defaults(array('custom' => 1, 'locked' => 0));
   }
 
-  $form['#node_type'] = $type; // Make the type object available to implementations of hook_form_alter.
+  // Make the type object available to implementations of hook_form_alter.
+  $form['#node_type'] = $type;
 
-  $form['identity'] = array(
-    '#type' => 'fieldset',
-    '#title' => t('Identification'),
-  );
-  $form['identity']['name'] = array(
+  $form['name'] = array(
     '#title' => t('Name'),
     '#type' => 'textfield',
     '#default_value' => $type->name,
-    '#description' => t('The human-readable name of this content type. This text will be displayed as part of the list on the <em>create content</em> page. It is recommended that this name begin with a capital letter and contain only letters, numbers, and <strong>spaces</strong>. This name must be unique.'),
+    '#description' => t('The human-readable name of this content type. This text will be displayed as part of the list on the <em>Add new content</em> page. It is recommended that this name begin with a capital letter and contain only letters, numbers, and spaces. This name must be unique.'),
     '#required' => TRUE,
+    '#size' => 30,
   );
 
-  if (!$type->locked) {
-    $form['identity']['type'] = array(
-      '#title' => t('Type'),
-      '#type' => 'textfield',
-      '#default_value' => $type->type,
-      '#maxlength' => 32,
-      '#required' => TRUE,
-      '#description' => t('The machine-readable name of this content type. This text will be used for constructing the URL of the <em>create content</em> page for this content type. This name must contain only lowercase letters, numbers, and underscores. Underscores will be converted into hyphens when constructing the URL of the <em>create content</em> page. This name must be unique.'),
-    );
-  }
-  else {
-    $form['identity']['type'] = array(
-      '#type' => 'value',
-      '#value' => $type->type,
-    );
-    $form['identity']['type_display'] = array(
-      '#title' => t('Type'),
-      '#type' => 'item',
-      '#value' => theme('placeholder', $type->type),
-      '#description' => t('The machine-readable name of this content type. This field cannot be modified for system-defined content types.'),
-    );
-  }
+  $form['type'] = array(
+    '#type' => 'machine_name',
+    '#default_value' => $type->type,
+    '#maxlength' => 32,
+    '#disabled' => $type->locked,
+    '#machine_name' => array(
+      'exists' => 'node_type_load',
+    ),
+    '#description' => t('A unique machine-readable name for this content type. It must only contain lowercase letters, numbers, and underscores. This name will be used for constructing the URL of the %node-add page, in which underscores will be converted into hyphens.', array(
+      '%node-add' => t('Add new content'),
+    )),
+  );
 
-  $form['identity']['description'] = array(
+  $form['description'] = array(
     '#title' => t('Description'),
     '#type' => 'textarea',
     '#default_value' => $type->description,
-    '#description' => t('A brief description of this content type. This text will be displayed as part of the list on the <em>create content</em> page.'),
-    );
+    '#description' => t('Describe this content type. The text will be displayed on the <em>Add new content</em> page.'),
+  );
+
+  $form['additional_settings'] = array(
+    '#type' => 'vertical_tabs',
+    '#attached' => array(
+      'js' => array(drupal_get_path('module', 'node') . '/content_types.js'),
+    ),
+  );
 
   $form['submission'] = array(
     '#type' => 'fieldset',
     '#title' => t('Submission form settings'),
     '#collapsible' => TRUE,
-    '#collapsed' => TRUE,
+    '#group' => 'additional_settings',
   );
   $form['submission']['title_label'] = array(
     '#title' => t('Title field label'),
@@ -124,43 +149,53 @@ function node_type_form(&$form_state, $type = NULL) {
     $form['submission']['title_label']['#description'] = t('This content type does not have a title field.');
     $form['submission']['title_label']['#required'] = FALSE;
   }
-  $form['submission']['body_label'] = array(
-    '#title' => t('Body field label'),
-    '#type' => 'textfield',
-    '#default_value' => isset($type->body_label) ? $type->body_label : '',
-    '#description' => t('To omit the body field for this content type, remove any text and leave this field blank.'),
-  );
-  $form['submission']['min_word_count'] = array(
-    '#type' => 'select',
-    '#title' => t('Minimum number of words'),
-    '#default_value' => $type->min_word_count,
-    '#options' => drupal_map_assoc(array(0, 1, 10, 25, 50, 75, 100, 125, 150, 175, 200)),
-    '#description' => t('The minimum number of words for the body field to be considered valid for this content type. This can be useful to rule out submissions that do not meet the site\'s standards, such as short test posts.')
+  $form['submission']['node_preview'] = array(
+    '#type' => 'radios',
+    '#title' => t('Preview before submitting'),
+    '#default_value' => variable_get('node_preview_' . $type->type, DRUPAL_OPTIONAL),
+    '#options' => array(
+      DRUPAL_DISABLED => t('Disabled'),
+      DRUPAL_OPTIONAL => t('Optional'),
+      DRUPAL_REQUIRED => t('Required'),
+    ),
   );
   $form['submission']['help']  = array(
     '#type' => 'textarea',
     '#title' => t('Explanation or submission guidelines'),
     '#default_value' => $type->help,
-    '#description' => t('This text will be displayed at the top of the submission form for this content type. It is useful for helping or instructing your users.')
+    '#description' => t('This text will be displayed at the top of the page when creating or editing content of this type.'),
   );
   $form['workflow'] = array(
     '#type' => 'fieldset',
-    '#title' => t('Workflow settings'),
+    '#title' => t('Publishing options'),
     '#collapsible' => TRUE,
     '#collapsed' => TRUE,
+    '#group' => 'additional_settings',
   );
   $form['workflow']['node_options'] = array('#type' => 'checkboxes',
     '#title' => t('Default options'),
-    '#default_value' => variable_get('node_options_'. $type->type, array('status', 'promote')),
+    '#default_value' => variable_get('node_options_' . $type->type, array('status', 'promote')),
     '#options' => array(
       'status' => t('Published'),
       'promote' => t('Promoted to front page'),
       'sticky' => t('Sticky at top of lists'),
       'revision' => t('Create new revision'),
     ),
-    '#description' => t('Users with the <em>administer nodes</em> permission will be able to override these options.'),
+    '#description' => t('Users with the <em>Administer content</em> permission will be able to override these options.'),
   );
-
+  $form['display'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Display settings'),
+    '#collapsible' => TRUE,
+    '#collapsed' => TRUE,
+    '#group' => 'additional_settings',
+  );
+  $form['display']['node_submitted'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Display author and date information.'),
+    '#default_value' => variable_get('node_submitted_' . $type->type, TRUE),
+    '#description' => t('Author username and publish date will be displayed.'),
+  );
   $form['old_type'] = array(
     '#type' => 'value',
     '#value' => $type->type,
@@ -169,9 +204,9 @@ function node_type_form(&$form_state, $type = NULL) {
     '#type' => 'value',
     '#value' => isset($type->orig_type) ? $type->orig_type : '',
   );
-  $form['module'] = array(
+  $form['base'] = array(
     '#type' => 'value',
-    '#value' => $type->module,
+    '#value' => $type->base,
   );
   $form['custom'] = array(
     '#type' => 'value',
@@ -186,7 +221,8 @@ function node_type_form(&$form_state, $type = NULL) {
     '#value' => $type->locked,
   );
 
-  $form['submit'] = array(
+  $form['actions'] = array('#type' => 'actions');
+  $form['actions']['submit'] = array(
     '#type' => 'submit',
     '#value' => t('Save content type'),
     '#weight' => 40,
@@ -194,26 +230,28 @@ function node_type_form(&$form_state, $type = NULL) {
 
   if ($type->custom) {
     if (!empty($type->type)) {
-      $form['delete'] = array(
+      $form['actions']['delete'] = array(
         '#type' => 'submit',
         '#value' => t('Delete content type'),
         '#weight' => 45,
       );
     }
   }
-  else {
-    $form['reset'] = array(
-      '#type' => 'submit',
-      '#value' => t('Reset to defaults'),
-      '#weight' => 50,
-    );
-  }
 
   return $form;
 }
 
 /**
- * Validates the content type submission form generated by node_type_form().
+ * Helper function for teaser length choices.
+ */
+function _node_characters($length) {
+  return ($length == 0) ? t('Unlimited') : format_plural($length, '1 character', '@count characters');
+}
+
+/**
+ * Form validation handler for node_type_form().
+ *
+ * @see node_type_form_submit()
  */
 function node_type_form_validate($form, &$form_state) {
   $type = new stdClass();
@@ -223,19 +261,13 @@ function node_type_form_validate($form, &$form_state) {
   // Work out what the type was before the user submitted this form
   $old_type = trim($form_state['values']['old_type']);
 
-  $types = node_get_types('names');
+  $types = node_type_get_names();
 
   if (!$form_state['values']['locked']) {
-    if (isset($types[$type->type]) && $type->type != $old_type) {
-      form_set_error('type', t('The machine-readable name %type is already taken.', array('%type' => $type->type)));
-    }
-    if (!preg_match('!^[a-z0-9_]+$!', $type->type)) {
-      form_set_error('type', t('The machine-readable name must contain only lowercase letters, numbers, and underscores.'));
-    }
     // 'theme' conflicts with theme_node_form().
     // '0' is invalid, since elsewhere we check it using empty().
     if (in_array($type->type, array('0', 'theme'))) {
-      form_set_error('type', t("Invalid machine-readable name. Please enter a name other than %invalid.", array('%invalid' => $type->type)));
+      form_set_error('type', t("Invalid machine-readable name. Enter a name other than %invalid.", array('%invalid' => $type->type)));
     }
   }
 
@@ -247,12 +279,14 @@ function node_type_form_validate($form, &$form_state) {
 }
 
 /**
- * Implementation of hook_form_submit().
+ * Form submission handler for node_type_form().
+ *
+ * @see node_type_form_validate()
  */
 function node_type_form_submit($form, &$form_state) {
   $op = isset($form_state['values']['op']) ? $form_state['values']['op'] : '';
 
-  $type = new stdClass();
+  $type = node_type_set_defaults();
 
   $type->type = trim($form_state['values']['type']);
   $type->name = trim($form_state['values']['name']);
@@ -261,29 +295,23 @@ function node_type_form_submit($form, &$form_state) {
 
   $type->description = $form_state['values']['description'];
   $type->help = $form_state['values']['help'];
-  $type->min_word_count = $form_state['values']['min_word_count'];
   $type->title_label = $form_state['values']['title_label'];
-  $type->body_label = $form_state['values']['body_label'];
-
   // title_label is required in core; has_title will always be true, unless a
   // module alters the title field.
   $type->has_title = ($type->title_label != '');
-  $type->has_body = ($type->body_label != '');
 
-  $type->module = !empty($form_state['values']['module']) ? $form_state['values']['module'] : 'node';
+  $type->base = !empty($form_state['values']['base']) ? $form_state['values']['base'] : 'node_content';
   $type->custom = $form_state['values']['custom'];
   $type->modified = TRUE;
   $type->locked = $form_state['values']['locked'];
-
-  if ($op == t('Reset to defaults')) {
-    node_type_reset($type);
+  if (isset($form['#node_type']->module)) {
+    $type->module = $form['#node_type']->module;
   }
-  elseif ($op == t('Delete content type')) {
-    $form_state['redirect'] = 'admin/content/node-type/'. str_replace('_', '-', $type->old_type) .'/delete';
+
+  if ($op == t('Delete content type')) {
+    $form_state['redirect'] = 'admin/structure/types/manage/' . str_replace('_', '-', $type->old_type) . '/delete';
     return;
   }
-
-  $status = node_type_save($type);
 
   $variables = $form_state['values'];
 
@@ -295,54 +323,62 @@ function node_type_form_submit($form, &$form_state) {
     }
   }
 
-  unset($variables['form_token'], $variables['op'], $variables['submit'], $variables['delete'], $variables['reset'], $variables['form_id']);
+  unset($variables['form_token'], $variables['op'], $variables['submit'], $variables['delete'], $variables['reset'], $variables['form_id'], $variables['form_build_id']);
 
   // Save or reset persistent variable values.
   foreach ($variables as $key => $value) {
-    $variable_new = $key .'_'. $type->type;
-    $variable_old = $key .'_'. $type->old_type;
+    $variable_new = $key . '_' . $type->type;
+    $variable_old = $key . '_' . $type->old_type;
 
-    if ($op == t('Reset to defaults')) {
+    if (is_array($value)) {
+      $value = array_keys(array_filter($value));
+    }
+    variable_set($variable_new, $value);
+
+    if ($variable_new != $variable_old) {
       variable_del($variable_old);
     }
-    else {
-      if (is_array($value)) {
-        $value = array_keys(array_filter($value));
-      }
-      variable_set($variable_new, $value);
-
-      if ($variable_new != $variable_old) {
-        variable_del($variable_old);
-      }
-    }
   }
+
+  // Saving the content type after saving the variables allows modules to act
+  // on those variables via hook_node_type_insert().
+  $status = node_type_save($type);
 
   node_types_rebuild();
   menu_rebuild();
   $t_args = array('%name' => $type->name);
 
-  if ($op == t('Reset to defaults')) {
-    drupal_set_message(t('The content type %name has been reset to its default values.', $t_args));
-    return;
-  }
-
   if ($status == SAVED_UPDATED) {
     drupal_set_message(t('The content type %name has been updated.', $t_args));
   }
   elseif ($status == SAVED_NEW) {
+    node_add_body_field($type);
     drupal_set_message(t('The content type %name has been added.', $t_args));
-    watchdog('node', 'Added content type %name.', $t_args, WATCHDOG_NOTICE, l(t('view'), 'admin/content/types'));
+    watchdog('node', 'Added content type %name.', $t_args, WATCHDOG_NOTICE, l(t('view'), 'admin/structure/types'));
   }
 
-  $form_state['redirect'] = 'admin/content/types';
+  $form_state['redirect'] = 'admin/structure/types';
   return;
 }
 
 /**
- * Implementation of hook_node_type().
+ * Implements hook_node_type_insert().
  */
-function node_node_type($op, $info) {
-  if ($op != 'delete' && !empty($info->old_type) && $info->old_type != $info->type) {
+function node_node_type_insert($info) {
+  if (!empty($info->old_type) && $info->old_type != $info->type) {
+    $update_count = node_type_update_nodes($info->old_type, $info->type);
+
+    if ($update_count) {
+      drupal_set_message(format_plural($update_count, 'Changed the content type of 1 post from %old-type to %type.', 'Changed the content type of @count posts from %old-type to %type.', array('%old-type' => $info->old_type, '%type' => $info->type)));
+    }
+  }
+}
+
+/**
+ * Implements hook_node_type_update().
+ */
+function node_node_type_update($info) {
+  if (!empty($info->old_type) && $info->old_type != $info->type) {
     $update_count = node_type_update_nodes($info->old_type, $info->type);
 
     if ($update_count) {
@@ -355,16 +391,16 @@ function node_node_type($op, $info) {
  * Resets all of the relevant fields of a module-defined node type to their
  * default values.
  *
- * @param &$type
+ * @param $type
  *   The node type to reset. The node type is passed back by reference with its
  *   resetted values. If there is no module-defined info for this node type,
  *   then nothing happens.
  */
-function node_type_reset(&$type) {
+function node_type_reset($type) {
   $info_array = module_invoke_all('node_info');
   if (isset($info_array[$type->orig_type])) {
-    $info_array[$type->orig_type]['type'] = $type->orig_type; 
-    $info = _node_type_set_defaults($info_array[$type->orig_type]);
+    $info_array[$type->orig_type]['type'] = $type->orig_type;
+    $info = node_type_set_defaults($info_array[$type->orig_type]);
 
     foreach ($info as $field => $value) {
       $type->$field = $value;
@@ -375,21 +411,21 @@ function node_type_reset(&$type) {
 /**
  * Menu callback; delete a single content type.
  */
-function node_type_delete_confirm(&$form_state, $type) {
+function node_type_delete_confirm($form, &$form_state, $type) {
   $form['type'] = array('#type' => 'value', '#value' => $type->type);
   $form['name'] = array('#type' => 'value', '#value' => $type->name);
 
   $message = t('Are you sure you want to delete the content type %type?', array('%type' => $type->name));
   $caption = '';
 
-  $num_nodes = db_result(db_query("SELECT COUNT(*) FROM {node} WHERE type = '%s'", $type->type));
+  $num_nodes = db_query("SELECT COUNT(*) FROM {node} WHERE type = :type", array(':type' => $type->type))->fetchField();
   if ($num_nodes) {
-    $caption .= '<p>'. format_plural($num_nodes, '<strong>Warning:</strong> there is currently 1 %type post on your site. It may not be able to be displayed or edited correctly, once you have removed this content type.', '<strong>Warning:</strong> there are currently @count %type posts on your site. They may not be able to be displayed or edited correctly, once you have removed this content type.', array('%type' => $type->name)) .'</p>';
+    $caption .= '<p>' . format_plural($num_nodes, '%type is used by 1 piece of content on your site. If you remove this content type, you will not be able to edit the %type content and it may not display correctly.', '%type is used by @count pieces of content on your site. If you remove %type, you will not be able to edit the %type content and it may not display correctly.', array('%type' => $type->name)) . '</p>';
   }
 
-  $caption .= '<p>'. t('This action cannot be undone.') .'</p>';
+  $caption .= '<p>' . t('This action cannot be undone.') . '</p>';
 
-  return confirm_form($form, $message, 'admin/content/types', $caption, t('Delete'));
+  return confirm_form($form, $message, 'admin/structure/types', $caption, t('Delete'));
 }
 
 /**
@@ -398,6 +434,7 @@ function node_type_delete_confirm(&$form_state, $type) {
 function node_type_delete_confirm_submit($form, &$form_state) {
   node_type_delete($form_state['values']['type']);
 
+  variable_del('node_preview_' . $form_state['values']['type']);
   $t_args = array('%name' => $form_state['values']['name']);
   drupal_set_message(t('The content type %name has been deleted.', $t_args));
   watchdog('menu', 'Deleted content type %name.', $t_args, WATCHDOG_NOTICE);
@@ -405,6 +442,6 @@ function node_type_delete_confirm_submit($form, &$form_state) {
   node_types_rebuild();
   menu_rebuild();
 
-  $form_state['redirect'] = 'admin/content/types';
+  $form_state['redirect'] = 'admin/structure/types';
   return;
 }

@@ -1,12 +1,8 @@
 <?php
-// $Id: simpletest.test,v 1.1.2.17 2009/11/06 21:23:32 boombatower Exp $
-// Core: Id: simpletest.test,v 1.31 2009/09/01 17:40:27 webchick Exp
 
 /**
  * @file
- * Backport of Drupal 7 simpletest.test with modifications, see BACKPORT.txt.
- *
- * Copyright 2008-2009 by Jimmy Berry ("boombatower", http://drupal.org/user/214218)
+ * Tests for simpletest.module.
  */
 
 class SimpleTestFunctionalTest extends DrupalWebTestCase {
@@ -24,10 +20,7 @@ class SimpleTestFunctionalTest extends DrupalWebTestCase {
   public static function getInfo() {
     return array(
       'name' => 'SimpleTest functionality',
-      'description' => 'Test SimpleTest\'s web interface: check that the intended tests were
-                          run and ensure that test reports display the intended results. Also
-                          test SimpleTest\'s internal browser and API\'s both explicitly and
-                          implicitly.',
+      'description' => "Test SimpleTest's web interface: check that the intended tests were run and ensure that test reports display the intended results. Also test SimpleTest's internal browser and API's both explicitly and implicitly.",
       'group' => 'SimpleTest'
     );
   }
@@ -41,7 +34,7 @@ class SimpleTestFunctionalTest extends DrupalWebTestCase {
       $this->drupalLogin($admin_user);
     }
     else {
-      parent::setUp();
+      parent::setUp('non_existent_module');
     }
   }
 
@@ -53,8 +46,7 @@ class SimpleTestFunctionalTest extends DrupalWebTestCase {
     if (!$this->inCURL()) {
       $this->drupalGet('node');
       $this->assertTrue($this->drupalGetHeader('Date'), t('An HTTP header was received.'));
-//      $this->assertTitle(t('Welcome to @site-name | @site-name', array('@site-name' => variable_get('site_name', 'Drupal'))), t('Site title matches.'));
-      $this->assertTitle(variable_get('site_name', 'Pressflow'), t('Site title matches.'));
+      $this->assertTitle(t('Welcome to @site-name | @site-name', array('@site-name' => variable_get('site_name', 'Drupal'))), t('Site title matches.'));
       $this->assertNoTitle('Foo', t('Site title does not match.'));
       // Make sure that we are locked out of the installer when prefixing
       // using the user-agent header. This is an important security check.
@@ -63,7 +55,8 @@ class SimpleTestFunctionalTest extends DrupalWebTestCase {
       $this->drupalGet($base_url . '/install.php', array('external' => TRUE));
       $this->assertResponse(403, 'Cannot access install.php with a "simpletest" user-agent header.');
 
-      $this->drupalLogin($this->drupalCreateUser());
+      $user = $this->drupalCreateUser();
+      $this->drupalLogin($user);
       $headers = $this->drupalGetHeaders(TRUE);
       $this->assertEqual(count($headers), 2, t('There was one intermediate request.'));
       $this->assertTrue(strpos($headers[0][':status'], '302') !== FALSE, t('Intermediate response code was 302.'));
@@ -71,6 +64,54 @@ class SimpleTestFunctionalTest extends DrupalWebTestCase {
       $this->assertEqual($this->getUrl(), $headers[0]['location'], t('HTTP redirect was followed'));
       $this->assertFalse($this->drupalGetHeader('Location'), t('Headers from intermediate request were reset.'));
       $this->assertResponse(200, t('Response code from intermediate request was reset.'));
+
+      // Test the maximum redirection option.
+      $this->drupalLogout();
+      $edit = array(
+        'name' => $user->name,
+        'pass' => $user->pass_raw
+      );
+      variable_set('simpletest_maximum_redirects', 1);
+      $this->drupalPost('user?destination=user/logout', $edit, t('Log in'));
+      $headers = $this->drupalGetHeaders(TRUE);
+      $this->assertEqual(count($headers), 2, t('Simpletest stopped following redirects after the first one.'));
+    }
+  }
+
+  /**
+   * Test validation of the User-Agent header we use to perform test requests.
+   */
+  function testUserAgentValidation() {
+    if (!$this->inCURL()) {
+      global $base_url;
+      $simpletest_path = $base_url . '/' . drupal_get_path('module', 'simpletest');
+      $HTTP_path = $simpletest_path .'/tests/http.php?q=node';
+      $https_path = $simpletest_path .'/tests/https.php?q=node';
+      // Generate a valid simpletest User-Agent to pass validation.
+      $this->assertTrue(preg_match('/simpletest\d+/', $this->databasePrefix, $matches), t('Database prefix contains simpletest prefix.'));
+      $test_ua = drupal_generate_test_ua($matches[0]);
+      $this->additionalCurlOptions = array(CURLOPT_USERAGENT => $test_ua);
+
+      // Test pages only available for testing.
+      $this->drupalGet($HTTP_path);
+      $this->assertResponse(200, t('Requesting http.php with a legitimate simpletest User-Agent returns OK.'));
+      $this->drupalGet($https_path);
+      $this->assertResponse(200, t('Requesting https.php with a legitimate simpletest User-Agent returns OK.'));
+
+      // Now slightly modify the HMAC on the header, which should not validate.
+      $this->additionalCurlOptions = array(CURLOPT_USERAGENT => $test_ua . 'X');
+      $this->drupalGet($HTTP_path);
+      $this->assertResponse(403, t('Requesting http.php with a bad simpletest User-Agent fails.'));
+      $this->drupalGet($https_path);
+      $this->assertResponse(403, t('Requesting https.php with a bad simpletest User-Agent fails.'));
+
+      // Use a real User-Agent and verify that the special files http.php and
+      // https.php can't be accessed.
+      $this->additionalCurlOptions = array(CURLOPT_USERAGENT => 'Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US; rv:1.9.2.12) Gecko/20101026 Firefox/3.6.12');
+      $this->drupalGet($HTTP_path);
+      $this->assertResponse(403, t('Requesting http.php with a normal User-Agent fails.'));
+      $this->drupalGet($https_path);
+      $this->assertResponse(403, t('Requesting https.php with a normal User-Agent fails.'));
     }
   }
 
@@ -93,8 +134,7 @@ class SimpleTestFunctionalTest extends DrupalWebTestCase {
       // Run twice so test_ids can be accumulated.
       for ($i = 0; $i < 2; $i++) {
         // Run this test from web interface.
-//        $this->drupalGet('admin/config/development/testing');
-        $this->drupalGet('admin/build/testing');
+        $this->drupalGet('admin/config/development/testing');
 
         $edit = array();
         $edit['SimpleTestFunctionalTest'] = TRUE;
@@ -146,13 +186,15 @@ class SimpleTestFunctionalTest extends DrupalWebTestCase {
    * Confirm that the stub test produced the desired results.
    */
   function confirmStubTestResults() {
+    $this->assertAssertion(t('Enabled modules: %modules', array('%modules' => 'non_existent_module')), 'Other', 'Fail', 'simpletest.test', 'SimpleTestFunctionalTest->setUp()');
+
     $this->assertAssertion($this->pass, 'Other', 'Pass', 'simpletest.test', 'SimpleTestFunctionalTest->stubTest()');
     $this->assertAssertion($this->fail, 'Other', 'Fail', 'simpletest.test', 'SimpleTestFunctionalTest->stubTest()');
 
     $this->assertAssertion(t('Created permissions: @perms', array('@perms' => $this->valid_permission)), 'Role', 'Pass', 'simpletest.test', 'SimpleTestFunctionalTest->stubTest()');
     $this->assertAssertion(t('Invalid permission %permission.', array('%permission' => $this->invalid_permission)), 'Role', 'Fail', 'simpletest.test', 'SimpleTestFunctionalTest->stubTest()');
 
-    // Check that a warning is catched by simpletest.
+    // Check that a warning is caught by simpletest.
     $this->assertAssertion('Division by zero', 'Warning', 'Fail', 'simpletest.test', 'SimpleTestFunctionalTest->stubTest()');
 
     // Check that the backtracing code works for specific assert function.
@@ -165,8 +207,7 @@ class SimpleTestFunctionalTest extends DrupalWebTestCase {
 
     $this->assertAssertion("Debug: 'Foo'", 'Debug', 'Fail', 'simpletest.test', 'SimpleTestFunctionalTest->stubTest()');
 
-//    $this->assertEqual('6 passes, 2 fails, 2 exceptions, and 1 debug message', $this->childTestResults['summary'], 'Stub test summary is correct');
-    $this->assertEqual('8 passes, 2 fails, 2 exceptions, and 1 debug message', $this->childTestResults['summary'], 'Stub test summary is correct');
+    $this->assertEqual('6 passes, 5 fails, 2 exceptions, and 1 debug message', $this->childTestResults['summary'], 'Stub test summary is correct');
 
     $this->test_ids[] = $test_id = $this->getTestIdFromResults();
     $this->assertTrue($test_id, t('Found test ID in results.'));
@@ -219,11 +260,11 @@ class SimpleTestFunctionalTest extends DrupalWebTestCase {
     if ($this->parse()) {
       if ($fieldset = $this->getResultFieldSet()) {
         // Code assumes this is the only test in group.
-        $results['summary'] = $this->asText($fieldset->div[1]);
+        $results['summary'] = $this->asText($fieldset->div->div[1]);
         $results['name'] = $this->asText($fieldset->legend);
 
         $results['assertions'] = array();
-        $tbody = $fieldset->table->tbody;
+        $tbody = $fieldset->div->table->tbody;
         foreach ($tbody->tr as $row) {
           $assertion = array();
           $assertion['message'] = $this->asText($row->td[0]);
@@ -231,8 +272,7 @@ class SimpleTestFunctionalTest extends DrupalWebTestCase {
           $assertion['file'] = $this->asText($row->td[2]);
           $assertion['line'] = $this->asText($row->td[3]);
           $assertion['function'] = $this->asText($row->td[4]);
-//          $ok_url = file_create_url('misc/watchdog-ok.png');
-          $ok_url = '/misc/watchdog-ok.png';
+          $ok_url = file_create_url('misc/watchdog-ok.png');
           $assertion['status'] = ($row->td[5]->img['src'] == $ok_url) ? 'Pass' : 'Fail';
           $results['assertions'][] = $assertion;
         }
@@ -243,8 +283,6 @@ class SimpleTestFunctionalTest extends DrupalWebTestCase {
 
   /**
    * Get the fieldset containing the results for group this test is in.
-   *
-   * @return fieldset containing the results for group this test is in.
    */
   function getResultFieldSet() {
     $fieldsets = $this->xpath('//fieldset');
@@ -274,11 +312,73 @@ class SimpleTestFunctionalTest extends DrupalWebTestCase {
 
   /**
    * Check if the test is being run from inside a CURL request.
-   *
-   * @return The test is being run from inside a CURL request.
    */
   function inCURL() {
-    return isset($_SERVER['HTTP_USER_AGENT']) && preg_match("/^simpletest\d+/", $_SERVER['HTTP_USER_AGENT']);
+    return (bool) drupal_valid_test_ua();
+  }
+}
+
+/**
+ * Test internal testing framework browser.
+ */
+class SimpleTestBrowserTestCase extends DrupalWebTestCase {
+  public static function getInfo() {
+    return array(
+      'name' => 'SimpleTest browser',
+      'description' => 'Test the internal browser of the testing framework.',
+      'group' => 'SimpleTest',
+    );
+  }
+
+  function setUp() {
+    parent::setUp();
+    variable_set('user_register', USER_REGISTER_VISITORS);
+  }
+
+  /**
+   * Test DrupalWebTestCase::getAbsoluteUrl().
+   */
+  function testGetAbsoluteUrl() {
+    // Testbed runs with Clean URLs disabled, so disable it here.
+    variable_set('clean_url', 0);
+    $url = 'user/login';
+
+    $this->drupalGet($url);
+    $absolute = url($url, array('absolute' => TRUE));
+    $this->assertEqual($absolute, $this->url, t('Passed and requested URL are equal.'));
+    $this->assertEqual($this->url, $this->getAbsoluteUrl($this->url), t('Requested and returned absolute URL are equal.'));
+
+    $this->drupalPost(NULL, array(), t('Log in'));
+    $this->assertEqual($absolute, $this->url, t('Passed and requested URL are equal.'));
+    $this->assertEqual($this->url, $this->getAbsoluteUrl($this->url), t('Requested and returned absolute URL are equal.'));
+
+    $this->clickLink('Create new account');
+    $url = 'user/register';
+    $absolute = url($url, array('absolute' => TRUE));
+    $this->assertEqual($absolute, $this->url, t('Passed and requested URL are equal.'));
+    $this->assertEqual($this->url, $this->getAbsoluteUrl($this->url), t('Requested and returned absolute URL are equal.'));
+  }
+
+  /**
+   * Tests XPath escaping.
+   */
+  function testXPathEscaping() {
+    $testpage = <<< EOF
+<html>
+<body>
+<a href="link1">A "weird" link, just to bother the dumb "XPath 1.0"</a>
+<a href="link2">A second "even more weird" link, in memory of George O'Malley</a>
+</body>
+</html>
+EOF;
+    $this->drupalSetContent($testpage);
+
+    // Matches the first link.
+    $urls = $this->xpath('//a[text()=:text]', array(':text' => 'A "weird" link, just to bother the dumb "XPath 1.0"'));
+    $this->assertEqual($urls[0]['href'], 'link1', 'Match with quotes.');
+
+    $urls = $this->xpath('//a[text()=:text]', array(':text' => 'A second "even more weird" link, in memory of George O\'Malley'));
+    $this->assertEqual($urls[0]['href'], 'link2', 'Match with mixed single and double quotes.');
   }
 }
 
@@ -314,8 +414,7 @@ class SimpleTestMailCaptureTestCase extends DrupalWebTestCase {
     $this->assertEqual(count($captured_emails), 0, t('The captured e-mails queue is empty.'), t('E-mail'));
 
     // Send the e-mail.
-//    $response = drupal_mail_sending_system('simpletest', 'drupal_mail_test')->mail($message);
-    $response = drupal_mail('simpletest', 'drupal_mail_test', $message['to'], language_default(), $message, NULL, TRUE);
+    $response = drupal_mail_system('simpletest', 'drupal_mail_test')->mail($message);
 
     // Ensure that there is one e-mail in the captured e-mails array.
     $captured_emails = $this->drupalGetMails();
@@ -323,7 +422,7 @@ class SimpleTestMailCaptureTestCase extends DrupalWebTestCase {
 
     // Assert that the e-mail was sent by iterating over the message properties
     // and ensuring that they are captured intact.
-    foreach($message as $field => $value) {
+    foreach ($message as $field => $value) {
       $this->assertMail($field, $value, t('The e-mail was sent and the value for property @field is intact.', array('@field' => $field)), t('E-mail'));
     }
 
@@ -336,8 +435,7 @@ class SimpleTestMailCaptureTestCase extends DrupalWebTestCase {
         'to' => $this->randomName(32) . '@example.com',
         'body' => $this->randomString(512),
       );
-//      drupal_mail_sending_system('drupal_mail_test', $index)->mail($message);
-      $response = drupal_mail('simpletest', 'drupal_mail_test', $message['to'], language_default(), $message, NULL, TRUE);
+      drupal_mail_system('drupal_mail_test', $index)->mail($message);
     }
 
     // There should now be 6 e-mails captured.
@@ -354,10 +452,118 @@ class SimpleTestMailCaptureTestCase extends DrupalWebTestCase {
 
     // Send the last e-mail again, so we can confirm that the drupalGetMails-filter
     // correctly returns all e-mails with a given property/value.
-//    drupal_mail_sending_system('drupal_mail_test', $index)->mail($message);
-    $response = drupal_mail('simpletest', $index, $message['to'], language_default(), $message, NULL, TRUE);
+    drupal_mail_system('drupal_mail_test', $index)->mail($message);
     $captured_emails = $this->drupalGetMails(array('id' => 'drupal_mail_test_4'));
     $this->assertEqual(count($captured_emails), 2, t('All e-mails with the same id are returned when filtering by id.'), t('E-mail'));
   }
 }
 
+/**
+ * Test Folder creation
+ */
+class SimpleTestFolderTestCase extends DrupalWebTestCase {
+  public static function getInfo() {
+    return array(
+      'name' => 'Testing SimpleTest setUp',
+      'description' => "This test will check SimpleTest's treatment of hook_install during setUp.  Image module is used for test.",
+      'group' => 'SimpleTest',
+    );
+  }
+
+  function setUp() {
+    return parent::setUp('image');
+  }
+
+  function testFolderSetup() {
+    $directory = file_default_scheme() . '://styles';
+    $this->assertTrue(file_prepare_directory($directory, FALSE), "Directory created.");
+  }
+}
+
+/**
+ * Test required modules for tests.
+ */
+class SimpleTestMissingDependentModuleUnitTest extends DrupalUnitTestCase {
+  public static function getInfo() {
+    return array(
+      'name' => 'Testing dependent module test',
+      'description' => 'This test should not load since it requires a module that is not found.',
+      'group' => 'SimpleTest',
+      'dependencies' => array('simpletest_missing_module'),
+    );
+  }
+
+  /**
+   * Ensure that this test will not be loaded despite its dependency.
+   */
+  function testFail() {
+    $this->fail(t('Running test with missing required module.'));
+  }
+}
+
+/**
+ * Tests a test case that does not run parent::setUp() in its setUp() method.
+ *
+ * If a test case does not call parent::setUp(), running
+ * DrupalTestCase::tearDown() would destroy the main site's database tables.
+ * Therefore, we ensure that tests which are not set up properly are skipped.
+ *
+ * @see DrupalTestCase
+ */
+class SimpleTestBrokenSetUp extends DrupalWebTestCase {
+  public static function getInfo() {
+    return array(
+      'name' => 'Broken SimpleTest method',
+      'description' => 'Tests a test case that does not call parent::setUp().',
+      'group' => 'SimpleTest'
+    );
+  }
+
+  function setUp() {
+    // If the test is being run from the main site, set up normally.
+    if (!drupal_valid_test_ua()) {
+      parent::setUp('simpletest');
+      // Create and log in user.
+      $admin_user = $this->drupalCreateUser(array('administer unit tests'));
+      $this->drupalLogin($admin_user);
+    }
+    // If the test is being run from within simpletest, set up the broken test.
+    else {
+      $this->pass(t('The test setUp() method has been run.'));
+      // Don't call parent::setUp(). This should trigger an error message.
+    }
+  }
+
+  function tearDown() {
+    // If the test is being run from the main site, tear down normally.
+    if (!drupal_valid_test_ua()) {
+      parent::tearDown();
+    }
+    else {
+      // If the test is being run from within simpletest, output a message.
+      $this->pass(t('The tearDown() method has run.'));
+    }
+  }
+
+  /**
+   * Runs this test case from within the simpletest child site.
+   */
+  function testBreakSetUp() {
+    // If the test is being run from the main site, run it again from the web
+    // interface within the simpletest child site.
+    if (!drupal_valid_test_ua()) {
+      $edit['SimpleTestBrokenSetUp'] = TRUE;
+      $this->drupalPost('admin/config/development/testing', $edit, t('Run tests'));
+
+      // Verify that the broken test and its tearDown() method are skipped.
+      $this->assertRaw(t('The test setUp() method has been run.'));
+      $this->assertRaw(t('The test cannot be executed because it has not been set up properly.'));
+      $this->assertNoRaw(t('The test method has run.'));
+      $this->assertNoRaw(t('The tearDown() method has run.'));
+    }
+    // If the test is being run from within simpletest, output a message.
+    else {
+      $this->pass(t('The test method has run.'));
+    }
+  }
+}

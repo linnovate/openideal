@@ -1,23 +1,12 @@
 <?php
 
 /**
- * Implementation of hook_install().
+ * @file
+ * Install, update and uninstall functions for the dblog module.
  */
-function dblog_install() {
-  // Create tables.
-  drupal_install_schema('dblog');
-}
 
 /**
- * Implementation of hook_uninstall().
- */
-function dblog_uninstall() {
-  // Remove tables.
-  drupal_uninstall_schema('dblog');
-}
-
-/**
- * Implementation of hook_schema().
+ * Implements hook_schema().
  */
 function dblog_schema() {
   $schema['watchdog'] = array(
@@ -36,7 +25,7 @@ function dblog_schema() {
       ),
       'type' => array(
         'type' => 'varchar',
-        'length' => 16,
+        'length' => 64,
         'not null' => TRUE,
         'default' => '',
         'description' => 'Type of log message, for example "user" or "page not found."',
@@ -48,7 +37,7 @@ function dblog_schema() {
         'description' => 'Text of log message to be passed into the t() function.',
       ),
       'variables' => array(
-        'type' => 'text',
+        'type' => 'blob',
         'not null' => TRUE,
         'size' => 'big',
         'description' => 'Serialized array of variables that match the message string and that is passed into the t() function.',
@@ -64,7 +53,7 @@ function dblog_schema() {
       'link' => array(
         'type' => 'varchar',
         'length' => 255,
-        'not null' => TRUE,
+        'not null' => FALSE,
         'default' => '',
         'description' => 'Link to view the result of the event.',
       ),
@@ -93,27 +82,61 @@ function dblog_schema() {
       ),
     ),
     'primary key' => array('wid'),
-    'indexes' => array('type' => array('type')),
+    'indexes' => array(
+      'type' => array('type'),
+      'uid' => array('uid'),
+    ),
   );
 
   return $schema;
 }
 
 /**
- * @defgroup updates-6.x-extra Extra database logging updates for 6.x
+ * Implements hook_uninstall().
+ */
+function dblog_uninstall() {
+  variable_del('dblog_row_limit');
+}
+
+/**
+ * @addtogroup updates-6.x-to-7.x
  * @{
  */
 
 /**
- * Allow longer referrers.
+ * Update the {watchdog} table.
  */
-function dblog_update_6000() {
-  $ret = array();
-  db_change_field($ret, 'watchdog', 'referer', 'referer', array('type' => 'text', 'not null' => FALSE));
-  return $ret;
+function dblog_update_7001() {
+  // Allow NULL values for links.
+  db_change_field('watchdog', 'link', 'link', array(
+    'type' => 'varchar',
+    'length' => 255,
+    'not null' => FALSE,
+    'default' => '',
+    'description' => 'Link to view the result of the event.',
+  ));
+
+  // Add an index on uid.
+  db_add_index('watchdog', 'uid', array('uid'));
+
+  // Allow longer type values.
+  db_change_field('watchdog', 'type', 'type', array(
+    'type' => 'varchar',
+    'length' => 64,
+    'not null' => TRUE,
+    'default' => '',
+    'description' => 'Type of log message, for example "user" or "page not found."',
+  ));
+
+  // Convert the variables field (that stores serialized variables) from text to blob.
+  db_change_field('watchdog', 'variables', 'variables', array(
+    'type' => 'blob',
+    'not null' => TRUE,
+    'size' => 'big',
+    'description' => 'Serialized array of variables that match the message string and that is passed into the t() function.',
+  ));
 }
 
 /**
- * @} End of "defgroup updates-6.x-extra"
- * The next series of updates should start at 7000.
+ * @} End of "addtogroup updates-6.x-to-7.x"
  */

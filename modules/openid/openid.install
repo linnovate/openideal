@@ -1,23 +1,12 @@
 <?php
 
 /**
- * Implementation of hook_install().
+ * @file
+ * Install, update and uninstall functions for the openid module.
  */
-function openid_install() {
-  // Create table.
-  drupal_install_schema('openid');
-}
 
 /**
- * Implementation of hook_uninstall().
- */
-function openid_uninstall() {
-  // Remove table.
-  drupal_uninstall_schema('openid');
-}
-
-/**
- * Implementation of hook_schema().
+ * Implements hook_schema().
  */
 function openid_schema() {
   $schema['openid_association'] = array(
@@ -76,7 +65,7 @@ function openid_schema() {
       'nonce' => array(
         'type' => 'varchar',
         'length' => 255,
-        'description' => 'The value of openid.response_nonce'
+        'description' => 'The value of openid.response_nonce.',
       ),
       'expires' => array(
         'type' => 'int',
@@ -95,18 +84,48 @@ function openid_schema() {
 }
 
 /**
- * @defgroup updates-6.x-extra Extra openid updates for 6.x
+ * Implements hook_requirements().
+ */
+function openid_requirements($phase) {
+  $requirements = array();
+
+  if ($phase == 'runtime') {
+    // Check for the PHP BC Math library.
+    if (!function_exists('bcadd') && !function_exists('gmp_add')) {
+      $requirements['openid_math'] = array(
+        'value' => t('Not installed'),
+        'severity' => REQUIREMENT_ERROR,
+        'description' => t('OpenID suggests the use of either the <a href="@gmp">GMP Math</a> (recommended for performance) or <a href="@bc">BC Math</a> libraries to enable OpenID associations.', array('@gmp' => 'http://php.net/manual/en/book.gmp.php', '@bc' => 'http://www.php.net/manual/en/book.bc.php')),
+      );
+    }
+    elseif (!function_exists('gmp_add')) {
+      $requirements['openid_math'] = array(
+        'value' => t('Not optimized'),
+        'severity' => REQUIREMENT_WARNING,
+        'description' => t('OpenID suggests the use of the GMP Math library for PHP for optimal performance. Check the <a href="@url">GMP Math Library documentation</a> for installation instructions.', array('@url' => 'http://www.php.net/manual/en/book.gmp.php')),
+      );
+    }
+    else {
+      $requirements['openid_math'] = array(
+        'value' => t('Installed'),
+        'severity' => REQUIREMENT_OK,
+      );
+    }
+    $requirements['openid_math']['title'] = t('OpenID Math library');
+  }
+
+  return $requirements;
+}
+
+/**
+ * @addtogroup updates-6.x-to-7.x
  * @{
  */
 
 /**
- * Add the openid_nonce table.
- *
- * Implementation of hook_update_N().
+ * Add a table to store nonces.
  */
 function openid_update_6000() {
-  $ret = array();
-
   $schema['openid_nonce'] = array(
     'description' => 'Stores received openid.response_nonce per OpenID endpoint URL to prevent replay attacks.',
     'fields' => array(
@@ -119,26 +138,23 @@ function openid_update_6000() {
         'type' => 'varchar',
         'length' => 255,
         'description' => 'The value of openid.response_nonce'
-      ),
+        ),
       'expires' => array(
         'type' => 'int',
         'not null' => TRUE,
         'default' => 0,
         'description' => 'A Unix timestamp indicating when the entry should expire.',
+        ),
       ),
-    ),
     'indexes' => array(
       'nonce' => array('nonce'),
       'expires' => array('expires'),
     ),
   );
 
-  db_create_table($ret, 'openid_nonce', $schema['openid_nonce']);
-
-  return $ret;
+  db_create_table('openid_nonce', $schema['openid_nonce']);
 }
 
 /**
- * @} End of "defgroup updates-6.x-extra"
- * The next series of updates should start at 7000.
+ * @} End of "addtogroup updates-6.x-to-7.x"
  */

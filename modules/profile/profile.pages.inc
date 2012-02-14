@@ -12,7 +12,7 @@ function profile_browse() {
   // Ensure that the path is converted to 3 levels always.
   list(, $name, $value) = array_pad(explode('/', $_GET['q'], 3), 3, '');
 
-  $field = db_fetch_object(db_query("SELECT DISTINCT(fid), type, title, page, visibility FROM {profile_fields} WHERE name = '%s'", $name));
+  $field = db_query("SELECT DISTINCT(fid), type, title, page, visibility FROM {profile_field} WHERE name = :name", array(':name' => $name))->fetchObject();
 
   if ($name && $field->fid) {
     // Only allow browsing of fields that have a page title set.
@@ -27,76 +27,88 @@ function profile_browse() {
     }
 
     // Compile a list of fields to show.
-    $fields = array();
-    $result = db_query('SELECT name, title, type, weight, page FROM {profile_fields} WHERE fid != %d AND visibility = %d ORDER BY weight', $field->fid, PROFILE_PUBLIC_LISTINGS);
-    while ($record = db_fetch_object($result)) {
-      $fields[] = $record;
-    }
+    $fields = db_query('SELECT name, title, type, weight, page FROM {profile_field} WHERE fid <> :fid AND visibility = :visibility ORDER BY weight', array(
+      ':fid' => $field->fid,
+      ':visibility' => PROFILE_PUBLIC_LISTINGS,
+    ))->fetchAll();
+
+    $query = db_select('users', 'u')->extend('PagerDefault');
+    $query->join('profile_value', 'v', 'u.uid = v.uid');
+    $query
+      ->fields('u', array('uid', 'access'))
+      ->condition('v.fid', $field->fid)
+      ->condition('u.status', 0, '<>')
+      ->orderBy('u.access', 'DESC');
 
     // Determine what query to use:
     $arguments = array($field->fid);
     switch ($field->type) {
       case 'checkbox':
-        $query = 'v.value = 1';
+        $query->condition('v.value', 1);
         break;
       case 'textfield':
       case 'selection':
-        $query = "v.value = '%s'";
-        $arguments[] = $value;
+        $query->condition('v.value', $value);
         break;
       case 'list':
-        $query = "v.value LIKE '%%%s%%'";
-        $arguments[] = $value;
+        $query->condition('v.value', '%' . db_like($value) . '%', 'LIKE');
         break;
       default:
         drupal_not_found();
         return;
     }
 
-    // Extract the affected users:
-    $result = pager_query("SELECT u.uid, u.access FROM {users} u INNER JOIN {profile_values} v ON u.uid = v.uid WHERE v.fid = %d AND $query AND u.access != 0 AND u.status != 0 ORDER BY u.access DESC", 20, 0, NULL, $arguments);
+    $uids = $query
+      ->limit(20)
+      ->execute()
+      ->fetchCol();
+
+    // Load the users.
+    $users = user_load_multiple($uids);
 
     $content = '';
-    while ($account = db_fetch_object($result)) {
-      $account = user_load(array('uid' => $account->uid));
+    foreach ($users as $account) {
       $profile = _profile_update_user_fields($fields, $account);
-      $content .= theme('profile_listing', $account, $profile);
+      $content .= theme('profile_listing', array('account' => $account, 'fields' => $profile));
     }
-    $output = theme('profile_wrapper', $content);
-    $output .= theme('pager', NULL, 20);
+    $output = theme('profile_wrapper', array('content' => $content));
+    $output .= theme('pager');
 
     if ($field->type == 'selection' || $field->type == 'list' || $field->type == 'textfield') {
-      $title = strtr(check_plain($field->page), array('%value' => theme('placeholder', $value)));
+      $title = strtr(check_plain($field->page), array('%value' => drupal_placeholder($value)));
     }
     else {
       $title = check_plain($field->page);
     }
 
-    drupal_set_title($title);
+    drupal_set_title($title, PASS_THROUGH);
     return $output;
   }
-  else if ($name && !$field->fid) {
+  elseif ($name && !$field->fid) {
     drupal_not_found();
   }
   else {
     // Compile a list of fields to show.
-    $fields = array();
-    $result = db_query('SELECT name, title, type, weight, page FROM {profile_fields} WHERE visibility = %d ORDER BY category, weight', PROFILE_PUBLIC_LISTINGS);
-    while ($record = db_fetch_object($result)) {
-      $fields[] = $record;
-    }
+    $fields = db_query('SELECT name, title, type, weight, page, visibility FROM {profile_field} WHERE visibility = :visibility ORDER BY category, weight', array(':visibility' => PROFILE_PUBLIC_LISTINGS))->fetchAll();
 
     // Extract the affected users:
-    $result = pager_query('SELECT uid, access FROM {users} WHERE uid > 0 AND status != 0 AND access != 0 ORDER BY access DESC', 20, 0, NULL);
-
+    $query = db_select('users', 'u')->extend('PagerDefault');
+    $uids = $query
+      ->fields('u', array('uid', 'access'))
+      ->condition('u.uid', 0, '>')
+      ->condition('u.status', 0, '>')
+      ->orderBy('u.access', 'DESC')
+      ->limit(20)
+      ->execute()
+      ->fetchCol();
+    $users = user_load_multiple($uids);
     $content = '';
-    while ($account = db_fetch_object($result)) {
-      $account = user_load(array('uid' => $account->uid));
+    foreach ($users as $account) {
       $profile = _profile_update_user_fields($fields, $account);
-      $content .= theme('profile_listing', $account, $profile);
+      $content .= theme('profile_listing', array('account' => $account, 'fields' => $profile));
     }
-    $output = theme('profile_wrapper', $content);
-    $output .= theme('pager', NULL, 20);
+    $output = theme('profile_wrapper', array('content' => $content));
+    $output .= theme('pager');
 
     drupal_set_title(t('User list'));
     return $output;
@@ -108,12 +120,20 @@ function profile_browse() {
  */
 function profile_autocomplete($field, $string) {
   $matches = array();
-  if (db_result(db_query("SELECT COUNT(*) FROM {profile_fields} WHERE fid = %d AND autocomplete = 1", $field))) {
-    $result = db_query_range("SELECT value FROM {profile_values} WHERE fid = %d AND LOWER(value) LIKE LOWER('%s%%') GROUP BY value ORDER BY value ASC", $field, $string, 0, 10);
-    while ($data = db_fetch_object($result)) {
-      $matches[$data->value] = check_plain($data->value);
+  $autocomplete_field = (bool) db_query_range("SELECT 1 FROM {profile_field} WHERE fid = :fid AND autocomplete = 1", 0, 1, array(':fid' => $field))->fetchField();
+  if ($autocomplete_field) {
+    $values = db_select('profile_value')
+      ->fields('profile_value', array('value'))
+      ->condition('fid', $field)
+      ->condition('value', db_like($string) . '%', 'LIKE')
+      ->groupBy('value')
+      ->orderBy('value')
+      ->range(0, 10)
+      ->execute()->fetchCol();
+    foreach ($values as $value) {
+      $matches[$value] = check_plain($value);
     }
   }
 
-  drupal_json($matches);
+  drupal_json_output($matches);
 }

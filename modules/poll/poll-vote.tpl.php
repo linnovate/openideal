@@ -1,8 +1,8 @@
 <?php
 
 /**
- * @file poll-vote.tpl.php
- * Voting form for a poll.
+ * @file
+ * Default theme implementation to display voting form for a poll.
  *
  * - $choice: The radio buttons for the choices in the poll.
  * - $title: The title of the poll.
@@ -18,7 +18,7 @@
   <div class="vote-form">
     <div class="choices">
       <?php if ($block): ?>
-        <div class="title"><?php print $title; ?>:</div>
+        <div class="title"><?php print $title; ?></div>
       <?php endif; ?>
       <?php print $choice; ?>
     </div>

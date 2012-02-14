@@ -1,35 +1,32 @@
 
 /**
- * Garland, for Drupal 6.x
- * Stefan Nagtegaal, iStyledThis [dot] nl
- * Steven Wittens, acko [dot] net`
- *
- * If you use a customized color scheme, you must regenerate it after
- * modifying this file.
- */
-
-/**
  * Generic elements
  */
 body {
   margin: 0;
   padding: 0;
   background: #edf5fa;
-  font: 12px/170% Verdana, sans-serif;
+  font: 76%/170% Verdana, sans-serif;
   color: #494949;
 }
 
 input {
-  font: 12px/100% Verdana, sans-serif;
+  font: 1em/100% Verdana, sans-serif;
   color: #494949;
 }
 
-textarea, select {
-  font: 12px/160% Verdana, sans-serif;
+textarea,
+select {
+  font: 1em/160% Verdana, sans-serif;
   color: #494949;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   margin: 0;
   padding: 0;
   font-weight: normal;
@@ -40,7 +37,8 @@ h1 {
   font-size: 170%;
 }
 
-h2 {
+h2,
+#center h1 {
   font-size: 160%;
   line-height: 130%;
 }
@@ -61,8 +59,16 @@ h6 {
   font-size: 110%;
 }
 
-ul, quote, code, fieldset {
+quote,
+code,
+fieldset {
   margin: .5em 0;
+}
+
+code,
+pre,
+kbd {
+  font-size: 115%;
 }
 
 p {
@@ -70,7 +76,8 @@ p {
   padding: 0;
 }
 
-a:link, a:visited {
+a:link,
+a:visited {
   color: #027AC6;
   text-decoration: none;
 }
@@ -80,7 +87,8 @@ a:hover {
   text-decoration: underline;
 }
 
-a:active, a.active {
+a:active,
+a.active {
   color: #5895be;
 }
 
@@ -92,54 +100,49 @@ hr {
   background: #5294c1;
 }
 
-ul {
-  margin: 0.5em 0 1em;
-  padding: 0;
-}
-
+ul,
+.block ul,
 ol {
-  margin: 0.75em 0 1.25em;
-  padding: 0;
+  margin: 0.5em 0 1em;
+  padding: 0 0 0 1.5em; /* LTR */
 }
 
-ol li, ul li {
-  margin: 0.4em 0 0.4em .5em; /* LTR */
+/* Default to menu leaf bullet for unordered list items. "ul" used here so it can cascade to list items and "li.leaf" to override the system leaf image. */
+ul,
+ul li.leaf {
+  list-style-image: url(images/menu-leaf.gif);
 }
 
-ul.menu, .item-list ul {
-  margin: 0.35em 0 0 -0.5em; /* LTR */
-  padding: 0;
-}
-
-ul.menu ul, .item-list ul ul {
-  margin-left: 0em; /* LTR */
-}
-
-ol li, ul li, ul.menu li, .item-list ul li, li.leaf {
-  margin: 0.15em 0 0.15em .5em; /* LTR */
-}
-
-ul li, ul.menu li, .item-list ul li, li.leaf {
-  padding: 0 0 .2em 1.5em;
-  list-style-type: none;
+/* This is used to cancel the list style image when an ordered list is embedded in an unordered list. */
+ol {
   list-style-image: none;
-  background: transparent url(images/menu-leaf.gif) no-repeat 1px .35em; /* LTR */
 }
 
-ol li {
-  padding: 0 0 .3em;
-  margin-left: 2em; /* LTR */
+ul.menu,
+.item-list ul {
+  margin: 0.35em 0 0 -0.5em; /* LTR */
+}
+
+ol li,
+ul li,
+ul.menu li,
+.item-list ul li,
+li.leaf {
+  margin: 0.15em 0 0.15em .5em; /* LTR */
+  padding-bottom: .1em;
 }
 
 ul li.expanded {
-  background: transparent url(images/menu-expanded.gif) no-repeat 1px .35em; /* LTR */
+  list-style-image: url(images/menu-expanded.gif);
 }
 
 ul li.collapsed {
-  background: transparent url(images/menu-collapsed.gif) no-repeat 0px .35em; /* LTR */
+  list-style-image: url(images/menu-collapsed.gif); /* LTR */
 }
 
-ul li.leaf a, ul li.expanded a, ul li.collapsed a {
+ul li.leaf a,
+ul li.expanded a,
+ul li.collapsed a {
   display: block;
 }
 
@@ -168,7 +171,7 @@ ol.task-list li.active {
   margin-right: 1em; /* LTR */
 }
 
-fieldset ul.clear-block li {
+fieldset ul.clearfix li {
   margin: 0;
   padding: 0;
   background-image: none;
@@ -185,7 +188,8 @@ dl dd {
   margin: 0 0 .5em 1.5em; /* LTR */
 }
 
-img, a img {
+img,
+a img {
   border: none;
 }
 
@@ -200,20 +204,25 @@ thead th {
   font-weight: bold;
 }
 
-th a:link, th a:visited {
+th a:link,
+th a:visited {
   color: #6f9dbd;
 }
 
-td, th {
+td,
+th {
   padding: .3em .5em;
 }
 
-tr.even, tr.odd, tbody th {
+tr.even,
+tr.odd,
+tbody th {
   border: solid #d3e7f4;
   border-width: 1px 0;
 }
 
-tr.odd, tr.info {
+tr.odd,
+tr.info {
   background-color: #edf5fa;
 }
 
@@ -222,7 +231,7 @@ tr.even {
 }
 
 tr.drag {
-  background-color: #fffff0;
+  background-color: #ffb;
 }
 
 tr.drag-previous {
@@ -237,7 +246,10 @@ tr.even td.active {
   background-color: #e6f1f7;
 }
 
-td.region, td.module, td.container, td.category {
+td.region-title,
+td.module,
+td.container,
+td.category {
   border-top: 1.5em solid #fff;
   border-bottom: 1px solid #b4d7f0;
   background-color: #d4e7f3;
@@ -245,7 +257,10 @@ td.region, td.module, td.container, td.category {
   font-weight: bold;
 }
 
-tr:first-child td.region, tr:first-child td.module, tr:first-child td.container, tr:first-child td.category {
+tr:first-child td.region-title,
+tr:first-child td.module,
+tr:first-child td.container,
+tr:first-child td.category {
   border-top-width: 0;
 }
 
@@ -253,9 +268,14 @@ span.form-required {
   color: #ffae00;
 }
 
-span.submitted, .description {
+.submitted, .description,
+.vertical-tab-button .summary {
   font-size: 0.92em;
   color: #898989;
+}
+
+.description .more-help-link {
+  font-size: 0.92em;
 }
 
 .description {
@@ -264,16 +284,15 @@ span.submitted, .description {
   color: #898989;
 }
 
-.messages, .preview {
+.preview {
   margin: .75em 0 .75em;
   padding: .5em 1em;
 }
 
-.messages ul {
-  margin: 0;
-}
-
-.form-checkboxes, .form-radios, .form-checkboxes .form-item, .form-radios .form-item {
+.form-checkboxes,
+.form-radios,
+.form-checkboxes .form-item,
+.form-radios .form-item {
   margin: 0.25em 0;
 }
 
@@ -281,38 +300,65 @@ span.submitted, .description {
   margin-bottom: 2em;
 }
 
-.form-button, .form-submit {
-  margin: 2em 0.5em 1em 0; /* LTR */
+.form-actions {
+  margin: 2em 0 1em;
+}
+.form-button,
+.form-submit {
+  margin: 0 0.5em 0 0; /* LTR */
 }
 
-#dblog-form-overview .form-submit,
-.confirmation .form-submit,
-.search-form .form-submit,
-.poll .form-submit,
-fieldset .form-button, fieldset .form-submit,
-.sidebar .form-button, .sidebar .form-submit,
-table .form-button, table .form-submit {
-  margin: 0;
+/**
+ * Skip link
+ */
+#skip-link {
+  left: 50%;
+  margin-left: -5.25em;
+  margin-top: 0;
+  position: absolute;
+  width: auto;
+  z-index: 1000;
 }
-
-.box {
-  margin-bottom: 2.5em;
+#skip-link a,
+#skip-link a:link,
+#skip-link a:visited {
+  background: #444;
+  background: rgba(0, 0, 0, 0.6);
+  color: #fff;
+  display: block;
+  font-size: 0.94em;
+  line-height: 1.7;
+  margin-top: 1px;
+  padding: 2px 10px;
+  text-decoration: none;
+  -khtml-border-radius: 0 0 2px 2px;
+  -moz-border-radius: 0 0 2px 2px;
+  -webkit-border-bottom-left-radius: 2px;
+  -webkit-border-bottom-right-radius: 2px;
+  -webkit-border-top-left-radius: 0;
+  -webkit-border-top-right-radius: 0;
+  border-radius: 0 0 2px 2px;
+}
+#skip-link a:hover,
+#skip-link a:active,
+#skip-link a:focus {
+  outline: 0;
 }
 
 /**
  * Layout
  */
-#header-region {
+.region-header {
   min-height: 1em;
   background: #d2e6f3 url(images/bg-navigation.png) repeat-x 50% 100%;
 }
 
-#header-region .block {
+.region-header .block {
   display: block;
   margin: 0 1em;
 }
 
-#header-region .block-region {
+.region-header .block-region {
   display: block;
   margin: 0 0.5em 1em;
   padding: 0.5em;
@@ -320,7 +366,7 @@ table .form-button, table .form-submit {
   top: 0.5em;
 }
 
-#header-region * {
+.region-header * {
   display: inline;
   line-height: 1.5em;
   margin-top: 0;
@@ -328,19 +374,22 @@ table .form-button, table .form-submit {
 }
 
 /* Prevent the previous directive from showing the content of script elements in Mozilla browsers. */
-#header-region script {
+.region-header script {
   display: none;
 }
 
-#header-region p, #header-region img {
+.region-header p,
+.region-header img {
   margin-top: 0.5em;
 }
 
-#header-region h2 {
+.region-header h2 {
   margin: 0 1em 0 0; /* LTR */
 }
 
-#header-region h3, #header-region label, #header-region li {
+.region-header h3,
+.region-header label,
+.region-header li {
   margin: 0 1em;
   padding: 0;
   background: none;
@@ -350,9 +399,24 @@ table .form-button, table .form-submit {
   background: #edf5fa url(images/body.png) repeat-x 50% 0;
 }
 
+/* Set container widths when we are using the "fixed width" option. */
 #wrapper #container {
+  width: 560px;
   margin: 0 auto;
   padding: 0 20px;
+}
+
+body.one-sidebar #wrapper #container {
+  width: 770px;
+}
+
+body.two-sidebars #wrapper #container {
+  width: 980px;
+}
+
+/* Unset container width when we are using the "fluid width" option. */
+body.fluid-width #wrapper #container {
+  width: auto;
   max-width: 1270px;
 }
 
@@ -364,57 +428,60 @@ table .form-button, table .form-submit {
   position: absolute;
 }
 
-#wrapper #container #header h1, #wrapper #container #header h1 a:link, #wrapper #container #header h1 a:visited {
+#branding,
+#branding a:link,
+#branding a:visited {
   line-height: 120px;
   position: relative;
   z-index: 2;
   white-space: nowrap;
 }
 
-#wrapper #container #header h1 span {
+#branding span {
   font-weight: bold;
 }
 
-#wrapper #container #header h1 img {
+#branding img {
   padding-top: 14px;
   padding-right: 20px; /* LTR */
   float: left; /* LTR */
 }
 
 /* With 3 columns, require a minimum width of 1000px to ensure there is enough horizontal space. */
-body.sidebars {
+body.two-sidebars {
   min-width: 980px;
 }
 /* With 2 columns, require a minimum width of 800px. */
-body.sidebar-left, body.sidebar-right {
+body.sidebar-first,
+body.sidebar-second {
   min-width: 780px;
 }
 
 /* We must define 100% width to avoid the body being too narrow for near-empty pages */
 #wrapper #container #center {
-  float: left;
+  float: left; /* LTR */
   width: 100%;
 }
 
 /* So we move the #center container over the sidebars to compensate */
-body.sidebar-left #center {
-  margin-left: -210px;
+body.sidebar-first #center {
+  margin-left: -210px; /* LTR */
 }
-body.sidebar-right #center {
-  margin-right: -210px;
+body.sidebar-second #center {
+  margin-right: -210px; /* LTR */
 }
-body.sidebars #center {
+body.two-sidebars #center {
   margin: 0 -210px;
 }
 
 /* And add blanks left and right for the sidebars to fill */
-body.sidebar-left #squeeze {
-  margin-left: 210px;
+body.sidebar-first #squeeze {
+  margin-left: 210px; /* LTR */
 }
-body.sidebar-right #squeeze {
-  margin-right: 210px;
+body.sidebar-second #squeeze {
+  margin-right: 210px; /* LTR */
 }
-body.sidebars #squeeze {
+body.two-sidebars #squeeze {
   margin: 0 210px;
 }
 
@@ -422,7 +489,7 @@ body.sidebars #squeeze {
 #wrapper #container .sidebar {
   margin: 60px 0 5em;
   width: 210px;
-  float: left;
+  float: left; /* LTR */
   z-index: 2;
   position: relative;
 }
@@ -431,23 +498,23 @@ body.sidebars #squeeze {
   margin: 0 0 1.5em 0;
 }
 
-#sidebar-left .block {
-  padding: 0 15px 0 0px;
+#sidebar-first .block {
+  padding: 0 15px 0 0; /* LTR */
 }
 
-#sidebar-right .block {
-  padding: 0 0px 0 15px;
+#sidebar-second .block {
+  padding: 0 0 0 15px; /* LTR */
 }
 
 .block .content {
   margin: 0.5em 0;
 }
 
-#sidebar-left .block-region {
+#sidebar-first .block-region {
   margin: 0 15px 0 0px; /* LTR */
 }
 
-#sidebar-right .block-region {
+#sidebar-second .block-region {
   margin: 0 0px 0 15px; /* LTR */
 }
 
@@ -480,7 +547,7 @@ body.sidebars #squeeze {
   min-height: 400px;
 }
 
-#wrapper #container #footer {
+#wrapper #container .region-footer {
   float: none;
   clear: both;
   text-align: center;
@@ -495,29 +562,38 @@ body.sidebars #squeeze {
   z-index: 3;
 }
 
-body.sidebar-left #footer {
+body.sidebar-first .region-footer {
   margin-left: -210px;
 }
 
-body.sidebar-right #footer {
+body.sidebar-second .region-footer {
   margin-right: -210px;
 }
 
-body.sidebars #footer {
+body.two-sidebars .region-footer {
   margin: 0 -210px;
 }
 
 /**
  * Header
  */
-#wrapper #container #header h1, #wrapper #container #header h1 a:link, #wrapper #container #header h1 a:visited {
+div#branding {
+  font-family: Helvetica,Arial,sans-serif;
+}
+
+div#branding strong {
+   font-weight: normal;
+}
+
+#branding,
+#branding a:link,
+#branding a:visited {
   color: #fff;
-  font-weight: normal;
   text-shadow: #1659ac 0px 1px 3px;
   font-size: 1.5em;
 }
 
-#wrapper #container #header h1 a:hover {
+#branding a:hover {
   text-decoration: none;
 }
 
@@ -525,11 +601,12 @@ body.sidebars #footer {
   font-size: 0.92em;
 }
 
-#wrapper #container .breadcrumb, #wrapper #container .breadcrumb a {
+#wrapper #container .breadcrumb,
+#wrapper #container .breadcrumb a {
   color: #529ad6;
 }
 
-#mission {
+#highlighted {
   padding: 1em;
   background-color: #fff;
   border: 1px solid #e0e5fb;
@@ -537,9 +614,35 @@ body.sidebars #footer {
 }
 
 /**
+ * Overlay
+ */
+#overlay #overlay-tabs li a {
+  background: #d9eaf5;
+  color: #000;
+}
+#overlay #overlay-tabs li a:hover,
+#overlay #overlay-tabs li a:focus {
+  background: #fff;
+}
+#overlay #overlay-tabs li.active a {
+  background: url("images/body.png") repeat-x scroll 50% -58px #edf5fa;
+  color: #fff;
+}
+#overlay-content {
+  padding: 1px;
+}
+#overlay-content #header {
+  display: none;
+}
+#overlay-content #wrapper {
+  background-position: 50% -80px;
+}
+
+
+/**
  * Primary navigation
  */
-ul.primary-links {
+ul.main-menu {
   margin: 0;
   padding: 0;
   float: right; /* LTR */
@@ -547,14 +650,16 @@ ul.primary-links {
   z-index: 4;
 }
 
-ul.primary-links li {
+ul.main-menu li {
   margin: 0;
   padding: 0;
   float: left; /* LTR */
   background-image: none;
 }
 
-ul.primary-links li a, ul.primary-links li a:link, ul.primary-links li a:visited {
+ul.main-menu li a,
+ul.main-menu li a:link,
+ul.main-menu li a:visited {
   display: block;
   margin: 0 1em;
   padding: .75em 0 0;
@@ -562,7 +667,8 @@ ul.primary-links li a, ul.primary-links li a:link, ul.primary-links li a:visited
   background: transparent url(images/bg-navigation-item.png) no-repeat 50% 0;
 }
 
-ul.primary-links li a:hover, ul.primary-links li a.active {
+ul.main-menu li a:hover,
+ul.main-menu li a.active {
   color: #fff;
   background: transparent url(images/bg-navigation-item-hover.png) no-repeat 50% 0;
 }
@@ -570,7 +676,7 @@ ul.primary-links li a:hover, ul.primary-links li a.active {
 /**
  * Secondary navigation
  */
-ul.secondary-links {
+ul.secondary-menu {
   margin: 0;
   padding: 18px 0 0;
   float: right; /* LTR */
@@ -579,14 +685,16 @@ ul.secondary-links {
   z-index: 4;
 }
 
-ul.secondary-links li {
+ul.secondary-menu li {
   margin: 0;
   padding: 0;
   float: left; /* LTR */
   background-image: none;
 }
 
-ul.secondary-links li a, ul.secondary-links li a:link, ul.secondary-links li a:visited {
+ul.secondary-menu li a,
+ul.secondary-menu li a:link,
+ul.secondary-menu li a:visited {
   display: block;
   margin: 0 1em;
   padding: .75em 0 0;
@@ -594,7 +702,8 @@ ul.secondary-links li a, ul.secondary-links li a:link, ul.secondary-links li a:v
   background: transparent;
 }
 
-ul.secondary-links li a:hover, ul.secondary-links li a.active {
+ul.secondary-menu li a:hover,
+ul.secondary-menu li a.active {
   color: #cde3f1;
   background: transparent;
 }
@@ -602,7 +711,10 @@ ul.secondary-links li a:hover, ul.secondary-links li a.active {
 /**
  * Local tasks
  */
-ul.primary, ul.primary li, ul.secondary, ul.secondary li {
+ul.primary,
+ul.primary li,
+ul.secondary,
+ul.secondary li {
   border: 0;
   background: none;
   margin: 0;
@@ -626,14 +738,20 @@ ul.secondary {
   margin: -0.2em -26px 1em;
   padding: 0 26px 0.6em;
 }
-h2.with-tabs {
+h1.with-tabs {
   float: left; /* LTR */
   margin: 0 2em 0 0; /* LTR */
   padding: 0;
 }
 
-ul.primary li a, ul.primary li.active a, ul.primary li a:hover, ul.primary li a:visited,
-ul.secondary li a, ul.secondary li.active a, ul.secondary li a:hover, ul.secondary li a:visited {
+ul.primary li a,
+ul.primary li.active a,
+ul.primary li a:hover,
+ul.primary li a:visited,
+ul.secondary li a,
+ul.secondary li.active a,
+ul.secondary li a:hover,
+ul.secondary li a:visited {
   border: 0;
   background: transparent;
   padding: 4px 1em;
@@ -644,8 +762,14 @@ ul.secondary li a, ul.secondary li.active a, ul.secondary li a:hover, ul.seconda
   top: -1px;
   display: inline-block;
 }
-ul.primary li.active a, ul.primary li.active a:link, ul.primary li.active a:visited, ul.primary li a:hover,
-ul.secondary li.active a, ul.secondary li.active a:link, ul.secondary li.active a:visited, ul.secondary li a:hover {
+ul.primary li.active a,
+ul.primary li.active a:link,
+ul.primary li.active a:visited,
+ul.primary li a:hover,
+ul.secondary li.active a,
+ul.secondary li.active a:link,
+ul.secondary li.active a:visited,
+ul.secondary li a:hover {
   background: url(images/bg-tab.png) repeat-x 0 50%;
   color: #fff;
 }
@@ -659,11 +783,12 @@ ul.secondary li.active a {
  */
 .node {
   border-bottom: 1px solid #e9eff3;
-  margin: 0 -26px 1.5em;
-  padding: 1.5em 26px;
+  margin: 0 -16px 1.5em;
+  padding: 1.5em 16px;
 }
 
-ul.links li, ul.inline li {
+ul.links li,
+ul.inline li {
   margin-left: 0;
   margin-right: 0;
   padding-left: 0; /* LTR */
@@ -671,19 +796,14 @@ ul.links li, ul.inline li {
   background-image: none;
 }
 
-.node .links, .comment .links {
+.node .links,
+.comment .links {
   text-align: left; /* LTR */
+  padding-left: 0; /* LTR */
 }
 
-.node .links ul.links li, .comment .links ul.links li {}
-.terms ul.links li {
-  margin-left: 0;
-  margin-right: 0;
-  padding-right: 0;
-  padding-left: 1em;
-}
-
-.picture, .comment .submitted {
+.user-picture,
+.comment .submitted {
   float: right; /* LTR */
   clear: right; /* LTR */
   padding-left: 1em; /* LTR */
@@ -696,18 +816,16 @@ ul.links li, ul.inline li {
   float: right; /* LTR */
 }
 
-.terms {
-  float: right; /* LTR */
-}
-
-.preview .node, .preview .comment, .sticky {
+.preview .node,
+.preview .comment,
+.node-sticky {
   margin: 0;
   padding: 0.5em 0;
   border: 0;
   background: 0;
 }
 
-.sticky {
+.node-sticky {
   padding: 1em;
   background-color: #fff;
   border: 1px solid #e0e5fb;
@@ -718,7 +836,7 @@ ul.links li, ul.inline li {
   position: relative;
   top: -1px;
   border-bottom: 1px solid #e9eff3;
-  margin: -1.5em -25px 0;
+  margin: 1.5em -25px 0;
   padding: 0 25px;
 }
 
@@ -742,7 +860,8 @@ ul.links li, ul.inline li {
   color: #494949;
 }
 
-.node .content, .comment .content {
+.node .content,
+.comment .content {
   margin: 0.6em 0;
 }
 
@@ -783,9 +902,6 @@ ul.links li, ul.inline li {
 /**
  * Menu.module
  */
-tr.menu-disabled {
-  opacity: 0.5;
-}
 tr.odd td.menu-disabled {
   background-color: #edf5fa;
 }
@@ -835,18 +951,19 @@ fieldset {
   background-position: 0 .75em;
   background-color: transparent;
 }
+*:first-child+html .text-format-wrapper .filter-wrapper {
+  padding: 1.5em 0 1.5em;
+  background-position: 0 0;
+}
 
-*:first-child+html fieldset > .description, *:first-child+html fieldset .fieldset-wrapper .description {
+/* Keep the background position at 0 for filters and vertical tabs. */
+*:first-child+html fieldset.filter-wrapper,
+*:first-child+html fieldset.vertical-tabs-pane {
+  background-position: 0 0;
+}
+
+*:first-child+html fieldset .fieldset-wrapper .fieldset-description {
   padding-top: 1em;
-}
-
-fieldset legend {
-  /* Fix disappearing legend in FFox */
-  display: block;
-}
-
-*:first-child+html fieldset legend, *:first-child+html fieldset.collapsed legend {
-  display: inline;
 }
 
 html.js fieldset.collapsed {
@@ -855,29 +972,77 @@ html.js fieldset.collapsed {
   padding-bottom: .6em;
 }
 
-html.js fieldset.collapsible legend a {
+html.js fieldset.collapsible .fieldset-legend {
   padding-left: 2em; /* LTR */
   background: url(images/menu-expanded.gif) no-repeat 0% 50%; /* LTR */
 }
-
-html.js fieldset.collapsed legend a {
+html.js fieldset.collapsed .fieldset-legend {
   background: url(images/menu-collapsed.gif) no-repeat 0% 50%; /* LTR */
+}
+
+.fieldset-legend span.summary {
+  color: #898989;
+}
+
+/**
+ * Vertical tabs.
+ */
+div.vertical-tabs {
+  border-color: #d9eaf5;
+}
+
+div.vertical-tabs .vertical-tabs-panes fieldset.vertical-tabs-pane {
+  padding: 0.5em 1em;
+}
+
+div.vertical-tabs ul.vertical-tabs-list {
+  border-color: #d9eaf5;
+}
+
+div.vertical-tabs ul.vertical-tabs-list li {
+  background-color: #edf5fa;
+  border-color: #d9eaf5;
+}
+
+div.vertical-tabs ul.vertical-tabs-list li strong {
+  font-weight: normal;
+}
+
+div.vertical-tabs ul.vertical-tabs-list li.selected strong {
+  font-weight: bold;
+}
+
+div.vertical-tabs ul.vertical-tabs-list li.selected small {
+  color: #898989;
+}
+
+div.vertical-tabs ul.vertical-tabs-list li.selected {
+  background: #fff repeat-x 0 0;
+}
+
+div.vertical-tabs ul.vertical-tabs-list li.selected.first {
+  background-image: url(images/gradient-inner.png);
+}
+
+div.vertical-tabs ul.vertical-tabs-list li.selected a strong {
+  color: #494949;
 }
 
 /**
  * Syndication icons and block
  */
-#block-node-0 h2 {
+#block-node-syndicate h2 {
   float: left; /* LTR */
   padding-right: 20px; /* LTR */
 }
 
-#block-node-0 img, .feed-icon {
+#block-node-syndicate img,
+.feed-icon {
   float: right; /* LTR */
   padding-top: 4px;
 }
 
-#block-node-0 .content {
+#block-node-syndicate .content {
   clear: right; /* LTR */
 }
 
@@ -889,6 +1054,15 @@ html.js fieldset.collapsed legend a {
 }
 #user-login-form ul {
   text-align: left; /* LTR */
+}
+#user-login .openid-links {
+  padding: 0;
+}
+#user-login-form .openid-links {
+  padding-left: 0.5em; /* LTR */
+}
+#user-login-form .openid-links li.user-link {
+  padding-left: 1em; /* LTR */
 }
 
 /**
@@ -963,12 +1137,16 @@ table.system-status-report th {
   border-color: #d3e7f4;
 }
 
-#autocomplete li.selected, tr.selected td, tr.selected td.active {
+#autocomplete li.selected,
+tr.selected td,
+tr.selected td.active {
   background: #027ac6;
   color: #fff;
 }
 
-tr.selected td a:link, tr.selected td a:visited, tr.selected td a:active {
+tr.selected td a:link,
+tr.selected td a:visited,
+tr.selected td a:active {
   color: #d3e7f4;
 }
 
@@ -984,6 +1162,13 @@ tr.taxonomy-term-divider-bottom {
   border-top: 1px dotted #CCC;
 }
 
+.theme-selector h3 {
+  margin: 10px 0;
+}
+.theme-selector .operations li {
+  list-style-image: none;
+}
+
 /**
  * CSS support
  */
@@ -995,27 +1180,13 @@ tr.taxonomy-term-divider-bottom {
 /**
  * Generic elements.
  */
-.messages {
-  background-color: #fff;
-  border: 1px solid #b8d3e5;
-}
-
 .preview {
   background-color: #fcfce8;
   border: 1px solid #e5e58f;
 }
 
-div.status {
-  color: #33a333;
-  border-color: #c7f2c8;
-}
-
-div.error, tr.error {
-  color: #a30000;
-  background-color: #FFCCCC;
-}
-
-.form-item input.error, .form-item textarea.error {
+.form-item input.error,
+.form-item textarea.error {
   border: 1px solid #c52020;
   color: #363636;
 }
@@ -1054,26 +1225,31 @@ tr.dblog-error {
 tr.dblog-error td.active {
   background-color: #fbdbdb;
 }
-tr.dblog-page-not-found, tr.dblog-access-denied {
+tr.dblog-page-not-found,
+tr.dblog-access-denied {
   background: #d7ffd7;
 }
-tr.dblog-page-not-found td.active, tr.dblog-access-denied td.active {
+tr.dblog-page-not-found td.active,
+tr.dblog-access-denied td.active {
   background: #c7eec7;
 }
 
 /**
  * Status report colors.
  */
-table.system-status-report tr.error, table.system-status-report tr.error th {
+table.system-status-report tr.error,
+table.system-status-report tr.error th {
   background-color: #fcc;
   border-color: #ebb;
   color: #200;
 }
-table.system-status-report tr.warning, table.system-status-report tr.warning th {
+table.system-status-report tr.warning,
+table.system-status-report tr.warning th {
   background-color: #ffd;
   border-color: #eeb;
 }
-table.system-status-report tr.ok, table.system-status-report tr.ok th {
+table.system-status-report tr.ok,
+table.system-status-report tr.ok th {
   background-color: #dfd;
   border-color: #beb;
 }

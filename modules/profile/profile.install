@@ -1,28 +1,22 @@
 <?php
 
 /**
- * Implementation of hook_install().
+ * @file
+ * Install, update and uninstall functions for the profile module.
  */
-function profile_install() {
-  // Create tables.
-  drupal_install_schema('profile');
-}
 
 /**
- * Implementation of hook_uninstall().
+ * Implements hook_uninstall().
  */
 function profile_uninstall() {
-  // Remove tables
-  drupal_uninstall_schema('profile');
-
   variable_del('profile_block_author_fields');
 }
 
 /**
- * Implementation of hook_schema().
+ * Implements hook_schema().
  */
 function profile_schema() {
-  $schema['profile_fields'] = array(
+  $schema['profile_field'] = array(
     'description' => 'Stores profile field information.',
     'fields' => array(
       'fid' => array(
@@ -70,7 +64,6 @@ function profile_schema() {
         'type' => 'int',
         'not null' => TRUE,
         'default' => 0,
-        'size' => 'tiny',
         'description' => 'Weight of field in relation to other profile fields.',
       ),
       'required' => array(
@@ -107,12 +100,16 @@ function profile_schema() {
         'description' => 'List of options to be used in a list selection field.',
       ),
     ),
-    'indexes' => array('category' => array('category')),
-    'unique keys' => array('name' => array('name')),
+    'indexes' => array(
+      'category' => array('category'),
+    ),
+    'unique keys' => array(
+      'name' => array('name'),
+    ),
     'primary key' => array('fid'),
   );
 
-  $schema['profile_values'] = array(
+  $schema['profile_value'] = array(
     'description' => 'Stores values for profile fields.',
     'fields' => array(
       'fid' => array(
@@ -120,7 +117,7 @@ function profile_schema() {
         'unsigned' => TRUE,
         'not null' => TRUE,
         'default' => 0,
-        'description' => 'The {profile_fields}.fid of the field.',
+        'description' => 'The {profile_field}.fid of the field.',
       ),
       'uid' => array(
         'type' => 'int',
@@ -139,8 +136,37 @@ function profile_schema() {
     'indexes' => array(
       'fid' => array('fid'),
     ),
+    'foreign keys' => array(
+      'profile_field' => array(
+        'table' => 'profile_field',
+        'columns' => array('fid' => 'fid'),
+      ),
+      'profile_user' => array(
+        'table' => 'users',
+        'columns' => array('uid' => 'uid'),
+      ),
+    ),
   );
 
   return $schema;
 }
 
+/**
+ * Rename {profile_fields} table to {profile_field} and {profile_values} to {profile_value}.
+ */
+function profile_update_7001() {
+  db_rename_table('profile_fields', 'profile_field');
+  db_rename_table('profile_values', 'profile_value');
+}
+
+/**
+ * Change the weight column to normal int.
+ */
+function profile_update_7002() {
+  db_change_field('profile_field', 'weight', 'weight', array(
+    'type' => 'int',
+    'not null' => TRUE,
+    'default' => 0,
+    'description' => 'Weight of field in relation to other profile fields.',
+  ));
+}

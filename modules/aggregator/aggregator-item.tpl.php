@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @file aggregator-item.tpl.php
+ * @file
  * Default theme implementation to format an individual feed item for display
  * on the aggregator page.
  *
@@ -16,6 +16,8 @@
  *
  * @see template_preprocess()
  * @see template_preprocess_aggregator_item()
+ *
+ * @ingroup themeable
  */
 ?>
 <div class="feed-item">
@@ -24,19 +26,19 @@
   </h3>
 
   <div class="feed-item-meta">
-  <?php if ($source_url) : ?>
+  <?php if ($source_url): ?>
     <a href="<?php print $source_url; ?>" class="feed-item-source"><?php print $source_title; ?></a> -
   <?php endif; ?>
     <span class="feed-item-date"><?php print $source_date; ?></span>
   </div>
 
-<?php if ($content) : ?>
+<?php if ($content): ?>
   <div class="feed-item-body">
     <?php print $content; ?>
   </div>
 <?php endif; ?>
 
-<?php if ($categories) : ?>
+<?php if ($categories): ?>
   <div class="feed-item-categories">
     <?php print t('Categories'); ?>: <?php print implode(', ', $categories); ?>
   </div>

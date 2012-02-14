@@ -1,11 +1,16 @@
 name = User
 description = Manages the user registration and login system.
-package = Core - required
+package = Core
 version = VERSION
-core = 6.x
+core = 7.x
+files[] = user.module
+files[] = user.test
+required = TRUE
+configure = admin/config/people
+stylesheets[all][] = user.css
 
-; Information added by drupal.org packaging script on 2011-05-25
-version = "6.22"
+; Information added by drupal.org packaging script on 2012-02-01
+version = "7.12"
 project = "drupal"
-datestamp = "1306357015"
+datestamp = "1328134560"
 

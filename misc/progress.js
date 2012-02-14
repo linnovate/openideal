@@ -1,3 +1,4 @@
+(function ($) {
 
 /**
  * A progressbar object. Initialized with the given id. Must be inserted into
@@ -12,16 +13,16 @@
 Drupal.progressBar = function (id, updateCallback, method, errorCallback) {
   var pb = this;
   this.id = id;
-  this.method = method || "GET";
+  this.method = method || 'GET';
   this.updateCallback = updateCallback;
   this.errorCallback = errorCallback;
 
-  this.element = document.createElement('div');
-  this.element.id = id;
-  this.element.className = 'progress';
-  $(this.element).html('<div class="bar"><div class="filled"></div></div>'+
-                       '<div class="percentage"></div>'+
-                       '<div class="message">&nbsp;</div>');
+  // The WAI-ARIA setting aria-live="polite" will announce changes after users
+  // have completed their current activity and not interrupt the screen reader.
+  this.element = $('<div class="progress" aria-live="polite"></div>').attr('id', id);
+  this.element.html('<div class="bar"><div class="filled"></div></div>' +
+                    '<div class="percentage"></div>' +
+                    '<div class="message">&nbsp;</div>');
 };
 
 /**
@@ -29,8 +30,8 @@ Drupal.progressBar = function (id, updateCallback, method, errorCallback) {
  */
 Drupal.progressBar.prototype.setProgress = function (percentage, message) {
   if (percentage >= 0 && percentage <= 100) {
-    $('div.filled', this.element).css('width', percentage +'%');
-    $('div.percentage', this.element).html(percentage +'%');
+    $('div.filled', this.element).css('width', percentage + '%');
+    $('div.percentage', this.element).html(percentage + '%');
   }
   $('div.message', this.element).html(message);
   if (this.updateCallback) {
@@ -52,7 +53,7 @@ Drupal.progressBar.prototype.startMonitoring = function (uri, delay) {
  */
 Drupal.progressBar.prototype.stopMonitoring = function () {
   clearTimeout(this.timer);
-  // This allows monitoring to be stopped from within the callback
+  // This allows monitoring to be stopped from within the callback.
   this.uri = null;
 };
 
@@ -73,18 +74,18 @@ Drupal.progressBar.prototype.sendPing = function () {
       data: '',
       dataType: 'json',
       success: function (progress) {
-        // Display errors
+        // Display errors.
         if (progress.status == 0) {
           pb.displayError(progress.data);
           return;
         }
-        // Update display
+        // Update display.
         pb.setProgress(progress.percentage, progress.message);
-        // Schedule next timer
-        pb.timer = setTimeout(function() { pb.sendPing(); }, pb.delay);
+        // Schedule next timer.
+        pb.timer = setTimeout(function () { pb.sendPing(); }, pb.delay);
       },
       error: function (xmlhttp) {
-        pb.displayError(Drupal.ahahError(xmlhttp, pb.uri));
+        pb.displayError(Drupal.ajaxError(xmlhttp, pb.uri));
       }
     });
   }
@@ -94,13 +95,12 @@ Drupal.progressBar.prototype.sendPing = function () {
  * Display errors on the page.
  */
 Drupal.progressBar.prototype.displayError = function (string) {
-  var error = document.createElement('div');
-  error.className = 'error';
-  error.innerHTML = string;
-
+  var error = $('<div class="messages error"></div>').html(string);
   $(this.element).before(error).hide();
 
   if (this.errorCallback) {
     this.errorCallback(this);
   }
 };
+
+})(jQuery);

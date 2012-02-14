@@ -1,4 +1,4 @@
-#!/usr/bin/php
+#!/usr/bin/env php
 <?php
 
 /**
@@ -13,7 +13,7 @@
  */
 $script = basename(array_shift($_SERVER['argv']));
 
-if (in_array('--help', $_SERVER['argv'])) {
+if (in_array('--help', $_SERVER['argv']) || empty($_SERVER['argv'])) {
   echo <<<EOF
 
 Execute a Drupal page from the shell.
@@ -35,15 +35,15 @@ All arguments are long options.
               produce errors from setting the session.
 
   URI         The URI to execute, i.e. http://default/foo/bar for executing
-              the path '/foo/bar' in your site 'default'.  URI has to be
+              the path '/foo/bar' in your site 'default'. URI has to be
               enclosed by quotation marks if there are ampersands in it
-              (f.e. index.php?q=node&foo=bar).  Prefix 'http://' is required,
+              (f.e. index.php?q=node&foo=bar). Prefix 'http://' is required,
               and the domain must exist in Drupal's sites-directory.
 
               If the given path and file exists it will be executed directly,
               i.e. if URI is set to http://default/bar/foo.php
               and bar/foo.php exists, this script will be executed without
-              bootstrapping Drupal.  To execute Drupal's cron.php, specify
+              bootstrapping Drupal. To execute Drupal's cron.php, specify
               http://default/cron.php as the URI.
 
 
@@ -61,10 +61,11 @@ $cmd = 'index.php';
 $_SERVER['HTTP_HOST']       = 'default';
 $_SERVER['PHP_SELF']        = '/index.php';
 $_SERVER['REMOTE_ADDR']     = '127.0.0.1';
-$_SERVER['SERVER_SOFTWARE'] = 'PHP CLI';
+$_SERVER['SERVER_SOFTWARE'] = NULL;
 $_SERVER['REQUEST_METHOD']  = 'GET';
 $_SERVER['QUERY_STRING']    = '';
 $_SERVER['PHP_SELF']        = $_SERVER['REQUEST_URI'] = '/';
+$_SERVER['HTTP_USER_AGENT'] = 'console';
 
 // toggle verbose mode
 if (in_array('--verbose', $_SERVER['argv'])) {
@@ -117,7 +118,7 @@ while ($param = array_shift($_SERVER['argv'])) {
           $_SERVER['PHP_SELF'] = $_SERVER['REQUEST_URI'] = $path['path'];
           $cmd = substr($path['path'], 1);
         }
-        else if (isset($path['path'])) {
+        elseif (isset($path['path'])) {
           if (!isset($_GET['q'])) {
             $_REQUEST['q'] = $_GET['q'] = $path['path'];
           }

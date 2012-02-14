@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @file profile-wrapper.tpl.php
+ * @file
  * Default theme implementation for wrapping member listings and their
  * profiles.
  *

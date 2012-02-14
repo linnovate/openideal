@@ -1,3 +1,7 @@
+/**
+ * @file
+ * Right-to-left specific stylesheet for the Color module.
+ */
 
 #placeholder {
   left: 0;
@@ -13,18 +17,20 @@
   float: right;
   clear: right;
 }
-.color-form .form-text, .color-form .form-select {
+.color-form .form-text,
+.color-form .form-select {
   float: right;
 }
 .color-form .form-text {
   margin-right: 0;
   margin-left: 5px;
 }
-
 #palette .hook {
   float: right;
 }
-#palette .down, #palette .up, #palette .both {
+#palette .down,
+#palette .up,
+#palette .both {
   background: url(images/hook-rtl.png) no-repeat 0 0;
 }
 #palette .up {
@@ -33,7 +39,6 @@
 #palette .both {
   background-position: 0 -54px;
 }
-
 #palette .lock {
   float: right;
   right: -10px;

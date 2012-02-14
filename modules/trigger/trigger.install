@@ -1,26 +1,12 @@
 <?php
 
 /**
- * Implementation of hook_install().
+ * @file
+ * Install, update and uninstall functions for the trigger module.
  */
-function trigger_install() {
-  // Create tables.
-  drupal_install_schema('trigger');
-
-  // Do initial synchronization of actions in code and the database.
-  actions_synchronize(actions_list());
-}
 
 /**
- * Implementation of hook_uninstall().
- */
-function trigger_uninstall() {
-  // Remove tables.
-  drupal_uninstall_schema('trigger');
-}
-
-/**
- * Implementation of hook_schema().
+ * Implements hook_schema().
  */
 function trigger_schema() {
   $schema['trigger_assignments'] = array(
@@ -31,14 +17,7 @@ function trigger_schema() {
         'length' => 32,
         'not null' => TRUE,
         'default' => '',
-        'description' => 'Primary Key: The name of the internal Drupal hook upon which an action is firing; for example, nodeapi.',
-      ),
-      'op' => array(
-        'type' => 'varchar',
-        'length' => 32,
-        'not null' => TRUE,
-        'default' => '',
-        'description' => 'Primary Key: The specific operation of the hook upon which an action is firing: for example, presave.',
+        'description' => 'Primary Key: The name of the internal Drupal hook; for example, node_insert.',
       ),
       'aid' => array(
         'type' => 'varchar',
@@ -54,9 +33,38 @@ function trigger_schema() {
         'description' => 'The weight of the trigger assignment in relation to other triggers.',
       ),
     ),
-    'primary key' => array('hook', 'op', 'aid'),
+    'primary key' => array('hook', 'aid'),
+    'foreign keys' => array(
+      'action' => array(
+        'table' => 'actions',
+        'columns' => array('aid' => 'aid'),
+      ),
+    ),
   );
   return $schema;
 }
 
+/**
+ * Implements hook_install().
+ */
+function trigger_install() {
+  // Do initial synchronization of actions in code and the database.
+  actions_synchronize();
+}
 
+/**
+ * Adds operation names to the hook names and drops the "op" field.
+ */
+function trigger_update_7000() {
+  $result = db_query("SELECT hook, op, aid FROM {trigger_assignments} WHERE op <> ''");
+
+  foreach ($result as $record) {
+    db_update('trigger_assignments')
+      ->fields(array('hook' => $record->hook . '_' . $record->op))
+      ->condition('hook', $record->hook)
+      ->condition('op', $record->op)
+      ->condition('aid', $record->aid)
+      ->execute();
+  }
+  db_drop_field('trigger_assignments', 'op');
+}

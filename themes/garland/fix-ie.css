@@ -1,18 +1,11 @@
 
-/**
- * Garland, for Drupal 6.x
- * Stefan Nagtegaal, iStyledThis [dot] nl
- * Steven Wittens, acko [dot] net
- */
-
 body {
   /* Center layout */
   text-align: center;
-  /* Allow text resizing */
-  font-size: 80%;
 }
 
-#header-region, #wrapper #container {
+#header-region,
+#wrapper #container {
   /* Reset text alignment */
   text-align: left; /* LTR */
 }
@@ -32,6 +25,10 @@ fieldset {
   background: none;
 }
 
+div.vertical-tabs ul.vertical-tabs-list li.first {
+  background-image: none;
+}
+
 ul.primary {
   /* Fix missing top margin */
   position: relative; /* LTR */
@@ -40,7 +37,6 @@ ul.primary {
 
 /* Prevent fieldsets from shifting when changing collapsed state. */
 html.js fieldset.collapsible {
-  position: relative;
   top: -1em;
 }
 html.js fieldset.collapsed {
@@ -62,7 +58,8 @@ tr.taxonomy-term-preview {
   filter: alpha(opacity=50);
 }
 
-#attach-hide label, #uploadprogress div.message {
+#attach-hide label,
+#uploadprogress div.message {
   /* Fading elements in IE causes the text to bleed unless they have a background. */
   background-color: #ffffff;
 }

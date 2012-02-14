@@ -1,5 +1,4 @@
 <?php
-// $Id$
 
 /**
  * @file
@@ -7,20 +6,20 @@
  */
 
 /**
- * Implementation of hook_init().
+ * Implements hook_init().
  */
 function phptemplate_init($template) {
-  $file = dirname($template->filename) .'/template.php';
+  $file = dirname($template->filename) . '/template.php';
   if (file_exists($file)) {
-    include_once "./$file";
+    include_once DRUPAL_ROOT . '/' . $file;
   }
 }
 
 /**
- * Implementation of hook_theme().
+ * Implements hook_theme().
  */
 function phptemplate_theme($existing, $type, $theme, $path) {
-  $templates = drupal_find_theme_functions($existing, array('phptemplate', $theme));
+  $templates = drupal_find_theme_functions($existing, array($theme));
   $templates += drupal_find_theme_templates($existing, '.tpl.php', $path);
   return $templates;
 }

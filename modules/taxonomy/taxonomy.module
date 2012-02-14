@@ -6,108 +6,258 @@
  */
 
 /**
- * Implementation of hook_perm().
+ * Users can create new terms in a free-tagging vocabulary when
+ * submitting a taxonomy_autocomplete_widget. We store a term object
+ * whose tid is 'autocreate' as a field data item during widget
+ * validation and then actually create the term if/when that field
+ * data item makes it to taxonomy_field_insert/update().
  */
-function taxonomy_perm() {
-  return array('administer taxonomy');
+
+/**
+ * Implements hook_help().
+ */
+function taxonomy_help($path, $arg) {
+  switch ($path) {
+    case 'admin/help#taxonomy':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('The Taxonomy module allows you to classify the content of your website. To classify content, you define <em>vocabularies</em> that contain related <em>terms</em>, and then assign the vocabularies to content types. For more information, see the online handbook entry for the <a href="@taxonomy">Taxonomy module</a>.', array('@taxonomy' => 'http://drupal.org/handbook/modules/taxonomy/')) . '</p>';
+      $output .= '<h3>' . t('Uses') . '</h3>';
+      $output .= '<dl>';
+      $output .= '<dt>' . t('Creating vocabularies') . '</dt>';
+      $output .= '<dd>' . t('Users with sufficient <a href="@perm">permissions</a> can create <em>vocabularies</em> and <em>terms</em> through the <a href="@taxo">Taxonomy page</a>. The page listing the terms provides a drag-and-drop interface for controlling the order of the terms and sub-terms within a vocabulary, in a hierarchical fashion. A <em>controlled vocabulary</em> classifying music by genre with terms and sub-terms could look as follows:', array('@taxo' => url('admin/structure/taxonomy'), '@perm' => url('admin/people/permissions', array('fragment'=>'module-taxonomy'))));
+      $output .= '<ul><li>' . t('<em>vocabulary</em>: Music') . '</li>';
+      $output .= '<ul><li>' . t('<em>term</em>: Jazz') . '</li>';
+      $output .= '<ul><li>' . t('<em>sub-term</em>: Swing') . '</li>';
+      $output .= '<li>' . t('<em>sub-term</em>: Fusion') . '</li></ul></ul>';
+      $output .= '<ul><li>' . t('<em>term</em>: Rock') . '</li>';
+      $output .= '<ul><li>' . t('<em>sub-term</em>: Country rock') . '</li>';
+      $output .= '<li>' . t('<em>sub-term</em>: Hard rock') . '</li></ul></ul></ul>';
+      $output .= t('You can assign a sub-term to multiple parent terms. For example, <em>fusion</em> can be assigned to both <em>rock</em> and <em>jazz</em>.') . '</dd>';
+      $output .= '<dd>' . t('Terms in a <em>free-tagging vocabulary</em> can be built gradually as you create or edit content. This is often done used for blogs or photo management applications.') . '</dd>';
+      $output .= '<dt>' . t('Assigning vocabularies to content types') . '</dt>';
+      $output .= '<dd>' . t('Before you can use a new vocabulary to classify your content, a new Taxonomy term field must be added to a <a href="@ctedit">content type</a> on its <em>manage fields</em> page. When adding a taxonomy field, you choose a <em>widget</em> to use to enter the taxonomy information on the content editing page: a select list, checkboxes, radio buttons, or an auto-complete field (to build a free-tagging vocabulary). After choosing the field type and widget, on the subsequent <em>field settings</em> page you can choose the desired vocabulary, whether one or multiple terms can be chosen from the vocabulary, and other settings. The same vocabulary can be added to multiple content types, by using the "Add existing field" section on the manage fields page.', array('@ctedit' => url('admin/structure/types'))) . '</dd>';
+      $output .= '<dt>' . t('Classifying content') . '</dt>';
+      $output .= '<dd>' . t('After the vocabulary is assigned to the content type, you can start classifying content. The field with terms will appear on the content editing screen when you edit or <a href="@addnode">add new content</a>.', array('@addnode' => url('node/add'))) . '</dd>';
+      $output .= '<dt>' . t('Viewing listings and RSS feeds by term') . '</dt>';
+      $output .= '<dd>' . t("Each taxonomy term automatically provides a page listing content that has its classification, and a corresponding RSS feed. For example, if the taxonomy term <em>country rock</em> has the ID 123 (you can see this by looking at the URL when hovering on the linked term, which you can click to navigate to the listing page), then you will find this list at the path <em>taxonomy/term/123</em>. The RSS feed will use the path <em>taxonomy/term/123/feed</em> (the RSS icon for this term's listing will automatically display in your browser's address bar when viewing the listing page).") . '</dd>';
+      $output .= '<dt>' . t('Extending Taxonomy module') . '</dt>';
+      $output .= '<dd>' . t('There are <a href="@taxcontrib">many contributed modules</a> that extend the behavior of the Taxonomy module for both display and organization of terms.', array('@taxcontrib' => 'http://drupal.org/project/modules?filters=tid:71&solrsort=sis_project_release_usage%20desc'));
+      $output .= '</dl>';
+      return $output;
+    case 'admin/structure/taxonomy':
+      $output = '<p>' . t('Taxonomy is for categorizing content. Terms are grouped into vocabularies. For example, a vocabulary called "Fruit" would contain the terms "Apple" and "Banana".') . '</p>';
+      return $output;
+    case 'admin/structure/taxonomy/%':
+      $vocabulary = taxonomy_vocabulary_machine_name_load($arg[3]);
+      switch ($vocabulary->hierarchy) {
+        case 0:
+          return '<p>' . t('You can reorganize the terms in %capital_name using their drag-and-drop handles, and group terms under a parent term by sliding them under and to the right of the parent.', array('%capital_name' => drupal_ucfirst($vocabulary->name), '%name' => $vocabulary->name)) . '</p>';
+        case 1:
+          return '<p>' . t('%capital_name contains terms grouped under parent terms. You can reorganize the terms in %capital_name using their drag-and-drop handles.', array('%capital_name' => drupal_ucfirst($vocabulary->name), '%name' => $vocabulary->name)) . '</p>';
+        case 2:
+          return '<p>' . t('%capital_name contains terms with multiple parents. Drag and drop of terms with multiple parents is not supported, but you can re-enable drag-and-drop support by editing each term to include only a single parent.', array('%capital_name' => drupal_ucfirst($vocabulary->name))) . '</p>';
+      }
+  }
 }
 
 /**
- * Implementation of hook_theme().
+ * Implements hook_permission().
+ */
+function taxonomy_permission() {
+  $permissions = array(
+    'administer taxonomy' => array(
+      'title' => t('Administer vocabularies and terms'),
+    ),
+  );
+  foreach (taxonomy_get_vocabularies() as $vocabulary) {
+    $permissions += array(
+      'edit terms in ' . $vocabulary->vid => array(
+        'title' => t('Edit terms in %vocabulary', array('%vocabulary' => $vocabulary->name)),
+      ),
+    );
+    $permissions += array(
+       'delete terms in ' . $vocabulary->vid => array(
+         'title' => t('Delete terms from %vocabulary', array('%vocabulary' => $vocabulary->name)),
+      ),
+    );
+  }
+  return $permissions;
+}
+
+/**
+ * Implements hook_entity_info().
+ */
+function taxonomy_entity_info() {
+  $return = array(
+    'taxonomy_term' => array(
+      'label' => t('Taxonomy term'),
+      'controller class' => 'TaxonomyTermController',
+      'base table' => 'taxonomy_term_data',
+      'uri callback' => 'taxonomy_term_uri',
+      'fieldable' => TRUE,
+      'entity keys' => array(
+        'id' => 'tid',
+        'bundle' => 'vocabulary_machine_name',
+        'label' => 'name',
+      ),
+      'bundle keys' => array(
+        'bundle' => 'machine_name',
+      ),
+      'bundles' => array(),
+      'view modes' => array(
+        // @todo View mode for display as a field (when attached to nodes etc).
+        'full' => array(
+          'label' => t('Taxonomy term page'),
+          'custom settings' => FALSE,
+        ),
+      ),
+    ),
+  );
+  foreach (taxonomy_vocabulary_get_names() as $machine_name => $vocabulary) {
+    $return['taxonomy_term']['bundles'][$machine_name] = array(
+      'label' => $vocabulary->name,
+      'admin' => array(
+        'path' => 'admin/structure/taxonomy/%taxonomy_vocabulary_machine_name',
+        'real path' => 'admin/structure/taxonomy/' . $machine_name,
+        'bundle argument' => 3,
+        'access arguments' => array('administer taxonomy'),
+      ),
+    );
+  }
+  $return['taxonomy_vocabulary'] = array(
+    'label' => t('Taxonomy vocabulary'),
+    'controller class' => 'TaxonomyVocabularyController',
+    'base table' => 'taxonomy_vocabulary',
+    'entity keys' => array(
+      'id' => 'vid',
+      'label' => 'name',
+    ),
+    'fieldable' => FALSE,
+  );
+
+  return $return;
+}
+
+/**
+ * Entity uri callback.
+ */
+function taxonomy_term_uri($term) {
+  return array(
+    'path' => 'taxonomy/term/' . $term->tid,
+  );
+}
+
+/**
+ * Implements hook_field_extra_fields().
+ */
+function taxonomy_field_extra_fields() {
+  $return = array();
+  $info = entity_get_info('taxonomy_term');
+  foreach (array_keys($info['bundles']) as $bundle) {
+    $return['taxonomy_term'][$bundle] = array(
+      'form' => array(
+        'name' => array(
+          'label' => t('Name'),
+          'description' => t('Term name textfield'),
+          'weight' => -5,
+        ),
+        'description' => array(
+          'label' => t('Description'),
+          'description' => t('Term description textarea'),
+          'weight' => 0,
+        ),
+      ),
+      'display' => array(
+        'description' => array(
+          'label' => t('Description'),
+          'description' => t('Term description'),
+          'weight' => 0,
+        ),
+      ),
+    );
+  }
+
+  return $return;
+}
+
+/**
+ * Return nodes attached to a term across all field instances.
+ *
+ * This function requires taxonomy module to be maintaining its own tables,
+ * and will return an empty array if it is not. If using other field storage
+ * methods alternatives methods for listing terms will need to be used.
+ *
+ * @param $tid
+ *   The term ID.
+ * @param $pager
+ *   Boolean to indicate whether a pager should be used.
+ * @param $limit
+ *   Integer. The maximum number of nodes to find.
+ *   Set to FALSE for no limit.
+ * @order
+ *   An array of fields and directions.
+ *
+ * @return
+ *   An array of nids matching the query.
+ */
+function taxonomy_select_nodes($tid, $pager = TRUE, $limit = FALSE, $order = array('t.sticky' => 'DESC', 't.created' => 'DESC')) {
+  if (!variable_get('taxonomy_maintain_index_table', TRUE)) {
+    return array();
+  }
+  $query = db_select('taxonomy_index', 't');
+  $query->addTag('node_access');
+  $query->condition('tid', $tid);
+  if ($pager) {
+    $count_query = clone $query;
+    $count_query->addExpression('COUNT(t.nid)');
+
+    $query = $query->extend('PagerDefault');
+    if ($limit !== FALSE) {
+      $query = $query->limit($limit);
+    }
+    $query->setCountQuery($count_query);
+  }
+  else {
+    if ($limit !== FALSE) {
+      $query->range(0, $limit);
+    }
+  }
+  $query->addField('t', 'nid');
+  $query->addField('t', 'tid');
+  foreach ($order as $field => $direction) {
+    $query->orderBy($field, $direction);
+    // ORDER BY fields need to be loaded too, assume they are in the form
+    // table_alias.name
+    list($table_alias, $name) = explode('.', $field);
+    $query->addField($table_alias, $name);
+  }
+  return $query->execute()->fetchCol();
+}
+
+/**
+ * Implements hook_theme().
  */
 function taxonomy_theme() {
   return array(
-    'taxonomy_term_select' => array(
-      'arguments' => array('element' => NULL),
-    ),
-    'taxonomy_term_page' => array(
-      'arguments' => array('tids' => array(), 'result' => NULL),
-    ),
     'taxonomy_overview_vocabularies' => array(
-      'arguments' => array('form' => array()),
+      'render element' => 'form',
     ),
     'taxonomy_overview_terms' => array(
-      'arguments' => array('form' => array()),
+      'render element' => 'form',
+    ),
+    'taxonomy_term' => array(
+      'render element' => 'elements',
+      'template' => 'taxonomy-term',
     ),
   );
 }
 
 /**
- * Implementation of hook_link().
- *
- * This hook is extended with $type = 'taxonomy terms' to allow themes to
- * print lists of terms associated with a node. Themes can print taxonomy
- * links with:
- *
- * if (module_exists('taxonomy')) {
- *   $terms = taxonomy_link('taxonomy terms', $node);
- *   print theme('links', $terms);
- * }
- */
-function taxonomy_link($type, $node = NULL) {
-  if ($type == 'taxonomy terms' && $node != NULL) {
-    $links = array();
-    // If previewing, the terms must be converted to objects first.
-    if (isset($node->build_mode) && $node->build_mode == NODE_BUILD_PREVIEW) {
-      $node->taxonomy = taxonomy_preview_terms($node);
-    }
-    if (!empty($node->taxonomy)) {
-      foreach ($node->taxonomy as $term) {
-        // During preview the free tagging terms are in an array unlike the
-        // other terms which are objects. So we have to check if a $term
-        // is an object or not.
-        if (is_object($term)) {
-          $links['taxonomy_term_'. $term->tid] = array(
-            'title' => $term->name,
-            'href' => taxonomy_term_path($term),
-            'attributes' => array('rel' => 'tag', 'title' => strip_tags($term->description))
-          );
-        }
-        // Previewing free tagging terms; we don't link them because the
-        // term-page might not exist yet.
-        else {
-          foreach ($term as $free_typed) {
-            $typed_terms = drupal_explode_tags($free_typed);
-            foreach ($typed_terms as $typed_term) {
-              $links['taxonomy_preview_term_'. $typed_term] = array(
-                'title' => $typed_term,
-              );
-            }
-          }
-        }
-      }
-    }
-
-    // We call this hook again because some modules and themes
-    // call taxonomy_link('taxonomy terms') directly.
-    drupal_alter('link', $links, $node);
-
-    return $links;
-  }
-}
-
-/**
- * For vocabularies not maintained by taxonomy.module, give the maintaining
- * module a chance to provide a path for terms in that vocabulary.
- *
- * @param $term
- *   A term object.
- * @return
- *   An internal Drupal path.
- */
-function taxonomy_term_path($term) {
-  $vocabulary = taxonomy_vocabulary_load($term->vid);
-  if ($vocabulary->module != 'taxonomy' && $path = module_invoke($vocabulary->module, 'term_path', $term)) {
-    return $path;
-  }
-  return 'taxonomy/term/'. $term->tid;
-}
-
-/**
- * Implementation of hook_menu().
+ * Implements hook_menu().
  */
 function taxonomy_menu() {
-  $items['admin/content/taxonomy'] = array(
+  $items['admin/structure/taxonomy'] = array(
     'title' => 'Taxonomy',
     'description' => 'Manage tagging, categorization, and classification of your content.',
     'page callback' => 'drupal_get_form',
@@ -115,49 +265,55 @@ function taxonomy_menu() {
     'access arguments' => array('administer taxonomy'),
     'file' => 'taxonomy.admin.inc',
   );
-
-  $items['admin/content/taxonomy/list'] = array(
+  $items['admin/structure/taxonomy/list'] = array(
     'title' => 'List',
     'type' => MENU_DEFAULT_LOCAL_TASK,
     'weight' => -10,
   );
-
-  $items['admin/content/taxonomy/add/vocabulary'] = array(
+  $items['admin/structure/taxonomy/add'] = array(
     'title' => 'Add vocabulary',
     'page callback' => 'drupal_get_form',
     'page arguments' => array('taxonomy_form_vocabulary'),
     'access arguments' => array('administer taxonomy'),
-    'type' => MENU_LOCAL_TASK,
-    'parent' => 'admin/content/taxonomy',
+    'type' => MENU_LOCAL_ACTION,
     'file' => 'taxonomy.admin.inc',
   );
 
-  $items['admin/content/taxonomy/edit/vocabulary/%taxonomy_vocabulary'] = array(
-    'title' => 'Edit vocabulary',
-    'page callback' => 'taxonomy_admin_vocabulary_edit',
-    'page arguments' => array(5),
-    'access arguments' => array('administer taxonomy'),
-    'type' => MENU_CALLBACK,
-    'file' => 'taxonomy.admin.inc',
-  );
-
-  $items['admin/content/taxonomy/edit/term'] = array(
-    'title' => 'Edit term',
-    'page callback' => 'taxonomy_admin_term_edit',
-    'access arguments' => array('administer taxonomy'),
-    'type' => MENU_CALLBACK,
-    'file' => 'taxonomy.admin.inc',
-  );
-
-  $items['taxonomy/term/%'] = array(
+  $items['taxonomy/term/%taxonomy_term'] = array(
     'title' => 'Taxonomy term',
+    'title callback' => 'taxonomy_term_title',
+    'title arguments' => array(2),
     'page callback' => 'taxonomy_term_page',
+    'page arguments' => array(2),
+    'access arguments' => array('access content'),
+    'file' => 'taxonomy.pages.inc',
+  );
+  $items['taxonomy/term/%taxonomy_term/view'] = array(
+    'title' => 'View',
+    'type' => MENU_DEFAULT_LOCAL_TASK,
+  );
+  $items['taxonomy/term/%taxonomy_term/edit'] = array(
+    'title' => 'Edit',
+    'page callback' => 'drupal_get_form',
+    // Pass a NULL argument to ensure that additional path components are not
+    // passed to taxonomy_form_term() as the vocabulary machine name argument.
+    'page arguments' => array('taxonomy_form_term', 2, NULL),
+    'access callback' => 'taxonomy_term_edit_access',
+    'access arguments' => array(2),
+    'type' => MENU_LOCAL_TASK,
+    'weight' => 10,
+    'file' => 'taxonomy.admin.inc',
+  );
+  $items['taxonomy/term/%taxonomy_term/feed'] = array(
+    'title' => 'Taxonomy term',
+    'title callback' => 'taxonomy_term_title',
+    'title arguments' => array(2),
+    'page callback' => 'taxonomy_term_feed',
     'page arguments' => array(2),
     'access arguments' => array('access content'),
     'type' => MENU_CALLBACK,
     'file' => 'taxonomy.pages.inc',
   );
-
   $items['taxonomy/autocomplete'] = array(
     'title' => 'Autocomplete taxonomy',
     'page callback' => 'taxonomy_autocomplete',
@@ -165,62 +321,129 @@ function taxonomy_menu() {
     'type' => MENU_CALLBACK,
     'file' => 'taxonomy.pages.inc',
   );
-  $items['admin/content/taxonomy/%taxonomy_vocabulary'] = array(
-    'title' => 'List terms',
+
+  $items['admin/structure/taxonomy/%taxonomy_vocabulary_machine_name'] = array(
+    'title callback' => 'taxonomy_admin_vocabulary_title_callback',
+    'title arguments' => array(3),
     'page callback' => 'drupal_get_form',
     'page arguments' => array('taxonomy_overview_terms', 3),
     'access arguments' => array('administer taxonomy'),
-    'type' => MENU_CALLBACK,
+    'file' => 'taxonomy.admin.inc',
+  );
+  $items['admin/structure/taxonomy/%taxonomy_vocabulary_machine_name/list'] = array(
+    'title' => 'List',
+    'type' => MENU_DEFAULT_LOCAL_TASK,
+    'weight' => -20,
+  );
+  $items['admin/structure/taxonomy/%taxonomy_vocabulary_machine_name/edit'] = array(
+    'title' => 'Edit',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('taxonomy_form_vocabulary', 3),
+    'access arguments' => array('administer taxonomy'),
+    'type' => MENU_LOCAL_TASK,
+    'weight' => -10,
     'file' => 'taxonomy.admin.inc',
   );
 
-  $items['admin/content/taxonomy/%taxonomy_vocabulary/list'] = array(
-    'title' => 'List',
-    'type' => MENU_DEFAULT_LOCAL_TASK,
-    'weight' => -10,
-  );
-
-  $items['admin/content/taxonomy/%taxonomy_vocabulary/add/term'] = array(
+  $items['admin/structure/taxonomy/%taxonomy_vocabulary_machine_name/add'] = array(
     'title' => 'Add term',
-    'page callback' => 'taxonomy_add_term_page',
-    'page arguments' => array(3),
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('taxonomy_form_term', array(), 3),
     'access arguments' => array('administer taxonomy'),
-    'type' => MENU_LOCAL_TASK,
-    'parent' => 'admin/content/taxonomy/%taxonomy_vocabulary',
+    'type' => MENU_LOCAL_ACTION,
     'file' => 'taxonomy.admin.inc',
   );
 
   return $items;
 }
 
-function taxonomy_save_vocabulary(&$edit) {
-  $edit['nodes'] = empty($edit['nodes']) ? array() : $edit['nodes'];
+/**
+ * Implements hook_admin_paths().
+ */
+function taxonomy_admin_paths() {
+  $paths = array(
+    'taxonomy/term/*/edit' => TRUE,
+  );
+  return $paths;
+}
 
-  if (!isset($edit['module'])) {
-    $edit['module'] = 'taxonomy';
+/**
+ * Return edit access for a given term.
+ */
+function taxonomy_term_edit_access($term) {
+  return user_access("edit terms in $term->vid") || user_access('administer taxonomy');
+}
+
+/**
+ * Return the vocabulary name given the vocabulary object.
+ */
+function taxonomy_admin_vocabulary_title_callback($vocabulary) {
+  return check_plain($vocabulary->name);
+}
+
+/**
+ * Saves a vocabulary.
+ *
+ * @param $vocabulary
+ *   A vocabulary object with the following properties:
+ *   - vid: The ID of the vocabulary.
+ *   - name: The human-readable name of the vocabulary.
+ *   - machine_name: The machine name of the vocabulary.
+ *   - description: (optional) The vocabulary's description.
+ *   - hierarchy: The hierarchy level of the vocabulary.
+ *   - module: (optional) The module altering the vocabulary.
+ *   - weight: (optional) The weight of this vocabulary in relation to other
+ *     vocabularies.
+ *   - original: (optional) The original vocabulary object before any changes
+ *     are applied.
+ *   - old_machine_name: (optional) The original machine name of the
+ *     vocabulary.
+ *
+ * @return
+ *   Status constant indicating whether the vocabulary was inserted (SAVED_NEW)
+ *   or updated(SAVED_UPDATED).
+ */
+function taxonomy_vocabulary_save($vocabulary) {
+  // Prevent leading and trailing spaces in vocabulary names.
+  if (!empty($vocabulary->name)) {
+    $vocabulary->name = trim($vocabulary->name);
   }
-
-  if (!empty($edit['vid']) && !empty($edit['name'])) {
-    drupal_write_record('vocabulary', $edit, 'vid');
-    db_query("DELETE FROM {vocabulary_node_types} WHERE vid = %d", $edit['vid']);
-    foreach ($edit['nodes'] as $type => $selected) {
-      db_query("INSERT INTO {vocabulary_node_types} (vid, type) VALUES (%d, '%s')", $edit['vid'], $type);
+  // Load the stored entity, if any.
+  if (!empty($vocabulary->vid)) {
+    if (!isset($vocabulary->original)) {
+      $vocabulary->original = entity_load_unchanged('taxonomy_vocabulary', $vocabulary->vid);
     }
-    module_invoke_all('taxonomy', 'update', 'vocabulary', $edit);
-    $status = SAVED_UPDATED;
-  }
-  else if (!empty($edit['vid'])) {
-    $status = taxonomy_del_vocabulary($edit['vid']);
-  }
-  else {
-    drupal_write_record('vocabulary', $edit);
-    foreach ($edit['nodes'] as $type => $selected) {
-      db_query("INSERT INTO {vocabulary_node_types} (vid, type) VALUES (%d, '%s')", $edit['vid'], $type);
-    }
-    module_invoke_all('taxonomy', 'insert', 'vocabulary', $edit);
-    $status = SAVED_NEW;
+    // Make sure machine name changes are easily detected.
+    // @todo: Remove in Drupal 8, as it is deprecated by directly reading from
+    // $vocabulary->original.
+    $vocabulary->old_machine_name = $vocabulary->original->machine_name;
   }
 
+  if (!isset($vocabulary->module)) {
+    $vocabulary->module = 'taxonomy';
+  }
+
+  module_invoke_all('taxonomy_vocabulary_presave', $vocabulary);
+  module_invoke_all('entity_presave', $vocabulary, 'taxonomy_vocabulary');
+
+  if (!empty($vocabulary->vid) && !empty($vocabulary->name)) {
+    $status = drupal_write_record('taxonomy_vocabulary', $vocabulary, 'vid');
+    taxonomy_vocabulary_static_reset(array($vocabulary->vid));
+    if ($vocabulary->old_machine_name != $vocabulary->machine_name) {
+      field_attach_rename_bundle('taxonomy_term', $vocabulary->old_machine_name, $vocabulary->machine_name);
+    }
+    module_invoke_all('taxonomy_vocabulary_update', $vocabulary);
+    module_invoke_all('entity_update', $vocabulary, 'taxonomy_vocabulary');
+  }
+  elseif (empty($vocabulary->vid)) {
+    $status = drupal_write_record('taxonomy_vocabulary', $vocabulary);
+    taxonomy_vocabulary_static_reset();
+    field_attach_create_bundle('taxonomy_term', $vocabulary->machine_name);
+    module_invoke_all('taxonomy_vocabulary_insert', $vocabulary);
+    module_invoke_all('entity_insert', $vocabulary, 'taxonomy_vocabulary');
+  }
+
+  unset($vocabulary->original);
   cache_clear_all();
 
   return $status;
@@ -234,45 +457,86 @@ function taxonomy_save_vocabulary(&$edit) {
  * @return
  *   Constant indicating items were deleted.
  */
-function taxonomy_del_vocabulary($vid) {
-  $vocabulary = (array) taxonomy_vocabulary_load($vid);
+function taxonomy_vocabulary_delete($vid) {
+  $vocabulary = taxonomy_vocabulary_load($vid);
 
-  db_query('DELETE FROM {vocabulary} WHERE vid = %d', $vid);
-  db_query('DELETE FROM {vocabulary_node_types} WHERE vid = %d', $vid);
-  $result = db_query('SELECT tid FROM {term_data} WHERE vid = %d', $vid);
-  while ($term = db_fetch_object($result)) {
-    taxonomy_del_term($term->tid);
+  $transaction = db_transaction();
+  try {
+    // Only load terms without a parent, child terms will get deleted too.
+    $result = db_query('SELECT t.tid FROM {taxonomy_term_data} t INNER JOIN {taxonomy_term_hierarchy} th ON th.tid = t.tid WHERE t.vid = :vid AND th.parent = 0', array(':vid' => $vid))->fetchCol();
+    foreach ($result as $tid) {
+      taxonomy_term_delete($tid);
+    }
+    db_delete('taxonomy_vocabulary')
+      ->condition('vid', $vid)
+      ->execute();
+
+    field_attach_delete_bundle('taxonomy_term', $vocabulary->machine_name);
+    module_invoke_all('taxonomy_vocabulary_delete', $vocabulary);
+    module_invoke_all('entity_delete', $vocabulary, 'taxonomy_vocabulary');
+
+    cache_clear_all();
+    taxonomy_vocabulary_static_reset();
+
+    return SAVED_DELETED;
   }
-
-  module_invoke_all('taxonomy', 'delete', 'vocabulary', $vocabulary);
-
-  cache_clear_all();
-
-  return SAVED_DELETED;
+  catch (Exception $e) {
+    $transaction->rollback();
+    watchdog_exception('taxonomy', $e);
+    throw $e;
+  }
 }
 
 /**
- * Dynamically check and update the hierarachy flag of a vocabulary.
+ * Implements hook_taxonomy_vocabulary_update().
+ */
+function taxonomy_taxonomy_vocabulary_update($vocabulary) {
+  // Reflect machine name changes in the definitions of existing 'taxonomy'
+  // fields.
+  if (!empty($vocabulary->old_machine_name) && $vocabulary->old_machine_name != $vocabulary->machine_name) {
+    $fields = field_read_fields();
+    foreach ($fields as $field_name => $field) {
+      $update = FALSE;
+      if ($field['type'] == 'taxonomy_term_reference') {
+        foreach ($field['settings']['allowed_values'] as $key => &$value) {
+          if ($value['vocabulary'] == $vocabulary->old_machine_name) {
+            $value['vocabulary'] = $vocabulary->machine_name;
+            $update = TRUE;
+          }
+        }
+        if ($update) {
+          field_update_field($field);
+        }
+      }
+    }
+  }
+}
+
+/**
+ * Checks and updates the hierarchy flag of a vocabulary.
  *
  * Checks the current parents of all terms in a vocabulary and updates the
- * vocabularies hierarchy setting to the lowest possible level. A hierarchy with
- * no parents in any of its terms will be given a hierarchy of 0. If terms
- * contain at most a single parent, the vocabulary will be given a hierarchy of
- * 1. If any term contain multiple parents, the vocabulary will be given a
- * hieararchy of 2.
+ * vocabulary's hierarchy setting to the lowest possible level. If no term
+ * has parent terms then the vocabulary will be given a hierarchy of 0.
+ * If any term has a single parent then the vocabulary will be given a
+ * hierarchy of 1. If any term has multiple parents then the vocabulary
+ * will be given a hierarchy of 2.
  *
  * @param $vocabulary
- *   An array of the vocabulary structure.
+ *   A vocabulary object.
  * @param $changed_term
  *   An array of the term structure that was updated.
+ *
+ * @return
+ *   An integer that represents the level of the vocabulary's hierarchy.
  */
 function taxonomy_check_vocabulary_hierarchy($vocabulary, $changed_term) {
-  $tree = taxonomy_get_tree($vocabulary['vid']);
+  $tree = taxonomy_get_tree($vocabulary->vid);
   $hierarchy = 0;
   foreach ($tree as $term) {
-    // Update the changed term with the new parent value before comparision.
+    // Update the changed term with the new parent value before comparison.
     if ($term->tid == $changed_term['tid']) {
-      $term = (object)$changed_term;
+      $term = (object) $changed_term;
       $term->parents = $term->parent;
     }
     // Check this term's parent count.
@@ -284,84 +548,113 @@ function taxonomy_check_vocabulary_hierarchy($vocabulary, $changed_term) {
       $hierarchy = 1;
     }
   }
-  if ($hierarchy != $vocabulary['hierarchy']) {
-    $vocabulary['hierarchy'] = $hierarchy;
-    taxonomy_save_vocabulary($vocabulary);
+  if ($hierarchy != $vocabulary->hierarchy) {
+    $vocabulary->hierarchy = $hierarchy;
+    taxonomy_vocabulary_save($vocabulary);
   }
 
   return $hierarchy;
 }
 
 /**
- * Helper function for taxonomy_form_term_submit().
+ * Saves a term object to the database.
  *
- * @param $form_state['values']
+ * @param $term
+ *   The taxonomy term object with the following properties:
+ *   - vid: The ID of the vocabulary the term is assigned to.
+ *   - name: The name of the term.
+ *   - tid: (optional) The unique ID for the term being saved. If $term->tid is
+ *     empty or omitted, a new term will be inserted.
+ *   - description: (optional) The term's description.
+ *   - format: (optional) The text format for the term's description.
+ *   - weight: (optional) The weight of this term in relation to other terms
+ *     within the same vocabulary.
+ *   - parent: (optional) The parent term(s) for this term. This can be a single
+ *     term ID or an array of term IDs. A value of 0 means this term does not
+ *     have any parents. When omitting this variable during an update, the
+ *     existing hierarchy for the term remains unchanged.
+ *   - vocabulary_machine_name: (optional) The machine name of the vocabulary
+ *     the term is assigned to. If not given, this value will be set
+ *     automatically by loading the vocabulary based on $term->vid.
+ *   - original: (optional) The original taxonomy term object before any changes
+ *     were applied. When omitted, the unchanged taxonomy term object is
+ *     loaded from the database and stored in this property.
+ *   Since a taxonomy term is an entity, any fields contained in the term object
+ *   are saved alongside the term object.
+ *
  * @return
- *   Status constant indicating if term was inserted or updated.
+ *   Status constant indicating whether term was inserted (SAVED_NEW) or updated
+ *   (SAVED_UPDATED). When inserting a new term, $term->tid will contain the
+ *   term ID of the newly created term.
  */
-function taxonomy_save_term(&$form_values) {
-  $form_values += array(
-    'description' => '',
-    'weight' => 0
-  );
-
-  if (!empty($form_values['tid']) && $form_values['name']) {
-    drupal_write_record('term_data', $form_values, 'tid');
-    $hook = 'update';
-    $status = SAVED_UPDATED;
+function taxonomy_term_save($term) {
+  // Prevent leading and trailing spaces in term names.
+  $term->name = trim($term->name);
+  if (!isset($term->vocabulary_machine_name)) {
+    $vocabulary = taxonomy_vocabulary_load($term->vid);
+    $term->vocabulary_machine_name = $vocabulary->machine_name;
   }
-  else if (!empty($form_values['tid'])) {
-    return taxonomy_del_term($form_values['tid']);
+
+  // Load the stored entity, if any.
+  if (!empty($term->tid) && !isset($term->original)) {
+    $term->original = entity_load_unchanged('taxonomy_term', $term->tid);
+  }
+
+  field_attach_presave('taxonomy_term', $term);
+  module_invoke_all('taxonomy_term_presave', $term);
+  module_invoke_all('entity_presave', $term, 'taxonomy_term');
+
+  if (empty($term->tid)) {
+    $op = 'insert';
+    $status = drupal_write_record('taxonomy_term_data', $term);
+    field_attach_insert('taxonomy_term', $term);
+    if (!isset($term->parent)) {
+      $term->parent = array(0);
+    }
   }
   else {
-    drupal_write_record('term_data', $form_values);
-    $hook = 'insert';
-    $status = SAVED_NEW;
-  }
-
-  db_query('DELETE FROM {term_relation} WHERE tid1 = %d OR tid2 = %d', $form_values['tid'], $form_values['tid']);
-  if (!empty($form_values['relations'])) {
-    foreach ($form_values['relations'] as $related_id) {
-      if ($related_id != 0) {
-        db_query('INSERT INTO {term_relation} (tid1, tid2) VALUES (%d, %d)', $form_values['tid'], $related_id);
-      }
+    $op = 'update';
+    $status = drupal_write_record('taxonomy_term_data', $term, 'tid');
+    field_attach_update('taxonomy_term', $term);
+    if (isset($term->parent)) {
+      db_delete('taxonomy_term_hierarchy')
+        ->condition('tid', $term->tid)
+        ->execute();
     }
   }
 
-  db_query('DELETE FROM {term_hierarchy} WHERE tid = %d', $form_values['tid']);
-  if (!isset($form_values['parent']) || empty($form_values['parent'])) {
-    $form_values['parent'] = array(0);
-  }
-  if (is_array($form_values['parent'])) {
-    foreach ($form_values['parent'] as $parent) {
+  if (isset($term->parent)) {
+    if (!is_array($term->parent)) {
+      $term->parent = array($term->parent);
+    }
+    $query = db_insert('taxonomy_term_hierarchy')
+      ->fields(array('tid', 'parent'));
+    foreach ($term->parent as $parent) {
       if (is_array($parent)) {
         foreach ($parent as $tid) {
-          db_query('INSERT INTO {term_hierarchy} (tid, parent) VALUES (%d, %d)', $form_values['tid'], $tid);
+          $query->values(array(
+            'tid' => $term->tid,
+            'parent' => $tid
+          ));
         }
       }
       else {
-        db_query('INSERT INTO {term_hierarchy} (tid, parent) VALUES (%d, %d)', $form_values['tid'], $parent);
+        $query->values(array(
+          'tid' => $term->tid,
+          'parent' => $parent
+        ));
       }
     }
-  }
-  else {
-    db_query('INSERT INTO {term_hierarchy} (tid, parent) VALUES (%d, %d)', $form_values['tid'], $form_values['parent']);
+    $query->execute();
   }
 
-  db_query('DELETE FROM {term_synonym} WHERE tid = %d', $form_values['tid']);
-  if (!empty($form_values['synonyms'])) {
-    foreach (explode ("\n", str_replace("\r", '', $form_values['synonyms'])) as $synonym) {
-      if ($synonym) {
-        db_query("INSERT INTO {term_synonym} (tid, name) VALUES (%d, '%s')", $form_values['tid'], chop($synonym));
-      }
-    }
-  }
+  // Reset the taxonomy term static variables.
+  taxonomy_terms_static_reset();
 
-  if (isset($hook)) {
-    module_invoke_all('taxonomy', $hook, 'term', $form_values);
-  }
-
-  cache_clear_all();
+  // Invoke the taxonomy hooks.
+  module_invoke_all("taxonomy_term_$op", $term);
+  module_invoke_all("entity_$op", $term, 'taxonomy_term');
+  unset($term->original);
 
   return $status;
 }
@@ -374,442 +667,282 @@ function taxonomy_save_term(&$form_values) {
  * @return
  *   Status constant indicating deletion.
  */
-function taxonomy_del_term($tid) {
-  $tids = array($tid);
-  while ($tids) {
-    $children_tids = $orphans = array();
-    foreach ($tids as $tid) {
-      // See if any of the term's children are about to be become orphans:
-      if ($children = taxonomy_get_children($tid)) {
-        foreach ($children as $child) {
-          // If the term has multiple parents, we don't delete it.
-          $parents = taxonomy_get_parents($child->tid);
-          if (count($parents) == 1) {
-            $orphans[] = $child->tid;
+function taxonomy_term_delete($tid) {
+  $transaction = db_transaction();
+  try {
+    $tids = array($tid);
+    while ($tids) {
+      $children_tids = $orphans = array();
+      foreach ($tids as $tid) {
+        // See if any of the term's children are about to be become orphans:
+        if ($children = taxonomy_get_children($tid)) {
+          foreach ($children as $child) {
+            // If the term has multiple parents, we don't delete it.
+            $parents = taxonomy_get_parents($child->tid);
+            if (count($parents) == 1) {
+              $orphans[] = $child->tid;
+            }
           }
+        }
+
+        if ($term = taxonomy_term_load($tid)) {
+          db_delete('taxonomy_term_data')
+            ->condition('tid', $tid)
+            ->execute();
+          db_delete('taxonomy_term_hierarchy')
+            ->condition('tid', $tid)
+            ->execute();
+
+          field_attach_delete('taxonomy_term', $term);
+          module_invoke_all('taxonomy_term_delete', $term);
+          module_invoke_all('entity_delete', $term, 'taxonomy_term');
+          taxonomy_terms_static_reset();
         }
       }
 
-      $term = (array) taxonomy_get_term($tid);
-
-      db_query('DELETE FROM {term_data} WHERE tid = %d', $tid);
-      db_query('DELETE FROM {term_hierarchy} WHERE tid = %d', $tid);
-      db_query('DELETE FROM {term_relation} WHERE tid1 = %d OR tid2 = %d', $tid, $tid);
-      db_query('DELETE FROM {term_synonym} WHERE tid = %d', $tid);
-      db_query('DELETE FROM {term_node} WHERE tid = %d', $tid);
-
-      module_invoke_all('taxonomy', 'delete', 'term', $term);
+      $tids = $orphans;
     }
-
-    $tids = $orphans;
+    return SAVED_DELETED;
   }
-
-  cache_clear_all();
-
-  return SAVED_DELETED;
+  catch (Exception $e) {
+    $transaction->rollback();
+    watchdog_exception('taxonomy', $e);
+    throw $e;
+  }
 }
 
 /**
- * Generate a form element for selecting terms from a vocabulary.
+ * Generate an array for rendering the given term.
  *
- * @param $vid
- *   The vocabulary ID to generate a form element for.
- * @param $value
- *   The existing value of the term(s) in this vocabulary to use by default.
- * @param $help
- *   Optional help text to use for the form element. If specified, this value
- *   MUST be properly sanitized and filtered (e.g. with filter_xss_admin() or
- *   check_plain() if it is user-supplied) to prevent XSS vulnerabilities. If
- *   omitted, the help text stored with the vocaulary (if any) will be used.
+ * @param $term
+ *   A term object.
+ * @param $view_mode
+ *   View mode, e.g. 'full', 'teaser'...
+ * @param $langcode
+ *   (optional) A language code to use for rendering. Defaults to the global
+ *   content language of the current request.
+ *
  * @return
- *   An array describing a form element to select terms for a vocabulary.
- *
- * @see _taxonomy_term_select()
- * @see filter_xss_admin()
+ *   An array as expected by drupal_render().
  */
-function taxonomy_form($vid, $value = 0, $help = NULL, $name = 'taxonomy') {
-  $vocabulary = taxonomy_vocabulary_load($vid);
-  $help = ($help) ? $help : filter_xss_admin($vocabulary->help);
-
-  if (!$vocabulary->multiple) {
-    $blank = ($vocabulary->required) ? t('- Please choose -') : t('- None selected -');
-  }
-  else {
-    $blank = ($vocabulary->required) ? 0 : t('- None -');
+function taxonomy_term_view($term, $view_mode = 'full', $langcode = NULL) {
+  if (!isset($langcode)) {
+    $langcode = $GLOBALS['language_content']->language;
   }
 
-  return _taxonomy_term_select(check_plain($vocabulary->name), $name, $value, $vid, $help, intval($vocabulary->multiple), $blank);
+  field_attach_prepare_view('taxonomy_term', array($term->tid => $term), $view_mode, $langcode);
+  entity_prepare_view('taxonomy_term', array($term->tid => $term), $langcode);
+
+  $build = array(
+    '#theme' => 'taxonomy_term',
+    '#term' => $term,
+    '#view_mode' => $view_mode,
+    '#language' => $langcode,
+  );
+
+  $build += field_attach_view('taxonomy_term', $term, $view_mode, $langcode);
+
+  // Add term description if the term has one.
+  if (!empty($term->description)) {
+    $build['description'] = array(
+      '#markup' => check_markup($term->description, $term->format, '', TRUE),
+      '#weight' => 0,
+      '#prefix' => '<div class="taxonomy-term-description">',
+      '#suffix' => '</div>',
+    );
+  }
+
+  $build['#attached']['css'][] = drupal_get_path('module', 'taxonomy') . '/taxonomy.css';
+
+  // Allow modules to modify the structured term.
+  $type = 'taxonomy_term';
+  drupal_alter(array('taxonomy_term_view', 'entity_view'), $build, $type);
+
+  return $build;
 }
 
 /**
- * Generate a set of options for selecting a term from all vocabularies.
+ * Process variables for taxonomy-term.tpl.php.
  */
-function taxonomy_form_all($free_tags = 0) {
-  $vocabularies = taxonomy_get_vocabularies();
-  $options = array();
-  foreach ($vocabularies as $vid => $vocabulary) {
-    if ($vocabulary->tags && !$free_tags) { continue; }
-    $tree = taxonomy_get_tree($vid);
-    if ($tree && (count($tree) > 0)) {
-      $options[$vocabulary->name] = array();
-      foreach ($tree as $term) {
-        $options[$vocabulary->name][$term->tid] = str_repeat('-', $term->depth) . $term->name;
-      }
-    }
+function template_preprocess_taxonomy_term(&$variables) {
+  $variables['view_mode'] = $variables['elements']['#view_mode'];
+  $variables['term'] = $variables['elements']['#term'];
+  $term = $variables['term'];
+
+  $uri = entity_uri('taxonomy_term', $term);
+  $variables['term_url']  = url($uri['path'], $uri['options']);
+  $variables['term_name'] = check_plain($term->name);
+  $variables['page']      = $variables['view_mode'] == 'full' && taxonomy_term_is_page($term);
+
+  // Flatten the term object's member fields.
+  $variables = array_merge((array) $term, $variables);
+
+  // Helpful $content variable for templates.
+  $variables['content'] = array();
+  foreach (element_children($variables['elements']) as $key) {
+    $variables['content'][$key] = $variables['elements'][$key];
   }
-  return $options;
+
+  // field_attach_preprocess() overwrites the $[field_name] variables with the
+  // values of the field in the language that was selected for display, instead
+  // of the raw values in $term->[field_name], which contain all values in all
+  // languages.
+  field_attach_preprocess('taxonomy_term', $term, $variables['content'], $variables);
+
+  // Gather classes, and clean up name so there are no underscores.
+  $vocabulary_name_css = str_replace('_', '-', $term->vocabulary_machine_name);
+  $variables['classes_array'][] = 'vocabulary-' . $vocabulary_name_css;
+
+  $variables['theme_hook_suggestions'][] = 'taxonomy_term__' . $term->vocabulary_machine_name;
+  $variables['theme_hook_suggestions'][] = 'taxonomy_term__' . $term->tid;
+}
+
+/**
+ * Returns whether the current page is the page of the passed-in term.
+ *
+ * @param $term
+ *   A term object.
+ */
+function taxonomy_term_is_page($term) {
+  $page_term = menu_get_object('taxonomy_term', 2);
+  return (!empty($page_term) ? $page_term->tid == $term->tid : FALSE);
+}
+
+/**
+ * Clear all static cache variables for terms.
+ */
+function taxonomy_terms_static_reset() {
+  drupal_static_reset('taxonomy_term_count_nodes');
+  drupal_static_reset('taxonomy_get_tree');
+  drupal_static_reset('taxonomy_get_tree:parents');
+  drupal_static_reset('taxonomy_get_tree:terms');
+  drupal_static_reset('taxonomy_get_parents');
+  drupal_static_reset('taxonomy_get_parents_all');
+  drupal_static_reset('taxonomy_get_children');
+  entity_get_controller('taxonomy_term')->resetCache();
+}
+
+/**
+ * Clear all static cache variables for vocabularies.
+ *
+ * @param $ids
+ * An array of ids to reset in entity controller cache.
+ */
+function taxonomy_vocabulary_static_reset($ids = NULL) {
+  drupal_static_reset('taxonomy_vocabulary_get_names');
+  entity_get_controller('taxonomy_vocabulary')->resetCache($ids);
 }
 
 /**
  * Return an array of all vocabulary objects.
  *
- * @param $type
- *   If set, return only those vocabularies associated with this node type.
+ * @return
+ *   An array of all vocabulary objects, indexed by vid.
  */
-function taxonomy_get_vocabularies($type = NULL) {
-  if ($type) {
-    $result = db_query(db_rewrite_sql("SELECT v.vid, v.*, n.type FROM {vocabulary} v LEFT JOIN {vocabulary_node_types} n ON v.vid = n.vid WHERE n.type = '%s' ORDER BY v.weight, v.name", 'v', 'vid'), $type);
-  }
-  else {
-    $result = db_query(db_rewrite_sql('SELECT v.*, n.type FROM {vocabulary} v LEFT JOIN {vocabulary_node_types} n ON v.vid = n.vid ORDER BY v.weight, v.name', 'v', 'vid'));
-  }
-
-  $vocabularies = array();
-  $node_types = array();
-  while ($voc = db_fetch_object($result)) {
-    // If no node types are associated with a vocabulary, the LEFT JOIN will
-    // return a NULL value for type.
-    if (isset($voc->type)) {
-      $node_types[$voc->vid][$voc->type] = $voc->type;
-      unset($voc->type);
-      $voc->nodes = $node_types[$voc->vid];
-    }
-    elseif (!isset($voc->nodes)) {
-      $voc->nodes = array();
-    }
-    $vocabularies[$voc->vid] = $voc;
-  }
-
-  return $vocabularies;
+function taxonomy_get_vocabularies() {
+  return taxonomy_vocabulary_load_multiple(FALSE, array());
 }
 
 /**
- * Implementation of hook_form_alter().
- * Generate a form for selecting terms to associate with a node.
- * We check for taxonomy_override_selector before loading the full
- * vocabulary, so contrib modules can intercept before hook_form_alter
- *  and provide scalable alternatives.
- */
-function taxonomy_form_alter(&$form, $form_state, $form_id) {
-  if (isset($form['type']) && isset($form['#node']) && (!variable_get('taxonomy_override_selector', FALSE)) && $form['type']['#value'] .'_node_form' == $form_id) {
-    $node = $form['#node'];
-
-    if (!isset($node->taxonomy)) {
-      $terms = empty($node->nid) ? array() : taxonomy_node_get_terms($node);
-    }
-    else {
-      // After a preview or form reload, the terms must be converted to objects.
-      reset($node->taxonomy);
-      if (!is_object(current($node->taxonomy))) {
-        $node->taxonomy = taxonomy_preview_terms($node);
-      }
-      $terms = $node->taxonomy;
-    }
-
-    $c = db_query(db_rewrite_sql("SELECT v.* FROM {vocabulary} v INNER JOIN {vocabulary_node_types} n ON v.vid = n.vid WHERE n.type = '%s' ORDER BY v.weight, v.name", 'v', 'vid'), $node->type);
-
-    while ($vocabulary = db_fetch_object($c)) {
-      if ($vocabulary->tags) {
-        if (isset($form_state['node_preview'])) {
-          // Typed string can be changed by the user before preview,
-          // so we just insert the tags directly as provided in the form.
-          $typed_string = $node->taxonomy['tags'][$vocabulary->vid];
-        }
-        else {
-          $typed_string = taxonomy_implode_tags($terms, $vocabulary->vid) . (array_key_exists('tags', $terms) ? $terms['tags'][$vocabulary->vid] : NULL);
-        }
-        if ($vocabulary->help) {
-          $help = filter_xss_admin($vocabulary->help);
-        }
-        else {
-          $help = t('A comma-separated list of terms describing this content. Example: funny, bungee jumping, "Company, Inc.".');
-        }
-        $form['taxonomy']['tags'][$vocabulary->vid] = array('#type' => 'textfield',
-          '#title' => $vocabulary->name,
-          '#description' => $help,
-          '#required' => $vocabulary->required,
-          '#default_value' => $typed_string,
-          '#autocomplete_path' => 'taxonomy/autocomplete/'. $vocabulary->vid,
-          '#weight' => $vocabulary->weight,
-          '#maxlength' => 1024,
-        );
-      }
-      else {
-        // Extract terms belonging to the vocabulary in question.
-        $default_terms = array();
-        foreach ($terms as $term) {
-          // Free tagging has no default terms and also no vid after preview.
-          if (isset($term->vid) && $term->vid == $vocabulary->vid) {
-            $default_terms[$term->tid] = $term;
-          }
-        }
-        $form['taxonomy'][$vocabulary->vid] = taxonomy_form($vocabulary->vid, array_keys($default_terms), filter_xss_admin($vocabulary->help));
-        $form['taxonomy'][$vocabulary->vid]['#weight'] = $vocabulary->weight;
-        $form['taxonomy'][$vocabulary->vid]['#required'] = $vocabulary->required;
-      }
-    }
-    if (!empty($form['taxonomy']) && is_array($form['taxonomy'])) {
-      if (count($form['taxonomy']) > 1) {
-        // Add fieldset only if form has more than 1 element.
-        $form['taxonomy'] += array(
-          '#type' => 'fieldset',
-          '#title' => t('Vocabularies'),
-          '#collapsible' => TRUE,
-          '#collapsed' => FALSE,
-        );
-      }
-      $form['taxonomy']['#weight'] = -3;
-      $form['taxonomy']['#tree'] = TRUE;
-    }
-  }
-}
-
-/**
- * Helper function to convert terms after a preview.
+ * Get names for all taxonomy vocabularies.
  *
- * After preview the tags are an array instead of proper objects. This function
- * converts them back to objects with the exception of 'free tagging' terms,
- * because new tags can be added by the user before preview and those do not
- * yet exist in the database. We therefore save those tags as a string so
- * we can fill the form again after the preview.
+ * @return
+ *   An array of vocabulary ids, names, machine names, keyed by machine name.
  */
-function taxonomy_preview_terms($node) {
-  $taxonomy = array();
-  if (isset($node->taxonomy)) {
-    foreach ($node->taxonomy as $key => $term) {
-      unset($node->taxonomy[$key]);
-      // A 'Multiple select' and a 'Free tagging' field returns an array.
-      if (is_array($term)) {
-        foreach ($term as $tid) {
-          if ($key == 'tags') {
-            // Free tagging; the values will be saved for later as strings
-            // instead of objects to fill the form again.
-            $taxonomy['tags'] = $term;
-          }
-          else {
-            $taxonomy[$tid] = taxonomy_get_term($tid);
-          }
-        }
-      }
-      // A 'Single select' field returns the term id.
-      elseif ($term) {
-        $taxonomy[$term] = taxonomy_get_term($term);
-      }
-    }
+function taxonomy_vocabulary_get_names() {
+  $names = &drupal_static(__FUNCTION__);
+
+  if (!isset($names)) {
+    $names = db_query('SELECT name, machine_name, vid FROM {taxonomy_vocabulary}')->fetchAllAssoc('machine_name');
   }
-  return $taxonomy;
+
+  return $names;
 }
 
 /**
- * Find all terms associated with the given node, within one vocabulary.
+ * Finds all parents of a given term ID.
+ *
+ * @param $tid
+ *   A taxonomy term ID.
+ *
+ * @return
+ *   An array of term objects which are the parents of the term $tid, or an
+ *   empty array if parents are not found.
  */
-function taxonomy_node_get_terms_by_vocabulary($node, $vid, $key = 'tid') {
-  $result = db_query(db_rewrite_sql('SELECT t.tid, t.* FROM {term_data} t INNER JOIN {term_node} r ON r.tid = t.tid WHERE t.vid = %d AND r.vid = %d ORDER BY weight', 't', 'tid'), $vid, $node->vid);
-  $terms = array();
-  while ($term = db_fetch_object($result)) {
-    $terms[$term->$key] = $term;
-  }
-  return $terms;
-}
+function taxonomy_get_parents($tid) {
+  $parents = &drupal_static(__FUNCTION__, array());
 
-/**
- * Find all terms associated with the given node, ordered by vocabulary and term weight.
- */
-function taxonomy_node_get_terms($node, $key = 'tid') {
-  static $terms;
-
-  if (!isset($terms[$node->vid][$key])) {
-    $result = db_query(db_rewrite_sql('SELECT t.* FROM {term_node} r INNER JOIN {term_data} t ON r.tid = t.tid INNER JOIN {vocabulary} v ON t.vid = v.vid WHERE r.vid = %d ORDER BY v.weight, t.weight, t.name', 't', 'tid'), $node->vid);
-    $terms[$node->vid][$key] = array();
-    while ($term = db_fetch_object($result)) {
-      $terms[$node->vid][$key][$term->$key] = $term;
-    }
-  }
-  return $terms[$node->vid][$key];
-}
-
-/**
- * Make sure incoming vids are free tagging enabled.
- */
-function taxonomy_node_validate(&$node) {
-  if (!empty($node->taxonomy)) {
-    $terms = $node->taxonomy;
-    if (!empty($terms['tags'])) {
-      foreach ($terms['tags'] as $vid => $vid_value) {
-        $vocabulary = taxonomy_vocabulary_load($vid);
-        if (empty($vocabulary->tags)) {
-          // see form_get_error $key = implode('][', $element['#parents']);
-          // on why this is the key
-          form_set_error("taxonomy][tags][$vid", t('The %name vocabulary can not be modified in this way.', array('%name' => $vocabulary->name)));
-        }
-      }
-    }
-  }
-}
-
-/**
- * Save term associations for a given node.
- */
-function taxonomy_node_save($node, $terms) {
-
-  taxonomy_node_delete_revision($node);
-
-  // Free tagging vocabularies do not send their tids in the form,
-  // so we'll detect them here and process them independently.
-  if (isset($terms['tags'])) {
-    $typed_input = $terms['tags'];
-    unset($terms['tags']);
-
-    foreach ($typed_input as $vid => $vid_value) {
-      $typed_terms = drupal_explode_tags($vid_value);
-
-      $inserted = array();
-      foreach ($typed_terms as $typed_term) {
-        // See if the term exists in the chosen vocabulary
-        // and return the tid; otherwise, add a new record.
-        $possibilities = taxonomy_get_term_by_name($typed_term);
-        $typed_term_tid = NULL; // tid match, if any.
-        foreach ($possibilities as $possibility) {
-          if ($possibility->vid == $vid) {
-            $typed_term_tid = $possibility->tid;
-          }
-        }
-
-        if (!$typed_term_tid) {
-          $edit = array('vid' => $vid, 'name' => $typed_term);
-          $status = taxonomy_save_term($edit);
-          $typed_term_tid = $edit['tid'];
-        }
-
-        // Defend against duplicate, differently cased tags
-        if (!isset($inserted[$typed_term_tid])) {
-          db_query('INSERT INTO {term_node} (nid, vid, tid) VALUES (%d, %d, %d)', $node->nid, $node->vid, $typed_term_tid);
-          $inserted[$typed_term_tid] = TRUE;
-        }
-      }
-    }
+  if ($tid && !isset($parents[$tid])) {
+    $query = db_select('taxonomy_term_data', 't');
+    $query->join('taxonomy_term_hierarchy', 'h', 'h.parent = t.tid');
+    $query->addField('t', 'tid');
+    $query->condition('h.tid', $tid);
+    $query->addTag('term_access');
+    $query->orderBy('t.weight');
+    $query->orderBy('t.name');
+    $tids = $query->execute()->fetchCol();
+    $parents[$tid] = taxonomy_term_load_multiple($tids);
   }
 
-  if (is_array($terms)) {
-    foreach ($terms as $term) {
-      if (is_array($term)) {
-        foreach ($term as $tid) {
-          if ($tid) {
-            db_query('INSERT INTO {term_node} (nid, vid, tid) VALUES (%d, %d, %d)', $node->nid, $node->vid, $tid);
-          }
-        }
-      }
-      else if (is_object($term)) {
-        db_query('INSERT INTO {term_node} (nid, vid, tid) VALUES (%d, %d, %d)', $node->nid, $node->vid, $term->tid);
-      }
-      else if ($term) {
-        db_query('INSERT INTO {term_node} (nid, vid, tid) VALUES (%d, %d, %d)', $node->nid, $node->vid, $term);
-      }
-    }
-  }
-}
-
-/**
- * Remove associations of a node to its terms.
- */
-function taxonomy_node_delete($node) {
-  db_query('DELETE FROM {term_node} WHERE nid = %d', $node->nid);
-}
-
-/**
- * Remove associations of a node to its terms.
- */
-function taxonomy_node_delete_revision($node) {
-  db_query('DELETE FROM {term_node} WHERE vid = %d', $node->vid);
-}
-
-/**
- * Implementation of hook_node_type().
- */
-function taxonomy_node_type($op, $info) {
-  if ($op == 'update' && !empty($info->old_type) && $info->type != $info->old_type) {
-    db_query("UPDATE {vocabulary_node_types} SET type = '%s' WHERE type = '%s'", $info->type, $info->old_type);
-  }
-  elseif ($op == 'delete') {
-    db_query("DELETE FROM {vocabulary_node_types} WHERE type = '%s'", $info->type);
-  }
-}
-
-/**
- * Find all term objects related to a given term ID.
- */
-function taxonomy_get_related($tid, $key = 'tid') {
-  if ($tid) {
-    $result = db_query('SELECT t.*, tid1, tid2 FROM {term_relation}, {term_data} t WHERE (t.tid = tid1 OR t.tid = tid2) AND (tid1 = %d OR tid2 = %d) AND t.tid != %d ORDER BY weight, name', $tid, $tid, $tid);
-    $related = array();
-    while ($term = db_fetch_object($result)) {
-      $related[$term->$key] = $term;
-    }
-    return $related;
-  }
-  else {
-    return array();
-  }
-}
-
-/**
- * Find all parents of a given term ID.
- */
-function taxonomy_get_parents($tid, $key = 'tid') {
-  if ($tid) {
-    $result = db_query(db_rewrite_sql('SELECT t.tid, t.* FROM {term_data} t INNER JOIN {term_hierarchy} h ON h.parent = t.tid WHERE h.tid = %d ORDER BY weight, name', 't', 'tid'), $tid);
-    $parents = array();
-    while ($parent = db_fetch_object($result)) {
-      $parents[$parent->$key] = $parent;
-    }
-    return $parents;
-  }
-  else {
-    return array();
-  }
+  return isset($parents[$tid]) ? $parents[$tid] : array();
 }
 
 /**
  * Find all ancestors of a given term ID.
  */
 function taxonomy_get_parents_all($tid) {
+  $cache = &drupal_static(__FUNCTION__, array());
+
+  if (isset($cache[$tid])) {
+    return $cache[$tid];
+  }
+
   $parents = array();
-  if ($tid) {
-    $parents[] = taxonomy_get_term($tid);
+  if ($term = taxonomy_term_load($tid)) {
+    $parents[] = $term;
     $n = 0;
     while ($parent = taxonomy_get_parents($parents[$n]->tid)) {
       $parents = array_merge($parents, $parent);
       $n++;
     }
   }
+
+  $cache[$tid] = $parents;
+
   return $parents;
 }
 
 /**
- * Find all children of a term ID.
+ * Finds all children of a term ID.
+ *
+ * @param $tid
+ *   A taxonomy term ID.
+ * @param $vid
+ *   An optional vocabulary ID to restrict the child search.
+ *
+ * @return
+ *   An array of term objects that are the children of the term $tid, or an
+ *   empty array when no children exist.
  */
-function taxonomy_get_children($tid, $vid = 0, $key = 'tid') {
-  if ($vid) {
-    $result = db_query(db_rewrite_sql('SELECT t.* FROM {term_data} t INNER JOIN {term_hierarchy} h ON h.tid = t.tid WHERE t.vid = %d AND h.parent = %d ORDER BY weight, name', 't', 'tid'), $vid, $tid);
+function taxonomy_get_children($tid, $vid = 0) {
+  $children = &drupal_static(__FUNCTION__, array());
+
+  if ($tid && !isset($children[$tid])) {
+    $query = db_select('taxonomy_term_data', 't');
+    $query->join('taxonomy_term_hierarchy', 'h', 'h.tid = t.tid');
+    $query->addField('t', 'tid');
+    $query->condition('h.parent', $tid);
+    if ($vid) {
+      $query->condition('t.vid', $vid);
+    }
+    $query->addTag('term_access');
+    $query->orderBy('t.weight');
+    $query->orderBy('t.name');
+    $tids = $query->execute()->fetchCol();
+    $children[$tid] = taxonomy_term_load_multiple($tids);
   }
-  else {
-    $result = db_query(db_rewrite_sql('SELECT t.* FROM {term_data} t INNER JOIN {term_hierarchy} h ON h.tid = t.tid WHERE parent = %d ORDER BY weight, name', 't', 'tid'), $tid);
-  }
-  $children = array();
-  while ($term = db_fetch_object($result)) {
-    $children[$term->$key] = $term;
-  }
-  return $children;
+
+  return isset($children[$tid]) ? $children[$tid] : array();
 }
 
 /**
@@ -817,52 +950,112 @@ function taxonomy_get_children($tid, $vid = 0, $key = 'tid') {
  *
  * @param $vid
  *   Which vocabulary to generate the tree for.
- *
  * @param $parent
  *   The term ID under which to generate the tree. If 0, generate the tree
  *   for the entire vocabulary.
- *
- * @param $depth
- *   Internal use only.
- *
  * @param $max_depth
  *   The number of levels of the tree to return. Leave NULL to return all levels.
+ * @param $load_entities
+ *   If TRUE, a full entity load will occur on the term objects. Otherwise they
+ *   are partial objects queried directly from the {taxonomy_term_data} table to
+ *   save execution time and memory consumption when listing large numbers of
+ *   terms. Defaults to FALSE.
  *
  * @return
  *   An array of all term objects in the tree. Each term object is extended
  *   to have "depth" and "parents" attributes in addition to its normal ones.
- *   Results are statically cached.
+ *   Results are statically cached. Term objects will be partial or complete
+ *   depending on the $load_entities parameter.
  */
-function taxonomy_get_tree($vid, $parent = 0, $depth = -1, $max_depth = NULL) {
-  static $children, $parents, $terms;
-
-  $depth++;
+function taxonomy_get_tree($vid, $parent = 0, $max_depth = NULL, $load_entities = FALSE) {
+  $children = &drupal_static(__FUNCTION__, array());
+  $parents = &drupal_static(__FUNCTION__ . ':parents', array());
+  $terms = &drupal_static(__FUNCTION__ . ':terms', array());
 
   // We cache trees, so it's not CPU-intensive to call get_tree() on a term
   // and its children, too.
   if (!isset($children[$vid])) {
     $children[$vid] = array();
+    $parents[$vid] = array();
+    $terms[$vid] = array();
 
-    $result = db_query(db_rewrite_sql('SELECT t.tid, t.*, parent FROM {term_data} t INNER JOIN {term_hierarchy} h ON t.tid = h.tid WHERE t.vid = %d ORDER BY weight, name', 't', 'tid'), $vid);
-    while ($term = db_fetch_object($result)) {
+    $query = db_select('taxonomy_term_data', 't');
+    $query->join('taxonomy_term_hierarchy', 'h', 'h.tid = t.tid');
+    $result = $query
+      ->addTag('translatable')
+      ->addTag('term_access')
+      ->fields('t')
+      ->fields('h', array('parent'))
+      ->condition('t.vid', $vid)
+      ->orderBy('t.weight')
+      ->orderBy('t.name')
+      ->execute();
+
+    foreach ($result as $term) {
       $children[$vid][$term->parent][] = $term->tid;
       $parents[$vid][$term->tid][] = $term->parent;
       $terms[$vid][$term->tid] = $term;
     }
   }
 
-  $max_depth = (is_null($max_depth)) ? count($children[$vid]) : $max_depth;
+  // Load full entities, if necessary. The entity controller statically
+  // caches the results.
+  if ($load_entities) {
+    $term_entities = taxonomy_term_load_multiple(array_keys($terms[$vid]));
+  }
+
+  $max_depth = (!isset($max_depth)) ? count($children[$vid]) : $max_depth;
   $tree = array();
-  if ($max_depth > $depth && !empty($children[$vid][$parent])) {
-    foreach ($children[$vid][$parent] as $child) {
-      $term = drupal_clone($terms[$vid][$child]);
-      $term->depth = $depth;
-      // The "parent" attribute is not useful, as it would show one parent only.
-      unset($term->parent);
-      $term->parents = $parents[$vid][$child];
-      $tree[] = $term;
-      if (!empty($children[$vid][$child])) {
-        $tree = array_merge($tree, taxonomy_get_tree($vid, $child, $depth, $max_depth));
+
+  // Keeps track of the parents we have to process, the last entry is used
+  // for the next processing step.
+  $process_parents = array();
+  $process_parents[] = $parent;
+
+  // Loops over the parent terms and adds its children to the tree array.
+  // Uses a loop instead of a recursion, because it's more efficient.
+  while (count($process_parents)) {
+    $parent = array_pop($process_parents);
+    // The number of parents determines the current depth.
+    $depth = count($process_parents);
+    if ($max_depth > $depth && !empty($children[$vid][$parent])) {
+      $has_children = FALSE;
+      $child = current($children[$vid][$parent]);
+      do {
+        if (empty($child)) {
+          break;
+        }
+        $term = $load_entities ? $term_entities[$child] : $terms[$vid][$child];
+        if (isset($parents[$vid][$term->tid])) {
+          // Clone the term so that the depth attribute remains correct
+          // in the event of multiple parents.
+          $term = clone $term;
+        }
+        $term->depth = $depth;
+        unset($term->parent);
+        $term->parents = $parents[$vid][$term->tid];
+        $tree[] = $term;
+        if (!empty($children[$vid][$term->tid])) {
+          $has_children = TRUE;
+
+          // We have to continue with this parent later.
+          $process_parents[] = $parent;
+          // Use the current term as parent for the next iteration.
+          $process_parents[] = $term->tid;
+
+          // Reset pointers for child lists because we step in there more often
+          // with multi parents.
+          reset($children[$vid][$term->tid]);
+          // Move pointer so that we get the correct term the next time.
+          next($children[$vid][$parent]);
+          break;
+        }
+      } while ($child = next($children[$vid][$parent]));
+
+      if (!$has_children) {
+        // We processed all terms in this hierarchy-level, reset pointer
+        // so that this function works the next time it gets called.
+        reset($children[$vid][$parent]);
       }
     }
   }
@@ -871,150 +1064,162 @@ function taxonomy_get_tree($vid, $parent = 0, $depth = -1, $max_depth = NULL) {
 }
 
 /**
- * Return an array of synonyms of the given term ID.
- */
-function taxonomy_get_synonyms($tid) {
-  if ($tid) {
-    $synonyms = array();
-    $result = db_query('SELECT name FROM {term_synonym} WHERE tid = %d', $tid);
-    while ($synonym = db_fetch_array($result)) {
-      $synonyms[] = $synonym['name'];
-    }
-    return $synonyms;
-  }
-  else {
-    return array();
-  }
-}
-
-/**
- * Return the term object that has the given string as a synonym.
- */
-function taxonomy_get_synonym_root($synonym) {
-  return db_fetch_object(db_query("SELECT * FROM {term_synonym} s, {term_data} t WHERE t.tid = s.tid AND s.name = '%s'", $synonym));
-}
-
-/**
- * Count the number of published nodes classified by a term.
- *
- * @param $tid
- *   The term's ID
- *
- * @param $type
- *   The $node->type. If given, taxonomy_term_count_nodes only counts
- *   nodes of $type that are classified with the term $tid.
- *
- * @return int
- *   An integer representing a number of nodes.
- *   Results are statically cached.
- */
-function taxonomy_term_count_nodes($tid, $type = 0) {
-  static $count;
-
-  if (!isset($count[$type])) {
-    // $type == 0 always evaluates TRUE if $type is a string
-    if (is_numeric($type)) {
-      $result = db_query(db_rewrite_sql('SELECT t.tid, COUNT(n.nid) AS c FROM {term_node} t INNER JOIN {node} n ON t.vid = n.vid WHERE n.status = 1 GROUP BY t.tid'));
-    }
-    else {
-      $result = db_query(db_rewrite_sql("SELECT t.tid, COUNT(n.nid) AS c FROM {term_node} t INNER JOIN {node} n ON t.vid = n.vid WHERE n.status = 1 AND n.type = '%s' GROUP BY t.tid"), $type);
-    }
-    $count[$type] = array();
-    while ($term = db_fetch_object($result)) {
-      $count[$type][$term->tid] = $term->c;
-    }
-  }
-  $children_count = 0;
-  foreach (_taxonomy_term_children($tid) as $c) {
-    $children_count += taxonomy_term_count_nodes($c, $type);
-  }
-  return $children_count + (isset($count[$type][$tid]) ? $count[$type][$tid] : 0);
-}
-
-/**
- * Helper for taxonomy_term_count_nodes(). Used to find out
- * which terms are children of a parent term.
- *
- * @param $tid
- *   The parent term's ID
- *
- * @return array
- *   An array of term IDs representing the children of $tid.
- *   Results are statically cached.
- *
- */
-function _taxonomy_term_children($tid) {
-  static $children;
-
-  if (!isset($children)) {
-    $result = db_query('SELECT tid, parent FROM {term_hierarchy}');
-    while ($term = db_fetch_object($result)) {
-      $children[$term->parent][] = $term->tid;
-    }
-  }
-  return isset($children[$tid]) ? $children[$tid] : array();
-}
-
-/**
  * Try to map a string to an existing term, as for glossary use.
  *
  * Provides a case-insensitive and trimmed mapping, to maximize the
  * likelihood of a successful match.
  *
- * @param name
+ * @param $name
  *   Name of the term to search for.
  *
  * @return
  *   An array of matching term objects.
  */
 function taxonomy_get_term_by_name($name) {
-  $db_result = db_query(db_rewrite_sql("SELECT t.tid, t.* FROM {term_data} t WHERE LOWER(t.name) = LOWER('%s')", 't', 'tid'), trim($name));
-  $result = array();
-  while ($term = db_fetch_object($db_result)) {
-    $result[] = $term;
+  return taxonomy_term_load_multiple(array(), array('name' => trim($name)));
+}
+
+/**
+ * Controller class for taxonomy terms.
+ *
+ * This extends the DrupalDefaultEntityController class. Only alteration is
+ * that we match the condition on term name case-independently.
+ */
+class TaxonomyTermController extends DrupalDefaultEntityController {
+
+  protected function buildQuery($ids, $conditions = array(), $revision_id = FALSE) {
+    $query = parent::buildQuery($ids, $conditions, $revision_id);
+    $query->addTag('translatable');
+    $query->addTag('term_access');
+    // When name is passed as a condition use LIKE.
+    if (isset($conditions['name'])) {
+      $query_conditions = &$query->conditions();
+      foreach ($query_conditions as $key => $condition) {
+        if ($condition['field'] == 'base.name') {
+          $query_conditions[$key]['operator'] = 'LIKE';
+          $query_conditions[$key]['value'] = db_like($query_conditions[$key]['value']);
+        }
+      }
+    }
+    // Add the machine name field from the {taxonomy_vocabulary} table.
+    $query->innerJoin('taxonomy_vocabulary', 'v', 'base.vid = v.vid');
+    $query->addField('v', 'machine_name', 'vocabulary_machine_name');
+    return $query;
   }
 
-  return $result;
+  protected function cacheGet($ids, $conditions = array()) {
+    $terms = parent::cacheGet($ids, $conditions);
+    // Name matching is case insensitive, note that with some collations
+    // LOWER() and drupal_strtolower() may return different results.
+    foreach ($terms as $term) {
+      $term_values = (array) $term;
+      if (isset($conditions['name']) && drupal_strtolower($conditions['name'] != drupal_strtolower($term_values['name']))) {
+        unset($terms[$term->tid]);
+      }
+    }
+    return $terms;
+  }
+}
+
+/**
+ * Controller class for taxonomy vocabularies.
+ *
+ * This extends the DrupalDefaultEntityController class, adding required
+ * special handling for taxonomy vocabulary objects.
+ */
+class TaxonomyVocabularyController extends DrupalDefaultEntityController {
+
+  protected function buildQuery($ids, $conditions = array(), $revision_id = FALSE) {
+    $query = parent::buildQuery($ids, $conditions, $revision_id);
+    $query->addTag('translatable');
+    $query->orderBy('base.weight');
+    $query->orderBy('base.name');
+    return $query;
+  }
+}
+
+/**
+ * Load multiple taxonomy terms based on certain conditions.
+ *
+ * This function should be used whenever you need to load more than one term
+ * from the database. Terms are loaded into memory and will not require
+ * database access if loaded again during the same page request.
+ *
+ * @see entity_load()
+ * @see EntityFieldQuery
+ *
+ * @param $tids
+ *   An array of taxonomy term IDs.
+ * @param $conditions
+ *   (deprecated) An associative array of conditions on the {taxonomy_term}
+ *   table, where the keys are the database fields and the values are the
+ *   values those fields must have. Instead, it is preferable to use
+ *   EntityFieldQuery to retrieve a list of entity IDs loadable by
+ *   this function.
+ *
+ * @return
+ *   An array of term objects, indexed by tid. When no results are found, an
+ *   empty array is returned.
+ *
+ * @todo Remove $conditions in Drupal 8.
+ */
+function taxonomy_term_load_multiple($tids = array(), $conditions = array()) {
+  return entity_load('taxonomy_term', $tids, $conditions);
+}
+
+/**
+ * Load multiple taxonomy vocabularies based on certain conditions.
+ *
+ * This function should be used whenever you need to load more than one
+ * vocabulary from the database. Terms are loaded into memory and will not
+ * require database access if loaded again during the same page request.
+ *
+ * @see entity_load()
+ *
+ * @param $vids
+ *  An array of taxonomy vocabulary IDs, or FALSE to load all vocabularies.
+ * @param $conditions
+ *  An array of conditions to add to the query.
+ *
+ * @return
+ *  An array of vocabulary objects, indexed by vid.
+ */
+function taxonomy_vocabulary_load_multiple($vids = array(), $conditions = array()) {
+  return entity_load('taxonomy_vocabulary', $vids, $conditions);
 }
 
 /**
  * Return the vocabulary object matching a vocabulary ID.
  *
  * @param $vid
- *   The vocabulary's ID
- * @param $reset
- *   Whether to reset the internal taxonomy_vocabulary_load cache.
+ *   The vocabulary's ID.
  *
  * @return
  *   The vocabulary object with all of its metadata, if exists, FALSE otherwise.
  *   Results are statically cached.
+ *
+ * @see taxonomy_vocabulary_machine_name_load()
  */
-function taxonomy_vocabulary_load($vid, $reset = FALSE) {
-  static $vocabularies = array();
+function taxonomy_vocabulary_load($vid) {
+  $vocabularies = taxonomy_vocabulary_load_multiple(array($vid));
+  return reset($vocabularies);
+}
 
-  if ($reset) {
-    $vocabularies = array();
-  }
-
-  if (!isset($vocabularies[$vid])) {
-    // Initialize so if this vocabulary does not exist, we have
-    // that cached, and we will not try to load this later.
-    $vocabularies[$vid] = FALSE;
-    // Try to load the data and fill up the object.
-    $result = db_query('SELECT v.*, n.type FROM {vocabulary} v LEFT JOIN {vocabulary_node_types} n ON v.vid = n.vid WHERE v.vid = %d', $vid);
-    $node_types = array();
-    while ($voc = db_fetch_object($result)) {
-      if (!empty($voc->type)) {
-        $node_types[$voc->type] = $voc->type;
-      }
-      unset($voc->type);
-      $voc->nodes = $node_types;
-      $vocabularies[$vid] = $voc;
-    }
-  }
-
-  // Return FALSE if this vocabulary does not exist.
-  return !empty($vocabularies[$vid]) ? $vocabularies[$vid] : FALSE;
+/**
+ * Return the vocabulary object matching a vocabulary machine name.
+ *
+ * @param $name
+ *   The vocabulary's machine name.
+ *
+ * @return
+ *   The vocabulary object with all of its metadata, if exists, FALSE otherwise.
+ *   Results are statically cached.
+ *
+ * @see taxonomy_vocabulary_load()
+ */
+function taxonomy_vocabulary_machine_name_load($name) {
+  $vocabularies = taxonomy_vocabulary_load_multiple(NULL, array('machine_name' => $name));
+  return reset($vocabularies);
 }
 
 /**
@@ -1022,303 +1227,16 @@ function taxonomy_vocabulary_load($vid, $reset = FALSE) {
  *
  * @param $tid
  *   A term's ID
- * @param $reset
- *   Whether to reset the internal taxonomy_get_term cache.
  *
- * @return Object
+ * @return
  *   A term object. Results are statically cached.
  */
-function taxonomy_get_term($tid, $reset = FALSE) {
-  static $terms = array();
-
-  if ($reset) {
-    $terms = array();
+function taxonomy_term_load($tid) {
+  if (!is_numeric($tid)) {
+    return FALSE;
   }
-
-  if (!isset($terms[$tid])) {
-    $terms[$tid] = db_fetch_object(db_query('SELECT * FROM {term_data} WHERE tid = %d', $tid));
-  }
-
-  return $terms[$tid];
-}
-
-/**
- * Create a select form element for a given taxonomy vocabulary.
- *
- * NOTE: This function expects input that has already been sanitized and is
- * safe for display. Callers must properly sanitize the $title and
- * $description arguments to prevent XSS vulnerabilities.
- *
- * @param $title
- *   The title of the vocabulary. This MUST be sanitized by the caller.
- * @param $name
- *   Ignored.
- * @param $value
- *   The currently selected terms from this vocabulary, if any.
- * @param $vocabulary_id
- *   The vocabulary ID to build the form element for.
- * @param $description
- *   Help text for the form element. This MUST be sanitized by the caller.
- * @param $multiple
- *   Boolean to control if the form should use a single or multiple select.
- * @param $blank
- *   Optional form choice to use when no value has been selected.
- * @param $exclude
- *   Optional array of term ids to exclude in the selector.
- * @return
- *   A FAPI form array to select terms from the given vocabulary.
- *
- * @see taxonomy_form()
- * @see taxonomy_form_term()
- */
-function _taxonomy_term_select($title, $name, $value, $vocabulary_id, $description, $multiple, $blank, $exclude = array()) {
-  $tree = taxonomy_get_tree($vocabulary_id);
-  $options = array();
-
-  if ($blank) {
-    $options[''] = $blank;
-  }
-  if ($tree) {
-    foreach ($tree as $term) {
-      if (!in_array($term->tid, $exclude)) {
-        $choice = new stdClass();
-        $choice->option = array($term->tid => str_repeat('-', $term->depth) . $term->name);
-        $options[] = $choice;
-      }
-    }
-  }
-
-  return array('#type' => 'select',
-    '#title' => $title,
-    '#default_value' => $value,
-    '#options' => $options,
-    '#description' => $description,
-    '#multiple' => $multiple,
-    '#size' => $multiple ? min(9, count($options)) : 0,
-    '#weight' => -15,
-    '#theme' => 'taxonomy_term_select',
-  );
-}
-
-/**
- * Format the selection field for choosing terms
- * (by deafult the default selection field is used).
- *
- * @ingroup themeable
- */
-function theme_taxonomy_term_select($element) {
-  return theme('select', $element);
-}
-
-/**
- * Finds all nodes that match selected taxonomy conditions.
- *
- * @param $tids
- *   An array of term IDs to match.
- * @param $operator
- *   How to interpret multiple IDs in the array. Can be "or" or "and".
- * @param $depth
- *   How many levels deep to traverse the taxonomy tree. Can be a nonnegative
- *   integer or "all".
- * @param $pager
- *   Whether the nodes are to be used with a pager (the case on most Drupal
- *   pages) or not (in an XML feed, for example).
- * @param $order
- *   The order clause for the query that retrieve the nodes.
- * @return
- *   A resource identifier pointing to the query results.
- */
-function taxonomy_select_nodes($tids = array(), $operator = 'or', $depth = 0, $pager = TRUE, $order = 'n.sticky DESC, n.created DESC') {
-  if (count($tids) > 0) {
-    // For each term ID, generate an array of descendant term IDs to the right depth.
-    $descendant_tids = array();
-    if ($depth === 'all') {
-      $depth = NULL;
-    }
-    foreach ($tids as $index => $tid) {
-      $term = taxonomy_get_term($tid);
-      $tree = taxonomy_get_tree($term->vid, $tid, -1, $depth);
-      $descendant_tids[] = array_merge(array($tid), array_map('_taxonomy_get_tid_from_term', $tree));
-    }
-
-    if ($operator == 'or') {
-      $args = call_user_func_array('array_merge', $descendant_tids);
-      $placeholders = db_placeholders($args, 'int');
-      $sql = 'SELECT DISTINCT(n.nid), n.sticky, n.title, n.created FROM {node} n INNER JOIN {term_node} tn ON n.vid = tn.vid WHERE tn.tid IN ('. $placeholders .') AND n.status = 1 ORDER BY '. $order;
-      $sql_count = 'SELECT COUNT(DISTINCT(n.nid)) FROM {node} n INNER JOIN {term_node} tn ON n.vid = tn.vid WHERE tn.tid IN ('. $placeholders .') AND n.status = 1';
-    }
-    else {
-      $joins = '';
-      $wheres = '';
-      $args = array();
-      foreach ($descendant_tids as $index => $tids) {
-        $joins .= ' INNER JOIN {term_node} tn'. $index .' ON n.vid = tn'. $index .'.vid';
-        $wheres .= ' AND tn'. $index .'.tid IN ('. db_placeholders($tids, 'int') .')';
-        $args = array_merge($args, $tids);
-      }
-      $sql = 'SELECT DISTINCT(n.nid), n.sticky, n.title, n.created FROM {node} n '. $joins .' WHERE n.status = 1 '. $wheres .' ORDER BY '. $order;
-      $sql_count = 'SELECT COUNT(DISTINCT(n.nid)) FROM {node} n '. $joins .' WHERE n.status = 1 '. $wheres;
-    }
-    $sql = db_rewrite_sql($sql);
-    $sql_count = db_rewrite_sql($sql_count);
-    if ($pager) {
-      $result = pager_query($sql, variable_get('default_nodes_main', 10), 0, $sql_count, $args);
-    }
-    else {
-      $result = db_query_range($sql, $args, 0, variable_get('feed_default_items', 10));
-    }
-  }
-
-  return $result;
-}
-
-/**
- * Accepts the result of a pager_query() call, such as that performed by
- * taxonomy_select_nodes(), and formats each node along with a pager.
- */
-function taxonomy_render_nodes($result) {
-  $output = '';
-  $has_rows = FALSE;
-  while ($node = db_fetch_object($result)) {
-    $output .= node_view(node_load($node->nid), 1);
-    $has_rows = TRUE;
-  }
-  if ($has_rows) {
-    $output .= theme('pager', NULL, variable_get('default_nodes_main', 10), 0);
-  }
-  else {
-    $output .= '<p>'. t('There are currently no posts in this category.') .'</p>';
-  }
-  return $output;
-}
-
-/**
- * Implementation of hook_nodeapi().
- */
-function taxonomy_nodeapi($node, $op, $arg = 0) {
-  switch ($op) {
-    case 'load':
-      $output['taxonomy'] = taxonomy_node_get_terms($node);
-      return $output;
-
-    case 'insert':
-      if (!empty($node->taxonomy)) {
-        taxonomy_node_save($node, $node->taxonomy);
-      }
-      break;
-
-    case 'update':
-      if (!empty($node->taxonomy)) {
-        taxonomy_node_save($node, $node->taxonomy);
-      }
-      break;
-
-    case 'delete':
-      taxonomy_node_delete($node);
-      break;
-
-    case 'delete revision':
-      taxonomy_node_delete_revision($node);
-      break;
-
-    case 'validate':
-      taxonomy_node_validate($node);
-      break;
-
-    case 'rss item':
-      return taxonomy_rss_item($node);
-
-    case 'update index':
-      return taxonomy_node_update_index($node);
-  }
-}
-
-/**
- * Implementation of hook_nodeapi('update_index').
- */
-function taxonomy_node_update_index(&$node) {
-  $output = array();
-  foreach ($node->taxonomy as $term) {
-    $output[] = $term->name;
-  }
-  if (count($output)) {
-    return '<strong>('. implode(', ', $output) .')</strong>';
-  }
-}
-
-/**
- * Parses a comma or plus separated string of term IDs.
- *
- * @param $str_tids
- *   A string of term IDs, separated by plus or comma.
- *   comma (,) means AND
- *   plus (+) means OR
- *
- * @return an associative array with an operator key (either 'and'
- *   or 'or') and a tid key containing an array of the term ids.
- */
-function taxonomy_terms_parse_string($str_tids) {
-  $terms = array('operator' => '', 'tids' => array());
-  if (preg_match('/^([0-9]+[+ ])+[0-9]+$/', $str_tids)) {
-    $terms['operator'] = 'or';
-    // The '+' character in a query string may be parsed as ' '.
-    $terms['tids'] = preg_split('/[+ ]/', $str_tids);
-  }
-  else if (preg_match('/^([0-9]+,)*[0-9]+$/', $str_tids)) {
-    $terms['operator'] = 'and';
-    $terms['tids'] = explode(',', $str_tids);
-  }
-  return $terms;
-}
-
-/**
- * Provides category information for RSS feeds.
- */
-function taxonomy_rss_item($node) {
-  $output = array();
-  foreach ($node->taxonomy as $term) {
-    $output[] = array('key'   => 'category',
-                      'value' => $term->name,
-                      'attributes' => array('domain' => url('taxonomy/term/'. $term->tid, array('absolute' => TRUE))));
-  }
-  return $output;
-}
-
-/**
- * Implementation of hook_help().
- */
-function taxonomy_help($path, $arg) {
-  switch ($path) {
-    case 'admin/help#taxonomy':
-      $output = '<p>'. t('The taxonomy module allows you to categorize content using various systems of classification. Free-tagging vocabularies are created by users on the fly when they submit posts (as commonly found in blogs and social bookmarking applications). Controlled vocabularies allow for administrator-defined short lists of terms as well as complex hierarchies with multiple relationships between different terms. These methods can be applied to different content types and combined together to create a powerful and flexible method of classifying and presenting your content.') .'</p>';
-      $output .= '<p>'. t('For example, when creating a recipe site, you might want to classify posts by both the type of meal and preparation time. A vocabulary for each allows you to categorize using each criteria independently instead of creating a tag for every possible combination.') .'</p>';
-      $output .= '<p>'. t('Type of Meal: <em>Appetizer, Main Course, Salad, Dessert</em>') .'</p>';
-      $output .= '<p>'. t('Preparation Time: <em>0-30mins, 30-60mins, 1-2 hrs, 2hrs+</em>') .'</p>';
-      $output .= '<p>'. t("Each taxonomy term (often called a 'category' or 'tag' in other systems) automatically provides lists of posts and a corresponding RSS feed. These taxonomy/term URLs can be manipulated to generate AND and OR lists of posts classified with terms. In our recipe site example, it then becomes easy to create pages displaying 'Main courses', '30 minute recipes', or '30 minute main courses and appetizers' by using terms on their own or in combination with others. There are a significant number of contributed modules which you to alter and extend the behavior of the core module for both display and organization of terms.") .'</p>';
-      $output .= '<p>'. t("Terms can also be organized in parent/child relationships from the admin interface. An example would be a vocabulary grouping countries under their parent geo-political regions. The taxonomy module also enables advanced implementations of hierarchy, for example placing Turkey in both the 'Middle East' and 'Europe'.") .'</p>';
-      $output .= '<p>'. t('The taxonomy module supports the use of both synonyms and related terms, but does not directly use this functionality. However, optional contributed or custom modules may make full use of these advanced features.') .'</p>';
-      $output .= '<p>'. t('For more information, see the online handbook entry for <a href="@taxonomy">Taxonomy module</a>.', array('@taxonomy' => 'http://drupal.org/handbook/modules/taxonomy/')) .'</p>';
-      return $output;
-    case 'admin/content/taxonomy':
-      $output = '<p>'. t("The taxonomy module allows you to categorize your content using both tags and administrator defined terms. It is a flexible tool for classifying content with many advanced features. To begin, create a 'Vocabulary' to hold one set of terms or tags. You can create one free-tagging vocabulary for everything, or separate controlled vocabularies to define the various properties of your content, for example 'Countries' or 'Colors'.") .'</p>';
-      $output .= '<p>'. t('Use the list below to configure and review the vocabularies defined on your site, or to list and manage the terms (tags) they contain. A vocabulary may (optionally) be tied to specific content types as shown in the <em>Type</em> column and, if so, will be displayed when creating or editing posts of that type. Multiple vocabularies tied to the same content type will be displayed in the order shown below. To change the order of a vocabulary, grab a drag-and-drop handle under the <em>Name</em> column and drag it to a new location in the list. (Grab a handle by clicking and holding the mouse while hovering over a handle icon.) Remember that your changes will not be saved until you click the <em>Save</em> button at the bottom of the page.') .'</p>';
-      return $output;
-    case 'admin/content/taxonomy/%':
-      $vocabulary = taxonomy_vocabulary_load($arg[3]);
-      if ($vocabulary->tags) {
-        return '<p>'. t('%capital_name is a free-tagging vocabulary. To change the name or description of a term, click the <em>edit</em> link next to the term.', array('%capital_name' => drupal_ucfirst($vocabulary->name))) .'</p>';
-      }
-      switch ($vocabulary->hierarchy) {
-        case 0:
-          return '<p>'. t('%capital_name is a flat vocabulary. You may organize the terms in the %name vocabulary by using the handles on the left side of the table. To change the name or description of a term, click the <em>edit</em> link next to the term.', array('%capital_name' => drupal_ucfirst($vocabulary->name), '%name' => $vocabulary->name)) .'</p>';
-        case 1:
-          return '<p>'. t('%capital_name is a single hierarchy vocabulary. You may organize the terms in the %name vocabulary by using the handles on the left side of the table. To change the name or description of a term, click the <em>edit</em> link next to the term.', array('%capital_name' => drupal_ucfirst($vocabulary->name), '%name' => $vocabulary->name)) .'</p>';
-        case 2:
-          return '<p>'. t('%capital_name is a multiple hierarchy vocabulary. To change the name or description of a term, click the <em>edit</em> link next to the term. Drag and drop of multiple hierarchies is not supported, but you can re-enable drag and drop support by editing each term to include only a single parent.', array('%capital_name' => drupal_ucfirst($vocabulary->name))) .'</p>';
-      }
-    case 'admin/content/taxonomy/add/vocabulary':
-      return '<p>'. t('Define how your vocabulary will be presented to administrators and users, and which content types to categorize with it. Tags allows users to create terms when submitting posts by typing a comma separated list. Otherwise terms are chosen from a select list and can only be created by users with the "administer taxonomy" permission.') .'</p>';
-  }
+  $term = taxonomy_term_load_multiple(array($tid), array());
+  return $term ? $term[$tid] : FALSE;
 }
 
 /**
@@ -1337,36 +1255,597 @@ function taxonomy_implode_tags($tags, $vid = NULL) {
   $typed_tags = array();
   foreach ($tags as $tag) {
     // Extract terms belonging to the vocabulary in question.
-    if (is_null($vid) || $tag->vid == $vid) {
-
-      // Commas and quotes in tag names are special cases, so encode 'em.
-      if (strpos($tag->name, ',') !== FALSE || strpos($tag->name, '"') !== FALSE) {
-        $tag->name = '"'. str_replace('"', '""', $tag->name) .'"';
+    if (!isset($vid) || $tag->vid == $vid) {
+      // Make sure we have a completed loaded taxonomy term.
+      if (isset($tag->name)) {
+        // Commas and quotes in tag names are special cases, so encode 'em.
+        if (strpos($tag->name, ',') !== FALSE || strpos($tag->name, '"') !== FALSE) {
+          $typed_tags[] = '"' . str_replace('"', '""', $tag->name) . '"';
+        }
+        else {
+          $typed_tags[] = $tag->name;
+        }
       }
-
-      $typed_tags[] = $tag->name;
     }
   }
   return implode(', ', $typed_tags);
 }
 
 /**
- * Implementation of hook_hook_info().
+ * Implements hook_field_info().
+ *
+ * Field settings:
+ * - allowed_values: a list array of one or more vocabulary trees:
+ *   - vocabulary: a vocabulary machine name.
+ *   - parent: a term ID of a term whose children are allowed. This should be
+ *     '0' if all terms in a vocabulary are allowed. The allowed values do not
+ *     include the parent term.
+ *
  */
-function taxonomy_hook_info() {
+function taxonomy_field_info() {
   return array(
-    'taxonomy' => array(
-      'taxonomy' => array(
-        'insert' => array(
-          'runs when' => t('After saving a new term to the database'),
-        ),
-        'update' => array(
-          'runs when' => t('After saving an updated term to the database'),
-        ),
-        'delete' => array(
-          'runs when' => t('After deleting a term')
+    'taxonomy_term_reference' => array(
+      'label' => t('Term reference'),
+      'description' => t('This field stores a reference to a taxonomy term.'),
+      'default_widget' => 'options_select',
+      'default_formatter' => 'taxonomy_term_reference_link',
+      'settings' => array(
+        'allowed_values' => array(
+          array(
+            'vocabulary' => '',
+            'parent' => '0',
+          ),
         ),
       ),
     ),
   );
 }
+
+/**
+ * Implements hook_field_widget_info().
+ */
+function taxonomy_field_widget_info() {
+  return array(
+    'taxonomy_autocomplete' => array(
+      'label' => t('Autocomplete term widget (tagging)'),
+      'field types' => array('taxonomy_term_reference'),
+      'settings' => array(
+        'size' => 60,
+        'autocomplete_path' => 'taxonomy/autocomplete',
+      ),
+      'behaviors' => array(
+        'multiple values' => FIELD_BEHAVIOR_CUSTOM,
+      ),
+    ),
+  );
+}
+
+/**
+ * Implements hook_field_widget_info_alter().
+ */
+function taxonomy_field_widget_info_alter(&$info) {
+  $info['options_select']['field types'][] = 'taxonomy_term_reference';
+  $info['options_buttons']['field types'][] = 'taxonomy_term_reference';
+}
+
+/**
+ * Implements hook_options_list().
+ */
+function taxonomy_options_list($field) {
+  $function = !empty($field['settings']['options_list_callback']) ? $field['settings']['options_list_callback'] : 'taxonomy_allowed_values';
+  return $function($field);
+}
+
+/**
+ * Implements hook_field_validate().
+ *
+ * Taxonomy field settings allow for either a single vocabulary ID, multiple
+ * vocabulary IDs, or sub-trees of a vocabulary to be specified as allowed
+ * values, although only the first of these is supported via the field UI.
+ * Confirm that terms entered as values meet at least one of these conditions.
+ *
+ * Possible error codes:
+ * - 'taxonomy_term_illegal_value': The value is not part of the list of allowed values.
+ */
+function taxonomy_field_validate($entity_type, $entity, $field, $instance, $langcode, $items, &$errors) {
+  // Build an array of existing term IDs so they can be loaded with
+  // taxonomy_term_load_multiple();
+  foreach ($items as $delta => $item) {
+    if (!empty($item['tid']) && $item['tid'] != 'autocreate') {
+      $tids[] = $item['tid'];
+    }
+  }
+  if (!empty($tids)) {
+    $terms = taxonomy_term_load_multiple($tids);
+
+    // Check each existing item to ensure it can be found in the
+    // allowed values for this field.
+    foreach ($items as $delta => $item) {
+      $validate = TRUE;
+      if (!empty($item['tid']) && $item['tid'] != 'autocreate') {
+        $validate = FALSE;
+        foreach ($field['settings']['allowed_values'] as $settings) {
+          // If no parent is specified, check if the term is in the vocabulary.
+          if (isset($settings['vocabulary']) && empty($settings['parent'])) {
+            if ($settings['vocabulary'] == $terms[$item['tid']]->vocabulary_machine_name) {
+              $validate = TRUE;
+              break;
+            }
+          }
+          // If a parent is specified, then to validate it must appear in the
+          // array returned by taxonomy_get_parents_all().
+          elseif (!empty($settings['parent'])) {
+            $ancestors = taxonomy_get_parents_all($item['tid']);
+            foreach ($ancestors as $ancestor) {
+              if ($ancestor->tid == $settings['parent']) {
+                $validate = TRUE;
+                break 2;
+              }
+            }
+          }
+        }
+      }
+      if (!$validate) {
+        $errors[$field['field_name']][$langcode][$delta][] = array(
+          'error' => 'taxonomy_term_reference_illegal_value',
+          'message' => t('%name: illegal value.', array('%name' => $instance['label'])),
+        );
+      }
+    }
+  }
+}
+
+/**
+ * Implements hook_field_is_empty().
+ */
+function taxonomy_field_is_empty($item, $field) {
+  if (!is_array($item) || (empty($item['tid']) && (string) $item['tid'] !== '0')) {
+    return TRUE;
+  }
+  return FALSE;
+}
+
+/**
+ * Implements hook_field_formatter_info().
+ */
+function taxonomy_field_formatter_info() {
+  return array(
+    'taxonomy_term_reference_link' => array(
+      'label' => t('Link'),
+      'field types' => array('taxonomy_term_reference'),
+    ),
+    'taxonomy_term_reference_plain' => array(
+      'label' => t('Plain text'),
+      'field types' => array('taxonomy_term_reference'),
+    ),
+  );
+}
+
+/**
+ * Implements hook_field_formatter_view().
+ */
+function taxonomy_field_formatter_view($entity_type, $entity, $field, $instance, $langcode, $items, $display) {
+  $element = array();
+
+  // Terms whose tid is 'autocreate' do not exist
+  // yet and $item['taxonomy_term'] is not set. Theme such terms as
+  // just their name.
+
+  switch ($display['type']) {
+    case 'taxonomy_term_reference_link':
+      foreach ($items as $delta => $item) {
+        if ($item['tid'] == 'autocreate') {
+          $element[$delta] = array(
+            '#markup' => check_plain($item['name']),
+          );
+        }
+        else {
+          $term = $item['taxonomy_term'];
+          $uri = entity_uri('taxonomy_term', $term);
+          $element[$delta] = array(
+            '#type' => 'link',
+            '#title' => $term->name,
+            '#href' => $uri['path'],
+            '#options' => $uri['options'],
+          );
+        }
+      }
+      break;
+
+    case 'taxonomy_term_reference_plain':
+      foreach ($items as $delta => $item) {
+        $name = ($item['tid'] != 'autocreate' ? $item['taxonomy_term']->name : $item['name']);
+        $element[$delta] = array(
+          '#markup' => check_plain($name),
+        );
+      }
+      break;
+  }
+
+  return $element;
+}
+
+/**
+ * Returns the set of valid terms for a taxonomy field.
+ *
+ * @param $field
+ *   The field definition.
+ * @return
+ *   The array of valid terms for this field, keyed by term id.
+ */
+function taxonomy_allowed_values($field) {
+  $options = array();
+  foreach ($field['settings']['allowed_values'] as $tree) {
+    if ($vocabulary = taxonomy_vocabulary_machine_name_load($tree['vocabulary'])) {
+      if ($terms = taxonomy_get_tree($vocabulary->vid, $tree['parent'])) {
+        foreach ($terms as $term) {
+          $options[$term->tid] = str_repeat('-', $term->depth) . $term->name;
+        }
+      }
+    }
+  }
+  return $options;
+}
+
+/**
+ * Implements hook_field_formatter_prepare_view().
+ *
+ * This preloads all taxonomy terms for multiple loaded objects at once and
+ * unsets values for invalid terms that do not exist.
+ */
+function taxonomy_field_formatter_prepare_view($entity_type, $entities, $field, $instances, $langcode, &$items, $displays) {
+  $tids = array();
+
+  // Collect every possible term attached to any of the fieldable entities.
+  foreach ($entities as $id => $entity) {
+    foreach ($items[$id] as $delta => $item) {
+      // Force the array key to prevent duplicates.
+      if ($item['tid'] != 'autocreate') {
+        $tids[$item['tid']] = $item['tid'];
+      }
+    }
+  }
+  if ($tids) {
+    $terms = taxonomy_term_load_multiple($tids);
+
+    // Iterate through the fieldable entities again to attach the loaded term data.
+    foreach ($entities as $id => $entity) {
+      $rekey = FALSE;
+
+      foreach ($items[$id] as $delta => $item) {
+        // Check whether the taxonomy term field instance value could be loaded.
+        if (isset($terms[$item['tid']])) {
+          // Replace the instance value with the term data.
+          $items[$id][$delta]['taxonomy_term'] = $terms[$item['tid']];
+        }
+        // Terms to be created are not in $terms, but are still legitimate.
+        else if ($item['tid'] == 'autocreate') {
+          // Leave the item in place.
+        }
+        // Otherwise, unset the instance value, since the term does not exist.
+        else {
+          unset($items[$id][$delta]);
+          $rekey = TRUE;
+        }
+      }
+
+      if ($rekey) {
+        // Rekey the items array.
+        $items[$id] = array_values($items[$id]);
+      }
+    }
+  }
+}
+
+/**
+ * Title callback for term pages.
+ *
+ * @param $term
+ *   A term object.
+ *
+ * @return
+ *   The term name to be used as the page title.
+ */
+function taxonomy_term_title($term) {
+  return $term->name;
+}
+
+/**
+ * Implements hook_field_widget_form().
+ */
+function taxonomy_field_widget_form(&$form, &$form_state, $field, $instance, $langcode, $items, $delta, $element) {
+  $tags = array();
+  foreach ($items as $item) {
+    $tags[$item['tid']] = isset($item['taxonomy_term']) ? $item['taxonomy_term'] : taxonomy_term_load($item['tid']);
+  }
+
+  $element += array(
+    '#type' => 'textfield',
+    '#default_value' => taxonomy_implode_tags($tags),
+    '#autocomplete_path' => $instance['widget']['settings']['autocomplete_path'] . '/' . $field['field_name'],
+    '#size' => $instance['widget']['settings']['size'],
+    '#maxlength' => 1024,
+    '#element_validate' => array('taxonomy_autocomplete_validate'),
+  );
+
+  return $element;
+}
+
+/**
+ * Form element validate handler for taxonomy term autocomplete element.
+ */
+function taxonomy_autocomplete_validate($element, &$form_state) {
+  // Autocomplete widgets do not send their tids in the form, so we must detect
+  // them here and process them independently.
+  $value = array();
+  if ($tags = $element['#value']) {
+    // Collect candidate vocabularies.
+    $field = field_widget_field($element, $form_state);
+    $vocabularies = array();
+    foreach ($field['settings']['allowed_values'] as $tree) {
+      if ($vocabulary = taxonomy_vocabulary_machine_name_load($tree['vocabulary'])) {
+        $vocabularies[$vocabulary->vid] = $vocabulary;
+      }
+    }
+
+    // Translate term names into actual terms.
+    $typed_terms = drupal_explode_tags($tags);
+    foreach ($typed_terms as $typed_term) {
+      // See if the term exists in the chosen vocabulary and return the tid;
+      // otherwise, create a new 'autocreate' term for insert/update.
+      if ($possibilities = taxonomy_term_load_multiple(array(), array('name' => trim($typed_term), 'vid' => array_keys($vocabularies)))) {
+        $term = array_pop($possibilities);
+      }
+      else {
+        $vocabulary = reset($vocabularies);
+        $term = array(
+          'tid' => 'autocreate',
+          'vid' => $vocabulary->vid,
+          'name' => $typed_term,
+          'vocabulary_machine_name' => $vocabulary->machine_name,
+        );
+      }
+      $value[] = (array)$term;
+    }
+  }
+
+  form_set_value($element, $value, $form_state);
+}
+
+/**
+ * Implements hook_field_widget_error().
+ */
+function taxonomy_field_widget_error($element, $error, $form, &$form_state) {
+  form_error($element, $error['message']);
+}
+/**
+ * Implements hook_field_settings_form().
+ */
+function taxonomy_field_settings_form($field, $instance, $has_data) {
+  // Get proper values for 'allowed_values_function', which is a core setting.
+  $vocabularies = taxonomy_get_vocabularies();
+  $options = array();
+  foreach ($vocabularies as $vocabulary) {
+    $options[$vocabulary->machine_name] = $vocabulary->name;
+  }
+  $form['allowed_values'] = array(
+    '#tree' => TRUE,
+  );
+
+  foreach ($field['settings']['allowed_values'] as $delta => $tree) {
+    $form['allowed_values'][$delta]['vocabulary'] = array(
+      '#type' => 'select',
+      '#title' => t('Vocabulary'),
+      '#default_value' => $tree['vocabulary'],
+      '#options' => $options,
+      '#required' => TRUE,
+      '#description' => t('The vocabulary which supplies the options for this field.'),
+      '#disabled' => $has_data,
+    );
+    $form['allowed_values'][$delta]['parent'] = array(
+      '#type' => 'value',
+      '#value' => $tree['parent'],
+    );
+  }
+
+  return $form;
+}
+
+/**
+ * Implements hook_rdf_mapping().
+ *
+ * @return array
+ *   The rdf mapping for vocabularies and terms.
+ */
+function taxonomy_rdf_mapping() {
+  return array(
+    array(
+      'type' => 'taxonomy_term',
+      'bundle' => RDF_DEFAULT_BUNDLE,
+      'mapping' => array(
+        'rdftype' => array('skos:Concept'),
+        'name'   => array(
+          'predicates' => array('rdfs:label', 'skos:prefLabel'),
+        ),
+        'description'   => array(
+          'predicates' => array('skos:definition'),
+        ),
+        'vid'   => array(
+          'predicates' => array('skos:inScheme'),
+          'type' => 'rel',
+        ),
+        'parent'   => array(
+          'predicates' => array('skos:broader'),
+          'type' => 'rel',
+        ),
+      ),
+    ),
+    array(
+      'type' => 'taxonomy_vocabulary',
+      'bundle' => RDF_DEFAULT_BUNDLE,
+      'mapping' => array(
+        'rdftype' => array('skos:ConceptScheme'),
+        'name'   => array(
+          'predicates' => array('dc:title'),
+        ),
+        'description'   => array(
+          'predicates' => array('rdfs:comment'),
+        ),
+      ),
+    ),
+  );
+}
+
+/**
+ * @defgroup taxonomy_index Taxonomy indexing
+ * @{
+ * Functions to maintain taxonomy indexing.
+ *
+ * Taxonomy uses default field storage to store canonical relationships
+ * between terms and fieldable entities. However its most common use case
+ * requires listing all content associated with a term or group of terms
+ * sorted by creation date. To avoid slow queries due to joining across
+ * multiple node and field tables with various conditions and order by criteria,
+ * we maintain a denormalized table with all relationships between terms,
+ * published nodes and common sort criteria such as sticky and created.
+ * This is used as a lookup table by taxonomy_select_nodes(). When using other
+ * field storage engines or alternative methods of denormalizing this data
+ * you should set the variable 'taxonomy_maintain_index_table' to FALSE
+ * to avoid unnecessary writes in SQL.
+ */
+
+/**
+ * Implements hook_field_presave().
+ *
+ * Create any new terms defined in a freetagging vocabulary.
+ */
+function taxonomy_field_presave($entity_type, $entity, $field, $instance, $langcode, &$items) {
+  foreach ($items as $delta => $item) {
+    if ($item['tid'] == 'autocreate') {
+      $term = (object) $item;
+      unset($term->tid);
+      taxonomy_term_save($term);
+      $items[$delta]['tid'] = $term->tid;
+    }
+  }
+}
+
+/**
+ * Implements hook_node_insert().
+ */
+function taxonomy_node_insert($node) {
+  // Add taxonomy index entries for the node.
+  taxonomy_build_node_index($node);
+}
+
+/**
+ * Builds and inserts taxonomy index entries for a given node.
+ *
+ * The index lists all terms that are related to a given node entity, and is
+ * therefore maintained at the entity level.
+ *
+ * @param $node
+ *   The node object.
+ */
+function taxonomy_build_node_index($node) {
+  // We maintain a denormalized table of term/node relationships, containing
+  // only data for current, published nodes.
+  $status = NULL;
+  if (variable_get('taxonomy_maintain_index_table', TRUE)) {
+    // If a node property is not set in the node object when node_save() is
+    // called, the old value from $node->original is used.
+    if (!empty($node->original)) {
+      $status = (int)(!empty($node->status) || (!isset($node->status) && !empty($node->original->status)));
+      $sticky = (int)(!empty($node->sticky) || (!isset($node->sticky) && !empty($node->original->sticky)));
+    }
+    else {
+      $status = (int)(!empty($node->status));
+      $sticky = (int)(!empty($node->sticky));
+    }
+  }
+  // We only maintain the taxonomy index for published nodes.
+  if ($status) {
+    // Collect a unique list of all the term IDs from all node fields.
+    $tid_all = array();
+    foreach (field_info_instances('node', $node->type) as $instance) {
+      $field_name = $instance['field_name'];
+      $field = field_info_field($field_name);
+      if ($field['module'] == 'taxonomy' && $field['storage']['type'] == 'field_sql_storage') {
+        // If a field value is not set in the node object when node_save() is
+        // called, the old value from $node->original is used.
+        if (isset($node->{$field_name})) {
+          $items = $node->{$field_name};
+        }
+        elseif (isset($node->original->{$field_name})) {
+          $items = $node->original->{$field_name};
+        }
+        else {
+          continue;
+        }
+        foreach (field_available_languages('node', $field) as $langcode) {
+          if (!empty($items[$langcode])) {
+            foreach ($items[$langcode] as $item) {
+              $tid_all[$item['tid']] = $item['tid'];
+            }
+          }
+        }
+      }
+    }
+    // Insert index entries for all the node's terms.
+    if (!empty($tid_all)) {
+      $query = db_insert('taxonomy_index')->fields(array('nid', 'tid', 'sticky', 'created'));
+      foreach ($tid_all as $tid) {
+        $query->values(array(
+          'nid' => $node->nid,
+          'tid' => $tid,
+          'sticky' => $sticky,
+          'created' => $node->created,
+        ));
+      }
+      $query->execute();
+    }
+  }
+}
+
+/**
+ * Implements hook_node_update().
+ */
+function taxonomy_node_update($node) {
+  // Always rebuild the node's taxonomy index entries on node save.
+  taxonomy_delete_node_index($node);
+  taxonomy_build_node_index($node);
+}
+
+/**
+ * Implements hook_node_delete().
+ */
+function taxonomy_node_delete($node) {
+  // Clean up the {taxonomy_index} table when nodes are deleted.
+  taxonomy_delete_node_index($node);
+}
+
+/**
+ * Deletes taxonomy index entries for a given node.
+ *
+ * @param $node
+ *   The node object.
+ */
+function taxonomy_delete_node_index($node) {
+  if (variable_get('taxonomy_maintain_index_table', TRUE)) {
+    db_delete('taxonomy_index')->condition('nid', $node->nid)->execute();
+  }
+}
+
+/**
+ * Implements hook_taxonomy_term_delete().
+ */
+function taxonomy_taxonomy_term_delete($term) {
+  if (variable_get('taxonomy_maintain_index_table', TRUE)) {
+    // Clean up the {taxonomy_index} table when terms are deleted.
+    db_delete('taxonomy_index')->condition('tid', $term->tid)->execute();
+  }
+}
+
+/**
+ * @} End of "defgroup taxonomy_index"
+ */

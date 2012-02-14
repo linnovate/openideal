@@ -1,11 +1,14 @@
 name = Filter
-description = Handles the filtering of content in preparation for display.
-package = Core - required
+description = Filters content in preparation for display.
+package = Core
 version = VERSION
-core = 6.x
+core = 7.x
+files[] = filter.test
+required = TRUE
+configure = admin/config/content/formats
 
-; Information added by drupal.org packaging script on 2011-05-25
-version = "6.22"
+; Information added by drupal.org packaging script on 2012-02-01
+version = "7.12"
 project = "drupal"
-datestamp = "1306357015"
+datestamp = "1328134560"
 

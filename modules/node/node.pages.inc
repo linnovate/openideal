@@ -7,114 +7,113 @@
 
 
 /**
- * Menu callback; presents the node editing form, or redirects to delete confirmation.
+ * Menu callback; presents the node editing form.
  */
 function node_page_edit($node) {
-  drupal_set_title(check_plain($node->title));
-  return drupal_get_form($node->type .'_node_form', $node);
+  $type_name = node_type_get_name($node);
+  drupal_set_title(t('<em>Edit @type</em> @title', array('@type' => $type_name, '@title' => $node->title)), PASS_THROUGH);
+  return drupal_get_form($node->type . '_node_form', $node);
 }
 
 function node_add_page() {
   $item = menu_get_item();
   $content = system_admin_menu_block($item);
-  return theme('node_add_list', $content);
+  // Bypass the node/add listing if only one content type is available.
+  if (count($content) == 1) {
+    $item = array_shift($content);
+    drupal_goto($item['href']);
+  }
+  return theme('node_add_list', array('content' => $content));
 }
 
 /**
- * Display the list of available node types for node creation.
+ * Returns HTML for a list of available node types for node creation.
+ *
+ * @param $variables
+ *   An associative array containing:
+ *   - content: An array of content types.
  *
  * @ingroup themeable
  */
-function theme_node_add_list($content) {
+function theme_node_add_list($variables) {
+  $content = $variables['content'];
   $output = '';
 
   if ($content) {
     $output = '<dl class="node-type-list">';
     foreach ($content as $item) {
-      $output .= '<dt>'. l($item['title'], $item['href'], $item['localized_options']) .'</dt>';      
-      $output .= '<dd>'. filter_xss_admin($item['description']) .'</dd>';
+      $output .= '<dt>' . l($item['title'], $item['href'], $item['localized_options']) . '</dt>';
+      $output .= '<dd>' . filter_xss_admin($item['description']) . '</dd>';
     }
     $output .= '</dl>';
+  }
+  else {
+    $output = '<p>' . t('You have not created any content types yet. Go to the <a href="@create-content">content type creation page</a> to add a new content type.', array('@create-content' => url('admin/structure/types/add'))) . '</p>';
   }
   return $output;
 }
 
 
 /**
- * Present a node submission form or a set of links to such forms.
+ * Returns a node submission form.
  */
 function node_add($type) {
   global $user;
 
-  $types = node_get_types();
-  $type = isset($type) ? str_replace('-', '_', $type) : NULL;
-  // If a node type has been specified, validate its existence.
-  if (isset($types[$type]) && node_access('create', $type)) {
-    // Initialize settings:
-    $node = array('uid' => $user->uid, 'name' => (isset($user->name) ? $user->name : ''), 'type' => $type, 'language' => '');
-
-    drupal_set_title(t('Create @name', array('@name' => $types[$type]->name)));
-    $output = drupal_get_form($type .'_node_form', $node);
-  }
+  $types = node_type_get_types();
+  $node = (object) array('uid' => $user->uid, 'name' => (isset($user->name) ? $user->name : ''), 'type' => $type, 'language' => LANGUAGE_NONE);
+  drupal_set_title(t('Create @name', array('@name' => $types[$type]->name)), PASS_THROUGH);
+  $output = drupal_get_form($type . '_node_form', $node);
 
   return $output;
 }
 
 function node_form_validate($form, &$form_state) {
-  node_validate($form_state['values'], $form);
-}
-
-function node_object_prepare(&$node) {
-  // Set up default values, if required.
-  $node_options = variable_get('node_options_'. $node->type, array('status', 'promote'));
-  // If this is a new node, fill in the default values.
-  if (!isset($node->nid)) {
-    foreach (array('status', 'promote', 'sticky') as $key) {
-      $node->$key = in_array($key, $node_options);
-    }
-    global $user;
-    $node->uid = $user->uid;
-    $node->created = time();
-  }
-  else {
-    $node->date = format_date($node->created, 'custom', 'Y-m-d H:i:s O');
-    // Remove the log message from the original node object.
-    $node->log = NULL;
-  }
-  // Always use the default revision setting.
-  $node->revision = in_array('revision', $node_options);
-
-  node_invoke($node, 'prepare');
-  node_invoke_nodeapi($node, 'prepare');
+  // $form_state['node'] contains the actual entity being edited, but we must
+  // not update it with form values that have not yet been validated, so we
+  // create a pseudo-entity to use during validation.
+  $node = (object) $form_state['values'];
+  node_validate($node, $form, $form_state);
+  entity_form_field_validate('node', $form, $form_state);
 }
 
 /**
  * Generate the node add/edit form array.
  */
-function node_form(&$form_state, $node) {
+function node_form($form, &$form_state, $node) {
   global $user;
 
-  if (isset($form_state['node'])) {
-    $node = $form_state['node'] + (array)$node;
-  }
-  if (isset($form_state['node_preview'])) {
-    $form['#prefix'] = $form_state['node_preview'];
-  }
-  $node = (object)$node;
-  foreach (array('body', 'title', 'format') as $key) {
-    if (!isset($node->$key)) {
-      $node->$key = NULL;
+  // During initial form build, add the node entity to the form state for use
+  // during form building and processing. During a rebuild, use what is in the
+  // form state.
+  if (!isset($form_state['node'])) {
+    if (!isset($node->title)) {
+      $node->title = NULL;
     }
-  }
-  if (!isset($form_state['node_preview'])) {
     node_object_prepare($node);
+    $form_state['node'] = $node;
   }
   else {
-    $node->build_mode = NODE_BUILD_PREVIEW;
+    $node = $form_state['node'];
   }
 
-  // Set the id of the top-level form tag
-  $form['#id'] = 'node-form';
+  // Some special stuff when previewing a node.
+  if (isset($form_state['node_preview'])) {
+    $form['#prefix'] = $form_state['node_preview'];
+    $node->in_preview = TRUE;
+  }
+  else {
+    unset($node->in_preview);
+  }
+
+  // Identify this as a node edit form.
+  // @todo D8: Remove. Modules can implement hook_form_BASE_FORM_ID_alter() now.
+  $form['#node_edit_form'] = TRUE;
+
+  $form['#attributes']['class'][] = 'node-form';
+  if (!empty($node->type)) {
+    $form['#attributes']['class'][] = 'node-' . $node->type . '-form';
+  }
 
   // Basic node information.
   // These elements are just values so they are not even sent to the client.
@@ -130,41 +129,68 @@ function node_form(&$form_state, $node) {
     '#type' => 'hidden',
     '#default_value' => isset($node->changed) ? $node->changed : NULL,
   );
-  // Get the node-specific bits.
-  if ($extra = node_invoke($node, 'form', $form_state)) {
+  // Invoke hook_form() to get the node-specific bits. Can't use node_invoke(),
+  // because hook_form() needs to be able to receive $form_state by reference.
+  // @todo hook_form() implementations are unable to add #validate or #submit
+  //   handlers to the form buttons below. Remove hook_form() entirely.
+  $function = node_type_get_base($node) . '_form';
+  if (function_exists($function) && ($extra = $function($node, $form_state))) {
     $form = array_merge_recursive($form, $extra);
   }
-  if (!isset($form['title']['#weight'])) {
+  // If the node type has a title, and the node type form defined no special
+  // weight for it, we default to a weight of -5 for consistency.
+  if (isset($form['title']) && !isset($form['title']['#weight'])) {
     $form['title']['#weight'] = -5;
   }
-
+  // @todo D8: Remove. Modules should access the node using $form_state['node'].
   $form['#node'] = $node;
+
+  $form['additional_settings'] = array(
+    '#type' => 'vertical_tabs',
+    '#weight' => 99,
+  );
 
   // Add a log field if the "Create new revision" option is checked, or if the
   // current user has the ability to check that option.
-  if (!empty($node->revision) || user_access('administer nodes')) {
-    $form['revision_information'] = array(
-      '#type' => 'fieldset',
-      '#title' => t('Revision information'),
-      '#collapsible' => TRUE,
-      // Collapsed by default when "Create new revision" is unchecked
-      '#collapsed' => !$node->revision,
-      '#weight' => 20,
-    );
-    $form['revision_information']['revision'] = array(
-      '#access' => user_access('administer nodes'),
-      '#type' => 'checkbox',
-      '#title' => t('Create new revision'),
-      '#default_value' => $node->revision,
-    );
-    $form['revision_information']['log'] = array(
-      '#type' => 'textarea',
-      '#title' => t('Log message'),
-      '#default_value' => (isset($node->log) ? $node->log : ''),
-      '#rows' => 2,
-      '#description' => t('An explanation of the additions or updates being made to help other authors understand your motivations.'),
+  $form['revision_information'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Revision information'),
+    '#collapsible' => TRUE,
+    // Collapsed by default when "Create new revision" is unchecked
+    '#collapsed' => !$node->revision,
+    '#group' => 'additional_settings',
+    '#attributes' => array(
+      'class' => array('node-form-revision-information'),
+    ),
+    '#attached' => array(
+      'js' => array(drupal_get_path('module', 'node') . '/node.js'),
+    ),
+    '#weight' => 20,
+    '#access' => $node->revision || user_access('administer nodes'),
+  );
+  $form['revision_information']['revision'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Create new revision'),
+    '#default_value' => $node->revision,
+    '#access' => user_access('administer nodes'),
+  );
+  // Check the revision log checkbox when the log textarea is filled in.
+  // This must not happen if "Create new revision" is enabled by default, since
+  // the state would auto-disable the checkbox otherwise.
+  if (!$node->revision) {
+    $form['revision_information']['revision']['#states'] = array(
+      'checked' => array(
+        'textarea[name="log"]' => array('empty' => FALSE),
+      ),
     );
   }
+  $form['revision_information']['log'] = array(
+    '#type' => 'textarea',
+    '#title' => t('Revision log message'),
+    '#rows' => 4,
+    '#default_value' => !empty($node->log) ? $node->log : '',
+    '#description' => t('Provide an explanation of the changes you are making. This will help other authors understand your motivations.'),
+  );
 
   // Node author information for administrators
   $form['author'] = array(
@@ -173,14 +199,27 @@ function node_form(&$form_state, $node) {
     '#title' => t('Authoring information'),
     '#collapsible' => TRUE,
     '#collapsed' => TRUE,
-    '#weight' => 20,
+    '#group' => 'additional_settings',
+    '#attributes' => array(
+      'class' => array('node-form-author'),
+    ),
+    '#attached' => array(
+      'js' => array(
+        drupal_get_path('module', 'node') . '/node.js',
+        array(
+          'type' => 'setting',
+          'data' => array('anonymous' => variable_get('anonymous', t('Anonymous'))),
+        ),
+      ),
+    ),
+    '#weight' => 90,
   );
   $form['author']['name'] = array(
     '#type' => 'textfield',
     '#title' => t('Authored by'),
     '#maxlength' => 60,
     '#autocomplete_path' => 'user/autocomplete',
-    '#default_value' => $node->name ? $node->name : '',
+    '#default_value' => !empty($node->name) ? $node->name : '',
     '#weight' => -1,
     '#description' => t('Leave blank for %anonymous.', array('%anonymous' => variable_get('anonymous', t('Anonymous')))),
   );
@@ -188,12 +227,9 @@ function node_form(&$form_state, $node) {
     '#type' => 'textfield',
     '#title' => t('Authored on'),
     '#maxlength' => 25,
-    '#description' => t('Format: %time. Leave blank to use the time of form submission.', array('%time' => !empty($node->date) ? $node->date : format_date($node->created, 'custom', 'Y-m-d H:i:s O'))),
+    '#description' => t('Format: %time. The date format is YYYY-MM-DD and %timezone is the time zone offset from UTC. Leave blank to use the time of form submission.', array('%time' => !empty($node->date) ? date_format(date_create($node->date), 'Y-m-d H:i:s O') : format_date($node->created, 'custom', 'Y-m-d H:i:s O'), '%timezone' => !empty($node->date) ? date_format(date_create($node->date), 'O') : format_date($node->created, 'custom', 'O'))),
+    '#default_value' => !empty($node->date) ? $node->date : '',
   );
-
-  if (isset($node->date)) {
-    $form['author']['date']['#default_value'] = $node->date;
-  }
 
   // Node options for administrators
   $form['options'] = array(
@@ -202,7 +238,14 @@ function node_form(&$form_state, $node) {
     '#title' => t('Publishing options'),
     '#collapsible' => TRUE,
     '#collapsed' => TRUE,
-    '#weight' => 25,
+    '#group' => 'additional_settings',
+    '#attributes' => array(
+      'class' => array('node-form-options'),
+    ),
+    '#attached' => array(
+      'js' => array(drupal_get_path('module', 'node') . '/node.js'),
+    ),
+    '#weight' => 95,
   );
   $form['options']['status'] = array(
     '#type' => 'checkbox',
@@ -220,143 +263,64 @@ function node_form(&$form_state, $node) {
     '#default_value' => $node->sticky,
   );
 
-  // These values are used when the user has no administrator access.
-  foreach (array('uid', 'created') as $key) {
-    $form[$key] = array(
-      '#type' => 'value',
-      '#value' => $node->$key,
-    );
-  }
-
   // Add the buttons.
-  $form['buttons'] = array();
-  $form['buttons']['submit'] = array(
+  $form['actions'] = array('#type' => 'actions');
+  $form['actions']['submit'] = array(
     '#type' => 'submit',
-    '#access' => !variable_get('node_preview', 0) || (!form_get_errors() && isset($form_state['node_preview'])),
+    '#access' => variable_get('node_preview_' . $node->type, DRUPAL_OPTIONAL) != DRUPAL_REQUIRED || (!form_get_errors() && isset($form_state['node_preview'])),
     '#value' => t('Save'),
     '#weight' => 5,
     '#submit' => array('node_form_submit'),
   );
-  $form['buttons']['preview'] = array(
+  $form['actions']['preview'] = array(
+    '#access' => variable_get('node_preview_' . $node->type, DRUPAL_OPTIONAL) != DRUPAL_DISABLED,
     '#type' => 'submit',
     '#value' => t('Preview'),
     '#weight' => 10,
     '#submit' => array('node_form_build_preview'),
   );
   if (!empty($node->nid) && node_access('delete', $node)) {
-    $form['buttons']['delete'] = array(
+    $form['actions']['delete'] = array(
       '#type' => 'submit',
       '#value' => t('Delete'),
       '#weight' => 15,
       '#submit' => array('node_form_delete_submit'),
     );
   }
+  // This form uses a button-level #submit handler for the form's main submit
+  // action. node_form_submit() manually invokes all form-level #submit handlers
+  // of the form. Without explicitly setting #submit, Form API would auto-detect
+  // node_form_submit() as submit handler, but that is the button-level #submit
+  // handler for the 'Save' action. To maintain backwards compatibility, a
+  // #submit handler is auto-suggested for custom node type modules.
   $form['#validate'][] = 'node_form_validate';
-  $form['#theme'] = array($node->type .'_node_form', 'node_form');
+  if (!isset($form['#submit']) && function_exists($node->type . '_node_form_submit')) {
+    $form['#submit'][] = $node->type . '_node_form_submit';
+  }
+  $form += array('#submit' => array());
+
+  field_attach_form('node', $node, $form, $form_state, $node->language);
   return $form;
 }
 
 /**
- * Return a node body field, with format and teaser.
- */
-function node_body_field(&$node, $label, $word_count) {
-
-  // Check if we need to restore the teaser at the beginning of the body.
-  $include = !isset($node->teaser) || ($node->teaser == substr($node->body, 0, strlen($node->teaser)));
-
-  $form = array(
-    '#after_build' => array('node_teaser_js', 'node_teaser_include_verify'));
-
-  $form['#prefix'] = '<div class="body-field-wrapper">';
-  $form['#suffix'] = '</div>';
-
-  $form['teaser_js'] = array(
-    '#type' => 'textarea',
-    '#rows' => 10,
-    '#teaser' => 'edit-body',
-    '#teaser_checkbox' => 'edit-teaser-include',
-    '#disabled' => TRUE,
-  );
-
-  $form['teaser_include'] = array(
-    '#type' => 'checkbox',
-    '#title' => t('Show summary in full view'),
-    '#default_value' => $include,
-    '#prefix' => '<div class="teaser-checkbox">',
-    '#suffix' => '</div>',
-  );
-
-  $form['body'] = array(
-    '#type' => 'textarea',
-    '#title' => check_plain($label),
-    '#default_value' => $include ? $node->body : ($node->teaser . $node->body),
-    '#rows' => 20,
-    '#required' => ($word_count > 0),
-  );
-
-  $form['format'] = filter_form($node->format);
-
-  return $form;
-}
-
-/**
- * Button sumit function: handle the 'Delete' button on the node form.
+ * Button submit function: handle the 'Delete' button on the node form.
  */
 function node_form_delete_submit($form, &$form_state) {
-  $destination = '';
-  if (isset($_REQUEST['destination'])) {
+  $destination = array();
+  if (isset($_GET['destination'])) {
     $destination = drupal_get_destination();
-    unset($_REQUEST['destination']);
+    unset($_GET['destination']);
   }
   $node = $form['#node'];
-  $form_state['redirect'] = array('node/'. $node->nid .'/delete', $destination);
+  $form_state['redirect'] = array('node/' . $node->nid . '/delete', array('query' => $destination));
 }
 
 
 function node_form_build_preview($form, &$form_state) {
   $node = node_form_submit_build_node($form, $form_state);
   $form_state['node_preview'] = node_preview($node);
-}
-
-/**
- * Present a node submission form.
- *
- * @ingroup themeable
- */
-function theme_node_form($form) {
-  $output = "\n<div class=\"node-form\">\n";
-
-  // Admin form fields and submit buttons must be rendered first, because
-  // they need to go to the bottom of the form, and so should not be part of
-  // the catch-all call to drupal_render().
-  $admin = '';
-  if (isset($form['author'])) {
-    $admin .= "    <div class=\"authored\">\n";
-    $admin .= drupal_render($form['author']);
-    $admin .= "    </div>\n";
-  }
-  if (isset($form['options'])) {
-    $admin .= "    <div class=\"options\">\n";
-    $admin .= drupal_render($form['options']);
-    $admin .= "    </div>\n";
-  }
-  $buttons = drupal_render($form['buttons']);
-
-  // Everything else gets rendered here, and is displayed before the admin form
-  // field and the submit buttons.
-  $output .= "  <div class=\"standard\">\n";
-  $output .= drupal_render($form);
-  $output .= "  </div>\n";
-
-  if (!empty($admin)) {
-    $output .= "  <div class=\"admin\">\n";
-    $output .= $admin;
-    $output .= "  </div>\n";
-  }
-  $output .= $buttons;
-  $output .= "</div>\n";
-
-  return $output;
+  $form_state['rebuild'] = TRUE;
 }
 
 /**
@@ -364,11 +328,12 @@ function theme_node_form($form) {
  */
 function node_preview($node) {
   if (node_access('create', $node) || node_access('update', $node)) {
+    _field_invoke_multiple('load', 'node', array($node->nid => $node));
     // Load the user's name when needed.
     if (isset($node->name)) {
       // The use of isset() is mandatory in the context of user IDs, because
       // user ID 0 denotes the anonymous user.
-      if ($user = user_load(array('name' => $node->name))) {
+      if ($user = user_load_by_name($node->name)) {
         $node->uid = $user->uid;
         $node->picture = $user->picture;
       }
@@ -376,71 +341,59 @@ function node_preview($node) {
         $node->uid = 0; // anonymous user
       }
     }
-    else if ($node->uid) {
-      $user = user_load(array('uid' => $node->uid));
+    elseif ($node->uid) {
+      $user = user_load($node->uid);
       $node->name = $user->name;
       $node->picture = $user->picture;
     }
 
-    $node->changed = time();
-
-    // Extract a teaser, if it hasn't been set (e.g. by a module-provided
-    // 'teaser' form item).
-    if (!isset($node->teaser)) {
-      $node->teaser = empty($node->body) ? '' : node_teaser($node->body, $node->format);
-      // Chop off the teaser from the body if needed.
-      if (!$node->teaser_include && $node->teaser == substr($node->body, 0, strlen($node->teaser))) {
-        $node->body = substr($node->body, strlen($node->teaser));
-      }
-    }
+    $node->changed = REQUEST_TIME;
+    $nodes = array($node->nid => $node);
+    field_attach_prepare_view('node', $nodes, 'full');
 
     // Display a preview of the node.
-    // Previewing alters $node so it needs to be cloned.
     if (!form_get_errors()) {
-      $cloned_node = drupal_clone($node);
-      $cloned_node->build_mode = NODE_BUILD_PREVIEW;
-      $output = theme('node_preview', $cloned_node);
+      $node->in_preview = TRUE;
+      $output = theme('node_preview', array('node' => $node));
+      unset($node->in_preview);
     }
-    drupal_set_title(t('Preview'));
+    drupal_set_title(t('Preview'), PASS_THROUGH);
 
     return $output;
   }
 }
 
 /**
- * Display a node preview for display during node creation and editing.
+ * Returns HTML for a node preview for display during node creation and editing.
  *
- * @param $node
- *   The node object which is being previewed.
+ * @param $variables
+ *   An associative array containing:
+ *   - node: The node object which is being previewed.
  *
  * @ingroup themeable
  */
-function theme_node_preview($node) {
+function theme_node_preview($variables) {
+  $node = $variables['node'];
+
   $output = '<div class="preview">';
 
   $preview_trimmed_version = FALSE;
+
+  $elements = node_view(clone $node, 'teaser');
+  $trimmed = drupal_render($elements);
+  $elements = node_view($node, 'full');
+  $full = drupal_render($elements);
+
   // Do we need to preview trimmed version of post as well as full version?
-  if (isset($node->teaser) && isset($node->body)) {
-    $teaser = trim($node->teaser);
-    $body = trim(str_replace('<!--break-->', '', $node->body));
-
-    // Preview trimmed version if teaser and body will appear different;
-    // also (edge case) if both teaser and body have been specified by the user
-    // and are actually the same.
-    if ($teaser != $body || ($body && strpos($node->body, '<!--break-->') === 0)) {
-      $preview_trimmed_version = TRUE;
-    }
-  }
-
-  if ($preview_trimmed_version) {
+  if ($trimmed != $full) {
     drupal_set_message(t('The trimmed version of your post shows what your post looks like when promoted to the main page or when exported for syndication.<span class="no-js"> You can insert the delimiter "&lt;!--break--&gt;" (without the quotes) to fine-tune where your post gets split.</span>'));
-    $output .= '<h3>'. t('Preview trimmed version') .'</h3>';
-    $output .= node_view(drupal_clone($node), 1, FALSE, 0);
-    $output .= '<h3>'. t('Preview full version') .'</h3>';
-    $output .= node_view($node, 0, FALSE, 0);
+    $output .= '<h3>' . t('Preview trimmed version') . '</h3>';
+    $output .= $trimmed;
+    $output .= '<h3>' . t('Preview full version') . '</h3>';
+    $output .= $full;
   }
   else {
-    $output .= node_view($node, 0, FALSE, 0);
+    $output .= $full;
   }
   $output .= "</div>\n";
 
@@ -448,14 +401,12 @@ function theme_node_preview($node) {
 }
 
 function node_form_submit($form, &$form_state) {
-  global $user;
-
   $node = node_form_submit_build_node($form, $form_state);
   $insert = empty($node->nid);
   node_save($node);
-  $node_link = l(t('view'), 'node/'. $node->nid);
+  $node_link = l(t('view'), 'node/' . $node->nid);
   $watchdog_args = array('@type' => $node->type, '%title' => $node->title);
-  $t_args = array('@type' => node_get_types('name', $node), '%title' => $node->title);
+  $t_args = array('@type' => node_type_get_name($node), '%title' => $node->title);
 
   if ($insert) {
     watchdog('content', '@type: added %title.', $watchdog_args, WATCHDOG_NOTICE, $node_link);
@@ -466,43 +417,63 @@ function node_form_submit($form, &$form_state) {
     drupal_set_message(t('@type %title has been updated.', $t_args));
   }
   if ($node->nid) {
-    unset($form_state['rebuild']);
+    $form_state['values']['nid'] = $node->nid;
     $form_state['nid'] = $node->nid;
-    $form_state['redirect'] = 'node/'. $node->nid;
+    $form_state['redirect'] = 'node/' . $node->nid;
   }
   else {
     // In the unlikely case something went wrong on save, the node will be
     // rebuilt and node form redisplayed the same way as in preview.
     drupal_set_message(t('The post could not be saved.'), 'error');
+    $form_state['rebuild'] = TRUE;
   }
+  // Clear the page and block caches.
+  cache_clear_all();
 }
 
 /**
- * Build a node by processing submitted form values and prepare for a form rebuild.
+ * Updates the form state's node entity by processing this submission's values.
+ *
+ * This is the default builder function for the node form. It is called
+ * during the "Save" and "Preview" submit handlers to retrieve the entity to
+ * save or preview. This function can also be called by a "Next" button of a
+ * wizard to update the form state's entity with the current step's values
+ * before proceeding to the next step.
+ *
+ * @see node_form()
  */
 function node_form_submit_build_node($form, &$form_state) {
-  // Unset any button-level handlers, execute all the form-level submit
-  // functions to process the form values into an updated node.
+  // @todo Legacy support for modules that extend the node form with form-level
+  //   submit handlers that adjust $form_state['values'] prior to those values
+  //   being used to update the entity. Module authors are encouraged to instead
+  //   adjust the node directly within a hook_node_submit() implementation. For
+  //   Drupal 8, evaluate whether the pattern of triggering form-level submit
+  //   handlers during button-level submit processing is worth supporting
+  //   properly, and if so, add a Form API function for doing so.
   unset($form_state['submit_handlers']);
   form_execute_handlers('submit', $form, $form_state);
-  $node = node_submit($form_state['values']);
-  $form_state['node'] = (array)$node;
-  $form_state['rebuild'] = TRUE;
+
+  $node = $form_state['node'];
+  entity_form_submit_build_entity('node', $node, $form, $form_state);
+
+  node_submit($node);
+  foreach (module_implements('node_submit') as $module) {
+    $function = $module . '_node_submit';
+    $function($node, $form, $form_state);
+  }
   return $node;
 }
 
 /**
  * Menu callback -- ask for confirmation of node deletion
  */
-function node_delete_confirm(&$form_state, $node) {
-  $form['nid'] = array(
-    '#type' => 'value',
-    '#value' => $node->nid,
-  );
-
+function node_delete_confirm($form, &$form_state, $node) {
+  $form['#node'] = $node;
+  // Always provide entity id in the same form key as in the entity edit form.
+  $form['nid'] = array('#type' => 'value', '#value' => $node->nid);
   return confirm_form($form,
     t('Are you sure you want to delete %title?', array('%title' => $node->title)),
-    isset($_GET['destination']) ? $_GET['destination'] : 'node/'. $node->nid,
+    'node/' . $node->nid,
     t('This action cannot be undone.'),
     t('Delete'),
     t('Cancel')
@@ -514,7 +485,10 @@ function node_delete_confirm(&$form_state, $node) {
  */
 function node_delete_confirm_submit($form, &$form_state) {
   if ($form_state['values']['confirm']) {
+    $node = node_load($form_state['values']['nid']);
     node_delete($form_state['values']['nid']);
+    watchdog('content', '@type: deleted %title.', array('@type' => $node->type, '%title' => $node->title));
+    drupal_set_message(t('@type %title has been deleted.', array('@type' => node_type_get_name($node), '%title' => $node->title)));
   }
 
   $form_state['redirect'] = '<front>';
@@ -524,7 +498,7 @@ function node_delete_confirm_submit($form, &$form_state) {
  * Generate an overview table of older revisions of a node.
  */
 function node_revision_overview($node) {
-  drupal_set_title(t('Revisions for %title', array('%title' => $node->title)));
+  drupal_set_title(t('Revisions for %title', array('%title' => $node->title)), PASS_THROUGH);
 
   $header = array(t('Revision'), array('data' => t('Operations'), 'colspan' => 2));
 
@@ -544,14 +518,14 @@ function node_revision_overview($node) {
     $operations = array();
 
     if ($revision->current_vid > 0) {
-      $row[] = array('data' => t('!date by !username', array('!date' => l(format_date($revision->timestamp, 'small'), "node/$node->nid"), '!username' => theme('username', $revision)))
-                               . (($revision->log != '') ? '<p class="revision-log">'. filter_xss($revision->log) .'</p>' : ''),
-                     'class' => 'revision-current');
-      $operations[] = array('data' => theme('placeholder', t('current revision')), 'class' => 'revision-current', 'colspan' => 2);
+      $row[] = array('data' => t('!date by !username', array('!date' => l(format_date($revision->timestamp, 'short'), "node/$node->nid"), '!username' => theme('username', array('account' => $revision))))
+                               . (($revision->log != '') ? '<p class="revision-log">' . filter_xss($revision->log) . '</p>' : ''),
+                     'class' => array('revision-current'));
+      $operations[] = array('data' => drupal_placeholder(t('current revision')), 'class' => array('revision-current'), 'colspan' => 2);
     }
     else {
-      $row[] = t('!date by !username', array('!date' => l(format_date($revision->timestamp, 'small'), "node/$node->nid/revisions/$revision->vid/view"), '!username' => theme('username', $revision)))
-               . (($revision->log != '') ? '<p class="revision-log">'. filter_xss($revision->log) .'</p>' : '');
+      $row[] = t('!date by !username', array('!date' => l(format_date($revision->timestamp, 'short'), "node/$node->nid/revisions/$revision->vid/view"), '!username' => theme('username', array('account' => $revision))))
+               . (($revision->log != '') ? '<p class="revision-log">' . filter_xss($revision->log) . '</p>' : '');
       if ($revert_permission) {
         $operations[] = l(t('revert'), "node/$node->nid/revisions/$revision->vid/revert");
       }
@@ -562,45 +536,48 @@ function node_revision_overview($node) {
     $rows[] = array_merge($row, $operations);
   }
 
-  return theme('table', $header, $rows);
+  $build['node_revisions_table'] = array(
+    '#theme' => 'table',
+    '#rows' => $rows,
+    '#header' => $header,
+  );
+
+  return $build;
 }
 
 /**
  * Ask for confirmation of the reversion to prevent against CSRF attacks.
  */
-function node_revision_revert_confirm($form_state, $node_revision) {
+function node_revision_revert_confirm($form, $form_state, $node_revision) {
   $form['#node_revision'] = $node_revision;
-  return confirm_form($form, t('Are you sure you want to revert to the revision from %revision-date?', array('%revision-date' => format_date($node_revision->revision_timestamp))), 'node/'. $node_revision->nid .'/revisions', '', t('Revert'), t('Cancel'));
+  return confirm_form($form, t('Are you sure you want to revert to the revision from %revision-date?', array('%revision-date' => format_date($node_revision->revision_timestamp))), 'node/' . $node_revision->nid . '/revisions', '', t('Revert'), t('Cancel'));
 }
 
 function node_revision_revert_confirm_submit($form, &$form_state) {
   $node_revision = $form['#node_revision'];
   $node_revision->revision = 1;
   $node_revision->log = t('Copy of the revision from %date.', array('%date' => format_date($node_revision->revision_timestamp)));
-  if (module_exists('taxonomy')) {
-    $node_revision->taxonomy = array_keys($node_revision->taxonomy);
-  }
 
   node_save($node_revision);
 
   watchdog('content', '@type: reverted %title revision %revision.', array('@type' => $node_revision->type, '%title' => $node_revision->title, '%revision' => $node_revision->vid));
-  drupal_set_message(t('@type %title has been reverted back to the revision from %revision-date.', array('@type' => node_get_types('name', $node_revision), '%title' => $node_revision->title, '%revision-date' => format_date($node_revision->revision_timestamp))));
-  $form_state['redirect'] = 'node/'. $node_revision->nid .'/revisions';
+  drupal_set_message(t('@type %title has been reverted back to the revision from %revision-date.', array('@type' => node_type_get_name($node_revision), '%title' => $node_revision->title, '%revision-date' => format_date($node_revision->revision_timestamp))));
+  $form_state['redirect'] = 'node/' . $node_revision->nid . '/revisions';
 }
 
-function node_revision_delete_confirm($form_state, $node_revision) {
+function node_revision_delete_confirm($form, $form_state, $node_revision) {
   $form['#node_revision'] = $node_revision;
-  return confirm_form($form, t('Are you sure you want to delete the revision from %revision-date?', array('%revision-date' => format_date($node_revision->revision_timestamp))), 'node/'. $node_revision->nid .'/revisions', t('This action cannot be undone.'), t('Delete'), t('Cancel'));
+  return confirm_form($form, t('Are you sure you want to delete the revision from %revision-date?', array('%revision-date' => format_date($node_revision->revision_timestamp))), 'node/' . $node_revision->nid . '/revisions', t('This action cannot be undone.'), t('Delete'), t('Cancel'));
 }
 
 function node_revision_delete_confirm_submit($form, &$form_state) {
   $node_revision = $form['#node_revision'];
-  db_query("DELETE FROM {node_revisions} WHERE nid = %d AND vid = %d", $node_revision->nid, $node_revision->vid);
-  node_invoke_nodeapi($node_revision, 'delete revision');
+  node_revision_delete($node_revision->vid);
+
   watchdog('content', '@type: deleted %title revision %revision.', array('@type' => $node_revision->type, '%title' => $node_revision->title, '%revision' => $node_revision->vid));
-  drupal_set_message(t('Revision from %revision-date of @type %title has been deleted.', array('%revision-date' => format_date($node_revision->revision_timestamp), '@type' => node_get_types('name', $node_revision), '%title' => $node_revision->title)));
-  $form_state['redirect'] = 'node/'. $node_revision->nid;
-  if (db_result(db_query('SELECT COUNT(vid) FROM {node_revisions} WHERE nid = %d', $node_revision->nid)) > 1) {
+  drupal_set_message(t('Revision from %revision-date of @type %title has been deleted.', array('%revision-date' => format_date($node_revision->revision_timestamp), '@type' => node_type_get_name($node_revision), '%title' => $node_revision->title)));
+  $form_state['redirect'] = 'node/' . $node_revision->nid;
+  if (db_query('SELECT COUNT(vid) FROM {node_revision} WHERE nid = :nid', array(':nid' => $node_revision->nid))->fetchField() > 1) {
     $form_state['redirect'] .= '/revisions';
   }
 }

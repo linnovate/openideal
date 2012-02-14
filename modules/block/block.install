@@ -1,10 +1,15 @@
 <?php
 
 /**
- * Implementation of hook_schema().
+ * @file
+ * Install, update and uninstall functions for the block module.
+ */
+
+/**
+ * Implements hook_schema().
  */
 function block_schema() {
-  $schema['blocks'] = array(
+  $schema['block'] = array(
     'description' => 'Stores block settings, such as region and visibility settings.',
     'fields' => array(
       'bid' => array(
@@ -44,7 +49,6 @@ function block_schema() {
         'type' => 'int',
         'not null' => TRUE,
         'default' => 0,
-        'size' => 'tiny',
         'description' => 'Block weight within region.',
       ),
       'region' => array(
@@ -60,13 +64,6 @@ function block_schema() {
         'default' => 0,
         'size' => 'tiny',
         'description' => 'Flag to indicate how users may control visibility of the block. (0 = Users cannot control, 1 = On by default, but can be hidden, 2 = Hidden by default, but can be shown)',
-      ),
-      'throttle' => array(
-        'type' => 'int',
-        'not null' => TRUE,
-        'default' => 0,
-        'size' => 'tiny',
-        'description' => 'Flag to indicate whether or not to remove block when website traffic is high. (1 = throttle, 0 = do not throttle)',
       ),
       'visibility' => array(
         'type' => 'int',
@@ -85,14 +82,15 @@ function block_schema() {
         'length' => 64,
         'not null' => TRUE,
         'default' => '',
-        'description' => 'Custom title for the block. (Empty string will use block default title, &lt;none&gt; will remove the title, text will cause block to use specified title.)',
+        'description' => 'Custom title for the block. (Empty string will use block default title, <none> will remove the title, text will cause block to use specified title.)',
+        'translatable' => TRUE,
       ),
       'cache' => array(
         'type' => 'int',
         'not null' => TRUE,
         'default' => 1,
         'size' => 'tiny',
-        'description' => 'Binary flag to indicate block cache mode. (-1: Do not cache, 1: Cache per role, 2: Cache per user, 4: Cache per page, 8: Block cache global) See BLOCK_CACHE_* constants in block.module for more detailed information.',
+        'description' => 'Binary flag to indicate block cache mode. (-2: Custom cache, -1: Do not cache, 1: Cache per role, 2: Cache per user, 4: Cache per page, 8: Block cache global) See DRUPAL_CACHE_* constants in ../includes/common.inc for more detailed information.',
       ),
     ),
     'primary key' => array('bid'),
@@ -104,20 +102,20 @@ function block_schema() {
     ),
   );
 
-  $schema['blocks_roles'] = array(
+  $schema['block_role'] = array(
     'description' => 'Sets up access permissions for blocks based on user roles',
     'fields' => array(
       'module' => array(
         'type' => 'varchar',
         'length' => 64,
         'not null' => TRUE,
-        'description' => "The block's origin module, from {blocks}.module.",
+        'description' => "The block's origin module, from {block}.module.",
       ),
-      'delta'  => array(
+      'delta' => array(
         'type' => 'varchar',
         'length' => 32,
         'not null' => TRUE,
-        'description' => "The block's unique delta within module, from {blocks}.delta.",
+        'description' => "The block's unique delta within module, from {block}.delta.",
       ),
       'rid' => array(
         'type' => 'int',
@@ -126,30 +124,27 @@ function block_schema() {
         'description' => "The user's role ID from {users_roles}.rid.",
       ),
     ),
-    'primary key' => array(
-      'module',
-      'delta',
-      'rid'
-    ),
+    'primary key' => array('module', 'delta', 'rid'),
     'indexes' => array(
       'rid' => array('rid'),
     ),
   );
 
-  $schema['boxes'] = array(
+  $schema['block_custom'] = array(
     'description' => 'Stores contents of custom-made blocks.',
     'fields' => array(
       'bid' => array(
         'type' => 'serial',
-  'unsigned' => TRUE,
+        'unsigned' => TRUE,
         'not null' => TRUE,
-        'description' => "The block's {blocks}.bid.",
+        'description' => "The block's {block}.bid.",
       ),
       'body' => array(
         'type' => 'text',
         'not null' => FALSE,
         'size' => 'big',
         'description' => 'Block contents.',
+        'translatable' => TRUE,
       ),
       'info' => array(
         'type' => 'varchar',
@@ -159,14 +154,15 @@ function block_schema() {
         'description' => 'Block description.',
       ),
       'format' => array(
-        'type' => 'int',
-        'size' => 'small',
-        'not null' => TRUE,
-        'default' => 0,
-        'description' => "Block body's {filter_formats}.format; for example, 1 = Filtered HTML.",
-      )
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => FALSE,
+        'description' => 'The {filter_format}.format of the block body.',
+      ),
     ),
-    'unique keys' => array('info' => array('info')),
+    'unique keys' => array(
+      'info' => array('info'),
+    ),
     'primary key' => array('bid'),
   );
 
@@ -176,3 +172,297 @@ function block_schema() {
   return $schema;
 }
 
+/**
+ * Implements hook_install().
+ */
+function block_install() {
+
+  // Block should go first so that other modules can alter its output
+  // during hook_page_alter(). Almost everything on the page is a block,
+  // so before block module runs, there will not be much to alter.
+  db_update('system')
+    ->fields(array('weight' => -5))
+    ->condition('name', 'block')
+    ->execute();
+}
+
+/**
+ * Implements hook_update_dependencies().
+ */
+function block_update_dependencies() {
+  // block_update_7005() needs to query the {filter_format} table to get a list
+  // of existing text formats, so it must run after filter_update_7000(), which
+  // creates that table.
+  $dependencies['block'][7005] = array(
+    'filter' => 7000,
+  );
+
+  return $dependencies;
+}
+
+/**
+ * @addtogroup updates-6.x-to-7.x
+ * @{
+ */
+
+/**
+ * Set system.weight to a low value for block module.
+ *
+ * Block should go first so that other modules can alter its output
+ * during hook_page_alter(). Almost everything on the page is a block,
+ * so before block module runs, there will not be much to alter.
+ */
+function block_update_7000() {
+  db_update('system')
+    ->fields(array('weight' => '-5'))
+    ->condition('name', 'block')
+    ->execute();
+}
+
+/**
+ * Rename {blocks} table to {block}, {blocks_roles} to {block_role} and
+ * {boxes} to {block_custom}.
+ */
+function block_update_7002() {
+  db_drop_index('blocks', 'list');
+  db_rename_table('blocks', 'block');
+  db_rename_table('blocks_roles', 'block_role');
+  db_rename_table('boxes', 'block_custom');
+}
+
+/**
+ * Change the weight column to normal int.
+ */
+function block_update_7003() {
+  db_change_field('block', 'weight', 'weight', array(
+    'type' => 'int',
+    'not null' => TRUE,
+    'default' => 0,
+    'description' => 'Block weight within region.',
+  ), array(
+    'indexes' => array(
+      'list' => array('theme', 'status', 'region', 'weight', 'module'),
+    ),
+  ));
+}
+
+/**
+ * Add new blocks to new regions, migrate custom variables to blocks.
+ */
+function block_update_7004() {
+  // Collect a list of themes with blocks.
+  $themes_with_blocks = array();
+  $result = db_query("SELECT s.name FROM {system} s INNER JOIN {block} b ON s.name = b.theme WHERE s.type = 'theme' GROUP by s.name");
+
+  $insert = db_insert('block')->fields(array('module', 'delta', 'theme', 'status', 'weight', 'region', 'pages', 'cache'));
+  foreach ($result as $theme) {
+    $themes_with_blocks[] = $theme->name;
+    // Add new system generated help block.
+    $insert->values(array(
+      'module' => 'system',
+      'delta' => 'help',
+      'theme' => $theme->name,
+      'status' => 1,
+      'weight' => 0,
+      'region' => 'help',
+      'pages' => '',
+      'cache' => DRUPAL_CACHE_PER_ROLE,
+    ));
+    // Add new system generated main page content block.
+    $insert->values(array(
+      'module' => 'system',
+      'delta' => 'main',
+      'theme' => $theme->name,
+      'status' => 1,
+      'weight' => 0,
+      'region' => 'content',
+      'pages' => '',
+      'cache' => DRUPAL_NO_CACHE,
+    ));
+  }
+  $insert->execute();
+
+  // Migrate blocks from left/right regions to first/second regions.
+  db_update('block')
+    ->fields(array('region' => 'sidebar_first'))
+    ->condition('region', 'left')
+    ->execute();
+  db_update('block')
+    ->fields(array('region' => 'sidebar_second'))
+    ->condition('region', 'right')
+    ->execute();
+
+  // Migrate contact form information.
+  $default_format = variable_get('filter_default_format', 1);
+  if ($contact_help = variable_get('contact_form_information', '')) {
+    $bid = db_insert('block_custom')
+      ->fields(array(
+        'body' => $contact_help,
+        'info' => 'Contact page help',
+        'format' => $default_format,
+      ))
+      ->execute();
+
+    $insert = db_insert('block')->fields(array('module', 'delta', 'theme', 'status', 'weight', 'region', 'visibility', 'pages', 'cache'));
+    foreach ($themes_with_blocks as $theme) {
+      // Add contact help block for themes, which had blocks.
+      $insert->values(array(
+        'module' => 'block',
+        'delta' => $bid,
+        'theme' => $theme,
+        'status' => 1,
+        'weight' => 5,
+        'region' => 'help',
+        'visibility' => BLOCK_VISIBILITY_LISTED,
+        'pages' => 'contact',
+        'cache' => DRUPAL_NO_CACHE,
+      ));
+    }
+    drupal_set_message('The contact form information setting was migrated to <a href="' . url('admin/structure/block/manage/block/' . $bid . '/configure') . '">a custom block</a> and set up to only show on the site-wide contact page. The block was set to use the default text format, which might differ from the HTML based format used before. Check the block and ensure that the output is right.');
+  }
+  $insert->execute();
+
+  // Migrate user help setting.
+  if ($user_help = variable_get('user_registration_help', '')) {
+    $bid = db_insert('block_custom')->fields(array('body' => $user_help, 'info' => 'User registration guidelines', 'format' => $default_format))->execute();
+
+    $insert = db_insert('block')->fields(array('module', 'delta', 'theme', 'status', 'weight', 'region', 'visibility', 'pages', 'cache'));
+    foreach ($themes_with_blocks as $theme) {
+      // Add user registration help block for themes, which had blocks.
+      $insert->values(array(
+        'module' => 'block',
+        'delta' => $bid,
+        'theme' => $theme,
+        'status' => 1,
+        'weight' => 5,
+        'region' => 'help',
+        'visibility' => BLOCK_VISIBILITY_LISTED,
+        'pages' => 'user/register',
+        'cache' => DRUPAL_NO_CACHE,
+      ));
+    }
+    drupal_set_message('The user registration guidelines were migrated to <a href="' . url('admin/structure/block/manage/block/' . $bid . '/configure') . '">a custom block</a> and set up to only show on the user registration page. The block was set to use the default text format, which might differ from the HTML based format used before. Check the block and ensure that the output is right.');
+    $insert->execute();
+  }
+
+  // Migrate site mission setting.
+  if ($mission = variable_get('site_mission')) {
+    $bid = db_insert('block_custom')->fields(array('body' => $mission, 'info' => 'Site mission', 'format' => $default_format))->execute();
+
+    $insert = db_insert('block')->fields(array('module', 'delta', 'theme', 'status', 'weight', 'region', 'visibility', 'pages', 'cache'));
+    foreach ($themes_with_blocks as $theme) {
+      // Add mission block for themes, which had blocks.
+      $insert->values(array(
+        'module' => 'block',
+        'delta' => $bid,
+        'theme' => $theme,
+        'status' => 1,
+        'weight' => 0,
+        'region' => 'highlighted',
+        'visibility' => BLOCK_VISIBILITY_LISTED,
+        'pages' => '<front>',
+        'cache' => DRUPAL_NO_CACHE,
+      ));
+    }
+    drupal_set_message('The site mission was migrated to <a href="' . url('admin/structure/block/manage/block/' . $bid . '/configure') . '">a custom block</a> and set up to only show on the front page in the highlighted content region. The block was set to use the default text format, which might differ from the HTML based format used before. Check the block and ensure that the output is right. If your theme does not have a highlighted content region, you might need to <a href="' . url('admin/structure/block') . '">relocate the block</a>.');
+    $insert->execute();
+    // Migrate mission to RSS site description.
+    variable_set('feed_description', $mission);
+  }
+
+  // Migrate site footer message to a custom block.
+  if ($footer_message = variable_get('site_footer', '')) {
+    $bid = db_insert('block_custom')->fields(array('body' => $footer_message, 'info' => 'Footer message', 'format' => $default_format))->execute();
+
+    $insert = db_insert('block')->fields(array('module', 'delta', 'theme', 'status', 'weight', 'region', 'pages', 'cache'));
+    foreach ($themes_with_blocks as $theme) {
+      // Add site footer block for themes, which had blocks.
+      // Set low weight, so the block comes early (it used to be
+      // before the other blocks).
+      $insert->values(array(
+        'module' => 'block',
+        'delta' => $bid,
+        'theme' => $theme,
+        'status' => 1,
+        'weight' => -10,
+        'region' => 'footer',
+        'pages' => '',
+        'cache' => DRUPAL_NO_CACHE,
+      ));
+    }
+    drupal_set_message('The footer message was migrated to <a href="' . url('admin/structure/block/manage/block/' . $bid . '/configure') . '">a custom block</a> and set up to appear in the footer. The block was set to use the default text format, which might differ from the HTML based format used before. Check the block and ensure that the output is right. If your theme does not have a footer region, you might need to <a href="' . url('admin/structure/block') . '">relocate the block</a>.');
+    $insert->execute();
+  }
+
+  // Remove the variables (even if they were saved empty on the admin interface),
+  // to avoid keeping clutter in the variables table.
+  variable_del('contact_form_information');
+  variable_del('user_registration_help');
+  variable_del('site_mission');
+  variable_del('site_footer');
+
+  // Rebuild theme data, so the new 'help' region is identified.
+  system_rebuild_theme_data();
+}
+
+/**
+ * Update the {block_custom}.format column.
+ */
+function block_update_7005() {
+  // For an explanation of these updates, see the code comments in
+  // user_update_7010().
+  db_change_field('block_custom', 'format', 'format', array(
+    'type' => 'int',
+    'unsigned' => TRUE,
+    'not null' => FALSE,
+    'description' => 'The {filter_format}.format of the block body.',
+  ));
+  db_update('block_custom')
+    ->fields(array('format' => NULL))
+    ->condition('body', '')
+    ->condition('format', 0)
+    ->execute();
+  $existing_formats = db_query("SELECT format FROM {filter_format}")->fetchCol();
+  $default_format = variable_get('filter_default_format', 1);
+  db_update('block_custom')
+    ->fields(array('format' => $default_format))
+    ->isNotNull('format')
+    ->condition('format', $existing_formats, 'NOT IN')
+    ->execute();
+}
+
+/**
+ * Recreates cache_block table.
+ *
+ * Converts fields that hold serialized variables from text to blob.
+ * Removes 'headers' column.
+ */
+function block_update_7006() {
+  $schema = system_schema_cache_7054();
+
+  db_drop_table('cache_block');
+  db_create_table('cache_block', $schema);
+}
+
+/**
+ * Change {block_custom}.format into varchar.
+ */
+function block_update_7007() {
+  db_change_field('block_custom', 'format', 'format', array(
+    'type' => 'varchar',
+    'length' => 255,
+    'not null' => FALSE,
+    'description' => 'The {filter_format}.format of the block body.',
+  ));
+}
+
+/**
+ * Update database to match Drupal 7 schema.
+ */
+function block_update_7008() {
+  db_drop_field('block', 'throttle');
+}
+
+/**
+ * @} End of "addtogroup updates-6.x-to-7.x"
+ */

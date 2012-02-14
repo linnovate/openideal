@@ -1,28 +1,21 @@
-// $Id: simpletest.js,v 1.2.4.6 2009/12/14 23:29:36 boombatower Exp $
-// Core: Id: simpletest.js,v 1.11 2009/04/27 20:19:37 webchick Exp
-//(function ($) {
+(function ($) {
 
 /**
  * Add the cool table collapsing on the testing overview page.
  */
-//Drupal.behaviors.simpleTestMenuCollapse = {
-//  attach: function (context, settings) {
-Drupal.behaviors.simpleTestMenuCollapse = function() {
+Drupal.behaviors.simpleTestMenuCollapse = {
+  attach: function (context, settings) {
     var timeout = null;
     // Adds expand-collapse functionality.
-    $('div.simpletest-image:not(.simpletest-image-processed)').addClass('simpletest-image-processed').each(function () {
-//      direction = settings.simpleTest[$(this).attr('id')].imageDirection;
-//      $(this).html(settings.simpleTest.images[direction]);
-      direction = Drupal.settings.simpleTest[$(this).attr('id')].imageDirection;
-      $(this).html(Drupal.settings.simpleTest.images[direction]);
+    $('div.simpletest-image').each(function () {
+      direction = settings.simpleTest[$(this).attr('id')].imageDirection;
+      $(this).html(settings.simpleTest.images[direction]);
     });
 
     // Adds group toggling functionality to arrow images.
-    $('div.simpletest-image:not(.simpletest-click-processed)').addClass('simpletest-click-processed').click(function () {
-//      var trs = $(this).parents('tbody').children('.' + settings.simpleTest[this.id].testClass);
-//      var direction = settings.simpleTest[this.id].imageDirection;
-      var trs = $(this).parents('tbody').children('.' + Drupal.settings.simpleTest[this.id].testClass);
-      var direction = Drupal.settings.simpleTest[this.id].imageDirection;
+    $('div.simpletest-image').click(function () {
+      var trs = $(this).parents('tbody').children('.' + settings.simpleTest[this.id].testClass);
+      var direction = settings.simpleTest[this.id].imageDirection;
       var row = direction ? trs.size() - 1 : 0;
 
       // If clicked in the middle of expanding a group, stop so we can switch directions.
@@ -54,25 +47,21 @@ Drupal.behaviors.simpleTestMenuCollapse = function() {
       rowToggle();
 
       // Toggle the arrow image next to the test group title.
-//      $(this).html(settings.simpleTest.images[(direction ? 0 : 1)]);
-//      settings.simpleTest[this.id].imageDirection = !direction;
-      $(this).html(Drupal.settings.simpleTest.images[(direction ? 0 : 1)]);
-      Drupal.settings.simpleTest[this.id].imageDirection = !direction;
+      $(this).html(settings.simpleTest.images[(direction ? 0 : 1)]);
+      settings.simpleTest[this.id].imageDirection = !direction;
 
     });
-//  }
+  }
 };
 
 /**
  * Select/deselect all the inner checkboxes when the outer checkboxes are
  * selected/deselected.
  */
-//Drupal.behaviors.simpleTestSelectAll = {
-//  attach: function (context, settings) {
-Drupal.behaviors.simpleTestSelectAll = function() {
-    $('td.simpletest-select-all:not(.simpletest-select-processed)').addClass('simpletest-select-processed').each(function () {
-//      var testCheckboxes = settings.simpleTest['simpletest-test-group-' + $(this).attr('id')].testNames;
-      var testCheckboxes = Drupal.settings.simpleTest['simpletest-test-group-' + $(this).attr('id')].testNames;
+Drupal.behaviors.simpleTestSelectAll = {
+  attach: function (context, settings) {
+    $('td.simpletest-select-all').each(function () {
+      var testCheckboxes = settings.simpleTest['simpletest-test-group-' + $(this).attr('id')].testNames;
       var groupCheckbox = $('<input type="checkbox" class="form-checkbox" id="' + $(this).attr('id') + '-select-all" />');
 
       // Each time a single-test checkbox is checked or unchecked, make sure
@@ -108,7 +97,7 @@ Drupal.behaviors.simpleTestSelectAll = function() {
       updateGroupCheckbox();
       $(this).append(groupCheckbox);
     });
-//  }
+  }
 };
 
-//})(jQuery);
+})(jQuery);

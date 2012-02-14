@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @file user-profile-category.tpl.php
+ * @file
  * Default theme implementation to present profile categories (groups of
  * profile items).
  *
@@ -24,7 +24,7 @@
  * @see template_preprocess_user_profile_category()
  */
 ?>
-<?php if ($title) : ?>
+<?php if ($title): ?>
   <h3><?php print $title; ?></h3>
 <?php endif; ?>
 

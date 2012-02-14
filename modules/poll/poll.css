@@ -1,4 +1,7 @@
 
+.poll {
+  overflow: hidden;
+}
 .poll .bar {
   height: 1em;
   margin: 1px 0;
@@ -31,6 +34,14 @@
 }
 .node-form #edit-poll-more {
   margin: 0;
+}
+.node-form #poll-choice-table .form-text {
+  display: inline;
+  width: auto;
+}
+.node-form #poll-choice-table td.choice-flag {
+  white-space: nowrap;
+  width: 4em;
 }
 td.poll-chtext {
   width: 80%;

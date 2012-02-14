@@ -1,3 +1,23 @@
+(function ($) {
+
+/**
+ * Show/hide the 'Email site administrator when updates are available' checkbox
+ * on the install page.
+ */
+Drupal.hideEmailAdministratorCheckbox = function () {
+  // Make sure the secondary box is shown / hidden as necessary on page load.
+  if ($('#edit-update-status-module-1').is(':checked')) {
+    $('.form-item-update-status-module-2').show();
+  }
+  else {
+    $('.form-item-update-status-module-2').hide();
+  }
+
+  // Toggle the display as necessary when the checkbox is clicked.
+  $('#edit-update-status-module-1').change( function () {
+    $('.form-item-update-status-module-2').toggle();
+  });
+};
 
 /**
  * Internal function to check using Ajax if clean URLs can be enabled on the
@@ -6,32 +26,24 @@
  * This function is not used to verify whether or not clean URLs
  * are currently enabled.
  */
-Drupal.behaviors.cleanURLsSettingsCheck = function(context) {
-  // This behavior attaches by ID, so is only valid once on a page.
-  // Also skip if we are on an install page, as Drupal.cleanURLsInstallCheck will handle
-  // the processing.
-  if ($("#clean-url.clean-url-processed, #clean-url.install").size()) {
-    return;
-  }
-  var url = Drupal.settings.basePath +"admin/settings/clean-urls/check";
-  $("#clean-url .description span").html('<div id="testing">'+ Drupal.t('Testing clean URLs...') +"</div>");
-  $("#clean-url p").hide();
-  $.ajax({
-    url: location.protocol +"//"+ location.host + url,
-    dataType: 'json',
-    success: function () {
-      // Check was successful.
-      $("#clean-url input.form-radio").attr("disabled", false);
-      $("#clean-url .description span").append('<div class="ok">'+ Drupal.t('Your server has been successfully tested to support this feature.') +"</div>");
-      $("#testing").hide();
-    },
-    error: function() {
-      // Check failed.
-      $("#clean-url .description span").append('<div class="warning">'+ Drupal.t('Your system configuration does not currently support this feature. The <a href="http://drupal.org/node/15365">handbook page on Clean URLs</a> has additional troubleshooting information.') +"</div>");
-      $("#testing").hide();
+Drupal.behaviors.cleanURLsSettingsCheck = {
+  attach: function (context, settings) {
+    // This behavior attaches by ID, so is only valid once on a page.
+    // Also skip if we are on an install page, as Drupal.cleanURLsInstallCheck will handle
+    // the processing.
+    if (!($('#edit-clean-url').length) || $('#edit-clean-url.install').once('clean-url').length) {
+      return;
     }
-  });
-  $("#clean-url").addClass('clean-url-processed');
+    var url = settings.basePath + 'admin/config/search/clean-urls/check';
+    $.ajax({
+      url: location.protocol + '//' + location.host + url,
+      dataType: 'json',
+      success: function () {
+        // Check was successful. Redirect using a "clean URL". This will force the form that allows enabling clean URLs.
+        location = settings.basePath +"admin/config/search/clean-urls";
+      }
+    });
+  }
 };
 
 /**
@@ -41,27 +53,19 @@ Drupal.behaviors.cleanURLsSettingsCheck = function(context) {
  * This function is not used to verify whether or not clean URLs
  * are currently enabled.
  */
-Drupal.cleanURLsInstallCheck = function() {
-  var url = location.protocol +"//"+ location.host + Drupal.settings.basePath +"admin/settings/clean-urls/check";
-  $("#clean-url .description").append('<span><div id="testing">'+ Drupal.settings.cleanURL.testing +"</div></span>");
-  $("#clean-url.install").css("display", "block");
+Drupal.cleanURLsInstallCheck = function () {
+  var url = location.protocol + '//' + location.host + Drupal.settings.basePath + 'admin/config/search/clean-urls/check';
+  // Submit a synchronous request to avoid database errors associated with
+  // concurrent requests during install.
   $.ajax({
+    async: false,
     url: url,
     dataType: 'json',
     success: function () {
       // Check was successful.
-      $("#clean-url input.form-radio").attr("disabled", false);
-      $("#clean-url input.form-radio").attr("checked", 1);
-      $("#clean-url .description span").append('<div class="ok">'+ Drupal.settings.cleanURL.success +"</div>");
-      $("#testing").hide();
-    },
-    error: function() {
-      // Check failed.
-      $("#clean-url .description span").append('<div class="warning">'+ Drupal.settings.cleanURL.failure +"</div>");
-      $("#testing").hide();
+      $('#edit-clean-url').attr('value', 1);
     }
   });
-  $("#clean-url").addClass('clean-url-processed');
 };
 
 /**
@@ -69,44 +73,65 @@ Drupal.cleanURLsInstallCheck = function() {
  * use the same value. In the installer this is used to populate the
  * administrator e-mail address with the same value as the site e-mail address.
  */
-Drupal.behaviors.copyFieldValue = function (context) {
-  for (var sourceId in Drupal.settings.copyFieldValue) {
-    // Get the list of target fields.
-    targetIds = Drupal.settings.copyFieldValue[sourceId];
-    if (!$('#'+ sourceId + '.copy-field-values-processed').size(), context) {
-      // Add the behavior to update target fields on blur of the primary field.
-      sourceField = $('#' + sourceId);
-      sourceField.bind('blur', function() {
+Drupal.behaviors.copyFieldValue = {
+  attach: function (context, settings) {
+    for (var sourceId in settings.copyFieldValue) {
+      $('#' + sourceId, context).once('copy-field-values').bind('blur', function () {
+        // Get the list of target fields.
+        var targetIds = settings.copyFieldValue[sourceId];
+        // Add the behavior to update target fields on blur of the primary field.
         for (var delta in targetIds) {
-          var targetField = $('#'+ targetIds[delta]);
+          var targetField = $('#' + targetIds[delta]);
           if (targetField.val() == '') {
             targetField.val(this.value);
           }
         }
       });
-      sourceField.addClass('copy-field-values-processed');
     }
   }
 };
 
 /**
- * Show/hide custom format sections on the date-time settings page.
+ * Show/hide custom format sections on the regional settings page.
  */
-Drupal.behaviors.dateTime = function(context) {
-  // Show/hide custom format depending on the select's value.
-  $('select.date-format:not(.date-time-processed)', context).change(function() {
-    $(this).addClass('date-time-processed').parents("div.date-container").children("div.custom-container")[$(this).val() == "custom" ? "show" : "hide"]();
-  });
+Drupal.behaviors.dateTime = {
+  attach: function (context, settings) {
+    for (var value in settings.dateTime) {
+      var settings = settings.dateTime[value];
+      var source = '#edit-' + value;
+      var suffix = source + '-suffix';
 
-  // Attach keyup handler to custom format inputs.
-  $('input.custom-format:not(.date-time-processed)', context).addClass('date-time-processed').keyup(function() {
-    var input = $(this);
-    var url = Drupal.settings.dateTime.lookup +(Drupal.settings.dateTime.lookup.match(/\?q=/) ? "&format=" : "?format=") + encodeURIComponent(input.val());
-    $.getJSON(url, function(data) {
-      $("div.description span", input.parent()).html(data);
-    });
-  });
-
-  // Trigger the event handler to show the form input if necessary.
-  $('select.date-format', context).trigger('change');
+      // Attach keyup handler to custom format inputs.
+      $('input' + source, context).once('date-time').keyup(function () {
+        var input = $(this);
+        var url = settings.lookup + (settings.lookup.match(/\?q=/) ? '&format=' : '?format=') + encodeURIComponent(input.val());
+        $.getJSON(url, function (data) {
+          $(suffix).empty().append(' ' + settings.text + ': <em>' + data + '</em>');
+        });
+      });
+    }
+  }
 };
+
+ /**
+ * Show/hide settings for page caching depending on whether page caching is
+ * enabled or not.
+ */
+Drupal.behaviors.pageCache = {
+  attach: function (context, settings) {
+    $('#edit-cache-0', context).change(function () {
+      $('#page-compression-wrapper').hide();
+      $('#cache-error').hide();
+    });
+    $('#edit-cache-1', context).change(function () {
+      $('#page-compression-wrapper').show();
+      $('#cache-error').hide();
+    });
+    $('#edit-cache-2', context).change(function () {
+      $('#page-compression-wrapper').show();
+      $('#cache-error').show();
+    });
+  }
+};
+
+})(jQuery);

@@ -11,41 +11,42 @@
 function blog_page_user($account) {
   global $user;
 
-  drupal_set_title($title = t("@name's blog", array('@name' => $account->name)));
+  drupal_set_title($title = t("@name's blog", array('@name' => format_username($account))), PASS_THROUGH);
 
-  $items = array();
+  $build = array();
 
-  if (($account->uid == $user->uid) && user_access('create blog entries')) {
-    $items[] = l(t('Post new blog entry.'), "node/add/blog");
-  }
-  else if ($account->uid == $user->uid) {
-    $items[] = t('You are not allowed to post a new blog entry.');
-  }
+  $query = db_select('node', 'n')->extend('PagerDefault');
+  $nids = $query
+    ->fields('n', array('nid', 'sticky', 'created'))
+    ->condition('type', 'blog')
+    ->condition('uid', $account->uid)
+    ->condition('status', 1)
+    ->orderBy('sticky', 'DESC')
+    ->orderBy('created', 'DESC')
+    ->limit(variable_get('default_nodes_main', 10))
+    ->addTag('node_access')
+    ->execute()
+    ->fetchCol();
 
-  $output = theme('item_list', $items);
-
-  $result = pager_query(db_rewrite_sql("SELECT n.nid, n.sticky, n.created FROM {node} n WHERE n.type = 'blog' AND n.uid = %d AND n.status = 1 ORDER BY n.sticky DESC, n.created DESC"), variable_get('default_nodes_main', 10), 0, NULL, $account->uid);
-  $has_posts = FALSE;
-  
-  while ($node = db_fetch_object($result)) {
-    $output .= node_view(node_load($node->nid), 1);
-    $has_posts = TRUE;
-  }
-  
-  if ($has_posts) {
-    $output .= theme('pager', NULL, variable_get('default_nodes_main', 10));
+  if (!empty($nids)) {
+    $nodes = node_load_multiple($nids);
+    $build += node_view_multiple($nodes);
+    $build['pager'] = array(
+      '#theme' => 'pager',
+      '#weight' => 5,
+    );
   }
   else {
     if ($account->uid == $user->uid) {
       drupal_set_message(t('You have not created any blog entries.'));
     }
     else {
-      drupal_set_message(t('!author has not created any blog entries.', array('!author' => theme('username', $account))));
+      drupal_set_message(t('!author has not created any blog entries.', array('!author' => theme('username', array('account' => $account)))));
     }
   }
-  drupal_add_feed(url('blog/'. $account->uid .'/feed'), t('RSS - !title', array('!title' => $title)));
+  drupal_add_feed('blog/' . $account->uid . '/feed', t('RSS - !title', array('!title' => $title)));
 
-  return $output;
+  return $build;
 }
 
 /**
@@ -53,62 +54,74 @@ function blog_page_user($account) {
  */
 function blog_page_last() {
   global $user;
+  $build = array();
 
-  $output = '';
-  $items = array();
+  $query = db_select('node', 'n')->extend('PagerDefault');
+  $nids = $query
+    ->fields('n', array('nid', 'sticky', 'created'))
+    ->condition('type', 'blog')
+    ->condition('status', 1)
+    ->orderBy('sticky', 'DESC')
+    ->orderBy('created', 'DESC')
+    ->limit(variable_get('default_nodes_main', 10))
+    ->addTag('node_access')
+    ->execute()
+    ->fetchCol();
 
-  if (user_access('create blog entries')) {
-    $items[] = l(t('Create new blog entry.'), "node/add/blog");
-  }
-
-  $output = theme('item_list', $items);
-
-  $result = pager_query(db_rewrite_sql("SELECT n.nid, n.created FROM {node} n WHERE n.type = 'blog' AND n.status = 1 ORDER BY n.sticky DESC, n.created DESC"), variable_get('default_nodes_main', 10));
-  $has_posts = FALSE;
-
-  while ($node = db_fetch_object($result)) {
-    $output .= node_view(node_load($node->nid), 1);
-    $has_posts = TRUE;
-  }
-  
-  if ($has_posts) {
-    $output .= theme('pager', NULL, variable_get('default_nodes_main', 10));
+  if (!empty($nids)) {
+    $nodes = node_load_multiple($nids);
+    $build += node_view_multiple($nodes);
+    $build['pager'] = array(
+      '#theme' => 'pager',
+      '#weight' => 5,
+    );
   }
   else {
     drupal_set_message(t('No blog entries have been created.'));
   }
-  drupal_add_feed(url('blog/feed'), t('RSS - blogs'));
+  drupal_add_feed('blog/feed', t('RSS - blogs'));
 
-  return $output;
+  return $build;
 }
 
 /**
  * Menu callback; displays an RSS feed containing recent blog entries of a given user.
  */
 function blog_feed_user($account) {
-  $result = db_query_range(db_rewrite_sql("SELECT n.nid, n.created FROM {node} n  WHERE n.type = 'blog' AND n.uid = %d AND n.status = 1 ORDER BY n.created DESC"), $account->uid, 0, variable_get('feed_default_items', 10));
-  $channel['title'] = t("!name's blog", array('!name' => $account->name));
-  $channel['link'] = url('blog/'. $account->uid, array('absolute' => TRUE));
 
-  $items = array();
-  while ($row = db_fetch_object($result)) {
-    $items[] = $row->nid;
-  }
-  node_feed($items, $channel);
+  $nids = db_select('node', 'n')
+    ->fields('n', array('nid', 'created'))
+    ->condition('type', 'blog')
+    ->condition('uid', $account->uid)
+    ->condition('status', 1)
+    ->orderBy('created', 'DESC')
+    ->range(0, variable_get('feed_default_items', 10))
+    ->addTag('node_access')
+    ->execute()
+    ->fetchCol();
+
+  $channel['title'] = t("!name's blog", array('!name' => format_username($account)));
+  $channel['link'] = url('blog/' . $account->uid, array('absolute' => TRUE));
+
+  node_feed($nids, $channel);
 }
 
 /**
  * Menu callback; displays an RSS feed containing recent blog entries of all users.
  */
 function blog_feed_last() {
-  $result = db_query_range(db_rewrite_sql("SELECT n.nid, n.created FROM {node} n WHERE n.type = 'blog' AND n.status = 1 ORDER BY n.created DESC"), 0, variable_get('feed_default_items', 10));
+  $nids = db_select('node', 'n')
+    ->fields('n', array('nid', 'created'))
+    ->condition('type', 'blog')
+    ->condition('status', 1)
+    ->orderBy('created', 'DESC')
+    ->range(0, variable_get('feed_default_items', 10))
+    ->addTag('node_access')
+    ->execute()
+    ->fetchCol();
+
   $channel['title'] = t('!site_name blogs', array('!site_name' => variable_get('site_name', 'Drupal')));
   $channel['link'] = url('blog', array('absolute' => TRUE));
 
-  $items = array();
-  while ($row = db_fetch_object($result)) {
-    $items[] = $row->nid;
-  }
-
-  node_feed($items, $channel);
+  node_feed($nids, $channel);
 }

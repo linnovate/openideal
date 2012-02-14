@@ -1,5 +1,0 @@
-
-<div class="home">
-  
-</div>
-
