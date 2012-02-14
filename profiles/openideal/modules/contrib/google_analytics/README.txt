@@ -1,4 +1,3 @@
-// $Id: README.txt,v 1.7.2.3 2010/06/03 01:40:24 hass Exp $
 
 Module: Google Analytics
 Author: Alexander Hass <http://drupal.org/user/85918>
@@ -24,11 +23,6 @@ Usage
 =====
 In the settings page enter your Google Analytics account number.
 
-You can also track the username and/or user ID who visits each page.
-This data will be visible in Google Analytics as segmentation data.
-If you enable the profile.module you can also add more detailed
-information about each user to the segmentation tracking.
-
 All pages will now have the required JavaScript added to the
 HTML footer can confirm this by viewing the page source from
 your browser.
@@ -36,7 +30,7 @@ your browser.
 New approach to page tracking in 5.x-1.5 and 6.x-1.1
 ====================================================
 With 5.x-1.5 and 6.x-1.1 there are new settings on the settings page at
-admin/settings/googleanalytics. The "Page specific tracking" area now
+admin/config/system/googleanalytics. The "Page specific tracking" area now
 comes with an interface that copies Drupal's block visibility settings.
 
 The default is set to "Add to every page except the listed pages". By
@@ -44,9 +38,10 @@ default the following pages are listed for exclusion:
 
 admin
 admin/*
-user/*/*
+batch
 node/add*
 node/*/*
+user/*/*
 
 These defaults are changeable by the website administrator or any other
 user with 'administer google analytics' permission.
@@ -56,8 +51,19 @@ choice for "Add if the following PHP code returns TRUE." Sample PHP snippets
 that can be used in this textarea can be found on the handbook page
 "Overview-approach to block visibility" at http://drupal.org/node/64135.
 
-A code snippet that creates opt-out by role functionality for unchecked roles
-can be found in the Google Analytics handbook at http://drupal.org/node/261997.
+Custom variables
+=================
+One example for custom variables tracking is the "User roles" tracking. Enter
+the below configuration data into the custom variables settings form under
+admin/config/system/googleanalytics.
+
+Slot: 1
+Name: User roles
+Value: [current-user:role-names]
+Scope: Visitor
+
+More details about Custom variables can be found in the Google API documentation at
+http://code.google.com/intl/en/apis/analytics/docs/tracking/gaTrackingCustomVariables.html
 
 Advanced Settings
 =================
@@ -67,5 +73,4 @@ and a few examples at http://drupal.org/node/248699. Support is not
 provided for any customisations you include.
 
 To speed up page loading you may also cache the Analytics ga.js
-file locally. You need to make sure the site file system is in public
-download mode.
+file locally.

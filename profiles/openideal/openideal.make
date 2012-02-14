@@ -1,43 +1,170 @@
-context_ui 7.x-3.0-beta2
-contextphp 7.x-1.x-dev
-fbconnect 7.x-2.x-dev
-default_content 7.x-1.0-alpha5
-features 7.x-1.0-beta6
-entity_reference 7.x-1.0-beta3
-field_collection 7.x-1.0-beta3
-fieldgroup 7.x-1.1
-file_field_sources 7.x-1.4
-flag 7.x-2.0-beta6
-flag_abuse 7.x-2.x-dev
-wysiwyg_filter 7.x-1.6-rc2
-htmlmail 7.x-2.62
-imce_mkdir 7.x-1.0
-video_embed_field 7.x-2.0-alpha3
-open_graph_metetags 7.x-1.0-alpha4
-nodequeue 7.x-2.0-beta1
-block_class 7.x-1.0
-boxes 7.x-1.0-beta7
-email_confirm 7.x-1.0-beta1
-fblikebutton 7.x-1.2
-faq 7.x-1.0-rc1
-googleplus 7.x-1.3
-login_destination 7.x-1.0
-logintoboggan_rules 7.x-1.3
-menu_attributes 7.x-1.0-rc1
-plus1 7.x-1.x-dev
-profile2 7.x-1.2
-quicktabs 7.x-3.3
-watcher 7.x-1.x-dev
-voting_rules 7.x-1.0-alpha1
-pagetitlte 7.x-2.5
-widget_services 7.x-2.1
-imce_wysiwyg 7.x-1.0
-popup_api
-userpoints_rules 7.x-1.0
-views_bulk_opertions 7.x-3.0-rc1
-views_data_export7.x-3.0-beta5
-views_php 7.x-1.x-dev
-views_ui 7.x-3.1
-is_usful 7.x-1.x-dev
-webform 7.x-3.15
-libraries 7.x-2.0-alpha2
+api = 2
+core = 7.x
+
+projects[block_class][version]                                 = 7.x-1.0
+projects[block_class][subdir]                                  = contrib
+
+projects[boxes][version]                                       = 7.x-1.0-beta7
+projects[boxes][subdir]                                        = contrib
+
+projects[context][version]                                     = 7.x-3.0-beta2
+projects[context][subdir]                                      = contrib
+
+projects[contextphp][version]                                  = 7.x-1.x-dev
+projects[contextphp][subdir]                                   = contrib
+
+projects[ctools][version]                                      = 7.x-1.0-rc1
+projects[ctools][subdir]                                       = contrib
+
+projects[defaultcontent][version]                              = 7.x-1.0-alpha5
+projects[defaultcontent][subdir]                               = contrib
+
+projects[email_confirm][version]                               = 7.x-1.0-beta1
+projects[email_confirm][subdir]                                = contrib
+
+projects[entity][version]                                      = 7.x-1.0-rc1
+projects[entity][subdir]                                       = contrib
+
+projects[entity_autocomplete][version]                         = 7.x-1.0-beta1
+projects[entity_autocomplete][subdir]                          = contrib
+
+projects[entityreference][version]                             = 7.x-1.0-beta3
+projects[entityreference][subdir]                              = contrib
+
+projects[faq][version]                                         = 7.x-1.0-rc1
+projects[faq][subdir]                                          = contrib
+
+projects[fbconnect][version]                                   = 7.x-2.x-dev
+projects[fbconnect][subdir]                                    = contrib
+
+projects[fblikebutton][version]                                = 7.x-1.2
+projects[fblikebutton][subdir]                                 = contrib
+
+projects[features][version]                                    = 7.x-1.0-beta6
+projects[features][subdir]                                     = contrib
+
+projects[field_collection][version]                            = 7.x-1.0-beta3
+projects[field_collection][subdir]                             = contrib
+
+projects[field_group][version]                                 = 7.x-1.1
+projects[field_group][subdir]                                  = contrib
+
+projects[filefield_sources][version]                           = 7.x-1.4
+projects[filefield_sources][subdir]                            = contrib
+
+projects[flag][version]                                        = 7.x-2.0-beta6
+projects[flag][subdir]                                         = contrib
+
+projects[flag_abuse][version]                                  = 7.x-2.x-dev
+projects[flag_abuse][subdir]                                   = contrib
+
+projects[google_analytics][version]                            = 7.x-1.2
+projects[google_analytics][subdir]                             = contrib
+
+projects[google_plusone][version]                              = 7.x-1.3
+projects[google_plusone][subdir]                               = contrib
+
+projects[heartbeat][version]                                   = 7.x-1.0
+projects[heartbeat][subdir]                                    = contrib
+
+projects[htmlmail][version]                                    = 7.x-2.62
+projects[htmlmail][subdir]                                     = contrib
+
+projects[imce][version]                                        = 7.x-1.5
+projects[imce][subdir]                                         = contrib
+
+projects[imce_mkdir][version]                                  = 7.x-1.0
+projects[imce_mkdir][subdir]                                   = contrib
+
+projects[imce_wysiwyg][version]                                = 7.x-1.0
+projects[imce_wysiwyg][subdir]                                 = contrib
+
+projects[is_usful][version]                                    = 7.x-1.x-dev
+projects[is_usful][subdir]                                     = contrib
+
+projects[libraries][version]                                   = 7.x-2.x-dev
+projects[libraries][subdir]                                    = contrib
+
+projects[login_destination][version]                           = 7.x-1.0
+projects[login_destination][subdir]                            = contrib
+
+projects[logintoboggan][version]                               = 7.x-1.3
+projects[logintoboggan][subdir]                                = contrib
+
+projects[mailsystem][version]                                  = 7.x-2.31
+projects[mailsystem][subdir]                                   = contrib
+
+projects[menu_attributes][version]                             = 7.x-1.0-rc1
+projects[menu_attributes][subdir]                              = contrib
+
+projects[metatag][version]                                     = 7.x-1.0-alpha4
+projects[metatag][subdir]                                      = contrib
+
+projects[module_filter][version]                               = 7.x-1.6
+projects[module_filter][subdir]                                = contrib
+
+projects[nodequeue][version]                                   = 7.x-2.0-beta1
+projects[nodequeue][subdir]                                    = contrib
+
+projects[page_titlte][version]                                 = 7.x-2.5
+projects[page_titlte][subdir]                                  = contrib
+
+projects[plus1][version]                                       = 7.x-1.x-dev
+projects[plus1][subdir]                                        = contrib
+
+projects[profile2][version]                                    = 7.x-1.2
+projects[profile2][subdir]                                     = contrib
+
+projects[quicktabs][version]                                   = 7.x-3.3
+projects[quicktabs][subdir]                                    = contrib
+
+projects[radioactivity][version]                               = 7.x-2.2
+projects[radioactivity][subdir]                                = contrib
+
+projects[rules][version]                                       = 7.x-2.0
+projects[rules][subdir]                                        = contrib
+
+projects[services_links][version]                              = 7.x-2.1
+projects[services_links][subdir]                               = contrib
+
+projects[strongarm][version]                                   = 7.x-2.0-beta5
+projects[strongarm][subdir]                                    = contrib
+
+projects[token][version]                                       = 7.x-1.0-rc1
+projects[token][subdir]                                        = contrib
+
+projects[userpoints][version]                                  = 7.x-1.0
+projects[userpoints][subdir]                                   = contrib
+
+projects[video_embed_field][version]                           = 7.x-2.0-alpha3
+projects[video_embed_field][subdir]                            = contrib
+
+projects[views][version]                                       = 7.x-3.1
+projects[views][subdir]                                        = contrib
+
+projects[views_bulk_opertions][version]                        = 7.x-3.0-rc1
+projects[views_bulk_opertions][subdir]                         = contrib
+
+projects[views_data_export][version]                           = 7.x-3.0-beta5
+projects[views_data_export][subdir]                            = contrib
+
+projects[views_php][version]                                   = 7.x-1.x-dev
+projects[views_php][subdir]                                    = contrib
+
+projects[voting_rules][version]                                = 7.x-1.0-alpha1
+projects[voting_rules][subdir]                                 = contrib
+
+projects[votingapi][version]                                   = 7.x-2.4
+projects[votingapi][subdir]                                    = contrib
+
+projects[watcher][version]                                     = 7.x-1.x-dev
+projects[watcher][subdir]                                      = contrib
+
+projects[webform][version]                                     = 7.x-3.15
+projects[webform][subdir]                                      = contrib
+
+projects[wysiwyg][version]                                     = 7.x-2.x-dev
+projects[wysiwyg][subdir]                                      = contrib
+
+projects[wysiwyg_filter][version]                              = 7.x-1.6-rc2
+projects[wysiwyg_filter][subdir]                               = contrib
