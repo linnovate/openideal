@@ -1,0 +1,80 @@
+<?php
+
+/**
+ * Implements hook_init().().
+ */
+function ideal_comments_init() {
+  drupal_add_js(drupal_get_path('module', 'ideal_comments') . '/theme/scripts/ideal_comments.js');
+  drupal_add_css(drupal_get_path('module', 'ideal_comments') . '/theme/styles/ideal_comments.css');
+}
+
+/**
+ * Implements hook_registry_alter().
+ */
+function ideal_comments_theme_registry_alter(&$theme_registry) {
+  $node_reg = array_search('modules/node', $theme_registry['node']['theme paths']);
+  $comment_reg = array_search('modules/comment', $theme_registry['comment']['theme paths']);
+
+  if ($node_reg !== FALSE) {
+    array_splice( $theme_registry['node']['theme paths'], $node_reg + 1, 0, drupal_get_path('module', 'ideal_comments') . '/theme');
+  }
+  if ($comment_reg !== FALSE) {
+    array_splice( $theme_registry['comment']['theme paths'], $comment_reg + 1, 0, drupal_get_path('module', 'ideal_comments') . '/theme');
+  }
+}
+
+/**
+ * Implements hook_forms().().
+ */
+function ideal_comments_forms($form_id, $args) {
+  $forms = array();
+  if (strpos($form_id, 'comment_form_') === 0) {
+    $forms[$form_id] = array(
+      'callback' => 'comment_form',
+    );
+  }
+  return $forms;
+}
+
+/**
+ * Implements hook_form_alter().().
+ */
+function ideal_comments_form_alter(&$form, $form_state, $form_id) {
+  global $user;
+  if (strpos($form_id, 'comment_form') === 0) {
+    if (strpos($form_id, 'comment_form_') === 0) {
+      $form['#submit'][] = 'comment_form_submit';
+      $form['#validate'][] = 'comment_form_validate';
+    }
+    $form['#theme'] = 'ideal_comment_form';
+    /*
+     TODO replace if statement with user_access
+     */
+    if (!user_access('post comments')) {
+      $form['my_captcha_element'] = array(
+        '#type' => 'captcha',
+      );
+    }
+    $form['#attributes'] = array('class' => 'comment-form');
+    $form['comment_filter']['comment']['#rows'] = '5';
+    $form['comment_filter']['format']['#weight'] = '0';
+    unset($form['_author']);
+    unset($form['comment_filter']['comment']['#title']);
+    unset($form['preview']);
+    unset($form['homepage']);
+    $form['submit']['#value'] = t('Add comment');
+    //don't show wysiwyg on comments
+    $form['comment_filter']['format'] = array();
+  }
+}
+
+/**
+ * Set CKEditor height
+ */
+function ideal_comments_wysiwyg_editor_settings_alter(&$settings, $context) {
+  if (arg(2) != 'edit' && arg(1) != 'add') {
+    if ($context['profile']->editor == 'ckeditor') {
+      $settings['height'] = 160;
+    }
+  }
+}

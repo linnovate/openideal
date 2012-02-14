@@ -1,0 +1,14 @@
+<?php
+/**
+ * @file
+ * Install, update and uninstall functions for the ideal_popular module.
+ *
+ */
+
+
+/**
+ * Implemenation of hook_install().
+ */
+function ideal_popular_install() {
+  variable_set('last_cron', REQUEST_TIME);
+}

@@ -1,0 +1,409 @@
+<?php
+
+
+define('HEAD_TO_HEAD_QID', 2);
+
+/**
+ * Implements hook_init().
+().
+ */
+function ideal_init() {
+  module_load_include('inc', 'ideal', 'ideal.api');
+}
+
+/**
+ * Implements hook_permission().
+().
+ */
+function ideal_permission() {
+  return array(
+    'admin ideas' => array(
+      'title' => t('admin ideas'),
+      'description' => t('TODO Add a description for \'admin ideas\''),
+    ),
+  );
+}
+
+/**
+ * Implements hook_menu().
+().
+ */
+function ideal_menu() {
+  $items = array();
+  $items['home'] = array(
+    'title' => '',
+    'page callback' => 'ideal_theme_pages',
+    'page arguments' => array('ideal_home_page'),
+    'access arguments' => array('access content'),
+    'type' => MENU_CALLBACK,
+  );
+  $items['ideas'] = array(
+    'title' => 'All ideas',
+    'page callback' => '_empty_page',
+    'access arguments' => array('access content'),
+    'type' => MENU_CALLBACK,
+  );
+  $items['in-action'] = array(
+    'title' => 'Ideas in action',
+    'page callback' => '_empty_page',
+    'access arguments' => array('access content'),
+    'type' => MENU_CALLBACK,
+  );
+  return $items;
+}
+
+/**
+ * ideal_theme_pages callback
+ */
+function ideal_theme_pages($key) {
+  // TODO Please change this theme call to use an associative array for the $variables parameter.
+  return theme($key);
+}
+function _empty_page() {
+  return '';
+}
+
+/**
+ * Implements hook_block_info().
+ */
+function ideal_block_info() {
+  if (TRUE) {
+    $blocks['ideal_profile'] = array(
+      'info' => t('Ideal: profile'),
+    );
+    $blocks['three_main_buttons'] = array(
+      'info' => t('Ideal: Three Main Buttons'),
+    );
+    $blocks['monthly_filter'] = array(
+      'info' => t('Ideal: News by Month'),
+    );
+    $blocks['head_to_head'] = array(
+      'info' => t('Ideal: Head to head'),
+    );
+    return $blocks;
+  }
+}
+
+/**
+ * Implements hook_block_view().
+ */
+function ideal_block_view($delta) {
+  if (TRUE) {
+    switch ($delta) {
+      case 'ideal_profile':
+        $block = array(
+          'subject' => '',
+          'content' => theme('ideal_profile'),
+        );
+        break;
+      case 'three_main_buttons':
+        // TODO Please change this theme call to use an associative array for the $variables parameter.
+        $block = array(
+          'subject' => '',
+          'content' => theme('ideal_three_main_buttons'),
+        );
+        break;
+      case 'monthly_filter':
+        $block = array(
+          'subject' => '',
+          'content' => monthly_filter(),
+        );
+        break;
+      case 'head_to_head':
+        $ret = ideal_head_to_head();
+        $title  = $ret[0];
+        $first  = $ret[1];
+        $chrat  = $ret[2];
+        $second = $ret[3];
+
+        $block = array(
+          'subject' => t('Head to head'),
+          'content' => theme('head_to_head_block', array('0' => $title, '1' => $first, '2' => $chart, '3' => $second)),
+        );
+        break;
+    }
+    return $block;
+  }
+}
+
+/**
+ * Implements hook_block().
+().
+ */
+function ideal_block_OLD($op = 'list', $delta = 0) { }
+
+/**
+ * Implements hook_node_view().
+ */
+function ideal_node_view($node, $view_mode = 'full') {
+  //disable vote on flag in action.
+  if ($node->type == 'idea') {
+    $can_edit = user_access('use vote up/down on nodes') || user_access('view vote up/down count on nodes');
+    $vote_on_teaser = (bool) variable_get('vud_node_widget_vote_on_teaser', TRUE);
+    $tag = variable_get('vud_tag', 'vote');
+    $widget = variable_get('vud_node_widget', 'plain');
+    $flag = flag_get_flag('in_action');
+    $readonly = ($flag->is_flagged($node->nid)) ? TRUE : FALSE;
+    // TODO Please change this theme call to use an associative array for the $variables parameter.
+    $node->content['vud_node_widget_display'] = array(
+      '#value' => theme('vud_widget', $node->nid, 'node', $tag, $widget, $readonly),
+      '#weight' => -10,
+    );
+  }
+}
+
+/**
+ * Implements hook_node_presave().
+ */
+function ideal_node_presave($node) {
+  if ($node->type == 'idea') {
+    if (rules_get_rule_set('rules_points_to_comments_authors')) {
+      //get the comments author on this node.
+      $resource = db_query("SELECT cid, uid FROM {comments} WHERE nid = :nid and pid = :pid", array(':nid' => $node->nid, ':pid' => 0));
+      //Go over the comments authors and send them to the rule set to grant them points.
+      while ($row = db_fetch_array( $resource )) {
+        // TODO Convert "user_load" to "user_load_multiple" if "$row['uid']" is other than a uid.
+        // To return a single user object, wrap "user_load_multiple" with "array_shift" or equivalent.
+        // Example: array_shift(user_load_multiple(array(), $row['uid']))
+        $comment_author = user_load($row['uid']);
+        rules_invoke_rule_set('rules_points_to_comments_authors', array('user' => $comment_author, 'node' => $node));
+      }
+    }
+  }
+}
+
+/**
+ * Implements hook_nodeapi().
+().
+ */
+function ideal_nodeapi_OLD(&$node, $op, $a3 = NULL, $a4 = NULL) { }
+
+/**
+ * Implements hook_theme()
+().
+ */
+function ideal_theme($existing, $type, $theme, $path) {
+  return array(
+    //create a template for home page.
+    'ideal_home_page' => array(
+      'variables' => array('titles' => NULL),
+      'template' => 'home-page',
+      'path' => drupal_get_path('module', 'ideal'),
+    ),
+    //theme function for the main buttons.
+    'ideal_three_main_buttons' => array(
+      'variables' => array('titles' => NULL),
+      'file' => 'ideal.theme.inc',
+    ),
+    'head_to_head_chart' => array(
+      'variables' => array($score1, $score2),
+      'file' => 'ideal.theme.inc',
+    ),
+    'head_to_head_block' => array(
+      'variables' => array($chart, $title1, $title2, $vud_widget1, $vud_widget2, $service_link1, $service_link2),
+      'file' => 'ideal.theme.inc',
+    ),
+    //Override filter.module's theme_filter_tips()
+    'filter_tips' => array(
+      'function' => 'ideal_filter_tips',
+      'variables' => array(
+        'tips' => NULL,
+        'long' => FALSE,
+        'extra' => '',
+      ),
+      'file' => 'ideal.theme.inc',
+    ),
+    //Override filter.module's theme_filter_tips()
+    'filter_tips_more_info' => array(
+      'function' => 'ideal_filter_tips_more_info',
+      'file' => 'ideal.theme.inc',
+    ),
+    'ideal_profile' => array(
+      'template' => 'ideal-profile',
+      'path' => drupal_get_path('module', 'ideal'),
+    ),
+  );
+}
+
+/**
+ * Implements hook_form_alter().
+().
+ */
+function ideal_form_alter(&$form, $form_state, $form_id) {
+  global $user;
+  switch ($form_id) {
+    case 'idea_node_form':
+      if (!user_access('admin ideas', $user)) {
+        //if (!(in_array('administrator', array_values($user->roles))) && $user->uid != 1) {
+        $form['field_in_action']['#access']                   = FALSE;
+        $form['path']['#access']                              = FALSE;
+        $form['comment_settings']['#access']                  = FALSE;
+        $form['menu']['#access']                              = FALSE;
+        $form['revision_information']['revision']['#access']  = FALSE;
+        $form['author']['#access']                            = FALSE;
+        $form['options']['#access']                           = FALSE;
+        $form['body_field']['teaser_include']['#access']      = FALSE;
+        $form['field_project_ref']['#access']                 = FALSE;
+        unset($form['taxonomy']['#type']);
+      }
+      break;
+
+      //chnage the search form buttom text.
+      //can be removed when using views 3 (can be fixed through th UI).
+    case 'views_exposed_form':
+      if ($form['#id'] == 'views-exposed-form-search-results-page-1') {
+        $form['submit']['#value'] = t('Search');
+      }
+      break;
+  }
+}
+
+/**
+ * Implements hook_views_api().
+().
+ */
+function ideal_views_api() {
+  return array('api' => 2);
+}
+
+
+/**
+ *  hook_data_alter
+ */
+function ideal_views_data_alter(&$data) {
+  $data['node']['uid_commented'] = array(
+    'title' => t('User commented or voted'),
+    'help' => t('Display nodes only if a user commented or voted on the node and he is not the author of the node.'),
+    'argument' => array(
+      'field' => 'uid',
+      'name table' => 'users',
+      'name field' => 'name',
+      'handler' => 'views_handler_argument_comment_only_user_uid',
+    ),
+    'filter' => array(
+      'field' => 'uid',
+      'name table' => 'users',
+      'name field' => 'name',
+      'handler' => 'views_handler_filter_comment_only_user_uid',
+    ),
+  );
+  $data['node']['created'] = array(
+    'title' => t('Post date'),
+    'help' => t('The date the node was posted'),
+    'field' => array(
+      'handler' => 'views_handler_field_custom_date',
+      'click sortable' => TRUE,
+    ),
+    'sort' => array(
+      'handler' => 'views_handler_sort_date',
+    ),
+    'filter' => array(
+      'handler' => 'views_handler_filter_date',
+    ),
+  );
+}
+
+/**
+ * Implements hook_views_handlers() to register all of the basic handlers
+().
+ * views uses.
+ */
+function ideal_views_handlers() {
+  return array(
+    'info' => array(
+      'path' => drupal_get_path('module', 'ideal') . '/views',
+    ),
+    'handlers' => array(
+      //User commented or voted argument
+      'views_handler_argument_comment_only_user_uid' => array(
+        'parent' => 'views_handler_argument',
+      ),
+      //User commented or voted filter
+      'views_handler_filter_comment_only_user_uid' => array(
+        'parent' => 'views_handler_filter_user_name',
+      ),
+      //Comment with NO parent count field
+      'views_handler_field_first_stage_comments' => array(
+        'parent' => 'views_handler_field_numeric',
+      ),
+      //Ideal block
+      'views_handler_field_ideal_view' => array(
+        'parent' => 'views_handler_field',
+      ),
+      //Ideal date format
+      'views_handler_field_custom_date' => array(
+        'parent' => 'views_handler_field_date',
+      ),
+      //nodereference referrer count
+      'views_handler_field_challenge_referrer_count' => array(
+        'parent' => 'views_handler_field_numeric',
+      ),
+    ),
+  );
+}
+
+/**
+ * @todo Please document this function.
+ * @see http://drupal.org/node/1354
+ */
+function ideal_get_action_status_list() {
+  return array(
+    'under_review' => t('Under Review'),
+    'reviewed' => t('Reviewed'),
+    'coming_soon' => t('Coming Soon'),
+    'launched' => t('Launched'),
+    'next_time' => t('Next Time'),
+  );
+}
+
+/**
+ * @todo Please document this function.
+ * @see http://drupal.org/node/1354
+ */
+function ideal_head_to_head() {
+  global $user;
+  $scores = array();
+  $nodes = array();
+  $result = db_query("SELECT  nq.nid AS nid, n.title AS title, v.value AS total_score
+    FROM {nodequeue_nodes} nq
+    INNER JOIN {node} n 
+    ON nq.nid = n.nid
+    LEFT JOIN {votingapi_cache} v
+    ON nq.nid = v.content_id 
+    AND function = 'sum'  
+    WHERE nq.qid = :nq.qid", array(':nq.qid' => HEAD_TO_HEAD_QID));
+
+  while ($fetch = db_fetch_object($result)) {
+    $nodes[]  = array(
+      'score' => $fetch->total_score,
+      'nid' => $fetch->nid,
+      'title' => $fetch->title,
+    );
+  }
+  if (count($nodes)) {
+    $chart = _ideal_head_to_head_chart($nodes[0]['score'], $nodes[1]['score']);
+    if ($user->uid) {
+      $widget_theme = variable_get('vud_node_widget', 'updown');
+      // TODO Please change this theme call to use an associative array for the $variables parameter.
+      $widget1 = theme('vud_widget', $nodes[0]['nid'], 'node', 'vote', $widget_theme, false, '');
+      // TODO Please change this theme call to use an associative array for the $variables parameter.
+      $widget2 = theme('vud_widget', $nodes[1]['nid'], 'node', 'vote', $widget_theme, false, '');
+    }
+    else {
+      $widget1 = '';
+      $widget2 = '';
+    }
+    $node1 = new stdClass();
+    $node1->nid = $nodes[0]['nid'];
+    $node1->title = '<div class="node-title">' . l(check_plain($nodes[0]['title']), "node/" . $node1->nid) . '</div>';
+
+    $node2 = new stdClass();
+    $node2->nid = $nodes[1]['nid'];
+    $node2->title = '<div class="node-title">' . l(check_plain($nodes[1]['title']), "node/" . $node2->nid) . '</div>';
+
+    $title = t('Here are two ideas, which one is better ?');
+    $first = $node1->title . $widget1;
+    $second = $node2->title . $widget2;
+  }
+  return (array($title, $first, $chart, $second));
+}
