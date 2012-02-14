@@ -80,8 +80,8 @@ projects[imce_mkdir][subdir]                                   = contrib
 projects[imce_wysiwyg][version]                                = 7.x-1.0
 projects[imce_wysiwyg][subdir]                                 = contrib
 
-projects[is_usful][version]                                    = 7.x-1.x-dev
-projects[is_usful][subdir]                                     = contrib
+projects[is_useful][version]                                    = 7.x-1.x-dev
+projects[is_useful][subdir]                                     = contrib
 
 projects[libraries][version]                                   = 7.x-2.x-dev
 projects[libraries][subdir]                                    = contrib
@@ -107,8 +107,8 @@ projects[module_filter][subdir]                                = contrib
 projects[nodequeue][version]                                   = 7.x-2.0-beta1
 projects[nodequeue][subdir]                                    = contrib
 
-projects[page_titlte][version]                                 = 7.x-2.5
-projects[page_titlte][subdir]                                  = contrib
+projects[page_title][version]                                 = 7.x-2.5
+projects[page_title][subdir]                                  = contrib
 
 projects[plus1][version]                                       = 7.x-1.x-dev
 projects[plus1][subdir]                                        = contrib
@@ -143,8 +143,8 @@ projects[video_embed_field][subdir]                            = contrib
 projects[views][version]                                       = 7.x-3.1
 projects[views][subdir]                                        = contrib
 
-projects[views_bulk_opertions][version]                        = 7.x-3.0-rc1
-projects[views_bulk_opertions][subdir]                         = contrib
+projects[views_bulk_operations][version]                        = 7.x-3.0-rc1
+projects[views_bulk_operations][subdir]                         = contrib
 
 projects[views_data_export][version]                           = 7.x-3.0-beta5
 projects[views_data_export][subdir]                            = contrib
