@@ -17,6 +17,9 @@ projects[contextphp][subdir]                                   = contrib
 projects[ctools][version]                                      = 7.x-1.0-rc1
 projects[ctools][subdir]                                       = contrib
 
+projects[ctools][version]                                      = 7.x-2.1
+projects[ctools][subdir]                                       = contrib
+
 projects[defaultcontent][version]                              = 7.x-1.0-alpha5
 projects[defaultcontent][subdir]                               = contrib
 
@@ -80,8 +83,8 @@ projects[imce_mkdir][subdir]                                   = contrib
 projects[imce_wysiwyg][version]                                = 7.x-1.0
 projects[imce_wysiwyg][subdir]                                 = contrib
 
-projects[is_useful][version]                                    = 7.x-1.x-dev
-projects[is_useful][subdir]                                     = contrib
+;projects[is_useful][version]                                    = 7.x-1.x-dev
+;projects[is_useful][subdir]                                     = contrib
 
 projects[libraries][version]                                   = 7.x-2.x-dev
 projects[libraries][subdir]                                    = contrib
@@ -110,8 +113,8 @@ projects[nodequeue][subdir]                                    = contrib
 projects[page_title][version]                                 = 7.x-2.5
 projects[page_title][subdir]                                  = contrib
 
-projects[plus1][version]                                       = 7.x-1.x-dev
-projects[plus1][subdir]                                        = contrib
+;projects[plus1][version]                                       = 7.x-1.x-dev
+;projects[plus1][subdir]                                        = contrib
 
 projects[profile2][version]                                    = 7.x-1.2
 projects[profile2][subdir]                                     = contrib
@@ -157,6 +160,9 @@ projects[voting_rules][subdir]                                 = contrib
 
 projects[votingapi][version]                                   = 7.x-2.4
 projects[votingapi][subdir]                                    = contrib
+
+projects[vud][version]                                         = 7.x-1.x-dev
+projects[vud][subdir]                                          = contrib
 
 projects[watcher][version]                                     = 7.x-1.x-dev
 projects[watcher][subdir]                                      = contrib

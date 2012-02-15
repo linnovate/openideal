@@ -1,0 +1,15 @@
+name = Vote Up/Down Comments
+description = "Allows adding an up/down voting widget to comments."
+dependencies[] = comment
+dependencies[] = vud
+package = Voting
+core = 7.x
+
+; Views field handlers
+files[] = views/vud_comment_handler_field_widget.inc
+; Information added by drupal.org packaging script on 2012-02-11
+version = "7.x-1.x-dev"
+core = "7.x"
+project = "vote_up_down"
+datestamp = "1328963913"
+

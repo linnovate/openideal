@@ -1,0 +1,187 @@
+<?php
+
+/**
+ * @file
+ * Defines field type which contains a voting widget.
+ */
+
+/**
+ * Implements hook_field_info().
+ */
+function vud_field_field_info() {
+  return array(
+    'vud_field' => array(
+      'label' => t('Vote Up/Down'),
+      'description' => t('A voting widget.'),
+      'settings' => array(
+        'vud_widget' => 'updown',
+        'votingapi_tag' => 'vote',
+      ),
+      'instance_settings' => array(
+        'vud_widget' => 'updown',
+        'votingapi_tag' => 'vote',
+      ),
+      'default_widget' => 'vud_field_default_widget',
+      'default_formatter' => 'default',
+    ),
+  );
+}
+
+/**
+ * Implements hook_field_instance_settings_form().
+ */
+function vud_field_field_instance_settings_form($field, $instance) {
+  $form = array();
+
+  $form['vud_widget'] = array(
+    '#type' => 'radios',
+    '#title' => t('Vote Up/Down Widget'),
+    '#default_value' => isset($instance['settings']['vud_widget']) ? $instance['settings']['vud_widget'] : 'updown',
+    '#options' => vud_widget_get_names(),
+    '#description'   => t('Select the voting widget that will be displayed for this field.'),
+    '#required' => TRUE,
+  );
+  $form['votingapi_tag'] = array(
+    '#type'          => 'textfield',
+    '#title'         => t('Voting API tag'),
+    '#default_value' => isset($instance['settings']['votingapi_tag']) ? $instance['settings']['votingapi_tag'] : variable_get('vud_tag', 'vote'),
+    '#description'   => t('The Voting API tag that votes will be tagged with.'),
+  );
+
+  return $form;
+}
+
+/**
+ * Implement hook_field_is_empty().
+ */
+function vud_field_field_is_empty($item, $field) {
+  return empty($item['vud_widget']) || empty($item['votingapi_tag']);
+}
+
+/**
+ * Implements hook_field_widget_info().
+ */
+function vud_field_field_widget_info() {
+  return array(
+    'vud_field_default_widget' => array(
+      'label' => 'Vote Up/Down',
+      'field types' => array('vud_field'),
+    ),
+  );
+}
+
+/**
+ * Implements hook_field_widget_form().
+ */
+function vud_field_field_widget_form(&$form, &$form_state, $field, $instance, $langcode, $items, $delta, $element) {
+  $item = isset($items[$delta]) ? $items[$delta] : NULL;
+  $item = _vud_field_load($field, $item, $instance);
+  $keys = array('vud_widget', 'votingapi_tag');
+  $form_elements = array();
+  foreach ($keys as $key) {
+    $form_elements[$key] = $element + array(
+      '#type' => 'value',
+      '#value' => $item[$key],
+    );
+  }
+  return $form_elements;
+}
+
+/**
+ * Get the item to use.
+ */
+function _vud_field_load($field, $item, $instance) {
+  $keys = array('vud_widget', 'votingapi_tag');
+  $value = array();
+  foreach ($keys as $key) {
+    if (isset($item[$key])) {
+      $value[$key] = $item[$key];
+    }
+    elseif (isset($instance['settings'][$key])) {
+      $value[$key] = $instance['settings'][$key];
+    }
+    else {
+      $value[$key] = $field['settings'][$key];
+    }
+  }
+  return $value;
+}
+
+/**
+ * Implements hook_theme().
+ */
+function vud_field_theme() {
+  return array(
+    'vud_field_formatter_default' => array(
+      'variables' => array(
+        'entity_info' => NULL,
+        'entity' => NULL,
+        'instance' => NULL,
+        'langcode' => NULL,
+        // variables for theme('vud_widget')
+        'vud_widget_variables' => NULL,
+      ),
+    ),
+  );
+}
+
+/**
+ * Implementation of hook_field_formatter_info().
+ */
+function vud_field_field_formatter_info() {
+  return array(
+    'default' => array(
+      'label' => t('Vote Up/Down (default)'),
+      'field types' => array('vud_field'),
+    ),
+  );
+}
+
+/**
+ * Implements hook_field_formatter_view().
+ */
+function vud_field_field_formatter_view($entity_type, $entity, $field, $instance, $langcode, $items, $display) {
+  $entity_info = entity_get_info($entity_type);
+  $entity_id_key = $entity_info['entity keys']['id'];
+  $variables_template = array(
+    'entity_info' => $entity_info,
+    'entity' => $entity,
+    'instance' => $instance,
+    'langcode' => $langcode,
+    'vud_widget_variables' =>  array(
+      'entity_id' => $entity->$entity_id_key,
+      'type' => $entity_type,
+    ),
+  );
+
+  $elements = array();
+  foreach ($items as $delta => $item) {
+    $variables = $variables_template;
+    $variables['vud_widget_variables']['widget_theme'] = $instance['settings']['vud_widget'];
+    $variables['vud_widget_variables']['tag'] = $instance['settings']['votingapi_tag'];
+    $elements[$delta] = array(
+      '#markup' => theme('vud_field_formatter_'. $display['type'], $variables),
+    );
+  }
+
+  return $elements;
+}
+
+/**
+ * Theme function for 'default' vud_field field formatter.
+ */
+function theme_vud_field_formatter_default($variables) {
+  return theme('vud_widget', $variables['vud_widget_variables']);
+}
+
+/**
+ * Implements hook_field_prepare_view().
+ */
+function vud_field_field_prepare_view($entity_type, $entities, $field, $instances, $langcode, &$items) {
+  // If there is no values in $items, specify default value.
+  foreach ($entities as $id => $entity) {
+    if (empty($items[$id])) {
+      $items[$id][0] = _vud_field_load($field, NULL, $instances[$id]);
+    }
+  }
+}
