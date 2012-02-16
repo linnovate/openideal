@@ -127,30 +127,24 @@ function ideal_block_view($delta) {
 }
 
 /**
- * Implements hook_block().
-().
- */
-function ideal_block_OLD($op = 'list', $delta = 0) { }
-
-/**
  * Implements hook_node_view().
  */
-function ideal_node_view($node, $view_mode = 'full') {
-  //disable vote on flag in action.
-  if ($node->type == 'idea') {
-    $can_edit = user_access('use vote up/down on nodes') || user_access('view vote up/down count on nodes');
-    $vote_on_teaser = (bool) variable_get('vud_node_widget_vote_on_teaser', TRUE);
-    $tag = variable_get('vud_tag', 'vote');
-    $widget = variable_get('vud_node_widget', 'plain');
-    $flag = flag_get_flag('in_action');
-    $readonly = ($flag->is_flagged($node->nid)) ? TRUE : FALSE;
-    // TODO Please change this theme call to use an associative array for the $variables parameter.
-    $node->content['vud_node_widget_display'] = array(
-      '#value' => theme('vud_widget', $node->nid, 'node', $tag, $widget, $readonly),
-      '#weight' => -10,
-    );
-  }
-}
+//function ideal_node_view($node, $view_mode = 'full') {
+//  //disable vote on flag in action.
+//  if ($node->type == 'idea') {
+//    $can_edit = user_access('use vote up/down on nodes') || user_access('view vote up/down count on nodes');
+//    $vote_on_teaser = (bool) variable_get('vud_node_widget_vote_on_teaser', TRUE);
+//    $tag = variable_get('vud_tag', 'vote');
+//    $widget = variable_get('vud_node_widget', 'plain');
+//    $flag = flag_get_flag('in_action');
+//    $readonly = ($flag->is_flagged($node->nid)) ? TRUE : FALSE;
+//    // TODO Please change this theme call to use an associative array for the $variables parameter.
+//    $node->content['vud_node_widget_display'] = array(
+//      '#value' => theme('vud_widget', $node->nid, 'node', $tag, $widget, $readonly),
+//      '#weight' => -10,
+//    );
+//  }
+//}
 
 /**
  * Implements hook_node_presave().
@@ -171,12 +165,6 @@ function ideal_node_presave($node) {
     }
   }
 }
-
-/**
- * Implements hook_nodeapi().
-().
- */
-function ideal_nodeapi_OLD(&$node, $op, $a3 = NULL, $a4 = NULL) { }
 
 /**
  * Implements hook_theme()
@@ -227,32 +215,18 @@ function ideal_theme($existing, $type, $theme, $path) {
 
 /**
  * Implements hook_form_alter().
-().
  */
 function ideal_form_alter(&$form, $form_state, $form_id) {
   global $user;
   switch ($form_id) {
     case 'idea_node_form':
-      if (!user_access('admin ideas', $user)) {
-        //if (!(in_array('administrator', array_values($user->roles))) && $user->uid != 1) {
-        $form['field_in_action']['#access']                   = FALSE;
-        $form['path']['#access']                              = FALSE;
-        $form['comment_settings']['#access']                  = FALSE;
-        $form['menu']['#access']                              = FALSE;
-        $form['revision_information']['revision']['#access']  = FALSE;
-        $form['author']['#access']                            = FALSE;
-        $form['options']['#access']                           = FALSE;
-        $form['body_field']['teaser_include']['#access']      = FALSE;
-        $form['field_project_ref']['#access']                 = FALSE;
-        unset($form['taxonomy']['#type']);
-      }
-      break;
-
-      //chnage the search form buttom text.
-      //can be removed when using views 3 (can be fixed through th UI).
-    case 'views_exposed_form':
-      if ($form['#id'] == 'views-exposed-form-search-results-page-1') {
-        $form['submit']['#value'] = t('Search');
+      // Show only the desired filed (title, body, category) for a non 'admin ideas' users.
+      foreach ($form as $k => $element) {
+        if (is_array($element) && isset($element['#type']) && $element['#type'] != 'hidden' && $element['#type'] != 'value') {
+          if ($k != 'title' && $k != 'body' && $k != 'field_category') {
+            $form[$k]['#access'] = user_access('admin ideas', $user);
+          }         
+        }
       }
       break;
   }
@@ -260,10 +234,9 @@ function ideal_form_alter(&$form, $form_state, $form_id) {
 
 /**
  * Implements hook_views_api().
-().
  */
 function ideal_views_api() {
-  return array('api' => 2);
+  return array('api' => 3);
 }
 
 
