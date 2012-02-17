@@ -4,14 +4,16 @@
 define('POPULAR_FLAG', 19);
 
 /**
- * Implements hook_init().().
+ * Implements hook_init().
+().
  */
 function ideal_popular_init() {
 
 }
 
 /**
- * Implements hook_form_FORM_ID_alter().().
+ * Implements hook_form_FORM_ID_alter().
+().
  * alter the content type form.
  * @param unknown_type $form
  * @param unknown_type $form_state
@@ -127,27 +129,27 @@ function is_popular($nid) {
  * @todo Please document this function.
  * @see http://drupal.org/node/1354
  */
-function ideal_popular_cron() {
-  if (!variable_get('ideal_last_cron', REQUEST_TIME)) {
-    variable_set('ideal_last_cron', REQUEST_TIME);
-  }
-  if (variable_get('last_cron', REQUEST_TIME) <= REQUEST_TIME - (60 * 60 * 24)) {
-    _ideal_check_all_ideas();
-  }
-}
+//function ideal_popular_cron() {
+//  if (!variable_get('ideal_last_cron', REQUEST_TIME)) {
+//    variable_set('ideal_last_cron', REQUEST_TIME);
+//  }
+//  if (variable_get('last_cron', REQUEST_TIME) <= REQUEST_TIME - (60 * 60 * 24)) {
+//    _ideal_check_all_ideas();
+//  }
+//}
 
 //get all ideas and send them to check and flag them as popular.
-function _ideal_check_all_ideas() {
-  $result = db_query("SELECT nid FROM {node} WHERE type = :type", array(':type' => 'idea'));
-  while ($fetch = db_fetch_array($result)) {
-    ideal_flag_popular($fetch['nid']);
-  }
-}
-
-//get all popular ideas and send them check if needs to unflag them.
-function _ideal_check_popular_ideas() {
-  $result = db_query("SELECT content_id FROM {flag_content} WHERE fid = :fid", array(':fid' => POPULAR_FLAG));
-  while ($fetch = db_fetch_array($result)) {
-    ideal_flag_popular($fetch['content_id']);
-  }
-}
+//function _ideal_check_all_ideas() {
+//  $result = db_query("SELECT nid FROM {node} WHERE type = :type", array(':type' => 'idea'));
+//  while ($fetch = db_fetch_array($result)) {
+//    ideal_flag_popular($fetch['nid']);
+//  }
+//}
+//
+////get all popular ideas and send them check if needs to unflag them.
+//function _ideal_check_popular_ideas() {
+//  $result = db_query("SELECT content_id FROM {flag_content} WHERE fid = :fid", array(':fid' => POPULAR_FLAG));
+//  while ($fetch = db_fetch_array($result)) {
+//    ideal_flag_popular($fetch['content_id']);
+//  }
+//}

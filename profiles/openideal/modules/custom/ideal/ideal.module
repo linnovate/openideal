@@ -149,22 +149,22 @@ function ideal_block_view($delta) {
 /**
  * Implements hook_node_presave().
  */
-function ideal_node_presave($node) {
-  if ($node->type == 'idea') {
-    if (rules_get_rule_set('rules_points_to_comments_authors')) {
-      //get the comments author on this node.
-      $resource = db_query("SELECT cid, uid FROM {comments} WHERE nid = :nid and pid = :pid", array(':nid' => $node->nid, ':pid' => 0));
-      //Go over the comments authors and send them to the rule set to grant them points.
-      while ($row = db_fetch_array( $resource )) {
-        // TODO Convert "user_load" to "user_load_multiple" if "$row['uid']" is other than a uid.
-        // To return a single user object, wrap "user_load_multiple" with "array_shift" or equivalent.
-        // Example: array_shift(user_load_multiple(array(), $row['uid']))
-        $comment_author = user_load($row['uid']);
-        rules_invoke_rule_set('rules_points_to_comments_authors', array('user' => $comment_author, 'node' => $node));
-      }
-    }
-  }
-}
+//function ideal_node_presave($node) {
+//  if ($node->type == 'idea') {
+//    if (rules_get_rule_set('rules_points_to_comments_authors')) {
+//      //get the comments author on this node.
+//      $resource = db_query("SELECT cid, uid FROM {comments} WHERE nid = :nid and pid = :pid", array(':nid' => $node->nid, ':pid' => 0));
+//      //Go over the comments authors and send them to the rule set to grant them points.
+//      while ($row = db_fetch_array( $resource )) {
+//        // TODO Convert "user_load" to "user_load_multiple" if "$row['uid']" is other than a uid.
+//        // To return a single user object, wrap "user_load_multiple" with "array_shift" or equivalent.
+//        // Example: array_shift(user_load_multiple(array(), $row['uid']))
+//        $comment_author = user_load($row['uid']);
+//        rules_invoke_rule_set('rules_points_to_comments_authors', array('user' => $comment_author, 'node' => $node));
+//      }
+//    }
+//  }
+//}
 
 /**
  * Implements hook_theme()
@@ -315,19 +315,6 @@ function ideal_views_handlers() {
   );
 }
 
-/**
- * @todo Please document this function.
- * @see http://drupal.org/node/1354
- */
-function ideal_get_action_status_list() {
-  return array(
-    'under_review' => t('Under Review'),
-    'reviewed' => t('Reviewed'),
-    'coming_soon' => t('Coming Soon'),
-    'launched' => t('Launched'),
-    'next_time' => t('Next Time'),
-  );
-}
 
 /**
  * @todo Please document this function.
