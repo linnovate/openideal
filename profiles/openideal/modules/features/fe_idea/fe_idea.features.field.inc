@@ -47,7 +47,7 @@ function fe_idea_field_default_fields() {
       'description' => 'Please share you idea.',
       'display' => array(
         'default' => array(
-          'label' => 'above',
+          'label' => 'hidden',
           'module' => 'text',
           'settings' => array(),
           'type' => 'text_default',
@@ -123,7 +123,7 @@ function fe_idea_field_default_fields() {
       'description' => '',
       'display' => array(
         'default' => array(
-          'label' => 'above',
+          'label' => 'hidden',
           'module' => 'taxonomy',
           'settings' => array(),
           'type' => 'taxonomy_term_reference_link',
@@ -199,7 +199,7 @@ function fe_idea_field_default_fields() {
           'label' => 'above',
           'settings' => array(),
           'type' => 'hidden',
-          'weight' => '4',
+          'weight' => '5',
         ),
         'teaser' => array(
           'label' => 'above',
@@ -264,7 +264,7 @@ function fe_idea_field_default_fields() {
           'label' => 'above',
           'settings' => array(),
           'type' => 'hidden',
-          'weight' => '3',
+          'weight' => '4',
         ),
         'teaser' => array(
           'label' => 'above',
@@ -286,6 +286,69 @@ function fe_idea_field_default_fields() {
         'settings' => array(),
         'type' => 'options_select',
         'weight' => '4',
+      ),
+    ),
+  );
+
+  // Exported field: 'node-idea-field_radioactivity'
+  $fields['node-idea-field_radioactivity'] = array(
+    'field_config' => array(
+      'active' => '1',
+      'cardinality' => '1',
+      'deleted' => '0',
+      'entity_types' => array(),
+      'field_name' => 'field_radioactivity',
+      'foreign keys' => array(),
+      'indexes' => array(),
+      'module' => 'radioactivity',
+      'settings' => array(
+        'profile2_private' => FALSE,
+      ),
+      'translatable' => '0',
+      'type' => 'radioactivity',
+    ),
+    'field_instance' => array(
+      'bundle' => 'idea',
+      'default_value' => array(
+        0 => array(
+          'radioactivity_energy' => '1000',
+          'radioactivity_timestamp' => '1329396949',
+        ),
+      ),
+      'deleted' => '0',
+      'description' => '',
+      'display' => array(
+        'default' => array(
+          'label' => 'hidden',
+          'module' => 'radioactivity',
+          'settings' => array(
+            'energy' => '10',
+            'type' => 'none',
+          ),
+          'type' => 'radioactivity_combo_formatter',
+          'weight' => '3',
+        ),
+        'teaser' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+      ),
+      'entity_type' => 'node',
+      'field_name' => 'field_radioactivity',
+      'label' => 'Radioactivity',
+      'required' => 0,
+      'settings' => array(
+        'profile' => 'clone_of_default',
+        'user_register_form' => FALSE,
+      ),
+      'widget' => array(
+        'active' => 0,
+        'module' => 'radioactivity',
+        'settings' => array(),
+        'type' => 'radioactivity_basic_widget',
+        'weight' => '8',
       ),
     ),
   );
@@ -359,6 +422,7 @@ function fe_idea_field_default_fields() {
   t('In Action');
   t('Is Part Of A Challenge');
   t('Please share you idea.');
+  t('Radioactivity');
   t('Vote');
   t('Your Idea');
 
