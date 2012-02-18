@@ -54,16 +54,15 @@ function ideal_challenge_block_view($delta) {
 
 function theme_ideal_challenge_add_idea() {
   $output = '';
-   // Get the nid (for reference) anf the terms from the default challenge.
+   // Get the nid (for reference) from the default challenge.
   $challenge_nid = variable_get('default_challenge', NULL);
-  $challenge = node_load($challenge_nid);
-  
-  $obj = entity_metadata_wrapper('node', $challenge);
-  $output .= $obj->title->value(array('sanitize' => TRUE));
-  $output .= $obj->body->value->value();
-    
+
+  $challenge = views_embed_view('default_challenge', 'block', $challenge_nid);
   $form = drupal_get_form('ideal_challenge_add_idea_form');
+  
+  $output .= $challenge; 
   $output .= render($form);
+  
   return $output;
 }
 
