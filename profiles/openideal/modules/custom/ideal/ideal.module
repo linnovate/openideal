@@ -67,21 +67,20 @@ function _empty_page() {
  * Implements hook_block_info().
  */
 function ideal_block_info() {
-  if (TRUE) {
-    $blocks['ideal_profile'] = array(
-      'info' => t('Ideal: profile'),
-    );
-    $blocks['three_main_buttons'] = array(
-      'info' => t('Ideal: Three Main Buttons'),
-    );
-    $blocks['monthly_filter'] = array(
-      'info' => t('Ideal: News by Month'),
-    );
-    $blocks['head_to_head'] = array(
-      'info' => t('Ideal: Head to head'),
-    );
-    return $blocks;
-  }
+  $blocks = array();
+  $blocks['ideal_profile'] = array(
+    'info' => t('Ideal: profile'),
+  );
+  $blocks['three_main_buttons'] = array(
+    'info' => t('Ideal: Three Main Buttons'),
+  );
+  $blocks['monthly_filter'] = array(
+    'info' => t('Ideal: News by Month'),
+  );
+  $blocks['head_to_head'] = array(
+    'info' => t('Ideal: Head to head'),
+  );
+  return $blocks;
 }
 
 /**
@@ -223,7 +222,7 @@ function ideal_form_alter(&$form, $form_state, $form_id) {
       // Show only the desired filed (title, body, category) for a non 'admin ideas' users.
       foreach ($form as $k => $element) {
         if (is_array($element) && isset($element['#type']) && $element['#type'] != 'hidden' && $element['#type'] != 'value') {
-          if ($k != 'title' && $k != 'body' && $k != 'field_category') {
+          if ($k != 'actions' && $k != 'title' && $k != 'body' && $k != 'field_category') {
             $form[$k]['#access'] = user_access('admin ideas', $user);
           }         
         }

@@ -1,242 +1,136 @@
 <?php
-
-
-define('CATEGORIES_VID', 2);
-
 /**
- * Implements hook_init().().
- */
-function ideal_challenge_init() {
-
-}
-
-/**
- * Implements hook_block_info().
- */
-function ideal_challenge_block_info() {
-  if (TRUE) {
-
-    $blocks['challenge_add_idea'] = array(
-      'info' => t('ideal challenge add idea'),
-    );
-
-    return $blocks;
-  }
-}
-
-/**
- * Implements hook_block_view().
- */
-function ideal_challenge_block_view($delta) {
-  if (TRUE) {
-    switch ($delta) {
-
-      case 'challenge_add_idea':
-        $block = array(
-          'subject' => t(''),
-          'content' => ideal_challenge_add_idea(),
-        );
-        break;
-    }
-    return $block;
-  }
-}
-
-/**
- * Implements hook_block().().
- */
-function ideal_challenge_block_OLD($op = 'list', $delta = 0) { }
-
-/**
- * Generate a block containing a node entry form.
- */
-function ideal_challenge_add_idea() {
-  //if (node_access('create', 'idea')) {
-  module_load_include('inc', 'node', 'node.pages');
-  $title = drupal_get_title();
-  $form = node_add('idea');
-  drupal_set_title($title);
-
-  return theme('ideal_challenge_add_idea', array('titles' => $form));
-  //}
-}
-
-/**
- * Implements hook_theme()().
- */
-function ideal_challenge_theme($existing, $type, $theme, $path) {
-  return array(
-    'ideal_challenge_add_idea' => array(
-      'variables' => array('titles' => NULL),
-    ),
-  );
-}
-
-/**
- * Theme function for the add idea block
- * @param $form
- * @return HTML string
- */
-function theme_ideal_challenge_add_idea($variables) {
-  $form = $variables['titles'];
-  $challenge_nid = variable_get('default_challenge', NULL);
-  if ($challenge_nid) {
-    $challenge_node = node_load($challenge_nid);
-    $challenge_db_info = content_database_info(content_fields('field_challenge', 'idea'));
-    $challenge_field = $challenge_db_info['columns']['nid']['column'];
-    $challenge_table = $challenge_db_info['table'];
-    // TODO Please convert this statement to the D7 database API syntax.
-    $count = db_query(
-        "SELECT COUNT(*) 
-        FROM $challenge_table 
-        WHERE $challenge_field = %d",  
-        $challenge_nid 
-      )->fetchField();
-  }
-  $is_front = drupal_is_front_page();
-  if ($is_front) {
-    $output .= '<div id="challenge_add_idea">';
-    $output .= '<h2>' . t('One challenge a month')/*$challenge_node->title*/ . '</h2>';
-    $output .= l(t('To all previous challenges'), 'challenges', array('attributes' => array('class' => 'view-all')));
-    // TODO Please change this theme call to use an associative array for the $variables parameter.
-    $output .= '<div class="challenge-image">' . theme('imagecache', '140x140_thumb', $challenge_node->field_challenge_image[0]['filepath'], 'Challenge image', 'Challenge image') . '</div>';
-    $output .= '<div class="challenge_content">';
-    $output .= '<h3>' . $challenge_node->title . '</h3><p>' . $challenge_node->body . '</p>';
-    $output .= l(t('To all ideas so far (!count)', array('!count' => $count)), 'node/' . $challenge_nid, array('attributes' => array('class' => 'all_challenges'))) . '</div>';
-    if ($form) {
-      $output .= '<div class="form-wrapper">' . $form . '</div>';
-    }
-    else {
-      $output .= '<div class="form-wrapper"><div class="anonymous-form"><div class="anonymous-form-inner">';
-      $output .= t('to add your idea, vote or comment you must be a registered user in @sitename, Please !login or !register', array('@sitename' => variable_get('site_name', "Ideal"), '!login' => l(t('Login'), 'user/login'), '!register' => l(t('Register'), 'user/register')));
-      $output .= '</div></div></div>';
-    }
-    $output .= '</div>';
-    //$output .= dpm($challenge_node);
-  }
-  else {
-    $output .= '<div id="challenge_add_idea">';
-    $output .= '<div class="form-wrapper">' . $form . '</div>';
-    $output .= '</div>';
-  }
-  return $output;
-}
-
-/**
- * Implements hook_form_alter().().
- */
-function ideal_challenge_form_alter(&$form, $form_state, $form_id) {
-  global $user;
-  $is_front = drupal_is_front_page();
-  switch ($form_id) {
-    case 'idea_node_form':
-      if (!user_access('admin ideas', $user)) {
-        //if (!(in_array('administrator', array_values($user->roles))) && $user->uid != 1) {
-        $form['field_challenge']['#access'] = FALSE;
-      }
-      if (isset($_GET['q']) && $_GET['q'] != 'node/add/idea' && arg(2) != 'edit') {
-        $form['field_in_action']['#access']                   = FALSE;
-        $form['path']['#access']                              = FALSE;
-        $form['comment_settings']['#access']                  = FALSE;
-        $form['menu']['#access']                              = FALSE;
-        $form['revision_information']['revision']['#access']  = FALSE;
-        $form['author']['#access']                            = FALSE;
-        $form['options']['#access']                           = FALSE;
-        $form['body_field']['teaser_include']['#access']      = FALSE;
-        $form['body_field']['format']['#access']              = FALSE;
-        $form['taxonomy']['#access']                          = FALSE;
-        $form['taxonomy'][CATEGORIES_VID]['#required']        = FALSE;
-        $form['flag']['#access']                              = FALSE;
-        $form['revision_information']['#access']              = FALSE;
-        $form['buttons']['preview']['#access']                = FALSE;
-        $form['field_challenge']['#access']                   = FALSE;
-        $form['field_project_ref']['#access']                 = FALSE;
-        $form['title']['#title']                              = t('Add idea');
-        $form['body_field']['body']['#title']                 = '';
-
-        $form['#submit'][] = 'ideal_challenge_idea_add_type_form_submit';
-      }
-      break;
-  }
-}
-
-/**
- * Additional submit handler for the node add form.
- */
-function ideal_challenge_idea_add_type_form_submit($form, &$form_state) {
-  $challenge = variable_get('default_challenge', NULL);
-  $form_state['values']['field_challenge']['0']['nid'] = $challenge;
-  $node = node_load($challenge);
-  foreach ($node->taxonomy as $term) {
-    if ($term->vid == CATEGORIES_VID) {
-      $form_state['values']['taxonomy'][CATEGORIES_VID][$term->tid] = $term->tid;
-    }
-  }
-}
-
-/**
- * Implements hook_menu().().
+ * Implements hook_menu().
  */
 function ideal_challenge_menu() {
   $items = array();
-  $items['admin/content/ideal-challenge'] = array(
+  $items['admin/config/user-interface/openideal/ideal-challenge'] = array(
     'title' => 'Default Challenge',
     'access arguments' => array('access content'),
     'page callback' => 'ideal_challenge_page',
+    'file' => 'ideal_challenge.admin.inc',  
     'type' => MENU_NORMAL_ITEM,
   );
   return $items;
 }
 
 /**
- * @todo Please document this function.
- * @see http://drupal.org/node/1354
+ * Implements hook_theme()
  */
-function ideal_challenge_page() {
-  return drupal_get_form('ideal_challenge_default_challenge_form');
+function ideal_challenge_theme($existing, $type, $theme, $path) {
+  return array(
+    'ideal_challenge_add_idea' => array(
+      'variables' => array(),
+    ),
+  );
 }
 
 /**
- * @todo Please document this function.
- * @see http://drupal.org/node/1354
+ * Implements hook_block_info().
  */
-function ideal_challenge_default_challenge_form($form) {
-  $options = array();
+function ideal_challenge_block_info() {
+  $blocks = array();
+  $blocks['challenge_add_idea'] = array(
+    'info' => t('ideal challenge add idea'),
+  );
 
-  $result = db_query("SELECT nid, title FROM {node} WHERE type = :type", array(':type' => 'challenge'));
+  return $blocks;
+}
 
-  while ($fetch = db_fetch_array($result)) {
-    $options[$fetch['nid']] = $fetch['title'];
+/**
+ * Implements hook_block_view().
+ */
+function ideal_challenge_block_view($delta) {
+  switch ($delta) {
+    case 'challenge_add_idea':
+      $block = array(
+        'subject' => 'The Chalenge',
+        'content' => theme('ideal_challenge_add_idea'),
+      );
+      break;
   }
+  return $block;
+}
 
-  $form['default_challenge'] = array(
-    '#type' => 'select',
-    '#title' => t('Default Challenge'),
-    '#options' => $options,
-    '#default_value' => variable_get('default_challenge', NULL),
+function theme_ideal_challenge_add_idea() {
+  $output = '';
+   // Get the nid (for reference) anf the terms from the default challenge.
+  $challenge_nid = variable_get('default_challenge', NULL);
+  $challenge = node_load($challenge_nid);
+  
+  $obj = entity_metadata_wrapper('node', $challenge);
+  $output .= $obj->title->value(array('sanitize' => TRUE));
+  $output .= $obj->body->value->value();
+    
+  $form = drupal_get_form('ideal_challenge_add_idea_form');
+  $output .= render($form);
+  return $output;
+}
+
+/**
+ * Generate a block containing a node entry form.
+ */
+function ideal_challenge_add_idea_form() {
+  $form = array();
+   
+  $form['title'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Title'),
+    '#description' => '',  
+    '#default_value' => '', 
+    '#size' => 60, 
+    '#maxlength' => 128, 
+    '#required' => TRUE,  
   );
-
+  
+  $form['body'] = array(
+    '#type' => 'textarea', 
+    '#title' => t('Body'),
+    '#description' => '',
+    '#default_value' => '', 
+    '#required' => TRUE
+  );
+  
   $form['submit'] = array(
-    '#type' => 'submit',
-    '#value' => t('Submit'),
+    '#type' => 'submit', 
+    '#value' => t('Share')
   );
-
+  
   return $form;
 }
 
 /**
- * @param $form
- * @param $form_state
- * @return unknown_type
+ * Additional submit handler for the node add form.
  */
-function ideal_challenge_default_challenge_form_submit($form, &$form_state) {
-  $default_challenge = $form_state['values']['default_challenge'];
-  variable_set('default_challenge', $default_challenge);
-}
+function ideal_challenge_add_idea_form_submit($form, &$form_state) { 
+  global $user;
+  global $language;
+  $lang = module_exists('local') ? $language : LANGUAGE_NONE;
+  
+  // Get the nid (for reference) anf the terms from the default challenge.
+  $challenge_nid = variable_get('default_challenge', NULL);
+  $challenge = node_load($challenge_nid);
+  $obj = entity_metadata_wrapper('node', $challenge);
+  $category = $obj->field_category->value();
+  
+//  $wrp = entity_property_values_create_entity('node');
+//  $wrp->save();
 
-function _get_challenge_count($nid) {
-  $db_field = $db_info['columns']['value']['column'];
-  $db_table = $db_info['table'];
-  // TODO Please convert this statement to the D7 database API syntax.
-  return db_query("SELECT COUNT(*) FROM $db_table WHERE $db_field = %d", $nid)->fetchField();
+  // Building the idea node fro, the title and body from th form,
+  // and the challenge reference and category from the default challenge.
+  $node = new stdClass();
+  $node->language = $lang;
+  $node->uid = $user->uid;
+  $node->type = 'idea';
+  $node->title = $form_state['values']['title'];
+  $node->body[$node->language][]['value'] = $form_state['values']['body'];
+  $node->field_category[$node->language][]['tid'] = $category->tid;
+  $node->field_challenge_ref[$node->language][]['target_id'] = $challenge_nid;
+  
+  // Saving the node,
+  node_object_prepare($node);
+  $node = node_submit($node);
+  node_save($node); 
+  
+  drupal_set_message('Your idea was saved');
 }

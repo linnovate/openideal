@@ -68,8 +68,8 @@ projects[google_analytics][subdir]                             = contrib
 projects[google_plusone][version]                              = 7.x-1.3
 projects[google_plusone][subdir]                               = contrib
 
-projects[heartbeat][version]                                   = 7.x-1.0
-projects[heartbeat][subdir]                                    = contrib
+;projects[heartbeat][version]                                   = 7.x-1.0
+;projects[heartbeat][subdir]                                    = contrib
 
 projects[htmlmail][version]                                    = 7.x-2.62
 projects[htmlmail][subdir]                                     = contrib
@@ -99,6 +99,9 @@ projects[mailsystem][version]                                  = 7.x-2.31
 projects[mailsystem][subdir]                                   = contrib
 
 projects[menu_attributes][version]                             = 7.x-1.0-rc1
+projects[menu_attributes][subdir]                              = contrib
+
+projects[menu_attributes][version]                             = 7.x-1.1
 projects[menu_attributes][subdir]                              = contrib
 
 projects[metatag][version]                                     = 7.x-1.0-alpha4

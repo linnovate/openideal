@@ -1,0 +1,160 @@
+<?php
+
+/**
+ * Test the Message CRUD handling.
+ */
+class MessageCrud extends DrupalWebTestCase {
+
+  public static function getInfo() {
+    return array(
+      'name' => 'Message CRUD',
+      'description' => 'Test the create, update and remove of Message entities.',
+      'group' => 'Message',
+    );
+  }
+
+  function setUp() {
+    parent::setUp('message');
+  }
+
+  /**
+   * Test CRUD of message entity.
+   */
+  function testMessageCrud() {
+    $web_user = $this->drupalCreateUser();
+
+    $message_type = message_type_create('foo', array('message_text' => array(LANGUAGE_NONE => array(array('value' => 'Example text.')))));
+    $message_type->save();
+
+    $message = message_create('foo', array(), $web_user);
+    $message->save();
+    $mid = $message->mid;
+
+    // Reload the message to see it was saved.
+    $message = message_load($mid);
+    $this->assertTrue(!empty($message->mid), t('Message was saved to the database.'));
+
+    $this->assertEqual($message->uid, $web_user->uid, 'Message has been saved for the right user.');
+    $this->assertEqual($message->getType()->message_text[LANGUAGE_NONE][0]['value'], 'Example text.', 'Message type text has been saved.');
+
+    // Make sure an exception is thrown if message type alreayd exists.
+    try {
+      $message_type = message_type_create('foo');
+      $this->fail("Creating the same message type hasn't created an exception.");
+    }
+    catch (Exception $e) {
+      $this->pass("Exception was thrown: ". $e->getMessage());
+    }
+  }
+}
+
+/**
+ * Test the Message CRUD handling.
+ */
+class MessageShowMessage extends DrupalWebTestCase {
+
+  public static function getInfo() {
+    return array(
+      'name' => 'Message view',
+      'description' => 'Test viewing a message.',
+      'group' => 'Message',
+    );
+  }
+
+  function setUp() {
+    parent::setUp('locale', 'message');
+
+    require_once DRUPAL_ROOT . '/includes/locale.inc';
+    for ($i = 0; $i < 2; ++$i) {
+      locale_add_language('l' . $i, $this->randomString(), $this->randomString());
+    }
+  }
+
+
+  /**
+   * Test showing a message.
+   */
+  function testMessageView() {
+    $web_user = $this->drupalCreateUser();
+    $this->drupalLogin($web_user);
+
+    $property = MESSAGE_FIELD_MESSAGE_TEXT;
+
+    // We use randomName instead of randomString since later-on we use
+    // strip_tags, so we don't want to get characters that might be escaped.
+    $text1 = $this->randomName() . ' argument -- @foo';
+    $text2 = $this->randomName() . ' argument -- @foo';
+    $message_type = message_type_create('foo', array('message_text' => array('l0' => array(array('value' => $text1)), 'l1' => array(array('value' => $text2)))));
+    $message_type->save();
+
+    // Reload the message type to see it was saved
+    $message_type = message_type_load('foo');
+    $this->assertTrue(!empty($message_type->id), t('Message type was saved to the database.'));
+
+    // Assert the message type text field exists and is populated.
+    $this->assertEqual($message_type->{$property}['l0'][0]['value'], $text1, t('First language message text was saved to the database.'));
+    $this->assertEqual($message_type->{$property}['l1'][0]['value'], $text2, t('Second language message text was saved to the database.'));
+
+
+    $arguments = array('@foo' => $this->randomName(4));
+    $message = message_create('foo', array('arguments' => $arguments), $web_user);
+    $message->save();
+
+    // Assert the arguments in the message are replaced.
+    $output = $message->view('full', 'l0');
+    $output = trim(strip_tags(render($output)));
+    $this->assertEqual($output, strtr($text1, $arguments), t('Arguments in the first language message were replaced.'));
+
+    // Assert the arguments in the message are replaced when showing a message
+    // from another language.
+    $output = $message->view('full', 'l1');
+    $output = trim(strip_tags(render($output)));
+    $this->assertEqual(strip_tags($output), strtr($text2, $arguments), t('Arguments in the second language message were replaced.'));
+  }
+}
+
+
+
+/**
+ * Test the Rules integration.
+ */
+class MessageRulesIntegrationTestCase extends DrupalWebTestCase {
+
+  public static function getInfo() {
+    return array(
+      'name' => 'Message Rules integration',
+      'description' => 'Tests the message module Rules integration.',
+      'group' => 'Message',
+      'dependencies' => array('rules'),
+    );
+  }
+
+  function setUp() {
+    parent::setUp('rules', 'message');
+  }
+
+  /**
+   * Tests creating a message via an action.
+   */
+  function testCRUD() {
+    $message_type = message_type_create('foo', array('message_text' => array(LANGUAGE_NONE => array(array('value' => 'Example text.')))));
+    $message_type->save();
+
+    $rule = rule();
+    $rule->action('entity_create', array(
+      'type' => 'message',
+      'param_type' => 'foo',
+      'param_user' => entity_metadata_wrapper('user', $GLOBALS['user']),
+    ));
+    $rule->integrityCheck();
+    $rule->execute();
+
+    // Checker whether a new message has been saved.
+    $messages = message_load_multiple(FALSE, array('type' => 'foo'));
+    $message = reset($messages);
+
+    $this->assertTrue(!empty($message), 'Message has been saved using Rules.');
+    $this->assertEqual($message->uid, $GLOBALS['user']->uid , 'Message has been saved for the right user.');
+    RulesLog::logger()->checkLog();
+  }
+}
