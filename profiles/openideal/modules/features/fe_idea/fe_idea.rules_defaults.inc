@@ -9,6 +9,39 @@
  */
 function fe_idea_default_rules_configuration() {
   $items = array();
+  $items['rules_idea_get_flag_on_radioactivity_'] = entity_import('rules_config', '{ "rules_idea_get_flag_on_radioactivity_" : {
+      "LABEL" : "Idea Get Flag On Radioactivity ",
+      "PLUGIN" : "reaction rule",
+      "TAGS" : [ "Radioactivity" ],
+      "REQUIRES" : [ "rules", "flag" ],
+      "ON" : [ "node_view" ],
+      "IF" : [
+        { "node_is_of_type" : { "node" : [ "node" ], "type" : { "value" : { "idea" : "idea" } } } },
+        { "entity_has_field" : { "entity" : [ "node" ], "field" : "field_radioactivity" } },
+        { "data_is" : {
+            "data" : [ "node:field-radioactivity" ],
+            "op" : "\\u003E",
+            "value" : "3000"
+          }
+        }
+      ],
+      "DO" : [
+        { "flag_flagnode" : {
+            "flag" : "popular_idea",
+            "node" : [ "node" ],
+            "flagging_user" : [ "node:author" ],
+            "permission_check" : 0
+          }
+        },
+        { "mail_to_users_of_role" : {
+            "roles" : { "value" : { "5" : "5" } },
+            "subject" : "The idea [node:title] become popular.\\r\\n",
+            "message" : "The idea [node:title] become popular.\\r\\nPlease check it out: [node:url]."
+          }
+        }
+      ]
+    }
+  }');
   $items['rules_idea_got_new_comment'] = entity_import('rules_config', '{ "rules_idea_got_new_comment" : {
       "LABEL" : "Idea got new comment",
       "PLUGIN" : "reaction rule",
