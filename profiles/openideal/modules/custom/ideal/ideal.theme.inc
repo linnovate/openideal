@@ -140,7 +140,7 @@ function theme_ideal_category_list_block() {
   $num_at_depth = 0;
   $output = "";
   
-  $output .=  "<ul class=\"menu\">\n<li>";
+  $output .=  "<ul class='menu'>\n<li>";
   foreach ($tree as $term) {
     $diffdepth = 0;
     if ($term->depth > $depth) {
@@ -156,7 +156,7 @@ function theme_ideal_category_list_block() {
       }
       $depth = $term->depth;
     }
-    if (($term->depth == $depth) && ($num_at_depth > 0)) {
+    if ($term->depth == $depth && $num_at_depth > 0) {
       $output .=  "</li>\n<li>";
     }
     $output .=  l($term->name, 'taxonomy/term/' . $term->tid);
