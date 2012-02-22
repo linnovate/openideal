@@ -3,7 +3,7 @@
  * 
  * By Jakob Persson of NodeOne
  */
-
+(function($) {
 /**
  * Register Watcher behavior
  */
@@ -167,3 +167,5 @@ function toggleWatch(el, rdata) {
   // Fade in, display the element again
   $(el).fadeTo(400, 1);
 }
+
+})(jQuery);

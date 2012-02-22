@@ -1,12 +1,29 @@
 /*
  * ##### Sasson - advanced drupal theming. #####
  *
- * SITENAME scripts.
+ * Open Ideal scripts.
  *
  */
 
 (function($) {
-  
+   
+Drupal.behaviors.categoryList = {
+  attach: function(context) {
+//    alert('hi');
+    $('.category-menu li').hover(
+      function() {
+        var level = $(this).parent().attr('class');
+        var start = level.indexOf('level-');
+        level = parseInt(level.substr(start+6, 1)) + 1;
+        $(this).children('ul.level-' + level).show();
+      },
+      function() {
+        $(this).children('ul').hide();
+      }
+    );
+  }
+};
+
 // DUPLICATE AND UNCOMMENT
 //Drupal.behaviors.behaviorName = {
 //  attach: function(context) {
