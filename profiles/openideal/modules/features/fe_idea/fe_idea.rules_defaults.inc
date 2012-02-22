@@ -9,6 +9,55 @@
  */
 function fe_idea_default_rules_configuration() {
   $items = array();
+  $items['rules_idea_become_popular'] = entity_import('rules_config', '{ "rules_idea_become_popular" : {
+      "LABEL" : "Idea_Become_Popular",
+      "PLUGIN" : "reaction rule",
+      "TAGS" : [ "Popular" ],
+      "REQUIRES" : [ "rules", "ideal_main", "flag" ],
+      "ON" : [ "flag_flagged_popular_idea" ],
+      "IF" : [
+        { "node_is_of_type" : {
+            "node" : [ "flagged-node" ],
+            "type" : { "value" : { "idea" : "idea" } }
+          }
+        },
+        { "AND" : [
+            { "entity_has_field" : { "entity" : [ "flagged-node" ], "field" : "field_in_action" } },
+            { "data_is_empty" : { "data" : [ "flagged-node:field-in-action" ] } }
+          ]
+        },
+        { "AND" : [
+            { "entity_has_field" : { "entity" : [ "flagged-node" ], "field" : "field_project_ref" } },
+            { "data_is_empty" : { "data" : [ "flagged-node:field-project-ref" ] } }
+          ]
+        }
+      ],
+      "DO" : [
+        { "entity_create" : {
+            "USING" : {
+              "type" : "node",
+              "param_type" : "project",
+              "param_title" : [ "flagged-node:title" ],
+              "param_author" : "1"
+            },
+            "PROVIDE" : { "entity_created" : { "entity_created" : "Created entity" } }
+          }
+        },
+        { "ideal_action_close_comments" : { "node" : [ "flagged-node" ] } },
+        { "data_set" : { "data" : [ "flagged-node:field-in-action" ], "value" : "Under Review" } },
+        { "data_set" : {
+            "data" : [ "flagged-node:field-project-ref" ],
+            "value" : [ "entity-created" ]
+          }
+        },
+        { "data_set" : {
+            "data" : [ "entity-created:field-in-action" ],
+            "value" : "Under Review"
+          }
+        }
+      ]
+    }
+  }');
   $items['rules_idea_get_flag_on_radioactivity_'] = entity_import('rules_config', '{ "rules_idea_get_flag_on_radioactivity_" : {
       "LABEL" : "Idea Get Flag On Radioactivity ",
       "PLUGIN" : "reaction rule",
@@ -35,8 +84,8 @@ function fe_idea_default_rules_configuration() {
         },
         { "mail_to_users_of_role" : {
             "roles" : { "value" : { "5" : "5" } },
-            "subject" : "The idea [node:title] become popular.\\u000D\\u000A",
-            "message" : "The idea [node:title] become popular.\\u000D\\u000APlease check it out: [node:url]."
+            "subject" : "The idea [node:title] become popular.\\r\\n",
+            "message" : "The idea [node:title] become popular.\\r\\nPlease check it out: [node:url]."
           }
         }
       ]
