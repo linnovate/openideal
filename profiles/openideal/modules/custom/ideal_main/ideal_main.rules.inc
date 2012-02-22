@@ -1,5 +1,34 @@
 <?php
 
+//---------------- Rules Actions
+/**
+ * Implements hook_rules_action_info()
+ */
+function ideal_main_rules_action_info() {
+  return array(
+    'ideal_action_close_comments' => array(
+      'label' => t('close node from adding new comments'), 
+      'group' => t("Openideal"),
+      'parameter' => array(
+        'node' => array(
+          'type' => 'node',
+          'label' => t('Content'),
+        ),
+      ),
+    ),
+  );
+}
+
+/**
+ * Action Implementation: close node from adding new comments.
+ */
+function ideal_action_close_comments($node) {
+  $node->comment = 1;
+  return array('node' => $node);
+}
+
+
+//---------------- Rules Conditions
 /**
   * Implements hook_rules_condition_info()
   */
@@ -31,7 +60,7 @@ function ideal_main_rules_condition_info() {
           'options list' => 'userpoints_condition_get_comparisons',
         ),
       ),
-      'group' => t('!Points', userpoints_translation()),
+      'group' => t("Openideal"),
     ),
   );
 }
