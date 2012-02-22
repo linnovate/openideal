@@ -36,7 +36,19 @@ function ideal_main_theme($existing, $type, $theme, $path) {
   return array(
     // theme function for sidebar category list
     'ideal_category_list_block' => array(
-      'file' => 'ideal.theme.inc',
+      'file' => 'ideal_main.theme.inc',
     ),
   );
+}
+
+/**
+ * Count idea nodes for a given taxonomy term 
+ */
+function ideal_count_term_ideas($tid) {
+  $query = db_select('taxonomy_index', 'ti');
+  $query->condition('ti.tid', $tid, '=')
+        ->fields('ti', array('nid'));
+  
+  $num_rows = $query->countQuery()->execute()->fetchField();
+  return $num_rows;
 }

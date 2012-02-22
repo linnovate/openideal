@@ -406,13 +406,13 @@ function openideal_install() {
     ->fields(array('uid' => 1, 'rid' => $admin_role->rid))
     ->execute();
 
-  // Create a Home link in the main menu.
+ /* // Create a Home link in the main menu.
   $item = array(
     'link_title' => st('Home'),
     'link_path' => '<front>',
     'menu_name' => 'main-menu',
   );
-  menu_link_save($item);
+  menu_link_save($item);*/
 
   // Update the menu router information.
   menu_rebuild();
