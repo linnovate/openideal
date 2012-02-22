@@ -1,1 +1,42 @@
 <?php
+
+/**
+ * Implements hook_block_info().
+ */
+function ideal_main_block_info() {
+  $blocks = array();
+  $blocks['category_list'] = array(
+    'info' => t('Ideal: Category list for sidebar'),
+  );
+  return $blocks;
+}
+
+
+/**
+ * Implements hook_block_view().
+ */
+function ideal_main_block_view($delta) {
+  if (TRUE) {
+    switch ($delta) {
+      case 'category_list':
+        $block = array(
+          'subject' => '',
+          'content' => theme('ideal_category_list_block'),
+        );
+        break;
+    }
+    return $block;
+  }
+}
+
+/**
+ * Implements hook_theme()
+ */
+function ideal_main_theme($existing, $type, $theme, $path) {
+  return array(
+    // theme function for sidebar category list
+    'ideal_category_list_block' => array(
+      'file' => 'ideal.theme.inc',
+    ),
+  );
+}
