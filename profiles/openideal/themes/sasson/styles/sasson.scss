@@ -1,0 +1,214 @@
+/**
+ * @file sasson/styles/sasson.scss
+ */
+
+// ==== Grid settings =======================================================
+//   Here we set the values for the grid system
+//   defaults are :
+//   $ninesixty-grid-width: 960px;
+//   $ninesixty-columns: 16;
+//   $ninesixty-gutter-width: 20px;
+//   $sidebar-first: 4;
+//   $sidebar-second: 4;
+// ==========================================================================
+
+// Grid dimentions
+$ninesixty-grid-width: [grid-width];
+$ninesixty-columns: [columns];
+$ninesixty-gutter-width: [gutter-width];
+
+// Sidebars widths
+$sidebar-first: [sidebar-first];
+$sidebar-second: [sidebar-second];
+
+@import "css3";
+@import "960/grid";
+@import "clear";
+
+@if [responsive] {
+  
+  @if [desktop-first] {
+
+    // ==== Media Queries for a Responsive Design. ============================
+    //   By default we suggest 4 levels of layout :
+    //   default - large viewport - fixed, pixel based layout, two sidebars floating (@see ninsixtyfive.scss).
+    //   second - medium viewport - fluid, precentage based layout, two sidebars floating (@see ninsixtyfive-narrow.scss).
+    //   third - small viewport - fluid, precentage based layout, only first one floating (@see ninsixtyfive-narrower.scss).
+    //   forth - no media queries - simple, content first, no sidebars layout (@see ninsixtyfive-narrowest.scss).
+    // =========================================================================
+
+    // Layout for large viewports - default.
+    @import "sasson-base";
+
+    // Layout for medium viewports
+    @media (max-width: [narrow]) {
+      @import "sasson-narrow"; 
+    }
+
+    // Layout for small viewports
+    @media (max-width: [narrower]) {
+      @import "sasson-narrower"; 
+    }
+
+    // Layout for smallest viewports
+    @media (max-width: [narrowest]) {
+      @import "sasson-narrowest";
+    }
+    
+  } @else if [mobile-first] {
+
+    // ==== Media Queries for Mobile-First Responsive Design. =======================
+    // By default we suggest 4 levels of layout :
+    // first - no media queries - simple, content first, no sidebars layout.
+    // second - small viewport - fluid, precentage based layout, only first sidebar floating.
+    // third - medium viewport - fluid, precentage based layout, two sidebars floating.
+    // forth - large viewport - fixed, pixel based layout, two sidebars floating.
+    // ==============================================================================
+
+    // No media queries is the first query
+    @import "sasson-mf-base";
+
+    // Layout for small viewports
+    @media (min-width: [small]) {
+      @import "sasson-mf-small";
+    }
+
+    // Layout for medium viewports
+    @media (min-width: [medium]) {
+      @import "sasson-mf-medium";
+    }
+
+    // Layout for large viewports
+    @media (min-width: [large]) {
+      @import "sasson-mf-large";
+    }
+    
+  }
+  
+} @else {
+
+  // Non responsive, simple layout.
+  @import "sasson-base";
+}
+
+
+// ==== Typography. ======================================
+//   Custom fonts from google web fonts
+// =======================================================
+@if [font-face] {
+  [font-selectors] {
+    font-family: [font-face] [font-fallback];
+  }
+}
+
+
+// ==== Clear floats. ======================================
+//   @mixin in _base.scss
+//   inspired by h5bp.com/q
+// =========================================================
+#page,
+#header,
+#featured,
+#footer {
+  @include clear;
+}
+
+
+@if [overlay] {
+
+  // ==== Design Overlay. =============================================
+  //   Overlay a draggable image over the design for visual comparison 
+  // ==================================================================
+  body.show-overlay #overlay {
+    position: absolute;
+    z-index: 99;
+    text-align: center;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    cursor: move;
+    opacity: [overlay-opacity];
+  }
+
+}
+
+
+@if [show-grid] + [overlay] > 0 {
+
+  // ==== Grid Background. =========================================
+  //   Use CSS3 gradients to creat flexible background grid "image"
+  // ===============================================================
+  $space : $ninesixty-gutter-width / 2;
+  $column: $ninesixty-grid-width / $ninesixty-columns - $space;
+  body.show-grid #page {
+    @include linear-gradient(color-stops(#e6ffa8 $space, #ccea7e $space, #bbd673 $column, #e6ffa8 $column, #e6ffa8 $column + $space), left);
+    background-size: 100% / $ninesixty-columns;
+  }
+
+  // Grid toggle switch
+  .toggle-grid,
+  .toggle-overlay {
+    width: 70px;
+    overflow: hidden;
+    height: 18px;
+    line-height: 18px;
+    position: fixed;
+    z-index: 100;
+    top: 60px;
+    right: 10px;
+    font-size: 11px;
+    text-align: center;
+    cursor: pointer;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5) inset;
+    background-clip: padding-box;
+    @include linear-gradient(color-stops(red 50%, green 50%, green), left);
+
+    body.dir-rtl & {
+      @include linear-gradient(color-stops(red 50%, green 50%, green), right);
+    }
+
+    div {
+      color: #777;
+      width: 46px;
+      border-radius: 2px;
+      background: #fff;
+      text-shadow: 1px 1px 0 #fff;
+      position: absolute;
+      left: 0;
+      @include linear-gradient(color-stops(#fefefe , #eaeaea), top);
+      transition: left 0.2s;
+
+      &:before,
+      &:after {
+        color: #fff;
+        text-shadow: none;
+        width: 25px;
+        position: absolute;
+        top: 0;
+        font-size: 9px;
+        font-weight: bold;
+      }
+      &:before {
+        content: "OFF";
+        left: -25px;
+      }
+      &:after {
+        content: "ON";
+        right: -25px;
+      }
+    } 
+
+    &.off {
+      div {
+        left: 25px;
+      }
+    }
+  }
+  .toggle-overlay {
+    top: 90px;
+  }
+
+}

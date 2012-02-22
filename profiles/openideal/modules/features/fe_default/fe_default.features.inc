@@ -43,11 +43,11 @@ function fe_default_flag_default_flags() {
     ),
     'show_on_profile' => 1,
     'access_uid' => 'others',
+    'api_version' => 2,
     'module' => 'fe_default',
     'locked' => array(
       0 => 'name',
     ),
-    'api_version' => 2,
   );
   return $flags;
 }

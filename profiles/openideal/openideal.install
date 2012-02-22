@@ -63,7 +63,7 @@ function openideal_install() {
   filter_format_save($full_html_format);
 
   // Enable some openideal blocks.
-  $default_theme = variable_get('theme_default', 'bartik');
+  $default_theme = variable_get('theme_default', 'luz');
   $admin_theme = 'seven';
   $blocks = array(
     array(

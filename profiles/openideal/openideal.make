@@ -178,3 +178,6 @@ projects[wysiwyg][subdir]                                      = contrib
 
 projects[wysiwyg_filter][version]                              = 7.x-1.6-rc2
 projects[wysiwyg_filter][subdir]                               = contrib
+
+; Themes
+projects[sasson][version]                                      = 7.x-2.0

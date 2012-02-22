@@ -13,17 +13,8 @@ function fe_default_default_rules_configuration() {
       "LABEL" : "User Get Flag On Userpoints",
       "PLUGIN" : "reaction rule",
       "TAGS" : [ "Userpoints" ],
-      "REQUIRES" : [ "ideal_main", "flag", "rules" ],
+      "REQUIRES" : [ "flag", "rules" ],
       "ON" : [ "node_view" ],
-      "IF" : [
-        { "userpoints_condition_check_points" : {
-            "user" : [ "site:current-user" ],
-            "tid" : "0",
-            "threshold" : "3000",
-            "comparison" : "ge"
-          }
-        }
-      ],
       "DO" : [
         { "flag_flaguser" : {
             "flag" : "extreme_user",

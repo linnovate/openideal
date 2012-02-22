@@ -80,6 +80,9 @@ function ideal_block_info() {
   $blocks['head_to_head'] = array(
     'info' => t('Ideal: Head to head'),
   );
+  $blocks['category_list'] = array(
+    'info' => t('Ideal: Category list for sidebar'),
+  );
   return $blocks;
 }
 
@@ -118,6 +121,12 @@ function ideal_block_view($delta) {
         $block = array(
           'subject' => t('Head to head'),
           'content' => theme('head_to_head_block', array('0' => $title, '1' => $first, '2' => $chart, '3' => $second)),
+        );
+        break;
+      case 'category_list':
+        $block = array(
+          'subject' => '',
+          'content' => theme('ideal_category_list_block'),
         );
         break;
     }
@@ -182,14 +191,18 @@ function ideal_theme($existing, $type, $theme, $path) {
       'variables' => array('titles' => NULL),
       'file' => 'ideal.theme.inc',
     ),
-//    'head_to_head_chart' => array(
-//      'variables' => array($score1, $score2),
-//      'file' => 'ideal.theme.inc',
-//    ),
-//    'head_to_head_block' => array(
-//      'variables' => array($chart, $title1, $title2, $vud_widget1, $vud_widget2, $service_link1, $service_link2),
-//      'file' => 'ideal.theme.inc',
-//    ),
+    'head_to_head_chart' => array(
+      'variables' => array($score1, $score2),
+      'file' => 'ideal.theme.inc',
+    ),
+    'head_to_head_block' => array(
+      'variables' => array($chart, $title1, $title2, $vud_widget1, $vud_widget2, $service_link1, $service_link2),
+      'file' => 'ideal.theme.inc',
+    ),
+    // theme function for sidebar category list
+    'ideal_category_list_block' => array(
+      'file' => 'ideal.theme.inc',
+    ),
     //Override filter.module's theme_filter_tips()
     'filter_tips' => array(
       'function' => 'ideal_filter_tips',

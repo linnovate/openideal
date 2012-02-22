@@ -44,7 +44,7 @@ function ideal_challenge_block_view($delta) {
   switch ($delta) {
     case 'challenge_add_idea':
       $block = array(
-        'subject' => 'The Chalenge',
+        'subject' => 'The Challenge',
         'content' => theme('ideal_challenge_add_idea'),
       );
       break;

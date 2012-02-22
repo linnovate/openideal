@@ -6,59 +6,59 @@
  */
 function theme_ideal_three_main_buttons($variables) {
   // TODO Number of parameters in this theme funcion does not match number of parameters found in hook_theme.
-  popups_add_popups(
-	   array(
-    //extend listing - reload.  
-    '.user-popup' => array(
-      'updateMethod' => 'reload',
-    ),
-    '.flag-deal-deliverd .flag' => array(
-      'updateMethod' => 'redirect',
-      'updateSource' => 'my_marketplace/deals_in_progress',
-      'doneTest' => 'my_marketplace/deals_in_progress',
-    ),
-    '.delivery_approval a' => array(
-      'updateMethod' => 'redirect',
-      'updateSource' => 'my_marketplace/completed_deals',
-      'doneTest' => '/',
-    ),
-    '.cancel_bid a' => array(
-      'updateMethod' => 'redirect',
-      'updateSource' => 'my_marketplace/cancelled_bids',
-    ),
-    '.flag-discarded .flag-action' => array(
-      'updateMethod' => 'reload',
-    ),
-    '.flag-extended .flag-action' => array(
-      'updateMethod' => 'reload',
-    ),
-    //cancel listing - redirect to my_marketplace/cancelled_listings.
-    '#block-cliconomy-listing_actions .cancel a' => array(
-      'updateMethod' => 'redirect',
-      'updateSource' => 'my_marketplace/cancelled_listings',
-    ),
-    //cancel bid - redirect to my_marketplace/cancelled_bids.
-    '.cancel-bid' => array(
-      'updateMethod' => 'redirect',
-      'updateSource' => 'my_marketplace/cancelled_bids',
-    ),
-    //bid-confirm  - reload.
-    '.bid-confirm' => array(
-      'updateMethod' => 'redirect',
-      'updateSource' => 'my_marketplace/my_bids',
-    ),
-    //no-credit  - reload.
-    '.no-credit' => array(
-      'updateMethod' => 'reload',
-    ),
-    //winning biddeer  - redirect to my_marketplace/deals_in_progress.
-    '.flag-selected-bid .flag-action' => array(
-      'updateMethod' => 'redirect',
-      'updateSource' => 'my_marketplace/deals_in_progress',
-      'doneTest' => 'my_marketplace/deals_in_progress',
-    ),
-  )
-	 );
+//  popups_add_popups(
+//	   array(
+//    //extend listing - reload.  
+//    '.user-popup' => array(
+//      'updateMethod' => 'reload',
+//    ),
+//    '.flag-deal-deliverd .flag' => array(
+//      'updateMethod' => 'redirect',
+//      'updateSource' => 'my_marketplace/deals_in_progress',
+//      'doneTest' => 'my_marketplace/deals_in_progress',
+//    ),
+//    '.delivery_approval a' => array(
+//      'updateMethod' => 'redirect',
+//      'updateSource' => 'my_marketplace/completed_deals',
+//      'doneTest' => '/',
+//    ),
+//    '.cancel_bid a' => array(
+//      'updateMethod' => 'redirect',
+//      'updateSource' => 'my_marketplace/cancelled_bids',
+//    ),
+//    '.flag-discarded .flag-action' => array(
+//      'updateMethod' => 'reload',
+//    ),
+//    '.flag-extended .flag-action' => array(
+//      'updateMethod' => 'reload',
+//    ),
+//    //cancel listing - redirect to my_marketplace/cancelled_listings.
+//    '#block-cliconomy-listing_actions .cancel a' => array(
+//      'updateMethod' => 'redirect',
+//      'updateSource' => 'my_marketplace/cancelled_listings',
+//    ),
+//    //cancel bid - redirect to my_marketplace/cancelled_bids.
+//    '.cancel-bid' => array(
+//      'updateMethod' => 'redirect',
+//      'updateSource' => 'my_marketplace/cancelled_bids',
+//    ),
+//    //bid-confirm  - reload.
+//    '.bid-confirm' => array(
+//      'updateMethod' => 'redirect',
+//      'updateSource' => 'my_marketplace/my_bids',
+//    ),
+//    //no-credit  - reload.
+//    '.no-credit' => array(
+//      'updateMethod' => 'reload',
+//    ),
+//    //winning biddeer  - redirect to my_marketplace/deals_in_progress.
+//    '.flag-selected-bid .flag-action' => array(
+//      'updateMethod' => 'redirect',
+//      'updateSource' => 'my_marketplace/deals_in_progress',
+//      'doneTest' => 'my_marketplace/deals_in_progress',
+//    ),
+//  )
+//	 );
   global $user;
   $output = '<div class="three-main-buttons">';
   if ($user->uid == 0) { // Send anonymous to log-in
@@ -127,4 +127,42 @@ function ideal_filter_tips($tips, $long = FALSE, $extra = '') {
  */
 function ideal_filter_tips_more_info() {
   return '';
+}
+
+/**
+ * Category list for sidebar:
+ * Show all terms from the "categories" taxonomy.
+ */
+function theme_ideal_category_list_block() {
+  $voc = taxonomy_vocabulary_machine_name_load('categories');
+  $tree = taxonomy_get_tree($voc->vid);
+  $depth = 0;
+  $num_at_depth = 0;
+  $output = "";
+  
+  $output .=  "<ul class=\"menu\">\n<li>";
+  foreach ($tree as $term) {
+    $diffdepth = 0;
+    if ($term->depth > $depth) {
+      $output .=  "\n<ul>\n<li>";
+      $depth = $term->depth;
+      $num_at_depth = 0;
+    }
+    if ($term->depth < $depth) {
+      $diffdepth = $depth - $term->depth;
+      while ($diffdepth > 0) {
+        $output .=  "</li>\n</ul>\n";
+        $diffdepth--;
+      }
+      $depth = $term->depth;
+    }
+    if (($term->depth == $depth) && ($num_at_depth > 0)) {
+      $output .=  "</li>\n<li>";
+    }
+    $output .=  l($term->name, 'taxonomy/term/' . $term->tid);
+    $num_at_depth++;
+  }
+  $output .=  "</li>\n</ul>\n";
+
+  return $output;
 }

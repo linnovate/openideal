@@ -1,0 +1,94 @@
+; Theme Info --------------------------------------------------------------
+; required information about the theme
+
+name = Sasson
+description = Sasson is a base theme for advanced drupal theming.
+screenshot = images/sasson.png
+core = 7.x
+
+
+; Stylesheets  ------------------------------------------------------------
+
+styles[styles/boilerplate.css][options][weight] = -1
+styles[styles/boilerplate.css][options][media] = all
+
+styles[styles/sasson.scss][options][weight] = -1
+styles[styles/sasson.scss][options][media] = all
+
+
+; Scripts  ----------------------------------------------------------------
+
+scripts[] = scripts/sasson.js
+
+
+; Regions -----------------------------------------------------------------
+; these content regions are available for block placement.
+; some are special hidden regions: page_top, page_bottom, and help.
+
+; these are the stock regions
+regions[header] = Header
+regions[help] = Help
+regions[page_top] = Page top
+regions[page_bottom] = Page bottom
+regions[highlighted] = Highlighted
+
+regions[featured] = Featured
+regions[content_top] = Content top
+regions[content] = Content
+regions[content_bottom] = Content bottom
+
+regions[sidebar_first] = Sidebar first
+regions[sidebar_second] = Sidebar second
+
+regions[footer] = Footer
+
+
+; Theme Settings ----------------------------------------------------------
+; these are the defaults for the theme settings configuration.
+; sub-themes must re-declare default settings.
+
+settings[sasson_show_grid] = 0
+settings[sasson_grid_width] = '960px'
+settings[sasson_columns] = '16'
+settings[sasson_gutter_width] = '20px'
+settings[sasson_sidebar_first] = '4'
+settings[sasson_sidebar_second] = '4'
+
+settings[sasson_responsive] = 1
+settings[sasson_responsive_approach] = 'desktop_first'
+settings[sasson_responsive_narrow] = '960px'
+settings[sasson_responsive_narrower] = '767px'
+settings[sasson_responsive_narrowest] = '480px'
+settings[sasson_responsive_mf_small] = '480px'
+settings[sasson_responsive_mf_medium] = '767px'
+settings[sasson_responsive_mf_large] = '960px'
+settings[sasson_responsive_menus_width] = '480px'
+settings[sasson_responsive_menus_selectors] = 'ul#main-menu-links, ul#secondary-menu-links'
+
+settings[sasson_sass] = 1
+settings[sasson_devel] = 1
+
+settings[sasson_html5shiv] = 1
+settings[sasson_force_ie] = 1
+settings[sasson_prompt_cf] = 'IE 7'
+
+settings[sasson_clear_registry] = 0
+settings[sasson_overlay] = 0
+settings[sasson_overlay_url] = ''
+settings[sasson_overlay_opacity] = '0.5'
+
+settings[sasson_font] = ''
+settings[sasson_font_fallback] = 'sans-serif'
+settings[sasson_font_selectors] = 'body'
+
+settings[sasson_breadcrumb_hideonlyfront] = 1
+settings[sasson_breadcrumb_showtitle] = 0
+settings[sasson_breadcrumb_separator] = '»'
+settings[sasson_feed_icons] = 0
+
+; Information added by drupal.org packaging script on 2012-02-19
+version = "7.x-2.0"
+core = "7.x"
+project = "sasson"
+datestamp = "1329693346"
+

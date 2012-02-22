@@ -9,12 +9,30 @@
  */
 function fe_idea_ctools_plugin_api() {
   list($module, $api) = func_get_args();
+  if ($module == "context" && $api == "context") {
+    return array("version" => "3");
+  }
+  list($module, $api) = func_get_args();
+  if ($module == "quicktabs" && $api == "quicktabs") {
+    return array("version" => "1");
+  }
+  list($module, $api) = func_get_args();
   if ($module == "radioactivity" && $api == "radioactivity_decay_profile") {
     return array("version" => "1");
   }
   list($module, $api) = func_get_args();
   if ($module == "strongarm" && $api == "strongarm") {
     return array("version" => "1");
+  }
+}
+
+/**
+ * Implements hook_views_api().
+ */
+function fe_idea_views_api() {
+  list($module, $api) = func_get_args();
+  if ($module == "views" && $api == "views_default") {
+    return array("version" => "3.0");
   }
 }
 
@@ -52,11 +70,11 @@ function fe_idea_flag_default_flags() {
     'show_on_form' => 0,
     'access_author' => '',
     'i18n' => 0,
-    'api_version' => 2,
     'module' => 'fe_idea',
     'locked' => array(
       0 => 'name',
     ),
+    'api_version' => 2,
   );
   return $flags;
 }
