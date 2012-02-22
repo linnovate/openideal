@@ -177,12 +177,6 @@ function fe_idea_context_default_contexts() {
   $context->reactions = array(
     'block' => array(
       'blocks' => array(
-        'ideal-three_main_buttons' => array(
-          'module' => 'ideal',
-          'delta' => 'three_main_buttons',
-          'region' => 'featured',
-          'weight' => '-10',
-        ),
         'ideal-category_list' => array(
           'module' => 'ideal',
           'delta' => 'category_list',
