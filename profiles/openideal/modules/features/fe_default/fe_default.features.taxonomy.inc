@@ -1,13 +1,13 @@
 <?php
 /**
  * @file
- * fe_idea.features.taxonomy.inc
+ * fe_default.features.taxonomy.inc
  */
 
 /**
  * Implements hook_taxonomy_default_vocabularies().
  */
-function fe_idea_taxonomy_default_vocabularies() {
+function fe_default_taxonomy_default_vocabularies() {
   return array(
     'categories' => array(
       'name' => 'Categories',
