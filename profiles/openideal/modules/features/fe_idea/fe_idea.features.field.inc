@@ -54,13 +54,10 @@ function fe_idea_field_default_fields() {
           'weight' => '1',
         ),
         'teaser' => array(
-          'label' => 'hidden',
-          'module' => 'text',
-          'settings' => array(
-            'trim_length' => 600,
-          ),
-          'type' => 'text_trimmed',
-          'weight' => '1',
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
         ),
       ),
       'entity_type' => 'node',
@@ -130,14 +127,13 @@ function fe_idea_field_default_fields() {
           'module' => 'taxonomy',
           'settings' => array(),
           'type' => 'taxonomy_term_reference_link',
-          'weight' => '3',
+          'weight' => '2',
         ),
         'teaser' => array(
           'label' => 'above',
-          'module' => 'taxonomy',
           'settings' => array(),
-          'type' => 'taxonomy_term_reference_link',
-          'weight' => '3',
+          'type' => 'hidden',
+          'weight' => 0,
         ),
       ),
       'entity_type' => 'node',
@@ -209,7 +205,7 @@ function fe_idea_field_default_fields() {
           'label' => 'above',
           'settings' => array(),
           'type' => 'hidden',
-          'weight' => '5',
+          'weight' => 0,
         ),
       ),
       'entity_type' => 'node',
@@ -224,7 +220,7 @@ function fe_idea_field_default_fields() {
         'module' => 'options',
         'settings' => array(),
         'type' => 'options_select',
-        'weight' => '5',
+        'weight' => '6',
       ),
     ),
   );
@@ -265,18 +261,16 @@ function fe_idea_field_default_fields() {
       'description' => '',
       'display' => array(
         'default' => array(
-          'label' => 'hidden',
-          'module' => 'list',
+          'label' => 'above',
           'settings' => array(),
-          'type' => 'list_default',
+          'type' => 'hidden',
           'weight' => '4',
         ),
         'teaser' => array(
-          'label' => 'hidden',
-          'module' => 'list',
+          'label' => 'above',
           'settings' => array(),
-          'type' => 'list_default',
-          'weight' => '4',
+          'type' => 'hidden',
+          'weight' => 0,
         ),
       ),
       'entity_type' => 'node',
@@ -292,6 +286,85 @@ function fe_idea_field_default_fields() {
         'settings' => array(),
         'type' => 'options_select',
         'weight' => '4',
+      ),
+    ),
+  );
+
+  // Exported field: 'node-idea-field_project_ref'
+  $fields['node-idea-field_project_ref'] = array(
+    'field_config' => array(
+      'active' => '1',
+      'cardinality' => '1',
+      'deleted' => '0',
+      'entity_types' => array(),
+      'field_name' => 'field_project_ref',
+      'foreign keys' => array(),
+      'indexes' => array(
+        'target_entity' => array(
+          0 => 'target_type',
+          1 => 'target_id',
+        ),
+      ),
+      'module' => 'entityreference',
+      'settings' => array(
+        'handler' => 'base',
+        'handler_settings' => array(
+          'sort' => array(
+            'direction' => 'ASC',
+            'field' => 'body:value',
+            'property' => 'nid',
+            'type' => 'none',
+          ),
+          'target_bundles' => array(
+            'project' => 'project',
+          ),
+        ),
+        'handler_submit' => 'Change handler',
+        'profile2_private' => FALSE,
+        'target_type' => 'node',
+      ),
+      'translatable' => '0',
+      'type' => 'entityreference',
+    ),
+    'field_instance' => array(
+      'bundle' => 'idea',
+      'default_value' => NULL,
+      'deleted' => '0',
+      'description' => '',
+      'display' => array(
+        'default' => array(
+          'label' => 'above',
+          'module' => 'entityreference',
+          'settings' => array(
+            'link' => FALSE,
+          ),
+          'type' => 'entityreference_label',
+          'weight' => 6,
+        ),
+        'teaser' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+      ),
+      'entity_type' => 'node',
+      'field_name' => 'field_project_ref',
+      'label' => 'Is Part Of A Project',
+      'required' => 0,
+      'settings' => array(
+        'user_register_form' => FALSE,
+      ),
+      'widget' => array(
+        'active' => 1,
+        'module' => 'entityreference',
+        'settings' => array(
+          'match_operator' => 'CONTAINS',
+          'path' => '',
+          'size' => '60',
+        ),
+        'type' => 'entityreference_autocomplete',
+        'weight' => '5',
       ),
     ),
   );
@@ -329,20 +402,16 @@ function fe_idea_field_default_fields() {
           'module' => 'radioactivity',
           'settings' => array(
             'energy' => '10',
-            'type' => 'energy',
+            'type' => 'none',
           ),
           'type' => 'radioactivity_combo_formatter',
-          'weight' => '2',
+          'weight' => '3',
         ),
         'teaser' => array(
-          'label' => 'hidden',
-          'module' => 'radioactivity',
-          'settings' => array(
-            'energy' => '0',
-            'type' => 'energy',
-          ),
-          'type' => 'radioactivity_combo_formatter',
-          'weight' => '2',
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
         ),
       ),
       'entity_type' => 'node',
@@ -394,7 +463,7 @@ function fe_idea_field_default_fields() {
       'description' => '',
       'display' => array(
         'default' => array(
-          'label' => 'above',
+          'label' => 'hidden',
           'module' => 'vud_field',
           'settings' => array(),
           'type' => 'default',
@@ -402,10 +471,9 @@ function fe_idea_field_default_fields() {
         ),
         'teaser' => array(
           'label' => 'above',
-          'module' => 'vud_field',
           'settings' => array(),
-          'type' => 'default',
-          'weight' => '0',
+          'type' => 'hidden',
+          'weight' => 0,
         ),
       ),
       'entity_type' => 'node',
@@ -432,6 +500,7 @@ function fe_idea_field_default_fields() {
   t('Category');
   t('In Action');
   t('Is Part Of A Challenge');
+  t('Is Part Of A Project');
   t('Please share you idea.');
   t('Radioactivity');
   t('Vote');

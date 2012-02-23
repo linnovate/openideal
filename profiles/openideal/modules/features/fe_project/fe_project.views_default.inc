@@ -35,10 +35,11 @@ function fe_project_views_default_views() {
   $handler->display->display_options['row_options']['relationship'] = 'field_idea_ref_target_id';
   $handler->display->display_options['row_options']['links'] = 0;
   $handler->display->display_options['row_options']['comments'] = 0;
-  /* Relationship: Entity Reference: Referenced Entity */
+  /* Relationship: Broken/missing handler */
   $handler->display->display_options['relationships']['field_idea_ref_target_id']['id'] = 'field_idea_ref_target_id';
   $handler->display->display_options['relationships']['field_idea_ref_target_id']['table'] = 'field_data_field_idea_ref';
   $handler->display->display_options['relationships']['field_idea_ref_target_id']['field'] = 'field_idea_ref_target_id';
+  $handler->display->display_options['relationships']['field_idea_ref_target_id']['label'] = 'Content entity referenced from field_idea_ref';
   $handler->display->display_options['relationships']['field_idea_ref_target_id']['required'] = 1;
   /* Field: Content: Title */
   $handler->display->display_options['fields']['title']['id'] = 'title';
