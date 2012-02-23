@@ -52,3 +52,38 @@ function ideal_count_term_ideas($tid) {
   $num_rows = $query->countQuery()->execute()->fetchField();
   return $num_rows;
 }
+
+/**
+ * Implements hook_quicktabs_alter()
+ * Add counter to quicktab title.
+ */
+function ideal_main_quicktabs_alter(&$quicktabs) { 
+  $quicktabs_to_alter = array("all_ideas", "ideas_by_category", "in_action");
+  if (in_array($quicktabs->machine_name, $quicktabs_to_alter)) {
+    foreach ($quicktabs->tabs as $key => $tab){
+      
+      // find what quicktab instance we're in, and what block this is
+      $block = substr($tab['bid'], strpos($tab['bid'], "block"));
+      $view = substr($tab['bid'], 0, strpos($tab['bid'], "block")-1);
+      $view = substr($view, strpos($view, "delta")+6);
+     
+      // if this is one of the tabs we want to add the counter to
+      if ($view == "ideas_in_action" || ($block == "block_3" && ($view == "ideas_by_category" || $view == "ideas_all"))) {
+        $count = ideal_main_quicktabs_view_counter($view, $block);
+        $quicktabs->tabs[$key]['title'] .= " (" . $count . ")";
+      }
+    }
+  }
+}
+
+/**
+ * Helper function for loading a view and getting the row count.
+ */
+function ideal_main_quicktabs_view_counter($tab_view, $tab_display) {
+  $view = views_get_view($tab_view);
+  $view->set_display($tab_display);
+  $view->pre_execute();
+  $view->execute();
+  $count = $view->total_rows ? $view->total_rows : 0;
+  return $count;
+}
