@@ -16,6 +16,21 @@ function ideal_main_rules_action_info() {
         ),
       ),
     ),
+      
+    'ideal_action_set_content_vote' => array(
+      'label' => t('Set content vote resulet'), 
+      'group' => t("Openideal"),
+      'parameter' => array(
+        'node' => array(
+          'type' => 'node',
+          'label' => t('Content'),
+        ),
+        'vote' => array(
+          'type' => '*',
+          'label' => t('Vote Resulets'),
+        ),
+      ),
+    ),
   );
 }
 
@@ -25,6 +40,22 @@ function ideal_main_rules_action_info() {
 function ideal_action_close_comments($node) {
   $node->comment = 1;
   return array('node' => $node);
+}
+
+/**
+ * Action Implementation: Set content vote resulet.
+ */
+function ideal_action_set_content_vote($node, $vote_result) {
+  $vote = array(
+    'value' => $vote_result,  
+    'entity_id' => $node->nid,
+    'value_type' => 'points',
+//    'uid' => 1,    
+  );
+  $votes = array(0 => $vote);
+  
+  $vote = votingapi_set_votes($votes);
+  return array('node' => $node, 'vote' => $vote);
 }
 
 

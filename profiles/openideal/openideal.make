@@ -2,9 +2,6 @@ api = 2
 core = 7.x
 projects[drupal][type]                                         = core
 
-projects[block_class][version]                                 = 7.x-1.0
-projects[block_class][subdir]                                  = contrib
-
 projects[boxes][version]                                       = 7.x-1.0-beta7
 projects[boxes][subdir]                                        = contrib
 
