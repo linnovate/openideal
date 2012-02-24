@@ -8,8 +8,8 @@ function ideal_main_menu() {
   $items['admin/config/user-interface/openideal'] = array(
     'title' => 'General Configurations',
     'access arguments' => array('access content'),
-    'page callback' => 'drupal_get_form',
-    'page arguments' => array('ideal_main_config_form'),
+    'page callback' => 'ideal_main_config_page',
+//    'page arguments' => array('ideal_main_config_form'),
     'file' => 'ideal_main.admin.inc',  
     'type' => MENU_NORMAL_ITEM,
   );
