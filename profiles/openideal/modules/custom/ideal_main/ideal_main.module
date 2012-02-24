@@ -1,6 +1,28 @@
 <?php
 
 /**
+ * Implements hook_menu().
+ */
+function ideal_main_menu() {
+  $items = array();
+  $items['admin/config/user-interface/openideal'] = array(
+    'title' => 'General Configurations',
+    'access arguments' => array('access content'),
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('ideal_main_config_form'),
+    'file' => 'ideal_main.admin.inc',  
+    'type' => MENU_NORMAL_ITEM,
+  );
+  
+  $items['admin/config/user-interface/openideal/general'] = array(
+    'title' => 'General Configurations',
+    'description' => 'General Configurations', 
+    'type' => MENU_DEFAULT_LOCAL_TASK,
+  );
+  return $items;
+}
+
+/**
  * Implements hook_block_info().
  */
 function ideal_main_block_info() {

@@ -1,0 +1,40 @@
+<?php
+/**
+ * @file
+ * Code for the Add Idea Autocompleate feature.
+ */
+
+include_once('add_idea_autocompleate.features.inc');
+
+
+/**
+ * implimentation of hook_form_FORM_ID_alter()
+ */
+function add_idea_autocompleate_form_idea_node_form_alter(&$form, &$form_state, $form_id) {
+  // Check if we're on the add idea page and the autocomplete id turn on.
+  if (variable_get('idea_add_autocomplete', NULL) && $_GET['q'] == 'node/add/idea') {
+    // Get the list of ideas.
+    $list = views_get_view_result('all_ideas_titles', 'block');
+    
+    // Adds the js and pass the the ideas list.
+    drupal_add_library('system', 'ui.autocomplete');
+    drupal_add_js(drupal_get_path('module', 'add_idea_autocompleate') . '/add_idea_autocompleate.js');
+    drupal_add_js(array('options' => $list), array('type' => 'setting'));  
+  }  
+}
+
+/**
+ * Implements hook_menu().
+ */
+function add_idea_autocompleate_menu() {
+  $items = array();
+  $items['admin/config/user-interface/openideal/add_idea_autocompleate'] = array(
+    'title' => 'Add Idea Autocompleate',
+    'access arguments' => array('access content'),
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('add_idea_autocompleate_config_form'),
+    'file' => 'add_idea_autocompleate.admin.inc', 
+    'type' => MENU_LOCAL_TASK,
+  );
+  return $items;
+}

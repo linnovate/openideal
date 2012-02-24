@@ -7,9 +7,10 @@ function ideal_challenge_menu() {
   $items['admin/config/user-interface/openideal/ideal-challenge'] = array(
     'title' => 'Default Challenge',
     'access arguments' => array('access content'),
-    'page callback' => 'ideal_challenge_page',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('ideal_challenge_default_challenge_form'),  
     'file' => 'ideal_challenge.admin.inc',  
-    'type' => MENU_NORMAL_ITEM,
+    'type' => MENU_LOCAL_TASK,
   );
   return $items;
 }
