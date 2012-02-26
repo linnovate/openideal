@@ -52,3 +52,27 @@ function ideal_count_term_ideas($tid) {
   $num_rows = $query->countQuery()->execute()->fetchField();
   return $num_rows;
 }
+
+
+
+/**
+ *  hook_data_alter
+ */
+function ideal_main_views_data_alter(&$data) {
+  $data['node']['uid_voted'] = array(
+    'title' => t('User voted'),
+    'help' => t('Display nodes only if a user voted on the node.'),
+    'argument' => array(
+      'field' => 'uid',
+      'name table' => 'users',
+      'name field' => 'name',
+      'handler' => 'views_handler_argument_vote_only_user_uid',
+    ),
+    'filter' => array(
+      'field' => 'uid',
+      'name table' => 'users',
+      'name field' => 'name',
+      'handler' => 'views_handler_filter_vote_only_user_uid',
+    ),
+  );
+}
