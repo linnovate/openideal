@@ -1,10 +1,9 @@
 <?php
-
 /**
  * Argument handler to accept a user id to check for nodes that
- * user posted or commented on.
+ * voted on.
  */
-class views_handler_argument_comment_only_user_uid extends views_handler_argument {
+class views_handler_argument_vote_only_user_uid extends views_handler_argument {
   function title() {
     if (!$this->argument) {
       $title = variable_get('anonymous', t('Anonymous'));
@@ -47,22 +46,3 @@ class views_handler_argument_comment_only_user_uid extends views_handler_argumen
     $this->query->add_where(0, $condition);
   }
 }
-  
-  
- /* function query() {
-    $this->ensure_my_table();
-    //$this->query->add_where(0, "$this->table_alias.uid = %d OR ((SELECT COUNT(*) FROM {comments} c WHERE c.uid = %d AND c.nid = $this->table_alias.nid) > 0)", $this->argument, $this->argument);
-    $this->query->add_where(0,
-    "((SELECT COUNT(*)
-    FROM {comments} c
-    WHERE c.uid = %d
-    AND c.nid = $this->table_alias.nid) > 0
-    OR
-    (SELECT COUNT(*)
-    FROM {votingapi_vote} v
-    WHERE v.uid =  %d
-    AND v.content_id = $this->table_alias.nid) > 0)
-    AND $this->table_alias.uid <> %d",
-    $this->argument, $this->argument,   $this->argument);
-  }
-}*/

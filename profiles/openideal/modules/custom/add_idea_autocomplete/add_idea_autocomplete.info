@@ -1,0 +1,8 @@
+name = "Add Idea autocomplete"
+description = "Add idea title form autocomplete"
+core = "7.x"
+package = "Features"
+dependencies[] = "ctools"
+dependencies[] = "views"
+features[ctools][] = "views:views_default:3.0"
+features[views_view][] = "all_ideas_titles"

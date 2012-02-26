@@ -1,10 +1,4 @@
 <?php
-/**
- * Page callback for settings the default challenge.
- */
-function ideal_challenge_page() {
-  return drupal_get_form('ideal_challenge_default_challenge_form');
-}
 
 /**
  * Form to select the default chellenge.
@@ -19,24 +13,10 @@ function ideal_challenge_default_challenge_form($form) {
   $form['default_challenge'] = array(
     '#type' => 'select',
     '#title' => t('Default Challenge'),
+    '#description' => 'Select the site current idea.',    
     '#options' => $options,
     '#default_value' => variable_get('default_challenge', NULL),
   );
 
-  $form['submit'] = array(
-    '#type' => 'submit',
-    '#value' => t('Submit'),
-  );
-
-  return $form;
-}
-
-/**
- * @param $form
- * @param $form_state
- * @return unknown_type
- */
-function ideal_challenge_default_challenge_form_submit($form, &$form_state) {
-  $default_challenge = $form_state['values']['default_challenge'];
-  variable_set('default_challenge', $default_challenge);
+  return system_settings_form($form);
 }
