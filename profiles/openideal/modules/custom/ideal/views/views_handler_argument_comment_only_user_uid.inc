@@ -10,7 +10,7 @@ class views_handler_argument_comment_only_user_uid extends views_handler_argumen
       $title = variable_get('anonymous', t('Anonymous'));
     }
     else {
-      $title = db_query("SELECT u.name FROM {users} u WHERE u.uid = :u.uid", array(':u.uid' => $this->argument))->fetchField();
+      $title = db_query("SELECT u.name FROM {users} u WHERE u.uid = :uid", array(':uid' => $this->argument))->fetchField();
     }
     if (empty($title)) {
       return t('No user');
@@ -33,7 +33,23 @@ class views_handler_argument_comment_only_user_uid extends views_handler_argumen
     }
   }
 
-  function query() {
+  function query($group_by = FALSE) {
+    $this->ensure_my_table();
+
+    $subselect = db_select('votingapi_vote', 'v');
+    $subselect->addField('v', 'vote_id');
+    $subselect->condition('v.uid', $this->argument);
+    $subselect->where("v.entity_id = $this->table_alias.nid");
+
+    $condition = db_or()
+      ->exists($subselect);
+
+    $this->query->add_where(0, $condition);
+  }
+}
+  
+  
+ /* function query() {
     $this->ensure_my_table();
     //$this->query->add_where(0, "$this->table_alias.uid = %d OR ((SELECT COUNT(*) FROM {comments} c WHERE c.uid = %d AND c.nid = $this->table_alias.nid) > 0)", $this->argument, $this->argument);
     $this->query->add_where(0,
@@ -49,4 +65,4 @@ class views_handler_argument_comment_only_user_uid extends views_handler_argumen
     AND $this->table_alias.uid <> %d",
     $this->argument, $this->argument,   $this->argument);
   }
-}
+}*/
