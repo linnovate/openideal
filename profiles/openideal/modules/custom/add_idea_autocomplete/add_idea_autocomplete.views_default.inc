@@ -1,13 +1,13 @@
 <?php
 /**
  * @file
- * add_idea_autocompleate.views_default.inc
+ * add_idea_autocomplete.views_default.inc
  */
 
 /**
  * Implements hook_views_default_views().
  */
-function add_idea_autocompleate_views_default_views() {
+function add_idea_autocomplete_views_default_views() {
   $export = array();
 
   $view = new view;
