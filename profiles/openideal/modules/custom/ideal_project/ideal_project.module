@@ -186,3 +186,83 @@ function _ideal_add_project_when_idea_is_worth_checking() {
     $flag_worth_checking->flag('flag', $newnode->nid);
   }
 }
+
+/*****************************************/
+/************* NEW STUFF *****************/
+/*****************************************/
+
+function ideal_project_flag($action, $flag, $content_id, $account) {
+  if ($action == 'flag' && $flag->name == 'popular_idea') {
+    // Do stuff to the idea node:
+    $idea = node_load($content_id);
+    if ($idea->type == "idea") {
+      // close it for comments
+      $wrp = entity_metadata_wrapper('node', $idea);
+      $wrp->comment->set(1);
+      // set the in_action field to the first option
+      $in_action_values = field_info_field('field_in_action');
+      $in_action_values = array_shift($in_action_values['settings']['allowed_values']);
+      $wrp->field_in_action->set($in_action_values);
+      
+      // Create the new project node
+      $project = entity_create('node', array(
+            'title' => $idea->title,
+            'body' => $idea->body,
+            'language' => $idea->language,
+            'uid' => 1,
+            'type' => 'project',
+            'field_category' => $idea->field_category,
+          ));
+      entity_save('node', $project);
+      $project_wrp = entity_metadata_wrapper('node', $project);
+      $project_wrp->field_in_action->set($in_action_values);
+      $project_wrp->field_idea_ref->set(array(0 => 5));
+      $project_wrp->save();
+      
+      // give the idea a reference to the new project 
+      $wrp->field_project_ref->set($project->nid);       
+      // save the changes to the idea
+      $wrp->save();
+      
+      // give the new project the idea's voting count
+      $node_votes = votingapi_select_results(array('entity_id' => $content_id));
+      $vote = array(
+        'value' => $node_votes[3]['value'],  
+        'entity_id' => $project->nid,
+        'value_type' => 'points',   
+      );
+      $votes = array(0 => $vote);
+      $vote = votingapi_set_votes($votes);
+
+      // Flag the project as popular
+      $flag = flag_get_flag('popular_idea');
+      $flag->flag('flag', $project->nid);
+    }
+  }
+}
+
+
+/*
+ * Implementation of hook_node_view()
+ * 
+ * Disable voting on flagged (popular idea) nodes.
+ * 
+ */
+
+function ideal_project_node_view(&$node) {
+  $flag = flag_get_flag('popular_idea');
+  if ($flag->is_flagged($node->nid)) {
+    $tag = variable_get('vud_tag', 'vote');
+    $widget = variable_get('vud_node_widget', 'updown');
+    
+    $theme_vars = array(
+        'entity_id' => $node->nid,
+        'type' => 'node',
+        'widget_theme' => 'alternate',
+        'tag' => $tag,
+        'readonly' => TRUE
+    );
+    
+    $node->content['field_vote'][0]['#markup'] = theme('vud_widget', $theme_vars);
+  }
+}
