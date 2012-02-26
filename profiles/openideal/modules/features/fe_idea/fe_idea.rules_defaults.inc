@@ -13,7 +13,7 @@ function fe_idea_default_rules_configuration() {
       "LABEL" : "Idea_Become_Popular",
       "PLUGIN" : "reaction rule",
       "TAGS" : [ "Popular" ],
-      "REQUIRES" : [ "rules", "ideal_main", "flag" ],
+      "REQUIRES" : [ "rules", "voting_rules", "ideal_main", "flag" ],
       "ON" : [ "flag_flagged_popular_idea" ],
       "IF" : [
         { "node_is_of_type" : {
@@ -30,6 +30,12 @@ function fe_idea_default_rules_configuration() {
             { "entity_has_field" : { "entity" : [ "flagged-node" ], "field" : "field_project_ref" } },
             { "data_is_empty" : { "data" : [ "flagged-node:field-project-ref" ] } }
           ]
+        },
+        { "voting_rules_condition_check_vote_value" : {
+            "vote" : [ "flagged-node:votes:0" ],
+            "operator" : "\\u003E",
+            "value" : "-1"
+          }
         }
       ],
       "DO" : [
@@ -54,7 +60,13 @@ function fe_idea_default_rules_configuration() {
             "data" : [ "entity-created:field-in-action" ],
             "value" : "Under Review"
           }
-        }
+        },
+        { "variable_add" : {
+            "USING" : { "type" : "vote_results", "value" : [ "flagged-node:vote-results" ] },
+            "PROVIDE" : { "variable_added" : { "flagged_node_resulet" : "Flagged node resulet" } }
+          }
+        },
+        { "ideal_action_set_content_vote" : { "node" : [ "entity-created" ], "vote" : [ "flagged-node-resulet:sum" ] } }
       ]
     }
   }');
@@ -84,8 +96,8 @@ function fe_idea_default_rules_configuration() {
         },
         { "mail_to_users_of_role" : {
             "roles" : { "value" : { "5" : "5" } },
-            "subject" : "The idea [node:title] become popular.\\r\\n",
-            "message" : "The idea [node:title] become popular.\\r\\nPlease check it out: [node:url]."
+            "subject" : "The idea [node:title] become popular.\\u000D\\u000A",
+            "message" : "The idea [node:title] become popular.\\u000D\\u000APlease check it out: [node:url]."
           }
         }
       ]

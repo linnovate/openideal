@@ -1,13 +1,13 @@
 <?php
 /**
  * @file
- * fe_default.features.menu_custom.inc
+ * fe_idea.features.menu_custom.inc
  */
 
 /**
  * Implements hook_menu_default_menu_custom().
  */
-function fe_default_menu_default_menu_custom() {
+function fe_idea_menu_default_menu_custom() {
   $menus = array();
 
   // Exported menu: main-menu
