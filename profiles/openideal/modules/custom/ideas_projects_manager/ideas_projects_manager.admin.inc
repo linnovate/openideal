@@ -19,7 +19,13 @@ function theme_ideas_projects_manager_page() {
  * Display the ideas to be added to the project.
  */
 function ideas_projects_manager_ideas_list_form($form) {
+  $options = array();
+//  $header = array (
+//    'idea' => t('Idea'),
+//  );
+  // Get the Projects from views.
   $ideas = views_get_view_result('ideas_manager', 'block');
+  // Loop through the views result to build an array.
   foreach ($ideas as $li) {
     $options[$li->nid] = $li->node_title;
   }
@@ -27,6 +33,7 @@ function ideas_projects_manager_ideas_list_form($form) {
   $form['ideas'] = array (
     '#type' => 'select',
     '#title' => 'Ideas',
+//    '#header' => $header,
     '#options' => $options,
     '#multiple' => TRUE,
     '#description' => "The list of ideas. \nUse the the add button under to pass ideas to project. \nFor multiselection use CTRL + click",  
@@ -58,6 +65,7 @@ function ideas_projects_manager_idea_manager_exposed_form($form) {
  * Filter the ideas by Title.
  */
 function ideas_projects_manager_idea_manager_exposed_form_submit($form, &$form_state) {
+  // Builde the querystring to the redirect.
   $options = array(
    'query' => array(
       'text' => $form_state['values']['title'],
@@ -75,9 +83,11 @@ function ideas_projects_manager_idea_manager_exposed_form_submit($form, &$form_s
  */
 function ideas_projects_manager_project_manager_exposed_form($form) {
   $form = array();
+  // Get the Projects from views.
   $projects = views_get_view_result('projects_manager', 'block');
   $options = array();
   $options[0] = '--';
+  // Loop through the views result to build an array.
   foreach ($projects as $li) {
     $options[$li->nid] = $li->node_title;
   }
@@ -101,6 +111,7 @@ function ideas_projects_manager_project_manager_exposed_form($form) {
  * Set the project to manipulate.
  */
 function ideas_projects_manager_project_manager_exposed_form_submit($form, &$form_state) {
+  // Builde the querystring to the redirect.
   $options = array(
    'query' => array(
       'project' => $form_state['values']['select_project'],
@@ -119,7 +130,7 @@ function ideas_projects_manager_project_manager_exposed_form_submit($form, &$for
  */
 function ideas_projects_manager_config_project_form($form) {
   $options = array();
-  // Get the Ideas from views
+  // Get the Ideas from views.
   $ideas = views_get_view_result('projects_manager', 'block_1');
   // Loop through the views result to build an array.
   foreach ($ideas as $li) {
@@ -129,39 +140,35 @@ function ideas_projects_manager_config_project_form($form) {
   if (!isset($_GET['project']) || empty($_GET['project'])) {
     $options = array('No project selected yet.');
   }
-  // Check if there any ideas in the selected project.
+  // Check if there any ideas in the selected project.gi
   elseif (!isset($options) || empty($options)) {
     $options = array('There no ideas in this project yet.');
   }
+  
   $form['projects'] = array (
     '#type' => 'select',
     '#title' => 'Ideas Already In Project',  
     '#multiple' => TRUE,
-    '#options' => $options, 
+    '#options' => $options,
     '#description' => "List of ideas which are already in this project.\nThis list is NOT editable and you can't remove any items from here."    
   );
   
-  $form['ideas_projects_manager'] = array (
-    '#type' => 'select',
-    '#title' => 'Ideas In Project',
-    '#multiple' => TRUE,
-    '#description' => 'Any ideas in this list will be added to the selected project (above), when you submit this form.',  
-    '#suffix' =>  '<a id="remove">' . t('Remove') . '</a><br />'
-  );
-  
-  $projects1 = views_get_view_result('projects_manager', 'block');
-  $options = array();
-  $options[0] = '--';
-  foreach ($projects1 as $li) {
-    $options1[$li->nid] = $li->node_title;
-  }
-    
-  $form['actions']['save'] = array(
-    '#type' => 'submit',
-    '#value' => t('Save Project'),
-    '#submit' => array('add_ideas_to_project_submit'),
+  if (isset($_GET['project']) && !empty($_GET['project'])) {
+    $form['ideas_projects_manager'] = array (
+      '#type' => 'select',
+      '#title' => 'Ideas In Project',
+      '#multiple' => TRUE,
+      '#description' => 'Any ideas in this list will be added to the selected project (above), when you submit this form.',  
+      '#suffix' =>  '<a id="remove">' . t('Remove') . '</a><br />'
+    );
+        
+    $form['actions']['save'] = array(
+      '#type' => 'submit',
+      '#value' => t('Save Project'),
+      '#submit' => array('add_ideas_to_project_submit'),
 
-   );
+    );
+  }
   return $form;
 }
 
