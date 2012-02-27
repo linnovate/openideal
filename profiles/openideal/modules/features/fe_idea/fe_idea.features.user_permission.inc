@@ -69,5 +69,15 @@ function fe_idea_user_default_permissions() {
     'module' => 'node',
   );
 
+  // Exported permission: use vote up/down
+  $permissions['use vote up/down'] = array(
+    'name' => 'use vote up/down',
+    'roles' => array(
+      0 => 'administrator',
+      1 => 'authenticated user',
+    ),
+    'module' => 'vud',
+  );
+
   return $permissions;
 }

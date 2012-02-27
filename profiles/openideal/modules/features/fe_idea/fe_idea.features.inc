@@ -48,6 +48,7 @@ function fe_idea_flag_default_flags() {
     'global' => '1',
     'types' => array(
       0 => 'idea',
+      1 => 'project',
     ),
     'flag_short' => 'Flag as popular idea',
     'flag_long' => '',
