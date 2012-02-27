@@ -148,85 +148,6 @@ function fe_project_field_default_fields() {
         'module' => 'options',
         'settings' => array(),
         'type' => 'options_select',
-        'weight' => '5',
-      ),
-    ),
-  );
-
-  // Exported field: 'node-project-field_idea_ref'
-  $fields['node-project-field_idea_ref'] = array(
-    'field_config' => array(
-      'active' => '1',
-      'cardinality' => '-1',
-      'deleted' => '0',
-      'entity_types' => array(),
-      'field_name' => 'field_idea_ref',
-      'foreign keys' => array(),
-      'indexes' => array(
-        'target_entity' => array(
-          0 => 'target_type',
-          1 => 'target_id',
-        ),
-      ),
-      'module' => 'entityreference',
-      'settings' => array(
-        'handler' => 'base',
-        'handler_settings' => array(
-          'sort' => array(
-            'direction' => 'ASC',
-            'field' => 'body:value',
-            'property' => 'nid',
-            'type' => 'none',
-          ),
-          'target_bundles' => array(
-            'idea' => 'idea',
-          ),
-        ),
-        'handler_submit' => 'Change handler',
-        'profile2_private' => FALSE,
-        'target_type' => 'node',
-      ),
-      'translatable' => '0',
-      'type' => 'entityreference',
-    ),
-    'field_instance' => array(
-      'bundle' => 'project',
-      'default_value' => NULL,
-      'deleted' => '0',
-      'description' => 'Select the ideas.',
-      'display' => array(
-        'default' => array(
-          'label' => 'hidden',
-          'module' => 'entityreference',
-          'settings' => array(
-            'link' => FALSE,
-          ),
-          'type' => 'entityreference_label',
-          'weight' => '2',
-        ),
-        'teaser' => array(
-          'label' => 'above',
-          'settings' => array(),
-          'type' => 'hidden',
-          'weight' => 0,
-        ),
-      ),
-      'entity_type' => 'node',
-      'field_name' => 'field_idea_ref',
-      'label' => 'Contains The Ideas ',
-      'required' => 0,
-      'settings' => array(
-        'user_register_form' => FALSE,
-      ),
-      'widget' => array(
-        'active' => 1,
-        'module' => 'entityreference',
-        'settings' => array(
-          'match_operator' => 'CONTAINS',
-          'path' => '',
-          'size' => '60',
-        ),
-        'type' => 'entityreference_autocomplete',
         'weight' => '4',
       ),
     ),
@@ -293,7 +214,7 @@ function fe_project_field_default_fields() {
         'module' => 'options',
         'settings' => array(),
         'type' => 'options_select',
-        'weight' => '6',
+        'weight' => '5',
       ),
     ),
   );
@@ -476,6 +397,63 @@ function fe_project_field_default_fields() {
     ),
   );
 
+  // Exported field: 'node-project-field_radioactivity'
+  $fields['node-project-field_radioactivity'] = array(
+    'field_config' => array(
+      'active' => '1',
+      'cardinality' => '1',
+      'deleted' => '0',
+      'entity_types' => array(),
+      'field_name' => 'field_radioactivity',
+      'foreign keys' => array(),
+      'indexes' => array(),
+      'module' => 'radioactivity',
+      'settings' => array(
+        'profile2_private' => FALSE,
+      ),
+      'translatable' => '0',
+      'type' => 'radioactivity',
+    ),
+    'field_instance' => array(
+      'bundle' => 'project',
+      'default_value' => NULL,
+      'deleted' => '0',
+      'description' => '',
+      'display' => array(
+        'default' => array(
+          'label' => 'above',
+          'module' => 'radioactivity',
+          'settings' => array(
+            'energy' => 10,
+            'type' => 'none',
+          ),
+          'type' => 'radioactivity_combo_formatter',
+          'weight' => 8,
+        ),
+        'teaser' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+      ),
+      'entity_type' => 'node',
+      'field_name' => 'field_radioactivity',
+      'label' => 'Radioactivity',
+      'required' => FALSE,
+      'settings' => array(
+        'profile' => 'default',
+        'user_register_form' => FALSE,
+      ),
+      'widget' => array(
+        'module' => 'radioactivity',
+        'settings' => array(),
+        'type' => 'radioactivity_basic_widget',
+        'weight' => '6',
+      ),
+    ),
+  );
+
   // Exported field: 'node-project-field_vote'
   $fields['node-project-field_vote'] = array(
     'field_config' => array(
@@ -543,11 +521,10 @@ function fe_project_field_default_fields() {
   // Included for use with string extractors like potx.
   t('Body');
   t('Category');
-  t('Contains The Ideas ');
   t('In Action');
   t('Launched Date');
   t('Project Image');
-  t('Select the ideas.');
+  t('Radioactivity');
   t('The Launching Date');
   t('Vote');
 
