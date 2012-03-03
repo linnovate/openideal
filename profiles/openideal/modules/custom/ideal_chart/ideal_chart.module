@@ -17,7 +17,7 @@ function ideal_chart_menu() {
 
 function ideal_charts_page() {
   drupal_add_js('https://www.google.com/jsapi', 'external');
-  drupal_add_js(drupal_get_path('module', 'ideal_main') . '/theme/ideal_chart.js');
+  drupal_add_js(drupal_get_path('module', 'ideal_chart') . '/theme/ideal_chart.js');
   
   $header = array();
   $rows = array();
