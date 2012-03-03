@@ -71,6 +71,9 @@ projects[google_plusone][subdir]                               = contrib
 projects[htmlmail][version]                                    = 7.x-2.62
 projects[htmlmail][subdir]                                     = contrib
 
+projects[ideal_comments][version]                              = 7.x-1.0-beta1
+projects[ideal_comments][subdir]                               = contrib
+
 projects[imce][version]                                        = 7.x-1.5
 projects[imce][subdir]                                         = contrib
 
