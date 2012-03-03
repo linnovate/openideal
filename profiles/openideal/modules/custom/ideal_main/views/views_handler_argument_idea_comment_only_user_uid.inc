@@ -1,10 +1,9 @@
 <?php
-
 /**
  * Argument handler to accept a user id to check for nodes that
- * user posted or commented on.
+ * commented on.
  */
-class views_handler_argument_comment_only_user_uid extends views_handler_argument {
+class views_handler_argument_idea_comment_only_user_uid extends views_handler_argument {
   function title() {
     if (!$this->argument) {
       $title = variable_get('anonymous', t('Anonymous'));
@@ -32,14 +31,13 @@ class views_handler_argument_comment_only_user_uid extends views_handler_argumen
       return parent::default_actions($which);
     }
   }
-
+  
   function query($group_by = FALSE) {
     $this->ensure_my_table();
-
-    $subselect = db_select('votingapi_vote', 'v');
-    $subselect->addField('v', 'vote_id');
-    $subselect->condition('v.uid', $this->argument);
-    $subselect->where("v.entity_id = $this->table_alias.nid");
+    $subselect = db_select('comment', 'c');
+    $subselect->addField('c', 'cid');
+    $subselect->condition('c.uid', $this->argument);
+    $subselect->where("c.nid = $this->table_alias.nid");
 
     $condition = db_or()
       ->exists($subselect);
@@ -47,22 +45,3 @@ class views_handler_argument_comment_only_user_uid extends views_handler_argumen
     $this->query->add_where(0, $condition);
   }
 }
-  
-  
- /* function query() {
-    $this->ensure_my_table();
-    //$this->query->add_where(0, "$this->table_alias.uid = %d OR ((SELECT COUNT(*) FROM {comments} c WHERE c.uid = %d AND c.nid = $this->table_alias.nid) > 0)", $this->argument, $this->argument);
-    $this->query->add_where(0,
-    "((SELECT COUNT(*)
-    FROM {comments} c
-    WHERE c.uid = %d
-    AND c.nid = $this->table_alias.nid) > 0
-    OR
-    (SELECT COUNT(*)
-    FROM {votingapi_vote} v
-    WHERE v.uid =  %d
-    AND v.content_id = $this->table_alias.nid) > 0)
-    AND $this->table_alias.uid <> %d",
-    $this->argument, $this->argument,   $this->argument);
-  }
-}*/

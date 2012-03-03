@@ -343,10 +343,17 @@ function fe_idea_views_default_views() {
   $handler->display->display_options['empty']['area']['table'] = 'views';
   $handler->display->display_options['empty']['area']['field'] = 'area';
   $handler->display->display_options['empty']['area']['empty'] = FALSE;
-  $handler->display->display_options['empty']['area']['content'] = 'There are no ideas in this category yet.
-  Why not add an idea?';
+  $handler->display->display_options['empty']['area']['content'] = 'There are no ideas yet.
+Why not add an idea?';
   $handler->display->display_options['empty']['area']['format'] = 'filtered_html';
   $handler->display->display_options['empty']['area']['tokenize'] = 0;
+  /* Relationship: Flags: popular_idea */
+  $handler->display->display_options['relationships']['flag_content_rel']['id'] = 'flag_content_rel';
+  $handler->display->display_options['relationships']['flag_content_rel']['table'] = 'node';
+  $handler->display->display_options['relationships']['flag_content_rel']['field'] = 'flag_content_rel';
+  $handler->display->display_options['relationships']['flag_content_rel']['required'] = 0;
+  $handler->display->display_options['relationships']['flag_content_rel']['flag'] = 'popular_idea';
+  $handler->display->display_options['relationships']['flag_content_rel']['user_scope'] = 'any';
   /* Sort criterion: Content: Post date */
   $handler->display->display_options['sorts']['created']['id'] = 'created';
   $handler->display->display_options['sorts']['created']['table'] = 'node';
@@ -358,6 +365,20 @@ function fe_idea_views_default_views() {
   $handler->display->display_options['filters']['status_extra']['field'] = 'status_extra';
   $handler->display->display_options['filters']['status_extra']['group'] = 0;
   $handler->display->display_options['filters']['status_extra']['expose']['operator'] = FALSE;
+  /* Filter criterion: Flags: Flagged */
+  $handler->display->display_options['filters']['flagged']['id'] = 'flagged';
+  $handler->display->display_options['filters']['flagged']['table'] = 'flag_content';
+  $handler->display->display_options['filters']['flagged']['field'] = 'flagged';
+  $handler->display->display_options['filters']['flagged']['relationship'] = 'flag_content_rel';
+  $handler->display->display_options['filters']['flagged']['value'] = '0';
+  /* Filter criterion: Content: Type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'node';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'idea' => 'idea',
+    'project' => 'project',
+  );
 
   /* Display: Popular Ideas */
   $handler = $view->new_display('block', 'Popular Ideas', 'block_1');
@@ -382,6 +403,7 @@ function fe_idea_views_default_views() {
   $handler->display->display_options['empty']['area']['content'] = 'There are no ideas in action yet.';
   $handler->display->display_options['empty']['area']['format'] = 'filtered_html';
   $handler->display->display_options['empty']['area']['tokenize'] = 0;
+  $handler->display->display_options['defaults']['relationships'] = FALSE;
   $handler->display->display_options['defaults']['sorts'] = FALSE;
   /* Sort criterion: Content: Updated date */
   $handler->display->display_options['sorts']['changed']['id'] = 'changed';
@@ -400,6 +422,13 @@ function fe_idea_views_default_views() {
   $handler->display->display_options['filters']['field_in_action_value']['table'] = 'field_data_field_in_action';
   $handler->display->display_options['filters']['field_in_action_value']['field'] = 'field_in_action_value';
   $handler->display->display_options['filters']['field_in_action_value']['operator'] = 'not empty';
+  /* Filter criterion: Content: Type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'node';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'project' => 'project',
+  );
   $export['ideas_all'] = $view;
 
   $view = new view;
@@ -431,6 +460,13 @@ function fe_idea_views_default_views() {
 Why not add an idea?';
   $handler->display->display_options['empty']['area']['format'] = 'filtered_html';
   $handler->display->display_options['empty']['area']['tokenize'] = 0;
+  /* Relationship: Flags: popular_idea */
+  $handler->display->display_options['relationships']['flag_content_rel']['id'] = 'flag_content_rel';
+  $handler->display->display_options['relationships']['flag_content_rel']['table'] = 'node';
+  $handler->display->display_options['relationships']['flag_content_rel']['field'] = 'flag_content_rel';
+  $handler->display->display_options['relationships']['flag_content_rel']['required'] = 0;
+  $handler->display->display_options['relationships']['flag_content_rel']['flag'] = 'popular_idea';
+  $handler->display->display_options['relationships']['flag_content_rel']['user_scope'] = 'any';
   /* Sort criterion: Content: Post date */
   $handler->display->display_options['sorts']['created']['id'] = 'created';
   $handler->display->display_options['sorts']['created']['table'] = 'node';
@@ -473,6 +509,20 @@ Why not add an idea?';
   $handler->display->display_options['filters']['status_extra']['field'] = 'status_extra';
   $handler->display->display_options['filters']['status_extra']['group'] = 0;
   $handler->display->display_options['filters']['status_extra']['expose']['operator'] = FALSE;
+  /* Filter criterion: Content: Type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'node';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'idea' => 'idea',
+    'project' => 'project',
+  );
+  /* Filter criterion: Flags: Flagged */
+  $handler->display->display_options['filters']['flagged']['id'] = 'flagged';
+  $handler->display->display_options['filters']['flagged']['table'] = 'flag_content';
+  $handler->display->display_options['filters']['flagged']['field'] = 'flagged';
+  $handler->display->display_options['filters']['flagged']['relationship'] = 'flag_content_rel';
+  $handler->display->display_options['filters']['flagged']['value'] = '0';
 
   /* Display: Popular Ideas */
   $handler = $view->new_display('block', 'Popular Ideas', 'block_1');
@@ -497,6 +547,7 @@ Why not add an idea?';
   $handler->display->display_options['empty']['area']['content'] = 'There are no ideas in action in this category yet.';
   $handler->display->display_options['empty']['area']['format'] = 'filtered_html';
   $handler->display->display_options['empty']['area']['tokenize'] = 0;
+  $handler->display->display_options['defaults']['relationships'] = FALSE;
   $handler->display->display_options['defaults']['sorts'] = FALSE;
   /* Sort criterion: Content: Updated date */
   $handler->display->display_options['sorts']['changed']['id'] = 'changed';
@@ -515,6 +566,13 @@ Why not add an idea?';
   $handler->display->display_options['filters']['field_in_action_value']['table'] = 'field_data_field_in_action';
   $handler->display->display_options['filters']['field_in_action_value']['field'] = 'field_in_action_value';
   $handler->display->display_options['filters']['field_in_action_value']['operator'] = 'not empty';
+  /* Filter criterion: Content: Type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'node';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'project' => 'project',
+  );
   $export['ideas_by_category'] = $view;
 
   $view = new view;
@@ -587,6 +645,13 @@ Why not add an idea?';
   $handler->display->display_options['filters']['field_in_action_value']['table'] = 'field_data_field_in_action';
   $handler->display->display_options['filters']['field_in_action_value']['field'] = 'field_in_action_value';
   $handler->display->display_options['filters']['field_in_action_value']['operator'] = 'not empty';
+  /* Filter criterion: Content: Type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'node';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'project' => 'project',
+  );
 
   /* Display: Under Review */
   $handler = $view->new_display('block', 'Under Review', 'block_2');
@@ -618,6 +683,13 @@ Why not add an idea?';
   $handler->display->display_options['filters']['field_in_action_value']['field'] = 'field_in_action_value';
   $handler->display->display_options['filters']['field_in_action_value']['value'] = array(
     'Under Review' => 'Under Review',
+  );
+  /* Filter criterion: Content: Type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'node';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'project' => 'project',
   );
 
   /* Display: Reviewed */
@@ -651,6 +723,13 @@ Why not add an idea?';
   $handler->display->display_options['filters']['field_in_action_value']['value'] = array(
     'Reviewed' => 'Reviewed',
   );
+  /* Filter criterion: Content: Type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'node';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'project' => 'project',
+  );
 
   /* Display: Coming Soon */
   $handler = $view->new_display('block', 'Coming Soon', 'block_5');
@@ -682,6 +761,13 @@ Why not add an idea?';
   $handler->display->display_options['filters']['field_in_action_value']['field'] = 'field_in_action_value';
   $handler->display->display_options['filters']['field_in_action_value']['value'] = array(
     'Coming Soon' => 'Coming Soon',
+  );
+  /* Filter criterion: Content: Type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'node';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'project' => 'project',
   );
 
   /* Display: Launched */
@@ -715,6 +801,13 @@ Why not add an idea?';
   $handler->display->display_options['filters']['field_in_action_value']['value'] = array(
     'Launched' => 'Launched',
   );
+  /* Filter criterion: Content: Type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'node';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'project' => 'project',
+  );
 
   /* Display: Next Time */
   $handler = $view->new_display('block', 'Next Time', 'block_7');
@@ -746,6 +839,13 @@ Why not add an idea?';
   $handler->display->display_options['filters']['field_in_action_value']['field'] = 'field_in_action_value';
   $handler->display->display_options['filters']['field_in_action_value']['value'] = array(
     'Next Time' => 'Next Time',
+  );
+  /* Filter criterion: Content: Type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'node';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'project' => 'project',
   );
   $export['ideas_in_action'] = $view;
 

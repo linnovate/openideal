@@ -397,6 +397,126 @@ function fe_project_field_default_fields() {
     ),
   );
 
+  // Exported field: 'node-project-field_radioactivity'
+  $fields['node-project-field_radioactivity'] = array(
+    'field_config' => array(
+      'active' => '1',
+      'cardinality' => '1',
+      'deleted' => '0',
+      'entity_types' => array(),
+      'field_name' => 'field_radioactivity',
+      'foreign keys' => array(),
+      'indexes' => array(),
+      'module' => 'radioactivity',
+      'settings' => array(
+        'profile2_private' => FALSE,
+      ),
+      'translatable' => '0',
+      'type' => 'radioactivity',
+    ),
+    'field_instance' => array(
+      'bundle' => 'project',
+      'default_value' => NULL,
+      'deleted' => '0',
+      'description' => '',
+      'display' => array(
+        'default' => array(
+          'label' => 'above',
+          'module' => 'radioactivity',
+          'settings' => array(
+            'energy' => 10,
+            'type' => 'none',
+          ),
+          'type' => 'radioactivity_combo_formatter',
+          'weight' => 8,
+        ),
+        'teaser' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+      ),
+      'entity_type' => 'node',
+      'field_name' => 'field_radioactivity',
+      'label' => 'Radioactivity',
+      'required' => FALSE,
+      'settings' => array(
+        'profile' => 'default',
+        'user_register_form' => FALSE,
+      ),
+      'widget' => array(
+        'module' => 'radioactivity',
+        'settings' => array(),
+        'type' => 'radioactivity_basic_widget',
+        'weight' => '6',
+      ),
+    ),
+  );
+
+  // Exported field: 'node-project-field_vote'
+  $fields['node-project-field_vote'] = array(
+    'field_config' => array(
+      'active' => '1',
+      'cardinality' => '1',
+      'deleted' => '0',
+      'entity_types' => array(),
+      'field_name' => 'field_vote',
+      'foreign keys' => array(),
+      'indexes' => array(),
+      'module' => 'vud_field',
+      'settings' => array(
+        'profile2_private' => FALSE,
+        'votingapi_tag' => 'vote',
+        'vud_widget' => 'updown',
+      ),
+      'translatable' => '0',
+      'type' => 'vud_field',
+    ),
+    'field_instance' => array(
+      'bundle' => 'project',
+      'default_value' => array(
+        0 => array(
+          'vud_widget' => 'updown',
+          'votingapi_tag' => 'vote',
+        ),
+      ),
+      'deleted' => '0',
+      'description' => '',
+      'display' => array(
+        'default' => array(
+          'label' => 'above',
+          'module' => 'vud_field',
+          'settings' => array(),
+          'type' => 'default',
+          'weight' => 7,
+        ),
+        'teaser' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+      ),
+      'entity_type' => 'node',
+      'field_name' => 'field_vote',
+      'label' => 'Vote',
+      'required' => 0,
+      'settings' => array(
+        'user_register_form' => FALSE,
+        'votingapi_tag' => 'vote',
+        'vud_widget' => 'alternate',
+      ),
+      'widget' => array(
+        'active' => 0,
+        'module' => 'vud_field',
+        'settings' => array(),
+        'type' => 'vud_field_default_widget',
+        'weight' => '7',
+      ),
+    ),
+  );
+
   // Translatables
   // Included for use with string extractors like potx.
   t('Body');
@@ -404,7 +524,9 @@ function fe_project_field_default_fields() {
   t('In Action');
   t('Launched Date');
   t('Project Image');
+  t('Radioactivity');
   t('The Launching Date');
+  t('Vote');
 
   return $fields;
 }

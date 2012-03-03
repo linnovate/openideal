@@ -12,6 +12,7 @@ function fe_idea_default_rules_configuration() {
   $items['rules_idea_become_popular'] = entity_import('rules_config', '{ "rules_idea_become_popular" : {
       "LABEL" : "Idea_Become_Popular",
       "PLUGIN" : "reaction rule",
+      "ACTIVE" : false,
       "TAGS" : [ "Popular" ],
       "REQUIRES" : [ "rules", "voting_rules", "ideal_main", "flag" ],
       "ON" : [ "flag_flagged_popular_idea" ],
