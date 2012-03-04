@@ -1,17 +1,68 @@
 <?php
 
 /**
- * Override or insert variables into the node template.
+ * Implements hook_form_FORM_ID_alter().
  */
-function ideal_comments_preprocess_node(&$vars) {
-  // This is stupid, but it's working.
-  // We switch between those arrary, to print the comment form on top of the comments list.
-  // @todo: there must be a better way doing it.
-  $comments = $vars['content']['comments']['comments'];
-  $comment_form = $vars['content']['comments']['comment_form'];
+function ideal_comments_form_node_type_form_alter(&$form, &$form_state, $form_id) {
+  $form['comment']['comments_fold'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Comment folding'),
+    '#description' => t('Limit the number of first deph comment shows, with a link to open the rest comments.'),
+    '#default_value' =>  variable_get("comments_fold_{$form['#node_type']->type}", 10),
+    '#size' => 15,
+    '#maxlength' => 32,
+    '#required' => TRUE,
+  );
+  $form['#submit'] = array('node_type_form_comments_fold_submit');
+}
 
-  $vars['content']['comments']['comments'] = $comment_form;
-  $vars['content']['comments']['comment_form'] = $comments;
+/**
+ * Extra submit for node_type_form to save the comment folding No.
+ */
+function node_type_form_comments_fold_submit($form, &$form_state) {
+  $fold = $form_state['values']['comments_fold'];
+  $type = $form_state['values']['type'];
+  variable_set("comments_fold_{$type}", $fold);
+  drupal_set_message(t("Comment folding have been set to @fold.", array('@fold' => $fold)));
+}
+
+/**
+ * Implements hook_registry_alter().
+ */
+function ideal_comments_theme_registry_alter(&$theme_registry) {
+  $path = $theme_registry['comment_wrapper']['path'];
+  // Override core implementations of ideal_comments,
+  // but leave it open to override by othee themes.
+  if (strpos($path, 'themes/') === 0 || strpos($path, 'modules/') === 0) {
+    $theme_registry['comment_wrapper']['path'] = drupal_get_path('module', 'ideal_comments') . '/theme';
+  }
+}
+
+/**
+ * Implements hook_node_type_insert().
+ */
+function ideal_comments_node_type_insert($info) {
+  _comment_preview_disabled($info->type);
+}
+
+/**
+ * Implements hook_node_type_update().
+ */
+function ideal_comments_node_type_update($info) {
+  _comment_preview_disabled($info->type);
+}
+
+/**
+ * Implements hook_forms().
+ */
+function ideal_comments_forms($form_id, $args) {
+  $forms = array();
+  // Use the default drupal callback for our unique comment forms.
+  // See ideal_comments_preprocess_comment().
+  if (strpos($form_id, 'comment_form_node_') === 0) {
+    $forms[$form_id]['callback'] = 'comment_form';
+  }
+  return $forms;
 }
 
 /**
@@ -20,21 +71,20 @@ function ideal_comments_preprocess_node(&$vars) {
 function ideal_comments_preprocess_comment(&$vars) {
   $node = $vars['node'];
   $comment = $vars['comment'];
+  $settings = array('comments_fold' => variable_get("comments_fold_{$node->type}", 10));
+  drupal_add_js($settings, array('type' => 'setting'));
   // Creating a unique comment form for each reply.
   // See ideal_comments_forms(), for handleing those unique forms.
-  $comment_form = drupal_get_form("comment_node_{$node->type}_form_{$node->nid}{$comment->cid}", (object) array('pid' => $comment->cid, 'nid' => $node->nid));
-  
+  $comment_form = drupal_get_form("comment_form_node_($node->type}_{$node->nid}{$comment->cid}", (object) array('pid' => $comment->cid, 'nid' => $node->nid));
+
   $vars['content']['comment_form'] = $comment_form;
   $vars['content']['comment_form']['#weight'] = 1000;
 }
 
 /**
- * Implements hook_forms().
+ * Turn off the comment preview.
  */
-function ideal_comments_forms($form_id, $args) {
-  $forms = array();
-  if (strpos($form_id, 'comment_node_idea_form_') === 0) {
-    $forms[$form_id]['callback'] = 'comment_form';
-  }
-  return $forms;
+function _comment_preview_disabled($type) {
+  variable_set("comment_preview_{$type}", DRUPAL_DISABLED);
+  drupal_set_message(t('Attention: Comment preview have been disabled by Ideal Comments module.'), 'warning');
 }

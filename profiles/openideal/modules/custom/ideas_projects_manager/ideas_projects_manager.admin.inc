@@ -27,7 +27,7 @@ function ideas_projects_manager_ideas_list_form($form) {
   $ideas = views_get_view_result('ideas_manager', 'block');
   // Loop through the views result to build an array.
   foreach ($ideas as $li) {
-    $options[$li->nid] = $li->node_title;
+    $options[$li->nid] = $li->node_created . " | " . $li->node_title . " By - ";
   }
   
   $form['ideas'] = array (

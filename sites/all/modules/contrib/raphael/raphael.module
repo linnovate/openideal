@@ -1,0 +1,54 @@
+<?php
+
+/**
+ * @file
+ * Provides the Raphaël JavaScript vector graphics library to other modules.
+ *
+ * This module does not do a lot on its own, but it is a centralised way 
+ * to load the Raphaël files for use by multiple modules, and may in 
+ * time grow to have helper functions for using Raphaël on your page.
+ */
+
+/**
+ * Path to Raphaël module.
+ *
+ * During site installation, RAPHAEL_PATH is the absolute path to the
+ * jQuery UI library.  At all other times RAPHAEL_PATH is relative, and
+ * safe for use in URLs.
+ */
+if (defined('MAINTENANCE_MODE') && MAINTENANCE_MODE == 'install') {
+  define('RAPHAEL_PATH', dirname(__FILE__));
+}
+else {
+  define('RAPHAEL_PATH', drupal_get_path('module', 'raphael'));
+}
+
+/**
+ * Load Raphaël on a page.
+ *
+ * @param boolean $minified
+ *    Whether to load the minified or the uncompressed version. Default
+ *    is TRUE for loading the minified version.
+ * @param string $scope
+ *   (optional) The location in which you want to place the script. Possible
+ *   values are 'header' and 'footer' by default. If your theme implements
+ *   different locations, however, you can also use these.
+ * @param boolean $defer
+ *   (optional) If set to TRUE, the defer attribute is set on the <script> tag.
+ *   Defaults to FALSE. This parameter is not used with $type == 'setting'.
+ */
+function raphael_add($minified = TRUE, $scope = 'header', $defer = FALSE) {
+  static $raphael_loaded;
+
+  if (!$raphael_loaded) {
+    $file_name = ($minified) ? 'raphael-min.js' : 'raphael.js';
+    drupal_add_js(RAPHAEL_PATH . '/js/' . $file_name, array(
+      'scope' => $scope,
+      'group' => JS_LIBRARY,
+      'defer' => $defer,
+    ));
+
+    $raphael_loaded = TRUE;
+  }
+}
+
