@@ -20,7 +20,7 @@ google.load("visualization", "1", {packages:["corechart", "gauge"]});
         var row = new Array();
         // Create the data table.
         var data = new google.visualization.DataTable();
-        data.addColumn('string', 'Post Date');
+        data.addColumn('string', 'Label');
         
         // Adding the colomns. 
         // These are graphs titles.
@@ -45,7 +45,7 @@ google.load("visualization", "1", {packages:["corechart", "gauge"]});
         var options = settings.options;
 
         // Instantiate and draw our chart, passing in some options.
-        var chart = new google.visualization.BarChart(document.getElementById(settings.html_id));
+        var chart = new google.visualization[settings.type](document.getElementById(settings.html_id));
         chart.draw(data, options);
       }
     }
