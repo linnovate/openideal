@@ -4,7 +4,7 @@
  */
 
 // Load the Visualization API and the chart package.
-google.load("visualization", "1", {packages:["corechart"]});
+google.load("visualization", "1", {packages:["corechart", "gauge"]});
 
 (function($) {
   Drupal.behaviors.idealChart = {
@@ -21,11 +21,19 @@ google.load("visualization", "1", {packages:["corechart"]});
         // Create the data table.
         var data = new google.visualization.DataTable();
         data.addColumn('string', 'Post Date');
-        data.addColumn('number', 'No. Of Ideas');
-        data.addColumn('number', 'No. Of Comments');
-        data.addColumn('number', 'No. Of No. Of Votes');
+        
+        // Adding the colomns. 
+        // These are graphs titles.
+        for (var col in settings.columns) {
+          data.addColumn('number', settings.columns[col]);
+        }
+
+        // Adding the heders.
+        // The rows titles.
         for (var i in settings.header) {
           var row = new Array();
+          // Adding the rows.
+          // The points of the column for each row.
           for (var j in settings.rows) {
              row[j] = parseInt(settings.rows[j][i]);
           } 
@@ -34,14 +42,10 @@ google.load("visualization", "1", {packages:["corechart"]});
         };
 
         // Set chart options
-        var options = {
-          'title':'Ideas per day',
-          'width':800,
-          'height':300
-        };
+        var options = settings.options;
 
         // Instantiate and draw our chart, passing in some options.
-        var chart = new google.visualization.LineChart(document.getElementById('content'));
+        var chart = new google.visualization.BarChart(document.getElementById(settings.html_id));
         chart.draw(data, options);
       }
     }
