@@ -66,13 +66,13 @@ function fe_user_context_default_contexts() {
           'module' => 'quicktabs',
           'delta' => 'user_ideas',
           'region' => 'content',
-          'weight' => '-10',
+          'weight' => '-8',
         ),
-        'views-user_activity-block' => array(
-          'module' => 'views',
-          'delta' => 'user_activity-block',
+        'heartbeat-userpage_activity' => array(
+          'module' => 'heartbeat',
+          'delta' => 'userpage_activity',
           'region' => 'content',
-          'weight' => '-11',
+          'weight' => '-10',
         ),
       ),
     ),

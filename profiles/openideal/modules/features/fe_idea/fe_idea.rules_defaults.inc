@@ -97,8 +97,8 @@ function fe_idea_default_rules_configuration() {
         },
         { "mail_to_users_of_role" : {
             "roles" : { "value" : { "5" : "5" } },
-            "subject" : "The idea [node:title] become popular.\\u000D\\u000A",
-            "message" : "The idea [node:title] become popular.\\u000D\\u000APlease check it out: [node:url]."
+            "subject" : "The idea [node:title] become popular.\\r\\n",
+            "message" : "The idea [node:title] become popular.\\r\\nPlease check it out: [node:url]."
           }
         }
       ]
