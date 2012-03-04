@@ -94,15 +94,9 @@ function fe_idea_context_default_contexts() {
   $context->reactions = array(
     'block' => array(
       'blocks' => array(
-        'views-most_active_users-block' => array(
+        'views-frontpage_ideas-block_3' => array(
           'module' => 'views',
-          'delta' => 'most_active_users-block',
-          'region' => 'content',
-          'weight' => '-10',
-        ),
-        'views-frontpage_ideas-block' => array(
-          'module' => 'views',
-          'delta' => 'frontpage_ideas-block',
+          'delta' => 'frontpage_ideas-block_3',
           'region' => 'content',
           'weight' => '-10',
         ),
@@ -112,9 +106,21 @@ function fe_idea_context_default_contexts() {
           'region' => 'content',
           'weight' => '-10',
         ),
-        'views-frontpage_ideas-block_3' => array(
+        'views-frontpage_ideas-block' => array(
           'module' => 'views',
-          'delta' => 'frontpage_ideas-block_3',
+          'delta' => 'frontpage_ideas-block',
+          'region' => 'content',
+          'weight' => '-10',
+        ),
+        'views-most_active_users-block' => array(
+          'module' => 'views',
+          'delta' => 'most_active_users-block',
+          'region' => 'content',
+          'weight' => '-10',
+        ),
+        'views-head_to_head-block' => array(
+          'module' => 'views',
+          'delta' => 'head_to_head-block',
           'region' => 'content',
           'weight' => '-10',
         ),
