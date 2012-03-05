@@ -140,9 +140,15 @@ function ideal_main_quicktabs_alter(&$quicktabs) {
 /**
  * Helper function for loading a view and getting the row count.
  */
-function ideal_main_quicktabs_view_counter($tab_view, $tab_display) {
+function ideal_main_quicktabs_view_counter($tab_view, $tab_display, $term=0) {
   $view = views_get_view($tab_view);
   $view->set_display($tab_display);
+  if ($term != 0) {
+    $view->args[0] = $term;
+  }
+  else {
+    $view->args[0] = arg(1);
+  }
   $view->pre_execute();
   $view->execute();
   $count = $view->total_rows ? $view->total_rows : 0;

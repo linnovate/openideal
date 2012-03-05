@@ -19,17 +19,110 @@
  * 
  */
 
+ /*         Definitions and Imports
+ *************************************************/
+
+/* Imports */
+// @import "variables";
+// @import "mixins";
+// @import "reset";
+
+// @import "buttons";
+
 /*         General Sitewide Styles
  *************************************************/
   /* Layout */
 
   /* General Styles (Colors, Backgrounds etc.)*/
+  body {
+     background: url('../images/bg-header.jpg') repeat-x top;
+  }
+
+  a, 
+  a:visited {
+    color: #0069D6;
+  }
+  a:hover,
+  a:active {
+     color: #0050A3;
+  }
 
   /* Typography */
 
   /* Links */
 
+  #main-menu {
+    float: left;
+    width: 600px;
+    margin-top: 80px;
+
+    a {
+      @extend .btn-large;
+    }
+  }
+
+  // #secondary-menu {
+  //   display: block;
+  //   margin: 0;
+  //   position: fixed;
+  //   width: 960px;
+  //   z-index: 1000;
+  //   background: url("../images/nav-tube.png") no-repeat right -30px;
+
+  //   #secondary-menu-links {
+  //     background: none repeat scroll 0 0 #FCFCFC;
+  //     border: 2px solid #CCCCCC;
+  //     border-radius: 5px 5px 5px 5px;
+  //     display: block;
+  //     float: right;
+  //     font-family: arial;
+  //     font-size: 12px;
+  //     font-weight: bold;
+  //     margin-right: 30px;
+  //     margin-top: 4px;
+  //     overflow: auto;
+  //     right: 0;
+
+  //     li {
+  //       border-right: 2px solid #CCCCCC;
+  //       display: inline;
+  //       float: left;
+  //       font-weight: bold;
+  //       list-style-type: none;
+  //       padding: 5px 11px 5px 13px;
+  //       color: #808080;
+  //       line-height: 22px;
+  //     }
+  //     li.last {
+  //       border-right: none;
+  //     }
+  //   }
+  // }
+
   /* header */
+  #header {
+   
+
+    #logo {
+      margin: 20px;
+    }
+
+    h1#site-name {
+
+      float: left;
+
+      a {
+        background: url("../images/logo-type.png") no-repeat top left;
+        height: 70px;
+        margin-top: 60px;
+        overflow: hidden;
+        text-indent: -9000px;
+        width: 162px;
+        display: block;
+      }
+    }
+  }
+
 
   /* Sidebars */
 
