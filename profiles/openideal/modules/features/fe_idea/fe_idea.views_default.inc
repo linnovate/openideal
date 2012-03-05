@@ -97,7 +97,13 @@ function fe_idea_views_default_views() {
   $handler->display->display_options['filters']['type']['field'] = 'type';
   $handler->display->display_options['filters']['type']['value'] = array(
     'idea' => 'idea',
+    'project' => 'project',
   );
+  /* Filter criterion: Content: Is Part Of A Project (field_project_ref:target_id) */
+  $handler->display->display_options['filters']['field_project_ref_target_id']['id'] = 'field_project_ref_target_id';
+  $handler->display->display_options['filters']['field_project_ref_target_id']['table'] = 'field_data_field_project_ref';
+  $handler->display->display_options['filters']['field_project_ref_target_id']['field'] = 'field_project_ref_target_id';
+  $handler->display->display_options['filters']['field_project_ref_target_id']['operator'] = 'empty';
 
   /* Display: Latest Ideas */
   $handler = $view->new_display('block', 'Latest Ideas', 'block');
@@ -174,7 +180,7 @@ function fe_idea_views_default_views() {
   $handler->display->display_options['filters']['type']['table'] = 'node';
   $handler->display->display_options['filters']['type']['field'] = 'type';
   $handler->display->display_options['filters']['type']['value'] = array(
-    'idea' => 'idea',
+    'project' => 'project',
   );
   /* Filter criterion: Content: In Action (field_in_action) */
   $handler->display->display_options['filters']['field_in_action_value']['id'] = 'field_in_action_value';
@@ -254,6 +260,7 @@ function fe_idea_views_default_views() {
   $handler->display->display_options['filters']['type']['field'] = 'type';
   $handler->display->display_options['filters']['type']['value'] = array(
     'idea' => 'idea',
+    'project' => 'project',
   );
   /* Filter criterion: Content: Comment count */
   $handler->display->display_options['filters']['comment_count']['id'] = 'comment_count';
