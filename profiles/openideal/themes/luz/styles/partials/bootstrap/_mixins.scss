@@ -9,7 +9,7 @@
 // Clearfix
 // --------
 // For clearing floats like a boss h5bp.com/q
-@mixin clearfix($fix: fix) {
+@mixin clearfix() {
   *zoom: 1;
   &:before,
   &:after {
@@ -24,7 +24,7 @@
 
 // Webkit-style focus
 // ------------------
-@mixin tab-focus($fix: fix) {
+@mixin tab-focus() {
   // Default
   outline: thin dotted #333;
   // Webkit
@@ -34,7 +34,7 @@
 
 // Center-align a block level element
 // ----------------------------------
-@mixin center-block($fix: fix) {
+@mixin center-block() {
   display: block;
   margin-left: auto;
   margin-right: auto;
@@ -42,7 +42,7 @@
 
 // IE7 inline-block
 // ----------------
-@mixin ie7-inline-block($fix: fix) {
+@mixin ie7-inline-block() {
   *display: inline; /* IE7 inline-block hack */
   *zoom: 1;
 }
@@ -53,7 +53,7 @@
 // right version is for icons, which come before. Applying both is ok, but it will
 // mean that space between those elements will be .6em (~2 space characters) in IE7,
 // instead of the 1 space in other browsers.
-@mixin ie7-restore-left-whitespace($fix: fix) {
+@mixin ie7-restore-left-whitespace() {
   *margin-left: .3em;
 
   &:first-child {
@@ -61,7 +61,7 @@
   }
 }
 
-@mixin ie7-restore-right-whitespace($fix: fix) {
+@mixin ie7-restore-right-whitespace() {
   *margin-right: .3em;
 
   &:last-child {
@@ -92,7 +92,7 @@
 
 // Text overflow
 // ------------------------
-@mixin text-overflow($fix: fix) {
+@mixin text-overflow() {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -101,13 +101,13 @@
 
 // FONTS
 // --------------------------------------------------
-@mixin font-family-serif($fix: fix) {
+@mixin font-family-serif() {
   font-family: Georgia, "Times New Roman", Times, serif;
 }
-@mixin font-family-sans-serif($fix: fix) {
+@mixin font-family-sans-serif() {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
-@mixin font-family-monospace($fix: fix) {
+@mixin font-family-monospace() {
   font-family: Menlo, Monaco, "Courier New", monospace;
 }
 @mixin font-shorthand($size: $baseFontSize, $weight: normal, $lineHeight: $baseLineHeight) {
@@ -135,7 +135,7 @@
 
 // Site container
 // -------------------------
-@mixin container-fixed($fix: fix) {
+@mixin container-fixed() {
   width: $gridRowWidth;
   margin-left: auto;
   margin-right: auto;
@@ -225,7 +225,7 @@
 // Make a grid
 // -------------------------
 // Use makeRow() and makeColumn() to assign semantic layouts grid system behaviour
-@mixin makeRow($fix: fix) {
+@mixin makeRow() {
   margin-left: $gridGutterWidth * -1;
   @include clearfix();
 }
@@ -466,7 +466,7 @@
   background-image: linear-gradient($angle, rgba(255,255,255,.15) 25%, rgba(255,255,255,0) 25%, rgba(255,255,255,0) 50%, rgba(255,255,255,.15) 50%, rgba(255,255,255,.15) 75%, rgba(255,255,255,0) 75%, rgba(255,255,255,0));
 }
 // Reset filters for IE
-@mixin reset-filter($fix: fix) {
+@mixin reset-filter() {
   filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
 }
 
