@@ -36,7 +36,8 @@ function theme_ideal_category_list_block() {
     }
     // Here we print the actual term link
     $output .=  l($term->name, 'taxonomy/term/' . $term->tid);
-    $output .= " (" . ideal_count_term_ideas($term->tid) . ")";
+//    $output .= " (" . ideal_count_term_ideas($term->tid) . ")";
+    $output .= " (" . ideal_main_quicktabs_view_counter('ideas_by_category', 'block_1', $term->tid) . ")";
     $num_at_depth++;
   }
   // close the top level container ul
