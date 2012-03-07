@@ -1,5 +1,8 @@
 <?php
-
+function ideal_main_init() {
+//  $r = field_get_items('node', $entity, $field_name, $langcode = NULL);//field_info_field('field_in_action');
+//  dpm($r);
+}
 /**
  * Implements hook_menu().
  */
@@ -19,6 +22,14 @@ function ideal_main_menu() {
     'description' => 'General Configurations', 
     'type' => MENU_DEFAULT_LOCAL_TASK,
   );
+  
+  $items['ideal-dashboard'] = array(
+    'title' => 'Dashboard',
+    'access arguments' => array('admin content'),
+    'page callback' => 'ideal_dashboard',
+    'file' => 'ideal_main.admin.inc',  
+  );
+  
   return $items;
 }
 

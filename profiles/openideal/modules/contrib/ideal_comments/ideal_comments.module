@@ -30,11 +30,13 @@ function node_type_form_comments_fold_submit($form, &$form_state) {
  * Implements hook_registry_alter().
  */
 function ideal_comments_theme_registry_alter(&$theme_registry) {
-  $path = $theme_registry['comment_wrapper']['path'];
-  // Override core implementations of ideal_comments,
-  // but leave it open to override by othee themes.
-  if (strpos($path, 'themes/') === 0 || strpos($path, 'modules/') === 0) {
-    $theme_registry['comment_wrapper']['path'] = drupal_get_path('module', 'ideal_comments') . '/theme';
+  if (isset($theme_registry['comment_wrapper']['path'])) {
+     $path = $theme_registry['comment_wrapper']['path'];
+    // Override core implementations of ideal_comments,
+    // but leave it open to override by othee themes.
+    if (strpos($path, 'themes/') === 0 || strpos($path, 'modules/') === 0) {
+      $theme_registry['comment_wrapper']['path'] = drupal_get_path('module', 'ideal_comments') . '/theme';
+    }
   }
 }
 

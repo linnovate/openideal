@@ -1,0 +1,64 @@
+<?php
+
+/**
+ * Implements hook_menu().
+ */
+function ideal_chart_example_menu() {
+  $items = array();
+  
+  $items['ideal-charts'] = array(
+    'title' => 'ideal-charts',
+    'access arguments' => array('access content'),
+    'page callback' => 'ideal_charts_page',
+  );
+  
+  return $items;
+}
+
+/**
+ *  Creating graphs for the last 10 days of node creating, comments and votes.
+ */
+function ideal_charts_page() {   
+  $header = $nodes = $comments = $votes = array();
+  
+  for ($i = 29; $i >= 0; $i--) {
+    // Building the header - list of date from today backward.
+    $header[$i]   = date('d.m.y', strtotime("-{$i} day"));
+    // The number of nodes created each day.
+    $nodes[$i]     = db_query("SELECT COUNT(*) FROM {node} WHERE  FROM_UNIXTIME(created,'%d.%m.%y') = :dete", array(':dete' => $header[$i]))->fetchField();
+    // The number of comments created each day.
+    $comments[$i]  = db_query("SELECT COUNT(*) FROM {comment} WHERE  FROM_UNIXTIME(created,'%d.%m.%y') = :dete", array(':dete' => $header[$i]))->fetchField();
+    // The number of voted placed each day.
+    $votes[$i]     = db_query("SELECT COUNT(*) FROM {votingapi_vote} WHERE  FROM_UNIXTIME(timestamp,'%d.%m.%y') = :dete", array(':dete' => $header[$i]))->fetchField();
+    // The number of users join each day.
+    $users[$i]     = db_query("SELECT COUNT(*) FROM {users} WHERE  FROM_UNIXTIME(created,'%d.%m.%y') = :dete", array(':dete' => $header[$i]))->fetchField();
+  }
+  // Building the rows, array of the data point arrays.
+  $rows = array($nodes, $comments, $votes, $users);
+  // The labels for the rows.
+  $columns = array('No. Of Nodes', 'No. Of Comments', 'No. Of Votes', 'No. Of Users');
+  
+  // Put all the data into the settings array, 
+  // which will be send to draw.
+ 
+  // Must empty the array first.
+  $settings = array();
+  $settings['chart']['chartOne'] = array(  
+    'header' => $header,
+    'rows' => $rows,
+    'columns' => $columns,
+    'chartType' => 'LineChart',// LineChart, PieChart, ,ColumnChart, ,AreaChart, Gauge, BarChart, etc....
+    'containerId' =>  'content',
+    'options' => array( // Optionals.
+      'curveType' => "function", 
+      'title' => 'Nodes / Comments / Votes / Users per day',
+      'width' => 800,
+      'height' => 400  
+    )   
+  );
+
+  //Draw it.
+  ideal_chart_draw_chart($settings); 
+
+  return '';
+}

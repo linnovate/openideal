@@ -1,169 +1,151 @@
 <?php 
-function ideal_main_config_page() {
-//  drupal_add_js(drupal_get_path('module', 'ideal_main') . '/ideal_main.js');
-//  $a = drupal_get_form('ideal_main_idea_manager_exposed_form');
-//  $c = drupal_get_form('ideal_main_project_manager_exposed_form');
-//  $b = drupal_get_form('ideal_main_config_form');
-//  $d = drupal_get_form('ideal_main_config_project_form');
-//  $output = ''; //render($a) . render($c) . render($b)  . render($d);
-//  $output .= '<span class="ideas-in-project-left>';
-//  $output .= render($a) . render($b);
-//  $output .= '</div>';
-//  $output .= '<span class="ideas-in-project-right>';
-//  $output .= render($c) . render($d);
-//  $output .= '</div>';
-//  return $output;
-  return '';
+/**
+ *  Creating graphs for the last 10 days of node creating, comments and votes.
+ */
+function ideal_dashboard() { 
+  // Chart for ideas, comments, votes and users created per day.
+  $header = $nodes = $comments = $votes = array();
+  
+  for ($i = 29; $i >= 0; $i--) {
+    // Building the header - list of date from today backward.
+    $header[$i]   = date('d.m.y', strtotime("-{$i} day"));
+    // The number of nodes created each day.
+    $nodes[$i]     = db_query("SELECT COUNT(*) FROM {node} WHERE type = :type AND FROM_UNIXTIME(created,'%d.%m.%y') = :dete", array(':dete' => $header[$i], ':type' => 'idea'))->fetchField();
+    // The number of comments created each day.
+    $comments[$i]  = db_query("SELECT COUNT(*) FROM {comment} WHERE FROM_UNIXTIME(created,'%d.%m.%y') = :dete", array(':dete' => $header[$i]))->fetchField();
+    // The number of voted placed each day.
+    $votes[$i]     = db_query("SELECT COUNT(*) FROM {votingapi_vote} WHERE  FROM_UNIXTIME(timestamp,'%d.%m.%y') = :dete", array(':dete' => $header[$i]))->fetchField();
+    // The number of users join each day.
+    $users[$i]     = db_query("SELECT COUNT(*) FROM {users} WHERE  FROM_UNIXTIME(created,'%d.%m.%y') = :dete", array(':dete' => $header[$i]))->fetchField();
+  }
+  // Building the rows, array of the data point arrays.
+  $rows = array($nodes, $comments, $votes, $users);
+  // The labels for the rows.
+  $columns = array('No. Of Ideas', 'No. Of Comments', 'No. Of Votes', 'No. Of Users');
+  
+  // Put all the data into the settings array, 
+  // which will be send to draw.
+ 
+  // Must empty the array first.
+  $settings = array();
+  $settings['chart']['chartOne'] = array(  
+    'header' => $header,
+    'rows' => $rows,
+    'columns' => $columns,
+    'chartType' => 'LineChart',// LineChart, PieChart, ,ColumnChart, ,AreaChart, Gauge, BarChart, etc....
+    'containerId' =>  'chart1',
+    'options' => array( // Optionals.
+      'curveType' => "function",
+      'forceIFrame' => FALSE,  
+      'title' => 'Ideas / Comments / Votes / Users / per day',
+      'width' => 800,
+      'height' => 400  
+    )   
+  );
+  
+  //Draw it.
+  ideal_chart_draw_chart($settings); 
+  
+  // Chart for ideas per category
+  $voc = taxonomy_vocabulary_machine_name_load('categories');
+  $tree = taxonomy_get_tree($voc->vid);
+  $header = array();
+  foreach ($tree as $term) {
+    $header[] = $term->name;
+    $terms[] = ideal_count_term_ideas($term->tid);
+    
+  }
+  $columns = array('Ideas in category');
+  $rows = array($terms);
+  
+  $settings = array();
+  $settings['chart']['chartTwo'] = array(  
+    'header' => $header,
+    'rows' => $rows,
+    'columns' => $columns,
+    'chartType' => 'PieChart',// LineChart, PieChart, ,ColumnChart, ,AreaChart, Gauge, BarChart, etc....
+    'containerId' =>  'chart2',
+    'options' => array( // Optionals.
+      'curveType' => "function", 
+      'is3D' => TRUE,  
+      'forceIFrame' => FALSE, 
+      'title' => 'Ideas per category',
+      'width' => 800,
+      'height' => 400  
+    )   
+  );
+  
+  //Draw it.
+  ideal_chart_draw_chart($settings); 
+  
+  // Chart for projects in progress
+  $nodes = $header = array();
+  $in_action = field_info_field('field_in_action');
+  foreach ($in_action['settings']['allowed_values'] as $k => $value) {
+    $header[] = $value;
+    // The number of nodes created each day.
+    $nodes[] = db_query("SELECT COUNT(*) FROM {field_data_field_in_action} WHERE field_in_action_value = :value", array(':value' => $k))->fetchField();
+  }
+  
+  $columns = array('Projects in progress');
+  $rows = array($nodes);
+  
+  $settings = array();
+  $settings['chart']['chartThree'] = array(  
+    'header' => $header,
+    'rows' => $rows,
+    'columns' => $columns,
+    'chartType' => 'PieChart',// LineChart, PieChart, ,ColumnChart, ,AreaChart, Gauge, BarChart, etc....
+    'containerId' =>  'chart3',
+    'options' => array( // Optionals.
+      'curveType' => "function", 
+      'is3D' => TRUE,  
+      'forceIFrame' => FALSE, 
+      'title' => 'projects in Progress',
+      'width' => 800,
+      'height' => 400  
+    )   
+  );
+  
+  //Draw it.
+  ideal_chart_draw_chart($settings); 
+  
+   // Chart for ideas, comments, votes and users created per day.
+  $header = $nodes = array();
+  $fid = db_query("SELECT fid FROM {flags} WHERE name = :name", array(':name' => 'popular_idea'))->fetchField();
+  for ($i = 29; $i >= 0; $i--) {
+    // Building the header - list of date from today backward.
+    $header[$i]   = date('d.m.y', strtotime("-{$i} day"));
+    // The number of nodes become popular each day.
+    $nodes[$i]  = db_query("SELECT COUNT(*) FROM {flag_content} WHERE fid = :fid AND FROM_UNIXTIME(timestamp,'%d.%m.%y') = :dete", array(':fid' => $fid, ':dete' => $header[$i]))->fetchField();
+  }
+  // Building the rows, array of the data point arrays.
+  $rows = array($nodes);
+  // The labels for the rows.
+  $columns = array('No. Of Ideas become populars');
+  
+  // Put all the data into the settings array, 
+  // which will be send to draw.
+ 
+  // Must empty the array first.
+  $settings = array();
+  $settings['chart']['chartFour'] = array(  
+    'header' => $header,
+    'rows' => $rows,
+    'columns' => $columns,
+    'chartType' => 'LineChart',// LineChart, PieChart, ,ColumnChart, ,AreaChart, Gauge, BarChart, etc....
+    'containerId' =>  'chart4',
+    'options' => array( // Optionals.
+//      'curveType' => "function",
+      'forceIFrame' => FALSE,  
+      'title' => 'Ideas become populars',
+      'width' => 800,
+      'height' => 400  
+    )   
+  );
+  
+  //Draw it.
+  ideal_chart_draw_chart($settings); 
+
+  return '<div id="chart1"></div><div id="chart2"></div><div id="chart3"></div><div id="chart4"></div>';
 }
-///**
-// * Display the ideas to be added to the project.
-// */
-//function ideal_main_config_form($form) {
-//  $ideas = views_get_view_result('ideas_manager', 'block');
-//  foreach ($ideas as $li) {
-//    $options[$li->nid] = $li->node_title;
-//  }
-//  
-//  $form['ideas'] = array (
-//    '#type' => 'select',
-//    '#title' => 'Ideas',
-//    '#options' => $options,
-//    '#multiple' => TRUE,
-//    '#suffix' =>  '<a id="add">' . t('Add') . '</a>' 
-//  );
-//  
-//  return $form;
-//}
-//
-///**
-// * Look for ideas title.
-// */
-//function ideal_main_idea_manager_exposed_form($form) {
-//  $form = array();
-//  $form['title'] = array (
-//    '#type' => 'textfield',
-//    '#title' => 'title',
-//  );
-//  
-//  $form['actions']['submit'] = array(
-//    '#type' => 'submit',
-//    '#value' =>  'Filter'
-//  );
-//  return $form;
-//}
-//
-///**
-// * Filter the ideas by Title.
-// */
-//function ideal_main_idea_manager_exposed_form_submit($form, &$form_state) {
-//  $options = array(
-//   'query' => array(
-//      'text' => $form_state['values']['title'],
-//      'project' => isset($_GET['project']) ? $_GET['project'] : 0
-//    ),
-//    'absolute' => true 
-//  );
-//
-//  $url = url($_GET['q'], $options);
-//  $form_state['redirect'] = $url;
-//}
-//
-///**
-// * Select the project to manipulate.
-// */
-//function ideal_main_project_manager_exposed_form($form) {
-//  $form = array();
-//  $projects = views_get_view_result('projects_manager', 'block');
-//  $options = array();
-//  $options[0] = '--';
-//  foreach ($projects as $li) {
-//    $options[$li->nid] = $li->node_title;
-//  }
-//  $form['select_project'] = array (
-//    '#type' => 'select',
-//    '#title' => 'Select Project',
-//    '#options' => $options,
-//    '#default_value' => isset($_GET['project']) ? $_GET['project'] : 0,
-//  );
-//  
-//  
-//  $form['actions']['submit'] = array(
-//    '#type' => 'submit',
-//    '#value' =>  'Set Project'
-//  );
-//  return $form;
-//}
-//
-///**
-// * Set the project to manipulate.
-// */
-//function ideal_main_project_manager_exposed_form_submit($form, &$form_state) {
-//  $options = array(
-//   'query' => array(
-//      'project' => $form_state['values']['select_project'],
-//      'text' => $_GET['text'] ? $_GET['text'] : ''
-//    ),
-//    'absolute' => true 
-//  );
-//
-//  $url = url($_GET['q'], $options);
-//  $form_state['redirect'] = $url;
-//}
-//
-///**
-// * Show the ideas already in priject and
-// * Set a conteiner to adds ideas to.
-// */
-//function ideal_main_config_project_form($form) {
-//  $projects = views_get_view_result('projects_manager', 'block_1');
-//  foreach ($projects as $li) {
-//    $options[$li->nid] = $li->node_title;
-//  }
-//  $form['projects'] = array (
-//    '#type' => 'select',
-//    '#title' => 'Ideas Already In Project',  
-//    '#multiple' => TRUE,
-//    '#options' => (isset($_GET['project']) && !empty($_GET['project'])) ? $options : 0,  
-//  );
-//  
-//  $form['ideas_in_project'] = array (
-//    '#type' => 'select',
-//    '#title' => 'Ideas In Project',
-//    '#multiple' => TRUE,
-//    '#suffix' =>  '<a id="remove">' . t('Remove') . '</a>' 
-//  );
-//  
-//  $projects1 = views_get_view_result('projects_manager', 'block');
-//  $options = array();
-//  $options[0] = '--';
-//  foreach ($projects1 as $li) {
-//    $options1[$li->nid] = $li->node_title;
-//  }
-//    
-//  $form['actions']['save'] = array(
-//    '#type' => 'submit',
-//    '#value' => t('Save Project'),
-//    '#submit' => array('add_ideas_to_project_submit'),
-//
-//   );
-//  return $form;
-//}
-//
-///**
-// * Adds Ideas to the selected project.
-// */
-//function add_ideas_to_project_submit($form, &$form_state) {
-//  global $language;
-//  $lang = module_exists('local') ? $language : LANGUAGE_NONE;
-//  if (isset($_GET['project']) && !empty($_GET['project'])) {
-//    foreach ($form_state['values']['ideas_in_project'] as $idea) {
-//      $node = node_load($idea);
-//      $node->field_project_ref[$lang][]['target_id'] = $_GET['project'];
-//      node_save($node); 
-//      drupal_set_message(t('The idea @title added to project'), array('@title' => $node->title));
-//    }
-//  }
-//  else {
-//    form_set_error('', t('There no project set! Please selact a project and try again'));
-//  }
-//}
