@@ -3,32 +3,33 @@
  *  Creating graphs for the last 10 days of node creating, comments and votes.
  */
 function ideal_dashboard() { 
+  $from = isset($_GET['from']) ? $_GET['from'] : strtotime('-1 month');
+  $to   = isset($_GET['to']) ? $_GET['to'] : time();
+
   // Chart for ideas, comments, votes and users created per day.
-  $header = $nodes = $comments = $votes = array();
-  
-  for ($i = 29; $i >= 0; $i--) {
+  $header = $nodes = $comments = $votes = $users = array();
+  $i = 0;
+  $f = $from;
+  while ($f <= $to) {
     // Building the header - list of date from today backward.
-    $header[$i]   = date('d.m.y', strtotime("-{$i} day"));
+    $header[$i]   = date('d.m.y', $f);
     // The number of nodes created each day.
     $nodes[$i]     = db_query("SELECT COUNT(*) FROM {node} WHERE type = :type AND FROM_UNIXTIME(created,'%d.%m.%y') = :dete", array(':dete' => $header[$i], ':type' => 'idea'))->fetchField();
-    // The number of comments created each day.
-    $comments[$i]  = db_query("SELECT COUNT(*) FROM {comment} WHERE FROM_UNIXTIME(created,'%d.%m.%y') = :dete", array(':dete' => $header[$i]))->fetchField();
-    // The number of voted placed each day.
-    $votes[$i]     = db_query("SELECT COUNT(*) FROM {votingapi_vote} WHERE  FROM_UNIXTIME(timestamp,'%d.%m.%y') = :dete", array(':dete' => $header[$i]))->fetchField();
-    // The number of users join each day.
-    $users[$i]     = db_query("SELECT COUNT(*) FROM {users} WHERE  FROM_UNIXTIME(created,'%d.%m.%y') = :dete", array(':dete' => $header[$i]))->fetchField();
+      
+    $i ++;
+    $f = strtotime("+1 day", $f);
   }
   // Building the rows, array of the data point arrays.
-  $rows = array($nodes, $comments, $votes, $users);
+  $rows = array($nodes);
   // The labels for the rows.
-  $columns = array('No. Of Ideas', 'No. Of Comments', 'No. Of Votes', 'No. Of Users');
+  $columns = array('No. Of Ideas');
   
   // Put all the data into the settings array, 
   // which will be send to draw.
  
   // Must empty the array first.
   $settings = array();
-  $settings['chart']['chartOne'] = array(  
+  $settings['chart']['chartIdeas'] = array(  
     'header' => $header,
     'rows' => $rows,
     'columns' => $columns,
@@ -37,9 +38,133 @@ function ideal_dashboard() {
     'options' => array( // Optionals.
       'curveType' => "function",
       'forceIFrame' => FALSE,  
-      'title' => 'Ideas / Comments / Votes / Users / per day',
-      'width' => 800,
-      'height' => 400  
+      'title' => 'Ideas per day',
+      'width' => 500,
+      'height' => 300  
+    )   
+  );
+  
+  //Draw it.
+  ideal_chart_draw_chart($settings); 
+  
+  // Chart for ideas, comments, votes and users created per day.
+  $i = 0;
+  $f = $from;
+  while ($f <= $to) {
+    // Building the header - list of date from today backward.
+    $header[$i]   = date('d.m.y', $f);
+    // The number of comments created each day.
+    $comments[$i]  = db_query("SELECT COUNT(*) FROM {comment} WHERE FROM_UNIXTIME(created,'%d.%m.%y') = :dete", array(':dete' => $header[$i]))->fetchField();
+    // The number of voted placed each day.
+  
+    $i ++;
+    $f = strtotime("+1 day", $f);
+  }
+  // Building the rows, array of the data point arrays.
+  $rows = array($comments);
+  // The labels for the rows.
+  $columns = array('No. Of Comments',);
+  
+  // Put all the data into the settings array, 
+  // which will be send to draw.
+ 
+  // Must empty the array first.
+  $settings = array();
+  $settings['chart']['chartComments'] = array(  
+    'header' => $header,
+    'rows' => $rows,
+    'columns' => $columns,
+    'chartType' => 'LineChart',// LineChart, PieChart, ,ColumnChart, ,AreaChart, Gauge, BarChart, etc....
+    'containerId' =>  'chart2',
+    'options' => array( // Optionals.
+      'curveType' => "function",
+      'colors' => array('green'),   
+      'forceIFrame' => FALSE,  
+      'title' => 'Comments per day',
+      'width' => 500,
+      'height' => 300  
+    )   
+  );
+  
+  //Draw it.
+  ideal_chart_draw_chart($settings); 
+  
+  // Chart for ideas, comments, votes and users created per day.
+  $i = 0;
+  $f = $from;
+  while ($f <= $to) {
+    // Building the header - list of date from today backward.
+    $header[$i]   = date('d.m.y', $f);
+     // The number of voted placed each day.
+    $votes[$i] = db_query("SELECT COUNT(*) FROM {votingapi_vote} WHERE  FROM_UNIXTIME(timestamp,'%d.%m.%y') = :dete", array(':dete' => $header[$i]))->fetchField();
+    
+    $i ++;
+    $f = strtotime("+1 day", $f);
+  }
+  // Building the rows, array of the data point arrays.
+  $rows = array($votes);
+  // The labels for the rows.
+  $columns = array('No. Of Votes');
+  
+  // Put all the data into the settings array, 
+  // which will be send to draw.
+ 
+  // Must empty the array first.
+  $settings = array();
+  $settings['chart']['chartVotes'] = array(  
+    'header' => $header,
+    'rows' => $rows,
+    'columns' => $columns,
+    'chartType' => 'LineChart',// LineChart, PieChart, ,ColumnChart, ,AreaChart, Gauge, BarChart, etc....
+    'containerId' =>  'chart3',
+    'options' => array( // Optionals.
+      'curveType' => "function",
+      'colors' => array('purple'),   
+      'forceIFrame' => FALSE,  
+      'title' => 'Votes per day',
+      'width' => 500,
+      'height' => 300  
+    )   
+  );
+  
+  //Draw it.
+  ideal_chart_draw_chart($settings); 
+  
+  // Chart for ideas, comments, votes and users created per day.
+  $i = 0;
+  $f = $from;
+  while ($f <= $to) {
+    // Building the header - list of date from today backward.
+    $header[$i]   = date('d.m.y', $f);
+    // The number of users join each day.
+    $users[$i]     = db_query("SELECT COUNT(*) FROM {users} WHERE  FROM_UNIXTIME(created,'%d.%m.%y') = :dete", array(':dete' => $header[$i]))->fetchField();
+    
+    $i ++;
+    $f = strtotime("+1 day", $f);
+  }
+  // Building the rows, array of the data point arrays.
+  $rows = array($users);
+  // The labels for the rows.
+  $columns = array('No. Of Users');
+  
+  // Put all the data into the settings array, 
+  // which will be send to draw.
+ 
+  // Must empty the array first.
+  $settings = array();
+  $settings['chart']['chartUsers'] = array(  
+    'header' => $header,
+    'rows' => $rows,
+    'columns' => $columns,
+    'chartType' => 'LineChart',// LineChart, PieChart, ,ColumnChart, ,AreaChart, Gauge, BarChart, etc....
+    'containerId' =>  'chart4',
+    'options' => array( // Optionals.
+      'curveType' => "function",
+      'colors' => array('orange'),   
+      'forceIFrame' => FALSE,  
+      'title' => 'Ideas Users per day',
+      'width' => 500,
+      'height' => 300  
     )   
   );
   
@@ -59,19 +184,19 @@ function ideal_dashboard() {
   $rows = array($terms);
   
   $settings = array();
-  $settings['chart']['chartTwo'] = array(  
+  $settings['chart']['chartCategory'] = array(  
     'header' => $header,
     'rows' => $rows,
     'columns' => $columns,
     'chartType' => 'PieChart',// LineChart, PieChart, ,ColumnChart, ,AreaChart, Gauge, BarChart, etc....
-    'containerId' =>  'chart2',
+    'containerId' =>  'chart5',
     'options' => array( // Optionals.
       'curveType' => "function", 
       'is3D' => TRUE,  
       'forceIFrame' => FALSE, 
       'title' => 'Ideas per category',
-      'width' => 800,
-      'height' => 400  
+      'width' => 500,
+      'height' => 300  
     )   
   );
   
@@ -91,19 +216,19 @@ function ideal_dashboard() {
   $rows = array($nodes);
   
   $settings = array();
-  $settings['chart']['chartThree'] = array(  
+  $settings['chart']['chartProgress'] = array(  
     'header' => $header,
     'rows' => $rows,
     'columns' => $columns,
     'chartType' => 'PieChart',// LineChart, PieChart, ,ColumnChart, ,AreaChart, Gauge, BarChart, etc....
-    'containerId' =>  'chart3',
+    'containerId' =>  'chart6',
     'options' => array( // Optionals.
       'curveType' => "function", 
       'is3D' => TRUE,  
       'forceIFrame' => FALSE, 
-      'title' => 'projects in Progress',
-      'width' => 800,
-      'height' => 400  
+      'title' => 'Projects in Progress',
+      'width' => 500,
+      'height' => 300  
     )   
   );
   
@@ -113,11 +238,16 @@ function ideal_dashboard() {
    // Chart for ideas, comments, votes and users created per day.
   $header = $nodes = array();
   $fid = db_query("SELECT fid FROM {flags} WHERE name = :name", array(':name' => 'popular_idea'))->fetchField();
-  for ($i = 29; $i >= 0; $i--) {
+  $i = 0;
+  $f = $from;
+  while ($f <= $to) {
     // Building the header - list of date from today backward.
-    $header[$i]   = date('d.m.y', strtotime("-{$i} day"));
+    $header[$i]   = date('d.m.y', $f);
     // The number of nodes become popular each day.
     $nodes[$i]  = db_query("SELECT COUNT(*) FROM {flag_content} WHERE fid = :fid AND FROM_UNIXTIME(timestamp,'%d.%m.%y') = :dete", array(':fid' => $fid, ':dete' => $header[$i]))->fetchField();
+    
+    $i ++;
+    $f = strtotime("+1 day", $f);
   }
   // Building the rows, array of the data point arrays.
   $rows = array($nodes);
@@ -129,23 +259,24 @@ function ideal_dashboard() {
  
   // Must empty the array first.
   $settings = array();
-  $settings['chart']['chartFour'] = array(  
+  $settings['chart']['chartPopular'] = array(  
     'header' => $header,
     'rows' => $rows,
     'columns' => $columns,
     'chartType' => 'LineChart',// LineChart, PieChart, ,ColumnChart, ,AreaChart, Gauge, BarChart, etc....
-    'containerId' =>  'chart4',
+    'containerId' =>  'chart7',
     'options' => array( // Optionals.
-//      'curveType' => "function",
+      'curveType' => "function",
+      'colors' => array('red'), 
       'forceIFrame' => FALSE,  
       'title' => 'Ideas become populars',
-      'width' => 800,
-      'height' => 400  
+      'width' => 500,
+      'height' => 300  
     )   
   );
   
   //Draw it.
   ideal_chart_draw_chart($settings); 
 
-  return '<div id="chart1"></div><div id="chart2"></div><div id="chart3"></div><div id="chart4"></div>';
+  return '<div id="chart1"></div><div id="chart2"></div><div id="chart3"></div><div id="chart4"></div><div id="chart5"></div><div id="chart6"></div><div id="chart7"></div>';
 }
