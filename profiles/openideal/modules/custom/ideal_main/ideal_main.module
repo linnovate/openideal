@@ -151,11 +151,110 @@ function ideal_main_quicktabs_alter(&$quicktabs) {
 /**
  * Helper function for loading a view and getting the row count.
  */
-function ideal_main_quicktabs_view_counter($tab_view, $tab_display) {
+function ideal_main_quicktabs_view_counter($tab_view, $tab_display, $term=0) {
   $view = views_get_view($tab_view);
   $view->set_display($tab_display);
+  if ($term != 0) {
+    $view->args[0] = $term;
+  }
+  else {
+    $view->args[0] = arg(1);
+  }
   $view->pre_execute();
   $view->execute();
   $count = $view->total_rows ? $view->total_rows : 0;
   return $count;
+}
+
+/**
+ * Implements theme registry alter
+ */
+function ideal_main_theme_registry_alter(&$theme_registry){
+  
+  $theme_registry['views_mini_pager']['function'] = "ideal_main_views_mini_pager";
+
+}
+
+/**
+ * Overides theme_views_mini_pager, mainly if li_previous and li_next are empty.
+ */
+function ideal_main_views_mini_pager($vars) {
+  global $pager_page_array, $pager_total;
+  $tags = $vars['tags'];
+  $element = $vars['element'];
+  $parameters = $vars['parameters'];
+  $quantity = $vars['quantity'];
+
+  // Calculate various markers within this pager piece:
+  // Middle is used to "center" pages around the current page.
+  $pager_middle = ceil($quantity / 2);
+  // current is the page we are currently paged to
+  $pager_current = $pager_page_array[$element] + 1;
+  // max is the maximum page number
+  $pager_max = $pager_total[$element];
+  // End of marker calculations.
+
+
+  $li_previous = theme('pager_previous',
+    array(
+      'text' => (isset($tags[1]) ? $tags[1] : t('‹‹')),
+      'element' => $element,
+      'interval' => 1,
+      'parameters' => $parameters,
+    )
+  );
+  if (empty($li_previous)) {
+      $li_previous = theme('pager_last',
+        array(
+          'text' => (isset($tags[1]) ? $tags[1] : t('‹‹')),
+          'element' => $element,
+          'interval' => 1,
+          'parameters' => $parameters,
+        )
+      );
+  }
+
+  $li_next = theme('pager_next',
+    array(
+      'text' => (isset($tags[3]) ? $tags[3] : t('››')),
+      'element' => $element,
+      'interval' => 1,
+      'parameters' => $parameters,
+    )
+  );
+  if (empty($li_next)) {
+    $li_next = theme('pager_first',
+      array(
+        'text' => (isset($tags[3]) ? $tags[3] : t('››')),
+        'element' => $element,
+        'interval' => 1,
+        'parameters' => $parameters,
+      )
+    );
+  }
+
+  if ($pager_total[$element] > 1) {
+    $items[] = array(
+      'class' => array('pager-previous'),
+      'data' => $li_previous,
+    );
+
+    $items[] = array(
+      'class' => array('pager-current'),
+      'data' => t('@current of @max', array('@current' => $pager_current, '@max' => $pager_max)),
+    );
+
+    $items[] = array(
+      'class' => array('pager-next'),
+      'data' => $li_next,
+    );
+    return theme('item_list',
+      array(
+        'items' => $items,
+        'title' => NULL,
+        'type' => 'ul',
+        'attributes' => array('class' => array('pager')),
+      )
+    );
+  }
 }

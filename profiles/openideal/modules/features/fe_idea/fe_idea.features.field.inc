@@ -346,9 +346,12 @@ function fe_idea_field_default_fields() {
       'display' => array(
         'default' => array(
           'label' => 'above',
-          'settings' => array(),
-          'type' => 'hidden',
-          'weight' => '6',
+          'module' => 'entityreference',
+          'settings' => array(
+            'view_mode' => 'teaser',
+          ),
+          'type' => 'entityreference_entity_view',
+          'weight' => '-2',
         ),
         'teaser' => array(
           'label' => 'above',

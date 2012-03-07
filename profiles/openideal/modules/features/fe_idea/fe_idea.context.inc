@@ -100,6 +100,12 @@ function fe_idea_context_default_contexts() {
           'region' => 'content',
           'weight' => '-10',
         ),
+        'views-carousel-block' => array(
+          'module' => 'views',
+          'delta' => 'carousel-block',
+          'region' => 'content',
+          'weight' => '-14',
+        ),
         'views-frontpage_ideas-block_1' => array(
           'module' => 'views',
           'delta' => 'frontpage_ideas-block_1',
@@ -122,7 +128,7 @@ function fe_idea_context_default_contexts() {
           'module' => 'views',
           'delta' => 'head_to_head-block',
           'region' => 'content',
-          'weight' => '-10',
+          'weight' => '-12',
         ),
       ),
     ),
