@@ -131,6 +131,9 @@ projects[radioactivity][subdir]                                = contrib
 projects[rules][version]                                       = 7.x-2.0
 projects[rules][subdir]                                        = contrib
 
+projects[search_autocomplete][version]                         = 7.x-2.1
+projects[rules][subdir]                                        = contrib
+
 projects[services_links][version]                              = 7.x-2.1
 projects[services_links][subdir]                               = contrib
 
