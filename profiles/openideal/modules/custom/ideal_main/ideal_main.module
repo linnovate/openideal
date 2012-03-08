@@ -1,6 +1,4 @@
 <?php
-function ideal_main_init() {
-}
 /**
  * Implements hook_menu().
  */
@@ -19,13 +17,6 @@ function ideal_main_menu() {
     'title' => 'General Configurations',
     'description' => 'General Configurations', 
     'type' => MENU_DEFAULT_LOCAL_TASK,
-  );
-  
-  $items['admin/reports/ideal-dashboard'] = array(
-    'title' => 'Dashboard',
-    'access arguments' => array('admin content'),
-    'page callback' => 'ideal_dashboard',
-    'file' => 'ideal_main.admin.inc',  
   );
   
   return $items;
