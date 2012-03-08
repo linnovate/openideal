@@ -21,7 +21,7 @@ function ideal_main_menu() {
     'type' => MENU_DEFAULT_LOCAL_TASK,
   );
   
-  $items['admin/ideal-dashboard'] = array(
+  $items['admin/reports/ideal-dashboard'] = array(
     'title' => 'Dashboard',
     'access arguments' => array('admin content'),
     'page callback' => 'ideal_dashboard',
