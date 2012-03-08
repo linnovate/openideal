@@ -1,56 +1,9 @@
 <?php
-
-/**
- * Implements hook_menu().
- */
-function ideal_chart_menu() {
-  $items = array();
-  
-  $items['ideal-charts'] = array(
-    'title' => 'ideal-charts',
-    'access arguments' => array('access content'),
-    'page callback' => 'ideal_charts_page',
-//    'page arguments' => array('ideal_charts_page'),
-  );
-  return $items;
-}
-
-function ideal_charts_page() {
+function ideal_chart_init() {
   drupal_add_js('https://www.google.com/jsapi', 'external');
   drupal_add_js(drupal_get_path('module', 'ideal_chart') . '/theme/ideal_chart.js');
-  
-  $header = array();
-  $rows = array();
-  for ($i = 9; $i >= 0; $i--) {
-    $header[$i] = date('d.m.y', strtotime("-{$i} day"));
-    $idea[$i]     = db_query("SELECT COUNT(*) FROM {node} WHERE  FROM_UNIXTIME(created,'%d.%m.%y') = :dete", array(':dete' => $header[$i]))->fetchField();
-    $comment[$i]  = db_query("SELECT COUNT(*) FROM {comment} WHERE  FROM_UNIXTIME(created,'%d.%m.%y') = :dete", array(':dete' => $header[$i]))->fetchField();
-    $vote[$i]     = db_query("SELECT COUNT(*) FROM {votingapi_vote} WHERE  FROM_UNIXTIME(timestamp,'%d.%m.%y') = :dete", array(':dete' => $header[$i]))->fetchField();
-  }
-  $rows[0] = $idea;
-  $rows[1] = $comment;
-  $rows[2] = $vote;
-  
-  $columns[0] = 'No. Of Ideas';
-  $columns[1] = 'No. Of Comments';
-  $columns[2] = 'No. Of Votes';
-  
-  $settings = array(
-    'header' => $header,
-    'rows' => $rows,
-    'columns' => $columns,
-    // LineChart, PieChart, ,ColumnChart, ,AreaChart, Gauge, BarChart
-    'type' => 'LineChart',
-    'html_id' =>  'content',
-    'options' => array(
-      'title' => 'Ideas / Comments / Votes per day',
-      'width' => 800,
-      'height' => 300  
-    )  
-    
-  );
+}
 
+function ideal_chart_draw_chart($settings) {
   drupal_add_js($settings, array('type' => 'setting'));
-
-  return '';
 }
