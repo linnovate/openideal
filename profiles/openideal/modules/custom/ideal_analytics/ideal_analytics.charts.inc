@@ -4,7 +4,9 @@ function ideal_analytics_charts() {
   $from = isset($period[0]) ? $period[0] : strtotime('-1 month');
   $to   = isset($period[1]) ? $period[1] : time();
 
-  // Chart for ideas, comments, votes and users created per day.
+  //==================================
+  // Chart for ideas created per day.
+  //==================================
   $header = $nodes = $comments = $votes = $users = array();
   $i = 0;
   $f = $from;
@@ -43,9 +45,11 @@ function ideal_analytics_charts() {
   );
   
   //Draw it.
-  ideal_chart_draw_chart($settings); 
+  draw_chart($settings); 
   
-  // Chart for ideas, comments, votes and users created per day.
+  //=====================================
+  // Chart for comments created per day.
+  //=====================================
   $i = 0;
   $f = $from;
   while ($f <= $to) {
@@ -85,9 +89,11 @@ function ideal_analytics_charts() {
   );
   
   //Draw it.
-  ideal_chart_draw_chart($settings); 
+  draw_chart($settings); 
   
-  // Chart for ideas, comments, votes and users created per day.
+  //=====================================
+  // Chart for votes placed per day.
+  //=====================================
   $i = 0;
   $f = $from;
   while ($f <= $to) {
@@ -126,9 +132,11 @@ function ideal_analytics_charts() {
   );
   
   //Draw it.
-  ideal_chart_draw_chart($settings); 
+  draw_chart($settings); 
   
-  // Chart for ideas, comments, votes and users created per day.
+  //=====================================
+  // Chart for user joind per day.
+  //=====================================
   $i = 0;
   $f = $from;
   while ($f <= $to) {
@@ -167,9 +175,11 @@ function ideal_analytics_charts() {
   );
   
   //Draw it.
-  ideal_chart_draw_chart($settings); 
+  draw_chart($settings); 
   
-  // Chart for ideas per category
+  //=====================================
+  // Chart for ideas per category.
+  //=====================================
   $voc = taxonomy_vocabulary_machine_name_load('categories');
   $tree = taxonomy_get_tree($voc->vid);
   $header = array();
@@ -199,9 +209,11 @@ function ideal_analytics_charts() {
   );
   
   //Draw it.
-  ideal_chart_draw_chart($settings); 
+  draw_chart($settings); 
   
-  // Chart for projects in progress
+  //=====================================
+  // Chart for projects in progress.
+  //=====================================
   $nodes = $header = array();
   $in_action = field_info_field('field_in_action');
   foreach ($in_action['settings']['allowed_values'] as $k => $value) {
@@ -231,9 +243,11 @@ function ideal_analytics_charts() {
   );
   
   //Draw it.
-  ideal_chart_draw_chart($settings); 
+  draw_chart($settings); 
   
-   // Chart for ideas, comments, votes and users created per day.
+  //=========================================
+  // Chart for ideas become popular per day.
+  //=========================================
   $header = $nodes = array();
   $fid = db_query("SELECT fid FROM {flags} WHERE name = :name", array(':name' => 'popular_idea'))->fetchField();
   $i = 0;
@@ -274,5 +288,5 @@ function ideal_analytics_charts() {
   );
   
   //Draw it.
-  ideal_chart_draw_chart($settings);
+  draw_chart($settings);
 }

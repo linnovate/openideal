@@ -1,9 +1,0 @@
-<?php
-function ideal_chart_init() {
-  drupal_add_js('https://www.google.com/jsapi', 'external');
-  drupal_add_js(drupal_get_path('module', 'ideal_chart') . '/theme/ideal_chart.js');
-}
-
-function ideal_chart_draw_chart($settings) {
-  drupal_add_js($settings, array('type' => 'setting'));
-}
