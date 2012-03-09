@@ -1,0 +1,111 @@
+<?php
+/**
+ * Implements hook_menu().
+ */
+function ideal_dashboard_menu() {
+  $items = array();
+  
+  $items['admin/reports/ideal-dashboard'] = array(
+    'title' => 'Dashboard',
+    'access arguments' => array('admin content'),
+    'page callback' => 'ideal_dashboard_page',
+  );
+  
+  return $items;
+}
+
+/**
+ * Implements hook_theme()
+ */
+function ideal_dashboard_theme($existing, $type, $theme, $path) {
+  return array(
+    'ideal_dashboard_form' => array(
+    'render element' => 'form'
+    )
+  );
+}
+
+function ideal_dashboard_page() {
+  module_load_include('inc', 'ideal_dashboard', 'ideal_dashboard.charts');
+  module_load_include('inc', 'ideal_dashboard', 'ideal_dashboard.forms');
+  ideal_dashboard_charts();
+  $form = drupal_get_form('ideal_dashboard_form');
+  $form = drupal_render($form);
+  return $form . '<div id="charts"><div id="chart1"></div><div id="chart2"></div><div id="chart3"></div><div id="chart4"></div><div id="chart5"></div><div id="chart6"></div><div id="chart7"></div></div>';
+}
+
+/**
+ * Retrieve the time period or interval from the URL
+ *
+ * @param $period
+ *   If the set option is a period, the return value will
+ *   be a single timestamp representing how far to go back
+ *   in time from the current. If the set option is custom,
+ *   the return value will be an array representing a given
+ *   time interval. The first value will be the "from" timestamp
+ *   and the second value will be the "to" timestamp. If neither
+ *   can be determined, FALSE will be returned. If no queries are
+ *   in the URL, a timestamp for a 1 month period will be returned.
+ */
+function _ideal_main_get_time_from_url() {
+  // Get the option
+  if (isset($_GET['option'])) {
+    switch ($_GET['option']) {
+      case 'custom':
+        $from = strtotime($_GET['from']);
+        $to = strtotime($_GET['to']);
+        if (is_numeric($from) && is_numeric($to)) {
+          // Move the 'to' date to 1 second before midnight
+          return array($from, $to + 86399);
+        }
+        break;
+
+      case 'period':
+        $from = strtotime('-' . str_replace('_', ' ', filter_xss($_GET['period'])));
+        if (is_numeric($from)) {
+          return array($from, time());
+        }
+    }
+  }
+  else {
+    return array(strtotime('-1 month'), time());
+  }
+
+  return FALSE;
+}
+
+/**
+ * Theme wrapper for quant_time_form()
+ */
+function theme_ideal_dashboard_form($variables) {
+  $form = $variables['form'];
+  $output = '';
+
+  $output .= '<div id="ideal-dashboard-page">';
+
+  $output .= '<div class="description">';
+  $output .= t('Select a timeframe and click Update to see what\'s happening on your site during that time, as well as a total for all the activity during that timeframe.');
+  $output .= '</div>';
+
+  $output .= '<div class="ideal-dashboard-option-row">';
+  $output .= drupal_render($form['option']['period']);
+  $output .= '<span class="description">From:</span>';
+  $output .= drupal_render($form['period']);
+  $output .= '<span class="description">ago.</span>';
+  $output .= '</div>';
+
+  $output .= '<div class="ideal-dashboard-option-row">';
+  $output .= drupal_render($form['option']['custom']);
+  $output .= '<span class="description">From:</span>';
+  $output .= drupal_render($form['custom_from']);
+  $output .= '<span class="description">To:</span>';
+  $output .= drupal_render($form['custom_to']);
+  $output .= '<span class="description"><i>Format DD.MM.YYYY</i></span>';
+  $output .= '</div>';
+
+  $output .= drupal_render_children($form);
+
+  $output .= '</div>';
+
+  return $output;
+}
