@@ -2,7 +2,7 @@
 /**
  * Provide a simple form to change time periods
  */
-function ideal_dashboard_form() {
+function ideal_analytics_form() {
   $form = array();
   
   // Load some javascript for datepicker
@@ -68,7 +68,7 @@ function ideal_dashboard_form() {
 /**
  * Validate handler for quant_time_form()
  */
-function ideal_dashboard_form_validate($form, &$form_state) {
+function ideal_analytics_form_validate($form, &$form_state) {
   $values = $form_state['values'];
 
   // Make sure a time option is checked
@@ -112,7 +112,7 @@ function ideal_dashboard_form_validate($form, &$form_state) {
 /**
  * Submit handler for quant_time_form()
  */
-function ideal_dashboard_form_submit(&$form, $form_state) {
+function ideal_analytics_form_submit(&$form, $form_state) {
   // Add a query to the URL which will be used to determine the query
   switch ($form_state['values']['option']) {
     case 'period':

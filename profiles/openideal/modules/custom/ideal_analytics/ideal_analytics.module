@@ -2,13 +2,13 @@
 /**
  * Implements hook_menu().
  */
-function ideal_dashboard_menu() {
+function ideal_analytics_menu() {
   $items = array();
   
-  $items['admin/reports/ideal-dashboard'] = array(
-    'title' => 'Dashboard',
+  $items['admin/reports/ideal-analytics'] = array(
+    'title' => 'Analytics',
     'access arguments' => array('admin content'),
-    'page callback' => 'ideal_dashboard_page',
+    'page callback' => 'ideal_analytics_page',
   );
   
   return $items;
@@ -17,19 +17,19 @@ function ideal_dashboard_menu() {
 /**
  * Implements hook_theme()
  */
-function ideal_dashboard_theme($existing, $type, $theme, $path) {
+function ideal_analytics_theme($existing, $type, $theme, $path) {
   return array(
-    'ideal_dashboard_form' => array(
+    'ideal_analytics_form' => array(
     'render element' => 'form'
     )
   );
 }
 
-function ideal_dashboard_page() {
-  module_load_include('inc', 'ideal_dashboard', 'ideal_dashboard.charts');
-  module_load_include('inc', 'ideal_dashboard', 'ideal_dashboard.forms');
-  ideal_dashboard_charts();
-  $form = drupal_get_form('ideal_dashboard_form');
+function ideal_analytics_page() {
+  module_load_include('inc', 'ideal_analytics', 'ideal_analytics.charts');
+  module_load_include('inc', 'ideal_analytics', 'ideal_analytics.forms');
+  ideal_analytics_charts();
+  $form = drupal_get_form('ideal_analytics_form');
   $form = drupal_render($form);
   return $form . '<div id="charts"><div id="chart1"></div><div id="chart2"></div><div id="chart3"></div><div id="chart4"></div><div id="chart5"></div><div id="chart6"></div><div id="chart7"></div></div>';
 }
@@ -77,24 +77,24 @@ function _ideal_main_get_time_from_url() {
 /**
  * Theme wrapper for quant_time_form()
  */
-function theme_ideal_dashboard_form($variables) {
+function theme_ideal_analytics_form($variables) {
   $form = $variables['form'];
   $output = '';
 
-  $output .= '<div id="ideal-dashboard-page">';
+  $output .= '<div id="ideal-analytics-page">';
 
   $output .= '<div class="description">';
   $output .= t('Select a timeframe and click Update to see what\'s happening on your site during that time, as well as a total for all the activity during that timeframe.');
   $output .= '</div>';
 
-  $output .= '<div class="ideal-dashboard-option-row">';
+  $output .= '<div class="ideal-analytics-option-row">';
   $output .= drupal_render($form['option']['period']);
   $output .= '<span class="description">From:</span>';
   $output .= drupal_render($form['period']);
   $output .= '<span class="description">ago.</span>';
   $output .= '</div>';
 
-  $output .= '<div class="ideal-dashboard-option-row">';
+  $output .= '<div class="ideal-analytics-option-row">';
   $output .= drupal_render($form['option']['custom']);
   $output .= '<span class="description">From:</span>';
   $output .= drupal_render($form['custom_from']);

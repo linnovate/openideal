@@ -1,5 +1,5 @@
 <?php
-function ideal_dashboard_charts() {
+function ideal_analytics_charts() {
   $period = _ideal_main_get_time_from_url();
   $from = isset($period[0]) ? $period[0] : strtotime('-1 month');
   $to   = isset($period[1]) ? $period[1] : time();
