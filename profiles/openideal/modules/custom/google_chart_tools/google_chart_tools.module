@@ -19,6 +19,7 @@ function draw_chart($settings) {
   $ret = array(
     'title' =>  $chart['options']['title'],
     'id' =>  $id,
+    'weight' => isset($chart['weight']) ? $chart['weight'] : 0,
     'markup' =>  "<div id='{$settings['chart'][$id]['containerId']}'></div>"
   );
   return $ret;
