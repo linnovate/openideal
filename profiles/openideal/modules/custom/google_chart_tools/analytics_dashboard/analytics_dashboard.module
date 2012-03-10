@@ -150,7 +150,7 @@ function theme_analytics_dashboard_form($variables) {
   $output .= '<span class="description">ago.</span>';
   $output .= '</div>';
 
-  $output .= '<div class="analytics-dashboard-analytics-option-row">';
+  $output .= '<div class="analytics-dashboard-option-row">';
   $output .= drupal_render($form['option']['custom']);
   $output .= '<span class="description">From:</span>';
   $output .= drupal_render($form['custom_from']);
