@@ -1,6 +1,7 @@
 <?php
-function ideal_analytics_charts() {
-  $period = _ideal_main_get_time_from_url();
+function gct_analytics_charts() {
+//function gct_analytics_gct() {
+  $period = _gct_main_get_time_from_url();
   $from = isset($period[0]) ? $period[0] : strtotime('-1 month');
   $to   = isset($period[1]) ? $period[1] : time();
 
@@ -45,8 +46,7 @@ function ideal_analytics_charts() {
   );
   
   //Draw it.
-  $ret[] = draw_chart($settings); 
-
+  $ret[] = draw_chart($settings);
   
   //=====================================
   // Chart for comments created per day.
@@ -90,7 +90,7 @@ function ideal_analytics_charts() {
   );
   
   //Draw it.
-  $ret[] = draw_chart($settings); 
+  $ret[] = draw_chart($settings);
   
   //=====================================
   // Chart for votes placed per day.
@@ -133,7 +133,7 @@ function ideal_analytics_charts() {
   );
   
   //Draw it.
-  $ret[] = draw_chart($settings); 
+  $ret[] = draw_chart($settings);  
   
   //=====================================
   // Chart for user joind per day.
@@ -186,7 +186,10 @@ function ideal_analytics_charts() {
   $header = array();
   foreach ($tree as $term) {
     $header[] = $term->name;
-    $terms[] = ideal_count_term_ideas($term->tid);
+    $query = db_select('taxonomy_index', 'ti');
+    $query->condition('ti.tid', $term->tid, '=')
+          ->fields('ti', array('nid'));
+    $terms[] = $query->countQuery()->execute()->fetchField();
     
   }
   $columns = array('Ideas in category');
@@ -210,7 +213,7 @@ function ideal_analytics_charts() {
   );
   
   //Draw it.
-  $ret[] = draw_chart($settings); 
+  $ret[] = draw_chart($settings);  
   
   //=====================================
   // Chart for projects in progress.
@@ -244,7 +247,7 @@ function ideal_analytics_charts() {
   );
   
   //Draw it.
-  $ret[] = draw_chart($settings); 
+  $ret[] = draw_chart($settings);  
   
   //=========================================
   // Chart for ideas become popular per day.

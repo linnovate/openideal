@@ -1,0 +1,165 @@
+<?php
+/**
+ * Implements hook_menu().
+ */
+function gct_analytics_menu() {
+  $items = array();
+  
+  $items['admin/reports/gct-analytics'] = array(
+    'title' => 'Analytics',
+    'access arguments' => array('admin content'),
+    'page callback' => 'gct_analytics_page',
+  );
+  
+  // Settings page
+  $items['admin/config/gct-analytics'] = array(
+    'title' => 'GCT Analytics configuration',
+    'description' => 'Configure the GCT analytics page',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('gtc_analytics_admin_settings'),
+    'access arguments' => array('administer analytics'),
+    'type' => MENU_NORMAL_ITEM,
+    'file' => 'gct_analytics.admin.inc',
+  );
+
+  
+  return $items;
+}
+
+/**
+ * Implements hook_permission().
+ */
+function gct_analytics_permission() {
+  return array(
+    'administer analytics' => array(
+      'title' => t('Administer GCT Analytics'), 
+      'description' => t('Perform administration tasks for GCT analytics.'),
+    ),
+  );
+}
+
+/**
+ * Implements hook_theme()
+ */
+function gct_analytics_theme($existing, $type, $theme, $path) {
+  return array(
+    'gct_analytics_form' => array(
+    'render element' => 'form'
+    )
+  );
+}
+
+/**
+ * Page callback for report page.
+ */
+function gct_analytics_page() {
+  module_load_include('inc', 'gct_analytics', 'gct_analytics.charts');
+  module_load_include('inc', 'gct_analytics', 'gct_analytics.forms');
+//  gct_analytics_charts();
+  $form = drupal_get_form('gct_analytics_form');
+  $form = drupal_render($form);
+  $charts = gct_get_charts();
+  $default = variable_get('chart_visible', array());
+  $ret = $form; 
+  $ret .= '<div id="charts">';
+  foreach ($charts as $chart) {
+    if (in_array($chart['id'], $default, TRUE)) {
+      $ret .= $chart['markup'];
+    }
+  }
+  $ret .= '</div>';
+  
+  return $ret;
+}
+
+/**
+ * Retrieve the time period or interval from the URL
+ *
+ * @param $period
+ *   If the set option is a period, the return value will
+ *   be a single timestamp representing how far to go back
+ *   in time from the current. If the set option is custom,
+ *   the return value will be an array representing a given
+ *   time interval. The first value will be the "from" timestamp
+ *   and the second value will be the "to" timestamp. If neither
+ *   can be determined, FALSE will be returned. If no queries are
+ *   in the URL, a timestamp for a 1 month period will be returned.
+ */
+function _gct_main_get_time_from_url() {
+  // Get the option
+  if (isset($_GET['option'])) {
+    switch ($_GET['option']) {
+      case 'custom':
+        $from = strtotime($_GET['from']);
+        $to = strtotime($_GET['to']);
+        if (is_numeric($from) && is_numeric($to)) {
+          // Move the 'to' date to 1 second before midnight
+          return array($from, $to + 86399);
+        }
+        break;
+
+      case 'period':
+        $from = strtotime('-' . str_replace('_', ' ', filter_xss($_GET['period'])));
+        if (is_numeric($from)) {
+          return array($from, time());
+        }
+    }
+  }
+  else {
+    return array(strtotime('-1 month'), time());
+  }
+
+  return FALSE;
+}
+
+/**
+ * Fetch all available GCT charts
+ */
+function gct_get_charts() {
+  $charts = module_invoke_all('gct');
+  return $charts;
+}
+
+/**
+ * Implements hook_gct()
+ */
+function gct_analytics_gct() {
+  module_load_include('inc', 'gct_analytics', 'gct_analytics.charts');
+  return gct_analytics_charts();
+}
+
+/**
+ * Theme wrapper for gct_analytics_form()
+ */
+function theme_gct_analytics_form($variables) {
+  $form = $variables['form'];
+  $output = '';
+
+  $output .= '<div id="gct-analytics-page">';
+
+  $output .= '<div class="description">';
+  $output .= t('Select a timeframe and click Update to see what\'s happening on your site during that time, as well as a total for all the activity during that timeframe.');
+  $output .= '</div>';
+
+  $output .= '<div class="gct-analytics-option-row">';
+  $output .= drupal_render($form['option']['period']);
+  $output .= '<span class="description">From:</span>';
+  $output .= drupal_render($form['period']);
+  $output .= '<span class="description">ago.</span>';
+  $output .= '</div>';
+
+  $output .= '<div class="gct-analytics-option-row">';
+  $output .= drupal_render($form['option']['custom']);
+  $output .= '<span class="description">From:</span>';
+  $output .= drupal_render($form['custom_from']);
+  $output .= '<span class="description">To:</span>';
+  $output .= drupal_render($form['custom_to']);
+  $output .= '<span class="description"><i>Format DD.MM.YYYY</i></span>';
+  $output .= '</div>';
+
+  $output .= drupal_render_children($form);
+
+  $output .= '</div>';
+
+  return $output;
+}
