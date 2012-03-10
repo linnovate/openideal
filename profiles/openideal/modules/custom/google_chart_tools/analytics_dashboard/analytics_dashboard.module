@@ -7,7 +7,7 @@ function analytics_dashboard_menu() {
   
   $items['admin/reports/analytics-dashboard'] = array(
     'title' => 'Analytics',
-    'access arguments' => array('admin content'),
+    'access arguments' => array('view analytics dashboard'),
     'page callback' => 'analytics_dashboard_page',
   );
   
@@ -16,7 +16,7 @@ function analytics_dashboard_menu() {
     'title' => 'Analytics dashboard configuration',
     'description' => 'Configure the Analytics dashboard page',
     'page callback' => 'drupal_get_form',
-    'page arguments' => array('gtc_analytics_admin_settings'),
+    'page arguments' => array('analytics_dashboard_admin_settings'),
     'access arguments' => array('administer analytics dashboard'),
     'type' => MENU_NORMAL_ITEM,
     'file' => 'analytics_dashboard.admin.inc',
@@ -34,6 +34,10 @@ function analytics_dashboard_permission() {
     'administer analytics dashboard' => array(
       'title' => t('Administer Analytics dashboard'), 
       'description' => t('Perform administration tasks for Analytics dashboard.'),
+    ),
+    'view analytics dashboard' => array(
+      'title' => t('View Analytics Dashboard'), 
+      'description' => t('View analytics dashboard.'),
     ),
   );
 }

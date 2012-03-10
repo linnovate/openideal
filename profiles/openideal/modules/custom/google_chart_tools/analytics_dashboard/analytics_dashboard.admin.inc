@@ -2,7 +2,7 @@
 /**
  * Provide admin settings form
  */
-function gtc_analytics_admin_settings($form, &$form_state) {
+function analytics_dashboard_admin_settings($form, &$form_state) {
   $form = array();
   // Get available charts
   $options = array();
