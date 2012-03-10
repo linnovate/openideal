@@ -2,24 +2,24 @@
 /**
  * Implements hook_menu().
  */
-function gct_analytics_menu() {
+function analytics_dashboard_menu() {
   $items = array();
   
-  $items['admin/reports/gct-analytics'] = array(
+  $items['admin/reports/analytics-dashboard'] = array(
     'title' => 'Analytics',
     'access arguments' => array('admin content'),
-    'page callback' => 'gct_analytics_page',
+    'page callback' => 'analytics_dashboard_page',
   );
   
   // Settings page
-  $items['admin/config/gct-analytics'] = array(
-    'title' => 'GCT Analytics configuration',
-    'description' => 'Configure the GCT analytics page',
+  $items['admin/config/analytics-dashboard'] = array(
+    'title' => 'Analytics dashboard configuration',
+    'description' => 'Configure the Analytics dashboard page',
     'page callback' => 'drupal_get_form',
     'page arguments' => array('gtc_analytics_admin_settings'),
-    'access arguments' => array('administer analytics'),
+    'access arguments' => array('administer analytics dashboard'),
     'type' => MENU_NORMAL_ITEM,
-    'file' => 'gct_analytics.admin.inc',
+    'file' => 'analytics_dashboard.admin.inc',
   );
 
   
@@ -29,11 +29,11 @@ function gct_analytics_menu() {
 /**
  * Implements hook_permission().
  */
-function gct_analytics_permission() {
+function analytics_dashboard_permission() {
   return array(
-    'administer analytics' => array(
-      'title' => t('Administer GCT Analytics'), 
-      'description' => t('Perform administration tasks for GCT analytics.'),
+    'administer analytics dashboard' => array(
+      'title' => t('Administer Analytics dashboard'), 
+      'description' => t('Perform administration tasks for Analytics dashboard.'),
     ),
   );
 }
@@ -41,9 +41,9 @@ function gct_analytics_permission() {
 /**
  * Implements hook_theme()
  */
-function gct_analytics_theme($existing, $type, $theme, $path) {
+function analytics_dashboard_theme($existing, $type, $theme, $path) {
   return array(
-    'gct_analytics_form' => array(
+    'analytics_dashboard_form' => array(
     'render element' => 'form'
     )
   );
@@ -52,23 +52,21 @@ function gct_analytics_theme($existing, $type, $theme, $path) {
 /**
  * Page callback for report page.
  */
-function gct_analytics_page() {
-  module_load_include('inc', 'gct_analytics', 'gct_analytics.charts');
-  module_load_include('inc', 'gct_analytics', 'gct_analytics.forms');
-//  gct_analytics_charts();
-  $form = drupal_get_form('gct_analytics_form');
+function analytics_dashboard_page() {
+  module_load_include('inc', 'analytics_dashboard', 'analytics_dashboard.charts');
+  module_load_include('inc', 'analytics_dashboard', 'analytics_dashboard.forms');
+  $form = drupal_get_form('analytics_dashboard_form');
   $form = drupal_render($form);
-  $charts = gct_get_charts();
-  $default = variable_get('chart_visible', array());
+  $charts = analytics_dashboard_get_charts();
+  $visibles = variable_get('chart_visible', array());
   $ret = $form; 
   $ret .= '<div id="charts">';
   foreach ($charts as $chart) {
-    if (in_array($chart['id'], $default, TRUE)) {
+    if (in_array($chart['id'], $visibles, TRUE)) {
       $ret .= $chart['markup'];
     }
   }
   $ret .= '</div>';
-  
   return $ret;
 }
 
@@ -85,7 +83,7 @@ function gct_analytics_page() {
  *   can be determined, FALSE will be returned. If no queries are
  *   in the URL, a timestamp for a 1 month period will be returned.
  */
-function _gct_main_get_time_from_url() {
+function _get_time_from_url() {
   // Get the option
   if (isset($_GET['option'])) {
     switch ($_GET['option']) {
@@ -113,42 +111,42 @@ function _gct_main_get_time_from_url() {
 }
 
 /**
- * Fetch all available GCT charts
+ * Fetch all available analytics_dashboard charts
  */
-function gct_get_charts() {
-  $charts = module_invoke_all('gct');
+function analytics_dashboard_get_charts() {
+  $charts = module_invoke_all('analytics_dashboard');
   return $charts;
 }
 
 /**
- * Implements hook_gct()
+ * Implements hook_analytics_dashboard()
  */
-function gct_analytics_gct() {
-  module_load_include('inc', 'gct_analytics', 'gct_analytics.charts');
-  return gct_analytics_charts();
+function analytics_dashboard_analytics_dashboard() {
+  module_load_include('inc', 'analytics_dashboard', 'analytics_dashboard.charts');
+  return analytics_dashboard_charts();
 }
 
 /**
- * Theme wrapper for gct_analytics_form()
+ * Theme wrapper for analytics_dashboard_form()
  */
-function theme_gct_analytics_form($variables) {
+function theme_analytics_dashboard_form($variables) {
   $form = $variables['form'];
   $output = '';
 
-  $output .= '<div id="gct-analytics-page">';
+  $output .= '<div id="analytics-dashboard-page">';
 
   $output .= '<div class="description">';
   $output .= t('Select a timeframe and click Update to see what\'s happening on your site during that time, as well as a total for all the activity during that timeframe.');
   $output .= '</div>';
 
-  $output .= '<div class="gct-analytics-option-row">';
+  $output .= '<div class="analytics-dashboard-option-row">';
   $output .= drupal_render($form['option']['period']);
   $output .= '<span class="description">From:</span>';
   $output .= drupal_render($form['period']);
   $output .= '<span class="description">ago.</span>';
   $output .= '</div>';
 
-  $output .= '<div class="gct-analytics-option-row">';
+  $output .= '<div class="analytics-dashboard-analytics-option-row">';
   $output .= drupal_render($form['option']['custom']);
   $output .= '<span class="description">From:</span>';
   $output .= drupal_render($form['custom_from']);

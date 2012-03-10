@@ -6,7 +6,7 @@ function gtc_analytics_admin_settings($form, &$form_state) {
   $form = array();
   // Get available charts
   $options = array();
-  $charts = gct_get_charts();
+  $charts = analytics_dashboard_get_charts();
   foreach ($charts as $chart) {
     $options[$chart['id']] = $chart['title'];
   }

@@ -1,7 +1,6 @@
 <?php
-function gct_analytics_charts() {
-//function gct_analytics_gct() {
-  $period = _gct_main_get_time_from_url();
+function analytics_dashboard_charts() {
+  $period = _get_time_from_url();
   $from = isset($period[0]) ? $period[0] : strtotime('-1 month');
   $to   = isset($period[1]) ? $period[1] : time();
 
@@ -35,7 +34,6 @@ function gct_analytics_charts() {
     'rows' => $rows,
     'columns' => $columns,
     'chartType' => 'LineChart',// LineChart, PieChart, ,ColumnChart, ,AreaChart, Gauge, BarChart, etc....
-    'containerId' =>  'chart1',
     'options' => array( // Optionals.
       'curveType' => "function",
       'forceIFrame' => FALSE,  
@@ -78,7 +76,6 @@ function gct_analytics_charts() {
     'rows' => $rows,
     'columns' => $columns,
     'chartType' => 'LineChart',// LineChart, PieChart, ,ColumnChart, ,AreaChart, Gauge, BarChart, etc....
-    'containerId' =>  'chart2',
     'options' => array( // Optionals.
       'curveType' => "function",
       'colors' => array('green'),   
@@ -121,7 +118,6 @@ function gct_analytics_charts() {
     'rows' => $rows,
     'columns' => $columns,
     'chartType' => 'LineChart',// LineChart, PieChart, ,ColumnChart, ,AreaChart, Gauge, BarChart, etc....
-    'containerId' =>  'chart3',
     'options' => array( // Optionals.
       'curveType' => "function",
       'colors' => array('purple'),   
@@ -164,7 +160,6 @@ function gct_analytics_charts() {
     'rows' => $rows,
     'columns' => $columns,
     'chartType' => 'LineChart',// LineChart, PieChart, ,ColumnChart, ,AreaChart, Gauge, BarChart, etc....
-    'containerId' =>  'chart4',
     'options' => array( // Optionals.
       'curveType' => "function",
       'colors' => array('orange'),   
@@ -201,7 +196,6 @@ function gct_analytics_charts() {
     'rows' => $rows,
     'columns' => $columns,
     'chartType' => 'PieChart',// LineChart, PieChart, ,ColumnChart, ,AreaChart, Gauge, BarChart, etc....
-    'containerId' =>  'chart5',
     'options' => array( // Optionals.
       'curveType' => "function", 
       'is3D' => TRUE,  
@@ -235,7 +229,6 @@ function gct_analytics_charts() {
     'rows' => $rows,
     'columns' => $columns,
     'chartType' => 'PieChart',// LineChart, PieChart, ,ColumnChart, ,AreaChart, Gauge, BarChart, etc....
-    'containerId' =>  'chart6',
     'options' => array( // Optionals.
       'curveType' => "function", 
       'is3D' => TRUE,  
@@ -280,7 +273,6 @@ function gct_analytics_charts() {
     'rows' => $rows,
     'columns' => $columns,
     'chartType' => 'LineChart',// LineChart, PieChart, ,ColumnChart, ,AreaChart, Gauge, BarChart, etc....
-    'containerId' =>  'chart7',
     'options' => array( // Optionals.
       'curveType' => "function",
       'colors' => array('red'), 

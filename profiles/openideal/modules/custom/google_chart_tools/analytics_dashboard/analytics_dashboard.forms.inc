@@ -2,7 +2,7 @@
 /**
  * Provide a simple form to change time periods
  */
-function gct_analytics_form() {
+function analytics_dashboard_form() {
   $form = array();
   
   // Load some javascript for datepicker
@@ -66,9 +66,9 @@ function gct_analytics_form() {
 }
 
 /**
- * Validate handler for gct_analytics_form()
+ * Validate handler for analytics_dashboard_form()
  */
-function gct_analytics_form_validate($form, &$form_state) {
+function analytics_dashboard_form_validate($form, &$form_state) {
   $values = $form_state['values'];
 
   // Make sure a time option is checked
@@ -110,9 +110,9 @@ function gct_analytics_form_validate($form, &$form_state) {
 }
 
 /**
- * Submit handler for gct_analytics_form()
+ * Submit handler for analytics_dashboard_form()
  */
-function gct_analytics_form_submit(&$form, $form_state) {
+function analytics_dashboard_form_submit(&$form, $form_state) {
   // Add a query to the URL which will be used to determine the query
   switch ($form_state['values']['option']) {
     case 'period':
