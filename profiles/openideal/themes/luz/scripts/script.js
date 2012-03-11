@@ -15,10 +15,10 @@ Drupal.behaviors.categoryList = {
         var level = $(this).parent().attr('class');
         var start = level.indexOf('level-');
         level = parseInt(level.substr(start+6, 1)) + 1;
-        $(this).children('ul.level-' + level).show();
+        $(this).children('ul.level-' + level).show('fast');
       },
       function() {
-        $(this).children('ul').hide();
+        $(this).children('ul').hide('fast');
       }
     );
   }
