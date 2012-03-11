@@ -143,7 +143,10 @@ projects[strongarm][subdir]                                    = contrib
 projects[token][version]                                       = 7.x-1.0-rc1
 projects[token][subdir]                                        = contrib
 
-projects[userpoints][version]                                  = 7.x-1.0
+projects[top_searches][version]                                = 7.x-1.0
+projects[rules][subdir]                                        = contrib
+
+rojects[userpoints][version]                                  = 7.x-1.0
 projects[userpoints][subdir]                                   = contrib
 
 projects[video_embed_field][version]                           = 7.x-2.0-alpha3

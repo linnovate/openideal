@@ -173,5 +173,37 @@ function fe_idea_context_default_contexts() {
   t('Ideas');
   $export['in_action'] = $context;
 
+  $context = new stdClass;
+  $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
+  $context->api_version = 3;
+  $context->name = 'search';
+  $context->description = '';
+  $context->tag = 'Search';
+  $context->conditions = array(
+    'path' => array(
+      'values' => array(
+        'search/*' => 'search/*',
+      ),
+    ),
+  );
+  $context->reactions = array(
+    'block' => array(
+      'blocks' => array(
+        'top_searches-0' => array(
+          'module' => 'top_searches',
+          'delta' => 0,
+          'region' => 'sidebar_first',
+          'weight' => '-10',
+        ),
+      ),
+    ),
+  );
+  $context->condition_mode = 0;
+
+  // Translatables
+  // Included for use with string extractors like potx.
+  t('Search');
+  $export['search'] = $context;
+
   return $export;
 }

@@ -67,7 +67,7 @@ function fe_idea_default_rules_configuration() {
             "PROVIDE" : { "variable_added" : { "flagged_node_resulet" : "Flagged node resulet" } }
           }
         },
-        { "ideal_action_set_content_vote" : { "node" : [ "entity-created" ], "vote" : [ "flagged-node-resulet:sum" ] } }
+        { "ideal_action_set_content_vote" : [] }
       ]
     }
   }');
