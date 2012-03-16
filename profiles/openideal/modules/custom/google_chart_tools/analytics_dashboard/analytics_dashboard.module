@@ -43,7 +43,7 @@ function analytics_dashboard_permission() {
 }
 
 /**
- * Implements hook_theme()
+ * Implements hook_theme().
  */
 function analytics_dashboard_theme($existing, $type, $theme, $path) {
   return array(
@@ -124,7 +124,7 @@ function _charts_sort($a, $b) {
 }
 
 /**
- * Implements hook_analytics_dashboard()
+ * Implements hook_analytics_dashboard().
  */
 function analytics_dashboard_analytics_dashboard() {
   module_load_include('inc', 'analytics_dashboard', 'analytics_dashboard.charts');

@@ -13,7 +13,9 @@ function google_chart_tools_init() {
 function draw_chart($settings) {
   drupal_alter('draw_chart', $settings);
   foreach ($settings['chart'] as $id => $chart) {
-    $settings['chart'][$id]['containerId'] = strtolower(str_replace(" ", "-", $id));
+    if (!isset($settings['chart'][$id]['containerId'])) {
+      $settings['chart'][$id]['containerId'] = strtolower(str_replace(" ", "-", $id));
+    }   
   }
   drupal_add_js($settings, array('type' => 'setting'));
   $ret = array(

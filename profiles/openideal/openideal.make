@@ -65,13 +65,13 @@ projects[google_analytics][subdir]                             = contrib
 projects[google_plusone][version]                              = 7.x-1.3
 projects[google_plusone][subdir]                               = contrib
 
-;projects[heartbeat][version]                                   = 7.x-1.0
-;projects[heartbeat][subdir]                                    = contrib
+projects[heartbeat][version]                                   = 7.x-1.0
+projects[heartbeat][subdir]                                    = contrib
 
 projects[htmlmail][version]                                    = 7.x-2.62
 projects[htmlmail][subdir]                                     = contrib
 
-projects[ideal_comments][version]                              = 7.x-1.0-beta1
+projects[ideal_comments][version]                              = 7.x-1.x-dev
 projects[ideal_comments][subdir]                               = contrib
 
 projects[imce][version]                                        = 7.x-1.5
@@ -82,9 +82,6 @@ projects[imce_mkdir][subdir]                                   = contrib
 
 projects[imce_wysiwyg][version]                                = 7.x-1.0
 projects[imce_wysiwyg][subdir]                                 = contrib
-
-;projects[is_useful][version]                                    = 7.x-1.x-dev
-;projects[is_useful][subdir]                                     = contrib
 
 projects[libraries][version]                                   = 7.x-2.x-dev
 projects[libraries][subdir]                                    = contrib
@@ -115,9 +112,6 @@ projects[nodequeue][subdir]                                    = contrib
 
 projects[page_title][version]                                 = 7.x-2.5
 projects[page_title][subdir]                                  = contrib
-
-;projects[plus1][version]                                       = 7.x-1.x-dev
-;projects[plus1][subdir]                                        = contrib
 
 projects[profile2][version]                                    = 7.x-1.2
 projects[profile2][subdir]                                     = contrib

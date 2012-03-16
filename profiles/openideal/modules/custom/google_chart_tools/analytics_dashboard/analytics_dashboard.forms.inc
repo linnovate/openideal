@@ -1,12 +1,18 @@
 <?php
 /**
+ * @file
+ * Provides the filtering form on the analytics dashboard page.
+ */
+
+
+/**
  * Provide a simple form to change time periods
  */
 function analytics_dashboard_form() {
   $form = array();
   
   // Load some javascript for datepicker
-  drupal_add_library('system','ui.datepicker');
+  drupal_add_library('system', 'ui.datepicker');
   drupal_add_js('jQuery(document).ready(function(){jQuery( ".pickadate" ).datepicker({
       dateFormat: "dd.mm.yy",
       autoSize: true
@@ -81,7 +87,7 @@ function analytics_dashboard_form_validate($form, &$form_state) {
     !($values['custom_from'] && $values['custom_to'])) {
     form_set_error('option', t('You must specify both dates'));
   }
-  else if ($values['option'] == 'custom') {
+  elseif ($values['option'] == 'custom') {
     // Convert the times
     $now = time();
     $from = strtotime($values['custom_from']);

@@ -1,6 +1,11 @@
 <?php
 /**
- * Implements hook_analytics_dashboard()
+ * @file
+ * Analytics Dashboard API definitions.
+ */
+
+/**
+ * Implements hook_analytics_dashboard().
  */
 function hook_analytics_dashboard() {
   $voc = taxonomy_vocabulary_machine_name_load('categories');
@@ -22,6 +27,7 @@ function hook_analytics_dashboard() {
     'header' => $header,
     'rows' => $rows,
     'columns' => $columns,
+    'weight' => -10,  
     'chartType' => 'PieChart',
     'options' => array( 
       'curveType' => "function", 

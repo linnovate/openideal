@@ -1,5 +1,10 @@
 <?php
 /**
+ * @file
+ * Provides settings for analytices dashboard page.
+ */
+
+/**
  * Provide admin settings form
  */
 function analytics_dashboard_admin_settings($form, &$form_state) {

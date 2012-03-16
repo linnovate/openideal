@@ -1,5 +1,10 @@
 <?php
 /**
+ * @file
+ * Google Chart Tools API definitions.
+ */
+
+/**
  * Implements hook_draw_chart_alter().
  */
 function hook_draw_chart_alter(&$settings) {
@@ -27,7 +32,7 @@ function hook_draw_chart_alter(&$settings) {
       $chart['chart']['chartCategory']['columns'] = $columns;
       
       // Adding a colors attribute to the pie.
-      $chart['chart']['chartCategory']['options']['colors'] = array('red','#004411');
+      $chart['chart']['chartCategory']['options']['colors'] = array('red', '#004411');
     }
   }
 }

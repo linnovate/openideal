@@ -1,4 +1,9 @@
 <?php
+/**
+ * @file
+ * Provides the charts definitions.
+ */
+
 function analytics_dashboard_charts() {
   $period = _get_time_from_url();
   $from = isset($period[0]) ? $period[0] : strtotime('-1 month');
@@ -12,7 +17,7 @@ function analytics_dashboard_charts() {
     $f = $from;
     while ($f <= $to) {
       // Building the header - list of date from today backward.
-      $header[$i]   = date('d.m.y', $f);
+      $header[$i] = date('d.m.y', $f);
       // The number of nodes created each day.
       $nodes[$i] = db_query("SELECT COUNT(*) FROM {node} WHERE FROM_UNIXTIME(created,'%d.%m.%y') = :dete", array(':dete' => $header[$i]))->fetchField();
 
@@ -54,9 +59,9 @@ function analytics_dashboard_charts() {
     $f = $from;
     while ($f <= $to) {
       // Building the header - list of date from today backward.
-      $header[$i]   = date('d.m.y', $f);
+      $header[$i] = date('d.m.y', $f);
       // The number of comments created each day.
-      $comments[$i]  = db_query("SELECT COUNT(*) FROM {comment} WHERE FROM_UNIXTIME(created,'%d.%m.%y') = :dete", array(':dete' => $header[$i]))->fetchField();
+      $comments[$i] = db_query("SELECT COUNT(*) FROM {comment} WHERE FROM_UNIXTIME(created,'%d.%m.%y') = :dete", array(':dete' => $header[$i]))->fetchField();
       // The number of voted placed each day.
 
       $i ++;
@@ -65,7 +70,7 @@ function analytics_dashboard_charts() {
     // Building the rows, array of the data point arrays.
     $rows = array($comments);
     // The labels for the rows.
-    $columns = array('No. Of Comments',);
+    $columns = array('No. Of Comments');
 
     // Put all the data into the settings array, 
     // which will be send to draw.
@@ -98,7 +103,7 @@ function analytics_dashboard_charts() {
     $f = $from;
     while ($f <= $to) {
       // Building the header - list of date from today backward.
-      $header[$i]   = date('d.m.y', $f);
+      $header[$i] = date('d.m.y', $f);
       // The number of voted placed each day.
       $votes[$i] = db_query("SELECT COUNT(*) FROM {votingapi_vote} WHERE  FROM_UNIXTIME(timestamp,'%d.%m.%y') = :dete", array(':dete' => $header[$i]))->fetchField();
 
@@ -141,9 +146,9 @@ function analytics_dashboard_charts() {
     $f = $from;
     while ($f <= $to) {
       // Building the header - list of date from today backward.
-      $header[$i]   = date('d.m.y', $f);
+      $header[$i] = date('d.m.y', $f);
       // The number of users join each day.
-      $users[$i]     = db_query("SELECT COUNT(*) FROM {users} WHERE  FROM_UNIXTIME(created,'%d.%m.%y') = :dete", array(':dete' => $header[$i]))->fetchField();
+      $users[$i] = db_query("SELECT COUNT(*) FROM {users} WHERE  FROM_UNIXTIME(created,'%d.%m.%y') = :dete", array(':dete' => $header[$i]))->fetchField();
 
       $i ++;
       $f = strtotime("+1 day", $f);

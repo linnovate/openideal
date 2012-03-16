@@ -34,8 +34,8 @@ function google_chart_tools_page() {
     $votes[$i]     = db_query("SELECT COUNT(*) FROM {votingapi_vote} WHERE  FROM_UNIXTIME(timestamp,'%d.%m.%y') = :dete", array(':dete' => $header[$i]))->fetchField();
     // The number of users join each day.
     $users[$i]     = db_query("SELECT COUNT(*) FROM {users} WHERE  FROM_UNIXTIME(created,'%d.%m.%y') = :dete", array(':dete' => $header[$i]))->fetchField();
-	
-	$i ++;
+
+    $i ++;
     $from = strtotime("+1 day", $from);
   }
   // Building the rows, array of the data point arrays.
@@ -45,7 +45,6 @@ function google_chart_tools_page() {
   
   // Put all the data into the settings array, 
   // which will be send to draw.
- 
   // Must empty the array first.
   $settings = array();
   $settings['chart']['chartOne'] = array(  
