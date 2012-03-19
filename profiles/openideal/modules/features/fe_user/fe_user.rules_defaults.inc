@@ -9,40 +9,81 @@
  */
 function fe_user_default_rules_configuration() {
   $items = array();
-  $items['rules_log_activity_for_a_new_node_being_published_oi'] = entity_import('rules_config', '{ "rules_log_activity_for_a_new_node_being_published_oi" : {
+  $items['oi_log_activity_when_a_node_is_voted'] = entity_import('rules_config', '{ "oi_log_activity_when_a_node_is_voted" : {
+      "LABEL" : "Log activity when a node is voted",
+      "PLUGIN" : "reaction rule",
+      "ACTIVE" : false,
+      "TAGS" : [ "Heartbeat" ],
+      "REQUIRES" : [ "rules", "heartbeat_rules", "voting_rules" ],
+      "ON" : [ "voting_rules_insert_node" ],
+      "DO" : [
+        { "heartbeat_activity_oi_vote_on_node" : {
+            "nid" : [ "vote:vote-id" ],
+            "uid" : "[vote:uid]",
+            "nid_target" : [ "0" ],
+            "uid_target" : [ "0" ],
+            "message_id" : { "value" : { "oi_vote_on_node" : "oi_vote_on_node" } },
+            "!node_title" : "[node:link]",
+            "!username" : "[site:current-user:link]",
+            "!types" : [ "node:type" ]
+          }
+        },
+        { "heartbeat_activity_oi_vote_on_my_content" : {
+            "nid" : [ "vote:vote-id" ],
+            "uid" : [ "node:author:uid" ],
+            "nid_target" : "0",
+            "uid_target" : "0",
+            "message_id" : { "value" : { "oi_vote_on_my_content" : "oi_vote_on_my_content" } },
+            "!username" : [ "vote:user:name" ],
+            "!title" : "[node:link]"
+          }
+        }
+      ]
+    }
+  }');
+  $items['oi_rules_log_activity_for_a_new_node_being_published'] = entity_import('rules_config', '{ "oi_rules_log_activity_for_a_new_node_being_published" : {
       "LABEL" : "Log activity for a new node being published",
       "PLUGIN" : "reaction rule",
       "REQUIRES" : [ "rules", "heartbeat_rules" ],
       "ON" : [ "node_insert" ],
       "IF" : [ { "node_is_published" : { "node" : [ "node" ] } } ],
       "DO" : [
-        { "heartbeat_activity_heartbeat_add_node_oi" : {
+        { "heartbeat_activity_oi_add_node" : {
             "nid" : "[node:nid]",
             "uid" : "[node:author:uid]",
             "nid_target" : "0",
             "uid_target" : "0",
-            "message_id" : { "value" : { "heartbeat_add_node_oi" : "heartbeat_add_node_oi" } },
-            "!username" : "[node:author:link]",
+            "message_id" : { "value" : { "oi_add_node" : "oi_add_node" } },
             "!node_title" : "[node:link]",
+            "!username" : "[node:author:link]",
             "!types" : "[node:type]s"
           }
         }
       ]
     }
   }');
-  $items['rules_log_activity_when_a_node_is_commented_oi'] = entity_import('rules_config', '{ "rules_log_activity_when_a_node_is_commented_oi" : {
+  $items['oi_rules_log_activity_when_a_node_is_commented'] = entity_import('rules_config', '{ "oi_rules_log_activity_when_a_node_is_commented" : {
       "LABEL" : "Log activity when a node is commented",
       "PLUGIN" : "reaction rule",
       "TAGS" : [ "Heartbeat" ],
       "REQUIRES" : [ "rules", "heartbeat_rules", "comment" ],
       "ON" : [ "comment_update", "comment_insert" ],
       "DO" : [
-        { "heartbeat_activity_heartbeat_add_comment_oi" : {
+        { "heartbeat_activity_oi_add_comment" : {
             "nid" : "[comment:node:nid]",
             "uid" : "[comment:author:uid]",
             "nid_target" : "0",
             "uid_target" : "0",
-            "message_id" : { "value" : { "heartbeat_add_comment_oi" : "heartbeat_add_comment_oi" } },
+            "message_id" : { "value" : { "heartbeat_add_comment" : "heartbeat_add_comment" } },
+            "!title" : "[comment:node:link]"
+          }
+        },
+        { "heartbeat_activity_oi_comment_on_my_content" : {
+            "nid" : "[comment:node:nid]",
+            "uid" : "[comment:author:uid]",
+            "nid_target" : "0",
+            "uid_target" : "0",
+            "message_id" : { "value" : { "oi_comment_on_my_content" : "oi_comment_on_my_content" } },
             "!username" : "[comment:author:link]",
             "!title" : "[comment:node:link]"
           }
@@ -50,22 +91,32 @@ function fe_user_default_rules_configuration() {
       ]
     }
   }');
-  $items['rules_log_activity_when_a_node_is_voted'] = entity_import('rules_config', '{ "rules_log_activity_when_a_node_is_voted" : {
+  $items['oi_rules_log_activity_when_a_node_is_voted'] = entity_import('rules_config', '{ "oi_rules_log_activity_when_a_node_is_voted" : {
       "LABEL" : "Log activity when a node is voted",
       "PLUGIN" : "reaction rule",
       "TAGS" : [ "Heartbeat" ],
       "REQUIRES" : [ "rules", "heartbeat_rules", "voting_rules" ],
       "ON" : [ "voting_rules_insert_node" ],
       "DO" : [
-        { "heartbeat_activity_heartbeat_vote_on_idea" : {
+        { "heartbeat_activity_oi_vote_on_node" : {
             "nid" : [ "vote:vote-id" ],
             "uid" : "[vote:uid]",
             "nid_target" : [ "0" ],
             "uid_target" : [ "0" ],
-            "message_id" : { "value" : { "heartbeat_vote_on_idea" : "heartbeat_vote_on_idea" } },
-            "!username" : "[site:current-user:link]",
+            "message_id" : { "value" : { "oi_vote_on_node" : "oi_vote_on_node" } },
             "!node_title" : "[node:link]",
+            "!username" : "[site:current-user:link]",
             "!types" : [ "node:type" ]
+          }
+        },
+        { "heartbeat_activity_oi_vote_on_my_content" : {
+            "nid" : [ "vote:vote-id" ],
+            "uid" : [ "node:author:uid" ],
+            "nid_target" : "0",
+            "uid_target" : "0",
+            "message_id" : { "value" : { "oi_vote_on_my_content" : "oi_vote_on_my_content" } },
+            "!username" : "[vote:user:link]",
+            "!title" : "[node:link]"
           }
         }
       ]
