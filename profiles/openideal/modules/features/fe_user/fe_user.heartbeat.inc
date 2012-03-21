@@ -15,7 +15,7 @@ function fe_user_heartbeat_template_info() {
   $heartbeatmessagetemplate->api_version = 1;
   $heartbeatmessagetemplate->message_id = 'oi_add_comment';
   $heartbeatmessagetemplate->description = 'user replied on some content';
-  $heartbeatmessagetemplate->message = 'You replied on !title ';
+  $heartbeatmessagetemplate->message = '!username replied on !node_title ';
   $heartbeatmessagetemplate->message_concat = '%username% replied on !title.';
   $heartbeatmessagetemplate->perms = 4;
   $heartbeatmessagetemplate->group_type = 'single';
@@ -28,7 +28,8 @@ function fe_user_heartbeat_template_info() {
     'merge_end_separator' => ' and ',
   );
   $heartbeatmessagetemplate->variables = array(
-    '!title' => '',
+    '!username' => '',
+    '!node_title' => '',
   );
   $heartbeatmessagetemplate->attachments = array();
   $export['oi_add_comment'] = $heartbeatmessagetemplate;
@@ -38,7 +39,7 @@ function fe_user_heartbeat_template_info() {
   $heartbeatmessagetemplate->api_version = 1;
   $heartbeatmessagetemplate->message_id = 'oi_add_node';
   $heartbeatmessagetemplate->description = 'User adds a node';
-  $heartbeatmessagetemplate->message = 'You added !node_title ';
+  $heartbeatmessagetemplate->message = '!username added !node_title ';
   $heartbeatmessagetemplate->message_concat = '!username has added the following !types: %node_title%.';
   $heartbeatmessagetemplate->perms = 4;
   $heartbeatmessagetemplate->group_type = 'single';
@@ -51,8 +52,8 @@ function fe_user_heartbeat_template_info() {
     'merge_end_separator' => 'and',
   );
   $heartbeatmessagetemplate->variables = array(
-    '!node_title' => '',
     '!username' => '',
+    '!node_title' => '',
     '!types' => '',
   );
   $heartbeatmessagetemplate->attachments = array();
@@ -62,8 +63,8 @@ function fe_user_heartbeat_template_info() {
   $heartbeatmessagetemplate->disabled = FALSE; /* Edit this to true to make a default heartbeatmessagetemplate disabled initially */
   $heartbeatmessagetemplate->api_version = 1;
   $heartbeatmessagetemplate->message_id = 'oi_comment_on_my_content';
-  $heartbeatmessagetemplate->description = 'Other user reply on my content';
-  $heartbeatmessagetemplate->message = '!username replied on your\'s idea !title ';
+  $heartbeatmessagetemplate->description = 'Other user replied on my content';
+  $heartbeatmessagetemplate->message = '!otherusername replied on your\'s idea !node_title ';
   $heartbeatmessagetemplate->message_concat = '';
   $heartbeatmessagetemplate->perms = 4;
   $heartbeatmessagetemplate->group_type = 'single';
@@ -76,8 +77,8 @@ function fe_user_heartbeat_template_info() {
     'merge_end_separator' => '',
   );
   $heartbeatmessagetemplate->variables = array(
-    '!username' => '',
-    '!title' => '',
+    '!otherusername' => '',
+    '!node_title' => '',
   );
   $heartbeatmessagetemplate->attachments = array();
   $export['oi_comment_on_my_content'] = $heartbeatmessagetemplate;
@@ -87,7 +88,7 @@ function fe_user_heartbeat_template_info() {
   $heartbeatmessagetemplate->api_version = 1;
   $heartbeatmessagetemplate->message_id = 'oi_vote_on_my_content';
   $heartbeatmessagetemplate->description = 'Other user voted on my content';
-  $heartbeatmessagetemplate->message = '!username voted on your\'s idea !title ';
+  $heartbeatmessagetemplate->message = '!otherusername voted on !node_title ';
   $heartbeatmessagetemplate->message_concat = '';
   $heartbeatmessagetemplate->perms = 4;
   $heartbeatmessagetemplate->group_type = 'single';
@@ -100,8 +101,8 @@ function fe_user_heartbeat_template_info() {
     'merge_end_separator' => '',
   );
   $heartbeatmessagetemplate->variables = array(
-    '!username' => '',
-    '!title' => '',
+    '!otherusername' => '',
+    '!node_title' => '',
   );
   $heartbeatmessagetemplate->attachments = array();
   $export['oi_vote_on_my_content'] = $heartbeatmessagetemplate;

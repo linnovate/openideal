@@ -9,40 +9,8 @@
  */
 function fe_user_default_rules_configuration() {
   $items = array();
-  $items['oi_log_activity_when_a_node_is_voted'] = entity_import('rules_config', '{ "oi_log_activity_when_a_node_is_voted" : {
-      "LABEL" : "Log activity when a node is voted",
-      "PLUGIN" : "reaction rule",
-      "ACTIVE" : false,
-      "TAGS" : [ "Heartbeat" ],
-      "REQUIRES" : [ "rules", "heartbeat_rules", "voting_rules" ],
-      "ON" : [ "voting_rules_insert_node" ],
-      "DO" : [
-        { "heartbeat_activity_oi_vote_on_node" : {
-            "nid" : [ "vote:vote-id" ],
-            "uid" : "[vote:uid]",
-            "nid_target" : [ "0" ],
-            "uid_target" : [ "0" ],
-            "message_id" : { "value" : { "oi_vote_on_node" : "oi_vote_on_node" } },
-            "!node_title" : "[node:link]",
-            "!username" : "[site:current-user:link]",
-            "!types" : [ "node:type" ]
-          }
-        },
-        { "heartbeat_activity_oi_vote_on_my_content" : {
-            "nid" : [ "vote:vote-id" ],
-            "uid" : [ "node:author:uid" ],
-            "nid_target" : "0",
-            "uid_target" : "0",
-            "message_id" : { "value" : { "oi_vote_on_my_content" : "oi_vote_on_my_content" } },
-            "!username" : [ "vote:user:name" ],
-            "!title" : "[node:link]"
-          }
-        }
-      ]
-    }
-  }');
-  $items['oi_rules_log_activity_for_a_new_node_being_published'] = entity_import('rules_config', '{ "oi_rules_log_activity_for_a_new_node_being_published" : {
-      "LABEL" : "Log activity for a new node being published",
+  $items['rules_oi_log_activity_for_a_new_node_being_published'] = entity_import('rules_config', '{ "rules_oi_log_activity_for_a_new_node_being_published" : {
+      "LABEL" : "OI Log activity for a new node being published",
       "PLUGIN" : "reaction rule",
       "REQUIRES" : [ "rules", "heartbeat_rules" ],
       "ON" : [ "node_insert" ],
@@ -54,16 +22,16 @@ function fe_user_default_rules_configuration() {
             "nid_target" : "0",
             "uid_target" : "0",
             "message_id" : { "value" : { "oi_add_node" : "oi_add_node" } },
-            "!node_title" : "[node:link]",
             "!username" : "[node:author:link]",
+            "!node_title" : "[node:link]",
             "!types" : "[node:type]s"
           }
         }
       ]
     }
   }');
-  $items['oi_rules_log_activity_when_a_node_is_commented'] = entity_import('rules_config', '{ "oi_rules_log_activity_when_a_node_is_commented" : {
-      "LABEL" : "OI_Log activity when a node is commented",
+  $items['rules_oi_log_activity_when_a_node_is_commented'] = entity_import('rules_config', '{ "rules_oi_log_activity_when_a_node_is_commented" : {
+      "LABEL" : "OI Log activity when a node is commented",
       "PLUGIN" : "reaction rule",
       "TAGS" : [ "Heartbeat" ],
       "REQUIRES" : [ "rules", "heartbeat_rules", "comment" ],
@@ -74,14 +42,15 @@ function fe_user_default_rules_configuration() {
             "uid" : "[comment:author:uid]",
             "nid_target" : "0",
             "uid_target" : "0",
-            "message_id" : { "value" : { "heartbeat_add_comment" : "heartbeat_add_comment" } },
-            "!title" : "[comment:node:link]"
+            "message_id" : { "value" : { "oi_add_comment" : "oi_add_comment" } },
+            "!username" : "[comment:author:link]",
+            "!node_title" : "[comment:node:link]",
           }
         }
       ]
     }
   }');
-  $items['oi_rules_log_activity_when_a_node_is_voted'] = entity_import('rules_config', '{ "oi_rules_log_activity_when_a_node_is_voted" : {
+  $items['rules_oi_log_activity_when_a_node_is_voted'] = entity_import('rules_config', '{ "rules_oi_log_activity_when_a_node_is_voted" : {
       "LABEL" : "OI Log activity when a node is voted",
       "PLUGIN" : "reaction rule",
       "TAGS" : [ "Heartbeat" ],
@@ -95,7 +64,7 @@ function fe_user_default_rules_configuration() {
             "uid_target" : [ "0" ],
             "message_id" : { "value" : { "oi_vote_on_node" : "oi_vote_on_node" } },
             "!node_title" : "[node:link]",
-            "!username" : "[site:current-user:link]",
+            "!username" : "[vote:user:link]",
             "!types" : [ "node:type" ]
           }
         }
@@ -118,15 +87,15 @@ function fe_user_default_rules_configuration() {
             "nid_target" : "0",
             "uid_target" : "0",
             "message_id" : { "value" : { "oi_vote_on_my_content" : "oi_vote_on_my_content" } },
-            "!username" : "[vote:user:link]",
-            "!title" : "[node:link]"
+            "!otherusername" : "[vote:user:link]",
+            "!node_title" : "[node:link]"
           }
         }
       ]
     }
   }');
-  $items['rules_oi_log_activity_when_my_node_is_commented_by_other'] = entity_import('rules_config', '{ "rules_oi_log_activity_when_my_node_is_commented_by_other" : {
-      "LABEL" : "OI_Log activity when my node is commented by other",
+  $items['rules_oi_log_activity_when_a_node_is_commented_by_other'] = entity_import('rules_config', '{ "rules_oi_log_activity_when_a_node_is_commented_by_other" : {
+      "LABEL" : "OI Log activity when a node is commented by other",
       "PLUGIN" : "reaction rule",
       "TAGS" : [ "Heartbeat" ],
       "REQUIRES" : [ "rules", "heartbeat_rules", "comment" ],
@@ -141,8 +110,8 @@ function fe_user_default_rules_configuration() {
             "nid_target" : "0",
             "uid_target" : "0",
             "message_id" : { "value" : { "oi_comment_on_my_content" : "oi_comment_on_my_content" } },
-            "!username" : "[comment:author:link]",
-            "!title" : "[comment:node:link]"
+            "!otherusername" : "[comment:author:link]",
+            "!node_title" : "[comment:node:link]"
           }
         }
       ]
