@@ -38,9 +38,6 @@ projects[faq][subdir]                                          = contrib
 projects[fbconnect][version]                                   = 7.x-2.x-dev
 projects[fbconnect][subdir]                                    = contrib
 
-projects[fblikebutton][version]                                = 7.x-1.2
-projects[fblikebutton][subdir]                                 = contrib
-
 projects[features][version]                                    = 7.x-1.0-beta6
 projects[features][subdir]                                     = contrib
 
@@ -59,19 +56,19 @@ projects[flag][subdir]                                         = contrib
 projects[flag_abuse][version]                                  = 7.x-2.x-dev
 projects[flag_abuse][subdir]                                   = contrib
 
+projects[forward][version]                                     = 7.x-1.3
+projects[forward][subdir]                                      = contrib
+
 projects[google_analytics][version]                            = 7.x-1.2
 projects[google_analytics][subdir]                             = contrib
 
-projects[google_plusone][version]                              = 7.x-1.3
-projects[google_plusone][subdir]                               = contrib
-
-;projects[heartbeat][version]                                   = 7.x-1.0
-;projects[heartbeat][subdir]                                    = contrib
+projects[heartbeat][version]                                   = 7.x-1.0
+projects[heartbeat][subdir]                                    = contrib
 
 projects[htmlmail][version]                                    = 7.x-2.62
 projects[htmlmail][subdir]                                     = contrib
 
-projects[ideal_comments][version]                              = 7.x-1.0-beta1
+projects[ideal_comments][version]                              = 7.x-1.x-dev
 projects[ideal_comments][subdir]                               = contrib
 
 projects[imce][version]                                        = 7.x-1.5
@@ -82,9 +79,6 @@ projects[imce_mkdir][subdir]                                   = contrib
 
 projects[imce_wysiwyg][version]                                = 7.x-1.0
 projects[imce_wysiwyg][subdir]                                 = contrib
-
-;projects[is_useful][version]                                    = 7.x-1.x-dev
-;projects[is_useful][subdir]                                     = contrib
 
 projects[libraries][version]                                   = 7.x-2.x-dev
 projects[libraries][subdir]                                    = contrib
@@ -116,12 +110,6 @@ projects[nodequeue][subdir]                                    = contrib
 projects[page_title][version]                                 = 7.x-2.5
 projects[page_title][subdir]                                  = contrib
 
-;projects[plus1][version]                                       = 7.x-1.x-dev
-;projects[plus1][subdir]                                        = contrib
-
-projects[profile2][version]                                    = 7.x-1.2
-projects[profile2][subdir]                                     = contrib
-
 projects[quicktabs][version]                                   = 7.x-3.3
 projects[quicktabs][subdir]                                    = contrib
 
@@ -129,6 +117,9 @@ projects[radioactivity][version]                               = 7.x-2.2
 projects[radioactivity][subdir]                                = contrib
 
 projects[rules][version]                                       = 7.x-2.0
+projects[rules][subdir]                                        = contrib
+
+projects[search_autocomplete][version]                         = 7.x-2.1
 projects[rules][subdir]                                        = contrib
 
 projects[services_links][version]                              = 7.x-2.1
@@ -140,7 +131,10 @@ projects[strongarm][subdir]                                    = contrib
 projects[token][version]                                       = 7.x-1.0-rc1
 projects[token][subdir]                                        = contrib
 
-projects[userpoints][version]                                  = 7.x-1.0
+projects[top_searches][version]                                = 7.x-1.0
+projects[rules][subdir]                                        = contrib
+
+rojects[userpoints][version]                                  = 7.x-1.0
 projects[userpoints][subdir]                                   = contrib
 
 projects[video_embed_field][version]                           = 7.x-2.0-alpha3

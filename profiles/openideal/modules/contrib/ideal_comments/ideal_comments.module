@@ -30,11 +30,13 @@ function node_type_form_comments_fold_submit($form, &$form_state) {
  * Implements hook_registry_alter().
  */
 function ideal_comments_theme_registry_alter(&$theme_registry) {
-  $path = $theme_registry['comment_wrapper']['path'];
-  // Override core implementations of ideal_comments,
-  // but leave it open to override by othee themes.
-  if (strpos($path, 'themes/') === 0 || strpos($path, 'modules/') === 0) {
-    $theme_registry['comment_wrapper']['path'] = drupal_get_path('module', 'ideal_comments') . '/theme';
+  if (isset($theme_registry['comment_wrapper']['path'])) {
+     $path = $theme_registry['comment_wrapper']['path'];
+    // Override core implementations of ideal_comments,
+    // but leave it open to override by othee themes.
+    if (strpos($path, 'themes/') === 0 || strpos($path, 'modules/') === 0) {
+      $theme_registry['comment_wrapper']['path'] = drupal_get_path('module', 'ideal_comments') . '/theme';
+    }
   }
 }
 
@@ -85,6 +87,8 @@ function ideal_comments_preprocess_comment(&$vars) {
  * Turn off the comment preview.
  */
 function _comment_preview_disabled($type) {
-  variable_set("comment_preview_{$type}", DRUPAL_DISABLED);
-  drupal_set_message(t('Attention: Comment preview have been disabled by Ideal Comments module.'), 'warning');
+  if (variable_get("comment_preview_{$type}", DRUPAL_DISABLED) != DRUPAL_DISABLED) {
+    variable_set("comment_preview_{$type}", DRUPAL_DISABLED);
+    drupal_set_message(t('Attention: Comment preview have been disabled by Ideal Comments module.'), 'warning');
+  }
 }

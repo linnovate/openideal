@@ -1,13 +1,13 @@
 <?php
 
-function ideal_export_nodeque_update_7001() {
+function ideal_export_nodeque_update_7103() {
   $ret = array();
     $queue_data = array(
       'head_to_head' => array(
         'name' => 'head_to_head',  
         'title' => 'Head to head',
         'subqueue_title' => '',
-        'size' => '3',
+        'size' => '2',
         'reverse' => 0,
         'link' => '+ Add to "Head to head"',
         'link_remove' => '- Remove from "Head to head"',
@@ -32,3 +32,37 @@ function ideal_export_nodeque_update_7001() {
     }   
   return $ret;
 }
+
+function ideal_export_nodeque_update_7104() {
+  $ret = array();
+    $queue_data = array(
+      'carousel' => array(
+        'name' => 'carousel',  
+        'title' => 'Carousel',
+        'subqueue_title' => '',
+        'size' => '5',
+        'reverse' => 0,
+        'link' => '+ Add to "Carousel"',
+        'link_remove' => '- Remove from "Carousel"',
+        'roles' => array ( ),
+        'types' => array ( 0 => 'idea', 1=> 'project',),
+        'i18n' => 1,
+        'op' => 'Submit',
+        'submit' => 'Submit',
+        'owner' => 'nodequeue',
+        'show_in_links' => false,
+        'show_in_tab' => true,
+        'show_in_ui' => true,
+        'reference' => 0,
+        'subqueues' => array ( ),
+        'new' => true,
+        'add_subqueue' => array ( 0 => 'Carousel',), // match title above
+      ),
+    );
+    foreach ($queue_data as $q) {
+      $queue = (object) $q;
+      $qid = nodequeue_save($queue); // sets $queue->qid if needed.
+    }   
+  return $ret;
+}
+

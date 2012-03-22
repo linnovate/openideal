@@ -13,9 +13,9 @@ function fe_user_heartbeat_template_info() {
   $heartbeatmessagetemplate = new HeartbeatMessageTemplate;
   $heartbeatmessagetemplate->disabled = FALSE; /* Edit this to true to make a default heartbeatmessagetemplate disabled initially */
   $heartbeatmessagetemplate->api_version = 1;
-  $heartbeatmessagetemplate->message_id = 'heartbeat_add_comment_oi';
-  $heartbeatmessagetemplate->description = 'user replied on some content - OpenIdeal';
-  $heartbeatmessagetemplate->message = '!username replied on !title ';
+  $heartbeatmessagetemplate->message_id = 'oi_add_comment';
+  $heartbeatmessagetemplate->description = 'user replied on some content';
+  $heartbeatmessagetemplate->message = '!username replied on !node_title ';
   $heartbeatmessagetemplate->message_concat = '%username% replied on !title.';
   $heartbeatmessagetemplate->perms = 4;
   $heartbeatmessagetemplate->group_type = 'single';
@@ -29,29 +29,16 @@ function fe_user_heartbeat_template_info() {
   );
   $heartbeatmessagetemplate->variables = array(
     '!username' => '',
-    '!title' => '',
+    '!node_title' => '',
   );
-  $heartbeatmessagetemplate->attachments = array(
-    'activitycomments' => array(
-      'enabled' => 0,
-      'activitycomments_node' => 0,
-    ),
-    'flagattachment' => array(
-      'flags' => array(
-        'like' => 'like',
-      ),
-      'flag_count_enabled' => array(
-        'flags' => 0,
-      ),
-    ),
-  );
-  $export['heartbeat_add_comment_oi'] = $heartbeatmessagetemplate;
+  $heartbeatmessagetemplate->attachments = array();
+  $export['oi_add_comment'] = $heartbeatmessagetemplate;
 
   $heartbeatmessagetemplate = new HeartbeatMessageTemplate;
   $heartbeatmessagetemplate->disabled = FALSE; /* Edit this to true to make a default heartbeatmessagetemplate disabled initially */
   $heartbeatmessagetemplate->api_version = 1;
-  $heartbeatmessagetemplate->message_id = 'heartbeat_add_node_oi';
-  $heartbeatmessagetemplate->description = 'User adds a node, save user activity - OpenIdeal';
+  $heartbeatmessagetemplate->message_id = 'oi_add_node';
+  $heartbeatmessagetemplate->description = 'User adds a node';
   $heartbeatmessagetemplate->message = '!username added !node_title ';
   $heartbeatmessagetemplate->message_concat = '!username has added the following !types: %node_title%.';
   $heartbeatmessagetemplate->perms = 4;
@@ -69,28 +56,63 @@ function fe_user_heartbeat_template_info() {
     '!node_title' => '',
     '!types' => '',
   );
-  $heartbeatmessagetemplate->attachments = array(
-    'activitycomments' => array(
-      'enabled' => 0,
-      'activitycomments_node' => 0,
-    ),
-    'flagattachment' => array(
-      'flags' => array(
-        'like' => 'like',
-      ),
-      'flag_count_enabled' => array(
-        'flags' => 0,
-      ),
-    ),
-  );
-  $export['heartbeat_add_node_oi'] = $heartbeatmessagetemplate;
+  $heartbeatmessagetemplate->attachments = array();
+  $export['oi_add_node'] = $heartbeatmessagetemplate;
 
   $heartbeatmessagetemplate = new HeartbeatMessageTemplate;
   $heartbeatmessagetemplate->disabled = FALSE; /* Edit this to true to make a default heartbeatmessagetemplate disabled initially */
   $heartbeatmessagetemplate->api_version = 1;
-  $heartbeatmessagetemplate->message_id = 'heartbeat_vote_on_idea';
-  $heartbeatmessagetemplate->description = 'User votes on idea - OpenIdeal';
-  $heartbeatmessagetemplate->message = '!username voted on !node_title ';
+  $heartbeatmessagetemplate->message_id = 'oi_comment_on_my_content';
+  $heartbeatmessagetemplate->description = 'Other user replied on my content';
+  $heartbeatmessagetemplate->message = '!otherusername replied on your\'s idea !node_title ';
+  $heartbeatmessagetemplate->message_concat = '';
+  $heartbeatmessagetemplate->perms = 4;
+  $heartbeatmessagetemplate->group_type = 'single';
+  $heartbeatmessagetemplate->concat_args = array(
+    'group_by' => 'none',
+    'group_target' => '',
+    'group_by_target' => '',
+    'group_num_max' => '',
+    'merge_separator' => '',
+    'merge_end_separator' => '',
+  );
+  $heartbeatmessagetemplate->variables = array(
+    '!otherusername' => '',
+    '!node_title' => '',
+  );
+  $heartbeatmessagetemplate->attachments = array();
+  $export['oi_comment_on_my_content'] = $heartbeatmessagetemplate;
+
+  $heartbeatmessagetemplate = new HeartbeatMessageTemplate;
+  $heartbeatmessagetemplate->disabled = FALSE; /* Edit this to true to make a default heartbeatmessagetemplate disabled initially */
+  $heartbeatmessagetemplate->api_version = 1;
+  $heartbeatmessagetemplate->message_id = 'oi_vote_on_my_content';
+  $heartbeatmessagetemplate->description = 'Other user voted on my content';
+  $heartbeatmessagetemplate->message = '!otherusername voted on !node_title ';
+  $heartbeatmessagetemplate->message_concat = '';
+  $heartbeatmessagetemplate->perms = 4;
+  $heartbeatmessagetemplate->group_type = 'single';
+  $heartbeatmessagetemplate->concat_args = array(
+    'group_by' => 'none',
+    'group_target' => '',
+    'group_by_target' => '',
+    'group_num_max' => '',
+    'merge_separator' => '',
+    'merge_end_separator' => '',
+  );
+  $heartbeatmessagetemplate->variables = array(
+    '!otherusername' => '',
+    '!node_title' => '',
+  );
+  $heartbeatmessagetemplate->attachments = array();
+  $export['oi_vote_on_my_content'] = $heartbeatmessagetemplate;
+
+  $heartbeatmessagetemplate = new HeartbeatMessageTemplate;
+  $heartbeatmessagetemplate->disabled = FALSE; /* Edit this to true to make a default heartbeatmessagetemplate disabled initially */
+  $heartbeatmessagetemplate->api_version = 1;
+  $heartbeatmessagetemplate->message_id = 'oi_vote_on_node';
+  $heartbeatmessagetemplate->description = 'User votes on some content';
+  $heartbeatmessagetemplate->message = 'You voted on !node_title ';
   $heartbeatmessagetemplate->message_concat = '!username has added the following !types: %node_title%.';
   $heartbeatmessagetemplate->perms = 4;
   $heartbeatmessagetemplate->group_type = 'single';
@@ -103,25 +125,12 @@ function fe_user_heartbeat_template_info() {
     'merge_end_separator' => 'and',
   );
   $heartbeatmessagetemplate->variables = array(
-    '!username' => '',
     '!node_title' => '',
+    '!username' => '',
     '!types' => '',
   );
-  $heartbeatmessagetemplate->attachments = array(
-    'activitycomments' => array(
-      'enabled' => 0,
-      'activitycomments_node' => 0,
-    ),
-    'flagattachment' => array(
-      'flags' => array(
-        'like' => 'like',
-      ),
-      'flag_count_enabled' => array(
-        'flags' => 0,
-      ),
-    ),
-  );
-  $export['heartbeat_vote_on_idea'] = $heartbeatmessagetemplate;
+  $heartbeatmessagetemplate->attachments = array();
+  $export['oi_vote_on_node'] = $heartbeatmessagetemplate;
 
   return $export;
 }

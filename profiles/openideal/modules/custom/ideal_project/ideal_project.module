@@ -249,7 +249,7 @@ function ideal_project_flag($action, $flag, $content_id, $account) {
  * 
  */
 
-function ideal_project_node_view(&$node) {
+function ideal_project_node_view($node, $view_mode, $langcode) {
   $flag = flag_get_flag('popular_idea');
   if ($flag->is_flagged($node->nid)) {
     $tag = variable_get('vud_tag', 'vote');

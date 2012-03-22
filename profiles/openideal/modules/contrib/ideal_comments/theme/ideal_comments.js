@@ -31,7 +31,7 @@
 
         // Show form comment to comment
       $(".comment li.comment-reply a").click(function() {
-        $(this).parents('.links').siblings('.content').find('.comment-form').slideToggle("slow");
+        $(this).closest('.comment').find('.comment-form').slideToggle("slow");
         return false; 
       });
 
