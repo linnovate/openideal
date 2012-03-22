@@ -1,0 +1,228 @@
+<?php
+
+/**
+ * @file
+ * Install, update and uninstall functions for the forward module.
+ *
+ */
+
+/**
+ * @todo Please document this function.
+ * @see http://drupal.org/node/1354
+ */
+function forward_install() {
+  // TODO The drupal_(un)install_schema functions are called automatically in D7.;
+  // drupal_install_schema('forward');
+  variable_set('forward_theme_template', 1);
+
+  $mail_systems = variable_get('mail_system', array('default-system' => 'DefaultMailSystem'));
+  $mail_systems['forward'] = 'ForwardMailSystem';
+  variable_set('mail_system', $mail_systems);
+}
+
+
+/**
+ * Implements hook_uninstall().
+().
+ */
+function forward_uninstall() {
+  // TODO The drupal_(un)install_schema functions are called automatically in D7.;
+  // drupal_uninstall_schema('forward');
+
+  // Get global variable array
+
+  global $conf;
+  foreach (array_keys($conf) as $key) {
+    // Find variables that have the module prefix
+
+    if (strpos($key, 'forward_') === 0) {
+      variable_del($key);
+    }
+  }
+
+  $mail_systems = variable_get('mail_system', array('default-system' => 'DefaultMailSystem'));
+  unset($mail_systems['forward']);
+  variable_set('mail_system', $mail_systems);
+}
+
+
+/**
+ * Implements hook_schema().
+().
+ */
+function forward_schema() {
+  $schema['forward_log'] = array(
+    'fields' => array(
+      'path'      => array('type' => 'varchar', 'not null' => TRUE, 'default' => '<front>', 'length' => 255),
+      'type'      => array('type' => 'varchar', 'not null' => TRUE, 'length' => 8),
+      'timestamp' => array('type' => 'int', 'not null' => TRUE, 'default' => 0),
+      'uid'       => array('type' => 'int', 'not null' => TRUE, 'default' => 0),
+      'hostname'  => array('type' => 'varchar', 'length' => 128, 'not null' => TRUE, 'default' => '', 'description' => 'Hostname of the user who triggered the event.',),
+    ),
+    'indexes' => array(
+      'forward_path'     => array('path'),
+      'forward_uid'      => array('uid'),
+      'forward_hostname' => array('hostname')
+    ),
+  );
+  $schema['forward_statistics'] = array(
+    'fields' => array(
+      'nid'                    => array('type' => 'int', 'unsigned' => TRUE, 'not null' => TRUE, 'default' => 0),
+      'last_forward_timestamp' => array('type' => 'int', 'not null' => TRUE, 'default' => 0),
+      'forward_count'          => array('type' => 'int', 'unsigned' => TRUE, 'not null' => TRUE, 'default' => 0),
+      'clickthrough_count'     => array('type' => 'int', 'unsigned' => TRUE, 'not null' => TRUE, 'default' => 0),
+    ),
+    'indexes' => array(
+      'forward_timestamp' => array('last_forward_timestamp')
+    ),
+    'primary key' => array('nid'),
+  );
+  return $schema;
+}
+
+
+/**
+ * Add statistics table and populate with data from forward_log
+ */
+function forward_update_1() {
+  // initialize table
+
+  $schema['forward_statistics'] = array(
+    'fields' => array(
+      'nid'                    => array('type' => 'int', 'unsigned' => TRUE, 'not null' => TRUE, 'default' => 0),
+      'last_forward_timestamp' => array('type' => 'int', 'not null' => TRUE, 'default' => 0),
+      'forward_count'          => array('type' => 'int', 'unsigned' => TRUE, 'not null' => TRUE, 'default' => 0),
+      'clickthrough_count'     => array('type' => 'int', 'unsigned' => TRUE, 'not null' => TRUE, 'default' => 0),
+    ),
+    'index' => array('last_forward_timestamp'),
+    'primary key' => array('nid'),
+  );
+  $ret = array();
+  db_create_table('forward_statistics', $schema['forward_statistics']);
+  // TODO Please review the conversion of this statement to the D7 database API syntax.
+  /* db_query("INSERT INTO {forward_statistics} (nid, last_forward_timestamp, forward_count, clickthrough_count) values(0, 0, 0, 0)") */
+  $id = db_insert('forward_log')
+    ->fields(array(
+      'nid' => 0,
+      'last_forward_timestamp' => 0,
+      'forward_count' => 0,
+      'clickthrough_count' => 0,
+    ))
+    ->execute();
+
+  // TODO Please review the conversion of this statement to the D7 database API syntax.
+  /* db_query("INSERT INTO {forward_statistics} (nid, last_forward_timestamp, forward_count, clickthrough_count) SELECT n.nid, 0, 0, 0 FROM {node} n") */
+  
+  // Build the SELECT query.
+  $query = db_select('node', 'n');
+  // Add the fields we want.
+  $query->addField('n','nid');
+  // Perform the insert.
+  db_insert('mytable')
+    ->from($query)
+    ->execute();
+
+
+  // fill table
+
+  $forwards = db_query("SELECT f.nid, f.timestamp, COUNT(f.nid) as forward_count FROM {node} n LEFT JOIN {forward_log} f ON f.nid = n.nid WHERE f.type = :f.type GROUP BY f.nid, f.timestamp", array(':f.type' => 'SENT'));
+  while ($forward = db_fetch_object($forwards)) {
+    $forward_count = db_query("SELECT COUNT(nid) FROM {forward_log} WHERE nid = :nid AND type = :type", array(':nid' => $forward->nid, ':type' => 'SENT'))->fetchField();
+    $clickthrough_count = db_query("SELECT COUNT(nid) FROM {forward_log} WHERE nid = :nid AND type = :type", array(':nid' => $forward->nid, ':type' => 'REF'))->fetchField();
+    // TODO Please review the conversion of this statement to the D7 database API syntax.
+    /* db_query("UPDATE {forward_statistics} SET forward_count = %d, clickthrough_count = %d, last_forward_timestamp = %d WHERE nid = %d", $forward_count, $clickthrough_count, $forward->timestamp, $forward->nid) */
+    db_update('forward_statistics')
+      ->fields(array(
+        'forward_count' => $forward_count,
+        'clickthrough_count' => $clickthrough_count,
+        'last_forward_timestamp' => $forward->timestamp,
+      ))
+      ->condition('nid', $forward->nid)
+      ->execute();
+  }
+  // hook_update_N() no longer returns a $ret array. Instead, return
+  // nothing or a translated string indicating the update ran successfully.
+  // See http://drupal.org/node/224333#update_sql.
+  return t('TODO Add a descriptive string here to show in the UI.') /* $ret */;
+}
+
+
+/**
+ * Update variable strings
+ */
+function forward_update_2() {
+  //variable strings changed
+
+  variable_set('forward_emailsubject', str_replace(array('%name', '%site'), array('!name', '!site'), variable_get('forward_emailsubject', '!name has forwarded a page to you from !site')));
+  variable_set('forward_emailmessage', str_replace(array('%name', '%site'), array('!name', '!site'), variable_get('forward_emailmessage', '!name thought you would like to see this page from the !site web site.')));
+
+  variable_set('forward_postcardsubject', str_replace(array('%name', '%site'), array('!name', '!site'), variable_get('forward_postcardsubject', '!name has sent you an e-postcard from !site')));
+  variable_set('forward_postcardmessage', str_replace(array('%name', '%site'), array('!name', '!site'), variable_get('forward_postcardmessage', '!name has sent you an e-postcard from the !site web site.  Please take a moment to visit our web site.')));
+
+  // hook_update_N() no longer returns a $ret array. Instead, return
+  // nothing or a translated string indicating the update ran successfully.
+  // See http://drupal.org/node/224333#update_sql.
+  return t('TODO Add a descriptive string here to show in the UI.') /* array() */;
+}
+
+
+/**
+ * Changed forward_statistics to handle non-node paths
+ */
+function forward_update_3() {
+  $ret = array();
+  db_add_field('forward_log', 'path', array('type' => 'varchar', 'length' => 255, 'not null' => TRUE, 'default' => '<front>'));
+  db_add_index('forward_log', 'forward_path', array('path'));
+  // TODO update_sql has been removed. Use the database API for any schema or data changes.
+  $ret[] = array() /* update_sql("UPDATE {forward_log} SET path = CONCAT('node/',nid) WHERE nid != 0") */;
+  // TODO update_sql has been removed. Use the database API for any schema or data changes.
+  $ret[] = array() /* update_sql("UPDATE {forward_log} SET path = '<front>' WHERE nid = 0") */;
+  db_drop_index('forward_log', 'forward_nid');
+  db_drop_field('forward_log', 'nid');
+
+  // hook_update_N() no longer returns a $ret array. Instead, return
+  // nothing or a translated string indicating the update ran successfully.
+  // See http://drupal.org/node/224333#update_sql.
+  return t('TODO Add a descriptive string here to show in the UI.') /* $ret */;
+}
+
+
+/**
+ * Migrate variable strings
+ */
+function forward_update_4() {
+  //variable strings changed
+
+  variable_set('forward_pagesubject', variable_get('forward_emailsubject', '!name has forwarded a page to you from !site'));
+  variable_set('forward_pagemessage', variable_get('forward_emailmessage', '!name thought you would like to see this page from the !site web site.'));
+
+  // hook_update_N() no longer returns a $ret array. Instead, return
+  // nothing or a translated string indicating the update ran successfully.
+  // See http://drupal.org/node/224333#update_sql.
+  return t('TODO Add a descriptive string here to show in the UI.') /* array() */;
+}
+
+
+/**
+ * Add uid and hostname to log table
+ */
+function forward_update_5() {
+  $ret = array();
+  db_add_field('forward_log', 'uid', array('type' => 'int', 'not null' => TRUE, 'default' => 0));
+  db_add_field('forward_log', 'hostname', array('type' => 'varchar', 'length' => 128, 'not null' => TRUE, 'default' => '', 'description' => 'Hostname of the user who triggered the event.'));
+  db_add_index('forward_log', 'forward_uid', array('uid'));
+  db_add_index('forward_log', 'forward_hostname', array('hostname'));
+
+  // hook_update_N() no longer returns a $ret array. Instead, return
+  // nothing or a translated string indicating the update ran successfully.
+  // See http://drupal.org/node/224333#update_sql.
+  return t('TODO Add a descriptive string here to show in the UI.') /* $ret */;
+}
+
+
+/**
+ * Set mail system for forward
+ */
+function forward_update_6() {
+  variable_set('mail_system', array('default-system' => 'DefaultMailSystem', 'forward' => 'ForwardMailSystem'));
+}
