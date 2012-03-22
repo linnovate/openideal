@@ -41,16 +41,16 @@ function fe_user_views_api() {
  */
 function fe_user_flag_default_flags() {
   $flags = array();
-  // Exported flag: "Extreme User".
-  $flags['extreme_user'] = array(
+  // Exported flag: "A Class User".
+  $flags['a_class_user'] = array(
     'content_type' => 'user',
-    'title' => 'Extreme User',
+    'title' => 'A Class User',
     'global' => '1',
     'types' => array(),
-    'flag_short' => 'Flag as extreme user',
+    'flag_short' => 'flag as A class user',
     'flag_long' => '',
     'flag_message' => '',
-    'unflag_short' => 'Unflagas extreme user',
+    'unflag_short' => 'unflag as A class user',
     'unflag_long' => '',
     'unflag_message' => '',
     'unflag_denied_text' => '',
@@ -58,9 +58,75 @@ function fe_user_flag_default_flags() {
     'roles' => array(
       'flag' => array(
         0 => '3',
+        1 => '5',
       ),
       'unflag' => array(
         0 => '3',
+        1 => '5',
+      ),
+    ),
+    'show_on_profile' => 1,
+    'access_uid' => 'others',
+    'module' => 'fe_user',
+    'locked' => array(
+      0 => 'name',
+    ),
+    'api_version' => 2,
+  );
+  // Exported flag: "B Class User".
+  $flags['b_class_user'] = array(
+    'content_type' => 'user',
+    'title' => 'B Class User',
+    'global' => '1',
+    'types' => array(),
+    'flag_short' => 'flag as B class user',
+    'flag_long' => '',
+    'flag_message' => '',
+    'unflag_short' => 'unflag as B class user',
+    'unflag_long' => '',
+    'unflag_message' => '',
+    'unflag_denied_text' => '',
+    'link_type' => 'toggle',
+    'roles' => array(
+      'flag' => array(
+        0 => '3',
+        1 => '5',
+      ),
+      'unflag' => array(
+        0 => '3',
+        1 => '5',
+      ),
+    ),
+    'show_on_profile' => 1,
+    'access_uid' => 'others',
+    'module' => 'fe_user',
+    'locked' => array(
+      0 => 'name',
+    ),
+    'api_version' => 2,
+  );
+  // Exported flag: "C Class User".
+  $flags['c_class_user'] = array(
+    'content_type' => 'user',
+    'title' => 'C Class User',
+    'global' => '1',
+    'types' => array(),
+    'flag_short' => 'flag as C class user',
+    'flag_long' => '',
+    'flag_message' => '',
+    'unflag_short' => 'unflag as C class user',
+    'unflag_long' => '',
+    'unflag_message' => '',
+    'unflag_denied_text' => '',
+    'link_type' => 'toggle',
+    'roles' => array(
+      'flag' => array(
+        0 => '3',
+        1 => '5',
+      ),
+      'unflag' => array(
+        0 => '3',
+        1 => '5',
       ),
     ),
     'show_on_profile' => 1,

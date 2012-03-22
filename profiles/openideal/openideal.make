@@ -38,9 +38,6 @@ projects[faq][subdir]                                          = contrib
 projects[fbconnect][version]                                   = 7.x-2.x-dev
 projects[fbconnect][subdir]                                    = contrib
 
-projects[fblikebutton][version]                                = 7.x-1.2
-projects[fblikebutton][subdir]                                 = contrib
-
 projects[features][version]                                    = 7.x-1.0-beta6
 projects[features][subdir]                                     = contrib
 
@@ -59,11 +56,11 @@ projects[flag][subdir]                                         = contrib
 projects[flag_abuse][version]                                  = 7.x-2.x-dev
 projects[flag_abuse][subdir]                                   = contrib
 
+projects[forward][version]                                     = 7.x-1.3
+projects[forward][subdir]                                      = contrib
+
 projects[google_analytics][version]                            = 7.x-1.2
 projects[google_analytics][subdir]                             = contrib
-
-projects[google_plusone][version]                              = 7.x-1.3
-projects[google_plusone][subdir]                               = contrib
 
 projects[heartbeat][version]                                   = 7.x-1.0
 projects[heartbeat][subdir]                                    = contrib
@@ -112,9 +109,6 @@ projects[nodequeue][subdir]                                    = contrib
 
 projects[page_title][version]                                 = 7.x-2.5
 projects[page_title][subdir]                                  = contrib
-
-projects[profile2][version]                                    = 7.x-1.2
-projects[profile2][subdir]                                     = contrib
 
 projects[quicktabs][version]                                   = 7.x-3.3
 projects[quicktabs][subdir]                                    = contrib
