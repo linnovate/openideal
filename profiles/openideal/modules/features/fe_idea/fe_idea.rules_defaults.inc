@@ -9,39 +9,6 @@
  */
 function fe_idea_default_rules_configuration() {
   $items = array();
-  $items['rules_idea_get_flag_on_radioactivity_'] = entity_import('rules_config', '{ "rules_idea_get_flag_on_radioactivity_" : {
-      "LABEL" : "Idea Get Flag On Radioactivity ",
-      "PLUGIN" : "reaction rule",
-      "TAGS" : [ "Radioactivity" ],
-      "REQUIRES" : [ "rules", "flag" ],
-      "ON" : [ "node_view" ],
-      "IF" : [
-        { "node_is_of_type" : { "node" : [ "node" ], "type" : { "value" : { "idea" : "idea" } } } },
-        { "entity_has_field" : { "entity" : [ "node" ], "field" : "field_radioactivity" } },
-        { "data_is" : {
-            "data" : [ "node:field-radioactivity" ],
-            "op" : "\\u003E",
-            "value" : "3000"
-          }
-        }
-      ],
-      "DO" : [
-        { "flag_flagnode" : {
-            "flag" : "popular_idea",
-            "node" : [ "node" ],
-            "flagging_user" : [ "node:author" ],
-            "permission_check" : 0
-          }
-        },
-        { "mail_to_users_of_role" : {
-            "roles" : { "value" : { "5" : "5" } },
-            "subject" : "The idea [node:title] become popular.\\r\\n",
-            "message" : "The idea [node:title] become popular.\\r\\nPlease check it out: [node:url]."
-          }
-        }
-      ]
-    }
-  }');
   $items['rules_idea_got_new_comment'] = entity_import('rules_config', '{ "rules_idea_got_new_comment" : {
       "LABEL" : "Idea got new comment",
       "PLUGIN" : "reaction rule",
@@ -56,7 +23,9 @@ function fe_idea_default_rules_configuration() {
         }
       ],
       "DO" : [
-        { "radioactivity_emit" : { "data" : [ "comment:node:field-blast-idea" ], "value" : "100" } }
+        { "radioactivity_emit" : { "data" : [ "comment:node:field-blast-idea" ], "value" : "100" } },
+        { "radioactivity_emit" : { "data" : [ "comment:node:field-buzz-idea" ], "value" : "100" } },
+        { "radioactivity_emit" : { "data" : [ "comment:node:field-groove-idea" ], "value" : "100" } }
       ]
     }
   }');
@@ -70,14 +39,106 @@ function fe_idea_default_rules_configuration() {
         { "node_is_of_type" : { "node" : [ "node" ], "type" : { "value" : { "idea" : "idea" } } } }
       ],
       "DO" : [
-        { "radioactivity_maximum" : {
-            "USING" : { "data" : [ "node:field-radioactivity" ] },
-            "PROVIDE" : { "maximum_energy" : { "maximum_energy" : "Maximum energy" } }
+        { "radioactivity_emit" : { "data" : [ "node:field-blast-idea" ], "value" : "50" } },
+        { "radioactivity_emit" : { "data" : [ "node:field-buzz-idea" ], "value" : "50" } },
+        { "radioactivity_emit" : { "data" : [ "node:field-groove-idea" ], "value" : "50" } }
+      ]
+    }
+  }');
+  $items['rules_idea_is_blast'] = entity_import('rules_config', '{ "rules_idea_is_blast" : {
+      "LABEL" : "Idea is Blast",
+      "PLUGIN" : "reaction rule",
+      "TAGS" : [ "Radioactivity" ],
+      "REQUIRES" : [ "rules", "flag" ],
+      "ON" : [ "node_view" ],
+      "IF" : [
+        { "node_is_of_type" : { "node" : [ "node" ], "type" : { "value" : { "idea" : "idea" } } } },
+        { "entity_has_field" : { "entity" : [ "node" ], "field" : "field_blast_idea" } },
+        { "data_is" : {
+            "data" : [ "node:field-blast-idea" ],
+            "op" : "\\u003E",
+            "value" : "3000"
+          }
+        }
+      ],
+      "DO" : [
+        { "flag_flagnode" : {
+            "flag" : "blast_idea",
+            "node" : [ "node" ],
+            "flagging_user" : "1",
+            "permission_check" : 0
           }
         },
-        { "radioactivity_emit" : {
-            "data" : [ "node:field-radioactivity" ],
-            "value" : { "select" : "maximum-energy", "num_offset" : { "value" : "50" } }
+        { "mail_to_users_of_role" : {
+            "roles" : { "value" : { "5" : "5" } },
+            "subject" : "The idea [node:title] is a blast.",
+            "message" : "The idea [node:title] is a blast.\\r\\nPlease check it out: [node:url]."
+          }
+        }
+      ]
+    }
+  }');
+  $items['rules_idea_is_buzz'] = entity_import('rules_config', '{ "rules_idea_is_buzz" : {
+      "LABEL" : "Idea is Buzz",
+      "PLUGIN" : "reaction rule",
+      "TAGS" : [ "Radioactivity" ],
+      "REQUIRES" : [ "rules", "flag" ],
+      "ON" : [ "node_view" ],
+      "IF" : [
+        { "node_is_of_type" : { "node" : [ "node" ], "type" : { "value" : { "idea" : "idea" } } } },
+        { "entity_has_field" : { "entity" : [ "node" ], "field" : "field_buzz_idea" } },
+        { "data_is" : {
+            "data" : [ "node:field-buzz-idea" ],
+            "op" : "\\u003E",
+            "value" : "3000"
+          }
+        }
+      ],
+      "DO" : [
+        { "flag_flagnode" : {
+            "flag" : "buzz_idea",
+            "node" : [ "node" ],
+            "flagging_user" : "1",
+            "permission_check" : 0
+          }
+        },
+        { "mail_to_users_of_role" : {
+            "roles" : { "value" : { "5" : "5" } },
+            "subject" : "The idea [node:title] is a buzz.",
+            "message" : "The idea [node:title] is a Buzz.\\r\\nPlease check it out: [node:url]."
+          }
+        }
+      ]
+    }
+  }');
+  $items['rules_idea_is_groove'] = entity_import('rules_config', '{ "rules_idea_is_groove" : {
+      "LABEL" : "Idea is Groove",
+      "PLUGIN" : "reaction rule",
+      "TAGS" : [ "Radioactivity" ],
+      "REQUIRES" : [ "rules", "flag" ],
+      "ON" : [ "node_view" ],
+      "IF" : [
+        { "node_is_of_type" : { "node" : [ "node" ], "type" : { "value" : { "idea" : "idea" } } } },
+        { "entity_has_field" : { "entity" : [ "node" ], "field" : "field_groove_idea" } },
+        { "data_is" : {
+            "data" : [ "node:field-groove-idea" ],
+            "op" : "\\u003E",
+            "value" : "3000"
+          }
+        }
+      ],
+      "DO" : [
+        { "flag_flagnode" : {
+            "flag" : "groove_idea",
+            "node" : [ "node" ],
+            "flagging_user" : "1",
+            "permission_check" : 0
+          }
+        },
+        { "mail_to_users_of_role" : {
+            "roles" : { "value" : { "5" : "5" } },
+            "subject" : "The idea [node:title] is a groove.",
+            "message" : "The idea [node:title] is a Groove.\\r\\nPlease check it out: [node:url]."
           }
         }
       ]
