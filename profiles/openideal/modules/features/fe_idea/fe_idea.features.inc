@@ -41,18 +41,18 @@ function fe_idea_views_api() {
  */
 function fe_idea_flag_default_flags() {
   $flags = array();
-  // Exported flag: "Popular Idea".
-  $flags['popular_idea'] = array(
+  // Exported flag: "Blast Idea".
+  $flags['blast_idea'] = array(
     'content_type' => 'node',
-    'title' => 'Popular Idea',
+    'title' => 'Blast Idea',
     'global' => '1',
     'types' => array(
       0 => 'idea',
     ),
-    'flag_short' => 'Flag as popular idea',
+    'flag_short' => 'flag as blast idea',
     'flag_long' => '',
     'flag_message' => '',
-    'unflag_short' => 'Unflag as popular idea',
+    'unflag_short' => 'unflag as blast idea',
     'unflag_long' => '',
     'unflag_message' => '',
     'unflag_denied_text' => '',
@@ -60,9 +60,85 @@ function fe_idea_flag_default_flags() {
     'roles' => array(
       'flag' => array(
         0 => '3',
+        1 => '5',
       ),
       'unflag' => array(
         0 => '3',
+        1 => '5',
+      ),
+    ),
+    'show_on_page' => 1,
+    'show_on_teaser' => 1,
+    'show_on_form' => 0,
+    'access_author' => '',
+    'i18n' => 0,
+    'module' => 'fe_idea',
+    'locked' => array(
+      0 => 'name',
+    ),
+    'api_version' => 2,
+  );
+  // Exported flag: "Buzz Idea".
+  $flags['buzz_idea'] = array(
+    'content_type' => 'node',
+    'title' => 'Buzz Idea',
+    'global' => '1',
+    'types' => array(
+      0 => 'idea',
+    ),
+    'flag_short' => 'flag as buzz idea',
+    'flag_long' => '',
+    'flag_message' => '',
+    'unflag_short' => 'unflag as buzz idea',
+    'unflag_long' => '',
+    'unflag_message' => '',
+    'unflag_denied_text' => '',
+    'link_type' => 'toggle',
+    'roles' => array(
+      'flag' => array(
+        0 => '3',
+        1 => '5',
+      ),
+      'unflag' => array(
+        0 => '3',
+        1 => '5',
+      ),
+    ),
+    'show_on_page' => 1,
+    'show_on_teaser' => 1,
+    'show_on_form' => 0,
+    'access_author' => '',
+    'i18n' => 0,
+    'module' => 'fe_idea',
+    'locked' => array(
+      0 => 'name',
+    ),
+    'api_version' => 2,
+  );
+  // Exported flag: "Groove Idea".
+  $flags['groove_idea'] = array(
+    'content_type' => 'node',
+    'title' => 'Groove Idea',
+    'global' => '1',
+    'types' => array(
+      0 => 'idea',
+    ),
+    'flag_short' => 'flag as groove idea',
+    'flag_long' => '',
+    'flag_message' => '',
+    'unflag_short' => 'unflag as groove idea',
+    'unflag_long' => '',
+    'unflag_message' => '',
+    'unflag_denied_text' => '',
+    'link_type' => 'toggle',
+    'roles' => array(
+      'flag' => array(
+        0 => '3',
+        1 => '5',
+      ),
+      'unflag' => array(
+        0 => '3',
+        1 => '5',
       ),
     ),
     'show_on_page' => 1,

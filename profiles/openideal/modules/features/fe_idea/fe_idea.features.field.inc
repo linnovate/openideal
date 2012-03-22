@@ -85,6 +85,128 @@ function fe_idea_field_default_fields() {
     ),
   );
 
+  // Exported field: 'node-idea-field_blast_idea'
+  $fields['node-idea-field_blast_idea'] = array(
+    'field_config' => array(
+      'active' => '1',
+      'cardinality' => '1',
+      'deleted' => '0',
+      'entity_types' => array(),
+      'field_name' => 'field_blast_idea',
+      'foreign keys' => array(),
+      'indexes' => array(),
+      'module' => 'radioactivity',
+      'settings' => array(),
+      'translatable' => '0',
+      'type' => 'radioactivity',
+    ),
+    'field_instance' => array(
+      'bundle' => 'idea',
+      'default_value' => array(
+        0 => array(
+          'radioactivity_energy' => '1000',
+          'radioactivity_timestamp' => '1332403825',
+        ),
+      ),
+      'deleted' => '0',
+      'description' => '',
+      'display' => array(
+        'default' => array(
+          'label' => 'above',
+          'module' => 'radioactivity',
+          'settings' => array(
+            'energy' => 10,
+            'type' => 'none',
+          ),
+          'type' => 'radioactivity_combo_formatter',
+          'weight' => 6,
+        ),
+        'teaser' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+      ),
+      'entity_type' => 'node',
+      'field_name' => 'field_blast_idea',
+      'label' => 'Blast Idea',
+      'required' => 0,
+      'settings' => array(
+        'profile' => 'blast_idea',
+        'user_register_form' => FALSE,
+      ),
+      'widget' => array(
+        'active' => 0,
+        'module' => 'radioactivity',
+        'settings' => array(),
+        'type' => 'radioactivity_basic_widget',
+        'weight' => '11',
+      ),
+    ),
+  );
+
+  // Exported field: 'node-idea-field_buzz_idea'
+  $fields['node-idea-field_buzz_idea'] = array(
+    'field_config' => array(
+      'active' => '1',
+      'cardinality' => '1',
+      'deleted' => '0',
+      'entity_types' => array(),
+      'field_name' => 'field_buzz_idea',
+      'foreign keys' => array(),
+      'indexes' => array(),
+      'module' => 'radioactivity',
+      'settings' => array(),
+      'translatable' => '0',
+      'type' => 'radioactivity',
+    ),
+    'field_instance' => array(
+      'bundle' => 'idea',
+      'default_value' => array(
+        0 => array(
+          'radioactivity_energy' => '1000',
+          'radioactivity_timestamp' => '1332403886',
+        ),
+      ),
+      'deleted' => '0',
+      'description' => '',
+      'display' => array(
+        'default' => array(
+          'label' => 'above',
+          'module' => 'radioactivity',
+          'settings' => array(
+            'energy' => 10,
+            'type' => 'none',
+          ),
+          'type' => 'radioactivity_combo_formatter',
+          'weight' => 7,
+        ),
+        'teaser' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+      ),
+      'entity_type' => 'node',
+      'field_name' => 'field_buzz_idea',
+      'label' => 'Buzz Idea',
+      'required' => 0,
+      'settings' => array(
+        'profile' => 'buzz_idea',
+        'user_register_form' => FALSE,
+      ),
+      'widget' => array(
+        'active' => 0,
+        'module' => 'radioactivity',
+        'settings' => array(),
+        'type' => 'radioactivity_basic_widget',
+        'weight' => '12',
+      ),
+    ),
+  );
+
   // Exported field: 'node-idea-field_category'
   $fields['node-idea-field_category'] = array(
     'field_config' => array(
@@ -231,6 +353,67 @@ function fe_idea_field_default_fields() {
         'settings' => array(),
         'type' => 'options_select',
         'weight' => '6',
+      ),
+    ),
+  );
+
+  // Exported field: 'node-idea-field_groove_idea'
+  $fields['node-idea-field_groove_idea'] = array(
+    'field_config' => array(
+      'active' => '1',
+      'cardinality' => '1',
+      'deleted' => '0',
+      'entity_types' => array(),
+      'field_name' => 'field_groove_idea',
+      'foreign keys' => array(),
+      'indexes' => array(),
+      'module' => 'radioactivity',
+      'settings' => array(),
+      'translatable' => '0',
+      'type' => 'radioactivity',
+    ),
+    'field_instance' => array(
+      'bundle' => 'idea',
+      'default_value' => array(
+        0 => array(
+          'radioactivity_energy' => '1000',
+          'radioactivity_timestamp' => '1332403976',
+        ),
+      ),
+      'deleted' => '0',
+      'description' => '',
+      'display' => array(
+        'default' => array(
+          'label' => 'above',
+          'module' => 'radioactivity',
+          'settings' => array(
+            'energy' => 10,
+            'type' => 'none',
+          ),
+          'type' => 'radioactivity_combo_formatter',
+          'weight' => 8,
+        ),
+        'teaser' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+      ),
+      'entity_type' => 'node',
+      'field_name' => 'field_groove_idea',
+      'label' => 'Groove Idea',
+      'required' => 0,
+      'settings' => array(
+        'profile' => 'groove_idea',
+        'user_register_form' => FALSE,
+      ),
+      'widget' => array(
+        'active' => 0,
+        'module' => 'radioactivity',
+        'settings' => array(),
+        'type' => 'radioactivity_basic_widget',
+        'weight' => '13',
       ),
     ),
   );
@@ -506,7 +689,10 @@ function fe_idea_field_default_fields() {
 
   // Translatables
   // Included for use with string extractors like potx.
+  t('Blast Idea');
+  t('Buzz Idea');
   t('Category');
+  t('Groove Idea');
   t('In Action');
   t('Is Part Of A Challenge');
   t('Is Part Of A Project');
