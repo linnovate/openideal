@@ -42,7 +42,7 @@ function ideal_main_block_view($delta) {
     switch ($delta) {
       case 'category_list':
         $block = array(
-          'subject' => '',
+          'subject' => t('Categories'),
           'content' => theme('ideal_category_list_block'),
         );
         break;

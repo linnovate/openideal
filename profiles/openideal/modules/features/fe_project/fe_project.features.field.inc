@@ -47,11 +47,11 @@ function fe_project_field_default_fields() {
       'description' => '',
       'display' => array(
         'default' => array(
-          'label' => 'above',
+          'label' => 'hidden',
           'module' => 'text',
           'settings' => array(),
           'type' => 'text_default',
-          'weight' => 6,
+          'weight' => '2',
         ),
         'teaser' => array(
           'label' => 'above',
@@ -123,11 +123,11 @@ function fe_project_field_default_fields() {
       'description' => '',
       'display' => array(
         'default' => array(
-          'label' => 'above',
+          'label' => 'hidden',
           'module' => 'taxonomy',
           'settings' => array(),
           'type' => 'taxonomy_term_reference_link',
-          'weight' => 4,
+          'weight' => '3',
         ),
         'teaser' => array(
           'label' => 'above',
@@ -189,11 +189,11 @@ function fe_project_field_default_fields() {
       'description' => '',
       'display' => array(
         'default' => array(
-          'label' => 'above',
+          'label' => 'hidden',
           'module' => 'list',
           'settings' => array(),
           'type' => 'list_default',
-          'weight' => 5,
+          'weight' => '4',
         ),
         'teaser' => array(
           'label' => 'above',
@@ -265,7 +265,7 @@ function fe_project_field_default_fields() {
             'multiple_to' => '',
           ),
           'type' => 'date_default',
-          'weight' => '0',
+          'weight' => '5',
         ),
         'teaser' => array(
           'label' => 'above',
@@ -342,10 +342,10 @@ function fe_project_field_default_fields() {
           'module' => 'image',
           'settings' => array(
             'image_link' => '',
-            'image_style' => '',
+            'image_style' => 'medium',
           ),
           'type' => 'image',
-          'weight' => '3',
+          'weight' => '1',
         ),
         'teaser' => array(
           'label' => 'above',
@@ -428,7 +428,7 @@ function fe_project_field_default_fields() {
             'type' => 'none',
           ),
           'type' => 'radioactivity_combo_formatter',
-          'weight' => 8,
+          'weight' => '6',
         ),
         'teaser' => array(
           'label' => 'above',
@@ -485,11 +485,11 @@ function fe_project_field_default_fields() {
       'description' => '',
       'display' => array(
         'default' => array(
-          'label' => 'above',
+          'label' => 'hidden',
           'module' => 'vud_field',
           'settings' => array(),
           'type' => 'default',
-          'weight' => 7,
+          'weight' => '0',
         ),
         'teaser' => array(
           'label' => 'above',

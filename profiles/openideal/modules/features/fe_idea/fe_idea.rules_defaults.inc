@@ -56,16 +56,7 @@ function fe_idea_default_rules_configuration() {
         }
       ],
       "DO" : [
-        { "radioactivity_maximum" : {
-            "USING" : { "data" : [ "comment:node:field-radioactivity" ] },
-            "PROVIDE" : { "maximum_energy" : { "maximum_energy" : "Maximum energy" } }
-          }
-        },
-        { "radioactivity_emit" : {
-            "data" : [ "comment:node:field-radioactivity" ],
-            "value" : { "select" : "maximum-energy", "num_offset" : { "value" : "100" } }
-          }
-        }
+        { "radioactivity_emit" : { "data" : [ "comment:node:field-blast-idea" ], "value" : "100" } }
       ]
     }
   }');

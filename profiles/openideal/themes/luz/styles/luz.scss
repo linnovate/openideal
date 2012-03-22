@@ -21,6 +21,9 @@
 
  /*         Definitions and Imports
  *************************************************/
+/* Imports */
+@import "bootstrap4luz";
+
 
 .btn {
   display: inline-block;
@@ -66,6 +69,23 @@
   border-radius: 5px;
 }
 
+@mixin box {
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 20px;
+  margin-bottom: 5px;
+}
+
+@mixin block-link {
+  background-color: #5fbae7;
+  border-radius: 3px;
+  color: #fff;
+  padding: 1px 5px 2px;
+  font-size: 12px;
+  display: inline-block;
+  margin: 0;
+}
+
 /*         General Sitewide Styles
  *************************************************/
   /* Layout */
@@ -73,11 +93,12 @@
   /* General Styles (Colors, Backgrounds etc.)*/
   body {
      background: url('../images/bg-header.jpg') repeat-x top;
+     color: #808080;
   }
 
   a, 
   a:visited {
-    color: #0069D6;
+    color: #1B90C9;
   }
   a:hover,
   a:active {
@@ -85,6 +106,14 @@
   }
 
   /* Typography */
+
+  h1 {
+    color: #1B90C9;
+    font-size: 32px;
+  }
+  h2 {
+    font-size: 16px;
+  }
 
   /* Links */
 
@@ -196,12 +225,23 @@
     }
   }
 
-  .category-menu {
-  	ul {
-  	  display: none;
-  	}
-    ul.level-0 {
-      display: block;
+  #block-ideal-category-list {
+    ul {
+    	display: none;
+      padding: 0;
+      margin: 0;
+      list-style: none;
+
+      &.level-0 {
+        display: block;
+      }
+
+      li {
+        list-style: none;
+        background: url("../images/sqr-bullet.png") no-repeat 0 4px;
+        padding: 0 0 0 20px;
+        margin: 0;
+      }
     }
   }
 
@@ -210,9 +250,132 @@
 
 /*         Front Page
  *************************************************/
+.front {
+  .region-content {
+    .block-views {
+      display: inline-block;
+      vertical-align: top;
+      width: 29%;
+      margin: 0 3% 30px 0;
+
+      .views-row {
+        border-bottom: 1px solid #DDDDDD;
+        padding: 5px 0;
+      }
+    }
+  }
+}
 
 /*         Inner Pages
  *************************************************/
+
+// Quicktabs (on category, ideas, and in action pages)
+.block-quicktabs {
+  .quicktabs-tabs {
+    margin: 0 0 0 10px;
+
+    li {
+      border: 1px solid #ddd;
+      border-bottom: none;
+      padding: 7px;
+      border-radius: 5px 5px 0 0;
+      display: inline-block;
+      margin: 0;
+
+      &.active {
+        border-bottom: 1px solid white;
+        margin-bottom: -1px;
+      }
+    }
+  }
+  .quicktabs-tabpage {
+    padding: 5px 5px 0;
+    border-radius: 5px;
+     border: 1px solid #ddd;
+
+    .views-row,
+    .view-empty {
+      @include box;
+    }  
+  }
+}
+
+// Idea(s)
+.field-name-field-category {
+  clear: both;
+  float: left;
+  margin-right: 10px;
+  ul {
+    margin: 0;
+  }
+  li {
+    list-style: none;
+    a{
+      @include block-link;
+    }
+  }
+} 
+.field-name-field-project-image {
+  float: right;
+  margin: 0 0 10px 10px;
+}
+.vud-widget-alternate {
+  height: 75px;
+  margin: 10px 20px 0 0;
+}
+.field-name-body {
+  margin-top: 10px;
+}
+footer {
+  clear: both;
+  .links.inline {
+    margin: 0;
+    li {
+      padding: 0;
+      margin-right: 10px;
+      a {
+        background: url('../images/v-bullet.png') no-repeat left center;
+        padding-left: 20px;
+        display: inline-block;
+        }
+      }
+  }  
+}
+
+
+// Comments
+article #comments {
+  clear: both;
+
+  h2 {
+    border-bottom: 1px solid #ddd;
+  }
+
+  article {
+    @include box;
+  }
+}
+
+// Project
+#block-views-ideas-in-project-block {
+  article {
+    @include box;
+  }
+}
+.field-name-field-project-ref {
+  @include box;
+}
+.field-name-field-in-action {
+  float: left;
+  margin-right: 10px;
+  .field-item {
+    @include block-link;
+  }
+}
+.field-name-field-launched-date {
+  float: left;
+  margin-right: 10px;
+}
 
 /*         Forms
  *************************************************/
