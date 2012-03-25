@@ -120,16 +120,16 @@ function ideal_analytics_analytics_dashboard() {
   $ret[] = draw_chart($settings);  
   
   //=========================================
-  // Chart for ideas become popular per day.
+  // Chart for blast ideas per day.
   //=========================================
   $header = $nodes = array();
-  $fid = db_query("SELECT fid FROM {flags} WHERE name = :name", array(':name' => 'popular_idea'))->fetchField();
+  $fid = db_query("SELECT fid FROM {flags} WHERE name = :name", array(':name' => 'blast_idea'))->fetchField();
   $i = 0;
   $f = $from;
   while ($f <= $to) {
     // Building the header - list of date from today backward.
     $header[$i]   = date('d.m.y', $f);
-    // The number of nodes become popular each day.
+    // The number of nodes become blast ideas each day.
     $nodes[$i]  = db_query("SELECT COUNT(*) FROM {flag_content} WHERE fid = :fid AND FROM_UNIXTIME(timestamp,'%d.%m.%y') = :dete", array(':fid' => $fid, ':dete' => $header[$i]))->fetchField();
     
     $i ++;
@@ -138,14 +138,14 @@ function ideal_analytics_analytics_dashboard() {
   // Building the rows, array of the data point arrays.
   $rows = array($nodes);
   // The labels for the rows.
-  $columns = array('No. Of Ideas become populars');
+  $columns = array('No. Of blast Ideas');
   
   // Put all the data into the settings array, 
   // which will be send to draw.
  
   // Must empty the array first.
   $settings = array();
-  $settings['chart']['chartPopular'] = array(  
+  $settings['chart']['chartBlast'] = array(  
     'header' => $header,
     'rows' => $rows,
     'columns' => $columns,
@@ -155,7 +155,7 @@ function ideal_analytics_analytics_dashboard() {
       'curveType' => "function",
       'colors' => array('red'), 
       'forceIFrame' => FALSE,  
-      'title' => 'Ideas become populars',
+      'title' => 'Blast Ideas',
       'width' => 500,
       'height' => 300  
     )   

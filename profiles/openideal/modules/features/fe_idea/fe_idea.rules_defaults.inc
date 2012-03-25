@@ -12,7 +12,7 @@ function fe_idea_default_rules_configuration() {
   $items['rules_idea_got_new_comment'] = entity_import('rules_config', '{ "rules_idea_got_new_comment" : {
       "LABEL" : "Idea got new comment",
       "PLUGIN" : "reaction rule",
-      "TAGS" : [ "Radioactivity" ],
+      "TAGS" : [ "Idea", "Radioactivity" ],
       "REQUIRES" : [ "rules", "radioactivity", "comment" ],
       "ON" : [ "comment_insert" ],
       "IF" : [
@@ -29,10 +29,49 @@ function fe_idea_default_rules_configuration() {
       ]
     }
   }');
+  $items['rules_idea_got_new_comment_project'] = entity_import('rules_config', '{ "rules_idea_got_new_comment_project" : {
+      "LABEL" : "Idea got new comment project",
+      "PLUGIN" : "reaction rule",
+      "TAGS" : [ "Project", "Radioactivity" ],
+      "REQUIRES" : [ "rules", "radioactivity", "comment" ],
+      "ON" : [ "comment_insert" ],
+      "IF" : [
+        { "node_is_of_type" : {
+            "node" : [ "comment:node" ],
+            "type" : { "value" : { "idea" : "idea" } }
+          }
+        },
+        { "entity_has_field" : { "entity" : [ "comment:node" ], "field" : "field_project_ref" } },
+        { "NOT data_is_empty" : { "data" : [ "comment:node:field-project-ref" ] } },
+        { "node_is_of_type" : {
+            "node" : [ "comment:node:field-project-ref" ],
+            "type" : { "value" : { "project" : "project" } }
+          }
+        }
+      ],
+      "DO" : [
+        { "radioactivity_emit" : {
+            "data" : [ "comment:node:field-project-ref:field-blast-idea" ],
+            "value" : "100"
+          }
+        },
+        { "radioactivity_emit" : {
+            "data" : [ "comment:node:field-project-ref:field-buzz-idea" ],
+            "value" : "100"
+          }
+        },
+        { "radioactivity_emit" : {
+            "data" : [ "comment:node:field-project-ref:field-groove-idea" ],
+            "value" : "100"
+          }
+        }
+      ]
+    }
+  }');
   $items['rules_idea_got_new_vote'] = entity_import('rules_config', '{ "rules_idea_got_new_vote" : {
       "LABEL" : "Idea got new vote",
       "PLUGIN" : "reaction rule",
-      "TAGS" : [ "Radioactivity" ],
+      "TAGS" : [ "Idea", "Radioactivity" ],
       "REQUIRES" : [ "rules", "radioactivity", "voting_rules" ],
       "ON" : [ "voting_rules_insert_node" ],
       "IF" : [
@@ -45,14 +84,45 @@ function fe_idea_default_rules_configuration() {
       ]
     }
   }');
+  $items['rules_idea_got_new_vote_project'] = entity_import('rules_config', '{ "rules_idea_got_new_vote_project" : {
+      "LABEL" : "Idea got new vote project",
+      "PLUGIN" : "reaction rule",
+      "TAGS" : [ "Project", "Radioactivity" ],
+      "REQUIRES" : [ "rules", "radioactivity", "voting_rules" ],
+      "ON" : [ "voting_rules_insert_node" ],
+      "IF" : [
+        { "node_is_of_type" : { "node" : [ "node" ], "type" : { "value" : { "idea" : "idea" } } } },
+        { "entity_has_field" : { "entity" : [ "node" ], "field" : "field_project_ref" } },
+        { "NOT data_is_empty" : { "data" : [ "node:field-project-ref" ] } },
+        { "node_is_of_type" : {
+            "node" : [ "node:field-project-ref" ],
+            "type" : { "value" : { "project" : "project" } }
+          }
+        }
+      ],
+      "DO" : [
+        { "radioactivity_emit" : { "data" : [ "node:field-project-ref:field-blast-idea" ], "value" : "50" } },
+        { "radioactivity_emit" : { "data" : [ "node:field-project-ref:field-buzz-idea" ], "value" : "50" } },
+        { "radioactivity_emit" : {
+            "data" : [ "node:field-project-ref:field-groove-idea" ],
+            "value" : "50"
+          }
+        }
+      ]
+    }
+  }');
   $items['rules_idea_is_blast'] = entity_import('rules_config', '{ "rules_idea_is_blast" : {
       "LABEL" : "Idea is Blast",
       "PLUGIN" : "reaction rule",
-      "TAGS" : [ "Radioactivity" ],
+      "TAGS" : [ "Idea", "Project", "Radioactivity" ],
       "REQUIRES" : [ "rules", "flag" ],
       "ON" : [ "node_view" ],
       "IF" : [
-        { "node_is_of_type" : { "node" : [ "node" ], "type" : { "value" : { "idea" : "idea" } } } },
+        { "node_is_of_type" : {
+            "node" : [ "node" ],
+            "type" : { "value" : { "idea" : "idea", "project" : "project" } }
+          }
+        },
         { "entity_has_field" : { "entity" : [ "node" ], "field" : "field_blast_idea" } },
         { "data_is" : {
             "data" : [ "node:field-blast-idea" ],
@@ -81,14 +151,18 @@ function fe_idea_default_rules_configuration() {
   $items['rules_idea_is_buzz'] = entity_import('rules_config', '{ "rules_idea_is_buzz" : {
       "LABEL" : "Idea is Buzz",
       "PLUGIN" : "reaction rule",
-      "TAGS" : [ "Radioactivity" ],
+      "TAGS" : [ "Idea", "Project", "Radioactivity" ],
       "REQUIRES" : [ "rules", "flag" ],
       "ON" : [ "node_view" ],
       "IF" : [
-        { "node_is_of_type" : { "node" : [ "node" ], "type" : { "value" : { "idea" : "idea" } } } },
+        { "node_is_of_type" : {
+            "node" : [ "node" ],
+            "type" : { "value" : { "idea" : "idea", "project" : "project" } }
+          }
+        },
         { "entity_has_field" : { "entity" : [ "node" ], "field" : "field_buzz_idea" } },
         { "data_is" : {
-            "data" : [ "node:field-buzz-idea" ],
+            "data" : [ "node:field-blast-idea" ],
             "op" : "\\u003E",
             "value" : "3000"
           }
@@ -114,14 +188,18 @@ function fe_idea_default_rules_configuration() {
   $items['rules_idea_is_groove'] = entity_import('rules_config', '{ "rules_idea_is_groove" : {
       "LABEL" : "Idea is Groove",
       "PLUGIN" : "reaction rule",
-      "TAGS" : [ "Radioactivity" ],
+      "TAGS" : [ "Idea", "Project", "Radioactivity" ],
       "REQUIRES" : [ "rules", "flag" ],
       "ON" : [ "node_view" ],
       "IF" : [
-        { "node_is_of_type" : { "node" : [ "node" ], "type" : { "value" : { "idea" : "idea" } } } },
-        { "entity_has_field" : { "entity" : [ "node" ], "field" : "field_groove_idea" } },
+        { "node_is_of_type" : {
+            "node" : [ "node" ],
+            "type" : { "value" : { "idea" : "idea", "project" : "project" } }
+          }
+        },
+        { "entity_has_field" : { "entity" : [ "node" ], "field" : "field_blast_idea" } },
         { "data_is" : {
-            "data" : [ "node:field-groove-idea" ],
+            "data" : [ "node:field-blast-idea" ],
             "op" : "\\u003E",
             "value" : "3000"
           }
@@ -147,13 +225,13 @@ function fe_idea_default_rules_configuration() {
   $items['rules_user_add_comment'] = entity_import('rules_config', '{ "rules_user_add_comment" : {
       "LABEL" : "User add comment",
       "PLUGIN" : "reaction rule",
-      "TAGS" : [ "Userpoints" ],
+      "TAGS" : [ "Idea", "Project", "Userpoints" ],
       "REQUIRES" : [ "rules", "userpoints_rules", "comment" ],
       "ON" : [ "comment_insert" ],
       "IF" : [
         { "node_is_of_type" : {
             "node" : [ "comment:node" ],
-            "type" : { "value" : { "idea" : "idea" } }
+            "type" : { "value" : { "idea" : "idea", "project" : "project" } }
           }
         }
       ],
@@ -174,7 +252,7 @@ function fe_idea_default_rules_configuration() {
   $items['rules_user_add_idea'] = entity_import('rules_config', '{ "rules_user_add_idea" : {
       "LABEL" : "User Add Idea",
       "PLUGIN" : "reaction rule",
-      "TAGS" : [ "Userpoints" ],
+      "TAGS" : [ "Idea", "Userpoints" ],
       "REQUIRES" : [ "rules", "userpoints_rules" ],
       "ON" : [ "node_insert" ],
       "IF" : [
@@ -197,7 +275,7 @@ function fe_idea_default_rules_configuration() {
   $items['rules_user_idea_in_action'] = entity_import('rules_config', '{ "rules_user_idea_in_action" : {
       "LABEL" : "User Idea In Action",
       "PLUGIN" : "reaction rule",
-      "TAGS" : [ "Userpoints" ],
+      "TAGS" : [ "Idea", "Userpoints" ],
       "REQUIRES" : [ "rules", "userpoints_rules" ],
       "ON" : [ "node_update" ],
       "IF" : [
@@ -228,7 +306,7 @@ function fe_idea_default_rules_configuration() {
   $items['rules_user_idea_launch'] = entity_import('rules_config', '{ "rules_user_idea_launch" : {
       "LABEL" : "User Idea Launch",
       "PLUGIN" : "reaction rule",
-      "TAGS" : [ "Userpoints" ],
+      "TAGS" : [ "Idea", "Userpoints" ],
       "REQUIRES" : [ "rules", "userpoints_rules" ],
       "ON" : [ "node_update" ],
       "IF" : [
@@ -254,11 +332,15 @@ function fe_idea_default_rules_configuration() {
   $items['rules_user_vote'] = entity_import('rules_config', '{ "rules_user_vote" : {
       "LABEL" : "User Vote",
       "PLUGIN" : "reaction rule",
-      "TAGS" : [ "Userpoints" ],
+      "TAGS" : [ "Idea", "Project", "Userpoints" ],
       "REQUIRES" : [ "rules", "userpoints_rules", "voting_rules" ],
       "ON" : [ "voting_rules_insert_node" ],
       "IF" : [
-        { "node_is_of_type" : { "node" : [ "node" ], "type" : { "value" : { "idea" : "idea" } } } }
+        { "node_is_of_type" : {
+            "node" : [ "node" ],
+            "type" : { "value" : { "idea" : "idea", "project" : "project" } }
+          }
+        }
       ],
       "DO" : [
         { "userpoints_action_grant_points" : {

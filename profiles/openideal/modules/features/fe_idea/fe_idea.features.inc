@@ -48,6 +48,7 @@ function fe_idea_flag_default_flags() {
     'global' => '1',
     'types' => array(
       0 => 'idea',
+      1 => 'project',
     ),
     'flag_short' => 'flag as blast idea',
     'flag_long' => '',
@@ -85,6 +86,7 @@ function fe_idea_flag_default_flags() {
     'global' => '1',
     'types' => array(
       0 => 'idea',
+      1 => 'project',
     ),
     'flag_short' => 'flag as buzz idea',
     'flag_long' => '',
@@ -122,6 +124,7 @@ function fe_idea_flag_default_flags() {
     'global' => '1',
     'types' => array(
       0 => 'idea',
+      1 => 'project',
     ),
     'flag_short' => 'flag as groove idea',
     'flag_long' => '',

@@ -10,7 +10,7 @@
 function fe_idea_quicktabs_default_quicktabs() {
   $export = array();
 
-  $quicktabs = new stdClass;
+  $quicktabs = new stdClass();
   $quicktabs->disabled = FALSE; /* Edit this to true to make a default quicktabs disabled initially */
   $quicktabs->api_version = 1;
   $quicktabs->machine_name = 'all_ideas';
@@ -54,7 +54,7 @@ function fe_idea_quicktabs_default_quicktabs() {
 
   $export['all_ideas'] = $quicktabs;
 
-  $quicktabs = new stdClass;
+  $quicktabs = new stdClass();
   $quicktabs->disabled = FALSE; /* Edit this to true to make a default quicktabs disabled initially */
   $quicktabs->api_version = 1;
   $quicktabs->machine_name = 'ideas_by_category';
@@ -98,7 +98,7 @@ function fe_idea_quicktabs_default_quicktabs() {
 
   $export['ideas_by_category'] = $quicktabs;
 
-  $quicktabs = new stdClass;
+  $quicktabs = new stdClass();
   $quicktabs->disabled = FALSE; /* Edit this to true to make a default quicktabs disabled initially */
   $quicktabs->api_version = 1;
   $quicktabs->machine_name = 'in_action';

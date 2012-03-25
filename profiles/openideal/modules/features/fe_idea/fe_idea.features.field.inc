@@ -564,65 +564,6 @@ function fe_idea_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-idea-field_radioactivity'
-  $fields['node-idea-field_radioactivity'] = array(
-    'field_config' => array(
-      'active' => '1',
-      'cardinality' => '1',
-      'deleted' => '0',
-      'entity_types' => array(),
-      'field_name' => 'field_radioactivity',
-      'foreign keys' => array(),
-      'indexes' => array(),
-      'module' => 'radioactivity',
-      'settings' => array(
-        'profile2_private' => FALSE,
-      ),
-      'translatable' => '0',
-      'type' => 'radioactivity',
-    ),
-    'field_instance' => array(
-      'bundle' => 'idea',
-      'default_value' => array(
-        0 => array(
-          'radioactivity_energy' => '1000',
-          'radioactivity_timestamp' => '1329396949',
-        ),
-      ),
-      'deleted' => '0',
-      'description' => '',
-      'display' => array(
-        'default' => array(
-          'label' => 'hidden',
-          'settings' => array(),
-          'type' => 'hidden',
-          'weight' => '3',
-        ),
-        'teaser' => array(
-          'label' => 'above',
-          'settings' => array(),
-          'type' => 'hidden',
-          'weight' => '5',
-        ),
-      ),
-      'entity_type' => 'node',
-      'field_name' => 'field_radioactivity',
-      'label' => 'Radioactivity',
-      'required' => 0,
-      'settings' => array(
-        'profile' => 'clone_of_default',
-        'user_register_form' => FALSE,
-      ),
-      'widget' => array(
-        'active' => 0,
-        'module' => 'radioactivity',
-        'settings' => array(),
-        'type' => 'radioactivity_basic_widget',
-        'weight' => '8',
-      ),
-    ),
-  );
-
   // Exported field: 'node-idea-field_vote'
   $fields['node-idea-field_vote'] = array(
     'field_config' => array(
@@ -697,7 +638,6 @@ function fe_idea_field_default_fields() {
   t('Is Part Of A Challenge');
   t('Is Part Of A Project');
   t('Please share you idea.');
-  t('Radioactivity');
   t('Vote');
   t('Your Idea');
 

@@ -10,7 +10,7 @@
 function fe_idea_context_default_contexts() {
   $export = array();
 
-  $context = new stdClass;
+  $context = new stdClass();
   $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
   $context->api_version = 3;
   $context->name = 'all_ideas';
@@ -42,7 +42,7 @@ function fe_idea_context_default_contexts() {
   t('Ideas');
   $export['all_ideas'] = $context;
 
-  $context = new stdClass;
+  $context = new stdClass();
   $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
   $context->api_version = 3;
   $context->name = 'category_page';
@@ -78,7 +78,7 @@ function fe_idea_context_default_contexts() {
   t('The term page with list of ideas.');
   $export['category_page'] = $context;
 
-  $context = new stdClass;
+  $context = new stdClass();
   $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
   $context->api_version = 3;
   $context->name = 'front';
@@ -141,7 +141,7 @@ function fe_idea_context_default_contexts() {
   t('the home page');
   $export['front'] = $context;
 
-  $context = new stdClass;
+  $context = new stdClass();
   $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
   $context->api_version = 3;
   $context->name = 'in_action';
@@ -173,7 +173,7 @@ function fe_idea_context_default_contexts() {
   t('Ideas');
   $export['in_action'] = $context;
 
-  $context = new stdClass;
+  $context = new stdClass();
   $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
   $context->api_version = 3;
   $context->name = 'search';

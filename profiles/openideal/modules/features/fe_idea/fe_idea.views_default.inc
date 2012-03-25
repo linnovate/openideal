@@ -520,7 +520,7 @@ Why not add an idea?';
   /* Display: Popular Ideas */
   $handler = $view->new_display('block', 'Popular Ideas', 'block_1');
   $handler->display->display_options['defaults']['sorts'] = FALSE;
-  /* Sort criterion: Content: Radioactivity (field_radioactivity:radioactivity_energy) */
+  /* Sort criterion: Broken/missing handler */
   $handler->display->display_options['sorts']['field_radioactivity_radioactivity_energy']['id'] = 'field_radioactivity_radioactivity_energy';
   $handler->display->display_options['sorts']['field_radioactivity_radioactivity_energy']['table'] = 'field_data_field_radioactivity';
   $handler->display->display_options['sorts']['field_radioactivity_radioactivity_energy']['field'] = 'field_radioactivity_radioactivity_energy';
@@ -664,7 +664,7 @@ Why not add an idea?';
   /* Display: Popular Ideas */
   $handler = $view->new_display('block', 'Popular Ideas', 'block_1');
   $handler->display->display_options['defaults']['sorts'] = FALSE;
-  /* Sort criterion: Content: Radioactivity (field_radioactivity:radioactivity_energy) */
+  /* Sort criterion: Broken/missing handler */
   $handler->display->display_options['sorts']['field_radioactivity_radioactivity_energy']['id'] = 'field_radioactivity_radioactivity_energy';
   $handler->display->display_options['sorts']['field_radioactivity_radioactivity_energy']['table'] = 'field_data_field_radioactivity';
   $handler->display->display_options['sorts']['field_radioactivity_radioactivity_energy']['field'] = 'field_radioactivity_radioactivity_energy';
