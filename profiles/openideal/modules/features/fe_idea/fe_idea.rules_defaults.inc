@@ -9,6 +9,20 @@
  */
 function fe_idea_default_rules_configuration() {
   $items = array();
+  $items['rules_close_commenting_voting'] = entity_import('rules_config', '{ "rules_close_commenting_voting" : {
+      "LABEL" : "Close Commnting \\u0026 Voting",
+      "PLUGIN" : "reaction rule",
+      "REQUIRES" : [ "flag", "rules" ],
+      "ON" : [ "node_view" ],
+      "IF" : [
+        { "flag_flagged_node" : { "flag" : "worth_checking", "node" : [ "node" ], "user" : "1" } }
+      ],
+      "DO" : [
+        { "component_rules_node_close_voting" : { "node" : [ "node" ] } },
+        { "component_rules_node_close_commenting" : { "node" : [ "node" ] } }
+      ]
+    }
+  }');
   $items['rules_idea_got_new_comment'] = entity_import('rules_config', '{ "rules_idea_got_new_comment" : {
       "LABEL" : "Idea got new comment",
       "PLUGIN" : "reaction rule",
@@ -219,6 +233,24 @@ function fe_idea_default_rules_configuration() {
             "message" : "The idea [node:title] is a Groove.\\r\\nPlease check it out: [node:url]."
           }
         }
+      ]
+    }
+  }');
+  $items['rules_node_close_commenting'] = entity_import('rules_config', '{ "rules_node_close_commenting" : {
+      "LABEL" : "Node Close Commenting",
+      "PLUGIN" : "action set",
+      "REQUIRES" : [ "rules" ],
+      "USES VARIABLES" : { "node" : { "label" : "Node", "type" : "node" } },
+      "ACTION SET" : [ { "data_set" : { "data" : [ "node:comment" ], "value" : "1" } } ]
+    }
+  }');
+  $items['rules_node_close_voting'] = entity_import('rules_config', '{ "rules_node_close_voting" : {
+      "LABEL" : "Node Close Voting",
+      "PLUGIN" : "action set",
+      "REQUIRES" : [ "php", "rules" ],
+      "USES VARIABLES" : { "node" : { "label" : "Node", "type" : "node" } },
+      "ACTION SET" : [
+        { "php_eval" : { "code" : "$tag = variable_get(\\u0027vud_tag\\u0027, \\u0027vote\\u0027);\\r\\n$widget = variable_get(\\u0027vud_node_widget\\u0027, \\u0027updown\\u0027);\\r\\n    \\r\\n$theme_vars = array(\\r\\n  \\u0027entity_id\\u0027 =\\u003E $node-\\u003Enid,\\r\\n  \\u0027type\\u0027 =\\u003E \\u0027node\\u0027,\\r\\n  \\u0027widget_theme\\u0027 =\\u003E \\u0027alternate\\u0027,\\r\\n  \\u0027tag\\u0027 =\\u003E $tag,\\r\\n  \\u0027readonly\\u0027 =\\u003E TRUE\\r\\n);\\r\\n   \\r\\n$node-\\u003Econtent[\\u0027field_vote\\u0027][0][\\u0027#markup\\u0027] = theme(\\u0027vud_widget\\u0027, $theme_vars);" } }
       ]
     }
   }');

@@ -196,13 +196,11 @@
  */
 
 function ideal_project_flag($action, $flag, $content_id, $account) {
-  if ($action == 'flag' && $flag->name == 'blast_idea') {
+  if ($action == 'flag' && $flag->name == 'worth_checking') {
     // Do stuff to the idea node:
     $idea = node_load($content_id);
     if ($idea->type == "idea") {
-      // close it for comments
       $wrp = entity_metadata_wrapper('node', $idea);
-      $wrp->comment->set(1);
       // set the in_action field to the first option
       $in_action_values = field_info_field('field_in_action');
       $in_action_values = array_shift($in_action_values['settings']['allowed_values']);
@@ -227,17 +225,17 @@ function ideal_project_flag($action, $flag, $content_id, $account) {
         $wrp->field_project_ref->set($project->nid);
         
         // give the new project the idea's voting count
-        $node_votes = votingapi_select_results(array('entity_id' => $content_id));
-        $vote = array(
-          'value' => $node_votes[3]['value'],  
-          'entity_id' => $project->nid,
-          'value_type' => 'points',   
-        );
-        $votes = array(0 => $vote);
-        $vote = votingapi_set_votes($votes);
+//        $node_votes = votingapi_select_results(array('entity_id' => $content_id));
+//        $vote = array(
+//          'value' => $node_votes[3]['value'],  
+//          'entity_id' => $project->nid,
+//          'value_type' => 'points',   
+//        );
+//        $votes = array(0 => $vote);
+//        $vote = votingapi_set_votes($votes);
 
         // Flag the project as blast idea
-        $flag = flag_get_flag('blast_idea');
+        $flag = flag_get_flag('worth_checking');
         $flag->flag('flag', $project->nid);
       }
       
@@ -247,30 +245,6 @@ function ideal_project_flag($action, $flag, $content_id, $account) {
   }
 }
 
-
-/*
- * Implementation of hook_node_view()
- * 
- * Disable voting on flagged (blast idea) nodes.
- * 
- */
-function ideal_project_node_view($node, $view_mode, $langcode) {
-  $flag = flag_get_flag('blast_idea');
-  if ($flag->is_flagged($node->nid)) {
-    $tag = variable_get('vud_tag', 'vote');
-    $widget = variable_get('vud_node_widget', 'updown');
-    
-    $theme_vars = array(
-      'entity_id' => $node->nid,
-      'type' => 'node',
-      'widget_theme' => 'alternate',
-      'tag' => $tag,
-      'readonly' => TRUE
-    );
-    
-    $node->content['field_vote'][0]['#markup'] = theme('vud_widget', $theme_vars);
-  }
-}
 
 /*
  * Implementation of hook_node_presave()
