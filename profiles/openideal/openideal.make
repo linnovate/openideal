@@ -65,6 +65,9 @@ projects[forward][subdir]                                      = contrib
 projects[google_analytics][version]                            = 7.x-1.2
 projects[google_analytics][subdir]                             = contrib
 
+projects[google_chart_tools][version]                          = 7.x-1.0-beta1
+projects[google_chart_tools][subdir]                           = contrib
+
 projects[heartbeat][version]                                   = 7.x-1.0
 projects[heartbeat][subdir]                                    = contrib
 
@@ -110,8 +113,8 @@ projects[module_filter][subdir]                                = contrib
 projects[nodequeue][version]                                   = 7.x-2.0-beta1
 projects[nodequeue][subdir]                                    = contrib
 
-projects[page_title][version]                                 = 7.x-2.5
-projects[page_title][subdir]                                  = contrib
+projects[page_title][version]                                  = 7.x-2.5
+projects[page_title][subdir]                                   = contrib
 
 projects[quicktabs][version]                                   = 7.x-3.3
 projects[quicktabs][subdir]                                    = contrib
@@ -119,11 +122,11 @@ projects[quicktabs][subdir]                                    = contrib
 projects[radioactivity][version]                               = 7.x-2.2
 projects[radioactivity][subdir]                                = contrib
 
-projects[rules][version]                                       = 7.x-2.0
+projects[rules][version]                                       = 7.x-2.1
 projects[rules][subdir]                                        = contrib
 
 projects[search_autocomplete][version]                         = 7.x-2.1
-projects[rules][subdir]                                        = contrib
+projects[search_autocomplete][subdir]                          = contrib
 
 projects[services_links][version]                              = 7.x-2.1
 projects[services_links][subdir]                               = contrib
@@ -135,9 +138,9 @@ projects[token][version]                                       = 7.x-1.0-rc1
 projects[token][subdir]                                        = contrib
 
 projects[top_searches][version]                                = 7.x-1.0
-projects[rules][subdir]                                        = contrib
+projects[top_searches][subdir]                                 = contrib
 
-rojects[userpoints][version]                                  = 7.x-1.0
+projects[userpoints][version]                                  = 7.x-1.0
 projects[userpoints][subdir]                                   = contrib
 
 projects[video_embed_field][version]                           = 7.x-2.0-alpha3
@@ -146,8 +149,8 @@ projects[video_embed_field][subdir]                            = contrib
 projects[views][version]                                       = 7.x-3.1
 projects[views][subdir]                                        = contrib
 
-projects[views_bulk_operations][version]                        = 7.x-3.0-rc1
-projects[views_bulk_operations][subdir]                         = contrib
+projects[views_bulk_operations][version]                       = 7.x-3.0-rc1
+projects[views_bulk_operations][subdir]                        = contrib
 
 projects[views_data_export][version]                           = 7.x-3.0-beta5
 projects[views_data_export][subdir]                            = contrib

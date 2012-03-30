@@ -484,12 +484,12 @@ function fe_idea_views_default_views() {
 Why not add an idea?';
   $handler->display->display_options['empty']['area']['format'] = 'filtered_html';
   $handler->display->display_options['empty']['area']['tokenize'] = 0;
-  /* Relationship: Flags: popular_idea */
+  /* Relationship: Flags: blast_idea */
   $handler->display->display_options['relationships']['flag_content_rel']['id'] = 'flag_content_rel';
   $handler->display->display_options['relationships']['flag_content_rel']['table'] = 'node';
   $handler->display->display_options['relationships']['flag_content_rel']['field'] = 'flag_content_rel';
   $handler->display->display_options['relationships']['flag_content_rel']['required'] = 0;
-  $handler->display->display_options['relationships']['flag_content_rel']['flag'] = 'popular_idea';
+  $handler->display->display_options['relationships']['flag_content_rel']['flag'] = 'blast_idea';
   $handler->display->display_options['relationships']['flag_content_rel']['user_scope'] = 'any';
   /* Sort criterion: Content: Post date */
   $handler->display->display_options['sorts']['created']['id'] = 'created';
@@ -597,12 +597,12 @@ Why not add an idea?';
 Why not add an idea?';
   $handler->display->display_options['empty']['area']['format'] = 'filtered_html';
   $handler->display->display_options['empty']['area']['tokenize'] = 0;
-  /* Relationship: Flags: popular_idea */
+  /* Relationship: Flags: blast_idea */
   $handler->display->display_options['relationships']['flag_content_rel']['id'] = 'flag_content_rel';
   $handler->display->display_options['relationships']['flag_content_rel']['table'] = 'node';
   $handler->display->display_options['relationships']['flag_content_rel']['field'] = 'flag_content_rel';
   $handler->display->display_options['relationships']['flag_content_rel']['required'] = 0;
-  $handler->display->display_options['relationships']['flag_content_rel']['flag'] = 'popular_idea';
+  $handler->display->display_options['relationships']['flag_content_rel']['flag'] = 'blast_idea';
   $handler->display->display_options['relationships']['flag_content_rel']['user_scope'] = 'any';
   /* Sort criterion: Content: Post date */
   $handler->display->display_options['sorts']['created']['id'] = 'created';
