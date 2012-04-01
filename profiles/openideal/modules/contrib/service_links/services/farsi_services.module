@@ -1,0 +1,37 @@
+<?php
+
+/**
+ * @file
+ * Farsi services that extend Service Links module,
+ * provided by @lameei.
+ */
+
+/**
+ * Implements hook_service_links().
+ */
+function farsi_services_service_links() {
+  $links = array();
+
+  $links['_fa_balatarin'] = array(
+    'name' => 'Balatarin',
+    'description' => t('Bookmark this post on balatarin.'),
+    'link' => 'http://balatarin.com/links/submit?phase=2&url=<raw-encoded-url>&title=<raw-encoded-title>',
+  );
+  $links['_fa_donbaleh'] = array(
+    'name' => 'Donbaleh',
+    'description' => t('Bookmark this post on donbaleh.'),
+    'link' => 'http://donbaleh.com/submit.php?url=<encoded-url>&subject=<encoded-title>',
+  );
+  $links['_fa_friendfa'] = array(
+    'name' => 'Friendfa',
+    'description' => t('Bookmark this post on friendfa.'),
+    'link' => 'http://www.friendfa.com/share?status=<encoded-title>&url=<encoded-url>',
+   );
+  $links['_fa_viwio'] = array(
+    'name' => 'Viwio',
+    'description' => t('Share this on Viwio.'),
+    'link' => 'http://www.viwio.com/home/?status=<encoded-title> <encoded-url>',
+  );
+  
+  return $links;
+}

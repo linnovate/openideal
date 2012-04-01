@@ -1,0 +1,51 @@
+/* $Id: admin_menu-rtl.css,v 1.4 2009/03/27 04:22:36 sun Exp $ */
+
+#admin-menu {
+  direction: rtl;
+  text-align: right;
+}
+#admin-menu li.admin-menu-action {
+  float: left;
+}
+#admin-menu li.admin-menu-action a {
+  border-left: none;
+  border-right: 1px solid #323232;
+}
+
+/* All lists */
+#admin-menu ul a {
+  border-left: 1px solid #323232;
+  border-right: 0;
+  padding: 4px 8px;
+  text-align: right;
+}
+
+/* All list items */
+#admin-menu li {
+  float: right;
+  position: relative;
+}
+#admin-menu li li {
+  position: static;
+}
+
+/* Second-level lists */
+#admin-menu li ul {
+  right: 0;
+}
+
+/* Third-and-above-level lists */
+#admin-menu li li.expandable ul {
+  margin: -20px 160px 0 0;
+}
+
+/* Lists nested under hovered list items */
+#admin-menu li.admin-menu-action:hover ul {
+  left: 0 !important;
+  right: auto;
+}
+
+/* Second-and-more-level hovering */
+#admin-menu li li.expandable {
+  background: #45454A url(images/arrow-rtl.png) no-repeat 5px 7px;
+}

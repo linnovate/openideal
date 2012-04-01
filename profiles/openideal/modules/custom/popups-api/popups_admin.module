@@ -1,0 +1,102 @@
+<?php
+
+/**
+ * @file
+ * Uses the popups API to add some popups to admin pages.
+ * 
+ * @todo
+ * Adding Javascript into popups doesn't always work.
+ *   tabledrag onmouse up action.
+ *   user.js and teaser.js bugs.
+ * Taxonomy > Add vocab.  Adding second item to page does not trigger d-n-d transformation.
+ *     Might be a problem with Taxonomy.  Menus doesn't have problem (adds d-n-d on first item).
+ * Comment view: popup is too small to contain comment.
+ */
+
+/**
+ * hook_popups
+ * 
+ * This implements hook_popups, defined in popups_get_popups.
+ * It adds page-in-popup behavior to the core admin pages.
+ * See the comments in popups_add_popups for explination of the options.
+ *
+ */
+function popups_admin_popups() {
+    
+  return array(
+    'admin/build/block' => array( // Blocks admin page.
+      '#tabs-wrapper a[href$=admin/build/block/add]', // Add Block
+      '#blocks a[href~=admin/build/block/configure]',  // configure
+      '#blocks a[href~=admin/build/block/delete]', // delete
+    ),
+    'admin/build/block/list/*' => array( // Blocks admin page.
+      '#tabs-wrapper a[href$=admin/build/block/add]', // Add Block
+      '#blocks a[href~=admin/build/block/configure]', // configure
+      '#blocks a[href~=admin/build/block/delete]', // delete
+    ),
+    'admin/build/path' => array( // URL aliases admin page.
+      '#tabs-wrapper a[href$=admin/build/path/add]', // Add alias
+      'td:nth-child(3) a[href~=admin/build/path/edit]', // edit alias
+      'td:nth-child(4) a[href~=admin/build/path/delete]', // delete alias
+    ),
+    'admin/content/taxonomy' => array( // Taxonomy admin page.
+      '#tabs-wrapper a[href$=admin/content/taxonomy/add/vocabulary]', // Add vocabulary
+      '#taxonomy-overview-vocabularies td a:contains('. t('edit vocabulary') .')', // edit vocabulary
+      '#taxonomy-overview-vocabularies td a:contains('. t('list terms') .')' => array( // list terms
+        'noUpdate' => TRUE,
+      ),
+      '#taxonomy-overview-vocabularies td a:contains('. t('add terms') .')' => array(  // add terms
+        'noUpdate' => TRUE,
+      ),
+    ),
+    'admin/content/types' => array( // Content Type admin page
+      '#tabs-wrapper a[href$=admin/content/types/add]',  // Add content type
+      'table td:nth-child(4) a, table td:nth-child(5) a, table td:nth-child(7) a' // edit, add field, delete
+    ),
+    'admin/content/types/list' => array( // Content Type admin page
+      '#tabs-wrapper a[href$=admin/content/types/add]',  // Add content type
+      'table td:nth-child(4) a, table td:nth-child(5) a, table td:nth-child(7) a' // edit, add field, delete
+    ),
+    'admin/content/node' => array( // Existing Content admin page
+      '#node-admin-content td a:contains('. t('edit') .')',  // edit
+    ),
+//    'page_node_form' => array( // Node edit form
+    'node/add/*' => array( // Node edit form
+      'a[href$=filter/tips]' => array( // Fixes insane "More information..." link
+        'noUpdate' => TRUE,
+      )      
+    ),
+    'admin/content/comment' => array( // Comments admin page.
+      'table td:nth-child(2) a' => array( // view (TODO: popup too small)
+        'noUpdate' => TRUE,
+      ),
+      '#comment-admin-overview td a:contains('. t('edit') .')', // edit
+    ),
+    'admin/user/rules' => array( // Access rules admin page.
+      '#tabs-wrapper a[href$=admin/user/rules/add]', // Add rule
+      'table td:nth-child(4) a, table td:nth-child(5) a', // edit, delete
+      '#tabs-wrapper a[href$=/admin/user/rules/check]' => array( // Check rule 
+        'noUpdate' => TRUE,
+      ),
+    ),
+    'admin/user/user' => array( // Manage all users admin page.
+      //Add user (TODO: Can't test, keeps crashing apache!)
+      '#tabs-wrapper a[href$=admin/user/user/create]', 
+      '#user-admin-account td:nth-child(2) a' => array( // View the user
+        'noUpdate' => TRUE,
+      ),
+      
+    ),
+    'menu_overview_form' => array( // Menu admin form.
+      // Add Item, , edit, delete
+      '#tabs-wrapper a:eq(1), table#menu-overview td:nth-child(5) a, table#menu-overview td:nth-child(6) a',
+      '#tabs-wrapper a:eq(2)' => array( // Edit menu: update just page title.
+        'updateTitle' => TRUE,
+        'noUpdate' => TRUE,
+      ),
+    ),
+        
+  );
+}
+
+

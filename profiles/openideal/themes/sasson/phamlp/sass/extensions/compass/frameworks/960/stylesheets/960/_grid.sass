@@ -1,0 +1,107 @@
+$ninesixty-gutter-width: 20px !default
+
+$ninesixty-grid-width: 960px !default
+
+$ninesixty-columns: 12 !default
+
+$fluid-gutter: $ninesixty-gutter-width / $ninesixty-grid-width * 100%;
+
+@mixin grid-container
+  margin-left: auto
+  margin-right: auto
+  width: $ninesixty-grid-width
+
+@mixin grid-width($n, $cols: $ninesixty-columns, $gutter-width: $ninesixty-gutter-width)
+  width: $ninesixty-grid-width / $cols * $n - $gutter-width
+
+@mixin grid-unit-base($gutter-width: $ninesixty-gutter-width)
+  display: inline
+  float: left
+  margin:
+    left: $gutter-width / 2
+    right: $gutter-width / 2
+
+@mixin grid($n, $cols: $ninesixty-columns, $gutter-width: $ninesixty-gutter-width)
+  +grid-unit-base($gutter-width)
+  +grid-width($n, $cols, $gutter-width)
+
+@mixin alpha
+  margin-left: 0
+
+@mixin omega
+  margin-right: 0
+
+@mixin grids($cols: $ninesixty-columns, $gutter-width: $ninesixty-gutter-width)
+  #{enumerate(".grid", 1, $cols, "_")}
+    +grid-unit-base
+  @for $n from 1 through $cols
+    .grid_#{$n}
+      +grid-width($n, $cols, $gutter-width)
+
+@mixin grid-prefix($n, $cols: $ninesixty-columns)
+  padding-left: $ninesixty-grid-width / $cols * $n
+
+@mixin grid-prefixes($cols: $ninesixty-columns)
+  @for $n from 1 through $cols - 1
+    .prefix_#{$n}
+      +grid-prefix($n, $cols)
+
+@mixin grid-suffix($n, $cols: $ninesixty-columns)
+  padding-right: $ninesixty-grid-width / $cols * $n
+
+@mixin grid-suffixes($cols: $ninesixty-columns)
+  @for $n from 1 through $cols - 1
+    .suffix_#{$n}
+      +grid-suffix($n, $cols)
+
+@mixin grid-children
+  .alpha
+    +alpha
+  .omega
+    +omega
+
+@mixin grid-move-base
+  position: relative
+
+@mixin grid-push($n, $cols: $ninesixty-columns)
+  left: ($ninesixty-grid-width / $cols) * $n
+  +grid-move-base
+
+@mixin grid-pull($n, $cols: $ninesixty-columns)
+  left: -($ninesixty-grid-width / $cols) * $n
+  +grid-move-base
+
+@mixin grid-movements($cols: $ninesixty-columns)
+  #{enumerate(".push", 1, $cols, "_")},
+  #{enumerate(".pull", 1, $cols, "_")}
+    +grid-move-base
+  @for $n from 1 through $cols
+    .push_#{$n}
+      +grid-push($n, $cols)
+    .pull_#{$n}
+      +grid-pull($n, $cols)
+
+@mixin grid-system($cols: $ninesixty-columns)
+  +grid-container
+  +grids($cols)
+  +grid-prefixes($cols)
+  +grid-suffixes($cols)
+  +grid-children
+  +grid-movements($cols)
+
+// Fluid grid
+@mixin fluid-width($n, $cols: $ninesixty-columns, $fluid-gutter: $fluid-gutter)
+  width: 100% / $cols * $n - $fluid-gutter
+
+@mixin fluid-grid($n, $cols: $ninesixty-columns, $fluid-gutter: $fluid-gutter)
+  +grid-unit-base($fluid-gutter)
+  +fluid-width($n, $cols, $fluid-gutter)
+
+@mixin fluid-push($n, $cols: $ninesixty-columns)
+  left: (100% / $cols) * $n
+  +grid-move-base
+
+@mixin fluid-pull($n, $cols: $ninesixty-columns)
+  left: -(100% / $cols) * $n
+  +grid-move-base
+

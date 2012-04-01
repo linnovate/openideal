@@ -1,0 +1,149 @@
+<?php
+
+/**
+ * @file
+ * This is the file description for Module Filter module.
+ *
+ * In this more verbose, multi-line description, you can specify what this
+ * file does exactly. Make sure to wrap your documentation in column 78 so
+ * that the file can be displayed nicely in default-sized consoles.
+ *
+ * @author greenSkin
+ */
+
+/**
+ * Implementation of hook_perm().
+ */
+function module_filter_permission() {
+  return array(
+    'administer module filter' => array(
+      'title' => t('Administer Module Filter'),
+      'description' => t('Configure how Module Filter performs.')
+    )
+  );
+}
+
+/**
+ * Implementation of hook_menu().
+ */
+function module_filter_menu() {
+  $items['admin/config/user-interface/modulefilter'] = array(
+    'title' => 'Module filter',
+    'description' => 'Configure settings for Module Filter.',
+    'access arguments' => array('administer module filter'),
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('module_filter_settings'),
+    'file' => 'module_filter.admin.inc'
+  );
+  return $items;
+}
+
+/**
+ * Implementation of hook_form_FORM_ID_alter().
+ */
+function module_filter_form_system_modules_alter(&$form, &$form_state, $form_id) {
+  // Don't alter the form when confirming.
+  if (isset($form['confirm'])) {
+    return;
+  }
+
+  $form['module_filter'] = array(
+    '#tree' => TRUE,
+    '#weight' => -1
+  );
+  $form['module_filter']['name'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Filter list')
+  );
+
+  $form['module_filter']['show'] = array(
+    '#type' => 'checkboxes',
+    '#default_value' => array('enabled', 'disabled', 'required', 'unavailable'),
+    '#options' => array('enabled' => t('Enabled'), 'disabled' => t('Disabled'), 'required' => t('Required'), 'unavailable' => t('Unavailable')),
+    '#prefix' => '<div id="module-filter-show-wrapper">',
+    '#suffix' => '</div>'
+  );
+
+  if (variable_get('module_filter_tabs', 1)) {
+    // Remove the fieldsets for each package since we will be using tabs
+    // instead. Put all modules into one array.
+    $modules = array(
+      '#theme' => 'module_filter_modules_table',
+      '#header' => array(
+        array('data' => t('Enabled'), 'class' => 'checkbox'),
+        t('Name'),
+        t('Version'),
+        t('Description'),
+        array('data' => t('Operations'), 'colspan' => 3)
+      )
+    );
+
+    $all = t('All');
+    $tab_counts = array($all => array('id' => 'all', 'enabled' => 0, 'total' => 0));
+    $form['#packages'] = array();
+    foreach (element_children($form['modules']) as $package) {
+      // Add the package to $form['#packages']. Tabs are built from this.
+      $form['#packages'][$package] = $package;
+
+      if (!isset($tab_counts[$package])) {
+        $tab_counts[$package] = array('enabled' => 0, 'total' => 0);
+      }
+
+      foreach (element_children($form['modules'][$package]) as $module) {
+        $tab_counts[$all]['total']++;
+        $tab_counts[$package]['total']++;
+        if (!empty($form['modules'][$package][$module]['enable']['#default_value'])) {
+          $tab_counts[$all]['enabled']++;
+          $tab_counts[$package]['enabled']++;
+        }
+
+        $modules[$module] = $form['modules'][$package][$module];
+        $modules[$module]['#package'] = $package;
+        $modules[$module]['#parents'] = array('modules', $package, $module);
+      }
+    }
+
+    // Sort the array of modules alphabetically.
+    uasort($modules, 'module_filter_sort_modules_by_display_name');
+
+    // Replace the $form['modules'] with our $modules array.
+    $form['modules'] = $modules;
+
+    // Add our $tab_counts array to the form.
+    $form['#tab_counts'] = $tab_counts;
+  }
+
+  $form['#theme'] = 'module_filter_system_modules';
+}
+
+/**
+ * Implementation of hook_theme().
+ */
+function module_filter_theme() {
+  return array(
+    'module_filter_system_modules' => array(
+      'render element' => 'form',
+      'file' => 'module_filter.theme.inc'
+    ),
+    'module_filter_modules_table' => array(
+      'render element' => 'form',
+      'file' => 'module_filter.theme.inc',
+    ),
+    'module_filter_system_modules_tabs' => array(
+      'render element' => 'form',
+      'file' => 'module_filter.theme.inc'
+    )
+  );
+}
+
+function module_filter_sort_modules_by_display_name($a, $b) {
+  if (is_array($a) && is_array($b) && isset($a['#package'], $b['#package'])) {
+    return strcasecmp($a['name']['#markup'], $b['name']['#markup']);
+  }
+  return 0;
+}
+
+function module_filter_get_id($text) {
+  $id = strtolower($text);
+  return preg_replace('/([^a-z])([\/(  )])*/', '-', $id);
+}

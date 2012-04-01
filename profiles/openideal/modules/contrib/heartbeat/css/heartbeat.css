@@ -1,0 +1,182 @@
+@CHARSET "UTF-8";
+
+/**
+ * Heartbeat streams.
+ */
+.heartbeat-stream {
+  padding: 2px 0;
+  clear: both;
+  width: auto;
+  /* FB styling */
+  font-size: 11px;
+  font-family: 'lucida grande', tahoma, verdana, arial, san-serif;
+}
+
+.heartbeat-stream a {
+  /* FB styling */
+  color: #3B5998;
+}
+
+.heartbeat-stream blockquote {
+  margin-left: 0;
+  /* FB styling */
+  padding-left: 7px;
+  border-left: 2px solid #CCC;
+  color: #979797;
+}
+
+a.user-link {
+  font-weight: bold;
+}
+
+
+/**
+ * Heartbeat activity (row).
+ */
+.heartbeat-activity {
+  border-bottom: 1px solid #E9E9E9;
+  padding-bottom: 7px;
+  padding-top: 7px;
+}
+
+/**
+ * Heartbeat activity: Heartbeat attachments and buttons in heartbeat to avoid extra css loading.
+ *   flags: FB-alike theming
+ *   heartbeat comments: FB-alike theming
+ */
+.heartbeat-stream span.flag-wrapper,
+.heartbeat-stream span.hover-delete,
+.heartbeat-attachment-button {
+  padding: 0 6px;
+  background: transparent url(../images/bullet.png) 0 0 no-repeat;
+}
+
+.heartbeat-stream span.heartbeat-time-ago {
+  padding-right: 6px;
+  background-image: none;
+}
+
+.heartbeat-stream span.heartbeat-time-ago,
+.heartbeat-stream span.heartbeat-time-ago a {
+  color: #B7B7B7;  
+}
+
+.heartbeat-stream span.hover-delete {
+  
+}
+
+.heartbeat-flag-count {
+  background-color: #EDEFF4;
+  border-bottom: 1px solid #E5EAF1;
+  margin-top: 2px;
+  padding: 5px 5px 4px; 
+  display: block; 
+  width: auto;
+}
+.heartbeat-comments-wrapper {
+  width: 100%;
+}
+
+.heartbeat-comments-wrapper .heartbeat-comments form {
+  padding: 5px 5px 4px;
+  background-color: #EDEFF4;  
+  border-bottom: 1px solid #E5EAF1;
+  margin-top: 2px;
+}
+
+.heartbeat-comments-wrapper .heartbeat-comments label {
+  display: none;
+}
+
+.heartbeat-comments-wrapper .heartbeat-comments .form-type-textarea {
+  /*form-textarea-wrapper*/
+  padding: 3px;
+  border: solid #BDC7D8;
+  border-width: 1px;
+  background-color: #FFF;
+}
+
+.heartbeat-comments-wrapper .heartbeat-comments textarea {
+  height: 14px;
+  padding: 0; margin: 0;
+  border-width: 0px;
+}
+
+.heartbeat-comment {
+  position: relative;
+  background-color: #EDEFF4;
+  border-bottom: 1px solid #E5EAF1;
+  margin-top: 2px;
+  padding: 5px 5px 4px;
+}
+
+.heartbeat-comment-delete {
+  display: none;
+}
+
+.heartbeat-comment:hover .heartbeat-comment-delete,
+.heartbeat-comment.hover .heartbeat-comment-delete {
+  position: absolute; top: 6px; right: 2px; z-index: 1;
+  display: block;
+}
+
+.heartbeat-comments ul {
+  padding: 0; margin: 0;
+}
+
+.heartbeat-comment {
+  list-style-type: none;
+  clear: both;
+}
+
+.heartbeat-comment span.avatar {
+  float: left;
+  clear: left;
+  margin: 3px 3px 3px 0;
+  width: 35px;
+}
+
+.heartbeat-comment .heartbeat-teaser {
+  float: left;
+  width: auto;
+  margin: 3px 0 3px 0;  
+  padding-top: 3px;
+  color: #666;
+  font-size: 11px;
+}
+
+.heartbeat-comment .heartbeat-teaser p {
+  margin: 2px 0;
+}
+
+
+/**
+ * Modal window theming.
+ */
+.ctools-modal-content {
+  background: #000;
+  padding: 30px;
+  /*filter: alpha(opacity=50);
+  -moz-opacity:0.5;
+  -khtml-opacity: 0.5;
+  opacity: 0.5;*/
+}
+.popups-container {
+  padding: 15px;
+  -moz-border-radius: 15px;
+  border-radius: 15px;
+}
+
+.modal-content .item-list ul li {
+  list-style-type: none;
+  margin: 20px;
+  float: left;
+}
+
+/**
+ * garland default fix.
+ */
+.region-content .heartbeat-messages-wrapper ul {
+    margin: 0;
+    padding: 0;
+}

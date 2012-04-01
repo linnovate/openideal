@@ -1,0 +1,50 @@
+<?php
+
+/**
+ * @file
+ * Message example.
+ */
+
+include_once('message_example.features.inc');
+
+/**
+ * Implements hook_node_insert().
+ */
+function message_example_node_insert($node) {
+  global $user;
+  // Set the arguments that would be replaced on run-time.
+  $arguments = array(
+    // The link will be replaced with the url of the node using url() upon
+    // display. Even if the node alias changes, then the link will always be
+    // displayed correctly.
+    '@url' => array(
+      'callback' => 'url',
+      'callback arguments' => array('node/' . $node->nid),
+    ),
+    // The title of the node will be sanitized using check_plain() upon
+    // display. We hard code the title to prevent a node load, but if the
+    // node's title will change it will not be reflected in the message.
+    // see message_example_comment() for an example of using a callback to get
+    // the most up-to-date title.
+    '@title' => $node->title,
+  );
+
+  // Save the message and assign it to the user realm. Since another user,
+  // usually an admin might create the node, but populate the author field
+  // with another user, we make sure the user realm is populated with the
+  // node's author, instead of the acting user (although in most cases it
+  // would be the same user).
+  // The following example demonstrates that we don't need to explicitly set
+  // the realm to the user, since if no realms are provided then the message
+  // is automatically assigned to the user passed in the function, or if no
+  // user object is provided, then to the acting user.
+  $account = user_load($node->uid);
+
+  $message = message_create('create_content', array('arguments' => $arguments), $account);
+  // Save reference to the node in the node reference field. We use the entity
+  // metadata wrapper.
+  $wrapper = entity_metadata_wrapper('message', $message);
+  $wrapper->field_node_ref->set($node);
+  // Save the Message entity.
+  $wrapper->save();
+}

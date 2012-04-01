@@ -1,0 +1,29 @@
+
+name = Radioactivity
+description = "Radioactivity provides a field for modelling popularity of entities."
+package = Radioactivity
+core = 7.x
+
+dependencies[] = ctools
+
+files[] = radioactivity.module
+files[] = radioactivity.field.inc
+files[] = radioactivity-admin-ui.inc
+files[] = radioactivity.rules.inc
+files[] = radioactivity.install
+
+files[] = includes/RadioactivityDeferredIncidentStorage.inc
+files[] = includes/RadioactivityIncidentStorage.inc
+files[] = includes/RadioactivityLiveIncidentStorage.inc
+files[] = includes/RadioactivityFileIncidentStorage.inc
+files[] = includes/RadioactivityMemcachedIncidentStorage.inc
+files[] = includes/RadioactivityIncident.inc
+
+
+
+; Information added by drupal.org packaging script on 2012-01-27
+version = "7.x-2.2"
+core = "7.x"
+project = "radioactivity"
+datestamp = "1327659047"
+

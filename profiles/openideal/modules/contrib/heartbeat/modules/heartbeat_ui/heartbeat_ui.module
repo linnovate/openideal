@@ -1,0 +1,632 @@
+<?php
+
+/**
+ * Implements hook_help().
+ */
+function heartbeat_ui_help($path, $arg) {
+  switch ($path) {
+    case 'admin/structure/heartbeat-templates/manage/%heartbeat_message_template':
+      return '<p>' . t('Heartbeat activity message templates.') . '</p>';
+  }
+}
+
+/**
+ * Implements hook_menu().
+ * TODO Fix admin/structure/heartbeat/cache-clear
+ */
+function heartbeat_ui_menu() {
+
+  $items = array();
+
+  // Build menu
+  $items['admin/structure/heartbeat'] = array(
+    'title' => 'Heartbeat',
+    'description' => 'Administer heartbeat.',
+    'page callback' => 'system_admin_menu_block_page',
+    'access arguments' => array('admin heartbeat configure'),
+    'file' => 'system.admin.inc',
+    'file path' => drupal_get_path('module', 'system'),
+  );
+
+  // Administer settings
+  $items['admin/structure/heartbeat/settings'] = array(
+    'title' => 'Heartbeat settings',
+    'description' => 'Administer settings for heartbeat.',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('heartbeat_admin_settings'),
+    'access arguments' => array('admin heartbeat configure'),
+    'file' => 'heartbeat_ui.admin.inc',
+    'weight' => 1,
+  );
+  $items['admin/structure/heartbeat/cache-clear'] = array(
+    'title' => 'Delete all activity logs',
+    'description' => 'Delete all heartbeat activity logs.',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('heartbeat_activity_delete_all_confirm'),
+    'access arguments' => array('admin heartbeat delete all'),
+    'file' => 'heartbeat_ui.admin.inc',
+    'weight' => 2,
+  );
+
+  return $items;
+
+}
+
+/**
+ * Implements hook_permission().
+ */
+function heartbeat_ui_permission() {
+  $permissions = array(
+    'admin heartbeat configure' => array(
+      'title' => t('Configure heartbeat'),
+      'description' => t('Manage the heartbeat streams and configuration settings.')
+    ),
+    'admin heartbeat streams' => array(
+      'title' => t('Administer heartbeat streams'),
+      'description' => t('Manage the heartbeat streams.')
+    ),
+  );
+
+  return $permissions;
+
+}
+
+/**
+ * Implements hook_ctools_plugin_directory().
+ */
+function heartbeat_ui_ctools_plugin_directory($module, $plugin) {
+  if ($module == 'ctools' && $plugin == 'export_ui') {
+    return 'plugins/' . $plugin;
+  }
+}
+
+/**
+ * Implements hook_admin_menu_map() on behalf of Heartbeat module.
+ */
+function heartbeat_ui_admin_menu_map() {
+
+  return;
+  // TODO Fix this again. This requires that streams and templates have urls
+  // of their own in the menu system, so we can add the fields and display ourself.
+  $map['admin/structure/heartbeat_ui/list/%heartbeat_message_template/edit'] = array(
+    'parent' => 'admin/structure/heartbeat_ui/list',
+    //'hide' => 'admin/structure/heartbeat_ui/list',
+    'arguments' => array(
+      array('%heartbeat_message_template' => array_keys(heartbeat_templates_names())),
+    ),
+  );
+
+  foreach (entity_get_info() as $obj_type => $info) {
+    foreach ($info['bundles'] as $bundle_name => $bundle_info) {
+      if (isset($bundle_info['admin'])) {
+        $arguments = array();
+        switch ($obj_type) {
+          case 'heartbeat_activity':
+            $fields = array();
+            foreach (field_info_instances($obj_type, $bundle_name) as $field) {
+              $fields[] = $field['field_name'];
+            }
+            $arguments = array(
+              '%heartbeat_message_template' => array($bundle_name),
+              '%field_ui_menu' => $fields,
+            );
+          break;
+        }
+        if (!empty($arguments)) {
+          $path = $bundle_info['admin']['path'];
+          $map["$path/fields/%field_ui_menu"]['parent'] = "$path/fields";
+          $map["$path/fields/%field_ui_menu"]['arguments'][] = $arguments;
+        }
+      }
+    }
+  }
+
+  return $map;
+}
+
+/**
+ * Helper function to get a readable time.
+ */
+function _heartbeat_activity_get_time($time) {
+  return format_interval($time, 6, $GLOBALS['language']->language);
+}
+
+/**
+ * Form for exportable heartbeat message template objects.
+ * @param Array $form
+ * @param Array $form_state
+ */
+function heartbeat_ui_ctools_export_ui_form(&$form, &$form_state) {
+
+  // '#theme' => 'heartbeat_template_form'
+
+  $template = $form_state['item'];
+
+  $form['general-tab'] = array('#type' => 'vertical_tabs');
+
+  // Add extra css.
+  $form['#attached']['css'][] = drupal_get_path('module', 'heartbeat_ui') . '/heartbeat_ui.css';
+
+  // Required form elements.
+  $form['hid'] = array(
+    '#type' => 'hidden',
+    '#default_value' => empty($template->hid) ? 0 : $template->hid,
+  );
+  $form['general'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Definition'),
+    '#collapsible' => TRUE,
+    '#collapsed' => TRUE,
+    '#group' => 'general-tab',
+  );
+  $form['general']['description'] = array(
+    '#type' => 'textarea',
+    '#title' => t('Description of the message'),
+    '#description' => t('(most of the time you already have an event in mind)'),
+    '#cols' => 60,
+    '#rows' => 1,
+    '#required' => TRUE,
+    '#default_value' => $template->description,
+  );
+
+  $form['permissions'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Access'),
+    '#collapsible' => TRUE,
+    '#collapsed' => TRUE,
+    '#group' => 'general-tab',
+  );
+  $form['permissions']['disabled'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Disable the message'),
+    '#description' => t('Defines whether this message template is disabled from logging and viewing.'),
+    '#default_value' => empty($template->disabled) ? 0 : $template->disabled,
+  );
+  $form['permissions']['perms'] = array(
+    '#type' => 'select',
+    '#title' => t('Message display access'),
+    '#description' => t('Defines to whom the message is meant for and who is entitled to see the message.'),
+    '#options' => _heartbeat_perms_options(),
+    '#default_value' => !isset($template->perms) ? HEARTBEAT_PUBLIC_TO_ALL : $template->perms,
+  );
+  $form['permissions']['roles'] = array(
+    '#type' => 'checkboxes',
+    '#title' => t('Limit this message with roles'),
+    '#description' => t('Select the roles to filter activity. Leaving empty means the messages will always be shown.'),
+    '#options' => user_roles(),
+    '#default_value' => empty($template->roles) ? array() : $template->roles,
+  );
+
+  // Examples with variables
+  $form['examples'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Examples'),
+    '#collapsible' => TRUE,
+    '#collapsed' => TRUE,
+    '#group' => 'general-tab',
+  );
+  $form['examples']['tokens']['#type'] = 'markup';
+  $form['examples']['tokens']['#markup'] = '<p>'. t('Here are a few examples of usage of variables in heartbeat messages:') .'</p><div>';
+  $form['examples']['tokens']['#markup'] .= '<small>'. t('!username has updated !node_title') .' (for a single message)</small><br />';
+  $form['examples']['tokens']['#markup'] .= '<small>'. t('!username has added %node_title%') .' (for grouped messages with variable summary)</small><br />';
+
+  // Extended example, specific to friendlist
+  if (module_exists('friendlist_api')) {
+    $form['examples']['tokens']['#markup'] .= '<small>'. t('!user1 is now !relation_type with !user2') .' (use %user2% if user1 becomes friends with lots of users in last timespan)</small><br />';
+  }
+  $form['examples']['tokens']['#markup'] .= '</div><p>'. t('Always append your variables with ! or embed the word in %\'s to group several instances of one part of a message.') .'</p>';
+
+  $form['content'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Content'),
+    '#collapsible' => TRUE,
+    '#collapsed' => TRUE,
+    '#group' => 'general-tab',
+  );
+  // the replacement of @ from # is only needed to view them like that.
+  // The actual implementation needs the # for partial message translations.
+  $form['content']['message'] = array(
+    '#type' => 'textarea',
+    '#title' => t('Single message'),
+    '#cols' => 60,
+    '#rows' => 1,
+    '#required' => TRUE,
+    '#default_value' => empty($template->message) ? '' : $template->message,
+    '#description' => t('"!" is available to interpret words as variables. <br />Note that the actor variable of the message should be <strong>!username</strong>.'),
+  );
+
+  $desc = t('Type of message when it comes to grouping messages together.<br />
+    <strong>Single</strong> is when you want to repeat messages without merging them together. These messages
+    are standalone and they dont take notice on previous and upcoming messages.<br />
+    <strong>Count</strong> means you want to merge the messages together so you know the occurrency.
+    Only one message in its single format will be displayed.<br />
+    A <strong>summary</strong> is when you want to group the same instance of several messages together.
+    For this you will summarize a part of the message and use it as substitional variables (with separators) to
+  form the merged messages. The occurrency of the message instance is also known as the count.<br />');
+
+  /**
+   * The group type of the message. Other form elements will
+   * depend on this setting to hide/show.
+   */
+  $form['content']['group_type'] = array(
+    '#id' => 'heartbeat_message_type',
+    '#type' => 'select',
+    '#title' => t('Type of message'),
+    '#description' => $desc,
+    '#options' => array(
+      'single'  => t('Single: Treat all activity instances as standalone messages'),
+      'count'   => t('Count: only add counter variable, merging only identical activity'),
+      'summary' => t('Summary: Merge recurrent activity together')
+    ),
+    '#required' => TRUE,
+    '#default_value' => $template->group_type,
+  );
+
+  /**
+   * Container for the concatenation or group arguments.
+   */
+  $form['content']['type_summary'] = array(
+    '#type' => 'container',
+    '#states' => array(
+      'visible' => array(
+        ':input[name="group_type"]' => array('value' => 'summary'),
+      ),
+    ),
+  );
+  $form['content']['type_summary']['message_concat'] = array(
+    '#type' => 'textarea',
+    '#title' => t('Message to group instances'),
+    '#description' => t('You can use "%" to indicate that a variable word needs to be replaced with multiple instances of another variable (target variable). This is used when messages are merged together.<br />! is still available'),
+    '#cols' => 60,
+    '#rows' => 2,
+    '#default_value' => empty($template->message_concat) ? '' : $template->message_concat,
+    // Add Prefix to improve UX.
+    '#prefix' => '<div class="heartbeat-conf-indent">',
+  );
+
+  /**
+   *  The concatenation arguments.
+   */
+  $form['content']['type_summary']['concat_args'] = array(
+    '#tree' => TRUE,
+    '#type' => 'container',
+  );
+  $group_by = !empty($template->concat_args['group_by']) ? $template->concat_args['group_by'] : 'none';
+  $form['content']['type_summary']['concat_args']['group_by'] = array(
+    '#type' => 'select',
+    '#options' => array(
+      'none' => t('No grouping'),
+      'user' => t('Group by user to summarize nodes'),
+      'node' => t('Group by node to summarize users'),
+      'node-target' => t('Group by target object id to summarize nodes'),
+      'user-user' => t('Group by user to summarize users'),
+    ),
+    '#title' => t('Group by'),
+    '#description' => t('<strong>Required for types summary. </strong>Messages with parts that merge together are grouped by user or node.
+      E.g. Group by node if you want to summarize users and vice versa.<br />In some cases where the activity uses a relation
+      between two users, then set the group by to "user-user". A good example is a friend-relation.'),
+    '#required' => FALSE,
+    '#default_value' => $group_by,
+  );
+  $desc = t('<blockquote>
+    Grouped message: !username added %images%.
+    Single message: !username added an !image and a nice one.
+    Then you will group by user and build a summary of images. The grouping variable here is "image".
+    </blockquote>');
+  $form['content']['type_summary']['concat_args']['group_target'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Variable to summarize'),
+    '#description' => t('If you used a word between %-signs, you have to fill in the variable you want to summarize.') .'<br /> e.g.:'. $desc,
+    '#required' => FALSE,
+    '#default_value' => empty($template->concat_args['group_target']) ? '' : $template->concat_args['group_target'],
+  );
+  // The wrapper for special user-user mapping.
+  $form['content']['type_summary']['concat_args']['group_by_target'] = array(
+    '#type' => 'textfield',
+    '#title' => t('The group by variable.'),
+    '#description' => t('This is the variable you want to summarize on. Group by parameter indicates your intensions. Note that it can never be the same as the group variable.'),
+    '#required' => FALSE,
+    '#default_value' => empty($template->concat_args['group_by_target']) ? '' : $template->concat_args['group_by_target'],
+  );
+  $form['content']['type_summary']['concat_args']['group_num_max'] = array(
+    '#title' => 'Maximum number of messages to group',
+    '#type' => 'textfield',
+    '#size' => 5,
+    '#default_value' => empty($template->concat_args['group_num_max']) ? '' : $template->concat_args['group_num_max'],
+    '#description' => 'Maximum number of items that can be grouped to create one summarized message.',
+  );
+  $form['content']['type_summary']['concat_args']['merge_separator'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Fill in the target separator'),
+    '#description' => t('Separators between the targets, like a colon. E.g. "title1<strong>,</strong> title2 and title3"'),
+    '#required' => FALSE,
+    '#default_value' => empty($template->concat_args['merge_separator']) ? '' : $template->concat_args['merge_separator'],
+  );
+  $form['content']['type_summary']['concat_args']['merge_end_separator'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Fill in the target end separator.'),
+    '#description' => t('Separators finishing listed targets. E.g. "title1, title2 <strong>and</strong> title3"'),
+    '#required' => FALSE,
+    '#default_value' => empty($template->concat_args['merge_end_separator']) ? '' : $template->concat_args['merge_end_separator'],
+    // Add Suffix to improve UX only.
+    '#suffix' => '</div>',
+  );
+
+  /**
+   *  Add container for other saveable data.
+   */
+  if (module_exists('heartbeat_plugins')) {
+    $form['attachments'] = array(
+      '#tree' => TRUE,
+      '#type' => 'fieldset',
+      '#title' => t('Attachments'),
+      '#collapsible' => TRUE,
+      '#collapsed' => TRUE,
+      '#group' => 'general-tab'
+    );
+  }
+}
+
+function heartbeat_ui_ctools_export_ui_form_validate(&$form, &$form_state) {
+
+}
+
+function heartbeat_ui_ctools_export_ui_form_submit(&$form, &$form_state) {
+
+  // Reformat the variables and attachments section.
+  $form_state['values']['variables'] = HeartbeatMessageTemplate::getVariablesFromMessage($form_state['values']['message'], $form_state['values']['message_concat']);
+  $form_state['values']['attachments'] = empty($form_state['values']['attachments']) ? array() : $form_state['values']['attachments'];
+
+}
+
+/**
+ * Form for exportable heartbeat message stream objects.
+ * @param Array $form
+ * @param Array $form_state
+ */
+function heartbeat_streams_ui_ctools_export_ui_form(&$form, &$form_state) {
+
+  $heartbeatStreamConfig = $form_state['item'];
+  _heartbeat_stream_config_unpack($heartbeatStreamConfig);
+
+  $cloning = preg_match("/clone_of_/", $heartbeatStreamConfig->class);
+
+  $form['path'] = array(
+    '#type' => 'hidden',
+    '#title' => t('Path'),
+    '#default_value' => $heartbeatStreamConfig->path,
+  );
+  $form['module'] = array(
+    '#type' => 'hidden',
+    '#title' => t('Module'),
+    '#default_value' => $heartbeatStreamConfig->module,
+  );
+
+  $heartbeatStreamConfig->real_class = empty($heartbeatStreamConfig->real_class) ? $heartbeatStreamConfig->class : $heartbeatStreamConfig->real_class;
+  if ($cloning) {
+    $heartbeatStreamConfig->real_class = preg_replace("/clone_of_/", "", $heartbeatStreamConfig->class);
+  }
+  $form['real_class'] = array(
+    '#type' => 'hidden',
+    '#title' => t('Real class'),
+    '#default_value' => $heartbeatStreamConfig->real_class,
+    '#description' => t('Real class to load for clones'),
+  );
+
+  $form['title'] = array(
+    '#type' => 'hidden',
+    '#title' => t('Title'),
+    '#default_value' => $heartbeatStreamConfig->title,
+    '#description' => t('Used in page titles'),
+  );
+  if ($cloning) {
+    $form['title']['#type'] = 'textfield';
+    $form['title']['#default_value'] = t('Clone of @title', array('@title' => $heartbeatStreamConfig->title));
+  }
+
+  $form['settings'] = array(
+    '#type' => 'vertical_tabs',
+    '#tree' => TRUE,
+    '#weight' => 50,
+  );
+
+  // Permissions, allow/deny message templates.
+  $form['settings']['fs_perms'] = array(
+    '#type' => 'fieldset',
+    '#collapsible' => TRUE,
+    '#collapsed' => FALSE,
+    '#title' => t('Permissions'),
+  );
+
+  // Fetch message objects.
+  ctools_include('export');
+  $options = array();
+  foreach (ctools_export_load_object('heartbeat_messages', 'all') as $template) {
+    $options[$template->message_id] = $template->description;
+  }
+  $form['settings']['fs_perms']['messages_denied'] = array(
+    '#type' => 'select',
+    '#title' => t('Choose message types you want to deny from display'),
+    '#multiple' => TRUE,
+    '#default_value' => $heartbeatStreamConfig->messages_denied,
+    '#options' => $options,
+  );
+
+  // Stream settings.
+  $form['settings']['fs_settings'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Settings'),
+    '#collapsible' => TRUE,
+    '#collapsed' => TRUE,
+  );
+
+  // Configuration can be simple for some heartbeat requirements and thus exceptions.
+  if (in_array($heartbeatStreamConfig->class, array('singleactivity', 'viewsactivity'))) {
+
+    $form['settings']['fs_settings']['page_disabled'] = array(
+      '#type' => 'checkbox',
+      '#default_value' => 1,
+      '#title' => t('Page disabled'),
+      '#required' => TRUE,
+      '#disabled' => TRUE,
+    );
+
+  }
+  else {
+
+    $form['settings']['fs_settings']['show_message_times'] = array(
+      '#title' => t('Show the time of action in message displays'),
+      '#type' => 'checkbox',
+      '#default_value' => $heartbeatStreamConfig->show_message_times,
+    );
+    $form['settings']['fs_settings']['show_message_times_grouped'] = array(
+      '#title' => t('Show the time of action with messages are grouped together'),
+      '#type' => 'checkbox',
+      '#default_value' => $heartbeatStreamConfig->show_message_times_grouped,
+    );
+    $form['settings']['fs_settings']['poll_messages'] = array(
+      '#type' => 'select',
+      '#options' => array(
+        0 => t('No'),
+        10 => t('Every 10 seconds'),
+        20 => t('Every 20 seconds'),
+        30 => t('Every 30 seconds'),
+        45 => t('Every 45 seconds'),
+        60 => t('Every minute'),
+      ),
+      '#title' => t('Poll every x seconds for newer messages to prepend the stream.'),
+      '#default_value' => $heartbeatStreamConfig->poll_messages,
+    );
+
+    $form['settings']['fs_settings']['num_load_max'] = array(
+      '#title' => t('Fetch a maximum of logged messages '),
+      '#type' => 'textfield',
+      '#size' => 20,
+      '#description' => t('Heartbeat loads a maximum number of activity messages to keep a final number.
+        This number has to be bigger than the number of max items in blocks and pages. This is needed because
+        streams can have messages that are denied, grouped or inhibited by permission. In
+        order to make sure we have enough messages for display and to keep the performance to a high level, this
+        odd way is needed.'),
+      '#default_value' => $heartbeatStreamConfig->num_load_max,
+    );
+
+    if (!empty($form_state['values']['settings']['grouping_seconds'])) {
+      $value = $form_state['values']['settings']['grouping_seconds'];
+    }
+    elseif (isset($heartbeatStreamConfig->grouping_seconds)) {
+      $value = $heartbeatStreamConfig->grouping_seconds;
+    }
+    else {
+      $value = variable_get('heartbeat_activity_grouping_seconds', 7200);
+    }
+    $form['settings']['fs_settings']['grouping_seconds'] = array(
+      '#title' => t('Maximum gap (in seconds)'),
+      '#type' => 'select',
+      '#options' => array(300 => t('5 minutes'), 600 => t('10 minutes'), 1200 => t('20 minutes'), 1800 => t('30 minutes'), 3600 => t('1 hour'), 7200 => t('2 hours'), 14400 => t('4 hours'), 86400 => t('24 hours')),
+      '#default_value' => $value,
+      '#description' => t('Maximum gap for the same activity to be grouped together and before an identical activity can be logged again'),
+    );
+
+    // Blocks settings.
+    $form['settings']['fs_blocks'] = array(
+      '#type' => 'fieldset',
+      '#title' => t('Blocks'),
+      '#collapsible' => TRUE,
+      '#collapsed' => TRUE,
+    );
+    $form['settings']['fs_blocks']['has_block'] = array(
+      '#title' => t('Enable block'),
+      '#type' => 'checkbox',
+      '#default_value' => $heartbeatStreamConfig->has_block,
+      '#attributes' => array()
+    );
+    if ($heartbeatStreamConfig->class == 'singleactivity') {
+      $form['settings']['fs_blocks']['has_block']['#attributes'] = array('readlonly' => 'readonly');
+    }
+    $form['settings']['fs_blocks']['block_items_max'] = array(
+      '#title' => t('Maximum items in the @name blocks', array('@name' => $heartbeatStreamConfig->name)),
+      '#type' => 'textfield',
+      '#size' => 20,
+      '#default_value' => $heartbeatStreamConfig->block_items_max,
+    );
+    $options = array(
+      0 => t('No more link'),
+      1 => t('Display "full list" link in block display'),
+      2 => t('Display an ajax-driven older messages link')
+    );
+    $form['settings']['fs_blocks']['block_show_pager'] = array(
+      '#title' => t('Show "older messages" link in block display'),
+      '#type' => 'radios',
+      '#options' => $options,
+      '#default_value' => $heartbeatStreamConfig->block_show_pager,
+    );
+
+    // Page settings.
+    $form['settings']['fs_pages'] = array(
+      '#type' => 'fieldset',
+      '#title' => t('Pages'),
+      '#collapsible' => TRUE,
+      '#collapsed' => TRUE,
+    );
+    $form['settings']['fs_pages']['page_disabled'] = array(
+      '#title' => t('Page disabled'),
+      '#type' => 'checkbox',
+      '#default_value' => $heartbeatStreamConfig->page_disabled,
+    );
+    $form['settings']['fs_pages']['profilePage'] = array(
+      '#title' => t('Add user profile page'),
+      '#type' => 'checkbox',
+      '#default_value' => $heartbeatStreamConfig->profilePage,
+    );
+    $form['settings']['fs_pages']['page_items_max'] = array(
+      '#title' => t('Maximum items in the @name pages', array('@name' => $heartbeatStreamConfig->name)),
+      '#type' => 'textfield',
+      '#size' => 20,
+      '#default_value' => $heartbeatStreamConfig->page_items_max,
+    );
+    $form['settings']['fs_pages']['page_show_pager'] = array(
+      '#title' => t('Display "older messages" link in page displays'),
+      '#type' => 'checkbox',
+      '#default_value' => $heartbeatStreamConfig->page_show_pager,
+    );
+    $form['settings']['fs_pages']['page_pager_ajax'] = array(
+      '#title' => t('Display "older messages" link in page displays with Ajax'),
+      '#type' => 'checkbox',
+      '#default_value' => $heartbeatStreamConfig->page_pager_ajax,
+    );
+  }
+
+  // Let other contribs save in the variables data.
+  $form['variables'] = array(
+    '#tree' => TRUE,
+  );
+
+}
+
+function heartbeat_streams_ui_ctools_export_ui_form_validate(&$form, &$form_state) {
+
+}
+
+function heartbeat_streams_ui_ctools_export_ui_form_submit(&$form, &$form_state) {
+
+  foreach ($form_state['values']['settings'] as $name => $setting) {
+    if (is_array($setting)) {
+      foreach ($setting as $key => $value) {
+        $form_state['values']['settings'][$key] = $value;
+      }
+      unset($form_state['values']['settings'][$name]);
+    }
+  }
+
+  cache_clear_all('heartbeat_streams', 'cache');
+  drupal_static_reset('heartbeat_streams');
+
+  if ($form_state['item']->page_disabled != $form_state['values']['settings']['page_disabled']) {
+    // clear menu cache.
+    menu_cache_clear_all();
+  }
+}
+
+/**
+ * eof().
+ */

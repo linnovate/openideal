@@ -1,0 +1,16 @@
+<?php
+
+/**
+ * @file
+ * Install, update and uninstall functions for the Vote Up/Down Term module.
+ */
+
+/**
+ * Implementation of hook_uninstall().
+ */
+function vud_term_uninstall() {
+  variable_del('vud_term_types');
+  variable_del('vud_term_widget');
+  variable_del('vud_term_votetable_show');
+  variable_del('vud_term_reset');
+}

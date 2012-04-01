@@ -1,0 +1,15 @@
+
+// Layout for medium viewports
+  
+// ==== Media Queries for Mobile-First Responsive Design. ============================
+//   By default we suggest 4 levels of layout :
+//   first - no media queries - simple, content first, no sidebars layout.
+//   second - small viewport - fluid, precentage based layout, only first sidebar floating.
+//   third - medium viewport - fluid, precentage based layout, two sidebars floating.
+//   forth - large viewport - fixed, pixel based layout, two sidebars floating.
+// ====================================================================================
+
+// Fixed width
+#page {
+  @include grid-container;
+}

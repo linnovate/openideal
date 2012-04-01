@@ -1,0 +1,32 @@
+<?php
+
+/**
+ * @file
+ * Install, update and uninstall functions for the Vote Up/Down Node module.
+ */
+
+/**
+ * Implementation of hook_uninstall().
+ */
+function vud_node_uninstall() {
+  variable_del('vud_node_types');
+  variable_del('vud_node_widget');
+  variable_del('vud_node_widget_show');
+  variable_del('vud_node_votes');
+  variable_del('vud_node_reset');
+  variable_del('vud_node_widget_vote_on_teaser');
+}
+
+/**
+ * use new constants to manage count/widget visibility
+ */
+function vud_node_update_6201() {
+  $ret = array();
+  $widget_visibility = variable_get('vud_node_widget_show', NULL);
+  if (!is_null($widget_visibility)) {
+    $widget_visibility++;
+    variable_set('vud_node_widget_show', $widget_visibility);
+  }
+  // no DB updates
+  return $ret;
+}

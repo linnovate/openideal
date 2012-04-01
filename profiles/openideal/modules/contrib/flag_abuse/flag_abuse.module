@@ -1,0 +1,156 @@
+<?php
+
+/**
+ * Implements hook_menu().
+ */
+function flag_abuse_menu() {
+  $items = array();
+
+  $items[FLAG_ADMIN_PATH . '/abuse'] = array(
+    'title' => 'Abuse Flags',
+    'description' => 'Configure Flag Abuse',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('flag_abuse_settings_form'),
+    'access arguments' => array('administer flags'),
+    'file' => 'includes/flag_abuse.admin.inc',
+    'type' => MENU_LOCAL_TASK,
+    'weight' => 10,
+  );
+
+  return $items;
+}
+
+/**
+ * Implements hook_flag_default_flags().
+ */
+function flag_abuse_flag_default_flags() {
+  $flags = array();
+  module_load_include('inc', 'flag_abuse', 'includes/flag_abuse.flag_default');
+  _flag_abuse_abuse_node_flags($flags);
+  _flag_abuse_abuse_comment_flags($flags);
+  _flag_abuse_abuse_user_flags($flags);
+  return $flags;
+}
+
+/**
+ * Implements hook_views_api().
+ */
+function flag_abuse_views_api() {
+  return array(
+    'api' => 3.0,
+    'path' => drupal_get_path('module', 'flag_abuse') . '/includes',
+  );
+}
+
+/**
+ * Implements hook_permission().
+ */
+function flag_abuse_permission() {
+  return array(
+    'reset abuse flags' => array(
+      'title' => t('reset abuse flags'),
+      'description' => t('Allow the resetting of all flags on a particular node, comment or user.'),
+    ),
+  );
+}
+
+/**
+ * Implements hook_preprocess_flag().
+ *
+ * Here we change our flag event/action to 'reset'.
+ */
+function flag_abuse_preprocess_flag(&$vars) {
+  // Ensure the user has permissions and this is an abuse flag.
+  if (user_access('reset abuse flags') && flag_abuse_is_abuse_flag($vars['flag']->name)) {
+    $vars['action'] = 'reset';
+    $vars['link_text'] = t('Reset flags');
+    $vars['link_title'] = t('Remove all flags on this content');
+  }
+}
+
+/**
+ * Implements hook_flag().
+ *
+ * If a user with appropriate permission/role flags this content from our view
+ * we want to remove all flags. http://drupal.org/node/327901#comment-1085685
+ *
+ * @todo: When $flag->access() goes in, use this to limit access to a flag that
+ * an administrator has already acted upon. http://drupal.org/node/322034
+ */
+function flag_abuse_flag($event, $flag, $content_id, $account) {
+  // Ensure the user has permissions and this is an abuse flag.
+  if (user_access('reset abuse flags', $account) && flag_abuse_is_abuse_flag($flag->name)) {
+    // remove all flags on this content
+    $rows = flag_reset_flag($flag, $content_id);
+    if ($rows) {
+      // This user actually flags the content as well, so it may confuse the
+      // user if they reset what they thought was one flag and we report two.
+      $rows--;
+      drupal_set_message(t('Reset !rows flags.', array('!rows' => $rows)));
+      variable_set($flag->name . '-' . $content_id, TRUE);
+    }
+  }
+}
+
+/**
+ * Implements hook_flag_access().
+ */
+function flag_abuse_flag_access($flag, $content_id, $action, $account) {
+  if (flag_abuse_is_abuse_flag($flag->name)) {
+    // Check to see if this flag has already been reset.
+    if (variable_get($flag->name . '-' . $content_id, FALSE)) {
+      return FALSE;
+    }
+  }
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function flag_abuse_form_flag_confirm_alter(&$form, &$form_state) {
+  // Ensure the user has permission.
+  if (user_access('reset abuse flags')) {
+    $flag_name = $form['flag_name']['#value'];
+    // Is this one of our abuse flags?
+    if (flag_abuse_is_abuse_flag($flag_name)) {
+      drupal_set_title(t('Flag reset'));
+      $form['description']['#value'] = t('Are you sure you want to reset all offensive flag on this content? Once doing so, users will not be able to flag this content again.');
+      $form['actions']['submit']['#value'] = t('Reset flags');
+    }
+  }
+}
+
+/**
+ * Implements hook_features_pipe_flag_alter().
+ */
+function flag_abuse_features_pipe_flag_alter(&$pipe, $data, $export) {
+  foreach ($data as $flag_name) {
+    if (flag_abuse_is_abuse_flag($flag_name)) {
+      $pipe['dependencies'][] = 'flag_abuse';
+      break;
+    }
+  }
+}
+
+/**
+ * Determine if a flag is an abuse flag.
+ *
+ * @param string $flag_name
+ *   The machine name of the flag.
+ * @return bool
+ *   Whether the flag is an abuse flag or not.
+ */
+function flag_abuse_is_abuse_flag($flag_name) {
+  // Use in_array() in strict mode, so that array keys aren't detected.
+  return in_array($flag_name, flag_abuse_get_abuse_flags(), TRUE);
+}
+
+/**
+ * Get the machine names of abuse flags.
+ *
+ * @return array
+ *   The machine names of abuse flags.
+ */
+function flag_abuse_get_abuse_flags() {
+  return variable_get('flag_abuse_flags', array('abuse_node', 'abuse_comment', 'abuse_user'));
+}

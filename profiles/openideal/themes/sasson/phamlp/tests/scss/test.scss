@@ -1,0 +1,15 @@
+
+@import "compass/css3/font-face";
+* {
+  @include font-face(test, font-files('test.woff', 'woff'));
+}
+
+
+@media    print {
+	* {
+		font-weight: bold;
+	}
+	@page {
+		margin: 1cm;
+	}
+}

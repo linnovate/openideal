@@ -1,0 +1,17 @@
+name = "Watcher"
+description = "Watcher enables your site's users to watch nodes for changes and new comments and be notified about them."
+package = Other
+core = 7.x
+
+dependencies[] = node
+dependencies[] = token
+dependencies[] = comment
+
+files[] = watcher.module
+files[] = watcher.db.inc
+; Information added by drupal.org packaging script on 2012-02-02
+version = "7.x-1.x-dev"
+core = "7.x"
+project = "watcher"
+datestamp = "1328145800"
+

@@ -1,0 +1,75 @@
+<?php
+
+/**
+ * Implements hook_field_schema().
+ */
+function entityreference_field_schema($field) {
+  if ($field['type'] == 'entityreference') {
+    return array(
+      'columns' => array(
+        'target_id' => array(
+          'description' => 'The id of the target entity',
+          'type' => 'int',
+          'unsigned' => TRUE,
+          'not null' => FALSE,
+        ),
+        'target_type' => array(
+          'description' => 'The type of the target entity',
+          'type' => 'varchar',
+          'length' => 255,
+          'not null' => TRUE,
+        ),
+      ),
+      'indexes' => array(
+        'target_entity' => array('target_type', 'target_id'),
+      ),
+      'foreign keys' => array(),
+    );
+  }
+}
+
+/**
+ * Update the field configuration to the new plugin structure.
+ */
+function entityreference_update_7000() {
+  // Enable ctools.
+  if (!module_enable(array('ctools'))) {
+    throw new Exception('This version of Entity Reference requires ctools, but it could not be enabled.');
+  }
+
+  // Get the list of fields of type 'entityreference'.
+  $fields = array();
+  foreach (field_info_fields() as $field_name => $field) {
+    // Update the field configuration.
+    if ($field['type'] == 'entityreference') {
+      $settings = &$field['settings'];
+      if (!isset($settings['handler'])) {
+        $settings['handler'] = 'base';
+        $settings['handler_settings']['target_bundles'] = $settings['target_bundles'];
+        unset($settings['target_bundles']);
+        field_update_field($field);
+      }
+    }
+
+    // Update the instance configurations.
+    foreach ($field['bundles'] as $entity_type => $bundles) {
+      foreach ($bundles as $bundle) {
+        $instance = field_info_instance($entity_type, $field_name, $bundle);
+        $save = FALSE;
+        if ($instance['widget']['type'] == 'entityreference_autocomplete') {
+          $instance['widget']['type'] = 'entityreference_autocomplete_tags';
+          $save = TRUE;
+        }
+        // When the autocomplete path is the default value, remove it from
+        // the configuration.
+        if (isset($instance['widget']['settings']['path']) && $instance['widget']['settings']['path'] == 'entityreference/autocomplete') {
+          unset($instance['widget']['settings']['path']);
+          $save = TRUE;
+        }
+        if ($save) {
+          field_update_instance($instance);
+        }
+      }
+    }
+  }
+}

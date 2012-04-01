@@ -1,0 +1,102 @@
+#popups-overlay {
+  background-color:transparent;
+}
+#popups-loading {
+  width:248px;
+  position:absolute;
+  display:none;
+  opacity:1;
+  -moz-border-radius: 8px;
+  -webkit-border-radius: 8px;
+  z-index:99;
+}
+#popups-loading span.popups-loading-message {
+  background:#FFF url(loading-large.gif) no-repeat 8px center;
+  display:block;
+  color:#444444;
+  font-family:Arial;
+  font-size:22px;
+  font-weight:bold;
+  height:36px;
+  line-height:36px;
+  padding:0 40px;
+}
+#popups-loading table, 
+.popups-box table { 
+	margin:0px; 
+}
+#popups-loading tbody,
+.popups-box tbody { 
+	border:none; 
+}
+.popups-box tr { 
+	background-color:transparent;
+}
+td.popups-border {
+  background: url(popups-border.png);
+  background-color:transparent;
+  filter:progid:DXImageTransform.Microsoft.Alpha(opacity=85);
+}
+td.popups-tl,
+td.popups-tr,
+td.popups-bl,
+td.popups-br {
+  background-repeat: no-repeat;
+  height:10px;
+  padding:0px;
+}
+td.popups-tl { background-position: 0px 0px; }
+td.popups-t,
+td.popups-b {
+  background-position: 0px -40px;
+  background-repeat: repeat-x;
+  height:10px;
+}
+td.popups-tr { background-position: 0px -10px; }
+td.popups-cl,
+td.popups-cr {
+  background-position: -10px 0;
+  background-repeat: repeat-y;
+  width:10px;
+}
+td.popups-cl,
+td.popups-cr,
+td.popups-c { padding:0; }
+td.popups-bl { background-position: 0px -20px; }
+td.popups-br { background-position: 0px -30px; }
+
+.popups-box,
+#popups-loading {
+  border: 0px solid #454545;
+  opacity:1;
+  overflow:hidden;
+  padding:0;
+  background-color:transparent;
+}
+.popups-container {
+  overflow:auto;
+  max-height:100%;
+  background-color:#fff;
+}
+.popups-title {
+  -moz-border-radius-topleft: 0px;
+  -webkit-border-radius-topleft: 0px;
+  margin-bottom:0px;
+  background-color:#6D84B4;
+  border:1px solid #3B5998;
+  padding:4px 10px 5px;
+  color:white;
+  font-size:14px;
+  font-weight:bold;
+}
+.popups-body {
+  background-color:#fff;
+  padding:8px;
+}
+.popups-box .popups-buttons,
+.popups-box .popups-footer { 
+  background-color:#fff; 
+}
+.popups-title .popups-close a {
+  color: #fff;
+}

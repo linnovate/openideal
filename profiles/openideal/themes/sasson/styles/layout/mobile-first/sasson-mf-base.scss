@@ -1,0 +1,26 @@
+
+// No media queries is the first query
+
+// ==== Media Queries for Mobile-First Responsive Design. ============================
+//   By default we suggest 4 levels of layout :
+//   first - no media queries - simple, content first, no sidebars layout.
+//   second - small viewport - fluid, precentage based layout, only first sidebar floating.
+//   third - medium viewport - fluid, precentage based layout, two sidebars floating.
+//   forth - large viewport - fixed, pixel based layout, two sidebars floating.
+// ===================================================================================
+
+// Full width elements
+#header,
+#main-menu,
+#secondary-menu,
+#featured,
+#main,
+#sidebar-first,
+#sidebar-second,
+#footer {
+  @include fluid-grid($ninesixty-columns);
+}
+
+#logo {
+  float: left;
+}

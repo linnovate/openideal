@@ -1,0 +1,249 @@
+<?php
+/**
+ * Implements hook_menu().
+ */
+function ideal_main_menu() {
+  $items = array();
+  $items['admin/config/user-interface/openideal'] = array(
+    'title' => 'General Configurations',
+    'access arguments' => array('access content'),
+    'page callback' => 'ideal_main_config_page',
+    'page arguments' => array('ideal_main_config_form'),
+    'file' => 'ideal_main.admin.inc',  
+    'type' => MENU_NORMAL_ITEM,
+  );
+  
+  $items['admin/config/user-interface/openideal/general'] = array(
+    'title' => 'General Configurations',
+    'description' => 'General Configurations', 
+    'type' => MENU_DEFAULT_LOCAL_TASK,
+  );
+  
+  return $items;
+}
+
+/**
+ * Implements hook_block_info().
+ */
+function ideal_main_block_info() {
+  $blocks = array();
+  $blocks['category_list'] = array(
+    'info' => t('Ideal: Category list for sidebar'),
+  );
+  return $blocks;
+}
+
+
+/**
+ * Implements hook_block_view().
+ */
+function ideal_main_block_view($delta) {
+  if (TRUE) {
+    switch ($delta) {
+      case 'category_list':
+        $block = array(
+          'subject' => t('Categories'),
+          'content' => theme('ideal_category_list_block'),
+        );
+        break;
+    }
+    return $block;
+  }
+}
+
+/**
+ * Implements hook_theme()
+ */
+function ideal_main_theme($existing, $type, $theme, $path) {
+  return array(
+    // theme function for sidebar category list
+    'ideal_category_list_block' => array(
+      'file' => 'ideal_main.theme.inc',
+    ),
+  );
+}
+
+/**
+ * Count idea nodes for a given taxonomy term 
+ */
+function ideal_count_term_ideas($tid) {
+  $query = db_select('taxonomy_index', 'ti');
+  $query->condition('ti.tid', $tid, '=')
+        ->fields('ti', array('nid'));
+  
+  $num_rows = $query->countQuery()->execute()->fetchField();
+  return $num_rows;
+}
+
+
+/**
+ *  hook_data_alter
+ */
+function ideal_main_views_data_alter(&$data) {
+  $data['node']['uid_voted'] = array(
+    'title' => t('User voted'),
+    'help' => t('Display nodes only if a user voted on the node.'),
+    'argument' => array(
+      'field' => 'uid',
+      'name table' => 'users',
+      'name field' => 'name',
+      'handler' => 'views_handler_argument_vote_only_user_uid',
+    ),
+    'filter' => array(
+      'field' => 'uid',
+      'name table' => 'users',
+      'name field' => 'name',
+      'handler' => 'views_handler_filter_vote_only_user_uid',
+    ),
+  );
+  $data['node']['uid_commented'] = array(
+    'title' => t('User commented'),
+    'help' => t('Display nodes only if a user commented on the node.'),
+    'argument' => array(
+      'field' => 'uid',
+      'name table' => 'users',
+      'name field' => 'name',
+      'handler' => 'views_handler_argument_idea_comment_only_user_uid',
+    ),
+    'filter' => array(
+      'field' => 'uid',
+      'name table' => 'users',
+      'name field' => 'name',
+      'handler' => 'views_handler_filter_idea_comment_only_user_uid',
+    ),
+  );
+}
+
+/**
+ * Implements hook_quicktabs_alter()
+ * Add counter to quicktab title.
+ */
+function ideal_main_quicktabs_alter(&$quicktabs) { 
+  $quicktabs_to_alter = array("all_ideas", "ideas_by_category", "in_action");
+  if (in_array($quicktabs->machine_name, $quicktabs_to_alter)) {
+    foreach ($quicktabs->tabs as $key => $tab){
+      
+      // find what quicktab instance we're in, and what block this is
+      $block = substr($tab['bid'], strpos($tab['bid'], "block"));
+      $view = substr($tab['bid'], 0, strpos($tab['bid'], "block")-1);
+      $view = substr($view, strpos($view, "delta")+6);
+     
+      // if this is one of the tabs we want to add the counter to
+      if ($view == "ideas_in_action" || ($block == "block_3" && ($view == "ideas_by_category" || $view == "ideas_all"))) {
+        $count = ideal_main_quicktabs_view_counter($view, $block);
+        $quicktabs->tabs[$key]['title'] .= " (" . $count . ")";
+      }
+    }
+  }
+}
+
+/**
+ * Helper function for loading a view and getting the row count.
+ */
+function ideal_main_quicktabs_view_counter($tab_view, $tab_display, $term=0) {
+  $view = views_get_view($tab_view);
+  $view->set_display($tab_display);
+  if ($term != 0) {
+    $view->args[0] = $term;
+  }
+  else {
+    $view->args[0] = arg(1);
+  }
+  $view->pre_execute();
+  $view->execute();
+  $count = $view->total_rows ? $view->total_rows : 0;
+  return $count;
+}
+
+/**
+ * Implements theme registry alter
+ */
+function ideal_main_theme_registry_alter(&$theme_registry){
+  
+  $theme_registry['views_mini_pager']['function'] = "ideal_main_views_mini_pager";
+
+}
+
+/**
+ * Overides theme_views_mini_pager, mainly if li_previous and li_next are empty.
+ */
+function ideal_main_views_mini_pager($vars) {
+  global $pager_page_array, $pager_total;
+  $tags = $vars['tags'];
+  $element = $vars['element'];
+  $parameters = $vars['parameters'];
+  $quantity = $vars['quantity'];
+
+  // Calculate various markers within this pager piece:
+  // Middle is used to "center" pages around the current page.
+  $pager_middle = ceil($quantity / 2);
+  // current is the page we are currently paged to
+  $pager_current = $pager_page_array[$element] + 1;
+  // max is the maximum page number
+  $pager_max = $pager_total[$element];
+  // End of marker calculations.
+
+
+  $li_previous = theme('pager_previous',
+    array(
+      'text' => (isset($tags[1]) ? $tags[1] : t('‹‹')),
+      'element' => $element,
+      'interval' => 1,
+      'parameters' => $parameters,
+    )
+  );
+  if (empty($li_previous)) {
+      $li_previous = theme('pager_last',
+        array(
+          'text' => (isset($tags[1]) ? $tags[1] : t('‹‹')),
+          'element' => $element,
+          'interval' => 1,
+          'parameters' => $parameters,
+        )
+      );
+  }
+
+  $li_next = theme('pager_next',
+    array(
+      'text' => (isset($tags[3]) ? $tags[3] : t('››')),
+      'element' => $element,
+      'interval' => 1,
+      'parameters' => $parameters,
+    )
+  );
+  if (empty($li_next)) {
+    $li_next = theme('pager_first',
+      array(
+        'text' => (isset($tags[3]) ? $tags[3] : t('››')),
+        'element' => $element,
+        'interval' => 1,
+        'parameters' => $parameters,
+      )
+    );
+  }
+
+  if ($pager_total[$element] > 1) {
+    $items[] = array(
+      'class' => array('pager-previous'),
+      'data' => $li_previous,
+    );
+
+    $items[] = array(
+      'class' => array('pager-current'),
+      'data' => t('@current of @max', array('@current' => $pager_current, '@max' => $pager_max)),
+    );
+
+    $items[] = array(
+      'class' => array('pager-next'),
+      'data' => $li_next,
+    );
+    return theme('item_list',
+      array(
+        'items' => $items,
+        'title' => NULL,
+        'type' => 'ul',
+        'attributes' => array('class' => array('pager')),
+      )
+    );
+  }
+}

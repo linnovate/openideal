@@ -1,0 +1,43 @@
+<?php
+
+/**
+ * @file
+ * Install and uninstall schema and functions for the xmlsitemap_user module.
+ */
+
+/**
+ * Implements hook_requirements().
+ */
+function xmlsitemap_user_requirements($phase) {
+  $requirements = array();
+  $t = get_t();
+
+  if ($phase == 'runtime') {
+    if (!user_access('access user profiles', drupal_anonymous_user())) {
+      $requirements['xmlsitemap_user_anonymous_permission'] = array(
+        'title' => $t('XML sitemap user'),
+        'value' => $t('Anonymous access to user profiles'),
+        'description' => $t('In order to list user profile links in the sitemap, the anonymous user must have the <a href="@perm-link"><em>View user profiles</em> permission</a>.', array('@perm-link' => url('admin/people/permissions/' . DRUPAL_ANONYMOUS_RID, array('fragment' => 'module-user')))),
+        'severity' => REQUIREMENT_ERROR,
+      );
+    }
+  }
+
+  return $requirements;
+}
+
+/**
+ * Implements hook_uninstall().
+ */
+function xmlsitemap_user_uninstall() {
+  drupal_load('module', 'user');
+  drupal_load('module', 'xmlsitemap');
+  xmlsitemap_link_bundle_delete('user', 'user');
+}
+
+/**
+ * Implements hook_update_last_removed().
+ */
+function xmlsitemap_user_update_last_removed() {
+  return 6202;
+}

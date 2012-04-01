@@ -1,0 +1,27 @@
+<?php
+/**
+ * @file
+ * Install file for the vud_field module.
+ */
+
+/**
+ * Implements hook_field_schema().
+ */
+function vud_field_field_schema($field) {
+  return array(
+    'columns' => array(
+      'vud_widget' => array(
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => FALSE,
+        'sortable' => TRUE
+      ),
+      'votingapi_tag' => array(
+        'type' => 'varchar',
+        'length' => 64,
+        'not null' => TRUE,
+        'default' => 'vote',
+      ),
+    ),
+  );
+}

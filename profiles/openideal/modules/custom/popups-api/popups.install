@@ -1,0 +1,14 @@
+<?php
+
+/**
+ * @file
+ */
+
+/**
+ * Implementation of hook_install().
+ *
+ * Ensures popups runs after everything else, since it short circuits in hook_init.
+ */
+function popups_install() {
+  db_update('system')->fields(array('weight' => 9999))->condition('name', 'popups')->execute();
+}

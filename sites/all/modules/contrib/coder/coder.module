@@ -1,0 +1,28 @@
+<?php
+
+/**
+ * @file
+ * Installation file for the coder module.
+ */
+
+/**
+ * Implements hook_menu().
+ */
+function coder_menu() {
+  $items['admin/config/development/coder'] = array(
+    'title' => 'Coder',
+    'description' => 'Select code review plugins and modules, and upgrade files.',
+    'page callback' => 'coder_display_required_module_message',
+    'access arguments' => array('administer site configuration'),
+  );
+  return $items;
+}
+
+/**
+ * Returns form items for the required module message.
+ */
+function coder_display_required_module_message() {
+  $message = t('Please enable one or both of the "Coder Review" or "Coder Upgrade" modules.');
+  $build['coder_message']['#markup'] = $message;
+  return $build;
+}

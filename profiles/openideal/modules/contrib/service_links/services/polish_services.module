@@ -1,0 +1,31 @@
+<?php
+
+/**
+ * @file
+ * Polish services that extend Service Links module.
+ */
+
+/**
+ * Implements hook_service_links().
+ */
+function polish_services_service_links() {
+  $links = array();
+
+  $links['_pl_wykop'] = array(
+    'name' => 'Wykop',
+    'description' => t('Add to Wykop'),
+    'link' => 'http://www.wykop.pl/dodaj?url=<raw-encoded-url>&title=<raw-encoded-title>',
+  );
+  $links['_pl_blip'] = array(
+    'name' => 'Blip',
+    'description' => t('Add to Blip'),
+    'link' => 'http://blip.pl/dashboard?body=<raw-encoded-short-url>%20--%20<raw-encoded-title>',
+  );
+  $links['_pl_sledzik'] = array(
+    'name' => 'Sledzik',
+    'description' => t('Add to Sledzik'),
+    'link' => 'http://nasza-klasa.pl/sledzik?shout=<raw-encoded-short-url>%20--%20<raw-encoded-title>',
+  );
+
+  return $links;
+}
