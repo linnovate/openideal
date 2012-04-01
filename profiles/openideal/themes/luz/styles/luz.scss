@@ -299,6 +299,36 @@
     }  
   }
 }
+// tabs on user pages 
+.section-user #main {
+  ul.primary{
+    margin: 5px 0 0;
+    border: none;
+  }
+  li {
+    border: 1px solid #ddd;
+    border-bottom: none;
+    padding: 7px;
+    border-radius: 5px 5px 0 0;
+    display: inline-block;
+    margin: 0;
+    a {
+      border: none;
+      background: none;
+    }
+
+    &.active {
+      border-bottom: 1px solid white;
+      margin-bottom: -1px;
+    }
+  }
+  #block-system-main{
+    padding: 5px 5px 0;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    margin: 0;
+  }
+}
 
 // Idea(s)
 .field-name-field-category {
