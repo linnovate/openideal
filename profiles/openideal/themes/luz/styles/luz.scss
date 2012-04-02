@@ -303,9 +303,9 @@
 .section-user #main {
   ul.primary{
     margin: 5px 0 0;
-    border: none;
-  }
-  li {
+    border-bottom: 1px solid #ddd;
+    width: 100%;
+     li {
     border: 1px solid #ddd;
     border-bottom: none;
     padding: 7px;
@@ -326,11 +326,29 @@
       margin-bottom: -1px;
     }
   }
-  #block-system-main{
-    padding: 5px 5px 0;
-    border-radius: 5px;
-    border: 1px solid #ddd;
-    margin: 0;
+  }
+  ul.secondary {
+    border-bottom: none;
+    margin: 10px 0;
+    padding: 0.5em 1em;
+    li{
+      border: none; 
+      .active {
+        border: none;
+      }
+    }
+
+    .active > a {
+      background-color: #0088CC;
+      color: #FFFFFF;
+      border-radius: 5px 5px 5px 5px;
+      margin-bottom: 2px;
+      margin-top: 2px;
+      padding: 8px;
+      &:hover{
+        text-decoration: none;
+      }
+    }
   }
 }
 
@@ -411,6 +429,19 @@ article #comments {
   margin-right: 10px;
 }
 
-/*         Forms
- *************************************************/
+//*         Forms
+// *************************************************/
+
+
+//*         Table
+// *************************************************/
+
+td.active {
+  background-color: #FFFFFF;
+}
+th.active img {
+    display: inline;
+    padding: 0 10px;
+}
+
 
