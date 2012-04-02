@@ -9,10 +9,55 @@
  */
 function fe_merge_default_rules_configuration() {
   $items = array();
+  $items['rules_close_commnting_hide_voting_widget_on_merge'] = entity_import('rules_config', '{ "rules_close_commnting_hide_voting_widget_on_merge" : {
+      "LABEL" : "Close Commnting \\u0026 hide Voting widget on merge",
+      "PLUGIN" : "reaction rule",
+      "REQUIRES" : [ "flag", "rules" ],
+      "ON" : [ "node_view" ],
+      "IF" : [
+        { "NOT flag_threshold_node" : {
+            "flag" : "merged_idea",
+            "node" : [ "node" ],
+            "number" : "1",
+            "operator" : "\\u003C"
+          }
+        }
+      ],
+      "DO" : [ { "component_rules_node_hide_voting" : { "node" : [ "node" ] } } ]
+    }
+  }');
+  $items['rules_merged_to_merged_ideas'] = entity_import('rules_config', '{ "rules_merged_to_merged_ideas" : {
+      "LABEL" : "Merged to merged ideas",
+      "PLUGIN" : "reaction rule",
+      "TAGS" : [ "Merged Idea" ],
+      "REQUIRES" : [ "rules", "flag" ],
+      "ON" : [ "flag_flagged_merged_idea" ],
+      "DO" : [
+        { "entity_query" : {
+            "USING" : {
+              "type" : "node",
+              "property" : "field_merge_to",
+              "value" : [ "flagged-node" ],
+              "limit" : [ "" ]
+            },
+            "PROVIDE" : { "entity_fetched" : { "merged_ideas" : "Merged Ideas" } }
+          }
+        },
+        { "LOOP" : {
+            "USING" : { "list" : [ "merged-ideas" ] },
+            "ITEM" : { "merged_idea" : "Current merged idea" },
+            "DO" : [
+              { "component_rules_merged_to_merged_to" : { "node" : [ "merged-idea" ] } }
+            ]
+          }
+        }
+      ]
+    }
+  }');
   $items['rules_merged_to_merged_to'] = entity_import('rules_config', '{ "rules_merged_to_merged_to" : {
       "LABEL" : "merged to merged to",
       "PLUGIN" : "rule",
-      "REQUIRES" : [ "rules" ],
+      "REQUIRES" : [ "rules", "php" ],
       "USES VARIABLES" : { "node" : { "label" : "Node", "type" : "node" } },
       "IF" : [
         { "node_is_of_type" : { "node" : [ "node" ], "type" : { "value" : { "idea" : "idea" } } } },
@@ -23,57 +68,33 @@ function fe_merge_default_rules_configuration() {
         }
       ],
       "DO" : [
-        { "data_set" : {
-            "data" : [ "node:field-merge-to" ],
-            "value" : [ "node:field-merge-to:field-merge-to" ]
-          }
-        }
+        { "php_eval" : { "code" : "\\/\\/ Set reference to the referenced - reference.\\r\\n$wrp = entity_metadata_wrapper(\\u0027node\\u0027, $node);\\r\\n$wrp-\\u003Efield_merge_to-\\u003Eset($wrp-\\u003Efield_merge_to-\\u003Efield_merge_to-\\u003Evalue());\\r\\n$wrp-\\u003Esave();" } }
       ]
     }
   }');
-  $items['rules_repoint_merged_ideas'] = entity_import('rules_config', '{ "rules_repoint_merged_ideas" : {
-      "LABEL" : "Repoint merged ideas",
-      "PLUGIN" : "reaction rule",
-      "REQUIRES" : [ "views_bulk_operations", "rules", "flag" ],
-      "ON" : [ "flag_flagged_merged_idea" ],
-      "IF" : [
-        { "views_bulk_operations_condition_result_count" : {
-            "view" : "idea_merged_ideas|default",
-            "args" : [ "flagged-node:nid" ],
-            "minimum" : "1"
-          }
-        },
-        { "node_is_of_type" : {
-            "node" : [ "flagged-node" ],
-            "type" : { "value" : { "idea" : "idea" } }
-          }
-        }
-      ],
-      "DO" : [
-        { "views_bulk_operations_action_load_list" : {
-            "USING" : { "view" : "idea_merged_ideas|default", "args" : [ "flagged-node:nid" ] },
-            "PROVIDE" : { "entity_list" : { "merged_ideas_list" : "A list of merged ideas" } }
-          }
-        },
-        { "LOOP" : {
-            "USING" : { "list" : [ "merged_ideas_list" ] },
-            "ITEM" : { "list_item" : "Current list item" },
-            "DO" : [
-              { "component_rules_merged_to_merged_to" : { "node" : [ "list-item" ] } }
-            ]
-          }
-        }
+  $items['rules_node_hide_voting'] = entity_import('rules_config', '{ "rules_node_hide_voting" : {
+      "LABEL" : "Node Hide Voting",
+      "PLUGIN" : "action set",
+      "REQUIRES" : [ "php", "rules" ],
+      "USES VARIABLES" : { "node" : { "label" : "Node", "type" : "node" } },
+      "ACTION SET" : [
+        { "php_eval" : { "code" : "\\/\\/ Remove the voting widget;\\r\\n$node-\\u003Efield_vote = NULL;\\r\\nnode_save($node);" } }
       ]
     }
   }');
   $items['rules_set_as_merged_idea'] = entity_import('rules_config', '{ "rules_set_as_merged_idea" : {
       "LABEL" : "Set as merged idea",
       "PLUGIN" : "reaction rule",
+      "TAGS" : [ "Merged Idea" ],
       "REQUIRES" : [ "rules", "flag" ],
       "ON" : [ "node_presave" ],
       "IF" : [
         { "node_is_of_type" : { "node" : [ "node" ], "type" : { "value" : { "idea" : "idea" } } } },
-        { "data_is_empty" : { "data" : [ "node-unchanged:field-merge-to" ] } },
+        { "NOT data_is" : {
+            "data" : [ "node-unchanged:field-merge-to" ],
+            "value" : [ "node:field-merge-to" ]
+          }
+        },
         { "NOT data_is_empty" : { "data" : [ "node:field-merge-to" ] } }
       ],
       "DO" : [

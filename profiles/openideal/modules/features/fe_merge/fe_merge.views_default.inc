@@ -53,6 +53,7 @@ function fe_merge_views_default_views() {
   $handler->display->display_options['fields']['views_bulk_operations']['id'] = 'views_bulk_operations';
   $handler->display->display_options['fields']['views_bulk_operations']['table'] = 'node';
   $handler->display->display_options['fields']['views_bulk_operations']['field'] = 'views_bulk_operations';
+  $handler->display->display_options['fields']['views_bulk_operations']['relationship'] = 'reverse_field_merge_to_node';
   $handler->display->display_options['fields']['views_bulk_operations']['alter']['alter_text'] = 0;
   $handler->display->display_options['fields']['views_bulk_operations']['alter']['make_link'] = 0;
   $handler->display->display_options['fields']['views_bulk_operations']['alter']['absolute'] = 0;
@@ -244,6 +245,7 @@ function fe_merge_views_default_views() {
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'node';
   $handler->display->display_options['fields']['title']['field'] = 'title';
+  $handler->display->display_options['fields']['title']['relationship'] = 'reverse_field_merge_to_node';
   $handler->display->display_options['fields']['title']['label'] = '';
   $handler->display->display_options['fields']['title']['alter']['alter_text'] = 0;
   $handler->display->display_options['fields']['title']['alter']['make_link'] = 0;
@@ -287,7 +289,6 @@ function fe_merge_views_default_views() {
   $handler->display->display_options['filters']['status']['value'] = 1;
   $handler->display->display_options['filters']['status']['group'] = 1;
   $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
-
   $export['idea_merged_ideas'] = $view;
 
   return $export;
