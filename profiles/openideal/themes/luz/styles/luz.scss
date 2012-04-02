@@ -305,7 +305,7 @@
     margin: 5px 0 0;
     border-bottom: 1px solid #ddd;
     width: 100%;
-     li {
+    li {
     border: 1px solid #ddd;
     border-bottom: none;
     padding: 7px;
@@ -325,7 +325,7 @@
       border-bottom: 1px solid white;
       margin-bottom: -1px;
     }
-  }
+    }
   }
   ul.secondary {
     border-bottom: none;
@@ -333,11 +333,10 @@
     padding: 0.5em 1em;
     li{
       border: none; 
-      .active {
-        border: none;
-      }
+    } 
+    .active {
+      border: none;
     }
-
     .active > a {
       background-color: #0088CC;
       color: #FFFFFF;
