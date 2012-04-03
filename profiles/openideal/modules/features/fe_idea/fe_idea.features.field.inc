@@ -51,7 +51,7 @@ function fe_idea_field_default_fields() {
           'module' => 'text',
           'settings' => array(),
           'type' => 'text_default',
-          'weight' => '1',
+          'weight' => '2',
         ),
         'teaser' => array(
           'label' => 'hidden',
@@ -119,13 +119,13 @@ function fe_idea_field_default_fields() {
             'type' => 'none',
           ),
           'type' => 'radioactivity_combo_formatter',
-          'weight' => 6,
+          'weight' => '6',
         ),
         'teaser' => array(
           'label' => 'above',
           'settings' => array(),
           'type' => 'hidden',
-          'weight' => 0,
+          'weight' => '7',
         ),
       ),
       'entity_type' => 'node',
@@ -180,13 +180,13 @@ function fe_idea_field_default_fields() {
             'type' => 'none',
           ),
           'type' => 'radioactivity_combo_formatter',
-          'weight' => 7,
+          'weight' => '7',
         ),
         'teaser' => array(
           'label' => 'above',
           'settings' => array(),
           'type' => 'hidden',
-          'weight' => 0,
+          'weight' => '6',
         ),
       ),
       'entity_type' => 'node',
@@ -252,7 +252,7 @@ function fe_idea_field_default_fields() {
           'module' => 'taxonomy',
           'settings' => array(),
           'type' => 'taxonomy_term_reference_link',
-          'weight' => '2',
+          'weight' => '3',
         ),
         'teaser' => array(
           'label' => 'hidden',
@@ -337,7 +337,7 @@ function fe_idea_field_default_fields() {
             'link' => 1,
           ),
           'type' => 'entityreference_label',
-          'weight' => '6',
+          'weight' => '4',
         ),
       ),
       'entity_type' => 'node',
@@ -391,13 +391,13 @@ function fe_idea_field_default_fields() {
             'type' => 'none',
           ),
           'type' => 'radioactivity_combo_formatter',
-          'weight' => 8,
+          'weight' => '8',
         ),
         'teaser' => array(
           'label' => 'above',
           'settings' => array(),
           'type' => 'hidden',
-          'weight' => 0,
+          'weight' => '5',
         ),
       ),
       'entity_type' => 'node',
@@ -485,59 +485,6 @@ function fe_idea_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-idea-field_is_useful'
-  $fields['node-idea-field_is_useful'] = array(
-    'field_config' => array(
-      'active' => '1',
-      'cardinality' => '1',
-      'deleted' => '0',
-      'entity_types' => array(),
-      'field_name' => 'field_is_useful',
-      'foreign keys' => array(),
-      'indexes' => array(),
-      'module' => 'is_useful',
-      'settings' => array(
-        'axis' => '0',
-      ),
-      'translatable' => '0',
-      'type' => 'is_useful',
-    ),
-    'field_instance' => array(
-      'bundle' => 'idea',
-      'default_value' => NULL,
-      'deleted' => '0',
-      'description' => '',
-      'display' => array(
-        'default' => array(
-          'label' => 'above',
-          'module' => 'is_useful',
-          'settings' => array(),
-          'type' => 'is_useful_formatter_default',
-          'weight' => 10,
-        ),
-        'teaser' => array(
-          'label' => 'above',
-          'settings' => array(),
-          'type' => 'hidden',
-          'weight' => 0,
-        ),
-      ),
-      'entity_type' => 'node',
-      'field_name' => 'field_is_useful',
-      'label' => 'Is Useful',
-      'required' => FALSE,
-      'settings' => array(
-        'user_register_form' => FALSE,
-      ),
-      'widget' => array(
-        'module' => 'is_useful',
-        'settings' => array(),
-        'type' => 'is_useful_exposed',
-        'weight' => '12',
-      ),
-    ),
-  );
-
   // Exported field: 'node-idea-field_merge_to'
   $fields['node-idea-field_merge_to'] = array(
     'field_config' => array(
@@ -587,12 +534,17 @@ function fe_idea_field_default_fields() {
           ),
           'type' => 'entityreference_label',
           'weight' => 9,
+          'label' => 'hidden',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => '9',
         ),
         'teaser' => array(
-          'label' => 'above',
+          'label' => 'hidden',
           'settings' => array(),
           'type' => 'hidden',
           'weight' => 0,
+          'weight' => '9',
         ),
       ),
       'entity_type' => 'node',
@@ -651,7 +603,7 @@ function fe_idea_field_default_fields() {
           'module' => 'vud_field',
           'settings' => array(),
           'type' => 'default',
-          'weight' => '0',
+          'weight' => '1',
         ),
         'teaser' => array(
           'label' => 'hidden',
