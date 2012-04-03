@@ -9,58 +9,8 @@
  */
 function fe_user_default_rules_configuration() {
   $items = array();
-  $items['rules_a_class_user'] = entity_import('rules_config', '{ "rules_a_class_user" : {
-      "LABEL" : "A Class User",
-      "PLUGIN" : "reaction rule",
-      "TAGS" : [ "User" ],
-      "REQUIRES" : [ "rules", "flag", "userpoints_rules" ],
-      "ON" : [ "userpoints_event_points_awarded_after" ],
-      "IF" : [
-        { "data_is" : {
-            "data" : [ "userpoints-transaction:points" ],
-            "op" : "\\u003E",
-            "value" : "5000"
-          }
-        }
-      ],
-      "DO" : [
-        { "flag_flaguser" : {
-            "flag" : "a_class_user",
-            "user" : [ "userpoints-transaction:user" ],
-            "flagging_user" : "1",
-            "permission_check" : 0
-          }
-        }
-      ]
-    }
-  }');
-  $items['rules_b_class_user'] = entity_import('rules_config', '{ "rules_b_class_user" : {
-      "LABEL" : "B Class User",
-      "PLUGIN" : "reaction rule",
-      "TAGS" : [ "User" ],
-      "REQUIRES" : [ "rules", "flag", "userpoints_rules" ],
-      "ON" : [ "userpoints_event_points_awarded_after" ],
-      "IF" : [
-        { "data_is" : {
-            "data" : [ "userpoints-transaction:points" ],
-            "op" : "\\u003E",
-            "value" : "2000"
-          }
-        }
-      ],
-      "DO" : [
-        { "flag_flaguser" : {
-            "flag" : "b_class_user",
-            "user" : [ "userpoints-transaction:user" ],
-            "flagging_user" : "1",
-            "permission_check" : 0
-          }
-        }
-      ]
-    }
-  }');
-  $items['rules_c_class_user'] = entity_import('rules_config', '{ "rules_c_class_user" : {
-      "LABEL" : "C Class User",
+  $items['rules_bronze_user'] = entity_import('rules_config', '{ "rules_bronze_user" : {
+      "LABEL" : "Bronze User",
       "PLUGIN" : "reaction rule",
       "TAGS" : [ "User" ],
       "REQUIRES" : [ "rules", "flag", "userpoints_rules" ],
@@ -75,7 +25,32 @@ function fe_user_default_rules_configuration() {
       ],
       "DO" : [
         { "flag_flaguser" : {
-            "flag" : "c_class_user",
+            "flag" : "bronze_user",
+            "user" : [ "userpoints-transaction:user" ],
+            "flagging_user" : "1",
+            "permission_check" : 0
+          }
+        }
+      ]
+    }
+  }');
+  $items['rules_gold_user'] = entity_import('rules_config', '{ "rules_gold_user" : {
+      "LABEL" : "Gold User",
+      "PLUGIN" : "reaction rule",
+      "TAGS" : [ "User" ],
+      "REQUIRES" : [ "rules", "flag", "userpoints_rules" ],
+      "ON" : [ "userpoints_event_points_awarded_after" ],
+      "IF" : [
+        { "data_is" : {
+            "data" : [ "userpoints-transaction:points" ],
+            "op" : "\\u003E",
+            "value" : "5000"
+          }
+        }
+      ],
+      "DO" : [
+        { "flag_flaguser" : {
+            "flag" : "gold_user",
             "user" : [ "userpoints-transaction:user" ],
             "flagging_user" : "1",
             "permission_check" : 0
@@ -119,7 +94,30 @@ function fe_user_default_rules_configuration() {
             "uid_target" : "0",
             "message_id" : { "value" : { "oi_add_comment" : "oi_add_comment" } },
             "!username" : "[comment:author:link]",
-            "!node_title" : "[comment:node:link]",
+            "!node_title" : "[comment:node:link]"
+          }
+        }
+      ]
+    }
+  }');
+  $items['rules_oi_log_activity_when_a_node_is_commented_by_other'] = entity_import('rules_config', '{ "rules_oi_log_activity_when_a_node_is_commented_by_other" : {
+      "LABEL" : "OI Log activity when a node is commented by other",
+      "PLUGIN" : "reaction rule",
+      "TAGS" : [ "Heartbeat" ],
+      "REQUIRES" : [ "rules", "heartbeat_rules", "comment" ],
+      "ON" : [ "comment_update", "comment_insert" ],
+      "IF" : [
+        { "NOT data_is" : { "data" : [ "comment:node:author" ], "value" : [ "comment:author" ] } }
+      ],
+      "DO" : [
+        { "heartbeat_activity_oi_comment_on_my_content" : {
+            "nid" : "[comment:node:nid]",
+            "uid" : "[comment:author:uid]",
+            "nid_target" : "0",
+            "uid_target" : "0",
+            "message_id" : { "value" : { "oi_comment_on_my_content" : "oi_comment_on_my_content" } },
+            "!otherusername" : "[comment:author:link]",
+            "!node_title" : "[comment:node:link]"
           }
         }
       ]
@@ -169,24 +167,26 @@ function fe_user_default_rules_configuration() {
       ]
     }
   }');
-  $items['rules_oi_log_activity_when_a_node_is_commented_by_other'] = entity_import('rules_config', '{ "rules_oi_log_activity_when_a_node_is_commented_by_other" : {
-      "LABEL" : "OI Log activity when a node is commented by other",
+  $items['rules_silver_user'] = entity_import('rules_config', '{ "rules_silver_user" : {
+      "LABEL" : "Silver User",
       "PLUGIN" : "reaction rule",
-      "TAGS" : [ "Heartbeat" ],
-      "REQUIRES" : [ "rules", "heartbeat_rules", "comment" ],
-      "ON" : [ "comment_update", "comment_insert" ],
+      "TAGS" : [ "User" ],
+      "REQUIRES" : [ "rules", "flag", "userpoints_rules" ],
+      "ON" : [ "userpoints_event_points_awarded_after" ],
       "IF" : [
-        { "NOT data_is" : { "data" : [ "comment:node:author" ], "value" : [ "comment:author" ] } }
+        { "data_is" : {
+            "data" : [ "userpoints-transaction:points" ],
+            "op" : "\\u003E",
+            "value" : "2000"
+          }
+        }
       ],
       "DO" : [
-        { "heartbeat_activity_oi_comment_on_my_content" : {
-            "nid" : "[comment:node:nid]",
-            "uid" : "[comment:author:uid]",
-            "nid_target" : "0",
-            "uid_target" : "0",
-            "message_id" : { "value" : { "oi_comment_on_my_content" : "oi_comment_on_my_content" } },
-            "!otherusername" : "[comment:author:link]",
-            "!node_title" : "[comment:node:link]"
+        { "flag_flaguser" : {
+            "flag" : "silver_user",
+            "user" : [ "userpoints-transaction:user" ],
+            "flagging_user" : "1",
+            "permission_check" : 0
           }
         }
       ]

@@ -41,16 +41,16 @@ function fe_user_views_api() {
  */
 function fe_user_flag_default_flags() {
   $flags = array();
-  // Exported flag: "A Class User".
-  $flags['a_class_user'] = array(
+  // Exported flag: "Bronze User".
+  $flags['bronze_user'] = array(
     'content_type' => 'user',
-    'title' => 'A Class User',
+    'title' => 'Bronze User',
     'global' => '1',
     'types' => array(),
-    'flag_short' => 'flag as A class user',
+    'flag_short' => 'flag as Bronze user',
     'flag_long' => '',
     'flag_message' => '',
-    'unflag_short' => 'unflag as A class user',
+    'unflag_short' => 'unflag as Bronze user',
     'unflag_long' => '',
     'unflag_message' => '',
     'unflag_denied_text' => '',
@@ -73,16 +73,16 @@ function fe_user_flag_default_flags() {
     ),
     'api_version' => 2,
   );
-  // Exported flag: "B Class User".
-  $flags['b_class_user'] = array(
+  // Exported flag: "Gold User".
+  $flags['gold_user'] = array(
     'content_type' => 'user',
-    'title' => 'B Class User',
+    'title' => 'Gold User',
     'global' => '1',
     'types' => array(),
-    'flag_short' => 'flag as B class user',
+    'flag_short' => 'flag as Gold user',
     'flag_long' => '',
     'flag_message' => '',
-    'unflag_short' => 'unflag as B class user',
+    'unflag_short' => 'unflag as Gold user',
     'unflag_long' => '',
     'unflag_message' => '',
     'unflag_denied_text' => '',
@@ -105,16 +105,16 @@ function fe_user_flag_default_flags() {
     ),
     'api_version' => 2,
   );
-  // Exported flag: "C Class User".
-  $flags['c_class_user'] = array(
+  // Exported flag: "Silver User".
+  $flags['silver_user'] = array(
     'content_type' => 'user',
-    'title' => 'C Class User',
+    'title' => 'Silver User',
     'global' => '1',
     'types' => array(),
-    'flag_short' => 'flag as C class user',
+    'flag_short' => 'flag as Silver user',
     'flag_long' => '',
     'flag_message' => '',
-    'unflag_short' => 'unflag as C class user',
+    'unflag_short' => 'unflag as Silver user',
     'unflag_long' => '',
     'unflag_message' => '',
     'unflag_denied_text' => '',
