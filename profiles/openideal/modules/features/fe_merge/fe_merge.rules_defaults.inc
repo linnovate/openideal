@@ -82,6 +82,58 @@ function fe_merge_default_rules_configuration() {
       ]
     }
   }');
+  $items['rules_pass_radioactivity_to_master_idea'] = entity_import('rules_config', '{ "rules_pass_radioactivity_to_master_idea" : {
+      "LABEL" : "Pass Radioactivity to Master idea",
+      "PLUGIN" : "reaction rule",
+      "TAGS" : [ "Merged Idea" ],
+      "REQUIRES" : [ "rules", "radioactivity", "flag" ],
+      "ON" : [ "flag_flagged_merged_idea" ],
+      "IF" : [
+        { "node_is_of_type" : {
+            "node" : [ "flagged-node" ],
+            "type" : { "value" : { "idea" : "idea" } }
+          }
+        },
+        { "node_is_of_type" : {
+            "node" : [ "flagged-node:field-merge-to" ],
+            "type" : { "value" : { "idea" : "idea" } }
+          }
+        }
+      ],
+      "DO" : [
+        { "radioactivity_maximum" : {
+            "USING" : { "data" : [ "flagged-node:field-blast-idea" ] },
+            "PROVIDE" : { "maximum_energy" : { "blast_energy" : "Blast Energy" } }
+          }
+        },
+        { "radioactivity_maximum" : {
+            "USING" : { "data" : [ "flagged-node:field-buzz-idea" ] },
+            "PROVIDE" : { "maximum_energy" : { "buzz_energy" : "Buzz Energy" } }
+          }
+        },
+        { "radioactivity_maximum" : {
+            "USING" : { "data" : [ "flagged-node:field-groove-idea" ] },
+            "PROVIDE" : { "maximum_energy" : { "groove_energy" : "Groove Energy" } }
+          }
+        },
+        { "radioactivity_emit" : {
+            "data" : [ "flagged-node:field-merge-to:field-blast-idea" ],
+            "value" : [ "blast-energy" ]
+          }
+        },
+        { "radioactivity_emit" : {
+            "data" : [ "flagged-node:field-merge-to:field-buzz-idea" ],
+            "value" : [ "buzz-energy" ]
+          }
+        },
+        { "radioactivity_set" : {
+            "data" : [ "flagged-node:field-merge-to:field-groove-idea" ],
+            "value" : [ "groove-energy" ]
+          }
+        }
+      ]
+    }
+  }');
   $items['rules_set_as_merged_idea'] = entity_import('rules_config', '{ "rules_set_as_merged_idea" : {
       "LABEL" : "Set as merged idea",
       "PLUGIN" : "reaction rule",

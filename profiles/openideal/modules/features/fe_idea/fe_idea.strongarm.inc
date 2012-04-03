@@ -174,7 +174,6 @@ function fe_idea_strongarm() {
     'challenge' => 0,
     'faq' => 0,
     'news' => 0,
-    'project' => 0,
     'webform' => 0,
   );
   $export['service_links_node_types'] = $strongarm;

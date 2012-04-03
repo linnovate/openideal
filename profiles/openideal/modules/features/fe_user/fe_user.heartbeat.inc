@@ -10,7 +10,7 @@
 function fe_user_heartbeat_template_info() {
   $export = array();
 
-  $heartbeatmessagetemplate = new HeartbeatMessageTemplate;
+  $heartbeatmessagetemplate = new HeartbeatMessageTemplate();
   $heartbeatmessagetemplate->disabled = FALSE; /* Edit this to true to make a default heartbeatmessagetemplate disabled initially */
   $heartbeatmessagetemplate->api_version = 1;
   $heartbeatmessagetemplate->message_id = 'oi_add_comment';
@@ -34,7 +34,7 @@ function fe_user_heartbeat_template_info() {
   $heartbeatmessagetemplate->attachments = array();
   $export['oi_add_comment'] = $heartbeatmessagetemplate;
 
-  $heartbeatmessagetemplate = new HeartbeatMessageTemplate;
+  $heartbeatmessagetemplate = new HeartbeatMessageTemplate();
   $heartbeatmessagetemplate->disabled = FALSE; /* Edit this to true to make a default heartbeatmessagetemplate disabled initially */
   $heartbeatmessagetemplate->api_version = 1;
   $heartbeatmessagetemplate->message_id = 'oi_add_node';
@@ -59,7 +59,7 @@ function fe_user_heartbeat_template_info() {
   $heartbeatmessagetemplate->attachments = array();
   $export['oi_add_node'] = $heartbeatmessagetemplate;
 
-  $heartbeatmessagetemplate = new HeartbeatMessageTemplate;
+  $heartbeatmessagetemplate = new HeartbeatMessageTemplate();
   $heartbeatmessagetemplate->disabled = FALSE; /* Edit this to true to make a default heartbeatmessagetemplate disabled initially */
   $heartbeatmessagetemplate->api_version = 1;
   $heartbeatmessagetemplate->message_id = 'oi_comment_on_my_content';
@@ -83,7 +83,7 @@ function fe_user_heartbeat_template_info() {
   $heartbeatmessagetemplate->attachments = array();
   $export['oi_comment_on_my_content'] = $heartbeatmessagetemplate;
 
-  $heartbeatmessagetemplate = new HeartbeatMessageTemplate;
+  $heartbeatmessagetemplate = new HeartbeatMessageTemplate();
   $heartbeatmessagetemplate->disabled = FALSE; /* Edit this to true to make a default heartbeatmessagetemplate disabled initially */
   $heartbeatmessagetemplate->api_version = 1;
   $heartbeatmessagetemplate->message_id = 'oi_vote_on_my_content';
@@ -107,7 +107,7 @@ function fe_user_heartbeat_template_info() {
   $heartbeatmessagetemplate->attachments = array();
   $export['oi_vote_on_my_content'] = $heartbeatmessagetemplate;
 
-  $heartbeatmessagetemplate = new HeartbeatMessageTemplate;
+  $heartbeatmessagetemplate = new HeartbeatMessageTemplate();
   $heartbeatmessagetemplate->disabled = FALSE; /* Edit this to true to make a default heartbeatmessagetemplate disabled initially */
   $heartbeatmessagetemplate->api_version = 1;
   $heartbeatmessagetemplate->message_id = 'oi_vote_on_node';
@@ -141,7 +141,7 @@ function fe_user_heartbeat_template_info() {
 function fe_user_heartbeat_stream_info() {
   $export = array();
 
-  $heartbeatstream = new HeartbeatStreamConfig;
+  $heartbeatstream = new HeartbeatStreamConfig();
   $heartbeatstream->disabled = FALSE; /* Edit this to true to make a default heartbeatstream disabled initially */
   $heartbeatstream->api_version = 1;
   $heartbeatstream->class = 'userpage_activity';

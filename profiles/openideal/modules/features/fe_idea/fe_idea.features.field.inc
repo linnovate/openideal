@@ -141,7 +141,7 @@ function fe_idea_field_default_fields() {
         'module' => 'radioactivity',
         'settings' => array(),
         'type' => 'radioactivity_basic_widget',
-        'weight' => '11',
+        'weight' => '9',
       ),
     ),
   );
@@ -202,7 +202,7 @@ function fe_idea_field_default_fields() {
         'module' => 'radioactivity',
         'settings' => array(),
         'type' => 'radioactivity_basic_widget',
-        'weight' => '12',
+        'weight' => '10',
       ),
     ),
   );
@@ -352,7 +352,7 @@ function fe_idea_field_default_fields() {
         'module' => 'options',
         'settings' => array(),
         'type' => 'options_select',
-        'weight' => '6',
+        'weight' => '7',
       ),
     ),
   );
@@ -413,7 +413,7 @@ function fe_idea_field_default_fields() {
         'module' => 'radioactivity',
         'settings' => array(),
         'type' => 'radioactivity_basic_widget',
-        'weight' => '13',
+        'weight' => '11',
       ),
     ),
   );
@@ -485,14 +485,67 @@ function fe_idea_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-idea-field_project_ref'
-  $fields['node-idea-field_project_ref'] = array(
+  // Exported field: 'node-idea-field_is_useful'
+  $fields['node-idea-field_is_useful'] = array(
     'field_config' => array(
       'active' => '1',
       'cardinality' => '1',
       'deleted' => '0',
       'entity_types' => array(),
-      'field_name' => 'field_project_ref',
+      'field_name' => 'field_is_useful',
+      'foreign keys' => array(),
+      'indexes' => array(),
+      'module' => 'is_useful',
+      'settings' => array(
+        'axis' => '0',
+      ),
+      'translatable' => '0',
+      'type' => 'is_useful',
+    ),
+    'field_instance' => array(
+      'bundle' => 'idea',
+      'default_value' => NULL,
+      'deleted' => '0',
+      'description' => '',
+      'display' => array(
+        'default' => array(
+          'label' => 'above',
+          'module' => 'is_useful',
+          'settings' => array(),
+          'type' => 'is_useful_formatter_default',
+          'weight' => 10,
+        ),
+        'teaser' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+      ),
+      'entity_type' => 'node',
+      'field_name' => 'field_is_useful',
+      'label' => 'Is Useful',
+      'required' => FALSE,
+      'settings' => array(
+        'user_register_form' => FALSE,
+      ),
+      'widget' => array(
+        'module' => 'is_useful',
+        'settings' => array(),
+        'type' => 'is_useful_exposed',
+        'weight' => '12',
+      ),
+    ),
+  );
+
+  // Exported field: 'node-idea-field_merge_to'
+  $fields['node-idea-field_merge_to'] = array(
+    'field_config' => array(
+      'active' => '1',
+      'cardinality' => '1',
+      'deleted' => '0',
+      'entity_types' => array(),
+      'field_name' => 'field_merge_to',
       'foreign keys' => array(),
       'indexes' => array(
         'target_entity' => array(
@@ -511,11 +564,10 @@ function fe_idea_field_default_fields() {
             'type' => 'none',
           ),
           'target_bundles' => array(
-            'project' => 'project',
+            'idea' => 'idea',
           ),
         ),
         'handler_submit' => 'Change handler',
-        'profile2_private' => FALSE,
         'target_type' => 'node',
       ),
       'translatable' => '0',
@@ -531,21 +583,21 @@ function fe_idea_field_default_fields() {
           'label' => 'above',
           'module' => 'entityreference',
           'settings' => array(
-            'view_mode' => 'teaser',
+            'link' => FALSE,
           ),
-          'type' => 'entityreference_entity_view',
-          'weight' => '-2',
+          'type' => 'entityreference_label',
+          'weight' => 9,
         ),
         'teaser' => array(
           'label' => 'above',
           'settings' => array(),
           'type' => 'hidden',
-          'weight' => '4',
+          'weight' => 0,
         ),
       ),
       'entity_type' => 'node',
-      'field_name' => 'field_project_ref',
-      'label' => 'Is Part Of A Project',
+      'field_name' => 'field_merge_to',
+      'label' => 'Merge to',
       'required' => 0,
       'settings' => array(
         'user_register_form' => FALSE,
@@ -559,7 +611,7 @@ function fe_idea_field_default_fields() {
           'size' => '60',
         ),
         'type' => 'entityreference_autocomplete',
-        'weight' => '5',
+        'weight' => '6',
       ),
     ),
   );
@@ -623,7 +675,7 @@ function fe_idea_field_default_fields() {
         'module' => 'vud_field',
         'settings' => array(),
         'type' => 'vud_field_default_widget',
-        'weight' => '0',
+        'weight' => '1',
       ),
     ),
   );
@@ -636,7 +688,7 @@ function fe_idea_field_default_fields() {
   t('Groove Idea');
   t('In Action');
   t('Is Part Of A Challenge');
-  t('Is Part Of A Project');
+  t('Merge to');
   t('Please share you idea.');
   t('Vote');
   t('Your Idea');

@@ -10,7 +10,7 @@
 function fe_user_context_default_contexts() {
   $export = array();
 
-  $context = new stdClass;
+  $context = new stdClass();
   $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
   $context->api_version = 3;
   $context->name = 'front_users';
@@ -43,7 +43,7 @@ function fe_user_context_default_contexts() {
   t('The front page - user blocks');
   $export['front_users'] = $context;
 
-  $context = new stdClass;
+  $context = new stdClass();
   $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
   $context->api_version = 3;
   $context->name = 'user_page';

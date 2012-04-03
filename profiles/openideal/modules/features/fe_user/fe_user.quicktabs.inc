@@ -10,7 +10,7 @@
 function fe_user_quicktabs_default_quicktabs() {
   $export = array();
 
-  $quicktabs = new stdClass;
+  $quicktabs = new stdClass();
   $quicktabs->disabled = FALSE; /* Edit this to true to make a default quicktabs disabled initially */
   $quicktabs->api_version = 1;
   $quicktabs->machine_name = 'activity';
@@ -38,7 +38,7 @@ function fe_user_quicktabs_default_quicktabs() {
 
   $export['activity'] = $quicktabs;
 
-  $quicktabs = new stdClass;
+  $quicktabs = new stdClass();
   $quicktabs->disabled = FALSE; /* Edit this to true to make a default quicktabs disabled initially */
   $quicktabs->api_version = 1;
   $quicktabs->machine_name = 'user_ideas';

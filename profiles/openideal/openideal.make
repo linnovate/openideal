@@ -14,11 +14,11 @@ projects[context][subdir]                                      = contrib
 projects[contextphp][version]                                  = 7.x-1.x-dev
 projects[contextphp][subdir]                                   = contrib
 
-projects[ctools][version]                                      = 7.x-1.0-rc2
-projects[ctools][subdir]                                       = contrib
-
 projects[ctools][version]                                      = 7.x-2.1
 projects[ctools][subdir]                                       = contrib
+
+projects[date][version]                                        = 7.x-2.3
+projects[date][subdir]                                         = contrib
 
 projects[defaultcontent][version]                              = 7.x-1.0-alpha5
 projects[defaultcontent][subdir]                               = contrib

@@ -105,27 +105,6 @@ function fe_user_default_rules_configuration() {
       ]
     }
   }');
-  $items['rules_oi_log_activity_for_a_new_node_being_published'] = entity_import('rules_config', '{ "rules_oi_log_activity_for_a_new_node_being_published" : {
-      "LABEL" : "OI Log activity for a new node being published",
-      "PLUGIN" : "reaction rule",
-      "REQUIRES" : [ "rules", "heartbeat_rules" ],
-      "ON" : [ "node_insert" ],
-      "IF" : [ { "node_is_published" : { "node" : [ "node" ] } } ],
-      "DO" : [
-        { "heartbeat_activity_oi_add_node" : {
-            "nid" : "[node:nid]",
-            "uid" : "[node:author:uid]",
-            "nid_target" : "0",
-            "uid_target" : "0",
-            "message_id" : { "value" : { "oi_add_node" : "oi_add_node" } },
-            "!username" : "[node:author:link]",
-            "!node_title" : "[node:link]",
-            "!types" : "[node:type]s"
-          }
-        }
-      ]
-    }
-  }');
   $items['rules_oi_log_activity_when_a_node_is_commented'] = entity_import('rules_config', '{ "rules_oi_log_activity_when_a_node_is_commented" : {
       "LABEL" : "OI Log activity when a node is commented",
       "PLUGIN" : "reaction rule",
