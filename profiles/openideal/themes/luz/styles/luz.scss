@@ -303,7 +303,10 @@
   }
 }
 // Tabs on user pages 
-.section-user #main {
+.section-user {
+  .field-label{
+    color: #333333;
+  }
   ul.primary{
     margin: 5px 0 0;
     border-bottom: 1px solid #ddd;
@@ -319,6 +322,8 @@
       border: none;
       background: none;
       color: #000000;
+      padding: 0 2px;
+      margin:0;
       &:hover{
         text-decoration: underline;
       }
@@ -355,6 +360,8 @@
   // User picture 
  .profile .user-picture {
    margin: 50px 0 25px;
+   position: absolute;
+   right: 0;
   }
   h3 {
     font-size: 16px;
@@ -381,6 +388,17 @@
    color: #333333;
    font-size: 16px;
    padding: 40px 0 0;
+ 
+  }
+  .field-name-field-user-address {
+    margin: 15px 0;
+    .field-label {
+    font-size: 16px;
+   }
+  }
+  // User History
+  .profile dt {
+    clear: both;
   }
 }
 // Heartbeat Stream
