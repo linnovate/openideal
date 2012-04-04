@@ -298,8 +298,11 @@
       @include box;
     }  
   }
+  .user-picture {
+    float: right;
+  }
 }
-// tabs on user pages 
+// Tabs on user pages 
 .section-user #main {
   ul.primary{
     margin: 5px 0 0;
@@ -348,6 +351,32 @@
         text-decoration: none;
       }
     }
+  }
+  // User picture 
+ .profile .user-picture {
+   margin: 50px 0 25px;
+  }
+  h3 {
+    font-size: 16px;
+    border-bottom: none;
+    float: left;
+  }
+  .userpoints-total {
+   color: #1B90C9;
+   float: left;
+   font-size: 16px;
+   font-weight: bold;
+   margin: 4px 7px;
+  }
+  ul.userpoints-links {
+    list-style: none;
+    li {
+      float: left;
+      margin: 0 15px;
+    }
+  }
+  .field-name-field-user-date-birth {
+    clear: both;
   }
 }
 
@@ -428,10 +457,6 @@ article #comments {
   margin-right: 10px;
 }
 
-//*         Forms
-// *************************************************/
-
-
 //*         Table
 // *************************************************/
 
@@ -442,4 +467,3 @@ th.active img {
     display: inline;
     padding: 0 10px;
 }
-
