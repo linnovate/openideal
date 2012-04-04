@@ -98,12 +98,6 @@ projects[logintoboggan][subdir]                                = contrib
 projects[mailsystem][version]                                  = 7.x-2.31
 projects[mailsystem][subdir]                                   = contrib
 
-projects[menu_attributes][version]                             = 7.x-1.0-rc1
-projects[menu_attributes][subdir]                              = contrib
-
-projects[menu_attributes][version]                             = 7.x-1.1
-projects[menu_attributes][subdir]                              = contrib
-
 projects[metatag][version]                                     = 7.x-1.0-alpha4
 projects[metatag][subdir]                                      = contrib
 
