@@ -247,3 +247,33 @@ function ideal_main_views_mini_pager($vars) {
     );
   }
 }
+
+/**
+ * Implements hook_field_formatter_info().
+ */
+function ideal_main_field_formatter_info() {
+  return array(
+    'ideal_main_age' => array(
+      'label' => t('Age'),
+      'field types' => array('datestamp'),
+    ),
+  );
+}
+ 
+/**
+ * Implements hook_field_formatter_view()
+ */
+function ideal_main_field_formatter_view($entity_type, $entity, $field, $instance, $langcode, $items, $display) {
+  $elements = array();
+  foreach ($items as $delta => $item) {
+    if($items[0]['date_type'] == 'datestamp') {
+      $c_time = date('Y', time());
+      $b_time = date('Y', $items[0]['value']);
+      $age = $c_time - $b_time;
+    }
+    $elements[$delta] = array(
+      '#markup' => $age,
+   );
+ }
+  return $elements;
+}

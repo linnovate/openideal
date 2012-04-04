@@ -298,8 +298,11 @@
       @include box;
     }  
   }
+  .user-picture {
+    float: right;
+  }
 }
-// tabs on user pages 
+// Tabs on user pages 
 .section-user #main {
   ul.primary{
     margin: 5px 0 0;
@@ -349,8 +352,47 @@
       }
     }
   }
+  // User picture 
+ .profile .user-picture {
+   margin: 50px 0 25px;
+  }
+  h3 {
+    font-size: 16px;
+    border-bottom: none;
+    float: left;
+  }
+  .userpoints-total {
+   color: #1B90C9;
+   float: left;
+   font-size: 16px;
+   font-weight: bold;
+   margin: 4px 7px;
+  }
+  ul.userpoints-links {
+    list-style: none;
+    li {
+      display: inline-block;
+      float: left;
+      margin: 4px 0 0 32px;
+    }
+  }
+  .field-name-field-user-date-birth {
+   clear: none;
+   color: #333333;
+   font-size: 16px;
+   padding: 40px 0 0;
+  }
 }
-
+// Heartbeat Stream
+#heartbeat-stream-userpage_activity {
+  img {
+    margin-right: 10px;
+  }
+}
+// Watcher 
+.watcher_node {
+  float: right;
+}
 // Idea(s)
 .field-name-field-category {
   clear: both;
@@ -428,10 +470,6 @@ article #comments {
   margin-right: 10px;
 }
 
-//*         Forms
-// *************************************************/
-
-
 //*         Table
 // *************************************************/
 
@@ -442,4 +480,3 @@ th.active img {
     display: inline;
     padding: 0 10px;
 }
-
