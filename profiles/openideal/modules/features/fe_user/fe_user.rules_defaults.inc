@@ -34,6 +34,31 @@ function fe_user_default_rules_configuration() {
       ]
     }
   }');
+  $items['rules_silver_user'] = entity_import('rules_config', '{ "rules_silver_user" : {
+      "LABEL" : "Silver User",
+      "PLUGIN" : "reaction rule",
+      "TAGS" : [ "User" ],
+      "REQUIRES" : [ "rules", "flag", "userpoints_rules" ],
+      "ON" : [ "userpoints_event_points_awarded_after" ],
+      "IF" : [
+        { "data_is" : {
+            "data" : [ "userpoints-transaction:points" ],
+            "op" : "\\u003E",
+            "value" : "2000"
+          }
+        }
+      ],
+      "DO" : [
+        { "flag_flaguser" : {
+            "flag" : "silver_user",
+            "user" : [ "userpoints-transaction:user" ],
+            "flagging_user" : "1",
+            "permission_check" : 0
+          }
+        }
+      ]
+    }
+  }');
   $items['rules_gold_user'] = entity_import('rules_config', '{ "rules_gold_user" : {
       "LABEL" : "Gold User",
       "PLUGIN" : "reaction rule",
@@ -80,8 +105,6 @@ function fe_user_default_rules_configuration() {
       ]
     }
   }');
-<<<<<<< .merge_file_a08924
-=======
   $items['rules_oi_log_activity_when_a_node_is_commented'] = entity_import('rules_config', '{ "rules_oi_log_activity_when_a_node_is_commented" : {
       "LABEL" : "OI Log activity when a node is commented",
       "PLUGIN" : "reaction rule",
@@ -169,31 +192,5 @@ function fe_user_default_rules_configuration() {
       ]
     }
   }');
-  $items['rules_silver_user'] = entity_import('rules_config', '{ "rules_silver_user" : {
-      "LABEL" : "Silver User",
-      "PLUGIN" : "reaction rule",
-      "TAGS" : [ "User" ],
-      "REQUIRES" : [ "rules", "flag", "userpoints_rules" ],
-      "ON" : [ "userpoints_event_points_awarded_after" ],
-      "IF" : [
-        { "data_is" : {
-            "data" : [ "userpoints-transaction:points" ],
-            "op" : "\\u003E",
-            "value" : "2000"
-          }
-        }
-      ],
-      "DO" : [
-        { "flag_flaguser" : {
-            "flag" : "silver_user",
-            "user" : [ "userpoints-transaction:user" ],
-            "flagging_user" : "1",
-            "permission_check" : 0
-          }
-        }
-      ]
-    }
-  }');
->>>>>>> .merge_file_a06416
   return $items;
 }
