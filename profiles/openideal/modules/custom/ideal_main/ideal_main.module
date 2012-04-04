@@ -1,5 +1,13 @@
 <?php
 /**
+ * Implements hook_init().
+ */
+function ideal_main_init() {
+  include_once DRUPAL_ROOT . '/' . drupal_get_path('module', 'ideal_main') . '/ideal_main.action.inc';
+}
+
+
+/**
  * Implements hook_menu().
  */
 function ideal_main_menu() {
