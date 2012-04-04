@@ -36,6 +36,8 @@ function fe_user_field_default_fields() {
           'premise' => '',
           'locality' => '',
           'country' => 'AF',
+          'first_name' => '',
+          'last_name' => '',
         ),
       ),
       'deleted' => '0',
@@ -46,17 +48,17 @@ function fe_user_field_default_fields() {
           'module' => 'addressfield',
           'settings' => array(
             'format_handlers' => array(
-              0 => 'address',
+              'address' => 'address',
             ),
             'use_widget_handlers' => 1,
           ),
           'type' => 'addressfield_default',
-          'weight' => 2,
+          'weight' => '2',
         ),
       ),
       'entity_type' => 'user',
       'field_name' => 'field_user_address',
-      'label' => 'Address',
+      'label' => 'Personal Details',
       'required' => 0,
       'settings' => array(
         'user_register_form' => 0,
@@ -115,17 +117,11 @@ function fe_user_field_default_fields() {
       'description' => '',
       'display' => array(
         'default' => array(
-          'label' => 'above',
-          'module' => 'date',
-          'settings' => array(
-            'format_type' => 'long',
-            'fromto' => 'both',
-            'multiple_from' => '',
-            'multiple_number' => '',
-            'multiple_to' => '',
-          ),
-          'type' => 'date_default',
-          'weight' => 1,
+          'label' => 'inline',
+          'module' => 'ideal_main',
+          'settings' => array(),
+          'type' => 'ideal_main_age',
+          'weight' => '1',
         ),
       ),
       'entity_type' => 'user',
@@ -158,8 +154,8 @@ function fe_user_field_default_fields() {
 
   // Translatables
   // Included for use with string extractors like potx.
-  t('Address');
   t('Date of Birth');
+  t('Personal Details');
 
   return $fields;
 }
