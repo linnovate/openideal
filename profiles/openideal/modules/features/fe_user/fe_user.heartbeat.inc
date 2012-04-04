@@ -64,7 +64,7 @@ function fe_user_heartbeat_template_info() {
   $heartbeatmessagetemplate->api_version = 1;
   $heartbeatmessagetemplate->message_id = 'oi_comment_on_my_content';
   $heartbeatmessagetemplate->description = 'Other user replied on my content';
-  $heartbeatmessagetemplate->message = '!otherusername replied on your\'s idea !node_title ';
+  $heartbeatmessagetemplate->message = '!otherusername replied on your idea !node_title ';
   $heartbeatmessagetemplate->message_concat = '';
   $heartbeatmessagetemplate->perms = 4;
   $heartbeatmessagetemplate->group_type = 'single';
@@ -112,7 +112,7 @@ function fe_user_heartbeat_template_info() {
   $heartbeatmessagetemplate->api_version = 1;
   $heartbeatmessagetemplate->message_id = 'oi_vote_on_node';
   $heartbeatmessagetemplate->description = 'User votes on some content';
-  $heartbeatmessagetemplate->message = 'You voted on !node_title ';
+  $heartbeatmessagetemplate->message = '!username voted on !node_title ';
   $heartbeatmessagetemplate->message_concat = '!username has added the following !types: %node_title%.';
   $heartbeatmessagetemplate->perms = 4;
   $heartbeatmessagetemplate->group_type = 'single';
