@@ -527,14 +527,8 @@ function fe_idea_field_default_fields() {
       'description' => '',
       'display' => array(
         'default' => array(
-          'label' => 'above',
-          'module' => 'entityreference',
-          'settings' => array(
-            'link' => FALSE,
-          ),
-          'type' => 'entityreference_label',
-          'weight' => 9,
           'label' => 'hidden',
+          'module' => 'entityreference',
           'settings' => array(),
           'type' => 'hidden',
           'weight' => '9',
@@ -543,7 +537,6 @@ function fe_idea_field_default_fields() {
           'label' => 'hidden',
           'settings' => array(),
           'type' => 'hidden',
-          'weight' => 0,
           'weight' => '9',
         ),
       ),
