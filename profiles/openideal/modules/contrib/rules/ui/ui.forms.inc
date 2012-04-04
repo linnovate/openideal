@@ -713,7 +713,11 @@ function rules_ui_element_duration_multipliers() {
     1 => t('seconds'),
     60 => t('minutes'),
     3600 => t('hours'),
+    // Just use approximate numbers for days (might last 23h on DST change),
+    // months and years.
     86400 => t('days'),
+    86400 * 30 => t('months'),
+    86400 * 30 * 12 => t('years'),
   );
 }
 

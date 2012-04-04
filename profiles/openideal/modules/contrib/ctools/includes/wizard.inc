@@ -34,9 +34,6 @@
  * Remember that the form builders for this form will receive
  * &$form, &$form_state, NOT just &$form_state and no additional args.
  *
- * Do NOT use #required => TRUE with these forms as that validation
- * cannot be skipped for the CANCEL button.
- *
  * @param $form_info
  *   An array of form info. @todo document the array.
  * @param $step
@@ -46,6 +43,10 @@
  *   whatever information the form(s) involved left for it.
  */
 function ctools_wizard_multistep_form($form_info, $step, &$form_state) {
+  // Make sure 'wizard' always exists for the form when dealing
+  // with form caching.
+  ctools_form_include($form_state, 'wizard');
+
   // allow order array to be optional
   if (empty($form_info['order'])) {
     foreach ($form_info['forms'] as $step_id => $params) {
@@ -104,11 +105,11 @@ function ctools_wizard_multistep_form($form_info, $step, &$form_state) {
   if (!empty($info['include'])) {
     if (is_array($info['include'])) {
       foreach ($info['include'] as $file) {
-        require_once DRUPAL_ROOT . '/' . $file;
+        ctools_form_include_file($form_state, $file);
       }
     }
     else {
-      require_once DRUPAL_ROOT . '/' . $info['include'];
+      ctools_form_include_file($form_state, $info['include']);
     }
   }
 
@@ -284,8 +285,7 @@ function ctools_wizard_wrapper($form, &$form_state) {
   if (empty($form_info['no buttons'])) {
     // Ensure buttons stay on the bottom.
     $form['buttons'] = array(
-      '#prefix' => '<div class="clearfix">',
-      '#suffix' => '</div>',
+      '#type' => 'actions',
       '#weight' => 1000,
     );
 

@@ -10,7 +10,7 @@
 function fe_idea_default_radioactivity_decay_profile() {
   $export = array();
 
-  $radioactivity_decay_profile = new stdClass;
+  $radioactivity_decay_profile = new stdClass();
   $radioactivity_decay_profile->disabled = FALSE; /* Edit this to true to make a default radioactivity_decay_profile disabled initially */
   $radioactivity_decay_profile->api_version = 1;
   $radioactivity_decay_profile->machine_name = 'blast_idea';
@@ -23,7 +23,7 @@ function fe_idea_default_radioactivity_decay_profile() {
   $radioactivity_decay_profile->storage = 'Live';
   $export['blast_idea'] = $radioactivity_decay_profile;
 
-  $radioactivity_decay_profile = new stdClass;
+  $radioactivity_decay_profile = new stdClass();
   $radioactivity_decay_profile->disabled = FALSE; /* Edit this to true to make a default radioactivity_decay_profile disabled initially */
   $radioactivity_decay_profile->api_version = 1;
   $radioactivity_decay_profile->machine_name = 'buzz_idea';
@@ -36,7 +36,7 @@ function fe_idea_default_radioactivity_decay_profile() {
   $radioactivity_decay_profile->storage = 'Live';
   $export['buzz_idea'] = $radioactivity_decay_profile;
 
-  $radioactivity_decay_profile = new stdClass;
+  $radioactivity_decay_profile = new stdClass();
   $radioactivity_decay_profile->disabled = FALSE; /* Edit this to true to make a default radioactivity_decay_profile disabled initially */
   $radioactivity_decay_profile->api_version = 1;
   $radioactivity_decay_profile->machine_name = 'groove_idea';

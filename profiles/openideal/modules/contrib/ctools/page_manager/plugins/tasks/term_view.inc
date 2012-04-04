@@ -46,6 +46,7 @@ function page_manager_term_view_page_manager_tasks() {
       // Allow this to be enabled or disabled:
       'disabled' => variable_get('page_manager_term_view_disabled', TRUE),
       'enable callback' => 'page_manager_term_view_enable',
+      'access callback' => 'page_manager_term_view_access_check',
 
       // Allow additional operations
       'operations' => array(
@@ -106,6 +107,10 @@ function page_manager_term_view_menu_alter(&$items, $task) {
  * term view, which is term_page_view().
  */
 function page_manager_term_view_page($term) {
+  // Assign the term name as the page title, just as the original page
+  // callback did.
+  drupal_set_title($term->name);
+
   // While we ordinarily should never actually get feeds through here,
   // just in case
   // Load my task plugin
@@ -309,3 +314,18 @@ function page_manager_term_view_admin_summary($task, $subtask) {
   return $output;
 }
 
+/**
+ * Callback to determine if a page is accessible.
+ *
+ * @param $task
+ *   The task plugin.
+ * @param $subtask_id
+ *   The subtask id
+ * @param $contexts
+ *   The contexts loaded for the task.
+ * @return
+ *   TRUE if the current user can access the page.
+ */
+function page_manager_term_view_access_check($task, $subtask_id, $contexts) {
+  return user_access('access content');
+}

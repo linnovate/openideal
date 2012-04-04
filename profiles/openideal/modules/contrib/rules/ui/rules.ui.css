@@ -183,6 +183,12 @@ ul.rules-autocomplete .ui-corner-all {
   -moz-border-radius: 0px;
 }
 
+/**
+ * Do not display the hide/show descriptions link above the permissions matrix.
+ */
+#rules-form-wrapper #edit-settings-access-permissions .compact-link {
+  display: none;
+}
 
 /* IE 6 hack for max-height. */
 * html ul.rule-autocomplete{

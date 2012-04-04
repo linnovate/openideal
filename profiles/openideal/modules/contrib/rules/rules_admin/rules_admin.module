@@ -86,6 +86,19 @@ function rules_admin_menu() {
     'file' => 'rules_admin.inc',
     'weight' => 1,
   );
+  $items['admin/config/workflow/rules/settings/basic'] = array(
+    'title' => 'Basic',
+    'type' => MENU_DEFAULT_LOCAL_TASK,
+    'weight' => -10,
+  );
+  $items['admin/config/workflow/rules/settings/advanced'] = array(
+    'title' => 'Advanced',
+    'type' => MENU_LOCAL_TASK,
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('rules_admin_settings_advanced'),
+    'access arguments' => array('administer rules'),
+    'file' => 'rules_admin.inc',
+  );
   return $items;
 }
 

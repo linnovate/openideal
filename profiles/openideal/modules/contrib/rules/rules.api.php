@@ -92,10 +92,22 @@
  *     FALSE.
  *   - restriction: (optional) Restrict how the argument for this parameter may
  *     be provided. Supported values are 'selector' and 'input'.
+ *   - default mode: (optional) Customize the default mode for providing the
+ *     argument value for a parameter. Supported values are 'selector' and
+ *     'input'. The default depends on the required data type.
  *   - sanitize: (optional) Allows parameters of type 'text' to demand an
  *     already sanitized argument. If enabled, any user specified value won't be
  *     sanitized itself, but replacements applied by input evaluators are as
  *     well as values retrieved from selected data sources.
+ *   - translatable: (optional) If set to TRUE, the provided argument value
+ *     of the parameter is translatable via i18n String translation. This is
+ *     applicable for textual parameters only, i.e. parameters of type 'text',
+ *     'token', 'list<text>' and 'list<token>'. Defaults to FALSE.
+ *   - ui class: (optional) Allows overriding the UI class, which is used to
+ *     generate the configuration UI of a parameter. Defaults to the UI class of
+ *     the specified data type.
+ *   - cleaning callback: (optional) A callback that input evaluators may use
+ *     to clean inserted replacements; e.g. this is used by the token evaluator.
  *   - wrapped: (optional) Set this to TRUE in case the data should be passed
  *     wrapped. This only applies to wrapped data types, e.g. entities.
  *  Each 'provides' array may contain the following properties:
@@ -754,6 +766,7 @@ function hook_rules_config_execute($config) {
  *   An array of rules configurations with the configuration names as keys.
  *
  * @see hook_default_rules_configuration_alter()
+ * @see hook_rules_config_defaults_rebuild()
  */
 function hook_default_rules_configuration() {
   $rule = rules_reaction_rule();
@@ -765,7 +778,7 @@ function hook_default_rules_configuration() {
        ->action('drupal_message', array('message' => 'A node has been updated.'));
 
   $configs['rules_test_default_1'] = $rule;
-  return $config;
+  return $configs;
 }
 
 /**
@@ -784,6 +797,37 @@ function hook_default_rules_configuration() {
 function hook_default_rules_configuration_alter(&$configs) {
   // Add custom condition.
   $configs['foo']->condition('bar');
+}
+
+/**
+ * Act after rebuilding default configurations.
+ *
+ * This hook is invoked by the entity module after default rules configurations
+ * have been rebuilt; i.e. defaults have been saved to the database.
+ *
+ * @param $rules_configs
+ *   The array of default rules configurations which have been inserted or
+ *   updated, keyed by name.
+ * @param $originals
+ *   An array of original rules configurations keyed by name; i.e. the rules
+ *   configurations before the current defaults have been applied. For inserted
+ *   rules configurations no original is available.
+ *
+ * @see hook_default_rules_configuration()
+ * @see entity_defaults_rebuild()
+ */
+function hook_rules_config_defaults_rebuild($rules_configs, $originals) {
+  // Once all defaults have been rebuilt, update all i18n strings at once. That
+  // way we build the rules cache once the rebuild is complete and avoid
+  // rebuilding caches for each updated rule.
+  foreach ($rules_configs as $name => $rule_config) {
+    if (empty($originals[$name])) {
+      rules_i18n_rules_config_insert($rule_config);
+    }
+    else {
+      rules_i18n_rules_config_update($rule_config, $originals[$name]);
+    }
+  }
 }
 
 /**
@@ -894,6 +938,32 @@ function hook_rules_action_base_upgrade($element, RulesPlugin $target) {
  */
 function hook_rules_element_upgrade_alter($element, $target) {
 
+}
+
+/**
+ * Allows modules to alter or to extend the provided Rules UI.
+ *
+ * Use this hook over the regular hook_menu_alter() as the Rules UI is re-used
+ * and embedded by modules. See rules_ui().
+ *
+ * @param $items
+ *   The menu items to alter.
+ * @param $base_path
+ *   The base path of the Rules UI.
+ * @param $base_count
+ *   The count of the directories contained in the base path.
+ */
+function hook_rules_ui_menu_alter(&$items, $base_path, $base_count) {
+  $items[$base_path . '/manage/%rules_config/schedule'] = array(
+    'title callback' => 'rules_get_title',
+    'title arguments' => array('Schedule !plugin "!label"', $base_count + 1),
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('rules_scheduler_schedule_form', $base_count + 1, $base_path),
+    'access callback' => 'rules_config_access',
+    'access arguments' => array('update', $base_count + 1),
+    'file' => 'rules_scheduler.admin.inc',
+    'file path' => drupal_get_path('module', 'rules_scheduler'),
+  );
 }
 
 /**

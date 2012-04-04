@@ -70,6 +70,7 @@ class RulesTestCase extends DrupalWebTestCase {
     $it = new RecursiveIteratorIterator($rule->conditions());
     $this->assertEqual(iterator_count($it), 6, 'Iterated over all conditions');
     $this->assertEqual(iterator_count($rule->actions()), 1, 'Iterated over all actions');
+    $this->assertEqual(iterator_count($rule->elements()), 10, 'Iterated over all rule elements.');
 
     // Test getting dependencies and the integrity check.
     $rule->integrityCheck();
@@ -120,11 +121,14 @@ class RulesTestCase extends DrupalWebTestCase {
     $rule = rules_config_load('rules_test_rule');
     $component = rules_config_load('rules_test_alias');
 
-    $node = NULL;
+    $this->assertTrue($component->dirty, 'Component has been marked as dirty');
+    $node = $this->drupalCreateNode();
     $result = rules_invoke_component('rules_test_alias', $node);
     $this->assertTrue($result === FALSE, 'Unable to execute a dirty component.');
 
-    $this->assertTrue($component->dirty, 'Component has been marked as dirty');
+    // When the rule is evaluated, the broken component is detected and the
+    // rule should be marked as dirty too.
+    $rule->execute($node);
     $this->assertTrue($rule->dirty, 'Rule has been marked as dirty');
 
     module_enable(array('path'));
@@ -334,6 +338,36 @@ class RulesTestCase extends DrupalWebTestCase {
 
     $this->assertEqual(FALSE, node_load($node->nid), 'Variable with custom name added.');
     RulesLog::logger()->checkLog();
+  }
+
+  /**
+   * Test custom access for using component actions/conditions.
+   */
+  function testRuleComponentAccess() {
+    // Create a normal user.
+    $normal_user = $this->drupalCreateUser();
+    // Create a role for granting access to the rule component.
+    $this->normal_role = $this->drupalCreateRole(array(), 'test_role');
+    $normal_user->roles[$this->normal_role] = 'test_role';
+    user_save($normal_user, array('roles' => $normal_user->roles));
+    // Create an 'action set' rule component making use of a permission.
+    $action_set = rules_action_set(array('node' => array('type' => 'node')));
+    $action_set->access_exposed = TRUE;
+    $action_set->save('rules_test_roles');
+
+    // Set the global user to be the current one as access is checked for the
+    // global user.
+    global $user;
+    $user = user_load($normal_user->uid);
+    $this->assertFalse(rules_action('component_rules_test_roles')->access(), 'Authenticated user without the correct role can\'t use the rule component.');
+
+    // Assign the role that will have permissions for the rule component.
+    user_role_change_permissions($this->normal_role, array('use Rules component rules_test_roles' => TRUE));
+    $this->assertTrue(rules_action('component_rules_test_roles')->access(), 'Authenticated user with the correct role can use the rule component.');
+
+    // Reset global user to anonyous.
+    $user = user_load(0);
+    $this->assertFalse(rules_action('component_rules_test_roles')->access(), 'Anonymous user can\'t use the rule component.');
   }
 
   /**
@@ -1306,6 +1340,17 @@ class RulesIntegrationTestCase extends DrupalWebTestCase {
     $this->assertTrue(rules_condition('list_contains')->execute($list, 'foo'), 'Condition "List item contains" evaluates to TRUE');
     //debug(RulesLog::logger()->render());
 
+    // Test data_is condition with IN operation.
+    $rule = rule(array('node' => array('type' => 'node')));
+    $rule->condition('data_is', array('data:select' => 'node:title', 'op' => 'IN', 'value' => array('foo', 'bar')));
+    $rule->action('data_set', array('data:select' => 'node:title', 'value' => 'bar'));
+    $rule->integrityCheck();
+
+    $node = $this->drupalCreateNode(array('title' => 'foo'));
+    $rule->execute($node);
+    $this->assertEqual($node->title, 'bar', "Data comparision using IN operation evaluates to TRUE.");
+
+
     // Test Condition: Data is empty.
     $rule = rule(array('node' => array('type' => 'node')));
     $rule->condition('data_is_empty', array('data:select' => 'node:title'));
@@ -1324,6 +1369,17 @@ class RulesIntegrationTestCase extends DrupalWebTestCase {
     $rule->execute($node);
     $this->assertEqual($node->title, 'foo', "Data is empty condition evaluates to FALSE for node with title 'foo', action is not executed.");
 
+    // Data is empty condition evaluates to TRUE for the parent of a
+    // not existing term in the tags field of the node.
+    $rule = rule(array('node' => array('type' => 'node')));
+    $rule->condition('node_is_of_type', array('type' => array('article')));
+    $rule->condition('data_is_empty', array('data:select' => 'node:field-tags:0:parent'));
+    $rule->action('data_set', array('data:select' => 'node:title', 'value' => 'bar'));
+    $rule->integrityCheck();
+    $node = $this->drupalCreateNode(array('title' => 'foo', 'type' => 'article'));
+    $rule->execute($node);
+    $this->assertEqual($node->title, 'bar', "Data is empty condition evaluates to TRUE for not existing data structures");
+
     // Test Action: Calculate a value.
     $rule = rule(array('node' => array('type' => 'node')));
     $rule->action('data_calc', array('input_1:select' => 'node:nid', 'op' => '*', 'input_2' => 2));
@@ -1334,11 +1390,11 @@ class RulesIntegrationTestCase extends DrupalWebTestCase {
 
     // Test moving a date.
     $action_set = rules_action_set(array('date' => array('type' => 'date')), array('date'));
-    $action_set->action('data_calc', array('input_1:select' => 'date', 'op' => '+', 'input_2' => 86400))
+    $action_set->action('data_calc', array('input_1:select' => 'date', 'op' => '+', 'input_2' => 3600))
                ->action('data_set', array('data:select' => 'date', 'value:select' => 'result'));
     $action_set->integrityCheck();
     list($result) = $action_set->execute(REQUEST_TIME);
-    $this->assertEqual($result, REQUEST_TIME + 86400, 'Used data calculation action to move a date by a day.');
+    $this->assertEqual($result, REQUEST_TIME + 3600, 'Used data calculation action to move a date by an hour.');
 
     // Test text matching condition.
     $result = rules_condition('text_matches')->execute('my-text', 'text', 'contains');
@@ -1698,20 +1754,45 @@ class RulesIntegrationTestCase extends DrupalWebTestCase {
     $this->assertTrue($result == 11, 'Numeric offset has been applied');
 
     // Test using a date offset.
-    $node = $this->drupalCreateNode(array('title' => 'foo'));
-    $rule = rule(array('node' => array('type' => 'node')));
-    $rule->action('data_set', array(
-      'data:select' => 'node:created',
-      'value:select' => 'node:created',
+    $set = rules_action_set(array('date' => array('type' => 'date')), array('date'));
+    $set->action('data_set', array(
+      'data:select' => 'date',
+      'value:select' => 'date',
       'value:process' => array(
-        'date_offset' => array('value' => 86400),
+        'date_offset' => array('value' => 1000),
       ),
     ));
-    $created_orig = $node->created;
-    $rule->execute($node);
+    $date = date_create("14 Mar 1984 10:19:23 +01:00")->format('U');
+    list($result) = $set->execute($date);
+    $this->assertEqual($result, $date + 1000, 'Date offset in seconds has been added.');
+
+    // Test using a negative offset of 2 months.
+    $set = rules_action_set(array('date' => array('type' => 'date')), array('date'));
+    $set->action('data_set', array(
+      'data:select' => 'date',
+      'value:select' => 'date',
+      'value:process' => array(
+        'date_offset' => array('value' => - 86400 * 30 * 2),
+      ),
+    ));
+    $date = date_create("14 Mar 1984 10:19:23 +01:00")->format('U');
+    list($result) = $set->execute($date);
+    $this->assertEqual($result, date_create("14 Jan 1984 10:19:23 +01:00")->format('U'), 'Date offset of -2 months has been added.');
+
+    // Test using a positive offset of 1 year 6 months and 30 minutes.
+    $set = rules_action_set(array('date' => array('type' => 'date')), array('date'));
+    $set->action('data_set', array(
+      'data:select' => 'date',
+      'value:select' => 'date',
+      'value:process' => array(
+        'date_offset' => array('value' => 86400 * 30 * 18 + 30 * 60),
+      ),
+    ));
+    $date = date_create("14 Mar 1984 10:19:23 +01:00")->format('U');
+    list($result) = $set->execute($date);
+    $this->assertEqual($result, date_create("14 Sep 1985 10:49:23 +01:00")->format('U'), 'Date offset of 1 year 6 months and 30 minutes has been added.');
+
     RulesLog::logger()->checkLog();
-    $node = node_load($node->nid, NULL, TRUE);
-    $this->assertTrue(($node->created - $created_orig - 86400) == 0, 'Date offset has been added.');
   }
 
   /**

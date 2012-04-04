@@ -68,6 +68,20 @@ class RulesDataUI {
       '#description' => t("The data selector helps you drill down into the data available to Rules. <em>To make entity fields appear in the data selector, you may have to use the condition 'entity has field' (or 'content is of type').</em> More useful tips about data selection is available in <a href='@url'>the online documentation</a>.",
         array('@url' => rules_external_help('data-selection'))),
     );
+
+    if (!empty($info['translatable'])) {
+      if ($info['custom translation language']) {
+        $text = t('If a multilingual data source (i.e. a translatable field) is given, the argument is translated to the configured language.');
+      }
+      else {
+        $text = t('If a multilingual data source (i.e. a translatable field) is given, the argument is translated to the current interface language.');
+      }
+      $form['translation'] = array(
+        '#theme' => 'rules_settings_help',
+        '#text' => $text,
+        '#heading' => t('Translation'),
+      );
+    }
     $form['help'] = array(
       '#theme' => 'rules_data_selector_help',
       '#variables' => $element->availableVariables(),
@@ -167,9 +181,11 @@ class RulesDataUITextToken extends RulesDataUIText {
 
   public static function inputForm($name, $info, $settings, RulesPlugin $element) {
     $form = parent::inputForm($name, $info, $settings, $element);
-    $form[$name]['#element_validate'][] = 'rules_ui_element_token_validate';
-    $form[$name]['#description'] = t('May only contain lowercase letters, numbers, and underscores and has to start with a letter.');
-    $form[$name]['#rows'] = 1;
+    if ($form[$name]['#type'] == 'textarea') {
+      $form[$name]['#element_validate'][] = 'rules_ui_element_token_validate';
+      $form[$name]['#description'] = t('May only contain lowercase letters, numbers, and underscores and has to start with a letter.');
+      $form[$name]['#rows'] = 1;
+    }
     return $form;
   }
 }
@@ -422,7 +438,7 @@ class RulesDataUIEntity extends RulesDataUIText {
       }
       $form[$name]['#title'] = t('@entity identifier', array('@entity' => $entity_info['label']));
       $entity_label = strtolower($entity_info['label'][0]) . substr($entity_info['label'], 1);
-      $form[$name]['#description'] = t('Specify an identfier of a @entity.', array('@entity' => $entity_label));
+      $form[$name]['#description'] = t('Specify an identifier of a @entity.', array('@entity' => $entity_label));
     }
     return $form;
   }
@@ -481,9 +497,8 @@ class RulesDataUIListEntity extends RulesDataUIListInteger {
       }
       $form[$name]['#title'] = t('@entity identifiers', array('@entity' => $entity_info['label']));
       $entity_label = strtolower($entity_info['label'][0]) . substr($entity_info['label'], 1);
-      $form[$name]['#description'] = t('Specify a comma-separated list of identfiers of @entity entities.', array('@entity' => $entity_label));
+      $form[$name]['#description'] = t('Specify a comma-separated list of identifiers of @entity entities.', array('@entity' => $entity_label));
     }
     return $form;
   }
 }
-

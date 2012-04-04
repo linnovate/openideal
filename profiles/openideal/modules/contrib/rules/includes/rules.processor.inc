@@ -235,24 +235,34 @@ abstract class RulesDataInputEvaluator extends RulesDataProcessor {
   protected function __construct($setting, $param_info, $var_info = array(), $processor = NULL) {
     $this->setting = TRUE;
     $this->processor = $processor;
-    $this->prepare($setting, $var_info);
+    $this->prepare($setting, $var_info, $param_info);
   }
 
   /**
    * Overridden to generate evaluator $options and invoke evaluate().
    */
   public function process($value, $info, RulesState $state, RulesPlugin $element, $options = NULL) {
-    if (!isset($options)) {
-      $cache = rules_get_cache();
-      $languages = language_list();
-      $options = array_filter(array(
-        'language' => isset($element->settings['language']) && isset($languages[$element->settings['language']]) ? $languages[$element->settings['language']] : NULL,
-        'callback' => isset($cache['data info'][$info['type']]['cleaning callback']) ? $cache['data info'][$info['type']]['cleaning callback'] : FALSE,
-        'sanitize' => !empty($info['sanitize']),
-      ));
-    }
+    $options = isset($options) ? $options : $this->getEvaluatorOptions($info, $state, $element);
     $value = isset($this->processor) ? $this->processor->process($value, $info, $state, $element, $options) : $value;
     return $this->evaluate($value, $options, $state);
+  }
+
+  /**
+   * Generates the evaluator $options.
+   */
+  protected function getEvaluatorOptions($info, $state, $element) {
+    $cache = rules_get_cache();
+    $languages = language_list();
+    $info += array(
+      'cleaning callback' => isset($cache['data info'][$info['type']]['cleaning callback']) ? $cache['data info'][$info['type']]['cleaning callback'] : FALSE,
+      'sanitize' => FALSE,
+    );
+    $options = array_filter(array(
+      'language' => $info['#langcode'] != LANGUAGE_NONE && isset($languages[$info['#langcode']]) ? $languages[$info['#langcode']] : NULL,
+      'callback' => $info['cleaning callback'],
+      'sanitize' => $info['sanitize'],
+    ));
+    return $options;
   }
 
   /**
@@ -278,7 +288,7 @@ abstract class RulesDataInputEvaluator extends RulesDataProcessor {
    */
   public static function attachForm(&$form, $settings, $param_info, $var_info, $access_check = TRUE) {
     foreach (self::evaluators($param_info, $access_check) as $name => $info) {
-      $form['help'][$name] = call_user_func(array($info['class'], 'help'), $var_info);
+      $form['help'][$name] = call_user_func(array($info['class'], 'help'), $var_info, $param_info);
       $form['help'][$name]['#weight'] = $info['weight'];
     }
   }
@@ -307,6 +317,9 @@ abstract class RulesDataInputEvaluator extends RulesDataProcessor {
    *   The text to evaluate later on.
    * @param $variables
    *   An array of info about available variables.
+   * @param $param_info
+   *   (optional) An array of information about the handled parameter value.
+   *   For backward compatibility, this parameter is not required.
    */
   abstract public function prepare($text, $variables);
 
@@ -326,6 +339,7 @@ abstract class RulesDataInputEvaluator extends RulesDataProcessor {
    *     should be sanitized.
    * @param RulesState
    *   The rules evaluation state.
+   *
    * @return
    *   The evaluated text.
    */
@@ -336,6 +350,10 @@ abstract class RulesDataInputEvaluator extends RulesDataProcessor {
    *
    * @param $variables
    *   An array of info about available variables.
+   * @param $param_info
+   *   (optional) An array of information about the handled parameter value.
+   *   For backward compatibility, this parameter is not required.
+   *
    * @return
    *   A renderable array.
    */

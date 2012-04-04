@@ -83,11 +83,12 @@ function _ctools_block_content_type_content_type($module, $delta, $block) {
  */
 function ctools_block_content_type_render($subtype, $conf) {
   list($module, $delta) = _ctools_block_get_module_delta($subtype, $conf);
-  $info = (object) array(
-    'module' => $module,
-    'delta' => $delta,
-  );
+
+  $info = new stdClass;
+  $info->module = $module;
+  $info->delta = $delta;
   $block = module_invoke($module, 'block_view', $delta);
+
   // Allow modules to modify the block before it is viewed, via either
   // hook_block_view_alter() or hook_block_view_MODULE_DELTA_alter().
   drupal_alter(array('block_view', "block_view_{$module}_{$delta}"), $block, $info);
@@ -100,21 +101,6 @@ function ctools_block_content_type_render($subtype, $conf) {
   $block->module = $module;
   $block->delta = $delta;
 
-  // $block->title is not set for the blocks returned by block_block() (the
-  // Block module adds the title in block_list() instead), so we look it up
-  // manually, unless the title is overridden and does not use the %title
-  // placeholder.
-  if ($module == 'block' && (empty($conf['override_title']) || strpos($conf['override_title_text'], '%title') !== FALSE)) {
-    // {block}.title is plain text, but this hook should return an HTML title.
-    global $theme_key;
-    $result = db_query("SELECT title FROM {block}
-      WHERE module = :module AND delta = :delta AND theme = :theme", array(
-          ':module' => 'block', ':delta' => $delta, ':theme' => $theme_key
-      )
-    );
-    $block->subject = check_plain($result->fetchObject()->title);
-  }
-
   if (isset($block->subject)) {
     $block->title = $block->subject;
   }
@@ -122,7 +108,7 @@ function ctools_block_content_type_render($subtype, $conf) {
     $block->title = NULL;
   }
 
-  if (user_access('administer blocks')) {
+  if (module_exists('block') && user_access('administer blocks')) {
     $block->admin_links = array(
       array(
         'title' => t('Configure block'),
@@ -351,6 +337,28 @@ function aggregator_ctools_block_info($module, $delta, &$info) {
 function block_ctools_block_info($module, $delta, &$info) {
   $info['icon'] = 'icon_core_block_empty.png';
   $info['category'] = t('Custom blocks');
+
+  // The title of custom blocks from the block module is stored in the
+  // {block} table. Look for it in the default theme as a reasonable
+  // default value for the title.
+  $block_info_cache = drupal_static(__FUNCTION__);
+  if (!isset($block_info_cache)) {
+    $block_info_cache = db_select('block', 'b')
+      ->fields('b')
+      ->condition('b.module', 'block')
+      ->condition('b.theme', variable_get('theme_default', 'bartik'))
+      ->addTag('block_load')
+      ->addTag('translatable')
+      ->execute()
+      ->fetchAllAssoc('delta');
+  }
+
+  if (isset($block_info_cache[$delta])) {
+    $info['defaults'] = array(
+      'override_title' => TRUE,
+      'override_title_text' => $block_info_cache[$delta]->title,
+    );
+  }
 }
 
 function user_ctools_block_info($module, $delta, &$info) {
@@ -359,6 +367,10 @@ function user_ctools_block_info($module, $delta, &$info) {
     case 'login':
       $info['icon'] = 'icon_core_userlogin.png';
       $info['category'] = t('Widgets');
+      // Provide a custom render callback, because the default login block
+      // will not render on /user, /user/login, or any other URL beginning
+      // /user (unless it's a user-specific page such as /user/123).
+      $info['render callback'] = 'ctools_user_login_pane_render';
       break;
 
     case 'new':
@@ -412,4 +424,69 @@ function system_ctools_block_info($module, $delta, &$info) {
   }
 
   $info['category'] = t('Widgets');
+}
+
+function ctools_user_login_pane_render($subtype, $conf, $panel_args, $contexts) {
+  list($module, $delta) = _ctools_block_get_module_delta($subtype, $conf);
+
+  // The login form is only visible to anonymous users.
+  global $user;
+  if ($user->uid) {
+    return;
+  }
+
+  $info = new stdClass;
+  $info->module = $module;
+  $info->delta = $delta;
+
+  $block = new stdClass;
+  $block->subject = t('User login');
+  // Manually set the content (rather than invoking block_view) because the
+  // block implementation won't render on certain URLs.
+  $block->content = drupal_get_form('user_login_block');
+
+  // Allow modules to modify the block before it is viewed, via either
+  // hook_block_view_alter() or hook_block_view_MODULE_DELTA_alter().
+  drupal_alter(array('block_view', "block_view_{$module}_{$delta}"), $block, $info);
+  $block = (object) $block;
+
+  if (empty($block)) {
+    return;
+  }
+
+  $block->module = $module;
+  $block->delta = $delta;
+
+  // $block->title is not set for the blocks returned by block_block() (the
+  // Block module adds the title in block_list() instead), so we look it up
+  // manually, unless the title is overridden and does not use the %title
+  // placeholder.
+  if ($module == 'block') {
+    $block->title = $info->title;
+  }
+  else if (isset($block->subject)) {
+    $block->title = $block->subject;
+  }
+  else {
+    $block->title = NULL;
+  }
+
+  if (isset($block->subject)) {
+    $block->title = $block->subject;
+  }
+  else {
+    $block->title = NULL;
+  }
+
+  if (user_access('administer blocks')) {
+    $block->admin_links = array(
+      array(
+        'title' => t('Configure block'),
+        'href' => "admin/structure/block/manage/$module/$delta/configure",
+        'query' => drupal_get_destination(),
+      ),
+    );
+  }
+
+  return $block;
 }

@@ -139,6 +139,8 @@ class RulesUIController {
       'file' => 'ui/ui.forms.inc',
       'file path' => drupal_get_path('module', 'rules'),
     );
+    drupal_alter('rules_ui_menu', $items, $base_path, $base_count);
+
     if (module_exists('rules_scheduler')) {
       $items[$base_path . '/manage/%rules_config/schedule'] = array(
         'title callback' => 'rules_get_title',
@@ -272,7 +274,14 @@ class RulesUIController {
     ));
 
     // Add operations depending on the options and the exportable status.
-    $row[] = $config->hasStatus(ENTITY_FIXED) ? '' : l(t('edit'), RulesPluginUI::path($name));
+    if (!$config->hasStatus(ENTITY_FIXED)) {
+      $row[] =  l(t('edit'), RulesPluginUI::path($name));
+      $row[] =  l(t('translate'), RulesPluginUI::path($name, 'translate'));
+    }
+    else {
+      $row[] = '';
+      $row[] = '';
+    }
 
     if (!$options['hide status op']) {
       // Add either an enable or disable link.

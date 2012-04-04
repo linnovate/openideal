@@ -215,8 +215,8 @@
 
       // Really large sets of fields are too slow with the above method, so this
       // is a sort of hacked one that's faster but much less flexible.
-      $("select.ctools-master-dependent:not(.ctools-processed)")
-        .addClass('ctools-processed')
+      $("select.ctools-master-dependent")
+        .once('ctools-dependent')
         .change(function() {
           var val = $(this).val();
           if (val == 'all') {

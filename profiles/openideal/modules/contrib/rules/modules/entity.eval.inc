@@ -99,7 +99,7 @@ function rules_action_entity_create($args, $element) {
  * Info alteration callback for the entity create action.
  */
 function rules_action_entity_create_info_alter(&$element_info, RulesAbstractPlugin $element) {
-  if (!empty($element->settings['type'])) {
+  if (!empty($element->settings['type']) && entity_get_info($element->settings['type'])) {
     $wrapper = entity_metadata_wrapper($element->settings['type']);
     // Add the data type's needed parameter for loading to the parameter info.
     foreach ($wrapper as $name => $child) {

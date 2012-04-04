@@ -15,6 +15,8 @@ function rules_init() {
 /**
  * Returns an instance of the rules UI controller, which eases re-using the Rules UI.
  *
+ * See the rules_admin.module for example usage.
+ *
  * @return RulesUIController
  */
 function rules_ui() {
@@ -167,8 +169,16 @@ function rules_action_set($variables, $provides = array()) {
  *  (FALSE) of a new execution scope.
  */
 function rules_log($msg, $args = array(), $priority = RulesLog::INFO, RulesPlugin $element = NULL, $scope = NULL) {
-  static $logger;
-  if ($priority >= variable_get('rules_log_errors', RulesLog::WARN)) {
+  static $logger, $settings;
+
+  // Statically cache the variable settings as this is called very often.
+  if (!isset($settings)) {
+    $settings['rules_log_errors'] = variable_get('rules_log_errors', RulesLog::WARN);
+    $settings['rules_debug_log'] = variable_get('rules_debug_log', FALSE);
+    $settings['rules_debug'] = variable_get('rules_debug', FALSE);
+  }
+
+  if ($priority >= $settings['rules_log_errors']) {
     $link = NULL;
     if (isset($element) && isset($element->root()->name)) {
       $link = l(t('edit configuration'), RulesPluginUI::path($element->root()->name, 'edit', $element));
@@ -176,13 +186,13 @@ function rules_log($msg, $args = array(), $priority = RulesLog::INFO, RulesPlugi
     watchdog('rules', $msg, $args, $priority == RulesLog::WARN ? WATCHDOG_WARNING : WATCHDOG_ERROR, $link);
   }
   // Do nothing in case debugging is totally disabled.
-  if (!variable_get('rules_debug_log', FALSE) && !variable_get('rules_debug', FALSE)) {
+  if (!$settings['rules_debug_log'] && !$settings['rules_debug']) {
     return;
   }
   if (!isset($logger)) {
     $logger = RulesLog::logger();
   }
-  $path = isset($element) ? RulesPluginUI::path($element->root()->name, 'edit', $element) : NULL;
+  $path = isset($element) && isset($element->root()->name) ? RulesPluginUI::path($element->root()->name, 'edit', $element) : NULL;
   $logger->log($msg, $args, $priority, $scope, $path);
 }
 
@@ -216,12 +226,12 @@ function rules_fetch_data($hook) {
  * Gets a rules cache entry.
  */
 function &rules_get_cache($cid = 'data') {
-  static $cache;
-
-  if (!isset($cache)) {
-    // Speed up multiple calls by using drupal_static only for initializing.
-    $cache = &drupal_static(__FUNCTION__, array());
+  // Make use of the fast, advanced drupal static pattern.
+  static $drupal_static_fast;
+  if (!isset($drupal_static_fast)) {
+    $drupal_static_fast['cache'] = &drupal_static(__FUNCTION__, array());
   }
+  $cache = &$drupal_static_fast['cache'];
 
   if (!isset($cache[$cid])) {
     // The main 'data' cache includes translated strings, so each language is
@@ -231,16 +241,21 @@ function &rules_get_cache($cid = 'data') {
     if ($get = cache_get($cid . $cid_suffix, 'cache_rules')) {
       $cache[$cid] = $get->data;
     }
-    elseif (!isset($cache['data']) && $cid != 'data') {
-      // Cache hasn't been initialized yet, do that by retrieving 'data' cache.
-      rules_get_cache('data');
-      return rules_get_cache($cid);
-    }
-    elseif (!isset($cache['data'])) {
+    elseif ($cid === 'data') {
       // There is no 'data' cache so we need to rebuild it. Make sure subsequent
       // cache gets of the main 'data' cache during rebuild get the interim
       // cache by passing in the reference of the static cache variable.
       _rules_rebuild_cache($cache['data']);
+    }
+    elseif (strpos($cid, 'comp_') === 0) {
+      $cache[$cid] = FALSE;
+      _rules_rebuild_component_cache();
+      return $cache[$cid];
+    }
+    elseif (strpos($cid, 'event_') === 0) {
+      $cache[$cid] = FALSE;
+      RulesEventSet::rebuildEventCache();
+      return $cache[$cid];
     }
     else {
       $cache[$cid] = FALSE;
@@ -253,8 +268,8 @@ function &rules_get_cache($cid = 'data') {
  * Rebuilds the rules cache.
  *
  * This rebuilds the rules 'data' cache and invokes rebuildCache() methods on
- * all plugin classes, which in turn rebuild their own caches or update the
- * main cache. The cache is rebuilt in the order the plugins are defined.
+ * all plugin classes, which allows plugins to add their own data to the cache.
+ * The cache is rebuilt in the order the plugins are defined.
  *
  * Note that building the action/condition info cache triggers loading of all
  * components, thus depends on entity-loading and so syncing entities in code
@@ -274,6 +289,32 @@ function _rules_rebuild_cache(&$cache) {
   }
   $cid_suffix = ':' . $GLOBALS['language']->language;
   cache_set('data' . $cid_suffix, $cache, 'cache_rules');
+}
+
+/**
+ * Cache components to allow efficient usage via rules_invoke_component().
+ *
+ * @see rules_invoke_component()
+ * @see rules_get_cache()
+ */
+function _rules_rebuild_component_cache() {
+  $components = rules_get_components();
+
+  foreach ($components as $id => $component) {
+    // If a component is marked as dirty, check if this still applies.
+    if ($component->dirty) {
+      rules_config_update_dirty_flag($component);
+    }
+    if (!$component->dirty) {
+      // Clone the component to avoid modules getting the to be cached
+      // version from the static loading cache.
+      $component = clone $component;
+      $component->optimize();
+      // Allow modules to alter the cached component.
+      drupal_alter('rules_component', $component->plugin, $component);
+      rules_set_cache('comp_' . $component->name, $component);
+    }
+  }
 }
 
 /**
@@ -308,6 +349,7 @@ function rules_clear_cache() {
   variable_del('rules_empty_sets');
   drupal_static_reset('rules_get_cache');
   drupal_static_reset('rules_fetch_data');
+  drupal_static_reset('rules_config_update_dirty_flag');
   entity_get_controller('rules_config')->resetCache();
 }
 
@@ -570,8 +612,10 @@ function rules_entity_info() {
         'name' => 'name',
         'label' => 'label',
       ),
+      'module' => 'rules',
       'static cache' => TRUE,
       'bundles' => array(),
+      'configuration' => TRUE,
       'exportable' => TRUE,
       'export' => array(
         'default hook' => 'default_rules_configuration',
@@ -680,16 +724,28 @@ function rules_config_delete(array $ids) {
 }
 
 /**
- * Ensures the configuration's 'dirty' flag is up to date.
+ * Ensures the configuration's 'dirty' flag is up to date by running an integrity check.
  *
  * @param $update
- *   Whether the dirty flag is also updated in the database if necessary.
+ *   (optional) Whether the dirty flag is also updated in the database if
+ *   necessary. Defaults to TRUE.
  */
 function rules_config_update_dirty_flag($rules_config, $update = TRUE) {
+  // Keep a log of already check configurations to avoid repetitive checks on
+  // oftent used components.
+  // @see rules_element_invoke_component_validate()
+  $checked = &drupal_static(__FUNCTION__, array());
+  if (!empty($checked[$rules_config->name])) {
+    return;
+  }
+  $checked[$rules_config->name] = TRUE;
+
   $was_dirty = !empty($rules_config->dirty);
   try {
-    $rules_config->integrityCheck();
+    // First set the rule to dirty, so any repetitive checks give green light
+    // for this configuration.
     $rules_config->dirty = FALSE;
+    $rules_config->integrityCheck();
     if ($was_dirty) {
       $variables = array('%label' => $rules_config->label(), '%name' => $rules_config->name, '@plugin' => $rules_config->plugin());
       watchdog('rules', 'The @plugin %label (%name) was marked dirty, but passes the integrity check now and is active again.', $variables, WATCHDOG_INFO);
@@ -897,6 +953,28 @@ function rules_array_key($array) {
 }
 
 /**
+ * Clean replacements so they are URL friendly.
+ *
+ * Can be used as 'cleaning callback' for action or condition parameters.
+ *
+ * @param $replacements
+ *   An array of token replacements that need to be "cleaned" for use in the URL.
+ * @param $data
+ *   An array of objects used to generate the replacements.
+ * @param $options
+ *   An array of options used to generate the replacements.
+ *
+ * @see rules_path_action_info()
+ */
+function rules_path_clean_replacement_values(&$replacements, $data = array(), $options = array()) {
+  // Include path.eval.inc which contains path cleaning functions.
+  module_load_include('inc', 'rules', 'modules/path.eval');
+  foreach ($replacements as $token => $value) {
+    $replacements[$token] = rules_clean_path($value);
+  }
+}
+
+/**
  * Implements hook_theme().
  */
 function rules_theme() {
@@ -937,6 +1015,10 @@ function rules_theme() {
       'render element' => 'element',
       'file' => 'ui/ui.theme.inc',
     ),
+    'rules_settings_help' => array(
+      'variables' => array('text' => '', 'heading' => ''),
+      'file' => 'ui/ui.theme.inc',
+    ),
   );
 }
 
@@ -944,7 +1026,7 @@ function rules_theme() {
  * Implements hook_permission().
  */
 function rules_permission() {
-  return array(
+  $perms = array(
     'administer rules' => array(
       'title' => t('Administer rule configurations'),
       'description' => t('Administer rule configurations including events, conditions and actions for which the user has sufficient access permissions.'),
@@ -958,6 +1040,30 @@ function rules_permission() {
       'title' => t('Access the Rules debug log'),
     ),
   );
+
+  // Fetch all components to generate the access keys.
+  $conditions['plugin'] = array_keys(rules_filter_array(rules_fetch_data('plugin_info'), 'component', TRUE));
+  $conditions['access_exposed'] = 1;
+  $components = entity_load('rules_config', FALSE, $conditions);
+  $perms += rules_permissions_by_component($components);
+
+  return $perms;
+}
+
+/**
+ * Helper function to get all the permissions for components that have access exposed.
+ */
+function rules_permissions_by_component(array $components = array()) {
+  $perms = array();
+  foreach ($components as $component) {
+    $perms += array(
+      "use Rules component $component->name" => array(
+        'title' => t('Use Rules component %component', array('%component' => $component->label())),
+        'description' => t('Controls access for using the component %component via the provided action or condition. <a href="@component-edit-url">Edit this component.</a>', array('%component' => $component->label(), '@component-edit-url' => url(RulesPluginUI::path($component->name)))),
+      ),
+    );
+  }
+  return $perms;
 }
 
 /**
@@ -1300,4 +1406,3 @@ function rules_help($path, $arg) {
     return render($output);
   }
 }
-

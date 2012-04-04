@@ -52,7 +52,7 @@ function rules_element_invoke_component($arguments, RulesPlugin $element) {
     return $return;
   }
   else {
-    throw new RulesEvaluationException('Unable to get the component %name', array('%name' => $info['#config_name']), $element);
+    throw new RulesEvaluationException('Unable to get the component %name', array('%name' => $info['#config_name']), $element, RulesLog::ERROR);
   }
 }
 
@@ -147,7 +147,34 @@ class RulesDateOffsetProcessor extends RulesDataProcessor {
 
   public function process($value, $info, RulesState $state, RulesPlugin $element) {
     $value = isset($this->processor) ? $this->processor->process($value, $info, $state, $element) : $value;
-    return $value + $this->setting['value'];
+    return RulesDateOffsetProcessor::applyOffset($value, $this->setting['value']);
+  }
+
+  /**
+   * Intelligently applies the given date offset in seconds.
+   *
+   * Intelligently apply duration values > 1 day, i.e. convert the duration
+   * to its biggest possible unit (months, days) and apply it to the date with
+   * the given unit. That's necessary as the number of days in a month
+   * differs, as well as the number of hours for a day (on DST changes).
+   */
+  public static function applyOffset($timestamp, $offset) {
+    if (abs($offset) >= 86400) {
+
+      // Get the days out of the seconds.
+      $days = intval($offset / 86400);
+      $sec = $offset % 86400;
+      // Get the months out of the number of days.
+      $months = intval($days / 30);
+      $days = $days % 30;
+
+      // Apply the offset using the DateTime::modify and convert it back to a
+      // timestamp.
+      return date_create("@$timestamp")->modify("$months months $days days $sec seconds")->format('U');
+    }
+    else {
+      return $timestamp + $offset;
+    }
   }
 }
 

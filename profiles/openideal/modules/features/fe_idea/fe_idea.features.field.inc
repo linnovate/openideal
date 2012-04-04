@@ -141,7 +141,7 @@ function fe_idea_field_default_fields() {
         'module' => 'radioactivity',
         'settings' => array(),
         'type' => 'radioactivity_basic_widget',
-        'weight' => '11',
+        'weight' => '9',
       ),
     ),
   );
@@ -202,7 +202,7 @@ function fe_idea_field_default_fields() {
         'module' => 'radioactivity',
         'settings' => array(),
         'type' => 'radioactivity_basic_widget',
-        'weight' => '12',
+        'weight' => '10',
       ),
     ),
   );
@@ -352,7 +352,7 @@ function fe_idea_field_default_fields() {
         'module' => 'options',
         'settings' => array(),
         'type' => 'options_select',
-        'weight' => '6',
+        'weight' => '7',
       ),
     ),
   );
@@ -413,7 +413,7 @@ function fe_idea_field_default_fields() {
         'module' => 'radioactivity',
         'settings' => array(),
         'type' => 'radioactivity_basic_widget',
-        'weight' => '13',
+        'weight' => '11',
       ),
     ),
   );
@@ -485,14 +485,14 @@ function fe_idea_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-idea-field_project_ref'
-  $fields['node-idea-field_project_ref'] = array(
+  // Exported field: 'node-idea-field_merge_to'
+  $fields['node-idea-field_merge_to'] = array(
     'field_config' => array(
       'active' => '1',
       'cardinality' => '1',
       'deleted' => '0',
       'entity_types' => array(),
-      'field_name' => 'field_project_ref',
+      'field_name' => 'field_merge_to',
       'foreign keys' => array(),
       'indexes' => array(
         'target_entity' => array(
@@ -511,11 +511,10 @@ function fe_idea_field_default_fields() {
             'type' => 'none',
           ),
           'target_bundles' => array(
-            'project' => 'project',
+            'idea' => 'idea',
           ),
         ),
         'handler_submit' => 'Change handler',
-        'profile2_private' => FALSE,
         'target_type' => 'node',
       ),
       'translatable' => '0',
@@ -531,21 +530,26 @@ function fe_idea_field_default_fields() {
           'label' => 'above',
           'module' => 'entityreference',
           'settings' => array(
-            'view_mode' => 'teaser',
+            'link' => FALSE,
           ),
-          'type' => 'entityreference_entity_view',
-          'weight' => '0',
-        ),
-        'teaser' => array(
-          'label' => 'above',
+          'type' => 'entityreference_label',
+          'weight' => 9,
+          'label' => 'hidden',
           'settings' => array(),
           'type' => 'hidden',
-          'weight' => '8',
+          'weight' => '9',
+        ),
+        'teaser' => array(
+          'label' => 'hidden',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+          'weight' => '9',
         ),
       ),
       'entity_type' => 'node',
-      'field_name' => 'field_project_ref',
-      'label' => 'Is Part Of A Project',
+      'field_name' => 'field_merge_to',
+      'label' => 'Merge to',
       'required' => 0,
       'settings' => array(
         'user_register_form' => FALSE,
@@ -559,66 +563,7 @@ function fe_idea_field_default_fields() {
           'size' => '60',
         ),
         'type' => 'entityreference_autocomplete',
-        'weight' => '5',
-      ),
-    ),
-  );
-
-  // Exported field: 'node-idea-field_radioactivity'
-  $fields['node-idea-field_radioactivity'] = array(
-    'field_config' => array(
-      'active' => '1',
-      'cardinality' => '1',
-      'deleted' => '0',
-      'entity_types' => array(),
-      'field_name' => 'field_radioactivity',
-      'foreign keys' => array(),
-      'indexes' => array(),
-      'module' => 'radioactivity',
-      'settings' => array(
-        'profile2_private' => FALSE,
-      ),
-      'translatable' => '0',
-      'type' => 'radioactivity',
-    ),
-    'field_instance' => array(
-      'bundle' => 'idea',
-      'default_value' => array(
-        0 => array(
-          'radioactivity_energy' => '1000',
-          'radioactivity_timestamp' => '1329396949',
-        ),
-      ),
-      'deleted' => '0',
-      'description' => '',
-      'display' => array(
-        'default' => array(
-          'label' => 'hidden',
-          'settings' => array(),
-          'type' => 'hidden',
-          'weight' => '9',
-        ),
-        'teaser' => array(
-          'label' => 'above',
-          'settings' => array(),
-          'type' => 'hidden',
-          'weight' => '9',
-        ),
-      ),
-      'entity_type' => 'node',
-      'field_name' => 'field_radioactivity',
-      'label' => 'Radioactivity',
-      'required' => 0,
-      'settings' => array(
-        'profile' => 'clone_of_default',
-        'user_register_form' => FALSE,
-      ),
-      'widget' => array(
-        'active' => 0,
-        'module' => 'radioactivity',
-        'settings' => array(),
-        'type' => 'radioactivity_basic_widget',
-        'weight' => '8',
+        'weight' => '6',
       ),
     ),
   );
@@ -682,7 +627,7 @@ function fe_idea_field_default_fields() {
         'module' => 'vud_field',
         'settings' => array(),
         'type' => 'vud_field_default_widget',
-        'weight' => '0',
+        'weight' => '1',
       ),
     ),
   );
@@ -695,9 +640,8 @@ function fe_idea_field_default_fields() {
   t('Groove Idea');
   t('In Action');
   t('Is Part Of A Challenge');
-  t('Is Part Of A Project');
+  t('Merge to');
   t('Please share you idea.');
-  t('Radioactivity');
   t('Vote');
   t('Your Idea');
 

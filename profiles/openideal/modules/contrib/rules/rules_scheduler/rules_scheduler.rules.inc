@@ -94,7 +94,7 @@ function rules_scheduler_action_schedule($args, $element) {
     ));
   }
   else {
-    throw new RulesEvaluationException('Unable to get the component %name', array('%name' => $args['component']), $element);
+    throw new RulesEvaluationException('Unable to get the component %name', array('%name' => $args['component']), $element, RulesLog::ERROR);
   }
 }
 
@@ -120,30 +120,16 @@ function rules_scheduler_action_schedule_info_alter(&$element_info, RulesPlugin 
  * @see rules_element_invoke_component_validate()
  */
 function rules_scheduler_action_schedule_validate(RulesPlugin $element) {
-  $recursion = &drupal_static('rules_element_invoke_component_validate', array());
-
-  // Bail out in case of recursive checks to avoid infinite loops. This is
-  // necessary when handling components that directly or indirectly call itself.
-  if (!empty($recursion[$element->root()->name])) {
-    return;
-  }
-  $recursion[$element->root()->name] = TRUE;
-
   $info = $element->info();
   $component = rules_config_load($element->settings['component']);
   if (!$component) {
-    unset($recursion[$element->root()->name]);
     throw new RulesIntegrityException(t('The component %config does not exist.', array('%config' => $element->settings['component'])), $element);
   }
-  try {
-    $component->integrityCheck();
+  // Check if the component is marked as dirty.
+  rules_config_update_dirty_flag($component);
+  if (!empty($component->dirty)) {
+    throw new RulesIntegrityException(t('The utilized component %config fails the integrity check.', array('%config' => $element->settings['component'])), $element);
   }
-  catch (RulesIntegrityException $e) {
-    unset($recursion[$element->root()->name]);
-    throw new RulesIntegrityException(t('The component %config fails the integrity check. Error: !message', array('%config' => $element->settings['component'], '!message' => $e->getMessage())), $element);
-  }
-
-  unset($recursion[$element->root()->name]);
 }
 
 /**

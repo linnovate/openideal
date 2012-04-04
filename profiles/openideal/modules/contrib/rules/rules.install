@@ -87,6 +87,13 @@ function rules_schema() {
         'length' => 255,
         'not null' => FALSE,
       ),
+      'access_exposed' => array(
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+        'size' => 'tiny',
+        'description' => 'Whether to use a permission to control access for using components.',
+      ),
       'data' => array(
         'type' => 'blob',
         'size' => 'big',
@@ -398,4 +405,32 @@ function rules_update_7205() {
  */
 function rules_update_7206() {
   // The update system is going to flush all caches anyway, so nothing to do.
+}
+
+/**
+ * Flush all caches.
+ */
+function rules_update_7207() {
+  // The update system is going to flush all caches anyway, so nothing to do.
+}
+
+/**
+ * Flush all caches to update the data_is_empty condition info.
+ */
+function rules_update_7208() {
+  // The update system is going to flush all caches anyway, so nothing to do.
+}
+
+/**
+ * Creates a flag that enables a permission for using components.
+ */
+function rules_update_7209() {
+  // Create a access exposed flag column.
+  db_add_field('rules_config', 'access_exposed', array(
+    'type' => 'int',
+    'not null' => TRUE,
+    'default' => 0,
+    'size' => 'tiny',
+    'description' => 'Whether to use a permission to control access for using components.',
+  ));
 }

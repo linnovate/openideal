@@ -9,7 +9,7 @@ Maintainers:
 The Rules module allows site administrators to define conditionally executed
 actions based on occurring events (ECA-rules).
 
-Poject homepage: http://drupal.org/project/rules
+Project homepage: http://drupal.org/project/rules
 
 
 Installation
@@ -57,7 +57,7 @@ Upgrade from Rules 6.x-1.x to Rules 7.x-2.x
      * At this page, you may choose the Rules 1.x rules and rule sets to upgrade
        and whether the converted configurations should be immediately saved to
        your database or whether the configuration export should be generated.
-     * Note that for importing a export the export needs to pass the
+     * Note that for importing an export the export needs to pass the
        configuration integrity check, what might be troublesome if the
        conversion was not 100% successful. In that case, try choosing the
        immediate saving method and correct the configuration after conversion.  

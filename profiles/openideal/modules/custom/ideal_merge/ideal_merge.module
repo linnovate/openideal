@@ -1,0 +1,74 @@
+<?php
+//function ideal_merge_init() {
+//  $node = menu_get_object();
+//  // Set reference to the referenced - reference.
+//$wrp = entity_metadata_wrapper('node', $node);
+////var_dump($wrp->field_merge_to->field_merge_to->value());
+////$wrp->field_merge_to->set($wrp->field_merge_to->field_merge_to->value());
+////$wrp->save();
+////dpm($wrp->field_merge_to->value());
+////dpm($wrp->field_merge_to->field_merge_to->value());
+////$wrp->field_merge_to->set($wrp->field_merge_to->field_merge_to->value());
+//
+//}
+
+/*
+ * Implementation of hook_node_presave()
+ * 
+ */
+function ideal_merge_node_presave(&$node) {
+//  if ($node->type == "idea") {
+//    // see if the idea had a project ref before
+//    $wrp_old = entity_metadata_wrapper('node', $node->nid);
+//    $project_ref_old = $wrp_old->field_merge_of->value();
+//    // see if the idea has a project ref now
+//    $wrp = entity_metadata_wrapper('node', $node);
+//    $project_ref = $wrp->field_merge_of->value();
+//    
+//    // If there was no project ref before, and there is now:
+//    if (empty($project_ref_old) && !empty($project_ref)) {
+//      
+//      // close the idea to new comments
+////      $wrp->comment->set(1);
+////      
+////      // set the in_action field to the first option
+////      $in_action_values = field_info_field('field_in_action');
+////      $in_action_values = array_shift($in_action_values['settings']['allowed_values']);
+////      $wrp->field_in_action->set($in_action_values);
+//
+//      // get the project node
+//      $project_wrp = entity_metadata_wrapper('node', $project_ref);
+//      
+//      // give the project the idea's radioactivity
+//      $project_wrp->field_radioactivity->set($wrp->field_radioactivity->value() + $project_wrp->field_radioactivity->value());
+//      $project_wrp->save();
+//      
+//      // give the project the idea's votes
+//        // get the idea's votes
+////      $idea_votes = votingapi_select_results(array('entity_id' => $node->nid));
+////        // get the project's votes
+////      $project_votes = votingapi_select_results(array('entity_id' => $project_ref->nid));
+////        // add them up
+////      $vote = array(
+////        'value' => $idea_votes[3]['value'] + $project_votes[3]['value'],  
+////        'entity_id' => $project_ref->nid,
+////        'value_type' => 'points',   
+////      );
+////      $votes = array(0 => $vote);
+////        // set votes
+////      $vote = votingapi_set_votes($votes);     
+//    }
+//  }
+}
+
+/**
+ * Implements hook_flag().
+ */
+function ideal_merge_flag($action, $flag, $content_id, $account) {
+//  if ($action == 'flag' && $flag->name == 'merged_idea') {
+//    // Set reference to the referenced - reference.
+//    $wrp = entity_metadata_wrapper('node', $content_id);
+//    $wrp->field_merge_to->set($wrp->field_merge_to->field_merge_to->value());
+//    $wrp->save();
+//  }
+}

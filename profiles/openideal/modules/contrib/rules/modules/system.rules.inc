@@ -90,7 +90,6 @@ function _rules_system_watchdog_log_entry_info() {
   );
 }
 
-
 /**
  * Implements hook_rules_action_info() on behalf of the system module.
  */
@@ -104,6 +103,7 @@ function rules_system_action_info() {
           'type' => 'text',
           'label' => t('Message'),
           'sanitize' => TRUE,
+          'translatable' => TRUE,
         ),
         'type' => array(
           'type' => 'token',
@@ -161,6 +161,7 @@ function rules_system_action_info() {
           'type' => 'list<text>',
           'label' => t('Titles'),
           'description' => t('A list of titles for the breadcrumb links.'),
+          'translatable' => TRUE,
         ),
         'paths' => array(
           'type' => 'list<text>',
@@ -184,17 +185,28 @@ function rules_system_action_info() {
           'type' => 'text',
           'label' => t('Subject'),
           'description' => t("The mail's subject."),
+          'translatable' => TRUE,
         ),
         'message' => array(
           'type' => 'text',
           'label' => t('Message'),
           'description' => t("The mail's message body."),
+          'translatable' => TRUE,
         ),
         'from' => array(
           'type' => 'text',
           'label' => t('From'),
           'description' => t("The mail's from address. Leave it empty to use the site-wide configured address."),
           'optional' => TRUE,
+        ),
+        'language' => array(
+          'type' => 'token',
+          'label' => t('Language'),
+          'description' => t('If specified, the language used for getting the mail message and subject.'),
+          'options list' => 'entity_metadata_language_list',
+          'optional' => TRUE,
+          'default value' => LANGUAGE_NONE,
+          'default mode' => 'selector',
         ),
       ),
       'base' => 'rules_action_mail',

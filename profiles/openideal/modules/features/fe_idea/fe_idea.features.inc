@@ -152,6 +152,78 @@ function fe_idea_flag_default_flags() {
     ),
     'api_version' => 2,
   );
+  // Exported flag: "Merged Idea".
+  $flags['merged_idea'] = array(
+    'content_type' => 'node',
+    'title' => 'Merged Idea',
+    'global' => '1',
+    'types' => array(
+      0 => 'idea',
+    ),
+    'flag_short' => 'flag as merged idea',
+    'flag_long' => '',
+    'flag_message' => '',
+    'unflag_short' => 'unflag as merged idea',
+    'unflag_long' => '',
+    'unflag_message' => '',
+    'unflag_denied_text' => '',
+    'link_type' => 'toggle',
+    'roles' => array(
+      'flag' => array(
+        0 => '3',
+      ),
+      'unflag' => array(
+        0 => '3',
+      ),
+    ),
+    'show_on_page' => 1,
+    'show_on_teaser' => 1,
+    'show_on_form' => 0,
+    'access_author' => '',
+    'i18n' => 0,
+    'api_version' => 2,
+    'module' => 'fe_idea',
+    'locked' => array(
+      0 => 'name',
+    ),
+  );
+  // Exported flag: "Worth checking".
+  $flags['worth_checking'] = array(
+    'content_type' => 'node',
+    'title' => 'Worth checking',
+    'global' => '1',
+    'types' => array(
+      0 => 'idea',
+    ),
+    'flag_short' => 'flag as worth checking',
+    'flag_long' => '',
+    'flag_message' => '',
+    'unflag_short' => 'unflag as worth checking',
+    'unflag_long' => '',
+    'unflag_message' => '',
+    'unflag_denied_text' => '',
+    'link_type' => 'toggle',
+    'roles' => array(
+      'flag' => array(
+        0 => '3',
+        1 => '5',
+      ),
+      'unflag' => array(
+        0 => '3',
+        1 => '5',
+      ),
+    ),
+    'show_on_page' => 1,
+    'show_on_teaser' => 1,
+    'show_on_form' => 0,
+    'access_author' => '',
+    'i18n' => 0,
+    'module' => 'fe_idea',
+    'locked' => array(
+      0 => 'name',
+    ),
+    'api_version' => 2,
+  );
   return $flags;
 }
 

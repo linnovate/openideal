@@ -312,7 +312,9 @@ function page_manager_list_pages_form($form, &$form_state) {
     '#attributes' => array('class' => array('use-ajax-submit')),
   );
 
-  $form['#attached']['js'] = array('misc/ajax.js', 'misc/progress.js', 'misc/jquery.form.js', ctools_attach_js('auto-submit'), ctools_attach_js('page-list', 'page_manager'));
+  $form['#attached']['js'] = array(ctools_attach_js('auto-submit'), ctools_attach_js('page-list', 'page_manager'));
+  $form['#attached']['library'][] = array('system', 'drupal.ajax');
+  $form['#attached']['library'][] = array('system', 'jquery.form');
   $form['#prefix'] = '<div class="clearfix">';
   $form['#suffix'] = '</div>';
   $form['#attributes'] = array('class' => array('ctools-auto-submit-full-form'));
@@ -1087,7 +1089,7 @@ function page_manager_edit_page_cancel(&$form_state) {
  * - - 'collapsible': If TRUE the collapsible tool will be used.
  */
 function page_manager_render_operations(&$page, $operations, $active_trail, $attributes, $location, $parents = array()) {
-  drupal_add_js('misc/ajax.js');
+  drupal_add_library('system', 'drupal.ajax');
 
   if (!isset($output[$location])) {
     $output[$location] = '';

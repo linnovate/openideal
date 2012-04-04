@@ -275,3 +275,13 @@ function theme_rules_autocomplete($variables) {
 
   return $output;
 }
+
+/**
+ * General theme function for displaying settings related help.
+ * @ingroup themeable
+ */
+function theme_rules_settings_help($variables) {
+  $text = $variables['text'];
+  $heading = $variables['heading'];
+  return "<p class=\"rules-settings-help\"><strong>$heading:</strong> $text</p>";
+}

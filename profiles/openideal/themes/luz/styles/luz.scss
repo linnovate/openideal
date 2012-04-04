@@ -371,15 +371,28 @@
   ul.userpoints-links {
     list-style: none;
     li {
+      display: inline-block;
       float: left;
-      margin: 0 15px;
+      margin: 4px 0 0 32px;
     }
   }
   .field-name-field-user-date-birth {
-    clear: both;
+   clear: none;
+   color: #333333;
+   font-size: 16px;
+   padding: 40px 0;
   }
 }
-
+// Heartbeat Stream
+#heartbeat-stream-userpage_activity {
+  img {
+    margin-right: 10px;
+  }
+}
+// Watcher 
+.watcher_node {
+  float: right;
+}
 // Idea(s)
 .field-name-field-category {
   clear: both;

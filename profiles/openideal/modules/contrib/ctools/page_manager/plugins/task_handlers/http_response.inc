@@ -129,9 +129,9 @@ function page_manager_http_response_admin_summary($handler, $task, $subtask, $pa
   $plugin = page_manager_get_task_handler($handler->handler);
 
   $object = ctools_context_handler_get_task_object($task, $subtask, $handler);
-  $display->context = ctools_context_load_contexts($object, TRUE);
+  $context = ctools_context_load_contexts($object, TRUE);
 
-  $access = ctools_access_group_summary(!empty($handler->conf['access']) ? $handler->conf['access'] : array(), $display->context);
+  $access = ctools_access_group_summary(!empty($handler->conf['access']) ? $handler->conf['access'] : array(), $context);
   if ($access) {
     $access = t('This panel will be selected if @conditions.', array('@conditions' => $access));
   }
@@ -271,14 +271,14 @@ function page_manager_http_response_render($handler, $base_contexts, $args, $tes
     $url = parse_url($path);
     if (isset($url['query'])) {
       $path = strtr($path, array('?' . $url['query'] => ''));
-      $info['query'] = $url['query'];
+      $info['query'] = drupal_get_query_array($url['query']);
     }
     if (isset($url['fragment'])) {
       $path = strtr($path, array('#' . $url['fragment'] => ''));
       $info['fragment'] = $url['fragment'];
     }
 
-    $info['destination'] = $path;
+    $info['destination'] = rtrim($path, '?');
   }
 
   return $info;

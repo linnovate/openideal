@@ -12,7 +12,6 @@
  * Action implementation: Path alias.
  */
 function rules_action_path_alias($source, $alias, $langcode = LANGUAGE_NONE) {
-  $alias = rules_clean_path($alias);
   if (!$alias) {
     path_delete(array('source' => $source, 'language' => $langcode));
   }
@@ -39,7 +38,6 @@ function rules_action_path_alias($source, $alias, $langcode = LANGUAGE_NONE) {
  * Action Implementation: Set the URL alias for a node.
  */
 function rules_action_node_path_alias($node, $alias) {
-  $alias = rules_clean_path($alias);
   $langcode = isset($node->language) ? $node->language : LANGUAGE_NONE;
   // Only set the alias if the alias is not taken yet.
   if (($path = path_load(array('alias' => $alias, 'language' => $langcode))) && (empty($node->path['pid']) || $node->path['pid'] != $path['pid'])) {
@@ -53,7 +51,6 @@ function rules_action_node_path_alias($node, $alias) {
  * Action Implementation: Set the URL alias for a node.
  */
 function rules_action_taxonomy_term_path_alias($term, $alias) {
-  $alias = rules_clean_path($alias);
   // Only set the alias if the alias is not taken yet.
   if (($path = path_load(array('alias' => $alias, 'language' => LANGUAGE_NONE))) && (empty($term->path['pid']) || $term->path['pid'] != $path['pid'])) {
     rules_log('The configured alias %alias already exists. Aborting.', array('%alias' => $alias));
@@ -73,17 +70,7 @@ function rules_condition_path_has_alias($source, $langcode = LANGUAGE_NONE) {
  * Condition implementation: Check if the URL alias exists.
  */
 function rules_condition_path_alias_exists($alias, $langcode = LANGUAGE_NONE) {
-  $alias = rules_clean_path($alias);
   return (bool) drupal_lookup_path('source', $alias, $langcode);
-}
-
-/**
- * Cleans the given path using the configured path cleaning method.
- */
-function rules_clean_path($path) {
-  // @todo Add a setting for choosing path cleaning callbacks.
-  $function = variable_get('rules_path_cleaning_callback', 'rules_path_default_cleaning_method');
-  return $function($path);
 }
 
 /**
@@ -103,14 +90,57 @@ function rules_path_default_cleaning_method($path) {
       $path = transliteration_get($path);
     }
 
-    $array = variable_get('rules_clean_path', array('/[^a-zA-Z0-9\/\-_]+/', $replace));
+    $array = variable_get('rules_clean_path', array('/[^a-zA-Z0-9\-_]+/', $replace));
     $array[2] = $path;
     // Replace it and remove trailing and leading replacement characters.
-    return trim(call_user_func_array('preg_replace', $array), $replace);
+    $output = trim(call_user_func_array('preg_replace', $array), $replace);
+
+    if (variable_get('rules_path_lower_case', TRUE)) {
+      $output = drupal_strtolower($output);
+    }
+    return $output;
   }
   else {
     return $path;
   }
+}
+
+/**
+ * Cleans the given string so it can be used as part of a URL path.
+ */
+function rules_clean_path($path) {
+  $function = variable_get('rules_path_cleaning_callback', 'rules_path_default_cleaning_method');
+  if (!function_exists($function)) {
+    rules_log('An invalid URL path cleaning callback has been configured. Falling back to the default cleaning method.', array(), RulesLog::WARN);
+    $function = 'rules_path_default_cleaning_method';
+  }
+  return $function($path);
+}
+
+/**
+ * CTools path cleaning callback.
+ *
+ * @see rules_admin_settings()
+ */
+function rules_path_clean_ctools($path) {
+  // Make use of the CTools cleanstring implementation.
+  ctools_include('cleanstring');
+  $settings = array(
+    'separator' => variable_get('rules_path_replacement_char', '-'),
+    'transliterate' => module_exists('transliteration') && variable_get('rules_path_transliteration', TRUE),
+    'lower case' => variable_get('rules_path_lower_case', TRUE),
+  );
+  return ctools_cleanstring($path, $settings);
+}
+
+/**
+ * Pathauto path cleaning callback.
+ *
+ * @see rules_admin_settings()
+ */
+function rules_path_clean_pathauto($path) {
+  module_load_include('inc', 'pathauto');
+  return pathauto_cleanstring($path);
 }
 
 /**

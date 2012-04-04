@@ -335,6 +335,11 @@ class Rule extends RulesActionContainer {
     }
     return $provides;
   }
+
+  public function resetInternalCache() {
+    parent::resetInternalCache();
+    $this->conditions->resetInternalCache();
+  }
 }
 
 /**
@@ -420,23 +425,29 @@ class RulesReactionRule extends Rule implements RulesTriggerableInterface {
   }
 
   public function availableVariables() {
-    if (isset($this->parent)) {
-      // Return the event variables provided by the event set, once cached.
-      return $this->parent->stateVariables();
-    }
-    //TODO: Once we have event_info caching make use of it.
-    $event_info = rules_fetch_data('event_info');
-    $events = array_intersect($this->events, array_keys($event_info));
-    foreach ($events as $event) {
-      $event_info[$event] += array('variables' => array());
-      if (!isset($vars)) {
-        $vars = $event_info[$event]['variables'];
+    if (!isset($this->availableVariables)) {
+      if (isset($this->parent)) {
+        // Return the event variables provided by the event set, once cached.
+        $this->availableVariables = $this->parent->stateVariables();
       }
       else {
-        $vars = array_intersect_key($vars, $event_info[$event]['variables']);
+        // The intersection of the variables provided by the events are
+        // available.
+        $event_info = rules_fetch_data('event_info');
+        $events = array_intersect($this->events, array_keys($event_info));
+        foreach ($events as $event) {
+          $event_info[$event] += array('variables' => array());
+          if (isset($this->availableVariables)) {
+            $this->availableVariables = array_intersect_key($this->availableVariables, $event_info[$event]['variables']);
+          }
+          else {
+            $this->availableVariables = $event_info[$event]['variables'];
+          }
+        }
+        $this->availableVariables = isset($this->availableVariables) ? RulesState::defaultVariables() + $this->availableVariables : RulesState::defaultVariables();
       }
     }
-    return parent::availableVariables() + (isset($vars) ? $vars : array());
+    return $this->availableVariables;
   }
 
   public function __sleep() {
@@ -686,49 +697,70 @@ class RulesEventSet extends RulesRuleSet {
     rules_log('Finished reacting on event %label.', array('%label' => $this->info['label']), RulesLog::INFO, NULL, FALSE);
   }
 
-  public function rebuildCache(&$itemInfo, &$cache) {
-    parent::rebuildCache($itemInfo, $cache);
+  /**
+   * Cache event-sets per event to allow efficient usage via rules_invoke_event().
+   *
+   * @see rules_get_cache()
+   * @see rules_invoke_event()
+   */
+  public static function rebuildEventCache() {
     // Set up the per-event cache.
     $events = rules_fetch_data('event_info');
-    $empty = array();
+    $sets = array();
+    // Add all rules associated with this event to an EventSet for caching.
+    $rules = rules_config_load_multiple(FALSE, array('plugin' => 'reaction rule', 'active' => TRUE));
 
-    foreach ($events as $name => $info) {
-      $info += array(
-        'variables' => isset($info['arguments']) ? $info['arguments'] : array(),
-      );
-      // Add all rules associated with this event to an EventSet for caching.
-      if ($rules = rules_config_load_multiple(FALSE, array('event' => $name, 'active' => TRUE))) {
-        $event = new RulesEventSet($info);
-        $event->name = $name;
-        foreach ($rules as $rule) {
+    foreach ($rules as $name => $rule) {
+      foreach ($rule->events() as $event) {
+        // Skip not defined events.
+        if (empty($events[$event])) {
+          continue;
+        }
+        // Create an event set if not yet done.
+        if (!isset($sets[$event])) {
+          $event_info = $events[$event] + array(
+            'variables' => isset($events[$event]['arguments']) ? $events[$event]['arguments'] : array(),
+          );
+          $sets[$event] = new RulesEventSet($event_info);
+          $sets[$event]->name = $event;
+        }
+
+        // If a rule is marked as dirty, check if this still applies.
+        if ($rule->dirty) {
           rules_config_update_dirty_flag($rule);
-          if (!$rule->dirty) {
-            // Clone the rule to avoid modules getting the changed version from
-            // the static cache.
-            $event->rule(clone $rule);
-          }
         }
-        if ($event->children) {
-          $event->sortChildren();
-          $event->optimize();
-          // Allow modules to alter the cached event set.
-          drupal_alter('rules_event_set', $name, $event);
-          rules_set_cache('event_' . $name, $event);
-        }
-        else {
-          $empty[] = $name;
+        if (!$rule->dirty) {
+          // Clone the rule to avoid modules getting the changed version from
+          // the static cache.
+          $sets[$event]->rule(clone $rule);
         }
       }
-      else {
-        $empty[] = $name;
-      }
+    }
+
+    // Create cache items for all created sets.
+    foreach ($sets as $event => $set) {
+      $set->sortChildren();
+      $set->optimize();
+      // Allow modules to alter the cached event set.
+      drupal_alter('rules_event_set', $event, $set);
+      rules_set_cache('event_' . $event, $set);
     }
     // Cache a list of empty sets so we can use it to speed up later calls.
     // See rules_get_event_set().
-    variable_set('rules_empty_sets', array_flip($empty));
+    $empty_events = array_keys(array_diff_key($events, $sets));
+    variable_set('rules_empty_sets', array_flip($empty_events));
   }
 
   protected function stateVariables($element = NULL) {
     return $this->availableVariables();
+  }
+
+  /**
+   * Do not save since this class is for caching purposes only.
+   *
+   * @see RulesPlugin::save()
+   */
+  public function save($name = NULL, $module = 'rules') {
+    return FALSE;
   }
 }

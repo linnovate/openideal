@@ -104,7 +104,7 @@ function rules_admin_components_overview($form, &$form_state, $base_path) {
   }
   $form['help'] = array(
     '#type' => 'markup',
-    '#markup' => t('Components are stand-alone sets of Rules configuration that can be used by Rules and other modules on your site. Components are for example useful if you want to use the same conditions, actions or rules in multiple places, or call them from your custom module. You may also export each component separately. See <a href="@url2">the online documentation</a> for more information about how to use components.',
+    '#markup' => t('Components are stand-alone sets of Rules configuration that can be used by Rules and other modules on your site. Components are for example useful if you want to use the same conditions, actions or rules in multiple places, or call them from your custom module. You may also export each component separately. See <a href="@url">the online documentation</a> for more information about how to use components.',
       array('@url' => rules_external_help('components'))),
   );
   $form['filter'] = array(
@@ -145,6 +145,33 @@ function rules_admin_components_overview($form, &$form_state, $base_path) {
  * Rules settings form.
  */
 function rules_admin_settings($form, &$form_state) {
+
+  if (module_exists('path')) {
+    // Present a list of available path cleaning callbacks.
+    // @see rules_clean_path()
+    $options = array(
+      'rules_path_default_cleaning_method' => t('Rules (built in)'),
+    );
+    if (module_exists('ctools')) {
+      $options['rules_path_clean_ctools'] = t('CTools');
+    }
+    if (module_exists('pathauto')) {
+      $options['rules_path_clean_pathauto'] = t('Pathauto');
+      $pathauto_help = t("Note that Pathauto's URL path cleaning method can be configured at <a href='!url'>admin/config/search/path/settings</a>.", array('!url' => url('admin/config/search/path/settings')));
+    }
+    else {
+      $pathauto_help = t('Install the <a href="http://drupal.org/project/pathauto">Pathauto module</a> in order to get a configurable URL path cleaning method.');
+    }
+
+    $form['path']['rules_path_cleaning_callback'] = array(
+      '#type' => 'select',
+      '#title' => t('URL path cleaning method'),
+      '#description' => t('Choose the path cleaning method to be applied when generating URL path aliases.') . ' ' . $pathauto_help,
+      '#default_value' => variable_get('rules_path_cleaning_callback', 'rules_path_default_cleaning_method'),
+      '#options' => $options,
+    );
+  }
+
   $form['rules_log_errors'] = array(
     '#type' => 'radios',
     '#title' => t('Logging of Rules evaluation errors'),
@@ -208,7 +235,75 @@ function rules_admin_settings($form, &$form_state) {
   if (db_table_exists('rules_rules')) {
     drupal_set_message(t('There are left over rule configurations from a previous Rules 1.x installation. Proceed to the <a href="!url">upgrade page</a> to convert them and consult the README.txt for more details.', array('!url' => url('admin/config/workflow/rules/upgrade'))), 'warning');
   }
+
   return system_settings_form($form);
+}
+
+/**
+ * Advanced settings form.
+ */
+function rules_admin_settings_advanced($form, &$form_state) {
+
+  $form['integrity'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Integrity'),
+    '#description' => t('Rules checks the integrity of your configurations to discover and exclude broken configurations from evaluation.'),
+  );
+  $form['integrity']['start_integrity_check'] = array(
+    '#type' => 'submit',
+    '#value' => t('Recheck integrity'),
+    '#submit' => array('rules_admin_settings_integrity_check_submit'),
+  );
+  $form['cache'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Cache'),
+    '#description' => t('Rules caches information about available actions, conditions and data types. Additionally all components and reaction rules are cached for efficient evaluation.'),
+  );
+  $form['cache']['rebuild_rules_cache'] = array(
+    '#type' => 'submit',
+    '#value' => t("Rebuild Rules' cache"),
+    '#weight' => 2,
+    '#submit' => array('rules_admin_settings_cache_rebuild_submit'),
+  );
+  return $form;
+}
+
+/**
+ * Form submit callback to check the integrity of all configurations.
+ */
+function rules_admin_settings_integrity_check_submit($form, &$form_state) {
+  $start = microtime(TRUE);
+  $count = 0;
+  $rules_configs = rules_config_load_multiple(FALSE);
+  foreach ($rules_configs as $rules_config) {
+    rules_config_update_dirty_flag($rules_config, TRUE, TRUE);
+    if ($rules_config->dirty) {
+      $count++;
+      $variables = array('%label' => $rules_config->label(), '%name' => $rules_config->name, '@plugin' => $rules_config->plugin(), '!uri'=> url(RulesPluginUI::path($rules_config->name)));
+      drupal_set_message(t('The @plugin <a href="!uri">%label (%name)</a> fails the integrity check and cannot be executed.', $variables), 'error');
+    }
+
+  }
+  drupal_set_message(t('Integrity of %count configurations checked in %duration seconds. %count_failed broken configurations found.', array(
+    '%count' => count($rules_configs),
+    '%count_failed' => $count,
+    '%duration' => round(microtime(TRUE) - $start, 2),
+  )));
+}
+
+/**
+ * Form submit callback: Rebuild the Rules' cache.
+ */
+function rules_admin_settings_cache_rebuild_submit($form, &$form_state) {
+  $start = microtime(TRUE);
+  rules_clear_cache();
+  // Manually trigger cache rebuilding of all caches.
+  rules_get_cache();
+  _rules_rebuild_component_cache();
+  RulesEventSet::rebuildEventCache();
+  drupal_set_message(t('Rules cache rebuilt in %duration seconds.', array(
+    '%duration' => round(microtime(TRUE) - $start, 2),
+  )));
 }
 
 /**
