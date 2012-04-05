@@ -127,14 +127,6 @@ function fe_idea_views_default_views() {
   $handler->display->display_options['relationships']['flag_content_rel_3']['required'] = 0;
   $handler->display->display_options['relationships']['flag_content_rel_3']['flag'] = 'merged_idea';
   $handler->display->display_options['relationships']['flag_content_rel_3']['user_scope'] = 'any';
-  /* Relationship: Flags: worth_checking */
-  $handler->display->display_options['relationships']['flag_content_rel_4']['id'] = 'flag_content_rel_4';
-  $handler->display->display_options['relationships']['flag_content_rel_4']['table'] = 'node';
-  $handler->display->display_options['relationships']['flag_content_rel_4']['field'] = 'flag_content_rel';
-  $handler->display->display_options['relationships']['flag_content_rel_4']['label'] = 'flag Worth checking';
-  $handler->display->display_options['relationships']['flag_content_rel_4']['required'] = 0;
-  $handler->display->display_options['relationships']['flag_content_rel_4']['flag'] = 'worth_checking';
-  $handler->display->display_options['relationships']['flag_content_rel_4']['user_scope'] = 'any';
   /* Field: Bulk operations: Content */
   $handler->display->display_options['fields']['views_bulk_operations']['id'] = 'views_bulk_operations';
   $handler->display->display_options['fields']['views_bulk_operations']['table'] = 'node';
@@ -552,21 +544,6 @@ function fe_idea_views_default_views() {
   $handler->display->display_options['filters']['flagged_2']['expose']['identifier'] = 'groove_idea';
   $handler->display->display_options['filters']['flagged_2']['expose']['remember'] = 1;
   $handler->display->display_options['filters']['flagged_2']['expose']['multiple'] = FALSE;
-  /* Filter criterion: Flags: Flagged */
-  $handler->display->display_options['filters']['flagged_3']['id'] = 'flagged_3';
-  $handler->display->display_options['filters']['flagged_3']['table'] = 'flag_content';
-  $handler->display->display_options['filters']['flagged_3']['field'] = 'flagged';
-  $handler->display->display_options['filters']['flagged_3']['relationship'] = 'flag_content_rel_4';
-  $handler->display->display_options['filters']['flagged_3']['value'] = 'All';
-  $handler->display->display_options['filters']['flagged_3']['exposed'] = TRUE;
-  $handler->display->display_options['filters']['flagged_3']['expose']['operator_id'] = '';
-  $handler->display->display_options['filters']['flagged_3']['expose']['label'] = 'Worth Checking';
-  $handler->display->display_options['filters']['flagged_3']['expose']['use_operator'] = FALSE;
-  $handler->display->display_options['filters']['flagged_3']['expose']['operator'] = 'flagged_3_op';
-  $handler->display->display_options['filters']['flagged_3']['expose']['identifier'] = 'worth_checking';
-  $handler->display->display_options['filters']['flagged_3']['expose']['remember'] = 1;
-  $handler->display->display_options['filters']['flagged_3']['expose']['multiple'] = FALSE;
-
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page');
   $handler->display->display_options['path'] = 'admin/ideas-management';
