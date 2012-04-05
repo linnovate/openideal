@@ -169,3 +169,34 @@ function fe_user_flag_default_flags() {
   );
   return $flags;
 }
+
+/**
+ * Implements hook_image_default_styles().
+ */
+function fe_user_image_default_styles() {
+  $styles = array();
+
+  // Exported image style: aventar_45_45
+  $styles['aventar_45_45'] = array(
+    'name' => 'aventar_45_45',
+    'effects' => array(
+      1 => array(
+        'label' => 'Scale and crop',
+        'help' => 'Scale and crop will maintain the aspect-ratio of the original image, then crop the larger dimension. This is most useful for creating perfectly square thumbnails without stretching the image.',
+        'effect callback' => 'image_scale_and_crop_effect',
+        'dimensions callback' => 'image_resize_dimensions',
+        'form callback' => 'image_resize_form',
+        'summary theme' => 'image_resize_summary',
+        'module' => 'image',
+        'name' => 'image_scale_and_crop',
+        'data' => array(
+          'width' => '45',
+          'height' => '45',
+        ),
+        'weight' => '1',
+      ),
+    ),
+  );
+
+  return $styles;
+}
