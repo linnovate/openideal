@@ -62,6 +62,7 @@ function fe_user_default_rules_configuration() {
   $items['rules_oi_log_activity_for_a_new_node_being_published'] = entity_import('rules_config', '{ "rules_oi_log_activity_for_a_new_node_being_published" : {
       "LABEL" : "OI Log activity for a new node being published",
       "PLUGIN" : "reaction rule",
+      "TAGS" : [ "Heartbeat" ],
       "REQUIRES" : [ "rules", "heartbeat_rules" ],
       "ON" : [ "node_insert" ],
       "IF" : [ { "node_is_published" : { "node" : [ "node" ] } } ],

@@ -105,6 +105,36 @@ function fe_user_flag_default_flags() {
     ),
     'api_version' => 2,
   );
+  // Exported flag: "Has Launched Idea".
+  $flags['has_launched_idea'] = array(
+    'content_type' => 'user',
+    'title' => 'Has Launched Idea',
+    'global' => '1',
+    'types' => array(),
+    'flag_short' => 'flag as has launched idea',
+    'flag_long' => '',
+    'flag_message' => '',
+    'unflag_short' => 'unflag as has launched idea',
+    'unflag_long' => '',
+    'unflag_message' => '',
+    'unflag_denied_text' => '',
+    'link_type' => 'toggle',
+    'roles' => array(
+      'flag' => array(
+        0 => '3',
+      ),
+      'unflag' => array(
+        0 => '3',
+      ),
+    ),
+    'show_on_profile' => 1,
+    'access_uid' => 'others',
+    'api_version' => 2,
+    'module' => 'fe_user',
+    'locked' => array(
+      0 => 'name',
+    ),
+  );
   // Exported flag: "Silver User".
   $flags['silver_user'] = array(
     'content_type' => 'user',

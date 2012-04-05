@@ -283,7 +283,7 @@ function fe_idea_default_rules_configuration() {
       "LABEL" : "User Idea Launch",
       "PLUGIN" : "reaction rule",
       "TAGS" : [ "Idea", "Userpoints" ],
-      "REQUIRES" : [ "rules", "userpoints_rules" ],
+      "REQUIRES" : [ "rules", "userpoints_rules", "flag" ],
       "ON" : [ "node_update" ],
       "IF" : [
         { "node_is_of_type" : { "node" : [ "node" ], "type" : { "value" : { "idea" : "idea" } } } },
@@ -300,6 +300,13 @@ function fe_idea_default_rules_configuration() {
             "operation" : "Insert",
             "display" : 0,
             "moderate" : "default"
+          }
+        },
+        { "flag_flaguser" : {
+            "flag" : "has_launched_idea",
+            "user" : [ "node:author" ],
+            "flagging_user" : "1",
+            "permission_check" : 0
           }
         },
         { "entity_query" : {
@@ -319,6 +326,13 @@ function fe_idea_default_rules_configuration() {
                   "operation" : "insert",
                   "display" : 0,
                   "moderate" : "default"
+                }
+              },
+              { "flag_flaguser" : {
+                  "flag" : "has_launched_idea",
+                  "user" : [ "list-item:author" ],
+                  "flagging_user" : "1",
+                  "permission_check" : 0
                 }
               }
             ]
