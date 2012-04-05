@@ -167,7 +167,7 @@ function ideal_main_quicktabs_view_counter($tab_view, $tab_display, $term=0) {
  * Implements theme registry alter
  */
 function ideal_main_theme_registry_alter(&$theme_registry){
-  
+  // Points to the ideal_main_views_mini_pager function.
   $theme_registry['views_mini_pager']['function'] = "ideal_main_views_mini_pager";
 
 }

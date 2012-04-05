@@ -9,13 +9,15 @@
  */
 function fe_idea_default_rules_configuration() {
   $items = array();
-  $items['rules_close_commenting_voting'] = entity_import('rules_config', '{ "rules_close_commenting_voting" : {
-      "LABEL" : "Close Commnting \\u0026 Voting when worth checking",
+  $items['rules_close_idea in action'] = entity_import('rules_config', '{ "rules_close_idea in action" : {
+      "LABEL" : "Close idea in action",
       "PLUGIN" : "reaction rule",
-      "REQUIRES" : [ "flag", "rules" ],
+      "TAGS" : [ "Idea", "In Action" ],
+      "REQUIRES" : [ "rules" ],
       "ON" : [ "node_view" ],
       "IF" : [
-        { "flag_flagged_node" : { "flag" : "worth_checking", "node" : [ "node" ], "user" : "1" } }
+        { "node_is_of_type" : { "node" : [ "node" ], "type" : { "value" : { "idea" : "idea" } } } },
+        { "NOT data_is_empty" : { "data" : [ "node:field-in-action" ] } }
       ],
       "DO" : [
         { "component_rules_node_close_voting" : { "node" : [ "node" ] } },
@@ -229,7 +231,7 @@ function fe_idea_default_rules_configuration() {
   $items['rules_user_idea_in_action'] = entity_import('rules_config', '{ "rules_user_idea_in_action" : {
       "LABEL" : "User Idea In Action",
       "PLUGIN" : "reaction rule",
-      "TAGS" : [ "Idea", "Userpoints" ],
+      "TAGS" : [ "Idea", "In Action", "Userpoints" ],
       "REQUIRES" : [ "rules", "userpoints_rules" ],
       "ON" : [ "node_update" ],
       "IF" : [
@@ -254,6 +256,14 @@ function fe_idea_default_rules_configuration() {
             "moderate" : "default"
           }
         },
+        { "mail" : {
+            "to" : [ "node:author:mail" ],
+            "subject" : "Your idea [node:title] caught our eyes !!!",
+            "message" : "Hello [node:author], \\r\\n\\r\\nYour idea [node:title] caught our eyes, and we started a review process.\\r\\n\\r\\n\\r\\nThank you,\\r\\n[site:name] team.",
+            "from" : "[site:mail]",
+            "language" : [ "" ]
+          }
+        },
         { "entity_query" : {
             "USING" : { "type" : "node", "property" : "field_merge_to", "value" : [ "node" ] },
             "PROVIDE" : { "entity_fetched" : { "merged_ideas" : "Merged Ideas" } }
@@ -271,6 +281,14 @@ function fe_idea_default_rules_configuration() {
                   "operation" : "insert",
                   "display" : 0,
                   "moderate" : "default"
+                }
+              },
+              { "mail" : {
+                  "to" : [ "list-item:author:mail" ],
+                  "subject" : "Your idea [node:title] caught our eyes !!!",
+                  "message" : "Hello [node:author], \\r\\n\\r\\nYour idea [node:title] caught our eyes, and we started a review process.\\r\\n\\r\\n\\r\\nThank you,\\r\\n[site:name] team.",
+                  "from" : "[site:mail]",
+                  "language" : [ "" ]
                 }
               }
             ]
@@ -307,6 +325,14 @@ function fe_idea_default_rules_configuration() {
             "user" : [ "node:author" ],
             "flagging_user" : "1",
             "permission_check" : 0
+          }
+        },
+        { "mail" : {
+            "to" : [ "node:author:mail" ],
+            "subject" : "Your idea [node:title] is LAUNCHED !!!",
+            "message" : "Hello [node:author], \\r\\n\\r\\nWe Happy to tell you that we launched your idea [node:title].\\r\\n\\r\\nThank you for your contribution,\\r\\n[site:name] team.",
+            "from" : "[site:mail]",
+            "language" : [ "" ]
           }
         },
         { "entity_query" : {
