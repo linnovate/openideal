@@ -215,8 +215,15 @@ function fe_idea_views_default_views() {
       'override_label' => 0,
       'label' => '',
     ),
-    'rules_component::rules_merged_to_merged_to' => array(
+    'action::ideal_main_merge_ideas_action' => array(
       'selected' => 1,
+      'use_queue' => 0,
+      'skip_confirmation' => 0,
+      'override_label' => 0,
+      'label' => '',
+    ),
+    'rules_component::rules_merged_to_merged_to' => array(
+      'selected' => 0,
       'use_queue' => 0,
       'skip_confirmation' => 0,
       'override_label' => 0,
