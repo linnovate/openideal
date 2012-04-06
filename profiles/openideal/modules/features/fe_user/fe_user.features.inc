@@ -177,8 +177,8 @@ function fe_user_image_default_styles() {
   $styles = array();
 
   // Exported image style: aventar_45_45
-  $styles['aventar_45_45'] = array(
-    'name' => 'aventar_45_45',
+  $styles['avatar_45_45'] = array(
+    'name' => 'avatar_45_45',
     'effects' => array(
       1 => array(
         'label' => 'Scale and crop',

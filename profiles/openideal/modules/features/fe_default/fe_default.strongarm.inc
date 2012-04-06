@@ -10,7 +10,7 @@
 function fe_default_strongarm() {
   $export = array();
 
-  $strongarm = new stdClass;
+  $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'watcher_content_types';
@@ -25,7 +25,7 @@ function fe_default_strongarm() {
   );
   $export['watcher_content_types'] = $strongarm;
 
-  $strongarm = new stdClass;
+  $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'watcher_default_settings';
@@ -39,7 +39,7 @@ function fe_default_strongarm() {
   );
   $export['watcher_default_settings'] = $strongarm;
 
-  $strongarm = new stdClass;
+  $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'watcher_display_intro_text';
@@ -47,56 +47,56 @@ function fe_default_strongarm() {
 ';
   $export['watcher_display_intro_text'] = $strongarm;
 
-  $strongarm = new stdClass;
+  $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'watcher_display_last_updated';
   $strongarm->value = 0;
   $export['watcher_display_last_updated'] = $strongarm;
 
-  $strongarm = new stdClass;
+  $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'watcher_display_node_type';
   $strongarm->value = 0;
   $export['watcher_display_node_type'] = $strongarm;
 
-  $strongarm = new stdClass;
+  $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'watcher_display_post_author';
   $strongarm->value = 1;
   $export['watcher_display_post_author'] = $strongarm;
 
-  $strongarm = new stdClass;
+  $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'watcher_email_notifications_comment_excerpt_len';
   $strongarm->value = '200chars';
   $export['watcher_email_notifications_comment_excerpt_len'] = $strongarm;
 
-  $strongarm = new stdClass;
+  $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'watcher_email_notifications_enabled';
   $strongarm->value = 1;
   $export['watcher_email_notifications_enabled'] = $strongarm;
 
-  $strongarm = new stdClass;
+  $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'watcher_email_notifications_method';
   $strongarm->value = 'cron';
   $export['watcher_email_notifications_method'] = $strongarm;
 
-  $strongarm = new stdClass;
+  $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'watcher_email_notifications_send_time_limit';
   $strongarm->value = '5';
   $export['watcher_email_notifications_send_time_limit'] = $strongarm;
 
-  $strongarm = new stdClass;
+  $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'watcher_help_text';
@@ -145,7 +145,7 @@ function fe_default_strongarm() {
 </dl></div>';
   $export['watcher_help_text'] = $strongarm;
 
-  $strongarm = new stdClass;
+  $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'watcher_notifications_templates_body_cmt';
@@ -163,7 +163,7 @@ Click the link below to reply to this comment:
 ';
   $export['watcher_notifications_templates_body_cmt'] = $strongarm;
 
-  $strongarm = new stdClass;
+  $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'watcher_notifications_templates_body_confirm';
@@ -177,7 +177,7 @@ watch for.
 If this request was made in error, please click either of the links below.';
   $export['watcher_notifications_templates_body_confirm'] = $strongarm;
 
-  $strongarm = new stdClass;
+  $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'watcher_notifications_templates_body_node';
@@ -189,7 +189,7 @@ Click the link below to view it:
 ';
   $export['watcher_notifications_templates_body_node'] = $strongarm;
 
-  $strongarm = new stdClass;
+  $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'watcher_notifications_templates_footer';
@@ -209,7 +209,7 @@ The staff at [site:name] - [site:slogan]
 ';
   $export['watcher_notifications_templates_footer'] = $strongarm;
 
-  $strongarm = new stdClass;
+  $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'watcher_notifications_templates_footer_anonymous_notify';
@@ -230,7 +230,7 @@ The staff at [site:name] - [site:slogan]
 ';
   $export['watcher_notifications_templates_footer_anonymous_notify'] = $strongarm;
 
-  $strongarm = new stdClass;
+  $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'watcher_notifications_templates_footer_confirm';
@@ -253,7 +253,7 @@ The staff at [site:name] - [site:slogan]
 ';
   $export['watcher_notifications_templates_footer_confirm'] = $strongarm;
 
-  $strongarm = new stdClass;
+  $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'watcher_notifications_templates_header';
@@ -267,7 +267,7 @@ Your are receiving this email because you have chosen to receive email notificat
 ';
   $export['watcher_notifications_templates_header'] = $strongarm;
 
-  $strongarm = new stdClass;
+  $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'watcher_toggle_link_in_teaser';

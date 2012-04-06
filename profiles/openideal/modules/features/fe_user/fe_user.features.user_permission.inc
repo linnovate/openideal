@@ -31,6 +31,37 @@ function fe_user_user_default_permissions() {
     ),
     'module' => 'userpoints',
   );
+  
+  // Exported permission: access user profiles
+  $permissions['access user profiles'] = array(
+    'name' => 'access user profiles',
+    'roles' => array(
+      0 => 'administrator',
+      1 => 'anonymous user',
+      2 => 'authenticated user',
+    ),
+    'module' => 'user',
+  );
+
+  // Exported permission: change own user settings
+  $permissions['change own user settings'] = array(
+    'name' => 'change own user settings',
+    'roles' => array(
+      0 => 'administrator',
+      1 => 'authenticated user',
+    ),
+    'module' => 'watcher',
+  );
+
+  // Exported permission: use watcher
+  $permissions['use watcher'] = array(
+    'name' => 'use watcher',
+    'roles' => array(
+      0 => 'administrator',
+      1 => 'authenticated user',
+    ),
+    'module' => 'watcher',
+  );
 
   return $permissions;
 }
