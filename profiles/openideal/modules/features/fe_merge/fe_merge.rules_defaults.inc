@@ -61,7 +61,7 @@ function fe_merge_default_rules_configuration() {
       "REQUIRES" : [ "php", "rules" ],
       "USES VARIABLES" : { "node" : { "label" : "Node", "type" : "node" } },
       "ACTION SET" : [
-        { "php_eval" : { "code" : "\\/\\/ Remove the voting widget;\\r\\n$node-\\u003Efield_vote = NULL;\\r\\nnode_save($node);" } }
+        { "php_eval" : { "code" : "\\/\\/ Remove the voting widget;\\r\\n$node-\\u003Econtent[\\u0027field_vote\\u0027][0][\\u0027#markup\\u0027] = \\u0027\\u0027;" } }
       ]
     }
   }');

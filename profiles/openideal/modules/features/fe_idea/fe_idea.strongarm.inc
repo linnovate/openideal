@@ -122,7 +122,7 @@ function fe_idea_strongarm() {
   $strongarm->api_version = 1;
   $strongarm->name = 'service_links_category_vocs';
   $strongarm->value = array(
-    3 => '3',
+    3 => 0,
     4 => 0,
     1 => 0,
   );
@@ -172,6 +172,7 @@ function fe_idea_strongarm() {
     'article' => 0,
     'page' => 0,
     'challenge' => 0,
+    'drupalgive_contribution' => 0,
     'faq' => 0,
     'news' => 0,
     'webform' => 0,

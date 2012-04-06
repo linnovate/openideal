@@ -5,6 +5,9 @@ projects[drupal][type]                                         = core
 projects[addressfield][version]                                = 7.x-1.0-beta2
 projects[addressfield][subdir]                                 = contrib
 
+projects[admin_menu][version]                                  = 7.x-3.0-rc1
+projects[admin_menu][subdir]                                   = contrib
+
 projects[boxes][version]                                       = 7.x-1.0-beta7
 projects[boxes][subdir]                                        = contrib
 

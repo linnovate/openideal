@@ -17,7 +17,7 @@ function fe_idea_user_default_permissions() {
       0 => 'administrator',
       1 => 'site-manager',
     ),
-    'module' => 'ideal',
+    'module' => 'ideal_main',
   );
 
   // Exported permission: create idea content

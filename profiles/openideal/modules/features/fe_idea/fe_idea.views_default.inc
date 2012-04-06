@@ -544,6 +544,7 @@ function fe_idea_views_default_views() {
   $handler->display->display_options['filters']['flagged_2']['expose']['identifier'] = 'groove_idea';
   $handler->display->display_options['filters']['flagged_2']['expose']['remember'] = 1;
   $handler->display->display_options['filters']['flagged_2']['expose']['multiple'] = FALSE;
+
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page');
   $handler->display->display_options['path'] = 'admin/ideas-management';

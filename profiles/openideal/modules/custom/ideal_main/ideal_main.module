@@ -8,10 +8,41 @@ function ideal_main_init() {
 
 
 /**
+ * Implements hook_permission().
+ */
+function ideal_main_permission() {
+  return array(
+    'admin ideas' => array(
+      'title' => t('admin ideas'),
+      'description' => t('Administer ideas'),
+    ),
+  );
+}
+
+/**
  * Implements hook_menu().
  */
 function ideal_main_menu() {
   $items = array();
+  $items['home'] = array(
+    'title' => '',
+    'page callback' => 'ideal_theme_pages',
+    'page arguments' => array('ideal_home_page'),
+    'access arguments' => array('access content'),
+    'type' => MENU_CALLBACK,
+  );
+  $items['ideas'] = array(
+    'title' => 'All ideas',
+    'page callback' => '_empty_page',
+    'access arguments' => array('access content'),
+    'type' => MENU_CALLBACK,
+  );
+  $items['in-action'] = array(
+    'title' => 'Ideas in action',
+    'page callback' => '_empty_page',
+    'access arguments' => array('access content'),
+    'type' => MENU_CALLBACK,
+  );
   $items['admin/config/user-interface/openideal'] = array(
     'title' => 'General Configurations',
     'access arguments' => array('access content'),
@@ -28,6 +59,16 @@ function ideal_main_menu() {
   );
   
   return $items;
+}
+
+/**
+ * ideal_theme_pages callback
+ */
+function ideal_theme_pages($key) {
+  return theme($key, array(NULL));
+}
+function _empty_page() {
+  return '';
 }
 
 /**
@@ -67,6 +108,12 @@ function ideal_main_theme($existing, $type, $theme, $path) {
     // theme function for sidebar category list
     'ideal_category_list_block' => array(
       'file' => 'ideal_main.theme.inc',
+    ),
+    //create a template for home page.
+    'ideal_home_page' => array(
+      'variables' => array('titles' => NULL),
+      'template' => 'home-page',
+      'path' => drupal_get_path('module', 'ideal_main'),
     ),
   );
 }
