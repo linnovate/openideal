@@ -51,7 +51,7 @@ function fe_idea_field_default_fields() {
           'module' => 'text',
           'settings' => array(),
           'type' => 'text_default',
-          'weight' => '2',
+          'weight' => '1',
         ),
         'teaser' => array(
           'label' => 'hidden',
@@ -113,12 +113,8 @@ function fe_idea_field_default_fields() {
       'display' => array(
         'default' => array(
           'label' => 'above',
-          'module' => 'radioactivity',
-          'settings' => array(
-            'energy' => 10,
-            'type' => 'none',
-          ),
-          'type' => 'radioactivity_combo_formatter',
+          'settings' => array(),
+          'type' => 'hidden',
           'weight' => '6',
         ),
         'teaser' => array(
@@ -174,13 +170,9 @@ function fe_idea_field_default_fields() {
       'display' => array(
         'default' => array(
           'label' => 'above',
-          'module' => 'radioactivity',
-          'settings' => array(
-            'energy' => 10,
-            'type' => 'none',
-          ),
-          'type' => 'radioactivity_combo_formatter',
-          'weight' => '7',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => '8',
         ),
         'teaser' => array(
           'label' => 'above',
@@ -252,7 +244,7 @@ function fe_idea_field_default_fields() {
           'module' => 'taxonomy',
           'settings' => array(),
           'type' => 'taxonomy_term_reference_link',
-          'weight' => '3',
+          'weight' => '2',
         ),
         'teaser' => array(
           'label' => 'hidden',
@@ -323,11 +315,8 @@ function fe_idea_field_default_fields() {
       'display' => array(
         'default' => array(
           'label' => 'above',
-          'module' => 'entityreference',
-          'settings' => array(
-            'link' => 1,
-          ),
-          'type' => 'entityreference_label',
+          'settings' => array(),
+          'type' => 'hidden',
           'weight' => '5',
         ),
         'teaser' => array(
@@ -385,13 +374,9 @@ function fe_idea_field_default_fields() {
       'display' => array(
         'default' => array(
           'label' => 'above',
-          'module' => 'radioactivity',
-          'settings' => array(
-            'energy' => 10,
-            'type' => 'none',
-          ),
-          'type' => 'radioactivity_combo_formatter',
-          'weight' => '8',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => '9',
         ),
         'teaser' => array(
           'label' => 'above',
@@ -454,11 +439,11 @@ function fe_idea_field_default_fields() {
       'description' => '',
       'display' => array(
         'default' => array(
-          'label' => 'above',
+          'label' => 'hidden',
           'module' => 'list',
           'settings' => array(),
           'type' => 'list_default',
-          'weight' => '4',
+          'weight' => '3',
         ),
         'teaser' => array(
           'label' => 'hidden',
@@ -528,10 +513,9 @@ function fe_idea_field_default_fields() {
       'display' => array(
         'default' => array(
           'label' => 'hidden',
-          'module' => 'entityreference',
           'settings' => array(),
           'type' => 'hidden',
-          'weight' => '9',
+          'weight' => '7',
         ),
         'teaser' => array(
           'label' => 'hidden',
@@ -557,6 +541,64 @@ function fe_idea_field_default_fields() {
         ),
         'type' => 'entityreference_autocomplete',
         'weight' => '6',
+      ),
+    ),
+  );
+
+  // Exported field: 'node-idea-field_social_links'
+  $fields['node-idea-field_social_links'] = array(
+    'field_config' => array(
+      'active' => '1',
+      'cardinality' => '1',
+      'deleted' => '0',
+      'entity_types' => array(),
+      'field_name' => 'field_social_links',
+      'foreign keys' => array(),
+      'indexes' => array(),
+      'module' => 'social_links',
+      'settings' => array(),
+      'translatable' => '0',
+      'type' => 'social_links',
+    ),
+    'field_instance' => array(
+      'bundle' => 'idea',
+      'default_value' => NULL,
+      'deleted' => '0',
+      'description' => '',
+      'display' => array(
+        'default' => array(
+          'label' => 'hidden',
+          'module' => 'social_links',
+          'settings' => array(),
+          'type' => 'social_links_formatter_default',
+          'weight' => '4',
+        ),
+        'teaser' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+      ),
+      'entity_type' => 'node',
+      'field_name' => 'field_social_links',
+      'label' => 'Social Links',
+      'required' => 0,
+      'settings' => array(
+        'link1' => '<iframe src="//www.facebook.com/plugins/like.php?href&amp;send=false&amp;layout=button_count&amp;width=90&amp;show_faces=false&amp;action=like&amp;colorscheme=light&amp;font&amp;height=21&amp; scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:90px; height:21px;" allowTransparency="true"></iframe>',
+        'link2' => '<a href="https://twitter.com/share" class="twitter-share-button">Tweet</a><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>',
+        'link3' => '<div class="g-plusone" data-size="medium"></div><script>(function() {var po = document.createElement("script"); po.type = "text/javascript"; po.async = true;po.src = "https://apis.google.com/js/plusone.js";var s = document.getElementsByTagName("script")[0]; s.parentNode.insertBefore(po, s);})();</script>',
+        'link4' => '<script src="//platform.linkedin.com/in.js" type="text/javascript"></script><script type="IN/Share" data-counter="right"></script>',
+        'link5' => '',
+        'link6' => '',
+        'user_register_form' => FALSE,
+      ),
+      'widget' => array(
+        'active' => 0,
+        'module' => 'social_links',
+        'settings' => array(),
+        'type' => 'social_links_exposed',
+        'weight' => '12',
       ),
     ),
   );
@@ -596,7 +638,7 @@ function fe_idea_field_default_fields() {
           'module' => 'vud_field',
           'settings' => array(),
           'type' => 'default',
-          'weight' => '1',
+          'weight' => '0',
         ),
         'teaser' => array(
           'label' => 'hidden',
@@ -635,6 +677,7 @@ function fe_idea_field_default_fields() {
   t('Is Part Of A Challenge');
   t('Merge to');
   t('Please share you idea.');
+  t('Social Links');
   t('Vote');
   t('Your Idea');
 
