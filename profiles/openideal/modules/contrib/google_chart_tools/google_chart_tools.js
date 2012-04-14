@@ -4,7 +4,7 @@
  */
 
 // Load the Visualization API and the chart package.
-google.load("visualization", "1", {packages:["corechart", "gauge"]});
+google.load("visualization", "1", {packages:["corechart", "gauge", "orgchart"]});
 
 (function($) {
   Drupal.behaviors.googleChart = {
@@ -16,29 +16,45 @@ google.load("visualization", "1", {packages:["corechart", "gauge"]});
       function drawChart() {
         // Loop on the charts in the settings.
         for (var chartId in settings.chart) {
-        var row = new Array();
           // Create the data table.
           var data = new google.visualization.DataTable();
-          data.addColumn('string', 'Label');
+          
+          //OrgChart charts need a different format data table.
+          if (settings.chart[chartId].chartType == "OrgChart") {
+            data.addColumn('string', 'Title');
+            data.addColumn('string', 'Parent');
+            data.addColumn('string', 'ToolTip');
+            for ( var i in settings.chart[chartId].rows ) {
+              var row = new Array();
+              row = [{v:settings.chart[chartId].rows[i][0], f:settings.chart[chartId].rows[i][1]}, settings.chart[chartId].rows[i][2], settings.chart[chartId].rows[i][3]];
+              data.addRows([row]);
+              i = parseInt(i);
+              data.setRowProperty(i, 'style', settings.chart[chartId].rows[i][4]);
+              data.setRowProperty(i, 'selectedStyle', settings.chart[chartId].rows[i][5]);
+            }
+          } 
+          else {
+            data.addColumn('string', 'Label');
 
-          // Adding the colomns. 
-          // These are graphs titles.
-          for (var col in settings.chart[chartId].columns) {
-            data.addColumn('number', settings.chart[chartId].columns[col]);
+            // Adding the colomns. 
+            // These are graphs titles.
+            for (var col in settings.chart[chartId].columns) {
+              data.addColumn('number', settings.chart[chartId].columns[col]);
+            }
+
+            // Adding the heders.
+            // The rows titles.
+            for (var i in settings.chart[chartId].header) {
+              var row = new Array();
+              // Adding the rows.
+              // The points of the column for each row.
+              for (var j in settings.chart[chartId].rows) {
+                row[j] = parseInt(settings.chart[chartId].rows[j][i]);
+              } 
+              row.unshift(settings.chart[chartId].header[i]);
+              data.addRows([row])
+            };
           }
-
-          // Adding the heders.
-          // The rows titles.
-          for (var i in settings.chart[chartId].header) {
-            var row = new Array();
-            // Adding the rows.
-            // The points of the column for each row.
-            for (var j in settings.chart[chartId].rows) {
-              row[j] = parseInt(settings.chart[chartId].rows[j][i]);
-            } 
-            row.unshift(settings.chart[chartId].header[i]);
-            data.addRows([row])
-          };
 
           // Set chart options
           var options = settings.chart[chartId].options;

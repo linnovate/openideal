@@ -52,7 +52,7 @@ function google_chart_tools_page() {
     'rows' => $rows,
     'columns' => $columns,
     'chartType' => 'LineChart',// LineChart, PieChart, ,ColumnChart, ,AreaChart, Gauge, BarChart, etc....
-    'containerId' =>  'content',
+    'containerId' =>  'line_chart',
     'options' => array( // Optionals.
       'curveType' => "function", 
       'forceIFrame' => FALSE, 
@@ -61,9 +61,29 @@ function google_chart_tools_page() {
       'height' => 400  
     )   
   );
+   
+  $tree = array(
+      // array(Name, Display Name, Parent, Tooltip, Style, Selected Style)
+    array('Grandparent', '<font color="red">Grandparent</font>', '', 'Grandparent Tooltip', '', ''),
+    array('Parent', '', 'Grandparent', '', 'border-color:green', 'border-color:red'),
+    array('Child1', '', 'Parent', '', '', ''),
+    array('Child2', '', 'Parent', 'Child 2 Tooltip', '', ''),
+  );
+  
+  $settings['chart']['chartTwo'] = array(
+    'header' => 'Header',
+    'containerId' => 'org_chart',
+    'chartType' => 'OrgChart',
+    'rows' => $tree,
+    'options' => array(
+      'title' => 'Org Chart',
+      'allowHtml' => 'true',
+      'allowCollapse' => 'true',
+    ),
+  );
 
   //Draw it.
   draw_chart($settings); 
 
-  return '';
+  return '<p>Example line chart:</p><div id="line_chart"></div><p>Example org chart:</p><div id="org_chart" class="org_chart"></div>';
 }
