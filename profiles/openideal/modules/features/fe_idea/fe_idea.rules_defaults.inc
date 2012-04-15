@@ -88,7 +88,7 @@ function fe_idea_default_rules_configuration() {
         { "mail_to_users_of_role" : {
             "roles" : { "value" : { "5" : "5" } },
             "subject" : "The idea [node:title] is a blast.",
-            "message" : "The idea [node:title] is a blast.\\r\\nPlease check it out: [node:url]."
+            "message" : "The idea [node:title] is a blast.\\u000D\\u000APlease check it out: [node:url]."
           }
         }
       ]
@@ -121,7 +121,7 @@ function fe_idea_default_rules_configuration() {
         { "mail_to_users_of_role" : {
             "roles" : { "value" : { "5" : "5" } },
             "subject" : "The idea [node:title] is a buzz.",
-            "message" : "The idea [node:title] is a Buzz.\\r\\nPlease check it out: [node:url]."
+            "message" : "The idea [node:title] is a Buzz.\\u000D\\u000APlease check it out: [node:url]."
           }
         }
       ]
@@ -154,7 +154,7 @@ function fe_idea_default_rules_configuration() {
         { "mail_to_users_of_role" : {
             "roles" : { "value" : { "5" : "5" } },
             "subject" : "The idea [node:title] is a groove.",
-            "message" : "The idea [node:title] is a Groove.\\r\\nPlease check it out: [node:url]."
+            "message" : "The idea [node:title] is a Groove.\\u000D\\u000APlease check it out: [node:url]."
           }
         }
       ]
@@ -174,7 +174,7 @@ function fe_idea_default_rules_configuration() {
       "REQUIRES" : [ "php", "rules" ],
       "USES VARIABLES" : { "node" : { "label" : "Node", "type" : "node" } },
       "ACTION SET" : [
-        { "php_eval" : { "code" : "$tag = variable_get(\\u0027vud_tag\\u0027, \\u0027vote\\u0027);\\r\\n$widget = variable_get(\\u0027vud_node_widget\\u0027, \\u0027updown\\u0027);\\r\\n    \\r\\n$theme_vars = array(\\r\\n  \\u0027entity_id\\u0027 =\\u003E $node-\\u003Enid,\\r\\n  \\u0027type\\u0027 =\\u003E \\u0027node\\u0027,\\r\\n  \\u0027widget_theme\\u0027 =\\u003E \\u0027alternate\\u0027,\\r\\n  \\u0027tag\\u0027 =\\u003E $tag,\\r\\n  \\u0027readonly\\u0027 =\\u003E TRUE\\r\\n);\\r\\n   \\r\\n$node-\\u003Econtent[\\u0027field_vote\\u0027][0][\\u0027#markup\\u0027] = theme(\\u0027vud_widget\\u0027, $theme_vars);" } }
+        { "php_eval" : { "code" : "$tag = variable_get(\\u0027vud_tag\\u0027, \\u0027vote\\u0027);\\u000D\\u000A$widget = variable_get(\\u0027vud_node_widget\\u0027, \\u0027updown\\u0027);\\u000D\\u000A    \\u000D\\u000A$theme_vars = array(\\u000D\\u000A  \\u0027entity_id\\u0027 =\\u003E $node-\\u003Enid,\\u000D\\u000A  \\u0027type\\u0027 =\\u003E \\u0027node\\u0027,\\u000D\\u000A  \\u0027widget_theme\\u0027 =\\u003E \\u0027alternate\\u0027,\\u000D\\u000A  \\u0027tag\\u0027 =\\u003E $tag,\\u000D\\u000A  \\u0027readonly\\u0027 =\\u003E TRUE\\u000D\\u000A);\\u000D\\u000A   \\u000D\\u000A$node-\\u003Econtent[\\u0027field_vote\\u0027][0][\\u0027#markup\\u0027] = theme(\\u0027vud_widget\\u0027, $theme_vars);" } }
       ]
     }
   }');
@@ -259,7 +259,7 @@ function fe_idea_default_rules_configuration() {
         { "mail" : {
             "to" : [ "node:author:mail" ],
             "subject" : "Your idea [node:title] caught our eyes !!!",
-            "message" : "Hello [node:author], \\r\\n\\r\\nYour idea [node:title] caught our eyes, and we started a review process.\\r\\n\\r\\n\\r\\nThank you,\\r\\n[site:name] team.",
+            "message" : "Hello [node:author], \\u000D\\u000A\\u000D\\u000AYour idea [node:title] caught our eyes, and we started a review process.\\u000D\\u000A\\u000D\\u000A\\u000D\\u000AThank you,\\u000D\\u000A[site:name] team.",
             "from" : "[site:mail]",
             "language" : [ "" ]
           }
@@ -286,7 +286,7 @@ function fe_idea_default_rules_configuration() {
               { "mail" : {
                   "to" : [ "list-item:author:mail" ],
                   "subject" : "Your idea [node:title] caught our eyes !!!",
-                  "message" : "Hello [node:author], \\r\\n\\r\\nYour idea [node:title] caught our eyes, and we started a review process.\\r\\n\\r\\n\\r\\nThank you,\\r\\n[site:name] team.",
+                  "message" : "Hello [node:author], \\u000D\\u000A\\u000D\\u000AYour idea [node:title] caught our eyes, and we started a review process.\\u000D\\u000A\\u000D\\u000A\\u000D\\u000AThank you,\\u000D\\u000A[site:name] team.",
                   "from" : "[site:mail]",
                   "language" : [ "" ]
                 }
@@ -330,7 +330,7 @@ function fe_idea_default_rules_configuration() {
         { "mail" : {
             "to" : [ "node:author:mail" ],
             "subject" : "Your idea [node:title] is LAUNCHED !!!",
-            "message" : "Hello [node:author], \\r\\n\\r\\nWe Happy to tell you that we launched your idea [node:title].\\r\\n\\r\\nThank you for your contribution,\\r\\n[site:name] team.",
+            "message" : "Hello [node:author], \\u000D\\u000A\\u000D\\u000AWe Happy to tell you that we launched your idea [node:title].\\u000D\\u000A\\u000D\\u000AThank you for your contribution,\\u000D\\u000A[site:name] team.",
             "from" : "[site:mail]",
             "language" : [ "" ]
           }

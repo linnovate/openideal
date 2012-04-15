@@ -81,6 +81,7 @@
   <?php if ($user_picture || !$page || $display_submitted): ?>
     <header>
       <?php print $user_picture; ?>
+      <?php print render($content['watcher']); ?>
 
       <?php print render($title_prefix); ?>
       <?php if (!$page): ?>
@@ -107,7 +108,10 @@
       hide($content['comments']);
       hide($content['links']);
       hide($content['field_tags']);
+      hide($content['field_in_action']);
       print render($content);
+      print render($content['links']['node']);
+      print render($content['field_in_action']);
     ?>
   </div><!-- /.content -->
 
