@@ -9,7 +9,6 @@
    
 Drupal.behaviors.categoryList = {
   attach: function(context) {
-//    alert('hi');
     $('.category-menu li').hover(
       function() {
         var level = $(this).parent().attr('class');
@@ -21,6 +20,16 @@ Drupal.behaviors.categoryList = {
         $(this).children('ul').hide('fast');
       }
     );
+  }
+};
+
+Drupal.behaviors.watcher = {
+  attach: function(context) {
+    //var $watcherText = $('.watcherText_node a').html() ;
+    $('.watcher_node a').html('Watcher') ;
+    alert($watcherText);
+
+    
   }
 };
 
