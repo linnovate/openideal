@@ -418,8 +418,6 @@ h2 {
 }
 // Idea(s)
 .field-name-field-category {
-  clear: both;
-  float: left;
   margin-right: 10px;
   ul {
     margin: 0;
@@ -441,6 +439,9 @@ h2 {
 }
 .field-name-body {
   margin-top: 10px;
+}
+.field-name-field-in-action {
+  padding: 10px 0 0;
 }
 .vud-widget-alternate .up-active {
    background: url('../images/thumbs.png') no-repeat -80px 0 ;
@@ -465,13 +466,14 @@ h2 {
 }
 footer {
   clear: both;
+  padding-top: 10px;
   .links.inline {
     margin: 0;
     li {
       padding: 0;
       margin-right: 10px;
       a {
-        background: url('../images/v-bullet.png') no-repeat left center;
+        // background: url('../images/v-bullet.png') no-repeat left center;
         padding-left: 20px;
         display: inline-block;
         }
@@ -486,7 +488,9 @@ footer {
     margin: 0 0 5px 15px;
   }
   .field-name-field-social-links{
+    clear: both;
     margin: 15px 0;
+    padding: 10px 0 0;
   }
 
 }
