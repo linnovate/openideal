@@ -442,6 +442,25 @@ h2 {
 .field-name-body {
   margin-top: 10px;
 }
+.vud-widget-alternate .up-active {
+   background: url('../images/thumbs.png') no-repeat -80px 0 ;
+  height: 27px;
+  margin: 5px auto;
+  width: 26px;
+    &:hover{
+    background-position:-80px 0 ;
+  }
+}
+.vud-widget-alternate .up-inactive {
+  background: url('../images/thumbs.png') no-repeat -53px 0 ;
+  height: 27px;
+  margin: 5px auto;
+  width: 26px;
+  &:hover{
+    background-position:-53px 0 ;
+  }
+}
+
 footer {
   clear: both;
   .links.inline {
@@ -463,6 +482,10 @@ footer {
   .user-picture {
     float: right;
   }
+  .field-name-field-social-links{
+    margin: 15px 0;
+  }
+
 }
 // Comments
 article #comments {
