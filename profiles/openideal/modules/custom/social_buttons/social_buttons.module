@@ -1,0 +1,129 @@
+<?php
+
+/**
+ * Implements of hook_field_info().
+ */
+function social_buttons_field_info() {
+  return array(
+    'social_buttons' => array(
+      'label' => t('Social Buttons'),
+      'description' => t('Store a social buttons difinition for this piece of content.'),
+      'default_widget' => 'social_buttons_exposed',
+      'default_formatter' => 'social_buttons_formatter_default',
+    ),
+  );
+}
+
+/**
+ * Implements of hook_field_widget_info().
+ */
+function social_buttons_field_widget_info() {
+  return array(
+    'social_buttons_exposed' => array(
+      'label' => t('Social Buttons'),
+      'field types' => array('social_buttons'),
+    ),
+  );
+}
+
+/**
+ * Implements hook_field_prepare_view().
+ * 
+ * Must populate items, for force rendering the output.
+ */
+function social_buttons_field_prepare_view($entity_type, $entities, $field, $instances, $langcode, &$items) {
+  foreach ($entities as $id => $entity) {
+    if (empty($items[$id])) {
+      $items[$id] =  array(0);
+    }
+  }
+}
+
+/**
+ * Implements hook_field_instance_settings_form().
+ */
+function social_buttons_field_instance_settings_form($field, $instance) {
+  $button = array();
+  $button[1] = '<iframe src="//www.facebook.com/plugins/like.php?href&amp;send=false&amp;layout=button_count&amp;width=90&amp;show_faces=false&amp;action=like&amp;colorscheme=light&amp;font&amp;height=21&amp; scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:90px; height:21px;" allowTransparency="true"></iframe>';
+  $button[2] = '<a href="https://twitter.com/share" class="twitter-share-button">Tweet</a><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>';
+  $button[3] = '<div class="g-plusone" data-size="medium"></div><script>(function() {var po = document.createElement("script"); po.type = "text/javascript"; po.async = true;po.src = "https://apis.google.com/js/plusone.js";var s = document.getElementsByTagName("script")[0]; s.parentNode.insertBefore(po, s);})();</script>';
+  $button[4] = '<script src="//platform.linkedin.com/in.js" type="text/javascript"></script><script type="IN/Share" data-counter="right"></script>';
+
+  
+  $form = array();
+  $form['description'] = array(
+    '#type' => 'item',
+    '#title' => t('Paset your desire buttons code in the text areas below.'),  
+    '#markup' => 
+      t('Get your Facebook Like button !here. (*iframe support.)', array('!here' => '<a href="http://developers.facebook.com/docs/reference/plugins/like" target="_blank">here</a>')) . "<br />" .
+      t('Get your Twitter Share button !here.', array('!here' => '<a href="http://twitter.com/about/resources/buttons#tweet" target="_blank">here</a>')) . "<br />" .
+      t('Get your Google+ button !here.', array('!here' => '<a href="http://www.google.com/webmasters/+1/button/" target="_blank">here</a>')) . "<br />" .
+      t('Get your Linkedin Share button !here.', array('!here' => '<a href="https://developer.linkedin.com/plugins/share-plugin-generator" target="_blank">here</a>')),
+  );
+  
+  $count = count(array_filter($instance['settings'])) + 1;
+  for ($i = 1; $i <= $count; $i++) {
+    $form["button-{$i}"] = array(
+      '#type' => 'textarea',
+      '#title' => t("button-@i code <em>@new</em>", array('@i' => $i, '@new' => $i >= $count ? t('(ADD ANOTHER)') : '')),
+      '#default_value' => isset($instance['settings']["button-{$i}"]) ? $instance['settings']["button-{$i}"] : $button[$i],
+      '#attributes' => array('class' => array("social-buttons-textarea button-{$i}")),
+      '#prefix' => '<div class="social-button-code">', 
+      '#suffix' => !empty($instance['settings']["button-{$i}"]) ? "<div class='social-button-{$i}-preview preview'>" . t("Button-@i preview", array('@i' => $i)) . "<div class='social-button-{$i}-code code'>" . $instance['settings']["button-{$i}"] . '</div></div></div>' : ''
+    );
+  }
+  return $form;
+}
+
+/**
+ * Implements hook_field_formatter_info().
+ */
+function social_buttons_field_formatter_info() {
+  return array(
+    'social_buttons_formatter_default' => array(
+      'label' => t('Social Buttons (default)'),
+      'field types' => array('social_buttons'),
+    ),
+  );
+}
+
+/**
+ * Implements of hook_field_formatter_view().
+ */
+function social_buttons_field_formatter_view($entity_type, $entity, $field, $instance, $langcode, $items, $display) {
+  $element = array();
+  
+  foreach ($instance['settings'] as $vendor => $button) {
+    if (!empty($button)) {
+      $buttons[] = $button;
+    }  
+  }
+
+  $element[0] = array('#markup' => theme('social_buttons', $buttons));
+  return $element;
+}
+
+/**
+ * Implements of hook_theme().
+ */
+function social_buttons_theme($existing, $type, $theme, $path) {
+  return array(
+   'social_buttons' => array(
+      'variables' => array('buttons' => NULL),
+    ),  
+  ); 
+}
+
+/**
+ * Theme function for display social buttons.
+ */
+function theme_social_buttons($buttons) {
+  $output = '';
+  foreach ($buttons as $button) {
+    if (!empty($button)) {
+      $output .=  "<span>{$button}</span>";
+    }
+  }
+
+  return $output;
+}
