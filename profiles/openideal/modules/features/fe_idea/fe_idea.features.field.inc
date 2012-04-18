@@ -545,20 +545,20 @@ function fe_idea_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-idea-field_social_links'
-  $fields['node-idea-field_social_links'] = array(
+  // Exported field: 'node-idea-field_social_buttons'
+  $fields['node-idea-field_social_buttons'] = array(
     'field_config' => array(
       'active' => '1',
       'cardinality' => '1',
       'deleted' => '0',
       'entity_types' => array(),
-      'field_name' => 'field_social_links',
+      'field_name' => 'field_social_buttons',
       'foreign keys' => array(),
       'indexes' => array(),
-      'module' => 'social_links',
+      'module' => 'social_buttons',
       'settings' => array(),
       'translatable' => '0',
-      'type' => 'social_links',
+      'type' => 'social_buttons',
     ),
     'field_instance' => array(
       'bundle' => 'idea',
@@ -568,36 +568,37 @@ function fe_idea_field_default_fields() {
       'display' => array(
         'default' => array(
           'label' => 'hidden',
-          'module' => 'social_links',
+          'module' => 'social_buttons',
           'settings' => array(),
-          'type' => 'social_links_formatter_default',
-          'weight' => '4',
+          'type' => 'social_buttons_formatter_default',
+          'weight' => '10',
         ),
         'teaser' => array(
           'label' => 'above',
           'settings' => array(),
           'type' => 'hidden',
-          'weight' => '5',
+          'weight' => 0,
         ),
       ),
       'entity_type' => 'node',
-      'field_name' => 'field_social_links',
-      'label' => 'Social Links',
+      'field_name' => 'field_social_buttons',
+      'label' => 'Social Buttons',
       'required' => 0,
       'settings' => array(
-        'link1' => '<iframe src="//www.facebook.com/plugins/like.php?href&amp;send=false&amp;layout=button_count&amp;width=90&amp;show_faces=false&amp;action=like&amp;colorscheme=light&amp;font&amp;height=21&amp; scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:90px; height:21px;" allowTransparency="true"></iframe>',
-        'link2' => '<a href="https://twitter.com/share" class="twitter-share-button">Tweet</a><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>',
-        'link3' => '<div class="g-plusone" data-size="medium"></div><script>(function() {var po = document.createElement("script"); po.type = "text/javascript"; po.async = true;po.src = "https://apis.google.com/js/plusone.js";var s = document.getElementsByTagName("script")[0]; s.parentNode.insertBefore(po, s);})();</script>',
-        'link4' => '<script src="//platform.linkedin.com/in.js" type="text/javascript"></script><script type="IN/Share" data-counter="right"></script>',
-        'link5' => '',
-        'link6' => '',
+        'button-1' => '<iframe src="//www.facebook.com/plugins/like.php?href&amp;send=false&amp;layout=button_count&amp;width=90&amp;show_faces=false&amp;action=like&amp;colorscheme=light&amp;font&amp;height=21&amp; scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:90px; height:21px;" allowTransparency="true"></iframe>',
+        'button-2' => '<a href="https://twitter.com/share" class="twitter-share-button">Tweet</a><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>',
+        'button-3' => '<div class="g-plusone" data-size="medium"></div><script>(function() {var po = document.createElement("script"); po.type = "text/javascript"; po.async = true;po.src = "https://apis.google.com/js/plusone.js";var s = document.getElementsByTagName("script")[0]; s.parentNode.insertBefore(po, s);})();</script>',
+        'button-4' => '<script src="//platform.linkedin.com/in.js" type="text/javascript"></script><script type="IN/Share" data-counter="right"></script>',
+        'button-5' => '',
+        'button-6' => '',
+        'button-7' => '',
         'user_register_form' => FALSE,
       ),
       'widget' => array(
         'active' => 0,
-        'module' => 'social_links',
+        'module' => 'social_buttons',
         'settings' => array(),
-        'type' => 'social_links_exposed',
+        'type' => 'social_buttons_exposed',
         'weight' => '11',
       ),
     ),
@@ -677,7 +678,7 @@ function fe_idea_field_default_fields() {
   t('Is Part Of A Challenge');
   t('Merge to');
   t('Please share you idea.');
-  t('Social Links');
+  t('Social Buttons');
   t('Vote');
   t('Your Idea');
 

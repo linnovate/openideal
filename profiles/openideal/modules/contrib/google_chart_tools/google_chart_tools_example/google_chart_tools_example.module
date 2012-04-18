@@ -18,7 +18,7 @@ function google_chart_tools_example_menu() {
 /**
  *  Creating graphs for the last 10 days of node creating, comments and votes.
  */
-function google_chart_tools_page() {   
+function google_chart_tools_page() {
   $header = $nodes = $comments = $votes = array();
   $from = strtotime('-1 month');
   $to   = time();
@@ -63,7 +63,7 @@ function google_chart_tools_page() {
   );
    
   $tree = array(
-      // array(Name, Display Name, Parent, Tooltip, Style, Selected Style)
+    // array(Name, Display Name, Parent, Tooltip, Style, Selected Style)
     array('Grandparent', '<font color="red">Grandparent</font>', '', 'Grandparent Tooltip', '', ''),
     array('Parent', '', 'Grandparent', '', 'border-color:green', 'border-color:red'),
     array('Child1', '', 'Parent', '', '', ''),
@@ -84,6 +84,6 @@ function google_chart_tools_page() {
 
   //Draw it.
   draw_chart($settings); 
-
+  drupal_add_css(drupal_get_path('module', 'google_chart_tools_example') . '/google_chart_tools_example.css');
   return '<p>Example line chart:</p><div id="line_chart"></div><p>Example org chart:</p><div id="org_chart" class="org_chart"></div>';
 }
