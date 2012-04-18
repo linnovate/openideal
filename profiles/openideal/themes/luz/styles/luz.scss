@@ -302,8 +302,20 @@ h2 {
       @include box;
     }  
   }
+  // user img in the teaser
   .user-picture {
     float: right;
+  }
+  // the read-more 
+  .read {
+    ul {
+      display: block;
+      margin:0;
+      li {
+        padding: 0;
+        //float: right;
+      } 
+    }
   }
 }
 // Tabs on user pages 
@@ -436,7 +448,7 @@ h2 {
 }
 .vud-widget-alternate {
   height: 75px;
-  margin: 10px 20px 10px 0;
+  margin: 4px 20px 10px 0;
 }
 .field-name-body {
   margin-top: 10px;
