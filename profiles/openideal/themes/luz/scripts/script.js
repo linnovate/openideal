@@ -25,11 +25,7 @@ Drupal.behaviors.categoryList = {
 
 Drupal.behaviors.watcher = {
   attach: function(context) {
-    //var $watcherText = $('.watcherText_node a').html() ;
     $('.watcher_node a').html('Watcher') ;
-    alert($watcherText);
-
-    
   }
 };
 
