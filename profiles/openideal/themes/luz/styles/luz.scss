@@ -80,7 +80,7 @@
   background-color: #5fbae7;
   border-radius: 3px;
   color: #fff;
-  padding: 1px 5px 2px;
+  padding: 1px 5px 1px;
   font-size: 12px;
   display: inline-block;
   margin: 0;
@@ -192,8 +192,12 @@ h2 {
 .user-picture img {
   border-radius: 5px;
 }
-
-/* header */
+// Flag 
+a.flag{
+  padding-left: 20px;
+  background: url('../images/flag_red.png') no-repeat 0 0;
+}
+/* Header */
 #header {
   margin-top: 30px;
 
@@ -302,8 +306,22 @@ h2 {
       @include box;
     }  
   }
+
+  // user img in the teaser
   .user-picture {
     float: right;
+    margin: 0 0 5px 15px;
+  }
+  // the read-more 
+  .read {
+    ul {
+      display: block;
+      margin:0;
+      li {
+        padding: 0;
+        //float: right;
+      } 
+    }
   }
 }
 // Tabs on user pages 
@@ -415,9 +433,18 @@ h2 {
 // Watcher 
 .watcher_node {
   float: right;
-  clear: both;
 }
 // Idea(s)
+.node-type-idea {
+  h1#page-title {
+    margin-bottom: 0.5em;
+
+  }
+  .field-name-field-category {
+    margin-bottom: 0.5em;
+  }  
+}
+
 .field-name-field-category {
   margin-right: 10px;
   ul {
@@ -427,6 +454,7 @@ h2 {
     list-style: none;
     a{
       @include block-link;
+      padding: 1px 10px 1px;
     }
   }
 } 
@@ -436,7 +464,7 @@ h2 {
 }
 .vud-widget-alternate {
   height: 75px;
-  margin: 10px 20px 10px 0;
+  margin: 4px 20px 10px 0;
 }
 .field-name-body {
   margin-top: 10px;
@@ -500,7 +528,7 @@ article #comments {
   clear: both;
 
   h2 {
-    border-bottom: 1px solid #ddd;
+   // border-bottom: 1px solid #ddd;
   }
 
   article {
