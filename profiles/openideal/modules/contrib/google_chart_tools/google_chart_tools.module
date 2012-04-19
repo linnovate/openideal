@@ -1,5 +1,10 @@
 <?php
-
+/**
+ * Implements hook_init(). 
+ */
+function google_chart_tools_init() {
+  drupal_add_js('https://www.google.com/jsapi', 'external');  
+}
 /**
  * Draw the chart
  */
@@ -9,8 +14,7 @@ function draw_chart($settings) {
     if (!isset($settings['chart'][$id]['containerId'])) {
       $settings['chart'][$id]['containerId'] = strtolower(str_replace(" ", "-", $id));
     }   
-  }
-  drupal_add_js('https://www.google.com/jsapi', 'external');
+  } 
   drupal_add_js(drupal_get_path('module', 'google_chart_tools') . '/google_chart_tools.js');
   drupal_add_js($settings, array('type' => 'setting'));
   $ret = array(
