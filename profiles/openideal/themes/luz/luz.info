@@ -19,7 +19,7 @@ base theme = sasson
 ;   Recompile - to force the file to be recompiled on every page load
 ; styles[styles/filename.scss][options][recompile] = true
 
-styles[styles/from_bootstrap.css][options][media] = all
+styles[styles/bootstrap_reset.css][options][media] = all
 styles[styles/luz.scss][options][media] = all
 
 
@@ -73,6 +73,7 @@ settings[sasson_responsive_mf_medium] = '767px'
 settings[sasson_responsive_mf_large] = '960px'
 settings[sasson_responsive_menus_width] = '480px'
 settings[sasson_responsive_menus_selectors] = 'ul#main-menu-links, ul#secondary-menu-links'
+settings[sasson_responsive_menus_autohide] = 1
 
 settings[sasson_sass] = 1
 settings[sasson_devel] = 1
@@ -82,6 +83,8 @@ settings[sasson_force_ie] = 1
 settings[sasson_prompt_cf] = 'IE 7'
 
 settings[sasson_clear_registry] = 0
+settings[sasson_watcher] = 0
+settings[sasson_watch_file] = 'profiles/openideal/themes/luz/styles/luz.scss'
 settings[sasson_overlay] = 0
 settings[sasson_overlay_url] = ''
 settings[sasson_overlay_opacity] = '0.5'
@@ -94,10 +97,3 @@ settings[sasson_breadcrumb_hideonlyfront] = 1
 settings[sasson_breadcrumb_showtitle] = 0
 settings[sasson_breadcrumb_separator] = '»'
 settings[sasson_feed_icons] = 0
-
-; Information added by drupal.org packaging script on 2012-02-19
-version = "7.x-2.0"
-core = "7.x"
-project = "sasson"
-datestamp = "1329693346"
-
