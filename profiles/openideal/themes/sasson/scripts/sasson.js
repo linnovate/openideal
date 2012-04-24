@@ -2,9 +2,43 @@
  * sasson javascript core
  *
  */
- 
-
 (function($) {
+
+  Drupal.sasson = {};
+
+  /**
+   * This script will watch files for changes and
+   * automatically refresh the browser when a file is modified.
+   */
+  Drupal.sasson.watch = function(url) {
+    
+    var request;
+    var dateModified;
+
+    // Check the last time the file was modified
+    request = $.ajax({
+      type: "HEAD",
+      url: url,
+      success: function () {
+        dateModified = request.getResponseHeader("Last-Modified");
+        interval = setInterval(check,1000);
+      }
+    });
+
+    // Check every second if the timestamp was modified
+    var check = function() {
+      request = $.ajax({
+        type: "HEAD",
+        url: url,
+        success: function () {
+          if (dateModified != request.getResponseHeader("Last-Modified")) {
+            location.reload(); // Reload when a file changes
+          }
+        }
+      });
+    };
+  };
+  
   Drupal.behaviors.sasson = {
     attach: function(context) {
 

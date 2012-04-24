@@ -34,7 +34,7 @@
     <?php print $tree; ?>
 
     <?php if ($has_links): ?>
-    <p class="page-links clearfix">
+    <p class="page-links">
       <?php if ($prev_url) : ?>
         <a href="<?php print $prev_url; ?>" class="page-previous" title="<?php print t('Go to previous page'); ?>"><?php print t('‹ ') . $prev_title; ?></a>
       <?php endif; ?>

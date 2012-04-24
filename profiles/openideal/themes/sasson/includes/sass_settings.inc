@@ -29,6 +29,7 @@ function sasson_sasson_alter(&$data) {
     '[font-selectors]' => theme_get_setting('sasson_font_selectors') ? theme_get_setting('sasson_font_selectors') : 'body',
     // Overlay image
     '[overlay]' => theme_get_setting('sasson_overlay') == 1 ? '1' : '0',
+    '[overlay_opacity]' => theme_get_setting('sasson_overlay_opacity'),
   );
 
   $data = str_replace(array_keys($variables), $variables, $data);
@@ -38,32 +39,25 @@ function sasson_sasson_alter(&$data) {
  * Implements hook_sasson_post_parse_alter().
  */
 function sasson_sasson_post_parse_alter(&$data) {
-  // Break the file data into lines.
-  $lines = preg_split('/$\R?^/m', $data);
-  foreach ($lines as $k => $line) {
-    // Look for @flip command.
-    if (strpos($line, '@flip') !== FALSE) {
-      $s = explode('"', $line);
-      $file = trim($s[1]);
-      // Replace the command line with the RTLer returns
-      $output = '/** Starting Auto-Flip **/';
-      $output .= sasson_flip($file);
-      $output .= '/** Ending Auto-Flip **/';
-      $lines[$k] = $output;
-    }
-  }
-  // Build back the data out of the lines
-  $data = implode("\n", $lines);
+
+  // Search for lines that look like :
+  // @flip {file: "filename.scss"};
+  // and replace them with a flipped version of filename.scss
+  $data = preg_replace_callback('/@flip\s*\{\s*file\s*:\s*("[^"]+"|\'[^\']+\')[\s;]*\}/', 'sasson_flip', $data);
+
 }
 
-function sasson_flip($fname) {
+function sasson_flip($match) {
+
+  list(, $fname) = $match;
+  $fname = trim($fname, '"\'');
+
   $pp = explode("/", $fname);
   $last = end($pp);
   $fp = explode(".", $last);
   $name = $fp[0];
   $ext = $fp[1];
   $directory = 'public://css';
-  
   // If it's scss file, lets check for the compile css file in the public files directory.
   if ($ext == 'scss' || $ext == 'sass') {
     $path = "{$directory}/{$name}.css" ;
@@ -81,12 +75,15 @@ function sasson_flip($fname) {
     $c = file_get_contents($path);
     // create RTL object
     $Flipper = new Flipper;
-
     // do our job! LOL
-    $flipped = $Flipper->parse_css($c);
-    return $flipped;
+    $output = '/** Starting Auto-Flip **/';
+    $output .= $Flipper->parse_css($c);
+    $output .= '/** Ending Auto-Flip **/';
+
+    return $output;
   }
 }
+
 /**
  * Implements hook_prefixes_alter().
  *

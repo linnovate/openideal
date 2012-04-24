@@ -6,13 +6,12 @@
 **/
 
 (function($){
-  "use strict";
 
   var methods = {
     init : function(config) {
       var options = $.extend({
         autoHide: true,
-        defaultOption: "Go to...",
+        defaultOption: Drupal.t("Go to..."),
         deviceWidth: 480
       }, config);
       

@@ -1,29 +1,36 @@
 ; Theme Info --------------------------------------------------------------
-; required information about the theme
 
-name = Sasson
-description = Sasson is a base theme for advanced drupal theming.
-screenshot = images/sasson.png
+name = Starterkit
+description = Starterkit, sub-theme for Sasson
+screenshot = images/SUBTHEME.png
 core = 7.x
+base theme = sasson
 
 
-; Stylesheets  ------------------------------------------------------------
+; Theme specific styles ---------------------------------------------------
+; You can set here any option available to drupal_add_css() :
+;   Media - this is the minimum, it defines a stylesheet and associate a media query to it
+; styles[styles/filename.scss][options][media] = screen and (min-width:400px)
+;   Weight - to re-order your stylesheets
+; styles[styles/filename.scss][options][weight] = 1
+;   Browsers - conditional stylesheets, this will load it for IE7 or older 
+; styles[styles/filename.scss][options][browsers][IE] = lte IE 7
+; styles[styles/filename.scss][options][browsers][!IE] = FALSE
+;   Recompile - to force the file to be recompiled on every page load
+; styles[styles/filename.scss][options][recompile] = true
 
-styles[styles/boilerplate.css][options][weight] = -1
-styles[styles/boilerplate.css][options][media] = all
-
-styles[styles/sasson.scss][options][weight] = -1
-styles[styles/sasson.scss][options][media] = all
+styles[styles/SUBTHEME.scss][options][media] = all
 
 
-; Scripts  ----------------------------------------------------------------
+; Theme Script Files ------------------------------------------------------
 
-scripts[] = scripts/sasson.js
+scripts[] = scripts/script.js
 
 
 ; Regions -----------------------------------------------------------------
 ; these content regions are available for block placement.
 ; some are special hidden regions: page_top, page_bottom, and help.
+; sub-themes must re-declare regions.
 
 ; these are the stock regions
 regions[header] = Header
@@ -75,7 +82,7 @@ settings[sasson_prompt_cf] = 'IE 7'
 
 settings[sasson_clear_registry] = 0
 settings[sasson_watcher] = 0
-settings[sasson_watch_file] = 'sites/all/themes/sasson/styles/sasson.scss'
+settings[sasson_watch_file] = 'sites/all/themes/SUBTHEME/styles/SUBTHEME.scss'
 settings[sasson_overlay] = 0
 settings[sasson_overlay_url] = ''
 settings[sasson_overlay_opacity] = '0.5'

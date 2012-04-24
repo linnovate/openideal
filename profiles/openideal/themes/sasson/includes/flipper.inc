@@ -45,8 +45,10 @@ class Flipper {
         }
         
         // parse code
-        $t = !empty($block[1]) ? $this->parse_block($block[1]) : FALSE;
-        
+        if (!preg_match('/no-flip-block/', $block[1])) {
+          $t = !empty($block[1]) ? $this->parse_block($block[1]) : FALSE;
+        }
+
         if ($t) {
           $return .= "\n" . trim($block[0]) . " {\n$t\n}\n";
         } 
@@ -81,14 +83,16 @@ class Flipper {
 
     // loop
     foreach ($block as $line) {
-      $line = preg_replace('/\\/\\*.*\\*\\//', '', $line); // remove comments
-      if (!$line)
-        continue;
-      $line = trim($line) . ';';
-      preg_replace('/^[\s\t]*([a-z\-]+)\:[\s\t]*(.+)[\s\t]*;/', '$1: $2;', $line);
-      $c = $this->parse_line($line);
-      if ($c) {
-        $return[] = '  ' . $c;
+      if (!preg_match('/no-flip/', $line)) {
+        $line = preg_replace('/\\/\\*.*\\*\\//', '', $line); // remove comments
+        if (!$line)
+          continue;
+        $line = trim($line) . ';';
+        preg_replace('/^[\s\t]*([a-z\-]+)\:[\s\t]*(.+)[\s\t]*;/', '$1: $2;', $line);
+        $c = $this->parse_line($line);
+        if ($c) {
+          $return[] = '  ' . $c;
+        }
       }
     }
 

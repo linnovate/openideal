@@ -96,7 +96,7 @@
   <?php if ($main_menu_links): ?>
     <nav id="main-menu" role="navigation">
       <?php print $main_menu_links; ?>
-    </nav><!-- /#navigation -->
+    </nav><!-- /#main-menu -->
   <?php endif; ?>
 
   <?php if ($secondary_menu_links): ?>
@@ -141,13 +141,13 @@
   </div><!-- /#main -->
 
   <?php if ($page['sidebar_first']): ?>
-    <aside id="sidebar-first" role="complementary">
+    <aside id="sidebar-first" class="sidebar" role="complementary">
       <?php print render($page['sidebar_first']); ?>
     </aside><!-- /#sidebar-first -->
   <?php endif; ?>
 
   <?php if ($page['sidebar_second']): ?>
-    <aside id="sidebar-second" role="complementary">
+    <aside id="sidebar-second" class="sidebar" role="complementary">
       <?php print render($page['sidebar_second']); ?>
     </aside><!-- /#sidebar-second -->
   <?php endif; ?>

@@ -55,7 +55,7 @@
  * @see theme_comment()
  */
 ?>
-<article class="<?php print $classes; ?> clearfix"<?php print $attributes; ?>>
+<article class="<?php print $classes; ?>"<?php print $attributes; ?>>
 
   <header class="attribution">
     <?php print $picture ?>
@@ -85,7 +85,7 @@
       print render($content);
     ?>
     <?php if ($signature): ?>
-      <div class="user-signature clearfix">
+      <div class="user-signature">
         <?php print $signature ?>
       </div><!-- /.user-signature -->
     <?php endif; ?>

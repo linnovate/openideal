@@ -82,10 +82,7 @@ function sasson_pre_render($elements) {
     $directory = 'public://css';
     $path = $directory . '/' . $name . '.css';
     
-    // We recompile this file if recompile equals TRUE, array (and thereby the
-    // hash value) changed, if the file doesn't exist, or if we are in development
-    // mode. NOTE: You can use the 'recompile' array for your CSS files to cache
-    // them based on advanced criteria.
+    // We recompile this file if the file doesn't exist, if recompile equals true or if the file have changed since it was last compiled AND if we are in development mode.
     if (!file_exists($path) || $file['recompile'] || filemtime($path) < filemtime($file['data']) && $devel) {
       $data = sasson_load_stylesheet($file['data']);
       if (!$output = sasson_parse($data, $file, $file['syntax'])) {
