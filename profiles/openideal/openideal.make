@@ -125,8 +125,8 @@ projects[rules][subdir]                                        = contrib
 projects[search_autocomplete][version]                         = 7.x-2.1
 projects[search_autocomplete][subdir]                          = contrib
 
-projects[social_links][version]                                = 7.x-1.0
-projects[social_links][subdir]                                 = contrib
+projects[social_buttons][version]                              = 7.x-1.0
+projects[social_buttons][subdir]                               = contrib
 
 projects[strongarm][version]                                   = 7.x-2.0-beta5
 projects[strongarm][subdir]                                    = contrib
