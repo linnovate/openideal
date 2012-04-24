@@ -62,6 +62,22 @@ function openideal_install() {
   $full_html_format = (object) $full_html_format;
   filter_format_save($full_html_format);
 
+  // Set admin and default theme
+  $enable = array(
+    'theme_default' => 'luz',
+    'admin_theme' => 'seven',
+  );
+  theme_enable($enable);
+   
+  foreach ($enable as $var => $theme) {
+    if (!is_numeric($var)) {
+      variable_set($var, $theme);
+    }
+  }
+   
+  // Disable the default Bartik theme
+  theme_disable(array('bartik'));
+
   // Enable some openideal blocks.
   $default_theme = variable_get('theme_default', 'luz');
   $admin_theme = 'seven';
