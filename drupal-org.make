@@ -1,6 +1,5 @@
 api = 2
 core = 7.x
-;projects[drupal][type]                                         = core
 
 projects[addressfield][version]                                = 7.x-1.0-beta2
 projects[addressfield][subdir]                                 = contrib
