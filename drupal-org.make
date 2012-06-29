@@ -40,8 +40,8 @@ projects[entityreference][subdir]                              = contrib
 projects[faq][version]                                         = 7.x-1.0-rc1
 projects[faq][subdir]                                          = contrib
 
-projects[fbconnect][version]                                   = 7.x-2.x-dev
-projects[fbconnect][subdir]                                    = contrib
+;projects[fbconnect][version]                                   = 7.x-2.x-dev
+;projects[fbconnect][subdir]                                    = contrib
 
 projects[features][version]                                    = 7.x-1.0-beta6
 projects[features][subdir]                                     = contrib
@@ -162,6 +162,8 @@ projects[votingapi][subdir]                                    = contrib
 
 projects[vud][version]                                         = 7.x-1.x-dev
 projects[vud][subdir]                                          = contrib
+projects[vud][download][type] = git
+projects[vud][download][branch] = 7.x-1.x
 
 projects[watcher][version]                                     = 7.x-1.x-dev
 projects[watcher][subdir]                                      = contrib
