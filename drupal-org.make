@@ -160,11 +160,11 @@ projects[voting_rules][subdir]                                 = contrib
 projects[votingapi][version]                                   = 7.x-2.4
 projects[votingapi][subdir]                                    = contrib
 
-;projects[vud][version]                                         = 7.x-1.x-dev
-;projects[vud][subdir]                                          = contrib
-;projects[vud][download][type] = git
-;projects[vud][download][branch] = 7.x-1.x
-;projects[vud][download][url] = http://git.drupal.org/project/vud.git
+projects[vote_up_down][version]                               = 7.x-1.x-dev
+projects[vote_up_down][subdir]                                = contrib
+;projects[vote_up_down][download][type] = git
+;projects[vote_up_down][download][branch] = 7.x-1.x
+;projects[vote_up_down][download][url] = http://git.drupal.org/project/vote_up_down.git
 
 projects[watcher][version]                                     = 7.x-1.x-dev
 projects[watcher][subdir]                                      = contrib
