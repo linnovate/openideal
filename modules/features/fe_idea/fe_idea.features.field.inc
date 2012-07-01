@@ -10,7 +10,7 @@
 function fe_idea_field_default_fields() {
   $fields = array();
 
-  // Exported field: 'node-idea-body'
+  // Exported field: 'node-idea-body'.
   $fields['node-idea-body'] = array(
     'field_config' => array(
       'active' => '1',
@@ -33,6 +33,7 @@ function fe_idea_field_default_fields() {
           0 => 'format',
         ),
       ),
+      'locked' => '0',
       'module' => 'text',
       'settings' => array(
         'profile2_private' => FALSE,
@@ -85,7 +86,7 @@ function fe_idea_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-idea-field_blast_idea'
+  // Exported field: 'node-idea-field_blast_idea'.
   $fields['node-idea-field_blast_idea'] = array(
     'field_config' => array(
       'active' => '1',
@@ -94,7 +95,12 @@ function fe_idea_field_default_fields() {
       'entity_types' => array(),
       'field_name' => 'field_blast_idea',
       'foreign keys' => array(),
-      'indexes' => array(),
+      'indexes' => array(
+        'energy' => array(
+          0 => 'radioactivity_energy',
+        ),
+      ),
+      'locked' => '0',
       'module' => 'radioactivity',
       'settings' => array(),
       'translatable' => '0',
@@ -142,7 +148,7 @@ function fe_idea_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-idea-field_buzz_idea'
+  // Exported field: 'node-idea-field_buzz_idea'.
   $fields['node-idea-field_buzz_idea'] = array(
     'field_config' => array(
       'active' => '1',
@@ -151,7 +157,12 @@ function fe_idea_field_default_fields() {
       'entity_types' => array(),
       'field_name' => 'field_buzz_idea',
       'foreign keys' => array(),
-      'indexes' => array(),
+      'indexes' => array(
+        'energy' => array(
+          0 => 'radioactivity_energy',
+        ),
+      ),
+      'locked' => '0',
       'module' => 'radioactivity',
       'settings' => array(),
       'translatable' => '0',
@@ -199,7 +210,7 @@ function fe_idea_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-idea-field_category'
+  // Exported field: 'node-idea-field_category'.
   $fields['node-idea-field_category'] = array(
     'field_config' => array(
       'active' => '1',
@@ -220,6 +231,7 @@ function fe_idea_field_default_fields() {
           0 => 'tid',
         ),
       ),
+      'locked' => '0',
       'module' => 'taxonomy',
       'settings' => array(
         'allowed_values' => array(
@@ -271,7 +283,7 @@ function fe_idea_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-idea-field_challenge_ref'
+  // Exported field: 'node-idea-field_challenge_ref'.
   $fields['node-idea-field_challenge_ref'] = array(
     'field_config' => array(
       'active' => '1',
@@ -282,10 +294,13 @@ function fe_idea_field_default_fields() {
       'foreign keys' => array(),
       'indexes' => array(
         'target_entity' => array(
-          0 => 'target_type',
-          1 => 'target_id',
+          0 => 'target_id',
+        ),
+        'target_id' => array(
+          0 => 'target_id',
         ),
       ),
+      'locked' => '0',
       'module' => 'entityreference',
       'settings' => array(
         'handler' => 'base',
@@ -346,7 +361,7 @@ function fe_idea_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-idea-field_groove_idea'
+  // Exported field: 'node-idea-field_groove_idea'.
   $fields['node-idea-field_groove_idea'] = array(
     'field_config' => array(
       'active' => '1',
@@ -355,7 +370,12 @@ function fe_idea_field_default_fields() {
       'entity_types' => array(),
       'field_name' => 'field_groove_idea',
       'foreign keys' => array(),
-      'indexes' => array(),
+      'indexes' => array(
+        'energy' => array(
+          0 => 'radioactivity_energy',
+        ),
+      ),
+      'locked' => '0',
       'module' => 'radioactivity',
       'settings' => array(),
       'translatable' => '0',
@@ -403,7 +423,7 @@ function fe_idea_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-idea-field_in_action'
+  // Exported field: 'node-idea-field_in_action'.
   $fields['node-idea-field_in_action'] = array(
     'field_config' => array(
       'active' => '1',
@@ -417,6 +437,7 @@ function fe_idea_field_default_fields() {
           0 => 'value',
         ),
       ),
+      'locked' => '0',
       'module' => 'list',
       'settings' => array(
         'allowed_values' => array(
@@ -470,7 +491,7 @@ function fe_idea_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-idea-field_merge_to'
+  // Exported field: 'node-idea-field_merge_to'.
   $fields['node-idea-field_merge_to'] = array(
     'field_config' => array(
       'active' => '1',
@@ -481,10 +502,13 @@ function fe_idea_field_default_fields() {
       'foreign keys' => array(),
       'indexes' => array(
         'target_entity' => array(
-          0 => 'target_type',
-          1 => 'target_id',
+          0 => 'target_id',
+        ),
+        'target_id' => array(
+          0 => 'target_id',
         ),
       ),
+      'locked' => '0',
       'module' => 'entityreference',
       'settings' => array(
         'handler' => 'base',
@@ -545,7 +569,7 @@ function fe_idea_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-idea-field_social_buttons'
+  // Exported field: 'node-idea-field_social_buttons'.
   $fields['node-idea-field_social_buttons'] = array(
     'field_config' => array(
       'active' => '1',
@@ -555,6 +579,7 @@ function fe_idea_field_default_fields() {
       'field_name' => 'field_social_buttons',
       'foreign keys' => array(),
       'indexes' => array(),
+      'locked' => '0',
       'module' => 'social_buttons',
       'settings' => array(),
       'translatable' => '0',
@@ -592,6 +617,7 @@ function fe_idea_field_default_fields() {
         'button-5' => '',
         'button-6' => '',
         'button-7' => '',
+        'init' => TRUE,
         'user_register_form' => FALSE,
       ),
       'widget' => array(
@@ -604,7 +630,7 @@ function fe_idea_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-idea-field_vote'
+  // Exported field: 'node-idea-field_vote'.
   $fields['node-idea-field_vote'] = array(
     'field_config' => array(
       'active' => '1',
@@ -614,6 +640,7 @@ function fe_idea_field_default_fields() {
       'field_name' => 'field_vote',
       'foreign keys' => array(),
       'indexes' => array(),
+      'locked' => '0',
       'module' => 'vud_field',
       'settings' => array(
         'profile2_private' => FALSE,

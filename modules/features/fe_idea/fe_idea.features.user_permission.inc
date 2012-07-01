@@ -10,7 +10,7 @@
 function fe_idea_user_default_permissions() {
   $permissions = array();
 
-  // Exported permission: admin ideas
+  // Exported permission: admin ideas.
   $permissions['admin ideas'] = array(
     'name' => 'admin ideas',
     'roles' => array(
@@ -20,7 +20,7 @@ function fe_idea_user_default_permissions() {
     'module' => 'ideal_main',
   );
 
-  // Exported permission: create idea content
+  // Exported permission: create idea content.
   $permissions['create idea content'] = array(
     'name' => 'create idea content',
     'roles' => array(
@@ -29,7 +29,7 @@ function fe_idea_user_default_permissions() {
     'module' => 'node',
   );
 
-  // Exported permission: delete any idea content
+  // Exported permission: delete any idea content.
   $permissions['delete any idea content'] = array(
     'name' => 'delete any idea content',
     'roles' => array(
@@ -39,7 +39,7 @@ function fe_idea_user_default_permissions() {
     'module' => 'node',
   );
 
-  // Exported permission: delete own idea content
+  // Exported permission: delete own idea content.
   $permissions['delete own idea content'] = array(
     'name' => 'delete own idea content',
     'roles' => array(
@@ -49,7 +49,7 @@ function fe_idea_user_default_permissions() {
     'module' => 'node',
   );
 
-  // Exported permission: edit any idea content
+  // Exported permission: edit any idea content.
   $permissions['edit any idea content'] = array(
     'name' => 'edit any idea content',
     'roles' => array(
@@ -59,7 +59,7 @@ function fe_idea_user_default_permissions() {
     'module' => 'node',
   );
 
-  // Exported permission: edit own idea content
+  // Exported permission: edit own idea content.
   $permissions['edit own idea content'] = array(
     'name' => 'edit own idea content',
     'roles' => array(
@@ -69,7 +69,7 @@ function fe_idea_user_default_permissions() {
     'module' => 'node',
   );
 
-  // Exported permission: use vote up/down
+  // Exported permission: use vote up/down.
   $permissions['use vote up/down'] = array(
     'name' => 'use vote up/down',
     'roles' => array(

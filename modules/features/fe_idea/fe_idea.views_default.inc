@@ -1323,7 +1323,7 @@ Why not add an idea?';
   $handler->display->display_options['sorts']['created']['table'] = 'node';
   $handler->display->display_options['sorts']['created']['field'] = 'created';
   $handler->display->display_options['sorts']['created']['order'] = 'DESC';
-  /* Contextual filter: Content: Merge to (field_merge_to:target_id) */
+  /* Contextual filter: Content: Merge to (field_merge_to) */
   $handler->display->display_options['arguments']['field_merge_to_target_id']['id'] = 'field_merge_to_target_id';
   $handler->display->display_options['arguments']['field_merge_to_target_id']['table'] = 'field_data_field_merge_to';
   $handler->display->display_options['arguments']['field_merge_to_target_id']['field'] = 'field_merge_to_target_id';
