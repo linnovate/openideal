@@ -48,6 +48,9 @@ projects[features][subdir] = contrib
 projects[field_group][version] = "1.1"
 projects[field_group][subdir] = contrib
 
+projects[field_permissions][version] = "1.0-beta2"
+projects[field_permissions][subdir] = contrib
+
 projects[filefield_sources][version] = "1.4"
 projects[filefield_sources][subdir] = contrib
 

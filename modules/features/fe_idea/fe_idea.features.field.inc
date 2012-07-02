@@ -291,7 +291,17 @@ function fe_idea_field_default_fields() {
       'deleted' => '0',
       'entity_types' => array(),
       'field_name' => 'field_challenge_ref',
-      'foreign keys' => array(),
+      'field_permissions' => array(
+        'type' => '2',
+      ),
+      'foreign keys' => array(
+        'node' => array(
+          'columns' => array(
+            'target_id' => 'nid',
+          ),
+          'table' => 'node',
+        ),
+      ),
       'indexes' => array(
         'target_entity' => array(
           0 => 'target_id',
@@ -305,6 +315,11 @@ function fe_idea_field_default_fields() {
       'settings' => array(
         'handler' => 'base',
         'handler_settings' => array(
+          'behaviors' => array(
+            'views-select-list' => array(
+              'status' => 0,
+            ),
+          ),
           'sort' => array(
             'direction' => 'ASC',
             'field' => 'body:value',
@@ -431,6 +446,9 @@ function fe_idea_field_default_fields() {
       'deleted' => '0',
       'entity_types' => array(),
       'field_name' => 'field_in_action',
+      'field_permissions' => array(
+        'type' => '2',
+      ),
       'foreign keys' => array(),
       'indexes' => array(
         'value' => array(
@@ -499,7 +517,17 @@ function fe_idea_field_default_fields() {
       'deleted' => '0',
       'entity_types' => array(),
       'field_name' => 'field_merge_to',
-      'foreign keys' => array(),
+      'field_permissions' => array(
+        'type' => '2',
+      ),
+      'foreign keys' => array(
+        'node' => array(
+          'columns' => array(
+            'target_id' => 'nid',
+          ),
+          'table' => 'node',
+        ),
+      ),
       'indexes' => array(
         'target_entity' => array(
           0 => 'target_id',
@@ -513,6 +541,11 @@ function fe_idea_field_default_fields() {
       'settings' => array(
         'handler' => 'base',
         'handler_settings' => array(
+          'behaviors' => array(
+            'views-select-list' => array(
+              'status' => 0,
+            ),
+          ),
           'sort' => array(
             'direction' => 'ASC',
             'field' => 'body:value',

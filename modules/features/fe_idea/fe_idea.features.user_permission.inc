@@ -20,6 +20,33 @@ function fe_idea_user_default_permissions() {
     'module' => 'ideal_main',
   );
 
+  // Exported permission: create field_challenge_ref.
+  $permissions['create field_challenge_ref'] = array(
+    'name' => 'create field_challenge_ref',
+    'roles' => array(
+      0 => 'administrator',
+    ),
+    'module' => 'field_permissions',
+  );
+
+  // Exported permission: create field_in_action.
+  $permissions['create field_in_action'] = array(
+    'name' => 'create field_in_action',
+    'roles' => array(
+      0 => 'administrator',
+    ),
+    'module' => 'field_permissions',
+  );
+
+  // Exported permission: create field_merge_to.
+  $permissions['create field_merge_to'] = array(
+    'name' => 'create field_merge_to',
+    'roles' => array(
+      0 => 'administrator',
+    ),
+    'module' => 'field_permissions',
+  );
+
   // Exported permission: create idea content.
   $permissions['create idea content'] = array(
     'name' => 'create idea content',
@@ -59,6 +86,60 @@ function fe_idea_user_default_permissions() {
     'module' => 'node',
   );
 
+  // Exported permission: edit field_challenge_ref.
+  $permissions['edit field_challenge_ref'] = array(
+    'name' => 'edit field_challenge_ref',
+    'roles' => array(
+      0 => 'administrator',
+    ),
+    'module' => 'field_permissions',
+  );
+
+  // Exported permission: edit field_in_action.
+  $permissions['edit field_in_action'] = array(
+    'name' => 'edit field_in_action',
+    'roles' => array(
+      0 => 'administrator',
+    ),
+    'module' => 'field_permissions',
+  );
+
+  // Exported permission: edit field_merge_to.
+  $permissions['edit field_merge_to'] = array(
+    'name' => 'edit field_merge_to',
+    'roles' => array(
+      0 => 'administrator',
+    ),
+    'module' => 'field_permissions',
+  );
+
+  // Exported permission: edit own field_challenge_ref.
+  $permissions['edit own field_challenge_ref'] = array(
+    'name' => 'edit own field_challenge_ref',
+    'roles' => array(
+      0 => 'administrator',
+    ),
+    'module' => 'field_permissions',
+  );
+
+  // Exported permission: edit own field_in_action.
+  $permissions['edit own field_in_action'] = array(
+    'name' => 'edit own field_in_action',
+    'roles' => array(
+      0 => 'administrator',
+    ),
+    'module' => 'field_permissions',
+  );
+
+  // Exported permission: edit own field_merge_to.
+  $permissions['edit own field_merge_to'] = array(
+    'name' => 'edit own field_merge_to',
+    'roles' => array(
+      0 => 'administrator',
+    ),
+    'module' => 'field_permissions',
+  );
+
   // Exported permission: edit own idea content.
   $permissions['edit own idea content'] = array(
     'name' => 'edit own idea content',
@@ -77,6 +158,60 @@ function fe_idea_user_default_permissions() {
       1 => 'authenticated user',
     ),
     'module' => 'vud',
+  );
+
+  // Exported permission: view field_challenge_ref.
+  $permissions['view field_challenge_ref'] = array(
+    'name' => 'view field_challenge_ref',
+    'roles' => array(
+      0 => 'administrator',
+    ),
+    'module' => 'field_permissions',
+  );
+
+  // Exported permission: view field_in_action.
+  $permissions['view field_in_action'] = array(
+    'name' => 'view field_in_action',
+    'roles' => array(
+      0 => 'administrator',
+    ),
+    'module' => 'field_permissions',
+  );
+
+  // Exported permission: view field_merge_to.
+  $permissions['view field_merge_to'] = array(
+    'name' => 'view field_merge_to',
+    'roles' => array(
+      0 => 'administrator',
+    ),
+    'module' => 'field_permissions',
+  );
+
+  // Exported permission: view own field_challenge_ref.
+  $permissions['view own field_challenge_ref'] = array(
+    'name' => 'view own field_challenge_ref',
+    'roles' => array(
+      0 => 'administrator',
+    ),
+    'module' => 'field_permissions',
+  );
+
+  // Exported permission: view own field_in_action.
+  $permissions['view own field_in_action'] = array(
+    'name' => 'view own field_in_action',
+    'roles' => array(
+      0 => 'administrator',
+    ),
+    'module' => 'field_permissions',
+  );
+
+  // Exported permission: view own field_merge_to.
+  $permissions['view own field_merge_to'] = array(
+    'name' => 'view own field_merge_to',
+    'roles' => array(
+      0 => 'administrator',
+    ),
+    'module' => 'field_permissions',
   );
 
   return $permissions;
