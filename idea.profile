@@ -5,7 +5,7 @@
  *
  * Allows the profile to alter the site configuration form.
  */
-function openideal_form_install_configure_form_alter(&$form, $form_state) {
+function idea_form_install_configure_form_alter(&$form, $form_state) {
   drupal_get_messages('status');
   drupal_get_messages('warning');
   

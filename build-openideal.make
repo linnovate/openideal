@@ -3,10 +3,6 @@
 
  ;Core
  projects[drupal][type] = core
- projects[drupal][version] = 7.14
  
  ;Profile
- projects[openideal][download][type] = git
- projects[openideal][download][url] = http://git.drupal.org/project/idea.git
- projects[openideal][download][branch] = 7.x-1.x
- projects[openideal][type] = profile
+ projects[idea][version] = 1.x-dev
