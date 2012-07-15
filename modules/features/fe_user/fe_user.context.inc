@@ -68,12 +68,6 @@ function fe_user_context_default_contexts() {
           'region' => 'content',
           'weight' => '-8',
         ),
-        'heartbeat-userpage_activity' => array(
-          'module' => 'heartbeat',
-          'delta' => 'userpage_activity',
-          'region' => 'content',
-          'weight' => '-10',
-        ),
       ),
     ),
   );

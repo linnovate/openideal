@@ -1,13 +1,13 @@
 <?php
 /**
  * @file
- * fe_user.strongarm.inc
+ * fe_heartbeat.strongarm.inc
  */
 
 /**
  * Implements hook_strongarm().
  */
-function fe_user_strongarm() {
+function fe_heartbeat_strongarm() {
   $export = array();
 
   $strongarm = new stdClass();

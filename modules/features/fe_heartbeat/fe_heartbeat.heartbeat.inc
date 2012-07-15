@@ -1,13 +1,13 @@
 <?php
 /**
  * @file
- * fe_user.heartbeat.inc
+ * fe_heartbeat.heartbeat.inc
  */
 
 /**
  * Implements hook_heartbeat_template_info().
  */
-function fe_user_heartbeat_template_info() {
+function fe_heartbeat_heartbeat_template_info() {
   $export = array();
 
   $heartbeatmessagetemplate = new HeartbeatMessageTemplate();
@@ -138,7 +138,7 @@ function fe_user_heartbeat_template_info() {
 /**
  * Implements hook_heartbeat_stream_info().
  */
-function fe_user_heartbeat_stream_info() {
+function fe_heartbeat_heartbeat_stream_info() {
   $export = array();
 
   $heartbeatstream = new HeartbeatStreamConfig();
