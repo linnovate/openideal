@@ -1,0 +1,77 @@
+/*
+ * ##### Sasson - advanced drupal theming. #####
+ *
+ * SASS mixins
+ * http://sass-lang.com/docs/yardoc/file.SASS_REFERENCE.html#mixins
+ *
+ */
+
+@import "compass/css3";
+
+// Image replacement mixin
+// Usage - @include img-replace(26%, 23px, image-url('../images/search-btn.png'), center center);
+@mixin img-replace($width, $height, $imgurl, $position: 0 0) {
+  width: $width;
+  height: $height;
+  background: #{$imgurl} no-repeat transparent #{$position};
+  display: block;
+  border: 0;
+  font: 0/0 a;
+  text-shadow: none;
+  color: transparent;
+  background-color: transparent;
+}
+
+@mixin off-canvas($side: left) {
+  margin-#{$side}: -100%;
+}
+
+@mixin box {
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 20px;
+  margin-bottom: 5px;
+}
+
+@mixin block-link {
+  background-color: #5fbae7;
+  border-radius: 3px;
+  color: #fff;
+  padding: 1px 5px 1px;
+  font-size: 12px;
+  display: inline-block;
+  margin: 0;
+}
+
+@mixin bevel($opacity: 0.2) {
+  @include linear-gradient(color-stops(rgba(255, 255, 255, $opacity), rgba(0, 0, 0, $opacity)), top);
+}
+
+@mixin bevel-in($opacity: 0.2) {
+  @include linear-gradient(color-stops(rgba(0, 0, 0, $opacity), rgba(255, 255, 255, $opacity)), top);
+}
+
+@mixin button($color: #0074cc) {
+  display: inline-block;
+  padding: 4px 10px 4px;
+  margin-bottom: 0;
+  font-size: 13px;
+  line-height: 18px;
+  color: white;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.4);
+  text-align: center;
+  vertical-align: middle;
+  background-color: $color;
+  @include bevel;
+  border: 1px solid #ccc;
+  border-color: #e6e6e6 #e6e6e6 #bfbfbf;
+  border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+  border-radius: 4px;
+  box-shadow: inset 1px 0 0 rgba(255, 255, 255, 0.125), inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05)
+  cursor: pointer;
+  transition: background-color 0.4s;
+
+  &:hover {
+    background-color: lighten($color, 10%);
+  }
+}

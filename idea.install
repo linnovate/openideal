@@ -64,7 +64,7 @@ function idea_install() {
 
   // Set admin and default theme
   $enable = array(
-    'theme_default' => 'luz',
+    'theme_default' => 'plato',
     'admin_theme' => 'seven',
   );
   theme_enable($enable);
@@ -79,7 +79,7 @@ function idea_install() {
   theme_disable(array('bartik'));
 
   // Enable some openideal blocks.
-  $default_theme = variable_get('theme_default', 'luz');
+  $default_theme = variable_get('theme_default', 'plato');
   $admin_theme = 'seven';
   $blocks = array(
     array(

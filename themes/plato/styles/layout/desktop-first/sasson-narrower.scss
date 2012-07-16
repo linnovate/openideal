@@ -1,0 +1,37 @@
+
+// Layout for small viewports
+
+// ====== Media Queries for a Responsive Design. ============================
+//   By default we suggest 4 levels of layout :
+//   default - large viewport - fixed, pixel based layout, two sidebars floating (@see sasson-base.scss).
+//   second - medium viewport - fluid, precentage based layout, two sidebars floating (@see sasson-narrow.scss).
+//   third - small viewport - fluid, precentage based layout, only first one floating (@see sasson-narrower.scss).
+//   forth - no media queries - simple, content first, no sidebars layout (@see sasson-narrowest.scss).
+// ==========================================================================
+
+// Trigger JS media queries
+head {
+  width: 2px;
+}
+
+.two-sidebars {
+  #main {
+    @include fluid-grid($ninesixty-columns - $sidebar-first);
+    @include fluid-push($sidebar-first);
+    padding: 30px 10px 30px;
+  }
+  #sidebar-first {
+    @include fluid-pull($ninesixty-columns - $sidebar-first);
+    padding: 30px 10px 30px;
+  }
+  #sidebar-second {
+    @include fluid-grid($ninesixty-columns);
+    padding: 30px 10px 30px;
+  }
+}
+
+#main,
+#sidebar-first,
+#sidebar-second {
+  padding: 30px 10px 30px;
+}

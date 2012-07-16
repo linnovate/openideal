@@ -1,0 +1,35 @@
+/*-----------------------------------------------
+                Off-canvas effect
+-----------------------------------------------*/
+@import "960/grid";
+
+$sidebar-width: 8;
+
+#page #sidebar-first {
+  margin-left: -100%;
+  width: 100% / $ninesixty-columns * $sidebar-width;
+  padding: 30px 20px 30px;
+}
+
+body.on-canvas #page {
+  overflow: hidden;
+
+  #sidebar-first {
+    left: 0%;
+    box-shadow: inset 0px 10px 10px -5px #ddd;
+
+  }
+  #main {
+    @include fluid-push($sidebar-width);
+    box-shadow: -10px 0px 10px -5px #ddd;
+  }
+}
+
+ul li.off-canvas {
+  font-size: 1.3em;
+  font-weight: bold;
+
+  a {
+    color: #eee;
+  }
+}
