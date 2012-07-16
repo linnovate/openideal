@@ -105,7 +105,7 @@ projects[mailsystem][subdir] = contrib
 projects[metatag][version] = "1.0-alpha6"
 projects[metatag][subdir] = contrib
 
-projects[module_filter][version] = 7.x-1.6
+projects[module_filter][version] = 7.x-1.7
 projects[module_filter][subdir] = contrib
 
 projects[nodequeue][version] = "2.0-beta1"
