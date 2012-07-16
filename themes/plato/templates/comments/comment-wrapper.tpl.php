@@ -42,11 +42,11 @@
     <?php print render($title_suffix); ?>
   <?php endif; ?>
 
-  <?php print render($content['comments']); ?>
-
   <?php if ($content['comment_form']): ?>
     <section id="comment-form-wrapper">
       <?php print render($content['comment_form']); ?>
     </section><!-- /#comment-form -->
-  <?php endif; ?>
+  <?php endif; ?>  
+    
+  <?php print render($content['comments']); ?>
 </section><!-- /#comments -->
