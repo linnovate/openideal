@@ -179,5 +179,5 @@ projects[wysiwyg_filter][subdir] = contrib
 
 
 ; Base Themes
-projects[sasson][version] = "2.4"
+projects[sasson][version] = "2.x-dev"
 
