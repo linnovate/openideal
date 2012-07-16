@@ -96,6 +96,9 @@ projects[login_destination][subdir] = contrib
 projects[logintoboggan][version] = "1.3"
 projects[logintoboggan][subdir] = contrib
 
+projects[message][version] = "1.4"
+projects[message][subdir] = contrib
+
 projects[mailsystem][version] = "2.34"
 projects[mailsystem][subdir] = contrib
 
