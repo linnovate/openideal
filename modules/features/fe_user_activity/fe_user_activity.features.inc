@@ -37,9 +37,9 @@ function fe_user_activity_default_message_type() {
     "arguments" : null,
     "message_text" : { "und" : [
         {
-          "value" : "[message:user:link] has \\u003Ca href=\\u0022[message:field-message-comment:url]\\u0022\\u003Ecommented\\u003C\\/a\\u003E to [message:field-message-content:link]",
+          "value" : "\\u003Ca href=\\u0022[message:user:url]\\u0022\\u003E[message:user:name]\\u003C\\/a\\u003E has \\u003Ca href=\\u0022[message:field-message-comment:url]\\u0022\\u003Ecommented\\u003C\\/a\\u003E to \\u003Ca href=\\u0022[message:field-message-content:url]\\u0022\\u003E[message:field-message-content:title]\\u003C\\/a\\u003E",
           "format" : "full_html",
-          "safe_value" : "\\u003Cp\\u003E[message:user:link] has \\u003Ca href=\\u0022[message:field-message-comment:url]\\u0022\\u003Ecommented\\u003C\\/a\\u003E to [message:field-message-content:link]\\u003C\\/p\\u003E\\n"
+          "safe_value" : "\\u003Cp\\u003E\\u003Ca href=\\u0022[message:user:url]\\u0022\\u003E[message:user:name]\\u003C\\/a\\u003E has \\u003Ca href=\\u0022[message:field-message-comment:url]\\u0022\\u003Ecommented\\u003C\\/a\\u003E to \\u003Ca href=\\u0022[message:field-message-content:url]\\u0022\\u003E[message:field-message-content:title]\\u003C\\/a\\u003E\\u003C\\/p\\u003E\\n"
         }
       ]
     },
@@ -57,9 +57,9 @@ function fe_user_activity_default_message_type() {
     "arguments" : null,
     "message_text" : { "und" : [
         {
-          "value" : "[message:field-message-content:link] has been added by [message:user:link]",
+          "value" : "\\u003Ca href=\\u0022[message:field-message-content:url]\\u0022\\u003E[message:field-message-content:title]\\u003C\\/a\\u003E has been added by \\u003Ca href=\\u0022[message:user:url]\\u0022\\u003E[message:user:name]\\u003C\\/a\\u003E",
           "format" : "filtered_html",
-          "safe_value" : "\\u003Cp\\u003E[message:field-message-content:link] has been added by [message:user:link]\\u003C\\/p\\u003E\\n"
+          "safe_value" : "\\u003Cp\\u003E\\u003Ca href=\\u0022url]\\u0022\\u003E[message:field-message-content:title]\\u003C\\/a\\u003E has been added by \\u003Ca href=\\u0022url]\\u0022\\u003E[message:user:name]\\u003C\\/a\\u003E\\u003C\\/p\\u003E\\n"
         }
       ]
     },
@@ -77,9 +77,9 @@ function fe_user_activity_default_message_type() {
     "arguments" : null,
     "message_text" : { "und" : [
         {
-          "value" : "[message:user:link] has been voted on [message:field-message-content:link]",
+          "value" : "\\u003Ca href=\\u0022[message:user:url]\\u0022\\u003E[message:user:name]\\u003C\\/a\\u003E has been voted on \\u003Ca href=\\u0022[message:field-message-content:url]\\u0022\\u003E[message:field-message-content:title]\\u003C\\/a\\u003E",
           "format" : "filtered_html",
-          "safe_value" : "\\u003Cp\\u003E[message:user:link] has been voted on [message:field-message-content:link]\\u003C\\/p\\u003E\\n"
+          "safe_value" : "\\u003Cp\\u003E\\u003Ca href=\\u0022url]\\u0022\\u003E[message:user:name]\\u003C\\/a\\u003E has been voted on \\u003Ca href=\\u0022url]\\u0022\\u003E[message:field-message-content:title]\\u003C\\/a\\u003E\\u003C\\/p\\u003E\\n"
         }
       ]
     },

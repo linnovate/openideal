@@ -22,11 +22,11 @@ function fe_user_activity_field_default_fields() {
         'type' => '0',
       ),
       'foreign keys' => array(
-        'node' => array(
+        'comment' => array(
           'columns' => array(
-            'target_id' => 'nid',
+            'target_id' => 'cid',
           ),
-          'table' => 'node',
+          'table' => 'comment',
         ),
       ),
       'indexes' => array(
