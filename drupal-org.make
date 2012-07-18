@@ -66,7 +66,7 @@ projects[forward][subdir] = contrib
 projects[google_analytics][version] = 7.x-1.2
 projects[google_analytics][subdir] = contrib
 
-projects[google_chart_tools][version] = "1.0-beta3"
+projects[google_chart_tools][version] = "1.0-beta4"
 projects[google_chart_tools][subdir] = contrib
 
 projects[heartbeat][version] = "1.0"
@@ -126,7 +126,7 @@ projects[rules][subdir] = contrib
 projects[search_autocomplete][version] = "2.3"
 projects[search_autocomplete][subdir] = contrib
 
-projects[social_buttons][version] = "1.0-beta3"
+projects[social_buttons][version] = "1.0-beta4"
 projects[social_buttons][subdir] = contrib
 
 projects[strongarm][version] = "2.0"
