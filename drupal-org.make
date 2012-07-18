@@ -75,7 +75,7 @@ projects[heartbeat][subdir] = contrib
 projects[htmlmail][version] = "2.65"
 projects[htmlmail][subdir] = contrib
 
-projects[ideal_comments][version] = "1.0-beta4"
+projects[ideal_comments][version] = "1.0-beta5"
 projects[ideal_comments][subdir] = contrib
 
 projects[imce][version] = "1.5"
