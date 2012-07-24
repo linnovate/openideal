@@ -1,8 +1,5 @@
  api = 2
  core = 7.x
+projects[drupal][version] = 7.14
 
- ;Core
- projects[drupal][type] = core
- 
- ;Profile
  projects[idea][version] = 1.x-dev

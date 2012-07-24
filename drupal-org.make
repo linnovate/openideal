@@ -33,7 +33,7 @@ projects[email_confirm][subdir] = contrib
 projects[entity][version] = "1.0-rc3"
 projects[entity][subdir] = contrib
 
-projects[entity_autocomplete][version] = 7.x-1.0-beta1
+projects[entity_autocomplete][version] = 1.0-beta1
 projects[entity_autocomplete][subdir] = contrib
 
 projects[entityreference][version] = "1.0-rc3"
@@ -63,7 +63,7 @@ projects[flag_abuse][subdir] = contrib
 projects[forward][version] = "1.3"
 projects[forward][subdir] = contrib
 
-projects[google_analytics][version] = 7.x-1.2
+projects[google_analytics][version] = "1.2"
 projects[google_analytics][subdir] = contrib
 
 projects[google_chart_tools][version] = "1.0-beta4"
@@ -105,7 +105,7 @@ projects[mailsystem][subdir] = contrib
 projects[metatag][version] = "1.0-alpha6"
 projects[metatag][subdir] = contrib
 
-projects[module_filter][version] = 7.x-1.7
+projects[module_filter][version] = 1.7
 projects[module_filter][subdir] = contrib
 
 projects[nodequeue][version] = "2.0-beta1"
@@ -180,4 +180,5 @@ projects[wysiwyg_filter][subdir] = contrib
 
 ; Base Themes
 projects[sasson][version] = "2.x-dev"
+projects[plato][version] = "1.x-dev"
 
