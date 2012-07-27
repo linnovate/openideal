@@ -2,7 +2,6 @@ api = 2
 core = 7.x
 
 ; Modules
-
 projects[addressfield][version] = "1.0-beta3"
 projects[addressfield][subdir] = contrib
 
