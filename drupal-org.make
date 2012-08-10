@@ -11,7 +11,7 @@ projects[admin_menu][subdir] = contrib
 projects[boxes][version] = "1.0"
 projects[boxes][subdir] = contrib
 
-projects[ctools][version] = "1.0"
+projects[ctools][version] = "1.1"
 projects[ctools][subdir] = contrib
 
 projects[context][version] = "3.0-beta3"
@@ -41,7 +41,7 @@ projects[entityreference][subdir] = contrib
 projects[faq][version] = "1.0-rc2"
 projects[faq][subdir] = contrib
 
-projects[features][version] = "1.0-rc3"
+projects[features][version] = "1.0"
 projects[features][subdir] = contrib
 
 projects[field_group][version] = "1.1"
@@ -53,7 +53,7 @@ projects[field_permissions][subdir] = contrib
 projects[filefield_sources][version] = "1.4"
 projects[filefield_sources][subdir] = contrib
 
-projects[flag][version] = "2.0-beta6"
+projects[flag][version] = "2.0-beta8"
 projects[flag][subdir] = contrib
 
 projects[flag_abuse][version] = "2.x-dev"
@@ -65,16 +65,13 @@ projects[forward][subdir] = contrib
 projects[google_analytics][version] = "1.2"
 projects[google_analytics][subdir] = contrib
 
-projects[google_chart_tools][version] = "1.0-beta4"
+projects[google_chart_tools][version] = "1.0"
 projects[google_chart_tools][subdir] = contrib
-
-projects[heartbeat][version] = "1.0"
-projects[heartbeat][subdir] = contrib
 
 projects[htmlmail][version] = "2.65"
 projects[htmlmail][subdir] = contrib
 
-projects[ideal_comments][version] = "1.0-beta5"
+projects[ideal_comments][version] = "1.0"
 projects[ideal_comments][subdir] = contrib
 
 projects[imce][version] = "1.5"
@@ -86,7 +83,7 @@ projects[imce_mkdir][subdir] = contrib
 projects[imce_wysiwyg][version] = "1.0"
 projects[imce_wysiwyg][subdir] = contrib
 
-projects[libraries][version] = "1.0"
+projects[libraries][version] = "2.0"
 projects[libraries][subdir] = contrib
 
 projects[login_destination][version] = "1.0"
@@ -125,7 +122,7 @@ projects[rules][subdir] = contrib
 projects[search_autocomplete][version] = "2.3"
 projects[search_autocomplete][subdir] = contrib
 
-projects[social_buttons][version] = "1.0-beta4"
+projects[social_buttons][version] = "1.0"
 projects[social_buttons][subdir] = contrib
 
 projects[strongarm][version] = "2.0"
