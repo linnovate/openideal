@@ -40,7 +40,11 @@
     </div>
 
   </div>
-
+  <div id="footer-messages">
+    <div class = "message"> 
+      <?php print 'OpenideaL is a Drupal open source distribution made by Linnovate'; ?>
+    </div>  
+  </div>
   <?php print $page_bottom; ?>
 
   </body>

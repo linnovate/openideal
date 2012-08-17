@@ -800,6 +800,10 @@ div.admin-options div.form-item {
 }
 
 /* Maintenance theming */
+body.in-maintenance #footer-messages {
+  width: 770px;
+  margin: 0 auto;
+}
 body.in-maintenance #sidebar-first {
   float: left; /* LTR */
   width: 200px;
@@ -842,6 +846,11 @@ body.in-maintenance #logo {
   max-width: 38px;
   float: left;
 }
+body.in-maintenance #footer-messages .message{
+  float: right;
+  color: #ccc;
+  padding-top: 8px;
+}
 ol.task-list {
   margin-left: 0; /* LTR */
   list-style-type: none;
@@ -855,7 +864,7 @@ ol.task-list li {
 ol.task-list li.active {
   background: transparent url(images/tasks.png) no-repeat 0 52%; /* LTR */
   padding: 0.5em 1em 0.3em 30px; /* LTR */
-  color: #555;
+  color: #318bcc;
 }
 ol.task-list li.done {
   background: transparent url(images/tasks.png) no-repeat 0 112%;
