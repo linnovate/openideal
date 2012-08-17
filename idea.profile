@@ -41,6 +41,25 @@ function idea_install_tasks_alter(&$tasks, $install_state) {
   );
   $old_tasks = $tasks;
   $tasks = array_slice($old_tasks, 0, 2) + $new_task + array_slice($old_tasks, 2);
+  
+   _openideal_set_theme('ideal7');
+}
+
+/**
+ * Force-set a theme at any point during the execution of the request.
+ *
+ * Drupal doesn't give us the option to set the theme during the installation
+ * process and forces enable the maintenance theme too early in the request
+ * for us to modify it in a clean way.
+ */
+function _openideal_set_theme($target_theme) {
+  if ($GLOBALS['theme'] != $target_theme) {
+    unset($GLOBALS['theme']);
+
+    drupal_static_reset();
+    $GLOBALS['conf']['maintenance_theme'] = $target_theme;
+    _drupal_maintenance_theme();
+  }
 }
 
 /**
