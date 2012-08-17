@@ -11,17 +11,18 @@
 
   <?php print $page_top; ?>
 
-  <div id="branding">
-    <?php if ($title): ?><h1 class="page-title"><?php print $title; ?></h1><?php endif; ?>
-  </div>
+  
 
   <div id="page">
-
+    <div id="branding">
+      <?php if ($logo): ?>
+        <img id="logo" src="<?php print $logo ?>" alt="<?php print $site_name ?>" />
+      <?php endif; ?>
+      <?php if ($title): ?><h1 class="page-title"><?php print $title; ?></h1><?php endif; ?>
+    </div>
     <?php if ($sidebar_first): ?>
       <div id="sidebar-first" class="sidebar">
-        <?php if ($logo): ?>
-          <img id="logo" src="<?php print $logo ?>" alt="<?php print $site_name ?>" />
-        <?php endif; ?>
+        
         <?php print $sidebar_first ?>
       </div>
     <?php endif; ?>

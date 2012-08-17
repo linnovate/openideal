@@ -32,6 +32,9 @@ function system_form_install_select_profile_form_alter(&$form, $form_state) {
  * Implements hook_install_tasks_alter().
  */
 function idea_install_tasks_alter(&$tasks, $install_state) {
+  unset($tasks['install_select_profile']);
+  unset($tasks['install_select_locale']);
+  
   // Add a wolcome page.
   $new_task['install_welcome'] = array(
     'display' => TRUE,
@@ -39,10 +42,8 @@ function idea_install_tasks_alter(&$tasks, $install_state) {
     'type' => 'form',
     'run' => isset($install_state['parameters']['welcome']) ? INSTALL_TASK_SKIP : INSTALL_TASK_RUN_IF_REACHED,
   );
-  $old_tasks = $tasks;
-  $tasks = array_slice($old_tasks, 0, 2) + $new_task + array_slice($old_tasks, 2);
-  
-   _openideal_set_theme('ideal7');
+  $tasks = array_merge($new_task, $tasks);
+  _openideal_set_theme('ideal7');
 }
 
 /**

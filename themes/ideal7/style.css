@@ -4,7 +4,7 @@
  */
 body {
   color: #000;
-  background: #fff;
+  background: #333;
   font: normal 81.3%/1.538em "Lucida Grande", "Lucida Sans Unicode", sans-serif;
 }
 a {
@@ -183,7 +183,7 @@ pre {
  */
 #branding {
   overflow: hidden;
-  padding: 20px 20px 0 20px; /* LTR */
+  padding: 20px 0 0 40px; /* LTR */
   position: relative;
   background-color: #e0e0d8;
 }
@@ -348,7 +348,6 @@ ul.secondary li.active a.active {
  * Page layout.
  */
 #page {
-  padding: 20px 0 40px 0; /* LTR */
   margin-right: 40px; /* LTR */
   margin-left: 40px; /* LTR */
   background: #fff;
@@ -804,23 +803,28 @@ div.admin-options div.form-item {
 body.in-maintenance #sidebar-first {
   float: left; /* LTR */
   width: 200px;
+  margin: 0 0 0 40px;
 }
 body.in-maintenance #content {
   float: right; /* LTR */
-  width: 550px;
-  padding-right: 20px; /* LTR */
+  width: 450px;
+  padding: 10px 40px 0 0; /* LTR */
   clear: none;
 }
 body.in-maintenance #page {
-  overflow: auto;
+  overflow: hidden;
   width: 770px;
   margin: 0 auto;
-  padding-top: 2em;
+  margin-top: 2em;
+  padding-bottom: 2em;
 }
 body.in-maintenance #branding h1 {
   width: 770px;
   margin: 0 auto;
   float: none;
+  font-size: 48px;
+  padding: 36px 0 0 72px;
+  color: #333;
 }
 body.in-maintenance .form-radios .form-type-radio {
   padding: 2px 0;
@@ -835,7 +839,8 @@ body.in-maintenance .form-submit {
 }
 body.in-maintenance #logo {
   margin-bottom: 1.5em;
-  max-width: 180px;
+  max-width: 38px;
+  float: left;
 }
 ol.task-list {
   margin-left: 0; /* LTR */
@@ -843,16 +848,17 @@ ol.task-list {
   list-style-image: none;
 }
 ol.task-list li {
-  padding: 0.5em 1em 0.5em 20px; /* LTR */
+  background: transparent url(images/tasks.png) no-repeat 0 -8%; /* LTR */
+  padding: 0.5em 1em 0.5em 30px; /* LTR */
   color: #adadad;
 }
 ol.task-list li.active {
-  background: transparent url(images/task-item.png) no-repeat 3px 50%; /* LTR */
-  padding: 0.5em 1em 0.5em 20px; /* LTR */
-  color: #000;
+  background: transparent url(images/tasks.png) no-repeat 0 52%; /* LTR */
+  padding: 0.5em 1em 0.3em 30px; /* LTR */
+  color: #555;
 }
 ol.task-list li.done {
-  background: transparent url(images/task-check.png) no-repeat 0 50%;
+  background: transparent url(images/tasks.png) no-repeat 0 112%;
   color: green;
 }
 
