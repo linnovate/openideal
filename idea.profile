@@ -19,3 +19,14 @@ function idea_form_install_configure_form_alter(&$form, $form_state) {
   $form['admin_account']['account']['name']['#default_value'] = 'admin';
   $form['admin_account']['account']['mail']['#default_value'] = 'admin@'. $_SERVER['HTTP_HOST'];
 }
+
+/**
+ * Set OpenIdeaL as default install profile.
+ *
+ * Must use system as the hook module because openideal is not active yet
+ */
+function system_form_install_select_profile_form_alter(&$form, $form_state) {
+  foreach($form['profile'] as $key => $element) {
+    $form['profile'][$key]['#value'] = 'idea';
+  }
+}
