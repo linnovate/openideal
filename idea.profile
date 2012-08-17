@@ -21,7 +21,7 @@ function idea_form_install_configure_form_alter(&$form, $form_state) {
 }
 
 /**
- * Set OpenIdeaL as default install profile.
+ * Set openideal as default install profile.
  *
  * Must use system as the hook module because openideal is not active yet
  */
