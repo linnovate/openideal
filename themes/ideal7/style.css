@@ -801,29 +801,29 @@ div.admin-options div.form-item {
 
 /* Maintenance theming */
 body.in-maintenance #footer-messages {
-  width: 770px;
+  width: 960px;
   margin: 0 auto;
 }
 body.in-maintenance #sidebar-first {
   float: left; /* LTR */
-  width: 200px;
-  margin: 0 0 0 40px;
+  width: 270px;
+  margin: 40px;
 }
 body.in-maintenance #content {
   float: right; /* LTR */
-  width: 450px;
+  width: 550px;
   padding: 10px 40px 0 0; /* LTR */
   clear: none;
 }
 body.in-maintenance #page {
   overflow: hidden;
-  width: 770px;
+  width: 960px;
   margin: 0 auto;
   margin-top: 2em;
   padding-bottom: 2em;
 }
 body.in-maintenance #branding h1 {
-  width: 770px;
+  width: 960px;
   margin: 0 auto;
   float: none;
   font-size: 48px;
@@ -855,19 +855,23 @@ ol.task-list {
   margin-left: 0; /* LTR */
   list-style-type: none;
   list-style-image: none;
+  font-size: 16px;
 }
 ol.task-list li {
-  background: transparent url(images/tasks.png) no-repeat 0 -8%; /* LTR */
-  padding: 0.5em 1em 0.5em 30px; /* LTR */
+  background: transparent url(images/tasks.png) no-repeat 0 0; /* LTR */
+  padding: 0 0 0 30px; /* LTR */
+  margin: 20px;
+  line-height: 25px;
   color: #adadad;
 }
 ol.task-list li.active {
-  background: transparent url(images/tasks.png) no-repeat 0 52%; /* LTR */
-  padding: 0.5em 1em 0.3em 30px; /* LTR */
+  background: transparent url(images/tasks.png) no-repeat 0 50%; /* LTR */
+  padding: 0 0 0 30px; /* LTR */
+  margin: 20px;
   color: #318bcc;
 }
 ol.task-list li.done {
-  background: transparent url(images/tasks.png) no-repeat 0 112%;
+  background: transparent url(images/tasks.png) no-repeat 0 100%;
   color: green;
 }
 
