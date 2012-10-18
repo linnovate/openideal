@@ -13,34 +13,6 @@ function fe_user_quicktabs_default_quicktabs() {
   $quicktabs = new stdClass();
   $quicktabs->disabled = FALSE; /* Edit this to true to make a default quicktabs disabled initially */
   $quicktabs->api_version = 1;
-  $quicktabs->machine_name = 'activity';
-  $quicktabs->ajax = 0;
-  $quicktabs->hide_empty_tabs = FALSE;
-  $quicktabs->default_tab = 0;
-  $quicktabs->title = 'Activity';
-  $quicktabs->tabs = array(
-    0 => array(
-      'bid' => 'heartbeat_delta_useractivity',
-      'hide_title' => 1,
-      'title' => 'User activity',
-      'weight' => '-100',
-      'type' => 'block',
-    ),
-  );
-  $quicktabs->renderer = 'quicktabs';
-  $quicktabs->style = 'nostyle';
-  $quicktabs->options = array();
-
-  // Translatables
-  // Included for use with string extractors like potx.
-  t('Activity');
-  t('User activity');
-
-  $export['activity'] = $quicktabs;
-
-  $quicktabs = new stdClass();
-  $quicktabs->disabled = FALSE; /* Edit this to true to make a default quicktabs disabled initially */
-  $quicktabs->api_version = 1;
   $quicktabs->machine_name = 'user_ideas';
   $quicktabs->ajax = 0;
   $quicktabs->hide_empty_tabs = FALSE;
