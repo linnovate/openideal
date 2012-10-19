@@ -98,7 +98,7 @@ projects[message][subdir] = contrib
 projects[mailsystem][version] = "2.34"
 projects[mailsystem][subdir] = contrib
 
-projects[metatag][version] = "1.0-alpha8"
+projects[metatag][version] = "1.0-beta1"
 projects[metatag][subdir] = contrib
 
 projects[module_filter][version] = 1.7
