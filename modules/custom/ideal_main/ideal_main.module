@@ -79,6 +79,9 @@ function ideal_main_block_info() {
   $blocks['category_list'] = array(
     'info' => t('Ideal: Category list for sidebar'),
   );
+  $blocks['openideal_credits'] = array(
+    'info' => t('OpenideaL credits'),
+  );
   return $blocks;
 }
 
@@ -95,6 +98,12 @@ function ideal_main_block_view($delta) {
           'content' => theme('ideal_category_list_block'),
         );
         break;
+      case 'openideal_credits':
+        $block = array(
+          'subject' => '',
+          'content' => theme('ideal_openideal_credits_block'),
+        );
+        break;
     }
     return $block;
   }
@@ -107,6 +116,10 @@ function ideal_main_theme($existing, $type, $theme, $path) {
   return array(
     // theme function for sidebar category list
     'ideal_category_list_block' => array(
+      'file' => 'ideal_main.theme.inc',
+    ),
+    // theme function for footer credits
+    'ideal_openideal_credits_block' => array(
       'file' => 'ideal_main.theme.inc',
     ),
     //create a template for home page.

@@ -45,3 +45,7 @@ function theme_ideal_category_list_block() {
 
   return $output;
 }
+
+function theme_ideal_openideal_credits_block() {
+  return t('Powered by !url', array('!url' => l('OpenideaL', 'http://openidealapp.com', array('attributes' => array ('title' => t('Open Source Idea Management System'))))));
+}

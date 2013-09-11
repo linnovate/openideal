@@ -73,6 +73,10 @@ function theme_ideal_challenge_add_idea() {
  */
 function ideal_challenge_add_idea_form() {
   $form = array();
+
+  $form['header'] = array(
+    '#markup' => '<h4 class="ideal-challenge-add-idea">' . t('Be bold! Add your idea:') . '</h4>',
+  );
    
   $form['title'] = array(
     '#type' => 'textfield',

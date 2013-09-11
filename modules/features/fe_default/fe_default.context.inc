@@ -32,6 +32,12 @@ function fe_default_context_default_contexts() {
           'region' => 'sidebar_first',
           'weight' => '-9',
         ),
+        'ideal_main-openideal_credits' => array(
+          'module' => 'ideal_main',
+          'delta' => 'openideal_credits',
+          'region' => 'footer',
+          'weight' => '9',
+        ),
         'search-form' => array(
           'module' => 'search',
           'delta' => 'form',
