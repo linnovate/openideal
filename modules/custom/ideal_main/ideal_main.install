@@ -27,12 +27,12 @@ function ideal_main_install() {
 
     'carousel' => array(
       'name' => 'carousel',  
-      'title' => 'Carousel',
+      'title' => 'Featured',
       'subqueue_title' => '',
       'size' => '5',
       'reverse' => 0,
-      'link' => '+ Add to "Carousel"',
-      'link_remove' => '- Remove from "Carousel"',
+      'link' => '+ Add to "Featured"',
+      'link_remove' => '- Remove from "Featured"',
       'roles' => array ( ),
       'types' => array ( 0 => 'idea'),
       'i18n' => 1,
@@ -45,7 +45,7 @@ function ideal_main_install() {
       'reference' => 0,
       'subqueues' => array ( ),
       'new' => true,
-      'add_subqueue' => array ( 0 => 'Carousel') // match title above
+      'add_subqueue' => array ( 0 => 'Featured') // match title above
     ),
   );
   foreach ($queue_data as $q) {
