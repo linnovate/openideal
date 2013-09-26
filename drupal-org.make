@@ -170,7 +170,7 @@ projects[wysiwyg_filter][subdir] = contrib
 
 ; Themes
 projects[sasson][version] = "2.10"
-projects[subdir][subdir] = ""
+projects[sasson][subdir] = ""
 
 projects[plato][version] = "1.0"
 projects[plato][subdir] = ""
