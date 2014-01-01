@@ -174,11 +174,3 @@ projects[sasson][subdir] = ""
 
 projects[plato][version] = "1.0"
 projects[plato][subdir] = ""
-
-projects[bootstrap][version] = "3.0"
-projects[bootstrap][subdir] = ""
-
-projects[socrates][download][type] = "git"
-projects[socrates][download][url] = "https://github.com/Innoveto/socrates.git"
-projects[socrates][type] = "theme"
-projects[socrates][version] = "7.x"
