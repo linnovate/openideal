@@ -169,8 +169,8 @@ projects[wysiwyg_filter][version] = "1.6-rc2"
 projects[wysiwyg_filter][subdir] = contrib
 
 ; Themes
-projects[sasson][version] = "2.10"
-projects[sasson][subdir] = ""
+projects[bootstrap][version] = "3.0"
+projects[bootstrap][subdir] = ""
 
-projects[plato][version] = "1.0"
-projects[plato][subdir] = ""
+projects[socrates][version] = "1.x"
+projects[socrates][subdir] = ""
