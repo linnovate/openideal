@@ -69,6 +69,9 @@ projects[forward][subdir] = contrib
 projects[htmlmail][version] = "2.65"
 projects[htmlmail][subdir] = contrib
 
+projects[hybridauth][version] = "2.8"
+projects[hybridauth][subdir] = contrib
+
 projects[ideal_comments][version] = "1.1"
 projects[ideal_comments][subdir] = contrib
 
@@ -169,6 +172,7 @@ projects[wysiwyg_filter][version] = "1.6-rc2"
 projects[wysiwyg_filter][subdir] = contrib
 
 ; Themes
+
 projects[bootstrap][version] = "3.0"
 projects[bootstrap][subdir] = ""
 
