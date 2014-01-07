@@ -453,4 +453,8 @@ function idea_install() {
     'lastName' => 'lastName',
     'gender' => 'gender',
   ));
+
+  // Enable panels for node & term view.
+  variable_set('page_manager_node_view_disabled', 0);
+  variable_set('page_manager_term_view_disabled', 0);
 }

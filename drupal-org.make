@@ -18,6 +18,12 @@ projects[admin_menu][patch][] = https://drupal.org/files/admin_menu-fix_rtl-7258
 projects[google_chart_tools][version] = "1.4"
 projects[google_chart_tools][subdir] = contrib
 
+projects[bootstrap_panels_horizontal_tabs][type] = module
+projects[bootstrap_panels_horizontal_tabs][download][type] = git
+projects[bootstrap_panels_horizontal_tabs][download][branch] = "7.x-1.x"
+projects[bootstrap_panels_horizontal_tabs][download][url] = http://git.drupal.org/sandbox/ShaunDychko/2126611.git
+projects[bootstrap_panels_horizontal_tabs][subdir] = contrib
+
 projects[boxes][version] = "1.1"
 projects[boxes][subdir] = contrib
 
@@ -111,6 +117,18 @@ projects[nodequeue][subdir] = contrib
 projects[page_title][version] = "2.7"
 projects[page_title][subdir] = contrib
 
+projects[panels][version] = "3.3"
+projects[panels][subdir] = contrib
+
+projects[panels_bootstrap_layouts][version] = "3.x-dev"
+projects[panels_bootstrap_layouts][subdir] = contrib
+
+projects[panels_bootstrap_layout_builder][version] = "3.x-dev"
+projects[panels_bootstrap_layout_builder][subdir] = contrib
+
+projects[panels_bootstrap_styles][version] = "1.0-alpha1"
+projects[panels_bootstrap_styles][subdir] = contrib
+
 projects[quicktabs][version] = "3.5"
 projects[quicktabs][subdir] = contrib
 
@@ -176,5 +194,5 @@ projects[wysiwyg_filter][subdir] = contrib
 projects[bootstrap][version] = "3.0"
 projects[bootstrap][subdir] = ""
 
-projects[socrates][version] = "1.x"
+projects[socrates][version] = "1.x-dev"
 projects[socrates][subdir] = ""
