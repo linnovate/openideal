@@ -457,4 +457,8 @@ function idea_install() {
   // Enable panels for node & term view.
   variable_set('page_manager_node_view_disabled', 0);
   variable_set('page_manager_term_view_disabled', 0);
+  
+  // Default settings for jquery_update.
+  variable_set('jquery_update_jquery_cdn', 'jQuery');
+  variable_set('jquery_update_jquery_version', '1.8');
 }

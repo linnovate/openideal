@@ -5,6 +5,9 @@ defaults[projects][subdir] = contrib
 
 ; Modules
 
+projects[jquery_update][version] = "2.3"
+projects[jquery_update][subdir] = contrib
+
 projects[views_bulk_operations][version] = "3.1"
 projects[views_bulk_operations][subdir] = contrib
 
