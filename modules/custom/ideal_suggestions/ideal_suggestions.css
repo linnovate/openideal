@@ -1,0 +1,70 @@
+.mentions-suggestions{
+  position: absolute;
+}
+.suggestions-suggestions {
+  background-color: #EEEEEE;
+  display: none;
+  z-index: 100;
+}
+
+.item-list ul.suggestions-suggestion-list li {
+  background: none;
+  border: 1px solid #CCCCCC;
+  border-bottom: 0 none;
+  float: none;
+  list-style-image: none;
+  list-style-type: none;
+  margin: 0;
+  padding: 0.5em;
+  width: 15em;
+}
+
+.item-list ul.suggestions-suggestion-list li:hover {
+  background-color: #DDDDDD;
+}
+
+.item-list ul.suggestions-suggestion-list li.last {
+  border-bottom: 1px solid #CCCCCC;
+}
+
+.item-list ul.suggestions-suggestion-list {
+  margin: 0;
+}
+
+.suggestion-hidden, .suggestions_key {
+  display: none;
+}
+
+.-sew-list-container {
+  background: white;
+  border: 1px solid #DDD;
+  border-radius: 3px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  min-width: 180px;
+}
+
+.-sew-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  max-height: 100px;
+  overflow: scroll;
+}
+
+.-sew-list-item {
+  display: block;
+  padding: 5px 10px;
+  border-bottom: 1px solid #DDD;
+  cursor: pointer;
+}
+
+
+.-sew-list-item small {
+  color: #afafaf;
+}
+
+.-sew-list-item.selected {
+  color: white;
+  background: #4183C4;
+  text-decoration: none;
+}

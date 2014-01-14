@@ -1,0 +1,13 @@
+<?php
+
+/**
+ * @file
+ *   (Un)installs the Facebook-style Statuses Tag Suggestions module.
+ */
+
+/**
+ * Implementation of hook_uninstall().
+ */
+function ideal_suggestions_uninstall() {
+  variable_del('suggestion_count');
+}

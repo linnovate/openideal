@@ -27,6 +27,16 @@ function idea_install() {
         'weight' => 2,
         'status' => 1,
       ),
+      // Mentions filter.
+      'filter_mentions' => array(
+        'weight' => 3,
+        'status' => 1,
+      ),
+      // Hashtags filter.
+      'filter_hashtags' => array(
+        'weight' => 4,
+        'status' => 1,
+      ),
       // HTML corrector filter.
       'filter_htmlcorrector' => array(
         'weight' => 10,
@@ -50,6 +60,16 @@ function idea_install() {
       // Line break filter.
       'filter_autop' => array(
         'weight' => 1,
+        'status' => 1,
+      ),
+      // Mentions filter.
+      'filter_mentions' => array(
+        'weight' => 3,
+        'status' => 1,
+      ),
+      // Hashtags filter.
+      'filter_hashtags' => array(
+        'weight' => 4,
         'status' => 1,
       ),
       // HTML corrector filter.
@@ -461,4 +481,46 @@ function idea_install() {
   // Default settings for jquery_update.
   variable_set('jquery_update_jquery_cdn', 'jQuery');
   variable_set('jquery_update_jquery_version', '1.8');
+
+  //setup hastags for idea content type
+  $field_name = variable_get('hashtags_terms_field', '');
+  $instance = field_info_instance('node', $field_name, 'idea');        
+  if (!is_array($instance)) {          
+    $instance = array(
+      'field_name' => $field_name, 
+      'entity_type' => 'node',
+      'label' => 'Hashtags',
+      'bundle' => 'idea',
+      'widget' => array(
+        'type' => 'taxonomy_autocomplete',
+        'weight' => -4,
+      ),
+      'display' => array(
+        'default' => array(
+          'type' => 'taxonomy_term_reference_link',
+          'weight' => 10,
+        ),
+        'teaser' => array(
+          'type' => 'taxonomy_term_reference_link',
+          'weight' => 10,
+        ),
+      ),
+    );
+    field_create_instance($instance);          
+  } 
+
+  //setup user mentions defaults
+  $override = array(
+      'input' => array(
+        'prefix' => '@',
+        'suffix' => '',
+      ),
+      'output' => array(
+        'prefix' => '@',
+        'suffix' => '',
+        'text' => '[user:name]',
+        'link' => 'user/[user:uid]',
+      ),
+    );
+  variable_set('mentions', $override);
 }
