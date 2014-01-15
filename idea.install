@@ -477,17 +477,17 @@ function idea_install() {
   // Enable panels for node & term view.
   variable_set('page_manager_node_view_disabled', 0);
   variable_set('page_manager_term_view_disabled', 0);
-  
+
   // Default settings for jquery_update.
   variable_set('jquery_update_jquery_cdn', 'jQuery');
   variable_set('jquery_update_jquery_version', '1.8');
 
-  //setup hastags for idea content type
+  // Setup hastags for idea content type.
   $field_name = variable_get('hashtags_terms_field', '');
-  $instance = field_info_instance('node', $field_name, 'idea');        
-  if (!is_array($instance)) {          
+  $instance = field_info_instance('node', $field_name, 'idea');
+  if (!is_array($instance)) {
     $instance = array(
-      'field_name' => $field_name, 
+      'field_name' => $field_name,
       'entity_type' => 'node',
       'label' => 'Hashtags',
       'bundle' => 'idea',
@@ -506,21 +506,21 @@ function idea_install() {
         ),
       ),
     );
-    field_create_instance($instance);          
-  } 
+    field_create_instance($instance);
+  }
 
-  //setup user mentions defaults
+  // Setup user mentions defaults.
   $override = array(
-      'input' => array(
-        'prefix' => '@',
-        'suffix' => '',
-      ),
-      'output' => array(
-        'prefix' => '@',
-        'suffix' => '',
-        'text' => '[user:name]',
-        'link' => 'user/[user:uid]',
-      ),
-    );
+    'input' => array(
+      'prefix' => '@',
+      'suffix' => '',
+    ),
+    'output' => array(
+      'prefix' => '@',
+      'suffix' => '',
+      'text' => '[user:name]',
+      'link' => 'user/[user:uid]',
+    ),
+  );
   variable_set('mentions', $override);
 }
