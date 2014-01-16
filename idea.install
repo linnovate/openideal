@@ -523,4 +523,7 @@ function idea_install() {
     ),
   );
   variable_set('mentions', $override);
+
+  // Default setting for dragdropfile.
+  variable_set('dragdropfile_cancel_all_drops', 1);
 }
