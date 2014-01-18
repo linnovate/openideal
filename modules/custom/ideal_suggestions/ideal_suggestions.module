@@ -43,15 +43,17 @@ function ideal_suggestions_permission() {
 /**
  * Implementation of hook_form_FORM_ID_alter().
  */
-function ideal_suggestions_form_idea_node_form_alter(&$form, &$form_state) {
+function ideal_suggestions_form_alter(&$form, &$form_state, $form_id) {
   if (!user_access('use mentions suggestions')) {
     return;
   }
-  $path = drupal_get_path('module', 'ideal_suggestions');
-  drupal_add_js($path . '/js/jquery.caretposition.js');
-  drupal_add_js($path . '/js/jquery.sew.min.js');
-  drupal_add_js($path . '/js/ideal_suggestions.js');
-  drupal_add_css($path . '/ideal_suggestions.css');
+  if ($form_id == 'idea_node_form' || $form_id == 'comment_node_idea_form') {
+    $path = drupal_get_path('module', 'ideal_suggestions');
+    drupal_add_js($path . '/js/jquery.caretposition.js');
+    drupal_add_js($path . '/js/jquery.sew.min.js');
+    drupal_add_js($path . '/js/ideal_suggestions.js');
+    drupal_add_css($path . '/ideal_suggestions.css');
+  }
 }
 
 /*

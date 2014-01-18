@@ -524,6 +524,10 @@ function idea_install() {
   );
   variable_set('mentions', $override);
 
+  //create default roles
+  user_role_grant_permissions(DRUPAL_AUTHENTICATED_RID, array('administer hashtags', 'use mentions suggestions'));
+
   // Default setting for dragdropfile.
   variable_set('dragdropfile_cancel_all_drops', 1);
+
 }
