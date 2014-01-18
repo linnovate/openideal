@@ -166,6 +166,9 @@ function fe_challenge_field_default_fields() {
       'deleted' => '0',
       'entity_types' => array(),
       'field_name' => 'field_challenge_image',
+      'field_permissions' => array(
+        'type' => '0',
+      ),
       'foreign keys' => array(
         'fid' => array(
           'columns' => array(
@@ -230,17 +233,23 @@ function fe_challenge_field_default_fields() {
         'active' => 1,
         'module' => 'image',
         'settings' => array(
+          'dragdropfile_enabled' => 1,
           'filefield_sources' => array(
             'filefield_sources' => array(
               'attach' => 'attach',
+              'clipboard' => 0,
               'imce' => 'imce',
               'reference' => 'reference',
               'remote' => 'remote',
+              'upload' => 'upload',
             ),
             'source_attach' => array(
               'absolute' => '0',
               'attach_mode' => 'copy',
               'path' => 'file_attach',
+            ),
+            'source_imce' => array(
+              'imce_mode' => '0',
             ),
             'source_reference' => array(
               'autocomplete' => '0',

@@ -64,10 +64,12 @@ function fe_idea_flag_default_flags() {
         1 => '5',
       ),
     ),
-    'show_on_page' => 1,
-    'show_on_teaser' => 1,
+    'weight' => 0,
     'show_on_form' => 0,
     'access_author' => '',
+    'show_on_page' => 1,
+    'show_on_teaser' => 1,
+    'show_contextual_link' => FALSE,
     'i18n' => 0,
     'module' => 'fe_idea',
     'locked' => array(
@@ -101,10 +103,12 @@ function fe_idea_flag_default_flags() {
         1 => '5',
       ),
     ),
-    'show_on_page' => 1,
-    'show_on_teaser' => 1,
+    'weight' => 0,
     'show_on_form' => 0,
     'access_author' => '',
+    'show_on_page' => 1,
+    'show_on_teaser' => 1,
+    'show_contextual_link' => FALSE,
     'i18n' => 0,
     'module' => 'fe_idea',
     'locked' => array(
@@ -138,10 +142,12 @@ function fe_idea_flag_default_flags() {
         1 => '5',
       ),
     ),
-    'show_on_page' => 1,
-    'show_on_teaser' => 1,
+    'weight' => 0,
     'show_on_form' => 0,
     'access_author' => '',
+    'show_on_page' => 1,
+    'show_on_teaser' => 1,
+    'show_contextual_link' => FALSE,
     'i18n' => 0,
     'module' => 'fe_idea',
     'locked' => array(
@@ -150,6 +156,7 @@ function fe_idea_flag_default_flags() {
     'api_version' => 2,
   );
   return $flags;
+
 }
 
 /**

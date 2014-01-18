@@ -45,6 +45,9 @@ projects[date][subdir] = contrib
 projects[defaultcontent][version] = "1.0-alpha9"
 projects[defaultcontent][subdir] = contrib
 
+projects[dragdropfile][version] = "1.2"
+projects[dragdropfile][subdir] = contrib
+
 projects[entity][version] = "1.2"
 projects[entity][subdir] = contrib
 
@@ -75,6 +78,9 @@ projects[flag_abuse][subdir] = contrib
 projects[forward][version] = "1.4"
 projects[forward][subdir] = contrib
 
+projects[hashtags][version] = "1.4"
+projects[hashtags][subdir] = contrib
+
 projects[htmlmail][version] = "2.65"
 projects[htmlmail][subdir] = contrib
 
@@ -104,6 +110,9 @@ projects[logintoboggan][subdir] = contrib
 
 projects[mailsystem][version] = "2.34"
 projects[mailsystem][subdir] = contrib
+
+projects[mentions][version] = "1.0"
+projects[mentions][subdir] = contrib
 
 projects[message][version] = "1.9"
 projects[message][subdir] = contrib
