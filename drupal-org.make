@@ -11,6 +11,9 @@ projects[jquery_update][subdir] = contrib
 projects[views_bulk_operations][version] = "3.1"
 projects[views_bulk_operations][subdir] = contrib
 
+projects[views_bootstrap][version] = "7.x-3.0"
+projects[views_bootstrap][subdir] = contrib
+
 projects[addressfield][version] = "1.0-beta4"
 projects[addressfield][subdir] = contrib
 
