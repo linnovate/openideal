@@ -331,8 +331,8 @@ function fe_pages_default_page_manager_pages() {
   $handler->weight = 0;
   $handler->conf = array(
     'title' => 'Landing page',
-    'no_blocks' => FALSE,
-    'pipeline' => 'ipe',
+    'no_blocks' => 1,
+    'pipeline' => 'standard',
     'body_classes_to_remove' => '',
     'body_classes_to_add' => '',
     'css_id' => '',
@@ -341,7 +341,7 @@ function fe_pages_default_page_manager_pages() {
     'relationships' => array(),
   );
   $display = new panels_display();
-  $display->layout = 'threecol_25_50_25_stacked';
+  $display->layout = 'bootstrap:home';
   $display->layout_settings = array();
   $display->panel_settings = array(
     'style_settings' => array(
@@ -351,13 +351,145 @@ function fe_pages_default_page_manager_pages() {
       'middle' => NULL,
       'right' => NULL,
       'bottom' => NULL,
+      'center' => NULL,
+      'content_views' => NULL,
+      'sidebar' => NULL,
     ),
   );
   $display->cache = array();
   $display->title = 'Home';
   $display->content = array();
   $display->panels = array();
-  $display->hide_title = PANELS_TITLE_FIXED;
+    $pane = new stdClass();
+    $pane->pid = 'new-1';
+    $pane->panel = 'content_views';
+    $pane->type = 'block';
+    $pane->subtype = 'views-default_challenge-block';
+    $pane->shown = TRUE;
+    $pane->access = array();
+    $pane->configuration = array(
+      'override_title' => 0,
+      'override_title_text' => '',
+    );
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 0;
+    $pane->locks = array();
+    $display->content['new-1'] = $pane;
+    $display->panels['content_views'][0] = 'new-1';
+    $pane = new stdClass();
+    $pane->pid = 'new-2';
+    $pane->panel = 'content_views';
+    $pane->type = 'block';
+    $pane->subtype = 'views-challenges_featured_front-block';
+    $pane->shown = TRUE;
+    $pane->access = array();
+    $pane->configuration = array(
+      'override_title' => 0,
+      'override_title_text' => '',
+    );
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 1;
+    $pane->locks = array();
+    $display->content['new-2'] = $pane;
+    $display->panels['content_views'][1] = 'new-2';
+    $pane = new stdClass();
+    $pane->pid = 'new-3';
+    $pane->panel = 'content_views';
+    $pane->type = 'panels_mini';
+    $pane->subtype = 'latest_and_greatest';
+    $pane->shown = TRUE;
+    $pane->access = array();
+    $pane->configuration = array(
+      'override_title' => 0,
+      'override_title_text' => '',
+    );
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 2;
+    $pane->locks = array();
+    $display->content['new-3'] = $pane;
+    $display->panels['content_views'][2] = 'new-3';
+    $pane = new stdClass();
+    $pane->pid = 'new-4';
+    $pane->panel = 'content_views';
+    $pane->type = 'block';
+    $pane->subtype = 'views-nodequeue_1-block';
+    $pane->shown = TRUE;
+    $pane->access = array();
+    $pane->configuration = array(
+      'override_title' => 0,
+      'override_title_text' => '',
+    );
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 3;
+    $pane->locks = array();
+    $display->content['new-4'] = $pane;
+    $display->panels['content_views'][3] = 'new-4';
+    $pane = new stdClass();
+    $pane->pid = 'new-5';
+    $pane->panel = 'sidebar';
+    $pane->type = 'block';
+    $pane->subtype = 'comment-recent';
+    $pane->shown = TRUE;
+    $pane->access = array();
+    $pane->configuration = array(
+      'override_title' => 0,
+      'override_title_text' => '',
+    );
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 0;
+    $pane->locks = array();
+    $display->content['new-5'] = $pane;
+    $display->panels['sidebar'][0] = 'new-5';
+    $pane = new stdClass();
+    $pane->pid = 'new-6';
+    $pane->panel = 'sidebar';
+    $pane->type = 'custom';
+    $pane->subtype = 'custom';
+    $pane->shown = TRUE;
+    $pane->access = array();
+    $pane->configuration = array(
+      'admin_title' => 'Intro video',
+      'title' => 'How it works',
+      'body' => '<iframe src="//player.vimeo.com/video/57515499?byline=0&amp;portrait=0" width="360" height="202" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>',
+      'format' => 'full_html',
+      'substitute' => TRUE,
+    );
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 1;
+    $pane->locks = array();
+    $display->content['new-6'] = $pane;
+    $display->panels['sidebar'][1] = 'new-6';
+  $display->hide_title = PANELS_TITLE_NONE;
   $display->title_pane = '0';
   $handler->conf['display'] = $display;
   $page->default_handlers[$handler->name] = $handler;
