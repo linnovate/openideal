@@ -11,7 +11,7 @@ projects[jquery_update][subdir] = contrib
 projects[views_bulk_operations][version] = "3.1"
 projects[views_bulk_operations][subdir] = contrib
 
-projects[views_bootstrap][version] = "7.x-3.0"
+projects[views_bootstrap][version] = "3.0"
 projects[views_bootstrap][subdir] = contrib
 
 projects[addressfield][version] = "1.0-beta4"
@@ -204,10 +204,10 @@ projects[wysiwyg][subdir] = contrib
 projects[wysiwyg_filter][version] = "1.6-rc2"
 projects[wysiwyg_filter][subdir] = contrib
 
-projects[hashtags][version] = "7.x-1.4"
+projects[hashtags][version] = "1.4"
 projects[hashtags][subdir] = contrib
 
-projects[mentions][version] = "7.x-1.x-dev"
+projects[mentions][version] = "1.x-dev"
 projects[mentions][subdir] = contrib
 
 ; Themes
