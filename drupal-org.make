@@ -204,10 +204,10 @@ projects[wysiwyg][subdir] = contrib
 projects[wysiwyg_filter][version] = "1.6-rc2"
 projects[wysiwyg_filter][subdir] = contrib
 
-projects[hashtags][version] = "7.x-1.4"
+projects[hashtags][version] = "1.4"
 projects[hashtags][subdir] = contrib
 
-projects[mentions][version] = "7.x-1.x-dev"
+projects[mentions][version] = "1.x-dev"
 projects[mentions][subdir] = contrib
 
 ; Themes
