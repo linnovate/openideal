@@ -26,23 +26,11 @@ function fe_default_context_default_contexts() {
   $context->reactions = array(
     'block' => array(
       'blocks' => array(
-        'ideal_main-category_list' => array(
-          'module' => 'ideal_main',
-          'delta' => 'category_list',
-          'region' => 'sidebar_first',
-          'weight' => '-9',
-        ),
         'ideal_main-openideal_credits' => array(
           'module' => 'ideal_main',
           'delta' => 'openideal_credits',
           'region' => 'footer',
           'weight' => '9',
-        ),
-        'search-form' => array(
-          'module' => 'search',
-          'delta' => 'form',
-          'region' => 'sidebar_first',
-          'weight' => '-29',
         ),
       ),
     ),

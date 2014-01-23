@@ -81,6 +81,9 @@ function idea_install() {
   );
   $full_html_format = (object) $full_html_format;
   filter_format_save($full_html_format);
+  
+  // Set path for homepage
+  variable_set('site_frontpage', 'front');
 
   // Set admin and default theme
   $enable = array(
@@ -531,6 +534,3 @@ function idea_install() {
   variable_set('dragdropfile_cancel_all_drops', 1);
 
 }
-
-  // Set path for homepage
-  variable_set('site_frontpage', 'home');

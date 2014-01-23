@@ -10,7 +10,7 @@
 function fe_user_views_default_views() {
   $export = array();
 
-  $view = new view;
+  $view = new view();
   $view->name = 'most_active_users';
   $view->description = '';
   $view->tag = 'default';
@@ -23,6 +23,7 @@ function fe_user_views_default_views() {
   /* Display: Master */
   $handler = $view->new_display('default', 'Master', 'default');
   $handler->display->display_options['title'] = 'Most active users';
+  $handler->display->display_options['use_more_always'] = FALSE;
   $handler->display->display_options['access']['type'] = 'perm';
   $handler->display->display_options['access']['perm'] = 'access user profiles';
   $handler->display->display_options['cache']['type'] = 'none';
@@ -38,41 +39,14 @@ function fe_user_views_default_views() {
   $handler->display->display_options['fields']['name']['table'] = 'users';
   $handler->display->display_options['fields']['name']['field'] = 'name';
   $handler->display->display_options['fields']['name']['label'] = '';
-  $handler->display->display_options['fields']['name']['alter']['alter_text'] = 0;
-  $handler->display->display_options['fields']['name']['alter']['make_link'] = 0;
-  $handler->display->display_options['fields']['name']['alter']['absolute'] = 0;
-  $handler->display->display_options['fields']['name']['alter']['word_boundary'] = 0;
-  $handler->display->display_options['fields']['name']['alter']['ellipsis'] = 0;
-  $handler->display->display_options['fields']['name']['alter']['strip_tags'] = 0;
-  $handler->display->display_options['fields']['name']['alter']['trim'] = 0;
-  $handler->display->display_options['fields']['name']['alter']['html'] = 0;
-  $handler->display->display_options['fields']['name']['hide_empty'] = 0;
-  $handler->display->display_options['fields']['name']['empty_zero'] = 0;
-  $handler->display->display_options['fields']['name']['link_to_user'] = 1;
-  $handler->display->display_options['fields']['name']['overwrite_anonymous'] = 0;
+  $handler->display->display_options['fields']['name']['alter']['word_boundary'] = FALSE;
+  $handler->display->display_options['fields']['name']['alter']['ellipsis'] = FALSE;
   /* Field: Userpoints total: Current total points */
   $handler->display->display_options['fields']['points']['id'] = 'points';
   $handler->display->display_options['fields']['points']['table'] = 'userpoints_total';
   $handler->display->display_options['fields']['points']['field'] = 'points';
   $handler->display->display_options['fields']['points']['label'] = '';
-  $handler->display->display_options['fields']['points']['alter']['alter_text'] = 0;
-  $handler->display->display_options['fields']['points']['alter']['make_link'] = 0;
-  $handler->display->display_options['fields']['points']['alter']['absolute'] = 0;
-  $handler->display->display_options['fields']['points']['alter']['external'] = 0;
-  $handler->display->display_options['fields']['points']['alter']['replace_spaces'] = 0;
-  $handler->display->display_options['fields']['points']['alter']['trim_whitespace'] = 0;
-  $handler->display->display_options['fields']['points']['alter']['nl2br'] = 0;
-  $handler->display->display_options['fields']['points']['alter']['word_boundary'] = 1;
-  $handler->display->display_options['fields']['points']['alter']['ellipsis'] = 1;
-  $handler->display->display_options['fields']['points']['alter']['strip_tags'] = 0;
-  $handler->display->display_options['fields']['points']['alter']['trim'] = 0;
-  $handler->display->display_options['fields']['points']['alter']['html'] = 0;
   $handler->display->display_options['fields']['points']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['points']['element_default_classes'] = 1;
-  $handler->display->display_options['fields']['points']['hide_empty'] = 0;
-  $handler->display->display_options['fields']['points']['empty_zero'] = 0;
-  $handler->display->display_options['fields']['points']['hide_alter_empty'] = 1;
-  $handler->display->display_options['fields']['points']['format_plural'] = 0;
   $handler->display->display_options['fields']['points']['suffix'] = ' points';
   /* Sort criterion: Userpoints total: Current total points */
   $handler->display->display_options['sorts']['points']['id'] = 'points';
@@ -91,7 +65,7 @@ function fe_user_views_default_views() {
   $handler = $view->new_display('block', 'Block', 'block');
   $export['most_active_users'] = $view;
 
-  $view = new view;
+  $view = new view();
   $view->name = 'my_commented_ideas';
   $view->description = '';
   $view->tag = 'default';
@@ -104,6 +78,7 @@ function fe_user_views_default_views() {
   /* Display: Master */
   $handler = $view->new_display('default', 'Master', 'default');
   $handler->display->display_options['title'] = 'My commented ideas';
+  $handler->display->display_options['use_more_always'] = FALSE;
   $handler->display->display_options['access']['type'] = 'perm';
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
@@ -113,24 +88,13 @@ function fe_user_views_default_views() {
   $handler->display->display_options['pager']['options']['items_per_page'] = '20';
   $handler->display->display_options['style_plugin'] = 'default';
   $handler->display->display_options['row_plugin'] = 'node';
-  $handler->display->display_options['row_options']['links'] = 1;
-  $handler->display->display_options['row_options']['comments'] = 0;
   /* Field: Content: Title */
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'node';
   $handler->display->display_options['fields']['title']['field'] = 'title';
   $handler->display->display_options['fields']['title']['label'] = '';
-  $handler->display->display_options['fields']['title']['alter']['alter_text'] = 0;
-  $handler->display->display_options['fields']['title']['alter']['make_link'] = 0;
-  $handler->display->display_options['fields']['title']['alter']['absolute'] = 0;
-  $handler->display->display_options['fields']['title']['alter']['word_boundary'] = 0;
-  $handler->display->display_options['fields']['title']['alter']['ellipsis'] = 0;
-  $handler->display->display_options['fields']['title']['alter']['strip_tags'] = 0;
-  $handler->display->display_options['fields']['title']['alter']['trim'] = 0;
-  $handler->display->display_options['fields']['title']['alter']['html'] = 0;
-  $handler->display->display_options['fields']['title']['hide_empty'] = 0;
-  $handler->display->display_options['fields']['title']['empty_zero'] = 0;
-  $handler->display->display_options['fields']['title']['link_to_node'] = 1;
+  $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
+  $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
   /* Sort criterion: Content: Post date */
   $handler->display->display_options['sorts']['created']['id'] = 'created';
   $handler->display->display_options['sorts']['created']['table'] = 'node';
@@ -143,7 +107,6 @@ function fe_user_views_default_views() {
   $handler->display->display_options['arguments']['uid_commented']['default_action'] = 'default';
   $handler->display->display_options['arguments']['uid_commented']['default_argument_type'] = 'user';
   $handler->display->display_options['arguments']['uid_commented']['default_argument_options']['user'] = FALSE;
-  $handler->display->display_options['arguments']['uid_commented']['default_argument_skip_url'] = 0;
   $handler->display->display_options['arguments']['uid_commented']['summary']['number_of_records'] = '0';
   $handler->display->display_options['arguments']['uid_commented']['summary']['format'] = 'default_summary';
   $handler->display->display_options['arguments']['uid_commented']['summary_options']['items_per_page'] = '25';
@@ -159,7 +122,7 @@ function fe_user_views_default_views() {
   $handler = $view->new_display('block', 'Block', 'block');
   $export['my_commented_ideas'] = $view;
 
-  $view = new view;
+  $view = new view();
   $view->name = 'my_voted_ideas';
   $view->description = '';
   $view->tag = 'default';
@@ -172,6 +135,7 @@ function fe_user_views_default_views() {
   /* Display: Master */
   $handler = $view->new_display('default', 'Master', 'default');
   $handler->display->display_options['title'] = 'My voted ideas';
+  $handler->display->display_options['use_more_always'] = FALSE;
   $handler->display->display_options['access']['type'] = 'perm';
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
@@ -186,17 +150,8 @@ function fe_user_views_default_views() {
   $handler->display->display_options['fields']['title']['table'] = 'node';
   $handler->display->display_options['fields']['title']['field'] = 'title';
   $handler->display->display_options['fields']['title']['label'] = '';
-  $handler->display->display_options['fields']['title']['alter']['alter_text'] = 0;
-  $handler->display->display_options['fields']['title']['alter']['make_link'] = 0;
-  $handler->display->display_options['fields']['title']['alter']['absolute'] = 0;
-  $handler->display->display_options['fields']['title']['alter']['word_boundary'] = 0;
-  $handler->display->display_options['fields']['title']['alter']['ellipsis'] = 0;
-  $handler->display->display_options['fields']['title']['alter']['strip_tags'] = 0;
-  $handler->display->display_options['fields']['title']['alter']['trim'] = 0;
-  $handler->display->display_options['fields']['title']['alter']['html'] = 0;
-  $handler->display->display_options['fields']['title']['hide_empty'] = 0;
-  $handler->display->display_options['fields']['title']['empty_zero'] = 0;
-  $handler->display->display_options['fields']['title']['link_to_node'] = 1;
+  $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
+  $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
   /* Sort criterion: Content: Post date */
   $handler->display->display_options['sorts']['created']['id'] = 'created';
   $handler->display->display_options['sorts']['created']['table'] = 'node';
@@ -209,7 +164,6 @@ function fe_user_views_default_views() {
   $handler->display->display_options['arguments']['uid_voted_1']['default_action'] = 'default';
   $handler->display->display_options['arguments']['uid_voted_1']['default_argument_type'] = 'user';
   $handler->display->display_options['arguments']['uid_voted_1']['default_argument_options']['user'] = FALSE;
-  $handler->display->display_options['arguments']['uid_voted_1']['default_argument_skip_url'] = 0;
   $handler->display->display_options['arguments']['uid_voted_1']['summary']['number_of_records'] = '0';
   $handler->display->display_options['arguments']['uid_voted_1']['summary']['format'] = 'default_summary';
   $handler->display->display_options['arguments']['uid_voted_1']['summary_options']['items_per_page'] = '25';
@@ -225,7 +179,7 @@ function fe_user_views_default_views() {
   $handler = $view->new_display('block', 'Block', 'block');
   $export['my_voted_ideas'] = $view;
 
-  $view = new view;
+  $view = new view();
   $view->name = 'user_ideas';
   $view->description = '';
   $view->tag = 'default';
@@ -238,6 +192,7 @@ function fe_user_views_default_views() {
   /* Display: Master */
   $handler = $view->new_display('default', 'Master', 'default');
   $handler->display->display_options['title'] = 'User page: User ideas';
+  $handler->display->display_options['use_more_always'] = FALSE;
   $handler->display->display_options['access']['type'] = 'perm';
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
@@ -252,17 +207,8 @@ function fe_user_views_default_views() {
   $handler->display->display_options['fields']['title']['table'] = 'node';
   $handler->display->display_options['fields']['title']['field'] = 'title';
   $handler->display->display_options['fields']['title']['label'] = '';
-  $handler->display->display_options['fields']['title']['alter']['alter_text'] = 0;
-  $handler->display->display_options['fields']['title']['alter']['make_link'] = 0;
-  $handler->display->display_options['fields']['title']['alter']['absolute'] = 0;
-  $handler->display->display_options['fields']['title']['alter']['word_boundary'] = 0;
-  $handler->display->display_options['fields']['title']['alter']['ellipsis'] = 0;
-  $handler->display->display_options['fields']['title']['alter']['strip_tags'] = 0;
-  $handler->display->display_options['fields']['title']['alter']['trim'] = 0;
-  $handler->display->display_options['fields']['title']['alter']['html'] = 0;
-  $handler->display->display_options['fields']['title']['hide_empty'] = 0;
-  $handler->display->display_options['fields']['title']['empty_zero'] = 0;
-  $handler->display->display_options['fields']['title']['link_to_node'] = 1;
+  $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
+  $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
   /* Sort criterion: Content: Post date */
   $handler->display->display_options['sorts']['created']['id'] = 'created';
   $handler->display->display_options['sorts']['created']['table'] = 'node';
@@ -275,12 +221,9 @@ function fe_user_views_default_views() {
   $handler->display->display_options['arguments']['uid']['default_action'] = 'default';
   $handler->display->display_options['arguments']['uid']['default_argument_type'] = 'user';
   $handler->display->display_options['arguments']['uid']['default_argument_options']['user'] = FALSE;
-  $handler->display->display_options['arguments']['uid']['default_argument_skip_url'] = 0;
   $handler->display->display_options['arguments']['uid']['summary']['number_of_records'] = '0';
   $handler->display->display_options['arguments']['uid']['summary']['format'] = 'default_summary';
   $handler->display->display_options['arguments']['uid']['summary_options']['items_per_page'] = '25';
-  $handler->display->display_options['arguments']['uid']['break_phrase'] = 0;
-  $handler->display->display_options['arguments']['uid']['not'] = 0;
   /* Filter criterion: Content: Published */
   $handler->display->display_options['filters']['status']['id'] = 'status';
   $handler->display->display_options['filters']['status']['table'] = 'node';
@@ -303,14 +246,11 @@ function fe_user_views_default_views() {
   $handler->display->display_options['pager']['options']['items_per_page'] = '20';
   $handler->display->display_options['pager']['options']['offset'] = '0';
   $handler->display->display_options['pager']['options']['id'] = '0';
-  $handler->display->display_options['pager']['options']['expose']['items_per_page_options_all'] = 0;
   $handler->display->display_options['defaults']['style_plugin'] = FALSE;
   $handler->display->display_options['style_plugin'] = 'default';
   $handler->display->display_options['defaults']['style_options'] = FALSE;
   $handler->display->display_options['defaults']['row_plugin'] = FALSE;
   $handler->display->display_options['row_plugin'] = 'node';
-  $handler->display->display_options['row_options']['links'] = 1;
-  $handler->display->display_options['row_options']['comments'] = 0;
   $handler->display->display_options['defaults']['row_options'] = FALSE;
   $handler->display->display_options['block_description'] = 'View: User Page: User ideas';
   $export['user_ideas'] = $view;

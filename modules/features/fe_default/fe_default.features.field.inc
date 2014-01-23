@@ -10,7 +10,7 @@
 function fe_default_field_default_fields() {
   $fields = array();
 
-  // Exported field: 'taxonomy_term-categories-field_term_image'
+  // Exported field: 'taxonomy_term-categories-field_term_image'.
   $fields['taxonomy_term-categories-field_term_image'] = array(
     'field_config' => array(
       'active' => '1',
@@ -31,6 +31,7 @@ function fe_default_field_default_fields() {
           0 => 'fid',
         ),
       ),
+      'locked' => '0',
       'module' => 'image',
       'settings' => array(
         'default_image' => 0,
@@ -61,6 +62,7 @@ function fe_default_field_default_fields() {
       'required' => FALSE,
       'settings' => array(
         'alt_field' => 0,
+        'default_image' => 0,
         'file_directory' => '',
         'file_extensions' => 'png gif jpg jpeg',
         'max_filesize' => '',

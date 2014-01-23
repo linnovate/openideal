@@ -10,7 +10,7 @@
 function fe_news_field_default_fields() {
   $fields = array();
 
-  // Exported field: 'node-news-body'
+  // Exported field: 'node-news-body'.
   $fields['node-news-body'] = array(
     'field_config' => array(
       'active' => '1',
@@ -33,6 +33,7 @@ function fe_news_field_default_fields() {
           0 => 'format',
         ),
       ),
+      'locked' => '0',
       'module' => 'text',
       'settings' => array(
         'profile2_private' => FALSE,
@@ -82,7 +83,7 @@ function fe_news_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-news-field_news_tags'
+  // Exported field: 'node-news-field_news_tags'.
   $fields['node-news-field_news_tags'] = array(
     'field_config' => array(
       'active' => '1',
@@ -103,6 +104,7 @@ function fe_news_field_default_fields() {
           0 => 'tid',
         ),
       ),
+      'locked' => '0',
       'module' => 'taxonomy',
       'settings' => array(
         'allowed_values' => array(

@@ -12,6 +12,10 @@ function fe_user_activity_ctools_plugin_api() {
   if ($module == "context" && $api == "context") {
     return array("version" => "3");
   }
+  list($module, $api) = func_get_args();
+  if ($module == "strongarm" && $api == "strongarm") {
+    return array("version" => "1");
+  }
 }
 
 /**
@@ -43,7 +47,6 @@ function fe_user_activity_default_message_type() {
         }
       ]
     },
-    "metatags" : [],
     "rdf_mapping" : []
   }');
   $items['log_new_content'] = entity_import('message_type', '{
@@ -63,7 +66,6 @@ function fe_user_activity_default_message_type() {
         }
       ]
     },
-    "metatags" : [],
     "rdf_mapping" : []
   }');
   $items['log_new_vote'] = entity_import('message_type', '{
@@ -83,7 +85,6 @@ function fe_user_activity_default_message_type() {
         }
       ]
     },
-    "metatags" : [],
     "rdf_mapping" : []
   }');
   return $items;

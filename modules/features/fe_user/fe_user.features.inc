@@ -16,20 +16,13 @@ function fe_user_ctools_plugin_api() {
   if ($module == "quicktabs" && $api == "quicktabs") {
     return array("version" => "1");
   }
-  list($module, $api) = func_get_args();
-  if ($module == "strongarm" && $api == "strongarm") {
-    return array("version" => "1");
-  }
 }
 
 /**
  * Implements hook_views_api().
  */
 function fe_user_views_api() {
-  list($module, $api) = func_get_args();
-  if ($module == "views" && $api == "views_default") {
-    return array("version" => "3.0");
-  }
+  return array("version" => "3.0");
 }
 
 /**
@@ -61,6 +54,10 @@ function fe_user_flag_default_flags() {
         1 => '5',
       ),
     ),
+    'weight' => 0,
+    'show_on_entity' => FALSE,
+    'show_on_form' => FALSE,
+    'access_author' => '',
     'show_on_profile' => 1,
     'access_uid' => 'others',
     'module' => 'fe_user',
@@ -93,6 +90,10 @@ function fe_user_flag_default_flags() {
         1 => '5',
       ),
     ),
+    'weight' => 0,
+    'show_on_entity' => FALSE,
+    'show_on_form' => FALSE,
+    'access_author' => '',
     'show_on_profile' => 1,
     'access_uid' => 'others',
     'module' => 'fe_user',
@@ -123,13 +124,17 @@ function fe_user_flag_default_flags() {
         0 => '3',
       ),
     ),
+    'weight' => 0,
+    'show_on_entity' => FALSE,
+    'show_on_form' => FALSE,
+    'access_author' => '',
     'show_on_profile' => 1,
     'access_uid' => 'others',
-    'api_version' => 2,
     'module' => 'fe_user',
     'locked' => array(
       0 => 'name',
     ),
+    'api_version' => 2,
   );
   // Exported flag: "Silver User".
   $flags['silver_user'] = array(
@@ -155,6 +160,10 @@ function fe_user_flag_default_flags() {
         1 => '5',
       ),
     ),
+    'weight' => 0,
+    'show_on_entity' => FALSE,
+    'show_on_form' => FALSE,
+    'access_author' => '',
     'show_on_profile' => 1,
     'access_uid' => 'others',
     'module' => 'fe_user',
@@ -164,6 +173,7 @@ function fe_user_flag_default_flags() {
     'api_version' => 2,
   );
   return $flags;
+
 }
 
 /**
@@ -172,7 +182,7 @@ function fe_user_flag_default_flags() {
 function fe_user_image_default_styles() {
   $styles = array();
 
-  // Exported image style: aventar_45_45
+  // Exported image style: avatar_45_45.
   $styles['avatar_45_45'] = array(
     'name' => 'avatar_45_45',
     'effects' => array(
@@ -192,6 +202,7 @@ function fe_user_image_default_styles() {
         'weight' => '1',
       ),
     ),
+    'label' => 'avatar_45_45',
   );
 
   return $styles;

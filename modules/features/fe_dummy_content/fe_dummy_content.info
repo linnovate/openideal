@@ -1,0 +1,11 @@
+name = fe_dummy_content
+description = A feature containing all content and settings related to dummy content
+core = 7.x
+package = OpenideaL
+version = 7.x-2.0
+project = fe_dummy_content
+dependencies[] = ctools
+dependencies[] = strongarm
+features[ctools][] = strongarm:strongarm:1
+features[features_api][] = api:1
+features[variable][] = nodequeue_links

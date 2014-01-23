@@ -81,69 +81,6 @@ function fe_idea_context_default_contexts() {
   $context = new stdClass();
   $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
   $context->api_version = 3;
-  $context->name = 'front';
-  $context->description = 'the home page';
-  $context->tag = 'Front';
-  $context->conditions = array(
-    'path' => array(
-      'values' => array(
-        '<front>' => '<front>',
-      ),
-    ),
-  );
-  $context->reactions = array(
-    'block' => array(
-      'blocks' => array(
-        'views-frontpage_ideas-block_3' => array(
-          'module' => 'views',
-          'delta' => 'frontpage_ideas-block_3',
-          'region' => 'content',
-          'weight' => '-10',
-        ),
-        'views-carousel-block' => array(
-          'module' => 'views',
-          'delta' => 'carousel-block',
-          'region' => 'content',
-          'weight' => '-14',
-        ),
-        'views-frontpage_ideas-block_1' => array(
-          'module' => 'views',
-          'delta' => 'frontpage_ideas-block_1',
-          'region' => 'content',
-          'weight' => '-10',
-        ),
-        'views-frontpage_ideas-block' => array(
-          'module' => 'views',
-          'delta' => 'frontpage_ideas-block',
-          'region' => 'content',
-          'weight' => '-10',
-        ),
-        'views-most_active_users-block' => array(
-          'module' => 'views',
-          'delta' => 'most_active_users-block',
-          'region' => 'content',
-          'weight' => '-10',
-        ),
-        'views-head_to_head-block' => array(
-          'module' => 'views',
-          'delta' => 'head_to_head-block',
-          'region' => 'content',
-          'weight' => '-12',
-        ),
-      ),
-    ),
-  );
-  $context->condition_mode = 0;
-
-  // Translatables
-  // Included for use with string extractors like potx.
-  t('Front');
-  t('the home page');
-  $export['front'] = $context;
-
-  $context = new stdClass();
-  $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
-  $context->api_version = 3;
   $context->name = 'idea_page';
   $context->description = '';
   $context->tag = 'Ideas';

@@ -10,7 +10,7 @@
 function fe_user_field_default_fields() {
   $fields = array();
 
-  // Exported field: 'user-user-field_user_address'
+  // Exported field: 'user-user-field_user_address'.
   $fields['user-user-field_user_address'] = array(
     'field_config' => array(
       'active' => '1',
@@ -20,6 +20,7 @@ function fe_user_field_default_fields() {
       'field_name' => 'field_user_address',
       'foreign keys' => array(),
       'indexes' => array(),
+      'locked' => '0',
       'module' => 'addressfield',
       'settings' => array(
         'profile2_private' => 0,
@@ -81,7 +82,7 @@ function fe_user_field_default_fields() {
     ),
   );
 
-  // Exported field: 'user-user-field_user_date_birth'
+  // Exported field: 'user-user-field_user_date_birth'.
   $fields['user-user-field_user_date_birth'] = array(
     'field_config' => array(
       'active' => '1',
@@ -91,6 +92,7 @@ function fe_user_field_default_fields() {
       'field_name' => 'field_user_date_birth',
       'foreign keys' => array(),
       'indexes' => array(),
+      'locked' => '0',
       'module' => 'date',
       'settings' => array(
         'cache_count' => '4',

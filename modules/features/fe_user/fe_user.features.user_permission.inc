@@ -10,29 +10,7 @@
 function fe_user_user_default_permissions() {
   $permissions = array();
 
-  // Exported permission: view own userpoints
-  $permissions['view own userpoints'] = array(
-    'name' => 'view own userpoints',
-    'roles' => array(
-      0 => 'administrator',
-      1 => 'anonymous user',
-      2 => 'authenticated user',
-    ),
-    'module' => 'userpoints',
-  );
-
-  // Exported permission: view userpoints
-  $permissions['view userpoints'] = array(
-    'name' => 'view userpoints',
-    'roles' => array(
-      0 => 'administrator',
-      1 => 'anonymous user',
-      2 => 'authenticated user',
-    ),
-    'module' => 'userpoints',
-  );
-  
-  // Exported permission: access user profiles
+  // Exported permission: access user profiles.
   $permissions['access user profiles'] = array(
     'name' => 'access user profiles',
     'roles' => array(
@@ -43,7 +21,7 @@ function fe_user_user_default_permissions() {
     'module' => 'user',
   );
 
-  // Exported permission: change own user settings
+  // Exported permission: change own user settings.
   $permissions['change own user settings'] = array(
     'name' => 'change own user settings',
     'roles' => array(
@@ -53,7 +31,7 @@ function fe_user_user_default_permissions() {
     'module' => 'watcher',
   );
 
-  // Exported permission: use watcher
+  // Exported permission: use watcher.
   $permissions['use watcher'] = array(
     'name' => 'use watcher',
     'roles' => array(
@@ -61,6 +39,28 @@ function fe_user_user_default_permissions() {
       1 => 'authenticated user',
     ),
     'module' => 'watcher',
+  );
+
+  // Exported permission: view own userpoints.
+  $permissions['view own userpoints'] = array(
+    'name' => 'view own userpoints',
+    'roles' => array(
+      0 => 'administrator',
+      1 => 'anonymous user',
+      2 => 'authenticated user',
+    ),
+    'module' => 'userpoints',
+  );
+
+  // Exported permission: view userpoints.
+  $permissions['view userpoints'] = array(
+    'name' => 'view userpoints',
+    'roles' => array(
+      0 => 'administrator',
+      1 => 'anonymous user',
+      2 => 'authenticated user',
+    ),
+    'module' => 'userpoints',
   );
 
   return $permissions;
