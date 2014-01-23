@@ -20,8 +20,8 @@ function fe_pages_default_page_manager_handlers() {
   $handler->weight = 0;
   $handler->conf = array(
     'title' => 'Challenge',
-    'no_blocks' => 0,
-    'pipeline' => 'standard',
+    'no_blocks' => 1,
+    'pipeline' => 'ipe',
     'body_classes_to_remove' => '',
     'body_classes_to_add' => '',
     'css_id' => '',
@@ -448,7 +448,7 @@ function fe_pages_default_page_manager_pages() {
     $pane->pid = 'new-5';
     $pane->panel = 'sidebar';
     $pane->type = 'block';
-    $pane->subtype = 'comment-recent';
+    $pane->subtype = 'views-highlighted_content-block';
     $pane->shown = TRUE;
     $pane->access = array();
     $pane->configuration = array(

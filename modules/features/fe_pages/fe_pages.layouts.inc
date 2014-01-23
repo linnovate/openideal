@@ -111,8 +111,8 @@ function fe_pages_default_panels_layout() {
         'bootstrap_class' => array(
           'xs' => 'col-xs-12',
           'sm' => 'col-sm-12',
-          'md' => 'col-md-12',
-          'lg' => 'col-lg-12',
+          'md' => 'col-md-4',
+          'lg' => 'col-lg-4',
         ),
         'children' => array(
           0 => 'main-row',
@@ -146,6 +146,10 @@ function fe_pages_default_panels_layout() {
           0 => 3,
         ),
         'class' => '',
+        'bootstrap_class' => array(
+          'md' => 'col-md-4',
+          'lg' => 'col-lg-4',
+        ),
       ),
       2 => array(
         'type' => 'column',
@@ -154,6 +158,10 @@ function fe_pages_default_panels_layout() {
           0 => 4,
         ),
         'class' => '',
+        'bootstrap_class' => array(
+          'md' => 'col-md-4',
+          'lg' => 'col-lg-4',
+        ),
       ),
       3 => array(
         'type' => 'row',

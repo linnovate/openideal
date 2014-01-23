@@ -31,6 +31,9 @@ function fe_pages_default_panels_mini() {
       'middle' => NULL,
       'right' => NULL,
       'bottom' => NULL,
+      'center' => NULL,
+      'column_2' => NULL,
+      'column_3' => NULL,
     ),
   );
   $display->cache = array();
@@ -45,8 +48,8 @@ function fe_pages_default_panels_mini() {
     $pane->shown = TRUE;
     $pane->access = array();
     $pane->configuration = array(
-      'override_title' => 0,
-      'override_title_text' => '',
+      'override_title' => 1,
+      'override_title_text' => 'Users',
     );
     $pane->cache = array();
     $pane->style = array(
@@ -66,8 +69,8 @@ function fe_pages_default_panels_mini() {
     $pane->shown = TRUE;
     $pane->access = array();
     $pane->configuration = array(
-      'override_title' => 0,
-      'override_title_text' => '',
+      'override_title' => 1,
+      'override_title_text' => 'Ideas',
     );
     $pane->cache = array();
     $pane->style = array(
@@ -87,8 +90,8 @@ function fe_pages_default_panels_mini() {
     $pane->shown = TRUE;
     $pane->access = array();
     $pane->configuration = array(
-      'override_title' => 0,
-      'override_title_text' => '',
+      'override_title' => 1,
+      'override_title_text' => 'Discussions',
     );
     $pane->cache = array();
     $pane->style = array(
