@@ -55,6 +55,7 @@ function ideal_analytics_analytics_dashboard() {
   $voc = taxonomy_vocabulary_machine_name_load('categories');
   $tree = taxonomy_get_tree($voc->vid);
   $header = array();
+  $terms = array();
   foreach ($tree as $term) {
     $header[] = $term->name;
     $query = db_select('taxonomy_index', 'ti');
@@ -165,4 +166,40 @@ function ideal_analytics_analytics_dashboard() {
   $ret[] = draw_chart($settings);
   
   return $ret;
+}
+
+/* Create a block for each graph */
+function ideal_analytics_block_info() {
+  //load analytics module
+  module_load_include('inc', 'analytics_dashboard', 'analytics_dashboard.charts');
+  $charts = analytics_dashboard_get_charts();
+  $visibles = variable_get('chart_visible', array());
+  foreach ($charts as $chart) {
+    if (in_array($chart['id'], $visibles, TRUE)) {
+      $blocks[$chart['id']] = array(
+        'info' => t('Graph').': '.$chart['title'],
+        'cache' => DRUPAL_NO_CACHE,
+      );
+      
+    }
+  }
+
+  return $blocks;
+}
+/* Display graph block */
+function ideal_analytics_block_view($delta = '') {
+  //load analytics module
+  module_load_include('inc', 'analytics_dashboard', 'analytics_dashboard.charts');
+  $charts = analytics_dashboard_get_charts();
+  $visibles = variable_get('chart_visible', array());
+
+  $block = array();
+  foreach ($charts as $chart) {
+    if (in_array($chart['id'], $visibles, TRUE) && $chart['id'] == $delta) {
+      $block['subject'] = t('Graph').': '.$chart['title'];
+      $block['content'] = $chart['markup'];
+      
+    }
+  }
+  return $block;
 }
