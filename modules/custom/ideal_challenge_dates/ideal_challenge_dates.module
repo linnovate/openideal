@@ -8,6 +8,9 @@ function ideal_challenge_dates_block_info() {
 	$blocks['challenge_data'] = array(
 		'info' => t('Challenge Data Block'),
 	);
+  $blocks['challenge_stats'] = array(
+		'info' => t('Challenge Statistics Block'),
+	);
 	return $blocks;
 }
 
@@ -17,6 +20,10 @@ function ideal_challenge_dates_block_info() {
 function ideal_challenge_dates_block_view($delta = '') {
 	if ($delta == 'challenge_data') {
 		$block['content'] = _ideal_challenge_dates_progress();
+		return $block;
+  }
+  elseif ($delta == 'challenge_stats') {
+		$block['content'] = _ideal_challenge_dates_stats();
 		return $block;
   }
 }
@@ -71,6 +78,7 @@ function _ideal_challenge_dates_progress() {
 				'#markup' => '<div>
 				<h4>' . t('Time left') . '</h4>
 				<div id="challenge-dates">' . $yearshtml . $monthshtml . $dayshtml . $hourshtml . $minuteshtml . '</div>
+        <div id="challenge-dates">' . t('Start') . '- ' . format_date($startdate, 'custom', 'n.j.Y') . ' '. t('End') . '- ' . format_date($enddate, 'custom', 'n.j.Y') . '</div>
 				</div>',
 			);
 		}
@@ -83,4 +91,55 @@ function _ideal_challenge_dates_progress() {
 		}
 		return $output;
 	}
+}
+
+/**
+ * Get statistics for a challenge.
+ */
+function _ideal_challenge_dates_stats() {
+  $entity = menu_get_object();
+  //dpm($entity);
+	if ($entity) {
+		$node = entity_metadata_wrapper('node', $entity);
+    $nid = $node->getIdentifier();
+
+    // Count all the published ideas belonging to this challenge.
+    $query = new EntityFieldQuery();
+    $query->entityCondition('entity_type', 'node')
+      ->entityCondition('bundle', 'idea')
+      ->propertyCondition('status', 1)
+      ->fieldCondition('field_challenge_ref', 'target_id', $nid);
+    $idea_count = $query->count()->execute();
+
+    // Count all the comments in this challenge.
+    $query = db_select('comment', 'c');
+    $query->join('field_data_field_challenge_ref', 'n', 'c.nid = n.entity_id');
+    $query->fields('c', array('cid'));
+    $query->condition('n.field_challenge_ref_target_id', $nid);
+    $result = $query->execute();
+    $comment_count = $result->rowCount();
+
+    // Count all users who commented on an idea.
+    $query = db_select('comment', 'c');
+    $query->join('field_data_field_challenge_ref', 'n', 'c.nid = n.entity_id');
+    $query->fields('c', array('uid'));
+    $query->condition('n.field_challenge_ref_target_id', $nid);
+    $query->distinct();
+    $result = $query->execute();
+    $user_count = $result->rowCount();
+
+    // Dummy vote value because votes are not implemented yet.
+    $vote_count = 1250;
+
+    // Generate output.
+    $output = '<div id="ideal-challenge-stats">';
+    $output .= '<div class="row ideas"><div class="col-xs-12">' . $idea_count . ' ' . t('Ideas') . '</div></div>';
+    $output .= '<div class="row">';
+    $output .= '<div class="col-xs-4 users">' . $user_count . ' ' . t('Users') . '</div>';
+    $output .= '<div class="col-xs-4 votes">' . $vote_count . ' ' . t('Votes') . '</div>';
+    $output .= '<div class="col-xs-4 comments">' . $comment_count . ' ' . t('Comments') . '</div>';
+    $output .= '</div></div>';
+
+    return $output;
+  }
 }
