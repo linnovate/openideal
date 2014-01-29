@@ -64,6 +64,9 @@ function fe_challenge_views_default_views() {
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page');
   $handler->display->display_options['path'] = 'challenges-list';
+
+  /* Display: Block */
+  $handler = $view->new_display('block', 'Block', 'block_1');
   $export['challenges_list'] = $view;
 
   $view = new view();
