@@ -115,7 +115,7 @@ function fe_pages_default_page_manager_handlers() {
     $pane->pid = 'new-2';
     $pane->panel = 'right';
     $pane->type = 'block';
-    $pane->subtype = 'ideal_challenge_dates-challenge_data';
+    $pane->subtype = 'ideal_challenge-challenge_data';
     $pane->shown = TRUE;
     $pane->access = array();
     $pane->configuration = array(

@@ -8,8 +8,8 @@ function ideal_challenge_menu() {
     'title' => 'Default Challenge',
     'access arguments' => array('access content'),
     'page callback' => 'drupal_get_form',
-    'page arguments' => array('ideal_challenge_default_challenge_form'),  
-    'file' => 'ideal_challenge.admin.inc',  
+    'page arguments' => array('ideal_challenge_default_challenge_form'),
+    'file' => 'ideal_challenge.admin.inc',
     'type' => MENU_LOCAL_TASK,
   );
   return $items;
@@ -34,7 +34,9 @@ function ideal_challenge_block_info() {
   $blocks['challenge_add_idea'] = array(
     'info' => t('ideal challenge add idea'),
   );
-
+  $blocks['challenge_data'] = array(
+		'info' => t('Challenge Data Block'),
+	);
   return $blocks;
 }
 
@@ -49,6 +51,11 @@ function ideal_challenge_block_view($delta) {
         'content' => theme('ideal_challenge_add_idea'),
       );
       break;
+    case 'challenge_data': {
+      $block = array(
+        'content' => _ideal_challenge_progress(),
+      );
+    }
   }
   return $block;
 }
@@ -57,12 +64,12 @@ function theme_ideal_challenge_add_idea() {
   $output = '';
    // Get the nid (for reference) from the default challenge.
   $challenge_nid = variable_get('default_challenge', NULL);
-  
+
   if (!empty($challenge_nid)) {
     $challenge = views_embed_view('default_challenge', 'block', $challenge_nid);
     $form = drupal_get_form('ideal_challenge_add_idea_form');
 
-    $output .= $challenge; 
+    $output .= $challenge;
     $output .= render($form);
   }
   return $output;
@@ -77,47 +84,47 @@ function ideal_challenge_add_idea_form() {
   $form['header'] = array(
     '#markup' => '<h4 class="ideal-challenge-add-idea">' . t('Be bold! Add your idea:') . '</h4>',
   );
-   
+
   $form['title'] = array(
     '#type' => 'textfield',
     '#title' => t('Title'),
-    '#description' => '',  
-    '#default_value' => '', 
-    '#size' => 60, 
-    '#maxlength' => 128, 
-    '#required' => TRUE,  
+    '#description' => '',
+    '#default_value' => '',
+    '#size' => 60,
+    '#maxlength' => 128,
+    '#required' => TRUE,
   );
-  
+
   $form['body'] = array(
-    '#type' => 'textarea', 
+    '#type' => 'textarea',
     '#title' => t('Body'),
     '#description' => '',
-    '#default_value' => '', 
+    '#default_value' => '',
     '#required' => TRUE
   );
-  
+
   $form['submit'] = array(
-    '#type' => 'submit', 
+    '#type' => 'submit',
     '#value' => t('Share')
   );
-  
+
   return $form;
 }
 
 /**
  * Additional submit handler for the node add form.
  */
-function ideal_challenge_add_idea_form_submit($form, &$form_state) { 
+function ideal_challenge_add_idea_form_submit($form, &$form_state) {
   global $user;
   global $language;
   $lang = module_exists('local') ? $language : LANGUAGE_NONE;
-  
+
   // Get the nid (for reference) anf the terms from the default challenge.
   $challenge_nid = variable_get('default_challenge', NULL);
   $challenge = node_load($challenge_nid);
   $obj = entity_metadata_wrapper('node', $challenge);
   $category = $obj->field_category->value();
-  
+
 //  $wrp = entity_property_values_create_entity('node');
 //  $wrp->save();
 
@@ -131,11 +138,76 @@ function ideal_challenge_add_idea_form_submit($form, &$form_state) {
   $node->body[$node->language][]['value'] = $form_state['values']['body'];
   $node->field_category[$node->language][]['tid'] = $category->tid;
   $node->field_challenge_ref[$node->language][]['target_id'] = $challenge_nid;
-  
+
   // Saving the node,
   node_object_prepare($node);
   $node = node_submit($node);
-  node_save($node); 
-  
+  node_save($node);
+
   drupal_set_message('Your idea was saved');
+}
+
+/**
+ * Calculate progress of challenge.
+ */
+function _ideal_challenge_progress() {
+	$entity = menu_get_object();
+	if ($entity) {
+		$node = entity_metadata_wrapper('node', $entity);
+		$startdate = $node->field_dates->value->value();
+		$enddate = $node->field_dates->value2->value();
+		$start = new DateTime(date('c'));
+		$end = new DateTime(date('c', $enddate));
+    // Time difference from now to end date.
+		$diffnow = $start->diff($end);
+    // Time difference from start date to end date.
+		$diff = abs($enddate - $startdate);
+    // Time difference from now to start date.
+		$diffpassed = abs(time() - $startdate);
+		if ($enddate > time()) {
+      // Create HTML for time left counter on challenge.
+      // Show year and months only if larger than 0.
+			$yearshtml = '';
+			if ($diffnow->y > 0) {
+				$yearshtml = '<span><strong class="challenge-date-value">' . $diffnow->y . '</strong>&nbsp;<small class="challenge-date-label small">' . format_plural($diffnow->y, 'Year', 'Years') . '</small></span><br />';
+			}
+			$monthshtml = '';
+			if ($diffnow->y > 0 || $diffnow->m > 0) {
+				$monthshtml = '<span><strong class="challenge-date-value">' . $diffnow->m . '</strong>&nbsp;<small class="challenge-date-label">' . format_plural($diffnow->m, 'Month', 'Months') . '</small></span><br />';
+			}
+			$dayshtml = '<span><strong class="challenge-date-value">' . $diffnow->d . '</strong>&nbsp;<small class="challenge-date-label">' . format_plural($diffnow->d, 'Day', 'Days') . '</small></span><br />';
+			// If the year is not displayed, display hours.
+      $hourshtml = '';
+			if ($diffnow->y == 0) {
+				$hourshtml = '<span><strong class="challenge-date-value">' . $diffnow->h . '</strong>&nbsp;<small class="challenge-date-label">' . format_plural($diffnow->h, 'Hour', 'Hours') . '</small></span><br />';
+			}
+      // If the month is not displayed, display minutes.
+			$minuteshtml = '';
+			if ($diffnow->y == 0 && $diffnow->m == 0) {
+				$minuteshtml = '<span><strong class="challenge-date-value">' . $diffnow->i . '</strong>&nbsp;<small class="challenge-date-label ">' . format_plural($diffnow->s, 'Min', 'Mins') . '</small></span><br />';
+			}
+      // Calculate percentage of time passed.
+			$complete = round(($diffpassed / $diff) * 100);
+      // Output progress bar of time passed and time counter.
+			// Progressbar removed:
+      // <h4>'. t('Challenge is @complete% completed', array('@complete' => $complete)) . '</h4>
+      // <div class="progress"><div class="bar" style="width:' . $complete . '%;"></div></div>
+			$output = array(
+				'#type' => 'markup',
+				'#markup' => '<div>
+				<h4>' . t('Time left') . '</h4>
+				<div id="challenge-dates">' . $yearshtml . $monthshtml . $dayshtml . $hourshtml . $minuteshtml . '</div>
+        <div id="challenge-dates">' . t('Start') . '- ' . format_date($startdate, 'custom', 'n.j.Y') . ' '. t('End') . '- ' . format_date($enddate, 'custom', 'n.j.Y') . '</div>
+				</div>',
+			);
+		}
+		else {
+      // If end date of challenge is in the past, the challenge is completed.
+			$output = array(
+				'#type' => 'markup',
+				'#markup' => '<div class="well">' . t('The challenge is completed.') .'</div>',
+			);
+		}
+		return $output;
+	}
 }
