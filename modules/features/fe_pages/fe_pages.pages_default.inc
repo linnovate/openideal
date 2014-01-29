@@ -157,7 +157,7 @@ function fe_pages_default_page_manager_handlers() {
     $pane->pid = 'new-4';
     $pane->panel = 'right';
     $pane->type = 'block';
-    $pane->subtype = 'ideal_challenge_dates-challenge_stats';
+    $pane->subtype = 'ideal_blocks-challenge_stats';
     $pane->shown = TRUE;
     $pane->access = array();
     $pane->configuration = array(

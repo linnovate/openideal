@@ -3,7 +3,7 @@
 /**
  * Implements hook_block_info().
  */
-function ideal_challenge_dates_block_info() {
+function ideal_blocks_block_info() {
 	$blocks = array();
   $blocks['challenge_stats'] = array(
 		'info' => t('Challenge Statistics Block'),
@@ -14,9 +14,9 @@ function ideal_challenge_dates_block_info() {
 /**
  * Implements hook_block_view().
  */
-function ideal_challenge_dates_block_view($delta = '') {
+function ideal_blocks_block_view($delta = '') {
   if ($delta == 'challenge_stats') {
-		$block['content'] = _ideal_challenge_dates_stats();
+		$block['content'] = _ideal_blocks_challenge_stats();
 		return $block;
   }
 }
@@ -24,7 +24,7 @@ function ideal_challenge_dates_block_view($delta = '') {
 /**
  * Get statistics for a challenge.
  */
-function _ideal_challenge_dates_stats() {
+function _ideal_blocks_challenge_stats() {
   $entity = menu_get_object();
   //dpm($entity);
 	if ($entity) {
