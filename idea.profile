@@ -37,13 +37,11 @@ function idea_install_tasks($install_state) {
   $dummy_content = variable_get('idea_add_dummy_content', TRUE);
 
   $tasks = array(
-/*
     'idea_taxonomy' => array(
       'display' => FALSE,
       'type' => '',
       'run' => $dummy_content ? INSTALL_TASK_RUN_IF_NOT_COMPLETED : INSTALL_TASK_SKIP,
     ),
-*/
     'idea_dummy_users' => array(
       'display' => FALSE,
       'type' => '',
@@ -129,6 +127,34 @@ function install_welcome_submit($form, &$form_state) {
   $install_state['parameters']['locale'] = 'en';
   if ($form_state['values']['install_options']['content'] === 'content') {
   }
+}
+
+/**
+ * Generate default taxonomy terms.
+ */
+function idea_taxonomy() {
+
+  // Create default taxonomy terms.
+  $terms = array(
+    array('name' => 'Products', 'vid' => 4, 'weight' => 1),
+    array('name' => 'Services', 'vid' => 4, 'weight' => 2),
+    array('name' => 'Processes', 'vid' => 4, 'weight' => 3),
+  );
+
+  foreach ($terms as $term) {
+    idea_create_term($term['name'], $term['vid'], $term['weight']);
+  }
+}
+
+/**
+ * Save term to database.
+ */
+	function idea_create_term($name, $vid, $weight) {
+	  $term = new stdClass();
+	  $term->name = $name;
+	  $term->vid = $vid;
+	  $term->weight = $weight;
+	  taxonomy_term_save($term);
 }
 
 /**
