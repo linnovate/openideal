@@ -47,6 +47,17 @@ function _ideal_blocks_challenge_stats() {
     $result = $query->execute();
     $comment_count = $result->rowCount();
 
+    $query = db_select('votingapi_vote', 'v');
+    $query->join('field_data_field_challenge_ref', 'n', 'v.entity_id = n.entity_id');
+    $query->fields('v', array('vote_id'));
+    $query->condition('v.entity_type', 'node');
+    $query->condition('v.value_type', 'points');
+    $query->condition('v.tag', 'vote');
+    $query->condition('v.value', 1);
+    $query->condition('n.field_challenge_ref_target_id', $nid);
+    $result = $query->execute();
+    $vote_count = $result->rowCount();
+
     // Count all users who commented on an idea.
     $query = db_select('comment', 'c');
     $query->join('field_data_field_challenge_ref', 'n', 'c.nid = n.entity_id');
@@ -56,16 +67,13 @@ function _ideal_blocks_challenge_stats() {
     $result = $query->execute();
     $user_count = $result->rowCount();
 
-    // Dummy vote value because votes are not implemented yet.
-    $vote_count = 1250;
-
     // Generate output.
     $output = '<div id="ideal-challenge-stats">';
-    $output .= '<div class="row ideas"><div class="col-xs-12">' . $idea_count . ' ' . t('Ideas') . '</div></div>';
+    $output .= '<div class="row ideas"><div class="col-xs-12">' . format_plural($idea_count, '1 Idea', '@count Ideas') . '</div></div>';
     $output .= '<div class="row">';
-    $output .= '<div class="col-xs-4 users">' . $user_count . ' ' . t('Users') . '</div>';
-    $output .= '<div class="col-xs-4 votes">' . $vote_count . ' ' . t('Votes') . '</div>';
-    $output .= '<div class="col-xs-4 comments">' . $comment_count . ' ' . t('Comments') . '</div>';
+    $output .= '<div class="col-xs-4 users">' . format_plural($user_count, '1 User', '@count Users') . '</div>';
+    $output .= '<div class="col-xs-4 votes">' . format_plural($vote_count, '1 Vote', '@count Votes') . '</div>';
+    $output .= '<div class="col-xs-4 comments">' . format_plural($comment_count, '1 Comment', '@count Comments') . '</div>';
     $output .= '</div></div>';
 
     return $output;
