@@ -37,6 +37,9 @@ function ideal_challenge_block_info() {
   $blocks['challenge_data'] = array(
 		'info' => t('Challenge Data Block'),
 	);
+  $blocks['challenge_add_idea_button'] = array(
+    'info' => t('Challenge add idea button'),
+  );
   return $blocks;
 }
 
@@ -51,11 +54,16 @@ function ideal_challenge_block_view($delta) {
         'content' => theme('ideal_challenge_add_idea'),
       );
       break;
-    case 'challenge_data': {
+    case 'challenge_data':
       $block = array(
         'content' => _ideal_challenge_progress(),
       );
-    }
+      break;
+    case 'challenge_add_idea_button':
+      $block = array(
+        'content' => _ideal_challenge_add_idea_button(),
+      );
+      break;
   }
   return $block;
 }
@@ -208,6 +216,20 @@ function _ideal_challenge_progress() {
 				'#markup' => '<div class="well">' . t('The challenge is completed.') .'</div>',
 			);
 		}
+		return $output;
+	}
+}
+
+/**
+ * Output a button to add an idea.
+ */
+function _ideal_challenge_add_idea_button() {
+  $node = menu_get_object();
+  if ($node) {
+    $nid = $node->nid;
+    $output = '<div class="challenge-add-idea-button">';
+    $output .= l('Add idea', 'node/add/idea', array('attributes' => array('class' => 'btn btn-success'), 'query' => array('field_challenge_ref' => $nid)));
+    $output .= '</div>';
 		return $output;
 	}
 }
