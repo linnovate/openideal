@@ -2,11 +2,13 @@
 --------------------------------------------------------------------------------
 
 Index
+1. Introduction
+2. Features
+2.1 HybridAuth installation & configuration
+2.2 Alerts & Notifications
+2.3 Activity
 
-1. HybridAuth installation & configuration
-2. Alerts & Notifications
-
-- 1. HybridAuth installation & configuration
+2.1 HybridAuth installation & configuration
 --------------------------------------------------------------------------------
 
 1. Download the HybridAuth library:
@@ -21,7 +23,7 @@ authentication keys supplied by the provider
 6. To automatically assign values from a service to user fields, create a rule
 using the event "User registered through HybridAuth" and set the data values
 
-- 2. Alerts & Notifications
+2.2 Alerts & Notifications
 --------------------------------------------------------------------------------
 
 Notifications are e-mails that get sent by the system to alert users of the site
@@ -50,3 +52,32 @@ configured:
 - Notifications for new content
 - Notifications for new comments
 - Notifications for mentions
+
+
+2.3 Activity
+--------------------------------------------------------------------------------
+For the activity streams the message module is used. On the frontpage a number 
+of different streams are show in a mini-panel called latest and greatest. Also 
+an overal activity stream is available as a view (block).
+
+Main activity stream
+- New content (idea, challenge, news)
+- New comments
+- New users
+- Various aggregated activity
+-- received 10, 25, 50, 100 votes (x people have voted on [title])
+-- reveived 10, 25, 50, 100 comments (x comments have been made for [title])
+-- new users (x new users have joined this (week, month, year))
+
+Users
+- Posted x ideas
+- User has joined
+
+Ideas
+- Idea was shared
+- Idea won challenge
+- Idea was posted
+
+Discussions
+- New comment
+- x-th votes on comment
