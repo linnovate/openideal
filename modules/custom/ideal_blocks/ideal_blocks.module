@@ -8,6 +8,9 @@ function ideal_blocks_block_info() {
   $blocks['challenge_stats'] = array(
 		'info' => t('Challenge Statistics Block'),
 	);
+  $blocks['ideal_key_stats'] = array(
+		'info' => t('Key Statistics Block'),
+	);
 	return $blocks;
 }
 
@@ -15,10 +18,20 @@ function ideal_blocks_block_info() {
  * Implements hook_block_view().
  */
 function ideal_blocks_block_view($delta = '') {
-  if ($delta == 'challenge_stats') {
-		$block['content'] = _ideal_blocks_challenge_stats();
-		return $block;
+  switch($delta) {
+    case 'challenge_stats':
+      $block = array(
+        'content' => _ideal_blocks_challenge_stats(),
+      );
+      break;
+    case 'ideal_key_stats':
+      $block = array(
+        'subject' => t('Key stats'),
+        'content' => _ideal_blocks_key_stats(),
+      );
+      break;
   }
+  return $block;
 }
 
 /**
@@ -26,7 +39,6 @@ function ideal_blocks_block_view($delta = '') {
  */
 function _ideal_blocks_challenge_stats() {
   $entity = menu_get_object();
-  //dpm($entity);
 	if ($entity) {
 		$node = entity_metadata_wrapper('node', $entity);
     $nid = $node->getIdentifier();
@@ -43,10 +55,12 @@ function _ideal_blocks_challenge_stats() {
     $query = db_select('comment', 'c');
     $query->join('field_data_field_challenge_ref', 'n', 'c.nid = n.entity_id');
     $query->fields('c', array('cid'));
+    $query->condition('c.status', 1);
     $query->condition('n.field_challenge_ref_target_id', $nid);
     $result = $query->execute();
     $comment_count = $result->rowCount();
 
+    // Count all the votes in this challenge.
     $query = db_select('votingapi_vote', 'v');
     $query->join('field_data_field_challenge_ref', 'n', 'v.entity_id = n.entity_id');
     $query->fields('v', array('vote_id'));
@@ -58,7 +72,7 @@ function _ideal_blocks_challenge_stats() {
     $result = $query->execute();
     $vote_count = $result->rowCount();
 
-    // Count all users who commented on an idea.
+    // Count all users who commented on an idea in this challenge.
     $query = db_select('comment', 'c');
     $query->join('field_data_field_challenge_ref', 'n', 'c.nid = n.entity_id');
     $query->fields('c', array('uid'));
@@ -78,4 +92,50 @@ function _ideal_blocks_challenge_stats() {
 
     return $output;
   }
+}
+
+/**
+ * Get key statistics for all challenges.
+ */
+function _ideal_blocks_key_stats() {
+  // Count all the published challenges.
+  $query = new EntityFieldQuery();
+  $query->entityCondition('entity_type', 'node')
+    ->entityCondition('bundle', 'challenge')
+    ->propertyCondition('status', 1);
+  $challenge_count = $query->count()->execute();
+
+  // Count all the published ideas of all challenges.
+  $query = new EntityFieldQuery();
+  $query->entityCondition('entity_type', 'node')
+    ->entityCondition('bundle', 'idea')
+    ->propertyCondition('status', 1);
+  $idea_count = $query->count()->execute();
+
+  // Count all users registered to the site.
+  $query = new EntityFieldQuery();
+  $query->entityCondition('entity_type', 'user')
+    ->propertyCondition('status', 1);
+  $user_count = $query->count()->execute();
+
+  // Count all the votes from all ideas.
+  $result = db_select('votingapi_vote', 'v')
+    ->fields('v', array('vote_id'))
+    ->condition('v.entity_type', 'node')
+    ->condition('v.value_type', 'points')
+    ->condition('v.tag', 'vote')
+    ->condition('v.value', 1)
+    ->execute();
+  $vote_count = $result->rowCount();
+
+  // Generate output.
+  $output = '<div id="ideal-key-stats">';
+  $output .= '<div class="row ideas"><div class="col-xs-12">' . format_plural($challenge_count, '1 Challenge', '@count Challenges') . '</div></div>';
+  $output .= '<div class="row">';
+  $output .= '<div class="col-xs-4 ideas">' . format_plural($idea_count, '1 Idea', '@count Ideas') . '</div>';
+  $output .= '<div class="col-xs-4 users">' . format_plural($user_count, '1 User', '@count Users') . '</div>';
+  $output .= '<div class="col-xs-4 votes">' . format_plural($vote_count, '1 Vote', '@count Votes') . '</div>';
+  $output .= '</div></div>';
+
+  return $output;
 }
