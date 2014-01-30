@@ -205,7 +205,7 @@ function _ideal_challenge_progress() {
 				'#type' => 'markup',
 				'#markup' => '
 				<div id="challenge-dates" class="row" >' . $yearshtml . $monthshtml . $dayshtml . $hourshtml . $minuteshtml . '</div>
-        <div id="challenge-dates-start-end"><strong>' . t('Start') . '</strong>- ' . format_date($startdate, 'custom', 'n.j.Y') . '<strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'. t('End') . '</strong>- ' . format_date($enddate, 'custom', 'n.j.Y') . '</div>
+        <div id="challenge-dates-start-end"><strong>' . t('Start') . '</strong>- ' . format_date($startdate, 'custom', 'n.j.Y') . '   <strong>'. t('End') . '</strong>- ' . format_date($enddate, 'custom', 'n.j.Y') . '</div>
 				',
 			);
 		}

@@ -372,6 +372,115 @@ function fe_pages_views_default_views() {
   $export['default_challenge'] = $view;
 
   $view = new view();
+  $view->name = 'head_to_head_ideas';
+  $view->description = 'Display a list of all nodes in queue \'Head to head\'';
+  $view->tag = 'nodequeue';
+  $view->base_table = 'node';
+  $view->human_name = 'Head to Head Ideas';
+  $view->core = 0;
+  $view->api_version = '3.0';
+  $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
+
+  /* Display: Defaults */
+  $handler = $view->new_display('default', 'Defaults', 'default');
+  $handler->display->display_options['title'] = 'Head to head';
+  $handler->display->display_options['use_more'] = TRUE;
+  $handler->display->display_options['use_more_always'] = FALSE;
+  $handler->display->display_options['access']['type'] = 'none';
+  $handler->display->display_options['cache']['type'] = 'none';
+  $handler->display->display_options['query']['type'] = 'views_query';
+  $handler->display->display_options['exposed_form']['type'] = 'basic';
+  $handler->display->display_options['pager']['type'] = 'none';
+  $handler->display->display_options['style_plugin'] = 'default';
+  $handler->display->display_options['row_plugin'] = 'node';
+  /* Relationship: Nodequeue: Queue */
+  $handler->display->display_options['relationships']['nodequeue_rel']['id'] = 'nodequeue_rel';
+  $handler->display->display_options['relationships']['nodequeue_rel']['table'] = 'node';
+  $handler->display->display_options['relationships']['nodequeue_rel']['field'] = 'nodequeue_rel';
+  $handler->display->display_options['relationships']['nodequeue_rel']['required'] = TRUE;
+  $handler->display->display_options['relationships']['nodequeue_rel']['limit'] = TRUE;
+  $handler->display->display_options['relationships']['nodequeue_rel']['names'] = array(
+    'head_to_head' => 'head_to_head',
+  );
+  /* Relationship: Content: Author */
+  $handler->display->display_options['relationships']['uid']['id'] = 'uid';
+  $handler->display->display_options['relationships']['uid']['table'] = 'node';
+  $handler->display->display_options['relationships']['uid']['field'] = 'uid';
+  /* Field: Content: Title */
+  $handler->display->display_options['fields']['title']['id'] = 'title';
+  $handler->display->display_options['fields']['title']['table'] = 'node';
+  $handler->display->display_options['fields']['title']['field'] = 'title';
+  $handler->display->display_options['fields']['title']['label'] = '';
+  /* Field: Content: Idea image */
+  $handler->display->display_options['fields']['field_idea_image']['id'] = 'field_idea_image';
+  $handler->display->display_options['fields']['field_idea_image']['table'] = 'field_data_field_idea_image';
+  $handler->display->display_options['fields']['field_idea_image']['field'] = 'field_idea_image';
+  $handler->display->display_options['fields']['field_idea_image']['label'] = '';
+  $handler->display->display_options['fields']['field_idea_image']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_idea_image']['click_sort_column'] = 'fid';
+  $handler->display->display_options['fields']['field_idea_image']['settings'] = array(
+    'image_style' => 'cropped_220_220',
+    'image_link' => '',
+  );
+  /* Field: Content: Body */
+  $handler->display->display_options['fields']['body']['id'] = 'body';
+  $handler->display->display_options['fields']['body']['table'] = 'field_data_body';
+  $handler->display->display_options['fields']['body']['field'] = 'body';
+  $handler->display->display_options['fields']['body']['label'] = '';
+  $handler->display->display_options['fields']['body']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['body']['type'] = 'text_summary_or_trimmed';
+  $handler->display->display_options['fields']['body']['settings'] = array(
+    'trim_length' => '200',
+  );
+  /* Field: User: Name */
+  $handler->display->display_options['fields']['name']['id'] = 'name';
+  $handler->display->display_options['fields']['name']['table'] = 'users';
+  $handler->display->display_options['fields']['name']['field'] = 'name';
+  $handler->display->display_options['fields']['name']['relationship'] = 'uid';
+  /* Field: User: Picture */
+  $handler->display->display_options['fields']['picture']['id'] = 'picture';
+  $handler->display->display_options['fields']['picture']['table'] = 'users';
+  $handler->display->display_options['fields']['picture']['field'] = 'picture';
+  $handler->display->display_options['fields']['picture']['relationship'] = 'uid';
+  $handler->display->display_options['fields']['picture']['label'] = '';
+  $handler->display->display_options['fields']['picture']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['picture']['image_style'] = 'avatar_45_45';
+  /* Field: Content: Vote */
+  $handler->display->display_options['fields']['field_vote']['id'] = 'field_vote';
+  $handler->display->display_options['fields']['field_vote']['table'] = 'field_data_field_vote';
+  $handler->display->display_options['fields']['field_vote']['field'] = 'field_vote';
+  $handler->display->display_options['fields']['field_vote']['label'] = '';
+  $handler->display->display_options['fields']['field_vote']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_vote']['click_sort_column'] = 'vud_widget';
+  /* Sort criterion: Nodequeue: Position */
+  $handler->display->display_options['sorts']['position']['id'] = 'position';
+  $handler->display->display_options['sorts']['position']['table'] = 'nodequeue_nodes';
+  $handler->display->display_options['sorts']['position']['field'] = 'position';
+  $handler->display->display_options['sorts']['position']['relationship'] = 'nodequeue_rel';
+  /* Filter criterion: Content: Published or admin */
+  $handler->display->display_options['filters']['status_extra']['id'] = 'status_extra';
+  $handler->display->display_options['filters']['status_extra']['table'] = 'node';
+  $handler->display->display_options['filters']['status_extra']['field'] = 'status_extra';
+  $handler->display->display_options['filters']['status_extra']['group'] = 0;
+  $handler->display->display_options['filters']['status_extra']['expose']['operator'] = FALSE;
+
+  /* Display: Page */
+  $handler = $view->new_display('page', 'Page', 'page');
+  $handler->display->display_options['path'] = 'nodequeue/1';
+
+  /* Display: Block */
+  $handler = $view->new_display('block', 'Block', 'block');
+  $handler->display->display_options['defaults']['style_plugin'] = FALSE;
+  $handler->display->display_options['style_plugin'] = 'views_bootstrap_thumbnail_plugin_style';
+  $handler->display->display_options['style_options']['column_type'] = '6';
+  $handler->display->display_options['defaults']['style_options'] = FALSE;
+  $handler->display->display_options['defaults']['row_plugin'] = FALSE;
+  $handler->display->display_options['row_plugin'] = 'fields';
+  $handler->display->display_options['defaults']['row_options'] = FALSE;
+  $handler->display->display_options['block_description'] = 'Queue \'Head to head\'';
+  $export['head_to_head_ideas'] = $view;
+
+  $view = new view();
   $view->name = 'highlighted_content';
   $view->description = 'A list of all content which is promoted to the front page';
   $view->tag = 'default';

@@ -44,12 +44,12 @@ function fe_pages_default_panels_mini() {
     $pane->pid = 'new-1';
     $pane->panel = 'center';
     $pane->type = 'block';
-    $pane->subtype = 'user-new';
+    $pane->subtype = 'views-activity-block_1';
     $pane->shown = TRUE;
     $pane->access = array();
     $pane->configuration = array(
-      'override_title' => 1,
-      'override_title_text' => 'Users',
+      'override_title' => 0,
+      'override_title_text' => '',
     );
     $pane->cache = array();
     $pane->style = array(
@@ -65,12 +65,12 @@ function fe_pages_default_panels_mini() {
     $pane->pid = 'new-2';
     $pane->panel = 'column_2';
     $pane->type = 'block';
-    $pane->subtype = 'views-ideas_all-block_2';
+    $pane->subtype = 'views-activity-block_2';
     $pane->shown = TRUE;
     $pane->access = array();
     $pane->configuration = array(
-      'override_title' => 1,
-      'override_title_text' => 'Ideas',
+      'override_title' => 0,
+      'override_title_text' => '',
     );
     $pane->cache = array();
     $pane->style = array(
@@ -86,12 +86,12 @@ function fe_pages_default_panels_mini() {
     $pane->pid = 'new-3';
     $pane->panel = 'column_3';
     $pane->type = 'block';
-    $pane->subtype = 'comment-recent';
+    $pane->subtype = 'views-activity-block_3';
     $pane->shown = TRUE;
     $pane->access = array();
     $pane->configuration = array(
-      'override_title' => 1,
-      'override_title_text' => 'Discussions',
+      'override_title' => 0,
+      'override_title_text' => '',
     );
     $pane->cache = array();
     $pane->style = array(
