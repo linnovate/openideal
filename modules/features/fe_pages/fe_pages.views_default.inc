@@ -83,8 +83,10 @@ function fe_pages_views_default_views() {
   $handler->display->display_options['fields']['nothing']['field'] = 'nothing';
   $handler->display->display_options['fields']['nothing']['ui_name'] = 'Mouseover (showing: title / body / link )';
   $handler->display->display_options['fields']['nothing']['label'] = '';
-  $handler->display->display_options['fields']['nothing']['alter']['text'] = '<h4 class="title" >[title]</h4>
-<div class="body" >[body]</div>
+  $handler->display->display_options['fields']['nothing']['alter']['text'] = '<div class="content" >
+  <h4 class="title" >[title]</h4>
+  <div class="body" >[body]</div>
+</div>
 <div class="read-more pull-right" >[view_node]</div>';
   $handler->display->display_options['fields']['nothing']['element_class'] = 'mouseover';
   $handler->display->display_options['fields']['nothing']['element_label_colon'] = FALSE;
