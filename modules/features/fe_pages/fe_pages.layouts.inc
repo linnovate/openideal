@@ -276,16 +276,5 @@ function fe_pages_default_panels_layout() {
   );
   $export['latest_and_greatest'] = $layout;
 
-  $layout = new stdClass();
-  $layout->disabled = FALSE; /* Edit this to true to make a default layout disabled initially */
-  $layout->api_version = 1;
-  $layout->name = 'openideal_admin';
-  $layout->admin_title = 'OpenideaL admin';
-  $layout->admin_description = '';
-  $layout->category = 'OpenideaL';
-  $layout->plugin = 'bootstrap';
-  $layout->settings = array();
-  $export['openideal_admin'] = $layout;
-
   return $export;
 }

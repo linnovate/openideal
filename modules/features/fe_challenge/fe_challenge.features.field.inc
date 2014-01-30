@@ -86,6 +86,104 @@ function fe_challenge_field_default_fields() {
     ),
   );
 
+  // Exported field: 'node-challenge-field_attachments'.
+  $fields['node-challenge-field_attachments'] = array(
+    'field_config' => array(
+      'active' => '1',
+      'cardinality' => '10',
+      'deleted' => '0',
+      'entity_types' => array(),
+      'field_name' => 'field_attachments',
+      'field_permissions' => array(
+        'type' => '0',
+      ),
+      'foreign keys' => array(
+        'fid' => array(
+          'columns' => array(
+            'fid' => 'fid',
+          ),
+          'table' => 'file_managed',
+        ),
+      ),
+      'indexes' => array(
+        'fid' => array(
+          0 => 'fid',
+        ),
+      ),
+      'locked' => '0',
+      'module' => 'file',
+      'settings' => array(
+        'display_default' => 0,
+        'display_field' => 0,
+        'uri_scheme' => 'public',
+      ),
+      'translatable' => '0',
+      'type' => 'file',
+    ),
+    'field_instance' => array(
+      'bundle' => 'challenge',
+      'deleted' => '0',
+      'description' => '',
+      'display' => array(
+        'default' => array(
+          'label' => 'above',
+          'module' => 'file',
+          'settings' => array(),
+          'type' => 'file_default',
+          'weight' => 5,
+        ),
+        'teaser' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+      ),
+      'entity_type' => 'node',
+      'field_name' => 'field_attachments',
+      'label' => 'Attachments',
+      'required' => 0,
+      'settings' => array(
+        'description_field' => 1,
+        'file_directory' => '',
+        'file_extensions' => 'txt doc docx pdf img png',
+        'max_filesize' => '',
+        'user_register_form' => FALSE,
+      ),
+      'widget' => array(
+        'active' => 1,
+        'module' => 'file',
+        'settings' => array(
+          'dragdropfile_enabled' => 1,
+          'filefield_sources' => array(
+            'filefield_sources' => array(
+              'attach' => 0,
+              'clipboard' => 0,
+              'imce' => 0,
+              'reference' => 0,
+              'remote' => 0,
+              'upload' => 'upload',
+            ),
+            'source_attach' => array(
+              'absolute' => '0',
+              'attach_mode' => 'move',
+              'path' => 'file_attach',
+            ),
+            'source_imce' => array(
+              'imce_mode' => '0',
+            ),
+            'source_reference' => array(
+              'autocomplete' => '0',
+            ),
+          ),
+          'progress_indicator' => 'throbber',
+        ),
+        'type' => 'file_generic',
+        'weight' => '43',
+      ),
+    ),
+  );
+
   // Exported field: 'node-challenge-field_category'.
   $fields['node-challenge-field_category'] = array(
     'field_config' => array(
@@ -434,6 +532,7 @@ function fe_challenge_field_default_fields() {
 
   // Translatables
   // Included for use with string extractors like potx.
+  t('Attachments');
   t('Body');
   t('Category');
   t('Challenge Image');
