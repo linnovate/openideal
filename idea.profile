@@ -179,10 +179,11 @@ function idea_dummy_content() {
   Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.
   At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.";
   $challenge->body[LANGUAGE_NONE][0]['format'] = filter_default_format();
-  $challenge->field_dates[LANGUAGE_NONE][0]['value'] = date('Y-m-d H:i:s', time() - 604800);
+	$challenge->field_dates[LANGUAGE_NONE][0]['value'] = date('Y-m-d H:i:s', time() - 604800);
   $challenge->field_dates[LANGUAGE_NONE][0]['value2'] = date('Y-m-d H:i:s', time() + 30 * 86400);
 	$challenge->promote = 1;
-	$challenge->field_moderator['target_id'] = 4;
+	$challenge->field_moderator[LANGUAGE_NONE][0]['target_id'] = 4;
+	$challenge->field_category[LANGUAGE_NONE][0]['tid'] = 1;
   node_save($challenge);
 
   $picture_result = drupal_http_request($base_url . '/profiles/idea/images/challenge1.jpg');
@@ -209,7 +210,9 @@ function idea_dummy_content() {
   $challenge->body[LANGUAGE_NONE][0]['format'] = filter_default_format();
   $challenge->field_dates[LANGUAGE_NONE][0]['value'] = date('Y-m-d H:i:s', time() - 604800);
   $challenge->field_dates[LANGUAGE_NONE][0]['value2'] = date('Y-m-d H:i:s', time() + 30 * 86400);
-
+	$challenge->field_moderator[LANGUAGE_NONE][0]['target_id'] = 4;
+	$challenge->field_category[LANGUAGE_NONE][0]['tid'] = 1;
+	
   node_save($challenge);
 
   $picture_result = drupal_http_request($base_url . '/profiles/idea/images/idea1.jpg');
@@ -236,7 +239,9 @@ function idea_dummy_content() {
   $challenge->body[LANGUAGE_NONE][0]['format'] = filter_default_format();
   $challenge->field_dates[LANGUAGE_NONE][0]['value'] = date('Y-m-d H:i:s', time() - 604800);
   $challenge->field_dates[LANGUAGE_NONE][0]['value2'] = date('Y-m-d H:i:s', time() + 30 * 86400);
-
+	$challenge->field_moderator[LANGUAGE_NONE][0]['target_id'] = 4;
+	$challenge->field_category[LANGUAGE_NONE][0]['tid'] = 1;
+	
   node_save($challenge);
 
   $picture_result = drupal_http_request($base_url . '/profiles/idea/images/challenge3.jpg');
@@ -263,7 +268,9 @@ function idea_dummy_content() {
   $challenge->body[LANGUAGE_NONE][0]['format'] = filter_default_format();
   $challenge->field_dates[LANGUAGE_NONE][0]['value'] = date('Y-m-d H:i:s', time() - 604800);
   $challenge->field_dates[LANGUAGE_NONE][0]['value2'] = date('Y-m-d H:i:s', time() + 30 * 86400);
-
+	$challenge->field_moderator[LANGUAGE_NONE][0]['target_id'] = 4;
+	$challenge->field_category[LANGUAGE_NONE][0]['tid'] = 1;
+	
   node_save($challenge);
 
   $picture_result = drupal_http_request($base_url . '/profiles/idea/images/challenge4.jpg');
@@ -325,6 +332,45 @@ function idea_dummy_content() {
   $idea->field_idea_image = array(LANGUAGE_NONE => array('0' => (array)$file));
 
   node_save($idea);
+
+  // News
+  // First news
+  $news = new stdClass();
+  $news->type = 'news';
+  node_object_prepare($news);
+
+  $news->title = 'First news';
+  $news->uid = 1;
+  $news->language = LANGUAGE_NONE;
+  $news->created = time() - 3600;
+  $news->body[LANGUAGE_NONE][0]['value'] = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr,
+  sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.
+  At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+  Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.
+  At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.";
+  $news->body[LANGUAGE_NONE][0]['format'] = filter_default_format();
+
+  node_save($news);
+  
+  db_insert('nodequeue_nodes')
+    ->fields(array(
+      'qid' => 1,
+      'sqid' => 1,
+      'nid' => 5,
+      'position' => 1,
+      'timestamp' => time() - 3600,
+    ))
+    ->execute();
+		
+	db_insert('nodequeue_nodes')
+    ->fields(array(
+      'qid' => 1,
+      'sqid' => 1,
+      'nid' => 6,
+      'position' => 2,
+      'timestamp' => time() - 3600,
+    ))
+    ->execute();
 
   variable_del('idea_add_dummy_content');
 }
