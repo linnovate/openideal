@@ -145,8 +145,13 @@ function _ideal_blocks_idea_stats() {
       ->condition('nid', $nid)
       ->execute()
       ->fetchAssoc();
-    foreach ($result as $record) {
-      $view_count = $record;
+    if ($result) {
+      foreach ($result as $record) {
+        $view_count = $record;
+      }
+    }
+    else {
+      $view_count = 0;
     }
 
     // Hardcode phase for now.
