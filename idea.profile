@@ -8,17 +8,17 @@
 function idea_form_install_configure_form_alter(&$form, $form_state) {
   drupal_get_messages('status');
   drupal_get_messages('warning');
-  
+
   // Pre-populate the site name with the server name.
   $form['site_information']['site_name']['#default_value'] = $_SERVER['SERVER_NAME'];
-  
+
   // Set reasonable defaults for site configuration form
   $form['site_information']['site_name']['#default_value'] = 'Open ideaL';
-  $form['site_information']['site_mail']['#default_value'] = 'admin@'. $_SERVER['HTTP_HOST']; 
-  $form['site_information']['site_frontpage']['#default_value'] = 'home'; 
+  $form['site_information']['site_mail']['#default_value'] = 'admin@'. $_SERVER['HTTP_HOST'];
+  $form['site_information']['site_frontpage']['#default_value'] = 'home';
   $form['admin_account']['account']['name']['#default_value'] = 'admin';
   $form['admin_account']['account']['mail']['#default_value'] = 'admin@'. $_SERVER['HTTP_HOST'];
-  
+
 }
 
 /**
@@ -62,7 +62,7 @@ function idea_install_tasks($install_state) {
 function idea_install_tasks_alter(&$tasks, $install_state) {
   unset($tasks['install_select_profile']);
   unset($tasks['install_select_locale']);
-    
+
   // Add a welcome page.
   $new_task['install_welcome'] = array(
     'display' => TRUE,
@@ -163,6 +163,20 @@ function idea_taxonomy() {
 function idea_dummy_content() {
 
   global $base_url;
+  $accounts = array(
+    1 => user_load(1),
+    2 => user_load(2),
+    3 => user_load(3),
+    4 => user_load(4),
+    5 => user_load(5),
+    6 => user_load(6),
+  );
+
+  // Create messages for users.
+  foreach ($accounts as $account) {
+    $message = message_create('new_user', array(), $account);
+    $message->save();
+  }
 
   // First challenge
   $challenge = new stdClass();
@@ -170,7 +184,7 @@ function idea_dummy_content() {
   node_object_prepare($challenge);
 
   $challenge->title = 'The first challenge';
-  $challenge->uid = 1;
+  $challenge->uid = 3;
   $challenge->language = LANGUAGE_NONE;
   $challenge->created = time() - 7200;
   $challenge->body[LANGUAGE_NONE][0]['value'] = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr,
@@ -192,14 +206,19 @@ function idea_dummy_content() {
   $challenge->field_challenge_image = array(LANGUAGE_NONE => array('0' => (array)$file));
 
   node_save($challenge);
-  
+
+  // Create message for challenge.
+  $message = message_create('new_challenge', array(), $accounts[3]);
+  $message->field_challenge[LANGUAGE_NONE][0]['target_id'] = $challenge->nid;
+  $message->save();
+
 	// Second challenge
 	$challenge = new stdClass();
   $challenge->type = 'challenge';
   node_object_prepare($challenge);
 
   $challenge->title = 'The second challenge';
-  $challenge->uid = 1;
+  $challenge->uid = 4;
   $challenge->language = LANGUAGE_NONE;
   $challenge->created = time() - 7200;
   $challenge->body[LANGUAGE_NONE][0]['value'] = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr,
@@ -212,7 +231,7 @@ function idea_dummy_content() {
   $challenge->field_dates[LANGUAGE_NONE][0]['value2'] = date('Y-m-d H:i:s', time() + 30 * 86400);
 	$challenge->field_moderator[LANGUAGE_NONE][0]['target_id'] = 4;
 	$challenge->field_category[LANGUAGE_NONE][0]['tid'] = 1;
-	
+
   node_save($challenge);
 
   $picture_result = drupal_http_request($base_url . '/profiles/idea/images/idea1.jpg');
@@ -222,13 +241,18 @@ function idea_dummy_content() {
 
   node_save($challenge);
 
+  // Create message for challenge.
+  $message = message_create('new_challenge', array(), $accounts[4]);
+  $message->field_challenge[LANGUAGE_NONE][0]['target_id'] = $challenge->nid;
+  $message->save();
+
   	// Third challenge
 	$challenge = new stdClass();
   $challenge->type = 'challenge';
   node_object_prepare($challenge);
 
   $challenge->title = 'The third challenge';
-  $challenge->uid = 1;
+  $challenge->uid = 2;
   $challenge->language = LANGUAGE_NONE;
   $challenge->created = time() - 7200;
   $challenge->body[LANGUAGE_NONE][0]['value'] = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr,
@@ -241,7 +265,7 @@ function idea_dummy_content() {
   $challenge->field_dates[LANGUAGE_NONE][0]['value2'] = date('Y-m-d H:i:s', time() + 30 * 86400);
 	$challenge->field_moderator[LANGUAGE_NONE][0]['target_id'] = 4;
 	$challenge->field_category[LANGUAGE_NONE][0]['tid'] = 1;
-	
+
   node_save($challenge);
 
   $picture_result = drupal_http_request($base_url . '/profiles/idea/images/challenge3.jpg');
@@ -250,14 +274,19 @@ function idea_dummy_content() {
   $challenge->field_challenge_image = array(LANGUAGE_NONE => array('0' => (array)$file));
 
   node_save($challenge);
-  
+
+  // Create message for challenge.
+  $message = message_create('new_challenge', array(), $accounts[2]);
+  $message->field_challenge[LANGUAGE_NONE][0]['target_id'] = $challenge->nid;
+  $message->save();
+
   // Fourth challenge
 	$challenge = new stdClass();
   $challenge->type = 'challenge';
   node_object_prepare($challenge);
 
   $challenge->title = 'The fourth challenge';
-  $challenge->uid = 1;
+  $challenge->uid = 5;
   $challenge->language = LANGUAGE_NONE;
   $challenge->created = time() - 7200;
   $challenge->body[LANGUAGE_NONE][0]['value'] = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr,
@@ -270,7 +299,7 @@ function idea_dummy_content() {
   $challenge->field_dates[LANGUAGE_NONE][0]['value2'] = date('Y-m-d H:i:s', time() + 30 * 86400);
 	$challenge->field_moderator[LANGUAGE_NONE][0]['target_id'] = 4;
 	$challenge->field_category[LANGUAGE_NONE][0]['tid'] = 1;
-	
+
   node_save($challenge);
 
   $picture_result = drupal_http_request($base_url . '/profiles/idea/images/challenge4.jpg');
@@ -280,6 +309,11 @@ function idea_dummy_content() {
 
   node_save($challenge);
 
+  // Create message for challenge.
+  $message = message_create('new_challenge', array(), $accounts[5]);
+  $message->field_challenge[LANGUAGE_NONE][0]['target_id'] = $challenge->nid;
+  $message->save();
+
   // Create dummy ideas
   // First idea
   $idea = new stdClass();
@@ -287,7 +321,7 @@ function idea_dummy_content() {
   node_object_prepare($idea);
 
   $idea->title = 'A very good idea';
-  $idea->uid = 1;
+  $idea->uid = 6;
   $idea->language = LANGUAGE_NONE;
   $idea->created = time() - 3600;
   $idea->body[LANGUAGE_NONE][0]['value'] = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr,
@@ -296,7 +330,7 @@ function idea_dummy_content() {
   Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.
   At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.";
   $idea->body[LANGUAGE_NONE][0]['format'] = filter_default_format();
-  $idea->field_challenge[LANGUAGE_NONE][0]['target_id'] = $challenge->nid;
+  $idea->field_challenge_ref[LANGUAGE_NONE][0]['target_id'] = $challenge->nid;
 
   node_save($idea);
 
@@ -306,14 +340,20 @@ function idea_dummy_content() {
   $idea->field_idea_image = array(LANGUAGE_NONE => array('0' => (array)$file));
 
   node_save($idea);
-  
+
+  // Create message for idea.
+  $message = message_create('new_idea', array(), $accounts[6]);
+  $message->field_posted_idea[LANGUAGE_NONE][0]['target_id'] = $idea->nid;
+  $message->field_challenge[LANGUAGE_NONE][0]['target_id'] = $idea->field_challenge_ref[LANGUAGE_NONE][0]['target_id'];
+  $message->save();
+
   // Second idea
   $idea = new stdClass();
   $idea->type = 'idea';
   node_object_prepare($idea);
 
   $idea->title = 'An even better idea';
-  $idea->uid = 1;
+  $idea->uid = 4;
   $idea->language = LANGUAGE_NONE;
   $idea->created = time() - 3600;
   $idea->body[LANGUAGE_NONE][0]['value'] = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr,
@@ -322,7 +362,7 @@ function idea_dummy_content() {
   Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.
   At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.";
   $idea->body[LANGUAGE_NONE][0]['format'] = filter_default_format();
-  $idea->field_challenge[LANGUAGE_NONE][0]['target_id'] = $challenge->nid;
+  $idea->field_challenge_ref[LANGUAGE_NONE][0]['target_id'] = $challenge->nid;
 
   node_save($idea);
 
@@ -332,6 +372,12 @@ function idea_dummy_content() {
   $idea->field_idea_image = array(LANGUAGE_NONE => array('0' => (array)$file));
 
   node_save($idea);
+
+  // Create message for idea.
+  $message = message_create('new_idea', array(), $accounts[4]);
+  $message->field_posted_idea[LANGUAGE_NONE][0]['target_id'] = $idea->nid;
+  $message->field_challenge[LANGUAGE_NONE][0]['target_id'] = $idea->field_challenge_ref[LANGUAGE_NONE][0]['target_id'];
+  $message->save();
 
   // News
   // First news
@@ -351,7 +397,114 @@ function idea_dummy_content() {
   $news->body[LANGUAGE_NONE][0]['format'] = filter_default_format();
 
   node_save($news);
-  
+
+  // Second news
+  $news = new stdClass();
+  $news->type = 'news';
+  node_object_prepare($news);
+
+  $news->title = 'Second news';
+  $news->uid = 1;
+  $news->language = LANGUAGE_NONE;
+  $news->created = time() - 3600;
+  $news->body[LANGUAGE_NONE][0]['value'] = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr,
+  sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.
+  At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+  Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.
+  At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.";
+  $news->body[LANGUAGE_NONE][0]['format'] = filter_default_format();
+
+  node_save($news);
+
+  // Third news
+  $news = new stdClass();
+  $news->type = 'news';
+  node_object_prepare($news);
+
+  $news->title = 'Third news';
+  $news->uid = 1;
+  $news->language = LANGUAGE_NONE;
+  $news->created = time() - 3600;
+  $news->body[LANGUAGE_NONE][0]['value'] = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr,
+  sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.
+  At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+  Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.
+  At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.";
+  $news->body[LANGUAGE_NONE][0]['format'] = filter_default_format();
+
+  node_save($news);
+
+  // Dummy comments.
+  $comment = new stdClass();
+  $comment->nid = 5;
+  $comment->cid = 0;
+  $comment->pid = 0;
+  $comment->uid = $accounts[2]->uid;
+  $comment->mail = $accounts[2]->mail;
+  $comment->name = $accounts[2]->name;
+  $comment->thread = '01/';
+  $comment->created = time() - 1800;
+  $comment->is_anonymous = 0;
+  $comment->homepage = '';
+  $comment->status = COMMENT_PUBLISHED;
+  $comment->language = LANGUAGE_NONE;
+  $comment->subject = 'First comment';
+  $comment->comment_body[$comment->language][0]['value'] = 'Comment body text'; // Everything here is pretty much like with a node
+  $comment->comment_body[$comment->language][0]['format'] = 'filtered_html';
+  comment_save($comment);
+
+  // Create message for comment.
+  $message = message_create('new_comment', array(), $accounts[2]);
+  $message->field_comment[LANGUAGE_NONE][0]['target_id'] = $comment->cid;
+  $message->save();
+
+  $comment = new stdClass();
+  $comment->nid = 6;
+  $comment->cid = 0;
+  $comment->pid = 0;
+  $comment->uid = $accounts[3]->uid;
+  $comment->mail = $accounts[3]->mail;
+  $comment->name = $accounts[3]->name;
+  $comment->thread = '01/';
+  $comment->created = time() - 1800;
+  $comment->is_anonymous = 0;
+  $comment->homepage = '';
+  $comment->status = COMMENT_PUBLISHED;
+  $comment->language = LANGUAGE_NONE;
+  $comment->subject = 'Second comment';
+  $comment->comment_body[$comment->language][0]['value'] = 'Comment body text'; // Everything here is pretty much like with a node
+  $comment->comment_body[$comment->language][0]['format'] = 'filtered_html';
+  comment_save($comment);
+
+  // Create message for comment.
+  $message = message_create('new_comment', array(), $accounts[3]);
+  $message->field_comment[LANGUAGE_NONE][0]['target_id'] = $comment->cid;
+  $message->save();
+
+  $comment = new stdClass();
+  $comment->nid = 7;
+  $comment->cid = 0;
+  $comment->pid = 0;
+  $comment->uid = $accounts[4]->uid;
+  $comment->mail = $accounts[4]->mail;
+  $comment->name = $accounts[4]->name;
+  $comment->thread = '01/';
+  $comment->created = time() - 1800;
+  $comment->is_anonymous = 0;
+  $comment->homepage = '';
+  $comment->status = COMMENT_PUBLISHED;
+  $comment->language = LANGUAGE_NONE;
+  $comment->subject = 'Third comment';
+  $comment->comment_body[$comment->language][0]['value'] = 'Comment body text'; // Everything here is pretty much like with a node
+  $comment->comment_body[$comment->language][0]['format'] = 'filtered_html';
+  comment_save($comment);
+
+  // Create message for comment.
+  $message = message_create('new_comment', array(), $accounts[4]);
+  $message->field_comment[LANGUAGE_NONE][0]['target_id'] = $comment->cid;
+  $message->save();
+
+  // Add nodes to Head to Head nodequeue.
   db_insert('nodequeue_nodes')
     ->fields(array(
       'qid' => 1,
@@ -361,7 +514,7 @@ function idea_dummy_content() {
       'timestamp' => time() - 3600,
     ))
     ->execute();
-		
+
 	db_insert('nodequeue_nodes')
     ->fields(array(
       'qid' => 1,
