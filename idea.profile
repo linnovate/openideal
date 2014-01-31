@@ -185,6 +185,7 @@ function idea_dummy_content() {
 
   $challenge->title = 'The first challenge';
   $challenge->uid = 3;
+  $challenge->promote = 1;
   $challenge->language = LANGUAGE_NONE;
   $challenge->created = time() - 7200;
   $challenge->body[LANGUAGE_NONE][0]['value'] = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr,
@@ -193,17 +194,25 @@ function idea_dummy_content() {
   Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.
   At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.";
   $challenge->body[LANGUAGE_NONE][0]['format'] = filter_default_format();
-	$challenge->field_dates[LANGUAGE_NONE][0]['value'] = date('Y-m-d H:i:s', time() - 604800);
+  $challenge->field_dates[LANGUAGE_NONE][0]['value'] = date('Y-m-d H:i:s', time() - 604800);
   $challenge->field_dates[LANGUAGE_NONE][0]['value2'] = date('Y-m-d H:i:s', time() + 30 * 86400);
-	$challenge->promote = 1;
-	$challenge->field_moderator[LANGUAGE_NONE][0]['target_id'] = 4;
-	$challenge->field_category[LANGUAGE_NONE][0]['tid'] = 1;
+  $challenge->field_moderator[LANGUAGE_NONE][0]['target_id'] = 4;
+  $challenge->field_category[LANGUAGE_NONE][0]['tid'] = 1;
   node_save($challenge);
 
-  $picture_result = drupal_http_request($base_url . '/profiles/idea/images/challenge1.jpg');
+  $picture_result = drupal_http_request($base_url . '/profiles/idea/files/challenge1.jpg');
   $file = file_save_data($picture_result->data, 'public://challenge1.jpg', FILE_EXISTS_RENAME);
   file_usage_add($file, 'node', 'node', $challenge->nid);
   $challenge->field_challenge_image = array(LANGUAGE_NONE => array('0' => (array)$file));
+
+  $file_result = drupal_http_request($base_url . '/profiles/idea/files/challenge.txt');
+  $file = file_save_data($file_result->data, 'public://challenge.txt', FILE_EXISTS_RENAME);
+  file_usage_add($file, 'node', 'node', $challenge->nid);
+  $challenge->field_attachments[LANGUAGE_NONE][] = array(
+    'fid' => $file->fid,
+    'display' => 1,
+    'description' => '',
+  );
 
   node_save($challenge);
 
@@ -234,7 +243,7 @@ function idea_dummy_content() {
 
   node_save($challenge);
 
-  $picture_result = drupal_http_request($base_url . '/profiles/idea/images/idea1.jpg');
+  $picture_result = drupal_http_request($base_url . '/profiles/idea/files/idea1.jpg');
   $file = file_save_data($picture_result->data, 'public://challenge2.jpg', FILE_EXISTS_RENAME);
   file_usage_add($file, 'node', 'node', $challenge->nid);
   $challenge->field_challenge_image = array(LANGUAGE_NONE => array('0' => (array)$file));
@@ -268,7 +277,7 @@ function idea_dummy_content() {
 
   node_save($challenge);
 
-  $picture_result = drupal_http_request($base_url . '/profiles/idea/images/challenge3.jpg');
+  $picture_result = drupal_http_request($base_url . '/profiles/idea/files/challenge3.jpg');
   $file = file_save_data($picture_result->data, 'public://challenge3.jpg', FILE_EXISTS_RENAME);
   file_usage_add($file, 'node', 'node', $challenge->nid);
   $challenge->field_challenge_image = array(LANGUAGE_NONE => array('0' => (array)$file));
@@ -302,7 +311,7 @@ function idea_dummy_content() {
 
   node_save($challenge);
 
-  $picture_result = drupal_http_request($base_url . '/profiles/idea/images/challenge4.jpg');
+  $picture_result = drupal_http_request($base_url . '/profiles/idea/files/challenge4.jpg');
   $file = file_save_data($picture_result->data, 'public://challenge4.jpg', FILE_EXISTS_RENAME);
   file_usage_add($file, 'node', 'node', $challenge->nid);
   $challenge->field_challenge_image = array(LANGUAGE_NONE => array('0' => (array)$file));
@@ -334,7 +343,7 @@ function idea_dummy_content() {
 
   node_save($idea);
 
-  $picture_result = drupal_http_request($base_url . '/profiles/idea/images/idea1.jpg');
+  $picture_result = drupal_http_request($base_url . '/profiles/idea/files/idea1.jpg');
   $file = file_save_data($picture_result->data, 'public://idea1.jpg', FILE_EXISTS_RENAME);
   file_usage_add($file, 'node', 'node', $idea->nid);
   $idea->field_idea_image = array(LANGUAGE_NONE => array('0' => (array)$file));
@@ -354,6 +363,7 @@ function idea_dummy_content() {
 
   $idea->title = 'An even better idea';
   $idea->uid = 4;
+  $idea->promote = 1;
   $idea->language = LANGUAGE_NONE;
   $idea->created = time() - 3600;
   $idea->body[LANGUAGE_NONE][0]['value'] = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr,
@@ -366,7 +376,7 @@ function idea_dummy_content() {
 
   node_save($idea);
 
-  $picture_result = drupal_http_request($base_url . '/profiles/idea/images/idea2.jpg');
+  $picture_result = drupal_http_request($base_url . '/profiles/idea/files/idea2.jpg');
   $file = file_save_data($picture_result->data, 'public://idea2.jpg', FILE_EXISTS_RENAME);
   file_usage_add($file, 'node', 'node', $idea->nid);
   $idea->field_idea_image = array(LANGUAGE_NONE => array('0' => (array)$file));
@@ -423,6 +433,7 @@ function idea_dummy_content() {
 
   $news->title = 'Third news';
   $news->uid = 1;
+  $news->promote = 1;
   $news->language = LANGUAGE_NONE;
   $news->created = time() - 3600;
   $news->body[LANGUAGE_NONE][0]['value'] = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr,
@@ -578,7 +589,7 @@ function idea_add_user_picture($account) {
   if ($account->uid) {
     $picture_directory =  file_default_scheme() . '://' . variable_get('user_picture_path', 'pictures');
     if(file_prepare_directory($picture_directory, FILE_CREATE_DIRECTORY)){
-      $picture_result = drupal_http_request($base_url . '/profiles/idea/images/users/' . drupal_strtolower(str_replace(' ', '_', $account->name)) . '.jpg');
+      $picture_result = drupal_http_request($base_url . '/profiles/idea/files/users/' . drupal_strtolower(str_replace(' ', '_', $account->name)) . '.jpg');
       $picture_path = file_stream_wrapper_uri_normalize($picture_directory . '/picture-' . $account->uid . '-' . REQUEST_TIME . '.jpg');
       $picture_file = file_save_data($picture_result->data, $picture_path, FILE_EXISTS_REPLACE);
 
