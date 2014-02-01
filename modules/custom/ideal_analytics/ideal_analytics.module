@@ -53,7 +53,7 @@ function ideal_analytics_analytics_dashboard() {
   // Chart for Nodes by category.
   //==================================
   $voc = taxonomy_vocabulary_machine_name_load('categories');
-  $tree = taxonomy_get_tree($voc->vid);
+  $tree = !empty($voc) && is_object($voc) ? taxonomy_get_tree($voc->vid) : array();
   $header = array();
   $terms = array();
   foreach ($tree as $term) {

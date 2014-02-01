@@ -390,5 +390,36 @@ function fe_idea_default_rules_configuration() {
       ]
     }
   }');
+
+  $items['rules_idea_comment_got_new_vote'] = entity_import('rules_config', '{ "rules_idea_comment_got_new_vote" : {
+    "LABEL" : "Idea comment got new vote",
+    "PLUGIN" : "reaction rule",
+    "REQUIRES" : [ "userpoints_rules", "voting_rules" ],
+    "ON" : [ "voting_rules_insert_comment" ],
+    "DO" : [
+      { "userpoints_action_grant_points" : {
+          "user" : [ "comment:author" ],
+          "points" : "10",
+          "tid" : "0",
+          "entity" : [ "" ],
+          "operation" : "Insert",
+          "display" : 1,
+          "moderate" : "default"
+        }
+      },
+      { "userpoints_action_grant_points" : {
+          "user" : [ "vote:user" ],
+          "points" : "10",
+          "tid" : "0",
+          "entity" : [ "" ],
+          "operation" : "Insert",
+          "display" : 1,
+          "moderate" : "default"
+        }
+      }
+    ]
+  }
+}');
+  
   return $items;
 }
