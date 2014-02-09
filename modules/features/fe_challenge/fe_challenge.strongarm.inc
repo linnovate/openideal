@@ -21,7 +21,7 @@ function fe_challenge_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'comment_challenge';
-  $strongarm->value = '1';
+  $strongarm->value = '2';
   $export['comment_challenge'] = $strongarm;
 
   $strongarm = new stdClass();
@@ -63,7 +63,7 @@ function fe_challenge_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'comment_preview_challenge';
-  $strongarm->value = 0;
+  $strongarm->value = '0';
   $export['comment_preview_challenge'] = $strongarm;
 
   $strongarm = new stdClass();

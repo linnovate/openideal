@@ -213,7 +213,7 @@ projects[hashtags][subdir] = contrib
 projects[mentions][version] = "1.x-dev"
 projects[mentions][subdir] = contrib
 
-projects[mentions][version] = "7.x-1.4"
+projects[mentions][version] = "7.x-1.4	"
 projects[mentions][subdir] = contrib
 
 ; Themes
