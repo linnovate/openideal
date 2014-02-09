@@ -10,6 +10,67 @@
 function fe_idea_field_default_fields() {
   $fields = array();
 
+  // Exported field: 'comment-comment_node_idea-field_vote'.
+  $fields['comment-comment_node_idea-field_vote'] = array(
+    'field_config' => array(
+      'active' => '1',
+      'cardinality' => '1',
+      'deleted' => '0',
+      'entity_types' => array(),
+      'field_name' => 'field_vote',
+      'field_permissions' => array(
+        'type' => '0',
+      ),
+      'foreign keys' => array(),
+      'indexes' => array(),
+      'locked' => '0',
+      'module' => 'vud_field',
+      'settings' => array(
+        'profile2_private' => FALSE,
+        'votingapi_tag' => 'vote',
+        'vud_widget' => 'updown',
+      ),
+      'translatable' => '0',
+      'type' => 'vud_field',
+    ),
+    'field_instance' => array(
+      'bundle' => 'comment_node_idea',
+      'default_value' => array(
+        0 => array(
+          'vud_widget' => 'updown',
+          'votingapi_tag' => 'vote',
+        ),
+      ),
+      'deleted' => '0',
+      'description' => '',
+      'display' => array(
+        'default' => array(
+          'label' => 'above',
+          'module' => 'vud_field',
+          'settings' => array(),
+          'type' => 'default',
+          'weight' => 1,
+        ),
+      ),
+      'entity_type' => 'comment',
+      'field_name' => 'field_vote',
+      'label' => 'Vote',
+      'required' => 0,
+      'settings' => array(
+        'user_register_form' => FALSE,
+        'votingapi_tag' => 'vote',
+        'vud_widget' => 'alternate',
+      ),
+      'widget' => array(
+        'active' => 0,
+        'module' => 'vud_field',
+        'settings' => array(),
+        'type' => 'vud_field_default_widget',
+        'weight' => '2',
+      ),
+    ),
+  );
+
   // Exported field: 'node-idea-body'.
   $fields['node-idea-body'] = array(
     'field_config' => array(
@@ -82,6 +143,104 @@ function fe_idea_field_default_fields() {
         ),
         'type' => 'text_textarea_with_summary',
         'weight' => '4',
+      ),
+    ),
+  );
+
+  // Exported field: 'node-idea-field_attachments'.
+  $fields['node-idea-field_attachments'] = array(
+    'field_config' => array(
+      'active' => '1',
+      'cardinality' => '5',
+      'deleted' => '0',
+      'entity_types' => array(),
+      'field_name' => 'field_attachments',
+      'field_permissions' => array(
+        'type' => '0',
+      ),
+      'foreign keys' => array(
+        'fid' => array(
+          'columns' => array(
+            'fid' => 'fid',
+          ),
+          'table' => 'file_managed',
+        ),
+      ),
+      'indexes' => array(
+        'fid' => array(
+          0 => 'fid',
+        ),
+      ),
+      'locked' => '0',
+      'module' => 'file',
+      'settings' => array(
+        'display_default' => 0,
+        'display_field' => 0,
+        'uri_scheme' => 'public',
+      ),
+      'translatable' => '0',
+      'type' => 'file',
+    ),
+    'field_instance' => array(
+      'bundle' => 'idea',
+      'deleted' => '0',
+      'description' => '',
+      'display' => array(
+        'default' => array(
+          'label' => 'above',
+          'module' => 'file',
+          'settings' => array(),
+          'type' => 'file_default',
+          'weight' => 12,
+        ),
+        'teaser' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+      ),
+      'entity_type' => 'node',
+      'field_name' => 'field_attachments',
+      'label' => 'Attachments',
+      'required' => 0,
+      'settings' => array(
+        'description_field' => 0,
+        'file_directory' => '',
+        'file_extensions' => 'txt pdf doc docx ppt pptx',
+        'max_filesize' => '',
+        'user_register_form' => FALSE,
+      ),
+      'widget' => array(
+        'active' => 1,
+        'module' => 'file',
+        'settings' => array(
+          'dragdropfile_enabled' => 1,
+          'filefield_sources' => array(
+            'filefield_sources' => array(
+              'attach' => 0,
+              'clipboard' => 0,
+              'imce' => 0,
+              'reference' => 0,
+              'remote' => 0,
+              'upload' => 'upload',
+            ),
+            'source_attach' => array(
+              'absolute' => '0',
+              'attach_mode' => 'move',
+              'path' => 'file_attach',
+            ),
+            'source_imce' => array(
+              'imce_mode' => '0',
+            ),
+            'source_reference' => array(
+              'autocomplete' => '0',
+            ),
+          ),
+          'progress_indicator' => 'throbber',
+        ),
+        'type' => 'file_generic',
+        'weight' => '15',
       ),
     ),
   );
@@ -524,7 +683,7 @@ function fe_idea_field_default_fields() {
   $fields['node-idea-field_idea_image'] = array(
     'field_config' => array(
       'active' => '1',
-      'cardinality' => '1',
+      'cardinality' => '5',
       'deleted' => '0',
       'entity_types' => array(),
       'field_name' => 'field_idea_image',
@@ -918,69 +1077,9 @@ function fe_idea_field_default_fields() {
     ),
   );
 
-  // Exported field: 'comment-comment_node_idea-field_vote'.
-  $fields['comment-comment_node_idea-field_vote'] = array(
-    'field_config' => array(
-      'active' => '1',
-      'cardinality' => '1',
-      'deleted' => '0',
-      'entity_types' => array(),
-      'field_name' => 'field_vote',
-      'field_permissions' => array(
-        'type' => '0',
-      ),
-      'foreign keys' => array(),
-      'indexes' => array(),
-      'locked' => '0',
-      'module' => 'vud_field',
-      'settings' => array(
-        'profile2_private' => FALSE,
-        'votingapi_tag' => 'vote',
-        'vud_widget' => 'updown',
-      ),
-      'translatable' => '0',
-      'type' => 'vud_field',
-    ),
-    'field_instance' => array(
-      'bundle' => 'comment_node_idea',
-      'default_value' => array(
-        0 => array(
-          'vud_widget' => 'updown',
-          'votingapi_tag' => 'vote',
-        ),
-      ),
-      'deleted' => '0',
-      'description' => '',
-      'display' => array(
-        'default' => array(
-          'label' => 'above',
-          'module' => 'vud_field',
-          'settings' => array(),
-          'type' => 'default',
-          'weight' => 1,
-        ),
-      ),
-      'entity_type' => 'comment',
-      'field_name' => 'field_vote',
-      'label' => 'Vote',
-      'required' => 0,
-      'settings' => array(
-        'user_register_form' => FALSE,
-        'votingapi_tag' => 'vote',
-        'vud_widget' => 'alternate',
-      ),
-      'widget' => array(
-        'active' => 0,
-        'module' => 'vud_field',
-        'settings' => array(),
-        'type' => 'vud_field_default_widget',
-        'weight' => '2',
-      ),
-    ),
-  );
-
   // Translatables
   // Included for use with string extractors like potx.
+  t('Attachments');
   t('Blast Idea');
   t('Buzz Idea');
   t('Category');
