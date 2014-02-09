@@ -447,7 +447,7 @@ function fe_pages_views_default_views() {
   $handler->display->display_options['fields']['picture']['label'] = '';
   $handler->display->display_options['fields']['picture']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['picture']['image_style'] = 'avatar_45_45';
-  /* Field: Content: Vote */
+  /* Field: Field: Vote */
   $handler->display->display_options['fields']['field_vote']['id'] = 'field_vote';
   $handler->display->display_options['fields']['field_vote']['table'] = 'field_data_field_vote';
   $handler->display->display_options['fields']['field_vote']['field'] = 'field_vote';
