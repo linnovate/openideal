@@ -220,3 +220,6 @@ projects[bootstrap][subdir] = ""
 
 projects[socrates][version] = "1.x-dev"
 projects[socrates][subdir] = ""
+
+projects[ember][version] = "2.x"
+projects[ember][subdir] = ""

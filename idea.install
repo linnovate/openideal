@@ -88,7 +88,7 @@ function idea_install() {
   // Set admin and default theme
   $enable = array(
     'theme_default' => 'socrates',
-    'admin_theme' => 'seven',
+    'admin_theme' => 'ember',
   );
   theme_enable($enable);
 
@@ -103,7 +103,7 @@ function idea_install() {
 
   // Enable some openideal blocks.
   $default_theme = variable_get('theme_default', 'socrates');
-  $admin_theme = 'seven';
+  $admin_theme = 'ember';
   $blocks = array(
     array(
       'module' => 'system',
@@ -463,9 +463,9 @@ function idea_install() {
   db_update('system')
     ->fields(array('status' => 1))
     ->condition('type', 'theme')
-    ->condition('name', 'seven')
+    ->condition('name', 'ember')
     ->execute();
-  variable_set('admin_theme', 'seven');
+  variable_set('admin_theme', 'ember');
   variable_set('node_admin_theme', '1');
 
   // Default settings for HybridAuth.
