@@ -213,6 +213,9 @@ projects[hashtags][subdir] = contrib
 projects[mentions][version] = "1.x-dev"
 projects[mentions][subdir] = contrib
 
+projects[navbar][version] = "7.x-1.4	"
+projects[navbar][subdir] = contrib
+
 ; Themes
 
 projects[bootstrap][version] = "3.0"
@@ -220,3 +223,6 @@ projects[bootstrap][subdir] = ""
 
 projects[socrates][version] = "1.x-dev"
 projects[socrates][subdir] = ""
+
+projects[ember][version] = "2.x"
+projects[ember][subdir] = ""

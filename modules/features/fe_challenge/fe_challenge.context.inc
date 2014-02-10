@@ -16,25 +16,8 @@ function fe_challenge_context_default_contexts() {
   $context->name = 'challenge_front_page';
   $context->description = '';
   $context->tag = 'Challenge';
-  $context->conditions = array(
-    'path' => array(
-      'values' => array(
-        '<front>' => '<front>',
-      ),
-    ),
-  );
-  $context->reactions = array(
-    'block' => array(
-      'blocks' => array(
-        'ideal_challenge-challenge_add_idea' => array(
-          'module' => 'ideal_challenge',
-          'delta' => 'challenge_add_idea',
-          'region' => 'content',
-          'weight' => '-10',
-        ),
-      ),
-    ),
-  );
+  $context->conditions = array();
+  $context->reactions = array();
   $context->condition_mode = 0;
 
   // Translatables
@@ -48,28 +31,8 @@ function fe_challenge_context_default_contexts() {
   $context->name = 'on_challenge_page';
   $context->description = '';
   $context->tag = 'Challenge';
-  $context->conditions = array(
-    'node' => array(
-      'values' => array(
-        'challenge' => 'challenge',
-      ),
-      'options' => array(
-        'node_form' => '0',
-      ),
-    ),
-  );
-  $context->reactions = array(
-    'block' => array(
-      'blocks' => array(
-        'views-ideas_in_challenge-block' => array(
-          'module' => 'views',
-          'delta' => 'ideas_in_challenge-block',
-          'region' => 'content',
-          'weight' => '-10',
-        ),
-      ),
-    ),
-  );
+  $context->conditions = array();
+  $context->reactions = array();
   $context->condition_mode = 0;
 
   // Translatables
