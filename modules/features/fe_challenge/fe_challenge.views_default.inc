@@ -99,6 +99,7 @@ function fe_challenge_views_default_views() {
   $handler->display->display_options['fields']['title_1']['relationship'] = 'reverse_field_challenge_ref_node';
   $handler->display->display_options['fields']['title_1']['group_type'] = 'count';
   $handler->display->display_options['fields']['title_1']['label'] = '';
+  $handler->display->display_options['fields']['title_1']['exclude'] = TRUE;
   $handler->display->display_options['fields']['title_1']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['title_1']['link_to_node'] = FALSE;
   /* Field: Content: Dates */
@@ -118,7 +119,7 @@ function fe_challenge_views_default_views() {
   $handler->display->display_options['fields']['nothing']['table'] = 'views';
   $handler->display->display_options['fields']['nothing']['field'] = 'nothing';
   $handler->display->display_options['fields']['nothing']['label'] = '';
-  $handler->display->display_options['fields']['nothing']['alter']['text'] = '<div class="row">
+  $handler->display->display_options['fields']['nothing']['alter']['text'] = '<div class="row row-bottom-openideal">
         <div class="author col-md-4">
 	   <div class="picture">[picture]</div>
 	   <div class="name">[name]</div>
