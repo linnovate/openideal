@@ -127,7 +127,7 @@ function fe_idea_field_default_fields() {
       ),
       'entity_type' => 'node',
       'field_name' => 'body',
-      'label' => 'Your Idea',
+      'label' => 'Describe your idea',
       'required' => 0,
       'settings' => array(
         'display_summary' => 0,
@@ -1092,7 +1092,7 @@ function fe_idea_field_default_fields() {
   t('Please share you idea.');
   t('Social Buttons');
   t('Vote');
-  t('Your Idea');
+  t('Describe your idea');
 
   return $fields;
 }

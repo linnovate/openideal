@@ -1,0 +1,41 @@
+<?php
+/**
+ * Implementation of hook_form_FORM_ID_alter().
+ */
+function ideal_idea_form_alter(&$form, &$form_state, $form_id) {
+  if ($form_id == 'idea_node_form') {
+    $path = drupal_get_path('module', 'ideal_idea');
+    drupal_add_js($path . '/js/ideal_idea.js');
+    drupal_add_css($path . '/css/ideal_idea.css');
+
+    //add placeholders on fields
+    $form['title']['#attributes']['placeholder'] = $form['title']['#title'];
+    //dvm($form['field_attachments']['und']);
+
+    $form['body']['und'][0]['#attributes']['placeholder'] = $form['body']['und'][0]['#title'];
+    $form['field_category']['und']['#options']['_none'] = $form['field_category']['und']['#title'];
+
+    //change submit button
+    $form['actions']['submit']['#value'] = '<span>'.t('Submit your Idea').'</span>';
+    $form['actions']['submit']['#attributes'] = array('class' => array('submit-idea'));
+
+    //add back button
+    $form['actions']['cancel'] = array(
+      '#type' => 'button',
+      '#access' => TRUE,
+      '#value' => '<span>'.t('Back').'</span>',
+      '#weight' => 4,
+      '#attributes' => array('class' => array('go-back'), 'onClick' => 'history.go(-1);'),
+    );
+    //upload fields text
+    //for images
+    $form['field_idea_image']['und']['#file_upload_title'] = t('Drag & drop images or <a href="#" class="open-browse">browse</a> them from your computer');
+    $form['field_idea_image']['und']['#title'] = t('Add images here');
+    $form['field_idea_image']['und']['#file_upload_description'] = '';
+    //for documents
+    $form['field_attachments']['und']['#file_upload_title'] = t('Drag & drop pdf or text files or <a href="#" class="open-browse">browse</a> them from your computer');
+    $form['field_attachments']['und']['#title'] = t('Add documents here');
+    $form['field_attachments']['und']['#file_upload_description'] = '';
+  }
+}
+?>

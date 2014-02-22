@@ -1,0 +1,67 @@
+fieldset.filter-wrapper, form.node-idea-form label{
+	display: none;
+}
+.go-back span{
+	background-image: url('../img/go-back.png');
+	background-position: left center;
+	background-repeat: no-repeat;
+	padding-left: 15px;
+}
+.submit-idea.btn-primary{
+	background-color: #43ac6a;
+	background-image: url('../img/submit-idea.png');
+	background-position: 10px 7px;
+	background-repeat: no-repeat;
+	border-color:#2d844d;
+}
+.submit-idea span{
+	padding-left: 33px;
+}
+#idea-node-form .dragdropfile-processed:before {
+	content: "";
+	background:none;
+	border:0;
+}
+#idea-node-form .dragdropfile-processed{
+	outline: none;
+	background: #f3f3f3;
+	border: dashed 2px #c6c6c6;
+}
+#idea-node-form .dragdropfile-processed label{
+	display: block;
+}
+#idea-node-form .panel-default{
+	border:0;
+	-webkit-box-shadow:none;
+	box-shadow: none;
+	background: #f3f3f3;
+	text-align: center;
+}
+#idea-node-form .image-widget-data input.form-control, #idea-node-form .image-widget-data button, #idea-node-form .file-widget input.form-control, #idea-node-form .file-widget button{
+	display: none;
+}
+#idea-node-form .field-type-image, #idea-node-form .field-type-file{
+	width: 190px;
+}
+#idea-node-form  .panel-default>.panel-heading{
+	border:0;
+	background-image: url('../img/upload-images.png');
+	background-position: center top;
+	background-repeat: no-repeat;
+	padding-top: 38px;
+	margin-top: 25px;
+	text-align: center;
+}
+#idea-node-form .field-type-file .panel-default>.panel-heading{
+	background-image: url('../img/upload-docs.png');
+}
+#idea-node-form .panel-heading .panel-title{
+	font-size: 15px;
+}
+#idea-node-form .panel-default table thead, #idea-node-form .panel-default .tabledrag-toggle-weight{
+	display: none;
+}
+#idea-node-form .panel-default table td{
+	background:none;
+	border:0;
+}
