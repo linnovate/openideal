@@ -29,13 +29,45 @@ function ideal_idea_form_alter(&$form, &$form_state, $form_id) {
     );
     //upload fields text
     //for images
-    $form['field_idea_image']['und']['#file_upload_title'] = t('Drag & drop images or <a href="#" class="open-browse">browse</a> them from your computer');
-    $form['field_idea_image']['und']['#title'] = t('Add images here');
+    $form['field_idea_image']['und']['#file_upload_title'] = '<div class="title">'.t('Add images here').'</div>'.t('Drag & drop images or <a href="#" class="open-browse">browse</a> them from your computer');
+    $form['field_idea_image']['und']['#title'] = '';
     $form['field_idea_image']['und']['#file_upload_description'] = '';
     //for documents
-    $form['field_attachments']['und']['#file_upload_title'] = t('Drag & drop pdf or text files or <a href="#" class="open-browse">browse</a> them from your computer');
-    $form['field_attachments']['und']['#title'] = t('Add documents here');
+    $form['field_attachments']['und']['#file_upload_title'] = '<div class="title">'.t('Add documents here').'</div>'.t('Drag & drop pdf or text files or <a href="#" class="open-browse">browse</a> them from your computer');
+    $form['field_attachments']['und']['#title'] = '';
     $form['field_attachments']['und']['#file_upload_description'] = '';
+  }
+}
+
+/**
+ * Implements hook_theme().
+ */
+function ideal_idea_theme($existing, $type, $theme, $path) {
+  return array(
+    'idea_node_form' => array(
+      'render element' => 'form',
+      'template' => 'idea-node-form',
+      // this will set to module/theme path by default:
+      'path' => drupal_get_path('module', 'ideal_idea'),
+    ),
+  );
+}
+
+/**
+ * Preprocessor for theme('idea_node_form').
+ */
+function template_preprocess_idea_node_form(&$variables) {
+  // nodeformcols is an alternative for this solution.
+  if (!module_exists('nodeformcols')) {
+    $variables['sidebar'] = array();   // Put taxonomy fields in sidebar.
+    $variables['sidebar'][] = $variables['form']['field_idea_image'];
+    $variables['sidebar'][] = $variables['form']['field_attachments'];
+
+    hide($variables['form']['field_idea_image']);
+    hide($variables['form']['field_attachments']);
+    // Extract the form buttons, and put them in independent variable.
+    $variables['buttons'] = $variables['form']['actions'];
+    hide($variables['form']['actions']);
   }
 }
 ?>
