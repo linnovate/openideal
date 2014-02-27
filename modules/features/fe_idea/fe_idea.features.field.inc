@@ -151,7 +151,7 @@ function fe_idea_field_default_fields() {
   $fields['node-idea-field_attachments'] = array(
     'field_config' => array(
       'active' => '1',
-      'cardinality' => '5',
+      'cardinality' => '10',
       'deleted' => '0',
       'entity_types' => array(),
       'field_name' => 'field_attachments',
@@ -1083,6 +1083,7 @@ function fe_idea_field_default_fields() {
   t('Blast Idea');
   t('Buzz Idea');
   t('Category');
+  t('Describe your idea');
   t('Groove Idea');
   t('Hashtags');
   t('Idea image');
@@ -1092,7 +1093,6 @@ function fe_idea_field_default_fields() {
   t('Please share you idea.');
   t('Social Buttons');
   t('Vote');
-  t('Describe your idea');
 
   return $fields;
 }

@@ -145,7 +145,8 @@ function fe_idea_user_default_permissions() {
     'name' => 'edit own idea content',
     'roles' => array(
       0 => 'administrator',
-      1 => 'site-manager',
+      1 => 'authenticated user',
+      2 => 'site-manager',
     ),
     'module' => 'node',
   );
