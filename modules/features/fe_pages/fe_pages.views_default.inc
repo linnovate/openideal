@@ -36,6 +36,12 @@ function fe_pages_views_default_views() {
   $handler->display->display_options['style_plugin'] = 'views_bootstrap_grid_plugin_style';
   $handler->display->display_options['style_options']['columns'] = '3';
   $handler->display->display_options['row_plugin'] = 'fields';
+  /* Header: View All link */
+  $handler->display->display_options['header']['area_text_custom']['id'] = 'area_text_custom';
+  $handler->display->display_options['header']['area_text_custom']['table'] = 'views';
+  $handler->display->display_options['header']['area_text_custom']['field'] = 'area_text_custom';
+  $handler->display->display_options['header']['area_text_custom']['ui_name'] = 'View All link';
+  $handler->display->display_options['header']['area_text_custom']['content'] = '<a href="challenges" class="view-all">View All</a>';
   /* Field: Content: Challenge Image */
   $handler->display->display_options['fields']['field_challenge_image']['id'] = 'field_challenge_image';
   $handler->display->display_options['fields']['field_challenge_image']['table'] = 'field_data_field_challenge_image';
@@ -305,7 +311,7 @@ function fe_pages_views_default_views() {
   $handler->display->display_options['fields']['field_dates']['element_class'] = '.col-md-4 glyphicon glyphicon-calendar';
   $handler->display->display_options['fields']['field_dates']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_dates']['settings'] = array(
-    'format_type' => 'long',
+    'format_type' => 'short',
     'fromto' => 'both',
     'multiple_number' => '',
     'multiple_from' => '',
@@ -466,6 +472,8 @@ function fe_pages_views_default_views() {
   $handler->display->display_options['fields']['name']['table'] = 'users';
   $handler->display->display_options['fields']['name']['field'] = 'name';
   $handler->display->display_options['fields']['name']['relationship'] = 'uid';
+  $handler->display->display_options['fields']['name']['label'] = '';
+  $handler->display->display_options['fields']['name']['element_label_colon'] = FALSE;
   /* Sort criterion: Nodequeue: Position */
   $handler->display->display_options['sorts']['position']['id'] = 'position';
   $handler->display->display_options['sorts']['position']['table'] = 'nodequeue_nodes';

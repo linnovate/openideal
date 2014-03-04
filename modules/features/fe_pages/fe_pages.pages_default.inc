@@ -61,7 +61,7 @@ function fe_pages_default_page_manager_handlers() {
     ),
   );
   $display = new panels_display();
-  $display->layout = 'bootstrap:ideal_two_column';
+  $display->layout = 'bootstrap:inner_page';
   $display->layout_settings = array();
   $display->panel_settings = array(
     'style_settings' => array(
@@ -83,6 +83,8 @@ function fe_pages_default_page_manager_handlers() {
       'bottom' => NULL,
       'center' => NULL,
       'sidebar' => NULL,
+      'content_bottom' => NULL,
+      'content_top' => NULL,
     ),
     'left' => array(
       'style' => 'bootstrap_region',
@@ -98,14 +100,18 @@ function fe_pages_default_page_manager_handlers() {
     $pane = new stdClass();
     $pane->pid = 'new-1';
     $pane->panel = 'center';
-    $pane->type = 'user_picture';
-    $pane->subtype = 'user_picture';
+    $pane->type = 'node_title';
+    $pane->subtype = 'node_title';
     $pane->shown = TRUE;
     $pane->access = array();
     $pane->configuration = array(
-      'context' => 'relationship_entity_from_schema:uid-node-user_1',
+      'link' => 0,
+      'markup' => 'h3',
+      'id' => '',
+      'class' => '',
+      'context' => 'argument_entity_id:node_1',
       'override_title' => 1,
-      'override_title_text' => '',
+      'override_title_text' => '<none>',
     );
     $pane->cache = array();
     $pane->style = array(
@@ -120,15 +126,14 @@ function fe_pages_default_page_manager_handlers() {
     $pane = new stdClass();
     $pane->pid = 'new-2';
     $pane->panel = 'center';
-    $pane->type = 'token';
-    $pane->subtype = 'user:name';
+    $pane->type = 'user_picture';
+    $pane->subtype = 'user_picture';
     $pane->shown = TRUE;
     $pane->access = array();
     $pane->configuration = array(
-      'sanitize' => 0,
       'context' => 'relationship_entity_from_schema:uid-node-user_1',
       'override_title' => 1,
-      'override_title_text' => '',
+      'override_title_text' => '<none>',
     );
     $pane->cache = array();
     $pane->style = array(
@@ -143,22 +148,15 @@ function fe_pages_default_page_manager_handlers() {
     $pane = new stdClass();
     $pane->pid = 'new-3';
     $pane->panel = 'center';
-    $pane->type = 'entity_field';
-    $pane->subtype = 'node:field_challenge_ref';
+    $pane->type = 'node_author';
+    $pane->subtype = 'node_author';
     $pane->shown = TRUE;
     $pane->access = array();
     $pane->configuration = array(
-      'label' => 'inline',
-      'formatter' => 'entityreference_label',
-      'delta_limit' => 0,
-      'delta_offset' => '0',
-      'delta_reversed' => FALSE,
-      'formatter_settings' => array(
-        'link' => 1,
-      ),
+      'link' => 1,
       'context' => 'argument_entity_id:node_1',
-      'override_title' => 0,
-      'override_title_text' => '',
+      'override_title' => 1,
+      'override_title_text' => '<none>',
     );
     $pane->cache = array();
     $pane->style = array(
@@ -174,19 +172,21 @@ function fe_pages_default_page_manager_handlers() {
     $pane->pid = 'new-4';
     $pane->panel = 'center';
     $pane->type = 'entity_field';
-    $pane->subtype = 'node:body';
+    $pane->subtype = 'node:field_moderator';
     $pane->shown = TRUE;
     $pane->access = array();
     $pane->configuration = array(
       'label' => 'hidden',
-      'formatter' => 'text_default',
+      'formatter' => 'entityreference_label',
       'delta_limit' => 0,
       'delta_offset' => '0',
       'delta_reversed' => FALSE,
-      'formatter_settings' => array(),
-      'context' => 'argument_entity_id:node_1',
-      'override_title' => 0,
-      'override_title_text' => '',
+      'formatter_settings' => array(
+        'link' => 0,
+      ),
+      'context' => 'relationship_entity_from_field:field_challenge_ref-node-node_1',
+      'override_title' => 1,
+      'override_title_text' => '<none>',
     );
     $pane->cache = array();
     $pane->style = array(
@@ -201,15 +201,20 @@ function fe_pages_default_page_manager_handlers() {
     $pane = new stdClass();
     $pane->pid = 'new-5';
     $pane->panel = 'center';
-    $pane->type = 'token';
-    $pane->subtype = 'node:field-attachments';
+    $pane->type = 'entity_field';
+    $pane->subtype = 'node:field_share';
     $pane->shown = TRUE;
     $pane->access = array();
     $pane->configuration = array(
-      'sanitize' => 0,
-      'context' => 'argument_entity_id:node_1',
-      'override_title' => 0,
-      'override_title_text' => '',
+      'label' => 'title',
+      'formatter' => 'social_buttons_formatter_default',
+      'delta_limit' => 0,
+      'delta_offset' => '0',
+      'delta_reversed' => FALSE,
+      'formatter_settings' => array(),
+      'context' => 'relationship_entity_from_field:field_challenge_ref-node-node_1',
+      'override_title' => 1,
+      'override_title_text' => 'Share',
     );
     $pane->cache = array();
     $pane->style = array(
@@ -224,6 +229,59 @@ function fe_pages_default_page_manager_handlers() {
     $pane = new stdClass();
     $pane->pid = 'new-6';
     $pane->panel = 'center';
+    $pane->type = 'entity_field';
+    $pane->subtype = 'node:field_idea_image';
+    $pane->shown = TRUE;
+    $pane->access = array();
+    $pane->configuration = array(
+      'label' => 'hidden',
+      'formatter' => 'image',
+      'delta_limit' => '0',
+      'delta_offset' => '0',
+      'delta_reversed' => 0,
+      'formatter_settings' => array(
+        'image_style' => 'cropped_220_220',
+        'image_link' => 'content',
+      ),
+      'context' => 'argument_entity_id:node_1',
+      'override_title' => 1,
+      'override_title_text' => '<none>',
+    );
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 5;
+    $pane->locks = array();
+    $display->content['new-6'] = $pane;
+    $display->panels['center'][5] = 'new-6';
+    $pane = new stdClass();
+    $pane->pid = 'new-7';
+    $pane->panel = 'center';
+    $pane->type = 'node_body';
+    $pane->subtype = 'node_body';
+    $pane->shown = TRUE;
+    $pane->access = array();
+    $pane->configuration = array(
+      'context' => 'argument_entity_id:node_1',
+      'override_title' => 1,
+      'override_title_text' => '<none>',
+    );
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 6;
+    $pane->locks = array();
+    $display->content['new-7'] = $pane;
+    $display->panels['center'][6] = 'new-7';
+    $pane = new stdClass();
+    $pane->pid = 'new-8';
+    $pane->panel = 'content_bottom';
     $pane->type = 'node_comments';
     $pane->subtype = 'node_comments';
     $pane->shown = TRUE;
@@ -241,16 +299,16 @@ function fe_pages_default_page_manager_handlers() {
     );
     $pane->css = array();
     $pane->extras = array();
-    $pane->position = 5;
+    $pane->position = 0;
     $pane->locks = array();
-    $display->content['new-6'] = $pane;
-    $display->panels['center'][5] = 'new-6';
+    $display->content['new-8'] = $pane;
+    $display->panels['content_bottom'][0] = 'new-8';
     $pane = new stdClass();
-    $pane->pid = 'new-7';
+    $pane->pid = 'new-9';
     $pane->panel = 'sidebar';
     $pane->type = 'entity_field';
     $pane->subtype = 'node:field_vote';
-    $pane->shown = TRUE;
+    $pane->shown = FALSE;
     $pane->access = array();
     $pane->configuration = array(
       'label' => 'title',
@@ -271,14 +329,14 @@ function fe_pages_default_page_manager_handlers() {
     $pane->extras = array();
     $pane->position = 0;
     $pane->locks = array();
-    $display->content['new-7'] = $pane;
-    $display->panels['sidebar'][0] = 'new-7';
+    $display->content['new-9'] = $pane;
+    $display->panels['sidebar'][0] = 'new-9';
     $pane = new stdClass();
-    $pane->pid = 'new-8';
+    $pane->pid = 'new-10';
     $pane->panel = 'sidebar';
     $pane->type = 'block';
     $pane->subtype = 'ideal_blocks-idea_stats';
-    $pane->shown = TRUE;
+    $pane->shown = FALSE;
     $pane->access = array();
     $pane->configuration = array(
       'override_title' => 0,
@@ -292,9 +350,9 @@ function fe_pages_default_page_manager_handlers() {
     $pane->extras = array();
     $pane->position = 1;
     $pane->locks = array();
-    $display->content['new-8'] = $pane;
-    $display->panels['sidebar'][1] = 'new-8';
-  $display->hide_title = PANELS_TITLE_FIXED;
+    $display->content['new-10'] = $pane;
+    $display->panels['sidebar'][1] = 'new-10';
+  $display->hide_title = PANELS_TITLE_NONE;
   $display->title_pane = '0';
   $handler->conf['display'] = $display;
   $export['node_view_panel_context_2'] = $handler;
@@ -331,13 +389,15 @@ function fe_pages_default_page_manager_handlers() {
     ),
   );
   $display = new panels_display();
-  $display->layout = 'bootstrap:ideal_two_column';
+  $display->layout = 'bootstrap:inner_page';
   $display->layout_settings = array();
   $display->panel_settings = array(
     'style_settings' => array(
       'default' => NULL,
       'center' => NULL,
       'sidebar' => NULL,
+      'content_top' => NULL,
+      'content_bottom' => NULL,
     ),
   );
   $display->cache = array();
@@ -345,7 +405,33 @@ function fe_pages_default_page_manager_handlers() {
   $display->content = array();
   $display->panels = array();
     $pane = new stdClass();
-    $pane->pid = 'new-9';
+    $pane->pid = 'new-11';
+    $pane->panel = 'center';
+    $pane->type = 'node_title';
+    $pane->subtype = 'node_title';
+    $pane->shown = TRUE;
+    $pane->access = array();
+    $pane->configuration = array(
+      'link' => 0,
+      'markup' => 'h3',
+      'id' => '',
+      'class' => '',
+      'context' => 'argument_entity_id:node_1',
+      'override_title' => 1,
+      'override_title_text' => '<none>',
+    );
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 0;
+    $pane->locks = array();
+    $display->content['new-11'] = $pane;
+    $display->panels['center'][0] = 'new-11';
+    $pane = new stdClass();
+    $pane->pid = 'new-12';
     $pane->panel = 'center';
     $pane->type = 'user_picture';
     $pane->subtype = 'user_picture';
@@ -362,50 +448,22 @@ function fe_pages_default_page_manager_handlers() {
     );
     $pane->css = array();
     $pane->extras = array();
-    $pane->position = 0;
-    $pane->locks = array();
-    $display->content['new-9'] = $pane;
-    $display->panels['center'][0] = 'new-9';
-    $pane = new stdClass();
-    $pane->pid = 'new-10';
-    $pane->panel = 'center';
-    $pane->type = 'token';
-    $pane->subtype = 'user:name';
-    $pane->shown = TRUE;
-    $pane->access = array();
-    $pane->configuration = array(
-      'sanitize' => 0,
-      'context' => 'relationship_entity_from_field:field_moderator-node-user_1',
-      'override_title' => 1,
-      'override_title_text' => '',
-    );
-    $pane->cache = array();
-    $pane->style = array(
-      'settings' => NULL,
-    );
-    $pane->css = array();
-    $pane->extras = array();
     $pane->position = 1;
     $pane->locks = array();
-    $display->content['new-10'] = $pane;
-    $display->panels['center'][1] = 'new-10';
+    $display->content['new-12'] = $pane;
+    $display->panels['center'][1] = 'new-12';
     $pane = new stdClass();
-    $pane->pid = 'new-11';
+    $pane->pid = 'new-13';
     $pane->panel = 'center';
-    $pane->type = 'entity_field';
-    $pane->subtype = 'node:field_social_buttons';
+    $pane->type = 'node_author';
+    $pane->subtype = 'node_author';
     $pane->shown = TRUE;
     $pane->access = array();
     $pane->configuration = array(
-      'label' => 'hidden',
-      'formatter' => 'social_buttons_formatter_default',
-      'delta_limit' => 0,
-      'delta_offset' => '0',
-      'delta_reversed' => FALSE,
-      'formatter_settings' => array(),
+      'link' => 1,
       'context' => 'argument_entity_id:node_1',
-      'override_title' => 0,
-      'override_title_text' => '',
+      'override_title' => 1,
+      'override_title_text' => '<none>',
     );
     $pane->cache = array();
     $pane->style = array(
@@ -415,10 +473,38 @@ function fe_pages_default_page_manager_handlers() {
     $pane->extras = array();
     $pane->position = 2;
     $pane->locks = array();
-    $display->content['new-11'] = $pane;
-    $display->panels['center'][2] = 'new-11';
+    $display->content['new-13'] = $pane;
+    $display->panels['center'][2] = 'new-13';
     $pane = new stdClass();
-    $pane->pid = 'new-12';
+    $pane->pid = 'new-14';
+    $pane->panel = 'center';
+    $pane->type = 'entity_field';
+    $pane->subtype = 'node:field_share';
+    $pane->shown = TRUE;
+    $pane->access = array();
+    $pane->configuration = array(
+      'label' => 'title',
+      'formatter' => 'social_buttons_formatter_default',
+      'delta_limit' => 0,
+      'delta_offset' => '0',
+      'delta_reversed' => FALSE,
+      'formatter_settings' => array(),
+      'context' => 'argument_entity_id:node_1',
+      'override_title' => 1,
+      'override_title_text' => 'Share',
+    );
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 3;
+    $pane->locks = array();
+    $display->content['new-14'] = $pane;
+    $display->panels['center'][3] = 'new-14';
+    $pane = new stdClass();
+    $pane->pid = 'new-15';
     $pane->panel = 'center';
     $pane->type = 'entity_field';
     $pane->subtype = 'node:field_challenge_image';
@@ -444,12 +530,12 @@ function fe_pages_default_page_manager_handlers() {
     );
     $pane->css = array();
     $pane->extras = array();
-    $pane->position = 3;
+    $pane->position = 4;
     $pane->locks = array();
-    $display->content['new-12'] = $pane;
-    $display->panels['center'][3] = 'new-12';
+    $display->content['new-15'] = $pane;
+    $display->panels['center'][4] = 'new-15';
     $pane = new stdClass();
-    $pane->pid = 'new-13';
+    $pane->pid = 'new-16';
     $pane->panel = 'center';
     $pane->type = 'entity_field';
     $pane->subtype = 'node:body';
@@ -472,12 +558,12 @@ function fe_pages_default_page_manager_handlers() {
     );
     $pane->css = array();
     $pane->extras = array();
-    $pane->position = 4;
+    $pane->position = 5;
     $pane->locks = array();
-    $display->content['new-13'] = $pane;
-    $display->panels['center'][4] = 'new-13';
+    $display->content['new-16'] = $pane;
+    $display->panels['center'][5] = 'new-16';
     $pane = new stdClass();
-    $pane->pid = 'new-14';
+    $pane->pid = 'new-17';
     $pane->panel = 'center';
     $pane->type = 'entity_field';
     $pane->subtype = 'node:field_attachments';
@@ -500,13 +586,13 @@ function fe_pages_default_page_manager_handlers() {
     );
     $pane->css = array();
     $pane->extras = array();
-    $pane->position = 5;
+    $pane->position = 6;
     $pane->locks = array();
-    $display->content['new-14'] = $pane;
-    $display->panels['center'][5] = 'new-14';
+    $display->content['new-17'] = $pane;
+    $display->panels['center'][6] = 'new-17';
     $pane = new stdClass();
-    $pane->pid = 'new-15';
-    $pane->panel = 'center';
+    $pane->pid = 'new-18';
+    $pane->panel = 'content_bottom';
     $pane->type = 'block';
     $pane->subtype = 'views-ideas_in_challenge-block';
     $pane->shown = TRUE;
@@ -521,13 +607,13 @@ function fe_pages_default_page_manager_handlers() {
     );
     $pane->css = array();
     $pane->extras = array();
-    $pane->position = 6;
+    $pane->position = 0;
     $pane->locks = array();
-    $display->content['new-15'] = $pane;
-    $display->panels['center'][6] = 'new-15';
+    $display->content['new-18'] = $pane;
+    $display->panels['content_bottom'][0] = 'new-18';
     $pane = new stdClass();
-    $pane->pid = 'new-16';
-    $pane->panel = 'center';
+    $pane->pid = 'new-19';
+    $pane->panel = 'content_bottom';
     $pane->type = 'block';
     $pane->subtype = 'ideal_challenge-challenge_add_idea_button';
     $pane->shown = TRUE;
@@ -545,36 +631,13 @@ function fe_pages_default_page_manager_handlers() {
       'css_class' => 'pull-right col-md-4 hidden-xs hidden-sm',
     );
     $pane->extras = array();
-    $pane->position = 7;
+    $pane->position = 1;
     $pane->locks = array();
-    $display->content['new-16'] = $pane;
-    $display->panels['center'][7] = 'new-16';
+    $display->content['new-19'] = $pane;
+    $display->panels['content_bottom'][1] = 'new-19';
     $pane = new stdClass();
-    $pane->pid = 'new-17';
-    $pane->panel = 'center';
-    $pane->type = 'node_comment_form';
-    $pane->subtype = 'node_comment_form';
-    $pane->shown = TRUE;
-    $pane->access = array();
-    $pane->configuration = array(
-      'anon_links' => 1,
-      'context' => 'argument_entity_id:node_1',
-      'override_title' => 0,
-      'override_title_text' => '',
-    );
-    $pane->cache = array();
-    $pane->style = array(
-      'settings' => NULL,
-    );
-    $pane->css = array();
-    $pane->extras = array();
-    $pane->position = 8;
-    $pane->locks = array();
-    $display->content['new-17'] = $pane;
-    $display->panels['center'][8] = 'new-17';
-    $pane = new stdClass();
-    $pane->pid = 'new-18';
-    $pane->panel = 'center';
+    $pane->pid = 'new-20';
+    $pane->panel = 'content_bottom';
     $pane->type = 'node_comments';
     $pane->subtype = 'node_comments';
     $pane->shown = TRUE;
@@ -592,12 +655,35 @@ function fe_pages_default_page_manager_handlers() {
     );
     $pane->css = array();
     $pane->extras = array();
-    $pane->position = 9;
+    $pane->position = 2;
     $pane->locks = array();
-    $display->content['new-18'] = $pane;
-    $display->panels['center'][9] = 'new-18';
+    $display->content['new-20'] = $pane;
+    $display->panels['content_bottom'][2] = 'new-20';
     $pane = new stdClass();
-    $pane->pid = 'new-19';
+    $pane->pid = 'new-21';
+    $pane->panel = 'content_bottom';
+    $pane->type = 'node_comment_form';
+    $pane->subtype = 'node_comment_form';
+    $pane->shown = TRUE;
+    $pane->access = array();
+    $pane->configuration = array(
+      'anon_links' => 1,
+      'context' => 'argument_entity_id:node_1',
+      'override_title' => 0,
+      'override_title_text' => '',
+    );
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 3;
+    $pane->locks = array();
+    $display->content['new-21'] = $pane;
+    $display->panels['content_bottom'][3] = 'new-21';
+    $pane = new stdClass();
+    $pane->pid = 'new-22';
     $pane->panel = 'sidebar';
     $pane->type = 'block';
     $pane->subtype = 'ideal_challenge-challenge_add_idea_button';
@@ -615,10 +701,10 @@ function fe_pages_default_page_manager_handlers() {
     $pane->extras = array();
     $pane->position = 0;
     $pane->locks = array();
-    $display->content['new-19'] = $pane;
-    $display->panels['sidebar'][0] = 'new-19';
+    $display->content['new-22'] = $pane;
+    $display->panels['sidebar'][0] = 'new-22';
     $pane = new stdClass();
-    $pane->pid = 'new-20';
+    $pane->pid = 'new-23';
     $pane->panel = 'sidebar';
     $pane->type = 'block';
     $pane->subtype = 'ideal_blocks-challenge_stats';
@@ -636,10 +722,10 @@ function fe_pages_default_page_manager_handlers() {
     $pane->extras = array();
     $pane->position = 1;
     $pane->locks = array();
-    $display->content['new-20'] = $pane;
-    $display->panels['sidebar'][1] = 'new-20';
+    $display->content['new-23'] = $pane;
+    $display->panels['sidebar'][1] = 'new-23';
     $pane = new stdClass();
-    $pane->pid = 'new-21';
+    $pane->pid = 'new-24';
     $pane->panel = 'sidebar';
     $pane->type = 'block';
     $pane->subtype = 'ideal_challenge-challenge_data';
@@ -657,9 +743,9 @@ function fe_pages_default_page_manager_handlers() {
     $pane->extras = array();
     $pane->position = 2;
     $pane->locks = array();
-    $display->content['new-21'] = $pane;
-    $display->panels['sidebar'][2] = 'new-21';
-  $display->hide_title = PANELS_TITLE_FIXED;
+    $display->content['new-24'] = $pane;
+    $display->panels['sidebar'][2] = 'new-24';
+  $display->hide_title = PANELS_TITLE_NONE;
   $display->title_pane = '0';
   $handler->conf['display'] = $display;
   $export['node_view_panel_context_3'] = $handler;
@@ -764,7 +850,7 @@ function fe_pages_default_page_manager_pages() {
   $handler->conf = array(
     'title' => 'Landing page',
     'no_blocks' => 1,
-    'pipeline' => 'standard',
+    'pipeline' => 'ipe',
     'body_classes_to_remove' => '',
     'body_classes_to_add' => '',
     'css_id' => '',
@@ -925,7 +1011,7 @@ function fe_pages_default_page_manager_pages() {
     $pane->pid = 'new-7';
     $pane->panel = 'sidebar';
     $pane->type = 'block';
-    $pane->subtype = 'ideal_blocks-ideal_key_stats';
+    $pane->subtype = 'views-activity-block';
     $pane->shown = TRUE;
     $pane->access = array();
     $pane->configuration = array(
@@ -946,7 +1032,7 @@ function fe_pages_default_page_manager_pages() {
     $pane->pid = 'new-8';
     $pane->panel = 'sidebar';
     $pane->type = 'block';
-    $pane->subtype = 'views-activity-block';
+    $pane->subtype = 'ideal_blocks-ideal_key_stats';
     $pane->shown = TRUE;
     $pane->access = array();
     $pane->configuration = array(
@@ -968,6 +1054,100 @@ function fe_pages_default_page_manager_pages() {
   $handler->conf['display'] = $display;
   $page->default_handlers[$handler->name] = $handler;
   $pages['home'] = $page;
+
+  $page = new stdClass();
+  $page->disabled = FALSE; /* Edit this to true to make a default page disabled initially */
+  $page->api_version = 1;
+  $page->name = 'ideas';
+  $page->task = 'page';
+  $page->admin_title = 'ideas';
+  $page->admin_description = '';
+  $page->path = 'ideas-list';
+  $page->access = array();
+  $page->menu = array();
+  $page->arguments = array();
+  $page->conf = array(
+    'admin_paths' => FALSE,
+  );
+  $page->default_handlers = array();
+  $handler = new stdClass();
+  $handler->disabled = FALSE; /* Edit this to true to make a default handler disabled initially */
+  $handler->api_version = 1;
+  $handler->name = 'page_ideas_panel_context';
+  $handler->task = 'page';
+  $handler->subtask = 'ideas';
+  $handler->handler = 'panel_context';
+  $handler->weight = 0;
+  $handler->conf = array(
+    'title' => 'Panel',
+    'no_blocks' => 0,
+    'pipeline' => 'standard',
+    'body_classes_to_remove' => '',
+    'body_classes_to_add' => '',
+    'css_id' => '',
+    'css' => '',
+    'contexts' => array(),
+    'relationships' => array(),
+  );
+  $display = new panels_display();
+  $display->layout = 'bootstrap:ideal_two_column';
+  $display->layout_settings = array();
+  $display->panel_settings = array(
+    'style_settings' => array(
+      'default' => NULL,
+      'center' => NULL,
+      'sidebar' => NULL,
+    ),
+  );
+  $display->cache = array();
+  $display->title = '';
+  $display->content = array();
+  $display->panels = array();
+    $pane = new stdClass();
+    $pane->pid = 'new-9';
+    $pane->panel = 'center';
+    $pane->type = 'block';
+    $pane->subtype = 'quicktabs-all_ideas';
+    $pane->shown = TRUE;
+    $pane->access = array();
+    $pane->configuration = array(
+      'override_title' => 0,
+      'override_title_text' => '',
+    );
+    $pane->cache = array();
+    $pane->style = array();
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 0;
+    $pane->locks = array();
+    $display->content['new-9'] = $pane;
+    $display->panels['center'][0] = 'new-9';
+    $pane = new stdClass();
+    $pane->pid = 'new-10';
+    $pane->panel = 'sidebar';
+    $pane->type = 'block';
+    $pane->subtype = 'views-activity-block';
+    $pane->shown = TRUE;
+    $pane->access = array();
+    $pane->configuration = array(
+      'override_title' => 0,
+      'override_title_text' => '',
+    );
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 0;
+    $pane->locks = array();
+    $display->content['new-10'] = $pane;
+    $display->panels['sidebar'][0] = 'new-10';
+  $display->hide_title = PANELS_TITLE_FIXED;
+  $display->title_pane = 'new-10';
+  $handler->conf['display'] = $display;
+  $page->default_handlers[$handler->name] = $handler;
+  $pages['ideas'] = $page;
 
   return $pages;
 
