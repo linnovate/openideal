@@ -16,25 +16,8 @@ function fe_idea_context_default_contexts() {
   $context->name = 'all_ideas';
   $context->description = '';
   $context->tag = 'Ideas';
-  $context->conditions = array(
-    'path' => array(
-      'values' => array(
-        'ideas' => 'ideas',
-      ),
-    ),
-  );
-  $context->reactions = array(
-    'block' => array(
-      'blocks' => array(
-        'quicktabs-all_ideas' => array(
-          'module' => 'quicktabs',
-          'delta' => 'all_ideas',
-          'region' => 'content',
-          'weight' => '-10',
-        ),
-      ),
-    ),
-  );
+  $context->conditions = array();
+  $context->reactions = array();
   $context->condition_mode = 0;
 
   // Translatables

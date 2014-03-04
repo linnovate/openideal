@@ -130,8 +130,8 @@ function fe_pages_default_panels_layout() {
         'type' => 'region',
         'title' => 'Center',
         'bootstrap_class' => array(
-          'xs' => 'col-xs-12',
-          'sm' => 'col-sm-12',
+          'xs' => 'col-xs-9',
+          'sm' => 'col-sm-9',
           'md' => 'col-md-8',
           'lg' => 'col-lg-8',
         ),
@@ -152,6 +152,108 @@ function fe_pages_default_panels_layout() {
     ),
   );
   $export['ideal_two_column'] = $layout;
+
+  $layout = new stdClass();
+  $layout->disabled = FALSE; /* Edit this to true to make a default layout disabled initially */
+  $layout->api_version = 1;
+  $layout->name = 'inner_page';
+  $layout->admin_title = 'inner-page';
+  $layout->admin_description = '';
+  $layout->category = 'OpenideaL';
+  $layout->plugin = 'bootstrap';
+  $layout->settings = array(
+    'items' => array(
+      'canvas' => array(
+        'type' => 'row',
+        'contains' => 'column',
+        'children' => array(
+          0 => 'main',
+          1 => 1,
+        ),
+        'parent' => NULL,
+      ),
+      'main' => array(
+        'type' => 'column',
+        'bootstrap_class' => array(
+          'xs' => 'col-xs-12',
+          'sm' => 'col-sm-12',
+          'md' => 'col-md-9',
+          'lg' => 'col-lg-9',
+        ),
+        'children' => array(
+          0 => 'main-row',
+        ),
+        'parent' => 'canvas',
+      ),
+      'main-row' => array(
+        'type' => 'row',
+        'contains' => 'region',
+        'children' => array(
+          0 => 'center',
+          1 => 'content_bottom',
+        ),
+        'parent' => 'main',
+      ),
+      'center' => array(
+        'type' => 'region',
+        'title' => 'Center',
+        'bootstrap_class' => array(
+          'xs' => 'col-xs-12',
+          'sm' => 'col-sm-12',
+          'md' => 'col-md-12',
+          'lg' => 'col-lg-12',
+        ),
+        'parent' => 'main-row',
+      ),
+      1 => array(
+        'type' => 'column',
+        'parent' => 'canvas',
+        'children' => array(
+          0 => 2,
+        ),
+        'class' => 'Sidebar',
+        'bootstrap_class' => array(
+          'xs' => 'col-xs-12',
+          'lg' => 'col-lg-3',
+          'md' => 'col-md-3',
+        ),
+      ),
+      2 => array(
+        'type' => 'row',
+        'contains' => 'region',
+        'children' => array(
+          0 => 'sidebar',
+        ),
+        'parent' => '1',
+        'class' => '',
+      ),
+      'sidebar' => array(
+        'type' => 'region',
+        'title' => 'Sidebar',
+        'bootstrap_class' => array(
+          'xs' => 'col-xs-12',
+          'sm' => 'col-sm-12',
+          'md' => 'col-md-12',
+          'lg' => 'col-lg-12',
+        ),
+        'parent' => '2',
+        'class' => '',
+      ),
+      'content_bottom' => array(
+        'type' => 'region',
+        'title' => 'content-bottom',
+        'bootstrap_class' => array(
+          'xs' => 'col-xs-12',
+          'sm' => 'col-sm-12',
+          'md' => 'col-md-12',
+          'lg' => 'col-lg-12',
+        ),
+        'parent' => 'main-row',
+        'class' => '',
+      ),
+    ),
+  );
+  $export['inner_page'] = $layout;
 
   $layout = new stdClass();
   $layout->disabled = FALSE; /* Edit this to true to make a default layout disabled initially */
