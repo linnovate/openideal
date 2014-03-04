@@ -59,7 +59,7 @@ function fe_challenge_default_page_manager_pages() {
     ),
   );
   $display = new panels_display();
-  $display->layout = 'bootstrap_twocol_stacked';
+  $display->layout = 'onecol';
   $display->layout_settings = array();
   $display->panel_settings = array(
     'style_settings' => array(
@@ -76,7 +76,7 @@ function fe_challenge_default_page_manager_pages() {
   $display->panels = array();
     $pane = new stdClass();
     $pane->pid = 'new-1';
-    $pane->panel = 'top';
+    $pane->panel = 'middle';
     $pane->type = 'block';
     $pane->subtype = 'views-challenges_list-block_1';
     $pane->shown = TRUE;
@@ -94,7 +94,7 @@ function fe_challenge_default_page_manager_pages() {
     $pane->position = 0;
     $pane->locks = array();
     $display->content['new-1'] = $pane;
-    $display->panels['top'][0] = 'new-1';
+    $display->panels['middle'][0] = 'new-1';
   $display->hide_title = PANELS_TITLE_FIXED;
   $display->title_pane = 'new-1';
   $handler->conf['display'] = $display;
