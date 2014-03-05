@@ -17,7 +17,9 @@ function fe_idea_menu_default_menu_links() {
     'router_path' => 'ideas',
     'link_title' => 'Ideas',
     'options' => array(
-      'attributes' => array(),
+      'attributes' => array(
+        'title' => '',
+      ),
     ),
     'module' => 'menu',
     'hidden' => '0',

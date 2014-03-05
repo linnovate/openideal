@@ -37,7 +37,7 @@ function fe_pages_default_panels_mini() {
     $pane->pid = 'new-1';
     $pane->panel = 'middle';
     $pane->type = 'block';
-    $pane->subtype = 'system-main-menu';
+    $pane->subtype = 'menu-menu-footer-menu';
     $pane->shown = TRUE;
     $pane->access = array();
     $pane->configuration = array(
@@ -58,7 +58,7 @@ function fe_pages_default_panels_mini() {
     $pane->pid = 'new-2';
     $pane->panel = 'middle';
     $pane->type = 'block';
-    $pane->subtype = 'system-navigation';
+    $pane->subtype = 'ideal_main-openideal_credits';
     $pane->shown = TRUE;
     $pane->access = array();
     $pane->configuration = array(
@@ -75,29 +75,8 @@ function fe_pages_default_panels_mini() {
     $pane->locks = array();
     $display->content['new-2'] = $pane;
     $display->panels['middle'][1] = 'new-2';
-    $pane = new stdClass();
-    $pane->pid = 'new-3';
-    $pane->panel = 'middle';
-    $pane->type = 'block';
-    $pane->subtype = 'ideal_main-openideal_credits';
-    $pane->shown = TRUE;
-    $pane->access = array();
-    $pane->configuration = array(
-      'override_title' => 1,
-      'override_title_text' => '<none>',
-    );
-    $pane->cache = array();
-    $pane->style = array(
-      'settings' => NULL,
-    );
-    $pane->css = array();
-    $pane->extras = array();
-    $pane->position = 2;
-    $pane->locks = array();
-    $display->content['new-3'] = $pane;
-    $display->panels['middle'][2] = 'new-3';
   $display->hide_title = PANELS_TITLE_NONE;
-  $display->title_pane = 'new-1';
+  $display->title_pane = '0';
   $mini->display = $display;
   $export['footer'] = $mini;
 
@@ -125,7 +104,7 @@ function fe_pages_default_panels_mini() {
   $display->content = array();
   $display->panels = array();
     $pane = new stdClass();
-    $pane->pid = 'new-4';
+    $pane->pid = 'new-3';
     $pane->panel = 'middle';
     $pane->type = 'page_logo';
     $pane->subtype = 'page_logo';
@@ -140,10 +119,10 @@ function fe_pages_default_panels_mini() {
     $pane->extras = array();
     $pane->position = 0;
     $pane->locks = array();
-    $display->content['new-4'] = $pane;
-    $display->panels['middle'][0] = 'new-4';
+    $display->content['new-3'] = $pane;
+    $display->panels['middle'][0] = 'new-3';
     $pane = new stdClass();
-    $pane->pid = 'new-5';
+    $pane->pid = 'new-4';
     $pane->panel = 'middle';
     $pane->type = 'block';
     $pane->subtype = 'system-main-menu';
@@ -161,10 +140,52 @@ function fe_pages_default_panels_mini() {
     $pane->extras = array();
     $pane->position = 1;
     $pane->locks = array();
+    $display->content['new-4'] = $pane;
+    $display->panels['middle'][1] = 'new-4';
+    $pane = new stdClass();
+    $pane->pid = 'new-5';
+    $pane->panel = 'middle';
+    $pane->type = 'block';
+    $pane->subtype = 'search-form';
+    $pane->shown = TRUE;
+    $pane->access = array();
+    $pane->configuration = array(
+      'override_title' => 1,
+      'override_title_text' => '<none>',
+    );
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 2;
+    $pane->locks = array();
     $display->content['new-5'] = $pane;
-    $display->panels['middle'][1] = 'new-5';
+    $display->panels['middle'][2] = 'new-5';
     $pane = new stdClass();
     $pane->pid = 'new-6';
+    $pane->panel = 'middle';
+    $pane->type = 'block';
+    $pane->subtype = 'top_searches-0';
+    $pane->shown = FALSE;
+    $pane->access = array();
+    $pane->configuration = array(
+      'override_title' => 1,
+      'override_title_text' => '<none>',
+    );
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 3;
+    $pane->locks = array();
+    $display->content['new-6'] = $pane;
+    $display->panels['middle'][3] = 'new-6';
+    $pane = new stdClass();
+    $pane->pid = 'new-7';
     $pane->panel = 'middle';
     $pane->type = 'block';
     $pane->subtype = 'system-user-menu';
@@ -180,33 +201,12 @@ function fe_pages_default_panels_mini() {
     );
     $pane->css = array();
     $pane->extras = array();
-    $pane->position = 2;
-    $pane->locks = array();
-    $display->content['new-6'] = $pane;
-    $display->panels['middle'][2] = 'new-6';
-    $pane = new stdClass();
-    $pane->pid = 'new-7';
-    $pane->panel = 'middle';
-    $pane->type = 'block';
-    $pane->subtype = 'top_searches-0';
-    $pane->shown = TRUE;
-    $pane->access = array();
-    $pane->configuration = array(
-      'override_title' => 1,
-      'override_title_text' => '<none>',
-    );
-    $pane->cache = array();
-    $pane->style = array(
-      'settings' => NULL,
-    );
-    $pane->css = array();
-    $pane->extras = array();
-    $pane->position = 3;
+    $pane->position = 4;
     $pane->locks = array();
     $display->content['new-7'] = $pane;
-    $display->panels['middle'][3] = 'new-7';
+    $display->panels['middle'][4] = 'new-7';
   $display->hide_title = PANELS_TITLE_NONE;
-  $display->title_pane = 'new-4';
+  $display->title_pane = 'new-3';
   $mini->display = $display;
   $export['header'] = $mini;
 

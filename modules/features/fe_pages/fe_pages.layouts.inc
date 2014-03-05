@@ -177,8 +177,8 @@ function fe_pages_default_panels_layout() {
         'bootstrap_class' => array(
           'xs' => 'col-xs-12',
           'sm' => 'col-sm-12',
-          'md' => 'col-md-9',
-          'lg' => 'col-lg-9',
+          'md' => 'col-md-8',
+          'lg' => 'col-lg-8',
         ),
         'children' => array(
           0 => 'main-row',
@@ -214,8 +214,8 @@ function fe_pages_default_panels_layout() {
         'class' => 'Sidebar',
         'bootstrap_class' => array(
           'xs' => 'col-xs-12',
-          'lg' => 'col-lg-3',
-          'md' => 'col-md-3',
+          'lg' => 'col-lg-4',
+          'md' => 'col-md-4',
         ),
       ),
       2 => array(
