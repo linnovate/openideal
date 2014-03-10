@@ -51,6 +51,7 @@ function fe_challenge_views_default_views() {
   $handler->display->display_options['fields']['field_challenge_image']['label'] = '';
   $handler->display->display_options['fields']['field_challenge_image']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_challenge_image']['element_wrapper_class'] = 'pull-left';
+  $handler->display->display_options['fields']['field_challenge_image']['hide_empty'] = TRUE;
   $handler->display->display_options['fields']['field_challenge_image']['click_sort_column'] = 'fid';
   $handler->display->display_options['fields']['field_challenge_image']['settings'] = array(
     'image_style' => 'cropped_220_220',
@@ -123,19 +124,20 @@ function fe_challenge_views_default_views() {
     'multiple_from' => '',
     'multiple_to' => '',
   );
-  /* Field: Global: Custom text */
+  /* Field: FOOTER */
   $handler->display->display_options['fields']['nothing']['id'] = 'nothing';
   $handler->display->display_options['fields']['nothing']['table'] = 'views';
   $handler->display->display_options['fields']['nothing']['field'] = 'nothing';
+  $handler->display->display_options['fields']['nothing']['ui_name'] = 'FOOTER';
   $handler->display->display_options['fields']['nothing']['label'] = '';
-  $handler->display->display_options['fields']['nothing']['alter']['text'] = '<div class="row row-bottom-openideal">
-        <div class="author col-md-4">
+  $handler->display->display_options['fields']['nothing']['alter']['text'] = '<div class="row-bottom-openideal">
+        <div class="author">
 	   <div class="picture">[picture]</div>
 	   <div class="name">[name]</div>
         </div>
-	<div class="moderator glyphicon glyphicon-th-list col-md-2 ">[field_moderator]</div>
-	<div class="dates glyphicon glyphicon-calendar col-md-4">[field_dates]</div>
-	<div class="count glyphicon glyphicon-map-marker col-md-2 pull-right">[title_1]</div>
+	<div class="moderator glyphicon glyphicon-th-list">[field_moderator]</div>
+	<div class="dates glyphicon glyphicon-calendar">[field_dates]</div>
+	<div class="count glyphicon glyphicon-map-marker">[title_1]</div>
 </div>';
   $handler->display->display_options['fields']['nothing']['element_label_colon'] = FALSE;
   /* Sort criterion: Content: Post date */
@@ -205,6 +207,7 @@ function fe_challenge_views_default_views() {
   $handler->display->display_options['fields']['field_idea_image']['relationship'] = 'reverse_field_challenge_ref_node';
   $handler->display->display_options['fields']['field_idea_image']['label'] = '';
   $handler->display->display_options['fields']['field_idea_image']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_idea_image']['hide_empty'] = TRUE;
   $handler->display->display_options['fields']['field_idea_image']['click_sort_column'] = 'fid';
   $handler->display->display_options['fields']['field_idea_image']['settings'] = array(
     'image_style' => '',

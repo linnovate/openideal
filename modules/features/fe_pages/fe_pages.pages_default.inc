@@ -596,7 +596,9 @@ function fe_pages_default_page_manager_handlers() {
       'delta_limit' => '0',
       'delta_offset' => '0',
       'delta_reversed' => 0,
-      'formatter_settings' => array(),
+      'formatter_settings' => array(
+        'format_custom_link_text' => 'Download file',
+      ),
       'context' => 'argument_entity_id:node_1',
       'override_title' => 1,
       'override_title_text' => 'Attachments',

@@ -831,6 +831,7 @@ Why not add an idea?';
   $handler->display->display_options['fields']['field_idea_image']['field'] = 'field_idea_image';
   $handler->display->display_options['fields']['field_idea_image']['label'] = '';
   $handler->display->display_options['fields']['field_idea_image']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_idea_image']['hide_empty'] = TRUE;
   $handler->display->display_options['fields']['field_idea_image']['click_sort_column'] = 'fid';
   $handler->display->display_options['fields']['field_idea_image']['settings'] = array(
     'image_style' => 'cropped_220_220',
@@ -887,20 +888,47 @@ Why not add an idea?';
   $handler->display->display_options['fields']['created']['exclude'] = TRUE;
   $handler->display->display_options['fields']['created']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['created']['date_format'] = 'short';
+  /* Field: Content: Comment count */
+  $handler->display->display_options['fields']['comment_count']['id'] = 'comment_count';
+  $handler->display->display_options['fields']['comment_count']['table'] = 'node_comment_statistics';
+  $handler->display->display_options['fields']['comment_count']['field'] = 'comment_count';
+  $handler->display->display_options['fields']['comment_count']['label'] = '';
+  $handler->display->display_options['fields']['comment_count']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['comment_count']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['comment_count']['separator'] = '.';
+  /* Field: Node count: Who view */
+  $handler->display->display_options['fields']['uid']['id'] = 'uid';
+  $handler->display->display_options['fields']['uid']['table'] = 'node_view_count';
+  $handler->display->display_options['fields']['uid']['field'] = 'uid';
+  $handler->display->display_options['fields']['uid']['label'] = '';
+  $handler->display->display_options['fields']['uid']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['uid']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['uid']['separator'] = '.';
+  /* Field: Field: Vote */
+  $handler->display->display_options['fields']['field_vote']['id'] = 'field_vote';
+  $handler->display->display_options['fields']['field_vote']['table'] = 'field_data_field_vote';
+  $handler->display->display_options['fields']['field_vote']['field'] = 'field_vote';
+  $handler->display->display_options['fields']['field_vote']['label'] = '';
+  $handler->display->display_options['fields']['field_vote']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_vote']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_vote']['click_sort_column'] = 'vud_widget';
   /* Field: FOTTER */
   $handler->display->display_options['fields']['nothing']['id'] = 'nothing';
   $handler->display->display_options['fields']['nothing']['table'] = 'views';
   $handler->display->display_options['fields']['nothing']['field'] = 'nothing';
   $handler->display->display_options['fields']['nothing']['ui_name'] = 'FOTTER';
   $handler->display->display_options['fields']['nothing']['label'] = '';
-  $handler->display->display_options['fields']['nothing']['alter']['text'] = '<div class="row row-bottom-openideal">
-        <div class="author col-md-4">
+  $handler->display->display_options['fields']['nothing']['alter']['text'] = '<div class="row-bottom-openideal">
+        <div class="author">
 	   <div class="picture">[picture]</div>
 	   <div class="name">[name]</div>
         </div>
-	<div class="moderator glyphicon glyphicon-th-list col-md-2 ">[field_moderator]</div>
-	<div class="dates glyphicon glyphicon-calendar col-md-4">[created]</div>
-	<div class="count glyphicon glyphicon-map-marker col-md-2 pull-right">[title_1]</div>
+	<div class="moderator glyphicon glyphicon-th-list">[field_moderator]</div>
+	<div class="dates glyphicon glyphicon-calendar">[created]</div>
+	<div class="count glyphicon glyphicon-map-marker">[title_1]</div>
+	<div class="count glyphicon glyphicon-read">[uid]</div>
+	<div class="count glyphicon glyphicon-comment">[comment_count]</div>
+	<div class="count glyphicon vote">[field_vote]</div>
 </div>';
   $handler->display->display_options['fields']['nothing']['element_label_colon'] = FALSE;
   /* Sort criterion: Content: Post date */

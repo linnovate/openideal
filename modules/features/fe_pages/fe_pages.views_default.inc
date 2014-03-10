@@ -48,6 +48,7 @@ function fe_pages_views_default_views() {
   $handler->display->display_options['fields']['field_challenge_image']['field'] = 'field_challenge_image';
   $handler->display->display_options['fields']['field_challenge_image']['label'] = '';
   $handler->display->display_options['fields']['field_challenge_image']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_challenge_image']['hide_empty'] = TRUE;
   $handler->display->display_options['fields']['field_challenge_image']['click_sort_column'] = 'fid';
   $handler->display->display_options['fields']['field_challenge_image']['settings'] = array(
     'image_style' => 'cropped_220_220',
@@ -224,6 +225,7 @@ function fe_pages_views_default_views() {
   $handler->display->display_options['fields']['field_challenge_image']['label'] = '';
   $handler->display->display_options['fields']['field_challenge_image']['element_class'] = 'img-responsive';
   $handler->display->display_options['fields']['field_challenge_image']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_challenge_image']['hide_empty'] = TRUE;
   $handler->display->display_options['fields']['field_challenge_image']['click_sort_column'] = 'fid';
   $handler->display->display_options['fields']['field_challenge_image']['settings'] = array(
     'image_style' => 'large',
@@ -335,14 +337,14 @@ function fe_pages_views_default_views() {
   $handler->display->display_options['fields']['nothing_1']['field'] = 'nothing';
   $handler->display->display_options['fields']['nothing_1']['ui_name'] = 'FOOTER';
   $handler->display->display_options['fields']['nothing_1']['label'] = '';
-  $handler->display->display_options['fields']['nothing_1']['alter']['text'] = '<div class="row row-bottom-openideal">
-        <div class="author col-md-4">
+  $handler->display->display_options['fields']['nothing_1']['alter']['text'] = '<div class="row-bottom-openideal">
+        <div class="author">
 	   <div class="picture">[picture]</div>
 	   <div class="name">[name]</div>
         </div>
-	<div class="moderator glyphicon glyphicon-th-list col-md-2 ">[field_moderator]</div>
-	<div class="dates glyphicon glyphicon-calendar col-md-4">[field_dates]</div>
-	<div class="count glyphicon glyphicon-map-marker col-md-2 pull-right">[title_1]</div>
+	<div class="moderator glyphicon glyphicon-th-list">[field_moderator]</div>
+	<div class="dates glyphicon glyphicon-calendar">[field_dates]</div>
+	<div class="count glyphicon glyphicon-map-marker">[title_1]</div>
 </div>';
   $handler->display->display_options['fields']['nothing_1']['element_label_colon'] = FALSE;
   /* Sort criterion: Content: Post date */
