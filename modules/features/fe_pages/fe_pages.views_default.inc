@@ -283,26 +283,15 @@ function fe_pages_views_default_views() {
   $handler->display->display_options['fields']['name']['exclude'] = TRUE;
   $handler->display->display_options['fields']['name']['element_class'] = '.col-md-3';
   $handler->display->display_options['fields']['name']['element_label_colon'] = FALSE;
-  /* Field: Comment count ( Exclude from display ) */
-  $handler->display->display_options['fields']['comment_count']['id'] = 'comment_count';
-  $handler->display->display_options['fields']['comment_count']['table'] = 'node_comment_statistics';
-  $handler->display->display_options['fields']['comment_count']['field'] = 'comment_count';
-  $handler->display->display_options['fields']['comment_count']['ui_name'] = 'Comment count ( Exclude from display )';
-  $handler->display->display_options['fields']['comment_count']['label'] = '';
-  $handler->display->display_options['fields']['comment_count']['exclude'] = TRUE;
-  $handler->display->display_options['fields']['comment_count']['element_label_colon'] = FALSE;
-  /* Field: Content: Moderator ( Exclude from display ) */
-  $handler->display->display_options['fields']['field_moderator']['id'] = 'field_moderator';
-  $handler->display->display_options['fields']['field_moderator']['table'] = 'field_data_field_moderator';
-  $handler->display->display_options['fields']['field_moderator']['field'] = 'field_moderator';
-  $handler->display->display_options['fields']['field_moderator']['ui_name'] = 'Content: Moderator ( Exclude from display )';
-  $handler->display->display_options['fields']['field_moderator']['label'] = '';
-  $handler->display->display_options['fields']['field_moderator']['exclude'] = TRUE;
-  $handler->display->display_options['fields']['field_moderator']['element_class'] = '.col-md-3 glyphicon glyphicon-th-list';
-  $handler->display->display_options['fields']['field_moderator']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['field_moderator']['settings'] = array(
-    'link' => 0,
-  );
+  /* Field: Content: Status ( Exclude from display ) */
+  $handler->display->display_options['fields']['field_status']['id'] = 'field_status';
+  $handler->display->display_options['fields']['field_status']['table'] = 'field_data_field_status';
+  $handler->display->display_options['fields']['field_status']['field'] = 'field_status';
+  $handler->display->display_options['fields']['field_status']['ui_name'] = 'Content: Status ( Exclude from display )';
+  $handler->display->display_options['fields']['field_status']['label'] = '';
+  $handler->display->display_options['fields']['field_status']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_status']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_status']['type'] = 'taxonomy_term_reference_plain';
   /* Field: Content: Dates ( Exclude from display ) */
   $handler->display->display_options['fields']['field_dates']['id'] = 'field_dates';
   $handler->display->display_options['fields']['field_dates']['table'] = 'field_data_field_dates';
@@ -342,7 +331,7 @@ function fe_pages_views_default_views() {
 	   <div class="picture">[picture]</div>
 	   <div class="name">[name]</div>
         </div>
-	<div class="moderator glyphicon glyphicon-th-list">[field_moderator]</div>
+	<div class="status glyphicon glyphicon-th-list">[field_status]</div>
 	<div class="dates glyphicon glyphicon-calendar">[field_dates]</div>
 	<div class="count glyphicon glyphicon-map-marker">[title_1]</div>
 </div>';
@@ -451,6 +440,8 @@ function fe_pages_views_default_views() {
     'image_style' => 'cropped_220_220',
     'image_link' => '',
   );
+  $handler->display->display_options['fields']['field_idea_image']['delta_limit'] = '1';
+  $handler->display->display_options['fields']['field_idea_image']['delta_offset'] = '0';
   /* Field: Content: Body */
   $handler->display->display_options['fields']['body']['id'] = 'body';
   $handler->display->display_options['fields']['body']['table'] = 'field_data_body';

@@ -825,6 +825,10 @@ Why not add an idea?';
   $handler->display->display_options['relationships']['field_moderator_target_id']['id'] = 'field_moderator_target_id';
   $handler->display->display_options['relationships']['field_moderator_target_id']['table'] = 'field_data_field_moderator';
   $handler->display->display_options['relationships']['field_moderator_target_id']['field'] = 'field_moderator_target_id';
+  /* Relationship: Entity Reference: Referenced Entity */
+  $handler->display->display_options['relationships']['field_challenge_ref_target_id']['id'] = 'field_challenge_ref_target_id';
+  $handler->display->display_options['relationships']['field_challenge_ref_target_id']['table'] = 'field_data_field_challenge_ref';
+  $handler->display->display_options['relationships']['field_challenge_ref_target_id']['field'] = 'field_challenge_ref_target_id';
   /* Field: Content: Idea image */
   $handler->display->display_options['fields']['field_idea_image']['id'] = 'field_idea_image';
   $handler->display->display_options['fields']['field_idea_image']['table'] = 'field_data_field_idea_image';
@@ -845,6 +849,12 @@ Why not add an idea?';
   $handler->display->display_options['fields']['title']['field'] = 'title';
   $handler->display->display_options['fields']['title']['label'] = '';
   $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
+  /* Field: Content: Title */
+  $handler->display->display_options['fields']['title_1']['id'] = 'title_1';
+  $handler->display->display_options['fields']['title_1']['table'] = 'node';
+  $handler->display->display_options['fields']['title_1']['field'] = 'title';
+  $handler->display->display_options['fields']['title_1']['relationship'] = 'field_challenge_ref_target_id';
+  $handler->display->display_options['fields']['title_1']['label'] = 'Challenge';
   /* Field: Content: Body */
   $handler->display->display_options['fields']['body']['id'] = 'body';
   $handler->display->display_options['fields']['body']['table'] = 'field_data_body';
@@ -871,15 +881,13 @@ Why not add an idea?';
   $handler->display->display_options['fields']['picture']['label'] = '';
   $handler->display->display_options['fields']['picture']['exclude'] = TRUE;
   $handler->display->display_options['fields']['picture']['element_label_colon'] = FALSE;
-  /* Field: Content: Moderator */
-  $handler->display->display_options['fields']['field_moderator']['id'] = 'field_moderator';
-  $handler->display->display_options['fields']['field_moderator']['table'] = 'field_data_field_moderator';
-  $handler->display->display_options['fields']['field_moderator']['field'] = 'field_moderator';
-  $handler->display->display_options['fields']['field_moderator']['label'] = '';
-  $handler->display->display_options['fields']['field_moderator']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['field_moderator']['settings'] = array(
-    'link' => 0,
-  );
+  /* Field: Content: In Action */
+  $handler->display->display_options['fields']['field_in_action']['id'] = 'field_in_action';
+  $handler->display->display_options['fields']['field_in_action']['table'] = 'field_data_field_in_action';
+  $handler->display->display_options['fields']['field_in_action']['field'] = 'field_in_action';
+  $handler->display->display_options['fields']['field_in_action']['label'] = '';
+  $handler->display->display_options['fields']['field_in_action']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_in_action']['element_label_colon'] = FALSE;
   /* Field: Content: Post date */
   $handler->display->display_options['fields']['created']['id'] = 'created';
   $handler->display->display_options['fields']['created']['table'] = 'node';
@@ -888,6 +896,15 @@ Why not add an idea?';
   $handler->display->display_options['fields']['created']['exclude'] = TRUE;
   $handler->display->display_options['fields']['created']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['created']['date_format'] = 'short';
+  /* Field: Content statistics: Total views */
+  $handler->display->display_options['fields']['totalcount']['id'] = 'totalcount';
+  $handler->display->display_options['fields']['totalcount']['table'] = 'node_counter';
+  $handler->display->display_options['fields']['totalcount']['field'] = 'totalcount';
+  $handler->display->display_options['fields']['totalcount']['label'] = '';
+  $handler->display->display_options['fields']['totalcount']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['totalcount']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['totalcount']['hide_empty'] = TRUE;
+  $handler->display->display_options['fields']['totalcount']['empty_zero'] = TRUE;
   /* Field: Content: Comment count */
   $handler->display->display_options['fields']['comment_count']['id'] = 'comment_count';
   $handler->display->display_options['fields']['comment_count']['table'] = 'node_comment_statistics';
@@ -896,14 +913,6 @@ Why not add an idea?';
   $handler->display->display_options['fields']['comment_count']['exclude'] = TRUE;
   $handler->display->display_options['fields']['comment_count']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['comment_count']['separator'] = '.';
-  /* Field: Node count: Who view */
-  $handler->display->display_options['fields']['uid']['id'] = 'uid';
-  $handler->display->display_options['fields']['uid']['table'] = 'node_view_count';
-  $handler->display->display_options['fields']['uid']['field'] = 'uid';
-  $handler->display->display_options['fields']['uid']['label'] = '';
-  $handler->display->display_options['fields']['uid']['exclude'] = TRUE;
-  $handler->display->display_options['fields']['uid']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['uid']['separator'] = '.';
   /* Field: Field: Vote */
   $handler->display->display_options['fields']['field_vote']['id'] = 'field_vote';
   $handler->display->display_options['fields']['field_vote']['table'] = 'field_data_field_vote';
@@ -923,10 +932,9 @@ Why not add an idea?';
 	   <div class="picture">[picture]</div>
 	   <div class="name">[name]</div>
         </div>
-	<div class="moderator glyphicon glyphicon-th-list">[field_moderator]</div>
+	<div class="status glyphicon glyphicon-th-list">[field_in_action]</div>
 	<div class="dates glyphicon glyphicon-calendar">[created]</div>
-	<div class="count glyphicon glyphicon-map-marker">[title_1]</div>
-	<div class="count glyphicon glyphicon-read">[uid]</div>
+	<div class="count glyphicon glyphicon-read">[totalcount]</div>
 	<div class="count glyphicon glyphicon-comment">[comment_count]</div>
 	<div class="count glyphicon vote">[field_vote]</div>
 </div>';

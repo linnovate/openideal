@@ -93,25 +93,14 @@ function fe_challenge_views_default_views() {
   $handler->display->display_options['fields']['name']['label'] = '';
   $handler->display->display_options['fields']['name']['exclude'] = TRUE;
   $handler->display->display_options['fields']['name']['element_label_colon'] = FALSE;
-  /* Field: Content: Title */
-  $handler->display->display_options['fields']['title_1']['id'] = 'title_1';
-  $handler->display->display_options['fields']['title_1']['table'] = 'node';
-  $handler->display->display_options['fields']['title_1']['field'] = 'title';
-  $handler->display->display_options['fields']['title_1']['relationship'] = 'reverse_field_challenge_ref_node';
-  $handler->display->display_options['fields']['title_1']['group_type'] = 'count';
-  $handler->display->display_options['fields']['title_1']['label'] = '';
-  $handler->display->display_options['fields']['title_1']['exclude'] = TRUE;
-  $handler->display->display_options['fields']['title_1']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['title_1']['link_to_node'] = FALSE;
-  /* Field: Content: Moderator */
-  $handler->display->display_options['fields']['field_moderator']['id'] = 'field_moderator';
-  $handler->display->display_options['fields']['field_moderator']['table'] = 'field_data_field_moderator';
-  $handler->display->display_options['fields']['field_moderator']['field'] = 'field_moderator';
-  $handler->display->display_options['fields']['field_moderator']['label'] = '';
-  $handler->display->display_options['fields']['field_moderator']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['field_moderator']['settings'] = array(
-    'link' => 0,
-  );
+  /* Field: Content: Status */
+  $handler->display->display_options['fields']['field_status']['id'] = 'field_status';
+  $handler->display->display_options['fields']['field_status']['table'] = 'field_data_field_status';
+  $handler->display->display_options['fields']['field_status']['field'] = 'field_status';
+  $handler->display->display_options['fields']['field_status']['label'] = '';
+  $handler->display->display_options['fields']['field_status']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_status']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_status']['type'] = 'taxonomy_term_reference_plain';
   /* Field: Content: Dates */
   $handler->display->display_options['fields']['field_dates']['id'] = 'field_dates';
   $handler->display->display_options['fields']['field_dates']['table'] = 'field_data_field_dates';
@@ -124,6 +113,16 @@ function fe_challenge_views_default_views() {
     'multiple_from' => '',
     'multiple_to' => '',
   );
+  /* Field: Content: Title */
+  $handler->display->display_options['fields']['title_1']['id'] = 'title_1';
+  $handler->display->display_options['fields']['title_1']['table'] = 'node';
+  $handler->display->display_options['fields']['title_1']['field'] = 'title';
+  $handler->display->display_options['fields']['title_1']['relationship'] = 'reverse_field_challenge_ref_node';
+  $handler->display->display_options['fields']['title_1']['group_type'] = 'count';
+  $handler->display->display_options['fields']['title_1']['label'] = '';
+  $handler->display->display_options['fields']['title_1']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['title_1']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['title_1']['link_to_node'] = FALSE;
   /* Field: FOOTER */
   $handler->display->display_options['fields']['nothing']['id'] = 'nothing';
   $handler->display->display_options['fields']['nothing']['table'] = 'views';
@@ -135,7 +134,7 @@ function fe_challenge_views_default_views() {
 	   <div class="picture">[picture]</div>
 	   <div class="name">[name]</div>
         </div>
-	<div class="moderator glyphicon glyphicon-th-list">[field_moderator]</div>
+	<div class="status glyphicon glyphicon-th-list">[field_status]</div>
 	<div class="dates glyphicon glyphicon-calendar">[field_dates]</div>
 	<div class="count glyphicon glyphicon-map-marker">[title_1]</div>
 </div>';
@@ -188,7 +187,7 @@ function fe_challenge_views_default_views() {
   $handler->display->display_options['query']['options']['query_comment'] = FALSE;
   $handler->display->display_options['exposed_form']['type'] = 'basic';
   $handler->display->display_options['pager']['type'] = 'none';
-  $handler->display->display_options['style_plugin'] = 'default';
+  $handler->display->display_options['style_plugin'] = 'list';
   $handler->display->display_options['row_plugin'] = 'fields';
   /* Relationship: Entity Reference: Referencing entity */
   $handler->display->display_options['relationships']['reverse_field_challenge_ref_node']['id'] = 'reverse_field_challenge_ref_node';
@@ -208,6 +207,7 @@ function fe_challenge_views_default_views() {
   $handler->display->display_options['fields']['field_idea_image']['label'] = '';
   $handler->display->display_options['fields']['field_idea_image']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_idea_image']['hide_empty'] = TRUE;
+  $handler->display->display_options['fields']['field_idea_image']['empty_zero'] = TRUE;
   $handler->display->display_options['fields']['field_idea_image']['click_sort_column'] = 'fid';
   $handler->display->display_options['fields']['field_idea_image']['settings'] = array(
     'image_style' => '',
