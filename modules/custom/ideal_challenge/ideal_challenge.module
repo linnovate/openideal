@@ -69,16 +69,6 @@ function ideal_challenge_block_view($delta) {
   return $block;
 }
 
-/*
-* Implements hook_views_pre_render().
-*/
-function ideal_challenge_views_pre_render(&$view) {
-  //add js for slider arrows if challenge slider
-  if($view->name == 'default_challenge'){
-    drupal_add_js('(function($) { Drupal.behaviors.challengeslidearrows = { attach: function(context) {$(".carousel-control.left").click(function(e){ e.preventDefault(); var carousel_id = $(this).attr("href"); $(carousel_id).carousel("prev"); }); $(".carousel-control.right").click(function(e){ e.preventDefault(); var carousel_id = $(this).attr("href"); $(carousel_id).carousel("next"); }); if($(".view-default-challenge .carousel-inner .item").length <= 1){ $(".view-default-challenge").find(".carousel-indicators, .carousel-control").hide();  } } } })(jQuery);', 'inline');
-  }
-}
-
 function theme_ideal_challenge_add_idea() {
   $output = '';
    // Get the nid (for reference) from the default challenge.

@@ -1065,7 +1065,7 @@ function fe_idea_field_default_fields() {
       'settings' => array(
         'user_register_form' => FALSE,
         'votingapi_tag' => 'vote',
-        'vud_widget' => 'thumbs',
+        'vud_widget' => 'alternate',
       ),
       'widget' => array(
         'active' => 0,
