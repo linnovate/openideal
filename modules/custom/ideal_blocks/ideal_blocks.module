@@ -24,11 +24,13 @@ function ideal_blocks_block_view($delta = '') {
   switch($delta) {
     case 'challenge_stats':
       $block = array(
+        'subject' => t('Key stats'),
         'content' => _ideal_blocks_challenge_stats(),
       );
       break;
     case 'idea_stats':
       $block = array(
+        
         'content' => _ideal_blocks_idea_stats(),
       );
       break;

@@ -93,9 +93,6 @@ projects[htmlmail][subdir] = contrib
 projects[hybridauth][version] = "2.8"
 projects[hybridauth][subdir] = contrib
 
-projects[ideal_comments][version] = "1.1"
-projects[ideal_comments][subdir] = contrib
-
 projects[imce][version] = "1.7"
 projects[imce][subdir] = contrib
 
