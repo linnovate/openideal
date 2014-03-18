@@ -6,3 +6,34 @@ function ideal_panes_ctools_plugin_directory($module, $plugin) {
   }
 }
 
+
+function ideal_panes_theme_registry_alter(&$theme_registry) {
+    if (!empty($theme_registry['menu_link'])) {
+      $theme_registry['menu_link']['function'] = 'menu_icon_menu_link';
+    }
+}
+
+
+function menu_icon_menu_link($variables) {
+  $element = $variables['element'];
+  global $user;
+  $sub_menu = '';
+  if ($element['#below']) {
+    $sub_menu = drupal_render($element['#below']);
+  }
+  $output = l($element['#title'], $element['#href'], $element['#localized_options']);
+  if (isset($element['#localized_options']['menu_icon'])) {
+    if ($element['#localized_options']['menu_icon']['enable'] == 1) {
+      $element['#attributes']['title'] = $element['#title'];
+      $output = l('', $element['#href'], $element['#localized_options']);
+    }
+  }
+  $link = '<li' . drupal_attributes($element['#attributes']) . '>' . $output . $sub_menu . "</li>\n";
+  if ($element['#title'] == t('My account') ) {
+         $image = theme('user_picture', array('account' => $user));
+       $link =  $image . '<li' . drupal_attributes($element['#attributes']) . '>'. $output . $sub_menu . "</li>\n";
+  }
+  return $link;
+}
+
+
