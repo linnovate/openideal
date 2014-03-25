@@ -149,12 +149,12 @@ function idea_taxonomy() {
 /**
  * Save term to database.
  */
-	function idea_create_term($name, $vid, $weight) {
-	  $term = new stdClass();
-	  $term->name = $name;
-	  $term->vid = $vid;
-	  $term->weight = $weight;
-	  taxonomy_term_save($term);
+  function idea_create_term($name, $vid, $weight) {
+    $term = new stdClass();
+    $term->name = $name;
+    $term->vid = $vid;
+    $term->weight = $weight;
+    taxonomy_term_save($term);
 }
 
 /**
@@ -221,8 +221,8 @@ function idea_dummy_content() {
   $message->field_challenge[LANGUAGE_NONE][0]['target_id'] = $challenge->nid;
   $message->save();
 
-	// Second challenge
-	$challenge = new stdClass();
+  // Second challenge
+  $challenge = new stdClass();
   $challenge->type = 'challenge';
   node_object_prepare($challenge);
 
@@ -238,8 +238,8 @@ function idea_dummy_content() {
   $challenge->body[LANGUAGE_NONE][0]['format'] = filter_default_format();
   $challenge->field_dates[LANGUAGE_NONE][0]['value'] = date('Y-m-d H:i:s', time() - 604800);
   $challenge->field_dates[LANGUAGE_NONE][0]['value2'] = date('Y-m-d H:i:s', time() + 30 * 86400);
-	$challenge->field_moderator[LANGUAGE_NONE][0]['target_id'] = 4;
-	$challenge->field_category[LANGUAGE_NONE][0]['tid'] = 1;
+  $challenge->field_moderator[LANGUAGE_NONE][0]['target_id'] = 4;
+  $challenge->field_category[LANGUAGE_NONE][0]['tid'] = 1;
 
   node_save($challenge);
 
@@ -255,8 +255,8 @@ function idea_dummy_content() {
   $message->field_challenge[LANGUAGE_NONE][0]['target_id'] = $challenge->nid;
   $message->save();
 
-  	// Third challenge
-	$challenge = new stdClass();
+    // Third challenge
+  $challenge = new stdClass();
   $challenge->type = 'challenge';
   node_object_prepare($challenge);
 
@@ -272,8 +272,8 @@ function idea_dummy_content() {
   $challenge->body[LANGUAGE_NONE][0]['format'] = filter_default_format();
   $challenge->field_dates[LANGUAGE_NONE][0]['value'] = date('Y-m-d H:i:s', time() - 604800);
   $challenge->field_dates[LANGUAGE_NONE][0]['value2'] = date('Y-m-d H:i:s', time() + 30 * 86400);
-	$challenge->field_moderator[LANGUAGE_NONE][0]['target_id'] = 4;
-	$challenge->field_category[LANGUAGE_NONE][0]['tid'] = 1;
+  $challenge->field_moderator[LANGUAGE_NONE][0]['target_id'] = 4;
+  $challenge->field_category[LANGUAGE_NONE][0]['tid'] = 1;
 
   node_save($challenge);
 
@@ -290,7 +290,7 @@ function idea_dummy_content() {
   $message->save();
 
   // Fourth challenge
-	$challenge = new stdClass();
+  $challenge = new stdClass();
   $challenge->type = 'challenge';
   node_object_prepare($challenge);
 
@@ -306,8 +306,8 @@ function idea_dummy_content() {
   $challenge->body[LANGUAGE_NONE][0]['format'] = filter_default_format();
   $challenge->field_dates[LANGUAGE_NONE][0]['value'] = date('Y-m-d H:i:s', time() - 604800);
   $challenge->field_dates[LANGUAGE_NONE][0]['value2'] = date('Y-m-d H:i:s', time() + 30 * 86400);
-	$challenge->field_moderator[LANGUAGE_NONE][0]['target_id'] = 4;
-	$challenge->field_category[LANGUAGE_NONE][0]['tid'] = 1;
+  $challenge->field_moderator[LANGUAGE_NONE][0]['target_id'] = 4;
+  $challenge->field_category[LANGUAGE_NONE][0]['tid'] = 1;
 
   node_save($challenge);
 
@@ -526,7 +526,7 @@ function idea_dummy_content() {
     ))
     ->execute();
 
-	db_insert('nodequeue_nodes')
+  db_insert('nodequeue_nodes')
     ->fields(array(
       'qid' => 1,
       'sqid' => 1,
@@ -546,11 +546,11 @@ function idea_dummy_users() {
 
   // Create dummy users.
   $users = array(
-    'Omar Little',
-    'Stringer Bell',
-    'Jimmy McNulty',
-    'Cedric Daniels',
-    'Lester Freamon',
+    'Lan Stallworth',
+    'Sharan Mcneal',
+    'Matilda Griggs',
+    'Stan Chu',
+    'Mardell Tenney',
   );
 
   foreach ($users as $name) {
