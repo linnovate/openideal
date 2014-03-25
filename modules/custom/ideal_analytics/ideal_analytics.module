@@ -91,10 +91,12 @@ function ideal_analytics_analytics_dashboard() {
   //=====================================
   $nodes = $header = array();
   $in_action = field_info_field('field_in_action');
-  foreach ($in_action['settings']['allowed_values'] as $k => $value) {
-    $header[] = $value;
-    // The number of nodes created each day.
-    $nodes[] = db_query("SELECT COUNT(*) FROM {field_data_field_in_action} WHERE field_in_action_value = :value", array(':value' => $k))->fetchField();
+  if(!empty($in_action) && isset($in_action['settings']['allowed_values'])){
+    foreach ($in_action['settings']['allowed_values'] as $k => $value) {
+      $header[] = $value;
+      // The number of nodes created each day.
+      $nodes[] = db_query("SELECT COUNT(*) FROM {field_data_field_in_action} WHERE field_in_action_value = :value", array(':value' => $k))->fetchField();
+    }
   }
   
   $columns = array('Projects in progress');
