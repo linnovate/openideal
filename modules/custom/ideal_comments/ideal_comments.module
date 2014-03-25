@@ -27,40 +27,41 @@ function ideal_comments_form_comment_form_alter(&$form, &$form_state, $form_id) 
   if (empty($node) && $comment = menu_get_object('comment')) {
     $node = node_load($comment->nid);
   }
+  //only if node exist
+  if(!empty($node) && is_object($node)){
+    // Add a preview zone for markup.
+    $form['comment_preview'] = array(
+      '#type' => 'item',
+      '#title' => '',
+      '#markup' => '',
+      '#weight' => 101,
+      '#prefix' => "<div id='replace_preview_{$form_id}' class='ideal-comment-preview-area comment-preview'>",
+      '#suffix' => '</div>',
+    );
 
-  // Add a preview zone for markup.
-  $form['comment_preview'] = array(
-    '#type' => 'item',
-    '#title' => '',
-    '#markup' => '',
-    '#weight' => 101,
-    '#prefix' => "<div id='replace_preview_{$form_id}' class='ideal-comment-preview-area comment-preview'>",
-    '#suffix' => '</div>',
-  );
+    // Add a custom preview button for execute the ajax call.
+    $form['actions']['preview'] = array(
+      '#type' => 'button',
+      '#value' => t('Preview'),
+      '#weight' => 20,
+      '#access' => (variable_get('comment_preview_' . $node->type, DRUPAL_OPTIONAL) != DRUPAL_DISABLED),
+      '#attributes' => array('class' => array('ideal-comment-preview-button', 'form-wrapper')),
+      '#ajax' => array(
+        'callback' => '_preview_ajax_callback',
+        'wrapper' => "replace_preview_{$form_id}",
+      ),
+    );
 
-  // Add a custom preview button for execute the ajax call.
-  $form['actions']['preview'] = array(
-    '#type' => 'button',
-    '#value' => t('Preview'),
-    '#weight' => 20,
-    '#access' => (variable_get('comment_preview_' . $node->type, DRUPAL_OPTIONAL) != DRUPAL_DISABLED),
-    '#attributes' => array('class' => array('ideal-comment-preview-button', 'form-wrapper')),
-    '#ajax' => array(
-      'callback' => '_preview_ajax_callback',
-      'wrapper' => "replace_preview_{$form_id}",
-    ),
-  );
-
-  global $user;
-  unset($form['actions']['preview']);
-  unset($form['author']['_author']['#title']);
-  $form['actions']['submit']['#value'] = t('Post comment');
-  $form['actions']['submit']['#attributes']['class'][] = 'btn btn-success';
-  $form['comment_body']['und']['0']['value']['#attributes']['placeholder'] = t('Add comment');
-  $image = theme('user_picture', array('account' => $user));
-  $form['author']['_author']['#markup'] = $image . $form['author']['_author']['#markup'];
-  $form['author']['#weight'] = 5;
-
+    global $user;
+    unset($form['actions']['preview']);
+    unset($form['author']['_author']['#title']);
+    $form['actions']['submit']['#value'] = t('Post comment');
+    $form['actions']['submit']['#attributes']['class'][] = 'btn btn-success';
+    $form['comment_body']['und']['0']['value']['#attributes']['placeholder'] = t('Add comment');
+    $image = theme('user_picture', array('account' => $user));
+    $form['author']['_author']['#markup'] = $image . $form['author']['_author']['#markup'];
+    $form['author']['#weight'] = 5;
+  }
 }
 
 function _preview_ajax_callback($form, $form_state) {
