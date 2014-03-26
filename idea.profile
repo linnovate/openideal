@@ -140,6 +140,14 @@ function idea_taxonomy() {
     array('name' => 'Services', 'vid' => 4, 'weight' => 2),
     array('name' => 'Processes', 'vid' => 4, 'weight' => 3),
   );
+  //find vid for challenge_status
+  $vocabularies = taxonomy_vocabulary_get_names();
+  if(!empty($vocabularies) && isset($vocabularies['challenge_status'])){
+    $vid = $vocabularies['challenge_status']->vid;
+    $terms[] = array('name' => 'Open', 'vid' => $vid, 'weight' => 1);
+    $terms[] = array('name' => 'Reviewed', 'vid' => $vid, 'weight' => 2);
+    $terms[] = array('name' => 'Closed', 'vid' => $vid, 'weight' => 3);
+  }
 
   foreach ($terms as $term) {
     idea_create_term($term['name'], $term['vid'], $term['weight']);
