@@ -237,15 +237,16 @@ function fe_pages_views_default_views() {
   $handler->display->display_options['exposed_form']['type'] = 'basic';
   $handler->display->display_options['pager']['type'] = 'full';
   $handler->display->display_options['pager']['options']['items_per_page'] = '50';
-  $handler->display->display_options['style_plugin'] = 'views_bootstrap_thumbnail_plugin_style';
-  $handler->display->display_options['style_options']['column_type'] = '2';
-  $handler->display->display_options['row_plugin'] = 'fields';
-  /* Field: User: Picture */
-  $handler->display->display_options['fields']['picture']['id'] = 'picture';
-  $handler->display->display_options['fields']['picture']['table'] = 'users';
-  $handler->display->display_options['fields']['picture']['field'] = 'picture';
-  $handler->display->display_options['fields']['picture']['label'] = '';
-  $handler->display->display_options['fields']['picture']['element_label_colon'] = FALSE;
+  $handler->display->display_options['style_plugin'] = 'default';
+  $handler->display->display_options['style_options']['default_row_class'] = FALSE;
+  $handler->display->display_options['style_options']['row_class_special'] = FALSE;
+  $handler->display->display_options['row_plugin'] = 'panels_fields';
+  $handler->display->display_options['row_options']['layout'] = 'bootstrap:ideal_two_column';
+  $handler->display->display_options['row_options']['regions'] = array(
+    'name' => 'center',
+    'picture' => 'sidebar',
+    'field_bio' => 'center',
+  );
   /* Field: User: Name */
   $handler->display->display_options['fields']['name']['id'] = 'name';
   $handler->display->display_options['fields']['name']['table'] = 'users';
@@ -253,6 +254,25 @@ function fe_pages_views_default_views() {
   $handler->display->display_options['fields']['name']['label'] = '';
   $handler->display->display_options['fields']['name']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['name']['alter']['ellipsis'] = FALSE;
+  /* Field: User: Picture */
+  $handler->display->display_options['fields']['picture']['id'] = 'picture';
+  $handler->display->display_options['fields']['picture']['table'] = 'users';
+  $handler->display->display_options['fields']['picture']['field'] = 'picture';
+  $handler->display->display_options['fields']['picture']['label'] = '';
+  $handler->display->display_options['fields']['picture']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['picture']['empty'] = '<i class="fa fa-user fa-5"></i>';
+  /* Field: User: Bio */
+  $handler->display->display_options['fields']['field_bio']['id'] = 'field_bio';
+  $handler->display->display_options['fields']['field_bio']['table'] = 'field_data_field_bio';
+  $handler->display->display_options['fields']['field_bio']['field'] = 'field_bio';
+  $handler->display->display_options['fields']['field_bio']['label'] = '';
+  $handler->display->display_options['fields']['field_bio']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['field_bio']['alter']['text'] = '<small>[field_bio]</small>';
+  $handler->display->display_options['fields']['field_bio']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_bio']['type'] = 'text_trimmed';
+  $handler->display->display_options['fields']['field_bio']['settings'] = array(
+    'trim_length' => '300',
+  );
   /* Sort criterion: User: Created date */
   $handler->display->display_options['sorts']['created']['id'] = 'created';
   $handler->display->display_options['sorts']['created']['table'] = 'users';
