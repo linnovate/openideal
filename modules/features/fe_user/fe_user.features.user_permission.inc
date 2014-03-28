@@ -46,8 +46,7 @@ function fe_user_user_default_permissions() {
     'name' => 'view own userpoints',
     'roles' => array(
       0 => 'administrator',
-      1 => 'anonymous user',
-      2 => 'authenticated user',
+      1 => 'authenticated user',
     ),
     'module' => 'userpoints',
   );
