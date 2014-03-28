@@ -213,6 +213,9 @@ projects[mentions][subdir] = contrib
 projects[navbar][version] = "1.4"
 projects[navbar][subdir] = contrib
 
+projects[user_settings_access][version] = "1.x-dev"
+projects[user_settings_access][subdir] = contrib
+
 ; Themes
 
 projects[bootstrap][version] = "3.0"
