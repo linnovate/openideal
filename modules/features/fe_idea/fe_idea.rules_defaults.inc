@@ -206,28 +206,29 @@ function fe_idea_default_rules_configuration() {
     }
   }');
   $items['rules_user_add_idea'] = entity_import('rules_config', '{ "rules_user_add_idea" : {
-      "LABEL" : "User Add Idea",
-      "PLUGIN" : "reaction rule",
-      "TAGS" : [ "Idea", "Userpoints" ],
-      "REQUIRES" : [ "rules", "userpoints_rules" ],
-      "ON" : [ "node_insert" ],
-      "IF" : [
-        { "node_is_of_type" : { "node" : [ "node" ], "type" : { "value" : { "idea" : "idea" } } } }
-      ],
-      "DO" : [
-        { "userpoints_action_grant_points" : {
-            "user" : [ "node:author" ],
-            "points" : "100",
-            "tid" : "0",
-            "entity" : [ "node:author" ],
-            "operation" : "Insert",
-            "display" : 0,
-            "moderate" : "default"
-          }
+    "LABEL" : "User Add Idea",
+    "PLUGIN" : "reaction rule",
+    "TAGS" : [ "Idea", "Userpoints" ],
+    "REQUIRES" : [ "rules", "userpoints_rules", "php" ],
+    "ON" : [ "node_insert" ],
+    "IF" : [
+      { "node_is_of_type" : { "node" : [ "node" ], "type" : { "value" : { "idea" : "idea" } } } }
+    ],
+    "DO" : [
+      { "userpoints_action_grant_points" : {
+          "user" : [ "node:author" ],
+          "points" : "100",
+          "tid" : "0",
+          "entity" : [ "node:author" ],
+          "operation" : "Insert",
+          "display" : 0,
+          "moderate" : "default"
         }
-      ]
-    }
-  }');
+      },
+      { "php_eval" : { "code" : "$_SESSION[\u0027newnode\u0027] = 1;" } }
+    ]
+  }
+}');
   $items['rules_user_idea_in_action'] = entity_import('rules_config', '{ "rules_user_idea_in_action" : {
       "LABEL" : "User Idea In Action",
       "PLUGIN" : "reaction rule",

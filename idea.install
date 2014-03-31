@@ -115,6 +115,17 @@ function idea_install() {
       'pages' => '',
       'cache' => -1,
     ),
+    array(
+      'module' => 'ideal_idea',
+      'delta' => 'new_idea_open_popup',
+      'theme' => $default_theme,
+      'status' => 1,
+      'weight' => 1,
+      'region' => 'content',
+      'pages' => '',
+      'cache' => -1,
+      'types' => array('idea'),
+    ),
 //    array(
 //      'module' => 'search',
 //      'delta' => 'form',
@@ -227,10 +238,21 @@ function idea_install() {
 //    ),
   );
   $query = db_insert('block')->fields(array('module', 'delta', 'theme', 'status', 'weight', 'region', 'pages', 'cache'));
+  $query_type = db_insert('block_node_type')->fields(array('module', 'delta', 'type'));
+  $t=0;
   foreach ($blocks as $block) {
     $query->values($block);
+    if(isset($block['types'])){
+      foreach($block['types'] as $key => $type){
+        $block['type'] = $type;
+        $query_type->values($block);
+        $t++;
+      }
+    }
   }
   $query->execute();
+  if($t > 0)
+    $query_type->execute();
 
   // Insert default pre-defined node types into the database. For a complete
   // list of available node type attributes, refer to the node type API
