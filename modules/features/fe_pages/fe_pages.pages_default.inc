@@ -537,6 +537,18 @@ function fe_pages_default_page_manager_handlers() {
       ),
     ),
     'access' => array(
+      'plugins' => array(
+        0 => array(
+          'name' => 'node_type',
+          'settings' => array(
+            'type' => array(
+              'idea' => 'challenge',
+            ),
+          ),
+          'context' => 'argument_entity_id:node_1',
+          'not' => FALSE,
+        ),
+      ),
       'logic' => 'and',
     ),
   );
