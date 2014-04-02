@@ -560,4 +560,7 @@ function idea_install() {
 
   //default setting for idea title autocomplete
   variable_set('idea_add_autocomplete', TRUE);
+
+  //turn of error message display by default
+  variable_set('error_level', 0);
 }
