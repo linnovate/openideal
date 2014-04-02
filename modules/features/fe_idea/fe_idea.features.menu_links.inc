@@ -28,9 +28,9 @@ function fe_idea_menu_default_menu_links() {
     'expanded' => '0',
     'weight' => '-48',
   );
-  // Exported menu link: main-menu:user/login
-  $menu_links['main-menu:user/login'] = array(
-    'menu_name' => 'main-menu',
+  // Exported menu link: user-menu:user/login
+  $menu_links['user-menu:user/login'] = array(
+    'menu_name' => 'user-menu',
     'link_path' => 'user/login',
     'router_path' => 'user/login',
     'link_title' => 'Login',
