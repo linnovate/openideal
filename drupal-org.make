@@ -116,6 +116,7 @@ projects[mailsystem][subdir] = contrib
 
 projects[mentions][version] = "1.0"
 projects[mentions][subdir] = contrib
+projects[mentions][patch][] = https://drupal.org/files/issues/mentions-patch-format-empty-2064103-9.patch
 
 projects[message][version] = "1.9"
 projects[message][subdir] = contrib
