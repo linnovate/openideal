@@ -61,10 +61,10 @@ function ideal_suggestions_form_alter(&$form, &$form_state, $form_id) {
 */
 function suggestions_get_suggestions($type, $part, $count) {
     if ($type == 'term') {
-      $t = _suggestions_get_suggestions($type, $part, $count - $c, FALSE, $s);
+      $t = _suggestions_get_suggestions($type, $part, $count, FALSE);
     }
     else {
-      $t = _suggestions_get_all_user_suggestions($part, $count - $c, $s);
+      $t = _suggestions_get_all_user_suggestions($part, $count);
     }
   return $t;
 }
