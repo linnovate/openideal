@@ -937,9 +937,31 @@ $display->panels = array();
   $pane->locks = array();
   $display->content['new-15'] = $pane;
   $display->panels['sidebar'][3] = 'new-15';
+  $pane = new stdClass();
+  $pane->pid = 'new-16';
+  $pane->panel = 'sidebar';
+  $pane->type = 'block';
+  $pane->subtype = 'views-activity-block';
+  $pane->shown = TRUE;
+  $pane->access = array();
+  $pane->configuration = array(
+    'override_title' => 0,
+    'override_title_text' => '',
+  );
+  $pane->cache = array();
+  $pane->style = array(
+    'settings' => NULL,
+  );
+  $pane->css = array();
+  $pane->extras = array();
+  $pane->position = 4;
+  $pane->locks = array();
+  $display->content['new-16'] = $pane;
+  $display->panels['sidebar'][4] = 'new-16';
 $display->hide_title = PANELS_TITLE_NONE;
 $display->title_pane = '0';
 $handler->conf['display'] = $display;
+
 
   $export['node_view_panel_context_3'] = $handler;
 
