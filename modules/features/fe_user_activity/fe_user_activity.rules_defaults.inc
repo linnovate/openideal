@@ -67,34 +67,34 @@ function fe_user_activity_default_rules_configuration() {
     }
   }');
   $items['rules_create_message_for_new_idea'] = entity_import('rules_config', '{ "rules_create_message_for_new_idea" : {
-    "LABEL" : "Create message for new idea",
-    "PLUGIN" : "reaction rule",
-    "TAGS" : [ "Message" ],
-    "REQUIRES" : [ "rules", "php" ],
-    "ON" : [ "node_insert" ],
-    "IF" : [
-      { "node_is_of_type" : { "node" : [ "node" ], "type" : { "value" : { "idea" : "idea" } } } }
-    ],
-    "DO" : [
-      { "entity_create" : {
-          "USING" : {
-            "type" : "message",
-            "param_type" : "new_idea",
-            "param_user" : [ "node:author" ]
-          },
-          "PROVIDE" : { "entity_created" : { "message" : "Message" } }
-        }
-      },
-      { "data_set" : { "data" : [ "message:field-posted-idea" ], "value" : [ "node" ] } },
-      { "data_set" : {
-          "data" : [ "message:field-challenge" ],
-          "value" : [ "node:field-challenge-ref" ]
-        }
-      },
-      { "entity_save" : { "data" : [ "message" ] } },
-      { "php_eval" : { "code" : "$_SESSION[\u0027nid\u0027] = $node-\u003Enid;\r\n$_SESSION[\u0027timestamp\u0027] = time();" } }
-    ]
-  }
+      "LABEL" : "Create message for new idea",
+      "PLUGIN" : "reaction rule",
+      "TAGS" : [ "Message" ],
+      "REQUIRES" : [ "rules", "php" ],
+      "ON" : [ "node_insert" ],
+      "IF" : [
+        { "node_is_of_type" : { "node" : [ "node" ], "type" : { "value" : { "idea" : "idea" } } } }
+      ],
+      "DO" : [
+        { "entity_create" : {
+            "USING" : {
+              "type" : "message",
+              "param_type" : "new_idea",
+              "param_user" : [ "node:author" ]
+            },
+            "PROVIDE" : { "entity_created" : { "message" : "Message" } }
+          }
+        },
+        { "data_set" : { "data" : [ "message:field-posted-idea" ], "value" : [ "node" ] } },
+        { "data_set" : {
+            "data" : [ "message:field-challenge" ],
+            "value" : [ "node:field-challenge-ref" ]
+          }
+        },
+        { "entity_save" : { "data" : [ "message" ] } },
+        { "php_eval" : { "code" : "$_SESSION[\\u0027nid\\u0027] = $node-\\u003Enid;\\r\\n$_SESSION[\\u0027timestamp\\u0027] = time();" } }
+      ]
+    }
   }');
   $items['rules_create_message_for_new_user'] = entity_import('rules_config', '{ "rules_create_message_for_new_user" : {
       "LABEL" : "Create message for new user",

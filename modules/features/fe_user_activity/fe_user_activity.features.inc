@@ -37,7 +37,7 @@ function fe_user_activity_default_message_type() {
     "argument" : [],
     "category" : "message_type",
     "data" : {
-      "token options" : { "clear" : 0 },
+      "token options" : { "clear" : 1 },
       "purge" : { "override" : 0, "enabled" : 0, "quota" : "", "days" : "" }
     },
     "language" : "",
@@ -59,7 +59,7 @@ function fe_user_activity_default_message_type() {
     "argument" : [],
     "category" : "message_type",
     "data" : {
-      "token options" : { "clear" : 0 },
+      "token options" : { "clear" : 1 },
       "purge" : { "override" : 0, "enabled" : 0, "quota" : "", "days" : "" }
     },
     "language" : "",
@@ -81,7 +81,7 @@ function fe_user_activity_default_message_type() {
     "argument" : [],
     "category" : "message_type",
     "data" : {
-      "token options" : { "clear" : 0 },
+      "token options" : { "clear" : 1 },
       "purge" : { "override" : 0, "enabled" : 0, "quota" : "", "days" : "" }
     },
     "language" : "",
@@ -103,7 +103,7 @@ function fe_user_activity_default_message_type() {
     "argument" : [],
     "category" : "message_type",
     "data" : {
-      "token options" : { "clear" : 0 },
+      "token options" : { "clear" : 1 },
       "purge" : { "override" : 0, "enabled" : 0, "quota" : "", "days" : "" }
     },
     "language" : "",
