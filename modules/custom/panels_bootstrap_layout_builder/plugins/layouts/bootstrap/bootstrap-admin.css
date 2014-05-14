@@ -1,0 +1,157 @@
+html{
+  font-size: inherit !important;
+}
+.container-full { 
+	padding: 0 15px; 
+}
+
+#panels-dnd-main .panel-bootstrap-edit-layout div.panels-display .pane-add-link,
+.panel-bootstrap-edit-layout .panel-pane {
+  display: none;
+}
+
+
+.panel-bootstrap-edit-layout [class*="col"] {
+    background-color: #EEEEEE;
+    border-radius: 3px 3px 3px 3px;
+    line-height: 40px;
+    min-height: 40px;
+    text-align: center;
+    margin-bottom: 5px;
+}
+
+.panel-bootstrap-edit-layout [class*="col"] [class*="col"] {
+    background-color: #CCCCCC;
+}
+
+.panel-bootstrap-edit-layout [class*="col"] [class*="col"] [class*="col"] {
+    background-color: #AAAAAA;
+}
+
+.panel-bootstrap-edit-layout [class*="col"] [class*="col"] [class*="col"] [class*="col"]{
+    background-color: #999999;
+}
+
+.panel-bootstrap-edit-layout [class*="col"] [class*="col"] [class*="col"] [class*="col"] [class*="col"]{
+    background-color: #777777;
+}
+
+.panel-bootstrap-edit-layout [class*="col"] [class*="col"] [class*="col"] [class*="col"] [class*="col"] [class*="col"]{
+    background-color: #555555;
+}
+
+.panel-bootstrap-edit-layout [class*="col"] [class*="col"] [class*="col"] [class*="col"] [class*="col"] [class*="col"] [class*="col"]{
+    background-color: #333333;
+}
+
+
+.row-fluid > [class*="col"]{
+    margin-left: 0 !important;
+}  
+
+.row-fluid > [class*="col"] ~ [class*="col"]{
+    margin-left: 2.12766% !important; 
+}   
+
+.bootstrap-class-selector{
+  margin: 0 auto;
+}
+
+.bootstrap-class-selector label{
+  display: inline-block;
+  float: left;
+  margin-left: 10px !important;
+  margin-right: 15px !important;
+  line-height: 24px;
+}
+
+.bootstrap-class-selector select{
+  float:left;
+}
+
+.bootstrap-class-selector .form-item{
+  float: left;
+}
+
+.panel-bootstrap-edit-layout div.panels-display h2.label {
+  padding-right: 0;
+}
+
+.panel-bootstrap-edit-layout .panels-bootstrap-column-inside {
+/*  margin: 5px; */
+  border: 1px dotted green;
+}
+
+.panels-bootstrap-column-inside {
+/*  overflow: hidden; */
+}
+
+.panel-bootstrap-edit-layout .panels-bootstrap-column > .bootstrap-title {
+  color: green;
+}
+
+.panel-bootstrap-edit-layout .panels-bootstrap-row-inside {
+  margin: 5px;
+  border: 1px dotted blue;
+}
+
+.panel-bootstrap-edit-layout .panels-bootstrap-row > .bootstrap-title {
+  color: blue;
+}
+
+.panel-bootstrap-no-edit-layout .bootstrap-layout-only,
+.panel-bootstrap-no-edit-layout .bootstrap-class-selector {
+  display: none;
+}
+
+.panel-bootstrap-edit-layout .bootstrap-title {
+  text-align: center;
+  width: 5em;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.panel-bootstrap-no-edit-layout .panels-bootstrap-splitter {
+  display: none;
+}
+
+.panels-bootstrap-splitter span {
+  display: none;
+}
+
+.panels-bootstrap-splitter {
+  width: 11px;
+  float: left;
+  margin-left: -7px;
+  margin-right: -6px;
+	cursor: e-resize;	/* in case col-resize isn't supported */
+	cursor: col-resize;
+  height: 30px;
+  position: relative;
+  z-index: 1;
+  background: url(grippie-vertical.png) center center no-repeat #eee;
+  border: 1px solid #ccc;
+}
+
+.bootstrap-splitting {
+  border: 2px dotted yellow !important;
+  margin: -2px !important;
+}
+
+.bootstrap-splitter-hover-box {
+  position: absolute;
+  z-index: 1000;
+  background: white;
+  color: black;
+  border: 1px solid black;
+  width: 60px;
+  height: 2em;
+  text-align: center;
+  line-height: 2em;
+}
+
+#panels-edit-display .panel-pane,
+#panels-edit-display .helperclass {
+  margin: .5em;
+}
+
