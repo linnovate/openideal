@@ -139,11 +139,11 @@ projects[panels][subdir] = contrib
 projects[panels_bootstrap_layouts][version] = "3.x-dev"
 projects[panels_bootstrap_layouts][subdir] = contrib
 
-projects[panels_bootstrap_layout_builder][type] = module
-projects[panels_bootstrap_layout_builder][download][type] = git
-projects[panels_bootstrap_layout_builder][download][branch] = "openideal"
-projects[panels_bootstrap_layout_builder][download][url] = https://github.com/Innoveto/panels_bootstrap_layout_builder.git
-projects[panels_bootstrap_layout_builder][subdir] = contrib
+;projects[panels_bootstrap_layout_builder][type] = module
+;projects[panels_bootstrap_layout_builder][download][type] = git
+;projects[panels_bootstrap_layout_builder][download][branch] = "openideal"
+;projects[panels_bootstrap_layout_builder][download][url] = https://github.com/Innoveto/panels_bootstrap_layout_builder.git
+;projects[panels_bootstrap_layout_builder][subdir] = contrib
 
 projects[panels_bootstrap_styles][version] = "1.0-alpha1"
 projects[panels_bootstrap_styles][subdir] = contrib
