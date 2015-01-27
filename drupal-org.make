@@ -114,9 +114,8 @@ projects[logintoboggan][subdir] = contrib
 projects[mailsystem][version] = "2.34"
 projects[mailsystem][subdir] = contrib
 
-projects[mentions][version] = "1.0"
-projects[mentions][subdir] = contrib
-projects[mentions][patch][] = https://drupal.org/files/issues/mentions-patch-format-empty-2064103-9.patch
+;projects[mentions][version] = "1.0-beta2"
+;projects[mentions][subdir] = contrib
 
 projects[message][version] = "1.9"
 projects[message][subdir] = contrib
@@ -210,9 +209,6 @@ projects[wysiwyg_filter][subdir] = contrib
 
 projects[hashtags][version] = "1.4"
 projects[hashtags][subdir] = contrib
-
-projects[mentions][version] = "1.x-dev"
-projects[mentions][subdir] = contrib
 
 projects[navbar][version] = "1.4"
 projects[navbar][subdir] = contrib
