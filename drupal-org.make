@@ -114,8 +114,8 @@ projects[logintoboggan][subdir] = contrib
 projects[mailsystem][version] = "2.34"
 projects[mailsystem][subdir] = contrib
 
-;projects[mentions][version] = "1.0-beta2"
-;projects[mentions][subdir] = contrib
+projects[mentions][version] = "1.0-beta2"
+projects[mentions][subdir] = contrib
 
 projects[message][version] = "1.9"
 projects[message][subdir] = contrib
