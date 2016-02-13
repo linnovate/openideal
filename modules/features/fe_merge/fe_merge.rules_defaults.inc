@@ -12,6 +12,7 @@ function fe_merge_default_rules_configuration() {
   $items['rules_merged_to_merged_ideas'] = entity_import('rules_config', '{ "rules_merged_to_merged_ideas" : {
       "LABEL" : "Merged to merged ideas",
       "PLUGIN" : "action set",
+      "OWNER" : "rules",
       "TAGS" : [ "Merged Idea" ],
       "REQUIRES" : [ "rules" ],
       "USES VARIABLES" : { "node" : { "label" : "Node", "type" : "node" } },
@@ -40,6 +41,7 @@ function fe_merge_default_rules_configuration() {
   $items['rules_merged_to_merged_to'] = entity_import('rules_config', '{ "rules_merged_to_merged_to" : {
       "LABEL" : "merged to merged to",
       "PLUGIN" : "rule",
+      "OWNER" : "rules",
       "REQUIRES" : [ "rules", "php" ],
       "USES VARIABLES" : { "node" : { "label" : "Node", "type" : "node" } },
       "IF" : [
@@ -58,6 +60,7 @@ function fe_merge_default_rules_configuration() {
   $items['rules_node_hide_voting'] = entity_import('rules_config', '{ "rules_node_hide_voting" : {
       "LABEL" : "Node Hide Voting",
       "PLUGIN" : "action set",
+      "OWNER" : "rules",
       "REQUIRES" : [ "php", "rules" ],
       "USES VARIABLES" : { "node" : { "label" : "Node", "type" : "node" } },
       "ACTION SET" : [
@@ -68,6 +71,7 @@ function fe_merge_default_rules_configuration() {
   $items['rules_pass_radioactivity_to_master_idea'] = entity_import('rules_config', '{ "rules_pass_radioactivity_to_master_idea" : {
       "LABEL" : "Pass Radioactivity to Master idea",
       "PLUGIN" : "rule",
+      "OWNER" : "rules",
       "TAGS" : [ "Merged Idea" ],
       "REQUIRES" : [ "rules", "radioactivity" ],
       "USES VARIABLES" : { "node" : { "label" : "Node", "type" : "node" } },
@@ -116,9 +120,10 @@ function fe_merge_default_rules_configuration() {
   $items['rules_set_as_merged_idea'] = entity_import('rules_config', '{ "rules_set_as_merged_idea" : {
       "LABEL" : "Set as merged idea",
       "PLUGIN" : "reaction rule",
+      "OWNER" : "rules",
       "TAGS" : [ "Merged Idea" ],
       "REQUIRES" : [ "rules" ],
-      "ON" : [ "node_presave" ],
+      "ON" : { "node_presave" : [] },
       "IF" : [
         { "node_is_of_type" : { "node" : [ "node" ], "type" : { "value" : { "idea" : "idea" } } } },
         { "NOT data_is" : {

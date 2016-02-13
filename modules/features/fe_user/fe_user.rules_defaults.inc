@@ -12,9 +12,10 @@ function fe_user_default_rules_configuration() {
   $items['rules_bronze_user'] = entity_import('rules_config', '{ "rules_bronze_user" : {
       "LABEL" : "Bronze User",
       "PLUGIN" : "reaction rule",
+      "OWNER" : "rules",
       "TAGS" : [ "User" ],
       "REQUIRES" : [ "rules", "flag", "userpoints_rules" ],
-      "ON" : [ "userpoints_event_points_awarded_after" ],
+      "ON" : { "userpoints_event_points_awarded_after" : [] },
       "IF" : [
         { "data_is" : {
             "data" : [ "userpoints-transaction:points" ],
@@ -37,9 +38,10 @@ function fe_user_default_rules_configuration() {
   $items['rules_gold_user'] = entity_import('rules_config', '{ "rules_gold_user" : {
       "LABEL" : "Gold User",
       "PLUGIN" : "reaction rule",
+      "OWNER" : "rules",
       "TAGS" : [ "User" ],
       "REQUIRES" : [ "rules", "flag", "userpoints_rules" ],
-      "ON" : [ "userpoints_event_points_awarded_after" ],
+      "ON" : { "userpoints_event_points_awarded_after" : [] },
       "IF" : [
         { "data_is" : {
             "data" : [ "userpoints-transaction:points" ],
@@ -62,9 +64,10 @@ function fe_user_default_rules_configuration() {
   $items['rules_silver_user'] = entity_import('rules_config', '{ "rules_silver_user" : {
       "LABEL" : "Silver User",
       "PLUGIN" : "reaction rule",
+      "OWNER" : "rules",
       "TAGS" : [ "User" ],
       "REQUIRES" : [ "rules", "flag", "userpoints_rules" ],
-      "ON" : [ "userpoints_event_points_awarded_after" ],
+      "ON" : { "userpoints_event_points_awarded_after" : [] },
       "IF" : [
         { "data_is" : {
             "data" : [ "userpoints-transaction:points" ],

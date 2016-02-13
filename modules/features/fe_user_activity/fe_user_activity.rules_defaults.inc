@@ -12,9 +12,10 @@ function fe_user_activity_default_rules_configuration() {
   $items['rules_create_message_for_new_challenge'] = entity_import('rules_config', '{ "rules_create_message_for_new_challenge" : {
       "LABEL" : "Create message for new challenge",
       "PLUGIN" : "reaction rule",
+      "OWNER" : "rules",
       "TAGS" : [ "Message" ],
       "REQUIRES" : [ "rules" ],
-      "ON" : [ "node_insert" ],
+      "ON" : { "node_insert" : [] },
       "IF" : [
         { "node_is_of_type" : {
             "node" : [ "node" ],
@@ -40,9 +41,10 @@ function fe_user_activity_default_rules_configuration() {
   $items['rules_create_message_for_new_comment'] = entity_import('rules_config', '{ "rules_create_message_for_new_comment" : {
       "LABEL" : "Create message for new comment",
       "PLUGIN" : "reaction rule",
+      "OWNER" : "rules",
       "TAGS" : [ "Message" ],
       "REQUIRES" : [ "rules", "comment" ],
-      "ON" : [ "comment_insert" ],
+      "ON" : { "comment_insert" : [] },
       "IF" : [
         { "data_is" : {
             "data" : [ "comment:node:type" ],
@@ -69,9 +71,10 @@ function fe_user_activity_default_rules_configuration() {
   $items['rules_create_message_for_new_idea'] = entity_import('rules_config', '{ "rules_create_message_for_new_idea" : {
       "LABEL" : "Create message for new idea",
       "PLUGIN" : "reaction rule",
+      "OWNER" : "rules",
       "TAGS" : [ "Message" ],
       "REQUIRES" : [ "rules", "php" ],
-      "ON" : [ "node_insert" ],
+      "ON" : { "node_insert" : [] },
       "IF" : [
         { "node_is_of_type" : { "node" : [ "node" ], "type" : { "value" : { "idea" : "idea" } } } }
       ],
@@ -99,8 +102,9 @@ function fe_user_activity_default_rules_configuration() {
   $items['rules_create_message_for_new_user'] = entity_import('rules_config', '{ "rules_create_message_for_new_user" : {
       "LABEL" : "Create message for new user",
       "PLUGIN" : "reaction rule",
+      "OWNER" : "rules",
       "REQUIRES" : [ "rules" ],
-      "ON" : [ "user_insert" ],
+      "ON" : { "user_insert" : [] },
       "DO" : [
         { "entity_create" : {
             "USING" : {

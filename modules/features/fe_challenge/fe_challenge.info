@@ -3,8 +3,8 @@ description = Add the ideal challenge feature
 core = 7.x
 package = OpenideaL
 php = 5.2.4
-version = 7.x-2.0
-project = fe_challenge
+
+project = idea
 dependencies[] = ctools
 dependencies[] = date
 dependencies[] = entityreference
@@ -19,7 +19,6 @@ dependencies[] = social_buttons
 dependencies[] = strongarm
 dependencies[] = taxonomy
 dependencies[] = views
-datestamp = 1391335658
 features[context][] = challenge_front_page
 features[context][] = on_challenge_page
 features[ctools][] = context:context:3
@@ -66,3 +65,4 @@ features[variable][] = node_submitted_challenge
 features[variable][] = upload_challenge
 features[views_view][] = challenges_list
 features[views_view][] = ideas_in_challenge
+

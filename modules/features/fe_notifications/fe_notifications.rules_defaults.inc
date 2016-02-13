@@ -12,9 +12,10 @@ function fe_notifications_default_rules_configuration() {
   $items['rules_send_mail_for_idea_status_change'] = entity_import('rules_config', '{ "rules_send_mail_for_idea_status_change" : {
       "LABEL" : "Send mail for idea status change",
       "PLUGIN" : "reaction rule",
+      "OWNER" : "rules",
       "TAGS" : [ "Notifications" ],
       "REQUIRES" : [ "rules" ],
-      "ON" : [ "node_update" ],
+      "ON" : { "node_update" : [] },
       "IF" : [
         { "node_is_of_type" : { "node" : [ "node" ], "type" : { "value" : { "idea" : "idea" } } } },
         { "NOT data_is" : {
@@ -39,9 +40,10 @@ function fe_notifications_default_rules_configuration() {
   $items['rules_send_mail_for_new_idea'] = entity_import('rules_config', '{ "rules_send_mail_for_new_idea" : {
       "LABEL" : "Send mail for new idea",
       "PLUGIN" : "reaction rule",
+      "OWNER" : "rules",
       "TAGS" : [ "Notifications" ],
       "REQUIRES" : [ "rules" ],
-      "ON" : [ "node_insert" ],
+      "ON" : { "node_insert" : [] },
       "IF" : [
         { "node_is_of_type" : { "node" : [ "node" ], "type" : { "value" : { "idea" : "idea" } } } },
         { "data_is" : {
@@ -65,9 +67,10 @@ function fe_notifications_default_rules_configuration() {
   $items['rules_send_mail_for_new_user'] = entity_import('rules_config', '{ "rules_send_mail_for_new_user" : {
       "LABEL" : "Send mail for new user",
       "PLUGIN" : "reaction rule",
+      "OWNER" : "rules",
       "TAGS" : [ "Notifications" ],
       "REQUIRES" : [ "rules" ],
-      "ON" : [ "user_insert" ],
+      "ON" : { "user_insert" : [] },
       "DO" : [
         { "mail_to_users_of_role" : {
             "roles" : { "value" : { "3" : "3", "5" : "5" } },
@@ -82,9 +85,10 @@ function fe_notifications_default_rules_configuration() {
   $items['rules_send_mail_notification_about_the_mention'] = entity_import('rules_config', '{ "rules_send_mail_notification_about_the_mention" : {
       "LABEL" : "Send mail notification about the mention",
       "PLUGIN" : "reaction rule",
+      "OWNER" : "rules",
       "TAGS" : [ "Notifications" ],
       "REQUIRES" : [ "rules", "mentions" ],
-      "ON" : [ "mentions_insert" ],
+      "ON" : { "mentions_insert" : [] },
       "IF" : [
         { "data_is" : { "data" : [ "mention:user:field-mention-notifications" ], "value" : 1 } }
       ],

@@ -74,10 +74,11 @@ function fe_challenge_default_page_manager_pages() {
   );
   $display->cache = array();
   $display->title = '';
+  $display->uuid = '97c888e9-bd4e-4493-bf0f-e62fd1481b30';
   $display->content = array();
   $display->panels = array();
     $pane = new stdClass();
-    $pane->pid = 'new-1';
+    $pane->pid = 'new-be2d700d-5398-49e2-bb00-8eae27379658';
     $pane->panel = 'middle';
     $pane->type = 'block';
     $pane->subtype = 'views-challenges_list-block_1';
@@ -95,10 +96,11 @@ function fe_challenge_default_page_manager_pages() {
     $pane->extras = array();
     $pane->position = 0;
     $pane->locks = array();
-    $display->content['new-1'] = $pane;
-    $display->panels['middle'][0] = 'new-1';
+    $pane->uuid = 'be2d700d-5398-49e2-bb00-8eae27379658';
+    $display->content['new-be2d700d-5398-49e2-bb00-8eae27379658'] = $pane;
+    $display->panels['middle'][0] = 'new-be2d700d-5398-49e2-bb00-8eae27379658';
   $display->hide_title = PANELS_TITLE_FIXED;
-  $display->title_pane = 'new-1';
+  $display->title_pane = 'new-be2d700d-5398-49e2-bb00-8eae27379658';
   $handler->conf['display'] = $display;
   $page->default_handlers[$handler->name] = $handler;
   $pages['challenges'] = $page;

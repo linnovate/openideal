@@ -133,6 +133,7 @@ function fe_user_field_default_fields() {
         'module' => 'addressfield',
         'settings' => array(
           'available_countries' => array(),
+          'default_country' => '',
           'format_handlers' => array(
             'address' => 'address',
             'name-full' => 'name-full',

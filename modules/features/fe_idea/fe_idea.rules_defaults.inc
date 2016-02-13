@@ -12,9 +12,10 @@ function fe_idea_default_rules_configuration() {
   $items['rules_close_idea in action'] = entity_import('rules_config', '{ "rules_close_idea in action" : {
       "LABEL" : "Close idea in action",
       "PLUGIN" : "reaction rule",
+      "OWNER" : "rules",
       "TAGS" : [ "Idea", "In Action" ],
       "REQUIRES" : [ "rules" ],
-      "ON" : [ "node_view" ],
+      "ON" : { "node_view" : [] },
       "IF" : [
         { "node_is_of_type" : { "node" : [ "node" ], "type" : { "value" : { "idea" : "idea" } } } },
         { "NOT data_is_empty" : { "data" : [ "node:field-in-action" ] } }
@@ -28,9 +29,10 @@ function fe_idea_default_rules_configuration() {
   $items['rules_idea_got_new_comment'] = entity_import('rules_config', '{ "rules_idea_got_new_comment" : {
       "LABEL" : "Idea got new comment",
       "PLUGIN" : "reaction rule",
+      "OWNER" : "rules",
       "TAGS" : [ "Idea", "Radioactivity" ],
       "REQUIRES" : [ "rules", "radioactivity", "comment" ],
-      "ON" : [ "comment_insert" ],
+      "ON" : { "comment_insert" : [] },
       "IF" : [
         { "node_is_of_type" : {
             "node" : [ "comment:node" ],
@@ -48,9 +50,10 @@ function fe_idea_default_rules_configuration() {
   $items['rules_idea_got_new_vote'] = entity_import('rules_config', '{ "rules_idea_got_new_vote" : {
       "LABEL" : "Idea got new vote",
       "PLUGIN" : "reaction rule",
+      "OWNER" : "rules",
       "TAGS" : [ "Idea", "Radioactivity" ],
       "REQUIRES" : [ "rules", "radioactivity", "voting_rules" ],
-      "ON" : [ "voting_rules_insert_node" ],
+      "ON" : { "voting_rules_insert_node" : [] },
       "IF" : [
         { "node_is_of_type" : { "node" : [ "node" ], "type" : { "value" : { "idea" : "idea" } } } }
       ],
@@ -64,9 +67,10 @@ function fe_idea_default_rules_configuration() {
   $items['rules_idea_is_blast'] = entity_import('rules_config', '{ "rules_idea_is_blast" : {
       "LABEL" : "Idea is Blast",
       "PLUGIN" : "reaction rule",
+      "OWNER" : "rules",
       "TAGS" : [ "Idea", "Radioactivity" ],
       "REQUIRES" : [ "rules", "flag" ],
-      "ON" : [ "node_view" ],
+      "ON" : { "node_view" : [] },
       "IF" : [
         { "node_is_of_type" : { "node" : [ "node" ], "type" : { "value" : { "idea" : "idea" } } } },
         { "entity_has_field" : { "entity" : [ "node" ], "field" : "field_blast_idea" } },
@@ -97,9 +101,10 @@ function fe_idea_default_rules_configuration() {
   $items['rules_idea_is_buzz'] = entity_import('rules_config', '{ "rules_idea_is_buzz" : {
       "LABEL" : "Idea is Buzz",
       "PLUGIN" : "reaction rule",
+      "OWNER" : "rules",
       "TAGS" : [ "Idea", "Radioactivity" ],
       "REQUIRES" : [ "rules", "flag" ],
-      "ON" : [ "node_view" ],
+      "ON" : { "node_view" : [] },
       "IF" : [
         { "node_is_of_type" : { "node" : [ "node" ], "type" : { "value" : { "idea" : "idea" } } } },
         { "entity_has_field" : { "entity" : [ "node" ], "field" : "field_buzz_idea" } },
@@ -130,9 +135,10 @@ function fe_idea_default_rules_configuration() {
   $items['rules_idea_is_groove'] = entity_import('rules_config', '{ "rules_idea_is_groove" : {
       "LABEL" : "Idea is Groove",
       "PLUGIN" : "reaction rule",
+      "OWNER" : "rules",
       "TAGS" : [ "Idea", "Radioactivity" ],
       "REQUIRES" : [ "rules", "flag" ],
-      "ON" : [ "node_view" ],
+      "ON" : { "node_view" : [] },
       "IF" : [
         { "node_is_of_type" : { "node" : [ "node" ], "type" : { "value" : { "idea" : "idea" } } } },
         { "entity_has_field" : { "entity" : [ "node" ], "field" : "field_blast_idea" } },
@@ -163,6 +169,7 @@ function fe_idea_default_rules_configuration() {
   $items['rules_node_close_commenting'] = entity_import('rules_config', '{ "rules_node_close_commenting" : {
       "LABEL" : "Node Close Commenting",
       "PLUGIN" : "action set",
+      "OWNER" : "rules",
       "REQUIRES" : [ "rules" ],
       "USES VARIABLES" : { "node" : { "label" : "Node", "type" : "node" } },
       "ACTION SET" : [ { "data_set" : { "data" : [ "node:comment" ], "value" : "1" } } ]
@@ -171,6 +178,7 @@ function fe_idea_default_rules_configuration() {
   $items['rules_node_close_voting'] = entity_import('rules_config', '{ "rules_node_close_voting" : {
       "LABEL" : "Node Close Voting",
       "PLUGIN" : "action set",
+      "OWNER" : "rules",
       "REQUIRES" : [ "php", "rules" ],
       "USES VARIABLES" : { "node" : { "label" : "Node", "type" : "node" } },
       "ACTION SET" : [
@@ -181,9 +189,10 @@ function fe_idea_default_rules_configuration() {
   $items['rules_user_add_comment'] = entity_import('rules_config', '{ "rules_user_add_comment" : {
       "LABEL" : "User add comment",
       "PLUGIN" : "reaction rule",
+      "OWNER" : "rules",
       "TAGS" : [ "Idea", "Userpoints" ],
       "REQUIRES" : [ "rules", "userpoints_rules", "comment" ],
-      "ON" : [ "comment_insert" ],
+      "ON" : { "comment_insert" : [] },
       "IF" : [
         { "node_is_of_type" : {
             "node" : [ "comment:node" ],
@@ -206,35 +215,37 @@ function fe_idea_default_rules_configuration() {
     }
   }');
   $items['rules_user_add_idea'] = entity_import('rules_config', '{ "rules_user_add_idea" : {
-    "LABEL" : "User Add Idea",
-    "PLUGIN" : "reaction rule",
-    "TAGS" : [ "Idea", "Userpoints" ],
-    "REQUIRES" : [ "rules", "userpoints_rules", "php" ],
-    "ON" : [ "node_insert" ],
-    "IF" : [
-      { "node_is_of_type" : { "node" : [ "node" ], "type" : { "value" : { "idea" : "idea" } } } }
-    ],
-    "DO" : [
-      { "userpoints_action_grant_points" : {
-          "user" : [ "node:author" ],
-          "points" : "100",
-          "tid" : "0",
-          "entity" : [ "node:author" ],
-          "operation" : "Insert",
-          "display" : 0,
-          "moderate" : "default"
-        }
-      },
-      { "php_eval" : { "code" : "$_SESSION[\u0027newnode\u0027] = 1;" } }
-    ]
-  }
-}');
+      "LABEL" : "User Add Idea",
+      "PLUGIN" : "reaction rule",
+      "OWNER" : "rules",
+      "TAGS" : [ "Idea", "Userpoints" ],
+      "REQUIRES" : [ "rules", "userpoints_rules", "php" ],
+      "ON" : { "node_insert" : [] },
+      "IF" : [
+        { "node_is_of_type" : { "node" : [ "node" ], "type" : { "value" : { "idea" : "idea" } } } }
+      ],
+      "DO" : [
+        { "userpoints_action_grant_points" : {
+            "user" : [ "node:author" ],
+            "points" : "100",
+            "tid" : "0",
+            "entity" : [ "node:author" ],
+            "operation" : "Insert",
+            "display" : 0,
+            "moderate" : "default"
+          }
+        },
+        { "php_eval" : { "code" : "$_SESSION[\\u0027newnode\\u0027] = 1;" } }
+      ]
+    }
+  }');
   $items['rules_user_idea_in_action'] = entity_import('rules_config', '{ "rules_user_idea_in_action" : {
       "LABEL" : "User Idea In Action",
       "PLUGIN" : "reaction rule",
+      "OWNER" : "rules",
       "TAGS" : [ "Idea", "In Action", "Userpoints" ],
       "REQUIRES" : [ "rules", "userpoints_rules" ],
-      "ON" : [ "node_update" ],
+      "ON" : { "node_update" : [] },
       "IF" : [
         { "node_is_of_type" : { "node" : [ "node" ], "type" : { "value" : { "idea" : "idea" } } } },
         { "entity_has_field" : { "entity" : [ "node" ], "field" : "field_in_action" } },
@@ -301,9 +312,10 @@ function fe_idea_default_rules_configuration() {
   $items['rules_user_idea_launch'] = entity_import('rules_config', '{ "rules_user_idea_launch" : {
       "LABEL" : "User Idea Launch",
       "PLUGIN" : "reaction rule",
+      "OWNER" : "rules",
       "TAGS" : [ "Idea", "Userpoints" ],
       "REQUIRES" : [ "rules", "userpoints_rules", "flag" ],
-      "ON" : [ "node_update" ],
+      "ON" : { "node_update" : [] },
       "IF" : [
         { "node_is_of_type" : { "node" : [ "node" ], "type" : { "value" : { "idea" : "idea" } } } },
         { "entity_has_field" : { "entity" : [ "node" ], "field" : "field_in_action" } },
@@ -371,9 +383,10 @@ function fe_idea_default_rules_configuration() {
   $items['rules_user_vote'] = entity_import('rules_config', '{ "rules_user_vote" : {
       "LABEL" : "User Vote",
       "PLUGIN" : "reaction rule",
+      "OWNER" : "rules",
       "TAGS" : [ "Idea", "Userpoints" ],
       "REQUIRES" : [ "rules", "userpoints_rules", "voting_rules" ],
-      "ON" : [ "voting_rules_insert_node" ],
+      "ON" : { "voting_rules_insert_node" : [] },
       "IF" : [
         { "node_is_of_type" : { "node" : [ "node" ], "type" : { "value" : { "idea" : "idea" } } } }
       ],

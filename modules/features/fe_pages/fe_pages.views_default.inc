@@ -317,7 +317,7 @@ function fe_pages_views_default_views() {
   $handler->display->display_options['pager']['options']['offset'] = '0';
   $handler->display->display_options['style_plugin'] = 'views_bootstrap_carousel_plugin_style';
   $handler->display->display_options['style_options']['interval'] = '5000';
-  $handler->display->display_options['style_options']['navigation'] = 1;
+  $handler->display->display_options['style_options']['navigation'] = 0;
   $handler->display->display_options['style_options']['indicators'] = 1;
   $handler->display->display_options['style_options']['pause'] = 0;
   $handler->display->display_options['row_plugin'] = 'fields';
@@ -483,6 +483,10 @@ function fe_pages_views_default_views() {
 
   /* Display: Block */
   $handler = $view->new_display('block', 'Block', 'block');
+  $handler->display->display_options['defaults']['pager'] = FALSE;
+  $handler->display->display_options['pager']['type'] = 'some';
+  $handler->display->display_options['pager']['options']['items_per_page'] = '3';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
   $export['default_challenge'] = $view;
 
   $view = new view();
@@ -602,7 +606,7 @@ function fe_pages_views_default_views() {
   $handler = $view->new_display('block', 'Block', 'block');
   $handler->display->display_options['defaults']['style_plugin'] = FALSE;
   $handler->display->display_options['style_plugin'] = 'views_bootstrap_thumbnail_plugin_style';
-  $handler->display->display_options['style_options']['column_type'] = '6';
+  $handler->display->display_options['style_options']['columns'] = '2';
   $handler->display->display_options['defaults']['style_options'] = FALSE;
   $handler->display->display_options['defaults']['row_plugin'] = FALSE;
   $handler->display->display_options['row_plugin'] = 'fields';

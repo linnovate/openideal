@@ -360,6 +360,8 @@ function fe_idea_field_default_fields() {
       'label' => 'Blast Idea',
       'required' => 0,
       'settings' => array(
+        'history' => 0,
+        'history_limit' => 8,
         'profile' => 'blast_idea',
         'user_register_form' => FALSE,
       ),
@@ -422,6 +424,8 @@ function fe_idea_field_default_fields() {
       'label' => 'Buzz Idea',
       'required' => 0,
       'settings' => array(
+        'history' => 0,
+        'history_limit' => 8,
         'profile' => 'buzz_idea',
         'user_register_form' => FALSE,
       ),
@@ -658,6 +662,8 @@ function fe_idea_field_default_fields() {
       'label' => 'Groove Idea',
       'required' => 0,
       'settings' => array(
+        'history' => 0,
+        'history_limit' => 8,
         'profile' => 'groove_idea',
         'user_register_form' => FALSE,
       ),
