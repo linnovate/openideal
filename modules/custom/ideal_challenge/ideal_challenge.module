@@ -238,7 +238,7 @@ function _ideal_challenge_add_idea_button() {
   if ($node) {
     $nid = $node->nid;
     $output = '<div class="challenge-add-idea-button">';
-    $output .= l('Add idea', 'node/add/idea', array('attributes' => array('class' => 'btn btn-success'), 'query' => array('field_challenge_ref' => $nid)));
+    $output .= l(t('Add idea'), 'node/add/idea', array('attributes' => array('class' => 'btn btn-success'), 'query' => array('field_challenge_ref' => $nid)));
     $output .= '</div>';
 		return $output;
 	}

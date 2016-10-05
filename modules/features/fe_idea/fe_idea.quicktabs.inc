@@ -17,26 +17,26 @@ function fe_idea_quicktabs_default_quicktabs() {
   $quicktabs->ajax = 0;
   $quicktabs->hide_empty_tabs = FALSE;
   $quicktabs->default_tab = 0;
-  $quicktabs->title = 'All Ideas';
+  $quicktabs->title = 'All ideas';
   $quicktabs->tabs = array(
     0 => array(
-      'bid' => 'views_delta_ideas_all-block_1',
+      'bid' => 'views_delta_ideas_all-block_3',
       'hide_title' => 1,
-      'title' => 'Popular Ideas',
+      'title' => 'Ideas',
       'weight' => '-100',
       'type' => 'block',
     ),
     1 => array(
       'bid' => 'views_delta_ideas_all-block_2',
       'hide_title' => 1,
-      'title' => 'Latest Ideas',
+      'title' => 'Latest',
       'weight' => '-99',
       'type' => 'block',
     ),
     2 => array(
-      'bid' => 'views_delta_ideas_all-block_3',
+      'bid' => 'views_delta_ideas_all-block_1',
       'hide_title' => 1,
-      'title' => 'Ideas in Action',
+      'title' => 'Popular',
       'weight' => '-98',
       'type' => 'block',
     ),
@@ -47,10 +47,10 @@ function fe_idea_quicktabs_default_quicktabs() {
 
   // Translatables
   // Included for use with string extractors like potx.
-  t('All Ideas');
-  t('Ideas in Action');
-  t('Latest Ideas');
-  t('Popular Ideas');
+  t('All ideas');
+  t('Ideas');
+  t('Latest');
+  t('Popular');
 
   $export['all_ideas'] = $quicktabs;
 

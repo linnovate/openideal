@@ -7,16 +7,16 @@
 /**
  * Implements hook_ctools_plugin_api().
  */
-function fe_user_ctools_plugin_api() {
-  list($module, $api) = func_get_args();
+function fe_user_ctools_plugin_api($module = NULL, $api = NULL) {
   if ($module == "context" && $api == "context") {
     return array("version" => "3");
   }
-  list($module, $api) = func_get_args();
+  if ($module == "page_manager" && $api == "pages_default") {
+    return array("version" => "1");
+  }
   if ($module == "quicktabs" && $api == "quicktabs") {
     return array("version" => "1");
   }
-  list($module, $api) = func_get_args();
   if ($module == "strongarm" && $api == "strongarm") {
     return array("version" => "1");
   }
@@ -25,8 +25,8 @@ function fe_user_ctools_plugin_api() {
 /**
  * Implements hook_views_api().
  */
-function fe_user_views_api() {
-  return array("version" => "3.0");
+function fe_user_views_api($module = NULL, $api = NULL) {
+  return array("api" => "3.0");
 }
 
 /**
@@ -38,7 +38,7 @@ function fe_user_flag_default_flags() {
   $flags['bronze_user'] = array(
     'content_type' => 'user',
     'title' => 'Bronze User',
-    'global' => '1',
+    'global' => 1,
     'types' => array(),
     'flag_short' => 'flag as Bronze user',
     'flag_long' => '',
@@ -50,12 +50,12 @@ function fe_user_flag_default_flags() {
     'link_type' => 'toggle',
     'roles' => array(
       'flag' => array(
-        0 => '3',
-        1 => '5',
+        0 => 3,
+        1 => 5,
       ),
       'unflag' => array(
-        0 => '3',
-        1 => '5',
+        0 => 3,
+        1 => 5,
       ),
     ),
     'weight' => 0,
@@ -74,7 +74,7 @@ function fe_user_flag_default_flags() {
   $flags['gold_user'] = array(
     'content_type' => 'user',
     'title' => 'Gold User',
-    'global' => '1',
+    'global' => 1,
     'types' => array(),
     'flag_short' => 'flag as Gold user',
     'flag_long' => '',
@@ -86,12 +86,12 @@ function fe_user_flag_default_flags() {
     'link_type' => 'toggle',
     'roles' => array(
       'flag' => array(
-        0 => '3',
-        1 => '5',
+        0 => 3,
+        1 => 5,
       ),
       'unflag' => array(
-        0 => '3',
-        1 => '5',
+        0 => 3,
+        1 => 5,
       ),
     ),
     'weight' => 0,
@@ -110,7 +110,7 @@ function fe_user_flag_default_flags() {
   $flags['has_launched_idea'] = array(
     'content_type' => 'user',
     'title' => 'Has Launched Idea',
-    'global' => '1',
+    'global' => 1,
     'types' => array(),
     'flag_short' => 'flag as has launched idea',
     'flag_long' => '',
@@ -122,10 +122,10 @@ function fe_user_flag_default_flags() {
     'link_type' => 'toggle',
     'roles' => array(
       'flag' => array(
-        0 => '3',
+        0 => 3,
       ),
       'unflag' => array(
-        0 => '3',
+        0 => 3,
       ),
     ),
     'weight' => 0,
@@ -144,7 +144,7 @@ function fe_user_flag_default_flags() {
   $flags['silver_user'] = array(
     'content_type' => 'user',
     'title' => 'Silver User',
-    'global' => '1',
+    'global' => 1,
     'types' => array(),
     'flag_short' => 'flag as Silver user',
     'flag_long' => '',
@@ -156,12 +156,12 @@ function fe_user_flag_default_flags() {
     'link_type' => 'toggle',
     'roles' => array(
       'flag' => array(
-        0 => '3',
-        1 => '5',
+        0 => 3,
+        1 => 5,
       ),
       'unflag' => array(
-        0 => '3',
-        1 => '5',
+        0 => 3,
+        1 => 5,
       ),
     ),
     'weight' => 0,
@@ -188,22 +188,14 @@ function fe_user_image_default_styles() {
 
   // Exported image style: avatar_45_45.
   $styles['avatar_45_45'] = array(
-    'name' => 'avatar_45_45',
     'effects' => array(
       1 => array(
-        'label' => 'Scale and crop',
-        'help' => 'Scale and crop will maintain the aspect-ratio of the original image, then crop the larger dimension. This is most useful for creating perfectly square thumbnails without stretching the image.',
-        'effect callback' => 'image_scale_and_crop_effect',
-        'dimensions callback' => 'image_resize_dimensions',
-        'form callback' => 'image_resize_form',
-        'summary theme' => 'image_resize_summary',
-        'module' => 'image',
         'name' => 'image_scale_and_crop',
         'data' => array(
-          'width' => '45',
-          'height' => '45',
+          'width' => 45,
+          'height' => 45,
         ),
-        'weight' => '1',
+        'weight' => 1,
       ),
     ),
     'label' => 'avatar_45_45',

@@ -15,7 +15,7 @@ function fe_idea_menu_default_menu_links() {
     'menu_name' => 'main-menu',
     'link_path' => 'ideas',
     'router_path' => 'ideas',
-    'link_title' => 'Ideas',
+    'link_title' => 'רעיונות',
     'options' => array(
       'attributes' => array(
         'title' => '',
@@ -30,7 +30,7 @@ function fe_idea_menu_default_menu_links() {
   );
   // Translatables
   // Included for use with string extractors like potx.
-  t('Ideas');
+  t('רעיונות');
 
 
   return $menu_links;

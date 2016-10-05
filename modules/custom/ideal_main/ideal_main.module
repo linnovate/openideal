@@ -3,9 +3,9 @@
  * Implements hook_init().
  */
 function ideal_main_init() {
+  variable_set('page_manager_user_view_enable',FALSE);
   include_once DRUPAL_ROOT . '/' . drupal_get_path('module', 'ideal_main') . '/ideal_main.action.inc';
 }
-
 
 /**
  * Implements hook_permission().
@@ -15,7 +15,7 @@ function ideal_main_permission() {
     'admin ideas' => array(
       'title' => t('admin ideas'),
       'description' => t('Administer ideas'),
-    ),
+    ),  
   );
 }
 
@@ -197,7 +197,7 @@ function ideal_main_quicktabs_alter(&$quicktabs) {
       $view = substr($view, strpos($view, "delta")+6);
      
       // if this is one of the tabs we want to add the counter to
-      if ($view == "ideas_in_action" || ($block == "block_3" && ($view == "ideas_by_category" || $view == "ideas_all"))) {
+      if ($view == "ideas_in_action" || ($block == "block_3" && ($view == "ideas_by_category"))) {
         $count = ideal_main_quicktabs_view_counter($view, $block);
         $quicktabs->tabs[$key]['title'] .= " (" . $count . ")";
       }
@@ -345,3 +345,187 @@ function ideal_main_field_formatter_view($entity_type, $entity, $field, $instanc
  }
   return $elements;
 }
+
+function ideal_main_comments_link($path = FALSE) {
+  if (!$path) {
+    $path = current_path();
+  }
+  global $user;
+  if ($user->uid) {
+    return l(t('Add comment'), $path, array('fragment' => 'comment-form-id'));
+  } else {
+    return l(t('Login/Register to post comments'), '/user/login');
+  }
+}
+/**
+* Implementation of hook_form_FORM_ID_alter().
+*/
+function ideal_main_form_alter(&$form, $form_state) {
+  switch ($form['form_id']['#value']) {
+    case 'user_admin_settings':
+      $form['personalization']['pictures']['user_picture_default'] = array(
+      '#title' => t('Image'),
+      '#type' => 'managed_file',
+      '#description' => t('The uploaded image will be displayed on this page using the image style choosen below.'),
+      '#default_value' => variable_get('user_picture_default', ''),
+      '#upload_location' => 'public://',
+      );
+      break;
+    case 'user_pass':
+      $form['#submit'][] = 'ideal_main_redirect_to_user_login';
+    default:
+      break;
+  }
+}
+
+function ideal_main_redirect_to_user_login($form, &$form_state) {
+  $form_state['redirect'] = 'user/login';  
+}
+
+function ideal_main_preprocess_user_picture(&$variables) {
+  $variables['user_picture'] = '';
+  if (variable_get('user_pictures', 0)) {
+    $account = $variables['account'];
+    if (!empty($account->picture)) {
+      // @TODO: Ideally this function would only be passed file objects, but
+      // since there's a lot of legacy code that JOINs the {users} table to
+      // {node} or {comments} and passes the results into this function if we
+      // a numeric value in the picture field we'll assume it's a file id
+      // and load it for them. Once we've got user_load_multiple() and
+      // comment_load_multiple() functions the user module will be able to load
+      // the picture files in mass during the object's load process.
+      if (is_numeric($account->picture)) {
+        $account->picture = file_load($account->picture);
+      }
+      if (!empty($account->picture->uri)) {
+        $filepath = $account->picture->uri;
+      }
+    }
+     elseif (variable_get('user_picture_default', '')) {
+
+      $filepath = file_load(variable_get('user_picture_default', ''));
+      $account->picture = $filepath;
+      if($account->uid != 0)
+        user_save($account);
+    }
+
+    if (isset($filepath)) {
+      $alt = t("@user's picture", array('@user' => format_username($account)));
+      // If the image does not have a valid Drupal scheme (for eg. HTTP),
+      // don't load image styles.
+      if (module_exists('image') && file_valid_uri($filepath) && $style = variable_get('user_picture_style', '')) {
+        $variables['user_picture'] = theme('image_style', array('style_name' => $style, 'path' => $filepath, 'alt' => $alt, 'title' => $alt));
+      }
+      else {
+        $variables['user_picture'] = theme('image', array('path' => $filepath, 'alt' => $alt, 'title' => $alt));
+      }
+      if (!empty($account->uid) && user_access('access user profiles')) {
+        $attributes = array('attributes' => array('title' => t('View user profile.')), 'html' => TRUE);
+        $variables['user_picture'] = l($variables['user_picture'], "user/$account->uid", $attributes);
+      }
+    }
+  }
+}
+
+
+
+
+function ideal_main_form_user_register_form_alter(&$form, &$form_state) {
+  $form['hybridauth']['#weight'] = -100 ;
+  $form['account']['name']['#weight'] = 1;                
+  $form['account']['mail']['#weight'] = 2;   
+  $form['account']['pass']['#weight'] = 3; 
+  $form['field_bio']['#weight'] = 4;  
+  $form['field_bio']['#access'] = TRUE;
+  // $form['picture']['#access'] = TRUE;
+  // $form['picture']['picture_upload']['#weight'] = 5;     
+  $form['field_comment_notficiations']['#access'] = FALSE;  
+  $form['field_content_notifications']['#access']  = FALSE;
+
+  // $form['picture']['picture_delete']['#access'] = !empty($account->picture->fid) &&
+  // $account->picture->fid != variable_get('user_picture_default');
+}
+
+function ideal_main_form_user_login_alter(&$form, &$form_state) {
+ $form['hybridauth']['#weight'] = 0 ;          
+}
+
+function ideal_main_form_user_profile_form_alter(&$form, &$form_state) {
+  $hidden_fields = array(
+    'field_user_address',
+    'field_user_date_birth', 
+    'contact', 
+    'account' => array('roles', 'status')
+  );
+
+  $form = ideal_main_set_form_properties($form, $hidden_fields,  array('#access' => false));
+
+  //move bio field to be near the name field
+  $form['account']['field_bio'] = $form['field_bio'];
+  $form['account']['field_bio']['#weight'] = -9;
+  $form['account']['field_bio']['#attributes']['class'][] = 'form-item';
+  unset($form['field_bio']);
+
+  //move picture field to password confirm fieldset
+  $form['pass'] = $form['account']['pass'];
+  unset($form['account']['pass']);
+
+}
+
+/**
+ * set properties of given form by given properties array
+ */
+function ideal_main_set_form_properties($form, $hidden_fields, $properties) {
+  foreach($hidden_fields as $key => $value) {
+    if (isset($form[$key])) {
+      $form[$key] = ideal_main_set_form_properties($form[$key], $value,  array('#access' => false));
+    } else {
+      foreach($properties as $prop => $prop_val) {
+        $form[$value][$prop] = $prop_val;  
+      }  
+    }
+  }
+  return $form;
+}
+
+
+/**
+ * Template preprocess function for hybridauth_widget.
+ */
+function ideal_main_preprocess_hybridauth_widget(&$vars, $hook) {
+  $element = $vars['element'];
+  $vars['providers'] = array();
+  foreach ($element['providers'] as $provider) {
+    $vars['providers'][] = l(t('Login by !span Facebook !close_span', 
+      array('!span' => '<span>', '!close_span' => '</span>')), $provider['path'], $provider['options']);
+  }
+}
+
+
+/**
+* Implements hook_node_presave
+*/
+function ideal_main_node_presave($node) {
+  global $user;
+  if (isset($node->field_moderator['und']) && count($node->field_moderator['und']) == 0) {
+    $node->field_moderator[LANGUAGE_NONE][0]['target_id'] = $user->uid;
+  }
+}
+
+function ideal_main_get_editing_url($uid) {
+  $path = "members/" . $uid . "/edit";
+  if ($router_item = menu_get_item($path)) {
+    if ($router_item['access']) {
+      return l(t('Editing'), $path);
+    }
+  }
+  return '';
+}
+
+function ideal_main_drupal_goto_alter(&$path, &$options, &$http_response_code) {
+  global $user;
+  if ($path == 'user/' . $user->uid . '/edit') {
+    $path = 'members/' . $user->uid . '/edit';
+  }
+}
+

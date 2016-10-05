@@ -16,7 +16,7 @@ function ideal_idea_form_alter(&$form, &$form_state, $form_id) {
     $form['field_category']['und']['#options']['_none'] = $form['field_category']['und']['#title'];
 
     //change submit button
-    $form['actions']['submit']['#value'] = '<span>'.t('Submit your Idea').'</span>';
+    $form['actions']['submit']['#value'] = t('Submit your Idea');
     $form['actions']['submit']['#attributes'] = array('class' => array('submit-idea'));
 
     //add back button
@@ -29,11 +29,13 @@ function ideal_idea_form_alter(&$form, &$form_state, $form_id) {
     );
     //upload fields text
     //for images
-    $form['field_idea_image']['und']['#file_upload_title'] = '<div class="title">'.t('Add images here').'</div>'.t('Drag & drop images or <a href="#" class="open-browse">browse</a> them from your computer');
+    // $form['field_idea_image']['und']['#file_upload_title'] = '<div class="title">'.t('Add images here').'</div>'.t('Drag & drop images or <a href="#" class="open-browse">browse</a> them from your computer');
+    $form['field_idea_image']['und']['#file_upload_title'] = '<div class="title">'.t('Add images here').'</div>'.t('<a href="#" class="open-browse">browse</a> images from your computer');
     $form['field_idea_image']['und']['#title'] = '';
     $form['field_idea_image']['und']['#file_upload_description'] = '';
     //for documents
-    $form['field_attachments']['und']['#file_upload_title'] = '<div class="title">'.t('Add documents here').'</div>'.t('Drag & drop pdf or text files or <a href="#" class="open-browse">browse</a> them from your computer');
+    // $form['field_attachments']['und']['#file_upload_title'] = '<div class="title">'.t('Add documents here').'</div>'.t('Drag & drop pdf or text files or <a href="#" class="open-browse">browse</a> them from your computer');
+    $form['field_attachments']['und']['#file_upload_title'] = '<div class="title">'.t('Add documents here').'</div>'.t('<a href="#" class="open-browse">browse</a> pdf or text files from your computer');
     $form['field_attachments']['und']['#title'] = '';
     $form['field_attachments']['und']['#file_upload_description'] = '';
 
@@ -149,7 +151,7 @@ function ideal_idea_popup_view(){
 
 /* Print bootstrap modal markup */
 function ideal_render_popup_markup($header = '', $body, $buttons = ''){
-  drupal_add_js('(function($) { Drupal.behaviors.ideasavepopup = { attach: function(context) {  $("#popup").modal() } } } )(jQuery);', 'inline');
+  drupal_add_js('(function($) { Drupal.behaviors.ideasavepopup = { attach: function(context) {  if($.isFunction($("#popup").modal)) $("#popup").modal() } } } )(jQuery);', 'inline');
   $output = '
   <div class="modal fade" id="popup" tabindex="-1" role="dialog" aria-labelledby="popupLabel" aria-hidden="true">
     <div class="modal-dialog">

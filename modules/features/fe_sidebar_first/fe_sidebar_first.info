@@ -1,0 +1,11 @@
+name = fe_sidebar first
+core = 7.x
+package = OpenideaL
+version = 7.x-1.0
+project = fe_sidebar_first
+dependencies[] = ctools
+dependencies[] = panels_mini
+features[ctools][] = panels_mini:panels_default:1
+features[features_api][] = api:2
+features[panels_mini][] = main_memu
+features[panels_mini][] = sidebar_first

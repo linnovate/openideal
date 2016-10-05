@@ -77,7 +77,7 @@ function fe_challenge_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'date_format_long';
-  $strongarm->value = 'D j.n.Y g:i a';
+  $strongarm->value = 'l, F j, Y - H:i';
   $export['date_format_long'] = $strongarm;
 
   $strongarm = new stdClass();
@@ -91,7 +91,7 @@ function fe_challenge_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'date_format_short';
-  $strongarm->value = 'j/n/y';
+  $strongarm->value = 'd.m.Y - H:i';
   $export['date_format_short'] = $strongarm;
 
   $strongarm = new stdClass();
@@ -142,16 +142,23 @@ function fe_challenge_strongarm() {
     'extra_fields' => array(
       'form' => array(
         'metatags' => array(
-          'weight' => '40',
+          'weight' => '5',
         ),
         'title' => array(
-          'weight' => '-5',
+          'weight' => '0',
         ),
       ),
       'display' => array(),
     ),
   );
   $export['field_bundle_settings_node__challenge'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'language_content_type_challenge';
+  $strongarm->value = '2';
+  $export['language_content_type_challenge'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */

@@ -2,8 +2,7 @@ name = fe_merge
 description = Ideas merging
 core = 7.x
 package = OpenideaL
-php = 5.2.4
-
+version = 7.x-2.7+0-dev
 project = idea
 dependencies[] = ctools
 dependencies[] = entity
@@ -13,11 +12,11 @@ dependencies[] = radioactivity
 dependencies[] = rules
 dependencies[] = views
 dependencies[] = views_bulk_operations
+datestamp = 1454925739
 features[ctools][] = views:views_default:3.0
-features[features_api][] = api:1
+features[features_api][] = api:2
 features[rules_config][] = rules_merged_to_merged_ideas
 features[rules_config][] = rules_merged_to_merged_to
 features[rules_config][] = rules_node_hide_voting
 features[rules_config][] = rules_pass_radioactivity_to_master_idea
 features[rules_config][] = rules_set_as_merged_idea
-

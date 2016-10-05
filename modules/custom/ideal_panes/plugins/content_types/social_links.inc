@@ -13,6 +13,7 @@ $plugin = array(
  */
 function ideal_panes_social_links_content_type_render($subtype, $conf, $args, $context) {
   $output = '';
+  // $output .= '<a class="social_link company_logo" href="'.$conf['company_logo'].'">company_logo</a>';
   $output .= '<a class="social_link facebook" href="'.$conf['facebook'].'">facebook</a>';
   $output .= '<a class="social_link twitter"  href="'.$conf['twitter'].'">twitter</a>';
   $output .= '<a class="social_link google" href="'.$conf['google'].'">google</a>';
@@ -26,6 +27,12 @@ function ideal_panes_social_links_content_type_render($subtype, $conf, $args, $c
 
 function ideal_panes_social_links_content_type_edit_form($form, &$form_state) {
   $conf = $form_state['conf'];
+  // $form['company_logo'] = array(
+  //   '#type' => 'textfield',
+  //   '#title' => t('Link for company logo'),
+  //   '#default_value' => !empty($conf['company_logo']) ? $conf['company_logo'] : '',
+  //   '#size' => '20'
+  // );
   $form['facebook'] = array(
     '#type' => 'textfield',
     '#title' => t('Link for facebook'),
@@ -50,16 +57,16 @@ function ideal_panes_social_links_content_type_edit_form($form, &$form_state) {
     '#default_value' => !empty($conf['linkedin']) ? $conf['linkedin'] : '',
     '#size' => '20'
   ); 
-
+  
   return $form;
   
   
 }
 
 function ideal_panes_social_links_content_type_edit_form_submit($form, &$form_state) {
+ // $form_state['conf']['company_logo'] = $form_state['values']['company_logo'];
  $form_state['conf']['facebook'] = $form_state['values']['facebook'];
  $form_state['conf']['twitter'] = $form_state['values']['twitter'];
  $form_state['conf']['google'] = $form_state['values']['google'];
  $form_state['conf']['linkedin'] = $form_state['values']['linkedin'];
-
 }

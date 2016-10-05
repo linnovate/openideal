@@ -127,11 +127,11 @@ function ideal_comments_preprocess_comment(&$vars) {
   $node = $vars['node'];
   $comment = $vars['comment'];
 
-  $date = date('D d.m.Y h.i A',$comment->created);
-  if (date('Ymd') == date('Ymd', $comment->created)) {
-      $date  = format_interval(time() - $comment->created, 1) . ' ' . t('ago'); 
-  }
-  $vars['submitted'] = t('Posted on !datetime', array('!datetime' => $date));
+  $date = date('j.n.y h:i',$comment->created);
+  // if (date('Ymd') == date('Ymd', $comment->created)) {
+  //     $date  = format_interval(time() - $comment->created, 1) . ' ' . t('ago'); 
+  // }
+  $vars['submitted'] = $date;
 
   $settings = array('comments_fold' => variable_get("comments_fold_{$node->type}", 10));
   drupal_add_js($settings, array('type' => 'setting'));

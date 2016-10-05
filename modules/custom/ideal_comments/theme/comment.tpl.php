@@ -71,7 +71,6 @@
     </div>   
      <?php
       // We hide the comments and links now so that we can render them later.
-      hide($content['links']);
       print render($content);
     ?>
       
@@ -80,7 +79,6 @@
       <?php print $signature ?>
     </div>
     <?php endif; ?>
-    <?php print render($content['links']) ?>
   </div>
   
 

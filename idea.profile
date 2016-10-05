@@ -52,6 +52,12 @@ function idea_install_tasks($install_state) {
       'type' => '',
       'run' => $dummy_content ? INSTALL_TASK_RUN_IF_NOT_COMPLETED : INSTALL_TASK_SKIP,
     ),
+
+    'idea_dummy_header_site' => array(
+      'display' => FALSE,
+      'type' => '',
+      'run' => $dummy_content ? INSTALL_TASK_RUN_IF_NOT_COMPLETED : INSTALL_TASK_SKIP,
+    ),
   );
   return $tasks;
 }
@@ -163,6 +169,47 @@ function idea_taxonomy() {
     $term->vid = $vid;
     $term->weight = $weight;
     taxonomy_term_save($term);
+}
+
+/**
+ * Generate dummy header site
+ */
+
+function idea_dummy_header_site() {
+  $header_site = new stdClass();
+  $header_site->type = 'header_site';
+  $header_site->title = 'site header';
+  $header_site->body[LANGUAGE_NONE][0]['value'] = 'openIdeal - Innovation management';
+  $file_logo = file_get_contents('./profiles/idea/themes/innovate/images/logo.png');
+  $file_logo = file_save_data($file_logo , 'public://logo.png');
+  $header_site->field_site_logo = array( 'und'=>array(
+    array(
+      'uid' => 1,
+      'fid' => $file_logo->fid,
+      'filename' => $file_logo->filename,
+      'uri' => $file_logo->uri ,
+      'filesize' => $file_logo->filesize,
+      'status'=> 1,
+    ),
+    )
+  );
+
+  $file_banner_image = file_get_contents('./profiles/idea/themes/innovate/images/banner.jpg');
+  $file_banner_image = file_save_data($file_banner_image , 'public://banner.jpg');
+  $header_site->field_banner_image = array( 'und'=>array(
+      array(
+        'uid' => 1,
+        'fid' => $file_banner_image->fid,
+        'filename' => $file_banner_image->filename,
+        'uri' => $file_banner_image->uri ,
+        'filesize' => $file_banner_image->filesize,
+        'status'=> 1,
+      ),
+    )
+  );
+
+  $header_site->uid = 1;
+  node_save($header_site);
 }
 
 /**

@@ -14,7 +14,7 @@ function fe_notifications_default_rules_configuration() {
       "PLUGIN" : "reaction rule",
       "OWNER" : "rules",
       "TAGS" : [ "Notifications" ],
-      "REQUIRES" : [ "rules" ],
+      "REQUIRES" : [ "rules", "rules_i18n" ],
       "ON" : { "node_update" : [] },
       "IF" : [
         { "node_is_of_type" : { "node" : [ "node" ], "type" : { "value" : { "idea" : "idea" } } } },
@@ -42,7 +42,7 @@ function fe_notifications_default_rules_configuration() {
       "PLUGIN" : "reaction rule",
       "OWNER" : "rules",
       "TAGS" : [ "Notifications" ],
-      "REQUIRES" : [ "rules" ],
+      "REQUIRES" : [ "rules", "rules_i18n" ],
       "ON" : { "node_insert" : [] },
       "IF" : [
         { "node_is_of_type" : { "node" : [ "node" ], "type" : { "value" : { "idea" : "idea" } } } },
@@ -87,7 +87,7 @@ function fe_notifications_default_rules_configuration() {
       "PLUGIN" : "reaction rule",
       "OWNER" : "rules",
       "TAGS" : [ "Notifications" ],
-      "REQUIRES" : [ "rules", "mentions" ],
+      "REQUIRES" : [ "rules", "rules_i18n", "mentions" ],
       "ON" : { "mentions_insert" : [] },
       "IF" : [
         { "data_is" : { "data" : [ "mention:user:field-mention-notifications" ], "value" : 1 } }

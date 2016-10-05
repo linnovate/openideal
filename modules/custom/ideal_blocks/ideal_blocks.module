@@ -50,9 +50,9 @@ function ideal_blocks_block_view($delta = '') {
 function _ideal_blocks_challenge_stats() {
   $entity = menu_get_object();
 	if ($entity) {
+
 		$node = entity_metadata_wrapper('node', $entity);
     $nid = $node->getIdentifier();
-
     // Count all the published ideas belonging to this challenge.
     $query = new EntityFieldQuery();
     $query->entityCondition('entity_type', 'node')
@@ -63,10 +63,10 @@ function _ideal_blocks_challenge_stats() {
 
     // Count all the comments in this challenge.
     $query = db_select('comment', 'c');
-    $query->join('field_data_field_challenge_ref', 'n', 'c.nid = n.entity_id');
     $query->fields('c', array('cid'));
     $query->condition('c.status', 1);
-    $query->condition('n.field_challenge_ref_target_id', $nid);
+    $query->condition('c.nid', $nid);
+    $query->condition('c.pid',0);
     $result = $query->execute();
     $comment_count = $result->rowCount();
 
@@ -82,22 +82,24 @@ function _ideal_blocks_challenge_stats() {
     $result = $query->execute();
     $vote_count = $result->rowCount();
 
-    // Count all users who commented on an idea in this challenge.
+    // Count all users who commented on an idea in this challenge or commented in this challenge.
     $query = db_select('comment', 'c');
-    $query->join('field_data_field_challenge_ref', 'n', 'c.nid = n.entity_id');
-    $query->fields('c', array('uid'));
-    $query->condition('n.field_challenge_ref_target_id', $nid);
+    $query->leftJoin('field_data_field_challenge_ref', 'n', 'c.nid = n.entity_id');
+    $query->fields('c', array());
+    $or = db_or()->condition('n.field_challenge_ref_target_id', $nid)->condition('c.nid', $nid);
+    $query->condition($or);
     $query->distinct();
+    $query->groupBy('c.name');
     $result = $query->execute();
     $user_count = $result->rowCount();
-
+    
     // Generate output.
     $output = '<div id="ideal-challenge-stats">';
-    $output .= '<div class="row top ideas col-xs-12">' . format_plural($idea_count, '<div class="count">1<span class="name">Idea</span></div>', '<div class="count">@count<span class="name">Ideas</span></div>') . '</div>';
+    $output .= '<div class="row top ideas col-xs-12"><div class="count">' . format_plural($idea_count, '1<span class="name">Idea</span>', '@count<span class="name">Ideas</span>') . '</div></div>';
     $output .= '<table class="counts"><tr>';
-    $output .= '<td class="col users"><div class="name">' . t('Users') . '</div><div class="count">' . $user_count . '</div></td>';
-    $output .= '<td class="col votes"><div class="name">' . t('Votes') . '</div><div class="count">' . $vote_count . '</div></td>';
-    $output .= '<td class="col comments"><div class="name">' . t('Comments') . '</div><div class="count">' . $comment_count . '</div></td>';
+    $output .= '<td class="col users"><div class="count">' . $user_count . '</div><div class="name">' . t('Users') . '</div></td>';
+    $output .= '<td class="col votes"><div class="count">' . $vote_count . '</div><div class="name">' . t('Votes') . '</div></td>';
+    $output .= '<td class="col comments"><div class="count">' . $comment_count . '</div><div class="name">' . t('Comments') . '</div></td>';
     $output .= '</tr></table></div></div>';
 
     return $output;
@@ -161,15 +163,12 @@ function _ideal_blocks_idea_stats() {
 
     // Generate output.
     $output = '<div id="ideal-challenge-stats">';
-    $output .= '<table class="top idea-page"><tr>';
-    $output .= '  <td class="votes"><div class="name">' . t('Votes') . '</div><div class="count">' . $vote_count . '</div></td>';
-    $output .= '  <td class="dislikes"><div class="name">' . t('Dislikes') . '</div><div class="count">' . $dislike_count . '</div></td></tr></table>';
-    $output .= '</div>';
+    $output .= '<div class="row top ideas col-xs-12"><div class="count">' . format_plural($vote_count, '1<span class="name">Vote</span>', '@count<span class="name">Votes</span>') . '</div></div>';
 
     $output .= '<table class="counts idea-page" ><tr>';
-    $output .= '  <td class="col views"><div class="name">' . t('Views') . '</div><div class="count">' . $view_count . '</div></td>';
-    $output .= '  <td class="col comments"><div class="name">' . t('Comments') . '</div><div class="count">' . $comment_count . '</div></td>';
-    $output .= '  <td class="col phase"><div class="name">' . t('Phase') . '</div><div class="count">' . $phase . '</div></td>';
+    $output .= '  <td class="col views"><div class="count">' . $view_count . '</div><div class="name">' . t('Views') . '</div></td>';
+    $output .= '  <td class="col comments"><div class="count">' . $comment_count . '</div><div class="name">' . t('Comments') . '</div></td>';
+    $output .= '  <td class="dislikes"><div class="count">' . $dislike_count . '</div><div class="name">' . t('Dislikes') . '</div></td>';
     $output .= '</tr></table>';
     $output.= '</div>';
 
@@ -213,11 +212,11 @@ function _ideal_blocks_key_stats() {
 
   // Generate output.
   $output = '<div id="ideal-key-stats">';
-  $output .= '<div class="row top challenges col-xs-12">' . format_plural($challenge_count, '<div class="count">1<span class="name">Challenge</span></div>', '<div class="count">@count<span class="name">Challenges</span></div>') . '</div>';
+  $output .= '<div class="row top challenges col-xs-12"><div class="count">' . format_plural($challenge_count, '1<span class="name">Challenge</span>', '@count<span class="name">Challenges</span>') . '</div></div>';
   $output .= '<table class="counts"><tr>';
-  $output .= '<td class="col ideas"><div class="name">' . t('Ideas') . '</div><div class="count">' . $idea_count . '</div></td>';
-  $output .= '<td class="col users"><div class="name">' . t('Users') . '</div><div class="count">' . $user_count . '</div></td>';
-  $output .= '<td class="col votes"><div class="name">' . t('Votes') . '</div><div class="count">' . $vote_count . '</div></td>';
+  $output .= '<td class="col ideas"><div class="count">' . $idea_count . '</div><div class="name">' . t('Ideas') . '</div></td>';
+  $output .= '<td class="col users"><div class="count">' . $user_count . '</div><div class="name">' . t('Users') . '</div></td>';
+  $output .= '<td class="col votes"><div class="count">' . $vote_count . '</div><div class="name">' . t('Votes') . '</div></td>';
   $output .= '</tr></table></div>';
 
   return $output;

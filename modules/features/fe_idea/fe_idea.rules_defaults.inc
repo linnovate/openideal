@@ -244,7 +244,7 @@ function fe_idea_default_rules_configuration() {
       "PLUGIN" : "reaction rule",
       "OWNER" : "rules",
       "TAGS" : [ "Idea", "In Action", "Userpoints" ],
-      "REQUIRES" : [ "rules", "userpoints_rules" ],
+      "REQUIRES" : [ "rules", "userpoints_rules", "rules_i18n" ],
       "ON" : { "node_update" : [] },
       "IF" : [
         { "node_is_of_type" : { "node" : [ "node" ], "type" : { "value" : { "idea" : "idea" } } } },
@@ -314,7 +314,7 @@ function fe_idea_default_rules_configuration() {
       "PLUGIN" : "reaction rule",
       "OWNER" : "rules",
       "TAGS" : [ "Idea", "Userpoints" ],
-      "REQUIRES" : [ "rules", "userpoints_rules", "flag" ],
+      "REQUIRES" : [ "rules", "userpoints_rules", "flag", "rules_i18n" ],
       "ON" : { "node_update" : [] },
       "IF" : [
         { "node_is_of_type" : { "node" : [ "node" ], "type" : { "value" : { "idea" : "idea" } } } },

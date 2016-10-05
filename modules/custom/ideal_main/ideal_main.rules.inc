@@ -99,7 +99,7 @@ function ideal_action_close_comments($node) {
  /**
  * Rules condition - compare the user's points to a threshold
  */
-//function userpoints_condition_check_points($params) {
+// function userpoints_condition_check_points($params) {
 //  $points = userpoints_get_current_points($params['user']->uid, $params['tid']);
 //  $threshold = $params['threshold'];
 //  switch ($params['comparison']) {
@@ -120,7 +120,7 @@ function ideal_action_close_comments($node) {
 //      break;
 //  }
 //  return false;
-//}
+// }
 
 /**
  * Returns options for ways to compare a number to a number of points.

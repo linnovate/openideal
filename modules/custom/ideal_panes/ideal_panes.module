@@ -28,10 +28,11 @@ function menu_icon_menu_link($variables) {
       $output = l('', $element['#href'], $element['#localized_options']);
     }
   }
+
   $link = '<li' . drupal_attributes($element['#attributes']) . '>' . $output . $sub_menu . "</li>\n";
   if ($element['#title'] == t('My account') ) {
-         $image = theme('user_picture', array('account' => $user));
-       $link =  $image . '<li' . drupal_attributes($element['#attributes']) . '>'. $output . $sub_menu . "</li>\n";
+       $image = theme('user_picture', array('account' => $user));
+       $link =  $image .'<div class = "user"><div>'.t('Hello'). ', </div><div class ="user-name">' .$user->name .'</div></div>'. '<li' .drupal_attributes($element['#attributes']) . '>'. $output . $sub_menu . "</li>\n";
   }
   return $link;
 }
