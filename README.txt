@@ -81,3 +81,4 @@ Ideas
 Discussions
 - New comment
 - x-th votes on comment
+- ping
