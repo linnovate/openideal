@@ -1,0 +1,56 @@
+/*-----------------------------------------------
+                     Header
+-----------------------------------------------*/
+header{
+  margin-right: -8px;
+  margin-left: 0px;
+  @media all and (max-width: 767px) {
+     margin-right:0px;
+  }
+  .node-header-site{
+ 
+
+
+  }
+}
+
+/*-----------------------------------------------
+                     Footer
+-----------------------------------------------*/
+
+footer.footer.navbar {
+  .panel-pane {
+    float: right;
+  }
+
+  /* --- menu --- */
+  ul.nav > li {
+    padding: 0;
+    margin: 0;
+    float: right;
+  }
+
+  /* --- social-links --- */
+  .pane-social-links {
+    float: left;
+
+    a.social_link {
+      @include inline-block();
+      &:before {
+        margin-right: 0 !important;
+        margin-left: 9px;
+      }
+      &:last-child{
+        &:before {
+          margin-left: 0 !important;
+        }
+      }
+    }
+  }
+
+  /* --- openideal-credits --- */
+  .pane-ideal-main-openideal-credits {
+    float: left;
+    clear: left;
+  }
+}

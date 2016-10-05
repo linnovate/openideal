@@ -1,0 +1,2130 @@
+@charset "UTF-8";
+/*-----------------------------------------------
+                   Imports
+-----------------------------------------------*/
+/*-----------------------------------------------
+                    Mixins
+-----------------------------------------------*/
+/* according: https://github.com/sass/sass/issues/1395 */
+/* ----- FIX RTL ----- */
+/* --------------------------------------------- mixin-pane-title ------------------------------------------- */
+/* ---------------------------------------------- mixin-font-icon ------------------------------------------- */
+/* --------------------------------------------- mixin-image-label ------------------------------------------ */
+/* -------------------------------------------- mixin-css-triangle ------------------------------------------ */
+/* -------------------------------------------- mixin-idea-btn ------------------------------------------ */
+/*-----------------------------------------------
+                   General
+-----------------------------------------------*/
+/*-----------------------------------------------
+                     Elements
+-----------------------------------------------*/
+/* line 8, ../sass/partials/_general-elements-rtl.scss */
+.region-inside-first {
+  width: 66%;
+}
+@media all and (max-width: 767px) {
+  /* line 8, ../sass/partials/_general-elements-rtl.scss */
+  .region-inside-first {
+    width: 100%;
+  }
+}
+
+/* line 14, ../sass/partials/_general-elements-rtl.scss */
+.region-inside-last {
+  margin-right: 2%;
+  margin-left: 0%;
+}
+@media all and (max-width: 767px) {
+  /* line 14, ../sass/partials/_general-elements-rtl.scss */
+  .region-inside-last {
+    margin-right: 0px;
+  }
+}
+
+/*-----------------------------------------------
+                     main-manu
+-----------------------------------------------*/
+/* line 26, ../sass/partials/_general-elements-rtl.scss */
+.sidebar_first .region-sidebar-first {
+  right: 0;
+}
+
+/* line 29, ../sass/partials/_general-elements-rtl.scss */
+.close-menu {
+  margin-right: 9.6em;
+  margin-left: 0em;
+}
+/* line 32, ../sass/partials/_general-elements-rtl.scss */
+.close-menu:before {
+  margin-right: 14em;
+  margin-left: 0em;
+}
+@media all and (max-width: 767px) {
+  /* line 32, ../sass/partials/_general-elements-rtl.scss */
+  .close-menu:before {
+    margin-right: 17.5em;
+  }
+}
+@media all and (max-width: 320px) {
+  /* line 32, ../sass/partials/_general-elements-rtl.scss */
+  .close-menu:before {
+    margin-right: 15.3em;
+  }
+}
+
+/* line 46, ../sass/partials/_general-elements-rtl.scss */
+.not-logged-in .pane-main-memu .pane-system-user-menu ul {
+  margin-right: 2.2em;
+  margin-left: 0px;
+}
+/* line 49, ../sass/partials/_general-elements-rtl.scss */
+.not-logged-in .pane-main-memu .pane-system-user-menu ul a {
+  padding-right: 0px;
+  padding-left: 10px;
+}
+
+/* line 60, ../sass/partials/_general-elements-rtl.scss */
+.pane-main-memu #mini-panel-main_memu .header_menu {
+  margin-right: 2.2em;
+  margin-left: 0em;
+}
+/* line 65, ../sass/partials/_general-elements-rtl.scss */
+.pane-main-memu #mini-panel-main_memu .header_menu a .home-icon:before {
+  margin-right: 0px;
+  margin-left: 0px;
+  font-size: 22px;
+  margin-top: -4px;
+}
+/* line 77, ../sass/partials/_general-elements-rtl.scss */
+.pane-main-memu #mini-panel-main_memu .pane-system-user-menu ul .user-picture {
+  margin-right: 2em;
+  margin-left: 0em;
+}
+/* line 81, ../sass/partials/_general-elements-rtl.scss */
+.pane-main-memu #mini-panel-main_memu .pane-system-user-menu ul .user {
+  width: 45%;
+  margin-right: 0.6em;
+  margin-left: 0em;
+}
+/* line 86, ../sass/partials/_general-elements-rtl.scss */
+.pane-main-memu #mini-panel-main_memu .pane-system-user-menu ul .first {
+  margin-right: 2em;
+  margin-left: 0em;
+}
+/* line 90, ../sass/partials/_general-elements-rtl.scss */
+.pane-main-memu #mini-panel-main_memu .pane-system-user-menu ul .first a:before {
+  padding-left: 12px;
+  padding-right: 0px;
+}
+/* line 96, ../sass/partials/_general-elements-rtl.scss */
+.pane-main-memu #mini-panel-main_memu .pane-system-user-menu ul .last {
+  margin-right: -0.4em;
+  margin-left: 0em;
+}
+/* line 99, ../sass/partials/_general-elements-rtl.scss */
+.pane-main-memu #mini-panel-main_memu .pane-system-user-menu ul .last a {
+  padding-right: 0px;
+  padding-left: 10px;
+}
+/* line 102, ../sass/partials/_general-elements-rtl.scss */
+.pane-main-memu #mini-panel-main_memu .pane-system-user-menu ul .last a:before {
+  padding-left: 5px;
+}
+/* line 112, ../sass/partials/_general-elements-rtl.scss */
+.pane-main-memu #mini-panel-main_memu .pane-system-main-menu ul {
+  padding-right: 1.3em;
+  padding-left: 0em;
+}
+/* line 115, ../sass/partials/_general-elements-rtl.scss */
+.pane-main-memu #mini-panel-main_memu .pane-system-main-menu ul a::before {
+  padding-left: 0.6em;
+  padding-right: 0em;
+}
+/* line 122, ../sass/partials/_general-elements-rtl.scss */
+.pane-main-memu #mini-panel-main_memu .pane-social-links {
+  margin-left: auto;
+}
+/* line 126, ../sass/partials/_general-elements-rtl.scss */
+.pane-main-memu #mini-panel-main_memu .pane-social-links a.social_link .pane-content a::before {
+  margin-left: 1.3em;
+  margin-right: 0em;
+}
+/* line 136, ../sass/partials/_general-elements-rtl.scss */
+.pane-main-memu #mini-panel-main_memu .pane-search:before {
+  left: 0.4em;
+  right: inherit;
+}
+
+/*-----------------------------------------------
+                   Font -icons
+-----------------------------------------------*/
+/* line 153, ../sass/partials/_general-elements-rtl.scss */
+.glyphicon-comment:before,
+.glyphicon-read:before,
+.glyphicon-th-list:before,
+.glyphicon-map-marker:before,
+.glyphicon-calendar:before {
+  direction: rtl;
+  margin-right: 5px;
+  margin-left: 7px;
+}
+
+/*-----------------------------------pane-comments-----------------------*/
+/* line 163, ../sass/partials/_general-elements-rtl.scss */
+.display-comments .view-content .views-row .user-image {
+  float: left;
+}
+/* line 166, ../sass/partials/_general-elements-rtl.scss */
+.display-comments .view-content .views-row .user-text {
+  margin-right: 58px;
+  margin-left: inherit;
+}
+
+/*-----------------------------------------------
+         General: row - footer-openideal
+-----------------------------------------------*/
+/* line 175, ../sass/partials/_general-elements-rtl.scss */
+.row-bottom-openideal {
+  /* --- author --- */
+  /* --- vote --- */
+}
+/* line 179, ../sass/partials/_general-elements-rtl.scss */
+.row-bottom-openideal .author .picture img {
+  float: right;
+}
+/* line 27, ../sass/_mixins.scss */
+.row-bottom-openideal .vote .alternate-votes-display:before {
+  margin-right: 0;
+  margin-left: 7px;
+}
+
+/*-----------------------------------------------
+         General: row - view-challenges-featured-front
+-----------------------------------------------*/
+/* line 196, ../sass/partials/_general-elements-rtl.scss */
+.view-challenges-featured-front {
+  /* --- author --- */
+}
+/* line 200, ../sass/partials/_general-elements-rtl.scss */
+.view-challenges-featured-front .author .picture img {
+  float: right;
+}
+
+/* line 209, ../sass/partials/_general-elements-rtl.scss */
+.display-comments .pane-title {
+  margin-right: 13px;
+  margin-left: 0px;
+}
+
+/* line 218, ../sass/partials/_general-elements-rtl.scss */
+.page-members-edit .inner div#block-system-main .form-item {
+  margin-left: 1em;
+  margin-right: 0;
+}
+
+/*-----------------------------------------------
+                      Blocks
+-----------------------------------------------*/
+/* ----------------------------------------- pane-Featured Challenges -------------------------------------- */
+/*.pane-views-f82b385d04a27538a1646ec3e53c5fef {
+  .pane-title {
+    &:before {
+      margin-right: 0;
+      margin-left: 7px;
+    }
+  }
+}*/
+/* ----------------------------------------- pane-custom - "Add-Idea" -------------------------------------- */
+/* line 168, ../sass/_mixins.scss */
+.inside .pane-custom.add-idea-btn a.add-idea:after {
+  direction: ltr;
+  right: 0;
+}
+
+/* ----------------------------------------- pane-views-activity-block -------------------------------------- */
+/*.pane-views-activity-block {
+  .pane-content {
+    .views-row {
+      .user-image {
+        @include fix-rtl(10px, right);
+      }
+    }
+  }
+}*/
+/* -------------------------------------- pane-ideal-blocks-idea-*-stats ------------------------------------ */
+/* -------------------------------------- pane-ideal-blocks-idea-*-stats ------------------------------------ */
+/*.pane-ideal-blocks-ideal-key-stats{
+    margin-left: -3px;
+    #ideal-key-stats{
+      .count{
+      .name{
+        padding-left: 14px;
+      }
+    }
+    table{
+        .count{
+        }
+        .name{
+          padding-left: 0px !important;
+        }
+    }
+}*/
+/*.pane-ideal-blocks-idea-stats,
+.pane-ideal-blocks-challenge-stats,
+.pane-ideal-blocks-ideal-key-stats {
+  .pane-content {
+    .top {
+      &.challenges {
+        .count {
+          @include fix-rtl-before();
+        }
+      }
+    }
+    table {
+      &.counts {
+        .ideas,
+        .users,
+        .votes,
+        .views,
+        .phase,
+        .comments {
+          .count {
+            @include fix-rtl-before();
+          }
+        }
+        .col {
+          + .col {
+            padding-left: 0;
+            padding-right: 15px;
+            border-width: 0 1px 0 0;
+          }
+        }
+      }
+    }
+  }
+}*/
+/* --------------------------------- pane-views-head-to-head-challenge-block  ----------------------------------- */
+/* -------------------------------------- pane-ideal-blocks-idea-*-stats ------------------------------------ */
+/* line 101, ../sass/partials/_general-blocks-rtl.scss */
+.pane-ideal-blocks-challenge-stats, .pane-ideal-blocks-idea-stats {
+  margin-right: -3px;
+}
+@media all and (max-width: 767px) {
+  /* line 101, ../sass/partials/_general-blocks-rtl.scss */
+  .pane-ideal-blocks-challenge-stats, .pane-ideal-blocks-idea-stats {
+    margin-right: 0px;
+  }
+}
+/* line 107, ../sass/partials/_general-blocks-rtl.scss */
+.pane-ideal-blocks-challenge-stats #ideal-challenge-stats .ideas::before, .pane-ideal-blocks-idea-stats #ideal-challenge-stats .ideas::before {
+  margin-right: 23px;
+  right: 0;
+  left: inherit;
+}
+/* line 112, ../sass/partials/_general-blocks-rtl.scss */
+.pane-ideal-blocks-challenge-stats #ideal-challenge-stats .count, .pane-ideal-blocks-idea-stats #ideal-challenge-stats .count {
+  text-align: right;
+  margin-right: 34%;
+  margin-left: 0px;
+}
+/* line 117, ../sass/partials/_general-blocks-rtl.scss */
+.pane-ideal-blocks-challenge-stats #ideal-challenge-stats .name, .pane-ideal-blocks-idea-stats #ideal-challenge-stats .name {
+  padding-right: 14px;
+  padding-left: 0px;
+}
+/* line 123, ../sass/partials/_general-blocks-rtl.scss */
+.pane-ideal-blocks-challenge-stats table .count, .pane-ideal-blocks-idea-stats table .count {
+  margin-right: 46% !important;
+  margin-left: 0px !important;
+}
+/* line 127, ../sass/partials/_general-blocks-rtl.scss */
+.pane-ideal-blocks-challenge-stats table .name, .pane-ideal-blocks-idea-stats table .name {
+  padding-right: 0px !important;
+  padding-left: 0px !important;
+}
+/* line 131, ../sass/partials/_general-blocks-rtl.scss */
+.pane-ideal-blocks-challenge-stats table td, .pane-ideal-blocks-idea-stats table td {
+  padding-right: 12px;
+}
+@media all and (min-width: 767px) {
+  /* line 131, ../sass/partials/_general-blocks-rtl.scss */
+  .pane-ideal-blocks-challenge-stats table td, .pane-ideal-blocks-idea-stats table td {
+    padding-left: 0px !important;
+    padding-right: 12px;
+  }
+}
+/* line 139, ../sass/partials/_general-blocks-rtl.scss */
+.pane-ideal-blocks-challenge-stats table .comments .count, .pane-ideal-blocks-idea-stats table .comments .count {
+  margin-right: 42% !important;
+  margin-left: 0px !important;
+}
+/* line 145, ../sass/partials/_general-blocks-rtl.scss */
+.pane-ideal-blocks-challenge-stats table .votes .count, .pane-ideal-blocks-idea-stats table .votes .count {
+  margin-right: 38% !important;
+  margin-left: 0px !important;
+}
+/* line 150, ../sass/partials/_general-blocks-rtl.scss */
+.pane-ideal-blocks-challenge-stats table .col::before, .pane-ideal-blocks-idea-stats table .col::before {
+  float: right;
+}
+
+/* ----------------------------------- pane-ideal-challenge-challenge-data ---------------------------------- */
+/* line 161, ../sass/partials/_general-blocks-rtl.scss */
+.pane-ideal-challenge-challenge-data .pane-content::before {
+  right: 25px;
+  left: inherit;
+  float: right;
+}
+
+/*-----------------------------------------------
+                   Spaces
+-----------------------------------------------*/
+/* Bootstrap RTL Fixes */
+/* line 2, ../sass/partials/_space-layout-rtl.scss */
+.col-xs-1, .col-xs-2, .col-xs-3, .col-xs-4, .col-xs-5, .col-xs-6, .col-xs-7, .col-xs-8, .col-xs-9, .col-xs-10, .col-xs-11, .col-xs-12 {
+  /*float: right;*/
+}
+
+/* line 6, ../sass/partials/_space-layout-rtl.scss */
+.col-xs-pull-11 {
+  left: 91.66666667%;
+}
+
+/* line 9, ../sass/partials/_space-layout-rtl.scss */
+.col-xs-pull-10 {
+  left: 83.33333333%;
+}
+
+/* line 12, ../sass/partials/_space-layout-rtl.scss */
+.col-xs-pull-9 {
+  left: 75%;
+}
+
+/* line 15, ../sass/partials/_space-layout-rtl.scss */
+.col-xs-pull-8 {
+  left: 66.66666667%;
+}
+
+/* line 18, ../sass/partials/_space-layout-rtl.scss */
+.col-xs-pull-7 {
+  left: 58.33333333%;
+}
+
+/* line 21, ../sass/partials/_space-layout-rtl.scss */
+.col-xs-pull-6 {
+  left: 50%;
+}
+
+/* line 24, ../sass/partials/_space-layout-rtl.scss */
+.col-xs-pull-5 {
+  left: 41.66666667%;
+}
+
+/* line 27, ../sass/partials/_space-layout-rtl.scss */
+.col-xs-pull-4 {
+  left: 33.33333333%;
+}
+
+/* line 30, ../sass/partials/_space-layout-rtl.scss */
+.col-xs-pull-3 {
+  left: 25%;
+}
+
+/* line 33, ../sass/partials/_space-layout-rtl.scss */
+.col-xs-pull-2 {
+  left: 16.66666667%;
+}
+
+/* line 36, ../sass/partials/_space-layout-rtl.scss */
+.col-xs-pull-1 {
+  left: 8.33333333%;
+}
+
+/* line 39, ../sass/partials/_space-layout-rtl.scss */
+.col-xs-pull-0 {
+  left: auto;
+}
+
+/* line 42, ../sass/partials/_space-layout-rtl.scss */
+.col-xs-push-12 {
+  right: 100%;
+}
+
+/* line 45, ../sass/partials/_space-layout-rtl.scss */
+.col-xs-push-11 {
+  right: 91.66666667%;
+}
+
+/* line 48, ../sass/partials/_space-layout-rtl.scss */
+.col-xs-push-10 {
+  right: 83.33333333%;
+}
+
+/* line 51, ../sass/partials/_space-layout-rtl.scss */
+.col-xs-push-9 {
+  right: 75%;
+}
+
+/* line 54, ../sass/partials/_space-layout-rtl.scss */
+.col-xs-push-8 {
+  right: 66.66666667%;
+}
+
+/* line 57, ../sass/partials/_space-layout-rtl.scss */
+.col-xs-push-7 {
+  right: 58.33333333%;
+}
+
+/* line 60, ../sass/partials/_space-layout-rtl.scss */
+.col-xs-push-6 {
+  right: 50%;
+}
+
+/* line 63, ../sass/partials/_space-layout-rtl.scss */
+.col-xs-push-5 {
+  right: 41.66666667%;
+}
+
+/* line 66, ../sass/partials/_space-layout-rtl.scss */
+.col-xs-push-4 {
+  right: 33.33333333%;
+}
+
+/* line 69, ../sass/partials/_space-layout-rtl.scss */
+.col-xs-push-3 {
+  right: 25%;
+}
+
+/* line 72, ../sass/partials/_space-layout-rtl.scss */
+.col-xs-push-2 {
+  right: 16.66666667%;
+}
+
+/* line 75, ../sass/partials/_space-layout-rtl.scss */
+.col-xs-push-1 {
+  right: 8.33333333%;
+}
+
+/* line 78, ../sass/partials/_space-layout-rtl.scss */
+.col-xs-push-0 {
+  right: auto;
+}
+
+/* line 81, ../sass/partials/_space-layout-rtl.scss */
+.col-xs-offset-12 {
+  margin-right: 100%;
+}
+
+/* line 84, ../sass/partials/_space-layout-rtl.scss */
+.col-xs-offset-11 {
+  margin-right: 91.66666667%;
+}
+
+/* line 87, ../sass/partials/_space-layout-rtl.scss */
+.col-xs-offset-10 {
+  margin-right: 83.33333333%;
+}
+
+/* line 90, ../sass/partials/_space-layout-rtl.scss */
+.col-xs-offset-9 {
+  margin-right: 75%;
+}
+
+/* line 93, ../sass/partials/_space-layout-rtl.scss */
+.col-xs-offset-8 {
+  margin-right: 66.66666667%;
+}
+
+/* line 96, ../sass/partials/_space-layout-rtl.scss */
+.col-xs-offset-7 {
+  margin-right: 58.33333333%;
+}
+
+/* line 99, ../sass/partials/_space-layout-rtl.scss */
+.col-xs-offset-6 {
+  margin-right: 50%;
+}
+
+/* line 102, ../sass/partials/_space-layout-rtl.scss */
+.col-xs-offset-5 {
+  margin-right: 41.66666667%;
+}
+
+/* line 105, ../sass/partials/_space-layout-rtl.scss */
+.col-xs-offset-4 {
+  margin-right: 33.33333333%;
+}
+
+/* line 108, ../sass/partials/_space-layout-rtl.scss */
+.col-xs-offset-3 {
+  margin-right: 25%;
+}
+
+/* line 111, ../sass/partials/_space-layout-rtl.scss */
+.col-xs-offset-2 {
+  margin-right: 16.66666667%;
+}
+
+/* line 114, ../sass/partials/_space-layout-rtl.scss */
+.col-xs-offset-1 {
+  margin-right: 8.33333333%;
+}
+
+/* line 117, ../sass/partials/_space-layout-rtl.scss */
+.col-xs-offset-0 {
+  margin-right: 0;
+}
+
+@media (min-width: 768px) {
+  /* line 122, ../sass/partials/_space-layout-rtl.scss */
+  .col-sm-1, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-sm-10, .col-sm-11, .col-sm-12 {
+    /*float: right;*/
+  }
+
+  /* line 125, ../sass/partials/_space-layout-rtl.scss */
+  .col-sm-pull-12 {
+    left: 100%;
+  }
+
+  /* line 128, ../sass/partials/_space-layout-rtl.scss */
+  .col-sm-pull-11 {
+    left: 91.66666667%;
+  }
+
+  /* line 131, ../sass/partials/_space-layout-rtl.scss */
+  .col-sm-pull-10 {
+    left: 83.33333333%;
+  }
+
+  /* line 134, ../sass/partials/_space-layout-rtl.scss */
+  .col-sm-pull-9 {
+    left: 75%;
+  }
+
+  /* line 137, ../sass/partials/_space-layout-rtl.scss */
+  .col-sm-pull-8 {
+    left: 66.66666667%;
+  }
+
+  /* line 140, ../sass/partials/_space-layout-rtl.scss */
+  .col-sm-pull-7 {
+    left: 58.33333333%;
+  }
+
+  /* line 143, ../sass/partials/_space-layout-rtl.scss */
+  .col-sm-pull-6 {
+    left: 50%;
+  }
+
+  /* line 146, ../sass/partials/_space-layout-rtl.scss */
+  .col-sm-pull-5 {
+    left: 41.66666667%;
+  }
+
+  /* line 149, ../sass/partials/_space-layout-rtl.scss */
+  .col-sm-pull-4 {
+    left: 33.33333333%;
+  }
+
+  /* line 152, ../sass/partials/_space-layout-rtl.scss */
+  .col-sm-pull-3 {
+    left: 25%;
+  }
+
+  /* line 155, ../sass/partials/_space-layout-rtl.scss */
+  .col-sm-pull-2 {
+    left: 16.66666667%;
+  }
+
+  /* line 158, ../sass/partials/_space-layout-rtl.scss */
+  .col-sm-pull-1 {
+    left: 8.33333333%;
+  }
+
+  /* line 161, ../sass/partials/_space-layout-rtl.scss */
+  .col-sm-pull-0 {
+    left: auto;
+  }
+
+  /* line 164, ../sass/partials/_space-layout-rtl.scss */
+  .col-sm-push-12 {
+    right: 100%;
+  }
+
+  /* line 167, ../sass/partials/_space-layout-rtl.scss */
+  .col-sm-push-11 {
+    right: 91.66666667%;
+  }
+
+  /* line 170, ../sass/partials/_space-layout-rtl.scss */
+  .col-sm-push-10 {
+    right: 83.33333333%;
+  }
+
+  /* line 173, ../sass/partials/_space-layout-rtl.scss */
+  .col-sm-push-9 {
+    right: 75%;
+  }
+
+  /* line 176, ../sass/partials/_space-layout-rtl.scss */
+  .col-sm-push-8 {
+    right: 66.66666667%;
+  }
+
+  /* line 179, ../sass/partials/_space-layout-rtl.scss */
+  .col-sm-push-7 {
+    right: 58.33333333%;
+  }
+
+  /* line 182, ../sass/partials/_space-layout-rtl.scss */
+  .col-sm-push-6 {
+    right: 50%;
+  }
+
+  /* line 185, ../sass/partials/_space-layout-rtl.scss */
+  .col-sm-push-5 {
+    right: 41.66666667%;
+  }
+
+  /* line 188, ../sass/partials/_space-layout-rtl.scss */
+  .col-sm-push-4 {
+    right: 33.33333333%;
+  }
+
+  /* line 191, ../sass/partials/_space-layout-rtl.scss */
+  .col-sm-push-3 {
+    right: 25%;
+  }
+
+  /* line 194, ../sass/partials/_space-layout-rtl.scss */
+  .col-sm-push-2 {
+    right: 16.66666667%;
+  }
+
+  /* line 197, ../sass/partials/_space-layout-rtl.scss */
+  .col-sm-push-1 {
+    right: 8.33333333%;
+  }
+
+  /* line 200, ../sass/partials/_space-layout-rtl.scss */
+  .col-sm-push-0 {
+    right: auto;
+  }
+
+  /* line 203, ../sass/partials/_space-layout-rtl.scss */
+  .col-sm-offset-12 {
+    margin-right: 100%;
+  }
+
+  /* line 206, ../sass/partials/_space-layout-rtl.scss */
+  .col-sm-offset-11 {
+    margin-right: 91.66666667%;
+  }
+
+  /* line 209, ../sass/partials/_space-layout-rtl.scss */
+  .col-sm-offset-10 {
+    margin-right: 83.33333333%;
+  }
+
+  /* line 212, ../sass/partials/_space-layout-rtl.scss */
+  .col-sm-offset-9 {
+    margin-right: 75%;
+  }
+
+  /* line 215, ../sass/partials/_space-layout-rtl.scss */
+  .col-sm-offset-8 {
+    margin-right: 66.66666667%;
+  }
+
+  /* line 218, ../sass/partials/_space-layout-rtl.scss */
+  .col-sm-offset-7 {
+    margin-right: 58.33333333%;
+  }
+
+  /* line 221, ../sass/partials/_space-layout-rtl.scss */
+  .col-sm-offset-6 {
+    margin-right: 50%;
+  }
+
+  /* line 224, ../sass/partials/_space-layout-rtl.scss */
+  .col-sm-offset-5 {
+    margin-right: 41.66666667%;
+  }
+
+  /* line 227, ../sass/partials/_space-layout-rtl.scss */
+  .col-sm-offset-4 {
+    margin-right: 33.33333333%;
+  }
+
+  /* line 230, ../sass/partials/_space-layout-rtl.scss */
+  .col-sm-offset-3 {
+    margin-right: 25%;
+  }
+
+  /* line 233, ../sass/partials/_space-layout-rtl.scss */
+  .col-sm-offset-2 {
+    margin-right: 16.66666667%;
+  }
+
+  /* line 236, ../sass/partials/_space-layout-rtl.scss */
+  .col-sm-offset-1 {
+    margin-right: 8.33333333%;
+  }
+
+  /* line 239, ../sass/partials/_space-layout-rtl.scss */
+  .col-sm-offset-0 {
+    margin-right: 0;
+  }
+}
+@media (min-width: 992px) {
+  /* line 245, ../sass/partials/_space-layout-rtl.scss */
+  .col-md-1, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-md-10, .col-md-11, .col-md-12 {
+    /*float: right;*/
+  }
+
+  /* line 248, ../sass/partials/_space-layout-rtl.scss */
+  .col-md-pull-12 {
+    left: 100%;
+  }
+
+  /* line 251, ../sass/partials/_space-layout-rtl.scss */
+  .col-md-pull-11 {
+    left: 91.66666667%;
+  }
+
+  /* line 254, ../sass/partials/_space-layout-rtl.scss */
+  .col-md-pull-10 {
+    left: 83.33333333%;
+  }
+
+  /* line 257, ../sass/partials/_space-layout-rtl.scss */
+  .col-md-pull-9 {
+    left: 75%;
+  }
+
+  /* line 260, ../sass/partials/_space-layout-rtl.scss */
+  .col-md-pull-8 {
+    left: 66.66666667%;
+  }
+
+  /* line 263, ../sass/partials/_space-layout-rtl.scss */
+  .col-md-pull-7 {
+    left: 58.33333333%;
+  }
+
+  /* line 266, ../sass/partials/_space-layout-rtl.scss */
+  .col-md-pull-6 {
+    left: 50%;
+  }
+
+  /* line 269, ../sass/partials/_space-layout-rtl.scss */
+  .col-md-pull-5 {
+    left: 41.66666667%;
+  }
+
+  /* line 272, ../sass/partials/_space-layout-rtl.scss */
+  .col-md-pull-4 {
+    left: 33.33333333%;
+  }
+
+  /* line 275, ../sass/partials/_space-layout-rtl.scss */
+  .col-md-pull-3 {
+    left: 25%;
+  }
+
+  /* line 278, ../sass/partials/_space-layout-rtl.scss */
+  .col-md-pull-2 {
+    left: 16.66666667%;
+  }
+
+  /* line 281, ../sass/partials/_space-layout-rtl.scss */
+  .col-md-pull-1 {
+    left: 8.33333333%;
+  }
+
+  /* line 284, ../sass/partials/_space-layout-rtl.scss */
+  .col-md-pull-0 {
+    left: auto;
+  }
+
+  /* line 287, ../sass/partials/_space-layout-rtl.scss */
+  .col-md-push-12 {
+    right: 100%;
+  }
+
+  /* line 290, ../sass/partials/_space-layout-rtl.scss */
+  .col-md-push-11 {
+    right: 91.66666667%;
+  }
+
+  /* line 293, ../sass/partials/_space-layout-rtl.scss */
+  .col-md-push-10 {
+    right: 83.33333333%;
+  }
+
+  /* line 296, ../sass/partials/_space-layout-rtl.scss */
+  .col-md-push-9 {
+    right: 75%;
+  }
+
+  /* line 299, ../sass/partials/_space-layout-rtl.scss */
+  .col-md-push-8 {
+    right: 66.66666667%;
+  }
+
+  /* line 302, ../sass/partials/_space-layout-rtl.scss */
+  .col-md-push-7 {
+    right: 58.33333333%;
+  }
+
+  /* line 305, ../sass/partials/_space-layout-rtl.scss */
+  .col-md-push-6 {
+    right: 50%;
+  }
+
+  /* line 308, ../sass/partials/_space-layout-rtl.scss */
+  .col-md-push-5 {
+    right: 41.66666667%;
+  }
+
+  /* line 311, ../sass/partials/_space-layout-rtl.scss */
+  .col-md-push-4 {
+    right: 33.33333333%;
+  }
+
+  /* line 314, ../sass/partials/_space-layout-rtl.scss */
+  .col-md-push-3 {
+    right: 25%;
+  }
+
+  /* line 317, ../sass/partials/_space-layout-rtl.scss */
+  .col-md-push-2 {
+    right: 16.66666667%;
+  }
+
+  /* line 320, ../sass/partials/_space-layout-rtl.scss */
+  .col-md-push-1 {
+    right: 8.33333333%;
+  }
+
+  /* line 323, ../sass/partials/_space-layout-rtl.scss */
+  .col-md-push-0 {
+    right: auto;
+  }
+
+  /* line 326, ../sass/partials/_space-layout-rtl.scss */
+  .col-md-offset-12 {
+    margin-right: 100%;
+  }
+
+  /* line 329, ../sass/partials/_space-layout-rtl.scss */
+  .col-md-offset-11 {
+    margin-right: 91.66666667%;
+  }
+
+  /* line 332, ../sass/partials/_space-layout-rtl.scss */
+  .col-md-offset-10 {
+    margin-right: 83.33333333%;
+  }
+
+  /* line 335, ../sass/partials/_space-layout-rtl.scss */
+  .col-md-offset-9 {
+    margin-right: 75%;
+  }
+
+  /* line 338, ../sass/partials/_space-layout-rtl.scss */
+  .col-md-offset-8 {
+    margin-right: 66.66666667%;
+  }
+
+  /* line 341, ../sass/partials/_space-layout-rtl.scss */
+  .col-md-offset-7 {
+    margin-right: 58.33333333%;
+  }
+
+  /* line 344, ../sass/partials/_space-layout-rtl.scss */
+  .col-md-offset-6 {
+    margin-right: 50%;
+  }
+
+  /* line 347, ../sass/partials/_space-layout-rtl.scss */
+  .col-md-offset-5 {
+    margin-right: 41.66666667%;
+  }
+
+  /* line 350, ../sass/partials/_space-layout-rtl.scss */
+  .col-md-offset-4 {
+    margin-right: 33.33333333%;
+  }
+
+  /* line 353, ../sass/partials/_space-layout-rtl.scss */
+  .col-md-offset-3 {
+    margin-right: 25%;
+  }
+
+  /* line 356, ../sass/partials/_space-layout-rtl.scss */
+  .col-md-offset-2 {
+    margin-right: 16.66666667%;
+  }
+
+  /* line 359, ../sass/partials/_space-layout-rtl.scss */
+  .col-md-offset-1 {
+    margin-right: 8.33333333%;
+  }
+
+  /* line 362, ../sass/partials/_space-layout-rtl.scss */
+  .col-md-offset-0 {
+    margin-right: 0;
+  }
+}
+@media (min-width: 1200px) {
+  /* line 368, ../sass/partials/_space-layout-rtl.scss */
+  .col-lg-1, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9, .col-lg-10, .col-lg-11, .col-lg-12 {
+    /*float: right;*/
+  }
+
+  /* line 371, ../sass/partials/_space-layout-rtl.scss */
+  .col-lg-pull-12 {
+    left: 100%;
+  }
+
+  /* line 374, ../sass/partials/_space-layout-rtl.scss */
+  .col-lg-pull-11 {
+    left: 91.66666667%;
+  }
+
+  /* line 377, ../sass/partials/_space-layout-rtl.scss */
+  .col-lg-pull-10 {
+    left: 83.33333333%;
+  }
+
+  /* line 380, ../sass/partials/_space-layout-rtl.scss */
+  .col-lg-pull-9 {
+    left: 75%;
+  }
+
+  /* line 383, ../sass/partials/_space-layout-rtl.scss */
+  .col-lg-pull-8 {
+    left: 66.66666667%;
+  }
+
+  /* line 386, ../sass/partials/_space-layout-rtl.scss */
+  .col-lg-pull-7 {
+    left: 58.33333333%;
+  }
+
+  /* line 389, ../sass/partials/_space-layout-rtl.scss */
+  .col-lg-pull-6 {
+    left: 50%;
+  }
+
+  /* line 392, ../sass/partials/_space-layout-rtl.scss */
+  .col-lg-pull-5 {
+    left: 41.66666667%;
+  }
+
+  /* line 395, ../sass/partials/_space-layout-rtl.scss */
+  .col-lg-pull-4 {
+    left: 33.33333333%;
+  }
+
+  /* line 398, ../sass/partials/_space-layout-rtl.scss */
+  .col-lg-pull-3 {
+    left: 25%;
+  }
+
+  /* line 401, ../sass/partials/_space-layout-rtl.scss */
+  .col-lg-pull-2 {
+    left: 16.66666667%;
+  }
+
+  /* line 404, ../sass/partials/_space-layout-rtl.scss */
+  .col-lg-pull-1 {
+    left: 8.33333333%;
+  }
+
+  /* line 407, ../sass/partials/_space-layout-rtl.scss */
+  .col-lg-pull-0 {
+    left: auto;
+  }
+
+  /* line 410, ../sass/partials/_space-layout-rtl.scss */
+  .col-lg-push-12 {
+    right: 100%;
+  }
+
+  /* line 413, ../sass/partials/_space-layout-rtl.scss */
+  .col-lg-push-11 {
+    right: 91.66666667%;
+  }
+
+  /* line 416, ../sass/partials/_space-layout-rtl.scss */
+  .col-lg-push-10 {
+    right: 83.33333333%;
+  }
+
+  /* line 419, ../sass/partials/_space-layout-rtl.scss */
+  .col-lg-push-9 {
+    right: 75%;
+  }
+
+  /* line 422, ../sass/partials/_space-layout-rtl.scss */
+  .col-lg-push-8 {
+    right: 66.66666667%;
+  }
+
+  /* line 425, ../sass/partials/_space-layout-rtl.scss */
+  .col-lg-push-7 {
+    right: 58.33333333%;
+  }
+
+  /* line 428, ../sass/partials/_space-layout-rtl.scss */
+  .col-lg-push-6 {
+    right: 50%;
+  }
+
+  /* line 431, ../sass/partials/_space-layout-rtl.scss */
+  .col-lg-push-5 {
+    right: 41.66666667%;
+  }
+
+  /* line 434, ../sass/partials/_space-layout-rtl.scss */
+  .col-lg-push-4 {
+    right: 33.33333333%;
+  }
+
+  /* line 437, ../sass/partials/_space-layout-rtl.scss */
+  .col-lg-push-3 {
+    right: 25%;
+  }
+
+  /* line 440, ../sass/partials/_space-layout-rtl.scss */
+  .col-lg-push-2 {
+    right: 16.66666667%;
+  }
+
+  /* line 443, ../sass/partials/_space-layout-rtl.scss */
+  .col-lg-push-1 {
+    right: 8.33333333%;
+  }
+
+  /* line 446, ../sass/partials/_space-layout-rtl.scss */
+  .col-lg-push-0 {
+    right: auto;
+  }
+
+  /* line 449, ../sass/partials/_space-layout-rtl.scss */
+  .col-lg-offset-12 {
+    margin-right: 100%;
+  }
+
+  /* line 452, ../sass/partials/_space-layout-rtl.scss */
+  .col-lg-offset-11 {
+    margin-right: 91.66666667%;
+  }
+
+  /* line 455, ../sass/partials/_space-layout-rtl.scss */
+  .col-lg-offset-10 {
+    margin-right: 83.33333333%;
+  }
+
+  /* line 458, ../sass/partials/_space-layout-rtl.scss */
+  .col-lg-offset-9 {
+    margin-right: 75%;
+  }
+
+  /* line 461, ../sass/partials/_space-layout-rtl.scss */
+  .col-lg-offset-8 {
+    margin-right: 66.66666667%;
+  }
+
+  /* line 464, ../sass/partials/_space-layout-rtl.scss */
+  .col-lg-offset-7 {
+    margin-right: 58.33333333%;
+  }
+
+  /* line 467, ../sass/partials/_space-layout-rtl.scss */
+  .col-lg-offset-6 {
+    margin-right: 50%;
+  }
+
+  /* line 470, ../sass/partials/_space-layout-rtl.scss */
+  .col-lg-offset-5 {
+    margin-right: 41.66666667%;
+  }
+
+  /* line 473, ../sass/partials/_space-layout-rtl.scss */
+  .col-lg-offset-4 {
+    margin-right: 33.33333333%;
+  }
+
+  /* line 476, ../sass/partials/_space-layout-rtl.scss */
+  .col-lg-offset-3 {
+    margin-right: 25%;
+  }
+
+  /* line 479, ../sass/partials/_space-layout-rtl.scss */
+  .col-lg-offset-2 {
+    margin-right: 16.66666667%;
+  }
+
+  /* line 482, ../sass/partials/_space-layout-rtl.scss */
+  .col-lg-offset-1 {
+    margin-right: 8.33333333%;
+  }
+
+  /* line 485, ../sass/partials/_space-layout-rtl.scss */
+  .col-lg-offset-0 {
+    margin-right: 0;
+  }
+}
+/* line 490, ../sass/partials/_space-layout-rtl.scss */
+#panel-bootstrap-region-sidebar,
+#panel-bootstrap-region-center,
+#panel-bootstrap-region-content_views {
+  float: right;
+}
+
+/*-----------------------------------------------
+                     Header
+-----------------------------------------------*/
+/* line 4, ../sass/partials/_space-header-footer-rtl.scss */
+header {
+  margin-right: -8px;
+  margin-left: 0px;
+}
+@media all and (max-width: 767px) {
+  /* line 4, ../sass/partials/_space-header-footer-rtl.scss */
+  header {
+    margin-right: 0px;
+  }
+}
+
+/*-----------------------------------------------
+                     Footer
+-----------------------------------------------*/
+/* line 21, ../sass/partials/_space-header-footer-rtl.scss */
+footer.footer.navbar {
+  /* --- menu --- */
+  /* --- social-links --- */
+  /* --- openideal-credits --- */
+}
+/* line 22, ../sass/partials/_space-header-footer-rtl.scss */
+footer.footer.navbar .panel-pane {
+  float: right;
+}
+/* line 27, ../sass/partials/_space-header-footer-rtl.scss */
+footer.footer.navbar ul.nav > li {
+  padding: 0;
+  margin: 0;
+  float: right;
+}
+/* line 34, ../sass/partials/_space-header-footer-rtl.scss */
+footer.footer.navbar .pane-social-links {
+  float: left;
+}
+/* line 37, ../sass/partials/_space-header-footer-rtl.scss */
+footer.footer.navbar .pane-social-links a.social_link {
+  display: inline-block;
+  vertical-align: middle;
+  *vertical-align: auto;
+  *zoom: 1;
+  *display: inline;
+}
+/* line 39, ../sass/partials/_space-header-footer-rtl.scss */
+footer.footer.navbar .pane-social-links a.social_link:before {
+  margin-right: 0 !important;
+  margin-left: 9px;
+}
+/* line 44, ../sass/partials/_space-header-footer-rtl.scss */
+footer.footer.navbar .pane-social-links a.social_link:last-child:before {
+  margin-left: 0 !important;
+}
+/* line 52, ../sass/partials/_space-header-footer-rtl.scss */
+footer.footer.navbar .pane-ideal-main-openideal-credits {
+  float: left;
+  clear: left;
+}
+
+/*-----------------------------------------------
+                    Pages
+-----------------------------------------------*/
+/*-----------------------------------------------
+                   Front - page
+-----------------------------------------------*/
+/* ------------------------------------ pane-views-default-challenge-block ---------------------------------- */
+/* line 7, ../sass/partials/_front-page-rtl.scss */
+.pane-views-default-challenge-block {
+  /* --- row-bottom --- */
+}
+/* line 8, ../sass/partials/_front-page-rtl.scss */
+.pane-views-default-challenge-block .carousel-indicators {
+  left: auto;
+  right: 45px;
+  padding-right: 0;
+}
+/* line 15, ../sass/partials/_front-page-rtl.scss */
+.pane-views-default-challenge-block .row-bottom-openideal .dates {
+  direction: ltr;
+  text-align: right;
+}
+/* line 19, ../sass/partials/_front-page-rtl.scss */
+.pane-views-default-challenge-block .row-bottom-openideal .dates:before {
+  float: right;
+}
+
+/* --------------------------------- pane-views-challenges-featured-front-block ----------------------------- */
+/* line 28, ../sass/partials/_front-page-rtl.scss */
+.pane-views-challenges-featured-front-block .view-all {
+  float: left;
+}
+/* line 33, ../sass/partials/_front-page-rtl.scss */
+.pane-views-challenges-featured-front-block .row .mouseover .read-more {
+  right: auto;
+  left: 14px;
+}
+
+/* ----------------------------------- pane-views-highlighted-content-block --------------------------------- */
+/* line 44, ../sass/partials/_front-page-rtl.scss */
+.pane-views-highlighted-content-block .pane-content {
+  /* --- views-row --- */
+  /* --- field-type --- */
+  /* --- title --- */
+}
+/* line 47, ../sass/partials/_front-page-rtl.scss */
+.pane-views-highlighted-content-block .pane-content .views-row {
+  padding-left: 0;
+  padding-right: 38px;
+}
+/* line 54, ../sass/partials/_front-page-rtl.scss */
+.pane-views-highlighted-content-block .pane-content .views-field-type.pull-left {
+  /*float: none !important;*/
+  float: right !important;
+  margin: -3px -35px 0 0;
+}
+/* line 59, ../sass/partials/_front-page-rtl.scss */
+.pane-views-highlighted-content-block .pane-content .views-field-type:before {
+  margin-right: 0;
+  margin-left: 7px;
+}
+/* line 67, ../sass/partials/_front-page-rtl.scss */
+.pane-views-highlighted-content-block .pane-content .views-field-title.pull-left {
+  float: right !important;
+  margin-right: 0;
+  margin-left: 5px;
+}
+
+/* --------------------------------- pane-panels-mini.pane-latest-and-greatest ------------------------------ */
+/* line 77, ../sass/partials/_front-page-rtl.scss */
+.pane-panels-mini.pane-latest-and-greatest {
+  /* --- icons for titles --- */
+  /* --- all views-row --- */
+}
+/* line 27, ../sass/_mixins.scss */
+.pane-panels-mini.pane-latest-and-greatest .pane-views-activity-block-1 .pane-title:before,
+.pane-panels-mini.pane-latest-and-greatest .pane-views-activity-block-2 .pane-title:before,
+.pane-panels-mini.pane-latest-and-greatest .pane-views-activity-block-3 .pane-title:before {
+  margin-right: 0;
+  margin-left: 7px;
+}
+/* line 88, ../sass/partials/_front-page-rtl.scss */
+.pane-panels-mini.pane-latest-and-greatest .pane-content .views-row .user-image {
+  margin-right: 0;
+  margin-left: 10px;
+  float: right;
+}
+
+/*-----------------------------------------------
+                   Home - page
+-----------------------------------------------*/
+/* ------------------------------------ Roundtable ---------------------------------- */
+@media (min-width: 768px) {
+  /* line 8, ../sass/partials/_home-page-rtl.scss */
+  .inside .round-table {
+    margin-left: 26px;
+    margin-right: 0px !important;
+  }
+}
+/* line 14, ../sass/partials/_home-page-rtl.scss */
+.inside .round-table .link-roundtable a {
+  margin-right: 0px !important;
+}
+@media all and (min-width: 767px) {
+  /* line 14, ../sass/partials/_home-page-rtl.scss */
+  .inside .round-table .link-roundtable a {
+    margin-left: 66px;
+  }
+}
+
+/* --------------------------------- pane-views-head-to-head-challenge-block  ----------------------------------- */
+/* line 30, ../sass/partials/_home-page-rtl.scss */
+.pane-views-head-to-head-ideas-block .pane-content {
+  /* -- view-footer -- */
+}
+/* line 33, ../sass/partials/_home-page-rtl.scss */
+.pane-views-head-to-head-ideas-block .pane-content .view-content .row .col {
+  margin-right: 0;
+}
+@media (min-width: 768px) {
+  /* line 38, ../sass/partials/_home-page-rtl.scss */
+  .pane-views-head-to-head-ideas-block .pane-content .view-content .row .col:first-child {
+    margin-left: none;
+  }
+  /* line 41, ../sass/partials/_home-page-rtl.scss */
+  .pane-views-head-to-head-ideas-block .pane-content .view-content .row .col:last-child {
+    margin-right: 26px;
+    margin-left: 0px;
+  }
+}
+/* line 48, ../sass/partials/_home-page-rtl.scss */
+.pane-views-head-to-head-ideas-block .pane-content .view-content .col .thumbnail {
+  /* -- field-vote -- */
+  /* -- field-picture -- */
+  /* -- field-name -- */
+}
+/* line 51, ../sass/partials/_home-page-rtl.scss */
+.pane-views-head-to-head-ideas-block .pane-content .view-content .col .thumbnail .views-field-field-vote .vud-widget-alternate {
+  margin: 10px 0 5px;
+}
+/* line 55, ../sass/partials/_home-page-rtl.scss */
+.pane-views-head-to-head-ideas-block .pane-content .view-content .col .thumbnail .views-field-field-vote .alternate-votes-display::before {
+  margin-left: 7px;
+}
+@media (min-width: 768px) {
+  /* line 58, ../sass/partials/_home-page-rtl.scss */
+  .pane-views-head-to-head-ideas-block .pane-content .view-content .col .thumbnail .views-field-field-vote .alternate-votes-display::after {
+    margin-right: 44px;
+  }
+}
+/* line 65, ../sass/partials/_home-page-rtl.scss */
+.pane-views-head-to-head-ideas-block .pane-content .view-content .col .thumbnail .views-field-field-vote .vud-link-reset {
+  right: 0;
+  left: inherit;
+}
+/* line 70, ../sass/partials/_home-page-rtl.scss */
+.pane-views-head-to-head-ideas-block .pane-content .view-content .col .thumbnail .views-field-field-vote .up-active, .pane-views-head-to-head-ideas-block .pane-content .view-content .col .thumbnail .views-field-field-vote .up-inactive, .pane-views-head-to-head-ideas-block .pane-content .view-content .col .thumbnail .views-field-field-vote .vud-link-reset {
+  padding: 3px 9px;
+}
+/* line 72, ../sass/partials/_home-page-rtl.scss */
+.pane-views-head-to-head-ideas-block .pane-content .view-content .col .thumbnail .views-field-field-vote .up-active:after, .pane-views-head-to-head-ideas-block .pane-content .view-content .col .thumbnail .views-field-field-vote .up-inactive:after, .pane-views-head-to-head-ideas-block .pane-content .view-content .col .thumbnail .views-field-field-vote .vud-link-reset:after {
+  padding-right: 4px;
+  content: "אהבתי";
+}
+@media (min-width: 768px) {
+  /* line 70, ../sass/partials/_home-page-rtl.scss */
+  .pane-views-head-to-head-ideas-block .pane-content .view-content .col .thumbnail .views-field-field-vote .up-active, .pane-views-head-to-head-ideas-block .pane-content .view-content .col .thumbnail .views-field-field-vote .up-inactive, .pane-views-head-to-head-ideas-block .pane-content .view-content .col .thumbnail .views-field-field-vote .vud-link-reset {
+    margin-left: 15px;
+  }
+}
+@media (max-width: 768px) {
+  /* line 70, ../sass/partials/_home-page-rtl.scss */
+  .pane-views-head-to-head-ideas-block .pane-content .view-content .col .thumbnail .views-field-field-vote .up-active, .pane-views-head-to-head-ideas-block .pane-content .view-content .col .thumbnail .views-field-field-vote .up-inactive, .pane-views-head-to-head-ideas-block .pane-content .view-content .col .thumbnail .views-field-field-vote .vud-link-reset {
+    padding: 2px 0px;
+    margin-left: 15px;
+  }
+}
+/* line 83, ../sass/partials/_home-page-rtl.scss */
+.pane-views-head-to-head-ideas-block .pane-content .view-content .col .thumbnail .views-field-field-vote .up-active:empty:before, .pane-views-head-to-head-ideas-block .pane-content .view-content .col .thumbnail .views-field-field-vote .up-inactive:empty:before, .pane-views-head-to-head-ideas-block .pane-content .view-content .col .thumbnail .views-field-field-vote .vud-link-reset:empty:before {
+  float: right;
+}
+/* line 87, ../sass/partials/_home-page-rtl.scss */
+.pane-views-head-to-head-ideas-block .pane-content .view-content .col .thumbnail .views-field-field-vote .up-active:before, .pane-views-head-to-head-ideas-block .pane-content .view-content .col .thumbnail .views-field-field-vote .vud-link-reset:before {
+  margin-left: 7px;
+  margin-right: 0px;
+  float: right;
+}
+@media (max-width: 768px) {
+  /* line 87, ../sass/partials/_home-page-rtl.scss */
+  .pane-views-head-to-head-ideas-block .pane-content .view-content .col .thumbnail .views-field-field-vote .up-active:before, .pane-views-head-to-head-ideas-block .pane-content .view-content .col .thumbnail .views-field-field-vote .vud-link-reset:before {
+    margin-left: 2px;
+  }
+}
+/* line 97, ../sass/partials/_home-page-rtl.scss */
+.pane-views-head-to-head-ideas-block .pane-content .view-content .col .thumbnail .views-field-field-vote .up-inactive:before {
+  margin-left: 7px;
+  margin-right: 0px;
+}
+/* line 104, ../sass/partials/_home-page-rtl.scss */
+.pane-views-head-to-head-ideas-block .pane-content .view-content .col .thumbnail .views-field-php {
+  padding-right: 51px;
+  padding-left: 0px;
+}
+/* line 110, ../sass/partials/_home-page-rtl.scss */
+.pane-views-head-to-head-ideas-block .pane-content .view-content .col .thumbnail .views-field-picture {
+  float: left;
+  margin: 4px 10px 0 4px;
+  right: 4px;
+  left: 0px;
+}
+/* line 118, ../sass/partials/_home-page-rtl.scss */
+.pane-views-head-to-head-ideas-block .pane-content .view-content .col .thumbnail .views-field-name {
+  padding: 10px 10px 10px 51px;
+  left: 0;
+  right: 0;
+  padding-right: 76px;
+  padding-left: 0px;
+}
+/* line 129, ../sass/partials/_home-page-rtl.scss */
+.pane-views-head-to-head-ideas-block .pane-content .view-footer {
+  left: 0;
+  right: 5px;
+}
+
+@media (min-width: 768px) {
+  /* line 138, ../sass/partials/_home-page-rtl.scss */
+  .pane-region-second .inside .pane-views-default-challenge-block {
+    margin-left: 2%;
+    margin-right: 0%;
+  }
+}
+
+/* --------------------------------- pane-panels-mini.pane-latest-and-greatest ------------------------------ */
+/* line 150, ../sass/partials/_home-page-rtl.scss */
+.pane-panels-mini.pane-latest-and-greatest {
+  /* --- all pane-title --- */
+  /* --- all views-row --- */
+  /* --- icons for titles --- */
+}
+/* line 151, ../sass/partials/_home-page-rtl.scss */
+.pane-panels-mini.pane-latest-and-greatest #mini-panel-latest_and_greatest > div {
+  margin-left: 1%;
+  margin-right: 0%;
+}
+/* line 155, ../sass/partials/_home-page-rtl.scss */
+.pane-panels-mini.pane-latest-and-greatest .column-inside-last {
+  margin-left: 0px !important;
+}
+/* line 159, ../sass/partials/_home-page-rtl.scss */
+.pane-panels-mini.pane-latest-and-greatest #mini-panel-latest_and_greatest > .row {
+  margin-right: -10px;
+  margin-left: -10px;
+}
+/* line 162, ../sass/partials/_home-page-rtl.scss */
+.pane-panels-mini.pane-latest-and-greatest #mini-panel-latest_and_greatest > .row .column {
+  padding-right: 10px;
+  padding-left: 10px;
+}
+/* line 166, ../sass/partials/_home-page-rtl.scss */
+.pane-panels-mini.pane-latest-and-greatest .pane-title {
+  padding: 0 0 9px 0;
+  /*margin: 7px 0 0;*/
+}
+/* line 169, ../sass/partials/_home-page-rtl.scss */
+.pane-panels-mini.pane-latest-and-greatest .pane-title:before {
+  margin-right: 7px;
+}
+/* line 175, ../sass/partials/_home-page-rtl.scss */
+.pane-panels-mini.pane-latest-and-greatest .panels-bootstrap-latest_and_greatest .inside .pane-title {
+  margin-right: 9px;
+  margin-left: 0px;
+}
+/* line 180, ../sass/partials/_home-page-rtl.scss */
+.pane-panels-mini.pane-latest-and-greatest .panels-bootstrap-latest_and_greatest .pane-content {
+  margin-right: 7px;
+  margin-left: 0px;
+}
+/* line 186, ../sass/partials/_home-page-rtl.scss */
+.pane-panels-mini.pane-latest-and-greatest .panels-bootstrap-latest_and_greatest .view-content .views-row .views-field-name {
+  margin-right: 66px;
+  margin-left: 0px;
+}
+/* line 190, ../sass/partials/_home-page-rtl.scss */
+.pane-panels-mini.pane-latest-and-greatest .panels-bootstrap-latest_and_greatest .view-content .views-row .views-field-field-bio {
+  margin-right: 66px;
+  margin-left: 0px;
+}
+/* line 194, ../sass/partials/_home-page-rtl.scss */
+.pane-panels-mini.pane-latest-and-greatest .panels-bootstrap-latest_and_greatest .view-content .views-row .user-image {
+  margin: 1px 10px 0 0;
+}
+/* line 205, ../sass/partials/_home-page-rtl.scss */
+.pane-panels-mini.pane-latest-and-greatest #panel-bootstrap-column-2 .view-content .views-row .user-text {
+  margin-right: 58px;
+}
+/* line 208, ../sass/partials/_home-page-rtl.scss */
+.pane-panels-mini.pane-latest-and-greatest #panel-bootstrap-column-2 .view-content .views-row .views-field-created {
+  margin-right: 58px;
+}
+
+/* line 4, ../sass/partials/_list-pages-rtl.scss */
+.page-challenges .pane-views-challenges-list-block-1 .pane-title::before, .page-challenges .pane-challenges-list .pane-title::before {
+  right: 0;
+  left: inherit;
+  padding-right: 0px;
+  padding-left: 9px;
+}
+
+/* line 16, ../sass/partials/_list-pages-rtl.scss */
+.pane-quicktabs-all-ideas ul.quicktabs-tabs li.first {
+  margin-right: 0;
+}
+/* line 27, ../sass/_mixins.scss */
+.pane-quicktabs-all-ideas ul.quicktabs-tabs li.first:before {
+  margin-right: 0;
+  margin-left: 7px;
+}
+
+/*-----------------------------------------------------------------------------
+                          Inner - page (challenge / idea)
+------------------------------------------------------------------------------*/
+/* line 5, ../sass/partials/_inner-pages-rtl.scss */
+body .panels-bootstrap-inner_page {
+  /* --- pane-user-picture --- */
+  /* --- pane-node-author --- */
+  /* --- pane-node-field-status --- */
+  /* --- pane-node-created --- */
+  /* --- pane-node-field-share --- */
+  /* --- pane-node-field-challenge-ref --- */
+}
+/* line 7, ../sass/partials/_inner-pages-rtl.scss */
+body .panels-bootstrap-inner_page .pane-user-picture {
+  float: right;
+  margin-right: 5px;
+  margin-left: 10px;
+}
+/* line 14, ../sass/partials/_inner-pages-rtl.scss */
+body .panels-bootstrap-inner_page .pane-node-author {
+  padding-left: 0;
+  padding-right: 10px;
+}
+/* line 18, ../sass/partials/_inner-pages-rtl.scss */
+body .panels-bootstrap-inner_page .pane-node-author .username {
+  float: right;
+}
+/* line 24, ../sass/partials/_inner-pages-rtl.scss */
+body .panels-bootstrap-inner_page .pane-node-field-status {
+  margin-right: 0;
+  margin-left: 100px;
+  float: left;
+}
+/* line 27, ../sass/_mixins.scss */
+body .panels-bootstrap-inner_page .pane-node-field-status .field-item:before {
+  margin-right: 0;
+  margin-left: 7px;
+}
+/* line 32, ../sass/partials/_inner-pages-rtl.scss */
+body .panels-bootstrap-inner_page .pane-node-created {
+  margin-right: 0;
+  margin-left: 100px;
+  float: left;
+}
+/* line 27, ../sass/_mixins.scss */
+body .panels-bootstrap-inner_page .pane-node-created .pane-content:before {
+  margin-right: 0;
+  margin-left: 5px;
+}
+/* line 40, ../sass/partials/_inner-pages-rtl.scss */
+body .panels-bootstrap-inner_page .pane-node-field-share {
+  margin-right: 0;
+  margin-left: 13px;
+  float: left;
+}
+/* line 27, ../sass/_mixins.scss */
+body .panels-bootstrap-inner_page .pane-node-field-share:before {
+  margin-right: 0;
+  margin-left: 7px;
+}
+/* line 47, ../sass/partials/_inner-pages-rtl.scss */
+body .panels-bootstrap-inner_page .pane-node-field-challenge-ref .pane-title {
+  margin-left: 7px;
+  margin-right: 0;
+  float: right;
+}
+
+/* --- pane-node-comment-form --- */
+/* line 58, ../sass/partials/_inner-pages-rtl.scss */
+.pane-node-comment-form .pane-title:before {
+  margin-left: 7px;
+  margin-right: 0;
+}
+
+/* --- .comment-form --- */
+/* line 66, ../sass/partials/_inner-pages-rtl.scss */
+.comment-form {
+  /* -- user-picture / username -- */
+  /* -- submit -- */
+}
+/* line 68, ../sass/partials/_inner-pages-rtl.scss */
+.comment-form .field-type-text-long ~ .form-item {
+  float: right;
+}
+/* line 72, ../sass/partials/_inner-pages-rtl.scss */
+.comment-form .user-picture {
+  margin-right: 0;
+  margin-left: 16px;
+}
+/* line 78, ../sass/partials/_inner-pages-rtl.scss */
+.comment-form .form-submit {
+  float: left;
+}
+/* line 27, ../sass/_mixins.scss */
+.comment-form .form-submit:before {
+  margin-right: 0;
+  margin-left: 7px;
+}
+
+/* --- pane-node-comments --- */
+/* line 27, ../sass/_mixins.scss */
+.pane-node-comments .pane-title:before {
+  margin-right: 0;
+  margin-left: 7px;
+}
+/* line 90, ../sass/partials/_inner-pages-rtl.scss */
+.pane-node-comments .pane-content ul.links {
+  padding-right: 9px;
+}
+/* line 27, ../sass/_mixins.scss */
+.pane-node-comments .pane-content ul.links li.comment-reply:before {
+  margin-right: 0;
+  margin-left: 7px;
+}
+/* line 98, ../sass/partials/_inner-pages-rtl.scss */
+.pane-node-comments .pane-content .indented {
+  margin: 0;
+}
+/* line 105, ../sass/partials/_inner-pages-rtl.scss */
+.pane-node-comments .pane-content > .indented > .comment {
+  padding: 1em 3.2em 1em 0;
+}
+/* line 109, ../sass/partials/_inner-pages-rtl.scss */
+.pane-node-comments .pane-content > .indented > .indented > .comment {
+  padding: 1em 6.4em 1em 0;
+}
+/* line 113, ../sass/partials/_inner-pages-rtl.scss */
+.pane-node-comments .pane-content > .indented > .indented > .indented > .comment {
+  padding: 1em 9.6em 1em 0;
+}
+/* line 121, ../sass/partials/_inner-pages-rtl.scss */
+.pane-node-comments .comment {
+  /* -- user-picture / username -- */
+  /* -- comment-body -- */
+  /* -- field-name-field-vote -- */
+}
+/* line 123, ../sass/partials/_inner-pages-rtl.scss */
+.pane-node-comments .comment > .user-picture {
+  margin-right: 0;
+  margin-left: 15px;
+  float: right;
+}
+@media all and (max-width: 767px) {
+  /* line 123, ../sass/partials/_inner-pages-rtl.scss */
+  .pane-node-comments .comment > .user-picture {
+    margin-right: 5%;
+  }
+}
+/* line 131, ../sass/partials/_inner-pages-rtl.scss */
+.pane-node-comments .comment > span .username {
+  margin-right: 0;
+  margin-left: 5px;
+}
+/* line 137, ../sass/partials/_inner-pages-rtl.scss */
+.pane-node-comments .comment .submitted span {
+  float: right;
+}
+/* line 143, ../sass/partials/_inner-pages-rtl.scss */
+.pane-node-comments .comment .field-name-field-vote {
+  float: left;
+}
+
+/*-----------------------------------------------------------------------------
+                        Challenge:  Inner - page
+-----------------------------------------------------------------------------*/
+/* ------------------------------- pane-ideal-challenge-challenge-add-idea-button --------------------------- */
+/* line 168, ../sass/_mixins.scss */
+.pane-ideal-challenge-challenge-add-idea-button .challenge-add-idea-button a.btn-success:after {
+  direction: ltr;
+  right: 0;
+}
+
+/* ----------------------------------- pane-ideal-challenge-challenge-data ---------------------------------- */
+/* line 27, ../sass/_mixins.scss */
+.pane-ideal-challenge-challenge-data .pane-title:before {
+  margin-right: 0;
+  margin-left: 13px;
+}
+
+/* ----------------------------------- pane-views-ideas-in-challenge-block ---------------------------------- */
+/*-----------------------------------------------------------------------------
+                        Idea:  Inner - page
+-----------------------------------------------------------------------------*/
+/* line 27, ../sass/_mixins.scss */
+.pane-node-field-vote .alternate-votes-display:before {
+  margin-right: 0;
+  margin-left: 7px;
+}
+/* line 179, ../sass/partials/_inner-pages-rtl.scss */
+.pane-node-field-vote .alternate-votes-display:after {
+  content: 'הצבעות';
+  left: auto;
+  right: 0;
+}
+/* line 27, ../sass/_mixins.scss */
+.pane-node-field-vote .up-active:before,
+.pane-node-field-vote .up-inactive:before,
+.pane-node-field-vote .vud-link-reset:before {
+  margin-right: 0;
+  margin-left: 7px;
+}
+/* line 190, ../sass/partials/_inner-pages-rtl.scss */
+.pane-node-field-vote .up-active:before,
+.pane-node-field-vote .up-inactive:before,
+.pane-node-field-vote .vud-link-reset:before {
+  content: "הצביעו לרעיון!";
+}
+/* line 168, ../sass/_mixins.scss */
+.pane-node-field-vote .up-active:after,
+.pane-node-field-vote .up-inactive:after,
+.pane-node-field-vote .vud-link-reset:after {
+  direction: ltr;
+  right: 0;
+}
+/* line 196, ../sass/partials/_inner-pages-rtl.scss */
+.pane-node-field-vote .up-active:before, .pane-node-field-vote .vud-link-reset:before {
+  content: "תודה על הצבעתך!";
+}
+/* line 200, ../sass/partials/_inner-pages-rtl.scss */
+.pane-node-field-vote .vud-link-reset {
+  left: inherit;
+  right: 0;
+}
+
+/* line 209, ../sass/partials/_inner-pages-rtl.scss */
+body.not-logged-in .pane-node-field-vote .up-active:before, body.not-logged-in .pane-node-field-vote .vud-link-reset:before {
+  content: "ההצבעה הינה לרשומי המערכת";
+}
+
+/* line 27, ../sass/_mixins.scss */
+.pane-node-field-attachments .pane-title:before {
+  margin-right: 0;
+  margin-left: 7px;
+}
+/* line 222, ../sass/partials/_inner-pages-rtl.scss */
+.pane-node-field-attachments .field-item a:before {
+  margin-right: 0;
+  margin-left: 10px;
+}
+
+/*-----------------------------------------------------------------------------
+                        Register:  user register - page
+-----------------------------------------------------------------------------*/
+/* line 231, ../sass/partials/_inner-pages-rtl.scss */
+.form-type-password-confirm {
+  width: 75%;
+}
+/* line 234, ../sass/partials/_inner-pages-rtl.scss */
+.form-type-password-confirm .password-strength {
+  padding-left: 10%;
+  margin-top: 0;
+}
+
+/* line 242, ../sass/partials/_inner-pages-rtl.scss */
+.page-user-register #edit-field-content-notifications, .page-user-register #edit-field-comment-notficiations {
+  width: 47%;
+}
+/* line 244, ../sass/partials/_inner-pages-rtl.scss */
+.page-user-register #edit-field-content-notifications input[type="checkbox"], .page-user-register #edit-field-comment-notficiations input[type="checkbox"] {
+  float: none !important;
+  margin-left: 2%;
+}
+
+/* line 27, ../sass/_mixins.scss */
+.node-type-idea .ol-item.idea h1.ol-item-title:before {
+  margin-right: 0;
+  margin-left: 0.3em;
+}
+@media all and (max-width: 768px) {
+  /* line 256, ../sass/partials/_inner-pages-rtl.scss */
+  .node-type-idea .ol-item.idea h1.ol-item-title::before {
+    display: none;
+  }
+}
+/* line 264, ../sass/partials/_inner-pages-rtl.scss */
+.node-type-idea .ol-item.idea .row-bottom-openideal > div.author .picture {
+  margin-right: 0;
+  margin-left: 0.2em;
+}
+/* line 270, ../sass/partials/_inner-pages-rtl.scss */
+.node-type-idea .ol-item.idea .row-bottom-openideal > div.details > div {
+  margin-left: 1.1em;
+  margin-right: 0;
+}
+/* line 273, ../sass/partials/_inner-pages-rtl.scss */
+.node-type-idea .ol-item.idea .row-bottom-openideal > div.details > div.dates {
+  margin-left: 0;
+}
+/* line 281, ../sass/partials/_inner-pages-rtl.scss */
+.node-type-idea .back-challenge {
+  float: left;
+}
+
+/* line 289, ../sass/partials/_inner-pages-rtl.scss */
+.node-type-challenge .ol-item.challenge .views-field-title h1.ol-item-title {
+  margin-right: 1.5em;
+  margin-left: 0;
+}
+/* line 27, ../sass/_mixins.scss */
+.node-type-challenge .ol-item.challenge .views-field-title h1.ol-item-title:before {
+  margin-right: 0;
+  margin-left: 0.3em;
+}
+/* line 293, ../sass/partials/_inner-pages-rtl.scss */
+.node-type-challenge .ol-item.challenge .views-field-title h1.ol-item-title:before {
+  right: 0;
+  margin-left: 0.3em;
+  margin-right: 0;
+}
+@media all and (max-width: 768px) {
+  /* line 302, ../sass/partials/_inner-pages-rtl.scss */
+  .node-type-challenge .ol-item.challenge .views-field-title h1.ol-item-title {
+    margin: 0;
+  }
+  /* line 310, ../sass/partials/_inner-pages-rtl.scss */
+  .node-type-challenge .ol-item.challenge .row-bottom-openideal .details .add-comment a:before {
+    float: left;
+  }
+}
+/* line 322, ../sass/partials/_inner-pages-rtl.scss */
+.node-type-challenge .pane-views-ideas-in-challenge-block ~ .pane-ideal-challenge-challenge-add-idea-button .challenge-add-idea-button a.btn-success {
+  float: left;
+}
+
+/* line 2, ../sass/partials/_ol-item-rtl.scss */
+.ol-item .ol-item-image {
+  float: right;
+  margin-left: 1.5em;
+  margin-right: 0;
+}
+/* line 9, ../sass/partials/_ol-item-rtl.scss */
+.ol-item .row-bottom-openideal > div:before {
+  float: right;
+  margin-left: 10px;
+}
+/* line 13, ../sass/partials/_ol-item-rtl.scss */
+.ol-item .row-bottom-openideal > div.author {
+  margin-right: 0;
+  float: right;
+}
+/* line 16, ../sass/partials/_ol-item-rtl.scss */
+.ol-item .row-bottom-openideal > div.author .picture {
+  margin-right: 0;
+  margin-left: 0.4em;
+}
+/* line 22, ../sass/partials/_ol-item-rtl.scss */
+.ol-item .row-bottom-openideal > div.details {
+  float: left;
+}
+/* line 25, ../sass/partials/_ol-item-rtl.scss */
+.ol-item .row-bottom-openideal > div.details > div:before {
+  float: right;
+  margin-left: 10px;
+}
+@media all and (max-width: 767px) {
+  /* line 25, ../sass/partials/_ol-item-rtl.scss */
+  .ol-item .row-bottom-openideal > div.details > div:before {
+    margin-left: 0.2em !important;
+    margin-right: 0.2em !important;
+  }
+}
+/* line 33, ../sass/partials/_ol-item-rtl.scss */
+.ol-item .row-bottom-openideal > div.details > div.vote-count {
+  margin-left: 0;
+  /*margin-bottom: 10px;*/
+}
+@media all and (min-width: 767px) {
+  /* line 33, ../sass/partials/_ol-item-rtl.scss */
+  .ol-item .row-bottom-openideal > div.details > div.vote-count {
+    vertical-align: top !important;
+    padding-top: 6px;
+  }
+}
+@media all and (max-width: 767px) {
+  /* line 33, ../sass/partials/_ol-item-rtl.scss */
+  .ol-item .row-bottom-openideal > div.details > div.vote-count {
+    margin-bottom: 0;
+  }
+}
+/* line 27, ../sass/_mixins.scss */
+.ol-item .row-bottom-openideal > div.details > div.subject a:before {
+  margin-right: 0;
+  margin-left: 7px;
+}
+/* line 60, ../sass/partials/_ol-item-rtl.scss */
+.ol-item.challenge .row-bottom-openideal .link {
+  float: left;
+}
+@media all and (min-width: 767px) {
+  /* line 60, ../sass/partials/_ol-item-rtl.scss */
+  .ol-item.challenge .row-bottom-openideal .link {
+    margin-left: 0;
+  }
+}
+/* line 168, ../sass/_mixins.scss */
+.ol-item.challenge .row-bottom-openideal .link a:after {
+  direction: ltr;
+  right: 0;
+}
+
+/* line 2, ../sass/partials/_user-rtl.scss */
+.view-user-details .views-field-php {
+  text-align: left;
+}
+/* line 27, ../sass/_mixins.scss */
+.view-user-details .views-field-php a:before {
+  margin-right: 0;
+  margin-left: 7px;
+}
+
+/* line 14, ../sass/partials/_user-rtl.scss */
+.page-user-login .inner .item-list .hybridauth-widget a:after, .page-user-password .inner .item-list .hybridauth-widget a:after, .page-user-register .inner .item-list .hybridauth-widget a:after {
+  float: left;
+  margin-left: 0.5em;
+  margin-right: 0;
+}
+
+/*--------------------------------------------------------------
+                         Page-community
+----------------------------------------------------------------*/
+/* line 6, ../sass/partials/_community-rtl.scss */
+.page-community .title {
+  padding-right: 50px;
+  padding-left: 0px;
+}
+@media all and (max-width: 767px) {
+  /* line 6, ../sass/partials/_community-rtl.scss */
+  .page-community .title {
+    padding-right: 0px !important;
+  }
+}
+/* line 15, ../sass/partials/_community-rtl.scss */
+.page-community .view-community .view-content > div {
+  margin-left: 24px;
+  margin-right: 0px;
+}
+@media all and (max-width: 767px) {
+  /* line 15, ../sass/partials/_community-rtl.scss */
+  .page-community .view-community .view-content > div {
+    margin-left: 0px !important;
+  }
+}
+/* line 21, ../sass/partials/_community-rtl.scss */
+.page-community .view-community .view-content > div #panel-bootstrap-region-sidebar {
+  float: left;
+}
+/* line 24, ../sass/partials/_community-rtl.scss */
+.page-community .view-community .view-content > div .region-inside-first {
+  float: left !important;
+  margin-right: 6%;
+}
+@media all and (max-width: 767px) {
+  /* line 24, ../sass/partials/_community-rtl.scss */
+  .page-community .view-community .view-content > div .region-inside-first {
+    margin-right: 4% !important;
+  }
+}
+/* line 31, ../sass/partials/_community-rtl.scss */
+.page-community .view-community .view-content > div .views-field-name {
+  margin-right: -3%;
+  margin-left: 0px;
+}
+@media all and (max-width: 767px) {
+  /* line 31, ../sass/partials/_community-rtl.scss */
+  .page-community .view-community .view-content > div .views-field-name {
+    margin-right: 4% !important;
+  }
+}
+/* line 38, ../sass/partials/_community-rtl.scss */
+.page-community .view-community .view-content > div .views-field-picture {
+  margin-right: 18%;
+  margin-left: 0px;
+}
+/* line 42, ../sass/partials/_community-rtl.scss */
+.page-community .view-community .view-content > div .views-field-field-bio {
+  margin-right: -7%;
+  margin-left: 0px;
+  padding-right: 11px;
+}
+@media all and (max-width: 767px) {
+  /* line 42, ../sass/partials/_community-rtl.scss */
+  .page-community .view-community .view-content > div .views-field-field-bio {
+    margin-right: 0% !important;
+  }
+}
+
+/*---------------------------------------------------
+                       List-news
+---------------------------------------------------*/
+/* line 6, ../sass/partials/_news-page-rtl.scss */
+.page-news .ol-item .views-field-view-node {
+  float: left;
+}
+/* line 10, ../sass/partials/_news-page-rtl.scss */
+.page-news .ol-item .views-field-view-node {
+  margin-left: inherit;
+  margin-rifht: 8.5%;
+}
+
+/*-----------------------------------------------
+                    miscellaneous
+-----------------------------------------------*/
+/* line 1, ../sass/partials/_miscellaneous-rtl.scss */
+.view-header {
+  margin-top: -32px;
+  font-size: 21px;
+}
+
+/*---------------------------------------------------
+                        User-picture
+---------------------------------------------------*/
+/* line 14, ../sass/partials/_miscellaneous-rtl.scss */
+.user-picture img {
+  border-radius: 50%;
+}
+
+/*--------------------------------------------------------------
+                         Page-community
+----------------------------------------------------------------*/
+/* line 24, ../sass/partials/_miscellaneous-rtl.scss */
+.page-community .title {
+  padding-right: 50px;
+  padding-left: 0px;
+}
+/* line 30, ../sass/partials/_miscellaneous-rtl.scss */
+.page-community .view-community .view-content > div {
+  margin-left: 24px;
+  margin-right: 0px;
+}
+/* line 33, ../sass/partials/_miscellaneous-rtl.scss */
+.page-community .view-community .view-content > div #panel-bootstrap-region-sidebar {
+  float: left;
+}
+/* line 36, ../sass/partials/_miscellaneous-rtl.scss */
+.page-community .view-community .view-content > div .region-inside-first {
+  float: left !important;
+}
+/* line 39, ../sass/partials/_miscellaneous-rtl.scss */
+.page-community .view-community .view-content > div .views-field-name {
+  margin-right: -3%;
+  margin-left: 0px;
+}
+/* line 43, ../sass/partials/_miscellaneous-rtl.scss */
+.page-community .view-community .view-content > div .views-field-picture {
+  margin-right: 18%;
+  margin-left: 0px;
+}
+/* line 47, ../sass/partials/_miscellaneous-rtl.scss */
+.page-community .view-community .view-content > div .views-field-field-bio {
+  margin-right: -7%;
+  margin-left: 0px;
+  padding-right: 11px;
+}
+
+/*--------------------------------------------------------------
+                         Box-add-comment
+----------------------------------------------------------------*/
+/* line 60, ../sass/partials/_miscellaneous-rtl.scss */
+.pane-node-comment-form a.username::before {
+  content: 'נוצר ע"י';
+  display: block;
+}
+
+/*# sourceMappingURL=style-rtl.css.map */

@@ -1,0 +1,398 @@
+body{
+	/*display: none;*/
+}
+.page-node-add-idea{
+	.title{
+	    font-size: 1.9em;
+        text-align: right;
+        font-weight: 500;
+       	@include mixin-font-icon($idea,1.4em, $orange , "icon-font");
+       	margin-top: 63px;
+		@media all and (max-width:767px){
+          margin-top: 0;
+		  text-align: center;
+        }
+	}
+    .title::before{
+    	font-weight: 500;
+    	margin: 7px;
+    }
+/*    .node-header-site .field-name-field-site-logo{
+    	margin-top: 1.8%;
+    }*/
+    .fieldset-wrapper{
+      display: flex;
+      flex-direction :column;
+    }
+}
+.node-add-wrapper {
+	@media all and (max-width:767px){
+        display: flex;
+		flex-direction: column-reverse;
+    }
+
+.node-column-main{
+	margin-bottom: 100px;
+    font-family: "Arial";
+    ::-webkit-input-placeholder {
+	    color: $black;
+	}
+    ::-moz-input-placeholder {
+      color: $black;
+  }
+	:-moz-placeholder { /* Firefox 18- */
+	   color: $black;  
+	}
+	::-moz-placeholder {  /* Firefox 19+ */
+	   color: $black;  
+	}
+	:-ms-input-placeholder {  
+	   color: $black;  
+	}
+   	background-color: $iron;
+   	width: 64% !important;
+    float: right !important;
+    border-radius: 3px;
+	@media all and (max-width:767px){
+        width: 100% !important;
+		box-sizing: border-box;
+    	padding: 7px;
+		margin-bottom: 17px;
+    }
+    label[for^="edit-"]{
+    	display: none;
+    }
+    .form-item-title{
+      	text-align: center;
+        input{
+        	width: 93%;
+			margin: 0 auto;
+		    border-color: $text-white;
+		    padding: 9px;
+		    border-radius: 3px;
+        }
+    }
+
+	.form-type-select{
+	    text-align: center;
+	    select{
+	    	border-radius: 4px;
+			width: 96%;
+			height: 32px;
+			background-color: $text-white;
+			font-size: 1em;
+			border-color: $text-white;
+			@media all and (max-width:767px){
+				width: 100%;
+			}
+
+	    }
+	}
+	textarea {
+		@media all and (max-width:767px){
+				width: 100% !important;
+			}
+	}
+	#edit-preview-changes, .form-item-field-hashtags-und{
+       display: none;
+	}
+
+	.form-type-textarea{
+		
+	   	textarea{
+		    width: 96%;
+		    margin: 0 auto;
+		    padding-right: 5px;
+		    border-radius: 3px;
+		    border-color: $text-white;
+	   	}
+	    .grippie{
+	    	display: none;
+	    }
+	}
+	.filter-wrapper{
+		display: none;
+	}
+    .go-back{
+      	display: none;
+    }
+    
+    div[class^="form-item-field-moderator-und"]{
+    	display: none;
+    }
+   /*    .form-item-field-moderator-und-0-target-id{
+    	display: none;
+    }*/
+    input#edit-submit{
+       	@include orange-btn($plus);
+    }
+    .form-item-field-moderator-und-0-target-id{
+    	display: none;
+    }
+    .form-actions{
+        position: relative;
+        @include mixin-font-icon($plus,1em, $text-white , "icon-font");
+        width: 50%;
+        float: left;
+        margin-left: 2%;
+        input{
+           	font-family: "Arias";
+           	font-weight: 500;
+   		    margin-top: 1em;
+            margin-bottom: 0.7em !important;
+        }
+		@media all and (max-width:767px){
+			width: 100%;
+			display: block;
+			margin: 0 auto;
+		}
+    }
+   .form-actions::before{
+		position: absolute;
+		right: 0;
+		z-index: 99999;
+		width: 0.8em;
+		height: 0.8em;
+		font-size: 3.4em;
+		line-height: 0.9em;
+		margin: 0.3em;
+		color: $flamingo;
+		content: "U";
+		font-family: 'icon-font';
+		direction: rtl;
+		width: 0.6em;
+		height: 0.6em;
+		background: white;
+		line-height: 0.7em;
+		border-radius: 100%;
+		margin: 0.5em;
+		display: inline-block;
+		font-weight: normal;
+		text-align: center;
+		top: 18px;
+    }
+   .description{
+      	display: none;
+    }
+
+ }  
+
+}
+
+.form-type-managed-file {
+	.file-widget{
+		@include upload-btn($icon: $add-file);
+	} 
+	.image-widget-data {
+		@include upload-btn;
+	}
+}
+
+.form-type-managed-file .image-widget-data:before{
+	content: 'צרף תמונה'
+}
+
+
+
+
+#idea-node-form .node-column-sidebar{
+   	float: left !important;
+   	width: 33% !important;
+	@media all and (max-width:767px){
+		width: 100% !important;
+	}
+   	.image-widget-data {
+       input[id^="edit-field-idea-image-undy"]{
+     	display: none;
+       }
+       .file{
+       	display: none;
+       }
+   	}
+   	table[id^="edit-field-idea-image"]{
+   		width: 100%;
+      order:2;
+   	}
+   	table[id^="edit-field-attachments"]{
+   		background-color: $text-white;
+   		width: 100%;
+      order : 2;
+   		tr{
+   			background-color: $text-white !important;
+   			font-size: 20px;
+   			width: 90% !important;
+   		}
+   	}
+		input[id^="edit-field-idea-image-und"],.filefield-source-attach, input[id^="edit-field-attachments"]{
+			display: none;
+		}
+      	div[id^="edit-field-idea-image"],div[id^="edit-field-attachments"]{
+   		border-collapse:inherit;
+   		outline: none;
+   		.messages{
+   			display: none;
+   		}
+   		.tabledrag-toggle-weight-wrapper{
+   			display: none;
+   		}
+	   	.tabledrag-hide{
+	   		display: none;
+	   	}
+	   	tbody{
+	   		display: block;
+	   		border:none;
+	   	}	
+		   	tr{
+		   		th{
+		   			display: none;
+		   		}
+		   		background-color: $athens-gray;
+		   		border:none;
+		   		display:inline-block;
+		   		width:45%;
+				 @media all and (max-width:767px){
+						background-color: white;
+						width: 100%;
+						padding: 0;
+						.image-preview {
+							width: 100%;
+							img {
+								width: 100% !important;
+								height: 100% !important;
+							}
+						}
+				}
+		   		td{
+		   			display: block;
+		   		}
+		   		input{
+		   			display: block !important;
+		   		/*	 visibility: hidden;
+		   			 display: none;*/
+					color: $text-white;
+					background-color: $blue;
+					font-family: 'Arial';
+					width: 40%;
+				    content: 'צרף קובץ';
+					color: $text-white;
+					display: inline-block;
+					outline: none;
+					white-space: nowrap;
+					-webkit-user-select: none;
+                     -moz-user-select: none;
+					font-size: 1.1em;
+					cursor: pointer;
+				    padding-top: 3px;
+				    padding-bottom: 1px;
+				    margin: 0 auto;
+				    margin-top: -11px;
+					@media all and (max-width:767px){
+						    margin-top: 0;
+   							 padding-bottom: 11px;
+					}
+		   		}
+		   		.tabledrag-handle{
+		   	    	display: none;
+		   	    }
+		   	    .image-preview{
+		   	    	img{
+					    height: 126px;
+					    width: 189px;
+		   	    	}
+		   	    }
+		   	    .file{
+		   	    	a{
+		   	    		color:$blue;
+		   	    		text-decoration: none;
+		   	    	}
+		   	    }
+
+		   	}
+	   	.file-size{
+	   		display: none;
+	   	}
+
+	   	#edit-field-idea-image-und-0-remove-button--2{
+	   		display: none;
+	   	}
+    }
+    div[id^="edit-field-attachments"] tr input{
+    	font-size: 0.7em;
+    	width: 23%;
+    	margin-top: 0px;
+    }
+   .form-type-managed-file{
+   	color: $athens-gray;
+    	label{
+    		display:none;
+    	}	
+    	.image-widget-data{
+    		position: relative;
+    		display: block;
+			input {
+				@media all and (max-width:767px){
+					width: 100%;
+				}
+			}
+    	}
+    	.file-widget{
+    		position: relative;
+			input {
+				@media all and (max-width:767px){
+					width: 100%;
+				}
+			}
+    	}
+    
+    	.filefield-sources-list.filefield-sources-processed{
+    		display: none;
+			
+    	}
+    	input#edit-field-idea-image-und-0-upload-button{
+    		display: none;
+    	}
+    	input#edit-field-attachments-und-0-upload-button{
+    		display: none;
+    	}
+    }
+    fieldset{
+    	border: none;
+    	padding: 0px;
+    	margin: 0px;
+    	margin-top: -11px;
+    	height: auto;
+    }
+   .form-item.form-type-managed-file , .form-item .form-type-managed-file{
+   		border:none;
+   		padding: 0px;
+   		/*background-color: $athens-gray;*/
+    }
+
+
+    .field-type-image{
+       width: 100%;
+       .image-widget-data{
+       	   input{
+       	   	  width: 100%;
+       	   }
+       }
+	   @media all and (max-width:767px){
+			background-color: white;
+	   }
+    }
+    .field-type-file{
+        width: 100%;
+       	input{
+       	    width: 100%;
+       	}
+		 @media all and (max-width:767px){
+			background-color: white;
+	   }
+    }
+} 
+
+
+
+#block-ideal-idea-new-idea-open-popup{
+  display: none;
+}

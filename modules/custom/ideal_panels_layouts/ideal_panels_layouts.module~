@@ -1,0 +1,10 @@
+<?php
+
+/**
+ * Implements hook_ctools_plugin_directory().
+ */
+function panels_bootstrap_layout_builder_ctools_plugin_directory($owner, $plugin_type) {
+  if (($owner == 'panels' && $plugin_type == 'layouts')) {
+    return "plugins/$plugin_type";
+  }
+}

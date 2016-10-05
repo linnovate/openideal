@@ -1,0 +1,15 @@
+diff --git a/i18n_string/i18n_string.pages.inc b/i18n_string/i18n_string.pages.inc
+index eb4d8b6..4e06c29 100644
+--- a/i18n_string/i18n_string.pages.inc
++++ b/i18n_string/i18n_string.pages.inc
+@@ -399,7 +399,9 @@ function i18n_string_locale_translate_edit_form_submit($form, &$form_state) {
+   locale_translate_edit_form_submit($form, $form_state);
+   $lid = $form_state['values']['lid'];
+   $i18n_string_object = i18n_string_get_by_lid($lid);
+-  $i18n_string_object->cache_reset();
++  if(is_object($i18n_string_object)) {
++    $i18n_string_object->cache_reset();
++  }
+   foreach ($form_state['values']['translations'] as $key => $value) {
+     if (!empty($value)) {
+       // An update has been made, so we assume the translation is now current.

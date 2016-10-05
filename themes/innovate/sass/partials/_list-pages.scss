@@ -1,0 +1,247 @@
+
+/*------------------------------------------------------------------------------
+                               Idea list - page
+------------------------------------------------------------------------------*/
+
+body.page-ideas {
+  .page-header {
+    display: none;  
+  }
+  #panel-bootstrap-region-center{
+   /* width: 63.3%;
+    margin-right: 3.3%;*/
+  }
+  
+}
+
+/* ------------------------------------------- pane-quicktabs-all-ideas ----------------------------------------- */
+.page-ideas{
+  .panel-tow-col{
+    margin-top: 16px;
+  }
+  .inner{
+    .content{
+      margin-top: 0px;
+    }
+  }
+  .row-bottom-openideal {
+   .name a{
+      font-weight: 300;
+   }
+   .vote-count{
+      @media all and (min-width:767px){
+        vertical-align: top !important;
+        padding-top: 6px;
+      }
+
+   }
+  }
+  @media all and (max-width:767px){
+    .panel-panel.unit.pane-region-first {
+       width: 100%;
+       #quicktabs-container-all_ideas {
+         margin-top: -9px;
+       }
+       .field-content.ol-item-image {
+         margin-bottom: 0;
+       }
+       .views-field.views-field-title-1 {
+         font-size: 13px;
+       }
+       .views-field.views-field-body {
+         display: none;
+       }
+       .views-field.views-field-nothing .row-bottom-openideal {
+             margin-top: 10px;
+             .wrap {
+                margin-top: 5px;
+                .created {
+                    font-size: 0.9em;
+                    letter-spacing: -0.4px;
+                    line-height: 13px;
+                }
+                .name {
+                    line-height: 11px;
+                    font-size: 0.8em;
+                }
+             }
+             .details {
+                /*width: 79%;*/
+                display: flex;
+                justify-content: space-between;
+                 margin-top: 9px;
+                .dates {
+                  font-size: 0.9em;
+                  &:before {
+                    line-height: 40px !important;
+                  }
+                }               
+                .vote-count {
+                  margin-right: 0px;
+                  margin-bottom: 0;
+                  .up-active {
+                    margin-right: -10px;
+                    width: 23px;
+                    &:after {
+                      font-size: 20px;  
+                    }
+                  }
+        /*          .up-inactive{
+                    margin-right: -32px;
+                  }*/
+                }
+              }
+       }
+    }
+  }
+}
+
+.pane-quicktabs-all-ideas {
+  .pane-title {
+    display: none;
+  } 
+  ul.quicktabs-tabs {
+    margin-top: 2.4em;
+    @media all and (max-width:767px){
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-top: 0px;
+        margin-bottom: 0;
+    }
+    li {
+      margin: 0 2em 0 2em;
+      padding: 0;
+      @media all and (max-width:767px){
+          margin: 0;
+      }
+      a {
+        font-weight: normal;
+        font-size: 1.5em;
+        color: $black;
+        display: inline-block;
+        text-decoration: none;
+        vertical-align: middle;
+        @media all and (max-width:767px){
+            font-size: 1.4em;
+        }
+      }
+      &:hover a, &.active a { color: $ecstasy; }
+      &.first {
+        margin-left: 0;
+        @include mixin-font-icon($idea, 3.5em, $ecstasy, 'icon-font');
+        &:before {
+          line-height: 1.5em;
+          vertical-align: middle;
+           @media all and (max-width:767px){
+             font-size: 2.5em;
+           }
+        }
+        a {
+          font-size: 2.2em;
+          font-weight: bold;
+          @media all and (max-width:767px){
+            font-size: 1.8em;
+          }
+        }
+      }
+    }
+  }
+}
+
+/* ------------------------------------------- page challenges ----------------------------------------- */
+.page-challenges{
+  .content{
+    margin-top: 0px;
+  }
+  .pane-views-challenges-list-block-1 , .pane-challenges-list{
+    .pane-title{
+      font-size: 28px;
+      vertical-align: middle;
+      margin-top: 41px;
+      margin-bottom: 0px;
+      margin-bottom: -17px;
+      @include mixin-font-icon($challenges-list,51px, $la-palma , "icon-font");
+      @media all and (max-width:767px){
+        text-align: center;
+        margin-top: -30px;
+      }
+    }
+    .pane-title::before{
+      vertical-align: inherit;
+      font-weight: 100;
+      padding-right: 9px;
+      @media all and (max-width:767px){
+        margin-top: 0px !important;
+      }
+    }
+  }  
+  .pane-region-second {
+    margin-top: 92px !important;
+      @media all and (max-width:767px){
+        margin-top: 0px !important;
+      }
+  }
+}  
+/* ------------------------------------------- view-challenges_list ----------------------------------------- */
+
+.view-id-challenges_list.view-display-id-block_1 , .view-id-ideas_all {
+  .ol-item {
+    padding-bottom: 20px;
+    padding-top: 13px;
+    .ol-item-title {  
+      font-size: 1.19em;
+    }
+    .ol-item-image {
+      img {
+        max-width: 8.5em;
+        height: 6.3em;
+      }
+    }
+    .views-field-body {
+      font-size: 0.9em;
+    }
+    .row-bottom-openideal {
+      padding-top: 10px !important;
+      .link {
+        font-size: 14px;
+        margin-top: 0;
+        @media all and (max-width:767px){
+          margin: 0px auto;
+          margin-bottom: 7px;
+        }
+      }
+    @media all and (max-width:767px){
+      div.author .picture {
+        display: none;
+      }
+    }
+    }
+  }
+}
+
+.view-id-ideas_all {
+  .ol-item {
+    &.views-row-first {
+      margin-top: 0;
+    }
+    .row-bottom-openideal {
+        @media all and (max-width:767px){
+          padding-top: 0px !important;
+        }
+    }
+  }
+}
+
+.view-id-challenges_list.view-display-id-block_1 {
+  .ol-item {
+      @media all and (max-width:767px){
+        padding-bottom: 50px;
+      }
+      .details {
+        @media all and (max-width:767px){
+            font-size: 0.83em;
+      }
+    }
+  }
+}

@@ -1,0 +1,86 @@
+name = Innovate
+description = OpenideaL theme
+core = 7.x
+;base theme = bootstrap
+
+
+;;;;;;;;;;;;;;;;;;;;;
+;; Regions
+;;;;;;;;;;;;;;;;;;;;;
+
+regions[header]          = 'header'
+regions[sidebar_first]   = 'sidebar first'
+regions[content]    = 'content'
+
+
+;;;;;;;;;;;;;;;;;;;;;
+;; Plugin
+;;;;;;;;;;;;;;;;;;;;;
+
+plugins[panels][layouts] = panels-layouts
+
+;;;;;;;;;;;;;;;;;;;;;
+;; Stylesheets
+;;;;;;;;;;;;;;;;;;;;;
+
+stylesheets[all][] = css/style.css
+stylesheets[all][] = css/bootstrap.css
+
+; Global
+; --------------
+settings[toggle_name] = 1
+settings[toggle_search] = 0
+settings[bootstrap_navbar_position] = 'fixed-top'
+
+
+; Advanced
+; --------------
+settings[bootstrap_cdn] = 3.0.2
+settings[bootstrap_bootswatch] = 'yeti'
+
+; For information on choosing the desired method, please read the Drupal
+; Bootstrap sub-theme "how-to" documentation:
+; https://drupal.org/node/1978010
+
+; ;----------------------------------
+; ; METHOD 1: Bootstrap Source Files
+; ;----------------------------------
+; 
+; ;;;;;;;;;;;;;;;;;;;;;
+; ;; Scripts
+; ;;;;;;;;;;;;;;;;;;;;;
+;
+  scripts[] = 'scripts/jquery.bxslider.min.js'
+  scripts[] = 'scripts/socrates.js'
+  scripts[] = 'scripts/innovate.js'
+; scripts[] = 'bootstrap/js/affix.js'
+; scripts[] = 'bootstrap/js/alert.js'
+; scripts[] = 'bootstrap/js/button.js'
+; scripts[] = 'bootstrap/js/carousel.js'
+; scripts[] = 'bootstrap/js/collapse.js'
+; scripts[] = 'bootstrap/js/dropdown.js'
+; scripts[] = 'bootstrap/js/modal.js'
+; scripts[] = 'bootstrap/js/tooltip.js'
+; scripts[] = 'bootstrap/js/popover.js'
+; scripts[] = 'bootstrap/js/scrollspy.js'
+; scripts[] = 'bootstrap/js/tab.js'
+; scripts[] = 'bootstrap/js/transition.js'
+;
+; ; Disable BootstrapCDN if using Bootstrap source files in your sub-theme.
+; settings[bootstrap_cdn] = ''
+
+
+; ;-------------------------
+; ; METHOD 2: Bootstrap CDN
+; ;-------------------------
+;
+; Method 2 uses BootstrapCDN, the only thing you might need to provide here
+; is overrides to Bootstrap theme settings. Copy them here from the base theme
+; to override.
+
+; Information added by Drupal.org packaging script on 2015-05-19
+version = "7.x-1.1+0-dev"
+core = "7.x"
+project = "socrates"
+datestamp = "1432019042"
+

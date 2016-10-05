@@ -1,0 +1,94 @@
+/*-----------------------------------------------
+                   Front - page
+-----------------------------------------------*/
+
+/* ------------------------------------ pane-views-default-challenge-block ---------------------------------- */
+
+.pane-views-default-challenge-block {
+  .carousel-indicators {
+    left: auto;
+    right: 45px;
+    padding-right: 0;
+  }
+
+  /* --- row-bottom --- */
+  .row-bottom-openideal .dates {
+    direction: ltr;
+    text-align: right;
+
+    &:before {
+      float: right;
+    }
+  }
+}
+
+/* --------------------------------- pane-views-challenges-featured-front-block ----------------------------- */
+
+.pane-views-challenges-featured-front-block {
+  .view-all {
+    float: left;
+  }
+  .row {
+    .mouseover {
+      .read-more {
+        right: auto;
+        left: 14px;
+      }
+    }
+  }
+}
+
+/* ----------------------------------- pane-views-highlighted-content-block --------------------------------- */
+
+.pane-views-highlighted-content-block {
+  .pane-content {
+
+    /* --- views-row --- */
+    .views-row {
+      padding-left: 0;
+      padding-right: 38px;
+    }
+
+    /* --- field-type --- */
+    .views-field-type {
+      &.pull-left {
+        /*float: none !important;*/
+        float: right !important;
+        margin: -3px -35px 0 0;
+      }
+      &:before {
+        margin-right: 0;
+        margin-left: 7px;
+      }
+    }
+
+    /* --- title --- */
+    .views-field-title {
+      &.pull-left {
+        float: right !important;
+        margin-right: 0;
+        margin-left: 5px;
+      }
+    }
+  }
+}
+
+/* --------------------------------- pane-panels-mini.pane-latest-and-greatest ------------------------------ */
+.pane-panels-mini.pane-latest-and-greatest {
+  /* --- icons for titles --- */
+  .pane-views-activity-block-1 .pane-title,
+  .pane-views-activity-block-2 .pane-title,
+  .pane-views-activity-block-3 .pane-title {
+    @include fix-rtl-before();
+  }
+
+  /* --- all views-row --- */
+  .pane-content {
+    .views-row {
+      .user-image {
+        @include fix-rtl(10px, right);
+      }
+    }
+  }
+}
+

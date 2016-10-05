@@ -1,0 +1,509 @@
+
+.page-user{
+
+  #block-quicktabs-user-ideas{
+    display: none;
+  }
+}
+
+.view-user-details {
+  font-family: 'Arial light';
+	.views-row.ol-item.idea {
+		padding-top: 0;
+    margin-top: 0;
+    @media all and (max-width:767px){
+      display:table;
+      position: relative;
+      padding-bottom: 45px;
+    }  
+	}
+	.views-field-picture {
+	  margin-top: 3.2em;
+    margin-right: 1em;
+		display: inline-block;
+		width: 9%;
+		vertical-align: top;
+    @media all and (max-width:767px){
+      display: table-cell;
+      padding-top: 27px;
+    }
+      
+	}
+
+	img {
+		border-radius: 100%;
+		max-width: 5em;
+		height: 5em;
+	}
+	.views-field-field-bio {
+		margin-top: 2.8em;
+		display: inline-block;
+		width: 83%;
+    @media all and (max-width:767px){
+        width: 95%;
+        min-height: 72px;
+    }  
+		.name {
+		    font-size: 2.4em;
+		    padding: 0 4%;
+        @media all and (max-width:767px){
+          font-size: 1.5em;
+        }
+		}
+		.bio {
+			font-size: 1.5em;
+			border-top: 1px solid $athens-gray;
+	   	padding: 0.2em 4%;	
+      @media all and (max-width:767px){
+        font-size:1em;
+        margin-bottom: 26px;
+      }
+		}
+	}
+  .views-field-php {
+		text-align: right;
+		padding-bottom: 1em;
+    @media all and (max-width:767px){
+      position: absolute;
+      left: 0;
+      right: 0;
+      margin: 0 auto;
+      width: 90%;
+    }
+
+		a {
+			  width: 5.3em;
+    		height: 1.5em;
+		    display: inline-block;
+		    background: $blue;
+		    text-align: center;
+		    line-height: 1.3em;
+		    font-size: 1.3em;
+		    font-weight: normal;
+		    color: white;
+		    border-radius: 4px;
+		    box-shadow: 1px 3px 3px #B3B3B5;
+		    @include mixin-font-icon($pencil, 25px, #fff, 'icon-font');
+        &:before {
+          margin-right: 7px;
+        }
+        @media all and (max-width:767px){
+          width: 100%;
+        }
+		}
+	}
+}
+.pane-user-ideas-full-panel-pane-1 {
+	h2.pane-title {
+	    margin: 0;
+    	font-size: 2.1em;
+    	line-height: 1.3em;
+    	@include mixin-font-icon($idea, 2em, $ecstasy, 'icon-font');
+    	&:before {
+    		font-weight: normal;
+    		display: inline-block;
+    		vertical-align: middle;
+    	}
+	}
+  .ol-item.idea {
+    .ol-item-image {
+      margin-bottom: 1em;
+    }
+  }
+}
+ 
+
+body.page-user-edit {
+  .field-name-field-user-date-birth,
+  .field-name-field-content-notifications,
+  .field-name-field-comment-notficiations,
+  .field-name-field-mention-notifications {
+    //  display: none;
+  }
+  .form-wrapper #edit-timezone {
+    display: none;
+  }
+  #edit-locale {
+    display: none;
+  }
+}
+
+body.page-user-register {
+  .field-name-field-mention-notifications {
+    display: none;
+  }
+  fieldset{
+    border: none;
+    legend{
+      display: none;
+    }
+  }
+}
+
+
+/*-----------------------------------------------------------------------------
+                        Member edit - page
+-----------------------------------------------------------------------------*/
+
+.page-members-edit {
+  fieldset {
+    border: none;
+    display: none;
+  }
+}
+
+
+/*-----------------------------------------------------------------------------
+                        Login - page
+-----------------------------------------------------------------------------*/
+.page-user-login, .page-user-password, .page-user-register, 
+.not-logged-in.page-toboggan-denied {
+  .description {
+    display: none;
+  }
+  .page-wrapper {
+    background-color: $shark;
+  }
+  .content-wrapper {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+  .content-block {
+    display: flex;
+    flex-grow: 1;
+    align-items: flex-end;
+      @media all and (max-width:767px){
+        align-items: center;
+     }
+    & > div {
+     display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+  .title {
+    color: $text-white;
+    font-size: 31px;
+    line-height: 10px;
+     @media all and (max-width:767px){
+        width: 80%;
+        text-align: center;
+        line-height: 1;
+     }
+  }
+  .inner {
+    background-color: $athens-gray;
+    border-radius: 4px;
+    @media all and (min-width:767px){
+      width: 478px;
+       padding: 2em 0px;
+        margin: 0 auto;
+    padding: 1.8em 0px;
+    }
+    .item-list {
+      width: 81%;
+      margin: 0 auto;
+      h3 {
+        display: none;
+      }
+      li {
+        width: 100%; 
+      }
+      .hybridauth-widget a {
+        @include mixin-font-icon($facebook-menu,30px, $text-white , "icon-font", true);
+        background-color: #2553B3;
+        width: 100%;
+        text-align: center;
+        display: block;
+        margin-top: 6px;      
+        border-radius: 6px;
+        color: white;
+        font-size: 1.17em;
+        font-weight: bold;
+        text-decoration: none;
+        line-height: 1.17em;
+        padding-top: 0.9em;
+        padding-bottom: 0.9em;
+         @media all and (max-width:767px){
+          border-radius: 2px;
+          line-height: 0.2em;
+          margin-top: 0;
+          &:after {
+            font-size: 26px;
+          }
+        }
+        span {
+          margin: 0 0.8em;
+        }
+        &:after {
+          float: right;
+          margin-right: 0.5em;
+        }
+      }
+      .hybridauth-facebook-hybridauth-32 {
+        background: none;
+      }  
+    }
+    .hybridauth-widget-wrapper {
+        @media all and (max-width:767px){
+         margin-top: 25px;
+        }
+    }
+    .form-item {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      width: 81%;
+      margin: auto;
+       margin-top: 25px;
+      margin-bottom: 18px;
+       @media all and (max-width:767px){
+             margin-top: 11px;
+            margin-bottom: 0;
+       }
+      label {
+        font-size: 18px;
+        font-weight: 200;
+        color: #969A9E;
+          @media all and (max-width:767px){
+                font-size: 14px;
+                margin-right: 4%;
+                color: #C2C0C1;
+          }
+      }
+        ::-webkit-input-placeholder {
+            font-family: 'icon-font';
+            font-size: 30px;
+            padding-right: 3px;
+            padding-left: 3px;
+            color: #C2C0C1;
+        }
+        ::-moz-placeholder {
+            font-family: 'icon-font';
+            font-size: 30px;
+            padding-right: 3px;
+            padding-left: 3px;
+            color: #C2C0C1;
+
+        }
+        :-ms-input-placeholder {
+            font-family: 'icon-font';
+            font-size: 30px;
+            padding-right: 3px;
+            padding-left: 3px;
+            color: #C2C0C1;
+        }
+        ::placeholder {
+          font-family: 'icon-font';
+          font-size: 30px;
+          padding-right: 3px;
+          padding-left: 3px;
+          color: #C2C0C1;
+        }
+        
+      .form-text {
+        width: 51%;
+        padding-right: 11px;
+        line-height: 37px;
+        padding-bottom: -3px;
+        /*padding-top: 8px;*/
+        border: 1px solid #DBDCDC;
+        border-radius: 4px;
+        font-size: 14px;
+        @media all and (max-width:767px){
+          height: 26px;
+          width: 38%;
+        }
+        &::-webkit-input-placeholder {
+          font-family: 'icon-font';
+          font-size: 32px;
+          margin-top: 3px;
+        }
+        // &.empty {
+        //     font-family: 'icon-font';
+        //     font-size: 32px;
+        // }
+
+      }
+    }
+    .form-actions {
+        text-align: center;
+        margin-bottom: 22px;
+        .form-submit {
+            background-color: #26B30F;
+            border: none;
+            width: 81%;
+            padding: 8px 0px;
+            border-radius: 5px;
+            color: white;
+            font-size: 24px;           
+             border-radius: 6px;
+              @media all and (max-width:767px){
+               padding: 5px 0px;
+           }
+        }
+    }
+    .more-options {
+       display: flex;
+      justify-content: space-between;
+      width: 81%;
+      margin: auto;
+      font-size: 18px;
+       @media all and (max-width:767px){
+           margin-bottom: 29px;
+           font-size: 15px;
+      }
+      .to-register a {
+         color: #52BC47;
+      }
+      .to-renew a {
+        color: #FB865A;
+
+      }
+    }
+  }
+  .footer.pane-panels-mini.pane-innovate-logo {
+    .innovate-logo {
+      width: 100%;
+      img {
+        width: auto;
+      }
+    }
+    .pane-social-links {
+      width: 100%;
+      .pane-content {
+        width: 100%;
+        display: flex !important;
+        flex-flow: row wrap;
+        margin: 0 -0.2em;
+      }
+      a.social_link {
+        width: 25%;
+        &:before {
+          margin: 0;
+        }
+      }
+    }
+    .pane-ideal-main-openideal-credits {
+      width: 100%;
+      margin-top: 3em;
+    }
+  }
+
+  .form-item-files-picture-upload input[type="file"] { 
+    @include upload-btn($athens-gray, $black, 1.3em, 'צרף קובץ', '');
+    &:before {
+      border-radius: 4px;
+      border: 1px solid;
+      padding: 0;
+      display: inline;
+    }
+  }
+
+}
+
+/*-----------------------------------------------------------------------------
+                        Register - page
+-----------------------------------------------------------------------------*/
+
+.page-user-register {
+  .inner {
+    /*height: 100%;*/
+    .form-item {
+      margin-bottom: 0;
+      .form-text {
+        width: 58%;
+        @media (max-width: 768px) {
+          width:53%;
+        }
+        &.empty {
+            font-family: 'icon-font';
+            font-size: 32px;
+        }
+
+      }
+    }
+    .form-textarea-wrapper {
+      width: 62%;
+      textarea {
+        height: 38px;
+        border: 1px solid #DBDCDC;
+        border-radius: 4px;
+      }
+    }
+    .form-item-pass {
+       margin-top: 0;
+      .password-strength, div.password-confirm, .password-suggestions {
+        display: none !important;
+      }
+      .form-item {
+        width: 100%;
+      } 
+
+    }
+    #edit-picture--3 {
+      border: none;
+      legend {
+        display: none;
+      }
+      .user-picture {
+        display: none;
+      }
+      .form-item-files-picture-upload {
+        width: 86%;
+        input{
+           width: 62%;
+        }
+      } 
+    }
+  }
+
+  .form-item-files-picture-upload input[type="file"]{
+        height: 44px;
+  }
+  .form-item-files-picture-upload input[type="file"]:before { 
+    content: "צרף תמונה";
+    background-color: #D6D4D5;
+    border: none;
+    border-radius: 0px;
+    padding: 12px;
+    padding-top: 12px;
+    text-align: center;
+    line-height: 3em;
+  }
+}
+
+
+/*-----------------------------------------------------------------------------
+                        Renew password - page
+-----------------------------------------------------------------------------*/
+
+.page-user-password {
+  /*.page-wrapper {
+    background-color: $shark;
+  }*/
+/*  .title {
+    color: $text-white;
+  }
+  .inner {
+    background-color: $athens-gray;
+    height: 298px;
+    width: 286px;
+    margin: 200px 200px;
+  }*/
+}
+	
+/*-----------------------------------------------------------------------------
+                       Toboggan - page
+-----------------------------------------------------------------------------*/  
+.page-toboggan{
+  .messages.error{
+    width: 69%;
+    margin: 0 auto;
+    margin-bottom: -33px;
+  }
+}

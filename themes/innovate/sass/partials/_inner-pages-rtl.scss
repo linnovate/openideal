@@ -1,0 +1,328 @@
+/*-----------------------------------------------------------------------------
+                          Inner - page (challenge / idea)
+------------------------------------------------------------------------------*/
+
+body .panels-bootstrap-inner_page {
+  /* --- pane-user-picture --- */
+  .pane-user-picture {
+    float: right;
+    margin-right: 5px;
+    margin-left: 10px;
+  }
+
+  /* --- pane-node-author --- */
+  .pane-node-author {
+    padding-left: 0;
+    padding-right: 10px;
+
+    .username {
+      float: right;
+    }
+  }
+
+  /* --- pane-node-field-status --- */
+  .pane-node-field-status {
+    @include fix-rtl(100px, left);
+    .field-item {
+      @include fix-rtl-before();
+    }
+  }
+
+  /* --- pane-node-created --- */
+  .pane-node-created {
+    @include fix-rtl(100px, left);
+    .pane-content {
+      @include fix-rtl-before(5px);
+    }
+  }
+
+  /* --- pane-node-field-share --- */
+  .pane-node-field-share {
+    @include fix-rtl(13px, left);
+    @include fix-rtl-before();
+  }
+
+  /* --- pane-node-field-challenge-ref --- */
+  .pane-node-field-challenge-ref {
+    .pane-title {
+      margin-left: 7px;
+      margin-right: 0;
+      float: right;
+    }
+  }
+}
+
+/* --- pane-node-comment-form --- */
+.pane-node-comment-form {
+  .pane-title {
+    &:before {
+      margin-left: 7px;
+      margin-right: 0;
+    }
+  }
+}
+
+/* --- .comment-form --- */
+.comment-form {
+  /* -- user-picture / username -- */
+  .field-type-text-long ~ .form-item {
+    float: right;
+  }
+
+  .user-picture {
+    margin-right: 0;
+    margin-left: 16px;
+  }
+
+  /* -- submit -- */
+  .form-submit {
+    float: left;
+    @include fix-rtl-before();
+  }
+}
+
+/* --- pane-node-comments --- */
+.pane-node-comments {
+   .pane-title {
+      @include fix-rtl-before;
+   }
+  .pane-content {
+    ul.links {
+      padding-right: 9px;
+      li {
+        &.comment-reply {
+          @include fix-rtl-before; 
+        }
+      }
+    }
+    .indented {
+      margin: 0;
+    }
+
+    $space: 3.2em;
+
+    &  > .indented  {
+      & > .comment {
+        padding: 1em $space 1em 0 ;
+      }
+      & > .indented {
+        & > .comment {
+          padding: 1em $space * 2 1em 0 ;
+        }
+        & > .indented {
+          & > .comment {
+            padding: 1em $space * 3 1em 0 ;
+          }
+        }
+      }
+    }
+  }
+
+  .comment {
+    /* -- user-picture / username -- */
+    > .user-picture {
+      @include fix-rtl(15px, right);
+      @media all and (max-width:767px){
+            margin-right: 5%;
+        }
+
+    }
+
+    > span .username {
+      @include fix-rtl(5px);
+    }
+
+    /* -- comment-body -- */
+    .submitted {
+      span {
+        float: right;
+      }
+    }
+
+    /* -- field-name-field-vote -- */
+    .field-name-field-vote {
+      float: left;
+    }
+  }
+}
+
+/*-----------------------------------------------------------------------------
+                        Challenge:  Inner - page
+-----------------------------------------------------------------------------*/
+/* ------------------------------- pane-ideal-challenge-challenge-add-idea-button --------------------------- */
+.pane-ideal-challenge-challenge-add-idea-button {
+  .challenge-add-idea-button a.btn-success {
+    @include idea-btn-fix-rtl;
+  }
+}
+
+/* ----------------------------------- pane-ideal-challenge-challenge-data ---------------------------------- */
+.pane-ideal-challenge-challenge-data {
+  .pane-title {
+    @include fix-rtl-before(13px);
+  }
+}
+
+/* ----------------------------------- pane-views-ideas-in-challenge-block ---------------------------------- */
+.pane-views-ideas-in-challenge-block {
+  
+}
+
+/*-----------------------------------------------------------------------------
+                        Idea:  Inner - page
+-----------------------------------------------------------------------------*/
+  
+.pane-node-field-vote {
+  .alternate-votes-display {
+    @include fix-rtl-before();
+
+    &:after {
+      content: 'הצבעות';
+      left: auto;
+      right: 0;
+    }
+  }
+
+  .up-active,
+  .up-inactive ,
+  .vud-link-reset{
+    @include fix-rtl-before();
+    &:before {
+      content: "הצביעו לרעיון!";
+    }
+    @include idea-btn-fix-rtl;
+  }
+  .up-active ,.vud-link-reset{
+      &:before {
+        content: "תודה על הצבעתך!";
+    }
+  }
+  .vud-link-reset{ 
+    left: inherit;
+    right: 0;
+  }
+}
+
+body.not-logged-in{
+  .pane-node-field-vote {
+    .up-active , .vud-link-reset {
+      &:before {
+        content: "ההצבעה הינה לרשומי המערכת";
+      }
+    }
+  }
+}
+
+
+.pane-node-field-attachments {
+  .pane-title {
+    @include fix-rtl-before();
+  }
+  .field-item {
+    a:before {
+      @include fix-rtl(10px);
+    }
+  }
+}
+
+/*-----------------------------------------------------------------------------
+                        Register:  user register - page
+-----------------------------------------------------------------------------*/
+.form-type-password-confirm{
+  width: 75%;
+
+  .password-strength{
+    padding-left: 10%;
+    margin-top: 0;
+  }
+
+}
+
+.page-user-register {
+  #edit-field-content-notifications, #edit-field-comment-notficiations{
+    width:47%;
+    input[type="checkbox"] {
+      float: none !important;
+      margin-left: 2%;
+    }
+  }
+}
+
+.node-type-idea {
+  .ol-item.idea {
+     h1.ol-item-title {
+      @include fix-rtl-before(0.3em);
+     }
+     h1.ol-item-title::before{
+       @media all and (max-width:768px) {
+          display:none;
+       }
+     }
+    .row-bottom-openideal {
+      & > div {
+        &.author {
+          .picture {
+            margin-right: 0;
+            margin-left: 0.2em;
+          }
+        }
+         &.details {
+          & > div {
+            margin-left: 1.1em;
+            margin-right: 0;
+            &.dates {
+              margin-left: 0;
+            }
+          }
+        }
+      }
+    }
+  }
+  .back-challenge {
+    float: left;
+  }
+}
+
+.node-type-challenge {
+  .ol-item.challenge {
+    .views-field-title {
+      h1.ol-item-title {
+        @include fix-rtl-before(0.3em);
+        margin-right: 1.5em;
+        margin-left: 0;  
+        &:before {
+          right: 0;
+          margin-left: 0.3em;
+          margin-right: 0;
+        }
+      }
+    }
+    @media all and (max-width:768px) {
+      .views-field-title {
+        h1.ol-item-title {
+          margin: 0;
+        }
+      }
+      .row-bottom-openideal {
+        .details {
+          .add-comment {
+            a {
+              &:before {
+                float: left;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  .pane-views-ideas-in-challenge-block {
+    & ~ .pane-ideal-challenge-challenge-add-idea-button {
+      .challenge-add-idea-button {
+        a.btn-success {
+          float: left;
+        }    
+      }  
+    }
+  }
+}

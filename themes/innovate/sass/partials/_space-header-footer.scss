@@ -1,0 +1,304 @@
+
+/*-----------------------------------------------
+                     Top
+-----------------------------------------------*/
+
+.region-page-top{
+  z-index:2;
+}
+
+
+/*-----------------------------------------------
+                     Header
+-----------------------------------------------*/
+
+
+header#navbar {
+ z-index:1;
+  .navbar-collapse { padding: 0; }
+
+  .panel-pane { margin-bottom: 0; float: left; }
+
+  /* --- logo --- */
+
+  /*.pane-page-logo {
+    display: table;
+    height: 45px;
+    margin-right: 10px;
+    .pane-content {
+      display: table-cell;
+      vertical-align: middle;
+      img { max-height: 40px; }
+    }
+  }
+*/
+  /* --- menu --- */
+
+  .user-picture {
+    float: left;
+    width: 37px;
+    height: 37px;
+    margin-top: 4px;
+    img {
+      width: auto;
+      max-height: 100%;
+    }
+  }
+  @media all and (max-width:767px){
+    .pane-system-main-menu  {
+      float:none;
+    }
+  }
+
+  .nav>li {
+    /*float: left;*/
+    a { color: white;  padding: 13px 15px; }
+    @media all and (max-width:991px){
+    a { color: white;  padding: 13px 10px; }
+
+    }
+    a:hover, a:focus {
+      text-decoration: none;
+      background-color: #000;
+    }
+  }
+
+
+  .pane-system-user-menu { float: right; }
+ @media all and (max-width:767px){
+    .pane-system-user-menu { float: none; }
+  }
+  /* --- search --- */
+
+  .pane-search-form {
+    float: right;
+    margin-left: 5px;
+    input.form-text {
+      height: 36px;
+      padding: 0 10px;
+      width: 170px;
+      margin-top: 4px;
+     // background: #fff url('../images/throbber-tall.gif') no-repeat 100% 10px;
+
+      &.ui-autocomplete-loading {
+        background-position: 100% -120px;
+      }
+    }
+    .input-group-btn {
+      display: none;
+    }
+  }
+
+}
+
+
+
+
+/*-----------------------------------------------
+                     Footer
+-----------------------------------------------*/
+
+
+footer.footer.navbar {
+position:fixed;
+left:0;
+bottom:0;
+  z-index: 333;
+  .panel-pane { margin-bottom: 0; float: left; }
+@media all and (max-width: 767px) {
+.panel-pane { float:none !important; }
+}
+  /* --- menu --- */
+
+  ul.nav{
+    margin: 15px 0;
+    >li {
+      float: left;
+      a { color: white; }
+    }
+    @media all and (max-width: 767px) {
+    >li { float:none !important; }
+    }
+    a:hover, a:focus {
+      text-decoration: none;
+      background-color: #000;
+    }
+  }
+
+  /* --- social-links --- */
+
+  .pane-social-links {
+    float: right;
+    a.social_link {
+      font-size: 0;
+      &:before {
+        font-size: 37px;
+        margin-right: 9px !important;
+        color: #D8D8D8;
+      }
+      &:hover:before { color: rgb(204, 200, 200); }
+      /*&.company_logo { @include mixin-font-icon($facebook-footer); }*/
+      &.facebook { @include mixin-font-icon($facebook-footer); }
+      &.twitter { @include mixin-font-icon($twitter-footer); }
+      &.google { @include mixin-font-icon($google-footer); }
+      &.linkedin { @include mixin-font-icon($linkedin-footer);  &:before { margin-right: 0 !important; } }
+    }
+    /*a.company_logo:before {
+      background: url('../images/logo.jpg') no-repeat;
+      width: 37px;
+      height:52px;
+    }
+    a.company_logo {
+      width: 37px;
+      height:52px;
+      background:red;
+    }*/
+  }
+
+
+  /* --- innovate-logo --- */
+
+  .pane-block.innovate-logo {
+    float: right;
+    margin-top: 4px;
+    a.company_logo {
+      display: block;
+      width: 169px;
+      height: 39px;
+    }
+  }
+
+  /* --- openideal-credits --- */
+
+  .pane-ideal-main-openideal-credits {
+    float: right;
+    clear: right;
+    color: #fff;
+    a { font-weight: bold; color: $blue; }
+  }
+  @media all and (max-width:767px){ .pane-ideal-main-openideal-credits {text-align:center;}}
+
+}
+.navbar-collapse {border:none; }
+@media all and (min-width:767px){
+ .nav>li {
+    float: left;
+    }
+}
+.footer
+{ 
+  border-top:none;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-flex: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+  webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+
+.pane-social-links a{
+    text-decoration: none !important;
+  }
+@media all and (max-width: 767px) {
+  .pane-social-links { width:176px; margin:0 auto; float:none !important; }
+  footer.footer.navbar {position:relative;}
+}
+
+/*-----------------------------------------------
+                     Bottom
+-----------------------------------------------*/
+
+.panels-ipe footer.footer.navbar{
+  //bottom:57px;
+}
+
+
+
+/*-----------------------------------------------
+                     Header
+-----------------------------------------------*/
+header{
+  height: 17.5em;
+  margin-left: -8px;
+  @media all and (max-width: 767px) {
+     margin-left:0px;
+  }
+  .node-header-site {
+    background-repeat: no-repeat;
+    min-height: 216px;
+    height: 296px;
+    padding-right: 2em !important;
+    font-size: 3.4em;
+    @media all and (max-width: 767px) {
+      height: 260px;
+    }
+
+    .field-name-body {
+      z-index: 100;
+      color: white;
+      font-weight: 600;
+      display: inline-block;
+      vertical-align: top;
+      margin-top: 1.2em;
+      margin-right: 0.7em;
+      p { 
+        margin: 0.75em 0;
+      }
+    }
+    a.logo {
+      margin-top: 1.5em;
+      display: inline-block;
+      img {
+        position: relative;
+        z-index: 4;
+        max-width: 4.4em;
+        height: auto;
+      }
+    }
+  }
+
+  @media all and (max-width: 767px) {
+    height: auto;
+    .node-header-site {
+      padding: 0 !important;
+      font-size: 3em;
+      background-size: auto 60%;
+      background-position: -14em 0;
+      & > .content {
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-orient: vertical;
+            -webkit-box-direction: normal;
+            -ms-flex-direction: column;
+            flex-direction: column;
+        .field-name-body {
+          order: 1;
+          margin-right: 10%;
+          margin-left: auto;
+        }
+        a.logo {
+          -webkit-box-ordinal-group: 3;
+          -ms-flex-order: 2;
+          order: 2;
+          margin: 0 auto;
+          max-width: 4.4em;
+          margin-top: -12px;
+        }
+      }
+      @media (max-width: 450px) {
+        font-size: 1.8em;
+      }   
+    }
+  }
+
+}
+
+

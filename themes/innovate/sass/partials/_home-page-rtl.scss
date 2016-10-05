@@ -1,0 +1,220 @@
+/*-----------------------------------------------
+                   Home - page
+-----------------------------------------------*/
+
+/* ------------------------------------ Roundtable ---------------------------------- */
+
+.inside{
+	.round-table{
+    @media (min-width: 768px) {
+          margin-left: 26px;
+          margin-right: 0px !important;
+        }
+		.link-roundtable{
+			a{
+				margin-right: 0px !important;
+          @media all and (min-width:767px){
+            	margin-left: 66px;
+          }
+			}
+		}
+	}
+}
+
+
+
+
+/* --------------------------------- pane-views-head-to-head-challenge-block  ----------------------------------- */
+.pane-views-head-to-head-ideas-block {
+
+  .pane-content {
+    .view-content {
+      .row {
+        .col { 
+          margin-right: 0; 
+        }
+        @media (min-width: 768px) {
+          .col {
+            &:first-child {
+              margin-left: none;
+            }
+            &:last-child {
+              margin-right: 26px;
+              margin-left: 0px;
+            }
+          }
+        }
+      }
+      .col .thumbnail {
+        /* -- field-vote -- */
+        .views-field-field-vote {
+          .vud-widget-alternate {
+            margin: 10px 0 5px;
+          }
+
+          .alternate-votes-display::before{
+            margin-left: 7px;
+          }
+          .alternate-votes-display::after{
+             @media (min-width: 768px) {
+                margin-right: 44px;
+             }
+          
+          }
+          
+          .vud-link-reset{ 
+            right:  0;
+            left: inherit;
+          }
+
+          .up-active,.up-inactive ,.vud-link-reset{ 
+            padding: 3px 9px;
+            &:after {
+              padding-right: 4px;
+              content: "אהבתי";
+            }
+             @media (min-width: 768px) {
+               margin-left: 15px;
+             }
+             @media (max-width: 768px) {
+                  padding: 2px 0px;
+                  margin-left: 15px;
+             }
+           &:empty:before { float: right; }
+
+          }
+          .up-active ,.vud-link-reset{
+            &:before{
+              margin-left: 7px;
+              margin-right: 0px;
+              float: right;
+               @media (max-width: 768px) {
+               margin-left: 2px;
+             }
+            }
+          }
+          .up-inactive{
+            &:before{
+              margin-left: 7px;
+              margin-right: 0px;
+            }
+          }
+        }
+
+        .views-field-php{
+          padding-right: 51px;
+          padding-left: 0px;
+        }
+
+        /* -- field-picture -- */
+        .views-field-picture {
+          float: left;
+          margin: 4px 10px 0 4px;
+          right: 4px;
+          left: 0px;
+        }
+
+        /* -- field-name -- */
+        .views-field-name {
+          padding: 10px 10px 10px 51px;
+          left: 0;
+          right: 0;
+          padding-right: 76px;
+          padding-left: 0px;
+        }
+      }
+    }
+
+    /* -- view-footer -- */
+    .view-footer {
+      left: 0;
+      right: 5px;
+    }
+  }
+}
+
+.pane-region-second{
+  .inside{
+    .pane-views-default-challenge-block{
+       @media (min-width: 768px) {
+               margin-left: 2%;
+               margin-right: 0%;
+      }
+    }
+  }
+}
+
+
+/* --------------------------------- pane-panels-mini.pane-latest-and-greatest ------------------------------ */
+
+.pane-panels-mini.pane-latest-and-greatest {
+  #mini-panel-latest_and_greatest> div{
+    margin-left: 1%;
+    margin-right: 0%;
+  }
+  .column-inside-last{
+    margin-left:0px !important;
+  }
+
+  #mini-panel-latest_and_greatest > .row {
+    margin-right: -10px; 
+    margin-left: -10px;
+    .column { padding-right: 10px; padding-left: 10px; }
+  }
+
+  /* --- all pane-title --- */
+  .pane-title { 
+    padding: 0 0 9px 0;
+    /*margin: 7px 0 0;*/
+    &:before { margin-right: 7px; }
+  }
+
+  /* --- all views-row --- */
+  .panels-bootstrap-latest_and_greatest{
+  	.inside {
+      .pane-title{
+       margin-right: 9px;
+       margin-left: 0px;
+      }
+    }
+    .pane-content {
+	    margin-right: 7px;
+	    margin-left: 0px;
+    }
+    .view-content{
+	    .views-row {
+	        .views-field-name{
+	          margin-right: 66px;
+	          margin-left: 0px;
+	        }
+	        .views-field-field-bio{
+	          margin-right: 66px;
+	          margin-left: 0px
+	        }
+	      	.user-image{  
+		        margin: 1px 10px 0 0;
+	    	}
+	    }
+    }
+  }
+
+  /* --- icons for titles --- */
+  #panel-bootstrap-column-2{
+  	.view-content{
+	    .views-row{
+			.user-text{
+			  	margin-right: 58px;
+			}
+			.views-field-created{
+				margin-right: 58px;
+			}	
+		}
+  	
+  	}
+  	
+  }
+
+}
+
+
+

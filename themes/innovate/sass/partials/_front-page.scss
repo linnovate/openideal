@@ -1,0 +1,464 @@
+
+/*-----------------------------------------------
+                   Front - page
+-----------------------------------------------*/
+
+/* ------------------------------------ pane-views-default-challenge-block ---------------------------------- */
+
+.pane-views-default-challenge-block {
+  .carousel-indicators {
+    position: absolute;
+    top: 15px;
+    left: 45px;
+    bottom: auto;
+    margin-left: 0;
+    width: auto;
+    li {  
+      border-radius: 0;
+      border: 0;
+      background-color: gray;
+      width: 8px;
+      height: 8px;
+      margin: 0 -1px 0 0;
+      &.active {
+        width: 8px;
+        height: 8px;
+        margin: 0 -1px 0 0;
+        background-color: $blue;
+      }
+    }
+  }
+
+  /* --- img --- */
+
+  .views-field-field-challenge-image img { width: 100%; }
+
+  /* --- text --- */
+
+  .text {
+    height: 100%;
+    width: 41%;
+    padding: 22px 23px;
+    position: absolute;
+    color: white;
+    h2 &, h5 { color: $text-white; }
+    .title { font-size: 29px;  margin-bottom: 15px; }
+    .summary { line-height: 22px; }
+  }
+  @media all and (max-width:767px){
+    .text
+    {
+      width:100%;
+    }
+  }
+
+  /* --- row-bottom --- */
+
+  .row-bottom-openideal {
+    background-color: #333;
+    .dates { max-width: 75px;}
+  }
+  
+}
+
+/* --------------------------------- pane-views-challenges-featured-front-block ----------------------------- */
+
+.pane-views-challenges-featured-front-block {
+  .pane-title { 
+    @include mixin-pane-title(text);
+  }
+  .view-all {
+    float: right;
+    margin-top: -40px;
+    color: black;
+  }
+  .row {
+    margin: 0px -6px;
+    > .col {
+      padding-right: 6px;
+      padding-left: 6px;
+      margin-bottom:20px;
+      &:hover {
+        .caption { display: none;  }
+        .mouseover { display: block; }
+      }
+    }
+
+    /* --- img --- */
+
+    .views-field-field-challenge-image img { width: 100%; }
+
+    /* --- caption --- */
+    .caption {
+      width: auto;
+      margin: 0 6px;
+    }
+
+    /* --- mouseover - content --- */
+    .mouseover {
+      display: none;
+      margin: 0 6px;
+      padding: 0 9px;
+      width: auto;
+      top: 0;
+      .content {
+        max-height: 85%; 
+        overflow: hidden;
+        .body { font-size: 14px; line-height: 20px;  }
+      }
+      .read-more {
+        position: absolute;
+        bottom: 9px;
+        right: 14px;
+        font-size: 13px;
+        a { color: $blue; }
+      }
+    }
+  }
+}
+
+/* ----------------------------------- pane-views-highlighted-content-block --------------------------------- */
+.pane-views-highlighted-content-block {
+  .pane-title {
+    @include mixin-pane-title(block);
+  }
+  .pane-content {
+    background: $light-gray;
+    padding: 16px 9px;
+    margin-bottom: 10px;
+  
+    /* --- views-row --- */
+    .views-row {
+      padding-left: 38px;
+      @include pie-clearfix;
+      padding-bottom: 15px;
+      margin-bottom: 15px;
+      border-bottom: 1px solid $light-border;
+
+      &:last-child,
+      &.views-row-last {
+        margin-bottom: 0;
+        border-bottom: 0;
+      }
+    }
+  
+    /* --- field-type --- */
+    .views-field-type {
+      /*margin-left: -35px;*/
+      @include mixin-font-icon($discussions,24px,$blue);
+      margin: -3px 0 0 -35px;
+      .field-content { display: none; }
+      &.Challenge { @include mixin-font-icon($challenge,24px,$blue); }
+      &.Iead { @include mixin-font-icon($idea,24px,$blue); }
+      /*&.pull-left {
+        float: none !important;
+      }*/
+    }
+
+    /* --- title --- */
+    .views-field-title {
+      /*margin-top: -30px;*/
+      font-weight: bold;
+      float: left;
+      margin-right: 5px;
+      color: black;
+      a { color: black; }
+    }
+
+    /* --- body --- */
+    .views-field-body {
+      line-height: 21px;
+    }
+  }
+}
+
+
+
+/* --------------------------------- pane-panels-mini.pane-latest-and-greatest ------------------------------ */
+
+.pane-panels-mini.pane-latest-and-greatest {
+  #mini-panel-latest_and_greatest > .row {
+    margin-right: -10px; 
+    margin-left: -10px;
+    .column { padding-right: 10px; padding-left: 10px; }
+  }
+
+  /* --- all pane-title --- */
+
+  .pane-title { 
+    // sub titles
+    border-bottom: 1px solid $light-border;
+    padding: 0 0 9px 0;
+    margin: 7px 0 0;
+    font-size: 19px;
+    &:before { margin-right: 7px; }
+  }
+  >.pane-title {
+    // main title
+    @include mixin-pane-title(text);
+    margin-bottom: 1em;
+  }
+
+  /* --- all views-row --- */
+  .pane-content {
+    margin: 10px 2% 0;
+    .inside {
+      margin-bottom: 2em;
+    }
+    .views-row {
+      display: inline-block;
+      width: 100%;
+      font-size: 14px;
+      line-height: 1.24em;
+      color: $black;
+      a { color: $black; }
+      .user-image{
+        width: 36px;
+        float: left;
+        margin: 1px 10px 0 0;
+      }
+    }
+    .views-row + .views-row { margin-top: 20px; }
+  }
+
+  /* --- icons for titles --- */
+
+  .panel-pane { margin-bottom: 0; }
+  .panel-bootstrap-column-main .pane-title { 
+    @include mixin-font-icon($user,24px,$blue);
+  }
+  .pane-views-activity-block-2 .pane-title {
+    @include mixin-font-icon($light,24px,$blue);
+  }
+  .pane-views-activity-block-3 .pane-title {
+    @include mixin-font-icon($discussions,24px,$blue);
+  }
+
+}
+
+/* ------------------------------------------ pane-comment-recent ------------------------------------------- */
+
+.pane-comment-recent {
+  .pane-title {
+    @include mixin-pane-title(block);
+  }
+}
+
+/* ---------------------------------------------- pane-custom ----------------------------------------------- */
+
+.pane-custom {
+  .pane-title {
+    @include mixin-pane-title(block);
+  }
+}
+
+/* --------------------------------- pane-views-head-to-head-ideas-block  ----------------------------------- */
+.pane-views-head-to-head-ideas-block{
+  .pane-title {
+    @include mixin-pane-title(text);
+  }
+  .pane-content {
+    position: relative;
+    .view-header { margin-bottom: 15px; }
+    .view-content {
+      border-top: 5px solid black;
+      padding-top: 10px;
+      .row {
+        margin-right: 0;
+        margin-left: 0;
+
+        .col { 
+          position: relative;
+          background-color: $light-gray;
+          margin-bottom: 1em;
+          width: 100%;
+          padding-bottom: 55px;
+        }
+        @media (min-width: 768px) {
+          display: -webkit-flex;
+          display: flex;
+          -webkit-align-items: stretch;
+          align-items: stretch;
+          -webkit-justify-content: space-between;
+          justify-content: space-between;
+          .col {
+            display: inline-block;
+            vertical-align: top;
+            margin: 0 1%;
+            -webkit-flex: 1 1 49%;
+            flex: 1 1 49%;
+
+            &:first-child {
+              margin-left: 0;
+            }
+            &:last-child {
+              margin-right: 0;
+            }
+          }
+        }
+      }
+      .col .thumbnail {
+        padding: 10px;
+        border-radius: 0;
+        margin-bottom: 0;
+        background-color: $light-gray;
+        border: 0;
+
+        .views-field {
+          margin-bottom: 12px; 
+        }
+        @media all and (max-width:767px){
+          .views-field-field-idea-image
+          {
+            display:none;
+          }
+        }
+        /* -- field-vote -- */
+
+        .views-field-field-vote {
+          .ajax-progress {
+            .glyphicon{
+              margin: 0;
+              &:before { top: 0;  margin: 0; }
+            }
+          }
+          .vud-link-reset {
+            display: none;
+          }
+          .vud-widget-alternate {
+            width: 100%;
+            text-align: center;
+            margin: 10px 0 5px;
+          }
+          .alternate-votes-display {
+            display: inline-block;
+            padding: 5px 16px;
+            border-radius: 21px;
+            border: 0;
+            background: #e0e0e0;
+            font-size: 29px;
+            height: auto;
+            line-height: 1.1;
+            font-weight: bold;
+            font-family: Arial;
+            @include mixin-font-icon($vote,22px,$green);
+          }
+          .up-active,.up-inactive {  
+            margin-left: 15px;
+            display: inline-block;
+            color: #fff;
+            padding: 7px 18px;
+            height: 39px;
+            width: 105px;
+            background: $green;
+            @include mixin-font-icon($vote,20px, #fff);
+            &:empty:before { display: inline-block !important; }
+            &:after {
+              position: relative;
+              top: -3px;
+              /*content: "That!";*/
+              content: "אהבתי";
+              font-weight: bold;
+            }
+          }
+          .up-active { background: #8DD5A8;  }
+        }
+
+        /* -- field-title -- */
+
+        .views-field-title{
+          font-size: 20px;
+          line-height: 20px;
+          clear: both;
+          a{ color: $black; }
+        }
+        @media all and (max-width:767px){
+           .views-field-title  {
+           text-align:center;
+           }
+        }
+        /* -- field-body -- */
+
+        .views-field-body {
+          font-size: 13px;
+          line-height: 15px;
+          margin-bottom: 1em;
+        }
+
+        /* -- field-picture -- */
+
+        .views-field-picture {
+          position: absolute;
+          bottom: 16px;
+          z-index: 1;
+          float: left;
+          margin: 4px 10px 0 4px;
+          width: 35px;
+          left: 15px;
+        }
+
+        /* -- field-name -- */
+
+        .views-field-name {
+          width: 100%;
+          position: absolute;
+          bottom: 12px;
+          background-color: rgb(218, 218, 218);
+          padding: 10px 10px 10px 51px;
+          min-height: 43px;
+          font-size: 14px;
+          max-width: 95%;
+          max-width: calc(100% - 20px);
+          left: 0;
+          right: 0;
+          margin: 0 auto;
+
+          a { color: $green; }
+        }
+        @media all and (max-width:767px){
+        .views-field-name {
+          width:auto;
+          padding:10px;
+          text-align:center;
+        }
+        }
+      }
+    }
+
+    /* -- view-footer -- */
+
+    .view-footer {
+      position: absolute;
+      top: 50%;
+      left: 0;
+      right: 5px;
+      margin: 0 auto;
+      -webkit-border-radius: 50%;
+      border-radius: 50%;
+      color: $green;
+      font-size: 25px;
+      background-color: white;
+      width: 47px;
+      padding: 3px 5px 7px 7px;
+      text-align: center;
+
+      @media (min-width: 1200px) {
+        top: 65px;
+        margin-top: 0;
+      }
+    }
+
+
+  }
+}
+
+#how-it-work-video .pane-content{
+  background: #f3f3f3;
+  padding: 4px 4px;
+  margin-bottom: 10px;
+}
+
+
+
+
+

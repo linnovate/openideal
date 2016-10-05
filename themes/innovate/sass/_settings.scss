@@ -1,0 +1,237 @@
+@charset "UTF-8";
+
+/*-----------------------------------------------
+                   Typography
+-----------------------------------------------*/
+
+@font-face {
+  font-family: 'OpenIdeal';
+  src:url('../fonts/OpenIdeal/OpenIdeal.eot');
+  src:url('../fonts/OpenIdeal/OpenIdeal.eot?#iefix') format('embedded-opentype'),
+    url('../fonts/OpenIdeal/OpenIdeal.woff') format('woff'),
+    url('../fonts/OpenIdeal/OpenIdeal.ttf') format('truetype'),
+    url('../fonts/OpenIdeal/OpenIdeal.svg#OpenIdeal') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'icon-font';
+  src:url('../fonts/icons/SHTF_Icons.eot');
+  src:url('../fonts/icons/SHTF_Icons.eot?#iefix') format('embedded-opentype'),
+  url('../fonts/icons/STF_Icons.woff') format('woff'),
+  url('../fonts/icons/SHTF_Icons.ttf') format('truetype'),
+  url('../fonts/icons/SHTF_Icons.svg#SHTF_Icons') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+/*@font-face {
+  font-family: 'Atlas';
+  src:url('../fonts/Atlas/atlas-aaa-400.eot');
+  src:url('../fonts/Atlas/atlas-aaa-400.eot?#iefix') format('embedded-opentype'),
+    url('../fonts/Atlas/atlas-aaa-400.woff') format('woff'),
+    url('../fonts/Atlas/atlas-aaa-400.ttf') format('truetype'),
+    url('../fonts/Atlas/atlas-aaa-400.eot.svg#Atlas') format('svg');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Atlas';
+  src:url('../fonts/Atlas/atlas-aaa-500.eot');
+  src:url('../fonts/Atlas/atlas-aaa-500.eot?#iefix') format('embedded-opentype'),
+    url('../fonts/Atlas/atlas-aaa-500.woff') format('woff'),
+    url('../fonts/Atlas/atlas-aaa-500.ttf') format('truetype'),
+    url('../fonts/Atlas/atlas-aaa-500.eot.svg#Atlas') format('svg');
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Atlas';
+  src:url('../fonts/Atlas/atlas-aaa-700.eot');
+  src:url('../fonts/Atlas/atlas-aaa-700.eot?#iefix') format('embedded-opentype'),
+    url('../fonts/Atlas/atlas-aaa-700.woff') format('woff'),
+    url('../fonts/Atlas/atlas-aaa-700.ttf') format('truetype'),
+    url('../fonts/Atlas/atlas-aaa-700.eot.svg#Atlas') format('svg');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Atlas';
+  src:url('../fonts/Atlas/atlas-aaa-900.eot');
+  src:url('../fonts/Atlas/atlas-aaa-900.eot?#iefix') format('embedded-opentype'),
+    url('../fonts/Atlas/atlas-aaa-900.woff') format('woff'),
+    url('../fonts/Atlas/atlas-aaa-900.ttf') format('truetype'),
+    url('../fonts/Atlas/atlas-aaa-900.eot.svg#Atlas') format('svg');
+  font-weight: 900;
+  font-style: normal;
+}*/
+
+/*-----------------------------------------------
+                   Sprites
+-----------------------------------------------*/
+
+$icons-smart-layout:smart;
+@import "icons-smart/*.png";
+
+//fix url image-sprite
+.icons-smart-sprite{
+  background: url('../images/icons-smart-sc6718674dc.png') no-repeat;
+} 
+
+/*-----------------------------------------------
+                   Font icon
+-----------------------------------------------*/
+$open-menu : b;
+
+$close-menu : a;
+
+$search : K;
+
+$account : P;
+
+$home : Q;
+
+$news: O;
+
+$comment: \e608;
+
+$eye: \e601;
+
+$list: \e604;
+
+/*$calendar: \e607;*/
+
+$calendar: J;
+
+$light: \e619;
+
+$vote: H;
+
+$vote-dislike: \e60e;
+
+$idea: V;
+
+/*$idea: \e60c;*/
+
+$user: R;
+
+/*$user: \e602;*/
+
+$challenge: M;
+
+$challenges-list : D;
+
+/*$challenge: \e609;*/
+
+/*$discussions: \e606;*/
+$discussions: I;
+
+$share: \e60d;
+
+$arrow-right: \e60a;
+
+$arrow-left: \e60b;
+
+$attachments: \e610;
+
+$fb-like: \e61a;
+
+$like : G;
+ 
+$full-like: F;
+
+$google: \e61b;
+
+$linkedin: \e61c;
+
+$twitter: \e61d;
+
+$facebook-footer: \e611;
+
+$twitter-footer: \e612;
+
+$google-footer: \e613;
+
+$linkedin-footer: \e614;
+
+$twitter_menu: \e61d;
+
+$facebook-menu: Y;
+
+$twitter-menu: Z;
+
+$google-menu: W;
+
+$linkedin-menu: X;
+
+$calendar: J;
+
+$love: G;
+
+$plus: U;
+
+$add-file: E;
+
+$add-imge: T;
+
+$join: U;
+
+$eye: S;
+
+$pencil: E;
+/*-----------------------------------------------
+                   Colors
+-----------------------------------------------*/
+$raven: #888F9A;
+$la-palma: #26B20F;
+$light-border: rgb(213, 213, 213);
+$light-gray: #f3f3f3;
+$line-gray:#E6E9EE;
+$navy-orange: #F0522B;
+$orange: #F7882E;
+$blue: #1A9ECF;  
+$athens-gray: #E6E9EE;
+$ecstasy: #F6892E;
+$flamingo: #F0532B;
+$light-flamingo: #F08C73;
+$la-palma: #26B211;
+$blue: #1A9ECF;
+$link-blue: #189FCE;
+$text-gray: #413f43;
+$date-text-gray: #858992;
+$text-light-gray: #A4B1BA;
+$icon-gray: #A3AFB9;
+$iron: #D4DBE1;
+/*$text-white: rgb(213, 213, 213);*/
+/*$text-white: #F7F7F7;*/
+$text-white: #FFFFFF;
+$background-white: #FFFFFF;
+$green: #43ac6a;
+$navy-blue: #016ca2;
+$light-Blue : #3BACD6;
+$red: #d70010;
+$athens-gray:#EFF3F6;
+$gull-gray: #A3B1BA;
+/*$blue: #028cbb;*/
+$black: black;
+$main-menu-color: #1D2530;
+$manu-link1: #1D2530;
+$sub-menu : #212A39;
+$icon-menu : #838A92;
+$user-menu-logout : #EF1C23;
+$main-menu-idea : #DB7A2E;
+$main-menu-challenges : #25AE10;
+$main-menu-users : #1898C7;
+$shark : #20242D;
+$fbg: #175892;
+$gbg: #EE2C34;
+$tbg: #0099BB;
+$inbg: #076EA9;
+/*-----------------------------------------------
+                       END
+-----------------------------------------------*/

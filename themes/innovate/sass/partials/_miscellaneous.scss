@@ -1,0 +1,69 @@
+
+/*--------------------------------------------------------------
+                         Box-add-comment
+----------------------------------------------------------------*/
+.pane-node-comment-form{
+   .pane-title{
+   	  	@include mixin-font-icon($discussions ,1.4em, $ecstasy , "icon-font");
+   }
+   .pane-title::before{
+   		font-weight: 100;
+   }	
+   .comment-form {
+      @include comment-form;
+   }
+   a.username::before{
+       content:"Created by";
+       display: block;
+   }
+
+} 
+
+/*--------------------------------------------------------------------
+                           Dispaly-ideas
+--------------------------------------------------------------------*/
+.display-ideas{
+    .views-field-title{
+       margin-top: -8px;
+       a{
+       	text-decoration: none;
+	    font-size: 1.1em;
+	    font-weight: 500;
+	    color: $ecstasy;
+       }
+    }
+    .views-field-body{
+
+    }
+    .views-field-name{
+        margin: 0px !important;
+        display: inline-block;
+        width: initial !important;
+        a{
+        	font-size: 1em !important;
+	        &:after{
+	        	content:"|";
+	        	padding-right: 2px;
+            padding-left: 2px;
+            color: $link-blue;
+	        }
+        }
+
+    }
+    .views-field-created{
+    	display: inline-block;
+    	color: $text-light-gray;
+    	font-size: 0.9em;
+    	&:after{
+    		content:"-";
+    	}
+    	
+    }
+    .views-field-field-challenge{
+    	display: inline-block;
+        color: $text-light-gray;
+        font-size: 0.9em;
+    }
+}
+
+

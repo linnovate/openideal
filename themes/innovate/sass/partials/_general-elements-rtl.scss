@@ -1,0 +1,224 @@
+
+
+/*-----------------------------------------------
+                     Elements
+-----------------------------------------------*/
+
+
+.region-inside-first{
+  width: 66%;
+  @media all and (max-width:767px){
+    width: 100%;
+  }
+}
+.region-inside-last{
+  margin-right: 2%;
+  margin-left: 0%;
+  @media all and (max-width:767px){
+    margin-right: 0px;
+  }
+}
+
+  
+/*-----------------------------------------------
+                     main-manu
+-----------------------------------------------*/
+.sidebar_first .region-sidebar-first{
+  right: 0;
+}
+.close-menu{
+  margin-right: 9.6em;
+  margin-left: 0em;
+  &:before{
+     @media all and (max-width:767px){
+       margin-right: 17.5em;
+     }
+     @media all and (max-width:320px){
+       margin-right: 15.3em;
+     }
+    margin-right: 14em;
+    margin-left: 0em;
+  }
+}
+.not-logged-in{
+  .pane-main-memu{
+    .pane-system-user-menu{
+      ul{
+        margin-right: 2.2em;
+        margin-left: 0px;
+        a{
+          padding-right: 0px;
+          padding-left: 10px;
+        }
+      }
+
+    }
+  }
+}
+.pane-main-memu{
+  #mini-panel-main_memu{
+    .header_menu{
+      margin-right: 2.2em;
+      margin-left: 0em;
+      a{
+        .home-icon{
+          &:before{
+            margin-right:0px;
+            margin-left:0px;
+            font-size: 22px;
+            margin-top: -4px;
+          }
+        }
+      }
+    } 
+
+    .pane-system-user-menu{
+      ul{
+        .user-picture{
+          margin-right: 2em;
+          margin-left: 0em;
+        }
+        .user{
+            width: 45%;
+           margin-right: 0.6em;
+           margin-left: 0em;
+        }
+        .first{
+            margin-right: 2em;
+            margin-left: 0em;
+            a{
+              &:before{
+                padding-left: 12px;
+                padding-right: 0px;
+              }
+            }
+        }
+        .last{
+          margin-right: -0.4em;
+          margin-left: 0em;
+          a{
+            padding-right: 0px;
+            padding-left: 10px;
+            &:before{
+              padding-left: 5px;
+            }
+          }
+        }
+      }
+
+    }
+
+    .pane-system-main-menu{
+      ul{
+        padding-right: 1.3em;
+        padding-left: 0em;
+        a::before{
+          padding-left: 0.6em;
+          padding-right: 0em;
+
+        }
+      }
+    }
+    .pane-social-links {
+      margin-left: auto;
+       a.social_link {
+      .pane-content{
+        a::before{
+            margin-left: 1.3em;
+            margin-right: 0em;
+        }
+      }
+    }
+
+  }
+  
+  .pane-search{
+      &:before{
+        left: 0.4em;
+        right: inherit;
+      }
+    }
+  }
+}
+
+
+/*-----------------------------------------------
+                   Font -icons
+-----------------------------------------------*/
+.glyphicon-comment,
+.glyphicon-read,
+.glyphicon-th-list,
+.glyphicon-map-marker,
+.glyphicon-calendar {
+  &:before {
+    direction: rtl;
+    margin-right: 5px;
+    margin-left: 7px;
+  }
+}
+
+/*-----------------------------------pane-comments-----------------------*/
+
+.display-comments .view-content .views-row {
+  .user-image{
+     float: left;
+  }
+  .user-text{
+     margin-right: 58px; 
+     margin-left: inherit;
+  }
+}
+/*-----------------------------------------------
+         General: row - footer-openideal
+-----------------------------------------------*/
+
+.row-bottom-openideal {
+  /* --- author --- */
+  .author {
+    .picture {
+      img {
+        float: right;
+      }
+    }
+  }
+
+  /* --- vote --- */
+  .vote {
+    .alternate-votes-display {
+      @include fix-rtl-before();
+    }
+  }
+}
+
+/*-----------------------------------------------
+         General: row - view-challenges-featured-front
+-----------------------------------------------*/
+.view-challenges-featured-front {
+  /* --- author --- */
+  .author {
+    .picture {
+      img {
+        float: right;
+      }
+    }
+  }
+}
+
+
+.display-comments{
+  .pane-title{
+    margin-right: 13px;
+    margin-left: 0px;
+  }
+}
+
+.page-members-edit {
+  .inner {
+    div#block-system-main {
+      .form-item {
+        margin-left: 1em;
+        margin-right: 0;
+      }
+    } 
+  }
+}
