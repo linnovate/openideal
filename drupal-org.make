@@ -92,6 +92,7 @@ projects[backup_migrate][version] = "3.1"
 projects[da11y][version] = "1.x-dev"
 projects[image_link_formatter][version] = "1.1"
 projects[link][version] = "1.4"
+projects[i18n][version] = "1.13"
 ; Themes
 projects[bootstrap][version] = "3.0" 
 projects[ember][version] = "2.x-dev" 
