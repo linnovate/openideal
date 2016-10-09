@@ -97,7 +97,7 @@ projects[diff][version] = "3.2"
 projects[features_diff][version] = "1.0-beta2"
 projects[uuid][version] = "1.0-beta2"
 projects[uuid_features][version] = "1.0-alpha4"
-projects[google_analytics][version] = "2.2"
+;projects[google_analytics][version] = "2.3"
 ;projects[fbconnect][version] = "2.0-beta4"
 ;projects[simple_fb_connect][version] = "2.5"
 
