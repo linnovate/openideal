@@ -36,9 +36,6 @@
              </div>
          </div>
         <!-- content-block -->
-        <div class="footer pane-panels-mini pane-innovate-logo">
-            <?php print $logo_section; ?>
-        </div><!-- footer -->        
 
     </div><!-- content-wrapper -->    
 

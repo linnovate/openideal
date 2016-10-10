@@ -40,11 +40,6 @@ function sheatufim_preprocess_page(&$variables) {
 
   $toboggan_denied = in_array('page__toboggan__denied', $variables['theme_hook_suggestions']);
 
-  if ((arg(0) == 'user' && in_array(arg(1), array('login', 'register', 'password'))) ||
-   $toboggan_denied) {
-    $logo_section = panels_mini_block_view('sheatufim_logo') ;
-    $variables['logo_section'] = $logo_section['content'];
-  }
 
   if ($toboggan_denied && $user->uid == 0) {
     $variables['theme_hook_suggestions'][] = 'page__user__login';

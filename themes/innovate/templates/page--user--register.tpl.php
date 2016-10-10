@@ -28,8 +28,6 @@ $form_r = drupal_get_form('user_register_form') ;
             
         </div><!-- content-block -->   
     
-    <div class="footer pane-panels-mini pane-innovate-logo">
-       <?php print $logo_section; ?>
-    </div><!-- footer -->
+      <!-- footer -->
    </div><!-- content-wrapper -->
 </div><!-- page-wrapper -->
