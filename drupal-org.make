@@ -17,7 +17,7 @@ projects[bootstrap_panels_horizontal_tabs][download][branch] = "7.x-1.x"
 projects[bootstrap_panels_horizontal_tabs][download][url] = http://git.drupal.org/sandbox/ShaunDychko/2126611.git
 projects[bootstrap_panels_horizontal_tabs][subdir] = contrib
 projects[boxes][version] = "1.2" 
-projects[ctools][version] = "1.6" 
+projects[ctools][version] = "1.10" 
 projects[context][version] = "3.6" 
 projects[contextphp][version] = "1.x-dev" 
 projects[date][version] = "2.8" 
@@ -100,7 +100,6 @@ projects[uuid_features][version] = "1.0-alpha4"
 ;projects[google_analytics][version] = "2.3"
 ;projects[fbconnect][version] = "2.0-beta4"
 ;projects[simple_fb_connect][version] = "2.5"
-
 ; Themes
 projects[bootstrap][version] = "3.0" 
 projects[ember][version] = "2.x-dev" 
