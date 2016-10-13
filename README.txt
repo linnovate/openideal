@@ -2,11 +2,18 @@
 --------------------------------------------------------------------------------
 
 Index
-1. Introduction
-2. Features
-2.1 HybridAuth installation & configuration
-2.2 Alerts & Notifications
-2.3 Activity
+1. Installation
+2. Introduction
+3. Features
+3.1 HybridAuth installation & configuration
+3.2 Alerts & Notifications
+3.3 Activity
+
+== 1. Installation
+
+```
+drush make
+```
 
 2.1 HybridAuth installation & configuration
 --------------------------------------------------------------------------------
