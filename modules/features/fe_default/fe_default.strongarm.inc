@@ -43,6 +43,7 @@ function fe_default_strongarm() {
     'faq' => 0,
     'news' => 0,
     'webform' => 0,
+    'header_site' => 0,
   );
   $export['watcher_content_types'] = $strongarm;
 

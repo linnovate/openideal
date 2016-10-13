@@ -513,6 +513,10 @@ function idea_install() {
   variable_set('jquery_update_jquery_version', '1.7');
 
   // Setup hastags for idea content type.
+  if(empty(variable_get('hashtags_terms_field', ''))) {
+      variable_set('hashtags_terms_field', 'field_hashtags');
+  }
+
   $field_name = variable_get('hashtags_terms_field', '');
   $instance = field_info_instance('node', $field_name, 'idea');
   if (!is_array($instance)) {
