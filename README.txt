@@ -9,7 +9,7 @@ Index
 3.2 Alerts & Notifications
 3.3 Activity
 
-== 1. Installation
+### 1. Installation
 
 ```
 drush make
