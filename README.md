@@ -12,8 +12,11 @@ Index
 ### 1. Installation
 
 ```
-drush make
+git clone https://github.com/linnovate/openideal.git
+cd openideal
+drush make build-openideal.make drupal
 ```
+To view the site go to http://{yourdomain}/drupal
 
 2.1 HybridAuth installation & configuration
 --------------------------------------------------------------------------------
