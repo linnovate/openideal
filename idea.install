@@ -456,7 +456,7 @@ function idea_install() {
   // Create a default role for site administrators, with all available permissions assigned.
   $admin_role = new stdClass();
   $admin_role->name = 'administrator';
-  $admin_role->weight = 2;
+  $admin_role->weight = 7;
   user_role_save($admin_role);
   user_role_grant_permissions($admin_role->rid, array_keys(module_invoke_all('permission')));
   // Set this as the administrator role.
@@ -513,7 +513,8 @@ function idea_install() {
   variable_set('jquery_update_jquery_version', '1.7');
 
   // Setup hastags for idea content type.
-  if(empty(variable_get('hashtags_terms_field', ''))) {
+  $var = variable_get('hashtags_terms_field', '');
+  if(empty($var)) {
       variable_set('hashtags_terms_field', 'field_hashtags');
   }
 
