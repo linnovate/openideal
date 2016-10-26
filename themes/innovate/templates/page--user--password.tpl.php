@@ -7,6 +7,12 @@ $form_p = drupal_get_form('user_pass') ;
         <?php  print render($page['sidebar_first']);?>
     </aside>
     <?php endif;?>
+    <aside class="sidebar_first">
+        <?php
+          $block = module_invoke('panels_mini', 'block_view', 'sidebar_first');
+          print $block['content'];    
+        ?>
+    </aside>
     <div class="content-wrapper">
         <div class="content-block">
             <div>
