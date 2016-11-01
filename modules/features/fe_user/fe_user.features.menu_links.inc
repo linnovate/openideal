@@ -92,26 +92,6 @@ function fe_user_menu_default_menu_links() {
     'language' => 'und',
     'menu_links_customized' => 1,
   );
-  // Exported menu link: user-menu_my-watched-posts:user/watcher.
-  $menu_links['user-menu_my-watched-posts:user/watcher'] = array(
-    'menu_name' => 'user-menu',
-    'link_path' => 'user/watcher',
-    'router_path' => 'user/watcher',
-    'link_title' => 'My Watched Posts',
-    'options' => array(
-      'identifier' => 'user-menu_my-watched-posts:user/watcher',
-    ),
-    'module' => 'system',
-    'hidden' => 0,
-    'external' => 0,
-    'has_children' => 0,
-    'expanded' => 0,
-    'weight' => 0,
-    'customized' => 0,
-    'language' => 'und',
-    'menu_links_customized' => 0,
-    'parent_identifier' => 'user-menu_my-account:user',
-  );
   // Exported menu link: user-menu_user-account:user.
   $menu_links['user-menu_user-account:user'] = array(
     'menu_name' => 'user-menu',
@@ -125,7 +105,7 @@ function fe_user_menu_default_menu_links() {
     'module' => 'system',
     'hidden' => 0,
     'external' => 0,
-    'has_children' => 1,
+    'has_children' => 0,
     'expanded' => 0,
     'weight' => -49,
     'customized' => 1,
@@ -138,7 +118,6 @@ function fe_user_menu_default_menu_links() {
   t('Log out');
   t('Login');
   t('My !points');
-  t('My Watched Posts');
   t('User account');
   t('User menu');
 

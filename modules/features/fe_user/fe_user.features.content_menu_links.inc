@@ -105,7 +105,7 @@ function fe_user_content_menu_links_defaults() {
     'module' => 'system',
     'hidden' => 0,
     'external' => 0,
-    'has_children' => 1,
+    'has_children' => 0,
     'expanded' => 0,
     'weight' => -49,
     'customized' => 1,

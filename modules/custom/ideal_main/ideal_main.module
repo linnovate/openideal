@@ -404,23 +404,23 @@ function ideal_main_preprocess_user_picture(&$variables) {
     }
      elseif (variable_get('user_picture_default', '')) {
       $filepath = file_load(variable_get('user_picture_default', ''));
-      if (isset($filepath)) {
-        $account->picture = $filepath;
-        if($account->uid != 0)
-          user_save($account);
-        $alt = t("@user's picture", array('@user' => format_username($account)));
-        // If the image does not have a valid Drupal scheme (for eg. HTTP),
-        // don't load image styles.
-        if (module_exists('image') && file_valid_uri($filepath) && $style = variable_get('user_picture_style', '')) {
-          $variables['user_picture'] = theme('image_style', array('style_name' => $style, 'path' => $filepath, 'alt' => $alt, 'title' => $alt));
-        }
-        else {
-          $variables['user_picture'] = theme('image', array('path' => $filepath, 'alt' => $alt, 'title' => $alt));
-        }
-        if (!empty($account->uid) && user_access('access user profiles')) {
-          $attributes = array('attributes' => array('title' => t('View user profile.')), 'html' => TRUE);
-          $variables['user_picture'] = l($variables['user_picture'], "user/$account->uid", $attributes);
-        }
+      $account->picture = $filepath;
+      if($account->uid != 0)
+         user_save($account);
+    }
+    if (isset($filepath)) {
+      $alt = t("@user's picture", array('@user' => format_username($account)));
+      // If the image does not have a valid Drupal scheme (for eg. HTTP),
+      // don't load image styles.
+      if (module_exists('image') && file_valid_uri($filepath) && $style = variable_get('user_picture_style', '')) {
+        $variables['user_picture'] = theme('image_style', array('style_name' => $style, 'path' => $filepath, 'alt' => $alt, 'title' => $alt));
+      }
+      else {
+        $variables['user_picture'] = theme('image', array('path' => $filepath, 'alt' => $alt, 'title' => $alt));
+      }
+      if (!empty($account->uid) && user_access('access user profiles')) {
+        $attributes = array('attributes' => array('title' => t('View user profile.')), 'html' => TRUE);
+        $variables['user_picture'] = l($variables['user_picture'], "user/$account->uid", $attributes);
       }
     }
 
