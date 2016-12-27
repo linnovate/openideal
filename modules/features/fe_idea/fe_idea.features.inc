@@ -168,7 +168,7 @@ function fe_idea_node_info() {
       'base' => 'node_content',
       'description' => t('Idea content type'),
       'has_title' => '1',
-      'title_label' => t('כותרת'),
+      'title_label' => t('Title'),
       'help' => '',
     ),
   );

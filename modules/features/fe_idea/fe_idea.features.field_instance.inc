@@ -108,7 +108,7 @@ function fe_idea_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'field_name' => 'body',
-    'label' => 'תארו את הרעיון שלכם בקצרה',
+    'label' => 'Idea description',
     'required' => 0,
     'settings' => array(
       'display_summary' => 0,
@@ -303,7 +303,7 @@ function fe_idea_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'field_name' => 'field_category',
-    'label' => 'קטגוריה',
+    'label' => 'Category',
     'required' => 0,
     'settings' => array(
       'user_register_form' => FALSE,
@@ -787,9 +787,11 @@ function fe_idea_field_default_field_instances() {
   // Included for use with string extractors like potx.
   t('Blast Idea');
   t('Buzz Idea');
+  t('Category');
   t('Comment');
   t('Groove Idea');
   t('Hashtags');
+  t('Idea description');
   t('Idea image');
   t('In Action');
   t('Is Part Of A Challenge');
@@ -800,8 +802,6 @@ function fe_idea_field_default_field_instances() {
   t('Social Buttons');
   t('Vote');
   t('קבצים מצורפים');
-  t('קטגוריה');
-  t('תארו את הרעיון שלכם בקצרה');
 
   return $field_instances;
 }
