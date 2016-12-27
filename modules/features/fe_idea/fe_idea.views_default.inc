@@ -1288,7 +1288,7 @@ Why not add an idea?';
   $handler->display->display_options['fields']['field_idea_image']['hide_empty'] = TRUE;
   $handler->display->display_options['fields']['field_idea_image']['click_sort_column'] = 'fid';
   $handler->display->display_options['fields']['field_idea_image']['settings'] = array(
-    'image_style' => 'idea_image',
+    'image_style' => 'medium',
     'image_link' => '',
   );
   $handler->display->display_options['fields']['field_idea_image']['delta_limit'] = '1';
@@ -1438,7 +1438,7 @@ Why not add an idea?';
   $handler->display->display_options['fields']['field_idea_image']['hide_empty'] = TRUE;
   $handler->display->display_options['fields']['field_idea_image']['click_sort_column'] = 'fid';
   $handler->display->display_options['fields']['field_idea_image']['settings'] = array(
-    'image_style' => 'idea_image',
+    'image_style' => 'medium',
     'image_link' => '',
   );
   $handler->display->display_options['fields']['field_idea_image']['delta_limit'] = '1';
@@ -1598,7 +1598,7 @@ Why not add an idea?';
   $handler->display->display_options['fields']['field_idea_image']['hide_empty'] = TRUE;
   $handler->display->display_options['fields']['field_idea_image']['click_sort_column'] = 'fid';
   $handler->display->display_options['fields']['field_idea_image']['settings'] = array(
-    'image_style' => 'idea_image',
+    'image_style' => 'medium',
     'image_link' => '',
   );
   $handler->display->display_options['fields']['field_idea_image']['delta_limit'] = '1';
@@ -1734,17 +1734,20 @@ Why not add an idea?';
   $handler->display->display_options['filters']['status_extra']['field'] = 'status_extra';
   $handler->display->display_options['filters']['status_extra']['group'] = 0;
   $handler->display->display_options['filters']['status_extra']['expose']['operator'] = FALSE;
-  /* Filter criterion: Content: In Action (field_in_action) */
-  $handler->display->display_options['filters']['field_in_action_value']['id'] = 'field_in_action_value';
-  $handler->display->display_options['filters']['field_in_action_value']['table'] = 'field_data_field_in_action';
-  $handler->display->display_options['filters']['field_in_action_value']['field'] = 'field_in_action_value';
-  $handler->display->display_options['filters']['field_in_action_value']['operator'] = 'not empty';
   /* Filter criterion: Content: Language */
   $handler->display->display_options['filters']['language']['id'] = 'language';
   $handler->display->display_options['filters']['language']['table'] = 'node';
   $handler->display->display_options['filters']['language']['field'] = 'language';
   $handler->display->display_options['filters']['language']['value'] = array(
     '***CURRENT_LANGUAGE***' => '***CURRENT_LANGUAGE***',
+    'und' => 'und',
+  );
+  /* Filter criterion: Content: Type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'node';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'idea' => 'idea',
   );
   $translatables['ideas_all'] = array(
     t('Master'),

@@ -203,7 +203,7 @@ function fe_challenge_views_default_views() {
   $handler->display->display_options['fields']['field_challenge_image']['hide_empty'] = TRUE;
   $handler->display->display_options['fields']['field_challenge_image']['click_sort_column'] = 'fid';
   $handler->display->display_options['fields']['field_challenge_image']['settings'] = array(
-    'image_style' => 'challenge_image',
+    'image_style' => 'medium',
     'image_link' => '',
   );
   /* Field: Content: Title */
@@ -394,7 +394,7 @@ function fe_challenge_views_default_views() {
   $handler->display->display_options['fields']['field_challenge_image']['hide_empty'] = TRUE;
   $handler->display->display_options['fields']['field_challenge_image']['click_sort_column'] = 'fid';
   $handler->display->display_options['fields']['field_challenge_image']['settings'] = array(
-    'image_style' => '_170x130_idea_image',
+    'image_style' => 'medium',
     'image_link' => 'content',
   );
   /* Field: Content: Title */
@@ -549,7 +549,7 @@ function fe_challenge_views_default_views() {
   $handler->display->display_options['fields']['field_challenge_image']['hide_empty'] = TRUE;
   $handler->display->display_options['fields']['field_challenge_image']['click_sort_column'] = 'fid';
   $handler->display->display_options['fields']['field_challenge_image']['settings'] = array(
-    'image_style' => 'idea_image',
+    'image_style' => 'medium',
     'image_link' => 'content',
   );
   /* Field: Content: Title */
@@ -1018,7 +1018,7 @@ function fe_challenge_views_default_views() {
   $handler->display->display_options['fields']['field_challenge_image']['hide_empty'] = TRUE;
   $handler->display->display_options['fields']['field_challenge_image']['click_sort_column'] = 'fid';
   $handler->display->display_options['fields']['field_challenge_image']['settings'] = array(
-    'image_style' => 'idea_image',
+    'image_style' => 'medium',
     'image_link' => '',
   );
   /* Field: Content: Title */
