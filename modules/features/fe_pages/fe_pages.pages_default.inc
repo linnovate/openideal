@@ -446,12 +446,12 @@ if("%node_2:url" != \'\')
     $pane->pid = 'new-425fd810-f0b7-4432-a9b9-0745a833be6f';
     $pane->panel = 'region_first';
     $pane->type = 'block';
-    $pane->subtype = 'views-ideas_in_challenge-block';
+    $pane->subtype = '-';
     $pane->shown = TRUE;
     $pane->access = array();
     $pane->configuration = array(
       'override_title' => 1,
-      'override_title_text' => 'הרעיונות שלכם',
+      'override_title_text' => 'Your ideas',
       'override_title_heading' => 'h2',
     );
     $pane->cache = array();
