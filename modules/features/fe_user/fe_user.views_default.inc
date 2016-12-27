@@ -266,7 +266,6 @@ function fe_user_views_default_views() {
   $handler->display->display_options['fields']['name']['table'] = 'users';
   $handler->display->display_options['fields']['name']['field'] = 'name';
   $handler->display->display_options['fields']['name']['label'] = '';
-  $handler->display->display_options['fields']['name']['exclude'] = TRUE;
   $handler->display->display_options['fields']['name']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['name']['alter']['ellipsis'] = FALSE;
   $handler->display->display_options['fields']['name']['element_label_colon'] = FALSE;
@@ -280,7 +279,6 @@ function fe_user_views_default_views() {
   $handler->display->display_options['fields']['field_bio']['alter']['text'] = '<div class="name">[name]</div>
 <div class="bio">[field_bio]</div>';
   $handler->display->display_options['fields']['field_bio']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['field_bio']['empty'] = '<div class="name">[name]</div>';
   $handler->display->display_options['fields']['field_bio']['hide_alter_empty'] = FALSE;
   /* Field: User: Uid */
   $handler->display->display_options['fields']['uid']['id'] = 'uid';
@@ -345,7 +343,6 @@ function fe_user_views_default_views() {
     t('last »'),
     t('<div class="name">[name]</div>
 <div class="bio">[field_bio]</div>'),
-    t('<div class="name">[name]</div>'),
     t('<a href="/members/[uid]/edit">[php]</a>'),
     t('All'),
     t('Content pane'),
@@ -633,7 +630,7 @@ function fe_user_views_default_views() {
   $handler->display->display_options['fields']['field_idea_image']['hide_empty'] = TRUE;
   $handler->display->display_options['fields']['field_idea_image']['click_sort_column'] = 'fid';
   $handler->display->display_options['fields']['field_idea_image']['settings'] = array(
-    'image_style' => 'idea_image',
+    'image_style' => 'medium',
     'image_link' => '',
   );
   $handler->display->display_options['fields']['field_idea_image']['delta_limit'] = '1';
