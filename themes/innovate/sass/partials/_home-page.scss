@@ -22,18 +22,18 @@ body.not-logged-in {
     @media all and (max-width:767px){
       flex-direction: column-reverse;
     }
-  	.pane-custom{
-  		display: inline-block;
+    .pane-custom{
+      display: inline-block;
        @media all and (min-width:767px){
          width: 76%;
       }  
     }
-  	  .round-table{
-  			background-color: $background-white;
-  			position: relative;
+      .round-table{
+        background-color: $background-white;
+        position: relative;
         padding: 13px 14px;
-  		  border: 1px solid #E5EAEE;
-  		  border-radius: 6px;
+        border: 1px solid #E5EAEE;
+        border-radius: 6px;
         @media all and (min-width:767px){
          width: 66%;
          padding: 45px;
@@ -43,25 +43,25 @@ body.not-logged-in {
         a{
           text-decoration: none;
         }
-  			.title-roundtable{
-  			    font-size: 1.6em;
-  			    font-weight: 500;
+        .title-roundtable{
+            font-size: 1.6em;
+            font-weight: 500;
              @media all and (max-width:767px){
                 font-weight: 700;
                 font-size: 1.67em;
                 letter-spacing: -0.2px;
              }
-  			}
-  			.sub-title-roundtable{
-  				  font-size: 13px;
-  			    font-weight: 500;
+        }
+        .sub-title-roundtable{
+            font-size: 13px;
+            font-weight: 500;
              @media all and (min-width:767px){
                margin-top: 5px;
                 font-size: 20px;
              }
-  			}
-  			.text-roundtable{
-  				margin-top: -6px;
+        }
+        .text-roundtable{
+          margin-top: -6px;
           font-size: 19.26px;
            @media all and (max-width:767px){
               margin-top: 16px;
@@ -70,36 +70,36 @@ body.not-logged-in {
               letter-spacing: -0.5px;
             }
               
-  			}
-  			.link-roundtable{
+        }
+        .link-roundtable{
           @media all and (min-width:767px){
-        	  position: absolute;
+            position: absolute;
           }
           @media all and (max-width:767px){
-        	   display: flex;
+             display: flex;
              flex-direction: column;
             margin-top: 4px;
             margin-right: 31px;
             font-size: 1.1em;
             letter-spacing: 0.3px;
           }
-  				bottom: 0;
-  				font-size: 1.3em;
-  				margin-bottom: 8px;
-  				a{
-  					color: $blue;
-  					margin-right: 66px;
-  		    	text-decoration: none;
+          bottom: 0;
+          font-size: 1.3em;
+          margin-bottom: 8px;
+          a{
+            color: $blue;
+            margin-right: 66px;
+            text-decoration: none;
              @media all and (max-width:767px){
                margin-top: 12px;
              }
-  				}
-  			}
-      }	
-  	
-  	
+          }
+        }
+      } 
+    
+    
     .panel-separator{
-  		display: none;
+      display: none;
      }
   }
 }
@@ -163,58 +163,58 @@ body.not-logged-in {
       }
     }  
     .pane-content {
-	    width: 92%;
-	    margin-left: 7px;
+      width: 92%;
+      margin-left: 7px;
         
     }
     .view-content{
       border-top: 1px solid $line-gray;
-   		margin-bottom: 11px;
-   		padding-bottom: 30px;
+      margin-bottom: 11px;
+      padding-bottom: 30px;
       padding-top: 21px;
       margin-top: -16px;
-	    .views-row {
-	    	margin-bottom: 5px;
-	      	width: 100%;
-	      	display: inline-block;
-	      	width: 100%;
-	      	font-size: 14px;
-	      	line-height: 1.24em;
-	      	color: $black;
-	      	.views-field-picture{
-         	 	width: 14%;
-	        }
-	        .views-field-name{
-	          margin-left: 66px;
-	          width: 70%;
-	          margin-top: -48px;
-	          a{
-	            color: $link-blue;
-	            text-decoration: none;
-	            font-size: 20px;
-	            font-weight: 500;
-	          }
-	        }
-	        .views-field-field-bio{
-	          margin-left: 66px;
-	          width: 70%;
-	          color: $text-light-gray;
-	          max-height: 16px;
+      .views-row {
+        margin-bottom: 5px;
+          width: 100%;
+          display: inline-block;
+          width: 100%;
+          font-size: 14px;
+          line-height: 1.24em;
+          color: $black;
+          .views-field-picture{
+            width: 14%;
+          }
+          .views-field-name{
+            margin-left: 66px;
+            width: 70%;
+            margin-top: -48px;
+            a{
+              color: $link-blue;
+              text-decoration: none;
+              font-size: 20px;
+              font-weight: 500;
+            }
+          }
+          .views-field-field-bio{
+            margin-left: 66px;
+            width: 70%;
+            color: $text-light-gray;
+            max-height: 16px;
             min-height: 16px;
-    		    overflow: hidden;
-	        }
-	      	.user-image{  
-	        	width: 36px;
-		        margin: 1px 10px 0 0;
-	    	}
-	      	.user-picture{
-	        	img{ 
-	          		width: 50px;
+            overflow: hidden;
+          }
+          .user-image{  
+            width: 36px;
+            margin: 1px 10px 0 0;
+        }
+          .user-picture{
+            img{ 
+                width: 50px;
                 height: 50px;
                 border-radius: 50%;
-	        	}
-	     	 }
-	    }
+            }
+         }
+      }
     }
     .view-footer{
       position: absolute;
@@ -223,10 +223,10 @@ body.not-logged-in {
       border-top: 1px solid $line-gray;
       padding-top: 12px;
       padding-bottom: 12px;
-	    a{
-	    	color: $text-light-gray;
-	    }
-	  }
+      a{
+        color: $text-light-gray;
+      }
+    }
 
     .views-row + .views-row { margin-top: 20px; }
   }
@@ -245,48 +245,48 @@ body.not-logged-in {
     @include mixin-font-icon($discussions,32px, $icon-gray , "icon-font"); 
   }
   #panel-bootstrap-column-2{
-  	h2{
-  	  	 &:before{
-   			padding-left: 13px;
-      	}
-  	}
-  	.view-content{
-  		border-bottom: none;
-	    margin-bottom: 0px;
-	    padding-bottom: 0px;
-	    .views-row{
-	    	margin-bottom: -6px;
-			.user-image{
-			  width: 42px !important;
-			  margin:0 !important;
-			  img{
-			   	width: 40px;
+    h2{
+         &:before{
+        padding-left: 13px;
+        }
+    }
+    .view-content{
+      border-bottom: none;
+      margin-bottom: 0px;
+      padding-bottom: 0px;
+      .views-row{
+        margin-bottom: -6px;
+      .user-image{
+        width: 42px !important;
+        margin:0 !important;
+        img{
+          width: 40px;
           height: 40px;
           border-radius: 50%;
-			  }
-			}
-			.user-text{
-			  	margin-right: 58px;
-			  	font-size: 16px;
-			  	max-height: 34px;
-    			overflow: hidden;
-			  	a{
-			  	 	display: block;
-				    color: $link-blue;
-				    text-decoration: none;
-				    font-size: 20px;
-				    font-weight: 500;
-				}
-			}
-			.views-field-created{
-				margin-right: 58px;
-				font-size: 12px;
-				color: $date-text-gray;
-			}	
-		}
-  	
-  	}
-  	
+        }
+      }
+      .user-text{
+          margin-right: 58px;
+          font-size: 16px;
+          max-height: 34px;
+          overflow: hidden;
+          a{
+            display: block;
+            color: $link-blue;
+            text-decoration: none;
+            font-size: 20px;
+            font-weight: 500;
+        }
+      }
+      .views-field-created{
+        margin-right: 58px;
+        font-size: 12px;
+        color: $date-text-gray;
+      } 
+    }
+    
+    }
+    
   }
 
 }
@@ -317,7 +317,7 @@ body.not-logged-in {
         @media (max-width: 768px) {
              display: flex;
              & > .col:first-child {
-                margin-left: 21px;
+                margin-right: 21px;
              }
       }
         margin-right: 0;
@@ -615,6 +615,7 @@ body.not-logged-in {
           padding-left: 51px;
           display: inline-block;
           padding-top: 27px;
+          padding-bottom: 7px;
         }
   
         /* -- field-picture -- */
@@ -640,7 +641,7 @@ body.not-logged-in {
           a { 
             color: $link-blue; 
             text-decoration: none;
-            font-size: 19px;
+            font-size: 16px;
              @media all and (max-width:767px){
                font-size: 12px;
              }
