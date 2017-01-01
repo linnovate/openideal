@@ -81,20 +81,17 @@
   	}  
 
   	    //icons to input in register pages
-	Drupal.behaviors.placeholder = {
-	    attach: function(context, settings) {  
-	        $('.page-user-login .inner .form-item-name .form-text').attr("placeholder", 'A');
-	        $('.page-user-login .inner .form-item-pass .form-text').attr("placeholder", 'C');
-	        $('.page-toboggan .inner .form-item-name .form-text').attr("placeholder", 'A');
-	        $('.page-toboggan .inner .form-item-pass .form-text').attr("placeholder", 'C');
-			$('.page-user-register .inner .form-item-name .form-text').attr("placeholder", 'A');
-			$('.page-user-register .inner .form-item-mail .form-text').attr("placeholder", 'B');
-			$('.page-user-register .inner .form-item-pass .form-text').attr("placeholder", 'C');
-
-
-		}
-			    
-  	} 
+	// Drupal.behaviors.placeholder = {
+	//     attach: function(context, settings) {  
+	  //       $('.page-user-login .inner .form-item-name .form-text').attr("placeholder", 'A');
+	  //       $('.page-user-login .inner .form-item-pass .form-text').attr("placeholder", 'C');
+	  //       $('.page-toboggan .inner .form-item-name .form-text').attr("placeholder", 'A');
+	  //       $('.page-toboggan .inner .form-item-pass .form-text').attr("placeholder", 'C');
+			// $('.page-user-register .inner .form-item-name .form-text').attr("placeholder", 'A');
+			// $('.page-user-register .inner .form-item-mail .form-text').attr("placeholder", 'B');
+			// $('.page-user-register .inner .form-item-pass .form-text').attr("placeholder", 'C');
+		// }    
+  	// } 
 	  function isMobile(){
 		if($(window).width() < 767) {
 		   return true;
