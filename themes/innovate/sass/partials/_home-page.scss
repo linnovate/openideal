@@ -506,6 +506,12 @@ body.not-logged-in {
           .vud-link-reset{ 
             position: absolute;
             left: 0;
+            @media all and (max-width:767px){
+                right:0;
+                left:inherit;
+                box-shadow: 1px 1px 4px #888888;
+                margin-top: 2px !important; 
+            }
             &:after {
               top :-3px !important;
             }
