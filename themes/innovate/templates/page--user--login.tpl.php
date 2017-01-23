@@ -16,7 +16,7 @@
             <!-- login screen -->
             <div class='title'>
                 <p>
-                    <?php print t("Welcome to Ma'agaley Siach");?>
+                    <?php print t("Welcome to OpenideaL");?>
                 </p>
             </div>
             <div class="inner">
