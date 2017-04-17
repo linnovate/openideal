@@ -81,7 +81,7 @@
  */
 ?>
 <div id="node-<?php print $node->nid;  ?>"
- style="background-size: 100% 83%; background-image: url('<?php
+ style="background-color: #1c609f; background-image: url('<?php
     $file_background = file_create_url
    ($node->field_banner_image['und'][0]['uri']);  print $file_background ?>');" 
  class="<?php print $classes; ?> clearfix"<?php print $attributes; ?>>
