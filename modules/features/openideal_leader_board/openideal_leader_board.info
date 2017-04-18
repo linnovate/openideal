@@ -1,0 +1,13 @@
+name = OpenideaL Leader Board
+description = Leader Board for OpenideaL
+core = 7.x
+package = OpenideaL
+dependencies[] = ctools
+dependencies[] = fe_idea
+dependencies[] = features
+dependencies[] = menu
+dependencies[] = views
+features[ctools][] = views:views_default:3.0
+features[features_api][] = api:1
+features[menu_links][] = main-menu:leader-board
+features[views_view][] = leader_board
