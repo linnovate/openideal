@@ -1,6 +1,5 @@
- - OpenideaL -
+- OpenideaL -
 --------------------------------------------------------------------------------
-
 Index
 1. Installation
 2. Introduction
@@ -92,3 +91,5 @@ Discussions
 - New comment
 - x-th votes on comment
 - ping
+
+[![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=J3TWKQ929H6QS)
