@@ -1,0 +1,7 @@
+<fieldset>
+ <label>{{element.label}}</label>
+  <lf-ng-md-file-input  lf-files="files"  lf-placeholder={{titleFile}} lf-browse-label={{titleButton}} lf-remove-label="Delete" drag preview ng-disabled="disable" lf-on-file-remove="onFileRemove" multiple="allowMultiple">
+ </lf-ng-md-file-input>
+ <div class="error-message" style="color: maroon;" ng-if="errorUpload">{{errorUpload}}</div>
+</fieldset>
+

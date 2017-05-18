@@ -1,0 +1,44 @@
+<div class = "idea-tabs">
+    <md-list class="idea-list-tabs" ng-cloak>
+     <md-list-item  ng-repeat="(iTab,tab) in tabs" label="{{tab.display_name}}" md-active="activeTab == iTab" >
+            <!-- <a ng-click="clickOnMenu()"  class="a-menu" target="{{$index}}" offset="30" href="" > {{tab.display_name}}</a><br/> -->
+        <div ng-click="select($index)" ng-class="{active: $index == selected}">
+            <a href="#{{$index}}" class= "menu-idea"  > {{tab.display_name}}</a>
+        </div>
+     </md-list-item>
+    </md-list>
+</div>
+
+<div class = "content-idea">
+    <div ng-if="tabs">
+        <div ng-repeat="(iTab,tab) in tabs" md-active="activeTab == iTab">
+           <div id="{{$index}}">
+           <h2 > {{tab.display_name}} </h2>
+            <div>
+                <md-content layout-padding>
+                    <md-list ng-cloak>
+                            <md-list-item data-ng-repeat="field in tab.fields" ng-switch on="field.type"  ng-if="idea[field.name]" class="md-block flex-gt-sm" class="noright">
+                                <div ng-if="idea[field.name]" class="md-list-item-text">
+                                    <h3  >{{field.display_label}}</h3>
+                                    <file-input element="field" ng-switch-when="file" values-obj="idea" view-only="true"></file-input>
+                                    <file-input element="field" ng-switch-when="image" values-obj="idea" view-only="true"></file-input>
+                                    <p ng-switch-default>
+                                        {{idea[field.name]}}
+                                    </p>
+
+                                <md-list> 
+                                  <md-list-item class="md-2-line {{field.name}}" ng-if="idea[field.name]"  data-ng-repeat='item in idea[field.name]' ng-switch-when= "entityreference_autocomplete" >
+                                    <div class="md-list-item-text">
+                                      <h3>{{item.key}}</h3>
+                                    </div>
+                                  </md-list-item>
+                                 </md-list>
+                                </div>
+                            </md-list-item>
+                   </md-list>
+                    </md-content>
+            </div>
+        </div>
+        </div>
+    </div>
+</div>

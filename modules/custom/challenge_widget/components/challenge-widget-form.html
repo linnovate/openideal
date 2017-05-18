@@ -1,0 +1,75 @@
+<!-- <script src="http://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/md5.js"></script> -->
+<div class="challenge-suggestion" ng-controller="ideaWidgetCtr as vm" ng-init="vm.init()" md-is-fullscreen="$mdMedia('max-width:767px')" ng-cloak>
+    <div>
+        <md-button class="md-icon-button" ng-click="vm.close()">
+          <md-icon aria-label="Close dialog"></md-icon>
+        </md-button>
+        <div class = "header-idea">
+            <h2>{{vm.title}}</h2>
+            <div>{{vm.subTitle}} </div>
+        </div>
+        <form name="ideaForm" novalidate >
+            <ul ng-if="vm.errMessages" style="margin: 4px 0;color: red;">
+                <li ng-repeat="err in vm.errMessages">{{err}}</li>
+            </ul>
+            <md-input-container class="md-block" ng-if="vm.external" >
+                <label>Enter your Email in {{vm.oiSite}}</label>
+                <input  ng-model="vm.idea['user_email']" type="email" name="user_email" required="required" data-ng-class="ideaForm['user_email'].$invalid?'error':''"/>
+                <div ng-messages="ideaForm.user_email.$error">
+                    <div ng-message="required">This is required.</div>
+                    <div ng-message="email">Need Enter Valid email.</div>
+                </div>
+            </md-input-container>
+            <md-progress-circular ng-disabled="!vm.loader" ng-if="vm.loader" class="md-warn md-hue-3" md-diameter="96px"></md-progress-circular>
+            <md-tabs  md-dynamic-height="" md-border-bottom="" md-selected="selectedIndex" ng-if="vm.tabs">
+                <md-tab  ng-repeat="(iTab,tab) in vm.tabs" label="{{tab.name}}" md-on-select="vm.selectTab(tab)" md-on-deselect="vm.leaveTab(tab)" md-active="vm.activeTab == iTab">
+                    <!-- <md-content ng-style="{height: vm.contentHeight + 'px'}"> -->
+                    <md-content>
+                        <md-input-container data-ng-repeat="field in tab.fields" ng-switch on="field.type"  class="md-block flex-gt-sm {{field.name}}">
+                            <label ng-if="field.name != 'field_attachments' && field.name != 'field_idea_image'">{{field.label}}</label>
+                            <input class="form-control" ng-model="vm.idea[field.name]" type="text" name="{{field.name}}" ng-required="field.required" ng-switch-when="textfield" data-ng-class="ideaForm[field.name].$invalid?'error':''"/>
+                            <textarea rows="2" md-select-on-focus="" class="form-control" ng-model="vm.idea[field.name]" name="{{field.name}}" ng-required="field.required" ng-switch-when="textarea" data-ng-class="ideaForm[field.name].$invalid?'error':''" ></textarea>
+                            <div>{{field.description}}</div>
+                            <md-chips ng-model="vm.idea[field.name]" md-autocomplete-snap md-transform-chip="vm.transformChip($chip)" md-require-match="vm.autocompleteDemoRequireMatch"  ng-switch-when="entityreference_autocomplete" >
+                                <md-autocomplete md-input-name="{{field.name}}"  md-search-text="searchText" md-items="item in vm.getMatches(searchText)" md-item-text="item.display"  >
+                                    <span md-highlight-text="searchText">{{item.display}}</span>
+                                </md-autocomplete>
+                                <md-chip-template>
+                                    <span>
+                                      <strong>{{$chip.key}}</strong>
+                                    </span>
+                                </md-chip-template>
+                            </md-chips>
+                            <input class="form-control" ng-model="vm.idea[field.name]" type="email" name="{{field.name}}" ng-required="field.required" ng-switch-when="email" data-ng-class="ideaForm[field.name].$invalid?'error':''" />
+                            <md-select class="form-control" ng-model="vm.idea[field.name]" name="{{field.name}}" ng-required="field.required" ng-switch-when="options_select" data-ng-class="ideaForm[field.name].invalid?'error':''" >
+                                <md-option value="">{{vm.language=='he' ? '--ללא--' :"--none--" }}</md-option>
+                                <md-option data-ng-repeat="(key,value) in field.options" value="{{key}}">{{value}}</md-option>
+                            </md-select>
+                       <!--      <md-content>
+                            <md-contact-chips ng-switch-when="options_select" data-ng-class="ideaForm[field.name].invalid?'error':''"
+                            ng-model="vm.asyncContacts"
+                            md-contacts="vm.delayedQuerySearch($query)"
+                            md-highlight-flags="i"
+                            filter-selected="vm.filterSelected"
+                                placeholder="To">
+                            </md-contact-chips>
+                            </md-content> -->
+                            <file-input-m element="field" ng-switch-when="file"  id="{{field.name}}" name="{{field.name}}" title-file="Select File" title-button="choose file" values-obj="vm.idea" ng-required="field.required" data-ng-class="ideaForm[field.name].$invalid?'error':''" ng-model="vm.idea[field.name]" disable="false" allow-multiple="true"></file-input-m>
+                            <file-input-m element="field" ng-switch-when="image"  id="{{field.name}}" name="{{field.name}}" title-file="Pick Image" title-button="choose photo" values-obj="vm.idea" ng-required="field.required" data-ng-class="ideaForm[field.name].$invalid?'error':''" ng-model="vm.idea[field.name]" disable="false" allow-multiple="false" ></file-input-m>
+                            <md-datepicker ng-switch-when="datetime" id="{{field.name}}" name="{{field.name}}" ng-init="vm.idea[field.name]= Date()" ng-required="field.required" data-ng-class="ideaForm[field.name].$invalid?'error':''" ng-model="vm.idea[field.name]" md-open-on-focus></md-datepicker>  
+                            <div ng-messages="ideaForm[field.name].$error"  >
+                                <div ng-message="required">This is required.</div>
+                            </div>
+                        </md-input-container>
+                    </md-content>
+                </md-tab>
+            </md-tabs>
+             <div class="buttons">
+                <md-button class="prev" ng-click="vm.activeTab = vm.activeTab -1" ng-if="vm.activeTab  != 0">{{vm.actionLabels.back[vm.language]}}</md-button>
+                    <md-button class="next" ng-click="vm.activeTab = vm.activeTab + 1" ng-if="vm.activeTab != vm.tabs.length-1">{{vm.actionLabels.next[vm.language]}}</md-button>
+                    <button  type="submit" class="md-raised md-primary md-button" type="submit" ng-click="vm.save()" ng-disabled="vm.inProgress">{{vm.actionLabels.save[vm.language]}}</button>
+                   <!--  <button  type="submit" class="md-raised md-button" type="submit" ng-click="vm.saveDraft()" ng-disabled="vm.inProgress" >{{vm.actionLabels.draft[vm.language]}}</button> -->
+                    <!--  <button  type="submit" class="md-raised md-button" type="submit" ng-click="vm.reset()" ng-disabled="vm.inProgress" >{{vm.actionLabels.reset[vm.language]}}</button> -->
+            </div>
+        </form>
+    </div>

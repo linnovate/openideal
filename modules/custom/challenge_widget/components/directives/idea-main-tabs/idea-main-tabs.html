@@ -1,0 +1,21 @@
+<div ng-cloak>
+  <md-content>
+    <md-tabs md-dynamic-height md-border-bottom>
+      <md-tab label="רעיון">
+        <md-content class="md-padding main-idea-tabs">
+          <idea-tabs></idea-tabs>
+        </md-content>
+      </md-tab>
+      <md-tab label="דיונים" ng-if = "isAlow == true">
+        <md-content class="md-padding main-feedback-tabs">
+          <discussion-tab></discussion-tab>
+        </md-content>
+      </md-tab>
+      <md-tab label="משובים"  ng-if = "isAlow == true">
+        <md-content class="md-padding main-feedback-tabs">
+          <feedback-tab></feedback-tab>
+        </md-content>
+      </md-tab>
+    </md-tabs>
+  </md-content>
+</div>

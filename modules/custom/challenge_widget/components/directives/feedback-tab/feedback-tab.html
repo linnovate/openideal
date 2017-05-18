@@ -1,0 +1,88 @@
+<div ng-init="init()" class= "table-feedback">
+<div class = "message messageNoFeedback"  ng-show="messageNoFeedback">{{messageNoFeedback}}</div> 
+<div ng-show="idea.feedback" >
+<h2>רשימת המשובים</h2>
+<table >
+    <thead>
+        <tr>
+            <th>נושא</th>
+            <th>שם</th>
+            <th>קבוצה</th>
+            <th>תאריך</th>
+            <th>עריכה</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr id="row_{{$index}}" ng-repeat-start="feedback in idea.feedback"  ng-click="selFeedback(feedback ,$index)" ng-class="{ 'selected': $index == selectedIndex && selected_feedback ==feedback }"
+             >
+            <td class = "field_comments">{{feedback.field_comments}}</td>
+            <td>{{feedback.field_author_feedback}}</td>
+            <td>{{feedback.field_requested_group}}</td>
+            <td>{{feedback.field_end_date}}</td>
+             <td><a class="ctools-use-modal edit-feedback" href="/edit-feedback/{{feedback.feedback_id}}/nojs" >עריכת משוב</a>
+            </td>
+        </tr>
+             
+        <tr ng-repeat-end class="content" ng-repeat-start="feedback_content in feedback.field_feedback_content" ng-if="selected_feedback ==feedback"  ng-class="{last: $last}">
+                <td colspan="5" >
+                  <div ng-if="feedback_content.field_content">
+                    <div class= "field-content">{{feedback_content.field_content}}</div>
+                      <div class = "field-author">
+                        <img src={{feedback_content.field_author_image}}>
+                        <div class = "auther">
+                          <div class="name">{{feedback_content.field_author_name}}</div>
+                          <span> | </span>
+                          <div class="date">{{feedback_content.field_created}}</div>
+                        </div>
+                      </div>
+                  </div>
+                 <!--         <md-button class="md-primary md-raised challenge-add-idea-button" ng-click="open($event ,feedback.feedback_id)">vdc</md-button>
+              -->
+              </td>
+            </tr> 
+        <tr ng-repeat-end class="content comment-form"  ng-if="selected_feedback ==feedback"  >
+            <td colspan="5" >
+              <div class="comment" >
+                <input placeholder="כתוב תגובה" ng-model="content"></input>
+                <md-button ng-click="save_content(content ,feedback.feedback_id)">הגב</md-button>
+              </div>
+
+          </td>
+        </tr>
+    </tbody>
+  </table>
+</div>
+</div>
+
+
+
+
+
+<!-- <md-list ng-cloak>
+  <md-list-item data-ng-repeat="feedback in idea.feedback" ng-switch on="field.type"  class="md-block flex-gt-sm" class="noright">
+  <div>{{feedback.field_comments}} </div>
+      
+      <div data-ng-repeat="feedback_content in feedback.field_feedback_content" ng-switch on="field.type"  class="md-block flex-gt-sm" class="noright">
+           {{feedback_content.field_content}}
+      </div>
+
+  </md-list-item>
+</md-list> -->
+
+ <!--                             <div class="md-list-item-text">
+                                <h3>{{field.label}}</h3>
+                                <file-input element="field" ng-switch-when="file" values-obj="idea" view-only="true"></file-input>
+                                <file-input element="field" ng-switch-when="image" values-obj="idea" view-only="true"></file-input>
+                                <p ng-switch-default>
+                                    {{idea[field.name]}}
+                                </p>
+
+                            <md-list>
+                              <md-list-item class="md-2-line" data-ng-repeat='item in idea[field.name]' ng-switch-when= "entityreference_autocomplete" >
+                                <div class="md-list-item-text">
+                                  <h3>{{item.key}}</h3>
+                                </div>
+                              </md-list-item>
+                             </md-list>
+                            </div> -->
+<!--  -->

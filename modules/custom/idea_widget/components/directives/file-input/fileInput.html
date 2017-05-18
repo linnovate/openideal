@@ -1,0 +1,21 @@
+<fieldset>
+    <!-- <div ng-if="!viewOnly"> -->
+    <fieldset class = "wrapper-input">
+       <input type="file" ngf-select ng-model="files" multiple>
+    </fieldset>
+<!--     Drop files: <div ngf-drop  ng-model="files" class="drop-box" ngf-multiple="true" style="min-height:30px;background-color:beige;border: 4px dotted;text-align: center;font-size: 28px;">Drop</div> -->
+    <span class="error-message"viewOnly style="color: maroon;" ng-if="error">{{error}}</span>
+    <!-- </div> -->
+    <div ng-if="uploadedFiles.length" >
+        <div ng-repeat="(key,file) in uploadedFiles" ng-show="uploadedFiles.length" class="img-area" ng-if="file" style="display:inline-block;float: left;padding-top: 6px; padding-left:6px">
+            <div class="file-cell">
+                <div ng-if="element.type == 'image'" class="img-content" style="width:170px;"  >
+                    <img  class="img-up" ng-src="{{file.url}}" style="max-width: 165px;height: auto;" >
+                </div>
+                <a ng-if="element.type == 'file'" href="{{file.url}}">{{file.filename}}</a>
+            </div>
+            <span us-spinner="{zIndex: 2}" spinner-key="spinner-{{countFilesUplouded}}"></span>
+        </div>
+    </div>
+</fieldset>
+

@@ -1,0 +1,36 @@
+<div ng-init="init()" class= "table-discussion">
+<div class = "message messageNoDiscussion"  ng-show="messageNoDiscussion">{{messageNoDiscussion}}</div> 
+<div ng-show="idea.discussion" >
+<h2>רשימת הדיונים</h2>
+<table >
+    <thead>
+        <tr>
+            <th>נושא</th>
+            <th>שם</th>
+            <th>תאריך</th>
+             <th>עריכה</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr id="row_{{$index}}" ng-repeat-start="discussion in idea.discussion"  ng-click="selDiscussion(discussion ,$index)" ng-class="{ 'selected': $index == selectedIndex && selected_discussion ==discussion }"
+             >
+            <td class = "field_comments">{{discussion.field_discussion_topic}}</td>
+            <td>{{discussion.field_author_discussion}}</td>
+            <td>{{discussion.field_date}}</td>
+            <!-- <td><a data-ng-element-ready="" class="uimodal edit-discussion " href="/node/{{discussion.field_discussion_id}}/edit" >עריכת דיון</a></td> -->
+            <td><a class="ctools-use-modal edit-discussion" href="/edit-discussion/{{discussion.field_discussion_id}}/nojs" >עריכת דיון</a>
+            </td>
+        </tr>
+             
+        <tr ng-repeat-end class="content" ng-if="selected_discussion ==discussion" >
+                <td colspan="4" >
+                  <div ng-if="discussion.body">
+                    <div class= "field-content">{{discussion.body}}</div>
+                  </div>
+                </td> 
+        </tr>
+    </tbody>
+  </table>
+
+</div>
+</div>

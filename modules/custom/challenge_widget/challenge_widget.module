@@ -1,0 +1,312 @@
+<?php
+
+// include_once 'idea_widget_extensions.inc';
+include_once 'challenge_widget_entity.inc';
+
+/**
+* Implements hook_init().
+*/
+function challenge_widget_init() {
+  // drupal_add_css(drupal_get_path('module', 'idea_widget') . '/idea_widget_ui.css');
+}
+
+/**
+ * Implements hook_block_info().
+ */
+ function challenge_widget_block_info() {
+ 	$blocks = array();
+ 	$blocks['add_challenge_button'] = array(
+ 		'info' => t('Add Challenge'),
+ 	);
+  return $blocks;
+ }
+
+ /**
+ * Implements hook_block_view().
+ */ 
+ function challenge_widget_block_view($delta) {
+  	switch ($delta) {
+  		case 'add_challenge_button':
+  			$block = array(
+        'subject' => t('Add Challenge Button'),
+        'content' => _challenge_widget_add_challenge_button(),
+      );
+      break; 
+  	}
+  	return $block;
+ }
+
+/**
+* Implements hook_menu().
+*/
+function challenge_widget_menu() {
+	$items = array();
+	$items['api/challenge_widget/get-fields'] = array(
+    'title' => 'challenge_widget_get_fields',
+    'page callback' => 'challenge_widget_get_fields',
+    'type' => MENU_CALLBACK,
+    'access callback' => TRUE,
+    'access arguments' => array('access content'),
+	);
+	$items['admin/config/challenge_widget_settings'] = array(
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('challenge_widget_admin_setting'),
+    //'type' => MENU_CALLBACK,
+    'file' => 'challenge_widget.settings.inc',
+    'file path' => drupal_get_path('module', 'challenge_widget'),
+    'title' =>'Challenge Widget Form',
+    'access arguments' => array('administer site configuration'),
+   );
+  $items['api/challenge_widget/entity/save'] = array(
+    'title' => 'challenge_widget_save_idea',
+    'page callback' => 'challenge_widget_save_idea',
+    'type' => MENU_CALLBACK,
+    'access callback' => TRUE,
+    'access arguments' => array('access content'),
+    );
+  $items['api/challenge_widget/entity/save_draft'] = array(
+    'title' => 'challenge_widget_save_idea',
+    'page callback' => 'challenge_widget_save_draft_idea',
+    'type' => MENU_CALLBACK,
+    'access callback' => TRUE,
+    'access arguments' => array('access content'),
+    );
+  $items['api/challenge_widget/entity/get/%node'] = array(
+    'page callback' => 'challenge_widget_get_idea',
+    'page arguments' => array(4),
+    'type' => MENU_CALLBACK,
+    'access callback' => 'node_access',
+    'access arguments' => array('view', 4),
+  );
+  $items['api/challenge_widget/add_file'] = array(
+    'page callback' => 'challenge_widget_add_file',
+    'type' => MENU_CALLBACK,
+    'access callback' => TRUE,
+    'access arguments' => array('access content'),
+    );
+  // $items['admin/config/idea_widget'] = array(
+  //   'page callback' => 'drupal_get_form',
+  //   'page arguments' => array('idea_widget_admin_info'),
+  //   'title' =>'Idea Widget',
+  //   'access arguments' => array('administer site configuration'),
+  //   );
+  return $items;
+
+}
+
+/**
+ *get settings(tabs,fields ..) of the widget.
+ */
+function challenge_widget_get_fields() {
+	global $base_url;
+  $results = array();
+  $results['title'] = 'Add Challenge';
+  $results['oi_site'] = $base_url;
+  $results['tabs'] = variable_get('oi_challenge_widget',array());
+  drupal_json_output($results);
+}
+
+/**
+ * Output a button to add an challenge.
+ */
+function _challenge_widget_add_challenge_button() {
+  global $user;
+  if ($user->uid) {
+    idea_load_angular();
+    drupal_add_js(drupal_get_path('module', 'challenge_widget') . '/components/directives/idea-modal/idea-modal.js', array('weight' => 6));
+    $output = "<div id='challenge-modal-wrapper'>"."<idea-modal label='".t('Add a new challenge')."' action='Add idea' fromchallenge='yes'></idea-modal>"."</div>";
+  } else {
+    $output = challenge_widget_get_login_link(t('Login to add challenge'));
+  }
+  return $output;
+}
+
+function challenge_widget_get_login_link($title) {
+  $path = current_path();
+  $output = l($title, 'user/login', array(
+    'attributes' => array('class' => 'add-challenge-btn login-link'),
+    'query' => array('destination' => $path)));
+  return $output;  
+}
+
+
+function idea_load_angular(){
+  drupal_add_js(drupal_get_path('module', 'challenge_widget') . '/components/bower_components/angular/angular.min.js', array('weight' => 0));
+  drupal_add_js(drupal_get_path('module', 'challenge_widget') . '/components/bower_components/angular-file-upload/dist/angular-file-upload.min.js', array('weight' => 1));
+  drupal_add_js(drupal_get_path('module', 'challenge_widget') . '/components/bower_components/ng-file-upload/ng-file-upload.min.js', array('weight' => 2));
+  drupal_add_js(drupal_get_path('module', 'challenge_widget') . '/components/bower_components/angular-messages/angular-messages.min.js', array('weight' => 3));
+  drupal_add_js(drupal_get_path('module', 'challenge_widget') . '/components/bower_components/angular-animate/angular-animate.min.js', array('weight' => 4));
+  drupal_add_js(drupal_get_path('module', 'challenge_widget') . '/components/bower_components/angular-aria/angular-aria.min.js', array('weight' => 5));
+  drupal_add_js(drupal_get_path('module', 'challenge_widget') . '/components/bower_components/angular-material/angular-material.min.js', array('weight' => 6));
+  drupal_add_js(drupal_get_path('module', 'challenge_widget') . '/components/bower_components/angular-material-fileinput/dist/lf-ng-md-file-input.js', array('weight' => 7));
+  drupal_add_js(drupal_get_path('module', 'challenge_widget') . '/components/directives/file-input-m/file-input-m.js', array('weight' => 8));
+  drupal_add_js(drupal_get_path('module', 'challenge_widget') . '/components/bower_components/angular-bootstrap/ui-bootstrap-tpls.js', array('weight' => 9));
+  // drupal_add_js(drupal_get_path('module', 'challenge_widget') . '/components/bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js', array('weight' => 10));
+  drupal_add_css(drupal_get_path('module', 'challenge_widget') . '/components/bower_components/angular-material/angular-material.min.css');
+  drupal_add_css(drupal_get_path('module', 'challenge_widget') . '/components/idea_widget.css');
+  drupal_add_css(drupal_get_path('module', 'challenge_widget') . '/components/bower_components/angular-material-fileinput/dist/lf-ng-md-file-input.css');
+  // drupal_add_css(drupal_get_path('module', 'challenge_widget') . '/components/bower_components/angular-bootstrap/ui-bootstrap-csp.css');
+  // drupal_add_css(drupal_get_path('module', 'challenge_widget') . '/components/bower_components/bootstrap/scss/bootstrap.scss');
+  // drupal_add_css(drupal_get_path('module', 'challenge_widget') . '/components/bower_components/bootstrap/scss');
+    drupal_add_js(drupal_get_path('module', 'challenge_widget') . '/components/challenge_widget.js', array('weight' => 5));
+  
+}
+
+/**
+ *Save new idea
+ */
+function challenge_widget_save_idea(){
+  challenge_widget_inner_save_challenge('new');
+  return;
+}
+
+/**
+ *Save draft idea
+ */
+function challenge_widget_save_draft_idea(){
+   challenge_widget_inner_save_challenge('draft');
+   return;
+}
+
+/**
+ *Save file that post by client
+ */
+// function challenge_widget_add_file(){
+//   dpm('lala');
+//   drupal_get_messages();
+//   $json = new stdClass();
+//   $json->status = "Error" ;
+//   $file_post = $_FILES['file'];
+//   $data = $_POST ;
+//   dpm('_FILES');
+//   dpm($_FILES);
+//   dpm('data');
+//   dpm($data);
+//   $filed_name = $data['field_name'] ? $data['field_name']:'field_challenge_image';
+//   if (!empty($file_post['name'])) {
+//     dpm('filed_name');
+//     dpm($filed_name);
+//     $infofieldfile = field_info_instances('node', 'challenge');
+//     $validators = array(
+//       'file_validate_extensions' => array($infofieldfile[$filed_name]['settings']['file_extensions']),
+//       'file_validate_size'=> array($infofieldfile[$filed_name]['settings']['max_filesize'])
+//       );
+//     //Create the directory if it does not already exist, otherwise check the permissions
+//     //$specific_direc = $data['directory'] ?  $_POST['directory']:"challenge_widget/".$filed_name . "/" . $file_post['name'];
+//     $specific_direc = $data['directory'] ?  $_POST['directory']:"challenge_widget/".$filed_name;
+//     dpm('specific_direc');
+//     dpm($specific_direc);
+//     $dest = 'public://'.$specific_direc;
+//     dpm('dest');
+//     dpm($dest);
+//     //$oldmask = umask(0);
+//     file_prepare_directory($dest, FILE_CREATE_DIRECTORY);
+//     //mkdir($dest, 0777);
+//     //umask($oldmask);
+//     // $writable = is_writable($dest);
+//     // if (!$writable) {
+//     //   dpm('lala');
+//     //   return drupal_chmod($dest);
+//     // }
+//     // else {
+//     //   dpm('gaga');
+//     // }
+//     foreach ($file_post as $key => $info_file) {
+//       if($key=='name'){
+//         $info_file = str_replace(',','-',$info_file);
+//       }
+//       $_FILES['files'][$key]['w_challenge_upload'] = $info_file;
+//     }
+//     if ($file = file_save_upload('w_challenge_upload', $validators, $dest)) {
+//       dpm($file);
+//       $file->filepath = drupal_realpath($file->uri);
+//       $file_content = file_get_contents($file->filepath);
+//       $file->url = file_create_url($file->uri);
+//       $json->status = "SUCCESS" ;
+//       $json->fileInfo = $file;
+//       dpm($file);
+//     }
+//     else {
+//       $drupal_messages = drupal_get_messages();
+//       $error = $drupal_messages['error'];
+//       $json->msg = $error;
+//     }
+//   }
+//   else {
+//     $json->msg = "missing File";
+//   }
+//   print drupal_json_encode($json);
+// }
+
+function challenge_widget_add_file(){
+  drupal_get_messages();
+  $json = new stdClass();
+  $json->status = "Error" ;
+  $file_post = $_FILES['file'];
+  //dpm($file_post);
+  $data = $_POST ;
+  //dpm($data);
+  $filed_name = $data['field_name']?$data['field_name']:'field_challenge_image';
+  //dpm($filed_name);
+  if (!empty($file_post['name'])) {
+    $infofieldfile = field_info_instances('node', 'challenge');
+    $validators = array(
+      'file_validate_extensions' => array($infofieldfile[$filed_name]['settings']['file_extensions']),
+      'file_validate_size'=> array($infofieldfile[$filed_name]['settings']['max_filesize'])
+      );
+    //Create the directory if it does not already exist, otherwise check the permissions
+    $specific_direc = $data['directory'] ?  $_POST['directory']:"challenge_widget/".$filed_name;
+    $dest = 'public://'.$specific_direc;
+    file_prepare_directory($dest, FILE_CREATE_DIRECTORY);
+    //dpm($dest);
+    foreach ($file_post as $key => $info_file) {
+      if($key=='name'){
+        $info_file = str_replace(',','-',$info_file);
+      }
+      $_FILES['files'][$key]['w_challenge_upload'] = $info_file;
+    }
+    if ($file = file_save_upload('w_challenge_upload', $validators, $dest)) {
+      //dpm($file);
+      $file->filepath = drupal_realpath($file->uri);
+      $file_content = file_get_contents($file->filepath);
+      $file->url = file_create_url($file->uri);
+      $json->status = "SUCCESS" ;
+      $json->fileInfo = $file;
+      //dpm($file);
+    }
+    else {
+      $drupal_messages = drupal_get_messages();
+      $error = $drupal_messages['error'];
+      $json->msg = $error;
+    }
+  }
+  else {
+    $json->msg = "missing File";
+  }
+  print drupal_json_encode($json);
+}
+
+
+
+/**
+ * @param $node
+ * send to client idea entity
+ */
+function challenge_widget_get_idea($node) {
+  $widget_settings = variable_get('oi_challenge_widget', array());
+  $fields = array();
+  if (!empty($widget_settings)) {
+    foreach ($widget_settings as $item) {
+      if ($item['fields']) {
+        $fields = array_merge($fields, $item['fields']);
+      }
+      else {
+        $fields[] = $item;
+      }
+    }
+  }
+  $entity = convert_from_db_data_to_client_data_chall($fields,$node);
+  drupal_alter('challenge_data', $entity);
+  drupal_json_output(array('data'=>$entity));
+}
+?>

@@ -1,0 +1,34 @@
+<?php
+/**
+ * Implements hook_install()
+ *
+ */
+function idea_widget_install(){
+  $fields_data = field_info_instances("node",'idea');
+  variable_set('oi_idea_widget',
+    array(array(
+      'name'=>t('Basic'),'weight'=>0,
+      'fields'=>array(array( 'name' => 'title', 'required' =>true, 'type' => 'textfield', 'label' => t('Idea Name')),array( 'name' => 'body', 'required' =>false, 'type' => 'textarea', 'label' => $fields_data['body']['label']))
+    ),array(
+      'name'=>t('Attach Files'),'weight'=>1,
+      'fields'=>array(array( 'name' => 'field_attachments', 'required' =>false, 'type' => 'file', 'label' => $fields_data['field_attachments']['label'],'file_extensions'=>$fields_data['field_attachments']['settings']['file_extensions']))
+    ),
+    )
+  );
+  variable_set('oi_widget_tabs_fieldset',array('tab_0'=>array(
+    'title'=>t('Basic'),'weight'=>0,
+    'fields'=>array('title'=>array('is_checked'=>true,'label'=>'Idea Name'),'body'=>array('is_checked'=>true,'label'=>'Idea Description'))),'tab_1'=>array(
+    'title'=>t('Attach Files'),'weight'=>1,
+    'fields'=>array('field_attachments'=>array('is_checked'=>true,'label'=>t('Upload Files'))))
+  ));
+  variable_set('disable_idea_widget',0);
+}
+/**
+ * Implements hook_uninstall()
+ *
+ */
+function idea_widget_uninstall(){
+  variable_del('oi_idea_widget');
+  variable_del('oi_widget_tabs_fieldset');
+  variable_del('disable_idea_widget');
+}
