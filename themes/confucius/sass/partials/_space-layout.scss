@@ -1,0 +1,184 @@
+
+/*-----------------------------------------------
+                     Layouts
+-----------------------------------------------*/
+
+body {/*
+  !*border: 2px solid #e4e4e4;*!
+  width: 93%;
+  margin: 0 auto;
+  position: static;
+  min-width: 450px;*/
+
+ /* .logo img{ height: 35px; }
+
+  header#navbar {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    max-width: none;
+  }
+
+  header#navbar >.container,
+  .main-container.container,
+  .footer .region-footer {
+    max-width: 82.5%;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 15px;
+  }*/
+  @media all and (max-width:767px){
+  .main-container.container
+    {
+  //  max-width:93%;
+  //  padding:0;
+
+    }
+  }
+
+  .main-container.container {
+ //   clear: both;
+//    margin: 40px auto 150px;
+  }
+
+  .footer {
+/*    margin: 0;
+    padding: 10px;
+    width: 100%;
+    &.navbar.container { max-width: none; }*/
+  }
+
+  .region-page-bottom {
+   /* position: fixed;
+    left: 0;
+    max-width: 100%;*/
+  }
+
+}
+
+#panel-bootstrap-region-sidebar,
+#panel-bootstrap-region-center,
+#panel-bootstrap-region-content_views {
+ /* position: relative;
+  min-height: 1px;
+  padding-right: 15px;
+  padding-left: 15px;
+  float: left;*/
+}
+#panel-bootstrap-region-center,
+#panel-bootstrap-region-content_views {
+  /*@media (min-width: 992px) {
+    width: 66.66666667%;
+  }*/
+}
+#panel-bootstrap-region-sidebar {
+  /*@media (min-width: 992px) {
+    width: 33.33333333%;
+  }*/
+}
+.inside.col-md-8 {
+  #panel-bootstrap-region-center,
+  #panel-bootstrap-region-content_views {
+   /* float: none;
+    @media (min-width: 992px) {
+      width: 100%;
+    }*/
+  }
+}
+.inside.col-md-4 {
+  #panel-bootstrap-region-sidebar {
+   /* float: none;
+    @media (min-width: 992px) {
+      width: 100%;
+    }*/
+  }
+}
+
+.panel-bootstrap .panel-separator {
+  margin: 0;
+  clear: both;
+}
+
+body.panels-ipe .panel-pane,
+.panel-pane {
+ // margin-bottom: 2.7em;
+}
+
+@media all and (max-width: 767px) {
+ /* body{ width:100%; }
+  .main-container { width:93%; }
+  .panel-bootstrap-inside { margin:0; }*/
+}
+
+
+
+
+
+
+.page-wrapper {
+  display: flex;
+  min-height: 100vh;
+}
+
+/* line 11, ../sass/partials/_general-elements.scss */
+/*aside {
+  width: 10em;
+  background-color: #a21616;
+}*/
+
+/* line 19, ../sass/partials/_general-elements.scss */
+/*.content-center {
+  flex-grow: 1;
+  background-color: #1c7fff;
+}*/
+
+/* line 25, ../sass/partials/_general-elements.scss */
+/*header {
+  background-color: rgba(53, 255, 173, 0.53);
+}*/
+
+/* line 30, ../sass/partials/_general-elements.scss */
+/*.inner {
+  width: 96%;
+  max-width: 90em;
+  margin: 1em auto;
+  background-color: #9ea546;
+}
+*/
+/* line 37, ../sass/partials/_general-elements.scss */
+body, html {
+  min-height: 100%;
+  direction: rtl;
+  width: 100%;
+}
+
+
+
+panels-ipe-portlet-content {
+  margin-bottom: 4em;
+  border-bottom: 1px solid;
+}
+
+.pane-block.pane-views-head-to-head-ideas-block {
+  width: 44%;
+  display: inline-block;
+  vertical-align: top;
+  float: left;
+}
+
+div#mini-panel-latest_and_greatest {
+  display: flex;
+  justify-content: space-between;
+}
+
+.panel-tow-col {
+  display: flex;
+  justify-content: space-between;
+	.pane-region-first {
+	  width: 75%;
+	}
+	.pane-region-second {
+	  width: 21%;
+	}
+}
+

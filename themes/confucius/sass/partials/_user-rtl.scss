@@ -1,0 +1,25 @@
+.view-user-details {
+	.views-field-php {
+		text-align: left;
+		a {
+			@include fix-rtl-before;
+		}
+	}
+}
+
+.page-user-login, .page-user-password, .page-user-register {
+	.inner {
+		.item-list {
+			.hybridauth-widget a {
+				&:after {
+					float: left;
+			    margin-left: 0.5em;
+			    margin-right: 0;
+				}
+			}
+		}
+  }	
+
+}
+
+  

@@ -1,0 +1,77 @@
+@charset "UTF-8";
+
+/* #############################################
+ * #####    Socrates - drupal theming.     #####
+ * #############################################
+ *  
+ * Socrates theme main stylesheet.
+ *
+ *  Index
+ *  ----------- 
+ *  1. Imports
+ *
+ *  2. General
+ *
+ *  3. Spaces
+ *
+ *  4. Pages
+ *
+ */
+/*-----------------------------------------------
+                   Imports
+-----------------------------------------------*/
+@import "compass/css3";
+@import "compass/utilities/general/clearfix";
+
+@import "settings";
+@import "mixins";
+  
+/*-----------------------------------------------
+                   General
+-----------------------------------------------*/
+
+@import "partials/general-elements";
+
+@import "partials/general-blocks";
+
+@import "partials/ol-item";
+
+@import "partials/user";
+
+@import "partials/contact";
+
+/*-----------------------------------------------
+                   Spaces
+-----------------------------------------------*/ 
+
+/*@import "partials/space-layout";*/
+
+@import "partials/space-header-footer";
+
+/*-----------------------------------------------
+                    Pages
+-----------------------------------------------*/
+@import "partials/add-idea";
+
+/*@import "partials/front-page";*/
+
+@import "partials/list-pages";
+
+@import "partials/inner-pages";
+
+@import "partials/home-page";
+
+@import "partials/community";
+
+@import "partials/add-idea-popup";
+
+/*-----------------------------------------------
+                    miscellaneous
+-----------------------------------------------*/
+
+@import "partials/miscellaneous";
+@import "partials/news-page";
+/*-----------------------------------------------
+                       END
+-----------------------------------------------*/
+  

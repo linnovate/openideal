@@ -1,0 +1,23 @@
+
+.page-challenges{
+  .pane-views-challenges-list-block-1 , .pane-challenges-list{
+    .pane-title::before{
+      right: 0;
+      left:inherit;
+      padding-right: 0px;
+      padding-left: 9px;
+    }
+  }
+}   
+
+.pane-quicktabs-all-ideas {
+  ul.quicktabs-tabs {
+    li {
+      &.first {
+        margin-right: 0;
+        @include fix-rtl-before;
+      }
+
+    }
+  }
+}   

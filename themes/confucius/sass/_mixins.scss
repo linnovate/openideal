@@ -1,0 +1,295 @@
+@charset "UTF-8";
+
+/*-----------------------------------------------
+                    Mixins
+-----------------------------------------------*/
+/* according: https://github.com/sass/sass/issues/1395 */
+@function unicode($str) {
+  @return unquote("\"") + $str + unquote("\"");
+}
+
+/* ----- FIX RTL ----- */
+@mixin fix-rtl($size: 7px, $float: false, $inverse: false) {
+  @if $inverse {
+    margin-left: 0;
+    margin-right: $size;
+  }
+  @else {
+    margin-right: 0;
+    margin-left: $size;
+  }
+  @if $float {
+    float: $float;
+  }
+}
+
+@mixin fix-rtl-before($size: 7px, $float: false, $inverse: false) {
+  &:before {
+    @if $inverse {
+      margin-left: 0;
+      margin-right: $size;
+    } @else {
+      margin-right: 0;
+      margin-left: $size;
+    }
+    @if $float {
+      float: $float;
+    }
+  }
+
+}
+
+/* --------------------------------------------- mixin-pane-title ------------------------------------------- */
+
+@mixin mixin-pane-title($type) {
+  @if $type == block {
+    background-color: $blue;
+    color: white;
+    padding: 8px 15px;
+    font-size: 26px;
+    margin: 0;
+  }
+  @if $type == text {
+    /*border-bottom: 1px solid $light-border;*/
+    padding-bottom: 8px;
+    margin-bottom: 13px;
+    font-size: 35px;
+    background-color: transparent;
+    color: black;
+  }
+}
+
+/* ---------------------------------------------- mixin-font-icon ------------------------------------------- */
+@mixin font-icon-content($name,$font-size: false, $color: false, $font-family: 'Franklin Gothic Book') {
+  font-family: $font-family;
+  content: unicode($name);
+  @include inline-block(baseline);
+  @if $font-size {
+    font-size: $font-size;
+  }
+  @if $color {
+    color: $color;
+  }
+}
+
+@mixin mixin-font-icon($name,$font-size: false, $color: false, $font-family: 'Franklin Gothic Book', $after: false) {
+  @if $after {
+    &:after {
+      @include font-icon-content($name,$font-size, $color, $font-family);
+    }
+    &:empty:after { display: none; }  
+  } @else {
+    &:before {
+      @include font-icon-content($name,$font-size, $color, $font-family);
+    }
+    &:empty:before { display: none; }
+  }
+}
+
+/* --------------------------------------------- mixin-image-label ------------------------------------------ */
+
+@mixin mixin-image-label($font-size: 15px, $padding: 7px,$line-height: false){
+  position: absolute;
+  bottom: 0;
+  margin: 0;
+  left: 0;
+  right: 0;
+  padding: $padding;
+  font-size: $font-size;
+  font-weight: lighter;
+  width: 100%;
+  color: #fff;
+  background-color: #2b2b2b;
+  background-color: rgba(#2b2b2b, 0.8);
+  box-sizing: border-box;
+  a { color: #fff; }
+  &:empty, &.empty { padding: 0; }
+  @if $line-height { 
+    line-height: $line-height; 
+  }
+}
+
+/* -------------------------------------------- mixin-css-triangle ------------------------------------------ */
+
+@mixin mixin-css-triangle($direction:bottom, $width:6px, $color:false) {
+  content: '';
+  width: 0;
+  height: 0;
+  display: block;
+  right: 45%;
+  border: $width solid transparent;
+  @if $color {
+    @if $direction == left { border-right: $width solid $color; }  
+    @if $direction == right { border-left: $width solid $color; }
+    @if $direction == bottom { border-top: $width solid $color; }
+    @if $direction == top { border-bottom: $width solid $color; }
+  }
+  @else {
+    @if $direction == left { border-right: $width solid; }  
+    @if $direction == right { border-left: $width solid; }
+    @if $direction == bottom { border-top: $width solid; }
+    @if $direction == top { border-bottom: $width solid; }
+  }
+}
+
+
+/* -------------------------------------------- mixin-idea-btn ------------------------------------------ */
+
+@mixin idea-btn($icon: $join, $width: 7.6em, $height: 2em, $background: $pink, $icon-color: green, $color: white) {
+  width: $width;
+  height: $height;
+  display: inline-block;
+  background: $background;
+  text-align: center;
+  line-height: 2em;
+  font-size: 1.5em;
+  color: $color;
+  border-radius: 5px;
+  box-shadow: 1px 3px 3px #B3B3B5;
+  text-decoration: none;
+  &:after {
+    content: unicode($icon);
+    font-family: 'icon-font';
+    direction: rtl;
+    width: 0.9em;
+    height: 0.9em;
+    background: white;
+    color: $icon-color;
+    line-height: 0.9em;
+    border-radius: 100%;
+    margin: 0.5em;
+    display: inline-block;
+    font-weight: normal;
+    text-align: center;
+  }
+}
+
+@mixin idea-btn-fix-rtl {
+    &:after {
+    direction: ltr;
+    right: 0;
+  }  
+}
+
+@mixin orange-btn($icon) {
+  @include idea-btn($icon, 100%, 2em, $pink, $pink);
+  line-height: 2em;
+  font-size: 2em;
+  position: relative;
+  margin-bottom: 1.5em;
+  &:after {
+    position: absolute;
+    left: 0;
+    width: 2em;
+    height: 2em;
+    font-size: 0.5em;
+    line-height: 2em;
+    margin: 1em;
+  }
+}
+
+@mixin blue-btn {
+  color: $text-white;
+  border-radius: 5px;
+  background-color: $blue;
+  box-shadow: 1px 1px 1px #61686E;
+  padding: 8px 32px 7px 32px;
+  border-color: $blue;
+  font-size: 1.25em;
+  padding-right: 27px; 
+  padding-left: 20px;
+  padding-top: 7px;
+  padding-bottom: 8px;
+  font-weight: bold;
+}
+
+@mixin social-btn($bg: $fbg) {
+    width: 1.2em;
+    height: 1.2em;
+    font-size: 1em;
+    background: $bg;
+    display: inline-block;
+    border-radius: 100%;
+    font-family: 'icon-font';
+    line-height: 1.4em;
+    text-indent: 0.3em;
+    color: white;
+    margin: 0 0.25em;
+    padding: 3px;
+}
+
+@mixin comment-form {
+  background-color: $text-light-gray;
+  border-radius: 2px;
+  input{
+    @include blue-btn;
+  }
+  .username{  
+    text-decoration: none;
+    color: $text-white;
+    font-size: 1.2em;
+  }
+  textarea{
+    height: 92px;
+  }
+}
+
+@mixin upload-btn($background: $blue, $color: $text-white, $size: 2.1em, $text: 'צרף קובץ', $icon: $add-imge) {
+  position: relative;
+  font-size: $size;
+  width: 100%;
+  &, &:active {
+    outline: 0;
+  }
+
+  &::-webkit-file-upload-button {
+    display: none;
+  }
+
+  &::-moz-file-upload-button {
+    display: none;
+  }
+
+  &:before {
+    /*font-family: 'Atlas';*/
+    width: 100%;
+    background-color: $background;
+    content: $text;
+    color: $color;
+    display: inline-block;
+    outline: none;
+    white-space: nowrap;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    cursor: pointer;
+    font-weight: 500;
+    text-align: center;
+    padding-top: 13px;
+    padding-bottom: 13px;
+    border-radius: 4px;
+    font-size: 1em;
+  }
+
+  &:after {
+    @if $icon != '' {
+      font-family: "icon-font";
+      content: unicode($icon);
+      display: inline-block;
+      vertical-align: baseline;
+      font-size: 1.1em;
+      color: #1A9ECF;
+      border-radius: 100%;
+      position: absolute;
+      top: 0.3em;
+      right: 0.3em;
+      text-align: center;
+      background-color: #FFFFFF;
+      width: 1.1em;
+      height: 1.1em;
+      visibility: visible;
+    }
+  }
+}
+
+
+            

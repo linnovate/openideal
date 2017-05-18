@@ -1,0 +1,107 @@
+
+/*--------------------------------------------------------------
+                         Page-community
+----------------------------------------------------------------*/
+.page-community{
+	.title{
+		font-size: 1.9em;
+	    font-weight: 700;
+	    padding-left: 50px;
+	    margin-top: 90px;
+	    margin-bottom: 17px;
+	    @media all and (max-width:767px){
+            padding-left : 0px;
+            padding-right: 0px;
+            text-align: center;
+            margin-bottom: 30px;
+            margin-top: 0px;
+	    }
+    }
+	.view-community{
+		.view-content{
+		@media all and (max-width:767px){
+			width:90%;
+			margin :0 auto;
+		}	
+			> div {
+				padding-top: 20px;
+			    display: inline-block;
+			    width: 31%;
+			    background-color: $text-white;
+			    border-radius: 4px;
+			    min-height: 112px;
+			    overflow: hidden;
+			    margin-right: 24px;
+			    margin-top: 16px;
+			    border: 1px solid #E6E9EE;
+			    @media all and (max-width:767px){
+			    	width:100%;
+			    	margin :0px;
+			    	margin-bottom: 20px;
+			    }
+			    #panel-bootstrap-row-main-row{
+                 	display: table;
+    				width: 100%;
+			    }
+				#panel-bootstrap-region-sidebar{
+					float: right;
+					display: table-cell;
+				}  
+				.region-inside-first{
+					float: right !important;
+				    display: table-cell;
+				    margin-top: 13px;	
+				    margin-left: 7%;
+				    width: 60%;  
+				    @media all and (max-width:767px){
+				       margin-left: 4%;
+				       width: 59%;
+				    }
+
+				}
+				.region-inside-last{
+					width: 24%;
+					 @media all and (max-width:767px){
+					 	width: 33%;
+					 }
+				}
+				.views-field-name{
+	                /*margin-top: 41px;*/
+	    			margin-left: -3%;
+	    			@media all and (max-width:767px){
+	    			   margin-left: 4%;
+			        }
+
+	                a{
+	                	font-size: 1.7em;
+					    font-weight: 100;
+					    color: $black;
+					    text-decoration: none;
+	                }
+				}
+				.views-field-picture{
+					margin-left: 18%;
+	                /*margin-top: 21px;*/
+					img{
+						width: 6em;
+						height: 6em;  
+						border-radius: 50%;
+				    }   
+				}
+				.views-field-field-bio{
+					font-size: 1.2em;
+				    border-top: 1px solid #E6EAED;
+				    margin-left: -7%;
+				    padding-left: 11px;
+				    width: 97%;
+				    margin-top: 6px;
+				    padding-top: 4px;
+				    @media all and (max-width:767px){
+	    			   margin-left: 0%;
+	    			   width: 82%;
+			        }
+				} 
+			}
+		}
+	}
+}

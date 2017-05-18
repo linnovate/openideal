@@ -1,0 +1,181 @@
+
+body{
+  background-color: white;
+  z-index: -1;
+  height: initial;
+}
+
+/*--------------------------------------------------------------
+                         Box-add-comment
+----------------------------------------------------------------*/
+.pane-node-comment-form{
+   .pane-title{
+   	  	@include mixin-font-icon($discussions ,1.4em, $ecstasy , "icon-font");
+   }
+   .pane-title::before{
+   		font-weight: 100;
+   }	
+   .comment-form {
+      @include comment-form;
+   }
+   a.username::before{
+       content:"Created by";
+       display: block;
+   }
+
+} 
+
+/*--------------------------------------------------------------------
+                           Dispaly-ideas
+--------------------------------------------------------------------*/
+.display-ideas{
+    .views-field-title{
+       margin-top: -8px;
+       a{
+       	text-decoration: none;
+	    font-size: 1.1em;
+	    font-weight: 500;
+	    color: $ecstasy;
+       }
+    }
+    .views-field-body{
+
+    }
+    .views-field-name{
+        margin: 0px !important;
+        display: inline-block;
+        width: initial !important;
+        a{
+        	font-size: 1em !important;
+	        &:after{
+	        	content:"|";
+	        	padding-right: 2px;
+            padding-left: 2px;
+            color: $link-blue;
+	        }
+        }
+
+    }
+    .views-field-created{
+    	display: inline-block;
+    	color: $text-light-gray;
+    	font-size: 0.9em;
+    	&:after{
+    		content:"-";
+    	}
+    	
+    }
+    .views-field-field-challenge{
+    	display: inline-block;
+        color: $text-light-gray;
+        font-size: 0.9em;
+    }
+}
+
+
+/*#da11y-plugin{
+  z-index: 1 !important; 
+}*/
+
+/*////////////////////////////////////////////////
+                most-popular-user
+///////////////////////////////////////////////*/
+.pane-ideal-idea-most-popular-user{
+  width: 100%;
+  .title{
+    font-size: 24px;
+    text-transform: uppercase;
+    color: #494949;
+  }
+  .content{
+    background-color: #3bb292;
+    padding-top: 24px;
+    margin-top: 14px;
+    padding-left: 21px;
+    min-height: 90px;
+    position: relative;
+    @media all and (max-width: 767px) {
+      min-height: 65px;
+      padding-top: 0;
+      margin-top: 49px;
+    }
+    &:before{
+      content: "";
+      position: absolute;
+      background-color: white;
+      width: 20%;
+      height: 28px;
+      right: -16px;
+      top: -11px;
+      -ms-transform: rotate(43deg);
+      -webkit-transform: rotate(43deg);
+      transform: rotate(43deg);
+      margin-top: 2px;
+      @media all and (max-width: 767px) {
+        transform: none;
+        width: 89.95%;
+        /*width: 88.2%;*/
+        height: 0;
+        left: 0;
+        top: -63%;
+        border-bottom: 40px solid #3bb292;
+        border-right: 40px solid transparent;
+        /*z-index: -1;*/
+        z-index:0;
+      }
+    }
+  }
+  .forandroid:before{
+    width: 88.2%;
+  }
+  .most-popular-user{
+    .user-image{
+      float: left;
+      @media all and (max-width: 767px) {
+        margin-top: -7%;
+        position: absolute;
+      }
+      img{
+        width: 5em;
+        height: 5em;
+        border-radius: 50%;
+      }
+    }
+    .name{
+      color: white;
+      font-size: 26px;
+      margin-left: 80px;
+      @media all and (max-width: 767px) {
+        top: -41%;
+        position: absolute;
+        font-weight: bold;
+        letter-spacing: 0.05em;
+      }
+    }
+    .count-ideas{
+      font-size: 31px;
+      font-weight: bold;
+      color: white;
+      margin-left: 11px;
+      display: inline-block;
+      @media all and (max-width: 767px) {
+        margin-top: 2%;
+        /*margin-left: 21%;*/
+        margin-left: 78px;
+      }
+      @include mixin-font-icon($idea ,12px, $text-white , "icon-font");
+      &:before{
+        float:right;
+        font-size: 24px;
+        font-weight: 100;
+        color: #FFFFFF;
+        background-color: #e4005c;
+        border-radius: 50%;
+        width: 28px;
+        height: 28px;
+        line-height: 27px;
+        margin-left: 8px;
+      }
+    }
+  }
+}

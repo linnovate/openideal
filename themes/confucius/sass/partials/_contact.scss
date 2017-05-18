@@ -1,0 +1,149 @@
+.page-contact {
+  .description {
+    display: none;
+  }
+  .page-wrapper {
+    background-color: #ebebeb;
+    display: block;
+  }
+  .content-wrapper {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+  .content-block {
+      @media all and (max-width:767px){
+        align-items: center;
+     }
+  }
+  
+  .content-block{
+      background-color: #ffffff;
+      margin-top: 107px;
+      position: relative;
+      padding-top: 45px;
+      @media all and (min-width:780px){
+        &:before{
+          content: "";
+          position: absolute;
+          background-color: #ebebeb;
+          width: 27%;
+          height: 70px;
+          right: -71px;
+          bottom: -26px;
+          -ms-transform: rotate(134deg);
+          -webkit-transform: rotate(134deg);
+          transform: rotate(134deg);
+          margin-top: 2px;
+        }
+     }
+
+    .logo{
+      position: absolute;
+      top: -34px;
+      left: 0;
+      margin-right: auto;
+      margin-left: auto;
+      right: 0;
+      width: 164px;
+    }
+  }
+   
+  .title {
+    font-size: 2.5em;
+    width: 66%;
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: bold;
+    margin: 0 auto;
+     @media all and (max-width:767px){
+        width: 80%;
+        text-align: center;
+        line-height: 1;
+     }
+  }
+
+  .inner {
+    border-radius: 4px;
+    div.messages{
+      margin-top: 0px;
+      margin-bottom: 0px;
+      width: 68%;
+      margin-right: auto;
+      margin-left: auto;
+    }
+    @media all and (min-width:767px){
+      width: 478px;
+        margin: 0 auto;
+        padding-bottom: 58px;
+    }
+    .content{
+      margin-top: 0px;
+      .panels-bootstrap-inner_page {
+        #panel-bootstrap-column-main {
+          width: 100%;
+          padding: 0;
+          margin: 0;
+        }
+        #panel-bootstrap-region-center {
+          background: white;
+          width: 100%;
+          .panel-pane.contact-us {
+            text-align: center;
+            .pane-title {
+              font-size: 2em;
+              text-transform: capitalize;
+              color: $participate-bg;
+            }
+            .pane-content {
+              a {
+                color: black;
+                font-size: 2em;
+              }
+            }
+          }
+        }
+      }
+    }
+
+    .item-list {
+      width: 81%;
+      margin: 0 auto;
+      h3 {
+        display: none;
+      }
+      li {
+        width: 100%; 
+      }
+    }
+  }
+  .footer.pane-panels-mini.pane-innovate-logo {
+    .innovate-logo {
+      width: 100%;
+      img {
+        width: auto;
+      }
+    }
+    .pane-social-links {
+      width: 100%;
+      .pane-content {
+        width: 100%;
+        display: flex !important;
+        flex-flow: row wrap;
+        margin: 0 -0.2em;
+      }
+      a.social_link {
+        width: 25%;
+        &:before {
+          margin: 0;
+        }
+      }
+    }
+    .pane-ideal-main-openideal-credits {
+      width: 100%;
+      margin-top: 3em;
+    }
+  }
+}

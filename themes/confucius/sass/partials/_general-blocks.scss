@@ -1,0 +1,533 @@
+/*-----------------------------------------------
+                      Blocks
+-----------------------------------------------*/
+
+
+/* ----------------------------------------- pane-Featured Challenges -------------------------------------- */
+
+.pane-views-f82b385d04a27538a1646ec3e53c5fef {
+  .pane-title {
+    @include mixin-pane-title(block);
+    @include mixin-font-icon($challenge,28px);
+    &:before { top: 2px; position: relative; }
+  }
+  .pane-content {
+    position: relative;
+    img { width: 100% }
+    .caption {
+      padding: 9px 13px;
+      font-size: 19px;
+      line-height: 1.2;
+    }
+    .mouseover { 
+      padding: 5px 13px;
+      .content { overflow: hidden; max-height: 68%;  }
+      .body {  font-size: 13px; line-height: 20px;  }
+      .author {
+        bottom: 0;
+        position: absolute;
+        padding: 5px 10px;
+        min-height: 45px;
+        width: 100%;
+        left: 0;
+        background-color: rgba(0, 0, 0, 0.5);
+        color: $blue;
+        font-weight: bold;
+        a { color: $blue; }
+      }
+    }
+    &:hover {
+      .caption { display: none;  }
+      .mouseover { display: block; }
+    }
+  }
+} 
+
+
+/* ----------------------------------------- pane-custom - "Add-Idea" -------------------------------------- */
+
+.inside .pane-custom.add-idea-btn  {
+  p {
+    margin: 0;
+  }
+  width: 100%;
+  display: block;
+  a.add-idea {
+    @include orange-btn($plus);
+    @media all and (max-width:767px){
+      font-size: 1.3em;
+    }
+
+  }
+}
+
+
+/* ----------------------------------------- pane-views-activity-block -------------------------------------- */
+
+/*.pane-views-activity-block {
+  clear: both;
+  .pane-title {
+    @include mixin-pane-title(block);
+  }
+  .pane-content {
+    margin-top: 15px;
+    .views-row {
+      display: inline-block;
+      width: 100%;
+      font-size: 14px;
+      line-height: 15px;
+      color: $black;
+      a {
+        color: $black;
+        @include inline-block(baseline);
+      }
+      .user-image {
+        width: 36px;
+        float: left;
+        margin: 1px 10px 0 0;
+      }
+    }
+    .views-row+.views-row {
+      padding-top: 12px;
+      margin-top: 12px;
+      border-top: 1px solid $light-border;
+    }
+  }
+}*/
+
+
+
+/* -------------------------------------- pane-ideal-blocks-idea-*-stats ------------------------------------ */
+.pane-ideal-blocks-ideal-key-stats {
+    margin-top: 56px;
+    color: $header;
+    display: inline-block;
+     & > .pane-content {
+        @media all and (max-width:767px){
+            padding: 4px;
+            padding-top: 0px;
+         }
+     }
+    h2{
+      display: none;
+    }
+    #ideal-key-stats{
+      @media all and (min-width:767px){
+        /*margin-top: 13px;*/
+      }
+      > div {
+        display: none;
+      }
+    }
+    table{
+      margin: 0 auto;
+      tbody {
+        border-top: none;
+      }
+        .count{
+          font-size: 0.9em !important;
+          font-weight: bold;
+          margin-top: 6px;
+        }
+        .name{
+          font-weight: 100 !important;
+          font-size: 0.9em !important;
+          padding-right: 0px !important;
+          text-transform: uppercase;
+           @media all and (max-width:767px){
+            font-size: 0.7em !important;
+           }
+        }
+        td{
+          text-align: center;
+          height: 7em;
+          background-repeat: no-repeat;
+          background-size: 100% 100%;
+          &before{
+            margin-top: 6px;
+          }
+          @media all and (max-width:767px){
+              padding: 0px 21px;
+              height: inherit;
+          }
+          @media all and (max-width:350px){
+             padding: 0 15px;
+          }
+        }
+        .ideas{
+          padding: 0.4em;
+          background-image: url("../images/statistic3.png");
+          @include mixin-font-icon($idea,2em, $text-light-gray2 , "icon-font"); 
+          &:before {
+            vertical-align: middle;
+            background: $background-white;
+            width: 1.2em;
+            height: 1.3em;
+            line-height: 1.3em;
+            border-radius: 50%;
+            @media all and (max-width:767px){
+               font-size: 2em !important;
+               margin-top: 5px;
+            }
+          }
+          @media all and (max-width:767px){
+            padding-left: 9px;
+            padding-right: 4px;
+          }
+        }
+        .users{
+          padding: 0.3em;
+          background-image: url("../images/statistic2.png");
+          @include mixin-font-icon($user,2.7em, $text-light-gray2 , "icon-font"); 
+           &:before {
+            background-color: $background-white;
+            border-radius: 50%;
+              @media all and (max-width:767px){
+                 font-size: 2em !important;
+                 margin-top: 5px;
+              }
+          }
+        }
+        .votes{
+          padding: 1.3em;
+          padding-top: 0px;
+          background-image: url("../images/statistic1.png");
+          @include mixin-font-icon($vote,2em, $text-light-gray2 , "icon-font"); 
+           &:before {
+              vertical-align: middle;
+              background: $background-white;
+              width: 1.2em;
+              height: 1.3em;
+              line-height: 1.3em;
+              border-radius: 50%;
+              margin-top: 0.7em;
+              @media all and (max-width:767px){
+                font-size: 1.6em !important;
+                margin-top: 4px;
+              }
+          }
+          @media all and (max-width:767px){
+            padding-right: 7px;
+          }
+        }
+    }
+    @media all and (max-width:767px){
+      width: 100%;
+      margin-bottom: 11px;
+    }
+}
+
+
+/* -------------------------------------- pane-ideal-blocks-idea-*-stats ------------------------------------ */
+
+
+.pane-ideal-blocks-challenge-stats, .pane-ideal-blocks-idea-stats  {
+    color: $text-white;
+    display: inline-block;
+    background-color: $blue;
+    vertical-align: top;
+    width: 100%;
+    margin-left: -3px;
+    border-radius: 4px;
+    margin-top: 22px;
+    margin-bottom: 22px;
+    position: relative;
+    h2{
+      display: none;
+    }
+    #ideal-challenge-stats{
+      margin-top: 13px;
+      text-align: center;
+      .ideas{
+         @include mixin-font-icon($idea,72px, $text-white , "icon-font");
+      }
+      .ideas::before{
+        margin-left: 23px;
+        margin-top: -24px;
+        position: absolute;
+        left: 0;
+        @media all and (max-width:767px){
+          display: none;
+        }
+
+      }
+      .count{
+        font-size: 29px;
+        font-weight: 500;
+        text-align: left;
+        display: block;
+        margin-left: 34%;
+        margin-top: 26px;
+        @media all and (max-width:767px){
+          font-size: 1.4em;
+          margin-top: 0px;
+        }
+      }
+      .name{
+        font-size: 29px;
+        font-weight: 500;
+        padding-left: 14px;
+        @media all and (max-width:767px){
+          font-size: 1em;
+        }
+      }
+    }
+    table{
+        width: 98%;
+        margin: 0 auto;
+        border-spacing: 10px 5px;
+        border-collapse: separate;
+        margin-bottom: 21px;
+        margin-top: 24px;
+        @media all and (max-width:767px){
+          margin-top: 0px;
+          margin-bottom: 8px;
+        }
+        .count{
+          font-size: 26px !important;
+          font-weight: 600 !important;
+          margin-top: 7px !important;
+          margin-left: 46% !important;
+        }
+        .name{
+          margin-top: -6px !important;
+          font-weight: 100 !important;
+          font-size: 17px !important;
+          padding-left: 0px !important;
+        }
+        td{
+          width: 34%;
+          background-color: $light-Blue;
+          border-radius: 4px;
+          margin-top: 12px;
+          padding-left: 18px;
+          @media all and (max-width:767px){
+            padding-left: 12px;
+          }
+          &before{
+            margin-top: 6px;
+          }
+        }
+        .views {
+          @include mixin-font-icon($love, 2em, $text-white , "icon-font"); 
+        }
+        .comments{
+          @include mixin-font-icon($discussions,2.15em, $text-white , "icon-font"); 
+          .count{
+            margin-left: 42% !important;
+          }
+        }
+        .users{
+          @include mixin-font-icon($user,49px, $text-white , "icon-font"); 
+        }
+        .votes{
+          @include mixin-font-icon($vote,32px, $text-white , "icon-font"); 
+          .count{
+            margin-left: 38% !important;
+          }
+        }
+        .col::before{
+          float: left;
+           @media all and (max-width:767px){
+            width: 100%;
+          }
+        }
+        .votes::before{
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+        .comments::before{
+            margin-top: 8px;
+        }
+    }
+}
+
+.pane-ideal-blocks-idea-stats {
+  #ideal-challenge-stats{
+    .ideas {
+      position: relative;
+      &:before {
+        content: unicode($vote);
+      }
+    }      
+  }
+  table {
+    .col {
+      &:before {
+        margin-top: 8px;
+      }
+    }
+  }
+}
+
+/* ----------------------------------- pane-ideal-challenge-challenge-data ---------------------------------- */
+/*
+.pane-ideal-challenge-challenge-data {
+  position: relative;
+  width: 100%;
+  clear: both;
+  background-color: $blue;
+  color: white;
+  text-align: center;
+  border-radius: 4px;
+  .pane-title {
+    font-size: 30px;
+    margin-top: 17px;
+    font-weight: 500;
+    padding-top: 17px;
+    @media all and (max-width:767px){
+       margin-top: 0;
+       padding-top: 9px;
+       margin-bottom: 7px;
+       font-size: 1.4em;
+   }
+  }
+
+  .pane-content {
+    @include mixin-font-icon($calendar,51px, $text-white , "icon-font");
+    .well { color: $black;  }
+    display: inline-block;
+    width: 95%;
+    margin-bottom: 28px;
+     @media all and (max-width:767px){
+      margin-bottom: 16px;
+    }
+    a { color: white; }
+    #challenge-dates{
+      display: flex;
+        .col-xs-4 {
+          width: 30%;
+          border-radius: 4px;
+          background-color: #3BACD6;
+          padding: 0 5px;
+          margin-right: 4px;
+          margin-left: 6px;
+          padding-top: 6px;
+          padding-bottom: 4px;
+        }
+    }
+    #challenge-dates .badge { 
+      color: white;
+      width: 100%;
+      @include border-radius(30px);
+      padding: 7px 0 12px;
+      .challenge-date-value {
+        margin: 0;
+        font-weight: bold;
+        font-size: 39px;
+        margin-bottom: -5px;
+      }
+      .challenge-date-label {
+        font-size: 15px;
+        font-weight: bold;
+      }
+    }
+    #challenge-dates-start-end {
+      display: none;
+    }
+  }
+  .pane-content::before{
+    top: 17px;
+    position: absolute;
+    left: 18px;
+    float: left;
+    @media all and (max-width:767px){
+      display: none;
+    }
+  }
+}*/
+
+/* ----------------------------------- pane-ideal-challenge-challenge-data ---------------------------------- */
+
+.date_left{
+  margin: 0px !important;
+  #challenge-dates{
+    @include mixin-font-icon($time-left,1.5em, $text-white , "icon-font");
+    &:before{
+      margin-right: 4px;
+      margin-left: 4px;
+      float: left;
+    }
+  }
+  .title{
+
+  }
+  div{
+    line-height: 2.6em;
+    display: inline-block;
+    font-size: 14px;
+  }
+  span{
+    margin-right: 4px;
+    margin-left: 4px;
+  }
+  h2{
+    display: inline-block;
+  }
+  #challenge-dates{
+    span{
+      color: $text-white !important;
+    }
+    .hour ,.minutes{
+      display: none;
+    } 
+  }
+  div#challenge-dates-start-end{
+    display: none;
+  }
+}
+
+/*---------------- 5 Essentials of challenge process -----------*/
+
+#challenge_process {
+  .pane-title {
+    font-size: 1.88em;
+    font-weight: normal;
+    color: $header;
+    -webkit-margin-after: 0.4em;
+    -webkit-margin-before: 1em;
+    text-transform: uppercase;
+
+  }
+  .level {
+    font-weight: bold;
+    font-size: 1.3em;
+    color: $participate-bg ;
+    margin-bottom: 16px;
+    .description {
+      font-size: 0.9em;
+      letter-spacing: 0.04em;
+      color: $header;
+    }
+  }
+}
+
+/*---------------- block searches -----------*/
+
+#block-top-searches-0 {
+  display: none;
+}
+#search-form {
+  width: 92%;
+    margin: 0 auto;
+    margin-top: 65px;
+    label {
+      text-align: center;
+    display: block;
+    font-size: 1.5em;
+    vertical-align: middle;
+    margin-top: 41px;
+    margin-bottom: 0px;
+    text-transform: uppercase;
+
+    }
+    input#edit-keys {
+          width: 90%;
+    margin-left: 5%;
+    margin-top: 30px;
+    }
+    input#edit-submit {
+          margin-left: 5%;
+    margin-top: 30px;
+    }
+}

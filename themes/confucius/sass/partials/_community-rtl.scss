@@ -1,0 +1,53 @@
+
+/*--------------------------------------------------------------
+                         Page-community
+----------------------------------------------------------------*/
+.page-community{
+	.title{
+    padding-right: 50px;
+    padding-left: 0px;
+     @media all and (max-width:767px){
+     	padding-right:0px !important;
+     }
+    }
+	.view-community{
+		.view-content{
+			> div {  
+			    margin-left: 24px;
+			    margin-right: 0px;
+			    @media all and (max-width:767px){
+     				margin-left:0px !important;
+                }  
+				#panel-bootstrap-region-sidebar{
+					float: left;
+				}
+				.region-inside-first{
+					float: left !important;
+					margin-right: 6%;
+					@media all and (max-width:767px){
+				       margin-right: 4% !important;
+				    }
+				}
+				.views-field-name{
+	    			margin-right: -3%;
+	    			margin-left: 0px;
+	    			@media all and (max-width:767px){
+	    			   margin-right: 4% !important;
+			        }
+				}
+				.views-field-picture{
+					margin-right: 18%;
+					margin-left: 0px;
+				}
+				.views-field-field-bio{
+				    margin-right: -7%;
+				    margin-left: 0px;
+				    padding-right: 11px;
+				    @media all and (max-width:767px){
+	    			   margin-right: 0% !important;
+			        }
+				}
+			}
+		}
+	}
+}

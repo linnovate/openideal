@@ -1,0 +1,607 @@
+
+.page-user{
+
+  #block-quicktabs-user-ideas{
+    display: none;
+  }
+  .pane-region-second{
+    @media all and (max-width: 767px) {
+      margin: 0 auto !important;
+    }
+    .inside {
+      margin-top: 63px;
+    }
+    
+  }
+  .pane-news-news-slider {
+    margin-top: 20px;
+  }
+}
+
+.view-user-details {
+  width: 16%;
+  margin: 0 auto;
+  font-family: 'Franklin Gothic Book';
+  @media all and (max-width:767px){
+    width: 35%;
+  }
+	.views-row.ol-item.idea {
+		padding: 0;
+    margin-top: 0;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    @media all and (max-width:767px){
+      display:block;
+      text-align: center;
+      position: relative;
+      padding-bottom: 45px;
+    }  
+	}
+	.views-field-picture {
+	  margin-top: 1.2em;
+		display: inline-block;
+		vertical-align: top;
+    @media all and (max-width:767px){
+      display: block;
+      padding-top: 27px;
+    }
+    .field-content {
+      width: 100%;
+      height: 100%;
+    }
+      
+	}
+
+	img {
+		border-radius: 100%;
+		max-width: 8em;
+		height: 8em;
+    @media all and (max-width:767px){
+      max-width: 6em;
+      height: 6em;
+    }
+
+	}
+	.views-field-field-bio {
+		display: inline-block;
+		width: 83%;
+    @media all and (max-width:767px){
+        width: 95%;
+        min-height: 72px;
+    }  
+		.name {
+        text-transform: uppercase;
+		    font-size: 2.4em;
+		    padding: 0 4%;
+        @media all and (max-width:767px){
+          font-size: 1.5em;
+        }
+		}
+		.bio {
+      padding: 0;
+      text-transform: capitalize;
+      font-size: 1.3em;
+      @media all and (max-width:767px){
+        font-size:1em;
+        margin-bottom: 26px;
+      }
+		}
+	}
+  .views-field-php {
+		padding-bottom: 1em;
+    margin-top: 1.2em;
+    @media all and (max-width:767px){
+      position: absolute;
+      left: 0;
+      right: 0;
+      margin: 0 auto;
+      width: 90%;
+    }
+		a {
+      text-transform: uppercase;
+      display: inline-block;
+      text-align: center;
+      line-height: 1.3em;
+      font-size: 0.9em;
+      font-weight: normal;
+      color: #ee7608;
+      border: 1px solid #ee7608;
+      padding: 0.7em 2.8em;
+      /* @include mixin-font-icon($pencil, 25px, #fff, 'icon-font');
+      &:before {
+        margin-right: 7px;
+      } */
+      @media all and (max-width:767px){
+        width: 100%;
+        padding: 0.3em 0;
+      }
+		}
+	}
+}
+.pane-user-ideas-full-panel-pane-1 {
+  .view-empty {
+    margin: 0 auto;
+    width: 36%;
+    font-size: 1.7em;
+    font-family: 'Franklin Gothic Book';
+    @media all and (max-width:767px) {
+      width:92%;
+    }
+  }
+	h2.pane-title {
+	    margin: 0;
+    	font-size: 2.1em;
+    	line-height: 1.3em;
+    	@include mixin-font-icon($idea, 2em, $ecstasy, 'icon-font');
+    	&:before {
+    		font-weight: normal;
+    		display: inline-block;
+    		vertical-align: middle;
+    	}
+	}
+  .ol-item.idea {
+    .ol-item-image {
+      margin-bottom: 1em;
+    }
+  }
+}
+ 
+
+body.page-user-edit {
+  .field-name-field-user-date-birth,
+  .field-name-field-content-notifications,
+  .field-name-field-comment-notficiations,
+  .field-name-field-mention-notifications {
+    //  display: none;
+  }
+  .form-wrapper #edit-timezone {
+    display: none;
+  }
+  #edit-locale {
+    display: none;
+  }
+}
+
+body.page-user-register {
+  .field-name-field-mention-notifications {
+    display: none;
+  }
+  fieldset{
+    border: none;
+    legend{
+      display: none;
+    }
+  }
+}
+
+
+/*-----------------------------------------------------------------------------
+                        Member edit - page
+-----------------------------------------------------------------------------*/
+
+.page-members-edit {
+  .pane-region-first {
+    width: 0;
+  }
+  .pane-region-second {
+    width: 100%;
+    margin-left: 0;
+    .pane-title {
+      margin-right: 0 !important;
+    }
+  }
+
+  #edit-picture .fieldset-wrapper {
+    float: none !important;
+  }
+  fieldset {
+    border: none;
+    display: none;
+  }
+}
+
+
+/*-----------------------------------------------------------------------------
+                        Login - page
+-----------------------------------------------------------------------------*/
+.page-user-login, .page-user-password, .page-user-register, 
+.not-logged-in.page-toboggan-denied{
+  .description {
+    display: none;
+  }
+  .page-wrapper {
+    background-color: #ebebeb;
+    display: block;
+  }
+  .content-wrapper {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+  .content-block {
+    /*display: flex;*/
+    /*flex-grow: 1;*/
+    /*align-items: flex-end;*/
+      @media all and (max-width:767px){
+        align-items: center;
+     }
+    & > div {
+/*     display: flex;
+      flex-direction: column;
+      align-items: center;*/
+    }
+  }
+  
+  .content-block{
+      background-color: #ffffff;
+      margin-top: 107px;
+      position: relative;
+      padding-top: 45px;
+      @media all and (min-width:780px){
+        &:before{
+          content: "";
+          position: absolute;
+          background-color: #ebebeb;
+          width: 27%;
+          height: 70px;
+          right: -71px;
+          bottom: -26px;
+          -ms-transform: rotate(134deg);
+          -webkit-transform: rotate(134deg);
+          transform: rotate(134deg);
+          margin-top: 2px;
+        }
+      }
+    .logo{
+      position: absolute;
+      top: -34px;
+      left: 0;
+      margin-right: auto;
+      margin-left: auto;
+      right: 0;
+      width: 164px;
+    }
+  }
+   
+  .title {
+    font-size: 2.5em;
+    width: 66%;
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: bold;
+    margin: 0 auto;
+     @media all and (max-width:767px){
+        width: 80%;
+        text-align: center;
+        line-height: 1;
+     }
+  }
+
+  .inner {
+    border-radius: 4px;
+    div.messages{
+      margin-top: 0px;
+      margin-bottom: 0px;
+      width: 68%;
+      margin-right: auto;
+      margin-left: auto;
+    }
+    @media all and (min-width:767px){
+      width: 478px;
+        margin: 0 auto;
+        padding-bottom: 58px;
+    }
+    .content{
+      margin-top: 0px;
+    }
+
+    .item-list {
+      width: 81%;
+      margin: 0 auto;
+      h3 {
+        display: none;
+      }
+      li {
+        width: 100%; 
+      }
+      .hybridauth-widget a {
+        @include mixin-font-icon($facebook-menu,30px, $text-white , "icon-font", true);
+        background-color: #2553B3;
+        width: 100%;
+        text-align: center;
+        display: block;
+        margin-top: 6px;      
+        border-radius: 6px;
+        color: white;
+        font-size: 1.17em;
+        font-weight: bold;
+        text-decoration: none;
+        line-height: 1.17em;
+        padding-top: 0.9em;
+        padding-bottom: 0.9em;
+         @media all and (max-width:767px){
+          border-radius: 2px;
+          line-height: 0.2em;
+          margin-top: 0;
+          &:after {
+            font-size: 26px;
+          }
+        }
+        span {
+          margin: 0 0.8em;
+        }
+        &:after {
+          float: right;
+          margin-right: 0.5em;
+        }
+      }
+      .hybridauth-facebook-hybridauth-32 {
+        background: none;
+      }  
+    }
+    .hybridauth-widget-wrapper {
+        @media all and (max-width:767px){
+         margin-top: 25px;
+        }
+    }
+    .form-item {
+        justify-content: space-between;
+        align-items: center;
+        width: 81%;
+        margin: auto;
+        margin-top: 50px;
+        margin-bottom: 18px;
+       @media all and (max-width:767px){
+             margin-top: 11px;
+            margin-bottom: 0;
+       }
+      label {
+        font-size: 18px;
+        font-weight: 200;
+        color: #4a4a4a;
+        margin-bottom: 8px;
+        width: 100%;
+          @media all and (max-width:767px){
+                font-size: 14px;
+                margin-right: 4%;
+                color: #C2C0C1;
+          }
+      }
+        ::-webkit-input-placeholder {
+            font-size: 18px;
+            padding-right: 3px;
+            padding-left: 3px;
+            color: #C2C0C1;
+            font-family: OpenSans;
+        }
+        ::-moz-placeholder {
+            font-size: 18px;
+            padding-right: 3px;
+            padding-left: 3px;
+            color: #C2C0C1;
+            font-family: OpenSans;
+
+        }
+        :-ms-input-placeholder {
+            font-size: 18px;
+            padding-right: 3px;
+            padding-left: 3px;
+            color: #C2C0C1;
+            font-family: OpenSans;
+        }
+        ::placeholder {
+          font-size: 18px;
+          padding-right: 3px;
+          padding-left: 3px;
+          color: #C2C0C1;
+          font-family: OpenSans;
+        }
+        
+      .form-text {
+        width: 100%;
+        background-color: #ebebeb !important;
+        line-height: 45px;
+        padding-left: 7px;
+        padding-bottom: -3px;
+        border-radius: 4px;
+        font-size: 14px;
+        box-shadow: none;
+        border: none;
+        margin-top: 4px;
+        @media all and (max-width:767px){
+          height: 35px;
+          width: 100%;
+        }
+        &::-webkit-input-placeholder {
+          /*font-family: 'icon-font';*/
+          /*font-size: 32px;*/
+          /*margin-top: 3px;*/
+        }
+      }
+    }
+    .form-type-password{
+      margin-top: 36px;
+    }
+    .form-actions {
+        text-align: center;
+        margin-bottom: 22px;
+        .form-submit {
+          background-color: #ee7608;
+          border: none;
+          width: 41%;
+          padding: 8px 0px;
+          color: white;
+          font-size: 1.3em;
+          font-weight: bold;
+          height: 52px;
+          text-transform: uppercase;
+          margin-top: 23px;
+              @media all and (max-width:767px){
+               padding: 5px 0px;
+           }
+        }
+    }
+    .more-options {
+       display: flex;
+      justify-content: space-between;
+      width: 81%;
+      margin: auto;
+      font-size: 18px;
+       @media all and (max-width:767px){
+           margin-bottom: 29px;
+           font-size: 15px;
+      }
+      .to-register a {
+         color: #52BC47;
+      }
+      .to-renew a {
+        color: #FB865A;
+
+      }
+    }
+  }
+  .footer.pane-panels-mini.pane-innovate-logo {
+    .innovate-logo {
+      width: 100%;
+      img {
+        width: auto;
+      }
+    }
+    .pane-social-links {
+      width: 100%;
+      .pane-content {
+        width: 100%;
+        display: flex !important;
+        flex-flow: row wrap;
+        margin: 0 -0.2em;
+      }
+      a.social_link {
+        width: 25%;
+        &:before {
+          margin: 0;
+        }
+      }
+    }
+    .pane-ideal-main-openideal-credits {
+      width: 100%;
+      margin-top: 3em;
+    }
+  }
+
+  .form-item-files-picture-upload input[type="file"] { 
+    @include upload-btn($athens-gray, $black, 1.3em, 'Upload picture', '');
+    &:before {
+      border-radius: 4px;
+      border: 1px solid;
+      padding: 0;
+      display: inline;
+    }
+  }
+
+}
+
+/*-----------------------------------------------------------------------------
+                        Register - page
+-----------------------------------------------------------------------------*/
+
+.page-user-register {
+  .inner {
+    /*height: 100%;*/
+    .form-item {
+      margin-bottom: 0;
+      .form-text {
+        width: 58%;
+        @media (max-width: 768px) {
+          width:53%;
+        }
+        &.empty {
+            font-family: 'icon-font';
+            font-size: 32px;
+        }
+
+      }
+    }
+    .form-textarea-wrapper {
+      width: 62%;
+      textarea {
+        height: 38px;
+        border: 1px solid #DBDCDC;
+        border-radius: 4px;
+      }
+    }
+    .form-item-pass {
+       margin-top: 0;
+      .password-strength, div.password-confirm, .password-suggestions {
+        display: none !important;
+      }
+      .form-item {
+        width: 100%;
+      } 
+
+    }
+    #edit-picture--3 {
+      border: none;
+      legend {
+        display: none;
+      }
+      .user-picture {
+        display: none;
+      }
+      .form-item-files-picture-upload {
+        width: 86%;
+        input{
+           width: 62%;
+        }
+      } 
+    }
+  }
+
+  .form-item-files-picture-upload input[type="file"]{
+        height: 44px;
+  }
+  .form-item-files-picture-upload input[type="file"]:before { 
+    content: "צרף תמונה";
+    background-color: #D6D4D5;
+    border: none;
+    border-radius: 0px;
+    padding: 12px;
+    padding-top: 12px;
+    text-align: center;
+    line-height: 3em;
+  }
+}
+
+
+/*-----------------------------------------------------------------------------
+                        Renew password - page
+-----------------------------------------------------------------------------*/
+
+.page-user-password {
+  /*.page-wrapper {
+    background-color: $shark;
+  }*/
+/*  .title {
+    color: $text-white;
+  }
+  .inner {
+    background-color: $athens-gray;
+    height: 298px;
+    width: 286px;
+    margin: 200px 200px;
+  }*/
+}
+	
+/*-----------------------------------------------------------------------------
+                       Toboggan - page
+-----------------------------------------------------------------------------*/  
+.page-toboggan{
+  .messages.error{
+    width: 69%;
+    margin: 0 auto;
+    margin-bottom: -33px;
+  }
+}

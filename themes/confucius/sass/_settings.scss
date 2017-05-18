@@ -1,0 +1,223 @@
+@charset "UTF-8";
+
+/*-----------------------------------------------
+                   Typography
+-----------------------------------------------*/
+
+/*@font-face {
+  font-family: 'OpenIdeal';
+  src:url('../fonts/OpenIdeal/OpenIdeal.eot');
+  src:url('../fonts/OpenIdeal/OpenIdeal.eot?#iefix') format('embedded-opentype'),
+    url('../fonts/OpenIdeal/OpenIdeal.woff') format('woff'),
+    url('../fonts/OpenIdeal/OpenIdeal.ttf') format('truetype'),
+    url('../fonts/OpenIdeal/OpenIdeal.svg#OpenIdeal') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}*/
+
+@font-face {
+  font-family: 'Franklin Gothic Book';
+  src:url('../fonts/FranklinGothic/FRABK.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'icon-font';
+  src:url('../fonts/mediacom_icons/fonts/icomoon.eot');
+  src:url('../fonts/mediacom_icons/fonts/icomoon.eot?#iefix') format('embedded-opentype'),
+  url('../fonts/mediacom_icons/fonts/icomoon.woff') format('woff'),
+  url('../fonts/mediacom_icons/fonts/icomoon.ttf') format('truetype'),
+  url('../fonts/mediacom_icons/fonts/icomoon.svg#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Mistral';
+  src:url('../fonts/Mistral/MISTRAL.TTF') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+/*-----------------------------------------------
+                   Sprites
+-----------------------------------------------*/
+
+$icons-smart-layout:smart;
+@import "icons-smart/*.png";
+
+//fix url image-sprite
+.icons-smart-sprite{
+  background: url('../images/icons-smart-sc6718674dc.png') no-repeat;
+} 
+
+/*-----------------------------------------------
+                   Font icon
+-----------------------------------------------*/
+$open-menu : \e909;
+
+$icon-icon-close : \e908;
+
+$search : \e90e;
+
+$account : P;
+
+$icon-home2 : \e901;
+
+$news: O;
+
+$comment: \e90d;
+
+$comments-bubble: \e96b;
+
+$eye: \e601;
+
+$list: \e604;
+
+$calendar: J;
+
+$light: \e619;
+
+$vote: \e910;
+/*$vote: H;*/
+
+$vote-dislike: \e60e;
+
+$idea: \e90b;
+/*$idea: V;*/
+
+$user: \e90c;
+/*$user: R;*/
+
+$challenge: M;
+
+$challenges-list : D;
+
+/*$challenge: \e609;*/
+
+
+/*$discussions: \e606;*/
+$discussions: \e90b;
+
+$share: \e60d;
+
+$arrow-right: \e60a;
+
+$arrow-left: \e60b;
+
+$attachments: \e610;
+
+$fb-like: \e61a;
+
+$like : \e90a;
+ 
+$full-like: F;
+
+$google: \e61b;
+
+$linkedin: \e61c;
+
+$twitter: \e61d;
+
+$facebook-footer: \ea90;
+
+$twitter-footer: \ea96;
+
+$google-footer: \ea8b;
+
+$linkedin-footer: \eaca;
+
+$twitter_menu: \e61d;
+
+$facebook-menu: Y;
+
+$twitter-menu: Z;
+
+$google-menu: W;
+
+$linkedin-menu: X;
+
+$calendar: J;
+
+$love: \e9da;
+
+$plus: \ea0a;
+
+$add-file: E;
+
+$add-imge: T;
+
+$join: U;
+
+$eye: \e9ce;
+
+$pencil: E;
+
+$time-left: \e907;
+
+$download: \e9c7;
+/*-----------------------------------------------
+                   Colors
+-----------------------------------------------*/
+$raven: #888F9A;
+$la-palma: #26B20F;
+$light-border: rgb(213, 213, 213);
+$light-gray: #f3f3f3;
+$line-gray:#E6E9EE;
+$navy-orange: #F0522B;
+$orange: #F7882E;
+$blue: #1A9ECF;  
+$athens-gray: #E6E9EE;
+$ecstasy: #ee7608;
+$flamingo: #F0532B;
+$light-flamingo: #F08C73;
+$la-palma: #26B211;
+$blue: #1A9ECF;
+$link-blue: #189FCE;
+$text-gray: #413f43;
+$date-text-gray: #858992;
+$text-light-gray: #A4B1BA;
+$icon-gray: #A3AFB9;
+$iron: #D4DBE1;
+$text-white: #FFFFFF;
+$background-white: #FFFFFF;
+$green: #43ac6a;
+$navy-blue: #016ca2;
+$light-Blue : #3BACD6;
+$red: #d70010;
+$athens-gray:#EFF3F6;
+$gull-gray: #A3B1BA;
+/*$blue: #028cbb;*/
+$black: black;
+$main-menu-color: #1D2530;
+$manu-link1: #1D2530;
+$sub-menu : #212A39;
+$icon-menu : #838A92;
+$user-menu-logout : #EF1C23;
+$main-menu-idea : #DB7A2E;
+$main-menu-challenges : #25AE10;
+$main-menu-users : #1898C7;
+$shark : #20242D;
+$fbg: #175892;
+$gbg: #EE2C34;
+$tbg: #0099BB;
+$inbg: #076EA9;
+$header : #4a4a49;
+$search-border: #A5A5A5;
+$gray-bg :#ebebeb;
+$text-light-gray2:#4B4B4B;
+$stats-background:#DADADA;
+$stats-center-background:#878787;
+$participate-bg :#ee7608;
+$pink: #e1005d;
+$list-pink: #E1517D;
+$single-challenge-text:#383838;
+$border-color: #4d4d4d;
+$turquoise : #ee7709;
+$menu-sidebar-first: #2d2d2d;
+
+/*-----------------------------------------------
+                       END
+-----------------------------------------------*/

@@ -1,0 +1,165 @@
+/*-----------------------------------------------
+                      Blocks
+-----------------------------------------------*/
+
+/* ----------------------------------------- pane-Featured Challenges -------------------------------------- */
+
+/*.pane-views-f82b385d04a27538a1646ec3e53c5fef {
+  .pane-title {
+    &:before {
+      margin-right: 0;
+      margin-left: 7px;
+    }
+  }
+}*/
+
+/* ----------------------------------------- pane-custom - "Add-Idea" -------------------------------------- */
+
+.inside .pane-custom.add-idea-btn  {
+  a.add-idea {  
+    @include idea-btn-fix-rtl;  
+  }
+  
+}
+
+/* ----------------------------------------- pane-views-activity-block -------------------------------------- */
+/*.pane-views-activity-block {
+  .pane-content {
+    .views-row {
+      .user-image {
+        @include fix-rtl(10px, right);
+      }
+    }
+  }
+}*/
+/* -------------------------------------- pane-ideal-blocks-idea-*-stats ------------------------------------ */
+
+/* -------------------------------------- pane-ideal-blocks-idea-*-stats ------------------------------------ */
+
+
+/*.pane-ideal-blocks-ideal-key-stats{
+    margin-left: -3px;
+    #ideal-key-stats{
+      .count{
+      .name{
+        padding-left: 14px;
+      }
+    }
+    table{
+        .count{
+        }
+        .name{
+          padding-left: 0px !important;
+        }
+    }
+}*/
+
+
+/*.pane-ideal-blocks-idea-stats,
+.pane-ideal-blocks-challenge-stats,
+.pane-ideal-blocks-ideal-key-stats {
+  .pane-content {
+    .top {
+      &.challenges {
+        .count {
+          @include fix-rtl-before();
+        }
+      }
+    }
+    table {
+      &.counts {
+        .ideas,
+        .users,
+        .votes,
+        .views,
+        .phase,
+        .comments {
+          .count {
+            @include fix-rtl-before();
+          }
+        }
+        .col {
+          + .col {
+            padding-left: 0;
+            padding-right: 15px;
+            border-width: 0 1px 0 0;
+          }
+        }
+      }
+    }
+  }
+}*/
+/* --------------------------------- pane-views-head-to-head-challenge-block  ----------------------------------- */
+
+
+
+/* -------------------------------------- pane-ideal-blocks-idea-*-stats ------------------------------------ */
+
+
+.pane-ideal-blocks-challenge-stats, .pane-ideal-blocks-idea-stats  {
+    margin-right: -3px;
+    @media all and (max-width:767px){
+      margin-right: 0px; 
+    }  
+    #ideal-challenge-stats{
+      .ideas::before{
+        margin-right: 23px;
+        right: 0;
+        left: inherit;
+      }
+      .count{  
+        text-align: right;
+        margin-right: 34%;
+        margin-left: 0px
+      }
+      .name{
+        padding-right: 14px;
+        padding-left: 0px
+      }
+    }
+    table{
+        .count{
+          margin-right: 46% !important;
+          margin-left: 0px !important;
+        }
+        .name{
+          padding-right: 0px !important;
+          padding-left: 0px !important;
+        }
+        td{
+          padding-right: 12px;
+          @media all and (min-width:767px){
+             padding-left: 0px !important;
+             padding-right: 12px;
+         }
+        }
+        .comments{
+          .count{
+            margin-right: 42% !important;
+            margin-left: 0px !important;
+          }
+        }
+        .votes{
+          .count{
+            margin-right: 38% !important;
+            margin-left: 0px !important;
+          }
+        }
+        .col::before{
+          float: right;
+        }
+
+    }
+}   
+
+
+/* ----------------------------------- pane-ideal-challenge-challenge-data ---------------------------------- */
+
+.pane-ideal-challenge-challenge-data {
+  .pane-content::before{
+    right: 25px;
+    left: inherit;
+    float: right;
+  }  
+}
+  

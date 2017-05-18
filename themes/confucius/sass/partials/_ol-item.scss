@@ -1,0 +1,412 @@
+.ol-item {
+	background: $text-white;
+	padding: 20px;
+	margin: 2.4em 0;
+	color: #4a4a4a;
+	font-size: 1.2em;
+	 @media (max-width: 768px) {
+		padding: 15px 13px;
+	 }
+	.ol-item-image {
+		float: left;
+        margin: 0 1em 1.5em 0;
+        @media all and (max-width:767px){
+			width: 100%;
+	        img{
+	        	width: 100% ;
+	        	max-width: 100% !important;
+	        	height: 100% !important;
+	        }
+		}
+	}
+    .views-field-body{
+        margin-top: -14px;
+        min-height: 13px;
+        max-height: 86px;
+        overflow: hidden;
+        line-height: 24px;
+    }
+    .views-field-view-node{
+    	a{
+    		font-size: 0.75em;
+    		color: #ec780b;
+    	}
+    }
+    .views-field-nothing{
+    	width: 82%;
+    	float: left;
+    }
+	.ol-item-title {
+		line-height: 1.2em;
+		a {
+			  @media (min-width: 768px) {
+                font-size: 1em;
+			  }
+			font-weight: bold;
+			text-decoration: none;
+		}
+	}
+	a {
+		color: #4a4a4a;
+		text-decoration: none;
+		font-weight: bold;
+	}
+	.row-bottom-openideal {
+	  padding-top: 20px;
+	  font-size: 1.7em;	
+	  display: inline-block;
+	  width: 100%;
+	  color: $blue;
+	  @media (max-width: 768px) {
+         padding-top: 0px !important;
+	}
+	 
+	  a { 
+	  	color: $blue;
+	  	font-weight: 500;
+	  	@media all and (max-width:767px){
+         	font-size: 1em;
+	  	}
+	   }
+	   .name{
+	   	@media all and (max-width:767px){
+         	    line-height: 15px;
+				font-size: 0.9em;
+				letter-spacing: -0.1px;
+
+	  	}
+	   }
+	  > div {
+	  	display: inline-block;
+	  	vertical-align: middle;
+		&.details {
+           @media all and (max-width:767px){
+            display: flex;
+			align-items: center;
+			margin-top: 15px;
+         }
+		}  
+		
+	  	&:before {
+	  	  float: left;
+	  		margin-right: 10px;
+	  		line-height: 1.5em;
+	  	}
+  	}
+	  & > div.author {
+	  	float: left;
+	  	margin-left: 0;
+	  	font-size: 0.7em;
+		  @media all and (max-width:767px){
+			  /*width: 20%;*/
+			  font-size: 0.5em;
+		  }
+	  	& > div {
+	  		display: inline-block;
+	  		vertical-align: middle;
+	  		 @media all and (max-width:767px){
+	  		 	padding-top: 9px;
+	  		 }
+	  	}
+	  	.created {
+            color: #494949;
+            font-size: 0.7em;
+            font-weight: bold;
+			  @media all and (max-width:767px){
+			      font-size: 1em;
+   					 letter-spacing: -0.4px;
+					 line-height: 8px;
+		  }
+
+	  	}
+	  	.picture {
+	  		margin: 0 0.2em;
+	  		margin-left: 0;
+	  		img {
+	  			border-radius: 100%;
+	  			width: 1.7em;
+	  			height: 1.7em;
+	  		}
+	  	}
+	  	.share {
+	  		.social-buttons {
+	  			margin: 0 0.8em;
+	  			.social-button {
+	  				a {
+	  					@include social-btn;
+		  				&.t-btn {
+		  					background: $tbg;
+		  				}
+		  				&.in-btn {
+		  					background: $inbg;	
+		  				}
+		  				&.g-btn {
+		  					background: $gbg;	
+		  				}
+	  				}
+	  			}
+	  		}
+
+	  		@media all and (max-width:767px) {
+	  			position: absolute;
+	  			bottom: -3em;
+		  	    width: 100% ;
+		  	    right:0px;
+	  			.social-buttons {
+		  			margin: 0;
+		  			display: flex;
+		  			width: 100% !important;
+		  			.social-button {
+		  				flex: 1;
+		  				a {
+		  					font-size: 1.5em;
+		  				}
+		  			}
+	  			}
+	  		}
+	  	}
+	  }
+
+	  .details {
+	  	float: right;
+	  	margin-top: 4px;
+	  	@media all and (max-width:767px){
+	  	    font-size: 0.7em;
+		}
+		.vote-count{
+			@media all and (max-width:767px){
+	  	   	 	
+		    }
+		}
+	  	> div {
+		  	margin-left: 1.7em;
+		  	display: inline-block;
+		  	vertical-align: middle;
+		  	@media all and (max-width:767px){
+	  	   	 	margin: 0 0.3em;
+		    }
+		  	&:before {
+		  	    float: left;
+		  		margin-right: 10px;
+		  		line-height: 1.5em;
+	  	        @media all and (max-width:767px){
+	  			  	margin-right: 0.2em !important;
+	  			  	margin-left: 0.2em !important;
+				    font-size: 0.8em;
+				    line-height: 26px;
+	  	        }
+
+		  	}
+	  	}
+	  	.views-count{
+	  		margin-left: 15px;
+	  		&:before {
+	  			line-height:inherit;
+	  			font-size: 24px;
+	  			float: left;
+	  			margin-top: -3px;
+	  		}
+	  	}
+	  }
+	  .count {
+	  	@include mixin-font-icon($idea, 35px, $icon-gray, 'icon-font');
+	  	&:before {
+	  		line-height: 0.9em;
+	  	}
+	  }
+
+	  .views-count {
+	  	@include mixin-font-icon($eye, 25px, $icon-gray, 'icon-font');
+	  }
+
+	  .comment-count {
+	  	@include mixin-font-icon($discussions, 25px, $icon-gray, 'icon-font');
+	  }
+
+	  .add-comment {
+	  	font-size: 0.8em;
+	  	a {
+	  		@include mixin-font-icon($discussions, 1.5em, $icon-gray, 'icon-font');
+	  		&:before {
+	  			font-weight: normal;
+	  			vertical-align: middle;
+                margin-left: 8px;
+	  		}
+	  	}
+	  } 
+
+	  .dates { 
+	  	color: $black;
+	  	font-size: 0.7em;
+    	@include mixin-font-icon($calendar, 1.65em, $icon-gray, 'icon-font');
+    	&:before {
+    		line-height: 22px;
+    		@media all and (max-width:767px){
+    		 	line-height: 33px !important;
+	  			margin-right: 0.4em !important;
+	  			font-size: 1.1em !important;
+     		}
+    	}
+	  }
+
+	  .vote-count {
+	  	.vud-widget-alternate {
+			display: flex;
+            flex-direction: row-reverse;
+	  		width: auto;
+	  		height: auto;
+	  		margin: 0;
+	  		clear: none;
+	  		position: relative;
+	  		.alternate-votes-display {
+	  			border: none;
+			    font-size: inherit;
+    			font-family: 'Franklin Gothic Book';
+    			padding: 0;
+    			float: none;
+    			@media all and (max-width:767px){
+    				padding-top:1px;
+    			}
+	  		}
+	  	}
+	  	.reset-active{
+	  		font-size: 0px;
+	  		position: absolute;
+	  	}
+	  	 .up-active, .up-inactive , .reset-active{
+			background-image: none;
+			text-align: center;
+			width: 30px;
+			margin-top: 2px;  
+			@media all and (max-width:767px){
+				background-image: none;
+			    text-align: left;
+			    display: inline-block;
+			    margin-left: 8px;
+			    width: 13px;
+			    margin-top: 1.5px;
+            }
+	  		&:after {
+				    font-family: "icon-font";
+					content: "\e90a";
+					display: inline-block;
+					vertical-align: baseline;
+					font-size: 0.5em;
+					color: #A3AFB9;
+					@media all and (max-width:767px){
+						font-size: 18px !important;
+          				margin-top: 2px;
+                    }
+
+			  }
+			
+			
+			  
+	  	}
+
+	  }
+
+	  .subject {
+	  	a {
+	  		color: $black;
+	  		font-size: 0.7em;
+	  		font-weight: normal;
+	  		@include mixin-font-icon($challenges-list, 1.65em, $icon-gray, 'icon-font');
+	  		&:before {
+	  			vertical-align: middle;
+		  		margin-right: 7px;
+	  		}
+	  	}
+	  }
+	}
+
+	&.idea {
+		padding-bottom: 0;
+		.dates {
+			line-height: 2.4em;
+		}
+		.ol-item-title {
+			a , & {
+			}
+		}
+	}
+
+	&.challenge {
+		border-color: $la-palma;
+		font-size: 1.3em;
+		position: relative;
+		margin-top: 1.2em !important;
+		.ol-item-title {
+			line-height: 1em;
+			max-width: 32em;
+			display: inline;			
+			a, & {
+				color: $la-palma;
+				font-size: 1em;
+			}
+		}
+
+		.row-bottom-openideal {
+			padding-top: 0.7em;
+			.dates {
+				span {
+					line-height: 2.3em;
+				}
+			}  
+			.details {
+				& > div {
+					line-height: 1.6em;
+					font-size: 0.57em;
+					@media all and (max-width:767px){
+                       margin: 0px;
+                    }
+				}
+				.add-comment{
+					a{
+                       font-size: 0.7em;
+					}
+					&:before{
+						font-size: 0.7em;
+    					line-height: 2.5;
+					}
+				}
+				.count{
+					font-size: 0.7em;
+					&:before{
+						font-size: 1.4em;
+    					line-height: inherit;
+					} 
+				}
+				.dates{
+					@media all and (max-width:767px){
+                       margin-left: 58px;
+                    }
+				}
+			}
+			.link {
+				float: right;
+				font-size: 16px;
+				margin-top: 12px;
+				margin-right: 0;
+			  	a {
+			  		@include idea-btn;
+					  @media all and (max-width:767px){
+						  width: 100%;
+						  font-size: 1.4em;
+						  letter-spacing: 0.5px;
+					  }
+				}
+				@media all and (max-width:767px){
+					    position: absolute;
+						width: 91%;
+						right: 0;
+						bottom: 7px;
+						left: 0;
+						margin: 0 auto;
+			   }
+			}
+		}
+	}
+}
+
+

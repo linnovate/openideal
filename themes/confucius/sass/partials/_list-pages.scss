@@ -1,0 +1,503 @@
+
+/*------------------------------------------------------------------------------
+                               Idea list - page
+------------------------------------------------------------------------------*/
+
+body.page-ideas {
+  .page-header {
+    display: none;  
+  }
+  #panel-bootstrap-region-center{
+   /* width: 63.3%;
+    margin-right: 3.3%;*/
+  }
+  
+}
+
+/* ------------------------------------------- pane-quicktabs-all-ideas ----------------------------------------- */
+.page-ideas ,.page-challenges ,.pane-news, .pane-user-ideas-full-panel-pane-1{
+   .pane-region-second{
+      .inside{
+        margin-top: 0px !important;
+      }
+   }
+  .pane-quicktabs-all-ideas  {
+    ul.quicktabs-tabs {
+      margin-top: 2.4em;
+      border-bottom: 1px solid $ecstasy;
+      margin-bottom: 42px;
+      @media all and (max-width:767px){
+          display: flex;
+          align-items: center;
+          justify-content: flex-start;
+          margin-top: 0px;
+          margin-bottom: 0;
+      }
+      li {
+        /*margin: 0 2em 0 2em;*/
+        margin: 0px;
+        padding-bottom: 9px;
+        padding-left: 0px;
+        padding-right: 0px;
+        @media all and (max-width:767px){
+            margin: 0;
+        }
+        a {
+          font-weight: normal;
+          font-size: 1.5em;
+          color: $ecstasy;
+          display: inline-block;
+          text-decoration: none;
+          vertical-align: middle;
+          padding-left: 12px;
+          padding-right: 18px;
+          @media all and (max-width:767px){
+              font-size: 1.4em;
+          }
+        }
+        &.active a { 
+          border-bottom: 4px solid $ecstasy;
+          padding-left: 12px;
+          padding-right: 18px;
+
+        }
+        &.first {
+          a {
+            @media all and (max-width:767px){
+              font-size: 1.8em;
+            }
+          }
+        }
+      }
+
+    }
+     .views-field-title{
+        font-size: 1em;
+        color: #4a4a4a;
+     }
+  }
+
+  .inside{
+    margin-top:83px !important;
+  }
+  .pane-title{
+    font-size: 2em;
+    text-transform: uppercase;
+  }
+
+ .pane-activity{
+   .pane-title{
+      margin-top: 0px;
+    }
+  }
+
+  .panel-tow-col{
+    margin-top: 16px;
+  }
+  .inner{
+    .content{
+      margin-top: 0px;
+    }
+  }
+  .row-bottom-openideal {
+   .name a{
+      font-weight: normal;
+      color: #494949;
+      font-size: 0.7em;
+      float: left;
+   }
+   .vote-count{
+      @media all and (min-width:767px){
+        vertical-align: top !important;
+        padding-top: 6px;
+      }
+
+   }
+  }
+  @media all and (max-width:767px){
+    .panel-panel.unit.pane-region-first {
+       width: 100%;
+       #quicktabs-container-all_ideas {
+         margin-top: -9px;
+       }
+       .field-content.ol-item-image {
+         margin-bottom: 0;
+       }
+       .views-field.views-field-title-1 {
+         font-size: 13px;
+       }
+       .views-field.views-field-body {
+         display: none;
+       }
+       .views-field-field-idea {
+        display: none;
+       }
+       .views-field-nothing {
+          float: none;
+       }
+       .views-field.views-field-nothing .row-bottom-openideal {
+             margin-top: 10px;
+             .wrap {
+                margin-top: 5px;
+                .created {
+                    font-size: 0.9em;
+                    letter-spacing: -0.4px;
+                    line-height: 13px;
+                }
+                .name {
+                    line-height: 11px;
+                    font-size: 0.8em;
+                }
+             }
+             .author .name a {
+              font-size: 1em;
+             }
+             .details {
+                /*width: 79%;*/
+                display: flex;
+                justify-content: space-between;
+                 margin-top: 9px;
+                .dates {
+                  font-size: 0.9em;
+                  &:before {
+                    line-height: 40px !important;
+                  }
+                }               
+                .vote-count {
+                  margin-right: 0px;
+                  margin-bottom: 0;
+                  .up-active {
+                    margin-right: -10px;
+                    width: 23px;
+                    &:after {
+                      font-size: 20px;  
+                    }
+                  }
+        /*          .up-inactive{
+                    margin-right: -32px;
+                  }*/
+                }
+              }
+       }
+    }
+  }
+}
+
+.page-ideas {
+  .pane-title {
+    @media all and (max-width: 767px) {
+      text-align: center;
+      margin-top: -30px;
+    }
+  }
+  .pane-region-second{
+    .inside{
+      margin-top: 83px !important;
+    }
+  }
+}
+
+/* ------------------------------------------- page challenges ----------------------------------------- */
+.page-challenges{
+  .content{
+    margin-top: 0px;
+  }
+
+
+  .pane-views-challenges-list-block-1 , .pane-challenges-list{
+    .pane-title{
+      font-size: 28px;
+      vertical-align: middle;
+      margin-top: 41px;
+      margin-bottom: 0px;
+     text-transform: uppercase;
+      @media all and (max-width:767px){
+        text-align: center;
+        margin-top: -30px;
+      }
+    }
+    .ol-item.challenge {
+      .row-bottom-openideal {
+        .link a{
+          background: #ed7709;
+          border: none;
+          border-radius: inherit;
+          box-shadow: none;
+          text-transform: uppercase;
+          &:after{
+            display: none;
+          }
+        }
+        .details .count{
+          font-size: 0.6em;
+          color: #505050;
+          &:before{
+            margin-right: 5px;
+            color: #494949;
+            font-size: 23px !important;
+          }
+        }
+      }
+
+    }
+    .views-field-nothing{
+      width: 81%;
+      /*margin-bottom: 4%;*/
+      .details {
+        font-weight: bold;
+        float: left;
+        margin-left: 7%;
+      }
+    }
+    .views-field-body{
+      max-height: 120px;
+      height: 120px;
+    }
+    .pane-title::before{
+      vertical-align: inherit;
+      font-weight: 100;
+      padding-right: 9px;
+      @media all and (max-width:767px){
+        margin-top: 0px !important;
+      }
+    }
+  }  
+  .pane-region-second {
+    margin-top: 92px !important;
+      @media all and (max-width:767px){
+        margin-top: 0px !important;
+      }
+  }
+}  
+/* ------------------------------------------- view-challenges_list ----------------------------------------- */
+
+.view-id-challenges_list.view-display-id-block_1 , .view-id-ideas_all ,.page-news, .pane-user-ideas-full-panel-pane-1 {
+  .pane-title{
+    text-transform: uppercase;
+   }
+  .ol-item {
+    padding-bottom: 16px;
+    padding-top: 16px;
+    min-height: 168px;
+    background-color: #ebebeb;
+    .ol-item-title {  
+      font-size: 1.19em;
+      a{
+        color: #4a4a49;
+      }
+    }
+    .views-field-title-1{
+      a{
+        font-size: 0.9em;
+      }
+    }
+    .ol-item-image {
+      img {
+        max-width: 9.4em;
+        height: 9.4em;
+      }
+    }
+    .user-picture{
+      img{
+        border-radius: 100%;
+        width: 1.7em;
+        height: 1.7em;
+      }
+    }
+    .views-field-body {
+      font-size: 0.9em;
+    }
+
+    .comment-count{
+      @include mixin-font-icon($comments-bubble,18px, #4a4a4a , "icon-font");
+      
+    }
+    .comment-count ,.views-count ,.vote-count{
+      color:  #4a4a4a ;
+      font-size: 0.55em;
+      margin-left: 17px !important;
+      vertical-align: middle !important;
+      @media all and (max-width: 767px) {
+        font-size: 0.9em;
+      }
+      &:before{
+        font-size: 18px;
+        float: right;
+        margin-top: -3px;
+        margin-right: 4px !important;
+        color: #4a4a4a;
+      }
+    }
+    
+    .reset-active,  .up-inactive, .up-active {
+      width: 22px !important;
+      height: 22px;
+      background-color: #e1005d;
+      border-radius: 100%;
+      text-align: center;
+      margin-right: 7px;
+      margin-top: -2px !important;
+    }
+    .reset-active:after,  .up-inactive:after, .up-active:after {
+      font-size:14px !important;
+      color: $text-white !important;
+      font-size: 14px;
+      line-height: 23px;
+      margin-left: 4px;
+      float: left;
+      @media all and (max-width: 767px) {
+        margin-left: 2px;
+      }
+    }
+    
+    
+
+    .row-bottom-openideal {
+      padding-top: 2px !important;
+      .link {
+        font-size: 14px;
+        margin-top: 0;
+        @media all and (max-width:767px){
+          margin: 0px auto;
+          margin-bottom: 7px;
+        }
+      }
+    @media all and (max-width:767px){
+      div.author .picture {
+        display: none;
+      }
+    }
+    }
+  }
+}
+.view-id-challenges_list.view-display-id-block_1 .ol-item .views-field-body {
+  line-height: 20px;
+}
+.page-news .view-news {
+  .views-row-first{
+    margin-top: 0px;
+  }
+  .views-field-body{
+    max-height: 139px;
+    height: 139px;
+    @media all and(max-width: 767px) {
+      max-height: 109px;
+      height: 109px;
+    }
+  }
+  .views-field-view-node{
+    float: right;
+    a{
+        background: #ed7709;
+        border: none;
+        border-radius: inherit;
+        box-shadow: none;
+        width: 7.6em;
+        height: 2em;
+        display: inline-block;
+        text-align: center;
+        line-height: 2em;
+        font-size: 1em;
+        color: white;
+        text-decoration: none;
+        text-transform: uppercase;
+    }
+
+  }
+  .views-field-picture{
+    display: inline-block;
+    float: left;
+  }
+  .views-field-php{
+    display: inline-block;
+    margin-top: 8px;
+    color: #494949;
+    font-size: 0.8em;
+    font-weight: bold;
+    margin-left: 6px;
+  }
+  .views-field-name{
+    display: inline-block;
+    a{
+      font-size: 0.85em;
+      font-weight: normal;
+    }
+  }
+}
+.view-id-ideas_all {
+  .ol-item {
+    &.views-row-first {
+      margin-top: 0;
+    }
+    .views-field-field-idea {
+      max-height: 80px;
+      height: 80px;
+      overflow: hidden;
+      line-height: 20px;
+    }
+    .row-bottom-openideal {
+        @media all and (max-width:767px){
+          padding-top: 0px !important;
+        }
+    }
+  }
+}
+
+.view-id-challenges_list.view-display-id-block_1 {
+  .ol-item {
+      @media all and (max-width:767px){
+        padding-bottom: 50px;
+      }
+      .details {
+        @media all and (max-width:767px){
+            font-size: 0.83em;
+      }
+    }
+  }
+}
+
+/* -------------- pane-user-ideas-full-panel-pane-1 --------------------- */
+
+.pane-user-ideas-full-panel-pane-1 .ol-item {
+  .views-field-title-1 {
+    display: inline-block;
+    a {
+      text-transform: capitalize;
+      &:after {
+        content: "|";
+        padding: 0 0.4em;
+        text-align: center;
+      }
+    }
+  }
+  .views-field-created {
+    display: inline-block;
+    font-weight: bold;
+    span {
+      font-size: 0.9em;
+    }
+  }
+  .views-field-body {
+    line-height: 1.5em;
+  }
+  .row-bottom-openideal .details {
+    float: left;
+  }
+  .views-field-nothing {
+    margin-top: 0.7em;
+    @media all and (max-width:767px){
+        float:none;
+    }
+
+
+  }
+}
+
+/* -------------- page-news --------------------- */
+.page-news {
+  .pane-title {
+    @media all and (max-width: 767px) {
+      text-align: center;
+    }
+  }
+}
