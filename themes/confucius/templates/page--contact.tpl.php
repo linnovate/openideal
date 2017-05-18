@@ -13,12 +13,12 @@
 
     <div class="content-wrapper">
         <div class="content-block">
-            <a class= "logo" href="/front"><img alt=" Home page " height="64" src="/sites/all/themes/mediacom/images/mediacom-logo.png" title=" Home page " width="164"></a>
+            <a class= "logo" href="/front"><img alt=" Home page " height="64" src="/sites/all/themes/confusius/images/confusius-logo.png" title=" Home page " width="164"></a>
         <div>            
             <!-- login screen -->
             <div class='title'>
                 <p>
-                    <?php print t("Welcome to mediacom openidea");?>
+                    <?php print t("Welcome to confusius openidea");?>
                 </p>
             </div>
             <div class="inner">
