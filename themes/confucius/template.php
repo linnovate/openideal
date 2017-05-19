@@ -8,7 +8,7 @@
 /**
  * Returns HTML for a date element formatted as a range.
  */
-function innovate_date_display_range($variables) {
+function confucius_date_display_range($variables) {
   $date1 = $variables['date1'];
   $date2 = $variables['date2'];
   $timezone = $variables['timezone'];

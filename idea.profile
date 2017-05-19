@@ -180,7 +180,7 @@ function idea_dummy_header_site() {
   $header_site->type = 'header_site';
   $header_site->title = 'site header';
   $header_site->body[LANGUAGE_NONE][0]['value'] = 'openIdeal - Innovation management';
-  $file_logo = file_get_contents('./profiles/idea/themes/innovate/images/logo.png');
+  $file_logo = file_get_contents('./profiles/idea/themes/confucius/images/logo.png');
   $file_logo = file_save_data($file_logo , 'public://logo.png');
   $header_site->field_site_logo = array( 'und'=>array(
     array(
@@ -194,7 +194,7 @@ function idea_dummy_header_site() {
     )
   );
 
-  $file_banner_image = file_get_contents('./profiles/idea/themes/innovate/images/banner.jpg');
+  $file_banner_image = file_get_contents('./profiles/idea/themes/confucius/images/banner.jpg');
   $file_banner_image = file_save_data($file_banner_image , 'public://banner.jpg');
   $header_site->field_banner_image = array( 'und'=>array(
       array(

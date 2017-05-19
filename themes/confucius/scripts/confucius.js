@@ -244,11 +244,11 @@
 				// image style for single challenge
 				$('.node-type-challenge .ol-item.challenge .views-field-field-challenge-image').detach();
 				// Logo image
-				$('#mini-panel-header #logo_confusius_header a.desc').detach();
+				$('#mini-panel-header #logo_confucius_header a.desc').detach();
 			}
 			else {
 				$('.node-type-challenge .ol-item.challenge .views-field-field-challenge-image-1').detach();
-				$('#mini-panel-header #logo_confusius_header a.mobile').detach();
+				$('#mini-panel-header #logo_confucius_header a.mobile').detach();
 			}
 		}
 			    

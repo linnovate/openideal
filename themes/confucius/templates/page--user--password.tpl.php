@@ -32,7 +32,7 @@ $form_p = drupal_get_form('user_pass') ;
         </div>
         </div><!-- content-block -->        
 
-        <div class="footer pane-panels-mini pane-confusius-logo">
+        <div class="footer pane-panels-mini pane-confucius-logo">
            <?php print $logo_section; ?>
         </div> <!-- footer -->
        
