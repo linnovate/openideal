@@ -29,7 +29,7 @@ function ideal_idea_form_alter(&$form, &$form_state, $form_id) {
     );
     //upload fields text
     //for images
-    // $form['field_idea_image']['und']['#file_upload_title'] = '<div class="title">'.t('Add images here').'</div>'.t('Drag & drop images or <a href="#" class="open-browse">browse</a> them from your computer');
+    // $form['field_idea_image']['und']['#file202_upload_title'] = '<div class="title">'.t('Add images here').'</div>'.t('Drag & drop images or <a href="#" class="open-browse">browse</a> them from your computer');
     $form['field_idea_image']['und']['#file_upload_title'] = '<div class="title">'.t('Add images here').'</div>'.t('<a href="#" class="open-browse">browse</a> images from your computer');
     $form['field_idea_image']['und']['#title'] = '';
     $form['field_idea_image']['und']['#file_upload_description'] = '';
@@ -77,28 +77,62 @@ function template_preprocess_idea_node_form(&$variables) {
 /**
  * Implements hook_block_info().
  */
-function ideal_idea_block_info() {
-  $blocks = array();
-  $blocks['new_idea_open_popup'] = array(
-    'info' => t('New Idea - Open modal on load'),
-  );
+ function ideal_idea_block_info() {
+   $blocks = array();
+   $blocks['new_idea_open_popup'] = array(
+     'info' => t('New Idea - Open modal on load'),
+   );
+    $blocks['most_popular_user'] = array(
+     'info' => t('Most Active Member'),
+   );
  
-  return $blocks;
-}
+   return $blocks;
+ }
 
-/**
+/*/**
  * Implements hook_block_view().
  */
 function ideal_idea_block_view($delta='') {
-  $block = array();
+   $block = array();
  
-  switch($delta) {
-    case 'new_idea_open_popup' :
-      $block['content'] = ideal_idea_popup_view();
-      break;
-  }
- 
-  return $block;
+   switch($delta) {
+     case 'new_idea_open_popup' :
+       $block['content'] = ideal_idea_popup_view();
+       break;
+      case 'most_popular_user' :
+       $block['content'] = ideal_idea_most_popular_user();
+       break;
+   }
+   return $block;
+}
+
+function ideal_idea_most_popular_user(){
+    $query = db_select('node', 'n');
+    $query->join('users', 'us', 'n.uid = us.uid');
+    $query->join('file_managed', 'p', 'us.picture = p.fid');
+    $query->fields('n', array('nid', 'title','uid'));
+    $query->fields('us', array('name'));
+    $query->fields('p', array('filename'));
+    $query->condition('n.type', 'idea');
+    $query->condition('n.status', 1);
+    $query->groupBy('n.uid');
+    $query->addExpression('COUNT(n.uid)', 'ncount');
+    $query->orderBy("ncount", "DESC");
+    $query->range(0,1);
+    $results = $query->execute();
+    $results = $results->fetchAll();
+    $name = $results[0]->name;
+    $img = $results[0]->filename;
+    $count_ideas = $results[0]->ncount;
+    $output = "<div class='most-popular-user'>";
+    $output .= "<div class='title'>".t('Most Active Member')."</div>";
+    $output .= "<div class = 'content'>";
+    $output .= "<div class='user-image'><img src='/sites/default/files/pictures/".$img."'></div>";
+    $output .= "<div class='name'>".$name."</div>";
+    $output .= "<div class='count-ideas'>".$count_ideas."</div>";
+    $output .= "</div></div>";
+    
+    return $output;
 }
 
 /* Display block */
@@ -179,4 +213,6 @@ function ideal_render_popup_markup($header = '', $body, $buttons = ''){
   </div>';
   return $output;
 }
+
+
 ?>
