@@ -18,7 +18,7 @@
             <!-- login screen -->
             <div class='title'>
                 <p>
-                    <?php print t("Welcome to confucius openidea");?>
+                    <?php print t("Welcome to @sitename", array('@sitename' => variable_get('site_name', 'OpenideaL'))); ?>
                 </p>
             </div>
             <div class="inner">
