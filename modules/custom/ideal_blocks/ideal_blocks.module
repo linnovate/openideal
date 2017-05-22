@@ -214,9 +214,9 @@ function _ideal_blocks_key_stats() {
   $output = '<div id="ideal-key-stats">';
   $output .= '<div class="row top challenges col-xs-12"><div class="count">' . format_plural($challenge_count, '1<span class="name">Challenge</span>', '@count<span class="name">Challenges</span>') . '</div></div>';
   $output .= '<table class="counts"><tr>';
-  $output .= '<td class="col ideas"><div class="count">' . $idea_count . '</div><div class="name">' . t('Ideas') . '</div></td>';
-  $output .= '<td class="col users"><div class="count">' . $user_count . '</div><div class="name">' . t('Users') . '</div></td>';
   $output .= '<td class="col votes"><div class="count">' . $vote_count . '</div><div class="name">' . t('Votes') . '</div></td>';
+  $output .= '<td class="col users"><div class="count">' . $user_count . '</div><div class="name">' . t('Members') . '</div></td>';
+  $output .= '<td class="col ideas"><div class="count">' . $idea_count . '</div><div class="name">' . t('Solutions') . '</div></td>';
   $output .= '</tr></table></div>';
 
   return $output;

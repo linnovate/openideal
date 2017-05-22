@@ -159,6 +159,39 @@ function fe_idea_flag_default_flags() {
 }
 
 /**
+ * Implements hook_image_default_styles().
+ */
+function fe_idea_image_default_styles() {
+  $styles = array();
+
+  // Exported image style: latest_solutions.
+  $styles['latest_solutions'] = array(
+    'label' => 'latest solutions',
+    'effects' => array(
+      6 => array(
+        'name' => 'image_crop',
+        'data' => array(
+          'width' => 290,
+          'height' => 145,
+          'anchor' => 'center-center',
+        ),
+        'weight' => -10,
+      ),
+      4 => array(
+        'name' => 'image_scale_and_crop',
+        'data' => array(
+          'width' => 290,
+          'height' => 145,
+        ),
+        'weight' => -9,
+      ),
+    ),
+  );
+
+  return $styles;
+}
+
+/**
  * Implements hook_node_info().
  */
 function fe_idea_node_info() {
@@ -168,7 +201,7 @@ function fe_idea_node_info() {
       'base' => 'node_content',
       'description' => t('Idea content type'),
       'has_title' => '1',
-      'title_label' => t('Title'),
+      'title_label' => t('Solution Name'),
       'help' => '',
     ),
   );

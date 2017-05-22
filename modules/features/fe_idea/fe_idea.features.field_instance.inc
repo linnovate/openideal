@@ -87,14 +87,14 @@ function fe_idea_field_default_field_instances() {
     'bundle' => 'idea',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'Please share you idea.',
+    'description' => '',
     'display' => array(
       'default' => array(
         'label' => 'hidden',
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 2,
+        'weight' => 3,
       ),
       'teaser' => array(
         'label' => 'hidden',
@@ -108,7 +108,7 @@ function fe_idea_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'field_name' => 'body',
-    'label' => 'Idea description',
+    'label' => 'Description',
     'required' => 0,
     'settings' => array(
       'display_summary' => 0,
@@ -123,7 +123,7 @@ function fe_idea_field_default_field_instances() {
         'summary_rows' => 5,
       ),
       'type' => 'text_textarea_with_summary',
-      'weight' => 4,
+      'weight' => 3,
     ),
   );
 
@@ -138,7 +138,7 @@ function fe_idea_field_default_field_instances() {
         'module' => 'file',
         'settings' => array(),
         'type' => 'file_default',
-        'weight' => 12,
+        'weight' => 8,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -187,7 +187,7 @@ function fe_idea_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'file_generic',
-      'weight' => 15,
+      'weight' => 20,
     ),
   );
 
@@ -207,7 +207,7 @@ function fe_idea_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 6,
+        'weight' => 16,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -231,7 +231,85 @@ function fe_idea_field_default_field_instances() {
       'module' => 'radioactivity',
       'settings' => array(),
       'type' => 'radioactivity_basic_widget',
-      'weight' => 9,
+      'weight' => 14,
+    ),
+  );
+
+  // Exported field_instance: 'node-idea-field_business_name'.
+  $field_instances['node-idea-field_business_name'] = array(
+    'bundle' => 'idea',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'i18n_taxonomy',
+        'settings' => array(),
+        'type' => 'i18n_taxonomy_term_reference_link',
+        'weight' => 2,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_business_name',
+    'label' => 'Business Name Old',
+    'required' => 0,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_select',
+      'weight' => 13,
+    ),
+  );
+
+  // Exported field_instance: 'node-idea-field_business_results'.
+  $field_instances['node-idea-field_business_results'] = array(
+    'bundle' => 'idea',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => 'State in 1-2 sentences..You can express it as a strategic platform or give it a name. Ideally you can state it
+as short as a Tweet, 140 characters',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 14,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_business_results',
+    'label' => 'Business Results',
+    'required' => 0,
+    'settings' => array(
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'rows' => 5,
+      ),
+      'type' => 'text_textarea',
+      'weight' => 1,
     ),
   );
 
@@ -251,7 +329,7 @@ function fe_idea_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 8,
+        'weight' => 18,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -275,7 +353,7 @@ function fe_idea_field_default_field_instances() {
       'module' => 'radioactivity',
       'settings' => array(),
       'type' => 'radioactivity_basic_widget',
-      'weight' => 10,
+      'weight' => 15,
     ),
   );
 
@@ -303,7 +381,7 @@ function fe_idea_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'field_name' => 'field_category',
-    'label' => 'Category',
+    'label' => 'קטגוריה',
     'required' => 0,
     'settings' => array(
       'user_register_form' => FALSE,
@@ -313,7 +391,7 @@ function fe_idea_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 2,
+      'weight' => 9,
     ),
   );
 
@@ -329,7 +407,7 @@ function fe_idea_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 5,
+        'weight' => 15,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -343,15 +421,18 @@ function fe_idea_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'field_name' => 'field_challenge_ref',
-    'label' => 'Is Part Of A Challenge',
-    'required' => 0,
+    'label' => 'Business Name',
+    'required' => 1,
     'settings' => array(
       'behaviors' => array(
         'prepopulate' => array(
           'action' => 'hide',
           'action_on_edit' => 0,
           'fallback' => 'none',
-          'og_context' => 0,
+          'providers' => array(
+            'og_context' => FALSE,
+            'url' => 1,
+          ),
           'skip_perm' => 0,
           'status' => 1,
         ),
@@ -363,7 +444,7 @@ function fe_idea_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 8,
+      'weight' => 2,
     ),
   );
 
@@ -383,7 +464,7 @@ function fe_idea_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 9,
+        'weight' => 19,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -407,7 +488,7 @@ function fe_idea_field_default_field_instances() {
       'module' => 'radioactivity',
       'settings' => array(),
       'type' => 'radioactivity_basic_widget',
-      'weight' => 11,
+      'weight' => 16,
     ),
   );
 
@@ -423,7 +504,7 @@ function fe_idea_field_default_field_instances() {
         'module' => 'taxonomy',
         'settings' => array(),
         'type' => 'taxonomy_term_reference_link',
-        'weight' => 10,
+        'weight' => 5,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -447,7 +528,89 @@ function fe_idea_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'taxonomy_autocomplete',
-      'weight' => 1,
+      'weight' => 8,
+    ),
+  );
+
+  // Exported field_instance: 'node-idea-field_how_it_works'.
+  $field_instances['node-idea-field_how_it_works'] = array(
+    'bundle' => 'idea',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => 'State in 1-2 sentences..You can express it as a strategic platform or give it a name. Ideally you can state it
+as short as a Tweet, 140 characters',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 13,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_how_it_works',
+    'label' => 'How it Works',
+    'required' => 0,
+    'settings' => array(
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'rows' => 5,
+      ),
+      'type' => 'text_textarea',
+      'weight' => 6,
+    ),
+  );
+
+  // Exported field_instance: 'node-idea-field_idea'.
+  $field_instances['node-idea-field_idea'] = array(
+    'bundle' => 'idea',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => 'State in 1-2 sentences.You can express it as a strategic platform or give it a name. Ideally you can state it
+as short as a Tweet, 140 characters',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 12,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_idea',
+    'label' => 'Idea',
+    'required' => 1,
+    'settings' => array(
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'rows' => 5,
+      ),
+      'type' => 'text_textarea',
+      'weight' => 5,
     ),
   );
 
@@ -465,7 +628,7 @@ function fe_idea_field_default_field_instances() {
           'image_style' => '',
         ),
         'type' => 'image',
-        'weight' => 11,
+        'weight' => 7,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -480,7 +643,7 @@ function fe_idea_field_default_field_instances() {
     'required' => 0,
     'settings' => array(
       'alt_field' => 0,
-      'default_image' => 0,
+      'default_image' => 30,
       'file_directory' => '',
       'file_extensions' => 'png gif jpg jpeg',
       'max_filesize' => '',
@@ -519,7 +682,7 @@ function fe_idea_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'image_image',
-      'weight' => 5,
+      'weight' => 7,
     ),
   );
 
@@ -535,7 +698,7 @@ function fe_idea_field_default_field_instances() {
         'module' => 'list',
         'settings' => array(),
         'type' => 'list_default',
-        'weight' => 3,
+        'weight' => 4,
       ),
       'teaser' => array(
         'label' => 'hidden',
@@ -557,7 +720,48 @@ function fe_idea_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 6,
+      'weight' => 11,
+    ),
+  );
+
+  // Exported field_instance: 'node-idea-field_insight'.
+  $field_instances['node-idea-field_insight'] = array(
+    'bundle' => 'idea',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => 'State in 4-5 sentences.No more than a paragraph. It should be clear, simple, and include cultural context.
+Ideally you can state it as short as a Tweet, 140 characters',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 11,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_insight',
+    'label' => 'Insight',
+    'required' => 0,
+    'settings' => array(
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'rows' => 5,
+      ),
+      'type' => 'text_textarea',
+      'weight' => 4,
     ),
   );
 
@@ -572,7 +776,7 @@ function fe_idea_field_default_field_instances() {
         'label' => 'hidden',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 7,
+        'weight' => 17,
       ),
       'teaser' => array(
         'label' => 'hidden',
@@ -597,7 +801,7 @@ function fe_idea_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'entityreference_autocomplete',
-      'weight' => 7,
+      'weight' => 12,
     ),
   );
 
@@ -616,7 +820,7 @@ function fe_idea_field_default_field_instances() {
           'link' => FALSE,
         ),
         'type' => 'entityreference_label',
-        'weight' => 14,
+        'weight' => 10,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -646,7 +850,7 @@ function fe_idea_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'entityreference_autocomplete',
-      'weight' => 16,
+      'weight' => 21,
     ),
   );
 
@@ -662,7 +866,7 @@ function fe_idea_field_default_field_instances() {
         'module' => 'social_buttons',
         'settings' => array(),
         'type' => 'social_buttons_formatter_default',
-        'weight' => 13,
+        'weight' => 9,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -690,7 +894,7 @@ function fe_idea_field_default_field_instances() {
       'module' => 'social_buttons',
       'settings' => array(),
       'type' => 'social_buttons_exposed',
-      'weight' => 13,
+      'weight' => 18,
     ),
   );
 
@@ -706,7 +910,7 @@ function fe_idea_field_default_field_instances() {
         'module' => 'social_buttons',
         'settings' => array(),
         'type' => 'social_buttons_formatter_default',
-        'weight' => 10,
+        'weight' => 6,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -734,7 +938,7 @@ function fe_idea_field_default_field_instances() {
       'module' => 'social_buttons',
       'settings' => array(),
       'type' => 'social_buttons_exposed',
-      'weight' => 12,
+      'weight' => 17,
     ),
   );
 
@@ -779,29 +983,39 @@ function fe_idea_field_default_field_instances() {
       'module' => 'vud_field',
       'settings' => array(),
       'type' => 'vud_field_default_widget',
-      'weight' => 3,
+      'weight' => 10,
     ),
   );
 
   // Translatables
   // Included for use with string extractors like potx.
   t('Blast Idea');
+  t('Business Name');
+  t('Business Name Old');
+  t('Business Results');
   t('Buzz Idea');
-  t('Category');
   t('Comment');
+  t('Description');
   t('Groove Idea');
   t('Hashtags');
-  t('Idea description');
+  t('How it Works');
+  t('Idea');
   t('Idea image');
   t('In Action');
-  t('Is Part Of A Challenge');
+  t('Insight');
   t('Merge to');
   t('Moderator');
-  t('Please share you idea.');
   t('Share');
   t('Social Buttons');
+  t('State in 1-2 sentences..You can express it as a strategic platform or give it a name. Ideally you can state it
+as short as a Tweet, 140 characters');
+  t('State in 1-2 sentences.You can express it as a strategic platform or give it a name. Ideally you can state it
+as short as a Tweet, 140 characters');
+  t('State in 4-5 sentences.No more than a paragraph. It should be clear, simple, and include cultural context.
+Ideally you can state it as short as a Tweet, 140 characters');
   t('Vote');
   t('קבצים מצורפים');
+  t('קטגוריה');
 
   return $field_instances;
 }

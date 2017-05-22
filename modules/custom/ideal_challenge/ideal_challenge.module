@@ -40,6 +40,9 @@ function ideal_challenge_block_info() {
   $blocks['challenge_add_idea_button'] = array(
     'info' => t('Challenge add idea button'),
   );
+  $blocks['challenge_amount_of_comments'] = array(
+    'info' => t('Challenge amount of comments'),
+  );
   return $blocks;
 }
 
@@ -54,6 +57,7 @@ function ideal_challenge_block_view($delta) {
         'content' => theme('ideal_challenge_add_idea'),
       );
       break;
+
     case 'challenge_data':
       $block = array(
         'subject' => t('Time left'),
@@ -63,6 +67,11 @@ function ideal_challenge_block_view($delta) {
     case 'challenge_add_idea_button':
       $block = array(
         'content' => _ideal_challenge_add_idea_button(),
+      );
+      break;
+    case 'challenge_amount_of_comments':
+      $block = array(
+        'content' => _ideal_challenge_amount_of_comments(),
       );
       break;
   }
@@ -169,77 +178,115 @@ function ideal_challenge_add_idea_form_submit($form, &$form_state) {
 /**
  * Calculate progress of challenge.
  */
-function _ideal_challenge_progress() {
-	$entity = menu_get_object();
-	if ($entity) {
-		$node = entity_metadata_wrapper('node', $entity);
-		$startdate = $node->field_dates->value->value();
-		$enddate = $node->field_dates->value2->value();
-		$start = new DateTime(date('c'));
-		$end = new DateTime(date('c', $enddate));
+function _ideal_challenge_progress($entity) {
+  if(!$entity){
+    $url = $_GET['q'];
+    $entity = end(explode("/", $url));
+  }
+  if ($entity) {
+    $node = node_load($entity);
+    $startdate = new DateTime(date('c'));
+    $enddate = $node->field_date_challengedate[LANGUAGE_NONE][0]['value'];
+    $enddate = strtotime($enddate);
+    $startdate = strtotime($startdate);
+    $start = new DateTime(date('c'));
+    $end = new DateTime(date('c', $enddate));
     // Time difference from now to end date.
-		$diffnow = $start->diff($end);
+    $diffnow = $start->diff($end);
     // Time difference from start date to end date.
-		$diff = abs($enddate - $startdate);
+    $diff = abs($enddate - $startdate);
     // Time difference from now to start date.
-		$diffpassed = abs(time() - $startdate);
-		if ($enddate > time()) {
+    $diffpassed = abs(time() - $startdate);
+    if ($enddate > time()) {
       // Create HTML for time left counter on challenge.
       // Show year and months only if larger than 0.
-			$yearshtml = '';
-			if ($diffnow->y > 0) {
-				$yearshtml = '<div class="col-xs-4" ><span class="badge" ><h2 class="challenge-date-value">' . $diffnow->y . '</h2>&nbsp;<small class="challenge-date-label small">' . format_plural($diffnow->y, 'Year', 'Years') . '</small></span></div>';
-			}
-			$monthshtml = '';
-			if ($diffnow->y > 0 || $diffnow->m > 0) {
-				$monthshtml = '<div class="col-xs-4" ><span class="badge" ><h2 class="challenge-date-value">' . $diffnow->m . '</h2>&nbsp;<small class="challenge-date-label">' . format_plural($diffnow->m, 'Month', 'Months') . '</small></span></div>';
-			}
-			$dayshtml = '<div class="col-xs-4" ><span class="badge" ><h2 class="challenge-date-value">' . $diffnow->d . '</h2>&nbsp;<small class="challenge-date-label">' . format_plural($diffnow->d, 'Day', 'Days') . '</small></span></div>';
-			// If the year is not displayed, display hours.
+      $yearshtml = '';
+      if ($diffnow->y > 0) {
+        $yearshtml = '<div class="col-xs-4" ><span class="badge" ><div class="challenge-date-value">' . $diffnow->y . '</div>&nbsp;<div class="challenge-date-label small">' . format_plural($diffnow->y, 'Year', 'Years') . '</div></span></div>';
+      }
+      $monthshtml = '';
+      if ($diffnow->y > 0 || $diffnow->m > 0) {
+        $monthshtml = '<div class="col-xs-4" ><span class="badge" ><div class="challenge-date-value">' . $diffnow->m . '</div>&nbsp;<div class="challenge-date-label">' . format_plural($diffnow->m, 'Month', 'Months') . '</div></span></div>';
+      }
+      $dayshtml = '<div class="col-xs-4" ><span class="badge" ><div class="challenge-date-value">' . $diffnow->d . '</div>&nbsp;<div class="challenge-date-label">' . format_plural($diffnow->d, 'Day', 'Days') . '</div></span></div>';
+      // If the year is not displayed, display hours.
       $hourshtml = '';
-			if ($diffnow->y == 0) {
-				$hourshtml = '<div class="col-xs-4" ><span class="badge" ><h2 class="challenge-date-value">' . $diffnow->h . '</h2>&nbsp;<small class="challenge-date-label">' . format_plural($diffnow->h, 'Hour', 'Hours') . '</small></span></div>';
-			}
+      if ($diffnow->y == 0) {
+        $hourshtml = '<div class="col-xs-4 hour" ><span class="badge" ><div class="challenge-date-value">' . $diffnow->h . '</div>&nbsp;<div class="challenge-date-label">' . format_plural($diffnow->h, 'Hour', 'Hours') . '</div></span></div>';
+      }
       // If the month is not displayed, display minutes.
-			$minuteshtml = '';
-			if ($diffnow->y == 0 && $diffnow->m == 0) {
-				$minuteshtml = '<div class="col-xs-4" ><span class="badge" ><h2 class="challenge-date-value">' . $diffnow->i . '</h2>&nbsp;<small class="challenge-date-label ">' . format_plural($diffnow->s, 'Min', 'Mins') . '</small></span></div>';
-			}
+      $minuteshtml = '';
+      if ($diffnow->y == 0 && $diffnow->m == 0) {
+        $minuteshtml = '<div class="col-xs-4 minutes" ><span class="badge" ><div class="challenge-date-value">' . $diffnow->i . '</div>&nbsp;<small class="challenge-date-label ">' . format_plural($diffnow->s, 'Min', 'Mins') . '</small></span></div>';
+      }
       // Calculate percentage of time passed.
-			$complete = round(($diffpassed / $diff) * 100);
+      $complete = round(($diffpassed / $diff) * 100);
       // Output progress bar of time passed and time counter.
-			// Progressbar removed:
+      // Progressbar removed:
       // <h4>'. t('Challenge is @complete% completed', array('@complete' => $complete)) . '</h4>
       // <div class="progress"><div class="bar" style="width:' . $complete . '%;"></div></div>
-			$output = array(
-				'#type' => 'markup',
-				'#markup' => '
-				<div id="challenge-dates" class="row" >' . $yearshtml . $monthshtml . $dayshtml . $hourshtml . $minuteshtml . '</div>
+      $output = array(
+        '#type' => 'markup',
+        '#markup' => '
+        <div id="challenge-dates" class="row" >' . $yearshtml . $monthshtml . $dayshtml . $hourshtml . $minuteshtml .'<div class="title">'.t("left").'</div></div>
         <div id="challenge-dates-start-end"><strong>' . t('Start') . '</strong>- ' . format_date($startdate, 'custom', 'n.j.Y') . '<strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'. t('End') . '</strong>- ' . format_date($enddate, 'custom', 'n.j.Y') . '</div>
-				',
-			);
-		}
-		else {
+        ',
+      );
+    }
+    else {
       // If end date of challenge is in the past, the challenge is completed.
-			$output = array(
-				'#type' => 'markup',
-				'#markup' => '<div class="well">' . t('The challenge is completed.') .'</div>',
-			);
-		}
-		return $output;
-	}
+      $output = array(
+        '#type' => 'markup',
+        '#markup' => '<div class="well">' . t('The challenge is completed.') .'</div>',
+      );
+    }
+    return $output;
+  }
 }
 
 /**
  * Output a button to add an idea.
  */
 function _ideal_challenge_add_idea_button() {
+  global $user;
   $node = menu_get_object();
   if ($node) {
-    $nid = $node->nid;
-    $output = '<div class="challenge-add-idea-button">';
-    $output .= l(t('Add idea'), 'node/add/idea', array('attributes' => array('class' => 'btn btn-success'), 'query' => array('field_challenge_ref' => $nid)));
-    $output .= '</div>';
-		return $output;
-	}
+    if ($user->uid) {
+      $nid = $node->nid;
+      idea_load_angular();
+      drupal_add_js(drupal_get_path('module', 'idea_widget') . '/components/directives/idea-modal/idea-modal.js', array('weight' => 6));
+      $output = "<div id='idea-modal-wrapper'>"."<idea-modal label='".t('Add idea')."' action='Add idea' fromChallenge ='yes'></idea-modal>"."</div>";
+    } else {
+      $output = ideal_idea_get_login_link(t('Login/Register to add idea'));
+    }
+    return $output;
+  }
+}
+
+function _ideal_challenge_amount_of_comments(){
+  $entity = menu_get_object();
+  if ($entity) {
+    $node = entity_metadata_wrapper('node', $entity);
+    $nid = $node->getIdentifier();
+    // Count all the published ideas belonging to this challenge.
+    $query = new EntityFieldQuery();
+    // Count all the comments in this challenge.
+    $query = db_select('comment', 'c');
+    $query->fields('c', array('cid'));
+    $query->condition('c.status', 1);
+    $query->condition('c.nid', $nid);
+    $query->condition('c.pid',0);
+    $result = $query->execute();
+    $comment_count = $result->rowCount();
+    
+    //return $output;
+    $output = "<h2>".t('Comments')."</h2>";
+    if($comment_count == 1){
+      $output .= "<div class='amount_of_comments'>".t(' One comment was written on the subject')."</div>";
+    }
+    else{
+       $output .= "<div class='amount_of_comments'>".$comment_count." ".t('Comments written on the subject')."</div>";
+    }
+    return $output;
+  }
 }

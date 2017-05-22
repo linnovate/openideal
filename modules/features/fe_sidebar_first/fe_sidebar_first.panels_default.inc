@@ -46,7 +46,7 @@ function fe_sidebar_first_default_panels_mini() {
       'title' => '',
       'body' => '<div class ="header_menu">
 <a href="/"> 
-<div class = "header_name">OpenideaL</div>
+<div class = "header_name">Openidea</div>
   <div class ="sub_name">Powered by Linnovate</div>
 <span class="home-icon">icon-hom</span>
 </a>
@@ -54,6 +54,7 @@ function fe_sidebar_first_default_panels_mini() {
 <div/>',
       'format' => 'full_html',
       'substitute' => TRUE,
+      'title_heading' => 'h2',
     );
     $pane->cache = array();
     $pane->style = array(
@@ -117,7 +118,7 @@ function fe_sidebar_first_default_panels_mini() {
     $pane->panel = 'middle';
     $pane->type = 'block';
     $pane->subtype = 'search-form';
-    $pane->shown = TRUE;
+    $pane->shown = FALSE;
     $pane->access = array();
     $pane->configuration = array(
       'override_title' => 1,

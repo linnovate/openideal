@@ -266,6 +266,7 @@ function fe_user_views_default_views() {
   $handler->display->display_options['fields']['name']['table'] = 'users';
   $handler->display->display_options['fields']['name']['field'] = 'name';
   $handler->display->display_options['fields']['name']['label'] = '';
+  $handler->display->display_options['fields']['name']['exclude'] = TRUE;
   $handler->display->display_options['fields']['name']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['name']['alter']['ellipsis'] = FALSE;
   $handler->display->display_options['fields']['name']['element_label_colon'] = FALSE;
@@ -279,6 +280,7 @@ function fe_user_views_default_views() {
   $handler->display->display_options['fields']['field_bio']['alter']['text'] = '<div class="name">[name]</div>
 <div class="bio">[field_bio]</div>';
   $handler->display->display_options['fields']['field_bio']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_bio']['empty'] = '<div class="name">[name]</div>';
   $handler->display->display_options['fields']['field_bio']['hide_alter_empty'] = FALSE;
   /* Field: User: Uid */
   $handler->display->display_options['fields']['uid']['id'] = 'uid';
@@ -343,6 +345,7 @@ function fe_user_views_default_views() {
     t('last »'),
     t('<div class="name">[name]</div>
 <div class="bio">[field_bio]</div>'),
+    t('<div class="name">[name]</div>'),
     t('<a href="/members/[uid]/edit">[php]</a>'),
     t('All'),
     t('Content pane'),
@@ -465,7 +468,8 @@ function fe_user_views_default_views() {
   $handler->display->display_options['query']['type'] = 'views_query';
   $handler->display->display_options['query']['options']['query_comment'] = FALSE;
   $handler->display->display_options['exposed_form']['type'] = 'basic';
-  $handler->display->display_options['pager']['type'] = 'full';
+  $handler->display->display_options['pager']['type'] = 'none';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
   $handler->display->display_options['style_plugin'] = 'default';
   $handler->display->display_options['style_options']['row_class'] = 'ol-item idea';
   $handler->display->display_options['row_plugin'] = 'fields';
@@ -474,7 +478,7 @@ function fe_user_views_default_views() {
   $handler->display->display_options['empty']['area']['table'] = 'views';
   $handler->display->display_options['empty']['area']['field'] = 'area';
   $handler->display->display_options['empty']['area']['empty'] = TRUE;
-  $handler->display->display_options['empty']['area']['content'] = '<?php print t("This user has no ideas yet."); ?>';
+  $handler->display->display_options['empty']['area']['content'] = '<?php print t("This user has no solutions yet."); ?>';
   $handler->display->display_options['empty']['area']['format'] = 'php_code';
   /* Relationship: Flags: blast_idea */
   $handler->display->display_options['relationships']['flag_content_rel']['id'] = 'flag_content_rel';
@@ -617,8 +621,26 @@ function fe_user_views_default_views() {
   $handler = $view->new_display('block', 'User Ideas', 'user_ideas');
   $handler->display->display_options['defaults']['sorts'] = FALSE;
 
-  /* Display: Content pane */
-  $handler = $view->new_display('panel_pane', 'Content pane', 'panel_pane_1');
+  /* Display: User ideas full */
+  $handler = $view->new_display('panel_pane', 'User ideas full', 'panel_pane_1');
+  $handler->display->display_options['defaults']['title'] = FALSE;
+  $handler->display->display_options['defaults']['header'] = FALSE;
+  $handler->display->display_options['defaults']['relationships'] = FALSE;
+  /* Relationship: Flags: blast_idea */
+  $handler->display->display_options['relationships']['flag_content_rel']['id'] = 'flag_content_rel';
+  $handler->display->display_options['relationships']['flag_content_rel']['table'] = 'node';
+  $handler->display->display_options['relationships']['flag_content_rel']['field'] = 'flag_content_rel';
+  $handler->display->display_options['relationships']['flag_content_rel']['required'] = 0;
+  $handler->display->display_options['relationships']['flag_content_rel']['flag'] = 'blast_idea';
+  $handler->display->display_options['relationships']['flag_content_rel']['user_scope'] = 'any';
+  /* Relationship: Entity Reference: Referenced Entity */
+  $handler->display->display_options['relationships']['field_challenge_ref_target_id']['id'] = 'field_challenge_ref_target_id';
+  $handler->display->display_options['relationships']['field_challenge_ref_target_id']['table'] = 'field_data_field_challenge_ref';
+  $handler->display->display_options['relationships']['field_challenge_ref_target_id']['field'] = 'field_challenge_ref_target_id';
+  /* Relationship: Entity Reference: Referenced Entity */
+  $handler->display->display_options['relationships']['field_moderator_target_id']['id'] = 'field_moderator_target_id';
+  $handler->display->display_options['relationships']['field_moderator_target_id']['table'] = 'field_data_field_moderator';
+  $handler->display->display_options['relationships']['field_moderator_target_id']['field'] = 'field_moderator_target_id';
   $handler->display->display_options['defaults']['fields'] = FALSE;
   /* Field: Content: Idea image */
   $handler->display->display_options['fields']['field_idea_image']['id'] = 'field_idea_image';
@@ -650,6 +672,15 @@ function fe_user_views_default_views() {
   $handler->display->display_options['fields']['title_1']['label'] = '';
   $handler->display->display_options['fields']['title_1']['element_class'] = 'ol-item-challenge';
   $handler->display->display_options['fields']['title_1']['element_label_colon'] = FALSE;
+  /* Field: Content: Post date */
+  $handler->display->display_options['fields']['created']['id'] = 'created';
+  $handler->display->display_options['fields']['created']['table'] = 'node';
+  $handler->display->display_options['fields']['created']['field'] = 'created';
+  $handler->display->display_options['fields']['created']['label'] = '';
+  $handler->display->display_options['fields']['created']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['created']['date_format'] = 'custom';
+  $handler->display->display_options['fields']['created']['custom_date_format'] = 'j.n.y';
+  $handler->display->display_options['fields']['created']['second_date_format'] = 'long';
   /* Field: Content: Body */
   $handler->display->display_options['fields']['body']['id'] = 'body';
   $handler->display->display_options['fields']['body']['table'] = 'field_data_body';
@@ -661,16 +692,6 @@ function fe_user_views_default_views() {
   $handler->display->display_options['fields']['body']['settings'] = array(
     'trim_length' => '600',
   );
-  /* Field: Content: Post date */
-  $handler->display->display_options['fields']['created']['id'] = 'created';
-  $handler->display->display_options['fields']['created']['table'] = 'node';
-  $handler->display->display_options['fields']['created']['field'] = 'created';
-  $handler->display->display_options['fields']['created']['label'] = '';
-  $handler->display->display_options['fields']['created']['exclude'] = TRUE;
-  $handler->display->display_options['fields']['created']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['created']['date_format'] = 'custom';
-  $handler->display->display_options['fields']['created']['custom_date_format'] = 'j.n.y';
-  $handler->display->display_options['fields']['created']['second_date_format'] = 'long';
   /* Field: Content statistics: Total views */
   $handler->display->display_options['fields']['totalcount']['id'] = 'totalcount';
   $handler->display->display_options['fields']['totalcount']['table'] = 'node_counter';
@@ -704,10 +725,11 @@ function fe_user_views_default_views() {
   $handler->display->display_options['fields']['nothing']['label'] = '';
   $handler->display->display_options['fields']['nothing']['alter']['text'] = '<div class="row-bottom-openideal">
 	<div class="details">
-		<div class="dates">[created]</div>
+                <div class="vote-count">[field_vote]</div>
 		<div class="views-count">[totalcount]</div>
 		<div class="comment-count">[comment_count]</div>
-		<div class="vote-count">[field_vote]</div>
+            
+		
 	</div>
 </div>';
   $handler->display->display_options['fields']['nothing']['element_label_colon'] = FALSE;
@@ -730,14 +752,7 @@ function fe_user_views_default_views() {
     t('Sort by'),
     t('Asc'),
     t('Desc'),
-    t('Items per page'),
-    t('- All -'),
-    t('Offset'),
-    t('« first'),
-    t('‹ previous'),
-    t('next ›'),
-    t('last »'),
-    t('<?php print t("This user has no ideas yet."); ?>'),
+    t('<?php print t("This user has no solutions yet."); ?>'),
     t('flag'),
     t('User entity referenced from field_moderator'),
     t('Content entity referenced from field_challenge_ref'),
@@ -751,13 +766,14 @@ function fe_user_views_default_views() {
 </div>'),
     t('All'),
     t('User Ideas'),
-    t('Content pane'),
+    t('User ideas full'),
     t('<div class="row-bottom-openideal">
 	<div class="details">
-		<div class="dates">[created]</div>
+                <div class="vote-count">[field_vote]</div>
 		<div class="views-count">[totalcount]</div>
 		<div class="comment-count">[comment_count]</div>
-		<div class="vote-count">[field_vote]</div>
+            
+		
 	</div>
 </div>'),
     t('View panes'),

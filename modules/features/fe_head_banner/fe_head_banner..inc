@@ -11,8 +11,8 @@ function fe_head_banner_default_block_machine_name_boxes() {
   $export = array();
 
   $block_machine_name_boxes = new stdClass();
-  $block_machine_name_boxes->machine_name = 'banner_header_confucius';
-  $export['banner_header_confucius'] = $block_machine_name_boxes;
+  $block_machine_name_boxes->machine_name = 'banner_header_innovate';
+  $export['banner_header_innovate'] = $block_machine_name_boxes;
 
   return $export;
 }

@@ -58,7 +58,7 @@ function fe_idea_default_page_manager_pages() {
     ),
   );
   $display->cache = array();
-  $display->title = '';
+  $display->title = 'Solutions';
   $display->uuid = '17b296fb-32c9-443c-9756-128212b80a39';
   $display->content = array();
   $display->panels = array();
@@ -71,7 +71,8 @@ function fe_idea_default_page_manager_pages() {
     $pane->access = array();
     $pane->configuration = array(
       'override_title' => 1,
-      'override_title_text' => 'Ideas',
+      'override_title_text' => 'solutions',
+      'override_title_heading' => 'h2',
     );
     $pane->cache = array();
     $pane->style = array(
@@ -117,7 +118,7 @@ function fe_idea_default_page_manager_pages() {
     $pane->panel = 'region_second';
     $pane->type = 'block';
     $pane->subtype = 'ideal_blocks-ideal_key_stats';
-    $pane->shown = TRUE;
+    $pane->shown = FALSE;
     $pane->access = array();
     $pane->configuration = array(
       'override_title' => 1,
@@ -140,7 +141,7 @@ function fe_idea_default_page_manager_pages() {
     $pane->panel = 'region_second';
     $pane->type = 'views';
     $pane->subtype = 'activity';
-    $pane->shown = TRUE;
+    $pane->shown = FALSE;
     $pane->access = array();
     $pane->configuration = array(
       'override_pager_settings' => 0,
@@ -173,6 +174,41 @@ function fe_idea_default_page_manager_pages() {
     $pane->uuid = '309e6623-ebd3-4631-b990-8ad132a5ca75';
     $display->content['new-309e6623-ebd3-4631-b990-8ad132a5ca75'] = $pane;
     $display->panels['region_second'][2] = 'new-309e6623-ebd3-4631-b990-8ad132a5ca75';
+    $pane = new stdClass();
+    $pane->pid = 'new-6344da81-eab8-49c0-a3f3-7d1f2a7ba3ad';
+    $pane->panel = 'region_second';
+    $pane->type = 'views';
+    $pane->subtype = 'activity';
+    $pane->shown = TRUE;
+    $pane->access = array();
+    $pane->configuration = array(
+      'override_pager_settings' => 0,
+      'use_pager' => 0,
+      'nodes_per_page' => '4',
+      'pager_id' => '0',
+      'offset' => '0',
+      'more_link' => 0,
+      'feed_icons' => 0,
+      'panel_args' => 0,
+      'link_to_view' => 0,
+      'args' => '',
+      'url' => '',
+      'display' => 'comment_hp',
+      'override_title' => 1,
+      'override_title_text' => 'Comments',
+      'override_title_heading' => 'h2',
+    );
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 3;
+    $pane->locks = array();
+    $pane->uuid = '6344da81-eab8-49c0-a3f3-7d1f2a7ba3ad';
+    $display->content['new-6344da81-eab8-49c0-a3f3-7d1f2a7ba3ad'] = $pane;
+    $display->panels['region_second'][3] = 'new-6344da81-eab8-49c0-a3f3-7d1f2a7ba3ad';
   $display->hide_title = PANELS_TITLE_FIXED;
   $display->title_pane = '0';
   $handler->conf['display'] = $display;

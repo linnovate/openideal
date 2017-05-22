@@ -761,6 +761,15 @@ function fe_idea_views_default_views() {
   $handler->display->display_options['pager']['options']['offset'] = '0';
   $handler->display->display_options['style_plugin'] = 'default';
   $handler->display->display_options['row_plugin'] = 'fields';
+  /* Header: Global: PHP */
+  $handler->display->display_options['header']['php']['id'] = 'php';
+  $handler->display->display_options['header']['php']['table'] = 'views';
+  $handler->display->display_options['header']['php']['field'] = 'php';
+  $handler->display->display_options['header']['php']['php_output'] = '<?php
+print checkAuthor() ;
+?> 
+
+';
   /* Relationship: Entity Reference: Referenced Entity */
   $handler->display->display_options['relationships']['field_challenge_ref_target_id']['id'] = 'field_challenge_ref_target_id';
   $handler->display->display_options['relationships']['field_challenge_ref_target_id']['table'] = 'field_data_field_challenge_ref';
@@ -906,15 +915,53 @@ function fe_idea_views_default_views() {
   $handler->display->display_options['row_plugin'] = 'fields';
   $handler->display->display_options['defaults']['row_options'] = FALSE;
   $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: Content: Idea image */
+  $handler->display->display_options['fields']['field_idea_image']['id'] = 'field_idea_image';
+  $handler->display->display_options['fields']['field_idea_image']['table'] = 'field_data_field_idea_image';
+  $handler->display->display_options['fields']['field_idea_image']['field'] = 'field_idea_image';
+  $handler->display->display_options['fields']['field_idea_image']['label'] = '';
+  $handler->display->display_options['fields']['field_idea_image']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_idea_image']['click_sort_column'] = 'fid';
+  $handler->display->display_options['fields']['field_idea_image']['settings'] = array(
+    'image_style' => '',
+    'image_link' => '',
+  );
+  $handler->display->display_options['fields']['field_idea_image']['delta_limit'] = '1';
+  $handler->display->display_options['fields']['field_idea_image']['delta_offset'] = '0';
+  $handler->display->display_options['fields']['field_idea_image']['separator'] = ' ';
   /* Field: Content: Title */
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'node';
   $handler->display->display_options['fields']['title']['field'] = 'title';
   $handler->display->display_options['fields']['title']['label'] = '';
+  $handler->display->display_options['fields']['title']['exclude'] = TRUE;
   $handler->display->display_options['fields']['title']['element_type'] = 'h1';
   $handler->display->display_options['fields']['title']['element_class'] = 'ol-item-title';
   $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
+  /* Field: Content: Body */
+  $handler->display->display_options['fields']['body_1']['id'] = 'body_1';
+  $handler->display->display_options['fields']['body_1']['table'] = 'field_data_body';
+  $handler->display->display_options['fields']['body_1']['field'] = 'body';
+  $handler->display->display_options['fields']['body_1']['label'] = 'Description';
+  $handler->display->display_options['fields']['body_1']['hide_empty'] = TRUE;
+  /* Field: Content: Insight */
+  $handler->display->display_options['fields']['field_insight']['id'] = 'field_insight';
+  $handler->display->display_options['fields']['field_insight']['table'] = 'field_data_field_insight';
+  $handler->display->display_options['fields']['field_insight']['field'] = 'field_insight';
+  $handler->display->display_options['fields']['field_insight']['hide_empty'] = TRUE;
+  /* Field: Content: Idea */
+  $handler->display->display_options['fields']['field_idea']['id'] = 'field_idea';
+  $handler->display->display_options['fields']['field_idea']['table'] = 'field_data_field_idea';
+  $handler->display->display_options['fields']['field_idea']['field'] = 'field_idea';
+  /* Field: Content: How it Works */
+  $handler->display->display_options['fields']['field_how_it_works']['id'] = 'field_how_it_works';
+  $handler->display->display_options['fields']['field_how_it_works']['table'] = 'field_data_field_how_it_works';
+  $handler->display->display_options['fields']['field_how_it_works']['field'] = 'field_how_it_works';
+  /* Field: Content: Business Results */
+  $handler->display->display_options['fields']['field_business_results']['id'] = 'field_business_results';
+  $handler->display->display_options['fields']['field_business_results']['table'] = 'field_data_field_business_results';
+  $handler->display->display_options['fields']['field_business_results']['field'] = 'field_business_results';
   /* Field: Content: Title */
   $handler->display->display_options['fields']['title_1']['id'] = 'title_1';
   $handler->display->display_options['fields']['title_1']['table'] = 'node';
@@ -923,15 +970,6 @@ function fe_idea_views_default_views() {
   $handler->display->display_options['fields']['title_1']['label'] = '';
   $handler->display->display_options['fields']['title_1']['exclude'] = TRUE;
   $handler->display->display_options['fields']['title_1']['element_label_colon'] = FALSE;
-  /* Field: Content: Body */
-  $handler->display->display_options['fields']['body']['id'] = 'body';
-  $handler->display->display_options['fields']['body']['table'] = 'field_data_body';
-  $handler->display->display_options['fields']['body']['field'] = 'body';
-  $handler->display->display_options['fields']['body']['label'] = '';
-  $handler->display->display_options['fields']['body']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['body']['settings'] = array(
-    'trim_length' => '600',
-  );
   /* Field: User: Name */
   $handler->display->display_options['fields']['name']['id'] = 'name';
   $handler->display->display_options['fields']['name']['table'] = 'users';
@@ -999,6 +1037,21 @@ function fe_idea_views_default_views() {
   $handler->display->display_options['fields']['title_2']['alter']['alter_text'] = TRUE;
   $handler->display->display_options['fields']['title_2']['alter']['text'] = '[php_1]';
   $handler->display->display_options['fields']['title_2']['element_label_colon'] = FALSE;
+  /* Field: Field: Vote */
+  $handler->display->display_options['fields']['field_vote']['id'] = 'field_vote';
+  $handler->display->display_options['fields']['field_vote']['table'] = 'field_data_field_vote';
+  $handler->display->display_options['fields']['field_vote']['field'] = 'field_vote';
+  $handler->display->display_options['fields']['field_vote']['label'] = '';
+  $handler->display->display_options['fields']['field_vote']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_vote']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_vote']['click_sort_column'] = 'vud_widget';
+  /* Field: Content statistics: Total views */
+  $handler->display->display_options['fields']['totalcount']['id'] = 'totalcount';
+  $handler->display->display_options['fields']['totalcount']['table'] = 'node_counter';
+  $handler->display->display_options['fields']['totalcount']['field'] = 'totalcount';
+  $handler->display->display_options['fields']['totalcount']['label'] = '';
+  $handler->display->display_options['fields']['totalcount']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['totalcount']['element_label_colon'] = FALSE;
   /* Field: FOTTER */
   $handler->display->display_options['fields']['nothing']['id'] = 'nothing';
   $handler->display->display_options['fields']['nothing']['table'] = 'views';
@@ -1008,17 +1061,11 @@ function fe_idea_views_default_views() {
   $handler->display->display_options['fields']['nothing']['alter']['text'] = '<div class="row-bottom-openideal">
     <div class="author">
 	   <div class="picture">[picture]</div>
-	   <div class="wrap">
 		   <div class="created">[php]</div>
 		   <div class="name">[name]</div>
-	   </div>
-	   <div class="share">
-	   	[field_share]
-	   </div>
     </div>
     <div class="details">
-           <div class="subject">[title_2]</div>    
-		<div class="dates">[created]</div>
+		<div class="views-count">[totalcount]</div>
 	</div>
 </div>';
   $handler->display->display_options['fields']['nothing']['element_label_colon'] = FALSE;
@@ -1049,21 +1096,20 @@ function fe_idea_views_default_views() {
 </div>'),
     t('All'),
     t('Idea display'),
+    t('Description'),
+    t('Insight'),
+    t('Idea'),
+    t('How it Works'),
+    t('Business Results'),
     t('[php_1]'),
     t('<div class="row-bottom-openideal">
     <div class="author">
 	   <div class="picture">[picture]</div>
-	   <div class="wrap">
 		   <div class="created">[php]</div>
 		   <div class="name">[name]</div>
-	   </div>
-	   <div class="share">
-	   	[field_share]
-	   </div>
     </div>
     <div class="details">
-           <div class="subject">[title_2]</div>    
-		<div class="dates">[created]</div>
+		<div class="views-count">[totalcount]</div>
 	</div>
 </div>'),
   );
@@ -1240,12 +1286,6 @@ Why not add an idea?';
   $handler->display->display_options['filters']['status_extra']['field'] = 'status_extra';
   $handler->display->display_options['filters']['status_extra']['group'] = 0;
   $handler->display->display_options['filters']['status_extra']['expose']['operator'] = FALSE;
-  /* Filter criterion: Flags: Flagged */
-  $handler->display->display_options['filters']['flagged']['id'] = 'flagged';
-  $handler->display->display_options['filters']['flagged']['table'] = 'flag_content';
-  $handler->display->display_options['filters']['flagged']['field'] = 'flagged';
-  $handler->display->display_options['filters']['flagged']['relationship'] = 'flag_content_rel';
-  $handler->display->display_options['filters']['flagged']['value'] = '0';
   /* Filter criterion: Content: Type */
   $handler->display->display_options['filters']['type']['id'] = 'type';
   $handler->display->display_options['filters']['type']['table'] = 'node';
@@ -1397,29 +1437,26 @@ Why not add an idea?';
   $handler->display->display_options['fields']['nothing']['alter']['text'] = '<div class="row-bottom-openideal">
     <div class="author">
 	   <div class="picture">[picture]</div>
-	   <div class="wrap">
 		   <div class="created">[php]</div>
 		   <div class="name">[name]</div>
-	   </div>
     </div>
     <div class="details">
-		<div class="dates">[created]</div>
+		<div class="vote-count">[field_vote]</div>
 		<div class="views-count">[totalcount]</div>
 		<div class="comment-count">[comment_count]</div>
-		<div class="vote-count">[field_vote]</div>
 	</div>
 </div>';
   $handler->display->display_options['fields']['nothing']['element_label_colon'] = FALSE;
   $handler->display->display_options['defaults']['sorts'] = FALSE;
 
   /* Display: Latest Ideas */
-  $handler = $view->new_display('block', 'Latest Ideas', 'block_2');
+  $handler = $view->new_display('block', 'Latest Ideas', 'latest_solutions');
+  $handler->display->display_options['defaults']['title'] = FALSE;
+  $handler->display->display_options['title'] = 'Latest Solutions';
   $handler->display->display_options['defaults']['pager'] = FALSE;
-  $handler->display->display_options['pager']['type'] = 'full';
-  $handler->display->display_options['pager']['options']['items_per_page'] = '10';
+  $handler->display->display_options['pager']['type'] = 'some';
+  $handler->display->display_options['pager']['options']['items_per_page'] = '3';
   $handler->display->display_options['pager']['options']['offset'] = '0';
-  $handler->display->display_options['pager']['options']['id'] = '0';
-  $handler->display->display_options['pager']['options']['quantity'] = '9';
   $handler->display->display_options['defaults']['style_plugin'] = FALSE;
   $handler->display->display_options['style_plugin'] = 'default';
   $handler->display->display_options['style_options']['row_class'] = 'ol-item idea';
@@ -1438,11 +1475,12 @@ Why not add an idea?';
   $handler->display->display_options['fields']['field_idea_image']['hide_empty'] = TRUE;
   $handler->display->display_options['fields']['field_idea_image']['click_sort_column'] = 'fid';
   $handler->display->display_options['fields']['field_idea_image']['settings'] = array(
-    'image_style' => 'medium',
+    'image_style' => 'latest_solutions',
     'image_link' => '',
   );
   $handler->display->display_options['fields']['field_idea_image']['delta_limit'] = '1';
   $handler->display->display_options['fields']['field_idea_image']['delta_offset'] = '0';
+  $handler->display->display_options['fields']['field_idea_image']['separator'] = '';
   /* Field: Content: Title */
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'node';
@@ -1467,6 +1505,20 @@ Why not add an idea?';
   $handler->display->display_options['fields']['body']['settings'] = array(
     'trim_length' => '600',
   );
+  /* Field: Content: Idea */
+  $handler->display->display_options['fields']['field_idea']['id'] = 'field_idea';
+  $handler->display->display_options['fields']['field_idea']['table'] = 'field_data_field_idea';
+  $handler->display->display_options['fields']['field_idea']['field'] = 'field_idea';
+  $handler->display->display_options['fields']['field_idea']['label'] = '';
+  $handler->display->display_options['fields']['field_idea']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_idea']['hide_empty'] = TRUE;
+  /* Field: Content: Link */
+  $handler->display->display_options['fields']['view_node']['id'] = 'view_node';
+  $handler->display->display_options['fields']['view_node']['table'] = 'views_entity_node';
+  $handler->display->display_options['fields']['view_node']['field'] = 'view_node';
+  $handler->display->display_options['fields']['view_node']['label'] = '';
+  $handler->display->display_options['fields']['view_node']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['view_node']['text'] = 'Read more';
   /* Field: User: Name */
   $handler->display->display_options['fields']['name']['id'] = 'name';
   $handler->display->display_options['fields']['name']['table'] = 'users';
@@ -1547,16 +1599,14 @@ Why not add an idea?';
   $handler->display->display_options['fields']['nothing']['alter']['text'] = '<div class="row-bottom-openideal">
     <div class="author">
 	   <div class="picture">[picture]</div>
-	   <div class="wrap">
 		   <div class="created">[php]</div>
 		   <div class="name">[name]</div>
-	   </div>
     </div>
     <div class="details">
-		<div class="dates">[created]</div>
 		<div class="views-count">[totalcount]</div>
+	        <div class="vote-count">[field_vote]</div>
 		<div class="comment-count">[comment_count]</div>
-		<div class="vote-count">[field_vote]</div>
+	
 	</div>
 </div>
 ';
@@ -1598,7 +1648,7 @@ Why not add an idea?';
   $handler->display->display_options['fields']['field_idea_image']['hide_empty'] = TRUE;
   $handler->display->display_options['fields']['field_idea_image']['click_sort_column'] = 'fid';
   $handler->display->display_options['fields']['field_idea_image']['settings'] = array(
-    'image_style' => 'medium',
+    'image_style' => 'idea_image',
     'image_link' => '',
   );
   $handler->display->display_options['fields']['field_idea_image']['delta_limit'] = '1';
@@ -1734,21 +1784,182 @@ Why not add an idea?';
   $handler->display->display_options['filters']['status_extra']['field'] = 'status_extra';
   $handler->display->display_options['filters']['status_extra']['group'] = 0;
   $handler->display->display_options['filters']['status_extra']['expose']['operator'] = FALSE;
+  /* Filter criterion: Content: In Action (field_in_action) */
+  $handler->display->display_options['filters']['field_in_action_value']['id'] = 'field_in_action_value';
+  $handler->display->display_options['filters']['field_in_action_value']['table'] = 'field_data_field_in_action';
+  $handler->display->display_options['filters']['field_in_action_value']['field'] = 'field_in_action_value';
+  $handler->display->display_options['filters']['field_in_action_value']['operator'] = 'not empty';
   /* Filter criterion: Content: Language */
   $handler->display->display_options['filters']['language']['id'] = 'language';
   $handler->display->display_options['filters']['language']['table'] = 'node';
   $handler->display->display_options['filters']['language']['field'] = 'language';
   $handler->display->display_options['filters']['language']['value'] = array(
     '***CURRENT_LANGUAGE***' => '***CURRENT_LANGUAGE***',
-    'und' => 'und',
   );
-  /* Filter criterion: Content: Type */
-  $handler->display->display_options['filters']['type']['id'] = 'type';
-  $handler->display->display_options['filters']['type']['table'] = 'node';
-  $handler->display->display_options['filters']['type']['field'] = 'type';
-  $handler->display->display_options['filters']['type']['value'] = array(
-    'idea' => 'idea',
+
+  /* Display: Ideas in popup */
+  $handler = $view->new_display('block', 'Ideas in popup', 'block_2');
+  $handler->display->display_options['defaults']['title'] = FALSE;
+  $handler->display->display_options['title'] = 'Ideas in popup';
+  $handler->display->display_options['defaults']['pager'] = FALSE;
+  $handler->display->display_options['pager']['type'] = 'some';
+  $handler->display->display_options['pager']['options']['items_per_page'] = '2';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
+  $handler->display->display_options['defaults']['style_plugin'] = FALSE;
+  $handler->display->display_options['style_plugin'] = 'default';
+  $handler->display->display_options['style_options']['row_class'] = 'ol-item idea';
+  $handler->display->display_options['defaults']['style_options'] = FALSE;
+  $handler->display->display_options['defaults']['row_plugin'] = FALSE;
+  $handler->display->display_options['row_plugin'] = 'fields';
+  $handler->display->display_options['defaults']['row_options'] = FALSE;
+  $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: Content: Idea image */
+  $handler->display->display_options['fields']['field_idea_image']['id'] = 'field_idea_image';
+  $handler->display->display_options['fields']['field_idea_image']['table'] = 'field_data_field_idea_image';
+  $handler->display->display_options['fields']['field_idea_image']['field'] = 'field_idea_image';
+  $handler->display->display_options['fields']['field_idea_image']['label'] = '';
+  $handler->display->display_options['fields']['field_idea_image']['element_class'] = 'ol-item-image';
+  $handler->display->display_options['fields']['field_idea_image']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_idea_image']['hide_empty'] = TRUE;
+  $handler->display->display_options['fields']['field_idea_image']['click_sort_column'] = 'fid';
+  $handler->display->display_options['fields']['field_idea_image']['settings'] = array(
+    'image_style' => 'latest_solutions',
+    'image_link' => '',
   );
+  $handler->display->display_options['fields']['field_idea_image']['delta_limit'] = '1';
+  $handler->display->display_options['fields']['field_idea_image']['delta_offset'] = '0';
+  $handler->display->display_options['fields']['field_idea_image']['separator'] = '';
+  /* Field: Content: Title */
+  $handler->display->display_options['fields']['title']['id'] = 'title';
+  $handler->display->display_options['fields']['title']['table'] = 'node';
+  $handler->display->display_options['fields']['title']['field'] = 'title';
+  $handler->display->display_options['fields']['title']['label'] = '';
+  $handler->display->display_options['fields']['title']['element_class'] = 'ol-item-title';
+  $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
+  /* Field: Content: Title */
+  $handler->display->display_options['fields']['title_1']['id'] = 'title_1';
+  $handler->display->display_options['fields']['title_1']['table'] = 'node';
+  $handler->display->display_options['fields']['title_1']['field'] = 'title';
+  $handler->display->display_options['fields']['title_1']['relationship'] = 'field_challenge_ref_target_id';
+  $handler->display->display_options['fields']['title_1']['label'] = '';
+  $handler->display->display_options['fields']['title_1']['element_label_colon'] = FALSE;
+  /* Field: Content: Idea */
+  $handler->display->display_options['fields']['field_idea']['id'] = 'field_idea';
+  $handler->display->display_options['fields']['field_idea']['table'] = 'field_data_field_idea';
+  $handler->display->display_options['fields']['field_idea']['field'] = 'field_idea';
+  $handler->display->display_options['fields']['field_idea']['label'] = '';
+  $handler->display->display_options['fields']['field_idea']['element_label_colon'] = FALSE;
+  /* Field: Content: Body */
+  $handler->display->display_options['fields']['body']['id'] = 'body';
+  $handler->display->display_options['fields']['body']['table'] = 'field_data_body';
+  $handler->display->display_options['fields']['body']['field'] = 'body';
+  $handler->display->display_options['fields']['body']['label'] = '';
+  $handler->display->display_options['fields']['body']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['body']['type'] = 'text_plain';
+  $handler->display->display_options['fields']['body']['settings'] = array(
+    'trim_length' => '600',
+  );
+  /* Field: Content: Link */
+  $handler->display->display_options['fields']['view_node']['id'] = 'view_node';
+  $handler->display->display_options['fields']['view_node']['table'] = 'views_entity_node';
+  $handler->display->display_options['fields']['view_node']['field'] = 'view_node';
+  $handler->display->display_options['fields']['view_node']['label'] = '';
+  $handler->display->display_options['fields']['view_node']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['view_node']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['view_node']['text'] = 'Read more';
+  /* Field: User: Name */
+  $handler->display->display_options['fields']['name']['id'] = 'name';
+  $handler->display->display_options['fields']['name']['table'] = 'users';
+  $handler->display->display_options['fields']['name']['field'] = 'name';
+  $handler->display->display_options['fields']['name']['relationship'] = 'uid';
+  $handler->display->display_options['fields']['name']['label'] = '';
+  $handler->display->display_options['fields']['name']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['name']['element_label_colon'] = FALSE;
+  /* Field: User: Picture */
+  $handler->display->display_options['fields']['picture']['id'] = 'picture';
+  $handler->display->display_options['fields']['picture']['table'] = 'users';
+  $handler->display->display_options['fields']['picture']['field'] = 'picture';
+  $handler->display->display_options['fields']['picture']['relationship'] = 'uid';
+  $handler->display->display_options['fields']['picture']['label'] = '';
+  $handler->display->display_options['fields']['picture']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['picture']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['picture']['image_style'] = 'avatar_45_45';
+  /* Field: Content: In Action */
+  $handler->display->display_options['fields']['field_in_action']['id'] = 'field_in_action';
+  $handler->display->display_options['fields']['field_in_action']['table'] = 'field_data_field_in_action';
+  $handler->display->display_options['fields']['field_in_action']['field'] = 'field_in_action';
+  $handler->display->display_options['fields']['field_in_action']['label'] = '';
+  $handler->display->display_options['fields']['field_in_action']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_in_action']['element_label_colon'] = FALSE;
+  /* Field: Content: Post date */
+  $handler->display->display_options['fields']['created']['id'] = 'created';
+  $handler->display->display_options['fields']['created']['table'] = 'node';
+  $handler->display->display_options['fields']['created']['field'] = 'created';
+  $handler->display->display_options['fields']['created']['label'] = '';
+  $handler->display->display_options['fields']['created']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['created']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['created']['date_format'] = 'custom';
+  $handler->display->display_options['fields']['created']['custom_date_format'] = 'd.m.y';
+  $handler->display->display_options['fields']['created']['second_date_format'] = 'long';
+  /* Field: Content statistics: Total views */
+  $handler->display->display_options['fields']['totalcount']['id'] = 'totalcount';
+  $handler->display->display_options['fields']['totalcount']['table'] = 'node_counter';
+  $handler->display->display_options['fields']['totalcount']['field'] = 'totalcount';
+  $handler->display->display_options['fields']['totalcount']['label'] = '';
+  $handler->display->display_options['fields']['totalcount']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['totalcount']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['totalcount']['hide_empty'] = TRUE;
+  $handler->display->display_options['fields']['totalcount']['empty_zero'] = TRUE;
+  /* Field: Content: Comment count */
+  $handler->display->display_options['fields']['comment_count']['id'] = 'comment_count';
+  $handler->display->display_options['fields']['comment_count']['table'] = 'node_comment_statistics';
+  $handler->display->display_options['fields']['comment_count']['field'] = 'comment_count';
+  $handler->display->display_options['fields']['comment_count']['label'] = '';
+  $handler->display->display_options['fields']['comment_count']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['comment_count']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['comment_count']['separator'] = '.';
+  /* Field: Field: Vote */
+  $handler->display->display_options['fields']['field_vote']['id'] = 'field_vote';
+  $handler->display->display_options['fields']['field_vote']['table'] = 'field_data_field_vote';
+  $handler->display->display_options['fields']['field_vote']['field'] = 'field_vote';
+  $handler->display->display_options['fields']['field_vote']['label'] = '';
+  $handler->display->display_options['fields']['field_vote']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_vote']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_vote']['click_sort_column'] = 'vud_widget';
+  /* Field: created by */
+  $handler->display->display_options['fields']['php']['id'] = 'php';
+  $handler->display->display_options['fields']['php']['table'] = 'views';
+  $handler->display->display_options['fields']['php']['field'] = 'php';
+  $handler->display->display_options['fields']['php']['ui_name'] = 'created by';
+  $handler->display->display_options['fields']['php']['label'] = '';
+  $handler->display->display_options['fields']['php']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['php']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['php']['use_php_setup'] = 0;
+  $handler->display->display_options['fields']['php']['php_value'] = 'return t(\'Created by\');';
+  $handler->display->display_options['fields']['php']['use_php_click_sortable'] = '0';
+  $handler->display->display_options['fields']['php']['php_click_sortable'] = '';
+  /* Field: FOTTER */
+  $handler->display->display_options['fields']['nothing']['id'] = 'nothing';
+  $handler->display->display_options['fields']['nothing']['table'] = 'views';
+  $handler->display->display_options['fields']['nothing']['field'] = 'nothing';
+  $handler->display->display_options['fields']['nothing']['ui_name'] = 'FOTTER';
+  $handler->display->display_options['fields']['nothing']['label'] = '';
+  $handler->display->display_options['fields']['nothing']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['nothing']['alter']['text'] = '<div class="row-bottom-openideal">
+    <div class="author">
+	   <div class="picture">[picture]</div>
+		   <div class="created">[php]</div>
+		   <div class="name">[name]</div>
+    </div>
+    <div class="details">
+		<div class="views-count">[totalcount]</div>
+	        <div class="vote-count">[field_vote]</div>
+		<div class="comment-count">[comment_count]</div>
+	
+	</div>
+</div>
+';
+  $handler->display->display_options['fields']['nothing']['element_label_colon'] = FALSE;
   $translatables['ideas_all'] = array(
     t('Master'),
     t('more'),
@@ -1787,19 +1998,34 @@ Why not add an idea?'),
     t('<div class="row-bottom-openideal">
     <div class="author">
 	   <div class="picture">[picture]</div>
-	   <div class="wrap">
 		   <div class="created">[php]</div>
 		   <div class="name">[name]</div>
-	   </div>
     </div>
     <div class="details">
-		<div class="dates">[created]</div>
+		<div class="vote-count">[field_vote]</div>
 		<div class="views-count">[totalcount]</div>
 		<div class="comment-count">[comment_count]</div>
-		<div class="vote-count">[field_vote]</div>
 	</div>
 </div>'),
     t('Latest Ideas'),
+    t('Latest Solutions'),
+    t('Read more'),
+    t('<div class="row-bottom-openideal">
+    <div class="author">
+	   <div class="picture">[picture]</div>
+		   <div class="created">[php]</div>
+		   <div class="name">[name]</div>
+    </div>
+    <div class="details">
+		<div class="views-count">[totalcount]</div>
+	        <div class="vote-count">[field_vote]</div>
+		<div class="comment-count">[comment_count]</div>
+	
+	</div>
+</div>
+'),
+    t('Ideas in Action'),
+    t('There are no ideas in action yet.'),
     t('<div class="row-bottom-openideal">
     <div class="author">
 	   <div class="picture">[picture]</div>
@@ -1814,10 +2040,8 @@ Why not add an idea?'),
 		<div class="comment-count">[comment_count]</div>
 		<div class="vote-count">[field_vote]</div>
 	</div>
-</div>
-'),
-    t('Ideas in Action'),
-    t('There are no ideas in action yet.'),
+</div>'),
+    t('Ideas in popup'),
   );
   $export['ideas_all'] = $view;
 

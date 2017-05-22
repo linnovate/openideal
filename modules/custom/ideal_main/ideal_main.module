@@ -352,7 +352,7 @@ function ideal_main_comments_link($path = FALSE) {
   }
   global $user;
   if ($user->uid) {
-    return l(t('Add comment'), $path, array('fragment' => 'comment-form-id'));
+    return l(t('comment'), $path, array('fragment' => 'comment-form-id'));
   } else {
     return l(t('Login/Register to post comments'), '/user/login');
   }
@@ -458,7 +458,7 @@ function ideal_main_form_user_profile_form_alter(&$form, &$form_state) {
   //   'account' => array('roles', 'status')
   // );
 
-  $form = ideal_main_set_form_properties($form, $hidden_fields,  array('#access' => false));
+  // $form = ideal_main_set_form_properties($form, $hidden_fields,  array('#access' => false));
 
   //move bio field to be near the name field
   $form['account']['field_bio'] = $form['field_bio'];
@@ -516,7 +516,7 @@ function ideal_main_get_editing_url($uid) {
   $path = "members/" . $uid . "/edit";
   if ($router_item = menu_get_item($path)) {
     if ($router_item['access']) {
-      return l(t('Editing'), $path);
+      return l(t('Edit'), $path);
     }
   }
   return '';

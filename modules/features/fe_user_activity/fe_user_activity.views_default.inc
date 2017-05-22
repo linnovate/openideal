@@ -299,13 +299,19 @@ function fe_user_activity_views_default_views() {
   );
 
   /* Display: Comments_HP */
-  $handler = $view->new_display('block', 'Comments_HP', 'block_4');
+  $handler = $view->new_display('block', 'Comments_HP', 'comment_hp');
   $handler->display->display_options['defaults']['title'] = FALSE;
-  $handler->display->display_options['title'] = 'Discussions';
+  $handler->display->display_options['title'] = 'Comments';
   $handler->display->display_options['defaults']['pager'] = FALSE;
   $handler->display->display_options['pager']['type'] = 'some';
-  $handler->display->display_options['pager']['options']['items_per_page'] = '5';
+  $handler->display->display_options['pager']['options']['items_per_page'] = '4';
   $handler->display->display_options['pager']['options']['offset'] = '0';
+  $handler->display->display_options['defaults']['header'] = FALSE;
+  /* Header: Global: PHP */
+  $handler->display->display_options['header']['php']['id'] = 'php';
+  $handler->display->display_options['header']['php']['table'] = 'views';
+  $handler->display->display_options['header']['php']['field'] = 'php';
+  $handler->display->display_options['header']['php']['php_output'] = '<p><?php print_r(count($results).  \' \'  .t("Last Comments"));?></p> ';
   $handler->display->display_options['defaults']['footer'] = FALSE;
   $handler->display->display_options['defaults']['relationships'] = FALSE;
   /* Relationship: Entity Reference: Referenced Entity */
@@ -337,6 +343,17 @@ function fe_user_activity_views_default_views() {
   $handler->display->display_options['fields']['view_comment']['label'] = '';
   $handler->display->display_options['fields']['view_comment']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['view_comment']['text'] = ' ';
+  $handler->display->display_options['fields']['view_comment']['link_to_node'] = TRUE;
+  /* Field: Comment: Updated date */
+  $handler->display->display_options['fields']['changed']['id'] = 'changed';
+  $handler->display->display_options['fields']['changed']['table'] = 'comment';
+  $handler->display->display_options['fields']['changed']['field'] = 'changed';
+  $handler->display->display_options['fields']['changed']['relationship'] = 'field_comment_target_id';
+  $handler->display->display_options['fields']['changed']['label'] = '';
+  $handler->display->display_options['fields']['changed']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['changed']['date_format'] = 'custom';
+  $handler->display->display_options['fields']['changed']['custom_date_format'] = 'n.j.Y g:i A';
+  $handler->display->display_options['fields']['changed']['second_date_format'] = 'long';
   $handler->display->display_options['defaults']['arguments'] = FALSE;
   /* Contextual filter: Comment: Nid */
   $handler->display->display_options['arguments']['nid']['id'] = 'nid';
@@ -374,7 +391,6 @@ function fe_user_activity_views_default_views() {
     t(' '),
     t('All'),
     t('Comments_HP'),
-    t('Discussions'),
   );
   $export['activity'] = $view;
 

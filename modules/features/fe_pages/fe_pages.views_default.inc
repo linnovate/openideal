@@ -42,7 +42,7 @@ function fe_pages_views_default_views() {
   $handler->display->display_options['header']['area_text_custom']['field'] = 'area_text_custom';
   $handler->display->display_options['header']['area_text_custom']['ui_name'] = 'View All link';
   $handler->display->display_options['header']['area_text_custom']['content'] = '<a href="challenges" class="view-all">כל המשימות</a>';
-  /* Field: Content: Challenge Image */
+  /* Field: Content: Upload Challenge Background Photo */
   $handler->display->display_options['fields']['field_challenge_image']['id'] = 'field_challenge_image';
   $handler->display->display_options['fields']['field_challenge_image']['table'] = 'field_data_field_challenge_image';
   $handler->display->display_options['fields']['field_challenge_image']['field'] = 'field_challenge_image';
@@ -143,7 +143,7 @@ function fe_pages_views_default_views() {
   $handler->display->display_options['relationships']['uid']['table'] = 'node';
   $handler->display->display_options['relationships']['uid']['field'] = 'uid';
   $handler->display->display_options['defaults']['fields'] = FALSE;
-  /* Field: Content: Challenge Image */
+  /* Field: Content: Upload Challenge Background Photo */
   $handler->display->display_options['fields']['field_challenge_image']['id'] = 'field_challenge_image';
   $handler->display->display_options['fields']['field_challenge_image']['table'] = 'field_data_field_challenge_image';
   $handler->display->display_options['fields']['field_challenge_image']['field'] = 'field_challenge_image';
