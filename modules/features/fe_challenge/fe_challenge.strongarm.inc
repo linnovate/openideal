@@ -142,10 +142,13 @@ function fe_challenge_strongarm() {
     'extra_fields' => array(
       'form' => array(
         'metatags' => array(
-          'weight' => '5',
+          'weight' => '10',
         ),
         'title' => array(
           'weight' => '0',
+        ),
+        'language' => array(
+          'weight' => '8',
         ),
       ),
       'display' => array(),

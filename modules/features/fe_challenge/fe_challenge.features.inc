@@ -27,6 +27,60 @@ function fe_challenge_views_api($module = NULL, $api = NULL) {
 }
 
 /**
+ * Implements hook_image_default_styles().
+ */
+function fe_challenge_image_default_styles() {
+  $styles = array();
+
+  // Exported image style: challenge_hp__500x325_.
+  $styles['challenge_hp__500x325_'] = array(
+    'label' => 'Challenge HP (500X325)',
+    'effects' => array(
+      1 => array(
+        'name' => 'image_resize',
+        'data' => array(
+          'width' => 498,
+          'height' => 325,
+        ),
+        'weight' => 1,
+      ),
+    ),
+  );
+
+  // Exported image style: singe_challenge.
+  $styles['singe_challenge'] = array(
+    'label' => 'singe_challenge',
+    'effects' => array(
+      9 => array(
+        'name' => 'image_scale_and_crop',
+        'data' => array(
+          'width' => 1040,
+          'height' => 321,
+        ),
+        'weight' => 2,
+      ),
+    ),
+  );
+
+  // Exported image style: singe_challenge_mobile.
+  $styles['singe_challenge_mobile'] = array(
+    'label' => 'singe challenge mobile',
+    'effects' => array(
+      2 => array(
+        'name' => 'image_scale_and_crop',
+        'data' => array(
+          'width' => 334,
+          'height' => 316,
+        ),
+        'weight' => 1,
+      ),
+    ),
+  );
+
+  return $styles;
+}
+
+/**
  * Implements hook_node_info().
  */
 function fe_challenge_node_info() {

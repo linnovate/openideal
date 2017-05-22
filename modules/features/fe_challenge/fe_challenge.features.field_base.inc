@@ -63,7 +63,7 @@ function fe_challenge_field_default_field_bases() {
   // Exported field_base: 'field_category'.
   $field_bases['field_category'] = array(
     'active' => 1,
-    'cardinality' => 1,
+    'cardinality' => -1,
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_category',
@@ -94,7 +94,7 @@ function fe_challenge_field_default_field_bases() {
   // Exported field_base: 'field_challenge_image'.
   $field_bases['field_challenge_image'] = array(
     'active' => 1,
-    'cardinality' => 1,
+    'cardinality' => 5,
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_challenge_image',
@@ -117,13 +117,35 @@ function fe_challenge_field_default_field_bases() {
     'type' => 'image',
   );
 
-  // Exported field_base: 'field_dates'.
-  $field_bases['field_dates'] = array(
+  // Exported field_base: 'field_consumer_insight'.
+  $field_bases['field_consumer_insight'] = array(
     'active' => 1,
     'cardinality' => 1,
     'deleted' => 0,
     'entity_types' => array(),
-    'field_name' => 'field_dates',
+    'field_name' => 'field_consumer_insight',
+    'field_permissions' => array(
+      'type' => 0,
+    ),
+    'indexes' => array(
+      'format' => array(
+        0 => 'format',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'text',
+    'settings' => array(),
+    'translatable' => 0,
+    'type' => 'text_with_summary',
+  );
+
+  // Exported field_base: 'field_date_challengedate'.
+  $field_bases['field_date_challengedate'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_date_challengedate',
     'field_permissions' => array(
       'type' => 0,
     ),
@@ -142,8 +164,40 @@ function fe_challenge_field_default_field_bases() {
         'year' => 'year',
       ),
       'timezone_db' => '',
-      'todate' => 'optional',
+      'todate' => '',
       'tz_handling' => 'none',
+    ),
+    'translatable' => 0,
+    'type' => 'datetime',
+  );
+
+  // Exported field_base: 'field_dates'.
+  $field_bases['field_dates'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_dates',
+    'field_permissions' => array(
+      'type' => 0,
+    ),
+    'indexes' => array(),
+    'locked' => 0,
+    'module' => 'date',
+    'settings' => array(
+      'cache_count' => 4,
+      'cache_enabled' => 0,
+      'granularity' => array(
+        'day' => 'day',
+        'hour' => 'hour',
+        'minute' => 'minute',
+        'month' => 'month',
+        'second' => 0,
+        'year' => 'year',
+      ),
+      'timezone_db' => 'UTC',
+      'todate' => 'optional',
+      'tz_handling' => 'site',
     ),
     'translatable' => 0,
     'type' => 'datetime',
@@ -185,6 +239,30 @@ function fe_challenge_field_default_field_bases() {
     ),
     'translatable' => 0,
     'type' => 'entityreference',
+  );
+
+  // Exported field_base: 'field_region_country'.
+  $field_bases['field_region_country'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_region_country',
+    'field_permissions' => array(
+      'type' => 0,
+    ),
+    'indexes' => array(
+      'format' => array(
+        0 => 'format',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'text',
+    'settings' => array(
+      'max_length' => 255,
+    ),
+    'translatable' => 0,
+    'type' => 'text',
   );
 
   // Exported field_base: 'field_share'.
