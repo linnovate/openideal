@@ -230,8 +230,8 @@ function fe_pages_default_panels_mini() {
       'admin_title' => 'Logo',
       'title' => '',
       'title_heading' => 'h2',
-      'body' => '<?php print \'<a href="/front" class="desc"><img alt=" \'.t("Home page").\' " height="56" src="/sites/all/themes/mediacom/images/mediacom-logo.png" title=" \'.t("Home page").\' "  width="145"></a>\';?>
-<?php print \'<a href="/front" class="mobile"><img alt=" \'.t("Home page").\' " height="56" src="/sites/all/themes/mediacom/images/Logo_Mobile2.png" title=" \'.t("Home page").\' "  width="117"></a>\';?>
+      'body' => '<?php print \'<a href="/front" class="desc"><img alt=" \'.t("Home page").\' " height="56" src="/profiles/idea/themes/confucius/images/confucius-logo.png" title=" \'.t("Home page").\' "  width="145"></a>\';?>
+<?php print \'<a href="/front" class="mobile"><img alt=" \'.t("Home page").\' " height="56" src="/profiles/idea/themes/confucius/images/Logo_Mobile2.png" title=" \'.t("Home page").\' "  width="117"></a>\';?>
 ',
       'format' => 'php_code',
       'substitute' => TRUE,
@@ -241,7 +241,7 @@ function fe_pages_default_panels_mini() {
       'settings' => NULL,
     );
     $pane->css = array(
-      'css_id' => 'logo_mediacom_header',
+      'css_id' => 'logo_confucius_header',
       'css_class' => '',
     );
     $pane->extras = array();

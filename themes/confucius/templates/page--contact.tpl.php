@@ -13,7 +13,7 @@
 
     <div class="content-wrapper">
         <div class="content-block">
-            <a class= "logo" href="/front"><img alt=" Home page " height="64" src="/sites/all/themes/confucius/images/confucius-logo.png" title=" Home page " width="164"></a>
+            <a class= "logo" href="/front"><img alt=" Home page " height="64" src="/profiles/idea/themes/confucius/images/confucius-logo.png" title=" Home page " width="164"></a>
         <div>            
             <!-- login screen -->
             <div class='title'>

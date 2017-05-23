@@ -46,7 +46,7 @@ function fe_sidebar_first_default_panels_mini() {
       'title' => '',
       'body' => '<div class ="header_menu">
 <a href="/"> 
-<div class = "header_name">Openidea</div>
+<div class = "header_name">OpenideaL</div>
   <div class ="sub_name">Powered by Linnovate</div>
 <span class="home-icon">icon-hom</span>
 </a>
