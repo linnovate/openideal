@@ -113,7 +113,7 @@ function _challenge_widget_add_challenge_button() {
   global $user;
   if ($user->uid) {
     idea_load_angular();
-    drupal_add_js(drupal_get_path('module', 'challenge_widget') . '/components/directives/idea-modal/idea-modal.js', array('weight' => 6));
+    drupal_add_js(drupal_get_path('module', 'challenge_widget') . '/components/directives/idea-modal/idea-modal.js', array('weight' => 6, 'preprocess' => false));
     $output = "<div id='challenge-modal-wrapper'>"."<idea-modal label='".t('Add a new challenge')."' action='Add idea' fromchallenge='yes'></idea-modal>"."</div>";
   } else {
     $output = challenge_widget_get_login_link(t('Login to add challenge'));
@@ -131,16 +131,16 @@ function challenge_widget_get_login_link($title) {
 
 
 function idea_load_angular(){
-  drupal_add_js(drupal_get_path('module', 'challenge_widget') . '/components/bower_components/angular/angular.min.js', array('weight' => 0));
-  drupal_add_js(drupal_get_path('module', 'challenge_widget') . '/components/bower_components/angular-file-upload/dist/angular-file-upload.min.js', array('weight' => 1));
-  drupal_add_js(drupal_get_path('module', 'challenge_widget') . '/components/bower_components/ng-file-upload/ng-file-upload.min.js', array('weight' => 2));
-  drupal_add_js(drupal_get_path('module', 'challenge_widget') . '/components/bower_components/angular-messages/angular-messages.min.js', array('weight' => 3));
-  drupal_add_js(drupal_get_path('module', 'challenge_widget') . '/components/bower_components/angular-animate/angular-animate.min.js', array('weight' => 4));
-  drupal_add_js(drupal_get_path('module', 'challenge_widget') . '/components/bower_components/angular-aria/angular-aria.min.js', array('weight' => 5));
-  drupal_add_js(drupal_get_path('module', 'challenge_widget') . '/components/bower_components/angular-material/angular-material.min.js', array('weight' => 6));
-  drupal_add_js(drupal_get_path('module', 'challenge_widget') . '/components/bower_components/angular-material-fileinput/dist/lf-ng-md-file-input.js', array('weight' => 7));
-  drupal_add_js(drupal_get_path('module', 'challenge_widget') . '/components/directives/file-input-m/file-input-m.js', array('weight' => 8));
-  drupal_add_js(drupal_get_path('module', 'challenge_widget') . '/components/bower_components/angular-bootstrap/ui-bootstrap-tpls.js', array('weight' => 9));
+  drupal_add_js(drupal_get_path('module', 'challenge_widget') . '/components/bower_components/angular/angular.min.js', array('weight' => 0, 'preprocess' => false));
+  drupal_add_js(drupal_get_path('module', 'challenge_widget') . '/components/bower_components/angular-file-upload/dist/angular-file-upload.min.js', array('weight' => 1, 'preprocess' => false));
+  drupal_add_js(drupal_get_path('module', 'challenge_widget') . '/components/bower_components/ng-file-upload/ng-file-upload.min.js', array('weight' => 2, 'preprocess' => false));
+  drupal_add_js(drupal_get_path('module', 'challenge_widget') . '/components/bower_components/angular-messages/angular-messages.min.js', array('weight' => 3, 'preprocess' => false));
+  drupal_add_js(drupal_get_path('module', 'challenge_widget') . '/components/bower_components/angular-animate/angular-animate.min.js', array('weight' => 4, 'preprocess' => false));
+  drupal_add_js(drupal_get_path('module', 'challenge_widget') . '/components/bower_components/angular-aria/angular-aria.min.js', array('weight' => 5, 'preprocess' => false));
+  drupal_add_js(drupal_get_path('module', 'challenge_widget') . '/components/bower_components/angular-material/angular-material.min.js', array('weight' => 6, 'preprocess' => false));
+  drupal_add_js(drupal_get_path('module', 'challenge_widget') . '/components/bower_components/angular-material-fileinput/dist/lf-ng-md-file-input.js', array('weight' => 7, 'preprocess' => false));
+  drupal_add_js(drupal_get_path('module', 'challenge_widget') . '/components/directives/file-input-m/file-input-m.js', array('weight' => 8, 'preprocess' => false));
+  drupal_add_js(drupal_get_path('module', 'challenge_widget') . '/components/bower_components/angular-bootstrap/ui-bootstrap-tpls.js', array('weight' => 9, 'preprocess' => false));
   // drupal_add_js(drupal_get_path('module', 'challenge_widget') . '/components/bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js', array('weight' => 10));
   drupal_add_css(drupal_get_path('module', 'challenge_widget') . '/components/bower_components/angular-material/angular-material.min.css');
   drupal_add_css(drupal_get_path('module', 'challenge_widget') . '/components/idea_widget.css');
@@ -148,7 +148,7 @@ function idea_load_angular(){
   // drupal_add_css(drupal_get_path('module', 'challenge_widget') . '/components/bower_components/angular-bootstrap/ui-bootstrap-csp.css');
   // drupal_add_css(drupal_get_path('module', 'challenge_widget') . '/components/bower_components/bootstrap/scss/bootstrap.scss');
   // drupal_add_css(drupal_get_path('module', 'challenge_widget') . '/components/bower_components/bootstrap/scss');
-    drupal_add_js(drupal_get_path('module', 'challenge_widget') . '/components/challenge_widget.js', array('weight' => 5));
+    drupal_add_js(drupal_get_path('module', 'challenge_widget') . '/components/challenge_widget.js', array('weight' => 5, 'preprocess' => false));
   
 }
 
