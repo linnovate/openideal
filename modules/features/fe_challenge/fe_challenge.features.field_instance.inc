@@ -116,7 +116,7 @@ function fe_challenge_field_default_field_instances() {
     'settings' => array(
       'description_field' => 1,
       'file_directory' => '',
-      'file_extensions' => 'txt doc docx pdf img png',
+      'file_extensions' => 'txt pdf doc docx ppt pptx jpg jpeg png gif xls xlsx',
       'max_filesize' => '',
       'user_register_form' => FALSE,
     ),
