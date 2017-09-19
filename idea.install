@@ -508,6 +508,12 @@ function idea_install() {
   variable_set('page_manager_node_view_disabled', 0);
   variable_set('page_manager_term_view_disabled', 0);
 
+  // Default settings for jquery_update.
+  // Set minimal jquery version for the drag n drop to function in the widget
+  variable_set('jquery_update_jquery_cdn', 'jquery');
+  variable_set('jquery_update_jquery_version', "1.10");
+  variable_set('jquery_update_compression_type', 'min');
+
   // Setup hastags for idea content type.
   $var = variable_get('hashtags_terms_field', '');
   if(empty($var)) {
