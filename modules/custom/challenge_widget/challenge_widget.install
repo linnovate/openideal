@@ -7,23 +7,86 @@
 function challenge_widget_install() {
 	$fields_data = field_info_instances("node",'challenge');
   variable_set('oi_challenge_widget', array(
-  	array(
-      'name'=>t('Basic'),'weight'=>0,
-      'fields'=>array(array( 'name' => 'title', 'required' =>true, 'type' => 'textfield', 'label' => t('Challenge Name')),array( 'name' => 'body', 'required' =>false, 'type' => 'textarea', 'label' => $fields_data['body']['label']))
-    ),array(
-      'name'=>t('Attach Files'),'weight'=>1,
-      'fields'=>array(array( 'name' => 'field_attachments', 'required' =>false, 'type' => 'file', 'label' => $fields_data['field_attachments']['label'],'file_extensions'=>$fields_data['field_attachments']['settings']['file_extensions']))
-    ),
+    	array(
+        'name'=>t('Basic'),'weight'=>0,
+        'fields'=>array(
+          array(
+            'name' => 'title', 
+            'required' =>true, 
+            'type' => 'textfield', 
+            'label' => t('Challenge Name')
+          ),
+          array(
+            'name' => 'field_date_challengedate', 
+            'required' =>true,
+            'type' => 'datetime', 
+            'label' => t('Date')
+          ),
+          array( 
+            'name' => 'body', 
+            'required' =>false, 
+            'type' => 'textarea', 
+            'label' => $fields_data['body']['label']
+          )
+        )
+      ),
+      array(
+        'name'=>t('Attach Files'),
+        'weight'=>1,
+        'fields'=>array(
+          array(
+            'name' => 'field_challenge_image', 
+            'required' =>false, 
+            'type' => 'image', 
+            'label' => $fields_data['field_challenge_image']['label'],
+            'file_extensions'=>$fields_data['field_challenge_image']['settings']['file_extensions']
+          ),
+          array(
+            'name' => 'field_attachments', 
+            'required' =>false, 
+            'type' => 'file', 
+            'label' => $fields_data['field_attachments']['label'],
+            'file_extensions'=>$fields_data['field_attachments']['settings']['file_extensions']
+          )
+        )
+      ),
     )
   );
-  variable_set('oi_challenge_widget_tabs_fieldset',array('tab_0'=>array(
-    'title'=>t('Basic'),'weight'=>0,
-    'fields'=>array('title'=>array('is_checked'=>true,'label'=>'Challenge Name'),'body'=>array('is_checked'=>true,'label'=>'Challenge Description'))),'tab_1'=>array(
-    'title'=>t('Attach Files'),'weight'=>1,
-    'fields'=>array('field_attachments'=>array('is_checked'=>true,'label'=>t('Upload Files'))))
-  ));
-  variable_set('disable_challenge_widget',0);
-	
+  variable_set('oi_challenge_widget_tabs_fieldset',array(
+      'tab_0'=>array(
+        'title'=>t('Basic'),'weight'=>0,
+        'fields'=>array(
+          'title'=>array(
+            'is_checked'=>true,
+            'label'=>'Challenge Name'
+          ),
+          'field_date_challengedate'=>array(
+            'is_checked'=>true,
+            'label'=>'Date'
+          ),
+          'body'=>array(
+            'is_checked'=>true,
+            'label'=>'Challenge Description'
+          )
+        )
+      ),
+      'tab_1'=>array(
+        'title'=>t('Attach Files'),
+        'weight'=>1,
+        'fields'=>array(
+          'field_challenge_image'=>array(
+            'is_checked'=>true,
+            'label'=>t('Upload a Background Image')
+          ),
+          'field_attachments'=>array(
+            'is_checked'=>true,
+            'label'=>t('Upload Files')
+          )
+        )
+      )
+    )
+  );
+  variable_set('disable_challenge_widget',0);	
 }
 
 /**
@@ -33,7 +96,5 @@ function challenge_widget_install() {
 function challenge_widget_uninstall() {
 	variable_del('oi_challenge_widget');
 	variable_del('oi_challenge_widget_tabs_fieldset');
-	variable_del('disable_challenge_widget');
-	
+	variable_del('disable_challenge_widget');	
 }
-?>

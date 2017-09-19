@@ -514,6 +514,11 @@ function idea_install() {
   variable_set('jquery_update_jquery_version', "1.10");
   variable_set('jquery_update_compression_type', 'min');
 
+  // Set cache and css/js aggregation:
+  variable_set('cache', 1);
+  variable_set('preprocess_css', true);
+  variable_set('preprocess_js', true);
+
   // Setup hastags for idea content type.
   $var = variable_get('hashtags_terms_field', '');
   if(empty($var)) {

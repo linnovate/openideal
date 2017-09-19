@@ -5,23 +5,87 @@
  */
 function idea_widget_install(){
   $fields_data = field_info_instances("node",'idea');
-  variable_set('oi_idea_widget',
-    array(array(
-      'name'=>t('Basic'),'weight'=>0,
-      'fields'=>array(array( 'name' => 'title', 'required' =>true, 'type' => 'textfield', 'label' => t('Idea Name')),array( 'name' => 'body', 'required' =>false, 'type' => 'textarea', 'label' => $fields_data['body']['label']))
-    ),array(
-      'name'=>t('Attach Files'),'weight'=>1,
-      'fields'=>array(array( 'name' => 'field_attachments', 'required' =>false, 'type' => 'file', 'label' => $fields_data['field_attachments']['label'],'file_extensions'=>$fields_data['field_attachments']['settings']['file_extensions']))
+  variable_set('oi_idea_widget', array(
+    array(
+      'name'=>t('Basic'),
+      'weight'=>0,
+      'fields'=>array(
+        array(
+          'name' => 'title', 
+          'required' =>true, 
+          'type' => 'textfield', 
+          'label' => t('Idea Name')
+        ),
+        array(
+          'name' => 'field_challenge_ref', 
+          'required' =>true, 
+          'type' => 'entityreference', 
+          'label' => t('Challenge Name')
+        ),
+        array(
+          'name' => 'field_idea', 
+          'required' =>true, 
+          'type' => 'textarea', 
+          'label' => $fields_data['field_idea']['label']
+        )
+      )
     ),
-    )
-  );
-  variable_set('oi_widget_tabs_fieldset',array('tab_0'=>array(
-    'title'=>t('Basic'),'weight'=>0,
-    'fields'=>array('title'=>array('is_checked'=>true,'label'=>'Idea Name'),'body'=>array('is_checked'=>true,'label'=>'Idea Description'))),'tab_1'=>array(
-    'title'=>t('Attach Files'),'weight'=>1,
-    'fields'=>array('field_attachments'=>array('is_checked'=>true,'label'=>t('Upload Files'))))
+    array(
+      'name'=>t('Attach Files'),
+      'weight'=>1,
+      'fields'=>array(
+        array(
+          'name' => 'field_idea_image',
+          'required' =>false,
+          'type' => 'file',
+          'label' => $fields_data['field_idea_image']['label'],
+          'file_extensions'=>$fields_data['field_idea_image']['settings']['file_extensions']
+        ),
+        array(
+          'name' => 'field_attachments',
+          'required' =>false,
+          'type' => 'file',
+          'label' => $fields_data['field_attachments']['label'],
+          'file_extensions'=>$fields_data['field_attachments']['settings']['file_extensions']
+        )
+      )
+    ),
   ));
-  variable_set('disable_idea_widget',0);
+  variable_set('oi_widget_tabs_fieldset',array(
+    'tab_0'=>array(
+      'title'=>t('Basic'),
+      'weight'=>0,
+      'fields'=>array(
+        'title'=>array(
+          'is_checked'=>true,
+          'label'=>'Idea Name'
+        ),
+        'field_challenge_ref'=>array(
+          'is_checked'=>true,
+          'label'=>'Challenge Name'
+        ),
+        'field_idea'=>array(
+          'is_checked'=>true,
+          'label'=>'Idea Description'
+        )
+      )
+    ),
+    'tab_1'=>array(
+      'title'=>t('Attach Files'),
+      'weight'=>1,
+      'fields'=>array(
+        'field_idea_image'=>array(
+          'is_checked'=>true,
+          'label'=>t('Upload Images')
+        ),
+        'field_attachments'=>array(
+          'is_checked'=>true,
+          'label'=>t('Upload Files')
+        )
+      )
+    )
+  ));
+  variable_set('disable_idea_widget', 0);
 }
 /**
  * Implements hook_uninstall()
