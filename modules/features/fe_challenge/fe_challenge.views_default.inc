@@ -253,7 +253,7 @@ function fe_challenge_views_default_views() {
   $handler->display->display_options['fields']['field_consumer_insight']['field'] = 'field_consumer_insight';
   $handler->display->display_options['fields']['field_consumer_insight']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_consumer_insight']['hide_empty'] = TRUE;
-  /* Field: Content: קבצים מצורפים */
+  /* Field: Content: Attached Files */
   $handler->display->display_options['fields']['field_attachments']['id'] = 'field_attachments';
   $handler->display->display_options['fields']['field_attachments']['table'] = 'field_data_field_attachments';
   $handler->display->display_options['fields']['field_attachments']['field'] = 'field_attachments';
