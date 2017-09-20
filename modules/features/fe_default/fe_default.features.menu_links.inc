@@ -18,6 +18,9 @@ function fe_default_menu_default_menu_links() {
     'link_title' => 'Challenges',
     'options' => array(
       'identifier' => 'main-menu_challenges:challenges',
+      'attributes' => array(
+        'title' => 'All Challenges',
+      ),
     ),
     'module' => 'system',
     'hidden' => 0,
@@ -37,9 +40,12 @@ function fe_default_menu_default_menu_links() {
     'link_title' => 'Community',
     'options' => array(
       'identifier' => 'main-menu_community:community',
+      'attributes' => array(
+        'title' => 'Community members list',
+      ),
     ),
     'module' => 'system',
-    'hidden' => 1,
+    'hidden' => 0,
     'external' => 0,
     'has_children' => 0,
     'expanded' => 0,
@@ -48,20 +54,20 @@ function fe_default_menu_default_menu_links() {
     'language' => 'und',
     'menu_links_customized' => 1,
   );
-  // Exported menu link: main-menu_ideas:news.
-  $menu_links['main-menu_ideas:news'] = array(
+  // Exported menu link: main-menu_ideas:ideas.
+  $menu_links['main-menu_ideas:ideas'] = array(
     'menu_name' => 'main-menu',
-    'link_path' => 'news',
-    'router_path' => 'news',
+    'link_path' => 'ideas',
+    'router_path' => 'ideas',
     'link_title' => 'Ideas',
     'options' => array(
       'attributes' => array(
-        'title' => '',
+        'title' => 'All Ideas',
       ),
-      'identifier' => 'main-menu_ideas:news',
+      'identifier' => 'main-menu_ideas:ideas',
     ),
     'module' => 'system',
-    'hidden' => 1,
+    'hidden' => 0,
     'external' => 0,
     'has_children' => 0,
     'expanded' => 0,
