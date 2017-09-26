@@ -50,16 +50,6 @@ function fe_permissions_user_default_permissions() {
     'module' => 'dashboard',
   );
 
-  // Exported permission: access navbar.
-  $permissions['access navbar'] = array(
-    'name' => 'access navbar',
-    'roles' => array(
-      0 => 'administrator',
-      1 => 'site-manager',
-    ),
-    'module' => 'navbar',
-  );
-
   // Exported permission: access site reports.
   $permissions['access site reports'] = array(
     'name' => 'access site reports',

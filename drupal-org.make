@@ -9,7 +9,6 @@ defaults[projects][subdir] = contrib
 ; Modules
 projects[addressfield][version] = "1.0" 
 projects[admin_menu][version] = "3.0-rc5"
-projects[admin_menu_toolbar][version] = "3.0-rc5"
 ; projects[admin_menu][patch][] = https://drupal.org/files/admin_menu-fix_rtl-725840-34.patch
 projects[bootstrap_panels_horizontal_tabs][type] = module
 projects[bootstrap_panels_horizontal_tabs][download][type] = git
