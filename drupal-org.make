@@ -84,4 +84,4 @@ projects[wysiwyg_filter][version] = "1.6-rc2"
 ; Themes
 projects[bootstrap][version] = "3.0" 
 projects[ember][version] = "2.x-dev" 
-projects[socrates][version] = "1.2" 
+projects[socrates][version] = "1.3" 
