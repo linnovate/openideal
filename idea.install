@@ -560,4 +560,7 @@ function idea_install() {
 
   //turn of error message display by default
   variable_set('error_level', 0);
+
+  // Set a reasonable 403 page 
+  variable_set('site_403', 'user/login');
 }
