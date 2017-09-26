@@ -888,6 +888,7 @@ Why not add an idea?';
   $handler->display->display_options['fields']['field_in_action']['label'] = '';
   $handler->display->display_options['fields']['field_in_action']['exclude'] = TRUE;
   $handler->display->display_options['fields']['field_in_action']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_in_action']['empty'] = 'Brainstorming';
   /* Field: Content: Post date */
   $handler->display->display_options['fields']['created']['id'] = 'created';
   $handler->display->display_options['fields']['created']['table'] = 'node';
