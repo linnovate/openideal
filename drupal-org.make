@@ -8,8 +8,7 @@ defaults[projects][subdir] = contrib
 
 ; Modules
 projects[addressfield][version] = "1.0" 
-; projects[admin_menu][version] = "3.0-rc4"
-; projects[admin_menu][subdir] = contrib
+projects[admin_menu][version] = "3.0-rc5"
 ; projects[admin_menu][patch][] = https://drupal.org/files/admin_menu-fix_rtl-725840-34.patch
 projects[bootstrap_panels_horizontal_tabs][type] = module
 projects[bootstrap_panels_horizontal_tabs][download][type] = git
@@ -49,7 +48,6 @@ projects[mentions][version] = "1.0-beta2"
 projects[message][version] = "1.9" 
 projects[metatag][version] = "1.4" 
 projects[module_filter][version] = "2.0" 
-projects[navbar][version] = "1.6" 
 projects[nodequeue][version] = "2.0-beta1" 
 projects[page_title][version] = "2.7" 
 projects[panels][version] = "3.5" 
