@@ -869,7 +869,7 @@ Why not add an idea?';
   $handler->display->display_options['fields']['name']['id'] = 'name';
   $handler->display->display_options['fields']['name']['table'] = 'users';
   $handler->display->display_options['fields']['name']['field'] = 'name';
-  $handler->display->display_options['fields']['name']['relationship'] = 'field_moderator_target_id';
+  $handler->display->display_options['fields']['name']['relationship'] = 'uid';
   $handler->display->display_options['fields']['name']['label'] = '';
   $handler->display->display_options['fields']['name']['exclude'] = TRUE;
   $handler->display->display_options['fields']['name']['element_label_colon'] = FALSE;
@@ -877,7 +877,7 @@ Why not add an idea?';
   $handler->display->display_options['fields']['picture']['id'] = 'picture';
   $handler->display->display_options['fields']['picture']['table'] = 'users';
   $handler->display->display_options['fields']['picture']['field'] = 'picture';
-  $handler->display->display_options['fields']['picture']['relationship'] = 'field_moderator_target_id';
+  $handler->display->display_options['fields']['picture']['relationship'] = 'uid';
   $handler->display->display_options['fields']['picture']['label'] = '';
   $handler->display->display_options['fields']['picture']['exclude'] = TRUE;
   $handler->display->display_options['fields']['picture']['element_label_colon'] = FALSE;
@@ -983,10 +983,15 @@ Why not add an idea?';
   $handler->display->display_options['empty']['area']['format'] = 'filtered_html';
   $handler->display->display_options['defaults']['relationships'] = FALSE;
   /* Relationship: Entity Reference: Referenced Entity */
-  $handler->display->display_options['relationships']['field_moderator_target_id']['id'] = 'field_moderator_target_id';
-  $handler->display->display_options['relationships']['field_moderator_target_id']['table'] = 'field_data_field_moderator';
-  $handler->display->display_options['relationships']['field_moderator_target_id']['field'] = 'field_moderator_target_id';
-  $handler->display->display_options['defaults']['sorts'] = FALSE;
+  // $handler->display->display_options['relationships']['field_moderator_target_id']['id'] = 'field_moderator_target_id';
+  // $handler->display->display_options['relationships']['field_moderator_target_id']['table'] = 'field_data_field_moderator';
+  // $handler->display->display_options['relationships']['field_moderator_target_id']['field'] = 'field_moderator_target_id';
+  // $handler->display->display_options['defaults']['sorts'] = FALSE;
+  /* Relationship: Content: Author */
+  $handler->display->display_options['relationships']['uid']['id'] = 'uid';
+  $handler->display->display_options['relationships']['uid']['table'] = 'node';
+  $handler->display->display_options['relationships']['uid']['field'] = 'uid';
+  $handler->display->display_options['relationships']['uid']['required'] = TRUE;
   /* Sort criterion: Content: Updated date */
   $handler->display->display_options['sorts']['changed']['id'] = 'changed';
   $handler->display->display_options['sorts']['changed']['table'] = 'node';
