@@ -821,10 +821,10 @@ Why not add an idea?';
   $handler->display->display_options['relationships']['flag_content_rel']['required'] = 0;
   $handler->display->display_options['relationships']['flag_content_rel']['flag'] = 'blast_idea';
   $handler->display->display_options['relationships']['flag_content_rel']['user_scope'] = 'any';
-  /* Relationship: Entity Reference: Referenced Entity */
-  $handler->display->display_options['relationships']['field_moderator_target_id']['id'] = 'field_moderator_target_id';
-  $handler->display->display_options['relationships']['field_moderator_target_id']['table'] = 'field_data_field_moderator';
-  $handler->display->display_options['relationships']['field_moderator_target_id']['field'] = 'field_moderator_target_id';
+  /* Relationship: Content: Author */
+  $handler->display->display_options['relationships']['uid']['id'] = 'uid';
+  $handler->display->display_options['relationships']['uid']['table'] = 'node';
+  $handler->display->display_options['relationships']['uid']['field'] = 'uid';
   /* Relationship: Entity Reference: Referenced Entity */
   $handler->display->display_options['relationships']['field_challenge_ref_target_id']['id'] = 'field_challenge_ref_target_id';
   $handler->display->display_options['relationships']['field_challenge_ref_target_id']['table'] = 'field_data_field_challenge_ref';
