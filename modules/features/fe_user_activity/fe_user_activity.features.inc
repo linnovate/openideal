@@ -66,9 +66,9 @@ function fe_user_activity_default_message_type() {
     "arguments" : null,
     "message_text" : { "und" : [
         {
-          "value" : "\\u003Cdiv class=\\u0022user-image\\u0022\\u003E\\u003Cimg src=\\u0022[message:user:picture:url]\\u0022\\u003E\\u003C\\/img\\u003E\\u003C\\/div\\u003E\\u003Cdiv class=\\u0022user-text\\u0022\\u003E\\u003Ca href=\\u0022[message:user:url]\\u0022\\u003E\\u003Cstrong\\u003E[message:user:name]\\u003C\\/strong\\u003E\\u003C\\/a\\u003E [message:field-comment:subject]\\u003C\\/div\\u003E",
+          "value" : "\\u003Cdiv class=\\u0022user-image\\u0022\\u003E[message:user:picture]\\u003C\\/img\\u003E\\u003C\\/div\\u003E\\u003Cdiv class=\\u0022user-text\\u0022\\u003E\\u003Ca href=\\u0022[message:user:url]\\u0022\\u003E\\u003Cstrong\\u003E[message:user:name]\\u003C\\/strong\\u003E\\u003C\\/a\\u003E [message:field-comment:subject]\\u003C\\/div\\u003E",
           "format" : "full_html",
-          "safe_value" : "\\u003Cdiv class=\\u0022user-image\\u0022\\u003E\\u003Cimg src=\\u0022[message:user:picture:url]\\u0022 \\/\\u003E\\u003C\\/div\\u003E\\n\\u003Cdiv class=\\u0022user-text\\u0022\\u003E\\u003Ca href=\\u0022[message:user:url]\\u0022\\u003E\\u003Cstrong\\u003E[message:user:name]\\u003C\\/strong\\u003E\\u003C\\/a\\u003E [message:field-comment:subject]\\u003C\\/div\\u003E\\n"
+          "safe_value" : "\\u003Cdiv class=\\u0022user-image\\u0022\\u003E[message:user:picture]\\u003C\\/div\\u003E\\n\\u003Cdiv class=\\u0022user-text\\u0022\\u003E\\u003Ca href=\\u0022[message:user:url]\\u0022\\u003E\\u003Cstrong\\u003E[message:user:name]\\u003C\\/strong\\u003E\\u003C\\/a\\u003E [message:field-comment:subject]\\u003C\\/div\\u003E\\n"
         }
       ]
     },
@@ -110,9 +110,9 @@ function fe_user_activity_default_message_type() {
     "arguments" : null,
     "message_text" : { "und" : [
         {
-          "value" : "\\u003Cdiv class=\\u0022user-image\\u0022\\u003E\\u003Cimg src=\\u0022[message:user:picture:url]\\u0022\\u003E\\u003C\\/img\\u003E\\u003C\\/div\\u003E\\u003Cdiv class=\\u0022user-text\\u0022\\u003E\\u003Ca href=\\u0022[message:user:url]\\u0022\\u003E\\u003Cstrong\\u003E[message:user:name]\\u003C\\/strong\\u003E\\u003C\\/a\\u003E has joined OpenideaL.\\u003C\\/div\\u003E",
+          "value" : "\\u003Cdiv class=\\u0022user-image\\u0022\\u003E[message:user:picture]\\u003C\\/div\\u003E\\u003Cdiv class=\\u0022user-text\\u0022\\u003E\\u003Ca href=\\u0022[message:user:url]\\u0022\\u003E\\u003Cstrong\\u003E[message:user:name]\\u003C\\/strong\\u003E\\u003C\\/a\\u003E has joined OpenideaL.\\u003C\\/div\\u003E",
           "format" : "full_html",
-          "safe_value" : "\\u003Cdiv class=\\u0022user-image\\u0022\\u003E\\u003Cimg src=\\u0022[message:user:picture:url]\\u0022 \\/\\u003E\\u003C\\/div\\u003E\\n\\u003Cdiv class=\\u0022user-text\\u0022\\u003E\\u003Ca href=\\u0022[message:user:url]\\u0022\\u003E\\u003Cstrong\\u003E[message:user:name]\\u003C\\/strong\\u003E\\u003C\\/a\\u003E has joined OpenideaL.\\u003C\\/div\\u003E\\n"
+          "safe_value" : "\\u003Cdiv class=\\u0022user-image\\u0022\\u003E[message:user:picture]\\u003C\\/div\\u003E\\n\\u003Cdiv class=\\u0022user-text\\u0022\\u003E\\u003Ca href=\\u0022[message:user:url]\\u0022\\u003E\\u003Cstrong\\u003E[message:user:name]\\u003C\\/strong\\u003E\\u003C\\/a\\u003E has joined OpenideaL.\\u003C\\/div\\u003E\\n"
         }
       ]
     },
