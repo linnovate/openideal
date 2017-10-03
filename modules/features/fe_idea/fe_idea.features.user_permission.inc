@@ -174,7 +174,8 @@ function fe_idea_user_default_permissions() {
   $permissions['view field_in_action'] = array(
     'name' => 'view field_in_action',
     'roles' => array(
-      0 => 'administrator',
+      0 => 'anonymous user',
+      1 => 'authenticated user'
     ),
     'module' => 'field_permissions',
   );
