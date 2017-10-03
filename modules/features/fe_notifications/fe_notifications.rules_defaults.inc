@@ -82,22 +82,24 @@ function fe_notifications_default_rules_configuration() {
       ]
     }
   }');
-  $items['rules_send_mail_notification_about_the_mention'] = entity_import('rules_config', '{ "rules_send_mail_notification_about_the_mention" : {
-      "LABEL" : "Send mail notification about the mention",
+  $items['rules_send_mail_to_idea_author_on_comment'] = entity_import('rules_config', '{ "rules_send_mail_to_idea_author_on_comment" : {
+      "LABEL" : "send_mail_to_idea_author_on_comment",
       "PLUGIN" : "reaction rule",
       "OWNER" : "rules",
-      "TAGS" : [ "Notifications" ],
-      "REQUIRES" : [ "rules", "mentions" ],
-      "ON" : { "mentions_insert" : [] },
+      "REQUIRES" : [ "rules", "comment" ],
+      "ON" : { "comment_insert--comment_node_idea" : { "bundle" : "comment_node_idea" } },
       "IF" : [
-        { "data_is" : { "data" : [ "mention:user:field-mention-notifications" ], "value" : 1 } }
+        { "data_is" : {
+            "data" : [ "comment:node:author:field-comment-notficiations" ],
+            "value" : "1"
+          }
+        }
       ],
       "DO" : [
         { "mail" : {
-            "to" : [ "mention:user:mail" ],
-            "subject" : "[mention:author] mentioned you on [site:name]",
-            "message" : "Hello,\\r\\n\\r\\n[mention:author] mentioned you on [mention:node]\\r\\nClick here to read more: [mention:node_url]\\r\\n\\r\\nRegards,\\r\\n[site:name]",
-            "from" : "[site:mail]",
+            "to" : [ "comment:node:author:mail" ],
+            "subject" : "New comments for your idea: [comment:node:title]",
+            "message" : "Hi [comment:node:author]\\r\\n\\r\\n\\u003Cstrong\\u003E[comment:author]\\u003C\\/strong\\u003E added a new comment to your idea \\u003Cstrong\\u003E[comment:node:title]\\u003C\\/strong\\u003E:\\r\\n[comment:body]\\r\\n\\r\\n\\r\\nContinue the discussion at: [comment:url]\\r\\n\\r\\nRegards,\\r\\n[site:name]\\r\\n",
             "language" : [ "" ]
           }
         }
