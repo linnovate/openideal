@@ -126,14 +126,14 @@ function ideal_analytics_analytics_dashboard() {
   // Chart for blast ideas per day.
   //=========================================
   $header = $nodes = array();
-  $fid = db_query("SELECT fid FROM {flags} WHERE name = :name", array(':name' => 'blast_idea'))->fetchField();
+  $fid = db_query("SELECT fid FROM {flag} WHERE name = :name", array(':name' => 'blast_idea'))->fetchField();
   $i = 0;
   $f = $from;
   while ($f <= $to) {
     // Building the header - list of date from today backward.
     $header[$i]   = date('d.m.y', $f);
     // The number of nodes become blast ideas each day.
-    $nodes[$i]  = db_query("SELECT COUNT(*) FROM {flag_content} WHERE fid = :fid AND FROM_UNIXTIME(timestamp,'%d.%m.%y') = :dete", array(':fid' => $fid, ':dete' => $header[$i]))->fetchField();
+    $nodes[$i]  = db_query("SELECT COUNT(*) FROM {flagging} WHERE fid = :fid AND FROM_UNIXTIME(timestamp,'%d.%m.%y') = :dete", array(':fid' => $fid, ':dete' => $header[$i]))->fetchField();
     
     $i ++;
     $f = strtotime("+1 day", $f);
