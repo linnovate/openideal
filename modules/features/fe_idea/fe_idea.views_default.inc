@@ -968,6 +968,43 @@ Why not add an idea?';
   /* Display: Popular Ideas */
   $handler = $view->new_display('block', 'Popular Ideas', 'block_1');
   $handler->display->display_options['defaults']['sorts'] = FALSE;
+  /* Sort criterion: Global: PHP */
+  $handler->display->display_options['sorts']['php']['id'] = 'php';
+  $handler->display->display_options['sorts']['php']['table'] = 'views';
+  $handler->display->display_options['sorts']['php']['field'] = 'php';
+  $handler->display->display_options['sorts']['php']['order'] = 'DESC';
+  $handler->display->display_options['sorts']['php']['expose']['label'] = 'PHP';
+  $handler->display->display_options['sorts']['php']['use_php_setup'] = 0;
+  $handler->display->display_options['sorts']['php']['php_sort'] = '/*
+Available fields:
+$row1->totalcount
+$row1->comment_count
+$row1->field_vote
+*/
+
+# @TODO: Move these values to a configuration screen:
+$factor_totalcount = 0.2;
+$factor_comment_count = 10;
+$factor_field_vote = 5;
+
+$fields = array(\'totalcount\', \'comment_count\', \'field_vote\');
+
+$score_row1 = $score_row2 = 0;
+foreach ($fields as $field) {
+  # Set the score for each row by multiplyting each field with its respecting factor and summing up all fields:
+  # Similar to:
+  /*
+  $score1 = $row1->totalcount * $factor_totalcount + 
+                 $row1->comment_count * $factor_comment_count + 
+                 $row1->vote * $factor_vote ;
+  */                 
+  $factor = \'factor_\' . $field;
+  $score_row1 += $row1->$field * $$factor;
+  $score_row2 += $row2->$field * $$factor;
+  //dsm ($row1->title .\'/\'. $field.\': \'. $row1->$field .\'*\'. $$factor);
+}
+
+return $score_row1 - $score_row2;';
 
   /* Display: Latest Ideas */
   $handler = $view->new_display('block', 'Latest Ideas', 'block_2');
@@ -982,21 +1019,11 @@ Why not add an idea?';
   $handler->display->display_options['empty']['area']['content'] = 'There are no ideas in action yet.';
   $handler->display->display_options['empty']['area']['format'] = 'filtered_html';
   $handler->display->display_options['defaults']['relationships'] = FALSE;
-  /* Relationship: Entity Reference: Referenced Entity */
-  // $handler->display->display_options['relationships']['field_moderator_target_id']['id'] = 'field_moderator_target_id';
-  // $handler->display->display_options['relationships']['field_moderator_target_id']['table'] = 'field_data_field_moderator';
-  // $handler->display->display_options['relationships']['field_moderator_target_id']['field'] = 'field_moderator_target_id';
-  // $handler->display->display_options['defaults']['sorts'] = FALSE;
   /* Relationship: Content: Author */
   $handler->display->display_options['relationships']['uid']['id'] = 'uid';
   $handler->display->display_options['relationships']['uid']['table'] = 'node';
   $handler->display->display_options['relationships']['uid']['field'] = 'uid';
   $handler->display->display_options['relationships']['uid']['required'] = TRUE;
-  /* Sort criterion: Content: Updated date */
-  $handler->display->display_options['sorts']['changed']['id'] = 'changed';
-  $handler->display->display_options['sorts']['changed']['table'] = 'node';
-  $handler->display->display_options['sorts']['changed']['field'] = 'changed';
-  $handler->display->display_options['sorts']['changed']['order'] = 'DESC';
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filter criterion: Content: Published or admin */
