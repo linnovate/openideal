@@ -418,6 +418,60 @@ function fe_pages_default_page_manager_handlers() {
     $display->content['new-c53b8dc1-2d06-4bf8-8ca5-ce4cb2e9cd3e'] = $pane;
     $display->panels['content_bottom'][1] = 'new-c53b8dc1-2d06-4bf8-8ca5-ce4cb2e9cd3e';
     $pane = new stdClass();
+    $pane->pid = 'new-25416d35-0aa4-4a15-9b76-8fe7b9a0e22c';
+    $pane->panel = 'sidebar';
+    $pane->type = 'custom';
+    $pane->subtype = 'custom';
+    $pane->shown = TRUE;
+    $pane->access = array(
+      'plugins' => array(
+        0 => array(
+          'name' => 'role',
+          'settings' => array(
+            'rids' => array(
+              0 => 1,
+            ),
+          ),
+          'context' => 'logged-in-user',
+          'not' => FALSE,
+        ),
+      ),
+    );
+    $pane->configuration = array(
+      'admin_title' => 'Login message for anonymous users in idea pages',
+      'title' => '',
+      'body' => '<?php
+if (user_access(\'use-vote-updown\') == FALSE) {
+  print t(\'You need to <a href="@login">log in</a> in order to vote\', 
+    array(
+      \'@login\' => url(\'user/login\', 
+        array(\'query\' => 
+          array(\'destination\'=>$_GET[\'q\'])))));
+}
+?>',
+      'format' => 'php_code',
+      'substitute' => 1,
+    );
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array(
+      'css_id' => '',
+      'css_class' => 'vud-anonymous btn-warning alert',
+    );
+    $pane->extras = array();
+    $pane->position = 0;
+    $pane->locks = array(
+      'type' => 'none',
+      'regions' => array(
+        'sidebar' => 'sidebar',
+      ),
+    );
+    $pane->uuid = '25416d35-0aa4-4a15-9b76-8fe7b9a0e22c';
+    $display->content['new-25416d35-0aa4-4a15-9b76-8fe7b9a0e22c'] = $pane;
+    $display->panels['sidebar'][0] = 'new-25416d35-0aa4-4a15-9b76-8fe7b9a0e22c';
+    $pane = new stdClass();
     $pane->pid = 'new-54cb9361-7019-4743-86c1-7ecfe4d3fc00';
     $pane->panel = 'sidebar';
     $pane->type = 'entity_field';
@@ -441,11 +495,11 @@ function fe_pages_default_page_manager_handlers() {
     );
     $pane->css = array();
     $pane->extras = array();
-    $pane->position = 0;
+    $pane->position = 1;
     $pane->locks = array();
     $pane->uuid = '54cb9361-7019-4743-86c1-7ecfe4d3fc00';
     $display->content['new-54cb9361-7019-4743-86c1-7ecfe4d3fc00'] = $pane;
-    $display->panels['sidebar'][0] = 'new-54cb9361-7019-4743-86c1-7ecfe4d3fc00';
+    $display->panels['sidebar'][1] = 'new-54cb9361-7019-4743-86c1-7ecfe4d3fc00';
     $pane = new stdClass();
     $pane->pid = 'new-6d39ddb3-b92f-4ec9-bc58-b86c9b3383e3';
     $pane->panel = 'sidebar';
@@ -463,11 +517,11 @@ function fe_pages_default_page_manager_handlers() {
     );
     $pane->css = array();
     $pane->extras = array();
-    $pane->position = 1;
+    $pane->position = 2;
     $pane->locks = array();
     $pane->uuid = '6d39ddb3-b92f-4ec9-bc58-b86c9b3383e3';
     $display->content['new-6d39ddb3-b92f-4ec9-bc58-b86c9b3383e3'] = $pane;
-    $display->panels['sidebar'][1] = 'new-6d39ddb3-b92f-4ec9-bc58-b86c9b3383e3';
+    $display->panels['sidebar'][2] = 'new-6d39ddb3-b92f-4ec9-bc58-b86c9b3383e3';
     $pane = new stdClass();
     $pane->pid = 'new-6027d044-d438-4784-81c3-6cbf7b2ea4e7';
     $pane->panel = 'sidebar';
@@ -492,11 +546,11 @@ function fe_pages_default_page_manager_handlers() {
     );
     $pane->css = array();
     $pane->extras = array();
-    $pane->position = 2;
+    $pane->position = 3;
     $pane->locks = array();
     $pane->uuid = '6027d044-d438-4784-81c3-6cbf7b2ea4e7';
     $display->content['new-6027d044-d438-4784-81c3-6cbf7b2ea4e7'] = $pane;
-    $display->panels['sidebar'][2] = 'new-6027d044-d438-4784-81c3-6cbf7b2ea4e7';
+    $display->panels['sidebar'][3] = 'new-6027d044-d438-4784-81c3-6cbf7b2ea4e7';
     $pane = new stdClass();
     $pane->pid = 'new-9f2feceb-597d-44c7-92ad-09953f3c6796';
     $pane->panel = 'sidebar';
@@ -514,11 +568,11 @@ function fe_pages_default_page_manager_handlers() {
     );
     $pane->css = array();
     $pane->extras = array();
-    $pane->position = 3;
+    $pane->position = 4;
     $pane->locks = array();
     $pane->uuid = '9f2feceb-597d-44c7-92ad-09953f3c6796';
     $display->content['new-9f2feceb-597d-44c7-92ad-09953f3c6796'] = $pane;
-    $display->panels['sidebar'][3] = 'new-9f2feceb-597d-44c7-92ad-09953f3c6796';
+    $display->panels['sidebar'][4] = 'new-9f2feceb-597d-44c7-92ad-09953f3c6796';
   $display->hide_title = PANELS_TITLE_NONE;
   $display->title_pane = '0';
   $handler->conf['display'] = $display;
