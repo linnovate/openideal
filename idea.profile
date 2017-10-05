@@ -627,3 +627,12 @@ function idea_add_user_picture($account) {
     }
   }
 }
+
+/**
+ * Hook Cron to set Indexes back to index.php
+ */
+function idea_cron() {
+  # Allow system-side post-install procedure
+  system(DRUPAL_ROOT . '/profiles/idea/post-install.sh', $retval);
+  //drupal_set_message($retval);
+}

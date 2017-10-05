@@ -563,4 +563,9 @@ function idea_install() {
 
   // Set a reasonable 403 page 
   variable_set('site_403', 'user/login');
+
+  variable_set('cache', 1);
+  variable_set('preprocess_css', TRUE);
+  variable_set('preprocess_js', TRUE);
+  variable_set('jquery_update_jquery_version', 1.9);
 }
