@@ -13,7 +13,7 @@ function idea_form_install_configure_form_alter(&$form, $form_state) {
   $form['site_information']['site_name']['#default_value'] = $_SERVER['SERVER_NAME'];
 
   // Set reasonable defaults for site configuration form
-  $form['site_information']['site_name']['#default_value'] = 'Open ideaL';
+  $form['site_information']['site_name']['#default_value'] = 'OpenideaL - Ideas and Innovation Management System';
   $form['site_information']['site_mail']['#default_value'] = 'admin@'. $_SERVER['HTTP_HOST'];
   $form['site_information']['site_frontpage']['#default_value'] = 'home';
   $form['admin_account']['account']['name']['#default_value'] = 'admin';
