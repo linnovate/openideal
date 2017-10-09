@@ -630,9 +630,13 @@ function idea_add_user_picture($account) {
 
 /**
  * Hook Cron to set Indexes back to index.php
+ * This runs during install_finished()
  */
 function idea_cron() {
   # Allow system-side post-install procedure
-  system(DRUPAL_ROOT . '/profiles/idea/post-install.sh', $retval);
+  if (!variable_set('openideal_post_install', FALSE)) {
+    system(DRUPAL_ROOT . '/profiles/idea/post-install.sh');
+    variable_set('openideal_post_install', TRUE);
+  }
   //drupal_set_message($retval);
 }
