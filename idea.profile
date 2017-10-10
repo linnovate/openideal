@@ -634,7 +634,7 @@ function idea_add_user_picture($account) {
  */
 function idea_cron() {
   # Allow system-side post-install procedure
-  if (!variable_get('openideal_post_install', FALSE)) {
+  if (variable_get('openideal_post_install', FALSE) == FALSE) {
     system(DRUPAL_ROOT . '/profiles/idea/post-install.sh');
     variable_set('openideal_post_install', TRUE);
   }
