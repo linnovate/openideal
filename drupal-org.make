@@ -52,7 +52,15 @@ projects[page_title][version] = "2.7"
 projects[panels][version] = "3.5" 
 projects[panels_bootstrap_layouts][version] = "3.0" 
 projects[panels_bootstrap_styles][version] = "1.0-alpha1" 
-projects[panels_bootstrap_layout_builder][version] = "3.1" 
+
+; This module is part of the distro. See https://github.com/linnovate/openideal/commit/a877bd0bccc5bc6ae0bd0ec119261fc34f099ddc#diff-74764508a513e1ac31b838a8c8877218
+; This came back when we went back to an earlier version
+; projects[panels_bootstrap_layout_builder][type] = module
+; projects[panels_bootstrap_layout_builder][download][type] = git
+; projects[panels_bootstrap_layout_builder][download][branch] = "openideal"
+; projects[panels_bootstrap_layout_builder][download][url] = https://github.com/Innoveto/panels_bootstrap_layout_builder.git
+; projects[panels_bootstrap_layout_builder][subdir] = contrib
+
 projects[quicktabs][version] = "3.6" 
 projects[radioactivity][version] = "2.9" 
 projects[rules][version] = "2.8" 
