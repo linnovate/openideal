@@ -68,7 +68,7 @@ function fe_idea_flag_default_flags() {
       'name' => 'name',
     ),
     'api_version' => 3,
-    'status' => FALSE,
+    'status' => TRUE,
     'import_roles' => array(
       'flag' => array(
         0 => 3,
@@ -110,7 +110,7 @@ function fe_idea_flag_default_flags() {
       'name' => 'name',
     ),
     'api_version' => 3,
-    'status' => FALSE,
+    'status' => TRUE,
     'import_roles' => array(
       'flag' => array(
         0 => 3,
@@ -152,7 +152,7 @@ function fe_idea_flag_default_flags() {
       'name' => 'name',
     ),
     'api_version' => 3,
-    'status' => FALSE,
+    'status' => TRUE,
     'import_roles' => array(
       'flag' => array(
         0 => 3,
