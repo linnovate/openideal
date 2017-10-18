@@ -34,11 +34,6 @@ function idea_install() {
         'weight' => 3,
         'status' => 1,
       ),
-      // Hashtags filter.
-      'filter_hashtags' => array(
-        'weight' => 4,
-        'status' => 1,
-      ),
       // HTML corrector filter.
       'filter_htmlcorrector' => array(
         'weight' => 10,
@@ -67,11 +62,6 @@ function idea_install() {
       // Mentions filter.
       'filter_mentions' => array(
         'weight' => 3,
-        'status' => 1,
-      ),
-      // Hashtags filter.
-      'filter_hashtags' => array(
-        'weight' => 4,
         'status' => 1,
       ),
       // HTML corrector filter.
@@ -128,116 +118,7 @@ function idea_install() {
       'cache' => -1,
       'types' => array('idea'),
     ),
-//    array(
-//      'module' => 'search',
-//      'delta' => 'form',
-//      'theme' => $default_theme,
-//      'status' => 1,
-//      'weight' => -1,
-//      'region' => 'sidebar_first',
-//      'pages' => '',
-//      'cache' => -1,
-//    ),
-//    array(
-//      'module' => 'node',
-//      'delta' => 'recent',
-//      'theme' => $admin_theme,
-//      'status' => 1,
-//      'weight' => 10,
-//      'region' => 'dashboard_main',
-//      'pages' => '',
-//      'cache' => -1,
-//    ),
-//    array(
-//      'module' => 'user',
-//      'delta' => 'login',
-//      'theme' => $default_theme,
-//      'status' => 1,
-//      'weight' => 0,
-//      'region' => 'sidebar_first',
-//      'pages' => '',
-//      'cache' => -1,
-//    ),
-//    array(
-//      'module' => 'system',
-//      'delta' => 'navigation',
-//      'theme' => $default_theme,
-//      'status' => 1,
-//      'weight' => 0,
-//      'region' => 'sidebar_first',
-//      'pages' => '',
-//      'cache' => -1,
-//    ),
-//    array(
-//      'module' => 'system',
-//      'delta' => 'powered-by',
-//      'theme' => $default_theme,
-//      'status' => 1,
-//      'weight' => 10,
-//      'region' => 'footer',
-//      'pages' => '',
-//      'cache' => -1,
-//    ),
-//    array(
-//      'module' => 'system',
-//      'delta' => 'help',
-//      'theme' => $default_theme,
-//      'status' => 1,
-//      'weight' => 0,
-//      'region' => 'help',
-//      'pages' => '',
-//      'cache' => -1,
-//    ),
-//    array(
-//      'module' => 'system',
-//      'delta' => 'main',
-//      'theme' => $admin_theme,
-//      'status' => 1,
-//      'weight' => 0,
-//      'region' => 'content',
-//      'pages' => '',
-//      'cache' => -1,
-//    ),
-//    array(
-//      'module' => 'system',
-//      'delta' => 'help',
-//      'theme' => $admin_theme,
-//      'status' => 1,
-//      'weight' => 0,
-//      'region' => 'help',
-//      'pages' => '',
-//      'cache' => -1,
-//    ),
-//    array(
-//      'module' => 'user',
-//      'delta' => 'login',
-//      'theme' => $admin_theme,
-//      'status' => 1,
-//      'weight' => 10,
-//      'region' => 'content',
-//      'pages' => '',
-//      'cache' => -1,
-//    ),
-//    array(
-//      'module' => 'user',
-//      'delta' => 'new',
-//      'theme' => $admin_theme,
-//      'status' => 1,
-//      'weight' => 0,
-//      'region' => 'dashboard_sidebar',
-//      'pages' => '',
-//      'cache' => -1,
-//    ),
-//    array(
-//      'module' => 'search',
-//      'delta' => 'form',
-//      'theme' => $admin_theme,
-//      'status' => 1,
-//      'weight' => -10,
-//      'region' => 'dashboard_sidebar',
-//      'pages' => '',
-//      'cache' => -1,
-//    ),
+
   );
   $query = db_insert('block')->fields(array('module', 'delta', 'theme', 'status', 'weight', 'region', 'pages', 'cache'));
   $query_type = db_insert('block_node_type')->fields(array('module', 'delta', 'type'));
@@ -512,33 +393,6 @@ function idea_install() {
   variable_set('jquery_update_jquery_cdn', 'jquery');
   variable_set('jquery_update_jquery_version', '1.7');
 
-  // Setup hastags for idea content type.
-  $field_name = variable_get('hashtags_terms_field', '');
-  $instance = field_info_instance('node', $field_name, 'idea');
-  if (!is_array($instance)) {
-    $instance = array(
-      'field_name' => $field_name,
-      'entity_type' => 'node',
-      'label' => 'Hashtags',
-      'bundle' => 'idea',
-      'widget' => array(
-        'type' => 'taxonomy_autocomplete',
-        'weight' => -4,
-      ),
-      'display' => array(
-        'default' => array(
-          'type' => 'taxonomy_term_reference_link',
-          'weight' => 10,
-        ),
-        'teaser' => array(
-          'type' => 'taxonomy_term_reference_link',
-          'weight' => 10,
-        ),
-      ),
-    );
-    field_create_instance($instance);
-  }
-
   // Setup user mentions defaults.
   $override = array(
     'input' => array(
@@ -555,7 +409,7 @@ function idea_install() {
   variable_set('mentions', $override);
 
   //create default roles
-  user_role_grant_permissions(DRUPAL_AUTHENTICATED_RID, array('administer hashtags', 'use mentions suggestions'));
+  user_role_grant_permissions(DRUPAL_AUTHENTICATED_RID, array('use mentions suggestions'));
 
   //default setting for idea title autocomplete
   variable_set('idea_add_autocomplete', TRUE);
@@ -565,13 +419,6 @@ function idea_install() {
 
   // Set a reasonable 403 page 
   variable_set('site_403', 'user/login');
-
-  // Set some default values for the theme. 
-  // We don't use the theme's .info file since it ran over the settings each time and prevented updates
-  $openideal_theme_settings = variable_get('theme_' . OPENIDEAL_DEFAULT_THEME . 'settings', array());
-  $openideal_theme_settings['bootstrap_cdn'] = '3.3.7';
-  $openideal_theme_settings['bootstrap_bootswatch'] = 'yeti';
-  variable_set('theme_' . OPENIDEAL_DEFAULT_THEME . 'settings', $openideal_theme_settings);
 
   variable_set('cache', 1);
   variable_set('preprocess_css', TRUE);
