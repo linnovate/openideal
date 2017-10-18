@@ -36,9 +36,9 @@ function fe_user_flag_default_flags() {
   $flags = array();
   // Exported flag: "Bronze User".
   $flags['bronze_user'] = array(
-    'content_type' => 'user',
+    'entity_type' => 'user',
     'title' => 'Bronze User',
-    'global' => '1',
+    'global' => 1,
     'types' => array(),
     'flag_short' => 'flag as Bronze user',
     'flag_long' => '',
@@ -48,16 +48,6 @@ function fe_user_flag_default_flags() {
     'unflag_message' => '',
     'unflag_denied_text' => '',
     'link_type' => 'toggle',
-    'roles' => array(
-      'flag' => array(
-        0 => '3',
-        1 => '5',
-      ),
-      'unflag' => array(
-        0 => '3',
-        1 => '5',
-      ),
-    ),
     'weight' => 0,
     'show_on_entity' => FALSE,
     'show_on_form' => FALSE,
@@ -66,15 +56,26 @@ function fe_user_flag_default_flags() {
     'access_uid' => 'others',
     'module' => 'fe_user',
     'locked' => array(
-      0 => 'name',
+      'name' => 'name',
     ),
-    'api_version' => 2,
+    'api_version' => 3,
+    'status' => FALSE,
+    'import_roles' => array(
+      'flag' => array(
+        0 => 3,
+        1 => 5,
+      ),
+      'unflag' => array(
+        0 => 3,
+        1 => 5,
+      ),
+    ),
   );
   // Exported flag: "Gold User".
   $flags['gold_user'] = array(
-    'content_type' => 'user',
+    'entity_type' => 'user',
     'title' => 'Gold User',
-    'global' => '1',
+    'global' => 1,
     'types' => array(),
     'flag_short' => 'flag as Gold user',
     'flag_long' => '',
@@ -84,16 +85,6 @@ function fe_user_flag_default_flags() {
     'unflag_message' => '',
     'unflag_denied_text' => '',
     'link_type' => 'toggle',
-    'roles' => array(
-      'flag' => array(
-        0 => '3',
-        1 => '5',
-      ),
-      'unflag' => array(
-        0 => '3',
-        1 => '5',
-      ),
-    ),
     'weight' => 0,
     'show_on_entity' => FALSE,
     'show_on_form' => FALSE,
@@ -102,15 +93,26 @@ function fe_user_flag_default_flags() {
     'access_uid' => 'others',
     'module' => 'fe_user',
     'locked' => array(
-      0 => 'name',
+      'name' => 'name',
     ),
-    'api_version' => 2,
+    'api_version' => 3,
+    'status' => FALSE,
+    'import_roles' => array(
+      'flag' => array(
+        0 => 3,
+        1 => 5,
+      ),
+      'unflag' => array(
+        0 => 3,
+        1 => 5,
+      ),
+    ),
   );
   // Exported flag: "Has Launched Idea".
   $flags['has_launched_idea'] = array(
-    'content_type' => 'user',
+    'entity_type' => 'user',
     'title' => 'Has Launched Idea',
-    'global' => '1',
+    'global' => 1,
     'types' => array(),
     'flag_short' => 'flag as has launched idea',
     'flag_long' => '',
@@ -120,14 +122,6 @@ function fe_user_flag_default_flags() {
     'unflag_message' => '',
     'unflag_denied_text' => '',
     'link_type' => 'toggle',
-    'roles' => array(
-      'flag' => array(
-        0 => '3',
-      ),
-      'unflag' => array(
-        0 => '3',
-      ),
-    ),
     'weight' => 0,
     'show_on_entity' => FALSE,
     'show_on_form' => FALSE,
@@ -136,15 +130,24 @@ function fe_user_flag_default_flags() {
     'access_uid' => 'others',
     'module' => 'fe_user',
     'locked' => array(
-      0 => 'name',
+      'name' => 'name',
     ),
-    'api_version' => 2,
+    'api_version' => 3,
+    'status' => FALSE,
+    'import_roles' => array(
+      'flag' => array(
+        0 => 3,
+      ),
+      'unflag' => array(
+        0 => 3,
+      ),
+    ),
   );
   // Exported flag: "Silver User".
   $flags['silver_user'] = array(
-    'content_type' => 'user',
+    'entity_type' => 'user',
     'title' => 'Silver User',
-    'global' => '1',
+    'global' => 1,
     'types' => array(),
     'flag_short' => 'flag as Silver user',
     'flag_long' => '',
@@ -154,16 +157,6 @@ function fe_user_flag_default_flags() {
     'unflag_message' => '',
     'unflag_denied_text' => '',
     'link_type' => 'toggle',
-    'roles' => array(
-      'flag' => array(
-        0 => '3',
-        1 => '5',
-      ),
-      'unflag' => array(
-        0 => '3',
-        1 => '5',
-      ),
-    ),
     'weight' => 0,
     'show_on_entity' => FALSE,
     'show_on_form' => FALSE,
@@ -172,12 +165,22 @@ function fe_user_flag_default_flags() {
     'access_uid' => 'others',
     'module' => 'fe_user',
     'locked' => array(
-      0 => 'name',
+      'name' => 'name',
     ),
-    'api_version' => 2,
+    'api_version' => 3,
+    'status' => FALSE,
+    'import_roles' => array(
+      'flag' => array(
+        0 => 3,
+        1 => 5,
+      ),
+      'unflag' => array(
+        0 => 3,
+        1 => 5,
+      ),
+    ),
   );
   return $flags;
-
 }
 
 /**
