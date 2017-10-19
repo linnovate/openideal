@@ -7,24 +7,19 @@
 /**
  * Implements hook_ctools_plugin_api().
  */
-function fe_idea_ctools_plugin_api() {
-  list($module, $api) = func_get_args();
+function fe_idea_ctools_plugin_api($module = NULL, $api = NULL) {
   if ($module == "context" && $api == "context") {
     return array("version" => "3");
   }
-  list($module, $api) = func_get_args();
   if ($module == "page_manager" && $api == "pages_default") {
     return array("version" => "1");
   }
-  list($module, $api) = func_get_args();
   if ($module == "quicktabs" && $api == "quicktabs") {
     return array("version" => "1");
   }
-  list($module, $api) = func_get_args();
   if ($module == "radioactivity" && $api == "radioactivity_decay_profile") {
     return array("version" => "1");
   }
-  list($module, $api) = func_get_args();
   if ($module == "strongarm" && $api == "strongarm") {
     return array("version" => "1");
   }
@@ -33,8 +28,8 @@ function fe_idea_ctools_plugin_api() {
 /**
  * Implements hook_views_api().
  */
-function fe_idea_views_api() {
-  return array("version" => "3.0");
+function fe_idea_views_api($module = NULL, $api = NULL) {
+  return array("api" => "3.0");
 }
 
 /**
@@ -59,30 +54,20 @@ function fe_idea_flag_default_flags() {
     'unflag_denied_text' => '',
     'link_type' => 'toggle',
     'weight' => 0,
+    'show_in_links' => array(
+      'teaser' => TRUE,
+      'full' => TRUE,
+    ),
+    'show_as_field' => FALSE,
     'show_on_form' => 0,
     'access_author' => '',
     'show_contextual_link' => FALSE,
     'i18n' => 0,
     'module' => 'fe_idea',
     'locked' => array(
-      'name' => 'name',
+      0 => 'name',
     ),
     'api_version' => 3,
-    'status' => TRUE,
-    'import_roles' => array(
-      'flag' => array(
-        0 => 3,
-        1 => 5,
-      ),
-      'unflag' => array(
-        0 => 3,
-        1 => 5,
-      ),
-    ),
-    'show_in_links' => array(
-      'teaser' => TRUE,
-      'full' => TRUE,
-    ),
   );
   // Exported flag: "Buzz Idea".
   $flags['buzz_idea'] = array(
@@ -101,30 +86,20 @@ function fe_idea_flag_default_flags() {
     'unflag_denied_text' => '',
     'link_type' => 'toggle',
     'weight' => 0,
+    'show_in_links' => array(
+      'teaser' => TRUE,
+      'full' => TRUE,
+    ),
+    'show_as_field' => FALSE,
     'show_on_form' => 0,
     'access_author' => '',
     'show_contextual_link' => FALSE,
     'i18n' => 0,
     'module' => 'fe_idea',
     'locked' => array(
-      'name' => 'name',
+      0 => 'name',
     ),
     'api_version' => 3,
-    'status' => TRUE,
-    'import_roles' => array(
-      'flag' => array(
-        0 => 3,
-        1 => 5,
-      ),
-      'unflag' => array(
-        0 => 3,
-        1 => 5,
-      ),
-    ),
-    'show_in_links' => array(
-      'teaser' => TRUE,
-      'full' => TRUE,
-    ),
   );
   // Exported flag: "Groove Idea".
   $flags['groove_idea'] = array(
@@ -143,32 +118,23 @@ function fe_idea_flag_default_flags() {
     'unflag_denied_text' => '',
     'link_type' => 'toggle',
     'weight' => 0,
+    'show_in_links' => array(
+      'teaser' => TRUE,
+      'full' => TRUE,
+    ),
+    'show_as_field' => FALSE,
     'show_on_form' => 0,
     'access_author' => '',
     'show_contextual_link' => FALSE,
     'i18n' => 0,
     'module' => 'fe_idea',
     'locked' => array(
-      'name' => 'name',
+      0 => 'name',
     ),
     'api_version' => 3,
-    'status' => TRUE,
-    'import_roles' => array(
-      'flag' => array(
-        0 => 3,
-        1 => 5,
-      ),
-      'unflag' => array(
-        0 => 3,
-        1 => 5,
-      ),
-    ),
-    'show_in_links' => array(
-      'teaser' => TRUE,
-      'full' => TRUE,
-    ),
   );
   return $flags;
+
 }
 
 /**
@@ -185,5 +151,6 @@ function fe_idea_node_info() {
       'help' => '',
     ),
   );
+  drupal_alter('node_info', $items);
   return $items;
 }

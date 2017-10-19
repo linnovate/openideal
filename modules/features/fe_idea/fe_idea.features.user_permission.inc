@@ -10,220 +10,210 @@
 function fe_idea_user_default_permissions() {
   $permissions = array();
 
-  // Exported permission: admin ideas.
+  // Exported permission: 'admin ideas'.
   $permissions['admin ideas'] = array(
     'name' => 'admin ideas',
     'roles' => array(
-      0 => 'administrator',
-      1 => 'site-manager',
+      'administrator' => 'administrator',
+      'site-manager' => 'site-manager',
     ),
     'module' => 'ideal_main',
   );
 
-  // Exported permission: create field_challenge_ref.
+  // Exported permission: 'create field_challenge_ref'.
   $permissions['create field_challenge_ref'] = array(
     'name' => 'create field_challenge_ref',
     'roles' => array(
-      0 => 'administrator',
+      'administrator' => 'administrator',
     ),
     'module' => 'field_permissions',
   );
 
-  // Exported permission: create field_in_action.
+  // Exported permission: 'create field_in_action'.
   $permissions['create field_in_action'] = array(
     'name' => 'create field_in_action',
     'roles' => array(
-      0 => 'administrator',
+      'administrator' => 'administrator',
     ),
     'module' => 'field_permissions',
   );
 
-  // Exported permission: create field_merge_to.
+  // Exported permission: 'create field_merge_to'.
   $permissions['create field_merge_to'] = array(
     'name' => 'create field_merge_to',
     'roles' => array(
-      0 => 'administrator',
+      'administrator' => 'administrator',
     ),
     'module' => 'field_permissions',
   );
 
-  // Exported permission: create idea content.
+  // Exported permission: 'create idea content'.
   $permissions['create idea content'] = array(
     'name' => 'create idea content',
     'roles' => array(
-      0 => 'authenticated user',
+      'authenticated user' => 'authenticated user',
     ),
     'module' => 'node',
   );
 
-  // Exported permission: delete any idea content.
+  // Exported permission: 'delete any idea content'.
   $permissions['delete any idea content'] = array(
     'name' => 'delete any idea content',
     'roles' => array(
-      0 => 'administrator',
-      1 => 'site-manager',
+      'administrator' => 'administrator',
+      'site-manager' => 'site-manager',
     ),
     'module' => 'node',
   );
 
-  // Exported permission: delete own idea content.
+  // Exported permission: 'delete own idea content'.
   $permissions['delete own idea content'] = array(
     'name' => 'delete own idea content',
     'roles' => array(
-      0 => 'administrator',
-      1 => 'site-manager',
+      'administrator' => 'administrator',
+      'site-manager' => 'site-manager',
     ),
     'module' => 'node',
   );
 
-  // Exported permission: edit any idea content.
+  // Exported permission: 'edit any idea content'.
   $permissions['edit any idea content'] = array(
     'name' => 'edit any idea content',
     'roles' => array(
-      0 => 'administrator',
-      1 => 'site-manager',
+      'administrator' => 'administrator',
+      'site-manager' => 'site-manager',
     ),
     'module' => 'node',
   );
 
-  // Exported permission: edit field_challenge_ref.
+  // Exported permission: 'edit field_challenge_ref'.
   $permissions['edit field_challenge_ref'] = array(
     'name' => 'edit field_challenge_ref',
     'roles' => array(
-      0 => 'administrator',
+      'administrator' => 'administrator',
     ),
     'module' => 'field_permissions',
   );
 
-  // Exported permission: edit field_in_action.
+  // Exported permission: 'edit field_in_action'.
   $permissions['edit field_in_action'] = array(
     'name' => 'edit field_in_action',
     'roles' => array(
-      0 => 'administrator',
+      'administrator' => 'administrator',
     ),
     'module' => 'field_permissions',
   );
 
-  // Exported permission: edit field_merge_to.
+  // Exported permission: 'edit field_merge_to'.
   $permissions['edit field_merge_to'] = array(
     'name' => 'edit field_merge_to',
     'roles' => array(
-      0 => 'administrator',
+      'administrator' => 'administrator',
     ),
     'module' => 'field_permissions',
   );
 
-  // Exported permission: edit own field_challenge_ref.
+  // Exported permission: 'edit own field_challenge_ref'.
   $permissions['edit own field_challenge_ref'] = array(
     'name' => 'edit own field_challenge_ref',
     'roles' => array(
-      0 => 'administrator',
+      'administrator' => 'administrator',
     ),
     'module' => 'field_permissions',
   );
 
-  // Exported permission: edit own field_in_action.
+  // Exported permission: 'edit own field_in_action'.
   $permissions['edit own field_in_action'] = array(
     'name' => 'edit own field_in_action',
     'roles' => array(
-      0 => 'administrator',
+      'administrator' => 'administrator',
     ),
     'module' => 'field_permissions',
   );
 
-  // Exported permission: edit own field_merge_to.
+  // Exported permission: 'edit own field_merge_to'.
   $permissions['edit own field_merge_to'] = array(
     'name' => 'edit own field_merge_to',
     'roles' => array(
-      0 => 'administrator',
+      'administrator' => 'administrator',
     ),
     'module' => 'field_permissions',
   );
 
-  // Exported permission: edit own idea content.
+  // Exported permission: 'edit own idea content'.
   $permissions['edit own idea content'] = array(
     'name' => 'edit own idea content',
     'roles' => array(
-      0 => 'administrator',
-      1 => 'authenticated user',
-      2 => 'site-manager',
+      'administrator' => 'administrator',
+      'authenticated user' => 'authenticated user',
+      'site-manager' => 'site-manager',
     ),
     'module' => 'node',
   );
 
-  // Exported permission: use vote up/down.
+  // Exported permission: 'use vote up/down'.
   $permissions['use vote up/down'] = array(
     'name' => 'use vote up/down',
     'roles' => array(
-      0 => 'administrator',
-      1 => 'authenticated user',
+      'administrator' => 'administrator',
+      'authenticated user' => 'authenticated user',
     ),
     'module' => 'vud',
   );
 
-  // Exported permission: view field_challenge_ref.
+  // Exported permission: 'view field_challenge_ref'.
   $permissions['view field_challenge_ref'] = array(
     'name' => 'view field_challenge_ref',
     'roles' => array(
-      0 => 'administrator',
+      'administrator' => 'administrator',
     ),
     'module' => 'field_permissions',
   );
 
-  // Exported permission: view field_in_action.
+  // Exported permission: 'view field_in_action'.
   $permissions['view field_in_action'] = array(
     'name' => 'view field_in_action',
     'roles' => array(
-      0 => 'anonymous user',
-      1 => 'authenticated user'
+      'anonymous user' => 'anonymous user',
+      'authenticated user' => 'authenticated user',
     ),
     'module' => 'field_permissions',
   );
 
-  // Exported permission: view field_merge_to.
+  // Exported permission: 'view field_merge_to'.
   $permissions['view field_merge_to'] = array(
     'name' => 'view field_merge_to',
     'roles' => array(
-      0 => 'administrator',
+      'administrator' => 'administrator',
     ),
     'module' => 'field_permissions',
   );
 
-  // Exported permission: view own field_challenge_ref.
+  // Exported permission: 'view own field_challenge_ref'.
   $permissions['view own field_challenge_ref'] = array(
     'name' => 'view own field_challenge_ref',
     'roles' => array(
-      0 => 'administrator',
+      'administrator' => 'administrator',
     ),
     'module' => 'field_permissions',
   );
 
-  // Exported permission: view own field_in_action.
+  // Exported permission: 'view own field_in_action'.
   $permissions['view own field_in_action'] = array(
     'name' => 'view own field_in_action',
     'roles' => array(
-      0 => 'administrator',
+      'administrator' => 'administrator',
     ),
     'module' => 'field_permissions',
   );
 
-  // Exported permission: view own field_merge_to.
+  // Exported permission: 'view own field_merge_to'.
   $permissions['view own field_merge_to'] = array(
     'name' => 'view own field_merge_to',
     'roles' => array(
-      0 => 'administrator',
+      'administrator' => 'administrator',
     ),
     'module' => 'field_permissions',
-  );
-
-  // Exported permission: view post access counter.
-  $permissions['view post access counter'] = array(
-    'name' => 'view post access counter',
-    'roles' => array(
-      0 => 'anonymous user',
-      1 => 'authenticated user'
-    ),
-    'module' => 'statistics',
   );
 
   return $permissions;
