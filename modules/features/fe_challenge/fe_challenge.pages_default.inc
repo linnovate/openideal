@@ -75,30 +75,32 @@ function fe_challenge_default_page_manager_pages() {
   $display->cache = array();
   $display->title = '';
   $display->uuid = '97c888e9-bd4e-4493-bf0f-e62fd1481b30';
+  $display->storage_type = 'page_manager';
+  $display->storage_id = 'page_challenges_panel_context';
   $display->content = array();
   $display->panels = array();
-    $pane = new stdClass();
-    $pane->pid = 'new-be2d700d-5398-49e2-bb00-8eae27379658';
-    $pane->panel = 'middle';
-    $pane->type = 'block';
-    $pane->subtype = 'views-challenges_list-block_1';
-    $pane->shown = TRUE;
-    $pane->access = array();
-    $pane->configuration = array(
-      'override_title' => 1,
-      'override_title_text' => '',
-    );
-    $pane->cache = array();
-    $pane->style = array(
-      'settings' => NULL,
-    );
-    $pane->css = array();
-    $pane->extras = array();
-    $pane->position = 0;
-    $pane->locks = array();
-    $pane->uuid = 'be2d700d-5398-49e2-bb00-8eae27379658';
-    $display->content['new-be2d700d-5398-49e2-bb00-8eae27379658'] = $pane;
-    $display->panels['middle'][0] = 'new-be2d700d-5398-49e2-bb00-8eae27379658';
+  $pane = new stdClass();
+  $pane->pid = 'new-be2d700d-5398-49e2-bb00-8eae27379658';
+  $pane->panel = 'middle';
+  $pane->type = 'block';
+  $pane->subtype = 'views-challenges_list-block_1';
+  $pane->shown = TRUE;
+  $pane->access = array();
+  $pane->configuration = array(
+    'override_title' => 1,
+    'override_title_text' => '',
+  );
+  $pane->cache = array();
+  $pane->style = array(
+    'settings' => NULL,
+  );
+  $pane->css = array();
+  $pane->extras = array();
+  $pane->position = 0;
+  $pane->locks = array();
+  $pane->uuid = 'be2d700d-5398-49e2-bb00-8eae27379658';
+  $display->content['new-be2d700d-5398-49e2-bb00-8eae27379658'] = $pane;
+  $display->panels['middle'][0] = 'new-be2d700d-5398-49e2-bb00-8eae27379658';
   $display->hide_title = PANELS_TITLE_FIXED;
   $display->title_pane = 'new-be2d700d-5398-49e2-bb00-8eae27379658';
   $handler->conf['display'] = $display;
