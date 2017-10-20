@@ -13,13 +13,13 @@ function fe_default_user_default_roles() {
   // Exported role: privilege.
   $roles['privilege'] = array(
     'name' => 'privilege',
-    'weight' => '4',
+    'weight' => 4,
   );
 
   // Exported role: site-manager.
   $roles['site-manager'] = array(
     'name' => 'site-manager',
-    'weight' => '5',
+    'weight' => 5,
   );
 
   return $roles;

@@ -7,16 +7,13 @@
 /**
  * Implements hook_ctools_plugin_api().
  */
-function fe_user_ctools_plugin_api() {
-  list($module, $api) = func_get_args();
+function fe_user_ctools_plugin_api($module = NULL, $api = NULL) {
   if ($module == "context" && $api == "context") {
     return array("version" => "3");
   }
-  list($module, $api) = func_get_args();
   if ($module == "quicktabs" && $api == "quicktabs") {
     return array("version" => "1");
   }
-  list($module, $api) = func_get_args();
   if ($module == "strongarm" && $api == "strongarm") {
     return array("version" => "1");
   }
@@ -25,8 +22,8 @@ function fe_user_ctools_plugin_api() {
 /**
  * Implements hook_views_api().
  */
-function fe_user_views_api() {
-  return array("version" => "3.0");
+function fe_user_views_api($module = NULL, $api = NULL) {
+  return array("api" => "3.0");
 }
 
 /**
@@ -49,27 +46,18 @@ function fe_user_flag_default_flags() {
     'unflag_denied_text' => '',
     'link_type' => 'toggle',
     'weight' => 0,
-    'show_on_entity' => FALSE,
+    'show_in_links' => array(),
+    'show_as_field' => FALSE,
     'show_on_form' => FALSE,
     'access_author' => '',
+    'show_contextual_link' => FALSE,
     'show_on_profile' => 1,
     'access_uid' => 'others',
     'module' => 'fe_user',
     'locked' => array(
-      'name' => 'name',
+      0 => 'name',
     ),
     'api_version' => 3,
-    'status' => TRUE,
-    'import_roles' => array(
-      'flag' => array(
-        0 => 3,
-        1 => 5,
-      ),
-      'unflag' => array(
-        0 => 3,
-        1 => 5,
-      ),
-    ),
   );
   // Exported flag: "Gold User".
   $flags['gold_user'] = array(
@@ -86,27 +74,18 @@ function fe_user_flag_default_flags() {
     'unflag_denied_text' => '',
     'link_type' => 'toggle',
     'weight' => 0,
-    'show_on_entity' => FALSE,
+    'show_in_links' => array(),
+    'show_as_field' => FALSE,
     'show_on_form' => FALSE,
     'access_author' => '',
+    'show_contextual_link' => FALSE,
     'show_on_profile' => 1,
     'access_uid' => 'others',
     'module' => 'fe_user',
     'locked' => array(
-      'name' => 'name',
+      0 => 'name',
     ),
     'api_version' => 3,
-    'status' => TRUE,
-    'import_roles' => array(
-      'flag' => array(
-        0 => 3,
-        1 => 5,
-      ),
-      'unflag' => array(
-        0 => 3,
-        1 => 5,
-      ),
-    ),
   );
   // Exported flag: "Has Launched Idea".
   $flags['has_launched_idea'] = array(
@@ -123,25 +102,18 @@ function fe_user_flag_default_flags() {
     'unflag_denied_text' => '',
     'link_type' => 'toggle',
     'weight' => 0,
-    'show_on_entity' => FALSE,
+    'show_in_links' => array(),
+    'show_as_field' => FALSE,
     'show_on_form' => FALSE,
     'access_author' => '',
+    'show_contextual_link' => FALSE,
     'show_on_profile' => 1,
     'access_uid' => 'others',
     'module' => 'fe_user',
     'locked' => array(
-      'name' => 'name',
+      0 => 'name',
     ),
     'api_version' => 3,
-    'status' => TRUE,
-    'import_roles' => array(
-      'flag' => array(
-        0 => 3,
-      ),
-      'unflag' => array(
-        0 => 3,
-      ),
-    ),
   );
   // Exported flag: "Silver User".
   $flags['silver_user'] = array(
@@ -158,29 +130,21 @@ function fe_user_flag_default_flags() {
     'unflag_denied_text' => '',
     'link_type' => 'toggle',
     'weight' => 0,
-    'show_on_entity' => FALSE,
+    'show_in_links' => array(),
+    'show_as_field' => FALSE,
     'show_on_form' => FALSE,
     'access_author' => '',
+    'show_contextual_link' => FALSE,
     'show_on_profile' => 1,
     'access_uid' => 'others',
     'module' => 'fe_user',
     'locked' => array(
-      'name' => 'name',
+      0 => 'name',
     ),
     'api_version' => 3,
-    'status' => TRUE,
-    'import_roles' => array(
-      'flag' => array(
-        0 => 3,
-        1 => 5,
-      ),
-      'unflag' => array(
-        0 => 3,
-        1 => 5,
-      ),
-    ),
   );
   return $flags;
+
 }
 
 /**
@@ -191,22 +155,14 @@ function fe_user_image_default_styles() {
 
   // Exported image style: avatar_45_45.
   $styles['avatar_45_45'] = array(
-    'name' => 'avatar_45_45',
     'effects' => array(
       1 => array(
-        'label' => 'Scale and crop',
-        'help' => 'Scale and crop will maintain the aspect-ratio of the original image, then crop the larger dimension. This is most useful for creating perfectly square thumbnails without stretching the image.',
-        'effect callback' => 'image_scale_and_crop_effect',
-        'dimensions callback' => 'image_resize_dimensions',
-        'form callback' => 'image_resize_form',
-        'summary theme' => 'image_resize_summary',
-        'module' => 'image',
         'name' => 'image_scale_and_crop',
         'data' => array(
-          'width' => '45',
-          'height' => '45',
+          'width' => 45,
+          'height' => 45,
         ),
-        'weight' => '1',
+        'weight' => 1,
       ),
     ),
     'label' => 'avatar_45_45',

@@ -82,6 +82,28 @@ function fe_notifications_default_rules_configuration() {
       ]
     }
   }');
+  $items['rules_send_mail_notification_about_the_mention'] = entity_import('rules_config', '{ "rules_send_mail_notification_about_the_mention" : {
+      "LABEL" : "Send mail notification about the mention",
+      "PLUGIN" : "reaction rule",
+      "OWNER" : "rules",
+      "TAGS" : [ "Notifications" ],
+      "REQUIRES" : [ "rules" ],
+      "ON" : { "mentions_insert" : [] },
+      "IF" : [
+        { "data_is" : { "data" : [ "mention:user:field-mention-notifications" ], "value" : 1 } }
+      ],
+      "DO" : [
+        { "mail" : {
+            "to" : [ "mention:user:mail" ],
+            "subject" : "[mention:author] mentioned you on [site:name]",
+            "message" : "Hello,\\r\\n\\r\\n[mention:author] mentioned you on [mention:node]\\r\\nClick here to read more: [mention:node_url]\\r\\n\\r\\nRegards,\\r\\n[site:name]",
+            "from" : "[site:mail]",
+            "language" : [ "" ]
+          }
+        }
+      ]
+    }
+  }');
   $items['rules_send_mail_to_idea_author_on_comment'] = entity_import('rules_config', '{ "rules_send_mail_to_idea_author_on_comment" : {
       "LABEL" : "send_mail_to_idea_author_on_comment",
       "PLUGIN" : "reaction rule",
