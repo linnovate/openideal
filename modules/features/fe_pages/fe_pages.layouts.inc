@@ -89,6 +89,73 @@ function fe_pages_default_panels_layout() {
   $layout = new stdClass();
   $layout->disabled = FALSE; /* Edit this to true to make a default layout disabled initially */
   $layout->api_version = 1;
+  $layout->name = 'ideal_tow_columns_flex';
+  $layout->admin_title = 'ideal_tow_columns_flex';
+  $layout->admin_description = '';
+  $layout->category = '';
+  $layout->plugin = 'flexible';
+  $layout->settings = array(
+    'items' => array(
+      'canvas' => array(
+        'type' => 'row',
+        'contains' => 'column',
+        'children' => array(
+          0 => 'main',
+        ),
+        'parent' => NULL,
+      ),
+      'main' => array(
+        'type' => 'column',
+        'width' => 100,
+        'width_type' => '%',
+        'children' => array(
+          0 => 'main-row',
+          1 => 1,
+        ),
+        'parent' => 'canvas',
+      ),
+      'main-row' => array(
+        'type' => 'row',
+        'contains' => 'region',
+        'children' => array(
+          0 => 'center',
+          1 => 'right',
+        ),
+        'parent' => 'main',
+      ),
+      'center' => array(
+        'type' => 'region',
+        'title' => 'left',
+        'width' => '68.85920428405234',
+        'width_type' => '%',
+        'parent' => 'main-row',
+        'class' => '',
+        'hide_empty' => 0,
+      ),
+      1 => array(
+        'type' => 'row',
+        'contains' => 'column',
+        'children' => array(),
+        'parent' => 'main',
+        'class' => '',
+        'hide_empty' => 0,
+      ),
+      'right' => array(
+        'type' => 'region',
+        'title' => 'right',
+        'width' => '31.140795715947664',
+        'width_type' => '%',
+        'parent' => 'main-row',
+        'class' => '',
+        'hide_empty' => 0,
+      ),
+    ),
+  );
+  $export['ideal_tow_columns_flex'] = $layout;
+
+  $layout = new stdClass();
+  $layout->disabled = FALSE; /* Edit this to true to make a default layout disabled initially */
+  $layout->api_version = 1;
   $layout->name = 'ideal_two_column';
   $layout->admin_title = 'Ideal two column';
   $layout->admin_description = '';
