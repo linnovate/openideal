@@ -138,6 +138,30 @@ function fe_idea_flag_default_flags() {
 }
 
 /**
+ * Implements hook_image_default_styles().
+ */
+function fe_idea_image_default_styles() {
+  $styles = array();
+
+  // Exported image style: scale_cropped.
+  $styles['scale_cropped'] = array(
+    'label' => 'Scale&Cropped 220*220',
+    'effects' => array(
+      1 => array(
+        'name' => 'image_scale_and_crop',
+        'data' => array(
+          'width' => 220,
+          'height' => 220,
+        ),
+        'weight' => 1,
+      ),
+    ),
+  );
+
+  return $styles;
+}
+
+/**
  * Implements hook_node_info().
  */
 function fe_idea_node_info() {

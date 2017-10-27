@@ -690,8 +690,8 @@ Why not add an idea?';
   $handler->display->display_options['fields']['field_idea_image']['hide_empty'] = TRUE;
   $handler->display->display_options['fields']['field_idea_image']['click_sort_column'] = 'fid';
   $handler->display->display_options['fields']['field_idea_image']['settings'] = array(
-    'image_style' => 'cropped_220_220',
-    'image_link' => '',
+    'image_style' => 'scale_cropped',
+    'image_link' => 'content',
   );
   $handler->display->display_options['fields']['field_idea_image']['delta_limit'] = '1';
   $handler->display->display_options['fields']['field_idea_image']['delta_offset'] = '0';
