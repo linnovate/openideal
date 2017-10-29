@@ -127,70 +127,6 @@ function fe_idea_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-idea-field_attachments'.
-  $field_instances['node-idea-field_attachments'] = array(
-    'bundle' => 'idea',
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'file',
-        'settings' => array(),
-        'type' => 'file_default',
-        'weight' => 12,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'field_name' => 'field_attachments',
-    'label' => 'Attachments',
-    'required' => 0,
-    'settings' => array(
-      'description_field' => 0,
-      'file_directory' => '',
-      'file_extensions' => 'txt pdf doc docx ppt pptx',
-      'max_filesize' => '',
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'file',
-      'settings' => array(
-        'dragdropfile_enabled' => 1,
-        'filefield_sources' => array(
-          'filefield_sources' => array(
-            'attach' => 0,
-            'clipboard' => 0,
-            'imce' => 0,
-            'reference' => 0,
-            'remote' => 0,
-            'upload' => 'upload',
-          ),
-          'source_attach' => array(
-            'absolute' => 0,
-            'attach_mode' => 'move',
-            'path' => 'file_attach',
-          ),
-          'source_imce' => array(
-            'imce_mode' => 0,
-          ),
-          'source_reference' => array(
-            'autocomplete' => 0,
-          ),
-        ),
-        'progress_indicator' => 'throbber',
-      ),
-      'type' => 'file_generic',
-      'weight' => 15,
-    ),
-  );
-
   // Exported field_instance: 'node-idea-field_blast_idea'.
   $field_instances['node-idea-field_blast_idea'] = array(
     'bundle' => 'idea',
@@ -276,44 +212,6 @@ function fe_idea_field_default_field_instances() {
       'settings' => array(),
       'type' => 'radioactivity_basic_widget',
       'weight' => 10,
-    ),
-  );
-
-  // Exported field_instance: 'node-idea-field_category'.
-  $field_instances['node-idea-field_category'] = array(
-    'bundle' => 'idea',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'hidden',
-        'module' => 'taxonomy',
-        'settings' => array(),
-        'type' => 'taxonomy_term_reference_link',
-        'weight' => 0,
-      ),
-      'teaser' => array(
-        'label' => 'hidden',
-        'module' => 'taxonomy',
-        'settings' => array(),
-        'type' => 'taxonomy_term_reference_link',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'field_name' => 'field_category',
-    'label' => 'Category',
-    'required' => 0,
-    'settings' => array(
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'options',
-      'settings' => array(),
-      'type' => 'options_select',
-      'weight' => 2,
     ),
   );
 
@@ -651,10 +549,8 @@ function fe_idea_field_default_field_instances() {
 
   // Translatables
   // Included for use with string extractors like potx.
-  t('Attachments');
   t('Blast Idea');
   t('Buzz Idea');
-  t('Category');
   t('Comment');
   t('Describe your idea');
   t('Groove Idea');
