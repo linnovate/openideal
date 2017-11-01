@@ -125,6 +125,7 @@ function fe_pages_default_panels_layout() {
           1 => 'sidebar',
         ),
         'parent' => 'main',
+        'class' => 'thumbnail',
       ),
       'center' => array(
         'type' => 'region',

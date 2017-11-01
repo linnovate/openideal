@@ -54,7 +54,7 @@ function fe_challenge_views_default_views() {
   $handler->display->display_options['fields']['field_challenge_image']['hide_empty'] = TRUE;
   $handler->display->display_options['fields']['field_challenge_image']['click_sort_column'] = 'fid';
   $handler->display->display_options['fields']['field_challenge_image']['settings'] = array(
-    'image_style' => 'cropped_220_220',
+    'image_style' => 'scale_cropped_220_220',
     'image_link' => 'content',
   );
   /* Field: Content: Title */
