@@ -87,7 +87,7 @@ function fe_notifications_default_rules_configuration() {
       "PLUGIN" : "reaction rule",
       "OWNER" : "rules",
       "TAGS" : [ "Notifications" ],
-      "REQUIRES" : [ "rules" ],
+      "REQUIRES" : [ "rules", "mentions" ],
       "ON" : { "mentions_insert" : [] },
       "IF" : [
         { "data_is" : { "data" : [ "mention:user:field-mention-notifications" ], "value" : 1 } }
