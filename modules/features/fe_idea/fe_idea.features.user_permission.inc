@@ -218,5 +218,16 @@ function fe_idea_user_default_permissions() {
     'module' => 'field_permissions',
   );
 
+  // Exported permission: 'view post access counter'.
+  $permissions['view post access counter'] = array(
+    'name' => 'view post access counter',
+    'roles' => array(
+      'administrator' => 'administrator',
+      'anonymous user' => 'anonymous user',
+      'authenticated user' => 'authenticated user',
+    ),
+    'module' => 'statistics',
+  );
+
   return $permissions;
 }
