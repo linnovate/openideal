@@ -692,12 +692,13 @@ Why not add an idea?';
   $handler->display->display_options['fields']['field_idea_image']['settings'] = array(
     'image_style' => 'scale_cropped_220_220',
     'image_link' => 'content',
+
   );
   $handler->display->display_options['fields']['field_idea_image']['delta_limit'] = '1';
   $handler->display->display_options['fields']['field_idea_image']['delta_offset'] = '0';
   /* Field: Content: Title */
   $handler->display->display_options['fields']['title']['id'] = 'title';
-  $handler->display->display_options['fields']['title']['table'] = 'node';
+  $handler->display->display_options['fields']['title']['table'] = 'node';ca
   $handler->display->display_options['fields']['title']['field'] = 'title';
   $handler->display->display_options['fields']['title']['label'] = '';
   $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
