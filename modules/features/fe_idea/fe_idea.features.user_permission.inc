@@ -51,6 +51,7 @@ function fe_idea_user_default_permissions() {
   $permissions['create idea content'] = array(
     'name' => 'create idea content',
     'roles' => array(
+      'administrator' => 'administrator',
       'authenticated user' => 'authenticated user',
     ),
     'module' => 'node',
@@ -174,6 +175,7 @@ function fe_idea_user_default_permissions() {
   $permissions['view field_in_action'] = array(
     'name' => 'view field_in_action',
     'roles' => array(
+      'administrator' => 'administrator',
       'anonymous user' => 'anonymous user',
       'authenticated user' => 'authenticated user',
     ),
@@ -214,6 +216,17 @@ function fe_idea_user_default_permissions() {
       'administrator' => 'administrator',
     ),
     'module' => 'field_permissions',
+  );
+
+  // Exported permission: 'view post access counter'.
+  $permissions['view post access counter'] = array(
+    'name' => 'view post access counter',
+    'roles' => array(
+      'administrator' => 'administrator',
+      'anonymous user' => 'anonymous user',
+      'authenticated user' => 'authenticated user',
+    ),
+    'module' => 'statistics',
   );
 
   return $permissions;

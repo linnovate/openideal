@@ -2,11 +2,9 @@ name = Add Idea autocomplete
 description = Add idea title form autocomplete
 core = 7.x
 package = OpenideaL
-php = 5.2.4
-
 project = add_idea_autocomplete
 dependencies[] = ctools
 dependencies[] = views
 features[ctools][] = views:views_default:3.0
-features[features_api][] = api:1
+features[features_api][] = api:2
 features[views_view][] = all_ideas_titles

@@ -51,7 +51,7 @@ function fe_pages_views_default_views() {
   $handler->display->display_options['fields']['field_challenge_image']['hide_empty'] = TRUE;
   $handler->display->display_options['fields']['field_challenge_image']['click_sort_column'] = 'fid';
   $handler->display->display_options['fields']['field_challenge_image']['settings'] = array(
-    'image_style' => 'sacle_and_crop_220_220',
+    'image_style' => 'scale_cropped_220_220',
     'image_link' => 'content',
   );
   /* Field: Content: Title */
@@ -148,7 +148,7 @@ function fe_pages_views_default_views() {
   $handler->display->display_options['fields']['field_challenge_image']['hide_empty'] = TRUE;
   $handler->display->display_options['fields']['field_challenge_image']['click_sort_column'] = 'fid';
   $handler->display->display_options['fields']['field_challenge_image']['settings'] = array(
-    'image_style' => 'sacle_and_crop_220_220',
+    'image_style' => 'cropped_220_220',
     'image_link' => 'content',
   );
   /* Field: Content: Title */
@@ -238,6 +238,7 @@ function fe_pages_views_default_views() {
   $handler->display->display_options['pager']['type'] = 'full';
   $handler->display->display_options['pager']['options']['items_per_page'] = '50';
   $handler->display->display_options['style_plugin'] = 'default';
+  $handler->display->display_options['style_options']['row_class'] = 'col-sm-6 col-md-4';
   $handler->display->display_options['style_options']['default_row_class'] = FALSE;
   $handler->display->display_options['style_options']['row_class_special'] = FALSE;
   $handler->display->display_options['row_plugin'] = 'panels_fields';
@@ -562,7 +563,7 @@ function fe_pages_views_default_views() {
   $handler->display->display_options['fields']['field_idea_image']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_idea_image']['click_sort_column'] = 'fid';
   $handler->display->display_options['fields']['field_idea_image']['settings'] = array(
-    'image_style' => 'sacle_and_crop_220_220',
+    'image_style' => 'scale_cropped_220_220',
     'image_link' => '',
   );
   $handler->display->display_options['fields']['field_idea_image']['delta_limit'] = '1';

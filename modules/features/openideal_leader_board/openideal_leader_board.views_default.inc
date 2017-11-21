@@ -89,11 +89,6 @@ function openideal_leader_board_views_default_views() {
   $handler->display->display_options['fields']['picture']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['picture']['empty'] = '<img src="http://upload.wikimedia.org/wikipedia/commons/d/d3/User_Circle.png" alt="This user has no picture" title="This user has no picture" width="45" height="45" />';
   $handler->display->display_options['fields']['picture']['image_style'] = 'avatar_45_45';
-  /* Field: User: Personal Details - Full name */
-  $handler->display->display_options['fields']['field_user_address_name_line']['id'] = 'field_user_address_name_line';
-  $handler->display->display_options['fields']['field_user_address_name_line']['table'] = 'field_data_field_user_address';
-  $handler->display->display_options['fields']['field_user_address_name_line']['field'] = 'field_user_address_name_line';
-  $handler->display->display_options['fields']['field_user_address_name_line']['label'] = 'Name';
   /* Field: User: Name */
   $handler->display->display_options['fields']['name']['id'] = 'name';
   $handler->display->display_options['fields']['name']['table'] = 'users';
@@ -209,12 +204,6 @@ function openideal_leader_board_views_default_views() {
   $handler->display->display_options['fields']['picture']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['picture']['empty'] = '<img src="http://upload.wikimedia.org/wikipedia/commons/d/d3/User_Circle.png" alt="This user has no picture" title="This user has no picture" width="45" height="45" />';
   $handler->display->display_options['fields']['picture']['image_style'] = 'avatar_45_45';
-  /* Field: User: Personal Details - Full name */
-  $handler->display->display_options['fields']['field_user_address_name_line']['id'] = 'field_user_address_name_line';
-  $handler->display->display_options['fields']['field_user_address_name_line']['table'] = 'field_data_field_user_address';
-  $handler->display->display_options['fields']['field_user_address_name_line']['field'] = 'field_user_address_name_line';
-  $handler->display->display_options['fields']['field_user_address_name_line']['label'] = '';
-  $handler->display->display_options['fields']['field_user_address_name_line']['element_label_colon'] = FALSE;
   /* Field: User: Name */
   $handler->display->display_options['fields']['name']['id'] = 'name';
   $handler->display->display_options['fields']['name']['table'] = 'users';
