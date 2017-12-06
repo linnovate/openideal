@@ -63,7 +63,6 @@ projects[panels_bootstrap_styles][version] = "1.0-alpha1"
 
 projects[quicktabs][version] = "3.8" 
 projects[radioactivity][version] = "2.10" 
-projects[realname][version] = "1.3"
 projects[rules][version] = "2.10"
 projects[search_autocomplete][version] = "4.7"
 projects[social_buttons][version] = "1.5" 
