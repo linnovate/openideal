@@ -70,6 +70,17 @@ function fe_permissions_user_default_permissions() {
     'module' => 'system',
   );
 
+  // Exported permission: 'access statistics'.
+  $permissions['access statistics'] = array(
+    'name' => 'access statistics',
+    'roles' => array(
+      'administrator' => 'administrator',
+      'anonymous user' => 'anonymous user',
+      'authenticated user' => 'authenticated user',
+    ),
+    'module' => 'statistics',
+  );
+
   // Exported permission: 'administer analytics dashboard'.
   $permissions['administer analytics dashboard'] = array(
     'name' => 'administer analytics dashboard',
