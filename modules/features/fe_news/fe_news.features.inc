@@ -29,7 +29,7 @@ function fe_news_views_api($module = NULL, $api = NULL) {
 function fe_news_node_info() {
   $items = array(
     'news' => array(
-      'name' => t('חדשות'),
+      'name' => t('News'),
       'base' => 'node_content',
       'description' => t('News & Updates'),
       'has_title' => '1',
