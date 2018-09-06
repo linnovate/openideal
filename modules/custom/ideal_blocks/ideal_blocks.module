@@ -158,7 +158,9 @@ function _ideal_blocks_idea_stats() {
 
     // Hardcode phase for now.
     $phase = t('Phase');
-
+    if (!empty($entity->field_in_action)){
+        $phase = $entity->field_in_action["und"][0]["value"];
+    }
     // Generate output.
     $output = '<div id="ideal-challenge-stats">';
     $output .= '<table class="top idea-page"><tr>';
