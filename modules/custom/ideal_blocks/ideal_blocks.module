@@ -30,7 +30,7 @@ function ideal_blocks_block_view($delta = '') {
       break;
     case 'idea_stats':
       $block = array(
-        
+
         'content' => _ideal_blocks_idea_stats(),
       );
       break;
@@ -157,7 +157,7 @@ function _ideal_blocks_idea_stats() {
     }
 
     // Hardcode phase for now.
-    $phase = t('Phase');
+    $phase = t('Ideation');
 
     // Generate output.
     $output = '<div id="ideal-challenge-stats">';
