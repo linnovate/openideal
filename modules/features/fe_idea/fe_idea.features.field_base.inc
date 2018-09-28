@@ -254,6 +254,7 @@ function fe_idea_field_default_field_bases() {
     'module' => 'list',
     'settings' => array(
       'allowed_values' => array(
+        'Ideation' => 'Ideation',
         'Under Review' => 'Under Review',
         'Reviewed' => 'Reviewed',
         'Coming Soon' => 'Coming Soon',
