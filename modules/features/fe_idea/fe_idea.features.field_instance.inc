@@ -487,7 +487,7 @@ function fe_idea_field_default_field_instances() {
   // Exported field_instance: 'node-idea-field_in_action'.
   $field_instances['node-idea-field_in_action'] = array(
     'bundle' => 'idea',
-    'default_value' => NULL,
+    'default_value' => 'Ideation',
     'deleted' => 0,
     'description' => '',
     'display' => array(
