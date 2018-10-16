@@ -53,6 +53,26 @@ function idea_install_tasks($install_state) {
       'run' => $dummy_content ? INSTALL_TASK_RUN_IF_NOT_COMPLETED : INSTALL_TASK_SKIP,
     ),
   );
+
+  # PANOPOLY INTEGRATION
+  // Add our custom CSS file for the installation process
+  drupal_add_css(drupal_get_path('profile', 'panopoly') . '/panopoly.css');
+
+  // Add the Panopoly app selection to the installation process
+  $panopoly_server = array(
+    'machine name' => 'panopoly',
+    'default apps' => array('panopoly_demo'),
+    'default content callback' => 'panopoly_default_content',
+  );
+  require_once(drupal_get_path('module', 'apps') . '/apps.profile.inc');
+  $tasks = $tasks + apps_profile_install_tasks($install_state, $panopoly_server);
+
+  // Add the Panopoly theme selection to the installation process
+  require_once(drupal_get_path('module', 'panopoly_theme') . '/panopoly_theme.profile.inc');
+  $tasks = $tasks + panopoly_theme_profile_theme_selection_install_task($install_state);
+
+  # END PANOPOLY INTEGRATION
+
   return $tasks;
 }
 
@@ -72,6 +92,19 @@ function idea_install_tasks_alter(&$tasks, $install_state) {
   );
   $tasks = array_merge($new_task, $tasks);
   _openideal_set_theme('ideal7');
+
+  # PANOPOLY INTEGRATION
+  // Magically go one level deeper in solving years of dependency problems
+  require_once(drupal_get_path('module', 'panopoly_core') . '/panopoly_core.profile.inc');
+  $tasks['install_load_profile']['function'] = 'panopoly_core_install_load_profile';
+
+  // If we only offer one language, define a callback to set this
+  require_once(drupal_get_path('module', 'panopoly_core') . '/panopoly_core.profile.inc');
+  if (!(count(install_find_locales($install_state['parameters']['profile'])) > 1)) {
+    $tasks['install_select_locale']['function'] = 'panopoly_core_install_locale_selection';
+  }
+  # END PANOPOLY INTEGRATION
+
 }
 
 /**
