@@ -376,6 +376,65 @@ function fe_idea_views_default_views() {
   $export['carousel'] = $view;
 
   $view = new view();
+  $view->name = 'duplicate_message';
+  $view->description = '';
+  $view->tag = 'default';
+  $view->base_table = 'node';
+  $view->human_name = 'duplicateMessage';
+  $view->core = 7;
+  $view->api_version = '3.0';
+  $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
+
+  /* Display: Master */
+  $handler = $view->new_display('default', 'Master', 'default');
+  $handler->display->display_options['use_more_always'] = FALSE;
+  $handler->display->display_options['access']['type'] = 'perm';
+  $handler->display->display_options['cache']['type'] = 'php';
+  $handler->display->display_options['query']['type'] = 'views_query';
+  $handler->display->display_options['exposed_form']['type'] = 'basic';
+  $handler->display->display_options['pager']['type'] = 'full';
+  $handler->display->display_options['style_plugin'] = 'default';
+  $handler->display->display_options['row_plugin'] = 'fields';
+  /* Field: Message to display in merged ideas */
+  $handler->display->display_options['fields']['field_merge_to']['id'] = 'field_merge_to';
+  $handler->display->display_options['fields']['field_merge_to']['table'] = 'field_data_field_merge_to';
+  $handler->display->display_options['fields']['field_merge_to']['field'] = 'field_merge_to';
+  $handler->display->display_options['fields']['field_merge_to']['ui_name'] = 'Message to display in merged ideas';
+  $handler->display->display_options['fields']['field_merge_to']['label'] = '';
+  $handler->display->display_options['fields']['field_merge_to']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['field_merge_to']['alter']['text'] = 'This idea is marked as duplicate of <strong class="alert-link"><em>[field_merge_to]. </em></strong>
+Further commenting has been disabled. 
+All unique votes have been added to the discussion at: [field_merge_to]';
+  $handler->display->display_options['fields']['field_merge_to']['alter']['nl2br'] = TRUE;
+  $handler->display->display_options['fields']['field_merge_to']['element_class'] = 'alert alert-info';
+  $handler->display->display_options['fields']['field_merge_to']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_merge_to']['hide_empty'] = TRUE;
+  $handler->display->display_options['fields']['field_merge_to']['settings'] = array(
+    'bypass_access' => 1,
+    'link' => 1,
+  );
+  /* Contextual filter: Content: Nid */
+  $handler->display->display_options['arguments']['nid']['id'] = 'nid';
+  $handler->display->display_options['arguments']['nid']['table'] = 'node';
+  $handler->display->display_options['arguments']['nid']['field'] = 'nid';
+  $handler->display->display_options['arguments']['nid']['default_action'] = 'default';
+  $handler->display->display_options['arguments']['nid']['default_argument_type'] = 'node';
+  $handler->display->display_options['arguments']['nid']['summary']['number_of_records'] = '0';
+  $handler->display->display_options['arguments']['nid']['summary']['format'] = 'default_summary';
+  $handler->display->display_options['arguments']['nid']['summary_options']['items_per_page'] = '25';
+  /* Filter criterion: Content: Published */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'node';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = 1;
+  $handler->display->display_options['filters']['status']['group'] = 1;
+  $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
+
+  /* Display: Block */
+  $handler = $view->new_display('block', 'Block', 'block_1');
+  $export['duplicate_message'] = $view;
+
+  $view = new view();
   $view->name = 'frontpage_ideas';
   $view->description = '';
   $view->tag = 'default';
@@ -692,7 +751,6 @@ Why not add an idea?';
   $handler->display->display_options['fields']['field_idea_image']['settings'] = array(
     'image_style' => 'scale_cropped_220_220',
     'image_link' => 'content',
-
   );
   $handler->display->display_options['fields']['field_idea_image']['delta_limit'] = '1';
   $handler->display->display_options['fields']['field_idea_image']['delta_offset'] = '0';
