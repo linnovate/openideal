@@ -92,6 +92,7 @@ function fe_idea_user_default_permissions() {
     'name' => 'edit field_challenge_ref',
     'roles' => array(
       'administrator' => 'administrator',
+      'site-manager' => 'site-manager',
     ),
     'module' => 'field_permissions',
   );
@@ -101,6 +102,7 @@ function fe_idea_user_default_permissions() {
     'name' => 'edit field_in_action',
     'roles' => array(
       'administrator' => 'administrator',
+      'site-manager' => 'site-manager',
     ),
     'module' => 'field_permissions',
   );
@@ -110,6 +112,7 @@ function fe_idea_user_default_permissions() {
     'name' => 'edit field_merge_to',
     'roles' => array(
       'administrator' => 'administrator',
+      'site-manager' => 'site-manager',
     ),
     'module' => 'field_permissions',
   );
@@ -167,6 +170,8 @@ function fe_idea_user_default_permissions() {
     'name' => 'view field_challenge_ref',
     'roles' => array(
       'administrator' => 'administrator',
+      'anonymous user' => 'anonymous user',
+      'authenticated user' => 'authenticated user',
     ),
     'module' => 'field_permissions',
   );
@@ -187,6 +192,8 @@ function fe_idea_user_default_permissions() {
     'name' => 'view field_merge_to',
     'roles' => array(
       'administrator' => 'administrator',
+      'anonymous user' => 'anonymous user',
+      'authenticated user' => 'authenticated user',
     ),
     'module' => 'field_permissions',
   );

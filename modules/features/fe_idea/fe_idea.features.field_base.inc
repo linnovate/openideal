@@ -297,9 +297,6 @@ function fe_idea_field_default_field_bases() {
           ),
         ),
         'sort' => array(
-          'direction' => 'ASC',
-          'field' => 'body:value',
-          'property' => 'nid',
           'type' => 'none',
         ),
         'target_bundles' => array(

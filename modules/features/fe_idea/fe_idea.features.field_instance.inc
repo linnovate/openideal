@@ -526,6 +526,7 @@ function fe_idea_field_default_field_instances() {
   $field_instances['node-idea-field_merge_to'] = array(
     'bundle' => 'idea',
     'default_value' => NULL,
+    'default_value_function' => '',
     'deleted' => 0,
     'description' => '',
     'display' => array(
@@ -547,6 +548,11 @@ function fe_idea_field_default_field_instances() {
     'label' => 'Merge to',
     'required' => 0,
     'settings' => array(
+      'behaviors' => array(
+        'prepopulate' => array(
+          'status' => 0,
+        ),
+      ),
       'user_register_form' => FALSE,
     ),
     'widget' => array(
