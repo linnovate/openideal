@@ -7,7 +7,7 @@
 function ideal_main_rules_action_info() {
   return array(
     'ideal_action_close_comments' => array(
-      'label' => t('close node from adding new comments'), 
+      'label' => t('Close node for further comments'), 
       'group' => t("Openideal"),
       'parameter' => array(
         'node' => array(

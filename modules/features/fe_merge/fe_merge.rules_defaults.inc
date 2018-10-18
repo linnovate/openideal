@@ -9,6 +9,27 @@
  */
 function fe_merge_default_rules_configuration() {
   $items = array();
+  $items['fe_idea_node_re_open_commenting'] = entity_import('rules_config', '{ "fe_idea_node_re_open_commenting" : {
+      "LABEL" : "Node Re-open Commenting",
+      "PLUGIN" : "action set",
+      "OWNER" : "rules",
+      "TAGS" : [ "openideal-new-merge-rules" ],
+      "REQUIRES" : [ "rules" ],
+      "USES VARIABLES" : { "node" : { "label" : "Node", "type" : "node" } },
+      "ACTION SET" : [ { "data_set" : { "data" : [ "node:comment" ], "value" : "2" } } ]
+    }
+  }');
+  $items['rules_close_discussion_when_an_idea_is_merged'] = entity_import('rules_config', '{ "rules_close_discussion_when_an_idea_is_merged" : {
+      "LABEL" : "Close discussion when an idea is merged",
+      "PLUGIN" : "reaction rule",
+      "OWNER" : "rules",
+      "TAGS" : [ "openideal-new-merge-rules" ],
+      "REQUIRES" : [ "rules" ],
+      "ON" : { "node_presave--idea" : { "bundle" : "idea" } },
+      "IF" : [ { "NOT data_is_empty" : { "data" : [ "node:field-merge-to" ] } } ],
+      "DO" : [ { "component_rules_node_close_commenting" : { "node" : [ "node" ] } } ]
+    }
+  }');
   $items['rules_merged_to_merged_ideas'] = entity_import('rules_config', '{ "rules_merged_to_merged_ideas" : {
       "LABEL" : "Merged to merged ideas",
       "PLUGIN" : "action set",
@@ -114,6 +135,19 @@ function fe_merge_default_rules_configuration() {
             "value" : [ "groove-energy" ]
           }
         }
+      ]
+    }
+  }');
+  $items['rules_reopen_discussion_when_an_idea_is_un_merged'] = entity_import('rules_config', '{ "rules_reopen_discussion_when_an_idea_is_un_merged" : {
+      "LABEL" : "Reopen discussion when an idea is un-merged",
+      "PLUGIN" : "reaction rule",
+      "OWNER" : "rules",
+      "TAGS" : [ "openideal-new-merge-rules" ],
+      "REQUIRES" : [ "rules" ],
+      "ON" : { "node_presave--idea" : { "bundle" : "idea" } },
+      "IF" : [ { "data_is_empty" : { "data" : [ "node:field-merge-to" ] } } ],
+      "DO" : [
+        { "component_fe_idea_node_re_open_commenting" : { "node" : [ "node" ] } }
       ]
     }
   }');
