@@ -116,21 +116,8 @@ function fe_pages_default_page_manager_handlers() {
   );
   $pane->cache = array();
   $pane->style = array(
-    'settings' => array(
-      'modifier_class' => 'alert-info',
-      'hide_classes' => array(
-        'hidden-xs' => 0,
-        'hidden-sm' => 0,
-        'hidden-md' => 0,
-        'hidden-lg' => 0,
-      ),
-      'additional_classes' => array(
-        'pull-left' => 0,
-        'pull-right' => 0,
-        'clearfix' => 0,
-      ),
-    ),
-    'style' => 'bootstrap_styles:alert',
+    'style' => 'default',
+    'settings' => NULL,
   );
   $pane->css = array();
   $pane->extras = array();
@@ -615,6 +602,32 @@ if (user_access(\'use-vote-updown\') == FALSE) {
   $pane->uuid = '9f2feceb-597d-44c7-92ad-09953f3c6796';
   $display->content['new-9f2feceb-597d-44c7-92ad-09953f3c6796'] = $pane;
   $display->panels['sidebar'][4] = 'new-9f2feceb-597d-44c7-92ad-09953f3c6796';
+  $pane = new stdClass();
+  $pane->pid = 'new-ec3c44dc-c514-4e3c-b96d-b0a253c42512';
+  $pane->panel = 'sidebar';
+  $pane->type = 'block';
+  $pane->subtype = 'views-merged_ideas-block';
+  $pane->shown = TRUE;
+  $pane->access = array();
+  $pane->configuration = array(
+    'override_title' => 0,
+    'override_title_text' => '',
+    'override_title_heading' => 'h2',
+  );
+  $pane->cache = array();
+  $pane->style = array(
+    'settings' => NULL,
+  );
+  $pane->css = array(
+    'css_id' => '',
+    'css_class' => '',
+  );
+  $pane->extras = array();
+  $pane->position = 5;
+  $pane->locks = array();
+  $pane->uuid = 'ec3c44dc-c514-4e3c-b96d-b0a253c42512';
+  $display->content['new-ec3c44dc-c514-4e3c-b96d-b0a253c42512'] = $pane;
+  $display->panels['sidebar'][5] = 'new-ec3c44dc-c514-4e3c-b96d-b0a253c42512';
   $display->hide_title = PANELS_TITLE_NONE;
   $display->title_pane = '0';
   $handler->conf['display'] = $display;
