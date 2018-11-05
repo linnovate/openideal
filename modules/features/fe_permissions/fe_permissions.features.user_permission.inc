@@ -91,6 +91,15 @@ function fe_permissions_user_default_permissions() {
     'module' => 'analytics_dashboard',
   );
 
+  // Exported permission: 'administer nodequeue'.
+  $permissions['administer nodequeue'] = array(
+    'name' => 'administer nodequeue',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'nodequeue',
+  );
+
   // Exported permission: 'administer nodes'.
   $permissions['administer nodes'] = array(
     'name' => 'administer nodes',
@@ -119,6 +128,16 @@ function fe_permissions_user_default_permissions() {
       'site-manager' => 'site-manager',
     ),
     'module' => 'node',
+  );
+
+  // Exported permission: 'manipulate all queues'.
+  $permissions['manipulate all queues'] = array(
+    'name' => 'manipulate all queues',
+    'roles' => array(
+      'administrator' => 'administrator',
+      'site-manager' => 'site-manager',
+    ),
+    'module' => 'nodequeue',
   );
 
   // Exported permission: 'view analytics dashboard'.
