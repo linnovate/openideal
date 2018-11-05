@@ -527,7 +527,7 @@ function fe_pages_views_default_views() {
   $handler->display->display_options['header']['php']['id'] = 'php';
   $handler->display->display_options['header']['php']['table'] = 'views';
   $handler->display->display_options['header']['php']['field'] = 'php';
-  $handler->display->display_options['header']['php']['php_output'] = '<?php if (user_access(\'admin-ideas\')) { ?>
+  $handler->display->display_options['header']['php']['php_output'] = '<?php if (user_access(\'admin ideas\')) { ?>
     <p>Admin: <?php print l(\'edit this widget\', \'admin/structure/nodequeue/1/view/1\');?></p><?php } ?>';
   /* Footer: Global: Text area */
   $handler->display->display_options['footer']['area']['id'] = 'area';
