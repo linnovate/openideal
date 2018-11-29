@@ -220,7 +220,10 @@ function fe_pages_default_page_manager_handlers() {
   $pane->style = array(
     'settings' => NULL,
   );
-  $pane->css = array();
+  $pane->css = array(
+    'css_id' => '',
+    'css_class' => '',
+  );
   $pane->extras = array();
   $pane->position = 4;
   $pane->locks = array();
@@ -606,11 +609,10 @@ if (user_access(\'use-vote-updown\') == FALSE) {
     'css' => '',
     'contexts' => array(),
     'relationships' => array(
-      0 => array(
-        'identifier' => 'User from Node (on Node: Moderator [field_moderator])',
-        'keyword' => 'user',
-        'name' => 'entity_from_field:field_moderator-node-user',
-        'delta' => 0,
+      1 => array(
+        'identifier' => 'User from Node (on node.node_author)',
+        'keyword' => 'user_author',
+        'name' => 'entity_from_schema:uid-node-user',
         'context' => 'argument_entity_id:node_1',
         'id' => 1,
       ),
