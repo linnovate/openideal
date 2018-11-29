@@ -40,10 +40,10 @@ function fe_challenge_views_default_views() {
   $handler->display->display_options['relationships']['reverse_field_challenge_ref_node']['id'] = 'reverse_field_challenge_ref_node';
   $handler->display->display_options['relationships']['reverse_field_challenge_ref_node']['table'] = 'node';
   $handler->display->display_options['relationships']['reverse_field_challenge_ref_node']['field'] = 'reverse_field_challenge_ref_node';
-  /* Relationship: Entity Reference: Referenced Entity */
-  $handler->display->display_options['relationships']['field_moderator_target_id']['id'] = 'field_moderator_target_id';
-  $handler->display->display_options['relationships']['field_moderator_target_id']['table'] = 'field_data_field_moderator';
-  $handler->display->display_options['relationships']['field_moderator_target_id']['field'] = 'field_moderator_target_id';
+  /* Relationship: Content: Author */
+  $handler->display->display_options['relationships']['uid']['id'] = 'uid';
+  $handler->display->display_options['relationships']['uid']['table'] = 'node';
+  $handler->display->display_options['relationships']['uid']['field'] = 'uid';
   /* Field: Content: Challenge Image */
   $handler->display->display_options['fields']['field_challenge_image']['id'] = 'field_challenge_image';
   $handler->display->display_options['fields']['field_challenge_image']['table'] = 'field_data_field_challenge_image';
@@ -80,7 +80,7 @@ function fe_challenge_views_default_views() {
   $handler->display->display_options['fields']['picture']['id'] = 'picture';
   $handler->display->display_options['fields']['picture']['table'] = 'users';
   $handler->display->display_options['fields']['picture']['field'] = 'picture';
-  $handler->display->display_options['fields']['picture']['relationship'] = 'field_moderator_target_id';
+  $handler->display->display_options['fields']['picture']['relationship'] = 'uid';
   $handler->display->display_options['fields']['picture']['label'] = '';
   $handler->display->display_options['fields']['picture']['exclude'] = TRUE;
   $handler->display->display_options['fields']['picture']['element_label_colon'] = FALSE;
@@ -89,7 +89,7 @@ function fe_challenge_views_default_views() {
   $handler->display->display_options['fields']['name']['id'] = 'name';
   $handler->display->display_options['fields']['name']['table'] = 'users';
   $handler->display->display_options['fields']['name']['field'] = 'name';
-  $handler->display->display_options['fields']['name']['relationship'] = 'field_moderator_target_id';
+  $handler->display->display_options['fields']['name']['relationship'] = 'uid';
   $handler->display->display_options['fields']['name']['label'] = '';
   $handler->display->display_options['fields']['name']['exclude'] = TRUE;
   $handler->display->display_options['fields']['name']['element_label_colon'] = FALSE;
