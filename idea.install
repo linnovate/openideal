@@ -393,6 +393,10 @@ function idea_install() {
   variable_set('jquery_update_jquery_cdn', 'jquery');
   variable_set('jquery_update_jquery_version', '1.7');
 
+  // Defaults for our bootstrap based theme (Socrates)
+  variable_set('bootstrap_cdn', '3.3.7');
+  variable_set('bootstrap_bootswatch', 'yeti');  
+
   // Setup user mentions defaults.
   $override = array(
     'input' => array(
