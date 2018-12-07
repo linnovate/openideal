@@ -85,7 +85,9 @@ function fe_idea_default_page_manager_pages() {
     'override_title_text' => 'Ideas',
   );
   $pane->cache = array();
-  $pane->style = array();
+  $pane->style = array(
+    'settings' => NULL,
+  );
   $pane->css = array();
   $pane->extras = array();
   $pane->position = 0;
@@ -150,6 +152,8 @@ function fe_idea_default_page_manager_pages() {
   $pane->configuration = array(
     'override_title' => 0,
     'override_title_text' => '',
+    'override_title_heading' => 'h2',
+    'title_class' => 'bg-primary',
   );
   $pane->cache = array();
   $pane->style = array(

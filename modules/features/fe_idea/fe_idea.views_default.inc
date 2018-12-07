@@ -692,7 +692,6 @@ Why not add an idea?';
   $handler->display->display_options['fields']['field_idea_image']['settings'] = array(
     'image_style' => 'scale_cropped_220_220',
     'image_link' => 'content',
-
   );
   $handler->display->display_options['fields']['field_idea_image']['delta_limit'] = '1';
   $handler->display->display_options['fields']['field_idea_image']['delta_offset'] = '0';
