@@ -84,6 +84,7 @@ projects[watcher][version] = "1.0"
 projects[webform][version] = "3.27"
 projects[wysiwyg][version] = "2.4"
 projects[wysiwyg_filter][version] = "1.6-rc9"
+projects[gravatar][version] = "1.1"
 
 ; Themes
 projects[bootstrap][version] = "3.15"
