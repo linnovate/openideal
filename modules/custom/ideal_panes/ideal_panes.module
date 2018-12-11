@@ -36,4 +36,30 @@ function menu_icon_menu_link($variables) {
   return $link;
 }
 
+/**
+ * Implements hook_form_alter().
+ */
+function ideal_panes_form_alter(&$form, &$form_state, $form_id) {
+  if ($form_id == 'ctools_block_content_type_edit_form' ||
+    $form_id == 'ctools_custom_content_type_edit_form') {
+    $form['title_class'] = [
+      '#default_value' => !empty($form_state['conf']['title_class']) ? $form_state['conf']['title_class'] : '',
+      '#type' => 'textfield',
+      '#title' => 'Title Class',
+      '#id' => 'title-class-textfield',
+    ];
 
+    $form['#submit'][] = 'ideal_panes_additional_settings_submit';
+
+    if ($form_id == 'ctools_custom_content_type_edit_form') {
+      $form['body']['#weight'] = 99;
+      $form['title_class']['#weight'] = 98;
+    }
+  }
+}
+
+function ideal_panes_additional_settings_submit(&$form, &$form_state) {
+  if (isset($form_state['values']['title_class'])) {
+    $form_state['conf']['title_class'] = $form_state['values']['title_class'];
+  }
+}

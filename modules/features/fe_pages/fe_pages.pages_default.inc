@@ -1305,6 +1305,8 @@ function fe_pages_default_page_manager_pages() {
   $pane->configuration = array(
     'override_title' => 0,
     'override_title_text' => '',
+    'override_title_heading' => 'h2',
+    'title_class' => 'bg-primary',
   );
   $pane->cache = array();
   $pane->style = array(
@@ -1330,6 +1332,8 @@ function fe_pages_default_page_manager_pages() {
     'body' => '<iframe src="//player.vimeo.com/video/57515499?byline=0&amp;portrait=0" width="360" height="202" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>',
     'format' => 'full_html',
     'substitute' => TRUE,
+    'title_heading' => 'h2',
+    'title_class' => 'bg-primary',
   );
   $pane->cache = array();
   $pane->style = array(
@@ -1352,6 +1356,8 @@ function fe_pages_default_page_manager_pages() {
   $pane->configuration = array(
     'override_title' => 0,
     'override_title_text' => '',
+    'override_title_heading' => 'h2',
+    'title_class' => 'bg-primary',
   );
   $pane->cache = array();
   $pane->style = array(
@@ -1374,6 +1380,8 @@ function fe_pages_default_page_manager_pages() {
   $pane->configuration = array(
     'override_title' => 0,
     'override_title_text' => '',
+    'override_title_heading' => 'h2',
+    'title_class' => 'bg-primary',
   );
   $pane->cache = array();
   $pane->style = array(
