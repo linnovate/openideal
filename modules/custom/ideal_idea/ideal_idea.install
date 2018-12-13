@@ -1,0 +1,8 @@
+<?php
+
+/**
+ * Implements hook_install().
+ */
+function ideal_idea_install() {
+  db_query("UPDATE {system} SET weight = 1 WHERE name = 'ideal_idea'");
+}
