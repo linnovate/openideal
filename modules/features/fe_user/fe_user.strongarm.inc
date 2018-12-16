@@ -14,7 +14,7 @@ function fe_user_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'gravatar_default';
-  $strongarm->value = '6';
+  $strongarm->value = '3';
   $export['gravatar_default'] = $strongarm;
 
   $strongarm = new stdClass();
