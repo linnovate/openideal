@@ -1,0 +1,10 @@
+name = OpenideaL wysiwyg editor integration
+description = Enables rich text editor in OpenideaL
+core = 7.x
+package = OpenideaL
+dependencies[] = filter
+dependencies[] = wysiwyg
+features[filter][] = filtered_html
+features[filter][] = full_html
+features[wysiwyg][] = filtered_html
+features[wysiwyg][] = full_html
