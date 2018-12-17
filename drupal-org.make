@@ -6,6 +6,10 @@ core = 7.x
 api = 2
 defaults[projects][subdir] = contrib
 
+; libraries
+libraries[ckeditor][download][type] = "get"
+libraries[ckeditor][download][url] = "https://download.cksource.com/CKEditor/CKEditor/CKEditor%204.11.1/ckeditor_4.11.1_basic_easyimage.zip"
+
 ; Modules
 projects[admin_menu][version] = "3.0-rc5"
 ; projects[admin_menu][patch][] = https://drupal.org/files/admin_menu-fix_rtl-725840-34.patch
