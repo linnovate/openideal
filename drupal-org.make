@@ -96,6 +96,5 @@ projects[ember][version] = "2.0-alpha4"
 projects[socrates][type] = "theme"
 projects[socrates][download][type] = git
 projects[socrates][download][url] = https://github.com/linnovate/socrates.git
-projects[socrates][download][branch] = 7.x-1.x
-projects[socrates][download][tag] = 7.x-1.6
+projects[socrates][download][branch] = 7.x-2.x
 
