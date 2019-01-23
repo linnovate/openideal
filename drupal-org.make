@@ -6,6 +6,10 @@ core = 7.x
 api = 2
 defaults[projects][subdir] = contrib
 
+; libraries
+libraries[ckeditor][download][type] = "get"
+libraries[ckeditor][download][url] = "https://download.cksource.com/CKEditor/CKEditor/CKEditor%204.11.1/ckeditor_4.11.1_basic_easyimage.zip"
+
 ; Modules
 projects[admin_menu][version] = "3.0-rc5"
 ; projects[admin_menu][patch][] = https://drupal.org/files/admin_menu-fix_rtl-725840-34.patch
@@ -32,6 +36,7 @@ projects[flag][version] = "3.9"
 projects[flag_abuse][version] = "2.0"
 projects[forward][version] = "2.1"
 projects[google_chart_tools][version] = "1.4"
+projects[gravatar][version] = "1.1"
 ;projects[hashtags][version] = "1.5"
 projects[htmlmail][version] = "2.65"
 projects[hybridauth][version] = "2.9"
@@ -91,6 +96,5 @@ projects[ember][version] = "2.0-alpha4"
 projects[socrates][type] = "theme"
 projects[socrates][download][type] = git
 projects[socrates][download][url] = https://github.com/linnovate/socrates.git
-projects[socrates][download][branch] = 7.x-1.x
-projects[socrates][download][tag] = 7.x-1.6
+projects[socrates][download][branch] = 7.x-2.x
 

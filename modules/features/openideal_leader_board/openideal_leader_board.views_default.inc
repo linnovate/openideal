@@ -87,7 +87,7 @@ function openideal_leader_board_views_default_views() {
   $handler->display->display_options['fields']['picture']['field'] = 'picture';
   $handler->display->display_options['fields']['picture']['label'] = '';
   $handler->display->display_options['fields']['picture']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['picture']['empty'] = '<img src="http://upload.wikimedia.org/wikipedia/commons/d/d3/User_Circle.png" alt="This user has no picture" title="This user has no picture" width="45" height="45" />';
+  $handler->display->display_options['fields']['picture']['empty'] = '<img src="https://upload.wikimedia.org/wikipedia/commons/d/d3/User_Circle.png" alt="This user has no picture" title="This user has no picture" width="45" height="45" />';
   $handler->display->display_options['fields']['picture']['image_style'] = 'avatar_45_45';
   /* Field: User: Name */
   $handler->display->display_options['fields']['name']['id'] = 'name';
@@ -202,7 +202,7 @@ function openideal_leader_board_views_default_views() {
   $handler->display->display_options['fields']['picture']['field'] = 'picture';
   $handler->display->display_options['fields']['picture']['label'] = '';
   $handler->display->display_options['fields']['picture']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['picture']['empty'] = '<img src="http://upload.wikimedia.org/wikipedia/commons/d/d3/User_Circle.png" alt="This user has no picture" title="This user has no picture" width="45" height="45" />';
+  $handler->display->display_options['fields']['picture']['empty'] = '<img src="https://upload.wikimedia.org/wikipedia/commons/d/d3/User_Circle.png" alt="This user has no picture" title="This user has no picture" width="45" height="45" />';
   $handler->display->display_options['fields']['picture']['image_style'] = 'avatar_45_45';
   /* Field: User: Name */
   $handler->display->display_options['fields']['name']['id'] = 'name';

@@ -1,0 +1,11 @@
+name = fe_wysiwyg
+description = Enables rich text editor in OpenideaL
+core = 7.x
+package = OpenideaL
+version = 7.x-4.0
+dependencies[] = features
+dependencies[] = filter
+dependencies[] = wysiwyg
+features[features_api][] = api:2
+features[filter][] = filtered_html
+features[wysiwyg][] = filtered_html

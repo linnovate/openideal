@@ -21,6 +21,15 @@ function fe_user_user_default_permissions() {
     'module' => 'user',
   );
 
+  // Exported permission: 'administer gravatar'.
+  $permissions['administer gravatar'] = array(
+    'name' => 'administer gravatar',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'gravatar',
+  );
+
   // Exported permission: 'change own user settings'.
   $permissions['change own user settings'] = array(
     'name' => 'change own user settings',
@@ -29,6 +38,26 @@ function fe_user_user_default_permissions() {
       'authenticated user' => 'authenticated user',
     ),
     'module' => 'watcher',
+  );
+
+  // Exported permission: 'disable own gravatar'.
+  $permissions['disable own gravatar'] = array(
+    'name' => 'disable own gravatar',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'gravatar',
+  );
+
+  // Exported permission: 'use gravatar'.
+  $permissions['use gravatar'] = array(
+    'name' => 'use gravatar',
+    'roles' => array(
+      'administrator' => 'administrator',
+      'anonymous user' => 'anonymous user',
+      'authenticated user' => 'authenticated user',
+    ),
+    'module' => 'gravatar',
   );
 
   // Exported permission: 'use watcher'.
