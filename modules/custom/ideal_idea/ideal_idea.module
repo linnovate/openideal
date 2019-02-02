@@ -19,13 +19,25 @@ function ideal_idea_form_alter(&$form, &$form_state, $form_id) {
     $form['actions']['submit']['#value'] = '<span>'.t('Submit your Idea').'</span>';
     $form['actions']['submit']['#attributes'] = array('class' => array('submit-idea'));
 
+    // Store referer url.
+    if (isset($_GET['destination'])) {
+      $form_state['storage']['#referer'] = $_GET['destination'];
+    }
+    elseif ($_SERVER["HTTP_REFERER"]) {
+      global $base_url;
+      $referer = str_replace($base_url . '/', '', $_SERVER["HTTP_REFERER"]);
+      $form_state['storage']['#referer'] = $referer;
+    }
+
     //add back button
     $form['actions']['cancel'] = array(
       '#type' => 'button',
       '#access' => TRUE,
       '#value' => '<span>'.t('Back').'</span>',
       '#weight' => 4,
-      '#attributes' => array('class' => array('go-back'), 'onClick' => 'history.go(-1);'),
+      '#validate' => array('ideal_idea_back_button_validate'),
+      '#limit_validation_errors' => array(),
+      '#attributes' => array('class' => array('go-back')),
     );
     /*
     *************************************************
@@ -183,4 +195,16 @@ function ideal_render_popup_markup($header = '', $body, $buttons = ''){
   </div>';
   return $output;
 }
-?>
+
+function ideal_idea_back_button_validate($form, &$form_state) {
+  $redirect = '<front>';
+
+  if (isset($form_state['storage']['#referer'])) {
+    $redirect = $form_state['storage']['#referer'];
+  }
+  elseif (isset($form['storage']['#referer'])) {
+    $redirect = $form['storage']['#referer'];
+  }
+
+  drupal_goto($redirect);
+}
