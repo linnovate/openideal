@@ -27,6 +27,14 @@ function ideal_idea_form_alter(&$form, &$form_state, $form_id) {
       '#weight' => 4,
       '#attributes' => array('class' => array('go-back'), 'onClick' => 'history.go(-1);'),
     );
+
+    if (isset($form['actions']['draft'])) {
+      $id = array_search('save_draft_submit', $form['actions']['draft']['#submit']);
+      if (is_numeric($id)) {
+        $form['actions']['draft']['#submit'][$id] = 'ideal_idea_node_form_draft_submit';
+      }
+    }
+
     /*
     *************************************************
     * This whole block is commented out since there is a problem with the drag n drop module(s). 
@@ -183,4 +191,11 @@ function ideal_render_popup_markup($header = '', $body, $buttons = ''){
   </div>';
   return $output;
 }
-?>
+
+function ideal_idea_node_form_draft_submit($form, &$form_state) {
+  node_form_submit($form, $form_state);
+  if (!empty($form_state['nid'])) {
+    $nid = $form_state['nid'];
+    $form_state['redirect'] = ['node/' . $nid . '/edit'];
+  }
+}

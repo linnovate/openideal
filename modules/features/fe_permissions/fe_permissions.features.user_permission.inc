@@ -140,6 +140,17 @@ function fe_permissions_user_default_permissions() {
     'module' => 'nodequeue',
   );
 
+  // Exported permission: 'save draft'.
+  $permissions['save draft'] = array(
+    'name' => 'save draft',
+    'roles' => array(
+      'administrator' => 'administrator',
+      'anonymous user' => 'anonymous user',
+      'authenticated user' => 'authenticated user',
+    ),
+    'module' => 'save_draft',
+  );
+
   // Exported permission: 'view analytics dashboard'.
   $permissions['view analytics dashboard'] = array(
     'name' => 'view analytics dashboard',
