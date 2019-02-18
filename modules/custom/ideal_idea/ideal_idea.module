@@ -21,7 +21,7 @@ function ideal_idea_form_alter(&$form, &$form_state, $form_id) {
 
     // Store referer url.
     if (isset($_GET['destination'])) {
-      $form_state['storage']['#referer'] = $_GET['destination'];
+      $form_state['storage']['#referer'] = check_plain($_GET['destination']);
     }
     elseif ($_SERVER["HTTP_REFERER"]) {
       global $base_url;
