@@ -1,0 +1,37 @@
+version: '3.7'
+services:
+  openideal:
+    image: danjng/openideal
+    depends_on:
+      - mysql
+    networks:
+      - frontend
+      - backend
+    ports:
+      - "8080:80"
+    volumes:
+      - type: volume
+        source: openideal_data
+        target: /var/www/html
+  mysql:
+    image: mysql:5
+    command: --default-authentication-plugin=mysql_native_password
+    networks:
+      - backend
+    environment: 
+      - MYSQL_ROOT_PASSWORD=rootpassword
+      - MYSQL_DATABASE=openideal
+      - MYSQL_USER=user
+      - MYSQL_PASSWORD=password
+    volumes:
+      - type: volume
+        source: openideal_db
+        target: /var/lib/mysql
+
+networks:
+  frontend:
+  backend:
+
+volumes:
+  openideal_data:
+  openideal_db:
