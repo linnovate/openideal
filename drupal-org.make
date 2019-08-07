@@ -13,11 +13,6 @@ libraries[ckeditor][download][url] = "https://download.cksource.com/CKEditor/CKE
 ; Modules
 projects[admin_menu][version] = "3.0-rc5"
 ; projects[admin_menu][patch][] = https://drupal.org/files/admin_menu-fix_rtl-725840-34.patch
-projects[bootstrap_panels_horizontal_tabs][type] = module
-projects[bootstrap_panels_horizontal_tabs][download][type] = git
-projects[bootstrap_panels_horizontal_tabs][download][branch] = "7.x-1.x"
-projects[bootstrap_panels_horizontal_tabs][download][url] = https://git.drupalcode.org/sandbox/shaundychko-2126611.git
-projects[bootstrap_panels_horizontal_tabs][subdir] = contrib
 projects[boxes][version] = "1.2"
 projects[ctools][version] = "1.12"
 projects[context][version] = "3.10"
@@ -93,8 +88,4 @@ projects[wysiwyg_filter][version] = "1.6-rc9"
 ; Themes
 projects[bootstrap][version] = "3.26"
 projects[ember][version] = "2.0-alpha4"
-projects[socrates][type] = "theme"
-projects[socrates][download][type] = git
-projects[socrates][download][url] = https://github.com/linnovate/socrates.git
-projects[socrates][download][branch] = 7.x-2.x
-
+projects[socrates][version] = "7.x-2.0"
