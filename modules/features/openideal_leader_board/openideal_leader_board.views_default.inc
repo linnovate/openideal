@@ -33,21 +33,14 @@ function openideal_leader_board_views_default_views() {
   $handler->display->display_options['pager']['options']['items_per_page'] = '50';
   $handler->display->display_options['style_plugin'] = 'views_bootstrap_table_plugin_style';
   $handler->display->display_options['style_options']['columns'] = array(
+    'name' => 'picture',
     'picture' => 'picture',
-    'name' => 'field_user_address_name_line',
-    'field_user_address_name_line' => 'field_user_address_name_line',
     'points' => 'points',
     'last_update' => 'points',
   );
+  $handler->display->display_options['style_options']['class'] = '';
   $handler->display->display_options['style_options']['default'] = 'points';
   $handler->display->display_options['style_options']['info'] = array(
-    'picture' => array(
-      'sortable' => 0,
-      'default_sort_order' => 'asc',
-      'align' => '',
-      'separator' => '',
-      'empty_column' => 0,
-    ),
     'name' => array(
       'sortable' => 0,
       'default_sort_order' => 'asc',
@@ -55,8 +48,8 @@ function openideal_leader_board_views_default_views() {
       'separator' => '',
       'empty_column' => 0,
     ),
-    'field_user_address_name_line' => array(
-      'sortable' => 1,
+    'picture' => array(
+      'sortable' => 0,
       'default_sort_order' => 'asc',
       'align' => '',
       'separator' => '',
@@ -70,6 +63,8 @@ function openideal_leader_board_views_default_views() {
       'empty_column' => 0,
     ),
     'last_update' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
       'align' => '',
       'separator' => '',
       'empty_column' => 0,
@@ -81,24 +76,27 @@ function openideal_leader_board_views_default_views() {
     'hover' => 0,
     'condensed' => 0,
   );
-  /* Field: User: Picture */
-  $handler->display->display_options['fields']['picture']['id'] = 'picture';
-  $handler->display->display_options['fields']['picture']['table'] = 'users';
-  $handler->display->display_options['fields']['picture']['field'] = 'picture';
-  $handler->display->display_options['fields']['picture']['label'] = '';
-  $handler->display->display_options['fields']['picture']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['picture']['empty'] = '<img src="https://upload.wikimedia.org/wikipedia/commons/d/d3/User_Circle.png" alt="This user has no picture" title="This user has no picture" width="45" height="45" />';
-  $handler->display->display_options['fields']['picture']['image_style'] = 'avatar_45_45';
+  $handler->display->display_options['style_options']['responsive'] = 0;
   /* Field: User: Name */
   $handler->display->display_options['fields']['name']['id'] = 'name';
   $handler->display->display_options['fields']['name']['table'] = 'users';
   $handler->display->display_options['fields']['name']['field'] = 'name';
   $handler->display->display_options['fields']['name']['label'] = '';
-  $handler->display->display_options['fields']['name']['alter']['alter_text'] = TRUE;
-  $handler->display->display_options['fields']['name']['alter']['text'] = '<br/>([name])';
+  $handler->display->display_options['fields']['name']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['name']['alter']['text'] = '[name]';
   $handler->display->display_options['fields']['name']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['name']['alter']['ellipsis'] = FALSE;
   $handler->display->display_options['fields']['name']['element_label_colon'] = FALSE;
+  /* Field: User: Picture */
+  $handler->display->display_options['fields']['picture']['id'] = 'picture';
+  $handler->display->display_options['fields']['picture']['table'] = 'users';
+  $handler->display->display_options['fields']['picture']['field'] = 'picture';
+  $handler->display->display_options['fields']['picture']['label'] = '';
+  $handler->display->display_options['fields']['picture']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['picture']['alter']['text'] = '[picture]
+[name]';
+  $handler->display->display_options['fields']['picture']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['picture']['empty'] = '<img src="https://upload.wikimedia.org/wikipedia/commons/d/d3/User_Circle.png" alt="This user has no picture" title="This user has no picture" width="45" height="45" />';
   /* Field: Userpoints total: Current total points */
   $handler->display->display_options['fields']['points']['id'] = 'points';
   $handler->display->display_options['fields']['points']['table'] = 'userpoints_total';
@@ -115,7 +113,7 @@ function openideal_leader_board_views_default_views() {
   $handler->display->display_options['fields']['last_update']['alter']['text'] = '<br/>([last_update])';
   $handler->display->display_options['fields']['last_update']['date_format'] = 'time ago';
   $handler->display->display_options['fields']['last_update']['second_date_format'] = 'long';
-  /* Filter criterion: User: Active */
+  /* Filter criterion: User: Active status */
   $handler->display->display_options['filters']['status']['id'] = 'status';
   $handler->display->display_options['filters']['status']['table'] = 'users';
   $handler->display->display_options['filters']['status']['field'] = 'status';
