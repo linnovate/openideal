@@ -487,7 +487,11 @@ function fe_idea_field_default_field_instances() {
   // Exported field_instance: 'node-idea-field_in_action'.
   $field_instances['node-idea-field_in_action'] = array(
     'bundle' => 'idea',
-    'default_value' => 'Ideation',
+    'default_value' => array(
+      0 => array(
+        'value' => 'Ideation',
+      ),
+    ),
     'deleted' => 0,
     'description' => '',
     'display' => array(
@@ -509,7 +513,7 @@ function fe_idea_field_default_field_instances() {
     'entity_type' => 'node',
     'field_name' => 'field_in_action',
     'label' => 'In Action',
-    'required' => 0,
+    'required' => 1,
     'settings' => array(
       'user_register_form' => FALSE,
     ),
