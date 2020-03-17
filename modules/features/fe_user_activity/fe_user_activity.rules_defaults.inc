@@ -103,8 +103,9 @@ function fe_user_activity_default_rules_configuration() {
       "LABEL" : "Create message for new user",
       "PLUGIN" : "reaction rule",
       "OWNER" : "rules",
-      "REQUIRES" : [ "rules" ],
-      "ON" : { "user_insert" : [] },
+      "REQUIRES" : [ "rules", "logintoboggan_rules" ],
+      "ON" : { "user_insert" : [], "user_update" : [], "logintoboggan_validated" : [] },
+      "IF" : [ { "NOT user_is_blocked" : { "account" : [ "account" ] } } ],
       "DO" : [
         { "entity_create" : {
             "USING" : {
