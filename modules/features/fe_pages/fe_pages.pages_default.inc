@@ -574,6 +574,8 @@ if (user_access(\'use-vote-updown\') == FALSE) {
   $pane->configuration = array(
     'override_title' => 0,
     'override_title_text' => '',
+    'override_title_heading' => 'h2',
+    'title_class' => 'bg-primary',
   );
   $pane->cache = array();
   $pane->style = array(
@@ -1025,6 +1027,8 @@ if (user_access(\'use-vote-updown\') == FALSE) {
   $pane->configuration = array(
     'override_title' => 0,
     'override_title_text' => '',
+    'override_title_heading' => 'h2',
+    'title_class' => 'bg-primary',
   );
   $pane->cache = array();
   $pane->style = array(
@@ -1047,6 +1051,8 @@ if (user_access(\'use-vote-updown\') == FALSE) {
   $pane->configuration = array(
     'override_title' => 0,
     'override_title_text' => '',
+    'override_title_heading' => 'h2',
+    'title_class' => 'bg-primary',
   );
   $pane->cache = array();
   $pane->style = array(
