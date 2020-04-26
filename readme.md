@@ -90,3 +90,17 @@ an overal activity stream is available as a view (block).
 
 - New comment
 - x-th votes on comment
+
+## Docker Containerization
+
+This application is available in Docker container format from the Docker Hub via `danjng/openideal` (this may change as code is merged into the upstream repo of `linnovate/openideal`). It can be pulled by performing a `docker pull danjng/openideal`. To set up a demo environment, a `docker-compose.yml` file is provided. The file will run as-is, but can be customized appropriately to suit needs. The demo environment can be stood up by performing a `docker-compose -f "docker-compose.yml" up -d --build`.
+
+This is a work in progress and may be subject to change. 
+
+### Prerequisites
+
+In order for this container to work, you will need the following fully installed and configured:
+
+* Docker Desktop
+  * Docker
+  * Docker Compose
