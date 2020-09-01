@@ -1,0 +1,91 @@
+/**
+ * @file
+ * Theme styling for user module.
+ */
+
+
+/* Visual styling for the Password strength indicator */
+
+.password-strength__meter {
+    margin-top: 0.5em;
+    background-color: $gray-200;
+}
+
+.password-strength__indicator {
+    background-color: theme-color("success");
+    -webkit-transition: width 0.5s ease-out;
+    transition: width 0.5s ease-out;
+}
+
+.password-strength__indicator.is-weak {
+    background-color: theme-color("danger");
+}
+
+.password-strength__indicator.is-fair {
+    background-color: theme-color("warning");
+}
+
+.password-strength__indicator.is-good {
+    background-color: theme-color("info");
+}
+
+.password-strength__indicator.is-strong {
+    background-color: theme-color("success");
+}
+
+.password-confirm,
+.password-field,
+.password-strength,
+.password-confirm-match {
+    width: 55%;
+}
+
+.password-suggestions {
+    padding: 0.2em 0.5em;
+    margin: 0.7em 0;
+    max-width: 34.7em;
+    border: $border-width solid $border-color;
+}
+
+.password-suggestions ul {
+    margin-bottom: 0;
+}
+
+.confirm-parent,
+.password-parent {
+    clear: left;
+    /* LTR */
+    margin: 0;
+    max-width: 33em;
+    overflow: hidden;
+}
+
+[dir="rtl"] .confirm-parent,
+[dir="rtl"] .password-parent {
+    clear: right;
+}
+
+
+/* Styling for the status indicator of the passwords match test.  */
+
+.password-confirm .ok {
+    color: theme-color("success");
+    font-weight: bold;
+}
+
+.password-confirm .error {
+    color: theme-color("danger");
+    font-weight: bold;
+}
+
+
+/* Login page stype */
+
+.page-user-login main .region-content,
+.page-user-password main .region-content {
+    max-width: 400px;
+    background: white;
+    padding: $spacer $spacer;
+    margin: 0 auto;
+    border-radius: $border-radius-lg;
+}

@@ -1,0 +1,34 @@
+/* MIXINS */
+
+//
+// Alternate buttons
+//
+@each $color,
+$value in $theme-colors {
+    .btn-#{$color} a {
+        @include button-variant($value, $value);
+    }
+}
+
+@each $color,
+$value in $theme-colors {
+    .btn-outline-#{$color} a {
+        @include button-outline-variant($value);
+    }
+}
+
+@mixin btn-theme($btn-color, $active-color) {
+    border-radius: 25px;
+    transition: background-color 0.5s ease-in-out;
+    background-color: $btn-color;
+    color: $white;
+    font-weight: $font-weight-bold;
+    &:hover {
+        background-color: $active-color;
+        text-decoration: none;
+    }
+    &:active {
+        background-color: $active-color;
+        text-decoration: none;
+    }
+}

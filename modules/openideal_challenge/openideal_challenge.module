@@ -1,0 +1,106 @@
+<?php
+
+/**
+ * @file
+ * Contains openideal_challenge.module.
+ */
+
+use Drupal\Core\Entity\EntityInterface;
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\node\NodeInterface;
+use Drupal\openideal_challenge\Event\OpenidealChallengeEvent;
+use Drupal\views\Plugin\views\query\QueryPluginBase;
+use Drupal\views\ViewExecutable;
+
+/**
+ * Implements hook_cron().
+ */
+function openideal_challenge_cron() {
+  // Processing open/close scheduling challenge nodes via cron.
+  /** @var \Drupal\openideal_challenge\Service\OpenidealChallengeService $challenge_service */
+  $challenge_service = \Drupal::service('openideal_challenge.challenge_service');
+  $challenge_service->openChallenges();
+  $challenge_service->closeChallenges();
+}
+
+/**
+ * Implements hook_form_alter().
+ */
+function openideal_challenge_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  if (!in_array($form_id, ['node_challenge_edit_form', 'node_challenge_form'])) {
+    return;
+  }
+
+  // Added visibility states to open_on and close_on form elements.
+  $form['field_schedule_open']['#states'] = [
+    'visible' => [
+      ':input[name="field_is_open[value]"]' => ['checked' => FALSE],
+    ],
+  ];
+
+  $form['field_schedule_close']['#states'] = [
+    'visible' => [
+      ':input[name="field_is_open[value]"]' => ['checked' => TRUE],
+    ],
+  ];
+
+  // Move open_on/close_on form elements to the sidebar of the form.
+  $form['challenge_scheduling_options'] = [
+    '#type' => 'details',
+    '#description' => t('The schedule will be triggered by cron job and run every minute.'),
+    '#title' => t('Challenge Status'),
+    '#group' => 'advanced',
+  ];
+
+  $form['challenge_scheduling_options'][] = $form['field_is_open'];
+  $form['challenge_scheduling_options'][] = $form['field_schedule_open'];
+  $form['challenge_scheduling_options'][] = $form['field_schedule_close'];
+  unset($form['field_is_open']);
+  unset($form['field_schedule_open']);
+  unset($form['field_schedule_close']);
+}
+
+/**
+ * Implements hook_views_query_alter().
+ */
+function openideal_challenge_views_query_alter(ViewExecutable $view, QueryPluginBase $query) {
+  if ($view->id() === 'challenges' && $view->current_display === 'all_challenges_page' && $view->exposed_data['sort_by'] === 'field_schedule_close_value') {
+    $table = 'node__field_schedule_close';
+    $field = 'field_schedule_close_value';
+    $alias = implode('_', [$table, $field, 'is_null']);
+
+    // Add extra sort order to show challenges with empty "Closed On" field
+    // value at the end.
+    $query->addOrderBy(NULL, "ISNULL($table.$field)", 'ASC', $alias);
+    $new_order_index = count($query->orderby) - 1;
+    array_unshift($query->orderby, $query->orderby[$new_order_index]);
+    unset($query->orderby[$new_order_index]);
+  }
+}
+
+/**
+ * Implements hook_entity_insert().
+ */
+function openideal_challenge_entity_insert(EntityInterface $entity) {
+  if ($entity instanceof NodeInterface && $entity->bundle() == 'challenge') {
+    $event_dispatcher = \Drupal::service('event_dispatcher');
+    $event = new OpenidealChallengeEvent($entity);
+    $event_dispatcher->dispatch($entity->field_is_open->value ? OpenidealChallengeEvent::CHALLENGE_OPEN : OpenidealChallengeEvent::CHALLENGE_CLOSE, $event);
+  }
+}
+
+/**
+ * Implements hook_entity_update().
+ */
+function openideal_challenge_entity_update(EntityInterface $entity) {
+  if ($entity instanceof NodeInterface && $entity->bundle() == 'challenge') {
+    $event_dispatcher = \Drupal::service('event_dispatcher');
+    // If challenge was unpublished then don't
+    // need to check schedule status.
+    if (($entity->isPublished() && ($entity->original->isPublished() != $entity->isPublished()))
+      || ($entity->original->get('field_is_open')->value != $entity->get('field_is_open')->value)) {
+      $event = new OpenidealChallengeEvent($entity);
+      $event_dispatcher->dispatch($entity->get('field_is_open')->value ? OpenidealChallengeEvent::CHALLENGE_OPEN : OpenidealChallengeEvent::CHALLENGE_CLOSE, $event);
+    }
+  }
+}

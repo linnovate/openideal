@@ -1,0 +1,7 @@
+openideal_statistics.graphs_reports:
+  path: '/graphs-and-charts'
+  defaults:
+    _controller: '\Drupal\openideal_statistics\Controller\ChartsAndStatisticsController::charts'
+    _title: 'Graphs & Reports'
+  requirements:
+    _permission: 'access content'

@@ -1,0 +1,20 @@
+<?php
+
+/**
+ * @file
+ * Contains openideal_slideshow.module.
+ */
+
+/**
+ * Implements hook_theme().
+ */
+function openideal_slideshow_theme($existing, $type, $theme, $path) {
+  return [
+    'openideal_slideshow' => [
+      'variables' => [
+        'items' => [],
+        'image_style' => NULL,
+      ],
+    ],
+  ];
+}

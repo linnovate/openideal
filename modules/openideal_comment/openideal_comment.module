@@ -1,0 +1,76 @@
+<?php
+
+/**
+ * @file
+ * Contains openideal_comment module.
+ */
+
+use Drupal\ajax_comments\Controller\AjaxCommentsController;
+use Drupal\comment\CommentInterface;
+use Drupal\Component\Utility\Html;
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\openideal_comment\OpenidealCommentViewBuilder;
+
+/**
+ * Implements hook_ajax_comments_wrapper_id_alter().
+ */
+function openideal_comment_ajax_comments_wrapper_id_alter(&$wrapper_html_id, $commented_entity, $field_name) {
+  // For some reason, AJAX Comments module can't retrieve correct cached markup
+  // based on the available cache contexts.
+  // As a result, during the first render (without cache), the comment field is
+  // rendered twice (by default node builder and Ajax Comments).
+  // Later (with cache), it's "rendered" only once so IDs don't match.
+  // We're just appending 2, because this ID matches cached markup.
+  // TODO: Should be investigated further.
+  $html_id = $commented_entity->getEntityTypeId() . '_' . $commented_entity->bundle() . '_' . $field_name;
+  if ($wrapper_html_id === Html::getId($html_id)) {
+    $wrapper_html_id = Html::getId($html_id) . '--2';
+  }
+}
+
+/**
+ * Implements template_preprocess_comment().
+ */
+function openideal_comment_preprocess_comment(&$variables) {
+  // Adding back comment preprocess function that was removed in the applied
+  // patch. It probably should be fixed in the patch itself.
+  /** @var \Drupal\comment\CommentInterface $comment */
+  $comment = $variables['elements']['#comment'];
+  $variables['attributes']['class'][] = AjaxCommentsController::$commentClassPrefix . $comment->id();
+}
+
+/**
+ * Implements hook_entity_type_alter().
+ */
+function openideal_comment_entity_type_alter(array &$entity_types) {
+  /** @var $entity_types \Drupal\Core\Entity\EntityTypeInterface[] */
+  $entity_types['comment']->setHandlerClass('view_builder', OpenidealCommentViewBuilder::class);
+}
+
+/**
+ * Implements hook_comment_links_alter().
+ */
+function openideal_comment_comment_links_alter(array &$links, CommentInterface $entity, array &$context) {
+  $links['comment']['#links']['comment-show'] = [
+    'title' => t('<span class="single-comment--open-replies"></span>'),
+  ];
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function openideal_comment_form_comment_comment_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  $theme = \Drupal::service('theme_handler')->getTheme('openideal_theme');
+  $img = '<img src="' . base_path() . $theme->getPath() . '/misc/icons/paper_plane.png">';
+  $form['comment_body']['widget'][0]['#title'] = t('Add comment');
+  $form['actions']['submit']['#value'] = t('Send');
+  $form['actions']['submit']['#prefix'] = '<div class="font-submit-btn-wrapper">' . $img;
+  $form['actions']['submit']['#suffix'] = '</div>';
+  $form['actions']['cancel'] = [
+    '#type' => 'html_tag',
+    '#tag' => 'span',
+    '#value' => t('Cancel'),
+    '#attributes' => ['class' => ['comment-form--cancel-btn', 'btn']],
+    '#weight' => 99,
+  ];
+}

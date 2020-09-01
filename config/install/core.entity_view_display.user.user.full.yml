@@ -1,0 +1,245 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.user.full
+    - field.field.user.user.avatars_avatar_generator
+    - field.field.user.user.avatars_user_picture
+    - field.field.user.user.field_age_group
+    - field.field.user.user.field_first_name
+    - field.field.user.user.field_gender
+    - field.field.user.user.field_last_name
+    - field.field.user.user.field_points
+    - field.field.user.user.user_picture
+    - views.view.my_comments
+    - views.view.user_content
+  module:
+    - image
+    - layout_builder
+    - layout_discovery
+    - options
+    - user
+    - views
+  theme:
+    - openideal_theme
+third_party_settings:
+  layout_builder:
+    allow_custom: false
+    enabled: true
+    sections:
+      -
+        layout_id: openideal_two_columns_teaser
+        layout_settings:
+          label: ''
+          main_class: user-profile-section-top
+          layout_builder_styles_style:
+            user_profile: user_profile
+            user_profile_top: user_profile_top
+            author: 0
+            user_compact: 0
+        components:
+          3220f5f9-c180-425f-ae78-4f4399690f01:
+            uuid: 3220f5f9-c180-425f-ae78-4f4399690f01
+            region: second
+            configuration:
+              id: 'field_block:user:user:field_points'
+              label: Points
+              provider: layout_builder
+              label_display: '0'
+              formatter:
+                label: inline
+                type: number_decimal
+                settings:
+                  thousand_separator: ''
+                  prefix_suffix: true
+                  decimal_separator: .
+                  scale: 0
+                third_party_settings: {  }
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+            additional: {  }
+            weight: 6
+          6ffc8da3-a2ea-4dbc-a1c8-99c7ea795bd7:
+            uuid: 6ffc8da3-a2ea-4dbc-a1c8-99c7ea795bd7
+            region: first
+            configuration:
+              id: 'field_block:user:user:user_picture'
+              label: Picture
+              provider: layout_builder
+              label_display: '0'
+              formatter:
+                label: hidden
+                type: image
+                settings:
+                  image_style: ''
+                  image_link: content
+                third_party_settings: {  }
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+            additional: {  }
+            weight: 7
+          7957471d-28fa-4c9b-b546-47c9f24361bf:
+            uuid: 7957471d-28fa-4c9b-b546-47c9f24361bf
+            region: second
+            configuration:
+              id: 'field_block:user:user:mail'
+              label: Email
+              provider: layout_builder
+              label_display: '0'
+              formatter:
+                label: inline
+                type: basic_string
+                settings: {  }
+                third_party_settings: {  }
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+            additional: {  }
+            weight: 8
+          5b4563c6-0a87-4c83-90d5-54fa9ccf1244:
+            uuid: 5b4563c6-0a87-4c83-90d5-54fa9ccf1244
+            region: second
+            configuration:
+              id: 'field_block:user:user:field_gender'
+              label: Gender
+              provider: layout_builder
+              label_display: '0'
+              formatter:
+                label: inline
+                type: list_default
+                settings: {  }
+                third_party_settings: {  }
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+            additional: {  }
+            weight: 9
+          5ace806b-800e-448e-b64d-0141314f6e35:
+            uuid: 5ace806b-800e-448e-b64d-0141314f6e35
+            region: second
+            configuration:
+              id: 'field_block:user:user:field_age_group'
+              label: 'When were you born?'
+              provider: layout_builder
+              label_display: '0'
+              formatter:
+                label: inline
+                type: list_default
+                settings: {  }
+                third_party_settings: {  }
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+            additional: {  }
+            weight: 10
+        third_party_settings: {  }
+      -
+        layout_id: layout_onecol
+        layout_settings:
+          label: Views
+          layout_builder_styles_style: user_profile
+        components:
+          c6bf00c0-680f-4842-bc3d-cf71fa64239b:
+            uuid: c6bf00c0-680f-4842-bc3d-cf71fa64239b
+            region: content
+            configuration:
+              id: 'views_block:user_content-things_i_follow'
+              label: ''
+              provider: views
+              label_display: visible
+              views_label: ''
+              items_per_page: none
+              context_mapping: {  }
+            additional: {  }
+            weight: 2
+          d4f485be-72b9-4acc-b786-e1282cb53e2f:
+            uuid: d4f485be-72b9-4acc-b786-e1282cb53e2f
+            region: content
+            configuration:
+              id: 'views_block:user_content-my_ideas_block'
+              label: ''
+              provider: views
+              label_display: visible
+              views_label: ''
+              items_per_page: none
+              context_mapping: {  }
+            additional: {  }
+            weight: 1
+          0b15c169-157a-4785-901f-8080c9032d91:
+            uuid: 0b15c169-157a-4785-901f-8080c9032d91
+            region: content
+            configuration:
+              id: 'views_block:my_comments-my_comments'
+              label: ''
+              provider: views
+              label_display: visible
+              views_label: ''
+              items_per_page: none
+              context_mapping: {  }
+            additional: {  }
+            weight: 0
+        third_party_settings: {  }
+id: user.user.full
+targetEntityType: user
+bundle: user
+mode: full
+content:
+  field_age_group:
+    weight: 5
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: list_default
+    region: content
+  field_gender:
+    weight: 4
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: list_default
+    region: content
+  field_last_name:
+    weight: 2
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_points:
+    weight: 0
+    label: above
+    settings:
+      thousand_separator: ''
+      decimal_separator: .
+      scale: 2
+      prefix_suffix: true
+    third_party_settings: {  }
+    type: number_decimal
+    region: content
+  member_for:
+    weight: 0
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  realname:
+    weight: 0
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  user_picture:
+    type: image
+    weight: 3
+    region: content
+    label: above
+    settings:
+      image_style: ''
+      image_link: ''
+    third_party_settings: {  }
+hidden:
+  avatars_avatar_generator: true
+  avatars_user_picture: true
+  field_first_name: true
+  langcode: true

@@ -1,0 +1,30 @@
+<?php
+
+/**
+ * @file
+ * Primary module hooks for openideal_faq module.
+ */
+
+use Drupal\Core\Form\FormStateInterface;
+
+/**
+ * Implements hook_multiple_field_remove_button_field_types_alter().
+ */
+function openideal_faq_multiple_field_remove_button_field_types_alter(array &$fieldTypes) {
+  $fieldTypes[] = 'faqfield';
+}
+
+/**
+ * Implements hook_field_widget_WIDGET_TYPE_form_alter().
+ */
+function openideal_faq_field_widget_faqfield_default_form_alter(&$element, FormStateInterface $form_state, $context) {
+  $element['answer']['#after_build'][] = '_allowed_formats_remove_textarea_help';
+  $element['answer'] += [
+    '#allowed_formats' => ['full_html'],
+    // Values from allowed format module.
+    '#allowed_format_hide_settings' => [
+      'hide_help' => TRUE,
+      'hide_guidelines' => TRUE,
+    ],
+  ];
+}

@@ -1,0 +1,15 @@
+openideal_slideshow.carousel:
+  js:
+    /libraries/photoswipe/dist/photoswipe.min.js: { minified: true }
+    /libraries/photoswipe/dist/photoswipe-ui-default.min.js: { minified: true }
+    /libraries/swiper/swiper-bundle.min.js: { minified: true }
+    js/slider-configuration.js: {}
+  css:
+    base:
+      /libraries/photoswipe/dist/photoswipe.css: {}
+      /libraries/photoswipe/dist/default-skin/default-skin.css: {}
+      /libraries/swiper/swiper-bundle.min.css: { minified: true }
+      css/slideshow.css: {}
+  dependencies:
+    - core/jquery
+    - core/jquery.once

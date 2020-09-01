@@ -1,0 +1,49 @@
+langcode: en
+status: true
+dependencies: {  }
+id: create_a_message_after_closing_a_challenge
+label: 'Create a message after closing a challenge'
+events:
+  -
+    event_name: openideal_challenge.close
+description: ''
+tags: {  }
+config_version: '3'
+expression:
+  id: rules_rule
+  uuid: 48182700-eaac-4bdb-8f5d-5555debb8b6c
+  weight: 0
+  conditions:
+    id: rules_and
+    uuid: ef5146d1-75e6-4b10-95e9-1c54c032f66e
+    weight: 0
+    conditions:
+      -
+        id: rules_condition
+        uuid: f943670a-63d7-4e89-9c76-8f54b9e3421a
+        weight: 0
+        context_values: {  }
+        context_mapping:
+          node: entity
+        context_processors: {  }
+        provides_mapping: {  }
+        condition_id: rules_node_is_published
+        negate: false
+  actions:
+    id: rules_action_set
+    uuid: 69aed080-147c-4717-a0bd-0a80014614e7
+    weight: 0
+    actions:
+      -
+        id: rules_action
+        uuid: 74699594-145f-4d3b-a7ef-48488b71f1ed
+        weight: 0
+        context_values:
+          template: challenge_schedule
+        context_mapping:
+          referenced_entity: entity
+        context_processors:
+          template:
+            rules_tokens: {  }
+        provides_mapping: {  }
+        action_id: openideal_message_action

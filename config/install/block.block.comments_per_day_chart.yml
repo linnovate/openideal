@@ -1,0 +1,26 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - openideal_statistics
+    - route_condition
+  theme:
+    - openideal_theme
+id: comments_per_day_chart
+theme: openideal_theme
+region: content
+weight: -5
+provider: null
+plugin: openideal_statistics_per_day_charts_block
+settings:
+  id: openideal_statistics_per_day_charts_block
+  label: 'Comments created per day'
+  provider: openideal_statistics
+  label_display: visible
+  entity: comment
+visibility:
+  route:
+    id: route
+    routes: openideal_statistics.graphs_reports
+    negate: false
+    context_mapping: {  }

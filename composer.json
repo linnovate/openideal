@@ -1,0 +1,286 @@
+{
+    "name": "istolar/openideal_distribution",
+    "description": "The OpenideaL distribution profile",
+    "type": "drupal-profile",
+    "license": "GPL-2.0-or-later",
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://packages.drupal.org/8"
+        },
+        {
+            "type": "composer",
+            "url": "https://asset-packagist.org"
+        },
+        {
+            "type": "package",
+            "package": {
+                "name": "ckeditor/mentions",
+                "version": "4.14.1",
+                "type": "drupal-library",
+                "dist": {
+                    "url": "https://download.ckeditor.com/mentions/releases/mentions_4.14.1.zip",
+                    "type": "zip"
+                }
+            }
+        },
+        {
+            "type": "package",
+            "package": {
+                "name": "ckeditor/autocomplete",
+                "version": "4.14.1",
+                "type": "drupal-library",
+                "dist": {
+                    "url": "https://download.ckeditor.com/autocomplete/releases/autocomplete_4.14.1.zip",
+                    "type": "zip"
+                }
+            }
+        },
+        {
+            "type": "package",
+            "package": {
+                "name": "ckeditor/textmatch",
+                "version": "4.14.1",
+                "type": "drupal-library",
+                "dist": {
+                    "url": "https://download.ckeditor.com/textmatch/releases/textmatch_4.14.1.zip",
+                    "type": "zip"
+                }
+            }
+        },
+        {
+            "type": "package",
+            "package": {
+                "name": "ckeditor/textwatcher",
+                "version": "4.14.1",
+                "type": "drupal-library",
+                "dist": {
+                    "url": "https://download.ckeditor.com/textwatcher/releases/textwatcher_4.14.1.zip",
+                    "type": "zip"
+                }
+            }
+        },
+        {
+            "type": "package",
+            "package": {
+                "name": "ckeditor/ajax",
+                "version": "4.14.1",
+                "type": "drupal-library",
+                "dist": {
+                    "url": "https://download.ckeditor.com/ajax/releases/ajax_4.14.1.zip",
+                    "type": "zip"
+                }
+            }
+        },
+        {
+            "type": "package",
+            "package": {
+                "name": "ckeditor/xml",
+                "version": "4.14.1",
+                "type": "drupal-library",
+                "dist": {
+                    "url": "https://download.ckeditor.com/xml/releases/xml_4.14.1.zip",
+                    "type": "zip"
+                }
+            }
+        },
+        {
+            "type": "package",
+            "package": {
+                "name": "ckeditor/embed",
+                "version": "4.14.1",
+                "type": "drupal-library",
+                "dist": {
+                    "url": "https://download.ckeditor.com/embed/releases/embed_4.14.1.zip",
+                    "type": "zip"
+                }
+            }
+        },
+        {
+            "type": "package",
+            "package": {
+                "name": "ckeditor/embedsemantic",
+                "version": "4.14.1",
+                "type": "drupal-library",
+                "dist": {
+                    "url": "https://download.ckeditor.com/embedsemantic/releases/embedsemantic_4.14.1.zip",
+                    "type": "zip"
+                }
+            }
+        },
+        {
+            "type": "package",
+            "package": {
+                "name": "ckeditor/embedbase",
+                "version": "4.14.1",
+                "type": "drupal-library",
+                "dist": {
+                    "url": "https://download.ckeditor.com/embedbase/releases/embedbase_4.14.1.zip",
+                    "type": "zip"
+                }
+            }
+        },
+        {
+            "type": "package",
+            "package": {
+                "name": "ckeditor/autoembed",
+                "version": "4.14.1",
+                "type": "drupal-library",
+                "dist": {
+                    "url": "https://download.ckeditor.com/autoembed/releases/autoembed_4.14.1.zip",
+                    "type": "zip"
+                }
+            }
+        },
+        {
+            "type": "package",
+            "package": {
+                "name": "ckeditor/autolink",
+                "version": "4.14.1",
+                "type": "drupal-library",
+                "dist": {
+                    "url": "https://download.ckeditor.com/autolink/releases/autolink_4.14.1.zip",
+                    "type": "zip"
+                }
+            }
+        },
+        {
+            "type": "package",
+            "package": {
+                "name": "ckeditor/notification",
+                "version": "4.14.1",
+                "type": "drupal-library",
+                "dist": {
+                    "url": "https://download.ckeditor.com/notification/releases/notification_4.14.1.zip",
+                    "type": "zip"
+                }
+            }
+        },
+        {
+            "type": "package",
+            "package": {
+                "name": "ckeditor/notificationaggregator",
+                "version": "4.14.1",
+                "type": "drupal-library",
+                "dist": {
+                    "url": "https://download.ckeditor.com/notificationaggregator/releases/notificationaggregator_4.14.1.zip",
+                    "type": "zip"
+                }
+            }
+        }
+    ],
+    "require": {
+        "bower-asset/c3": "^0.7.20",
+        "composer/installers": "^1.2",
+        "cweagans/composer-patches": "^1.6",
+        "drupal/admin_toolbar": "^2.2",
+        "drupal/adminimal_admin_toolbar": "^1.10",
+        "drupal/adminimal_theme": "^1.5",
+        "drupal/administerusersbyrole": "^3.0",
+        "drupal/ajax_comments": "1.x-dev",
+        "drupal/allowed_formats": "^1.2",
+        "drupal/avatars": "^1.1",
+        "drupal/better_exposed_filters": "^4.0",
+        "drupal/bootstrap_barrio": "^5.0",
+        "drupal/ckeditor_media_embed": "^1.9",
+        "drupal/ckeditor_mentions": "2.x-dev",
+        "drupal/comments_order": "^1.1",
+        "drupal/config_pages": "^2.6",
+        "ckeditor/ajax": "4.14.1",
+        "ckeditor/autocomplete": "4.14.1",
+        "ckeditor/mentions": "4.14.1",
+        "ckeditor/textmatch": "4.14.1",
+        "ckeditor/textwatcher": "4.14.1",
+        "ckeditor/xml": "4.14.1",
+        "ckeditor/notificationaggregator": "4.14.1",
+        "ckeditor/notification": "4.14.1",
+        "ckeditor/autolink": "4.14.1",
+        "ckeditor/autoembed": "4.14.1",
+        "ckeditor/embedbase": "4.14.1",
+        "ckeditor/embedsemantic": "4.14.1",
+        "ckeditor/embed": "4.14.1",
+        "drupal/ctools": "^3.4",
+        "drupal/default_content": "^2.0",
+        "drupal/dropzonejs": "^2.1",
+        "drupal/email_registration": "^1.0",
+        "drupal/entity_browser": "^2.5",
+        "drupal/eu_cookie_compliance": "^1.9",
+        "drupal/faqfield": "^1.1",
+        "drupal/field_permissions": "^1.0",
+        "drupal/flag": "^4.0",
+        "drupal/group": "^1.0",
+        "drupal/layout_builder_styles": "^1.0@beta",
+        "drupal/metatag": "^1.13",
+        "drupal/message": "^1.0",
+        "drupal/message_notify": "^1.1",
+        "drupal/moderation_state_buttons_widget": "^1.0@alpha",
+        "drupal/multiple_fields_remove_button": "^1.0@alpha",
+        "drupal/paragraphs": "^1.11",
+        "drupal/rabbit_hole": "^1.0",
+        "drupal/redirect": "^1.6",
+        "drupal/route_condition": "^1.1",
+        "drupal/rrssb": "^2.2",
+        "drupal/rules": "3.x-dev",
+        "drupal/social_auth_facebook": "^2.0",
+        "drupal/social_auth_github": "^2.0",
+        "drupal/social_auth_google": "^2.0",
+        "drupal/social_auth_linkedin": "^2.0",
+        "drupal/token": "^1.6",
+        "drupal/twig_field_value": "^2.0",
+        "drupal/twig_tweak": "^2.5",
+        "drupal/ultimate_cron": "^2.0@alpha",
+        "drupal/userpoints": "^1.0@alpha",
+        "drupal/user_registrationpassword": "1.x-dev",
+        "drupal/views_data_export": "^1.0",
+        "drupal/votingapi": "3.x-dev",
+        "drupal/votingapi_reaction": "^1.1",
+        "drupal/votingapi_widgets": "1.x-dev",
+        "npm-asset/masonry-layout": "^4.2",
+        "npm-asset/dropzone": "^5.7",
+        "npm-asset/jquery-bar-rating": "^1.2",
+        "npm-asset/swiper": "^6.1",
+        "npm-asset/photoswipe": "^4.1",
+        "oomphinc/composer-installers-extender": "^1.1"
+    },
+    "provide": {
+        "antennaio/jquery-bar-rating": "*"
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "installer-name": "idea",
+        "patches": {
+            "drupal/core": {
+                "Fix comment access handling": "https://www.drupal.org/files/issues/2020-07-18/2879087-65.patch",
+                "Dispatch events for changing content moderation states": "https://www.drupal.org/files/issues/2018-11-06/2873287-50.patch",
+                "Entity reference error messages are not user friendly": "https://www.drupal.org/files/issues/2020-06-04/3138631-9.patch",
+                "Callers of LayoutEntityHelperTrait::getEntitySections() do not account for the view mode": "https://www.drupal.org/files/issues/2019-06-20/3008924-5.patch"
+            },
+            "drupal/votingapi_widgets": {
+                "Previewing a Voting API formatter causes the fatals": "https://www.drupal.org/files/issues/2019-01-09/3024465-votingwidgets-4.patch"
+            },
+            "drupal/ajax_comments": {
+                "Ajax not working when using non-default view mode": "https://www.drupal.org/files/issues/2020-02-12/ajax_comments-non-default-view-mode-2896916-24.patch"
+            },
+            "drupal/rules": {
+                "ServiceNotFoundException when installing a rule via configuration": "https://www.drupal.org/files/issues/2020-07-10/ServiceNotFoundException-when-installing-a-rule-via-configuration.2870851-10_0.patch"
+            },
+            "drupal/message": {
+                "Message template should depend on text(s) filter formats": "https://www.drupal.org/files/issues/2020-08-03/3163049-2.patch"
+            },
+            "drupal/ckeditor_mentions": {
+                "Use the official CKEditor mention plugin": "https://www.drupal.org/files/issues/2020-08-12/ckeditorplugin-3009308-21.patch"
+            },
+            "drupal/group": {
+                "Don't deny access to update/delete unpublished entities if we don't support it yrt": "https://www.drupal.org/files/issues/2020-08-06/group-3163727-2.patch",
+                "Permissions to choose which roles a member can assign, edit or delete": "https://www.drupal.org/files/issues/2020-07-27/group-user-manage-by-role-permissions-3027685-29.patch"
+            },
+            "drupal/rabbit_hole": {
+                "Split performAction() into submethods in PageRedirect Behaviour": "https://www.drupal.org/files/issues/2019-11-21/3095653-5.patch"
+            }
+        }
+    }
+}

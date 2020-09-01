@@ -1,0 +1,26 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - openideal_statistics
+    - route_condition
+  theme:
+    - openideal_theme
+id: ideas_by_category_chart
+theme: openideal_theme
+region: content
+weight: 0
+provider: null
+plugin: openideal_statistics_etity_by_chart_block
+settings:
+  id: openideal_statistics_etity_by_chart_block
+  label: 'Ideas by category'
+  provider: openideal_statistics
+  label_display: visible
+  entity_by: category
+visibility:
+  route:
+    id: route
+    routes: openideal_statistics.graphs_reports
+    negate: false
+    context_mapping: {  }

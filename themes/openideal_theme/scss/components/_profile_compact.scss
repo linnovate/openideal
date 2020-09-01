@@ -1,0 +1,22 @@
+.profile-user-compact .layout__region--content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  a {
+    font-style: normal;
+    font-weight: bold;
+    color: $primary-color;
+    text-transform: capitalize;
+    margin-right: 3px;
+    &:hover {
+      color: $primary-color;
+    }
+  }
+
+  img {
+    border-radius: 50%;
+    width: 200px;
+    height: 200px;
+  }
+}

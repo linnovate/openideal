@@ -1,0 +1,40 @@
+<?php
+
+/**
+ * @file
+ * Contains openideal_statistics.module.
+ */
+
+/**
+ * Implements hook_theme().
+ */
+function openideal_statistics_theme() {
+  return [
+    'site_wide_statistics_block' => [
+      'variables' => [
+        'content' => NULL,
+        'main_class' => NULL,
+        'show_title' => NULL,
+      ],
+    ],
+    'export_icon__openideal' => [
+      'base hook' => 'export_icon',
+      'template' => 'export_icon__openideal',
+    ],
+  ];
+}
+
+/**
+ * Implements hook_preprocess_HOOK().
+ */
+function openideal_statistics_preprocess_export_icon(&$variables) {
+  $variables['#attached']['library'][] = 'openideal_statistics/export_icons';
+}
+
+/**
+ * Implements hook_theme_suggestions_HOOK_alter().
+ */
+function openideal_statistics_theme_suggestions_export_icon_alter(array &$suggestions, array $variables) {
+  $suggestions[] = 'export_icon__openideal';
+  return $suggestions;
+}

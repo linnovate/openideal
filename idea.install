@@ -1,0 +1,26 @@
+<?php
+
+/**
+ * @file
+ * Install, update and uninstall functions for the idea install profile.
+ */
+
+use Drupal\user\Entity\User;
+
+/**
+ * Implements hook_install().
+ *
+ * Perform actions to set up the site for this profile.
+ *
+ * @see system_install()
+ */
+function idea_install() {
+  // Assign user 1 the "administrator" role.
+  // @see standard_install().
+  $user = User::load(1);
+  $user->roles[] = 'administrator';
+  $user->save();
+
+  // Install 'openideal_content' module.
+  \Drupal::service('module_installer')->install(['openideal_content']);
+}

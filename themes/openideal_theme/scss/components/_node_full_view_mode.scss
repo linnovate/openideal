@@ -1,0 +1,177 @@
+.node--view-mode-full {
+  .card-body {
+    padding: 26px 101px 50px 19px;
+    // Block created.
+    .block-field-blocknodechallengecreated,
+    .block-field-blocknodearticlecreated,
+    .block-field-blocknodeideacreated {
+      font-size: $font-size-xs;
+      color: $dark-gray;
+      margin-bottom: 10px;
+    }
+
+    // Block title
+    .block-field-blocknodeideatitle,
+    .block-field-blocknodearticletitle,
+    .block-field-blocknodechallengetitle {
+      font-size: 1.6rem;
+      line-height: 30px;
+      margin-bottom: 26px;
+    }
+
+    // Block body.
+    .block-field-blocknodeideabody,
+    .block-field-blocknodearticlebody,
+    .block-field-blocknodechallengebody {
+      color: $dark-gray;
+      line-height: 24px;
+    }
+
+    .block-openideal-idea-info-block,
+    .block-openideal-statistics-challenge-statistics,
+    .block-views-blockfollowers-followers {
+      display: none;
+    }
+  }
+
+  .block-field-blocknodearticlefield-tags {
+    .field__items {
+      display: flex;
+      li {
+        @include btn-theme($white, $white);
+        border: 1px $primary-color solid;
+        padding: .2em 1em;
+        font-weight: $font-weight-base;
+        margin-right: 3px;
+        font-size: $font-size-sm;
+        color: $primary-color;
+        text-decoration: none;
+        margin-bottom: 5px;
+      }
+    }
+  }
+
+  .idea-statistics-and-status-block,
+  .block-openideal-statistics-challenge-statistics {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 44px;
+    font-size: 14px;
+
+    &--status {
+      text-transform: capitalize;
+      font-weight: $font-weight-bold;
+      color: $dark-gray;
+    }
+
+    .idea-statistics-block {
+
+      &--list {
+        display: flex;
+        font-size: 14px;
+
+        &__item {
+          margin: 0 8px 0 0;
+
+          &--title {
+            display: none;
+          }
+          svg {
+            margin-right: 4px;
+            width: 24px;
+            height: 24px;
+          }
+        }
+      }
+    }
+  }
+
+  .two-columns-challenge-ideas {
+    margin: 30px 0;
+    display: flex;
+    justify-content: space-between;
+
+    .challenges-ideas-title {
+      font-size: 28px;
+      font-weight: $font-weight-bold;
+    }
+
+    a {
+      padding: 15px 70px;
+      @include btn-theme($btn-light, #5eaed2);
+      font-size: 15px;
+    }
+  }
+}
+
+@media (max-width: 767px) {
+  .node--view-mode-full .card-body {
+    padding: 26px 19px;
+
+    .block-openideal-idea-info-block,
+    .block-openideal-statistics-challenge-statistics,
+    .block-views-blockfollowers-followers {
+      display: unset;
+    }
+    .block-views-blockfollowers-followers {
+      h5 {
+        font-size: 15px;
+      }
+    }
+
+    .block-field-blocknodeideatitle,
+    .block-field-blocknodearticletitle,
+    .block-field-blocknodechallengetitle {
+      font-size: 24px;
+    }
+    .mobile_idea_blocks  {
+      h2 {
+        font-size: 14px;
+      }
+
+    }
+    .challenge-statistics-block--list__item .item-svg,
+    .idea-statistics-block--list__item .item-svg {
+      background-size: 24px 24px;
+      width: 24px;
+      height: 24px;
+    }
+
+    .idea-information {
+      border-top: 1px solid #E0E0E0;
+      padding-top: 17px;
+
+      &--list__item--title {
+        font-size: 14px;
+      }
+
+      &--list__item--value {
+        font-size: 15px;
+        color: $dark-gray;
+      }
+      .challenge-status--deadline {
+        font-size: 15px;
+        color: #EB5757;
+      }
+    }
+  }
+
+  .block-views-blockfollowers-followers {
+    h2 {
+      font-size: $font-size-xs;
+      font-weight: $font-weight-bold;
+      margin-bottom: 16px;
+      text-transform: uppercase;
+    }
+
+    .view-content img {
+      margin-right: 0;
+    }
+  }
+}
+
+@media (max-width: 767px) {
+  .comments--header__add-comment-btn {
+    display: none;
+  }
+}

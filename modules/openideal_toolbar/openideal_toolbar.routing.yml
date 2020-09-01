@@ -1,0 +1,23 @@
+openideal_toolbar.system:
+  path: '/admin/openideal'
+  defaults:
+    _controller: '\Drupal\system\Controller\SystemController::systemAdminMenuBlockPage'
+    _title: 'OpenideaL system'
+  requirements:
+    _permission: 'access openideal toolbar'
+
+openideal_toolbar.configuration:
+  path: '/admin/openideal/configuration'
+  defaults:
+    _controller: '\Drupal\system\Controller\SystemController::systemAdminMenuBlockPage'
+    _title: 'Configuration'
+  requirements:
+    _permission: 'access openideal toolbar'
+
+openideal_toolbar.activity:
+  path: '/admin/openideal/activity'
+  defaults:
+    _controller: '\Drupal\system\Controller\SystemController::systemAdminMenuBlockPage'
+    _title: 'OpenideaL activity'
+  requirements:
+    _permission: 'access activity pages openideal'

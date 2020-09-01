@@ -1,0 +1,35 @@
+{#
+/**
+* @file
+* Default theme implementation to display a block.
+*
+* @see template_preprocess_block()
+*
+* @ingroup themeable
+*/
+#}
+<div{{ attributes.addClass(main_class) }}>
+    {# Flag. #}
+    <div class="{{ main_class }}--element">
+        {# Check what a actual action is and depending on it rotate the follow icon. #}
+        {% if follow['#flag'] is not empty %}
+            {{ follow }}
+        {% else %}
+            <div class="{{ main_class }}--body flag-follow--body">
+                {% if like %}
+                    {% include active_theme_path() ~ '/misc/icons/follow.svg' %}
+                {% endif %}
+                <span class="{{ main_class }}--element__text">
+                    {{ 'Followed'|t }}
+                </span>
+            </div>
+        {% endif %}
+    </div>
+
+    {# Like. #}
+    {% if like %}
+        <div class="{{ main_class }}--element">
+            {{ like }}
+        </div>
+    {% endif %}
+</div>

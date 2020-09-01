@@ -1,0 +1,62 @@
+/**
+ * @file
+ * General styles for dropbuttons.
+ */
+
+.js .dropbutton-widget {
+    background-color: white;
+    border: 1px solid #cccccc;
+}
+
+.js .dropbutton-widget:hover {
+    border-color: #b8b8b8;
+}
+
+.dropbutton .dropbutton-action>* {
+    padding: 0.1em 0.5em;
+    white-space: nowrap;
+}
+
+.dropbutton .secondary-action {
+    border-top: 1px solid #e8e8e8;
+}
+
+.dropbutton-multiple .dropbutton {
+    border-right: 1px solid #e8e8e8;
+    /* LTR */
+}
+
+[dir="rtl"] .dropbutton-multiple .dropbutton {
+    border-left: 1px solid #e8e8e8;
+    border-right: 0 none;
+}
+
+.dropbutton-multiple .dropbutton .dropbutton-action>* {
+    margin-right: 0.25em;
+    /* LTR */
+}
+
+[dir="rtl"] .dropbutton-multiple .dropbutton .dropbutton-action>* {
+    margin-left: 0.25em;
+    margin-right: 0;
+}
+
+.js td .dropbutton-multiple {
+    padding-right: 10em;
+    margin-right: 2em;
+    max-width: 100%;
+}
+
+.js td .dropbutton-wrapper {
+    min-height: 2em;
+}
+
+.js .dropbutton-wrapper,
+.js .dropbutton-widget {
+    display: block;
+    position: relative;
+}
+
+.js td .dropbutton-widget {
+    position: absolute;
+}

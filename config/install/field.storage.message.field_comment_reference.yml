@@ -1,0 +1,19 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - comment
+    - message
+id: message.field_comment_reference
+field_name: field_comment_reference
+entity_type: message
+type: entity_reference
+settings:
+  target_type: comment
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

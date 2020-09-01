@@ -1,0 +1,13 @@
+services:
+  openideal_statistics.lazy_builder:
+    class: Drupal\openideal_statistics\OpenidealStatisticsLazyBuilder
+    arguments:
+      - '@entity_type.manager'
+      - '@token'
+      - '@statistics.storage.node'
+
+  openideal_statistics.subscriber:
+    class: Drupal\openideal_statistics\EventSubscriber\OpenidealStatisticsEventSubscriber
+    arguments: []
+    tags:
+      - { name: event_subscriber }

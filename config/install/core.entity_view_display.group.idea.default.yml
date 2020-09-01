@@ -1,0 +1,23 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - group.type.idea
+id: group.idea.default
+targetEntityType: group
+bundle: idea
+mode: default
+content:
+  label:
+    label: hidden
+    type: string
+    weight: -5
+    region: content
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+hidden:
+  changed: true
+  created: true
+  langcode: true
+  uid: true

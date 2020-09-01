@@ -1,0 +1,15 @@
+{# The swiper slideshow. #}
+<div class="openideal-slideshow">
+    <ul class="swiper-wrapper my-gallery">
+        {% for key, item in items %}
+            <li id="slide-{{ key + 1 }}" class="swiper-slide">
+                {# For the photoswipe use default image without styles. #}
+                <a id="{{ key == 0 ? 'first' : '' }}" title="{{ 'click to zoom-in'|t }}" href="{{ file_url(item.uri.value) }}"
+                   data-size="{{ item._referringItem.width }}x{{ item._referringItem.height }}">
+                    <img src="{{ item.uri.value | image_style(image_style) }}"
+                         alt="{{ item._referringItem.alt }}">
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
+</div>

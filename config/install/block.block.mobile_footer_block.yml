@@ -1,0 +1,39 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - openideal_footer
+    - route_condition
+  theme:
+    - openideal_theme
+id: mobile_footer_block
+theme: openideal_theme
+region: footer
+weight: 0
+provider: null
+plugin: openideal_footer_mobile_footer_block
+settings:
+  id: openideal_footer_mobile_footer_block
+  label: 'Mobile footer block'
+  provider: openideal_footer
+  label_display: '0'
+  hide_like: 0
+  main_class: site-footer-mobile-block
+  context_mapping:
+    node: '@node.node_route_context:node'
+visibility:
+  node_type:
+    id: node_type
+    bundles:
+      article: article
+      challenge: challenge
+      idea: idea
+    negate: false
+    context_mapping:
+      node: '@node.node_route_context:node'
+  route:
+    id: route
+    routes: entity.node.canonical
+    negate: false
+    context_mapping: {  }

@@ -1,0 +1,32 @@
+# Unable to create tabs from views because of
+# https://www.drupal.org/project/drupal/issues/2804195
+# @todo remove and create task links from views when #2804195 is fixed
+openideal_user.user_points:
+  title: 'Points'
+  route_name: view.user_points.user_total_points_page
+  base_route: entity.user.collection
+  weight: 10
+
+openideal_user.user_points.totals:
+  title: 'Totals'
+  route_name: view.user_points.user_total_points_page
+  parent_id: openideal_user.user_points
+  weight: 0
+
+openideal_user.user_points.transactions:
+  title: 'Transactions'
+  route_name: view.user_points.user_points_transactions_page
+  parent_id: openideal_user.user_points
+  weight: 10
+
+openideal_user.user_points_tab:
+  title: 'Points'
+  route_name: view.user_points.user_points_page
+  base_route: entity.user.canonical
+  weight: 10
+
+openideal_user.user_points_tab.applied:
+  title: 'Applied'
+  route_name: view.user_points.user_points_page
+  parent_id: openideal_user.user_points_tab
+  weight: 0

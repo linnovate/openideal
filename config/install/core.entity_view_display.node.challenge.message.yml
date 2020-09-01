@@ -1,0 +1,109 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.base_field_override.node.challenge.created
+    - core.base_field_override.node.challenge.uid
+    - core.entity_view_mode.node.message
+    - field.field.node.challenge.body
+    - field.field.node.challenge.field_category
+    - field.field.node.challenge.field_comments
+    - field.field.node.challenge.field_images
+    - field.field.node.challenge.field_is_open
+    - field.field.node.challenge.field_like
+    - field.field.node.challenge.field_main_image
+    - field.field.node.challenge.field_meta_tags
+    - field.field.node.challenge.field_schedule_close
+    - field.field.node.challenge.field_schedule_open
+    - field.field.node.challenge.field_supporting_data
+    - node.type.challenge
+  module:
+    - layout_builder
+    - openideal_statistics
+    - user
+  theme:
+    - openideal_theme
+third_party_settings:
+  layout_builder:
+    allow_custom: false
+    enabled: true
+    sections:
+      -
+        layout_id: openideal_card_with_footer
+        layout_settings:
+          label: ''
+        components:
+          7d58b000-7492-4203-9e83-1464f6ec8ec0:
+            uuid: 7d58b000-7492-4203-9e83-1464f6ec8ec0
+            region: first
+            configuration:
+              id: 'field_block:node:challenge:uid'
+              label: 'Authored by'
+              provider: layout_builder
+              label_display: '0'
+              formatter:
+                label: hidden
+                type: entity_reference_entity_view
+                settings:
+                  view_mode: author
+                third_party_settings: {  }
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+            additional: {  }
+            weight: -9
+          bbe2ea7f-dceb-4e08-8912-dcb4b9ada62f:
+            uuid: bbe2ea7f-dceb-4e08-8912-dcb4b9ada62f
+            region: footer
+            configuration:
+              id: 'field_block:node:challenge:created'
+              label: 'Authored on'
+              provider: layout_builder
+              label_display: '0'
+              formatter:
+                label: hidden
+                type: timestamp
+                settings:
+                  date_format: custom
+                  custom_date_format: d/m/Y
+                  timezone: ''
+                third_party_settings: {  }
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+            additional: {  }
+            weight: 0
+          0755f53c-8517-492d-9f25-cb0a2b3e919c:
+            uuid: 0755f53c-8517-492d-9f25-cb0a2b3e919c
+            region: footer
+            configuration:
+              id: openideal_statistics_challenge_statistics
+              label: 'Challenge statistics block'
+              provider: openideal_statistics
+              label_display: '0'
+              context_mapping:
+                node: layout_builder.entity
+            additional: {  }
+            weight: 1
+        third_party_settings: {  }
+id: node.challenge.message
+targetEntityType: node
+bundle: challenge
+mode: message
+content: {  }
+hidden:
+  addtoany: true
+  body: true
+  field_category: true
+  field_comments: true
+  field_images: true
+  field_is_open: true
+  field_like: true
+  field_main_image: true
+  field_meta_tags: true
+  field_schedule_close: true
+  field_schedule_open: true
+  field_supporting_data: true
+  flag_follow: true
+  langcode: true
+  links: true

@@ -1,0 +1,26 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - openideal_statistics
+    - route_condition
+  theme:
+    - openideal_theme
+id: votes_per_day_chart
+theme: openideal_theme
+region: content
+weight: -4
+provider: null
+plugin: openideal_statistics_per_day_charts_block
+settings:
+  id: openideal_statistics_per_day_charts_block
+  label: 'Votes placed per day'
+  provider: openideal_statistics
+  label_display: visible
+  entity: vote
+visibility:
+  route:
+    id: route
+    routes: openideal_statistics.graphs_reports
+    negate: false
+    context_mapping: {  }

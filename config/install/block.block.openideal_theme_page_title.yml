@@ -1,0 +1,24 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - openideal_theme
+id: openideal_theme_page_title
+theme: openideal_theme
+region: content
+weight: -12
+provider: null
+plugin: page_title_block
+settings:
+  id: page_title_block
+  label: 'Page title'
+  provider: core
+  label_display: '0'
+visibility:
+  request_path:
+    id: request_path
+    pages: "<front>\r\n/user/*\r\n/ideas\r\n/challenges\r\n/community"
+    negate: false
+    context_mapping: {  }

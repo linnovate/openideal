@@ -1,0 +1,27 @@
+name: OpenideaL theme
+type: theme
+description: 'SASS starter kit for a Bootstrap Barrio SubTheme.'
+# version: VERSION
+core: 8.x
+core_version_requirement: ^8 || ^9
+base theme: bootstrap_barrio
+
+libraries:
+  - openideal_theme/global-styling
+libraries-override:
+  bootstrap_barrio/global-styling: false
+  bootstrap_barrio/file: false
+regions:
+  logo: 'Site logo'
+  navigation: 'Navigation'
+  navigation_footer: 'Navigation Footer'
+  user: 'User info'
+  highlighted: Highlighted
+  featured_top: 'Featured top'
+  breadcrumb: Breadcrumb
+  content: Content
+  sidebar: 'Sidebar'
+  mobile_share: 'Mobile share'
+  footer: 'Footer'
+  page_top: 'Page top'
+  page_bottom: 'Page bottom'

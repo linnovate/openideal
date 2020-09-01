@@ -1,0 +1,27 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.message.mail_subject
+    - field.field.message.challenge_schedule.field_node_reference
+    - message.template.challenge_schedule
+  module:
+    - layout_builder
+third_party_settings:
+  layout_builder:
+    allow_custom: false
+    enabled: false
+id: message.challenge_schedule.mail_subject
+targetEntityType: message
+bundle: challenge_schedule
+mode: mail_subject
+content:
+  partial_1:
+    weight: 0
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  field_node_reference: true
+  partial_0: true
+  partial_2: true

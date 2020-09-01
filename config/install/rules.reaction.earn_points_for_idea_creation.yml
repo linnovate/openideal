@@ -1,0 +1,100 @@
+langcode: en
+status: true
+dependencies: {  }
+id: earn_points_for_idea_creation
+label: 'Earn points for creation idea'
+events:
+  -
+    event_name: openideal_user.content_moderation.state_changed
+description: ''
+tags:
+  - points
+  - 'user points'
+config_version: '3'
+expression:
+  id: rules_rule
+  uuid: ba3d4b06-7558-4496-b561-edb15899457f
+  weight: 0
+  conditions:
+    id: rules_and
+    uuid: 9440e93a-a878-4d29-bcdb-5e37172b2ba2
+    weight: 0
+    conditions:
+      -
+        id: rules_condition
+        uuid: 8a4bc19c-0696-4236-a919-dc8490f8cc1e
+        weight: 0
+        context_values:
+          operation: '=='
+          value: published
+        context_mapping:
+          data: newState
+        context_processors:
+          operation:
+            rules_tokens: {  }
+          value:
+            rules_tokens: {  }
+        provides_mapping: {  }
+        condition_id: rules_data_comparison
+        negate: false
+      -
+        id: rules_condition
+        uuid: 6a591982-a0a4-42f9-9fe5-7dbd99b0d982
+        weight: 0
+        context_values:
+          operation: '=='
+          value: idea
+        context_mapping:
+          data: moderatedEntity.type.target_id
+        context_processors:
+          operation:
+            rules_tokens: {  }
+          value:
+            rules_tokens: {  }
+        provides_mapping: {  }
+        condition_id: rules_data_comparison
+        negate: false
+  actions:
+    id: rules_action_set
+    uuid: bf8d0297-9f40-4cc5-9022-0c1e572e1a47
+    weight: 0
+    actions:
+      -
+        id: rules_action
+        uuid: f103c4fb-2830-4f87-a98e-7909b20c7a9c
+        weight: 0
+        context_values:
+          type: user
+        context_mapping:
+          entity_id: moderatedEntity.uid.target_id
+        context_processors:
+          type:
+            rules_tokens: {  }
+        provides_mapping: {  }
+        action_id: rules_entity_fetch_by_id
+      -
+        id: rules_action
+        uuid: 2ca183bf-2799-4ebc-a76e-84bd45055f38
+        weight: 0
+        context_values:
+          transaction_type_id: user_points
+          operation_id: earn_points_on_idea_create
+          transaction_field_amount: '10'
+          transaction_field_balance: '0'
+          transaction_field_log_message: ''
+        context_mapping:
+          idea: moderatedEntity
+          target_entity: entity_fetched
+        context_processors:
+          transaction_type_id:
+            rules_tokens: {  }
+          operation_id:
+            rules_tokens: {  }
+          transaction_field_amount:
+            rules_tokens: {  }
+          transaction_field_balance:
+            rules_tokens: {  }
+          transaction_field_log_message:
+            rules_tokens: {  }
+        provides_mapping: {  }
+        action_id: 'openideal_user_potins_transaction_bulk_execute:user_points'

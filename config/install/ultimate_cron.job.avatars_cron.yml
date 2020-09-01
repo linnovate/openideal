@@ -1,0 +1,16 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - avatars
+title: 'Default cron handler'
+id: avatars_cron
+weight: 0
+module: avatars
+callback: avatars_cron
+scheduler:
+  id: simple
+launcher:
+  id: serial
+logger:
+  id: database

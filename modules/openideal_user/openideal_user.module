@@ -1,0 +1,232 @@
+<?php
+
+/**
+ * @file
+ * Contains openideal_idea.module.
+ */
+
+use Drupal\message\MessageInterface;
+use Drupal\Core\Access\AccessResult;
+use Drupal\Core\Entity\EntityInterface;
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Routing\RouteMatch;
+use Drupal\Core\Session\AccountInterface;
+use Drupal\Core\Url;
+use Drupal\flag\FlagInterface;
+use Drupal\group\Entity\GroupContent;
+use Drupal\node\NodeInterface;
+use Drupal\openideal_user\Event\OpenidealUserEvents;
+use Drupal\openideal_user\Event\OpenidealUserGroupEvent;
+use Drupal\openideal_user\Event\OpenidealUserJoinedSiteEvent;
+use Drupal\openideal_user\Form\OpenidealSecondStepRegistrationForm;
+use Drupal\transaction\TransactionInterface;
+use Drupal\user\UserInterface;
+use Drupal\views\Plugin\views\query\QueryPluginBase;
+use Drupal\views\ViewExecutable;
+use Drupal\views\Views;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function openideal_user_form_user_login_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  /** @var \Drupal\social_api\Plugin\NetworkManager $network_manager */
+  $network_manager = \Drupal::service('plugin.network.manager');
+  $social_plugins = \Drupal::config('social_auth.settings')->get('auth');
+
+  // Remove socials that aren't configured properly.
+  foreach ($social_plugins as $plugin_id => $data) {
+    if (!$network_manager->createInstance($plugin_id)->getSdk()) {
+      unset($social_plugins[$plugin_id]);
+    }
+  }
+  $form['actions']['social_buttons'] = [
+    '#type' => 'container',
+    '#attributes' => ['class' => ['social-login-buttons']],
+    'buttons' => [
+      '#theme' => 'login_with',
+      '#social_networks' => $social_plugins,
+      '#weight' => '1',
+    ],
+  ];
+}
+
+/**
+ * Implements hook_user_login().
+ */
+function openideal_user_user_login(UserInterface $account) {
+  if (RouteMatch::createFromRequest(\Drupal::request())->getRouteName() == 'user_registrationpassword.confirm') {
+    $event = new OpenidealUserJoinedSiteEvent($account);
+    \Drupal::service('event_dispatcher')->dispatch(OpenidealUserEvents::OPENIDEA_USER_JOINED_THE_SITE, $event);
+
+    // Redirect user if joined the site for the first
+    // time via the user_registrationpassword one time link.
+    $response = new RedirectResponse(URL::fromRoute('openideal_user.register.user.more_about_you')->toString());
+    $response->send();
+  }
+
+  // If user was created by UI or via social logins then dispatch
+  // OpenidealUserEvents.
+  if (!$account->getLastAccessedTime()) {
+    $event = new OpenidealUserJoinedSiteEvent($account);
+    \Drupal::service('event_dispatcher')->dispatch(OpenidealUserEvents::OPENIDEA_USER_JOINED_THE_SITE, $event);
+  }
+}
+
+/**
+ * Implements hook_entity_type_alter().
+ */
+function openideal_user_entity_type_alter(array &$entity_types) {
+  $entity_types['user']
+    ->setFormClass('additional_details', OpenidealSecondStepRegistrationForm::class);
+}
+
+/**
+ * Implements hook_preprocess_HOOK().
+ */
+function openideal_user_preprocess_page(&$variables) {
+  if (\Drupal::currentUser()->isAuthenticated()) {
+    $user_id = \Drupal::currentUser()->id();
+    $user = \Drupal::entityTypeManager()->getStorage('user')->load($user_id);
+    $current_route = \Drupal::service('current_route_match')->getRouteName();
+    // Check if any of user field empty, if so set a remind message.
+    if (($user->get('field_age_group')->isEmpty() || $user->get('field_gender')->isEmpty())
+      && ($current_route !== 'entity.user.edit_form' && $current_route !== 'openideal_user.register.user.more_about_you')
+      && !$user->hasRole('administrator')) {
+      \Drupal::messenger()->addMessage(t('Please fill your <a href="@link">profile</a>',
+        ['@link' => Url::fromRoute('entity.user.edit_form', ['user' => $user_id])->toString()]
+      ));
+    }
+  }
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_insert().
+ */
+function openideal_user_group_content_insert(GroupContent $entity) {
+  if ($entity->getGroupContentType()->id() == 'idea-group_membership') {
+    $event = new OpenidealUserGroupEvent($entity);
+    \Drupal::service('event_dispatcher')->dispatch(OpenidealUserEvents::OPENIDEA_USER_JOINED_GROUP, $event);
+  }
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_delete().
+ */
+function openideal_user_group_content_delete(GroupContent $entity) {
+  if ($entity->getGroupContentType()->id() == 'idea-group_membership') {
+    $event = new OpenidealUserGroupEvent($entity);
+    \Drupal::service('event_dispatcher')->dispatch(OpenidealUserEvents::OPENIDEA_USER_LEFT_GROUP, $event);
+  }
+}
+
+/**
+ * Implements hook_flag_action_access().
+ *
+ * If user is Idea creator then restrict "unfollow" access.
+ */
+function openideal_user_flag_action_access($action, FlagInterface $flag, AccountInterface $account, EntityInterface $flaggable = NULL) {
+  if ($flaggable
+    && $flaggable instanceof NodeInterface
+    && $action == 'unflag'
+    && $flaggable->bundle() == 'idea'
+    && $flaggable->uid->target_id == $account->id()) {
+    return AccessResult::forbidden();
+  }
+  return AccessResult::neutral();
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_insert().
+ */
+function openideal_user_transaction_insert(TransactionInterface $entity) {
+  // If transaction was added manually then execute it immediately.
+  if ($entity->isPending()) {
+    $entity->execute();
+  }
+}
+
+/**
+ * Implements hook_views_query_alter().
+ */
+function openideal_user_views_query_alter(ViewExecutable $view, QueryPluginBase $query) {
+  if ($view->id() == 'user_content' && $view->current_display == 'things_i_follow') {
+    // Create the join to add the into query relationship.
+    $configuration = [
+      'table' => 'group_content__group_roles',
+      'field' => 'entity_id',
+      'left_table' => 'group_content_field_data_groups_field_data',
+      'left_field' => 'id',
+      'type' => 'LEFT',
+    ];
+
+    // If there is a user object in the current route
+    // then apply it to join extra.
+    if ($user = \Drupal::routeMatch()->getParameter('user')) {
+      if ($user instanceof UserInterface) {
+        $group_content_user_join = $query->getTableInfo('group_content_field_data_groups_field_data')['join'];
+        $group_content_user_join->extra[] = [
+          'field' => 'entity_id',
+          'value' => [$user->id()],
+        ];
+      }
+    }
+
+    $join = Views::pluginManager('join')->createInstance('standard', $configuration);
+    $query->addRelationship('group_content_field_data_groups_field_data__group_content__group_roles', $join, 'group_content__group_roles');
+
+    // Add the having expressions to check if user has
+    // group 'admin' roles or it isn't exists at all.
+    $query->setWhereGroup('OR', 0, 'having');
+    $query->addHavingExpression(0, "GROUP_CONCAT(group_content_field_data_groups_field_data__group_content__group_roles.group_roles_target_id) NOT LIKE '%author%'");
+    $query->addHavingExpression(0, 'GROUP_CONCAT(group_content_field_data_groups_field_data__group_content__group_roles.group_roles_target_id) IS NULL');
+  }
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_insert().
+ */
+function openideal_user_message_insert(MessageInterface $message) {
+  /** @var \Drupal\message_notify\MessageNotifier $sender */
+  $sender = \Drupal::service('message_notify.sender');
+  $sender->send($message, [], 'openideal_user_bulk_email');
+}
+
+/**
+ * Implements hook_mail().
+ */
+function openideal_user_mail($key, &$message, $params) {
+  $message['from'] = Drupal::config('system.site')->get('mail');
+  $message['subject'] = $params['mail_subject'];
+  $message['body'][] = $params['mail_body'];
+}
+
+/**
+ * Implements hook_form_alter().
+ */
+function openideal_user_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  if (in_array($form_id, ['node_idea_edit_form', 'node_idea_form'])
+  && !\Drupal::currentUser()->hasPermission('administer site configuration')) {
+    $form['field_duplicate_of']['#access'] = FALSE;
+  }
+
+  if ($form_id == 'group_content_idea-group_membership_edit_form') {
+    $form['group_roles']['widget']['#after_build'][] = '_openideal_user_preprocess_group_membership';
+  }
+}
+
+/**
+ * Preprocess the group roles edit form.
+ *
+ * Disable author select option for the author of the group.
+ */
+function _openideal_user_preprocess_group_membership($element, FormStateInterface $form_state) {
+  if (isset($element['idea-author']) == 'idea-author' && \Drupal::routeMatch()->getRouteName() == 'entity.group_content.edit_form') {
+    $group = \Drupal::routeMatch()->getParameter('group');
+    $roles = \Drupal::service('group.membership_loader')->load($group, Drupal::currentUser())->getRoles();
+    if (array_key_exists('idea-author', $roles)) {
+      $element['idea-author']['#attributes']['disabled'] = TRUE;
+    }
+  }
+  return $element;
+}

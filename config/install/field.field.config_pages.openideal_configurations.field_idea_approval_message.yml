@@ -1,0 +1,27 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - config_pages.type.openideal_configurations
+    - field.storage.config_pages.field_idea_approval_message
+  module:
+    - allowed_formats
+    - text
+third_party_settings:
+  allowed_formats:
+    basic_html: basic_html
+    restricted_html: '0'
+    full_html: '0'
+    plain_text: '0'
+id: config_pages.openideal_configurations.field_idea_approval_message
+field_name: field_idea_approval_message
+entity_type: config_pages
+bundle: openideal_configurations
+label: 'Idea approval message'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long

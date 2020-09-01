@@ -1,0 +1,19 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - transaction
+id: transaction.field_balance
+field_name: field_balance
+entity_type: transaction
+type: decimal
+settings:
+  precision: 10
+  scale: 0
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

@@ -1,0 +1,20 @@
+{#
+/**
+* @file
+* Default theme implementation to display a block.
+*
+* @see template_preprocess_block()
+*
+* @ingroup themeable
+*/
+#}
+<div class="idea-information">
+    <ul class="idea-information--list">
+        {% for key, item in content %}
+            <li class="idea-information--list__item">
+                <div class="idea-information--list__item--title">{{ item.title }}</div>
+                <div class="idea-information--list__item--value">{{ item.value }}</div>
+            </li>
+        {% endfor %}
+    </ul>
+</div>

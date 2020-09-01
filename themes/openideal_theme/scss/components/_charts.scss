@@ -1,0 +1,66 @@
+.charts {
+  .parcoords {
+    display: block;
+  }
+
+  .parcoords svg,
+  .parcoords canvas {
+    font: 10px sans-serif;
+    position: absolute;
+  }
+
+  .parcoords canvas {
+    opacity: 0.9;
+    pointer-events: none;
+  }
+
+  .axis .title {
+    font-size: 10px;
+    transform: rotate(-21deg) translate(-5px,-6px);
+    fill: #222;
+  }
+
+  .axis line,
+  .axis path {
+    fill: none;
+    stroke: #ccc;
+    stroke-width: 1px;
+  }
+
+  .axis .tick text {
+    fill: #222;
+    pointer-events: none;
+  }
+
+  .axis:hover line,
+  .axis:hover path,
+  .axis.active line,
+  .axis.active path {
+    fill: none;
+    stroke: #222;
+    stroke-width: 1px;
+  }
+
+  .axis:hover .title {
+    font-weight: bold;
+  }
+
+  .axis:hover .tick text {
+    opacity: 1;
+  }
+
+  .axis.active .title {
+    font-weight: bold;
+  }
+
+  .axis.active .tick text {
+    opacity: 1;
+    font-weight: bold;
+  }
+
+  .brush .extent {
+    fill-opacity: .3;
+    stroke: #fff;
+    stroke-width: 1px;
+  }
+}

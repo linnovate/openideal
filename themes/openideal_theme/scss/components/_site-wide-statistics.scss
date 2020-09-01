@@ -1,0 +1,59 @@
+.site-wide-statistics-block {
+  &--list {
+    display: flex;
+    list-style: none;
+
+    &__item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-right: 5px;
+      flex-basis: 75px;
+      box-shadow: 0 1px 5px rgba(0,0,0,0.03), 0 3px 6px rgba(0,0,0,0.1);
+      border-radius: 2px;
+      padding: 12px 6px 0;
+      background-color: #fff;
+      min-width: 77px;
+
+      &--bottom {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-transform: uppercase;
+      }
+
+      .item-svg {
+        width: 32px;
+        height: 32px;
+        margin-bottom: 6px;
+      }
+
+      &--statistics_tag {
+        background: url('../misc/icons/statistics_tag.svg') no-repeat center center;
+      }
+
+      &--members_tag {
+        background: url('../misc/icons/members_tag.svg') no-repeat center center;
+      }
+
+      &--comment_tag {
+        background: url('../misc/icons/comment_tag.svg') no-repeat center center;
+      }
+
+      &--like_tag {
+        background: url('../misc/icons/like_tag.svg') no-repeat center center;
+      }
+
+      p {
+        line-height: 1;
+        letter-spacing: -0.5px;
+        font-size: 15px;
+      }
+
+      &--count {
+        font-weight: bold;
+        margin-bottom: 1px;
+      }
+    }
+  }
+}

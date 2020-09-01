@@ -1,0 +1,25 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - openideal_statistics
+    - system
+  theme:
+    - openideal_theme
+id: site_wide_statistics_block
+theme: openideal_theme
+region: content
+weight: -13
+provider: null
+plugin: site_wide_statistics_block
+settings:
+  id: site_wide_statistics_block
+  label: 'Site wide statistics block'
+  provider: openideal_statistics
+  label_display: '0'
+visibility:
+  request_path:
+    id: request_path
+    pages: "<front>\r\n/ideas\r\n/challenges"
+    negate: false
+    context_mapping: {  }

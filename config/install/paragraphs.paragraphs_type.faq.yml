@@ -1,0 +1,17 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - openideal_faq
+id: faq
+label: FAQ
+icon_uuid: null
+icon_default: null
+description: ''
+behavior_plugins:
+  faq_view_behaviour:
+    enabled: true
+    default_view: faqfield_accordion
+    formats:
+      faqfield_accordion: Accordion
+      faqfield_anchor_list: 'Anchor list'

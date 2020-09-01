@@ -1,0 +1,264 @@
+/* ------------------ Sidebar ----------------- */
+
+.region-sidebar {
+  flex-direction: column;
+
+  & > div:not([class*="flag-and-like-block"]) {
+    margin: 0 25px;
+    padding: 40px 0;
+    border-bottom: 1px solid #E0E0E0;
+
+    h5 {
+      font-size: 16px;
+    }
+  }
+
+  // Votes block.
+  &--flag-and-follow,
+  &--flag {
+    background-color: #F6F7F8;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    label {
+      cursor: pointer;
+    }
+
+    .votingapi-reaction-form input[type="radio"] {
+      display: none;
+    }
+
+    &--element {
+      width: 50%;
+        svg {
+          fill: white;
+          margin-right: 8px;
+          width: 18px;
+          height: 18px;
+        }
+
+        .flag-follow,
+        .flag-follow--body {
+          svg {
+            transform: rotate(180deg);
+          }
+        }
+
+      .votingapi-reaction-form {
+        .form-check {
+          padding-left: 0;
+        }
+
+        .form-check-label {
+          width: 100%;
+        }
+      }
+
+      a,
+      .votingapi-reaction-item,
+      .flag-follow--body {
+        display: flex;
+        text-transform: uppercase;
+        padding: $font-size-xs 0;
+        align-items: center;
+        justify-content: center;
+        line-height: 1;
+      }
+
+
+      .votingapi-reaction-item {
+        font-size: $font-size-xs;
+        margin-bottom: 59px;
+        @include btn-theme($btn-dark, #1e7697);
+        margin-right: 0;
+      }
+
+      .votingapi-reaction-item.active {
+        background-color: #1e7697;
+      }
+      .flag-follow {
+        display: block;
+        margin: 70px 0 11px 0;
+
+        a,
+        &--body {
+          font-size: $font-size-xs;
+          @include btn-theme($btn-light, #5eaed2);
+        }
+      }
+      .flag-follow--body {
+        margin: 70px 0 11px 0;
+      }
+    }
+  }
+}
+
+.site-sidebar-node--article .region-sidebar {
+  & > div {
+    margin: 0 25px;
+    padding: 40px 0;
+    border-bottom: 1px solid #E0E0E0;
+  }
+}
+
+.site-sidebar-node.site-sidebar {
+  background-color: $white;
+
+  h2 {
+    text-transform: uppercase;
+    font-size: $font-size-sm;
+    font-weight: $font-weight-bold;
+  }
+}
+
+// Info block
+.idea-information {
+  &--list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+
+    &__item {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 16px;
+
+      &--title {
+        text-transform: uppercase;
+        font-weight: $font-weight-bold;
+        font-size: $font-size-sm;
+        margin-bottom: 16px;
+      }
+
+      &--value {
+        font-size: $font-size-sm;
+        color: $dark-gray;
+        .challenge-status--deadline {
+          font-size: 15px;
+          color: #EB5757;
+        }
+
+        a {
+          transition: color 0.4s;
+          color: #5a5656;
+
+          &:hover {
+            color: $dark-gray;
+          }
+        }
+      }
+    }
+  }
+}
+
+
+// Tags block.
+.block-openideal-idea-tags-block {
+  h3 {
+    text-transform: uppercase;
+    font-size: 1.00001rem;
+    font-weight: bold;
+  }
+
+  .list-group {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+
+    &-item {
+      margin-bottom: 5px;
+      @include btn-theme($white, $white);
+      border: 1px $primary-color solid;
+      padding: .2em 1em;
+      font-weight: $font-weight-base;
+      margin-right: 3px;
+      font-size: $font-size-sm;
+      color: $primary-color;
+      text-decoration: none;
+    }
+  }
+}
+
+// Statistics block
+.idea-statistics-block {
+  margin-bottom: 15px;
+  font-size: $font-size-base;
+
+  &--list {
+    list-style: none;
+    padding: 0;
+    &__item {
+      display: flex;
+      align-items: center;
+      margin-bottom: 15px;
+
+      &--bottom {
+        display: flex;
+        align-items: baseline;
+      }
+      &--count {
+        font-weight: $font-weight-bold;
+        padding: 0;
+        margin: 0 5px 0 0;
+      }
+
+      &--title {
+        text-transform: uppercase;
+        margin: 0;
+        padding: 0;
+        font-size: 13px;
+        color: $dark-gray;
+        font-weight: $font-weight-normal;
+      }
+
+      .item-svg {
+        width: 32px;
+        height: 32px;
+        margin-right: 10px;
+      }
+
+      &--view_tag {
+        background: url('../misc/icons/view_tag.svg') no-repeat center center;
+      }
+
+      &--comment_tag {
+        background: url('../misc/icons/comment_tag.svg') no-repeat center center;
+      }
+
+      &--statistics_tag {
+        background: url('../misc/icons/statistics_tag.svg') no-repeat center center;
+      }
+
+      &--like_tag {
+        background: url('../misc/icons/like_tag.svg') no-repeat center center;
+      }
+
+      &--score_tag {
+        background: url('../misc/icons/score_tag.svg') no-repeat center center;
+        background-size: 32px;
+      }
+    }
+
+  }
+}
+
+// Followers block
+.idea-followers-block {
+  .view-content {
+    display: flex;
+    flex-wrap: wrap;
+
+    img {
+      margin-right: 12px;
+      border-radius: 50%;
+    }
+  }
+}
+
+@media (max-width: 1099px) {
+  .block-views-blockideas-idea-flag-vote-block {
+    font-size: $font-size-sm;
+  }
+}

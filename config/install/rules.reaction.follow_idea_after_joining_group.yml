@@ -1,0 +1,59 @@
+langcode: en
+status: true
+dependencies: {  }
+id: follow_idea_after_joining_group
+label: 'Set the user to follow the idea after joining the group.'
+events:
+  -
+    event_name: openideal_user.user_joined_group
+description: ''
+tags: {  }
+config_version: '3'
+expression:
+  id: rules_rule
+  uuid: 4da5c6e8-b04c-4008-ab13-e3451492b751
+  weight: 0
+  conditions:
+    id: rules_and
+    uuid: 0f2245d4-056b-41b8-a54d-bbfac43c0efb
+    weight: 0
+    conditions:
+      -
+        id: rules_condition
+        uuid: 566fa3aa-9839-4a88-804e-86bce6911194
+        weight: 0
+        context_values:
+          operation: '=='
+          value: idea
+        context_mapping:
+          data: node.type.target_id
+        context_processors:
+          operation:
+            rules_tokens: {  }
+          value:
+            rules_tokens: {  }
+        provides_mapping: {  }
+        condition_id: rules_data_comparison
+        negate: false
+  actions:
+    id: rules_action_set
+    uuid: 7db1f1f7-b94d-4422-a7e1-f46ee3654d33
+    weight: 0
+    actions:
+      -
+        id: rules_action
+        uuid: ac82e6de-b6a8-4712-ac71-87101858a0ba
+        weight: 0
+        context_values:
+          operation: flag
+          flag_id: follow
+        context_mapping:
+          entity: node
+          user: user
+        context_processors:
+          operation:
+            rules_tokens: {  }
+          flag_id:
+            rules_tokens: {  }
+        provides_mapping: {  }
+        action_id: openideal_user_flag_action

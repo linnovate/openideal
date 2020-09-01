@@ -1,0 +1,311 @@
+.message {
+  position: relative;
+  background: #485363;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+  padding: 12px 30px 12px 12px;
+  color: $white;
+  margin-bottom: 14px;
+  font-size: 16px;
+
+  .profile-author-view-mode .layout__region--content {
+    margin-bottom: 0;
+  }
+
+  a {
+    transition: color 0.3s;
+    color: #BDBDBD;
+
+    &:hover {
+      color: #d2caca;
+    }
+
+    p {
+      display: inline;
+    }
+  }
+
+  mark {
+    display: none;
+  }
+
+  &--referenced-label {
+    position: absolute;
+    font-weight: $font-weight-bold;
+    top: 15px;
+    left: 0;
+    background: #F2994A;
+    padding: 1px 21px 2px 12px;
+    border-top-right-radius: 37px;
+    text-transform: uppercase;
+    font-size: 12px;
+    line-height: 16px;
+  }
+
+  &--referenced-label--article {
+    background: #F85B85;
+  }
+
+  &--referenced-label--news {
+    background: #F85B85;
+  }
+
+  &--referenced-label--idea {
+    background: #64C45C;
+  }
+
+  &--referenced-label--challenge {
+    background: #1294CA;
+  }
+
+  &--referenced-label--comment {
+    background: #F2994A;
+  }
+
+  &--referenced-label--user {
+    background: #E1B83B;
+  }
+
+  &--referenced-label--page {
+    background: #3bcee1;
+  }
+
+  &--text {
+    margin: 29px 0 24px 0;
+    padding: 0;
+  }
+
+  .profile {
+    display: flex;
+    align-items: center;
+    font-weight: $font-weight-bold;
+    font-size: 12px;
+
+    & > div {
+      margin-right: 4px;
+    }
+
+  }
+
+  .profile-author-view-mode .layout__region--content {
+    img {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      margin-right: 4px;
+    }
+
+    a {
+      font-size: 12px;
+      transition: color 0.3s;
+      color: $white;
+    }
+  }
+
+  &--section {
+
+    &__content {
+      margin: 0 0 12px 0;
+    }
+
+    &__footer {
+      flex-wrap: wrap-reverse;
+      color: #BDBDBD;
+      padding-top: 10px;
+      opacity: 0.49;
+      border-top: 1px solid rgba(255, 255, 255, 0.25);
+      font-size: 14px;
+      display: flex;
+      font-style: normal;
+      font-weight: bold;
+      line-height: 18px;
+      justify-content: space-between;
+
+      & > div:first-child {
+        margin-bottom: 5px;
+      }
+
+      .idea-statistics-block {
+        margin-bottom: 5px;
+      }
+
+      .idea-statistics-block--list {
+        display: flex;
+        flex-direction: row-reverse;
+        font-size: 14px;
+        margin: 0;
+
+        &__item {
+          flex-direction: row-reverse;
+          margin: 0;
+
+          &--count {
+            margin: 0 2px 0 0;
+          }
+
+          .item-svg {
+            background-size: 16.67px 16.67px;
+            width: 18px;
+            height: 16.67px;
+          }
+
+          &--public_stream_view.item-svg {
+            background: url('../misc/icons/public_stream_view.svg') no-repeat center center;
+            background-size: 18.33px 13.33px;
+          }
+
+          &--public_stream_comment {
+            background: url('../misc/icons/public_stream_comment.svg') no-repeat center center;
+            background-size: 16.67px 16.67px;
+          }
+
+          &--public_stream_like.item-svg {
+            background-size: 15px;
+            height: 18px;
+            background: url('../misc/icons/public_stream_like.svg') no-repeat;
+          }
+
+          &--public_stream_idea.item-svg {
+            background-size: 16.67px 13.33px;
+            background: url('../misc/icons/public_stream_idea.svg') no-repeat center center;
+          }
+
+          .idea-statistics-block--list__item--score_tag {
+            background: url("../misc/icons/public_stream_score_tag.svg") no-repeat center center;
+            width: 13px;
+            height: 18px;
+            background-size: auto;
+          }
+        }
+      }
+
+      .block-field-blockcommentcommentcreated .content a {
+        color: #BDBDBD;
+      }
+    }
+  }
+  .block-field-blockcommentcommentcreated  p {
+    margin-bottom: 0;
+  }
+
+  .block-field-blockcommentcommentcomment-body {
+    color: $white;
+  }
+}
+
+.site-sidebar .region-sidebar .block-views-blockpublic-activity-public-activity-block,
+.site-sidebar .region-sidebar .block-views-blockpublic-activity-personalized-activity-block {
+  padding: 0 27px;
+  width: 100%;
+  margin: 52px 0 0 0;
+  border-bottom: unset;
+
+  h2 {
+    color: $white;
+    font-size: 25px;
+    margin-bottom: 18px;
+  }
+}
+
+.block-openideal-personal-activity-stream-block {
+  .list-group {
+    list-style: none;
+
+    &-item {
+      padding: 0;
+      background-color: unset;
+      border: none;
+    }
+  }
+}
+
+.activity-stream {
+  &--list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .message-user-section__footer {
+    margin-top: 20px;
+  }
+}
+
+@media (max-width: 1226px) {
+    .message {
+      &--text {
+      font-size: 14px;
+    }
+    &--section__footer {
+      .idea-statistics-block--list__item {
+
+        .item-svg {
+          background-size: contain;
+          width: 16px;
+          height: 13.67px;
+        }
+
+        &--public_stream_view.item-svg {
+          background: url('../misc/icons/public_stream_view.svg') no-repeat center center;
+          background-size: contain;
+        }
+
+        &--public_stream_comment {
+          background: url('../misc/icons/public_stream_comment.svg') no-repeat center center;
+          background-size: contain;
+        }
+
+        &--public_stream_like {
+          background: url('../misc/icons/public_stream_like.svg') no-repeat center center;
+          background-size: contain;
+        }
+
+        &--public_stream_idea.item-svg {
+          background: url('../misc/icons/public_stream_idea.svg') no-repeat center center;
+          background-size: contain;
+        }
+      }
+    }
+  }
+
+}
+
+@media (max-width: 767px) {
+  .entity--user--canonical .site-sidebar,
+  .view--frontpage--front-page .site-sidebar {
+    display: block !important;
+    width: 312px;
+    padding-left: 0;
+    position: fixed;
+    top: 0;
+    right: -312px;
+    height: 100vh;
+    overflow: scroll;
+    z-index: 999;
+    transition: all 0.3s;
+
+    &.active {
+      right: 0;
+    }
+
+    .site-sidebar--dismiss {
+      position: absolute;
+      right: 20px;
+      top: 10px;
+    }
+  }
+}
+
+@media (max-width: 656px) {
+  .node--view-mode-teaser {
+    .block-field-blocknodechallengetitle a,
+    .block-field-blocknodearticletitle a,
+    .block-field-blocknodeideatitle a {
+      font-size: 24px;
+    }
+
+    .teaser-top-section--section__second {
+      padding: 15px;
+    }
+  }
+}

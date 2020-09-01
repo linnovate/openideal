@@ -1,0 +1,24 @@
+<div class="share-buttons rrssb-buttons">
+    {% if prefix_text %}
+        <div class="rrssb-prefix">{{ prefix_text }}</div>
+    {% endif %}
+    <ul class="share-buttons--buttons">
+        {% for button in buttons %}
+            {% if button.name != 'copy_url' %}
+            <li class="share-buttons--buttons__{{ button.name }}">
+                    <a href="{{ button.link }}" {{ button.class | raw }}>
+                        {% include button.svg %}
+                        <span class="share-buttons--buttons__text visually-hidden">{{ button.text }}</span>
+                    </a>
+            </li>
+            {% else %}
+            <li data-toggle="tooltip" data-placement="top" title="Copy link to clipboard" class="share-buttons--buttons__{{ button.name }}">
+                    <span class="share-buttons--buttons__icon">
+                  {% include button.svg %}
+              </span>
+                    <span class="share-buttons--buttons__text visually-hidden">{{ button.text }}</span>
+            </li>
+                {% endif %}
+        {% endfor %}
+    </ul>
+</div>

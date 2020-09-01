@@ -1,0 +1,16 @@
+<?php
+
+/**
+ * @file
+ * Primary module hooks for openideal_toolbar module.
+ */
+
+/**
+ * Implements hook_element_info_alter().
+ */
+function openideal_toolbar_element_info_alter(array &$types) {
+  // Attach our extra CSS for toolbar icons.
+  if (isset($types['toolbar'])) {
+    $types['toolbar']['#attached']['library'][] = 'openideal_toolbar/openideal_toolbar.icon';
+  }
+}

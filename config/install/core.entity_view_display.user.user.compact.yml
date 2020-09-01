@@ -1,0 +1,123 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.user.compact
+    - field.field.user.user.avatars_avatar_generator
+    - field.field.user.user.avatars_user_picture
+    - field.field.user.user.field_age_group
+    - field.field.user.user.field_first_name
+    - field.field.user.user.field_gender
+    - field.field.user.user.field_last_name
+    - field.field.user.user.field_points
+    - field.field.user.user.user_picture
+  module:
+    - layout_builder
+    - layout_discovery
+    - openideal_user
+    - user
+third_party_settings:
+  layout_builder:
+    allow_custom: false
+    enabled: true
+    sections:
+      -
+        layout_id: layout_onecol
+        layout_settings:
+          label: Compact
+          layout_builder_styles_style: user_compact
+        components:
+          dc114bc3-c6ef-4940-8750-a12719c8d472:
+            uuid: dc114bc3-c6ef-4940-8750-a12719c8d472
+            region: content
+            configuration:
+              id: 'field_block:user:user:user_picture'
+              label: Picture
+              provider: layout_builder
+              label_display: '0'
+              formatter:
+                label: hidden
+                type: image
+                settings:
+                  image_style: ''
+                  image_link: content
+                third_party_settings: {  }
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+            additional: {  }
+            weight: 3
+          3e73382b-516f-465c-b237-07fbb2b9dece:
+            uuid: 3e73382b-516f-465c-b237-07fbb2b9dece
+            region: content
+            configuration:
+              id: 'field_block:user:user:created'
+              label: 'Member since:'
+              provider: layout_builder
+              label_display: '0'
+              formatter:
+                label: inline
+                type: timestamp
+                settings:
+                  date_format: custom
+                  custom_date_format: d/m/Y
+                  timezone: ''
+                third_party_settings: {  }
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+            additional: {  }
+            weight: 6
+          425f3923-73c7-4fd1-b43c-1c50c9cf6424:
+            uuid: 425f3923-73c7-4fd1-b43c-1c50c9cf6424
+            region: content
+            configuration:
+              id: openideal_user_user_name_block
+              label: 'User name'
+              provider: openideal_user
+              label_display: '0'
+              context_mapping:
+                user: layout_builder.entity
+              hide_label: 0
+            additional: {  }
+            weight: 4
+          61219a2e-11b7-4762-bb01-976282a57079:
+            uuid: 61219a2e-11b7-4762-bb01-976282a57079
+            region: content
+            configuration:
+              id: 'field_block:user:user:field_points'
+              label: Points
+              provider: layout_builder
+              label_display: '0'
+              formatter:
+                label: inline
+                type: number_decimal
+                settings:
+                  thousand_separator: ''
+                  prefix_suffix: false
+                  decimal_separator: .
+                  scale: 0
+                third_party_settings: {  }
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+            additional: {  }
+            weight: 7
+        third_party_settings: {  }
+id: user.user.compact
+targetEntityType: user
+bundle: user
+mode: compact
+content: {  }
+hidden:
+  avatars_avatar_generator: true
+  avatars_user_picture: true
+  field_age_group: true
+  field_first_name: true
+  field_gender: true
+  field_last_name: true
+  field_points: true
+  langcode: true
+  member_for: true
+  realname: true
+  user_picture: true

@@ -1,0 +1,25 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - openideal_statistics
+    - route_condition
+  theme:
+    - openideal_theme
+id: chartsblock
+theme: openideal_theme
+region: content
+weight: -8
+provider: null
+plugin: openideal_statistics_charts_block
+settings:
+  id: openideal_statistics_charts_block
+  label: Demographic
+  provider: openideal_statistics
+  label_display: visible
+visibility:
+  route:
+    id: route
+    routes: openideal_statistics.graphs_reports
+    negate: false
+    context_mapping: {  }

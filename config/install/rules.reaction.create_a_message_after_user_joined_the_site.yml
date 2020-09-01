@@ -1,0 +1,49 @@
+langcode: en
+status: true
+dependencies: {  }
+id: create_a_message_after_user_joined_the_site
+label: 'Create a message after user joined the site'
+events:
+  -
+    event_name: openideal_user.user_joined_site
+description: ''
+tags: {  }
+config_version: '3'
+expression:
+  id: rules_rule
+  uuid: b4b32aff-8369-4865-9698-4074e2bb7cb2
+  weight: 0
+  conditions:
+    id: rules_and
+    uuid: 0230c3c8-bc78-449f-909e-56725b1b6088
+    weight: 0
+    conditions:
+      -
+        id: rules_condition
+        uuid: 6930d5a9-9ae0-4c7d-bd1c-df8aec56e60d
+        weight: 0
+        context_values: {  }
+        context_mapping:
+          user: user
+        context_processors: {  }
+        provides_mapping: {  }
+        condition_id: rules_user_is_blocked
+        negate: true
+  actions:
+    id: rules_action_set
+    uuid: 6ec95133-3c88-47dc-aa9b-6ad77c98a8b3
+    weight: 0
+    actions:
+      -
+        id: rules_action
+        uuid: f7e54511-63d1-4b3e-a8ab-953a036776d1
+        weight: 0
+        context_values:
+          template: user_joined
+        context_mapping:
+          referenced_entity: user
+        context_processors:
+          template:
+            rules_tokens: {  }
+        provides_mapping: {  }
+        action_id: openideal_message_action

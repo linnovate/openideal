@@ -1,0 +1,98 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - comment.type.comment
+    - core.base_field_override.comment.comment.created
+    - core.base_field_override.comment.comment.uid
+    - core.entity_view_mode.comment.message
+    - field.field.comment.comment.comment_body
+    - field.field.comment.comment.field_like
+  module:
+    - layout_builder
+    - text
+    - votingapi_reaction
+  theme:
+    - openideal_theme
+third_party_settings:
+  layout_builder:
+    allow_custom: false
+    enabled: true
+    sections:
+      -
+        layout_id: openideal_card_with_footer
+        layout_settings:
+          label: Content
+        components:
+          d7d54887-cec6-4d5b-9754-b41526c83406:
+            uuid: d7d54887-cec6-4d5b-9754-b41526c83406
+            region: footer
+            configuration:
+              id: 'field_block:comment:comment:created'
+              label: Created
+              provider: layout_builder
+              label_display: '0'
+              formatter:
+                label: hidden
+                type: timestamp
+                settings:
+                  date_format: custom
+                  custom_date_format: 'd \ m \ Y'
+                  timezone: ''
+                third_party_settings: {  }
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+            additional: {  }
+            weight: 0
+          5a5d3a0d-5452-465c-867e-7ab73e2d1683:
+            uuid: 5a5d3a0d-5452-465c-867e-7ab73e2d1683
+            region: first
+            configuration:
+              id: 'field_block:comment:comment:uid'
+              label: 'User ID'
+              provider: layout_builder
+              label_display: '0'
+              formatter:
+                label: hidden
+                type: entity_reference_entity_view
+                settings:
+                  view_mode: author
+                third_party_settings: {  }
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+            additional: {  }
+            weight: -9
+        third_party_settings: {  }
+id: comment.comment.message
+targetEntityType: comment
+bundle: comment
+mode: message
+content:
+  comment_body:
+    label: hidden
+    type: text_default
+    weight: 0
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_like:
+    weight: 4
+    label: above
+    settings:
+      show_summary: true
+      show_icon: true
+      show_label: true
+      show_count: true
+      sort_reactions: desc
+    third_party_settings: {  }
+    type: votingapi_reaction_default
+    region: content
+  links:
+    weight: 2
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  langcode: true

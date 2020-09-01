@@ -1,0 +1,205 @@
+.comments {
+  padding-top: 58px;
+  margin-top: 50px;
+  border-top: 1px solid #E0E0E0;
+
+  &--header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+
+    &__add-comment-btn {
+      @include btn-theme(transparent, transparent);
+      border: 1.5px solid $btn-dark;
+      font-size: $font-size-xs;
+      color: $btn-dark;
+      padding: 15px 70px;
+
+      &:hover,
+      &:active {
+        color: $btn-dark;
+      }
+    }
+  }
+
+  // Add form.
+  &--bottom {
+    padding: 25px 23px;
+    display: none;
+    margin-bottom: 10px;
+  }
+
+  // Comments thread.
+  &--thread {
+    margin-bottom: 8px;
+
+    // Single comment
+    .single-comment {
+      padding: 24px 24px 0 24px;
+      margin-bottom: 8px;
+      &--inner {
+        padding-bottom: 24px;
+        border-bottom: 1px solid #E0E0E0;
+      }
+
+      &.comments--thread__border-none .single-comment--inner {
+        border-bottom: none;
+      }
+
+      .comment-show {
+        cursor: pointer;
+      }
+
+      &--open-replies:before {
+        content: '';
+        display: inline-block;
+        background: url('../misc/icons/caret-up.png') no-repeat center center;
+        width: 13px;
+        height: 13px;
+        margin-right: 7px;
+      }
+
+    }
+  }
+}
+
+// Created block.
+.block-field-blockcommentcommentcreated {
+  .content {
+    display: flex;
+    justify-content: space-between;
+
+    .profile .profile-author-view-mode .layout__region--content {
+      font-weight: $font-weight-bold;
+      font-size: $font-size-sm;
+
+      img {
+        border-radius: 50%;
+        margin: 0 12px 0 0;
+        width: 42px;
+        height: 42px;
+      }
+
+      a {
+        font-size: unset;
+      }
+    }
+
+    a {
+      color: $dark-gray;
+      font-size: 14px;
+    }
+  }
+}
+
+.block-field-blockcommentcommentcomment-body {
+  margin-top: 16px;
+  color: $dark-gray;
+  font-size: $font-size-sm;
+}
+
+.block-extra-field-blockcommentcommentlinks {
+  display: inline-block;
+  width: 95%;
+
+  .nav-link {
+    font-size: 12px;
+  }
+}
+
+.block-field-blockcommentcommentfield-like {
+  display: inline-block;
+
+  .votingapi-reaction-item-wrapper {
+    display: flex;
+    align-items: center;
+
+    svg {
+      fill: $btn-dark;
+      height: 15px;
+      width: 15px;
+      margin-right: 6.5px;
+    }
+  }
+
+  .form-check {
+    padding-left: 0;
+  }
+
+  input[type='radio'] {
+    display: none;
+  }
+
+  label {
+    cursor: pointer;
+  }
+}
+
+.my-comments-single-comment {
+  padding: 15px;
+  margin-bottom: 8px;
+}
+
+.comment-comment-form .form-actions {
+  display: inline-flex;
+  font-size: 14px;
+
+  .font-submit-btn-wrapper {
+    position: relative;
+
+    .form-submit {
+      text-transform: uppercase;
+      font-size: inherit;
+      @include btn-theme($btn-dark, #1e7697);
+      padding-left: 25px;
+    }
+
+    img {
+      font-size: inherit;
+      top: 50%;
+      left: 10%;
+      transform: translateY(-55%);
+      position: absolute;
+      color: white;
+    }
+  }
+
+  .comment-form--cancel-btn {
+    font-size: inherit;
+  }
+}
+
+@media (max-width: 1226px) {
+  .block-extra-field-blockcommentcommentlinks {
+    width: 93%;
+  }
+}
+
+@media (max-width: 807px) {
+  .block-extra-field-blockcommentcommentlinks {
+    width: 90%;
+  }
+
+  .block-field-blockcommentcommentcreated .content .profile {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 559px) {
+  .block-field-blockcommentcommentcreated .content .profile {
+    img {
+      margin-right: 10px;
+    }
+  }
+}
+
+@media (max-width: 434px) {
+  .block-extra-field-blockcommentcommentlinks {
+    width: 85%;
+    .nav-link {
+      padding: 10px;
+      font-size: $font-size-xs;
+    }
+  }
+}

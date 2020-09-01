@@ -1,0 +1,54 @@
+{#
+/**
+* @file
+* Default theme implementation to display a block.
+*
+* @see template_preprocess_block()
+*
+* @ingroup themeable
+*/
+#}
+<div{{ attributes.addClass(main_class) }}>
+    {% if like %}
+    <div class="{{ main_class }}--element {{ cols }}">
+        {{ like }}
+    </div>
+    {% endif %}
+
+    {% if follow %}
+    <div class="{{ main_class }}--element {{ cols }}">
+        {% if follow['#flag'] is not empty %}
+            {{ follow }}
+        {% else %}
+            <div class="flag-follow--body">
+                {% include active_theme_path() ~ '/misc/icons/follow.svg' %}
+                <span class="{{ main_class }}--element__text">
+                    {{ 'Followed'|t }}
+                </span>
+            </div>
+        {% endif %}
+    </div>
+    {% endif %}
+
+    {% if comment %}
+    <div class="{{ main_class }}--element site-footer-open-comments-btn {{ cols }}">
+        <span class="{{ main_class }}--element__icon">
+            {% include active_theme_path() ~ '/misc/icons/comment.svg' %}
+        </span>
+        <span class="{{ main_class }}--element__text">
+            {{ 'Comment'|t }}
+        </span>
+    </div>
+    {% endif %}
+
+    {% if share %}
+    <div class="{{ main_class }}--element site-footer-open-share-btn {{ cols }}">
+        <span class="{{ main_class }}--element__icon">
+            {% include active_theme_path() ~ '/misc/icons/share.svg' %}
+        </span>
+        <span class="{{ main_class }}--element__text">
+            {{ 'Share'|t }}
+        </span>
+    </div>
+    {% endif %}
+</div>

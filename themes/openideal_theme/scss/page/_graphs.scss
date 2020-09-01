@@ -1,0 +1,29 @@
+.openideal-statistics--graphs-reports {
+  section.main-content {
+    display: flex;
+    flex-wrap: wrap;
+
+    .block-openideal-statistics-charts-block {
+      flex-basis: 100%;
+      flex-grow: 1;
+      .charts {
+        display: flex;
+        justify-content: center;
+      }
+    }
+
+    & > div:not(:nth-child(2)) {
+      flex-basis: 50%;
+
+      h2 {
+        text-align: center;
+      }
+
+      .content {
+        display: flex;
+        justify-content: center;
+      }
+    }
+
+  }
+}
