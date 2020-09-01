@@ -1,0 +1,136 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.base_field_override.node.page.created
+    - core.base_field_override.node.page.uid
+    - core.entity_view_mode.node.message
+    - field.field.node.page.field_attached_docs
+    - field.field.node.page.field_body
+    - field.field.node.page.field_images
+    - node.type.page
+  module:
+    - file
+    - image
+    - layout_builder
+    - text
+    - user
+  theme:
+    - openideal_theme
+third_party_settings:
+  layout_builder:
+    allow_custom: false
+    enabled: true
+    sections:
+      -
+        layout_id: openideal_card_with_footer
+        layout_settings:
+          label: Content
+        components:
+          097b4439-1ab0-4e17-9883-b4edbc119ca5:
+            uuid: 097b4439-1ab0-4e17-9883-b4edbc119ca5
+            region: first
+            configuration:
+              id: 'field_block:node:page:field_body'
+              label: Body
+              provider: layout_builder
+              label_display: '0'
+              formatter:
+                label: hidden
+                type: text_trimmed
+                settings:
+                  trim_length: 100
+                third_party_settings: {  }
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+            additional: {  }
+            weight: 1
+          05a9e030-95d2-47d8-9bcc-246c82a38619:
+            uuid: 05a9e030-95d2-47d8-9bcc-246c82a38619
+            region: first
+            configuration:
+              id: 'field_block:node:page:uid'
+              label: 'Authored by'
+              provider: layout_builder
+              label_display: '0'
+              formatter:
+                label: hidden
+                type: entity_reference_entity_view
+                settings:
+                  view_mode: author
+                third_party_settings: {  }
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+            additional: {  }
+            weight: 2
+          0e01cf1e-256b-43c4-bc25-f132a118d9f8:
+            uuid: 0e01cf1e-256b-43c4-bc25-f132a118d9f8
+            region: footer
+            configuration:
+              id: 'field_block:node:page:created'
+              label: 'Authored on'
+              provider: layout_builder
+              label_display: '0'
+              formatter:
+                label: above
+                type: timestamp
+                settings:
+                  date_format: custom
+                  custom_date_format: d/m/Y
+                  timezone: ''
+                third_party_settings: {  }
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+            additional: {  }
+            weight: 2
+        third_party_settings: {  }
+id: node.page.message
+targetEntityType: node
+bundle: page
+mode: message
+content:
+  addtoany:
+    weight: 101
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+  field_attached_docs:
+    weight: 104
+    label: above
+    settings:
+      use_description_as_link_text: true
+    third_party_settings: {  }
+    type: file_default
+    region: content
+  field_body:
+    weight: 102
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: text_default
+    region: content
+  field_images:
+    weight: 103
+    label: above
+    settings:
+      image_style: ''
+      image_link: ''
+    third_party_settings: {  }
+    type: image
+    region: content
+  field_paragraphs:
+    type: entity_reference_revisions_entity_view
+    region: content
+    weight: 105
+    settings: {  }
+    third_party_settings: {  }
+  links:
+    weight: 101
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  langcode: true

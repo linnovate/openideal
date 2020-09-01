@@ -1,0 +1,7 @@
+services:
+  openideal_challenge.challenge_service:
+    class: Drupal\openideal_challenge\Service\OpenidealChallengeService
+    arguments:
+      - '@entity_type.manager'
+      - '@event_dispatcher'
+      - '@datetime.time'

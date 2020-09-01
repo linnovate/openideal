@@ -1,0 +1,47 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.user.follower
+    - field.field.user.user.avatars_avatar_generator
+    - field.field.user.user.avatars_user_picture
+    - field.field.user.user.field_age_group
+    - field.field.user.user.field_first_name
+    - field.field.user.user.field_gender
+    - field.field.user.user.field_last_name
+    - field.field.user.user.field_points
+    - field.field.user.user.user_picture
+    - image.style.follower_icon
+  module:
+    - image
+    - layout_builder
+    - user
+third_party_settings:
+  layout_builder:
+    allow_custom: false
+    enabled: false
+id: user.user.follower
+targetEntityType: user
+bundle: user
+mode: follower
+content:
+  user_picture:
+    type: image
+    weight: 0
+    region: content
+    label: hidden
+    settings:
+      image_style: follower_icon
+      image_link: content
+    third_party_settings: {  }
+hidden:
+  avatars_avatar_generator: true
+  avatars_user_picture: true
+  field_age_group: true
+  field_first_name: true
+  field_gender: true
+  field_last_name: true
+  field_points: true
+  langcode: true
+  member_for: true
+  realname: true

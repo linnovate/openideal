@@ -1,0 +1,18 @@
+<div class="site-footer--wrapper">
+    <div class="site-footer--powered-by">
+        <a href="{{ site_url }}" target="_blank">
+            {{ 'Powered by'|t }}
+            <span class="site-footer--powered-by__drupal">
+            {{ 'OpenideaL'|t }}
+            </span>
+            <img src="{{ logo }}" alt="{{ 'OpenideaL logo'|t }}">
+        </a>
+    </div>
+    <div class="site-footer--links">
+    {% for link in links %}
+        <div class="site-footer--links__link">
+            <a href="{{ link.path }}" target="_blank"><img src="{{ link.logo }}" alt="{{ link.alt }}"></a>
+        </div>
+    {% endfor %}
+    </div>
+</div>

@@ -1,0 +1,83 @@
+langcode: en
+status: true
+dependencies: {  }
+id: create_a_message_after_content_is_published
+label: 'Create a message after content is published'
+events:
+  -
+    event_name: 'rules_entity_update:node'
+description: ''
+tags: {  }
+config_version: '3'
+expression:
+  id: rules_rule
+  uuid: 757f2756-217e-4c7b-85f9-ecfccbef8b06
+  weight: 0
+  conditions:
+    id: rules_and
+    uuid: 6311eba1-7f4e-49b1-900c-165b66041718
+    weight: 0
+    conditions:
+      -
+        id: rules_condition
+        uuid: 844bc609-3bf5-4784-9931-378e57157795
+        weight: -50
+        context_values:
+          operation: '=='
+          value: '0'
+        context_mapping:
+          data: node_unchanged.status.value
+        context_processors:
+          operation:
+            rules_tokens: {  }
+          value:
+            rules_tokens: {  }
+        provides_mapping: {  }
+        condition_id: rules_data_comparison
+        negate: false
+      -
+        id: rules_condition
+        uuid: 7372ef2f-4177-4a33-b15c-358aab4db1b7
+        weight: -49
+        context_values: {  }
+        context_mapping:
+          node: node
+        context_processors: {  }
+        provides_mapping: {  }
+        condition_id: rules_node_is_published
+        negate: false
+      -
+        id: rules_condition
+        uuid: d764805a-19db-445b-892a-b8fcc8e3567b
+        weight: -48
+        context_values:
+          type: node
+          bundle: idea
+        context_mapping:
+          entity: node
+        context_processors:
+          type:
+            rules_tokens: {  }
+          bundle:
+            rules_tokens: {  }
+        provides_mapping: {  }
+        condition_id: rules_entity_is_of_bundle
+        negate: true
+  actions:
+    id: rules_action_set
+    uuid: 2e665d22-dd48-4e5a-8939-0adecc98dc27
+    weight: 0
+    actions:
+      -
+        id: rules_action
+        uuid: a8689a2a-bfda-47d2-a4ba-cab05e5c8776
+        weight: 0
+        context_values:
+          template: node_created
+        context_mapping:
+          referenced_entity: node
+        context_processors:
+          template:
+            rules_tokens: {  }
+        provides_mapping: {  }
+        action_id: openideal_message_action

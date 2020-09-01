@@ -1,0 +1,81 @@
+/**
+ * @file
+ * Visual styles for Bootstrap Barrio's node component.
+ */
+
+.node__content {
+    margin-top: unset;
+    font-size: 18px;
+}
+
+
+/* View mode teaser styles. */
+
+.node--view-mode-teaser {
+    border-bottom: unset;
+    margin-bottom: unset;
+    padding-bottom: unset;
+}
+
+.node--view-mode-teaser h2 {
+    margin-top: 0;
+    padding-top: unset;
+}
+
+.node--view-mode-teaser.node--sticky {
+    background: #f9f9f9;
+    border: unset;
+    padding: unset;
+}
+
+.node--view-mode-teaser .node__content {
+    clear: none;
+    font-size: unset;
+    line-height: unset;
+}
+
+
+/* Node metadata styles. */
+
+.node__meta {
+    font-size: unset;
+    margin-bottom: -5px;
+}
+
+.node__meta .field--name-field-user-picture img {
+    float: left;
+    /* LTR */
+    margin: 1px $spacer 0 0;
+    /* LTR */
+}
+
+[dir="rtl"] .node__meta .field--name-field-user-picture img {
+    float: right;
+    margin-left: $spacer;
+    margin-right: 0;
+}
+
+
+/* Node links styles. */
+
+.node__links {
+    text-align: unset;
+    /* LTR */
+    font-size: unset;
+}
+
+[dir="rtl"] .node__links {
+    text-align: unset;
+}
+
+
+/* Unpublished node styles. */
+
+.node--unpublished {
+    padding: unset;
+}
+
+.node--unpublished .comment-text .comment-arrow {
+    border-left: unset;
+    border-right: unset;
+}

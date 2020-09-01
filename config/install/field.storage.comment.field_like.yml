@@ -1,0 +1,18 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - comment
+    - votingapi_reaction
+id: comment.field_like
+field_name: field_like
+entity_type: comment
+type: votingapi_reaction
+settings: {  }
+module: votingapi_reaction
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

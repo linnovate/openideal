@@ -1,0 +1,37 @@
+.mobile-share-footer {
+  position: fixed;
+  display: none;
+  top: 75%;
+  left: 50%;
+  width: 360px;
+  transform: translateX(-50%);
+
+  .share-buttons {
+    background-color: #242A36;
+    opacity: 0.9;
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0.04), 0px -2px 6px rgba(0, 0, 0, 0.04), 0px -8px 16px rgba(0, 0, 0, 0.06);
+    border-radius: 45px;
+    padding: 20px 90px;
+
+    &--buttons {
+      margin: 0;
+      justify-content: space-between;
+    }
+
+    li {
+      background-color: unset;
+    }
+  }
+}
+
+@media (max-width: 763px) {
+  .mobile-share-footer {
+    top: 80%;
+  }
+}
+
+@media (max-width: 400px) {
+  .mobile-share-footer {
+    width: 90%;
+  }
+}

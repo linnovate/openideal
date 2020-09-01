@@ -1,0 +1,127 @@
+name: OpenideaL
+type: profile
+description: 'Basic installation profile for OpenideaL sites.'
+core: 8.x
+core_version_requirement: ^8 || ^9
+
+# Required modules
+dependencies:
+  # Core and contrib modules.
+  - admin_toolbar:admin_toolbar
+  - admin_toolbar_tools:admin_toolbar_tools
+  - adminimal_admin_toolbar:adminimal_admin_toolbar
+  - administerusersbyrole:administerusersbyrole
+  - ajax_comments:ajax_comments
+  - allowed_formats:allowed_formats
+  - avatars:avatars_gravatar
+  - drupal:automated_cron
+  - better_exposed_filters:better_exposed_filters
+  - drupal:big_pipe
+  - drupal:block
+  - block_content:block_content
+  - drupal:breakpoint
+  - drupal:ckeditor
+  - drupal:content_translation
+  - route_condition:route_condition
+  - ckeditor_mentions:ckeditor_mentions
+  - ckeditor_media_embed:ckeditor_media_embed
+  - drupal:comment
+  - drupal:config
+  - comments_order:comments_order
+  - config_pages:config_pages
+  - drupal:contact
+  - drupal:content_moderation
+  - drupal:contextual
+  - ctools:ctools
+  - drupal:datetime
+  - default_content:default_content
+  - drupal:dblog
+  - layout_builder_styles:layout_builder_styles
+  - dropzonejs:dropzonejs
+  - dropzonejs_eb_widget:dropzonejs_eb_widget
+  - drupal:dynamic_page_cache
+  - drupal:editor
+  - message:message
+  - message_notify:message_notify
+  - email_registration:email_registration
+  - entity_browser:entity_browser
+  - entity_reference_revisions:entity_reference_revisions
+  - faqfield:faqfield
+  - drupal:field
+  - drupal:field_ui
+  - drupal:file
+  - drupal:filter
+  - eu_cookie_compliance:eu_cookie_compliance
+  - flag:flag
+  - gnode:gnode
+  - group:group
+  - group_roles_management:group_roles_management
+  - drupal:hal
+  - drupal:history
+  - drupal:image
+  - drupal:inline_form_errors
+  - drupal:layout_builder
+  - drupal:layout_discovery
+  - drupal:link
+  - drupal:menu_ui
+  - metatag:metatag
+  - metatag:metatag_open_graph
+  - metatag:metatag_twitter_cards
+  - moderation_state_buttons_widget:moderation_state_buttons_widget
+  - multiple_fields_remove_button:multiple_fields_remove_button
+  - drupal:node
+  - drupal:options
+  - drupal:page_cache
+  - drupal:path
+  - drupal:path_alias
+  - drupal:quickedit
+  - rabbit_hole:rabbit_hole
+  - redirect:redirect
+  - rrssb:rrssb
+  - rh_group:rh_group
+  - rh_node:rh_node
+  - rh_taxonomy:rh_taxonomy
+  - rules:rules
+  - drupal:serialization
+  - drupal:shortcut
+  - drupal:statistics
+  - social_auth_facebook:social_auth_facebook
+  - social_auth_github:social_auth_github
+  - social_auth_google:social_auth_google
+  - social_auth_linkedin:social_auth_linkedin
+  - drupal:system
+  - drupal:taxonomy
+  - drupal:text
+  - drupal:token
+  - drupal:toolbar
+  - drupal:tour
+  - twig_field_value:twig_field_value
+  - twig_tweak:twig_tweak
+  - ultimate_cron:ultimate_cron
+  - drupal:update
+  - drupal:user
+  - user_registrationpassword:user_registrationpassword
+  - userpoints:userpoints
+  - drupal:views_ui
+  - drupal:workflows
+  - drupal:menu_link_content
+  - views_data_export:views_data_export
+  - votingapi:votingapi
+  - votingapi_widgets:votingapi_widgets
+  - votingapi_reaction:votingapi_reaction
+  - drupal:views
+  - paragraphs:paragraphs
+  # Custom modules
+  - openideal_challenge:openideal_challenge
+  - openideal_faq:openideal_faq
+  - openideal_toolbar:openideal_toolbar
+  - openideal_idea:openideal_idea
+  - openideal_user:openideal_user
+  - openideal_slideshow:openideal_slideshow
+  - openideal_comment:openideal_comment
+  - openideal_footer:openideal_footer
+  - openideal_statistics:openideal_statistics
+
+themes:
+  - adminimal_theme
+  - openideal_theme

@@ -1,0 +1,20 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.user.avatars_avatar_generator
+  module:
+    - options
+    - user
+id: user.user.avatars_avatar_generator
+field_name: avatars_avatar_generator
+entity_type: user
+bundle: user
+label: 'Avatar Generator'
+description: 'Select source of avatar.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

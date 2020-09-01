@@ -1,0 +1,404 @@
+.teaser-view-mode {
+
+  /**  Exposed filters   */
+  .form-row {
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+
+  .form-group {
+    margin-bottom: 0;
+  }
+
+  fieldset {
+
+    label {
+      display: none;
+    }
+
+    select {
+      border: 1px solid #C6CDD0;
+      border-radius: 4px;
+      appearance: none;
+      background-image: url("../misc/icons/select_dropdown.png");
+      background-repeat: no-repeat;
+      background-position-x: 95%;
+      background-position-y: 50%;
+      padding-right: 22px;
+      height: 100%;
+      background-color: $white;
+      font-size: 16px;
+    }
+
+    .select-prepend {
+      font-weight: $font-weight-bold;
+    }
+  }
+
+  .form-item-search {
+    border: unset;
+    padding: 0;
+    position: relative;
+    border: 0.8px solid #D0D6DC;
+    border-radius: 30px;
+    background: #E8E8E9;
+    margin-top: 0;
+
+    label {
+      display: none;
+    }
+
+    input {
+      padding: 18px 3rem 18px 18px;
+      background: transparent;
+      border: none;
+      margin: 0;
+
+      &:focus {
+        outline: unset;
+        box-shadow: none;
+      }
+
+      &::placeholder {
+        color: #828282;
+        font-style: $font-weight-base;
+      }
+    }
+
+    .search-submit-button {
+      position: absolute;
+      background: url('../misc/icons/search.svg') no-repeat center center;
+      width: 20px;
+      height: 20px;
+      right: 5%;
+      top: 50%;
+      transform: translateY(-50%);
+      cursor: pointer;
+      z-index: 30;
+    }
+  }
+
+}
+
+/** The teaser mod itself */
+.node--view-mode-teaser {
+  margin-bottom: 20px;
+
+  .teaser-top-section {
+    background-color: $white;
+    display: flex;
+
+    &--section__first {
+      border-top-left-radius: 8px;
+      position: relative;
+      width: auto;
+      max-width: 400px;
+      height: 190px;
+
+      &.teaser-top-section--without-slideshow {
+        background-color: #F0F2F3;
+        border-top-right-radius: 0;
+      }
+
+      a {
+        overflow: hidden;
+        height: 190px;
+        display: block;
+      }
+
+      img {
+        border-radius: unset;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+
+    &--section__second {
+      flex-grow: 1;
+      padding: 23px;
+
+      p {
+        margin-bottom: 2px;
+      }
+    }
+
+  }
+
+  .teaser-bottom-section {
+    border-bottom-right-radius: 8px;
+    border-bottom-left-radius: 8px;
+    background: $white;
+    padding: 12px;
+    box-shadow: 0px -1px 2px rgba(0, 0, 0, 0.05), 0px -1px 6px rgba(0, 0, 0, 0.09);
+    display: flex;
+    align-items: center;
+
+    &--section__first {
+      width: auto;
+    }
+
+    &--section__second {
+      width: auto;
+      font-weight: bold;
+      font-size: 14px;
+      margin-left: auto;
+      display: flex;
+    }
+
+  }
+
+  /** Blocks */
+
+  // Created
+  .block-field-blocknodechallengetitle,
+  .block-field-blocknodearticletitle,
+  .block-field-blocknodeideatitle {
+    a {
+      display: inline-block;
+      font-size: 25px;
+      font-weight: 600;
+      color: $main-font-color;
+      line-height: 30px;
+      margin-bottom: 12px;
+    }
+  }
+
+  // Body
+  .block-field-blocknodeideabody,
+  .block-field-blocknodechallengebody,
+  .block-field-blocknodearticlebody {
+    p {
+      font-size: 18px;
+      line-height: 24px;
+      color: $dark-gray;
+    }
+  }
+
+  // Statistics
+  .idea-statistics-block {
+    margin: 0;
+
+    &--list {
+      display: flex;
+      flex-direction: row-reverse;
+      font-size: 14px;
+      margin: 0 17px 0 27px;
+      color: #676C72;
+
+      &__item {
+        flex-direction: row-reverse;
+        margin: 0;
+
+        .item-svg {
+          background-size: 16.67px 16.67px;
+          width: 18px;
+          height: 16.67px;
+        }
+
+        &--public_stream_view.item-svg {
+          background: url('../misc/icons/teaser_view.svg') no-repeat center center;
+          background-size: 18.33px 13.33px;
+        }
+
+        &--public_stream_comment {
+          background: url('../misc/icons/teaser_comment.svg') no-repeat center center;
+          background-size: 16.67px 16.67px;
+        }
+
+        &--public_stream_like.item-svg {
+          background-size: 15px;
+          height: 18px;
+          background: url('../misc/icons/teaser_like.svg') no-repeat;
+        }
+
+        &--public_stream_idea.item-svg {
+          background-size: 16.67px 13.33px;
+          background: url('../misc/icons/teaser_idea.svg') no-repeat center center;
+        }
+
+        .idea-statistics-block--list__item--score_tag {
+          background: url("../misc/icons/score_tag.svg") no-repeat center center;
+          background-size: 16px;
+        }
+      }
+    }
+  }
+
+  // Statistics
+  .block-openideal-statistics-idea-statistics {
+    display: flex;
+    align-items: center;
+  }
+
+  // Author
+  .block-openideal-user-user-name-block {
+    a {
+      font-size: $font-size-sm;
+    }
+  }
+
+  .profile-author-view-mode .layout__region--content {
+    margin-bottom: 0;
+
+    a {
+      display: block;
+    }
+  }
+
+  // Created
+  .block-field-blocknodeideacreated,
+  .block-field-blocknodearticlecreated,
+  .block-field-blocknodechallengecreated {
+    margin-right: 6px;
+
+    span {
+      font-weight: $font-weight-base;
+      color: #676C72;
+      font-size: inherit;
+    }
+  }
+
+  // Follow
+  .flag-follow a,
+  .teaser-flag--element__text {
+    cursor: pointer;
+    color: #1294CA;
+    padding: 0.5em 0.7em;
+    border: 1.5px solid #1294CA;
+    text-align: center;
+    font-size: 13px;
+    text-transform: uppercase;
+    border-radius: 30px;
+
+    svg {
+      display: none;
+    }
+  }
+
+  .layout--onecol .layout__region {
+    width: auto;
+  }
+
+}
+
+@media (max-width: 1414px) {
+  .node--view-mode-teaser {
+    .block-field-blocknodechallengetitle a,
+    .block-field-blocknodearticletitle a,
+    .block-field-blocknodeideatitle a {
+      font-size: 23px;
+    }
+
+    .block-field-blocknodeideabody,
+    .block-field-blocknodechallengebody,
+    .block-field-blocknodearticlebody {
+      p {
+        font-size: 16px;
+      }
+    }
+  }
+}
+
+@media (max-width: 1300px) {
+  .node--view-mode-teaser {
+    .teaser-top-section {
+      flex-direction: column;
+
+      &--section__first {
+        max-width: unset;
+        height: auto;
+        min-height: 25px;
+      }
+    }
+
+    .block-field-blocknodechallengetitle a,
+    .block-field-blocknodearticletitle a,
+    .block-field-blocknodeideatitle a {
+      font-size: 25px;
+    }
+
+    .block-field-blocknodeideabody,
+    .block-field-blocknodechallengebody,
+    .block-field-blocknodearticlebody {
+      p {
+        font-size: 18px;
+      }
+    }
+  }
+}
+
+@media (max-width: 998px) {
+  .teaser-view-mode--teaser {
+    .form-item-search {
+      flex-basis: 100%;
+      flex-grow: 1;
+      font-size: 16px;
+      margin-bottom: 5px;
+
+      .search-submit-button {
+        right: 3%;
+      }
+    }
+
+    fieldset select {
+      font-size: 16px;
+      margin-bottom: 5px;
+    }
+  }
+}
+
+@media (max-width: 647px) {
+  .node--view-mode-teaser {
+    .teaser-top-section--section__second {
+      padding: 23px 23px 10px 23px;
+    }
+
+    .block-openideal-user-user-name-block a {
+      font-size: 14px;
+    }
+
+    .teaser-bottom-section {
+      padding: 5px 23px 12px 23px;
+      flex-wrap: wrap;
+
+      &--section__second {
+        margin-bottom: 10px;
+        flex-basis: 100%;
+        flex-grow: 1;
+        justify-content: space-between;
+        flex-wrap: wrap;
+      }
+
+      &--section__first {
+        flex-grow: 1;
+        flex-basis: 100%;
+        margin: 15px 0;
+      }
+    }
+  }
+}
+
+@media (max-width: 530px) {
+  .node--view-mode-teaser {
+    .block-openideal-statistics-idea-statistics,
+    .block-openideal-statistics-challenge-statistics {
+      flex-basis: 100%;
+      order: 1;
+      display: flex;
+      justify-content: flex-end;
+      margin-top: 14px;
+    }
+    .idea-statistics-block--list {
+      margin: 0;
+    }
+  }
+}
+
+@media (max-width: 345px) {
+  .teaser-view-mode--teaser {
+    .form-row fieldset {
+      flex-basis: 100%;
+      flex-grow: 1;
+    }
+  }
+}

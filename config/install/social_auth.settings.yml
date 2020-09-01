@@ -1,0 +1,19 @@
+auth:
+  social_auth_facebook:
+    route: social_auth_facebook.redirect_to_fb
+    img_path: modules/contrib/social_auth_facebook/img/facebook_logo.svg
+  social_auth_github:
+    route: social_auth_github.redirect_to_github
+    img_path: modules/contrib/social_auth_github/img/github_logo.svg
+  social_auth_google:
+    route: social_auth_google.redirect_to_google
+    img_path: modules/contrib/social_auth_google/img/google_logo.svg
+  social_auth_linkedin:
+    route: social_auth_linkedin.redirect_to_linkedin
+    img_path: modules/contrib/social_auth_linkedin/img/linkedin_logo.svg
+post_login: /user/register/step-2
+redirect_user_form: false
+disable_admin_login: true
+disabled_roles:
+  administrator: '0'
+user_allowed: register

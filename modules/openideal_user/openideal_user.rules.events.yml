@@ -1,0 +1,60 @@
+openideal_user.user_mention:
+  label: 'After user was mentioned'
+  category: 'User'
+  context_definitions:
+    comment:
+      type: 'entity:comment'
+      label: 'The comment that mentions user.'
+    user:
+      type: 'entity:user'
+      label: 'Mentioned user.'
+
+openideal_user.user_joined_group:
+  label: 'After user joined the group'
+  category: 'User'
+  context_definitions:
+    groupContent:
+      type: 'entity:group_content'
+      label: 'Group content entity that contains the user.'
+    node:
+      type: 'entity:node'
+      label: 'Node that unite the group.'
+    user:
+      type: 'entity:user'
+      label: 'Group owner user.'
+
+openideal_user.user_left_group:
+  label: 'After user left the group'
+  category: 'User'
+  context_definitions:
+    groupContent:
+      type: 'entity:group_content'
+      label: 'Group content entity that contains the user.'
+    user:
+      type: 'entity:user'
+      label: 'Group owner user.'
+
+openideal_user.user_joined_site:
+  label: 'User joined the site'
+  category: 'User'
+  context_definitions:
+    user:
+      type: 'entity:user'
+      label: 'User entity.'
+
+openideal_user.content_moderation.state_changed:
+  label: 'After changing workflow state of a content'
+  category: 'Workflow'
+  context_definitions:
+    moderatedEntity:
+      type: 'entity:node'
+      label: 'The entity that is being moderated.'
+    newState:
+      type: 'string'
+      label: 'The new state the content is moving to'
+    originalState:
+      type: 'string'
+      label: 'The original state of the content, before the change was made.'
+    workflow:
+      type: 'string'
+      label: 'The ID of the workflow that allowed the state change.'

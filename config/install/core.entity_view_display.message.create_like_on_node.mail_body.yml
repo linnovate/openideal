@@ -1,0 +1,27 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.message.mail_body
+    - field.field.message.create_like_on_node.field_node_reference
+    - message.template.create_like_on_node
+  module:
+    - layout_builder
+third_party_settings:
+  layout_builder:
+    allow_custom: false
+    enabled: false
+id: message.create_like_on_node.mail_body
+targetEntityType: message
+bundle: create_like_on_node
+mode: mail_body
+content:
+  partial_2:
+    weight: 0
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  field_node_reference: true
+  partial_0: true
+  partial_1: true

@@ -1,0 +1,76 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - comment.type.comment
+    - core.base_field_override.comment.comment.created
+    - core.entity_view_mode.comment.my_comments
+    - field.field.comment.comment.comment_body
+    - field.field.comment.comment.field_like
+  module:
+    - layout_builder
+    - layout_discovery
+    - text
+third_party_settings:
+  layout_builder:
+    allow_custom: false
+    enabled: true
+    sections:
+      -
+        layout_id: layout_onecol
+        layout_settings:
+          label: ''
+        components:
+          0e788d62-3fc4-4e5f-bad4-82478de5be0e:
+            uuid: 0e788d62-3fc4-4e5f-bad4-82478de5be0e
+            region: content
+            configuration:
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              id: 'field_block:comment:comment:comment_body'
+              formatter:
+                label: hidden
+                type: text_default
+                settings: {  }
+                third_party_settings: {  }
+            additional: {  }
+            weight: 2
+          ce734f7b-401c-4fa0-921e-fea307f8ef82:
+            uuid: ce734f7b-401c-4fa0-921e-fea307f8ef82
+            region: content
+            configuration:
+              id: 'field_block:comment:comment:created'
+              label: Created
+              provider: layout_builder
+              label_display: '0'
+              formatter:
+                label: hidden
+                type: timestamp_ago
+                settings:
+                  future_format: '@interval hence'
+                  past_format: '@interval ago'
+                  granularity: 2
+                third_party_settings: {  }
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+            additional: {  }
+            weight: 3
+        third_party_settings: {  }
+id: comment.comment.my_comments
+targetEntityType: comment
+bundle: comment
+mode: my_comments
+content:
+  comment_body:
+    label: hidden
+    type: text_default
+    weight: 0
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  field_like: true
+  langcode: true
+  links: true

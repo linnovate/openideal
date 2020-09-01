@@ -1,0 +1,14 @@
+<div class="votingapi-reaction-item-wrapper">
+  <div class="votingapi-reaction-item">
+    {% if icon %}
+        {# Change default icon #}
+        {% include active_theme_path() ~ '/misc/icons/like.svg' %}
+    {% endif %}
+    {% if label %}
+      <span class="votingapi-reaction-label">{{ label }}</span>
+    {% endif %}
+  </div>
+  {% if count is not empty %}
+    <div class="votingapi-reaction-count">{{ count }}</div>
+  {% endif %}
+</div>

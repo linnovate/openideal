@@ -1,0 +1,36 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - dropzonejs_eb_widget
+name: openideal_file_browser
+label: 'Openideal File Browser'
+display: modal
+display_configuration:
+  width: '650'
+  height: '500'
+  link_text: 'Select files'
+  auto_open: false
+selection_display: no_display
+selection_display_configuration: {  }
+widget_selector: tabs
+widget_selector_configuration: {  }
+widgets:
+  07fd1311-3fa2-4498-98a4-51a8bf40e9f5:
+    settings:
+      upload_location: 'public://[date:custom:Y]-[date:custom:m]'
+      dropzone_description: 'Drop files here to upload them'
+      max_filesize: 32M
+      extensions: 'txt doc docx xls xlsx pdf ppt pptx csv'
+      clientside_resize: false
+      resize_width: null
+      resize_height: null
+      resize_quality: !!float 1
+      resize_method: contain
+      thumbnail_method: contain
+      submit_text: 'Select files'
+      auto_select: false
+    uuid: 07fd1311-3fa2-4498-98a4-51a8bf40e9f5
+    weight: 1
+    label: Browse
+    id: dropzonejs

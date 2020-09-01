@@ -1,0 +1,18 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.transaction.field_log_message
+    - transaction.type.user_points
+id: transaction.user_points.field_log_message
+field_name: field_log_message
+entity_type: transaction
+bundle: user_points
+label: 'Log message'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

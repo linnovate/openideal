@@ -1,0 +1,9 @@
+openideal_idea.openideal_idea_score_config_form:
+  path: '/admin/config/openideal_idea/scoreconfig'
+  defaults:
+    _form: '\Drupal\openideal_idea\Form\ScoreConfigForm'
+    _title: 'Overall Score Weights'
+  requirements:
+    _permission: 'access to configuration forms'
+  options:
+    _admin_route: TRUE

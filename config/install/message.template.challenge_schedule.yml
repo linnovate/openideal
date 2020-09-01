@@ -1,0 +1,25 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - filter.format.basic_html
+    - filter.format.full_html
+template: challenge_schedule
+label: 'Challenge schedule'
+description: ''
+text:
+  -
+    value: "<p class=\"message--text\">Challenge <a href=\"[message:field_node_reference:entity:url]\">[message:field_node_reference:entity:title]</a> is now @challenge_status.</p>\r\n\r\n<div id=\"gtx-trans\" style=\"position: absolute; left: 528px; top: -13px;\">\r\n<div class=\"gtx-trans-icon\">&nbsp;</div>\r\n</div>\r\n"
+    format: full_html
+  -
+    value: "<p>[site:name] Challenge is now @challenge_status!</p>\r\n"
+    format: full_html
+  -
+    value: "<p>Challenge [message:field_node_reference:entity:title] is now @challenge_status.</p>\r\n\r\n<p>&nbsp;</p>\r\n"
+    format: basic_html
+settings:
+  'token options':
+    clear: false
+    'token replace': true
+  purge_override: false
+  purge_methods: {  }

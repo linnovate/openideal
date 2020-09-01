@@ -1,0 +1,159 @@
+<?php
+
+/**
+ * @file
+ * Functions to support theming in the SASS Starterkit subtheme.
+ */
+
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Url;
+use Drupal\node\NodeInterface;
+
+/**
+ * Implements hook_form_system_theme_settings_alter() for settings form.
+ *
+ * Replace Barrio setting options with subtheme ones.
+ */
+function openideal_theme_form_system_theme_settings_alter(&$form, FormStateInterface $form_state) {
+  $form['components']['navbar']['bootstrap_barrio_navbar_top_background']['#options'] = [
+    'bg-primary' => t('Primary'),
+    'bg-secondary' => t('Secondary'),
+    'bg-light' => t('Light'),
+    'bg-dark' => t('Dark'),
+    'bg-white' => t('White'),
+    'bg-transparent' => t('Transparent'),
+  ];
+  $form['components']['navbar']['bootstrap_barrio_navbar_background']['#options'] = [
+    'bg-primary' => t('Primary'),
+    'bg-secondary' => t('Secondary'),
+    'bg-light' => t('Light'),
+    'bg-dark' => t('Dark'),
+    'bg-white' => t('White'),
+    'bg-transparent' => t('Transparent'),
+  ];
+}
+
+/**
+ * Implements hook_preprocess_HOOK().
+ */
+function openideal_theme_preprocess_html(&$variables) {
+  // Add route name as class.
+  $route = \Drupal::routeMatch();
+  $route_name = str_replace(['.', '_'], ['--', '-'], $route->getRouteName());
+  $variables['attributes']['class'][] = $route_name;
+}
+
+/**
+ * Implements hook_preprocess_HOOK().
+ */
+function openideal_theme_preprocess_page(&$variables) {
+  $node = \Drupal::routeMatch()->getParameter('node');
+  if ($node instanceof NodeInterface) {
+    $variables['node_type'] = $node->bundle();
+  }
+}
+
+/**
+ * Implements hook_preprocess_HOOK().
+ */
+function openideal_theme_preprocess_field__comment(&$variables) {
+  $node = $variables['element']['#object'];
+  $statistics = \Drupal::service('comment.statistics')->read([$node->id() => $node], 'node');
+  $variables['comments_count'] = (reset($statistics))->comment_count;
+}
+
+/**
+ * Implements hook_preprocess_HOOK().
+ */
+function openideal_theme_preprocess_message(&$variables) {
+  /** @var \Drupal\message\Entity\Message $message */
+  $message = $variables['message'];
+  foreach ($variables['content'] as $name => $item) {
+    if (strpos($name, 'field') !== FALSE) {
+      try {
+        $label = $message->{$name}->entity->bundle();
+        $variables['entity_label'] = $label === 'article' ? 'news' : $label;
+        $variables['label_class'] = 'message--referenced-label--' . $label;
+      }
+      catch (\Throwable $e) {
+        \Drupal::logger('openideal')->error(t('Could not get the message bundle, probably the referenced entity was deleted. Error message: @message', ['@message' => $e->getMessage()]));
+      }
+    }
+    elseif ($message->getTemplate()->id() == 'user_joined') {
+      $variables['entity_label'] = t('User');
+      $variables['label_class'] = 'message--referenced-label--user';
+      $create = $message->getOwner()->getCreatedTime();
+      $time = \Drupal::service('date.formatter')->format($create, 'custom', 'd/m/Y');
+      $variables['created'] = $time;
+    }
+  }
+}
+
+/**
+ * Implements hook_theme_suggestions_HOOK_alter().
+ */
+function openideal_theme_theme_suggestions_comment_alter(array &$suggestions, array $variables) {
+  $elements = $variables['elements'];
+  if (isset($elements['#view_mode'])) {
+    $suggestions[] = 'comment__view_mode__' . $elements['#view_mode'];
+  }
+}
+
+/**
+ * Implements hook_preprocess_HOOK().
+ */
+function openideal_theme_preprocess_field__created(&$variables) {
+  $element = $variables['element'];
+  if (isset($element['#third_party_settings']['layout_builder']['view_mode'])
+    && $element['#third_party_settings']['layout_builder']['view_mode'] == 'compact') {
+    $variables['label'] = t('Member since:');
+  }
+}
+
+/**
+ * Implements hook_preprocess_HOOK().
+ */
+function openideal_theme_preprocess_field__field_points(&$variables) {
+  $variables['label'] = t('User points:');
+}
+
+/**
+ * Implements hook_form_alter().
+ */
+function openideal_theme_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  if ($form_id == 'views_exposed_form' && $form['#id'] == 'views-exposed-form-ideas-all-ideas-page') {
+    $form['search']['#placeholder'] = t('Search');
+  }
+}
+
+/**
+ * Implements hook_preprocess_HOOK().
+ */
+function openideal_theme_preprocess_page_title(&$variables) {
+  $route_match = \Drupal::routeMatch();
+  if ($route_match->getRouteName() == 'entity.user.canonical' && $route_match->getParameter('user')->id() == \Drupal::currentUser()->id()) {
+    $variables['logout_link'] = [
+      '#type' => 'link',
+      '#title' => t('Log out'),
+      '#url' => Url::fromRoute('user.logout'),
+    ];
+  }
+}
+
+/**
+ * Implements hook_preprocess_HOOK().
+ */
+function openideal_theme_preprocess_comment__view__my_comments__my_comments(&$variables) {
+  $commented_entity = $variables['commented_entity'];
+  $comment = $variables['comment'];
+  $uri = $commented_entity->toUrl();
+
+  // Set attributes for permalink.
+  $attributes = $uri->getOption('attributes') ?: [];
+  $attributes += ['class' => ['permalink'], 'rel' => 'bookmark'];
+  $uri->setOptions([
+    'attributes' => $attributes,
+    'fragment' => 'comment-' . $comment->id(),
+  ]);
+  $variables['comment_uri'] = $uri->toString();
+}

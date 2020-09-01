@@ -1,0 +1,19 @@
+/**
+ * @file
+ * Basic styling for comment module.
+ */
+
+
+/**
+ * Indent threaded comments.
+ */
+
+.indented {
+    margin-left: ($spacer * 1.5);
+    /* LTR */
+}
+
+[dir="rtl"] .indented {
+    margin-left: 0;
+    margin-right: ($spacer * 1.5);
+}

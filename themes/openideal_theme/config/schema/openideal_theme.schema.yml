@@ -1,0 +1,297 @@
+# Schema for the configuration files of the Bootstrap Barrio Subtheme.
+
+bootstrap_barrio_sass.settings:
+  type: theme_settings
+  label: 'Bootstrap Barrio settings'
+  mapping:
+
+# Library.
+# ----------------------------
+bootstrap_barrio_library:
+  type: text
+  label: 'Load library'
+
+# Container.
+# ----------------------------
+bootstrap_barrio_fluid_container:
+  type: integer
+  label: 'Fluid container'
+
+# Region.
+# ----------------------------
+bootstrap_barrio_region_clean_top_header:
+  type: text
+  label: 'Clean wrapper for Top header region'
+bootstrap_barrio_region_class_top_header:
+  type: text
+  label: 'Classes for Top header region'
+bootstrap_barrio_region_clean_top_header_form:
+  type: text
+  label: 'Clean wrapper for Top header form region'
+bootstrap_barrio_region_class_top_header_form:
+  type: text
+  label: 'Classes for Top header form region'
+bootstrap_barrio_region_clean_header:
+  type: text
+  label: 'Clean wrapper for Header region'
+bootstrap_barrio_region_class_header:
+  type: text
+  label: 'Classes for Header region'
+bootstrap_barrio_region_clean_header_form:
+  type: text
+  label: 'Clean wrapper for Header form region'
+bootstrap_barrio_region_class_header_form:
+  type: text
+  label: 'Classes for Header form region'
+bootstrap_barrio_region_clean_primary_menu:
+  type: text
+  label: 'Clean wrapper for Primary menu region'
+bootstrap_barrio_region_class_primary_menu:
+  type: text
+  label: 'Classes for Primary menu region'
+bootstrap_barrio_region_clean_secondary_menu:
+  type: text
+  label: 'Clean wrapper for Secondary menu region'
+bootstrap_barrio_region_class_secondary_menu:
+  type: text
+  label: 'Classes for Secondary menu region'
+bootstrap_barrio_region_clean_page_top:
+  type: text
+  label: 'Clean wrapper for Page top region'
+bootstrap_barrio_region_class_page_top:
+  type: text
+  label: 'Classes for Page top region'
+bootstrap_barrio_region_clean_page_bottom:
+  type: text
+  label: 'Clean wrapper for Page bottom region'
+bootstrap_barrio_region_class_page_bottom:
+  type: text
+  label: 'Classes for Page bottom region'
+bootstrap_barrio_region_clean_highlighted:
+  type: text
+  label: 'Clean wrapper for Highlighted region'
+bootstrap_barrio_region_class_highlighted:
+  type: text
+  label: 'Classes for Highlighted region'
+bootstrap_barrio_region_clean_featured_top:
+  type: text
+  label: 'Clean wrapper for Featured top region'
+bootstrap_barrio_region_class_featured_top:
+  type: text
+  label: 'Classes for Featured top region'
+bootstrap_barrio_region_clean_breadcrumb:
+  type: text
+  label: 'Clean wrapper for Breadcrumb region'
+bootstrap_barrio_region_class_breadcrumb:
+  type: text
+  label: 'Classes for Breadcrumb region'
+bootstrap_barrio_region_clean_content:
+  type: text
+  label: 'Clean wrapper for Content region'
+bootstrap_barrio_region_class_content:
+  type: text
+  label: 'Classes for Content region'
+bootstrap_barrio_region_clean_sidebar_first:
+  type: text
+  label: 'Clean wrapper for Sidebar first region'
+bootstrap_barrio_region_class_sidebar_first:
+  type: text
+  label: 'Classes for Sidebar first region'
+bootstrap_barrio_region_clean_sidebar_second:
+  type: text
+  label: 'Clean wrapper for Sidebar second region'
+bootstrap_barrio_region_class_sidebar_second:
+  type: text
+  label: 'Classes for Sidebar second region'
+bootstrap_barrio_region_clean_featured_bottom_first:
+  type: text
+  label: 'Clean wrapper for Featured bottom first region'
+bootstrap_barrio_region_class_featured_bottom_first:
+  type: text
+  label: 'Classes for Featured bottom first region'
+bootstrap_barrio_region_clean_featured_bottom_second:
+  type: text
+  label: 'Clean wrapper for Featured bottom second region'
+bootstrap_barrio_region_class_featured_bottom_second:
+  type: text
+  label: 'Classes for Featured bottom second region'
+bootstrap_barrio_region_clean_featured_bottom_third:
+  type: text
+  label: 'Clean wrapper for Featured bottom third region'
+bootstrap_barrio_region_class_featured_bottom_third:
+  type: text
+  label: 'Classes for Featured bottom third region'
+bootstrap_barrio_region_clean_footer_first:
+  type: text
+  label: 'Clean wrapper for Footer first region'
+bootstrap_barrio_region_class_footer_first:
+  type: text
+  label: 'Classes for Footer first region'
+bootstrap_barrio_region_clean_footer_second:
+  type: text
+  label: 'Clean wrapper for Footer second region'
+bootstrap_barrio_region_class_footer_second:
+  type: text
+  label: 'Classes for Footer second region'
+bootstrap_barrio_region_clean_footer_third:
+  type: text
+  label: 'Clean wrapper for Footer third region'
+bootstrap_barrio_region_class_footer_third:
+  type: text
+  label: 'Classes for Footer third region'
+bootstrap_barrio_region_clean_footer_fourth:
+  type: text
+  label: 'Clean wrapper for Footer fourth region'
+bootstrap_barrio_region_class_footer_fourth:
+  type: text
+  label: 'Classes for Footer fourth region'
+bootstrap_barrio_region_clean_footer_fifth:
+  type: text
+  label: 'Clean wrapper for Footer fifth region'
+bootstrap_barrio_region_class_footer_fifth:
+  type: text
+  label: 'Classes for Footer fifth region'
+
+# Sidebar position.
+# ----------------------------
+bootstrap_barrio_sidebar_position:
+  type: text
+  label: 'Sidebar position'
+bootstrap_barrio_content_offset:
+  type: integer
+  label: 'Content offset'
+
+# Sidebar first layout.
+# ----------------------------
+bootstrap_barrio_sidebar_collapse:
+  type: integer
+  label: 'Sidebar collapse'
+bootstrap_barrio_sidebar_first_width:
+  type: integer
+  label: 'Sidebar first width'
+bootstrap_barrio_sidebar_first_offset:
+  type: integer
+  label: 'Sidebar first offset'
+
+# Sidebar second layout.
+# ----------------------------
+bootstrap_barrio_sidebar_second_width:
+  type: integer
+  label: 'Sidebar second width'
+bootstrap_barrio_sidebar_second_offset:
+  type: integer
+  label: 'Sidebar second layout'
+
+# Buttons.
+# ----------------------------
+bootstrap_barrio_button:
+  type: integer
+  label: 'Convert input submit to button element'
+bootstrap_barrio_button_size:
+  type: text
+  label: 'Default button size'
+bootstrap_barrio_button_outline:
+  type: integer
+  label: 'Button with outline format'
+
+# Navbar.
+# ----------------------------
+bootstrap_barrio_navbar_container:
+  type: text
+  label: 'Navbar width container'
+bootstrap_barrio_navbar_toggle:
+  type: text
+  label: 'Navbar toggle size'
+bootstrap_barrio_navbar_top_navbar:
+  type: integer
+  label: 'Navbar top is navbar'
+bootstrap_barrio_navbar_top_position:
+  type: text
+  label: 'Navbar top position'
+bootstrap_barrio_navbar_top_color:
+  type: text
+  label: 'Navbar top link color'
+bootstrap_barrio_navbar_top_background:
+  type: text
+  label: 'Navbar top background color'
+bootstrap_barrio_navbar_position:
+  type: text
+  label: 'Navbar position'
+bootstrap_barrio_navbar_color:
+  type: text
+  label: 'Navbar link color'
+bootstrap_barrio_navbar_background:
+  type: text
+  label: 'Navbar background color'
+
+# Messages.
+# ----------------------------
+bootstrap_barrio_messages_widget:
+  type: text
+  label: 'Messages widget'
+
+# Form.
+# ----------------------------
+bootstrap_barrio_radio:
+  type: text
+  label: 'Radio widget'
+bootstrap_barrio_checkbox:
+  type: text
+  label: 'Checkbox widget'
+bootstrap_barrio_select:
+  type: text
+  label: 'Select widget'
+bootstrap_barrio_file:
+  type: text
+  label: 'File widget'
+
+# Affix.
+# ----------------------------
+bootstrap_barrio_navbar_top_affix:
+  type: integer
+  label: 'Affix navbar top'
+bootstrap_barrio_navbar_affix:
+  type: integer
+  label: 'Affix navbar'
+bootstrap_barrio_sidebar_first_affix:
+  type: integer
+  label: 'Affix sidebar first'
+bootstrap_barrio_sidebar_second_affix:
+  type: integer
+  label: 'Affix sidebar first'
+
+# Scrollspy.
+# ----------------------------
+bootstrap_barrio_scroll_spy:
+  type: text
+  label: 'Scrollspy element ID'
+
+# Fonts.
+# ----------------------------
+bootstrap_barrio_google_fonts:
+  type: text
+  label: 'Google Fonts combination'
+
+# Icons.
+# ----------------------------
+bootstrap_barrio_icons:
+  type: text
+  label: 'Icon set'
+
+# System messages.
+# ----------------------------
+bootstrap_barrio_system_messages:
+  type: text
+  label: 'System messages color scheme'
+
+# Tables.
+# ----------------------------
+bootstrap_barrio_table_style:
+  type: text
+  label: 'Table cell style'
+bootstrap_barrio_table_hover:
+  type: integer
+  label: 'Hover effect over table cells'
+bootstrap_barrio_table_head:
+  type: text
+  label: 'Table header color scheme'

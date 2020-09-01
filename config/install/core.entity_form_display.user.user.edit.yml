@@ -1,0 +1,82 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_form_mode.user.edit
+    - entity_browser.browser.openideal_image_browser
+    - field.field.user.user.avatars_avatar_generator
+    - field.field.user.user.avatars_user_picture
+    - field.field.user.user.field_age_group
+    - field.field.user.user.field_first_name
+    - field.field.user.user.field_gender
+    - field.field.user.user.field_last_name
+    - field.field.user.user.field_points
+    - field.field.user.user.user_picture
+  module:
+    - entity_browser
+    - user
+id: user.user.edit
+targetEntityType: user
+bundle: user
+mode: edit
+content:
+  account:
+    weight: 3
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  avatars_user_picture:
+    type: entity_browser_file
+    weight: 5
+    region: content
+    settings:
+      entity_browser: openideal_image_browser
+      field_widget_remove: true
+      selection_mode: selection_append
+      preview_image_style: thumbnail
+      field_widget_edit: true
+      field_widget_replace: false
+      open: false
+      view_mode: default
+    third_party_settings: {  }
+  field_age_group:
+    type: options_select
+    weight: 4
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_first_name:
+    weight: 0
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_gender:
+    weight: 2
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_last_name:
+    weight: 1
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  translation:
+    weight: 10
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+hidden:
+  avatars_avatar_generator: true
+  contact: true
+  field_points: true
+  langcode: true
+  language: true
+  timezone: true
+  user_picture: true

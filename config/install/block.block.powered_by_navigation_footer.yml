@@ -1,0 +1,20 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - openideal_footer
+  theme:
+    - openideal_theme
+id: powered_by_navigation_footer
+theme: openideal_theme
+region: navigation_footer
+weight: 0
+provider: null
+plugin: openidel_footer_powered_by
+settings:
+  id: openidel_footer_powered_by
+  label: 'Powered by'
+  provider: openideal_footer
+  label_display: '0'
+  openideal_official_site: 'https://www.openidealapp.com/'
+visibility: {  }

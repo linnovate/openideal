@@ -1,0 +1,144 @@
+.views-field-variations > span > div {
+  display: flex;
+  align-items: center;
+}
+.views-field-variations > span > div > div {
+  display: inline-block;
+}
+.views-field-variations {
+  margin-bottom: 0;
+  .field--name-price {
+    display: inline-block;
+    width: 70px;
+    text-align: right;
+    padding-bottom: 1.2rem;
+  }
+  .field--type-entity-reference {
+    padding-left: 1rem;
+  }
+  .commerce-order-item-variation-cart-form-form {
+    display: flex;
+    max-width: 100%;
+    .field--name-purchased-entity {
+      padding: 0;
+      margin: 0;
+    }
+    .field--name-quantity {
+      display: inline-block;
+      margin-bottom: 0;
+      padding: 0;
+      label {
+        display: none;
+      }
+      input {
+        width: 50px;
+      }
+    }
+    .form-actions {
+      display: inline-block;
+      margin-bottom: 0;
+      padding: 0;
+    }
+  }
+}
+#edit-shipping-information .col-auto,
+#edit-payment-information-billing-information .col-auto,
+#edit-payment-information-billing-information.col-auto,
+#edit-order-summary .col-auto,
+#edit-order-summary.col-auto {
+  padding: 0;
+}
+#edit-shipping-information {
+  #edit-shipping-information-shipping-profile-field-ruc-wrapper {
+    display: none;
+  }
+}
+.view-id-listado_de_productos {
+  .views-row > div {
+    display: inline-block;
+  }
+  .views-row {
+    border-bottom: 1px solid $gray-400;
+    margin-top: $spacer / 2;
+    display: flex;
+    .views-field-title {
+      width: 320px;
+      display: flex;
+      align-items: center;
+      color: $accent-dark;
+    }
+  }
+}
+.cart-block--contents {
+  background: $primary-dark;
+  color: $white;
+  font-size: $font-size-xs;
+  width: auto;
+  .cart-block--contents__items {
+    max-height: inherit;
+    overflow-y: hidden;
+    overflow-x: hidden;
+    table {
+      color: $white;
+      thead.thead-light {
+        background: $primary-dark;
+        color: $white;
+      }
+      tr:hover {
+        color: $white;
+      }
+    }
+  }
+}
+
+.cart--cart-offcanvas {
+  background: $primary-dark;
+  color: $white;
+  font-size: $font-size-xs;
+  .cart-block--offcanvas-contents__links {
+    padding: $spacer/2 $spacer;
+    a {
+      color: $white;
+      text-decoration: none;
+    }
+    a:hover {
+      color: $primary-light;
+    }
+  }
+  .close {
+    color: $white;
+    padding: $spacer / 4;
+  }
+  table {
+    color: $white;
+    .btn {
+      color: $white;
+    }
+    td.cart-block--offcanvas-cart-table__title,
+    td.cart-block--offcanvas-cart-table__price {
+      padding: $spacer/2 $spacer/4 !important;
+    }
+    td.cart-block--offcanvas-cart-table__quantity {
+      padding: $spacer/4 !important;
+    }
+    .btn {
+      color: $white;
+      font-size: $font-size-xs;
+    }
+    .btn:hover {
+      color: $primary-light;
+    }
+    tfoot {
+      .btn {
+        background: transparent;
+        color: white;
+        border-color: white;
+        font-size: $font-size-xs;
+        margin-top: $spacer/2;
+      }
+      .btn:hover {
+        background: $primary-shade;
+      }
+    }
+  }
+}

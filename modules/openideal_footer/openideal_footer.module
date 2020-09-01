@@ -1,0 +1,31 @@
+<?php
+
+/**
+ * @file
+ * Module file.
+ */
+
+/**
+ * Implements hook_theme().
+ */
+function openideal_footer_theme() {
+  return [
+    'openideal_footer_mobile_footer_block' => [
+      'variables' => [
+        'follow' => NULL,
+        'like' => NULL,
+        'comment' => NULL,
+        'share' => NULL,
+        'main_class' => NULL,
+        'cols' => NULL,
+      ],
+    ],
+    'openideal_powered_by' => [
+      'variables' => [
+        'links' => NULL,
+        'logo' => NULL,
+        'site_url' => NULL,
+      ],
+    ],
+  ];
+}

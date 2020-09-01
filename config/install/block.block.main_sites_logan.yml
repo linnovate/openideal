@@ -1,0 +1,27 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - openideal_theme
+id: main_sites_logan
+theme: openideal_theme
+region: content
+weight: -12
+provider: null
+plugin: 'block_content:3ed7eeba-0dcc-45a5-9ade-c53cacbc3c0e'
+settings:
+  id: 'block_content:3ed7eeba-0dcc-45a5-9ade-c53cacbc3c0e'
+  label: 'Main site slogan'
+  provider: block_content
+  label_display: '0'
+  status: true
+  info: ''
+  view_mode: full
+visibility:
+  request_path:
+    id: request_path
+    pages: "<front>\r\n/ideas\r\n/challenges\r\n/user/*\r\n/homepage"
+    negate: false
+    context_mapping: {  }

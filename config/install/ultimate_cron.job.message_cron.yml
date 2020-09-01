@@ -1,0 +1,16 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - message
+title: 'Default cron handler'
+id: message_cron
+weight: 0
+module: message
+callback: message_cron
+scheduler:
+  id: simple
+launcher:
+  id: serial
+logger:
+  id: database

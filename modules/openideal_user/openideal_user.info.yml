@@ -1,0 +1,16 @@
+name: 'OpenideaL User'
+type: module
+description: 'Provides main features/functionality for OpenideaL User module.'
+package: OpenideaL
+core: 8.x
+core_version_requirement: ^8 || ^9
+
+dependencies:
+  - user_registrationpassword:user_registrationpassword
+  - social_auth:social_auth
+  - social_auth_facebook:social_auth_facebook
+  - social_auth_github:social_auth_github
+  - social_auth_google:social_auth_google
+  - social_auth_linkedin:social_auth_linkedin
+  - rules:rules
+  - ckeditor_mentions:ckeditor_mentions

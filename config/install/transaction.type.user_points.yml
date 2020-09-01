@@ -1,0 +1,18 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - user
+    - userpoints
+id: user_points
+label: 'User points'
+target_entity_type: user
+transactor:
+  id: userpoints
+  settings:
+    roles: ''
+    amount: field_amount
+    balance: field_balance
+    target_balance: field_points
+bundles: {  }
+options: {  }

@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.message.created_reply_on_comment.field_comment_reference
+    - message.template.created_reply_on_comment
+id: message.created_reply_on_comment.default
+targetEntityType: message
+bundle: created_reply_on_comment
+mode: default
+content:
+  field_comment_reference:
+    weight: 0
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
+hidden: {  }

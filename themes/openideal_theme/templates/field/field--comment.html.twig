@@ -1,0 +1,67 @@
+{#
+/**
+ * @file
+ * Theme override for comment fields.
+ *
+ * Available variables:
+ * - attributes: HTML attributes for the containing element.
+ * - label_hidden: Whether to show the field label or not.
+ * - title_attributes: HTML attributes for the title.
+ * - label: The label for the field.
+ * - title_prefix: Additional output populated by modules, intended to be
+ *   displayed in front of the main title tag that appears in the template.
+ * - title_suffix: Additional title output populated by modules, intended to
+ *   be displayed after the main title tag that appears in the template.
+ * - comments: List of comments rendered through comment.html.twig.
+ * - comment_form: The 'Add new comment' form.
+ * - comment_display_mode: Is the comments are threaded.
+ * - comment_type: The comment type bundle ID for the comment field.
+ * - entity_type: The entity type to which the field belongs.
+ * - field_name: The name of the field.
+ * - field_type: The type of the field.
+ * - label_display: The display settings for the label.
+ * - comments_count: Disaply comments count.
+ *
+ * @see template_preprocess_field()
+ * @see comment_preprocess_field()
+ */
+#}
+{%
+  set classes = [
+    'field',
+    'field--name-' ~ field_name|clean_class,
+    'field--type-' ~ field_type|clean_class,
+    'field--label-' ~ label_display,
+    'comment-wrapper',
+    'comments'
+  ]
+%}
+{%
+  set title_classes = [
+    'title',
+    label_display == 'visually_hidden' ? 'visually-hidden',
+  ]
+%}
+<section{{ attributes.addClass(classes) }}>
+  <div class="comments--header">
+    {% if comments and not label_hidden %}
+      {{ title_prefix }}
+      <h2{{ title_attributes.addClass(title_classes) }}>{{ label }} ({{ comments_count }})</h2>
+      {{ title_suffix }}
+    {% endif %}
+    {% if comment_form %}
+      <button class='btn title comment-form__title comments--header__add-comment-btn'>
+        <i class="fa fa-plus" aria-hidden="true"></i>
+        {{ 'Add comment'|t }}
+      </button>
+    {% endif %}
+  </div>
+
+  {% if comment_form %}
+    <div class="comments--bottom card">
+      {{ comment_form }}
+    </div>
+  {% endif %}
+  {{ comments }}
+
+</section>

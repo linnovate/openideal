@@ -1,0 +1,320 @@
+<?php
+
+/**
+ * @file
+ * Contains openideal_idea.module.
+ */
+
+use Drupal\Core\Access\AccessResult;
+use Drupal\Core\Cache\RefinableCacheableDependencyInterface;
+use Drupal\Core\Entity\EntityInterface;
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Session\AccountInterface;
+use Drupal\Core\Url;
+use Drupal\node\NodeInterface;
+use Drupal\openideal_idea\Plugin\Validation\Constraint\OpenidealModerationStateConstraint;
+
+/**
+ * Implements hook_theme().
+ */
+function openideal_idea_theme() {
+  return [
+    'openideal_idea_flag_and_like_block' => [
+      'variables' => [
+        'like' => NULL,
+        'follow' => NULL,
+        'main_class' => NULL,
+      ],
+    ],
+    'openideal_idea_info_block' => [
+      'variables' => [
+        'content' => NULL,
+      ],
+    ],
+  ];
+}
+
+/**
+ * Implements hook_cron().
+ */
+function openideal_idea_cron() {
+  $storage = \Drupal::entityTypeManager()->getStorage('node');
+  // Node id.
+  $entity_query = $storage->getQuery();
+
+  $entities = $entity_query->condition('type', 'idea')
+    ->sort('changed', 'DESC')
+    ->range(0, 50)
+    ->execute();
+
+  $ideas = $storage->loadMultiple($entities);
+  /** @var \Drupal\node\NodeInterface $idea */
+  foreach ($ideas as $idea) {
+    $idea->save();
+  }
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function openideal_idea_form_node_idea_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  // Set default challenge based on query parameter.
+  if ($challenge_id = \Drupal::request()->get('challenge')) {
+    if (isset($form['field_challenge']['widget']['#options'][$challenge_id])) {
+      $form['field_challenge']['widget']['#default_value'] = $challenge_id;
+    }
+  }
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_presave().
+ */
+function openideal_idea_node_presave(NodeInterface $node) {
+  // Check entity type and duplicate_of field of the entity.
+  if ($node->bundle() == 'idea' && !$node->get('field_duplicate_of')->isEmpty()) {
+    // Todo: Change the workflow state.
+  }
+  elseif ($node->bundle() == 'idea') {
+    $overall_score = \Drupal::service('openideal_idea.helper')->computeOverallScore($node->id());
+    $node->set('field_overall_score', $overall_score);
+  }
+}
+
+/**
+ * Implements hook_entity_insert().
+ */
+function openideal_idea_entity_insert(EntityInterface $entity) {
+  if ($entity->getEntityTypeId() == 'node' && $entity->bundle() == 'idea') {
+    try {
+      // Create the group for the node.
+      /** @var \Drupal\group\Entity\Group $group */
+      $group = \Drupal::entityTypeManager()->getStorage('group')
+        ->create([
+          'label' => $entity->label(),
+          'type' => 'idea',
+          'langcode' => 'en',
+        ]);
+      $group->save();
+
+      // Need to add node to group before the member will be added
+      // to be able fetch the node.
+      //
+      // Define the plugin id.
+      $plugin_id = 'group_node:' . $entity->bundle();
+      // Add the entity to the group.
+      $group->addContent($entity, $plugin_id);
+
+      // The group creator automatically becomes a member.
+      $values = ['group_roles' => ['idea-author']];
+      $group->addMember($group->getOwner(), $values);
+
+      // Author follow the node after its creating.
+      /** @var \Drupal\flag\FlagService $flag_service */
+      $flag_service = \Drupal::service('flag');
+      $flag = $flag_service->getFlagById('follow');
+      $flag_service->flag($flag, $entity, $entity->getOwner());
+    }
+    catch (Exception $e) {
+      \Drupal::logger('openideal_idea')->error($e->getMessage());
+    }
+  }
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_predelete().
+ */
+function openideal_idea_node_predelete(EntityInterface $entity) {
+  if ($entity->bundle() == 'idea') {
+    // Delete the group that contains this node.
+    if ($group = _openideal_idea_get_group_by_entity($entity)) {
+      $group->delete();
+    }
+  }
+}
+
+/**
+ * Implements hook_entity_access().
+ */
+function openideal_idea_entity_access(EntityInterface $entity, $operation, AccountInterface $account) {
+  if ($entity->getEntityTypeId() === 'comment') {
+    $commented_entity = $entity->getCommentedEntity();
+    if ($commented_entity->bundle() === 'idea' && $operation === 'update') {
+      return AccessResult::forbiddenIf(!$commented_entity->get('field_duplicate_of')->isEmpty());
+    }
+  }
+
+  // @Todo: Remove once appropriate permissions will be implemented
+  // https://www.drupal.org/project/drupal/issues/2808309
+  $moderation_info = Drupal::service('content_moderation.moderation_information');
+  if ($operation === 'update' && $moderation_info->isModeratedEntity($entity) && $entity->moderation_state && $entity instanceof NodeInterface) {
+    // Get the group member.
+    $helper = \Drupal::service('openideal_idea.helper');
+    $member = $helper->getGroupMember($account, $entity);
+    if ($member && $member->hasPermission('update own group_node:idea entity')) {
+      return AccessResult::neutral();
+    }
+    return content_moderation_entity_access($entity, $operation, $account);
+  }
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_create_access().
+ */
+function openideal_idea_comment_create_access(AccountInterface $account, array $context, $entity_bundle) {
+  /** @var \Drupal\node\NodeInterface $node */
+  $node = \Drupal::routeMatch()->getParameter('node');
+  if ($node instanceof NodeInterface && $node->bundle() === 'idea') {
+    return AccessResult::forbiddenIf(!$node->get('field_duplicate_of')->isEmpty());
+  }
+}
+
+/**
+ * Implements hook_menu_local_tasks_alter().
+ */
+function openideal_idea_menu_local_tasks_alter(&$data, $route_name, RefinableCacheableDependencyInterface &$cacheability) {
+  if ($route_name !== 'entity.node.canonical') {
+    return;
+  }
+
+  $node = \Drupal::routeMatch()->getParameter('node');
+  if ($node->bundle() === 'idea' && $group = _openideal_idea_get_group_by_entity($node)) {
+    $data['tabs'][0]['group.members'] = [
+      '#theme' => 'menu_local_task',
+      '#link' => [
+        'title' => t('Members'),
+        'url' => Url::fromRoute('view.group_members.page_1', ['group' => $group->id()]),
+        'localized_options' => [],
+      ],
+      '#access' => $group->hasPermission('view group_membership content', \Drupal::currentUser()),
+    ];
+
+    // The tab we're adding is dependent on a user's access to add content.
+    $cacheability->addCacheContexts(['user.group_permissions']);
+  }
+}
+
+/**
+ * Get single group entity that represents a given entity.
+ *
+ * @param object $entity
+ *   Entity instance.
+ *
+ * @return \Drupal\group\Entity\GroupInterface|null
+ *   Group entity or NULL.
+ */
+function _openideal_idea_get_group_by_entity($entity) {
+  // In our case we will have one node per group.
+  // We get all group ids but return just the first one.
+  $group_contents = \Drupal::entityTypeManager()
+    ->getStorage('group_content')
+    ->loadByEntity($entity);
+  foreach ($group_contents as $group_content) {
+    $groups[] = $group_content->getGroup();
+  }
+
+  return !empty($groups) ? array_shift($groups) : NULL;
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function openideal_idea_form_views_exposed_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  if ($form['#id'] != 'views-exposed-form-ideas-all-ideas-page') {
+    return;
+  }
+  // Remove workflow title form the views exposed filter.
+  // @see https://www.drupal.org/project/drupal/issues/3091182
+  if (isset($form['phase']['#options']['Life Cycle Phases'])) {
+    foreach ($form['phase']['#options']['Life Cycle Phases'] as $key => $phase_option) {
+      $form['phase']['#options'][$key] = $phase_option;
+    }
+    unset($form['phase']['#options']['Life Cycle Phases']);
+  }
+  // Get the list of published and opened challenges.
+  $node_storage = \Drupal::entityTypeManager()->getStorage('node');
+  $query = $node_storage->getQuery()
+    ->condition('type', 'challenge', '=')
+    ->condition('field_is_open', TRUE, '=')
+    ->condition('status', NodeInterface::PUBLISHED)
+    ->latestRevision()
+    ->sort('title');
+  $nids = $query->execute();
+
+  if (empty($nids)) {
+    $form['challenge']['#access'] = FALSE;
+    return;
+  }
+
+  /** @var \Drupal\node\NodeInterface $node */
+  $options = [];
+  foreach ($node_storage->loadMultiple($nids) as $node) {
+    $options[$node->id()] = $node->getTitle();
+  }
+  // Replace existing challenge form element with select.
+  $form['challenge'] = [
+    '#type' => 'select',
+    '#multiple' => FALSE,
+    '#empty_option' => t("Any"),
+    '#options' => $options,
+  ];
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_access().
+ */
+function openideal_idea_group_content_access(EntityInterface $entity, $operation, AccountInterface $account) {
+  if ($entity->getOwnerId() === $account->id()
+    && $operation == 'delete'
+    && $entity->getContentPlugin()->getPluginId() == 'group_membership') {
+    return AccessResult::forbidden();
+  }
+
+  return AccessResult::neutral();
+}
+
+/**
+ * Implements hook_rrssb_buttons_alter().
+ */
+function openideal_idea_rrssb_buttons_alter(&$buttons) {
+  $theme = \Drupal::service('theme_handler')->getTheme('openideal_theme');
+  $theme_path = $theme->getPath();
+  $buttons['facebook']['svg'] = $theme_path . '/misc/icons/facebook.svg';
+  $buttons['copy_url']['svg'] = $theme_path . '/misc/icons/clipboard.svg';
+  $buttons['twitter']['svg'] = $theme_path . '/misc/icons/twitter.svg';
+  $buttons['linkedin']['svg'] = $theme_path . '/misc/icons/linkedin.svg';
+}
+
+/**
+ * Implements hook_rrssb_buttons().
+ */
+function openideal_idea_rrssb_buttons() {
+  return [
+    'copy_url' => [
+      'share_url' => '',
+      'color' => '',
+      'color_hover' => '',
+    ],
+  ];
+}
+
+/**
+ * Implements hook_module_implements_alter().
+ */
+function openideal_idea_module_implements_alter(&$implementations, $hook) {
+  // Remove content moderation implementation of hook_entity_access.
+  // If the user has not permission to update the content moderation,
+  // if not allow to edit whole node, but we need to have the ability to.
+  // @See: openideal_idea_entity_access()
+  // @Todo: Remove once appropriate permissions will be implemented
+  // https://www.drupal.org/project/drupal/issues/2808309
+  if ($hook == 'entity_access' && isset($implementations['content_moderation'])) {
+    unset($implementations['content_moderation']);
+  }
+}
+
+/**
+ * Implements hook_validation_constraint_alter().
+ */
+function openideal_idea_validation_constraint_alter(array &$definitions) {
+  $definitions['ModerationState']['class'] = OpenidealModerationStateConstraint::class;
+}

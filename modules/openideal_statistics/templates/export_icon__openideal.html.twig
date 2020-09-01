@@ -1,0 +1,17 @@
+{#
+/**
+ * @file
+ * Default theme implementation for an export icon.
+ *
+ * Available variables:
+ * - url: An internal system path of the data export.
+ * - attributes: Remaining HTML attributes for the export link.
+ *   - format: The export format (csv, json, xml).
+ *   - class: HTML classes to be applied to the export link.
+ *
+ * @ingroup themeable
+ */
+#}
+<a href="{{ url }}"{{ attributes.addClass('feed-icon') }}>
+  {{ 'Download as @format'|t({'@format': format}) }}
+</a>

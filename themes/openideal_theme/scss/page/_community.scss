@@ -1,0 +1,26 @@
+.community-page {
+  .view-content {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .views-row {
+    margin-right: 15px;
+  }
+}
+
+@media (max-width: 1123px) {
+  .community-page {
+    .profile-user-compact .layout__region--content img {
+      border-radius: 50%;
+      width: 130px;
+      height: 130px;
+    }
+  }
+}
+
+@media (max-width: 668px) {
+  .community-page {
+    justify-content: space-evenly;
+  }
+}

@@ -1,0 +1,15 @@
+services:
+  openideal_idea.subscriber:
+    class: Drupal\openideal_idea\EventSubscriber\OpenidealIdeaEventSubscriber
+    arguments: []
+    tags:
+      - { name: event_subscriber }
+  openideal_idea.helper:
+    class: Drupal\openideal_idea\OpenidealHelper
+    arguments:
+      - '@entity_type.manager'
+      - '@group.membership_loader'
+      - '@config.factory'
+      - '@module_handler'
+    calls:
+      - [setStatisticsStorage, ['@?statistics.storage.node']]

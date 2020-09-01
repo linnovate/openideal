@@ -1,0 +1,33 @@
+bypass_transactional_safe_connection: false
+queue:
+  enabled: false
+  timeouts:
+    lease_time: !!float 30
+    time: !!float 15
+  delays:
+    empty_delay: !!float 0
+    item_delay: !!float 0
+  throttle:
+    enabled: true
+    threads: 4
+    threshold: 10
+launcher:
+  thread: any
+  max_threads: 1
+  lock_timeout: 3600
+  max_execution_time: 3600
+logger:
+  cache:
+    bin: ultimate_cron_logger
+    timeout: -1
+  database:
+    method: 3
+    expire: 1209600
+    retain: 1000
+scheduler:
+  crontab:
+    catch_up: 86400
+    rules:
+      - '*/10+@ * * * *'
+  simple:
+    rule: '*/15+@ * * * *'

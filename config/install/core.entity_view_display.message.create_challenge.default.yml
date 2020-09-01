@@ -1,0 +1,28 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.message.create_challenge.field_node_reference
+    - message.template.create_challenge
+id: message.create_challenge.default
+targetEntityType: message
+bundle: create_challenge
+mode: default
+content:
+  field_node_reference:
+    type: entity_reference_entity_view
+    weight: 1
+    region: content
+    label: hidden
+    settings:
+      view_mode: message
+      link: false
+    third_party_settings: {  }
+  partial_0:
+    weight: 0
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  partial_1: true
+  partial_2: true

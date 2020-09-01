@@ -1,0 +1,104 @@
+langcode: en
+status: true
+dependencies: {  }
+id: create_message_after_idea_life_cycle_is_changed
+label: 'Create a message after idea life cycle is changed'
+events:
+  -
+    event_name: openideal_user.content_moderation.state_changed
+description: ''
+tags: {  }
+config_version: '3'
+expression:
+  id: rules_rule
+  uuid: cef23d77-2c71-402b-a035-e598c1bb5b17
+  weight: 0
+  conditions:
+    id: rules_and
+    uuid: 675b7743-c520-4903-9130-990f4dcd7b79
+    weight: 0
+    conditions:
+      -
+        id: rules_condition
+        uuid: b4e0659b-673e-4b51-96a4-c4c91af7a182
+        weight: 0
+        context_values:
+          operation: '=='
+          value: draft
+        context_mapping:
+          data: newState
+        context_processors:
+          operation:
+            rules_tokens: {  }
+          value:
+            rules_tokens: {  }
+        provides_mapping: {  }
+        condition_id: rules_data_comparison
+        negate: true
+      -
+        id: rules_condition
+        uuid: 461866f7-cb91-4bac-b9f7-9a7b28b200fd
+        weight: 0
+        context_values:
+          operation: '=='
+          value: draft_approval
+        context_mapping:
+          data: newState
+        context_processors:
+          operation:
+            rules_tokens: {  }
+          value:
+            rules_tokens: {  }
+        provides_mapping: {  }
+        condition_id: rules_data_comparison
+        negate: true
+      -
+        id: rules_condition
+        uuid: a80fefc1-8cec-4f53-88a0-dad89be5a690
+        weight: 0
+        context_values:
+          operation: '=='
+        context_mapping:
+          data: newState
+          value: originalState
+        context_processors:
+          operation:
+            rules_tokens: {  }
+        provides_mapping: {  }
+        condition_id: rules_data_comparison
+        negate: true
+      -
+        id: rules_condition
+        uuid: bbbe5676-f787-4cb1-bac4-4e1e01b751b6
+        weight: 0
+        context_values:
+          operation: '=='
+          value: needs_work
+        context_mapping:
+          data: newState
+        context_processors:
+          operation:
+            rules_tokens: {  }
+          value:
+            rules_tokens: {  }
+        provides_mapping: {  }
+        condition_id: rules_data_comparison
+        negate: true
+  actions:
+    id: rules_action_set
+    uuid: 61e1c472-5ff0-495d-9fd1-76d120c7597c
+    weight: 0
+    actions:
+      -
+        id: rules_action
+        uuid: 87f59cd7-2d13-4def-b4fe-1810713ed570
+        weight: 0
+        context_values:
+          template: idea_life_cycle_change
+        context_mapping:
+          referenced_entity: moderatedEntity
+        context_processors:
+          template:
+            rules_tokens: {  }
+        provides_mapping: {  }
+        action_id: openideal_message_action

@@ -1,0 +1,27 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - config_pages.type.openideal_configurations
+    - field.field.config_pages.openideal_configurations.field_idea_approval_message
+  module:
+    - allowed_formats
+    - text
+id: config_pages.openideal_configurations.default
+targetEntityType: config_pages
+bundle: openideal_configurations
+mode: default
+content:
+  field_idea_approval_message:
+    weight: 0
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings:
+      allowed_formats:
+        hide_help: '1'
+        hide_guidelines: '1'
+    type: text_textarea
+    region: content
+hidden:
+  label: true

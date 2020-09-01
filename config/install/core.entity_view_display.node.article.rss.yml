@@ -1,0 +1,29 @@
+langcode: en
+status: false
+dependencies:
+  config:
+    - core.entity_view_mode.node.rss
+    - field.field.node.article.body
+    - field.field.node.article.field_attached_docs
+    - field.field.node.article.field_images
+    - field.field.node.article.field_meta_tags
+    - field.field.node.article.field_tags
+    - node.type.article
+  module:
+    - user
+id: node.article.rss
+targetEntityType: node
+bundle: article
+mode: rss
+content:
+  links:
+    weight: 100
+    region: content
+hidden:
+  addtoany: true
+  body: true
+  field_attached_docs: true
+  field_images: true
+  field_meta_tags: true
+  field_tags: true
+  langcode: true

@@ -1,0 +1,54 @@
+<?php
+
+/**
+ * @file
+ * Contains openideal_content.module.
+ */
+
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Url;
+use Drupal\views\Plugin\views\query\QueryPluginBase;
+use Drupal\views\ViewExecutable;
+
+/**
+ * Implements hook_link_alter().
+ */
+function openideal_content_link_alter(&$variables) {
+  // All external links should open in a new tab.
+  if ($variables['url']->isExternal()) {
+    $variables['options']['attributes']['target'] = '_blank';
+  }
+}
+
+/**
+ * Implements hook_views_query_alter().
+ */
+function openideal_content_views_query_alter(ViewExecutable $view, QueryPluginBase $query) {
+  if ($view->id() == 'public_activity' && $view->current_display === 'personalized_activity_block' && $user = \Drupal::routeMatch()->getParameter('user')) {
+    foreach ($query->where as &$condition_group) {
+      foreach ($condition_group['conditions'] as &$condition) {
+        if ($condition['value'] == '[user-page-id]') {
+          $condition['value'] = $user->id();
+        }
+      }
+    }
+  }
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function openideal_content_form_views_exposed_form_alter(&$form, FormStateInterface $form_state) {
+  if ($form['#id'] == 'views-exposed-form-frontpage-front-page') {
+    $form['search']['#placeholder'] = t('Search');
+    $form['add_idea_button'] = [
+      '#type' => 'link',
+      '#title' => t('Add idea'),
+      '#url' => Url::fromRoute('node.add', ['node_type' => 'idea']),
+      '#attributes' => ['class' => ['frontpage-add-idea-button']],
+      '#access' => \Drupal::currentUser()->isAuthenticated(),
+      '#weight' => 999,
+    ];
+  }
+  $form['#attached']['library'][] = 'openideal_content/openideal_content.masonry';
+}

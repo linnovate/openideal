@@ -1,0 +1,19 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - message
+    - node
+id: message.field_node_reference
+field_name: field_node_reference
+entity_type: message
+type: entity_reference
+settings:
+  target_type: node
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

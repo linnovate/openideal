@@ -1,0 +1,35 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.faq.field_faq_items
+    - paragraphs.paragraphs_type.faq
+  module:
+    - faqfield
+id: paragraph.faq.default
+targetEntityType: paragraph
+bundle: faq
+mode: default
+content:
+  field_faq_items:
+    weight: 0
+    settings:
+      answer_widget: text_format
+      question_title: Question
+      answer_title: Answer
+      advanced:
+        question_length: 255
+        question_size: 100
+        question_rows: 0
+        answer_rows: 3
+    third_party_settings: {  }
+    type: faqfield_default
+    region: content
+  translation:
+    weight: 10
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+hidden:
+  created: true
+  status: true

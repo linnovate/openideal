@@ -1,0 +1,26 @@
+openideal_toolbar.help:
+  title: 'OpenideaL'
+  route_name: openideal_toolbar.system
+  menu_name: admin
+  parent: system.admin
+  weight: -50
+
+openideal_toolbar.user_points:
+  title: 'Points'
+  route_name: view.user_points.user_total_points_page
+  description: 'User points details.'
+  parent: openideal_toolbar.help
+  weight: 1
+
+openideal_toolbar.configuration:
+  title: 'Configuration'
+  route_name: openideal_toolbar.configuration
+  parent: openideal_toolbar.help
+  weight: 2
+
+openideal_toolbar.activity:
+  title: 'Activity'
+  route_name: openideal_toolbar.activity
+  description: 'Data export pages.'
+  parent: openideal_toolbar.help
+  weight: 3

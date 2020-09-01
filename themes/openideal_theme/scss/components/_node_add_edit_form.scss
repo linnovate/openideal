@@ -1,0 +1,111 @@
+.node--edit-form {
+  &--main {
+    float: unset;
+    width: auto;
+    padding-right: 0;
+
+    input[type="submit"] {
+      @include btn-theme(transparent, #1e7697);
+      color: $btn-dark;
+      transition: background-color 0.5s ease-in-out, color 0.5s ease-in-out;
+
+      &:hover {
+        color: $white;
+      }
+    }
+
+    input[type="text"] {
+      border-radius: 4px;
+      border: 1px solid #D0D6DC;
+    }
+
+    label {
+      font-size: 24px;
+    }
+
+    button {
+      border: none;
+      padding: 1px 14px;
+      font-size: 16px;
+      @include btn-theme($btn-dark, #1e7697);
+    }
+
+    .details-wrapper {
+      position: relative;
+
+      label {
+        font-size: 16px;
+      }
+
+      .tabledrag-toggle-weight-wrapper {
+        margin-bottom: 15px;
+      }
+      .js-form-wrapper {
+        .form-submit {
+          padding: 0.6em 0.7em;
+          height: unset;
+          font-size: 14px;
+          @include btn-theme($btn-dark, #1e7697);
+        }
+      }
+    }
+
+    .form-item-field-category {
+      label {
+        font-size: 16px;
+      }
+    }
+  }
+
+  .field--widget-moderation-state-buttons > div {
+    display: flex;
+    flex-wrap: wrap;
+
+    label {
+      flex-grow: 1;
+      flex-basis: 100%;
+    }
+
+    input {
+      flex-basis: 6%;
+      margin-right: 5px;
+    }
+
+    .form-control:disabled,
+    .form-control[readonly] {
+      @include btn-theme($btn-dark, #1e7697);
+    }
+  }
+
+  &--footer {
+    float: unset;
+    width: auto;
+    padding-right: 0;
+
+    .form-group {
+      display: flex;
+      justify-content: flex-end;
+
+      input {
+        flex-basis: 10%;
+        padding: 10px;
+        height: unset;
+        margin-right: 10px;
+        @include btn-theme($btn-dark, #1e7697);
+      }
+    }
+  }
+
+}
+
+@media (max-width: 530px) {
+  .node--edit-form .field--widget-moderation-state-buttons > div input {
+    flex-basis: 100%;
+    margin-bottom: 5px;
+  }
+
+  .node--edit-form--footer .form-group input {
+    flex-basis: 100%;
+    margin-bottom: 5px;
+  }
+}

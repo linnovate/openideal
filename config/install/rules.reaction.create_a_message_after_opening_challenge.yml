@@ -1,0 +1,49 @@
+langcode: en
+status: true
+dependencies: {  }
+id: create_a_message_after_opening_challenge
+label: 'Create a message after opening a challenge'
+events:
+  -
+    event_name: openideal_challenge.open
+description: ''
+tags: {  }
+config_version: '3'
+expression:
+  id: rules_rule
+  uuid: e427ef4a-48cc-4b47-a5af-42c95bfff89d
+  weight: 0
+  conditions:
+    id: rules_and
+    uuid: 8ab8b39a-5989-43ed-bcd0-4a16b0728a16
+    weight: 0
+    conditions:
+      -
+        id: rules_condition
+        uuid: 87eee6f3-f6c8-4af4-aabc-b15486313378
+        weight: 0
+        context_values: {  }
+        context_mapping:
+          node: entity
+        context_processors: {  }
+        provides_mapping: {  }
+        condition_id: rules_node_is_published
+        negate: false
+  actions:
+    id: rules_action_set
+    uuid: 404457e6-8ebb-4e3a-854b-8b3bc4ceb75e
+    weight: 0
+    actions:
+      -
+        id: rules_action
+        uuid: 3e65060d-f3c4-4866-89e7-7e7e44c59812
+        weight: 0
+        context_values:
+          template: challenge_schedule
+        context_mapping:
+          referenced_entity: entity
+        context_processors:
+          template:
+            rules_tokens: {  }
+        provides_mapping: {  }
+        action_id: openideal_message_action

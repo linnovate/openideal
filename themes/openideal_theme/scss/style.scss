@@ -1,0 +1,74 @@
+/* 
+Theme Name: Bootstrap 4 Sass
+Description: Bootstrap 4 with Sass
+*/
+
+// import files
+@import "import";
+
+/* GENERAL STYLES
+-------------------------------------------------*/
+html {
+  font-size: 16px;
+}
+
+body {
+  padding: 0;
+  color: $primary-color;
+  margin: 0;
+  height: 100vh;
+  background-color: $body-bg;
+}
+
+.main-content {
+  min-height: 100vh;
+}
+
+/* COLORS 
+--------------------------------------------------*/
+
+a {
+  color: $accent-shade;
+}
+
+.bg-inverse {
+  background: $primary-shade;
+}
+
+.menu--main li a {
+  color: $white;
+}
+
+.menu--account li a {
+  color: $white;
+}
+
+.site-name-slogan a {
+  text-decoration: none;
+}
+
+.card-group img {
+  margin: 0;
+  width: 100%;
+  height: auto;
+}
+
+.card-group .field--type-image {
+  margin: 0
+}
+
+.slick {
+  width: 100%;
+}
+
+.slick > div {
+  margin: 0 15px;
+}
+
+.color-white {
+  color: $white !important;
+}
+
+.pswp.pswp-hidden {
+  display: none;
+}

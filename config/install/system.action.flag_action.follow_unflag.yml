@@ -1,0 +1,14 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - flag.flag.follow
+  module:
+    - flag
+id: flag_action.follow_unflag
+label: Unfollow
+type: node
+plugin: 'flag_action:follow_unflag'
+configuration:
+  flag_id: follow
+  flag_action: unflag

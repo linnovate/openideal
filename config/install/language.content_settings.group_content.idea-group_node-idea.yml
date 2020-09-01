@@ -1,0 +1,17 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - group.content_type.idea-group_node-idea
+  module:
+    - content_translation
+third_party_settings:
+  content_translation:
+    enabled: true
+    bundle_settings:
+      untranslatable_fields_hide: '0'
+id: group_content.idea-group_node-idea
+target_entity_type_id: group_content
+target_bundle: idea-group_node-idea
+default_langcode: site_default
+language_alterable: true

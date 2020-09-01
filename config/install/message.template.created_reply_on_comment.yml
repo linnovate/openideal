@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - filter.format.basic_html
+    - filter.format.full_html
+template: created_reply_on_comment
+label: 'Created reply on the comment'
+description: ''
+text:
+  -
+    value: "<p class=\"message--text\"><a href=\"[message:author:url:absolute]\">[message:author:display-name]</a>&nbsp;replied to your comment</p>\r\n"
+    format: full_html
+  -
+    value: "<p>[site:name]:&nbsp;Reply to your comment</p>\r\n"
+    format: basic_html
+settings:
+  'token options':
+    clear: false
+    'token replace': true
+  purge_override: false
+  purge_methods: {  }

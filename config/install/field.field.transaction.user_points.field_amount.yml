@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.transaction.field_amount
+    - transaction.type.user_points
+id: transaction.user_points.field_amount
+field_name: field_amount
+entity_type: transaction
+bundle: user_points
+label: Amount
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: decimal

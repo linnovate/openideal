@@ -1,0 +1,33 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.message.field_node_reference
+    - message.template.node_created
+    - node.type.article
+    - node.type.challenge
+    - node.type.faq
+    - node.type.page
+id: message.node_created.field_node_reference
+field_name: field_node_reference
+entity_type: message
+bundle: node_created
+label: 'Node reference'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      page: page
+      challenge: challenge
+      faq: faq
+      article: article
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: challenge
+field_type: entity_reference

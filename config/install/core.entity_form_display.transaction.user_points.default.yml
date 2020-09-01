@@ -1,0 +1,45 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.transaction.user_points.field_amount
+    - field.field.transaction.user_points.field_balance
+    - field.field.transaction.user_points.field_log_message
+    - transaction.type.user_points
+id: transaction.user_points.default
+targetEntityType: transaction
+bundle: user_points
+mode: default
+content:
+  created:
+    type: datetime_timestamp
+    weight: 3
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_amount:
+    weight: 1
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+    type: number
+    region: content
+  operation:
+    type: options_select
+    weight: 0
+    settings: {  }
+    region: content
+    third_party_settings: {  }
+  uid:
+    type: entity_reference_autocomplete
+    weight: 2
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+      match_limit: 10
+    region: content
+    third_party_settings: {  }
+hidden:
+  field_balance: true
+  field_log_message: true

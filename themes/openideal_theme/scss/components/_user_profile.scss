@@ -1,0 +1,47 @@
+.profile-user-profile-view-mode {
+  h2 {
+    font-size: 30px;
+    margin: 20px 0;
+  }
+
+  h5 {
+    a {
+      font-size: 25px;
+      font-weight: 600;
+      color: #343352;
+
+      &:hover {
+        color: inherit;
+      }
+    }
+  }
+}
+
+.user-profile-section-top {
+  display: flex;
+
+  &--section__first {
+    img {
+      border-radius: 50%;
+    }
+  }
+
+  &--section__second {
+    .field__label {
+      font-weight: $font-weight-bold;
+    }
+  }
+}
+
+.logout-link-title-wrapper {
+  display: flex;
+  align-items: center;
+  h1 {
+    margin-right: 5px;
+    text-transform: capitalize;
+  }
+
+  a {
+    font-size: 18px;
+  }
+}

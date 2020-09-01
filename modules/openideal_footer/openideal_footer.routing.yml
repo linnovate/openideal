@@ -1,0 +1,9 @@
+openideal_footer.openideal_footer_links_config_form:
+  path: '/admin/config/openideal_footer/social_configuration'
+  defaults:
+    _form: '\Drupal\openideal_footer\Form\OpenidealFooterConfigForm'
+    _title: 'OpenideaL Social Links Configuration'
+  requirements:
+    _permission: 'access to configuration forms'
+  options:
+    _admin_route: TRUE

@@ -1,0 +1,26 @@
+openideal_user.register.user.more_about_you:
+  path: '/user/register/step-2'
+  defaults:
+    _entity_form: 'user.additional_details'
+    _title: 'Let us know more about you'
+  requirements:
+    _user_is_logged_in: 'TRUE'
+
+openideal_user.user_points.add_transaction_form:
+  path: '/transaction/add/{transaction_type}/user/{user}'
+  defaults:
+    _entity_form: 'transaction.add'
+    _title_callback: '\Drupal\transaction\Controller\TransactionController::transactionAddTitle'
+    transaction_type: 'user_points'
+  requirements:
+    _entity_create_access: 'transaction:userpoints'
+    _entity_access: 'user.view'
+    user: \d+
+  options:
+    _admin_route: TRUE
+    _transaction_target_entity_type_id: 'user'
+    parameters:
+      user:
+        type: entity:user
+      transaction_type:
+        type: entity:transaction_type
