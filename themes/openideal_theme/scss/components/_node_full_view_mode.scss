@@ -12,6 +12,7 @@
 
     // Block title
     .block-field-blocknodeideatitle,
+    .block-field-blocknodepagetitle,
     .block-field-blocknodearticletitle,
     .block-field-blocknodechallengetitle {
       font-size: 1.6rem;
@@ -21,6 +22,7 @@
 
     // Block body.
     .block-field-blocknodeideabody,
+    .block-field-blocknodepagebody,
     .block-field-blocknodearticlebody,
     .block-field-blocknodechallengebody {
       color: $dark-gray;
@@ -32,6 +34,31 @@
     .block-views-blockfollowers-followers {
       display: none;
     }
+
+    .block-field-blocknodeideafield-attached-docs,
+    .block-field-blocknodepagefield-attached-docs,
+    .block-field-blocknodearticlefield-attached-docs,
+    .block-field-blocknodechallengefield-supporting-data {
+      h2 {
+        font-size: 1rem;
+        font-weight: $font-weight-bold;
+      }
+
+      a {
+        font-size: $font-size-sm;
+      }
+
+      .field {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+      }
+
+      .field__items {
+        line-height: 180%;
+      }
+    }
+
   }
 
   .block-field-blocknodearticlefield-tags {
@@ -107,6 +134,19 @@
 @media (max-width: 767px) {
   .node--view-mode-full .card-body {
     padding: 26px 19px;
+
+    .block-field-blocknodeideafield-attached-docs,
+    .block-field-blocknodearticlefield-attached-docs,
+    .block-field-blocknodechallengefield-supporting-data {
+      h2 {
+        font-size: 14px;
+        text-transform: uppercase;
+      }
+
+      a {
+        font-size: 15px;
+      }
+    }
 
     .block-openideal-idea-info-block,
     .block-openideal-statistics-challenge-statistics,

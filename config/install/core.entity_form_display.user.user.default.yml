@@ -25,17 +25,17 @@ content:
     settings: {  }
     third_party_settings: {  }
   avatars_user_picture:
-    type: entity_browser_file
+    type: openideal_user_entity_browser_single_file
     weight: 5
     region: content
     settings:
       entity_browser: openideal_image_browser
-      field_widget_remove: true
+      field_widget_remove: '1'
       selection_mode: selection_append
       preview_image_style: thumbnail
       field_widget_edit: true
-      field_widget_replace: false
-      open: false
+      field_widget_replace: 0
+      open: 0
       view_mode: default
     third_party_settings: {  }
   field_age_group:
@@ -75,7 +75,6 @@ hidden:
   avatars_avatar_generator: true
   contact: true
   field_points: true
-  langcode: true
   language: true
   timezone: true
   user_picture: true

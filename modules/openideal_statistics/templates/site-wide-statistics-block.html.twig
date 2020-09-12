@@ -12,7 +12,7 @@
     <ul class="{{ main_class ~ '--list' }}">
         {% for item in content %}
             <li class="{{ main_class ~ '--list__item' }}">
-                <div class="{{ main_class ~ '--list__item--' ~ item.img_class }} item-svg"></div>
+                <div class="{{ main_class ~ '--list__item--' ~ item.img_class }} item-svg" title="{{ item.title }}"></div>
                 <div class="{{ main_class ~ '--list__item--bottom' }}">
                     <p class="{{ main_class ~ '--list__item--count' }}">{{ item.bottom }}</p>
                     {% if show_title %}

@@ -1,10 +1,13 @@
 langcode: en
 status: true
 dependencies:
+  config:
+    - workflows.workflow.life_cycle_phases
   enforced:
     module:
       - content_moderation
   module:
+    - content_moderation
     - node
     - user
 id: moderated_content
@@ -125,6 +128,68 @@ display:
       row:
         type: fields
       fields:
+        node_bulk_form:
+          id: node_bulk_form
+          table: node
+          field: node_bulk_form
+          relationship: nid
+          group_type: group
+          admin_label: ''
+          label: ''
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          action_title: Action
+          include_exclude: include
+          selected_actions:
+            - change_idea_status_to_approved
+            - change_idea_status_to_draft
+            - change_idea_status_to_expert_review
+            - change_idea_status_to_ideation
+            - change_idea_status_to_launched
+            - change_idea_status_to_needs_work
+            - change_idea_status_to_postponed
+            - change_idea_status_to_rejected
+            - change_idea_status_to_send_to_approval
+          entity_type: node
+          plugin_id: node_bulk_form
         title:
           id: title
           table: node_field_revision
@@ -720,9 +785,17 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
-          operator: 'not in'
+          operator: in
           value:
-            editorial-published: editorial-published
+            life_cycle_phases-draft: life_cycle_phases-draft
+            life_cycle_phases-draft_approval: life_cycle_phases-draft_approval
+            life_cycle_phases-published: life_cycle_phases-published
+            life_cycle_phases-ex: life_cycle_phases-ex
+            life_cycle_phases-needs_work: life_cycle_phases-needs_work
+            life_cycle_phases-approved: life_cycle_phases-approved
+            life_cycle_phases-postponed: life_cycle_phases-postponed
+            life_cycle_phases-launched: life_cycle_phases-launched
+            life_cycle_phases-rejected: life_cycle_phases-rejected
           group: 1
           exposed: false
           expose:
@@ -731,6 +804,8 @@ display:
             description: ''
             use_operator: false
             operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
             identifier: ''
             required: false
             remember: false
@@ -738,8 +813,6 @@ display:
             remember_roles:
               authenticated: authenticated
             reduce: false
-            operator_limit_selection: false
-            operator_list: {  }
           is_grouped: false
           group_info:
             label: ''
@@ -800,7 +873,7 @@ display:
         groups:
           1: AND
     cache_metadata:
-      max-age: -1
+      max-age: 0
       contexts:
         - 'languages:language_content'
         - 'languages:language_interface'
@@ -808,7 +881,8 @@ display:
         - url.query_args
         - 'user.node_grants:view'
         - user.permissions
-      tags: {  }
+      tags:
+        - 'config:workflow_list'
   moderated_content:
     display_plugin: page
     id: moderated_content
@@ -819,7 +893,7 @@ display:
       path: admin/content/moderated
       display_description: ''
     cache_metadata:
-      max-age: -1
+      max-age: 0
       contexts:
         - 'languages:language_content'
         - 'languages:language_interface'
@@ -827,4 +901,5 @@ display:
         - url.query_args
         - 'user.node_grants:view'
         - user.permissions
-      tags: {  }
+      tags:
+        - 'config:workflow_list'

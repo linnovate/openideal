@@ -211,6 +211,7 @@
         "drupal/field_permissions": "^1.0",
         "drupal/flag": "^4.0",
         "drupal/group": "^1.0",
+        "drupal/honeypot": "^2.0",
         "drupal/layout_builder_styles": "^1.0@beta",
         "drupal/metatag": "^1.13",
         "drupal/message": "^1.0",
@@ -238,6 +239,7 @@
         "drupal/votingapi_reaction": "^1.1",
         "drupal/votingapi_widgets": "1.x-dev",
         "npm-asset/masonry-layout": "^4.2",
+        "npm-asset/imagesloaded": "^4.1",
         "npm-asset/dropzone": "^5.7",
         "npm-asset/jquery-bar-rating": "^1.2",
         "npm-asset/swiper": "^6.1",
@@ -254,7 +256,11 @@
         "installer-name": "idea",
         "patches": {
             "drupal/core": {
+                "Combined Fields Filter does not work with body summary": "https://www.drupal.org/files/issues/2020-08-28/3049502-27.patch",
+                "Add visibility control conditions to blocks within Layout Builder": "https://www.drupal.org/files/issues/2020-06-23/2916876-92.patch",
                 "Fix comment access handling": "https://www.drupal.org/files/issues/2020-07-18/2879087-65.patch",
+                "Dynamically provide action plugins for every moderation state change": "https://www.drupal.org/files/issues/2020-01-25/2797583-149.patch",
+                "Limit the number of fields to display": "https://www.drupal.org/files/issues/2019-05-07/1234624-115-limit-values-to-display.patch",
                 "Dispatch events for changing content moderation states": "https://www.drupal.org/files/issues/2018-11-06/2873287-50.patch",
                 "Entity reference error messages are not user friendly": "https://www.drupal.org/files/issues/2020-06-04/3138631-9.patch",
                 "Callers of LayoutEntityHelperTrait::getEntitySections() do not account for the view mode": "https://www.drupal.org/files/issues/2019-06-20/3008924-5.patch"
@@ -272,7 +278,7 @@
                 "Message template should depend on text(s) filter formats": "https://www.drupal.org/files/issues/2020-08-03/3163049-2.patch"
             },
             "drupal/ckeditor_mentions": {
-                "Use the official CKEditor mention plugin": "https://www.drupal.org/files/issues/2020-08-12/ckeditorplugin-3009308-21.patch"
+                "Use the official CKEditor mention plugin": "https://www.drupal.org/files/issues/2020-09-01/ckeditorplugin-3009308-23.patch"
             },
             "drupal/group": {
                 "Don't deny access to update/delete unpublished entities if we don't support it yrt": "https://www.drupal.org/files/issues/2020-08-06/group-3163727-2.patch",

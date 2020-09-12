@@ -1,7 +1,7 @@
 .site-navigation-toggle {
   background-color: #242A36;
   position: relative;
-  #sidebar-collapse {
+  .sidebar-collapse-button {
     position: absolute;
     top: 25%;
     left: 2%;
@@ -18,14 +18,21 @@
     padding: 0;
   }
 
-  .site-branding--link {
-    display: flex;
-    flex-direction: row;
-    font-size: 13px;
-    margin: 15px;
+  .site-branding {
+    &--name {
+      display: none;
+    }
+
+    &--link {
+      display: flex;
+      flex-direction: row;
+      font-size: 13px;
+      margin: 15px;
+      color: $white;
+    }
   }
 
-  #site-notification-collapse {
+  .site-notification-collapse-button {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);

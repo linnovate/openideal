@@ -13,23 +13,30 @@ dependencies:
     - field.field.user.user.user_picture
   module:
     - layout_builder
-    - layout_discovery
+    - openideal_statistics
     - openideal_user
     - user
+  theme:
+    - openideal_theme
 third_party_settings:
   layout_builder:
     allow_custom: false
     enabled: true
     sections:
       -
-        layout_id: layout_onecol
+        layout_id: openideal_two_columns_teaser
         layout_settings:
-          label: Compact
-          layout_builder_styles_style: user_compact
+          label: ''
+          main_class: two-columns-flexible
+          layout_builder_styles_style:
+            author: 0
+            user_compact: 0
+            user_profile: 0
+            user_profile_top: 0
         components:
           dc114bc3-c6ef-4940-8750-a12719c8d472:
             uuid: dc114bc3-c6ef-4940-8750-a12719c8d472
-            region: content
+            region: first
             configuration:
               id: 'field_block:user:user:user_picture'
               label: Picture
@@ -37,9 +44,9 @@ third_party_settings:
               label_display: '0'
               formatter:
                 label: hidden
-                type: image
+                type: openideal_user_user_image
                 settings:
-                  image_style: ''
+                  image_style: compact_user_icon
                   image_link: content
                 third_party_settings: {  }
               context_mapping:
@@ -47,9 +54,22 @@ third_party_settings:
                 view_mode: view_mode
             additional: {  }
             weight: 3
+          425f3923-73c7-4fd1-b43c-1c50c9cf6424:
+            uuid: 425f3923-73c7-4fd1-b43c-1c50c9cf6424
+            region: first
+            configuration:
+              id: openideal_user_user_name_block
+              label: 'User name'
+              provider: openideal_user
+              label_display: '0'
+              context_mapping:
+                user: layout_builder.entity
+              hide_label: 1
+            additional: {  }
+            weight: 4
           3e73382b-516f-465c-b237-07fbb2b9dece:
             uuid: 3e73382b-516f-465c-b237-07fbb2b9dece
-            region: content
+            region: first
             configuration:
               id: 'field_block:user:user:created'
               label: 'Member since:'
@@ -59,7 +79,7 @@ third_party_settings:
                 label: inline
                 type: timestamp
                 settings:
-                  date_format: custom
+                  date_format: openideal_short_full_date
                   custom_date_format: d/m/Y
                   timezone: ''
                 third_party_settings: {  }
@@ -68,39 +88,16 @@ third_party_settings:
                 view_mode: view_mode
             additional: {  }
             weight: 6
-          425f3923-73c7-4fd1-b43c-1c50c9cf6424:
-            uuid: 425f3923-73c7-4fd1-b43c-1c50c9cf6424
-            region: content
+          7f421378-46a9-4fc1-8b72-2a635406189e:
+            uuid: 7f421378-46a9-4fc1-8b72-2a635406189e
+            region: second
             configuration:
-              id: openideal_user_user_name_block
-              label: 'User name'
-              provider: openideal_user
+              id: openideal_statistics_user_statistics
+              label: 'User statistics block'
+              provider: openideal_statistics
               label_display: '0'
               context_mapping:
-                user: layout_builder.entity
-              hide_label: 0
-            additional: {  }
-            weight: 4
-          61219a2e-11b7-4762-bb01-976282a57079:
-            uuid: 61219a2e-11b7-4762-bb01-976282a57079
-            region: content
-            configuration:
-              id: 'field_block:user:user:field_points'
-              label: Points
-              provider: layout_builder
-              label_display: '0'
-              formatter:
-                label: inline
-                type: number_decimal
-                settings:
-                  thousand_separator: ''
-                  prefix_suffix: false
-                  decimal_separator: .
-                  scale: 0
-                third_party_settings: {  }
-              context_mapping:
-                entity: layout_builder.entity
-                view_mode: view_mode
+                node: layout_builder.entity
             additional: {  }
             weight: 7
         third_party_settings: {  }
@@ -117,7 +114,6 @@ hidden:
   field_gender: true
   field_last_name: true
   field_points: true
-  langcode: true
   member_for: true
   realname: true
   user_picture: true

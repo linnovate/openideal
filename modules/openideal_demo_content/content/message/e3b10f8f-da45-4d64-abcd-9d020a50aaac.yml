@@ -1,0 +1,23 @@
+_meta:
+  version: '1.0'
+  entity_type: message
+  uuid: e3b10f8f-da45-4d64-abcd-9d020a50aaac
+  bundle: comment_created
+  default_langcode: en
+  depends:
+    20a910fa-0e25-484c-bac2-0653ae5a9953: user
+    9220b182-293a-4ff3-9dfa-46106d13ede0: comment
+    b55c28b4-2ce6-4795-a1db-8b1b0c30a9bb: node
+default:
+  uid:
+    -
+      entity: 20a910fa-0e25-484c-bac2-0653ae5a9953
+  created:
+    -
+      value: 1599682506
+  field_comment_reference:
+    -
+      entity: 9220b182-293a-4ff3-9dfa-46106d13ede0
+  field_node_reference:
+    -
+      entity: b55c28b4-2ce6-4795-a1db-8b1b0c30a9bb

@@ -5,14 +5,7 @@ dependencies:
     - field.storage.node.field_images
     - node.type.page
   module:
-    - content_translation
     - image
-third_party_settings:
-  content_translation:
-    translation_sync:
-      alt: alt
-      title: title
-      file: '0'
 id: node.page.field_images
 field_name: field_images
 entity_type: node
@@ -30,7 +23,7 @@ settings:
   max_resolution: ''
   min_resolution: ''
   alt_field: true
-  alt_field_required: true
+  alt_field_required: false
   title_field: false
   title_field_required: false
   default_image:

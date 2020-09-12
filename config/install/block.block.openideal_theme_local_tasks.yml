@@ -1,12 +1,14 @@
 langcode: en
 status: true
 dependencies:
+  module:
+    - route_condition
   theme:
     - openideal_theme
 id: openideal_theme_local_tasks
 theme: openideal_theme
 region: content
-weight: -11
+weight: -13
 provider: null
 plugin: local_tasks_block
 settings:
@@ -16,4 +18,9 @@ settings:
   label_display: '0'
   primary: true
   secondary: true
-visibility: {  }
+visibility:
+  route:
+    id: route
+    routes: entity.user.canonical
+    negate: true
+    context_mapping: {  }

@@ -2,13 +2,14 @@ langcode: en
 status: true
 dependencies:
   module:
+    - route_condition
     - system
   theme:
     - openideal_theme
 id: openideal_theme_page_title
 theme: openideal_theme
 region: content
-weight: -12
+weight: -13
 provider: null
 plugin: page_title_block
 settings:
@@ -17,8 +18,13 @@ settings:
   provider: core
   label_display: '0'
 visibility:
+  route:
+    id: route
+    routes: entity.node.canonical
+    negate: true
+    context_mapping: {  }
   request_path:
     id: request_path
-    pages: "<front>\r\n/user/*\r\n/ideas\r\n/challenges\r\n/community"
-    negate: false
+    pages: '/user/*'
+    negate: true
     context_mapping: {  }

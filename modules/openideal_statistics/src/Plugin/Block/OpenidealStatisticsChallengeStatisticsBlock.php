@@ -3,6 +3,7 @@
 namespace Drupal\openideal_statistics\Plugin\Block;
 
 use Drupal\Core\Block\BlockBase;
+use Drupal\openideal_challenge\OpenidealContextEntityTrait;
 
 /**
  * Provides a 'OpenidealStatisticsChallengeStatisticsBlock' block.
@@ -21,18 +22,18 @@ use Drupal\Core\Block\BlockBase;
  */
 class OpenidealStatisticsChallengeStatisticsBlock extends BlockBase {
 
+  use OpenidealContextEntityTrait;
+
   /**
    * {@inheritdoc}
    */
   public function build($challenge = NULL) {
-    // @Todo: create a trait that will handle getting the node from context.
     $build = [];
     $contexts = $this->getContexts();
     $is_not_full = isset($contexts['view_mode']) && $contexts['view_mode']->getContextValue() != 'full';
     $id = NULL;
 
-    if (isset($contexts['node']) && !$contexts['node']->getContextValue()->isNew()) {
-      $node = $contexts['node']->getContextValue();
+    if ($node = $this->getEntity($this->getContexts())) {
       $id = $node->id();
     }
     else {

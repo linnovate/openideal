@@ -4,6 +4,7 @@ namespace Drupal\openideal_user\Plugin\Block;
 
 use Drupal\Core\Block\BlockBase;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\openideal_challenge\OpenidealContextEntityTrait;
 
 /**
  * Provides a 'OpenidealUserName' block.
@@ -22,15 +23,14 @@ use Drupal\Core\Form\FormStateInterface;
  */
 class OpenidealUserName extends BlockBase {
 
+  use OpenidealContextEntityTrait;
+
   /**
    * {@inheritdoc}
    */
   public function build() {
     $build = [];
-    $contexts = $this->getContexts();
-    if (isset($contexts['user']) && !$contexts['user']->getContextValue()->isNew()) {
-      /** @var \Drupal\user\Entity\User $user */
-      $user = $contexts['user']->getContextValue();
+    if ($user = $this->getEntity($this->getContexts(), 'user')) {
       $build['container'] = [
         '#type' => 'container',
         '#attributes' => ['class' => ['user-compact--name']],

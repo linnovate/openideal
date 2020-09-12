@@ -6,6 +6,7 @@ use Drupal\content_moderation\ModerationInformation;
 use Drupal\Core\Block\BlockBase;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
+use Drupal\openideal_challenge\OpenidealContextEntityTrait;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
@@ -24,6 +25,8 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  * )
  */
 class OpenidealStatisticsWorkflowBlock extends BlockBase implements ContainerFactoryPluginInterface {
+
+  use OpenidealContextEntityTrait;
 
   /**
    * Entity type manager.
@@ -82,10 +85,8 @@ class OpenidealStatisticsWorkflowBlock extends BlockBase implements ContainerFac
    * {@inheritdoc}
    */
   public function build() {
-    $contexts = $this->getContexts();
     $build = [];
-    if (isset($contexts['node']) && !$contexts['node']->getContextValue()->isNew()) {
-      $node = $contexts['node']->getContextValue();
+    if ($node = $this->getEntity($this->getContexts())) {
       $state = $this->moderationInformation->getOriginalState($node);
 
       $build = [

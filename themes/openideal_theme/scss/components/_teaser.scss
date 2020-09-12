@@ -1,4 +1,5 @@
-.teaser-view-mode {
+.teaser-view-mode,
+.view--user-admin-people--community-page {
 
   /**  Exposed filters   */
   .form-row {
@@ -17,10 +18,11 @@
     }
 
     select {
+      margin-bottom: 5px;
       border: 1px solid #C6CDD0;
       border-radius: 4px;
       appearance: none;
-      background-image: url("../misc/icons/select_dropdown.png");
+      background-image: url("../images/icons/select_dropdown.png");
       background-repeat: no-repeat;
       background-position-x: 95%;
       background-position-y: 50%;
@@ -43,6 +45,7 @@
     border-radius: 30px;
     background: #E8E8E9;
     margin-top: 0;
+    margin-bottom: 5px;
 
     label {
       display: none;
@@ -67,7 +70,7 @@
 
     .search-submit-button {
       position: absolute;
-      background: url('../misc/icons/search.svg') no-repeat center center;
+      background: url('../images/icons/search.svg') no-repeat center center;
       width: 20px;
       height: 20px;
       right: 5%;
@@ -87,13 +90,23 @@
   .teaser-top-section {
     background-color: $white;
     display: flex;
+    border-top-left-radius: 8px;
+    overflow: hidden;
 
     &--section__first {
-      border-top-left-radius: 8px;
       position: relative;
       width: auto;
       max-width: 400px;
       height: 190px;
+
+      .block-field-blocknodechallengefield-images,
+      .block-field-blocknodearticlefield-images,
+      .block-field-blocknodeideafield-images {
+        img {
+          width: 100%;
+          height: 100%;
+        }
+      }
 
       &.teaser-top-section--without-slideshow {
         background-color: #F0F2F3;
@@ -149,6 +162,33 @@
 
   /** Blocks */
 
+  // Info
+  .block-openideal-idea-info-block {
+    display: flex;
+    align-items: center;
+    .idea-information--list__item {
+      flex-direction: row;
+      margin-bottom: 0;
+
+      &--title {
+        margin-bottom: 0;
+        margin-right: 4px;
+        font-weight: 600;
+        font-size: 14px;
+        &:after {
+          content: ": "
+        }
+      }
+      &--value {
+        margin-right: 5px;
+        font-size: 14px;
+
+        .challenge-status--deadline {
+          font-size: 14px;
+        }
+      }
+    }
+  }
   // Created
   .block-field-blocknodechallengetitle,
   .block-field-blocknodearticletitle,
@@ -196,28 +236,23 @@
         }
 
         &--public_stream_view.item-svg {
-          background: url('../misc/icons/teaser_view.svg') no-repeat center center;
           background-size: 18.33px 13.33px;
         }
 
         &--public_stream_comment {
-          background: url('../misc/icons/teaser_comment.svg') no-repeat center center;
           background-size: 16.67px 16.67px;
         }
 
         &--public_stream_like.item-svg {
           background-size: 15px;
           height: 18px;
-          background: url('../misc/icons/teaser_like.svg') no-repeat;
         }
 
         &--public_stream_idea.item-svg {
-          background-size: 16.67px 13.33px;
-          background: url('../misc/icons/teaser_idea.svg') no-repeat center center;
+          background-size: 16.67px 15.33px;
         }
 
         .idea-statistics-block--list__item--score_tag {
-          background: url("../misc/icons/score_tag.svg") no-repeat center center;
           background-size: 16px;
         }
       }
@@ -225,6 +260,8 @@
   }
 
   // Statistics
+  .block-openideal-statistics-status,
+  .block-openideal-statistics-challenge-statistics,
   .block-openideal-statistics-idea-statistics {
     display: flex;
     align-items: center;
@@ -249,6 +286,8 @@
   .block-field-blocknodeideacreated,
   .block-field-blocknodearticlecreated,
   .block-field-blocknodechallengecreated {
+    display: flex;
+    align-items: center;
     margin-right: 6px;
 
     span {
@@ -261,6 +300,7 @@
   // Follow
   .flag-follow a,
   .teaser-flag--element__text {
+    min-width: 87px;
     cursor: pointer;
     color: #1294CA;
     padding: 0.5em 0.7em;
@@ -281,8 +321,20 @@
 
 }
 
+.view--challenges--all-challenges-page .idea-statistics-block--list {
+  margin: 0 17px 0 0;
+}
+
 @media (max-width: 1414px) {
   .node--view-mode-teaser {
+    .block-field-blocknodechallengefield-images,
+    .block-field-blocknodearticlefield-images,
+    .block-field-blocknodeideafield-images {
+      img {
+        height: auto;
+      }
+    }
+
     .block-field-blocknodechallengetitle a,
     .block-field-blocknodearticletitle a,
     .block-field-blocknodeideatitle a {
@@ -378,6 +430,26 @@
   }
 }
 
+@media (max-width: 679px) {
+  .teaser-view-mode--teaser {
+    .form-row fieldset {
+      flex-basis: 100%;
+      flex-grow: 1;
+    }
+  }
+}
+
+
+@media (max-width: 630px) {
+  .node--view-mode-teaser .block-openideal-idea-info-block {
+    flex-basis: 100%;
+    order: 2;
+    display: flex;
+    justify-content: center;
+    margin-top: 14px;
+  }
+}
+
 @media (max-width: 530px) {
   .node--view-mode-teaser {
     .block-openideal-statistics-idea-statistics,
@@ -394,11 +466,26 @@
   }
 }
 
-@media (max-width: 345px) {
-  .teaser-view-mode--teaser {
-    .form-row fieldset {
+@media (max-width: 424px) {
+
+  .node--view-mode-teaser {
+    .block-openideal-statistics-status {
+      order: 2;
       flex-basis: 100%;
-      flex-grow: 1;
+      justify-content: flex-end;
+      display: flex;
     }
+
+    .idea-statistics-block--list {
+      margin: 0;
+    }
+  }
+}
+
+@media (max-width: 345px) {
+  .node--view-mode-teaser .block-openideal-idea-info-block .idea-information--list__item--title,
+  .node--view-mode-teaser .block-openideal-idea-info-block .idea-information--list__item--value,
+  .node--view-mode-teaser .block-openideal-idea-info-block .idea-information--list__item--value .challenge-status--deadline {
+    font-size: 12px;
   }
 }

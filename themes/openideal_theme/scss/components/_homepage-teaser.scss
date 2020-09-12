@@ -1,5 +1,13 @@
+.view--frontpage--front-page .block-page-title-block {
+  display: none;
+}
+
 .node--view-mode-front-page-teaser {
   position: unset;
+}
+
+.view-empty {
+  padding: 0 5px;
 }
 
 .front-page-teaser {
@@ -30,6 +38,43 @@
 
   .profile-author-view-mode .layout__region--content a {
     font-size: 16px;
+  }
+
+  .block-field-blocknodechallengefield-images,
+  .block-field-blocknodearticlefield-images,
+  .block-field-blocknodeideafield-images {
+    img {
+      width: 100%;
+      height: auto;
+    }
+  }
+
+  // Info
+  .block-openideal-idea-info-block {
+    display: flex;
+    align-items: center;
+    .idea-information--list__item {
+      flex-direction: row;
+      margin-bottom: 0;
+
+      &--title {
+        text-transform: unset;
+        margin-bottom: 0;
+        margin-right: 4px;
+        font-weight: 600;
+        font-size: 14px;
+        &:after {
+          content: ": "
+        }
+      }
+      &--value {
+        font-size: 14px;
+
+        .challenge-status--deadline {
+          font-size: 14px;
+        }
+      }
+    }
   }
 
   .block-field-blocknodechallengetitle,
@@ -92,24 +137,20 @@
         }
 
         &--public_stream_view.item-svg {
-          background: url('../misc/icons/teaser_view.svg') no-repeat center center;
-          background-size: 18.33px 13.33px;
+          background-size: 18.33px 15.33px;
         }
 
         &--public_stream_comment {
-          background: url('../misc/icons/teaser_comment.svg') no-repeat center center;
           background-size: 16.67px 16.67px;
         }
 
         &--public_stream_like.item-svg {
           background-size: 15px;
           height: 18px;
-          background: url('../misc/icons/teaser_like.svg') no-repeat center center;
         }
 
         &--public_stream_idea.item-svg {
-          background-size: 16.67px 13.33px;
-          background: url('../misc/icons/teaser_idea.svg') no-repeat center center;
+          background-size: 16.67px 15.33px;
         }
 
       }
@@ -133,6 +174,7 @@
   // Follow
   .flag-follow a,
   .homepage-teaser--flag--element__text {
+    min-width: 87px;
     cursor: pointer;
     color: #1294CA;
     display: block;
@@ -161,6 +203,11 @@
   .view-filters .form-row {
     display: flex;
     flex-wrap: wrap;
+    padding: 0 10px;
+
+    .form-item-sort-bef-combine {
+      display: none;
+    }
 
     .frontpage-add-idea-button {
       margin-left: auto;
@@ -172,7 +219,7 @@
       &:before {
         content: '';
         display: inline-block;
-        background: url('../misc/icons/plus.png') no-repeat center center;
+        background: url('../images/icons/plus.png') no-repeat center center;
         width: 11px;
         height: 11px;
         margin-right: 7px;
@@ -181,6 +228,25 @@
   }
 }
 
+
+@media (max-width: 1598px) {
+  .front-page-teaser .block-openideal-idea-info-block {
+    order: 1;
+    flex-basis: 100%;
+    justify-content: center;
+    margin-top: 6px;
+  }
+}
+
+@media (max-width: 1329px) {
+  .front-page-teaser .block-openideal-idea-info-block {
+    order: unset;
+    flex-basis: unset;
+    justify-content: unset;
+    margin-top: 0;
+  }
+
+}
 @media (max-width: 1226px) {
   .teaser-view-mode.view-frontpage {
     fieldset select {
@@ -241,5 +307,14 @@
     font-size: 16px;
     flex-basis: 100%;
     text-align: center;
+  }
+}
+
+@media (max-width: 622px) {
+  .front-page-teaser .block-openideal-idea-info-block {
+    order: 1;
+    flex-basis: 100%;
+    justify-content: center;
+    margin-top: 6px;
   }
 }

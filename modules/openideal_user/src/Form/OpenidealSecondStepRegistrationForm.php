@@ -48,7 +48,7 @@ class OpenidealSecondStepRegistrationForm extends ContentEntityForm {
         '#title' => $this->t('Skip'),
         '#url' => Url::fromRoute('<front>'),
         '#weight' => 2,
-        '#attributes' => ['class' => ['btn', 'btn-warning']],
+        '#attributes' => ['class' => ['btn', 'btn-warning', 'skip-button']],
       ];
     }
 

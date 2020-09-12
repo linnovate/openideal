@@ -6,6 +6,8 @@ use Drupal\Component\Serialization\Json;
 use Drupal\Core\Entity\EntityTypeManager;
 use Drupal\Core\Block\BlockBase;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
+use Drupal\openideal_statistics\Form\OpenidealStatisticsDateSelectForm;
+use Drupal\openideal_statistics\OpenidealStatisticsFilterTrait;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
@@ -15,8 +17,12 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  *  id = "openideal_statistics_charts_block",
  *  admin_label = @Translation("Charts block"),
  * )
+ *
+ * @group openideal_charts
  */
 class DemographicChart extends BlockBase implements ContainerFactoryPluginInterface {
+
+  use OpenidealStatisticsFilterTrait;
 
   /**
    * Entity type manager.
@@ -64,13 +70,41 @@ class DemographicChart extends BlockBase implements ContainerFactoryPluginInterf
    * {@inheritdoc}
    */
   public function build() {
-    $storage = $this->entityTypeManager->getStorage('user');
-    $user_query = $storage->getQuery();
-    $ids = $user_query->exists('field_gender')
-      ->exists('field_age_group')
-      ->condition('status', '1')
-      ->execute();
+    $data = $this->serializer->encode($this->getData());
+    $build['#attached']['drupalSettings']['charts']['data'] = $data;
+    $build['#attached']['library'][] = 'openideal_statistics/openideal_statistics.charts';
+    $build['#cache']['contexts'] = ['url.query_args'];
 
+    $build[] = [
+      '#type' => 'container',
+      '#attributes' => ['class' => ['charts']],
+    ];
+
+    return $build;
+  }
+
+  /**
+   * Get data for chart.
+   *
+   * @return array
+   *   Data.
+   */
+  private function getData() {
+    $storage = $this->entityTypeManager->getStorage('user');
+    $query = $storage->getQuery();
+    $query->exists('field_gender')
+      ->exists('field_age_group')
+      ->condition('status', '1');
+
+    $filters = $this->getFilters();
+    if (isset($filters[OpenidealStatisticsDateSelectForm::TO])) {
+      $query->condition('created', $filters[OpenidealStatisticsDateSelectForm::TO], '<=');
+    }
+    if (isset($filters[OpenidealStatisticsDateSelectForm::FROM])) {
+      $query->condition('created', $filters[OpenidealStatisticsDateSelectForm::FROM], '>=');
+    }
+
+    $ids = $query->execute();
     $users = $storage->loadMultiple($ids);
 
     $data = [];
@@ -81,17 +115,7 @@ class DemographicChart extends BlockBase implements ContainerFactoryPluginInterf
       ];
     }
 
-    $data = $this->serializer->encode($data);
-    $build['#attached']['drupalSettings']['charts']['data'] = $data;
-    $build['#attached']['library'][] = 'openideal_statistics/openideal_statistics.charts';
-    $build['#cache']['tags'] = ['user_list'];
-
-    $build[] = [
-      '#type' => 'container',
-      '#attributes' => ['class' => ['charts']],
-    ];
-
-    return $build;
+    return $data;
   }
 
 }

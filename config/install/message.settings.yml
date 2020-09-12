@@ -1,6 +1,12 @@
-purge_methods: {  }
+purge_methods:
+  quota:
+    id: quota
+    weight: 0
+    data:
+      quota: 400
 delete_on_entity_delete:
   comment: comment
   node: node
   taxonomy_term: taxonomy_term
   user: user
+purge_enable: true

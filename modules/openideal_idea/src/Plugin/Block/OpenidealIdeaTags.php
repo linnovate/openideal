@@ -3,6 +3,7 @@
 namespace Drupal\openideal_idea\Plugin\Block;
 
 use Drupal\Core\Block\BlockBase;
+use Drupal\openideal_challenge\OpenidealContextEntityTrait;
 
 /**
  * Provides a 'Node tags' block.
@@ -21,21 +22,23 @@ use Drupal\Core\Block\BlockBase;
  */
 class OpenidealIdeaTags extends BlockBase {
 
+  use OpenidealContextEntityTrait;
+
   /**
    * {@inheritdoc}
    */
   public function build() {
     $build = [];
-    $contexts = $this->getContexts();
-    if (isset($contexts['node'])) {
-      $node = $contexts['node']->getContextValue();
+    if ($node = $this->getEntity($this->getContexts())) {
       $build = [
         '#theme' => 'item_list',
         '#title' => $this->t('Tags'),
         '#attributes' => ['class' => ['idea-tags']],
       ];
       $items = [];
-      foreach ($node->field_idea_tags as $tag) {
+      // @Todo: Unify field names.
+      $field = $node->bundle() == 'idea' ? 'field_idea_tags' : 'field_tags';
+      foreach ($node->{$field} as $tag) {
         $items[] = $tag->entity->label();
       }
       $build['#items'] = $items;

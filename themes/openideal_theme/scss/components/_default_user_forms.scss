@@ -1,0 +1,75 @@
+.user--login,
+.user--register,
+.user--pass {
+  section.main-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .block-system-main-block {
+    display: flex;
+    justify-content: center;
+  }
+
+  .nav-tabs {
+    justify-content: center;
+  }
+}
+
+.user-login-form,
+.user-pass,
+.user-register-form {
+  max-width: 560px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  .password-confirm, .password-confirm-match, .password-field, .password-strength {
+    width: 100%;
+  }
+
+  .confirm-parent,
+  .password-parent {
+    min-width: unset;
+    overflow: unset;
+  }
+
+  .form-submit {
+    margin-bottom: 13px;
+    font-size: 22px;
+  }
+
+  .form-actions {
+    width: 100%;
+    input {
+      @include btn-theme($btn-dark, #1e7697);
+    }
+  }
+  .social-login-buttons {
+    margin-top: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    img {
+      border-radius: 50%;
+    }
+  }
+}
+
+@media (max-width: 615px) {
+  .user-login-form .form-actions {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 100%;
+
+    .form-submit {
+      flex: 1 0 100%;
+    }
+  }
+}

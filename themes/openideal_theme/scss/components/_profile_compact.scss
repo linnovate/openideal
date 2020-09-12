@@ -1,22 +1,134 @@
-.profile-user-compact .layout__region--content {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  a {
-    font-style: normal;
-    font-weight: bold;
-    color: $primary-color;
-    text-transform: capitalize;
-    margin-right: 3px;
-    &:hover {
-      color: $primary-color;
+.view--user-admin-people--community-page {
+  article.profile {
+    padding: 0 5px;
+  }
+
+  .form-row {
+    justify-content: flex-start;
+    flex-direction: row-reverse;
+  }
+
+  .block-page-title-block {
+    .title {
+      margin-left: 15px;
     }
   }
 
-  img {
-    border-radius: 50%;
-    width: 200px;
-    height: 200px;
+  .views-exposed-form .form-row {
+    padding: 0 15px;
+  }
+
+  .block-site-wide-statistics-block {
+    right: 28px;
+  }
+
+  .two-columns-flexible {
+    margin-bottom: 32px;
+    filter: drop-shadow(0px 1px 14px rgba(0, 0, 0, 0.09));
+    background-color: $white;
+    padding: 23px 0 20px 0;
+    border-radius: 4px;
+
+    &--section__first {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 27px;
+    }
+
+    &--section__second {
+      border-top: 1px solid #E0E0E0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .user-compact--name {
+      font-size: 25px;
+      line-height: 100%;
+      font-weight: 600;
+      a {
+        text-transform: capitalize;
+        color: $primary-color;
+        &:hover {
+          text-decoration: none;
+        }
+      }
+    }
+
+    .field--type-created {
+      font-size: 18px;
+      line-height: 24px;
+      margin-top: 18px;
+      color: $dark-gray;
+    }
+
+    .field--name-user-picture {
+      img {
+        margin-bottom: 8px;
+        border-radius: 50%;
+        max-width: 100%;
+        height: auto;
+      }
+    }
+
+    // Statistics block.
+    .block-openideal-statistics-user-statistics {
+      width: 100%;
+    }
+
+    .idea-statistics-block {
+      margin-bottom: 0;
+      margin-top: 21px;
+
+      &--list {
+        margin: 0;
+        list-style: none;
+        padding: 0;
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+
+        &__item {
+          display: flex;
+          flex-direction: row-reverse;
+          padding: 0;
+          margin: 0;
+          align-items: center;
+
+          &--count {
+            color: #676C72;
+            font-size: 14px;
+            line-height: 18px;
+            margin: 0 3px 0 0;
+          }
+
+          &--score_tag {
+            background-size: 18px;
+          }
+
+          .item-svg {
+            width: 16px;
+            height: 16px;
+            margin-right: 2px;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 679px) {
+  .view--user-admin-people--community-page {
+    .form-item-search {
+      flex-basis: 100%;
+    }
+
+    .form-row {
+      justify-content: flex-start;
+      flex-direction: row;
+    }
   }
 }

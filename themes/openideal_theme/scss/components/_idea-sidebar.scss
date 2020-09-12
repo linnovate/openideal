@@ -1,6 +1,8 @@
 /* ------------------ Sidebar ----------------- */
 
 .region-sidebar {
+  margin-right: -7.5px;
+  margin-left: -7.5px;
   flex-direction: column;
 
   & > div:not([class*="flag-and-like-block"]) {
@@ -79,11 +81,14 @@
         background-color: #1e7697;
       }
       .flag-follow {
-        display: block;
+        display: flex;
+        position: relative;
+        justify-content: center;
         margin: 70px 0 11px 0;
 
         a,
         &--body {
+          flex-basis: 100%;
           font-size: $font-size-xs;
           @include btn-theme($btn-light, #5eaed2);
         }
@@ -219,24 +224,7 @@
         margin-right: 10px;
       }
 
-      &--view_tag {
-        background: url('../misc/icons/view_tag.svg') no-repeat center center;
-      }
-
-      &--comment_tag {
-        background: url('../misc/icons/comment_tag.svg') no-repeat center center;
-      }
-
-      &--statistics_tag {
-        background: url('../misc/icons/statistics_tag.svg') no-repeat center center;
-      }
-
-      &--like_tag {
-        background: url('../misc/icons/like_tag.svg') no-repeat center center;
-      }
-
       &--score_tag {
-        background: url('../misc/icons/score_tag.svg') no-repeat center center;
         background-size: 32px;
       }
     }

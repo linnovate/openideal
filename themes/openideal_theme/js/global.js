@@ -59,6 +59,40 @@
   };
 
   /**
+   * Custom select behaviors.
+   *
+   * @type {Drupal~behavior}
+   *
+   * @prop {Drupal~behaviorAttach} attach
+   *   Attach behaviors to views created select.
+   */
+  Drupal.behaviors.openidealCustomSelectOption = {
+    attach: function (context, settings) {
+      $('.custom-sort', context).once('openideal_custom_select_option').each(function () {
+        // Hide custom selection on window click.
+        $(window).on('click', function (e) {
+          var $options = $('.custom-sort--options');
+          if (!e.target.matches('.custom-sort--button') && $options.is(':visible')) {
+            $options.hide('400');
+          }
+        });
+
+        // Show custom selection.
+        $('.custom-sort--button' ,this).on('click', function () {
+          $('.custom-sort--options').toggle('show');
+        });
+
+        // Trigger real selection option.
+        $('.custom-sort--option' ,this).each(function () {
+          $(this).on('click', function () {
+            $('.form-item-sort-bef-combine select').val($(this).data('option-id')).change()
+          });
+        });
+      });
+    }
+  };
+
+  /**
    * Main navigation behaviour.
    *
    * @type {Drupal~behavior}
@@ -215,7 +249,7 @@
    */
   Drupal.behaviors.openidealThemeExposedIdeasFilter = {
     attach: function (context, settings) {
-      $('.teaser-view-mode .views-exposed-form fieldset', context).once('openideal_theme_exposed_ideas_filter').each(function () {
+      $('.teaser-view-mode .views-exposed-form fieldset, .view--user-admin-people--community-page .views-exposed-form fieldset', context).once('openideal_theme_exposed_ideas_filter').each(function () {
         var $this = $(this);
         var text = $('label', $this).text();
 

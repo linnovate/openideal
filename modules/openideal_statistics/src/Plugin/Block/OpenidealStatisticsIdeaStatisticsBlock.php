@@ -3,6 +3,7 @@
 namespace Drupal\openideal_statistics\Plugin\Block;
 
 use Drupal\Core\Block\BlockBase;
+use Drupal\openideal_challenge\OpenidealContextEntityTrait;
 
 /**
  * Provides a 'OpenidealStatisticsIdeaStatisticsBlock' block.
@@ -21,6 +22,8 @@ use Drupal\Core\Block\BlockBase;
  */
 class OpenidealStatisticsIdeaStatisticsBlock extends BlockBase {
 
+  use OpenidealContextEntityTrait;
+
   /**
    * {@inheritdoc}
    */
@@ -30,8 +33,7 @@ class OpenidealStatisticsIdeaStatisticsBlock extends BlockBase {
     $is_not_full = isset($contexts['view_mode']) && $contexts['view_mode']->getContextValue() != 'full';
     $id = NULL;
 
-    if (isset($contexts['node']) && !$contexts['node']->getContextValue()->isNew()) {
-      $node = $contexts['node']->getContextValue();
+    if ($node = $this->getEntity($this->getContexts())) {
       $id = $node->id();
     }
     else {

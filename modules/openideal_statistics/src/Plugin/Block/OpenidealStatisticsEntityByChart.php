@@ -8,6 +8,8 @@ use Drupal\Core\Entity\EntityTypeManager;
 use Drupal\Core\Block\BlockBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
+use Drupal\openideal_statistics\Form\OpenidealStatisticsDateSelectForm;
+use Drupal\openideal_statistics\OpenidealStatisticsFilterTrait;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
@@ -17,8 +19,12 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  *  id = "openideal_statistics_etity_by_chart_block",
  *  admin_label = @Translation("Entity by chart"),
  * )
+ *
+ * @group openideal_charts
  */
 class OpenidealStatisticsEntityByChart extends BlockBase implements ContainerFactoryPluginInterface {
+
+  use OpenidealStatisticsFilterTrait;
 
   /**
    * Entity type manager.
@@ -76,39 +82,16 @@ class OpenidealStatisticsEntityByChart extends BlockBase implements ContainerFac
    * {@inheritdoc}
    */
   public function build() {
-    $storage = $this->entityTypeManager->getStorage('node');
-    $entity_query = $storage->getQuery();
-    $query = $entity_query->condition('type', 'idea');
     $entity_by = $this->configuration['entity_by'];
 
-    if ($entity_by == 'category') {
-      $query->exists('field_category');
-    }
-
-    $ids = $query->execute();
-
-    $ideas = $storage->loadMultiple($ids);
-
-    $data = [];
-    /** @var \Drupal\node\NodeInterface $idea */
-    foreach ($ideas as $idea) {
-      if ($entity_by == 'category') {
-        $label = $idea->field_category->first()->entity->label();
-      }
-      else {
-        $state = $this->moderationInformation->getOriginalState($idea);
-        $label = $state->label();
-      }
-      $data[$label] = ($data[$label] ?? 0) + 1;
-    }
-
-    $data = $this->serializer->encode($data);
+    $data = $this->serializer->encode($this->getData());
     $build['#attached']['drupalSettings']['charts']['byEntity'][$entity_by] = [
       'data' => $data,
       'bindTo' => '#entity-by-' . $entity_by,
     ];
     $build['#attached']['library'][] = 'openideal_statistics/openideal_statistics.charts';
     $build['#cache']['tags'] = ['node_list:idea'];
+    $build['#cache']['contexts'] = ['url.query_args'];
 
     $build[] = [
       '#type' => 'container',
@@ -139,6 +122,49 @@ class OpenidealStatisticsEntityByChart extends BlockBase implements ContainerFac
    */
   public function blockSubmit($form, FormStateInterface $form_state) {
     $this->configuration['entity_by'] = $form_state->getValue('entity_by');
+  }
+
+  /**
+   * Get data for chart.
+   *
+   * @return array
+   *   Data.
+   */
+  private function getData() {
+    $entity_by = $this->configuration['entity_by'];
+    $storage = $this->entityTypeManager->getStorage('node');
+    $entity_query = $storage->getQuery();
+    $query = $entity_query->condition('type', 'idea');
+    $filters = $this->getFilters();
+    if (isset($filters[OpenidealStatisticsDateSelectForm::TO])) {
+      $query->condition('created', $filters[OpenidealStatisticsDateSelectForm::TO], '<=');
+    }
+    if (isset($filters[OpenidealStatisticsDateSelectForm::FROM])) {
+      $query->condition('created', $filters[OpenidealStatisticsDateSelectForm::FROM], '>=');
+    }
+
+    if ($entity_by == 'category') {
+      $query->exists('field_category');
+    }
+
+    $ids = $query->execute();
+
+    $ideas = $storage->loadMultiple($ids);
+
+    $data = [];
+    /** @var \Drupal\node\NodeInterface $idea */
+    foreach ($ideas as $idea) {
+      if ($entity_by == 'category') {
+        $label = $idea->field_category->first()->entity->label();
+      }
+      else {
+        $state = $this->moderationInformation->getOriginalState($idea);
+        $label = $state->label();
+      }
+      $data[$label] = ($data[$label] ?? 0) + 1;
+    }
+
+    return $data;
   }
 
 }

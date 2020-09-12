@@ -10,6 +10,8 @@ use Drupal\Core\Entity\EntityTypeManager;
 use Drupal\Core\Block\BlockBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
+use Drupal\openideal_statistics\Form\OpenidealStatisticsDateSelectForm;
+use Drupal\openideal_statistics\OpenidealStatisticsFilterTrait;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
@@ -19,8 +21,12 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  *  id = "openideal_statistics_per_day_charts_block",
  *  admin_label = @Translation("Charts per day"),
  * )
+ *
+ * @group openideal_charts
  */
 class OpenidealStatisticsPerDayCharts extends BlockBase implements ContainerFactoryPluginInterface {
+
+  use OpenidealStatisticsFilterTrait;
 
   /**
    * Entity type manager.
@@ -116,6 +122,7 @@ class OpenidealStatisticsPerDayCharts extends BlockBase implements ContainerFact
       'max' => $this->max,
     ];
     $build['#cache']['tags'] = [$entity . '_list' . ($entity == 'node' ? ':idea' : '')];
+    $build['#cache']['contexts'] = ['url.query_args'];
 
     $build[] = [
       '#type' => 'container',
@@ -166,6 +173,11 @@ class OpenidealStatisticsPerDayCharts extends BlockBase implements ContainerFact
     // difference of time during request executing.
     $to = time();
     $from = strtotime('-1 month');
+
+    if ($filters = $this->getFilters()) {
+      $to = $filters[OpenidealStatisticsDateSelectForm::TO] ?? $to;
+      $from = $filters[OpenidealStatisticsDateSelectForm::FROM] ?? $from;
+    }
 
     // @Todo: investigate if there is possibility to count occurrences of equal fields.
     $select = $this->database->select($this->getTable(), 'd');

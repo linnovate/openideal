@@ -1,5 +1,6 @@
 .openideal-slideshow {
   overflow: hidden;
+  position: relative;
 }
 
 ul.swiper-wrapper {
@@ -21,4 +22,12 @@ ul.swiper-wrapper img {
 .openideal-slideshow img {
   width: 100%;
   height: auto;
+}
+
+@media (max-width: 1270px) {
+  .swiper-button-next:after,
+  .swiper-button-prev:after {
+    font-size: 25px;
+  }
+
 }

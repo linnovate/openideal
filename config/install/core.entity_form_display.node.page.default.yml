@@ -3,12 +3,12 @@ status: true
 dependencies:
   config:
     - entity_browser.browser.openideal_images_browser
+    - field.field.node.page.body
     - field.field.node.page.field_attached_docs
-    - field.field.node.page.field_body
     - field.field.node.page.field_images
     - node.type.page
   module:
-    - allowed_formats
+    - content_moderation
     - entity_browser
     - path
     - text
@@ -17,6 +17,16 @@ targetEntityType: node
 bundle: page
 mode: default
 content:
+  body:
+    weight: 6
+    settings:
+      rows: 9
+      summary_rows: 3
+      placeholder: ''
+      show_summary: false
+    third_party_settings: {  }
+    type: text_textarea_with_summary
+    region: content
   created:
     type: datetime_timestamp
     weight: 2
@@ -24,7 +34,7 @@ content:
     settings: {  }
     third_party_settings: {  }
   field_attached_docs:
-    weight: 103
+    weight: 9
     settings:
       entity_browser: openideal_file_browser
       field_widget_remove: true
@@ -37,19 +47,8 @@ content:
     third_party_settings: {  }
     type: entity_browser_file
     region: content
-  field_body:
-    weight: 101
-    settings:
-      rows: 5
-      placeholder: ''
-    third_party_settings:
-      allowed_formats:
-        hide_help: '1'
-        hide_guidelines: '1'
-    type: text_textarea
-    region: content
   field_images:
-    weight: 102
+    weight: 8
     settings:
       entity_browser: openideal_images_browser
       field_widget_remove: true
@@ -62,16 +61,9 @@ content:
     third_party_settings: {  }
     type: entity_browser_file
     region: content
-  langcode:
-    type: language_select
-    weight: 2
-    region: content
-    settings:
-      include_locked: true
-    third_party_settings: {  }
   moderation_state:
     type: moderation_state_default
-    weight: 100
+    weight: 7
     settings: {  }
     region: content
     third_party_settings: {  }
@@ -110,6 +102,11 @@ content:
       match_limit: 10
       size: 60
       placeholder: ''
+    third_party_settings: {  }
+  url_redirects:
+    weight: 5
+    region: content
+    settings: {  }
     third_party_settings: {  }
 hidden:
   promote: true

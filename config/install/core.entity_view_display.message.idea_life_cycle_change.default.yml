@@ -16,12 +16,13 @@ bundle: idea_life_cycle_change
 mode: default
 content:
   field_node_reference:
-    type: entity_reference_label
+    type: entity_reference_entity_view
     weight: 1
     region: content
     label: hidden
     settings:
-      link: true
+      view_mode: message
+      link: false
     third_party_settings: {  }
   partial_0:
     weight: 0

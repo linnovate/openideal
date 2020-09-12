@@ -3,13 +3,13 @@ status: true
 dependencies:
   module:
     - openideal_statistics
-    - system
+    - route_condition
   theme:
     - openideal_theme
 id: site_wide_statistics_block
 theme: openideal_theme
 region: content
-weight: -13
+weight: -16
 provider: null
 plugin: site_wide_statistics_block
 settings:
@@ -18,8 +18,8 @@ settings:
   provider: openideal_statistics
   label_display: '0'
 visibility:
-  request_path:
-    id: request_path
-    pages: "<front>\r\n/ideas\r\n/challenges"
+  route:
+    id: route
+    routes: "view.challenges.all_challenges_page\r\nview.ideas.all_ideas_page\r\nview.news.all_news_page\r\nview.user_admin_people.community_page\r\nview.frontpage.front_page"
     negate: false
     context_mapping: {  }

@@ -1,6 +1,6 @@
-name: OpenideaL
+name: OpenideaL - ideas and innovation management system
 type: profile
-description: 'Basic installation profile for OpenideaL sites.'
+description: 'Manage innovation campaigns and ideation communities'
 core: 8.x
 core_version_requirement: ^8 || ^9
 
@@ -15,17 +15,18 @@ dependencies:
   - allowed_formats:allowed_formats
   - avatars:avatars_gravatar
   - drupal:automated_cron
+  - honeypot:honeypot
   - better_exposed_filters:better_exposed_filters
   - drupal:big_pipe
   - drupal:block
   - block_content:block_content
   - drupal:breakpoint
   - drupal:ckeditor
-  - drupal:content_translation
   - route_condition:route_condition
   - ckeditor_mentions:ckeditor_mentions
   - ckeditor_media_embed:ckeditor_media_embed
   - drupal:comment
+  - drupal:action
   - drupal:config
   - comments_order:comments_order
   - config_pages:config_pages
