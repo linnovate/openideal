@@ -5,6 +5,7 @@
  * Contains openideal_idea.module.
  */
 
+use Drupal\Core\Cache\RefinableCacheableDependencyInterface;
 use Drupal\message\MessageInterface;
 use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Entity\EntityInterface;
@@ -49,6 +50,32 @@ function openideal_user_form_user_login_form_alter(&$form, FormStateInterface $f
       '#weight' => '1',
     ],
   ];
+}
+
+/**
+ * Implements hook_menu_local_tasks_alter().
+ */
+function openideal_user_menu_local_tasks_alter(&$data, $route_name, RefinableCacheableDependencyInterface &$cacheability) {
+  // For the user page make tabs looks according to the design.
+  if ($route_name == 'entity.user.canonical') {
+    if (isset($data['tabs'][0]['shortcut.set_switch'])) {
+      unset($data['tabs'][0]['shortcut.set_switch']);
+    }
+    if (isset($data['tabs'][0]['entity.user.canonical'])) {
+      $data['tabs'][0]['entity.user.canonical']['#link']['url']->setOptions(['attributes' => ['class' => ['view-link']]]);
+    }
+    if (isset($data['tabs'][0]['openideal_user.user_points_tab'])) {
+      $data['tabs'][0]['openideal_user.user_points_tab']['#link']['url']->setOptions(['attributes' => ['class' => ['points-link']]]);
+    }
+    if (isset($data['tabs'][0]['entity.user.edit_form'])) {
+      $data['tabs'][0]['entity.user.edit_form']['#link']['title'] = t('Edit details');
+      $data['tabs'][0]['entity.user.edit_form']['#link']['url']->setOptions(['attributes' => ['class' => ['edit-link']]]);
+    }
+    if (isset($data['tabs'][0]['entity.user.contact_form'])) {
+      $data['tabs'][0]['entity.user.contact_form']['#link']['url']->setOptions(['attributes' => ['class' => ['contact-link']]]);
+      $data['tabs'][0]['entity.user.contact_form']['#link']['title'] = t('Send message');
+    }
+  }
 }
 
 /**

@@ -13,33 +13,64 @@
     font-size: 1.5rem;
   }
 
+  .menu--main {
+    padding-right: 25px;
+  }
+
+  &--user-info {
+    padding-bottom: 10px;
+  }
+
   &--add-idea {
-    padding: 18.59px 15px;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30px;
+    align-items: center;
+    position: relative;
+    &:after {
+      content: '';
+      width: 200%;
+      position: absolute;
+      height: 1px;
+      border-top: 1px solid rgba(224, 224, 224, 0.1);
+      top: 3.5em;
+    }
+
     a {
+      padding: 9.5px 1.3em;
+      @include btn-theme(#27C0FF, #27C8f9);
       position: relative;
       font-size: $font-size-sm;
       line-height: 21px;
       color: $white;
       display: flex;
       align-items: center;
+      justify-content: center;
+      text-transform: uppercase;
 
       &:before {
         content: '';
         display: inline-block;
-        background: url('../misc/icons/plus.svg') no-repeat center center;
-        width: 23px;
-        height: 23px;
-        margin-right: 7px;
+        background: url('../images/icons/plus.svg') no-repeat center center;
+        width: 10.5px;
+        height: 10.5px;
+        margin-right: 2px;
       }
     }
   }
 
   &--inner {
-    top: 0;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
     z-index: 500;
-    height: 95%;
+    height: 100%;
     display: flex;
     flex-direction: column;
+    &::-webkit-scrollbar {
+      display: none;
+    }
   }
 
   &--elements {
@@ -52,15 +83,16 @@
   &--logo {
     .site-branding--link {
       margin-right: 0;
+      color: $white;
       display: flex;
       flex-flow: column wrap;
       align-items: center;
       margin-bottom: 10px;
       margin-top: 36px;
+      &:hover {
+        color: $white;
+      }
     }
-  }
-
-  &--nav {
   }
 
   &--user-account {
@@ -108,13 +140,14 @@
   }
 
   &--top {
-    margin-top: 22px;
+    margin-top: 5px;
   }
 
   &__menu-list {
     &--item {
       margin-bottom: 15px;
       transition: border-left 0.3s ease-in-out, background-color 0.7s;
+      border-radius: 0 30px 30px 0;
       border-left: 0 solid #fff;
 
       a {
@@ -190,11 +223,11 @@
 
     &--top {
       margin-top: 0;
-      border-top: 1px solid rgba(224, 224, 224, 0.1);
       border-bottom: 1px solid rgba(224, 224, 224, 0.1);
     }
 
     &--user-info {
+      padding-bottom: 0;
       .views-row {
         display: block;
 

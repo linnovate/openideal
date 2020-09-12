@@ -27,6 +27,10 @@
             delay: 5000,
             disableOnInteraction: false
           },
+          navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+          },
           // keyboard control
           keyboard: {
             enabled: true,

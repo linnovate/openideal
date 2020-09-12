@@ -6,7 +6,7 @@
         {% for button in buttons %}
             {% if button.name != 'copy_url' %}
             <li class="share-buttons--buttons__{{ button.name }}">
-                    <a href="{{ button.link }}" {{ button.class | raw }}>
+                    <a href="{{ button.link }}" {{ button.class | raw }} title="{{ button.name }}">
                         {% include button.svg %}
                         <span class="share-buttons--buttons__text visually-hidden">{{ button.text }}</span>
                     </a>

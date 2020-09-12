@@ -5,6 +5,7 @@
  * OpenideaL Challenge module tokens support.
  */
 
+use Drupal\Core\Cache\Cache;
 use Drupal\Core\Render\BubbleableMetadata;
 
 /**
@@ -44,6 +45,19 @@ function openideal_statistics_token_info() {
       'name' => t('Challenge ideas count'),
       'type' => 'openideal',
     ],
+    'user-votes-count' => [
+      'name' => t('User votes count'),
+      'type' => 'openideal',
+    ],
+    'user-comments-count' => [
+      'name' => t('User comments count'),
+      'type' => 'openideal',
+    ],
+    'user-ideas-count' => [
+      'name' => t('User ideas count'),
+      'type' => 'openideal',
+    ],
+
   ];
 
   return [
@@ -72,6 +86,9 @@ function openideal_statistics_tokens($type, $tokens, array $data, array $options
           $query = $entity_type_manager->getStorage('user')->getQuery();
           $result = $query
             ->condition('status', '1')
+            // @Todo: Remove once we will find better way to resolve this issue,
+            // and remove the same logic from community page view.
+            ->condition('uid', '1', '>')
             ->count()
             ->execute();
           $replacements[$original] = $result;
@@ -118,6 +135,47 @@ function openideal_statistics_tokens($type, $tokens, array $data, array $options
 
             $replacements[$original] = $result;
           }
+          break;
+
+        case 'user-votes-count':
+          if (!empty($data['user'])) {
+            $storage = \Drupal::entityTypeManager()->getStorage('vote');
+            $count = $storage->getQuery()
+              ->condition('user_id', $data['user']->id())
+              ->condition('type', 'reaction_like')
+              ->count()
+              ->execute();
+
+            $replacements[$original] = $count;
+            $bubbleable_metadata->addCacheTags(Cache::mergeTags($data['user']->getCacheTags(), ['vote_list']));
+          }
+          break;
+
+        case 'user-comments-count':
+          if (!empty($data['user'])) {
+            $query = $entity_type_manager->getStorage('comment')->getQuery();
+            $result = $query
+              ->condition('status', '1')
+              ->condition('uid', $data['user']->id())
+              ->count()
+              ->execute();
+            $replacements[$original] = $result;
+            $bubbleable_metadata->addCacheTags(Cache::mergeTags($data['user']->getCacheTags(), ['comment_list']));
+          }
+          break;
+
+        case 'user-ideas-count':
+          if (!empty($data['user'])) {
+            $result = \Drupal::entityQuery('node')
+              ->condition('status', '1')
+              ->condition('type', 'idea')
+              ->condition('uid', $data['user']->id())
+              ->count()
+              ->execute();
+            $replacements[$original] = $result;
+            $bubbleable_metadata->addCacheTags(Cache::mergeTags($data['user']->getCacheTags(), ['node_list:idea']));
+          }
+          break;
 
         case 'challenge-ideas-count':
           if (!empty($data['node_id'])) {
@@ -125,11 +183,12 @@ function openideal_statistics_tokens($type, $tokens, array $data, array $options
             $node_query = $storage->getQuery();
             $result = $node_query->condition('field_challenge', $data['node_id'], '=')
               ->condition('type', 'idea')
+              ->condition('status', 1)
               ->count()
               ->execute();
-
             $replacements[$original] = $result;
           }
+          break;
       }
     }
   }

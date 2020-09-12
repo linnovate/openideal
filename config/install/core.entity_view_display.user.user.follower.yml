@@ -15,11 +15,39 @@ dependencies:
   module:
     - image
     - layout_builder
+    - layout_discovery
     - user
 third_party_settings:
   layout_builder:
     allow_custom: false
-    enabled: false
+    enabled: true
+    sections:
+      -
+        layout_id: layout_onecol
+        layout_settings:
+          label: ''
+        components:
+          3e049496-5ae3-4fe4-a953-b9eaaefda934:
+            uuid: 3e049496-5ae3-4fe4-a953-b9eaaefda934
+            region: content
+            configuration:
+              id: 'field_block:user:user:user_picture'
+              label: Picture
+              provider: layout_builder
+              label_display: '0'
+              formatter:
+                label: hidden
+                type: openideal_user_user_image
+                settings:
+                  image_style: follower_icon
+                  image_link: content
+                third_party_settings: {  }
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+            additional: {  }
+            weight: 0
+        third_party_settings: {  }
 id: user.user.follower
 targetEntityType: user
 bundle: user
@@ -42,6 +70,5 @@ hidden:
   field_gender: true
   field_last_name: true
   field_points: true
-  langcode: true
   member_for: true
   realname: true

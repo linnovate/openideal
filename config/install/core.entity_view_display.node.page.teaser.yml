@@ -3,8 +3,8 @@ status: true
 dependencies:
   config:
     - core.entity_view_mode.node.teaser
+    - field.field.node.page.body
     - field.field.node.page.field_attached_docs
-    - field.field.node.page.field_body
     - field.field.node.page.field_images
     - node.type.page
   module:
@@ -23,7 +23,6 @@ content:
     weight: 101
     region: content
 hidden:
+  body: true
   field_attached_docs: true
-  field_body: true
   field_images: true
-  langcode: true

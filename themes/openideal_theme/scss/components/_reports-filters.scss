@@ -1,0 +1,67 @@
+.openideal-statistics-date-select-form {
+  .form-submit {
+    @include btn-theme($btn-dark, #1e7697);
+    width: 200px;
+    margin-bottom: 15px;
+  }
+}
+
+.reports-filters {
+  display: flex;
+  align-items: center;
+
+  .form-group {
+    margin-bottom: 0;
+  }
+
+  &--date-type {
+    .fieldset-wrapper {
+      & div > div:first-child {
+        margin-bottom: 22px;
+      }
+    }
+
+    legend {
+      margin: 0;
+    }
+
+    .form-item-date-type {
+      display: flex;
+
+      label {
+        font-size: 17px;
+        width: 100px;
+      }
+    }
+  }
+
+  &--filters {
+    .fieldset-wrapper {
+      display: flex;
+      align-items: baseline;
+    }
+
+    &__fixed_dates {
+      display: flex;
+      &--label {
+        font-size: 17px;
+        margin-right: 10px;
+      }
+
+    }
+
+    &__custom_dates {
+      display: flex;
+      align-items: baseline;
+      &--label {
+        margin-right: 10px;
+        font-size: 17px;
+
+        &.to {
+          margin-left: 10px;
+        }
+      }
+    }
+  }
+
+}

@@ -25,7 +25,6 @@ dependencies:
     - layout_builder
     - metatag
     - openideal_idea
-    - openideal_slideshow
     - openideal_statistics
     - text
     - user
@@ -48,19 +47,6 @@ third_party_settings:
             user_profile: 0
             user_profile_top: 0
         components:
-          e7b8450b-84b6-4a7a-9327-b4ffe8a8abb7:
-            uuid: e7b8450b-84b6-4a7a-9327-b4ffe8a8abb7
-            region: first
-            configuration:
-              id: openidel_slideshow_block
-              label: Slideshow
-              provider: openideal_slideshow
-              label_display: '0'
-              image_style: front_page_teaser
-              context_mapping:
-                node: layout_builder.entity
-            additional: {  }
-            weight: 0
           d59fa5f6-3ecc-4d21-ba73-d5db543c7bdc:
             uuid: d59fa5f6-3ecc-4d21-ba73-d5db543c7bdc
             region: second
@@ -176,7 +162,29 @@ third_party_settings:
               context_mapping:
                 entity: layout_builder.entity
             additional: {  }
-            weight: 1
+            weight: -9
+          1ef90dbd-e318-418e-bbbc-9a6bd969126c:
+            uuid: 1ef90dbd-e318-418e-bbbc-9a6bd969126c
+            region: first
+            configuration:
+              id: 'field_block:node:idea:field_images'
+              label: Images
+              provider: layout_builder
+              label_display: '0'
+              formatter:
+                label: hidden
+                type: image
+                settings:
+                  offset: 0
+                  limit: 1
+                  image_style: front_page_teaser
+                  image_link: content
+                third_party_settings: {  }
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+            additional: {  }
+            weight: -10
         third_party_settings: {  }
 id: node.idea.front_page_teaser
 targetEntityType: node
@@ -295,5 +303,4 @@ content:
     third_party_settings: {  }
 hidden:
   addtoany: true
-  langcode: true
   moderation_state_buttons_widget: true

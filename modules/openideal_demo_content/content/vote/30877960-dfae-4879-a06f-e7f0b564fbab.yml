@@ -1,0 +1,32 @@
+_meta:
+  version: '1.0'
+  entity_type: vote
+  uuid: 30877960-dfae-4879-a06f-e7f0b564fbab
+  bundle: reaction_like
+  depends:
+    41055ef4-c90e-4487-b20a-9a1eff547eda: user
+default:
+  entity_type:
+    -
+      value: comment
+  entity_id:
+    -
+      target_id: 473
+  value:
+    -
+      value: !!float 1
+  value_type:
+    -
+      value: option
+  user_id:
+    -
+      entity: 41055ef4-c90e-4487-b20a-9a1eff547eda
+  timestamp:
+    -
+      value: 1599685382
+  vote_source:
+    -
+      value: 689e2728a013c13bf7f313ec1b63f806134bd6b8f0fd0f9f41c6d13bff6dea08
+  field_name:
+    -
+      value: field_like

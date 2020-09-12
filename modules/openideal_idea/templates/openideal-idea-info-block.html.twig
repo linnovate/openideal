@@ -10,11 +10,13 @@
 #}
 <div class="idea-information">
     <ul class="idea-information--list">
-        {% for key, item in content %}
-            <li class="idea-information--list__item">
-                <div class="idea-information--list__item--title">{{ item.title }}</div>
-                <div class="idea-information--list__item--value">{{ item.value }}</div>
-            </li>
+        {% for item in content %}
+            {% if item.access %}
+                <li class="idea-information--list__item">
+                    <div class="idea-information--list__item--title">{{ item.title }}</div>
+                    <div class="idea-information--list__item--value">{{ item.value }}</div>
+                </li>
+            {% endif %}
         {% endfor %}
     </ul>
 </div>

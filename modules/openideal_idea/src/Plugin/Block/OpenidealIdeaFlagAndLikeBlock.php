@@ -3,10 +3,12 @@
 namespace Drupal\openideal_idea\Plugin\Block;
 
 use Drupal\Core\Block\BlockBase;
+use Drupal\Core\Cache\Cache;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\Core\Session\AccountProxy;
 use Drupal\flag\FlagLinkBuilderInterface;
+use Drupal\openideal_challenge\OpenidealContextEntityTrait;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
@@ -25,6 +27,8 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  * )
  */
 class OpenidealIdeaFlagAndLikeBlock extends BlockBase implements ContainerFactoryPluginInterface {
+
+  use OpenidealContextEntityTrait;
 
   /**
    * Flag link builder service.
@@ -84,9 +88,10 @@ class OpenidealIdeaFlagAndLikeBlock extends BlockBase implements ContainerFactor
    */
   public function build() {
     $build = [];
-    $contexts = $this->getContexts();
-    if (isset($contexts['node']) && ($node = $contexts['node']->getContextValue()) && !$node->isNew()) {
-      $build['#cache']['tags'] = $node->getCacheTags();
+
+    if ($node = $this->getEntity($this->getContexts())) {
+      $build['#cache']['tags'] = Cache::mergeTags($node->getCacheTags(), ['flagging_list']);
+      $build['#cache']['contexts'] = ['user.roles:authenticated', 'route'];
       if ($this->currentUser->isAnonymous()) {
         return $build;
       }

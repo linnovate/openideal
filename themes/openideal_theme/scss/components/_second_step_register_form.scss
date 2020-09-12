@@ -1,0 +1,29 @@
+.openideal-user--register--user--more-about-you {
+  .tabledrag-toggle-weight {
+    display: none;
+  }
+
+  .form-actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    a {
+      margin-right: 5px;
+    }
+
+    a,
+    input {
+      flex-basis: 10%;
+    }
+  }
+
+  .js-form-type-radio {
+    padding: 4px 11px;
+  }
+
+  .skip-button {
+    width: 100%;
+    @include btn-theme(#ffc107, #ffc210);
+    margin-bottom: 5px;
+  }
+}

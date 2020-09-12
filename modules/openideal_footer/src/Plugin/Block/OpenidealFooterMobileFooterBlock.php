@@ -2,6 +2,7 @@
 
 namespace Drupal\openideal_footer\Plugin\Block;
 
+use Drupal\openideal_challenge\OpenidealContextEntityTrait;
 use Drupal\openideal_idea\Plugin\Block\OpenidealIdeaFlagAndLikeBlock;
 
 /**
@@ -21,12 +22,13 @@ use Drupal\openideal_idea\Plugin\Block\OpenidealIdeaFlagAndLikeBlock;
  */
 class OpenidealFooterMobileFooterBlock extends OpenidealIdeaFlagAndLikeBlock {
 
+  use OpenidealContextEntityTrait;
+
   /**
    * {@inheritdoc}
    */
   public function build() {
-    $contexts = $this->getContexts();
-    if (isset($contexts['node']) && ($node = $contexts['node']->getContextValue()) && !$node->isNew()) {
+    if ($node = $this->getEntity($this->getContexts())) {
       // We should only display share section for article and anonymous user,
       // because article has not comments, follow, and likes at all
       // and anonymous user has no access to it.

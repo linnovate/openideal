@@ -1,0 +1,22 @@
+unprotected_forms:
+  - user_login_form
+  - search_form
+  - search_block_form
+  - views_exposed_form
+  - honeypot_settings_form
+protect_all_forms: false
+log: false
+element_name: url
+time_limit: 5
+expire: 300
+form_settings:
+  user_register_form: true
+  user_pass: true
+  contact_message_feedback_form: true
+  contact_message_personal_form: false
+  node_article_form: false
+  node_challenge_form: false
+  node_faq_form: false
+  node_idea_form: false
+  node_page_form: false
+  comment_comment_form: true

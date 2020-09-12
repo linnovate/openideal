@@ -1,6 +1,115 @@
-.profile-user-profile-view-mode {
-  img {
-    border-radius: 50%;
+.entity--user--canonical {
+  .user-top {
+    display: flex;
+    border-bottom: 1px solid #E0E0E0;
+    justify-content: space-between;
+    padding-bottom: 19.5px;
+    margin-bottom: 34px;
+
+    &--section__first {
+      display: flex;
+      align-items: center;
+
+      img {
+        border-radius: 50%;
+        margin-right: 21px;
+      }
+    }
+
+    &--section__second {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    &--section__third {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .user-compact--name a {
+      font-weight: 600;
+      font-size: 25px;
+      line-height: 100%;
+      color: $primary-color;
+      text-transform: capitalize;
+    }
+
+    .field--name-created {
+      color: $dark-gray;
+    }
+
+    nav.tabs {
+      margin-bottom: 0;
+    }
+
+    .nav-tabs {
+      border-bottom: unset;
+      flex-direction: column;
+    }
+
+    .nav-tabs .nav-item .nav-link {
+      border: unset;
+      border-top-left-radius: unset;
+      border-top-right-radius: unset;
+      display: flex;
+      align-items: center;
+      @include btn-theme($btn-dark, #1e829a);
+      text-transform: uppercase;
+      justify-content: center;
+      font-size: 15px;
+      line-height: 20px;
+      padding: 15px 43px;
+      color: $white;
+
+      &:before {
+        content: '';
+        display: block;
+        background: url("../images/icons/mail.png") no-repeat center center;
+        width: 18.33px;
+        height: 14.64px;
+        margin-right: 10px;
+      }
+
+      &.edit-link {
+        &:before {
+          width: 17.42px;
+          height: 17.42px;
+          background: url("../images/icons/edit.png") no-repeat center center;
+        }
+      }
+
+      &.view-link {
+        display: none;
+      }
+
+      &.points-link {
+        &:before {
+          width: 17.42px;
+          height: 17.42px;
+          background: url("../images/icons/points.svg") no-repeat center center;
+        }
+      }
+    }
+
+    .nav-tabs .nav-item:not(:last-child) {
+      margin-bottom: 11px;
+    }
+
+    .user-actions--link {
+      a {
+        display: flex;
+        align-items: center;
+        @include btn-theme($btn-dark, #1e829a);
+        text-transform: uppercase;
+        font-size: 15px;
+        line-height: 20px;
+        padding: 15px 43px;
+        color: $white;
+      }
+    }
   }
 
 }

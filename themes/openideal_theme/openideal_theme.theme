@@ -36,6 +36,13 @@ function openideal_theme_form_system_theme_settings_alter(&$form, FormStateInter
 /**
  * Implements hook_preprocess_HOOK().
  */
+function openideal_theme_preprocess_menu__main(&$variables) {
+  $variables['base_path'] = base_path();
+}
+
+/**
+ * Implements hook_preprocess_HOOK().
+ */
 function openideal_theme_preprocess_html(&$variables) {
   // Add route name as class.
   $route = \Drupal::routeMatch();
@@ -47,9 +54,14 @@ function openideal_theme_preprocess_html(&$variables) {
  * Implements hook_preprocess_HOOK().
  */
 function openideal_theme_preprocess_page(&$variables) {
-  $node = \Drupal::routeMatch()->getParameter('node');
+  $route_match = \Drupal::routeMatch();
+  $node = $route_match->getParameter('node');
   if ($node instanceof NodeInterface) {
     $variables['node_type'] = $node->bundle();
+  }
+
+  if ($route_match->getRouteName() == 'view.frontpage.front_page' || $route_match->getRouteName() == 'entity.user.canonical') {
+    $variables['is_activity_page'] = TRUE;
   }
 }
 
@@ -102,11 +114,13 @@ function openideal_theme_theme_suggestions_comment_alter(array &$suggestions, ar
 /**
  * Implements hook_preprocess_HOOK().
  */
-function openideal_theme_preprocess_field__created(&$variables) {
+function openideal_theme_preprocess_field__user__created(&$variables) {
   $element = $variables['element'];
   if (isset($element['#third_party_settings']['layout_builder']['view_mode'])
-    && $element['#third_party_settings']['layout_builder']['view_mode'] == 'compact') {
-    $variables['label'] = t('Member since:');
+    && (($element['#third_party_settings']['layout_builder']['view_mode'] == 'compact')
+    || ($element['#third_party_settings']['layout_builder']['view_mode'] == 'full'))
+  ) {
+    $variables['label'] = t('Joined');
   }
 }
 
@@ -115,15 +129,6 @@ function openideal_theme_preprocess_field__created(&$variables) {
  */
 function openideal_theme_preprocess_field__field_points(&$variables) {
   $variables['label'] = t('User points:');
-}
-
-/**
- * Implements hook_form_alter().
- */
-function openideal_theme_form_alter(&$form, FormStateInterface $form_state, $form_id) {
-  if ($form_id == 'views_exposed_form' && $form['#id'] == 'views-exposed-form-ideas-all-ideas-page') {
-    $form['search']['#placeholder'] = t('Search');
-  }
 }
 
 /**
@@ -156,4 +161,14 @@ function openideal_theme_preprocess_comment__view__my_comments__my_comments(&$va
     'fragment' => 'comment-' . $comment->id(),
   ]);
   $variables['comment_uri'] = $uri->toString();
+}
+
+/**
+ * Implements hook_preprocess_HOOK().
+ */
+function openideal_theme_preprocess_image(&$variables) {
+  // Set image title same as alt.
+  if (empty($variables['attributes']['title']) && !empty($variables['alt'])) {
+    $variables['attributes']['title'] = $variables['alt'];
+  }
 }

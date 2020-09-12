@@ -20,7 +20,6 @@ dependencies:
   module:
     - layout_builder
     - openideal_idea
-    - openideal_slideshow
     - openideal_statistics
     - text
     - user
@@ -38,19 +37,6 @@ third_party_settings:
           main_class: teaser-top-section
           layout_builder_styles_style: ''
         components:
-          8b503cd1-a9f6-4a78-8578-2156d4a3448e:
-            uuid: 8b503cd1-a9f6-4a78-8578-2156d4a3448e
-            region: first
-            configuration:
-              id: openidel_slideshow_block
-              label: Slideshow
-              provider: openideal_slideshow
-              label_display: '0'
-              image_style: front_page_teaser_large
-              context_mapping:
-                node: layout_builder.entity
-            additional: {  }
-            weight: 0
           6e8f5147-8e1a-46da-984e-ff7d35c8df9d:
             uuid: 6e8f5147-8e1a-46da-984e-ff7d35c8df9d
             region: second
@@ -80,9 +66,9 @@ third_party_settings:
               label_display: '0'
               formatter:
                 label: hidden
-                type: text_trimmed
+                type: text_summary_or_trimmed
                 settings:
-                  trim_length: 340
+                  trim_length: 400
                 third_party_settings: {  }
               context_mapping:
                 entity: layout_builder.entity
@@ -101,6 +87,28 @@ third_party_settings:
                 entity: layout_builder.entity
             additional: {  }
             weight: 1
+          8294f8b9-f1fc-4cc9-ab1f-63f67b8a3272:
+            uuid: 8294f8b9-f1fc-4cc9-ab1f-63f67b8a3272
+            region: first
+            configuration:
+              id: 'field_block:node:idea:field_images'
+              label: Images
+              provider: layout_builder
+              label_display: '0'
+              formatter:
+                label: hidden
+                type: image
+                settings:
+                  offset: 0
+                  limit: 1
+                  image_style: front_page_teaser_large
+                  image_link: content
+                third_party_settings: {  }
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+            additional: {  }
+            weight: 2
         third_party_settings: {  }
       -
         layout_id: openideal_two_columns_teaser
@@ -224,5 +232,4 @@ hidden:
   field_like: true
   field_meta_tags: true
   field_overall_score: true
-  langcode: true
   moderation_state_buttons_widget: true

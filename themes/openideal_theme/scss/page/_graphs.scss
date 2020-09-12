@@ -12,7 +12,15 @@
       }
     }
 
-    & > div:not(:nth-child(2)) {
+    div[data-drupal-messages] {
+      flex-basis: 100%;
+    }
+
+    .block-system-main-block {
+      flex-basis: 100%;
+    }
+
+    & > div:not(:nth-child(3)) {
       flex-basis: 50%;
 
       h2 {
@@ -25,5 +33,16 @@
       }
     }
 
+  }
+}
+
+.openideal-statistics--graphs-reports .container-fluid .main-content {
+  .block-page-title-block {
+    flex-basis: 100%;
+    flex-grow: 1;
+
+    .content {
+      justify-content: flex-start;
+    }
   }
 }

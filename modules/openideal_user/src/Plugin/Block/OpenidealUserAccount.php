@@ -6,6 +6,7 @@ use Drupal\Core\Block\BlockBase;
 use Drupal\Core\Entity\EntityTypeManager;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\Core\Url;
+use Drupal\openideal_challenge\OpenidealContextEntityTrait;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
@@ -24,6 +25,8 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  * )
  */
 class OpenidealUserAccount extends BlockBase implements ContainerFactoryPluginInterface {
+
+  use OpenidealContextEntityTrait;
 
   /**
    * Entity type manager.
@@ -65,8 +68,7 @@ class OpenidealUserAccount extends BlockBase implements ContainerFactoryPluginIn
       '#type' => 'container',
       '#attributes' => ['class' => ['site-navigation--user-account']],
     ];
-    $contexts = $this->getContexts();
-    if (isset($contexts['user']) && ($user = $contexts['user']->getContextValue()) && !$user->isNew() && !$user->isAnonymous()) {
+    if (($user = $this->getEntity($this->getContexts(), 'user')) && !$user->isAnonymous()) {
       $view_builder = $this->entityTypeManager->getViewBuilder('user');
       $author = $view_builder->view($user, 'author');
       $build += [

@@ -54,24 +54,26 @@
 #}
 {# Mobile header. #}
 <div class="site-navigation-toggle d-lg-none">
-    <button id="sidebar-collapse" class="btn">
-        <span>{% include active_theme_path() ~ '/misc/icons/Menu.svg' %}</span>
+    <button id="sidebar-collapse" class="btn sidebar-collapse-button">
+        <span>{% include active_theme_path() ~ '/images/icons/Menu.svg' %}</span>
     </button>
     {% if page.logo %}
         <div class="site-navigation--logo">
             {{ page.logo }}
         </div>
     {% endif %}
-    <button id="site-notification-collapse" class="btn d-md-none">
-        {% include active_theme_path() ~ '/misc/icons/notification.svg' %}
-    </button>
+    {% if is_activity_page %}
+        <button id="site-notification-collapse" class="btn d-md-none site-notification-collapse-button">
+            {% include active_theme_path() ~ '/images/icons/notification.svg' %}
+        </button>
+    {% endif %}
 </div>
 <div id="page-wrapper" class="container-fluid">
     <div id="page" class="row">
         {# Main navigation #}
         <section id="site-navigation" class="site-navigation col-lg-3 col-xxxl-2">
             <div class="site-navigation--dismiss d-lg-none">
-                {% include active_theme_path() ~ '/misc/icons/exit.svg' %}
+                {% include active_theme_path() ~ '/images/icons/exit.svg' %}
             </div>
             <div class="site-navigation--inner">
                 {% block nav %}
@@ -136,7 +138,7 @@
         {% if page.sidebar %}
             <div class="sidebar site-sidebar col-xxl-5 col-lg-6 col-md-8 d-none d-md-block {{ node_type ? 'site-sidebar-node' }} {{ node_type == 'article' ? 'site-sidebar-node--article' }}">
                 <div class="site-sidebar--dismiss d-md-none">
-                    {% include active_theme_path() ~ '/misc/icons/exit.svg' %}
+                    {% include active_theme_path() ~ '/images/icons/exit.svg' %}
                 </div>
                 <aside class="section site-sidebar--inner" role="complementary">
                     {{ page.sidebar }}

@@ -17,7 +17,6 @@ dependencies:
     - layout_builder
     - metatag
     - openideal_idea
-    - openideal_slideshow
     - text
     - user
   theme:
@@ -38,19 +37,6 @@ third_party_settings:
             user_profile: 0
             user_profile_top: 0
         components:
-          86611bf6-2156-4cac-9ad2-563dcc6465af:
-            uuid: 86611bf6-2156-4cac-9ad2-563dcc6465af
-            region: first
-            configuration:
-              id: openidel_slideshow_block
-              label: Slideshow
-              provider: openideal_slideshow
-              label_display: '0'
-              image_style: front_page_teaser
-              context_mapping:
-                node: layout_builder.entity
-            additional: {  }
-            weight: 0
           3781cf52-d073-4c26-9e09-2edc291ab524:
             uuid: 3781cf52-d073-4c26-9e09-2edc291ab524
             region: second
@@ -140,7 +126,29 @@ third_party_settings:
               context_mapping:
                 entity: layout_builder.entity
             additional: {  }
-            weight: 1
+            weight: -9
+          6258b45d-1896-42d7-a44d-bda4798d2e56:
+            uuid: 6258b45d-1896-42d7-a44d-bda4798d2e56
+            region: first
+            configuration:
+              id: 'field_block:node:article:field_images'
+              label: Images
+              provider: layout_builder
+              label_display: '0'
+              formatter:
+                label: hidden
+                type: image
+                settings:
+                  offset: 0
+                  limit: 1
+                  image_style: front_page_teaser
+                  image_link: content
+                third_party_settings: {  }
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+            additional: {  }
+            weight: -10
         third_party_settings: {  }
 id: node.article.front_page_teaser
 targetEntityType: node
@@ -196,5 +204,4 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
-hidden:
-  langcode: true
+hidden: {  }

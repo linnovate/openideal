@@ -5,9 +5,7 @@ dependencies:
     - core.entity_view_mode.user.compact
     - field.storage.user.field_first_name
     - field.storage.user.field_last_name
-    - field.storage.user.field_points
     - field.storage.user.user_picture
-    - image.style.medium
     - image.style.thumbnail
     - system.menu.main
   module:
@@ -1363,14 +1361,14 @@ display:
     display_options:
       display_extenders: {  }
       fields:
-        user_picture:
-          id: user_picture
-          table: user__user_picture
-          field: user_picture
+        rendered_entity:
+          id: rendered_entity
+          table: users
+          field: rendered_entity
           relationship: none
           group_type: group
           admin_label: ''
-          label: Picture
+          label: ''
           exclude: false
           alter:
             alter_text: false
@@ -1403,7 +1401,7 @@ display:
           element_class: ''
           element_label_type: ''
           element_label_class: ''
-          element_label_colon: true
+          element_label_colon: false
           element_wrapper_type: ''
           element_wrapper_class: ''
           element_default_classes: true
@@ -1411,22 +1409,9 @@ display:
           hide_empty: false
           empty_zero: false
           hide_alter_empty: true
-          click_sort_column: target_id
-          type: image
-          settings:
-            image_style: medium
-            image_link: content
-          group_column: ''
-          group_columns: {  }
-          group_rows: true
-          delta_limit: 0
-          delta_offset: 0
-          delta_reversed: false
-          delta_first_last: false
-          multi_type: separator
-          separator: ', '
-          field_api_classes: false
-          plugin_id: field
+          view_mode: compact
+          entity_type: user
+          plugin_id: rendered_entity
         field_first_name:
           id: field_first_name
           table: user__field_first_name
@@ -1498,7 +1483,7 @@ display:
           group_type: group
           admin_label: ''
           label: ''
-          exclude: false
+          exclude: true
           alter:
             alter_text: true
             text: 'Username: {{ field_first_name }}  {{ field_last_name }}'
@@ -1553,139 +1538,6 @@ display:
           separator: ', '
           field_api_classes: false
           plugin_id: field
-        created:
-          id: created
-          table: users_field_data
-          field: created
-          relationship: none
-          group_type: group
-          admin_label: ''
-          label: 'Member since'
-          exclude: false
-          alter:
-            alter_text: false
-            text: 'Mebmer for{{ created }}'
-            make_link: false
-            path: ''
-            absolute: false
-            external: false
-            replace_spaces: false
-            path_case: none
-            trim_whitespace: false
-            alt: ''
-            rel: ''
-            link_class: ''
-            prefix: ''
-            suffix: ''
-            target: ''
-            nl2br: false
-            max_length: 0
-            word_boundary: true
-            ellipsis: true
-            more_link: false
-            more_link_text: ''
-            more_link_path: ''
-            strip_tags: false
-            trim: false
-            preserve_tags: ''
-            html: false
-          element_type: ''
-          element_class: ''
-          element_label_type: ''
-          element_label_class: ''
-          element_label_colon: true
-          element_wrapper_type: ''
-          element_wrapper_class: ''
-          element_default_classes: true
-          empty: ''
-          hide_empty: false
-          empty_zero: false
-          hide_alter_empty: true
-          click_sort_column: value
-          type: timestamp
-          settings:
-            date_format: custom
-            custom_date_format: d/m/Y
-            timezone: ''
-          group_column: value
-          group_columns: {  }
-          group_rows: true
-          delta_limit: 0
-          delta_offset: 0
-          delta_reversed: false
-          delta_first_last: false
-          multi_type: separator
-          separator: ', '
-          field_api_classes: false
-          plugin_id: field
-          entity_type: user
-          entity_field: created
-        field_points:
-          id: field_points
-          table: user__field_points
-          field: field_points
-          relationship: none
-          group_type: group
-          admin_label: ''
-          label: Points
-          exclude: false
-          alter:
-            alter_text: false
-            text: ''
-            make_link: false
-            path: ''
-            absolute: false
-            external: false
-            replace_spaces: false
-            path_case: none
-            trim_whitespace: false
-            alt: ''
-            rel: ''
-            link_class: ''
-            prefix: ''
-            suffix: ''
-            target: ''
-            nl2br: false
-            max_length: 0
-            word_boundary: true
-            ellipsis: true
-            more_link: false
-            more_link_text: ''
-            more_link_path: ''
-            strip_tags: false
-            trim: false
-            preserve_tags: ''
-            html: false
-          element_type: ''
-          element_class: ''
-          element_label_type: ''
-          element_label_class: ''
-          element_label_colon: true
-          element_wrapper_type: ''
-          element_wrapper_class: ''
-          element_default_classes: true
-          empty: '0'
-          hide_empty: false
-          empty_zero: false
-          hide_alter_empty: true
-          click_sort_column: value
-          type: number_decimal
-          settings:
-            thousand_separator: ''
-            prefix_suffix: true
-            decimal_separator: .
-            scale: 0
-          group_column: value
-          group_columns: {  }
-          group_rows: true
-          delta_limit: 0
-          delta_offset: 0
-          delta_reversed: false
-          delta_first_last: false
-          multi_type: separator
-          separator: ', '
-          field_api_classes: false
-          plugin_id: field
       defaults:
         fields: false
         filters: false
@@ -1695,6 +1547,7 @@ display:
         row: false
         exposed_form: false
         css_class: false
+        empty: false
       display_description: ''
       path: community
       menu:
@@ -1709,51 +1562,6 @@ display:
       filters:
         uid_raw:
           id: uid_raw
-          table: users_field_data
-          field: uid_raw
-          relationship: none
-          group_type: group
-          admin_label: ''
-          operator: '!='
-          value:
-            min: ''
-            max: ''
-            value: '0'
-          group: 1
-          exposed: false
-          expose:
-            operator_id: ''
-            label: ''
-            description: ''
-            use_operator: false
-            operator: ''
-            operator_limit_selection: false
-            operator_list: {  }
-            identifier: ''
-            required: false
-            remember: false
-            multiple: false
-            remember_roles:
-              authenticated: authenticated
-            placeholder: ''
-            min_placeholder: ''
-            max_placeholder: ''
-          is_grouped: false
-          group_info:
-            label: ''
-            description: ''
-            identifier: ''
-            optional: true
-            widget: select
-            multiple: false
-            remember: false
-            default_group: All
-            default_group_multiple: {  }
-            group_items: {  }
-          entity_type: user
-          plugin_id: numeric
-        uid_raw_1:
-          id: uid_raw_1
           table: users_field_data
           field: uid_raw
           relationship: none
@@ -1797,6 +1605,91 @@ display:
             group_items: {  }
           entity_type: user
           plugin_id: numeric
+        combine:
+          id: combine
+          table: views
+          field: combine
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: contains
+          value: ''
+          group: 1
+          exposed: true
+          expose:
+            operator_id: combine_op
+            label: Search
+            description: ''
+            use_operator: false
+            operator: combine_op
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: search
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              administrator: '0'
+              manager: '0'
+            placeholder: ''
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          fields:
+            field_first_name: field_first_name
+            field_last_name: field_last_name
+          plugin_id: combine
+        status:
+          id: status
+          table: users_field_data
+          field: status
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: '='
+          value: '1'
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          entity_type: user
+          entity_field: status
+          plugin_id: boolean
       filter_groups:
         operator: AND
         groups:
@@ -1832,14 +1725,16 @@ display:
       style:
         type: default
         options:
-          grouping: {  }
-          row_class: ''
+          row_class: 'col-lg-6 col-md-12'
           default_row_class: true
+          uses_fields: false
       row:
-        type: 'entity:user'
+        type: fields
         options:
-          relationship: none
-          view_mode: compact
+          inline: {  }
+          separator: ''
+          hide_empty: false
+          default_field_elements: true
       exposed_form:
         type: bef
         options:
@@ -1873,20 +1768,36 @@ display:
                 collapsible_label: 'Sort options'
                 is_secondary: false
       css_class: community-page
+      empty:
+        area_text_custom:
+          id: area_text_custom
+          table: views
+          field: area_text_custom
+          relationship: none
+          group_type: group
+          admin_label: ''
+          empty: true
+          tokenize: false
+          content: '<h5>No people available.</h5>'
+          plugin_id: text_custom
     cache_metadata:
       max-age: -1
       contexts:
         - 'languages:language_content'
         - 'languages:language_interface'
+        - url
         - url.query_args
         - 'url.query_args:sort_by'
         - 'url.query_args:sort_order'
         - user.permissions
       tags:
+        - 'config:core.entity_view_display.user.user.author'
+        - 'config:core.entity_view_display.user.user.compact'
+        - 'config:core.entity_view_display.user.user.default'
+        - 'config:core.entity_view_display.user.user.follower'
+        - 'config:core.entity_view_display.user.user.full'
         - 'config:field.storage.user.field_first_name'
         - 'config:field.storage.user.field_last_name'
-        - 'config:field.storage.user.field_points'
-        - 'config:field.storage.user.user_picture'
   page_1:
     display_plugin: page
     id: page_1

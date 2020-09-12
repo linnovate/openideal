@@ -1,0 +1,74 @@
+{#
+/**
+ * @file
+ * Default theme implementation for status messages.
+ *
+ * Displays status, error, and warning messages, grouped by type.
+ *
+ * An invisible heading identifies the messages for assistive technology.
+ * Sighted users see a colored box. See http://www.w3.org/TR/WCAG-TECHS/H69.html
+ * for info.
+ *
+ * Add an ARIA label to the contentinfo area so that assistive technology
+ * user agents will better describe this landmark.
+ *
+ * Available variables:
+ * - message_list: List of messages to be displayed, grouped by type.
+ * - status_headings: List of all status types.
+ * - display: (optional) May have a value of 'status' or 'error' when only
+ *   displaying messages of that specific type.
+ * - attributes: HTML attributes for the element, including:
+ *   - class: HTML classes.
+ *
+ * @see template_preprocess_status_messages()
+ *
+ * @ingroup themeable
+ */
+#}
+{{ attach_library('bootstrap_barrio/alerts') }}
+
+<div data-drupal-messages>
+{% for type, messages in message_list %}
+  {%
+    set classes = [
+      'alert',
+      'alert-dismissible',
+      'fade',
+      'show',
+      'col-24',
+      type == 'status' ? 'alert-success',
+      type == 'warning' ? 'alert-warning',
+      type == 'error' ? 'alert-danger',
+      type == 'info' ? 'alert-info',
+    ]
+  %}
+  {%
+    set role = {
+      'status': 'status',
+      'error': 'alert',
+      'warning': 'alert',
+      'info': 'status',
+    }
+  %}
+  <div aria-label="{{ status_headings[type] }}" {{ attributes|without('role', 'aria-label').addClass(classes).setAttribute('role', role[type]) }}>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+    {% if is_message_with_title or is_message_with_icon %}
+      {% if is_message_with_title %}
+        <h4 id="{{ title_ids[type] }}" class="alert-heading">
+          {{ status_headings[type] }}
+        </h4>
+      {% endif %}
+    {% endif %}
+    {% for message in messages %}
+      {% if loop.last %}
+        {{ message }}
+      {% else %}
+        {{ message }}
+        <hr>
+      {% endif %}
+    {% endfor %}
+  </div>
+{% endfor %}
+</div>

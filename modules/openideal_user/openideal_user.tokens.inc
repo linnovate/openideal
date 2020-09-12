@@ -46,6 +46,8 @@ function openideal_user_tokens($type, $tokens, array $data, array $options, Bubb
         case 'trimmed-comment':
           if ($message->hasField('field_comment_reference')) {
             $comment = $message->field_comment_reference[0]->entity;
+            // Set special restricted html to remove <a> tags.
+            $comment->comment_body[0]->set('format', 'restricted_comments_html');
             $body = $comment->comment_body->view(
               [
                 'label' => 'hidden',

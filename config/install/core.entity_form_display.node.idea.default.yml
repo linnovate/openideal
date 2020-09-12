@@ -19,7 +19,6 @@ dependencies:
     - allowed_formats
     - entity_browser
     - metatag
-    - moderation_state_buttons_widget
     - path
     - text
     - votingapi_reaction
@@ -120,13 +119,6 @@ content:
     third_party_settings: {  }
     type: metatag_firehose
     region: content
-  langcode:
-    type: language_select
-    weight: 2
-    region: content
-    settings:
-      include_locked: true
-    third_party_settings: {  }
   moderation_state:
     type: moderation_state_buttons
     weight: 12
@@ -170,6 +162,11 @@ content:
       match_limit: 10
     region: content
     third_party_settings: {  }
+  url_redirects:
+    weight: 50
+    settings: {  }
+    third_party_settings: {  }
+    region: content
 hidden:
   field_comments: true
   field_overall_score: true

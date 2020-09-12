@@ -16,3 +16,9 @@ services:
       - '@entity_type.manager'
     tags:
       - { name: event_subscriber }
+
+  cache_context.user.is_user_profile_page:
+    class: Drupal\openideal_user\IsUserProfilePageCacheContext
+    arguments: ['@current_user', '@current_route_match']
+    tags:
+      - { name: cache.context }

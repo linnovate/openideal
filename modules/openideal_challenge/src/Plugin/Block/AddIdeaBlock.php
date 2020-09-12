@@ -74,8 +74,13 @@ class AddIdeaBlock extends BlockBase implements ContainerFactoryPluginInterface 
     $node = $this->currentRouteMatch->getParameter('node');
     $route_parameters = ['node_type' => 'idea'];
 
+    // In case of layout builder.
+    if (!($node instanceof NodeInterface) || $node->isNew()) {
+      return [];
+    }
+
     // If displayed in layout builder node isn't presented.
-    if ($node instanceof NodeInterface && $node->bundle() == 'challenge') {
+    if ($node->bundle() == 'challenge') {
       $route_parameters['challenge'] = $node->id();
     }
 

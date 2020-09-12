@@ -1,0 +1,157 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.full
+    - field.field.node.page.body
+    - field.field.node.page.field_attached_docs
+    - field.field.node.page.field_images
+    - node.type.page
+  module:
+    - file
+    - image
+    - layout_builder
+    - openideal_slideshow
+    - text
+    - user
+  theme:
+    - bootstrap_barrio
+third_party_settings:
+  layout_builder:
+    allow_custom: false
+    enabled: true
+    sections:
+      -
+        layout_id: barrio_cardtopimage
+        layout_settings:
+          label: ''
+          layout_builder_styles_style:
+            author: 0
+            user_compact: 0
+            user_profile: 0
+            user_profile_top: 0
+        components:
+          04134f32-c096-4551-ba34-0bb705f07a2c:
+            uuid: 04134f32-c096-4551-ba34-0bb705f07a2c
+            region: second
+            configuration:
+              id: 'field_block:node:page:body'
+              label: Body
+              provider: layout_builder
+              label_display: '0'
+              formatter:
+                label: hidden
+                type: text_default
+                settings: {  }
+                third_party_settings: {  }
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+            additional: {  }
+            weight: 2
+          bc64fdd7-ed87-4eff-9a63-3201d7fde2b9:
+            uuid: bc64fdd7-ed87-4eff-9a63-3201d7fde2b9
+            region: second
+            configuration:
+              id: 'field_block:node:page:field_attached_docs'
+              label: 'Attached docs'
+              provider: layout_builder
+              label_display: '0'
+              formatter:
+                label: above
+                type: file_default
+                settings:
+                  offset: 0
+                  limit: 0
+                  use_description_as_link_text: true
+                third_party_settings: {  }
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+            additional: {  }
+            weight: 3
+          99a93f94-606e-4a80-a1c8-4f2895654fde:
+            uuid: 99a93f94-606e-4a80-a1c8-4f2895654fde
+            region: first
+            configuration:
+              id: openidel_slideshow_block
+              label: Slideshow
+              provider: openideal_slideshow
+              label_display: '0'
+              image_style: slideshow_large
+              context_mapping:
+                node: layout_builder.entity
+            additional: {  }
+            weight: 0
+          67cf0f75-5028-42d7-a702-9dc5b3b6e816:
+            uuid: 67cf0f75-5028-42d7-a702-9dc5b3b6e816
+            region: second
+            configuration:
+              id: 'field_block:node:page:title'
+              label: Title
+              provider: layout_builder
+              label_display: '0'
+              formatter:
+                label: hidden
+                type: string
+                settings:
+                  link_to_entity: false
+                third_party_settings: {  }
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+            additional: {  }
+            weight: 1
+        third_party_settings: {  }
+id: node.page.full
+targetEntityType: node
+bundle: page
+mode: full
+content:
+  addtoany:
+    weight: 101
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+  body:
+    weight: 105
+    label: above
+    settings:
+      offset: 0
+      limit: 0
+    third_party_settings: {  }
+    type: text_default
+    region: content
+  field_attached_docs:
+    weight: 104
+    label: above
+    settings:
+      use_description_as_link_text: true
+      offset: 0
+      limit: 0
+    third_party_settings: {  }
+    type: file_default
+    region: content
+  field_images:
+    weight: 103
+    label: above
+    settings:
+      image_style: ''
+      image_link: ''
+      offset: 0
+      limit: 0
+    third_party_settings: {  }
+    type: image
+    region: content
+  field_paragraphs:
+    type: entity_reference_revisions_entity_view
+    region: content
+    weight: 106
+    settings: {  }
+    third_party_settings: {  }
+  links:
+    weight: 101
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden: {  }

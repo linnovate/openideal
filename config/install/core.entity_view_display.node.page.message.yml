@@ -5,15 +5,14 @@ dependencies:
     - core.base_field_override.node.page.created
     - core.base_field_override.node.page.uid
     - core.entity_view_mode.node.message
+    - field.field.node.page.body
     - field.field.node.page.field_attached_docs
-    - field.field.node.page.field_body
     - field.field.node.page.field_images
     - node.type.page
   module:
     - file
     - image
     - layout_builder
-    - text
     - user
   theme:
     - openideal_theme
@@ -27,25 +26,6 @@ third_party_settings:
         layout_settings:
           label: Content
         components:
-          097b4439-1ab0-4e17-9883-b4edbc119ca5:
-            uuid: 097b4439-1ab0-4e17-9883-b4edbc119ca5
-            region: first
-            configuration:
-              id: 'field_block:node:page:field_body'
-              label: Body
-              provider: layout_builder
-              label_display: '0'
-              formatter:
-                label: hidden
-                type: text_trimmed
-                settings:
-                  trim_length: 100
-                third_party_settings: {  }
-              context_mapping:
-                entity: layout_builder.entity
-                view_mode: view_mode
-            additional: {  }
-            weight: 1
           05a9e030-95d2-47d8-9bcc-246c82a38619:
             uuid: 05a9e030-95d2-47d8-9bcc-246c82a38619
             region: first
@@ -105,13 +85,6 @@ content:
     third_party_settings: {  }
     type: file_default
     region: content
-  field_body:
-    weight: 102
-    label: above
-    settings: {  }
-    third_party_settings: {  }
-    type: text_default
-    region: content
   field_images:
     weight: 103
     label: above
@@ -133,4 +106,4 @@ content:
     settings: {  }
     third_party_settings: {  }
 hidden:
-  langcode: true
+  body: true

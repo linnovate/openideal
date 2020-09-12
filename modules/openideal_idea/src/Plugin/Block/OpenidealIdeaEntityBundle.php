@@ -3,6 +3,7 @@
 namespace Drupal\openideal_idea\Plugin\Block;
 
 use Drupal\Core\Block\BlockBase;
+use Drupal\openideal_challenge\OpenidealContextEntityTrait;
 
 /**
  * Provides a OpenidealIdeaEntityBundle class.
@@ -22,14 +23,16 @@ use Drupal\Core\Block\BlockBase;
  */
 class OpenidealIdeaEntityBundle extends BlockBase {
 
+  use OpenidealContextEntityTrait;
+
   /**
    * {@inheritDoc}
    */
   public function build() {
     $build = [];
-    $contexts = $this->getContexts();
+
     // If displayed in layout builder node isn't presented.
-    if (isset($contexts['entity']) && ($entity = $contexts['entity']->getContextValue()) && !$entity->isNew()) {
+    if ($entity = $this->getEntity($this->getContexts(), 'entity')) {
       $build['content_type'] = [
         '#type' => 'html_tag',
         '#tag' => 'div',

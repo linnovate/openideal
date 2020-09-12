@@ -3,6 +3,7 @@
 namespace Drupal\openideal_challenge\Plugin\Block;
 
 use Drupal\Core\Block\BlockBase;
+use Drupal\openideal_challenge\OpenidealContextEntityTrait;
 
 /**
  * Class ChallengeIdeasTitleWithCount.
@@ -22,16 +23,14 @@ use Drupal\Core\Block\BlockBase;
  */
 class ChallengeIdeasTitleWithCount extends BlockBase {
 
+  use OpenidealContextEntityTrait;
+
   /**
    * {@inheritDoc}
    */
   public function build() {
-    $contexts = $this->getContexts();
     $build = [];
-    if (isset($contexts['node'])
-      && !$contexts['node']->getContextValue()->isNew()) {
-      $node = $contexts['node']->getContextValue();
-
+    if ($node = $this->getEntity($this->getContexts())) {
       $build['content'] = [
         '#type' => 'container',
         '#attributes' => ['class' => ['challenges-ideas-title']],

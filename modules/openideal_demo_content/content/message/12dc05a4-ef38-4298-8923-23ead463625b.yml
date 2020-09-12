@@ -1,0 +1,19 @@
+_meta:
+  version: '1.0'
+  entity_type: message
+  uuid: 12dc05a4-ef38-4298-8923-23ead463625b
+  bundle: created_reply_on_comment
+  default_langcode: en
+  depends:
+    9893c810-c697-4be6-8524-5ea9ddb870cf: user
+    7edc20ad-cb08-4f78-bf2e-0ab7b161479c: comment
+default:
+  uid:
+    -
+      entity: 9893c810-c697-4be6-8524-5ea9ddb870cf
+  created:
+    -
+      value: 1599687507
+  field_comment_reference:
+    -
+      entity: 7edc20ad-cb08-4f78-bf2e-0ab7b161479c

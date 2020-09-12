@@ -23,4 +23,17 @@ function idea_install() {
 
   // Install 'openideal_content' module.
   \Drupal::service('module_installer')->install(['openideal_content']);
+
+  // Force set the administerusersbyrole configuration in fact
+  // the module change it during installation of profile.
+  // @Todo: Further investigation.
+  \Drupal::configFactory()->getEditable('administerusersbyrole.settings')->set('roles', ['manager' => 'safe'])->save();
+
+  // To avoid issues with importing of configurations set system.site
+  // config programmatically.
+  \Drupal::configFactory()->getEditable('system.site')
+    ->set('name', 'OpenideaL')
+    ->set('slogan', 'Ideas, challenges, news')
+    ->set('page', ['front' => '/home'])
+    ->save();
 }

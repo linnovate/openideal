@@ -15,15 +15,20 @@ provider: null
 plugin: openideal_idea_info_block
 settings:
   id: openideal_idea_info_block
-  label: 'Idea info'
+  label: 'Node info'
   provider: openideal_idea
   label_display: '0'
+  use_created: 1
+  use_updated: 1
+  use_schedule: 1
+  context_mapping:
+    node: '@node.node_route_context:node'
 visibility:
   node_type:
     id: node_type
     bundles:
-      article: article
       challenge: challenge
+      article: article
       idea: idea
     negate: false
     context_mapping:

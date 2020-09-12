@@ -1,0 +1,15 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - workflows.workflow.life_cycle_phases
+  module:
+    - content_moderation
+    - node
+id: change_idea_status_to_draft
+label: 'Change Idea status to Draft'
+type: node
+plugin: 'moderation_state_change:node'
+configuration:
+  workflow: life_cycle_phases
+  state: draft

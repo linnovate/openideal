@@ -17,6 +17,7 @@ dependencies:
     - image
     - layout_builder
     - layout_discovery
+    - openideal_user
     - options
     - user
     - views
@@ -28,38 +29,16 @@ third_party_settings:
     enabled: true
     sections:
       -
-        layout_id: openideal_two_columns_teaser
+        layout_id: openideal_user_top_section
         layout_settings:
           label: ''
-          main_class: user-profile-section-top
+          main_class: user-top
           layout_builder_styles_style:
-            user_profile: user_profile
-            user_profile_top: user_profile_top
             author: 0
             user_compact: 0
+            user_profile: 0
+            user_profile_top: 0
         components:
-          3220f5f9-c180-425f-ae78-4f4399690f01:
-            uuid: 3220f5f9-c180-425f-ae78-4f4399690f01
-            region: second
-            configuration:
-              id: 'field_block:user:user:field_points'
-              label: Points
-              provider: layout_builder
-              label_display: '0'
-              formatter:
-                label: inline
-                type: number_decimal
-                settings:
-                  thousand_separator: ''
-                  prefix_suffix: true
-                  decimal_separator: .
-                  scale: 0
-                third_party_settings: {  }
-              context_mapping:
-                entity: layout_builder.entity
-                view_mode: view_mode
-            additional: {  }
-            weight: 6
           6ffc8da3-a2ea-4dbc-a1c8-99c7ea795bd7:
             uuid: 6ffc8da3-a2ea-4dbc-a1c8-99c7ea795bd7
             region: first
@@ -70,9 +49,9 @@ third_party_settings:
               label_display: '0'
               formatter:
                 label: hidden
-                type: image
+                type: openideal_user_user_image
                 settings:
-                  image_style: ''
+                  image_style: user_account_image
                   image_link: content
                 third_party_settings: {  }
               context_mapping:
@@ -80,60 +59,65 @@ third_party_settings:
                 view_mode: view_mode
             additional: {  }
             weight: 7
-          7957471d-28fa-4c9b-b546-47c9f24361bf:
-            uuid: 7957471d-28fa-4c9b-b546-47c9f24361bf
+          51eeba86-d00f-4705-a391-b588b2bd980a:
+            uuid: 51eeba86-d00f-4705-a391-b588b2bd980a
             region: second
             configuration:
-              id: 'field_block:user:user:mail'
-              label: Email
+              id: 'field_block:user:user:created'
+              label: Created
               provider: layout_builder
               label_display: '0'
               formatter:
                 label: inline
-                type: basic_string
-                settings: {  }
+                type: timestamp
+                settings:
+                  date_format: openideal_short_full_date
+                  custom_date_format: ''
+                  timezone: ''
                 third_party_settings: {  }
               context_mapping:
                 entity: layout_builder.entity
                 view_mode: view_mode
             additional: {  }
-            weight: 8
-          5b4563c6-0a87-4c83-90d5-54fa9ccf1244:
-            uuid: 5b4563c6-0a87-4c83-90d5-54fa9ccf1244
+            weight: -9
+          e6212a57-39a4-43b1-867d-34b8d8fa501e:
+            uuid: e6212a57-39a4-43b1-867d-34b8d8fa501e
             region: second
             configuration:
-              id: 'field_block:user:user:field_gender'
-              label: Gender
-              provider: layout_builder
+              id: openideal_user_user_name_block
+              label: 'User name'
+              provider: openideal_user
               label_display: '0'
-              formatter:
-                label: inline
-                type: list_default
-                settings: {  }
-                third_party_settings: {  }
+              hide_label: 1
               context_mapping:
-                entity: layout_builder.entity
-                view_mode: view_mode
+                user: layout_builder.entity
             additional: {  }
-            weight: 9
-          5ace806b-800e-448e-b64d-0141314f6e35:
-            uuid: 5ace806b-800e-448e-b64d-0141314f6e35
+            weight: -10
+          b258f011-0c4f-4d35-889a-d3c504810002:
+            uuid: b258f011-0c4f-4d35-889a-d3c504810002
+            region: third
+            configuration:
+              id: local_tasks_block
+              label: Tabs
+              provider: core
+              label_display: '0'
+              primary: true
+              secondary: true
+              context_mapping: {  }
+            additional: {  }
+            weight: 2
+          f534cd47-9b18-4fa5-b825-645cf9816699:
+            uuid: f534cd47-9b18-4fa5-b825-645cf9816699
             region: second
             configuration:
-              id: 'field_block:user:user:field_age_group'
-              label: 'When were you born?'
-              provider: layout_builder
+              id: openideal_user_logout_block
+              label: 'User logout'
+              provider: openideal_user
               label_display: '0'
-              formatter:
-                label: inline
-                type: list_default
-                settings: {  }
-                third_party_settings: {  }
               context_mapping:
-                entity: layout_builder.entity
-                view_mode: view_mode
+                user: layout_builder.entity
             additional: {  }
-            weight: 10
+            weight: -6
         third_party_settings: {  }
       -
         layout_id: layout_onecol
@@ -153,7 +137,7 @@ third_party_settings:
               items_per_page: none
               context_mapping: {  }
             additional: {  }
-            weight: 2
+            weight: 3
           d4f485be-72b9-4acc-b786-e1282cb53e2f:
             uuid: d4f485be-72b9-4acc-b786-e1282cb53e2f
             region: content
@@ -180,6 +164,29 @@ third_party_settings:
               context_mapping: {  }
             additional: {  }
             weight: 0
+          8e868078-9987-4237-a8d4-455b7ea522a2:
+            uuid: 8e868078-9987-4237-a8d4-455b7ea522a2
+            region: content
+            configuration:
+              id: 'views_block:user_content-my_draft_ideas_block'
+              label: ''
+              provider: views
+              label_display: visible
+              views_label: ''
+              items_per_page: none
+              context_mapping: {  }
+            additional:
+              visibility:
+                a22558a7-2a19-411b-ba09-80d263406ef6:
+                  id: openideal_user_page
+                  is_profile_page: 1
+                  negate: 0
+                  uuid: a22558a7-2a19-411b-ba09-80d263406ef6
+                  roles: null
+                  context_mapping:
+                    user: '@user.current_user_context:current_user'
+              visibility_operator: and
+            weight: 2
         third_party_settings: {  }
 id: user.user.full
 targetEntityType: user
@@ -242,4 +249,3 @@ hidden:
   avatars_avatar_generator: true
   avatars_user_picture: true
   field_first_name: true
-  langcode: true

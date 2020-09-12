@@ -2,7 +2,6 @@ langcode: en
 status: true
 dependencies:
   config:
-    - core.base_field_override.node.challenge.created
     - core.base_field_override.node.challenge.uid
     - core.entity_view_mode.node.teaser
     - field.field.node.challenge.body
@@ -20,7 +19,6 @@ dependencies:
   module:
     - layout_builder
     - openideal_idea
-    - openideal_slideshow
     - openideal_statistics
     - text
     - user
@@ -38,19 +36,6 @@ third_party_settings:
           main_class: teaser-top-section
           layout_builder_styles_style: ''
         components:
-          64b026bf-c178-4789-be3c-73169a8b020c:
-            uuid: 64b026bf-c178-4789-be3c-73169a8b020c
-            region: first
-            configuration:
-              id: openidel_slideshow_block
-              label: Slideshow
-              provider: openideal_slideshow
-              label_display: '0'
-              image_style: front_page_teaser_large
-              context_mapping:
-                node: layout_builder.entity
-            additional: {  }
-            weight: 0
           dbfd8d6c-8d4a-4bbb-ad31-e4f4cfcdb145:
             uuid: dbfd8d6c-8d4a-4bbb-ad31-e4f4cfcdb145
             region: second
@@ -80,9 +65,9 @@ third_party_settings:
               label_display: '0'
               formatter:
                 label: hidden
-                type: text_trimmed
+                type: text_summary_or_trimmed
                 settings:
-                  trim_length: 200
+                  trim_length: 400
                 third_party_settings: {  }
               context_mapping:
                 entity: layout_builder.entity
@@ -101,6 +86,28 @@ third_party_settings:
                 entity: layout_builder.entity
             additional: {  }
             weight: 1
+          a22591d4-fd28-4aee-b9d0-02ae890c3ea1:
+            uuid: a22591d4-fd28-4aee-b9d0-02ae890c3ea1
+            region: first
+            configuration:
+              id: 'field_block:node:challenge:field_images'
+              label: Images
+              provider: layout_builder
+              label_display: '0'
+              formatter:
+                label: hidden
+                type: image
+                settings:
+                  offset: 0
+                  limit: 1
+                  image_style: front_page_teaser_large
+                  image_link: content
+                third_party_settings: {  }
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+            additional: {  }
+            weight: 2
         third_party_settings: {  }
       -
         layout_id: openideal_two_columns_teaser
@@ -128,27 +135,6 @@ third_party_settings:
                 view_mode: view_mode
             additional: {  }
             weight: 0
-          569ee350-c949-4cc9-810b-df4666a501ce:
-            uuid: 569ee350-c949-4cc9-810b-df4666a501ce
-            region: second
-            configuration:
-              id: 'field_block:node:challenge:created'
-              label: 'Authored on'
-              provider: layout_builder
-              label_display: '0'
-              formatter:
-                label: hidden
-                type: timestamp
-                settings:
-                  date_format: custom
-                  custom_date_format: d/m/Y
-                  timezone: ''
-                third_party_settings: {  }
-              context_mapping:
-                entity: layout_builder.entity
-                view_mode: view_mode
-            additional: {  }
-            weight: -9
           95d4b25b-b666-4927-804f-fa9d32f55493:
             uuid: 95d4b25b-b666-4927-804f-fa9d32f55493
             region: second
@@ -175,6 +161,23 @@ third_party_settings:
                 node: layout_builder.entity
             additional: {  }
             weight: -10
+          d65a383c-684a-4973-87e8-4a50ea4cc13d:
+            uuid: d65a383c-684a-4973-87e8-4a50ea4cc13d
+            region: second
+            configuration:
+              id: openideal_idea_info_block
+              label: 'Idea info'
+              provider: openideal_idea
+              label_display: '0'
+              use_created: 0
+              use_updated: 0
+              use_schedule: 1
+              context_mapping:
+                node: layout_builder.entity
+            additional:
+              layout_builder_styles_style:
+                mobile_status_and_statistics: 0
+            weight: -9
         third_party_settings: {  }
 id: node.challenge.teaser
 targetEntityType: node
@@ -211,4 +214,3 @@ hidden:
   field_schedule_close: true
   field_schedule_open: true
   field_supporting_data: true
-  langcode: true

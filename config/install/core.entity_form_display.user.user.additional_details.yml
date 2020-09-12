@@ -21,7 +21,7 @@ bundle: user
 mode: additional_details
 content:
   avatars_user_picture:
-    type: entity_browser_file
+    type: openideal_user_entity_browser_single_file
     weight: 4
     region: content
     settings:
@@ -35,7 +35,7 @@ content:
       view_mode: default
     third_party_settings: {  }
   field_age_group:
-    type: options_select
+    type: options_buttons
     weight: 3
     region: content
     settings: {  }
@@ -49,7 +49,7 @@ content:
       placeholder: ''
     third_party_settings: {  }
   field_gender:
-    type: options_select
+    type: options_buttons
     weight: 2
     region: content
     settings: {  }
@@ -72,7 +72,6 @@ hidden:
   avatars_avatar_generator: true
   contact: true
   field_points: true
-  langcode: true
   language: true
   timezone: true
   user_picture: true

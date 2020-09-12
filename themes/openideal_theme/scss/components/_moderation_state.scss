@@ -1,0 +1,26 @@
+.entity-moderation-form {
+  align-items: center;
+  padding: 10px;
+
+  label {
+    margin-bottom: 0;
+  }
+
+  &__item {
+    &:nth-child(2) {
+      display: flex;
+      align-items: center;
+    }
+
+    &--state-title {
+      margin-right: 5px;
+    }
+  }
+  .form-group {
+    margin-bottom: 0;
+  }
+
+  input[type=submit] {
+    margin-bottom: 0;
+  }
+}

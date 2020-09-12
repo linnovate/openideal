@@ -46,3 +46,21 @@ openideal_three_columns:
       label: Second
     third:
       label: Third
+
+openideal_user_top_section:
+  label: User top section
+  category: Openideal User
+  path: layouts
+  template: user-top-section
+  class: '\Drupal\openideal_theme\Plugin\Layout\OpenidealBEMLayout'
+  default_region: first
+  icon_map:
+    - [first,second]
+    - [third]
+  regions:
+    first:
+      label: First
+    second:
+      label: Second
+    third:
+      label: Third

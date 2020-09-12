@@ -21,7 +21,7 @@
             {{ follow }}
         {% else %}
             <div class="flag-follow--body">
-                {% include active_theme_path() ~ '/misc/icons/follow.svg' %}
+                {% include active_theme_path() ~ '/images/icons/follow.svg' %}
                 <span class="{{ main_class }}--element__text">
                     {{ 'Followed'|t }}
                 </span>
@@ -33,7 +33,7 @@
     {% if comment %}
     <div class="{{ main_class }}--element site-footer-open-comments-btn {{ cols }}">
         <span class="{{ main_class }}--element__icon">
-            {% include active_theme_path() ~ '/misc/icons/comment.svg' %}
+            {% include active_theme_path() ~ '/images/icons/comment.svg' %}
         </span>
         <span class="{{ main_class }}--element__text">
             {{ 'Comment'|t }}
@@ -44,7 +44,7 @@
     {% if share %}
     <div class="{{ main_class }}--element site-footer-open-share-btn {{ cols }}">
         <span class="{{ main_class }}--element__icon">
-            {% include active_theme_path() ~ '/misc/icons/share.svg' %}
+            {% include active_theme_path() ~ '/images/icons/share.svg' %}
         </span>
         <span class="{{ main_class }}--element__text">
             {{ 'Share'|t }}

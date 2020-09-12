@@ -1,0 +1,29 @@
+.path-frontpage {
+  .main-content {
+    .site-branding {
+      margin-bottom: 10px;
+      padding: 0 10px;
+      &--name {
+        font-size: $h1-font-size;
+        color: $btn-dark;
+        font-weight: $font-weight-bold;
+      }
+      &--slogan {
+        font-size: $h1-font-size;
+        font-weight: $font-weight-light;
+        color: $main-font-color;
+      }
+    }
+  }
+}
+
+@media (max-width: 1200px) {
+  .path-frontpage .main-content {
+    .site-branding {
+      &--name,
+      &--slogan {
+        font-size: calc(1.35rem + 1.2vw);
+      }
+    }
+  }
+}
