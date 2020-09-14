@@ -17,7 +17,7 @@ OI is based on Drupal, and therefore it is modular, and allows growth and adapta
 OpenideaL is super easy to install. The following composer command will install the full codebase, together with all the required dependencies and libraries:
 
 ```
-composer create-project linnovate/openideal_project
+composer create-project linnovate/openideal-composer
 ```
 
 Once the command has finishd executing, point your webserver to the `web` directory and start innovating.
