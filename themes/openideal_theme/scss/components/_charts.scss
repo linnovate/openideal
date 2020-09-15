@@ -1,10 +1,16 @@
 .charts {
+  direction: ltr;
+
   .parcoords {
     display: block;
+    position: relative;
   }
 
   .parcoords svg,
   .parcoords canvas {
+    /*!rtl:raw:
+      left: 0;
+    */
     font: 10px sans-serif;
     position: absolute;
   }
@@ -16,6 +22,7 @@
 
   .axis .title {
     font-size: 10px;
+    /*!rtl:ignore*/
     transform: rotate(-21deg) translate(-5px,-6px);
     fill: #222;
   }
@@ -63,4 +70,15 @@
     stroke: #fff;
     stroke-width: 1px;
   }
+}
+
+.entity-by-status,
+.entity-by-category,
+.per-day-node,
+.per-day-vote,
+.per-day-user,
+.per-day-comment,
+.charts {
+  /*!rtl:ignore*/
+  direction: ltr;
 }

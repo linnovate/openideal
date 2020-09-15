@@ -1,26 +1,71 @@
 .block-openidel-idea-node-bundle {
   position: absolute;
+  height: 24px;
   bottom: 0;
   left: 0;
   z-index: 3;
 
   .entity_bundle_label {
-    text-indent: -9999em;
-    width: 129px;
-    height: 24px;
-    font-size: 16px;
+    position: absolute;
+    font-weight: $font-weight-bold;
+    color: $white;
+    bottom: 0;
+    left: 0;
+    background: #F2994A;
+    padding: 1px 14px 2px 12px;
+    border-top-right-radius: 7px;
+    text-transform: uppercase;
+    font-size: 15px;
+    line-height: 20px;
+
+    &:after {
+      border-bottom: 26px solid #1294ca;
+      content: '';
+      display: block;
+      height: 24px;
+      position: absolute;
+      width: 0;
+      right: -9px;
+      bottom: 0;
+      border-right: 8px solid red;
+      border-top-left-radius: 111px;
+      border-right: 13px solid transparent;
+    }
 
     &--challenge {
-      background: url('../images/icons/challenge_label.png') no-repeat;
-      background-size: 129px 25px;
+    }
+
+    &--idea,
+    &--article {
+      border-top-right-radius: 6px;
+
+      &:after {
+        right: -7px;
+        border-top-left-radius: 100%;
+        border-right: 10px solid transparent;
+      }
     }
     &--idea {
-      background: url('../images/icons/idea_label.png') no-repeat;
-      background-size: 129px 25px;
+      background: #64C45C;
+
+      &:after {
+        border-bottom: 26px solid #64C45C;
+      }
     }
     &--article {
-      background: url('../images/icons/news_label.png') no-repeat;
-      background-size: 129px 25px;
+      background: #F85B85;
+
+      &:after {
+        border-bottom: 26px solid #F85B85;
+      }
+    }
+    &--challenge {
+      background: #1294CA;
+
+      &:after {
+        border-bottom: 26px solid #1294CA;
+      }
     }
   }
 }
+

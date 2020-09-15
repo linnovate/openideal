@@ -734,12 +734,7 @@ display:
             format: basic_html
           plugin_id: text
       relationships: {  }
-      arguments:
-        field_challenge_target_id:
-          id: field_challenge_target_id
-          table: node__field_challenge
-          field: field_challenge_target_id
-          plugin_id: numeric
+      arguments: {  }
       display_extenders: {  }
     cache_metadata:
       max-age: -1
@@ -759,7 +754,7 @@ display:
   all_ideas_page:
     display_plugin: page
     id: all_ideas_page
-    display_title: Page
+    display_title: 'Idea (page)'
     position: 1
     display_options:
       display_extenders: {  }
@@ -1420,6 +1415,7 @@ display:
             label: 'Overall score'
           plugin_id: standard
       css_class: 'ideas-teaser-view-page teaser-view-mode teaser-view-mode--teaser'
+      display_description: ''
     cache_metadata:
       max-age: -1
       contexts:
@@ -1453,6 +1449,7 @@ display:
         - 'config:core.entity_view_display.node.idea.message'
         - 'config:core.entity_view_display.node.idea.teaser'
         - 'config:core.entity_view_display.node.page.default'
+        - 'config:core.entity_view_display.node.page.full'
         - 'config:core.entity_view_display.node.page.message'
         - 'config:core.entity_view_display.node.page.teaser'
         - 'config:field.storage.node.body'

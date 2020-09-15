@@ -53,6 +53,7 @@ function stylesRtl() {
   return gulp.src([paths.scss.src])
     .pipe(sourcemaps.init())
     .pipe(sass().on('error', sass.logError))
+    .pipe(rtlcss())
     .pipe(postcss([autoprefixer({
       browsers: [
         'Chrome >= 35',
@@ -66,7 +67,6 @@ function stylesRtl() {
         'Opera >= 12']
     })]))
     .pipe(sourcemaps.write())
-    .pipe(rtlcss())
     .pipe(rename({ suffix: '-rtl' }))
     .pipe(gulp.dest(paths.scss.dest))
     .pipe(cleanCss())

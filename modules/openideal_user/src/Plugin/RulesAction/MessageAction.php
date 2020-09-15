@@ -115,6 +115,7 @@ class MessageAction extends RulesActionBase implements ContainerFactoryPluginInt
       $message->set('field_node_reference', $entity->getCommentedEntity());
     }
 
+    $message->set('langcode', $entity->language()->getId());
     $message->set('field_' . $entity_type . '_reference', $entity);
     $message->save();
   }

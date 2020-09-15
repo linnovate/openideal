@@ -28,7 +28,7 @@ expression:
           operation: '=='
           value: idea
         context_mapping:
-          data: vote.entity_type.value
+          data: vote.entity_id.entity.type.target_id
         context_processors:
           operation:
             rules_tokens: {  }
@@ -47,7 +47,7 @@ expression:
         context_processors: {  }
         provides_mapping: {  }
         condition_id: openideal_user_is_voted
-        negate: false
+        negate: true
       -
         id: rules_condition
         uuid: 077a555d-78ba-4e37-bf84-5bfb1bafeed6
@@ -88,17 +88,15 @@ expression:
         context_values:
           transaction_type_id: user_points
           operation_id: earn_points_for_voting_an_idea
-          transaction_field_amount: '1'
           transaction_field_balance: '0'
           transaction_field_log_message: ''
         context_mapping:
           target_entity: entity_fetched
+          transaction_field_amount: '@openideal_user.user_points_context:points.vote'
         context_processors:
           transaction_type_id:
             rules_tokens: {  }
           operation_id:
-            rules_tokens: {  }
-          transaction_field_amount:
             rules_tokens: {  }
           transaction_field_balance:
             rules_tokens: {  }

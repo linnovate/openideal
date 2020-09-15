@@ -13,7 +13,12 @@
 
     a,
     input {
+      margin-bottom: 0;
       flex-basis: 10%;
+    }
+
+    input {
+      margin-right: 15px;
     }
   }
 
@@ -21,9 +26,13 @@
     padding: 4px 11px;
   }
 
-  .skip-button {
-    width: 100%;
-    @include btn-theme(#ffc107, #ffc210);
-    margin-bottom: 5px;
+  .form-actions {
+    .skip-button {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-basis: auto;
+    }
   }
+
 }

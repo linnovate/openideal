@@ -95,7 +95,10 @@ class OpenidealStatisticsEntityByChart extends BlockBase implements ContainerFac
 
     $build[] = [
       '#type' => 'container',
-      '#attributes' => ['id' => 'entity-by-' . $entity_by],
+      '#attributes' => [
+        'id' => 'entity-by-' . $entity_by,
+        'class' => ['per-day-' . $entity_by],
+      ],
     ];
 
     return $build;

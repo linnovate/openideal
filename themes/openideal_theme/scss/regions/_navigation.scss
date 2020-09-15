@@ -149,7 +149,6 @@
       transition: border-left 0.3s ease-in-out, background-color 0.7s;
       border-radius: 0 30px 30px 0;
       border-left: 0 solid #fff;
-
       a {
         flex-wrap: nowrap;
         display: flex;
@@ -170,6 +169,15 @@
         border-left: 7px solid #3AC0F7;
         background-color: #393F4A;
         transition: border-left 0.3s ease-in-out;
+      }
+
+      &.active {
+        border-left: 7px solid #3AC0F7;
+        background-color: #393F4A;
+
+        &:hover {
+          border-left: 7px solid #3AC0F7;
+        }
       }
     }
   }
