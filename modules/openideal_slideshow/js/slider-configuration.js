@@ -37,7 +37,7 @@
           }
         });
 
-        initPhotoSwipeFromDOM('.my-gallery', mySwiper);
+        initPhotoSwipeFromDOM('.my-gallery', mySwiper, isOneSlide);
       })
 
     }
@@ -50,10 +50,12 @@
    *   The index of the current element.
    * @param {object} mySwiper
    *   The slick HTML element.
+   * @param {bool} isOneSlide
+   *   is one slide
    *
    * @see https://photoswipe.com/documentation/getting-started.html
    */
-  var initPhotoSwipeFromDOM = function (gallerySelector, mySwiper) {
+  var initPhotoSwipeFromDOM = function (gallerySelector, mySwiper, isOneSlide) {
 
     /**
      * Parse slide data (url, title, size ...) from DOM elements
@@ -68,6 +70,7 @@
       figureEl,
       linkEl,
       size,
+      oneSlide,
       item;
 
       for (var i = 0; i < numNodes; i++) {
@@ -76,6 +79,16 @@
         // include only element nodes
         if (figureEl.nodeType !== 1) {
           continue;
+        }
+
+        // The swiper creates clones of node even if there only one slide,
+        // so need to somehow indicate that there only one slide.
+        if (oneSlide) {
+          break;
+        }
+
+        if (!isOneSlide) {
+          oneSlide = true;
         }
 
         linkEl = figureEl.children[0]; // <a> element
@@ -123,7 +136,7 @@
      *
      * @param {element} e
      */
-    var onThumbnailsClick = function (e) {
+    var onThumbnailsClick = function (e, isOneSlide) {
       e = e || window.event;
       e.preventDefault ? e.preventDefault() : (e.returnValue = false);
 
@@ -292,7 +305,7 @@
 
     for (var i = 0, l = galleryElements.length; i < l; i++) {
       galleryElements[i].setAttribute("data-pswp-uid", i + 1);
-      galleryElements[i].onclick = onThumbnailsClick;
+      galleryElements[i].onclick = (e) => onThumbnailsClick(e, isOneSlide);
     }
 
     // Parse URL and open gallery if it contains #&pid=3&gid=1

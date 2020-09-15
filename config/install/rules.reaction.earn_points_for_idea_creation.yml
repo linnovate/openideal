@@ -79,18 +79,16 @@ expression:
         context_values:
           transaction_type_id: user_points
           operation_id: earn_points_on_idea_create
-          transaction_field_amount: '10'
           transaction_field_balance: '0'
           transaction_field_log_message: ''
         context_mapping:
           idea: moderatedEntity
           target_entity: entity_fetched
+          transaction_field_amount: '@openideal_user.user_points_context:points.idea'
         context_processors:
           transaction_type_id:
             rules_tokens: {  }
           operation_id:
-            rules_tokens: {  }
-          transaction_field_amount:
             rules_tokens: {  }
           transaction_field_balance:
             rules_tokens: {  }

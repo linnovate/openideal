@@ -59,7 +59,7 @@
           {{ menus.menu_links(item.below, attributes, menu_level + 1) }}
         {% else %}
           <a href="{{ item.url }}" {{ attributes.addClass(link_classes) }}>
-            <img src="{{ base_path }}{{ active_theme_path() }}/images/icons/{{ item.title }}.png" alt="{{ item.title }}">
+            <img src="{{ base_path }}{{ active_theme_path() }}/images/icons/{{ item.icon_name }}.png" alt="{{ item.title }}">
             <span class="nav-link--text">{{ item.title }}</span>
           </a>
         {% endif %}

@@ -69,7 +69,7 @@ class TransactionBulkExecute extends RulesActionBase implements ContainerFactory
       $plugin_definition,
       $container->get('entity_type.manager'),
       $container->get('plugin.manager.rules_expression'),
-      $container->get('group.membership_loader'),
+      $container->get('group.membership_loader')
     );
   }
 
@@ -105,8 +105,6 @@ class TransactionBulkExecute extends RulesActionBase implements ContainerFactory
       return [];
     }
     $group_content = reset($group_contents);
-    // @Todo: maybe better to not loop through transaction module "rules" actions
-    // but just create userpoints "transaction" manually.
     $group_members_ships = $this->groupMembershipLoader->loadByGroup($group_content->getGroup());
     foreach ($group_members_ships as $content_group) {
       $member = $content_group->getUser();

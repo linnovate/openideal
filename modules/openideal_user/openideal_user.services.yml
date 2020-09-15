@@ -22,3 +22,9 @@ services:
     arguments: ['@current_user', '@current_route_match']
     tags:
       - { name: cache.context }
+
+  openideal_user.user_points_context:
+    class: Drupal\openideal_user\ContextProvider\UserPointsContext
+    arguments: [ '@config.factory' ]
+    tags:
+      - { name: context_provider }

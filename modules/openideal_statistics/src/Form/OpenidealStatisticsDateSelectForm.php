@@ -50,7 +50,7 @@ class OpenidealStatisticsDateSelectForm extends FormBase {
         'fixed' => $this->t('Fixed filter'),
         'custom' => $this->t('Range filter'),
       ],
-      '#default_value' => $query->get(self::DATE_TYPE) ?? NULL,
+      '#default_value' => $query->get(self::DATE_TYPE) ?? self::DATE_TYPE_FIXED,
       '#required' => TRUE,
     ];
     $form['filters_wrapper']['filter_container'] = [

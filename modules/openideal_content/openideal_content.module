@@ -42,6 +42,7 @@ function openideal_content_views_query_alter(ViewExecutable $view, QueryPluginBa
 function openideal_content_form_views_exposed_form_alter(&$form, FormStateInterface $form_state) {
   if ($form['#id'] == 'views-exposed-form-frontpage-front-page'
     || $form['#id'] == 'views-exposed-form-user-admin-people-community-page'
+    || $form['#id'] == 'views-exposed-form-challenges-all-challenges-page'
     || $form['#id'] == 'views-exposed-form-ideas-all-ideas-page') {
     $form['search']['#placeholder'] = t('Search');
 
@@ -56,8 +57,10 @@ function openideal_content_form_views_exposed_form_alter(&$form, FormStateInterf
       ];
     }
 
+    $field = $form['#id'] == 'views-exposed-form-challenges-all-challenges-page' ? 'sort_by' : 'sort_bef_combine';
+
     // Create custom options and hide real one.
-    $form['sort_bef_combine']['#attributes']['class'][] = 'd-none';
+    $form[$field]['#attributes']['class'][] = 'd-none';
     $form['custom_sort'] = [
       '#type' => 'container',
       '#attributes' => ['class' => ['custom-sort']],
@@ -73,7 +76,7 @@ function openideal_content_form_views_exposed_form_alter(&$form, FormStateInterf
       ],
     ];
 
-    foreach ($form['sort_bef_combine']['#options'] as $id => $option) {
+    foreach ($form[$field]['#options'] as $id => $option) {
       $form['custom_sort']['options'][$option] = [
         '#type' => 'html_tag',
         '#tag' => 'span',

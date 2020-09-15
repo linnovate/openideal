@@ -84,17 +84,15 @@ expression:
         context_values:
           transaction_type_id: user_points
           operation_id: earn_points_for_posting_a_comment
-          transaction_field_amount: '1'
           transaction_field_balance: '0'
           transaction_field_log_message: ''
         context_mapping:
           target_entity: entity_fetched
+          transaction_field_amount: '@openideal_user.user_points_context:points.comment'
         context_processors:
           transaction_type_id:
             rules_tokens: {  }
           operation_id:
-            rules_tokens: {  }
-          transaction_field_amount:
             rules_tokens: {  }
           transaction_field_balance:
             rules_tokens: {  }

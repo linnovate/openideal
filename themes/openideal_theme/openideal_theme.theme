@@ -6,6 +6,7 @@
  */
 
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\StringTranslation\TranslatableMarkup;
 use Drupal\Core\Url;
 use Drupal\node\NodeInterface;
 
@@ -38,6 +39,18 @@ function openideal_theme_form_system_theme_settings_alter(&$form, FormStateInter
  */
 function openideal_theme_preprocess_menu__main(&$variables) {
   $variables['base_path'] = base_path();
+  // Set title as icon name.
+  // @Todo: change logic to not rely on item title.
+  if (!empty($variables['items'])) {
+    foreach ($variables['items'] as $key => $item) {
+      if (($title = $item['original_link']->getPluginDefinition()['title']) instanceof TranslatableMarkup) {
+        $variables['items'][$key]['icon_name'] = $title->getUntranslatedString();
+      }
+      else {
+        $variables['items'][$key]['icon_name'] = $title;
+      }
+    }
+  }
 }
 
 /**

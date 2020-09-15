@@ -18,7 +18,8 @@ class OpenidealCommentViewBuilder extends CommentViewBuilder {
     parent::buildComponents($build, $entities, $displays, $view_mode);
 
     // Point last comment, because it always should have closing div.
-    $build[array_key_last($entities)]['#comment_section_end'] = TRUE;
+    end($entities);
+    $build[key($entities)]['#comment_section_end'] = TRUE;
   }
 
   /**

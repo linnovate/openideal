@@ -24,3 +24,13 @@ openideal_user.user_points.add_transaction_form:
         type: entity:user
       transaction_type:
         type: entity:transaction_type
+
+openideal_user.user_points_configuration_form:
+  path: '/admin/config/openideal/configuration/user-points'
+  defaults:
+    _form: '\Drupal\openideal_user\Form\OpenidealUserPointsConfigurationForm'
+    _title: 'User Points Configuration'
+  requirements:
+    _permission: 'access to user points configuration forms'
+  options:
+    _admin_route: TRUE
