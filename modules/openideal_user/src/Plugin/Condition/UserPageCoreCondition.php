@@ -74,7 +74,7 @@ class UserPageCoreCondition extends ConditionPluginBase implements ContainerFact
    */
   public function defaultConfiguration() {
     return [
-      'is_profile_page' => NULL,
+      'is_profile_page' => FALSE,
     ] + parent::defaultConfiguration();
   }
 
@@ -82,7 +82,7 @@ class UserPageCoreCondition extends ConditionPluginBase implements ContainerFact
    * {@inheritdoc}
    */
   public function submitConfigurationForm(array &$form, FormStateInterface $form_state) {
-    $this->configuration['is_profile_page'] = $form_state->getValue('is_profile_page');
+    $this->configuration['is_profile_page'] = (bool) $form_state->getValue('is_profile_page');
     parent::submitConfigurationForm($form, $form_state);
   }
 
@@ -90,7 +90,7 @@ class UserPageCoreCondition extends ConditionPluginBase implements ContainerFact
    * {@inheritdoc}
    */
   public function summary() {
-    if (!empty($this->configuration['negate'])) {
+    if ($this->configuration['negate']) {
       return $this->t("The page is the user's page");
     }
     else {
