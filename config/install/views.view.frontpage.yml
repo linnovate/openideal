@@ -819,16 +819,16 @@ display:
           1: AND
       sorts:
         sticky:
+          id: sticky
+          table: node_field_data
+          field: sticky
+          relationship: none
+          group_type: group
           admin_label: ''
+          order: DESC
+          exposed: false
           expose:
             label: ''
-          exposed: false
-          field: sticky
-          group_type: group
-          id: sticky
-          order: DESC
-          relationship: none
-          table: node_field_data
           plugin_id: boolean
           entity_type: node
           entity_field: sticky

@@ -15,10 +15,12 @@ dependencies:
     - field.field.node.idea.field_meta_tags
     - field.field.node.idea.field_overall_score
     - node.type.idea
+    - workflows.workflow.life_cycle_phases
   module:
     - allowed_formats
     - entity_browser
     - metatag
+    - moderation_state_buttons_widget
     - path
     - text
     - votingapi_reaction
@@ -139,6 +141,13 @@ content:
     weight: 4
     region: content
     third_party_settings: {  }
+  sticky:
+    type: boolean_checkbox
+    weight: 16
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
   title:
     type: string_textfield
     weight: 0
@@ -163,12 +172,11 @@ content:
     region: content
     third_party_settings: {  }
   url_redirects:
-    weight: 50
+    weight: 15
+    region: content
     settings: {  }
     third_party_settings: {  }
-    region: content
 hidden:
   field_comments: true
   field_overall_score: true
   promote: true
-  sticky: true

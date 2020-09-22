@@ -8,6 +8,7 @@ dependencies:
     - field.storage.user.user_picture
     - image.style.thumbnail
     - system.menu.main
+    - user.role.authenticated
   module:
     - better_exposed_filters
     - image
@@ -1548,6 +1549,7 @@ display:
         exposed_form: false
         css_class: false
         empty: false
+        access: false
       display_description: ''
       path: community
       menu:
@@ -1780,6 +1782,11 @@ display:
           tokenize: false
           content: '<h5>No people available.</h5>'
           plugin_id: text_custom
+      access:
+        type: role
+        options:
+          role:
+            authenticated: authenticated
     cache_metadata:
       max-age: -1
       contexts:
@@ -1789,7 +1796,7 @@ display:
         - url.query_args
         - 'url.query_args:sort_by'
         - 'url.query_args:sort_order'
-        - user.permissions
+        - user.roles
       tags:
         - 'config:core.entity_view_display.user.user.author'
         - 'config:core.entity_view_display.user.user.compact'
