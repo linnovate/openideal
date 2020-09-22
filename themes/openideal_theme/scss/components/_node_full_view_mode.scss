@@ -15,6 +15,9 @@
     .block-field-blocknodepagetitle,
     .block-field-blocknodearticletitle,
     .block-field-blocknodechallengetitle {
+      a {
+        color: inherit;
+      }
       font-size: 1.6rem;
       line-height: 30px;
       margin-bottom: 26px;
@@ -59,9 +62,23 @@
       }
     }
 
+    .idea-statistics-block {
+      margin-bottom: 0;
+
+      &--list {
+        margin: 0;
+      }
+    }
   }
 
   .block-field-blocknodearticlefield-tags {
+    margin-top: 10px;
+
+    h2 {
+      font-size: 1rem;
+      font-weight: 700;
+    }
+
     .field__items {
       display: flex;
       li {

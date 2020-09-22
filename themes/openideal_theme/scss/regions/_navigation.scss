@@ -39,6 +39,7 @@
     a {
       padding: 9.5px 1.3em;
       @include btn-theme(#27C0FF, #27C8f9);
+      font-weight: 400;
       position: relative;
       font-size: $font-size-sm;
       line-height: 21px;
@@ -87,10 +88,14 @@
       display: flex;
       flex-flow: column wrap;
       align-items: center;
-      margin-bottom: 10px;
+      margin-bottom: 29px;
       margin-top: 36px;
       &:hover {
         color: $white;
+      }
+
+      img {
+        max-width: calc(100% - .2em);
       }
     }
   }
@@ -140,7 +145,7 @@
   }
 
   &--top {
-    margin-top: 5px;
+    margin-top: 19.5px;
   }
 
   &__menu-list {

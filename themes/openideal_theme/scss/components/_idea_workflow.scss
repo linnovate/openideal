@@ -1,0 +1,451 @@
+.idea-statistics-and-status-block--status {
+  position: relative;
+
+  &::before {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    display: block;
+    width: 3px;
+    content: "";
+  }
+
+  &__container {
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 130%;
+    padding: 6px 12px;
+
+    &::before {
+      content: "";
+      width: 11.51px;
+      height: 11.51px;
+      border-width: 2px;
+      top: 50%;
+      transform: translateY(-50%);
+      left: -4.251px;
+      border-style: solid;
+      border-radius: 50%;
+      position: absolute;
+      display: block;
+    }
+  }
+
+  &.draft,
+  &.draft_approval {
+    & {
+      &::before {
+        background: $prepare;
+      }
+    }
+
+    .idea-statistics-and-status-block--status__container {
+      background: #F0F2F3;
+      color: $prepare;
+
+      &::before {
+        background: #F0F2F3;
+        border-color: $prepare;
+      }
+    }
+  }
+
+  &.published {
+    & {
+      &::before {
+        background: $discuss;
+      }
+    }
+
+    .idea-statistics-and-status-block--status__container {
+      background: #E7F4FA;
+      color: $discuss;
+
+      &::before {
+        background: #E7F4FA;
+        border-color: $discuss;
+      }
+    }
+  }
+
+  &.ex,
+  &.needs_work {
+    & {
+      &::before {
+        background: $refine;
+      }
+    }
+
+    .idea-statistics-and-status-block--status__container {
+      background: #E8F8F6;
+      color: $refine;
+
+      &::before {
+        background: #E8F8F6;
+        border-color: $refine;
+      }
+    }
+  }
+
+  &.launched {
+    & {
+      &::before {
+        background: #E1B83B;
+      }
+    }
+
+    .idea-statistics-and-status-block--status__container {
+      background: #FFF9E3;
+      color: #E1B83B;
+
+      &::before {
+        background: #FFF9E3;
+        border-color: #E1B83B;
+      }
+    }
+  }
+
+  &.approved {
+    & {
+      &::before {
+        background: $innovate;
+      }
+    }
+
+    .idea-statistics-and-status-block--status__container {
+      background: #F3FFF2;
+      color: $innovate;
+
+      &::before {
+        background: #F3FFF2;
+        border-color: $innovate;
+      }
+    }
+  }
+
+  &.postponed,
+  &.rejected {
+    & {
+      &::before {
+        background: $reject;
+      }
+    }
+
+    .idea-statistics-and-status-block--status__container {
+      background: #FDEEEE;
+      color: $reject;
+
+      &::before {
+        background: #FDEEEE;
+        border-color: $reject;
+      }
+    }
+  }
+
+  &.postponed,
+  &.draft_approval {
+    .idea-statistics-and-status-block--status__container::before {
+      left: -4px;
+    }
+  }
+
+  &.published {
+    .idea-statistics-and-status-block--status__container::before {
+      left: -4.151px;
+    }
+  }
+
+  &.rejected {
+    .idea-statistics-and-status-block--status__container::before {
+      left: -4px;
+    }
+  }
+
+  &.approved {
+    .idea-statistics-and-status-block--status__container::before {
+      left: -4.6px;
+    }
+  }
+}
+
+.idea-workflow-full {
+  color: #828282;
+  text-transform: capitalize;
+
+  &--group-title {
+    margin-bottom: 18.5px;
+    font-weight: $font-weight-bold;
+    color: #343352;
+    font-size: 16px;
+    line-height: 130%;
+    position: relative;
+    padding-left: 12px;
+
+    &:first-letter {
+      text-transform: uppercase;
+    }
+
+    &::before {
+      content: "2";
+      background: $discuss;
+      width: 20px;
+      height: 20px;
+      display: block;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      left: -19.2px;
+      text-align: center;
+      border-radius: 50%;
+      color: #fff;
+    }
+  }
+
+  .current_group li:not(:last-child) {
+    margin-bottom: 8px;
+  }
+
+  &--indicator {
+    padding-left: 12px;
+
+    &::before {
+      content: "1";
+      background-color: #C7D2EB;
+      width: 20px;
+      font-weight: $font-weight-bold;
+      height: 20px;
+      display: block;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      left: -19.2px;
+      text-align: center;
+      border-radius: 50%;
+      color: #fff;
+    }
+  }
+
+  &--group-states {
+    font-size: 14px;
+    position: relative;
+    line-height: 144%;
+    padding-left: 49px;
+
+    &::before {
+      content: "";
+      position: absolute;
+      display: block;
+      top: 50%;
+      transform: translateY(-50%);
+      left: 29px;
+      width: 11.53px;
+      height: 11.53px;
+      background: #C7D2EB;
+      border-radius: 50%;
+    }
+  }
+
+  &--active-state {
+    color: #343352;
+    font-weight: $font-weight-bold;
+
+    &::before {
+      background: $discuss;
+      box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.15);
+    }
+  }
+
+  & > ul {
+    position: relative;
+    padding: 0 20px;
+
+    &::before {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 10px;
+      display: block;
+      width: 2.11px;
+      content: "";
+    }
+
+    li {
+      padding: 0;
+      border: unset;
+      background-color: unset;
+      position: relative;
+    }
+
+    & > li {
+      font-size: 16px;
+      line-height: 130%;
+    }
+
+    & > li:not(:last-of-type) {
+      margin-bottom: 18px;
+    }
+  }
+
+  &--group-wrapper {
+    display: flex;
+  }
+}
+
+.idea-workflow-full--group-reject {
+  .idea-workflow-full--active-state::before,
+  .idea-workflow-full--group-title::before {
+    background-color: $reject;
+  }
+
+  .idea-workflow-full--group-title::before {
+    content: "4";
+  }
+}
+
+.idea-workflow-full--group-prepare {
+  .idea-workflow-full--active-state::before,
+  .idea-workflow-full--group-title::before {
+    background-color: $prepare;
+  }
+
+  .idea-workflow-full--group-title::before {
+    content: "1";
+  }
+}
+
+.idea-workflow-full--group-innovate {
+  .idea-workflow-full--active-state::before,
+  .idea-workflow-full--group-title::before {
+    background-color: $innovate;
+  }
+
+  .idea-workflow-full--group-title::before {
+    content: "4";
+  }
+}
+
+.idea-workflow-full--group-discuss {
+  .idea-workflow-full--active-state::before,
+  .idea-workflow-full--group-title::before {
+    background-color: $discuss;
+  }
+}
+
+.idea-workflow-full--group-refine {
+  .idea-workflow-full--active-state::before,
+  .idea-workflow-full--group-title::before {
+    background-color: $refine;
+  }
+
+  .idea-workflow-full--group-title::before {
+    content: "3";
+  }
+}
+
+.idea-workflow-full--group-rejected,
+.idea-workflow-full--group-postponed {
+  .idea-workflow-full--group-title {
+    margin-bottom: 0;
+
+    &::before {
+      content: "4";
+      background-color: $reject;
+    }
+  }
+}
+
+.idea-workflow-full--group-wrapper {
+  .idea-workflow-full--checked.idea-workflow-full--group-reject::before {
+    background-color: $reject;
+    content: "";
+  }
+}
+
+.idea-workflow-full--group-wrapper {
+  .idea-workflow-full--checked.idea-workflow-full--group-prepare::before {
+    background-color: $prepare;
+    content: "";
+  }
+}
+
+.idea-workflow-full--group-wrapper {
+  .idea-workflow-full--checked.idea-workflow-full--group-innovate::before {
+    background-color: $innovate;
+    content: "";
+  }
+}
+
+.idea-workflow-full--group-wrapper {
+  .idea-workflow-full--checked.idea-workflow-full--group-discuss::before {
+    background-color: $discuss;
+    content: "";
+  }
+}
+
+.idea-workflow-full--group-wrapper {
+  .idea-workflow-full--checked.idea-workflow-full--group-refine::before {
+    background-color: $refine;
+    content: "";
+  }
+}
+
+.idea-workflow-full--group-wrapper {
+  .idea-workflow-full--group-reject::before {
+    content: "4";
+  }
+}
+
+.idea-workflow-full--group-wrapper {
+  .idea-workflow-full--group-prepare::before {
+    content: "1";
+  }
+}
+
+.idea-workflow-full--group-wrapper {
+  .idea-workflow-full--group-innovate::before {
+    content: "4";
+  }
+}
+
+.idea-workflow-full--group-wrapper {
+  .idea-workflow-full--group-discuss::before {
+    content: "2";
+  }
+}
+
+.idea-workflow-full--group-wrapper {
+  .idea-workflow-full--group-refine::before {
+    content: "3";
+  }
+}
+
+.idea-workflow-full--group-wrapper {
+  .idea-workflow-full--checked::before {
+    background-image: url("../images/icons/checked.png");
+    background-position: center center;
+    background-repeat: no-repeat;
+    content: "";
+  }
+}
+
+.idea-workflow-full--prepare > ul::before {
+  background: linear-gradient(180deg, $prepare 0.01%, $prepare 25.38%, #C7D2EB 26.98%, #C7D2EB 100%);
+}
+
+.idea-workflow-full--discuss > ul::before {
+  background: linear-gradient(180deg, $prepare 0.01%, $prepare 25.38%, $discuss 25.39%, $discuss 51.51%, #C7D2EB 52.09%, #C7D2EB 100%);
+}
+
+.idea-workflow-full--rejected > ul::before,
+.idea-workflow-full--postponed > ul::before {
+  background: linear-gradient(180deg, #676C72 3.95%, #676C72 24.21%, #1294CA 38.75%, #1EBCA1 54.45%, #1EBCA1 68.61%, #EB5757 84.31%, #EB5757 102.16%);
+}
+
+.idea-workflow-full--innovate > ul::before {
+  background: linear-gradient(180deg, #676C72 0.01%, #676C72 25.38%, #1294CA 25.39%, #1294CA 43.22%, #1EBCA1 44.73%, #7BC67D 64.91%, #1EBCA1 64.92%, #64C35C 64.93%, #64C35C 82.29%, #C7D2EB 88.02%, #C7D2EB 100%);
+}
+
+.idea-workflow-full--refine > ul::before {
+  background: linear-gradient(180deg, #676C72 0.01%, #676C72 24.75%, #1294CA 25.28%, #1294CA 45.54%, #1EBCA1 48.73%, #1EBCA1 67.12%, #C7D2EB 67.39%, #C7D2EB 100%);
+}
