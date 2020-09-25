@@ -92,8 +92,8 @@ class OpenidealIdeaUpdateInfo extends BlockBase implements ContainerFactoryPlugi
     $build = [];
     if ($node = $this->getEntity($this->getContexts())) {
       $build = ['#theme' => 'openideal_idea_info_block'];
-      $created = $this->dateFormatter->format($node->getCreatedTime(), 'html_date');
-      $changed = $this->dateFormatter->format($node->getChangedTime(), 'html_date');
+      $created = $this->dateFormatter->format($node->getCreatedTime(), 'openideal_date');
+      $changed = $this->dateFormatter->format($node->getChangedTime(), 'openideal_date');
       if ($node->bundle() == 'challenge') {
         $status = $this->getChallengeStatus($node) + ['access' => $this->configuration['use_schedule']];
         $build['#content']['challenge_status'] = $status;
