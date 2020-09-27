@@ -35,6 +35,15 @@ function openideal_idea_theme() {
 }
 
 /**
+ * Implements hook_local_tasks_alter().
+ */
+function openideal_idea_local_tasks_alter(&$local_tasks) {
+  if (isset($local_tasks['content_moderation.moderated_content']['title'])) {
+    $local_tasks['content_moderation.moderated_content']['title'] = t('Ideas');
+  }
+}
+
+/**
  * Implements hook_cron().
  */
 function openideal_idea_cron() {
