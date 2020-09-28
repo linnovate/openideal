@@ -3,3 +3,37 @@
   color: #595959;
   font-size: 0.95em;
 }
+
+input[type="date"] {
+  position: relative;
+  width: 145px;
+  height: 30px;
+  color: white;
+  margin-right: 5px;
+}
+
+.field--type-created .container-inline {
+  display: flex;
+}
+
+input[type="date"]:before {
+  position: absolute;
+  content: attr(data-date);
+  color: #595959;
+  display: inline-block;
+}
+
+input[type="date"]::-webkit-datetime-edit,
+input[type="date"]::-webkit-inner-spin-button,
+input[type="date"]::-webkit-clear-button {
+  display: none;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 0;
+  color: black;
+  opacity: 1;
+}
