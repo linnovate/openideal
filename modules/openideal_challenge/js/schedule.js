@@ -3,8 +3,30 @@
  * Attaches behaviors for the Openideal Challenge module's schedule widget.
  */
 
-(function ($, Drupal, window, document) {
+(function ($, Drupal, drupalSettings) {
 
+  "use strict";
+
+  /**
+   * Generate default date string e.g. d/m/Y.
+   *
+   * @param {Date} date
+   *   Date to format.
+   *
+   * @returns {string}
+   *   Formatted string.
+   */
+  function generateDefaultDate(date) {
+    if (!(date instanceof Date)) {
+      // @Todo: throw error?
+      return;
+    }
+    var language = drupalSettings.path.currentLanguage;
+    var year = new Intl.DateTimeFormat(language, {year: 'numeric'}).format(date)
+    var month = new Intl.DateTimeFormat(language, {month: '2-digit'}).format(date)
+    var day = new Intl.DateTimeFormat(language, {day: '2-digit'}).format(date)
+    return `${day}/${month}/${year}`;
+  }
   /**
    * Schedule behaviours.
    *
@@ -17,14 +39,9 @@
     attach: function (context, settings) {
       $('.challenge-schedule-local-machine-time').once('openideal_challenge_schedule').each(function () {
         // Format the date.
-        var date = new Date();
-        const year = new Intl.DateTimeFormat('en', {year: 'numeric'}).format(date)
-        const month = new Intl.DateTimeFormat('en', {month: '2-digit'}).format(date)
-        const day = new Intl.DateTimeFormat('en', {day: '2-digit'}).format(date)
-        var localFormattedDate = `${day}/${month}/${year}`;
         $(this).html(Drupal.t('Your time is: @time. <br/> Leave blank to use the time of submission ("Now").',
         {
-          '@time': localFormattedDate,
+          '@time': generateDefaultDate(new Date()),
         })
         )
       })
@@ -40,14 +57,14 @@
    *   Attach dynamic format change to date.
    */
   Drupal.behaviors.openidealChallengeHMTL5Date = {
-    attach: function () {
+    attach: function (context, settings) {
       $('input[type="date"]').once('openideal_challenge_html5_date').each(function () {
         $(this).on('change', function () {
-          var attribute = this.value == '' ? 'dd/mm/yyyy' : moment(this.value, 'YYYY-MM-DD').format(this.getAttribute('data-date-format'))
+          var attribute = !this.value ? 'dd/mm/yyyy' : generateDefaultDate(new Date(this.value));
           this.setAttribute('data-date', attribute);
         }).trigger("change")
       })
     }
   }
 }
-)(jQuery, Drupal);
+)(jQuery, Drupal, drupalSettings);
