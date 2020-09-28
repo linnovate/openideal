@@ -31,7 +31,6 @@ class OpenidealTimestampDatetimeWidget extends TimestampDatetimeWidget {
     $element['value']['#description'] = $this->t('<div>Note that scheduling is triggered using the server time.</div><div>Current server time is: %format.</div>', ['%format' => Datetime::formatExample($date_format)]);
     $element['value']['#date_date_element'] = 'date';
     $element['value']['#date_time_element'] = 'none';
-    $element['value']['#attributes']['data-date-format'] = 'DD/MM/YYYY';
     $element['#suffix'] = '<div class="challenge-schedule-local-machine-time"></div>';
     $element['#attached']['library'][] = 'openideal_challenge/openideal_challenge.schedule';
     return $element;

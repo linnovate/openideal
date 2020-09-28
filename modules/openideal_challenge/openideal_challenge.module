@@ -32,7 +32,6 @@ function openideal_challenge_form_node_form_alter(&$form, FormStateInterface $fo
   if (isset($form['created']['widget'][0]['value'])) {
     $value = &$form['created']['widget'][0]['value'];
     $date_format = DateFormat::load('openideal_date')->getPattern();
-    $value['#attributes']['data-date-format'] = 'DD/MM/YYYY';
     $value['#description'] = t('<div>Note that scheduling is triggered using the server time.</div><div>Current server time is: %format.</div>', ['%format' => Datetime::formatExample($date_format)]);
     $form['#attached']['library'][] = 'openideal_challenge/openideal_challenge.schedule';
   }
