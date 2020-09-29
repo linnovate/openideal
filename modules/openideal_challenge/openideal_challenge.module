@@ -5,6 +5,8 @@
  * Contains openideal_challenge.module.
  */
 
+use Drupal\Core\Datetime\Element\Datetime;
+use Drupal\Core\Datetime\Entity\DateFormat;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\node\NodeInterface;
@@ -21,6 +23,18 @@ function openideal_challenge_cron() {
   $challenge_service = \Drupal::service('openideal_challenge.challenge_service');
   $challenge_service->openChallenges();
   $challenge_service->closeChallenges();
+}
+
+/**
+ * Implements hook_form_BASE_FORM_ID_alter().
+ */
+function openideal_challenge_form_node_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  if (isset($form['created']['widget'][0]['value'])) {
+    $value = &$form['created']['widget'][0]['value'];
+    $date_format = DateFormat::load('openideal_date')->getPattern();
+    $value['#description'] = t('<div>Note that scheduling is triggered using the server time.</div><div>Current server time is: %format.</div>', ['%format' => Datetime::formatExample($date_format)]);
+    $form['#attached']['library'][] = 'openideal_challenge/openideal_challenge.schedule';
+  }
 }
 
 /**
@@ -52,6 +66,12 @@ function openideal_challenge_form_alter(&$form, FormStateInterface $form_state, 
     '#group' => 'advanced',
   ];
 
+  if (isset($form['field_schedule_open']['widget'][0]['value']['#attributes'])) {
+    $form['field_schedule_open']['widget'][0]['value']['#attributes']['min'] = \Drupal::service('date.formatter')->format(\Drupal::time()->getRequestTime(), 'html_date');
+  }
+  if (isset($form['field_schedule_close']['widget'][0]['value']['#attributes'])) {
+    $form['field_schedule_close']['widget'][0]['value']['#attributes']['min'] = \Drupal::service('date.formatter')->format(\Drupal::time()->getRequestTime(), 'html_date');
+  }
   $form['challenge_scheduling_options'][] = $form['field_is_open'];
   $form['challenge_scheduling_options'][] = $form['field_schedule_open'];
   $form['challenge_scheduling_options'][] = $form['field_schedule_close'];

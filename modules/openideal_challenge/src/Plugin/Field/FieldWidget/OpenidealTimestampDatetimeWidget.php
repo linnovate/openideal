@@ -27,7 +27,7 @@ class OpenidealTimestampDatetimeWidget extends TimestampDatetimeWidget {
    */
   public function formElement(FieldItemListInterface $items, $delta, array $element, array &$form, FormStateInterface $form_state) {
     $element = parent::formElement($items, $delta, $element, $form, $form_state);
-    $date_format = DateFormat::load('html_date')->getPattern();
+    $date_format = DateFormat::load('openideal_date')->getPattern();
     $element['value']['#description'] = $this->t('<div>Note that scheduling is triggered using the server time.</div><div>Current server time is: %format.</div>', ['%format' => Datetime::formatExample($date_format)]);
     $element['value']['#date_date_element'] = 'date';
     $element['value']['#date_time_element'] = 'none';
