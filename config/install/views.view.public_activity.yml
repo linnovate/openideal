@@ -7,6 +7,7 @@ dependencies:
     - field.storage.message.field_user_reference
     - flag.flag.follow
     - message.template.created_reply_on_comment
+    - message.template.user_mention
   module:
     - comment
     - flag
@@ -14,7 +15,7 @@ dependencies:
     - node
     - user
 id: public_activity
-label: 'Public activity'
+label: 'Activity feed'
 module: views
 description: ''
 tag: ''
@@ -764,11 +765,100 @@ display:
           entity_type: comment
           entity_field: uid
           plugin_id: numeric
+        template_1:
+          id: template_1
+          table: message_field_data
+          field: template
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: in
+          value:
+            user_mention: user_mention
+          group: 3
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          entity_type: message
+          entity_field: template
+          plugin_id: bundle
+        uid_2:
+          id: uid_2
+          table: message_field_data
+          field: uid
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: '='
+          value:
+            min: ''
+            max: ''
+            value: '[user-page-id]'
+          group: 3
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            placeholder: ''
+            min_placeholder: ''
+            max_placeholder: ''
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          entity_type: message
+          entity_field: uid
+          plugin_id: numeric
       filter_groups:
         operator: OR
         groups:
           1: OR
           2: AND
+          3: AND
       arguments: {  }
       cache:
         type: none
@@ -792,6 +882,57 @@ display:
       display_extenders: {  }
       block_description: 'Public activity'
       display_description: ''
+      filters:
+        template:
+          id: template
+          table: message_field_data
+          field: template
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: 'not in'
+          value:
+            created_reply_on_comment: created_reply_on_comment
+            user_mention: user_mention
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          entity_type: message
+          entity_field: template
+          plugin_id: bundle
+      defaults:
+        filters: false
+        filter_groups: false
+      filter_groups:
+        operator: AND
+        groups:
+          1: AND
     cache_metadata:
       max-age: -1
       contexts:
