@@ -24,6 +24,39 @@ function openideal_challenge_cron() {
 }
 
 /**
+ * Implements hook_form_BASE_FORM_ID_alter().
+ */
+function openideal_challenge_form_vote_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  $entity = $form_state->getFormObject()->getEntity();
+  if (isset($form['type']['#ajax']['callback']) && $entity->entity_type->value == 'node') {
+    $form['type']['#ajax']['callback'] = '_openideal_challenge_vote_ajax_submit';
+  }
+}
+
+/**
+ * Ajax submit handler.
+ *
+ * Replace submit handler from voting api, and set the
+ * voting count into hidden field for FE purposes.
+ */
+function _openideal_challenge_vote_ajax_submit(&$form, FormStateInterface $form_state) {
+  $callback_object = $form_state->getFormObject();
+  $field_items = $form_state->get('field_items');
+  $settings = $form_state->get('formatter_settings') + $field_items->getSettings();
+  $results = \Drupal::service('votingapi_reaction.manager')->getResults($callback_object->getEntity(), $settings);
+  $result = array_sum(array_column($results, 'vote_sum'));
+  $form['summary_result'] = [
+    '#type' => 'hidden',
+    '#attributes' => ['class' => ['votings-api-summary-result']],
+    '#value' => $result,
+  ];
+  $form_state->getFormObject()
+    ->submitForm($form, $form_state);
+
+  return $form;
+}
+
+/**
  * Implements hook_form_alter().
  */
 function openideal_challenge_form_alter(&$form, FormStateInterface $form_state, $form_id) {

@@ -175,6 +175,17 @@
         var $this = $(this);
         var $item = $('.votingapi-reaction-item', $this);
         var $label = $('.votingapi-reaction-label', $this);
+        var $count = $('.votings-api-summary-result').val();
+
+        // Update count of like in real-time.
+        if ($count) {
+          $('.idea-statistics-block--list__item--score_tag ~ .idea-statistics-block--list__item--bottom')
+          .find('.idea-statistics-block--list__item--count')
+          .each(function () {
+            $(this).text($count);
+          });
+        }
+
         if ($('.radio input', $this).is(':checked')) {
           $item.addClass('active');
           $label.text(Drupal.t('Liked'));
