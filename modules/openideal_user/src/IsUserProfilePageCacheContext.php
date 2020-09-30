@@ -11,7 +11,7 @@ use Drupal\Core\Session\AccountInterface;
 /**
  * Defines the IsUserProfilePage service, for "is user profile page" caching.
  *
- * Cache context ID: 'openideal_user.is_user_page_page'.
+ * Cache context ID: 'user.is_user_profile_page'.
  */
 class IsUserProfilePageCacheContext extends UserCacheContextBase implements CacheContextInterface {
 
