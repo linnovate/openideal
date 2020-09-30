@@ -13,3 +13,7 @@ services:
       - '@module_handler'
     calls:
       - [setStatisticsStorage, ['@?statistics.storage.node']]
+  openideal_idea.route_subscriber:
+    class: Drupal\openideal_idea\Routing\OpenidealIdeaRouteSubscriber
+    tags:
+      - { name: event_subscriber }
