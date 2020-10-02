@@ -206,6 +206,27 @@ third_party_settings:
               layout_builder_styles_style:
                 mobile_status_and_statistics: 0
             weight: 6
+          bfb33572-2f22-43fb-98d8-593359b4b883:
+            uuid: bfb33572-2f22-43fb-98d8-593359b4b883
+            region: second
+            configuration:
+              id: openideal_rrssb_block
+              label: Share
+              provider: openideal_idea
+              label_display: visible
+              button_set: default
+              context_mapping:
+                node: layout_builder.entity
+            additional:
+              visibility:
+                dc6f33c4-a8e2-413d-986e-3e767288f7a7:
+                  id: request_path
+                  pages: /news
+                  negate: 0
+                  uuid: dc6f33c4-a8e2-413d-986e-3e767288f7a7
+                  context_mapping: {  }
+              visibility_operator: and
+            weight: 7
         third_party_settings: {  }
 id: node.article.full
 targetEntityType: node
