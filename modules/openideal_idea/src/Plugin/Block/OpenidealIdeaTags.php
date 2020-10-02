@@ -30,6 +30,13 @@ class OpenidealIdeaTags extends BlockBase {
   public function build() {
     $build = [];
     if ($node = $this->getEntity($this->getContexts())) {
+      $field = $node->bundle() == 'idea' ? 'field_idea_tags' : 'field_tags';
+      // In case when field is empty do not need to render anything at all.
+      $build['#cache']['tags'] = $node->getCacheTags();
+      if ($node->{$field}->isEmpty()) {
+        return $build;
+      }
+
       $build = [
         '#theme' => 'item_list',
         '#title' => $this->t('Tags'),
@@ -37,12 +44,10 @@ class OpenidealIdeaTags extends BlockBase {
       ];
       $items = [];
       // @Todo: Unify field names.
-      $field = $node->bundle() == 'idea' ? 'field_idea_tags' : 'field_tags';
       foreach ($node->{$field} as $tag) {
         $items[] = $tag->entity->label();
       }
       $build['#items'] = $items;
-      $build['#cache']['tags'] = $node->getCacheTags();
     }
 
     return $build;

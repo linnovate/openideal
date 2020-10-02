@@ -24,10 +24,40 @@ ul.swiper-wrapper img {
   height: auto;
 }
 
+.swiper-button-prev,
+.swiper-button-next {
+  width: 50px;
+  height: 50px;
+}
+
+.pswp__button--arrow--left:before,
+.pswp__button--arrow--right:before,
+.swiper-button-prev:after,
+.swiper-button-next:after {
+  font-family: inherit;
+  content: '';
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 25px 25px;
+  background-color: lightgray;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+
+.pswp .pswp__button--arrow--right:before,
+.swiper-button-next:after {
+  background-image: url("../icons/arrow_forward.svg");
+}
+
+.pswp .pswp__button--arrow--left:before,
+.swiper-button-prev:after {
+  background-image: url("../icons/arrow_back.svg");
+}
+
 @media (max-width: 1270px) {
   .swiper-button-next:after,
   .swiper-button-prev:after {
     font-size: 25px;
   }
-
 }

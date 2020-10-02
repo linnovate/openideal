@@ -157,12 +157,16 @@
     }
   }
 
-  // Created
   .block-field-blocknodeideacreated,
+  .block-openideal-statistics-status,
   .block-field-blocknodearticlecreated,
   .block-field-blocknodechallengecreated {
     display: flex;
     align-items: center;
+
+    .content {
+      display: flex;
+    }
 
     span {
       color: #676C72;
@@ -230,11 +234,44 @@
 
 
 @media (max-width: 1598px) {
-  .front-page-teaser .block-openideal-idea-info-block {
-    order: 1;
-    flex-basis: 100%;
-    justify-content: center;
-    margin-top: 6px;
+  .node--type-idea .front-page-teaser {
+    .block-field-blocknodeideacreated {
+      flex-basis: 71%;
+    }
+
+    .idea-statistics-block--list__item--score_tag {
+      margin-right: 0;
+    }
+
+    .block-field-blocknodeideacreated {
+      justify-content: flex-start;
+    }
+
+    .block-openideal-statistics-status {
+      order: 1;
+      flex-basis: 35%;
+      justify-content: flex-start;
+      align-items: center;
+      margin-top: 6px;
+    }
+
+    .block-openideal-statistics-idea-statistics {
+      order: 2;
+      flex-basis: 50%;
+      justify-content: flex-end;
+      align-items: center;
+      margin-top: 6px;
+    }
+  }
+
+  .front-page-teaser {
+
+    .block-openideal-idea-info-block {
+      order: 1;
+      flex-basis: 100%;
+      justify-content: center;
+      margin-top: 6px;
+    }
   }
 }
 
@@ -244,6 +281,16 @@
     flex-basis: unset;
     justify-content: unset;
     margin-top: 0;
+  }
+
+  .node--type-idea .front-page-teaser {
+    .block-openideal-statistics-idea-statistics,
+    .block-openideal-statistics-status,
+    .block-field-blocknodeideacreated {
+      flex-basis: unset;
+      margin-top: 0;
+      order: unset;
+    }
   }
 
 }
@@ -316,5 +363,37 @@
     flex-basis: 100%;
     justify-content: center;
     margin-top: 6px;
+  }
+}
+
+@media (max-width: 573px) {
+  .node--type-idea .front-page-teaser {
+    .block-field-blocknodeideacreated {
+      flex-basis: 56%;
+    }
+
+    .idea-statistics-block--list__item--score_tag {
+      margin-right: 0;
+    }
+
+    .block-field-blocknodeideacreated {
+      justify-content: flex-start;
+    }
+
+    .block-openideal-statistics-status {
+      order: 1;
+      flex-basis: 48%;
+      justify-content: flex-start;
+      align-items: center;
+      margin-top: 6px;
+    }
+
+    .block-openideal-statistics-idea-statistics {
+      order: 2;
+      flex-basis: 50%;
+      justify-content: flex-end;
+      align-items: center;
+      margin-top: 6px;
+    }
   }
 }

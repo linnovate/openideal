@@ -451,6 +451,22 @@
   }
 }
 
+@media (max-width: 574px) {
+  .node--view-mode-teaser.node--type-idea {
+    .block-openideal-statistics-idea-statistics,
+    .block-openideal-statistics-challenge-statistics {
+      flex-basis: 100%;
+      order: 1;
+      display: flex;
+      justify-content: flex-end;
+      margin-top: 14px;
+    }
+    .idea-statistics-block--list {
+      margin: 0;
+    }
+  }
+}
+
 @media (max-width: 530px) {
   .node--view-mode-teaser {
     .block-openideal-statistics-idea-statistics,

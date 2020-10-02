@@ -4,7 +4,7 @@ dependencies:
   config:
     - views.view.public_activity
   module:
-    - system
+    - route_condition
     - views
   theme:
     - openideal_theme
@@ -22,8 +22,8 @@ settings:
   views_label: 'Latest updates'
   items_per_page: none
 visibility:
-  request_path:
-    id: request_path
-    pages: '<front>'
+  route:
+    id: route
+    routes: "view.frontpage.front_page\r\nview.news.all_news_page"
     negate: false
     context_mapping: {  }
