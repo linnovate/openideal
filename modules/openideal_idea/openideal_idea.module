@@ -38,8 +38,11 @@ function openideal_idea_theme() {
  * Implements hook_local_tasks_alter().
  */
 function openideal_idea_local_tasks_alter(&$local_tasks) {
-  if (isset($local_tasks['content_moderation.moderated_content']['title'])) {
-    $local_tasks['content_moderation.moderated_content']['title'] = t('Ideas');
+  $view = \Drupal::entityTypeManager()->getStorage('view')->load('moderated_content');
+  if (isset($local_tasks['content_moderation.moderated_content']) && $view
+    && ($display = $view->getDisplay('moderated_content'))
+    && !$display['display_options']['enabled']) {
+    unset($local_tasks['content_moderation.moderated_content']);
   }
 }
 

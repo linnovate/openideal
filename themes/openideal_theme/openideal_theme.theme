@@ -73,7 +73,9 @@ function openideal_theme_preprocess_page(&$variables) {
     $variables['node_type'] = $node->bundle();
   }
 
-  if ($route_match->getRouteName() == 'view.frontpage.front_page' || $route_match->getRouteName() == 'entity.user.canonical') {
+  if ($route_match->getRouteName() == 'view.frontpage.front_page'
+    || $route_match->getRouteName() == 'entity.user.canonical'
+    || $route_match->getRouteName() == 'view.news.all_news_page') {
     $variables['is_activity_page'] = TRUE;
   }
 }
