@@ -5,6 +5,8 @@
  * Contains openideal_challenge.module.
  */
 
+use Drupal\Core\Ajax\AjaxResponse;
+use Drupal\Core\Ajax\InsertCommand;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\node\NodeInterface;
@@ -42,20 +44,25 @@ function openideal_challenge_form_vote_form_alter(&$form, FormStateInterface $fo
 function _openideal_challenge_vote_ajax_submit(&$form, FormStateInterface $form_state) {
   // Todo: change the button label here.
   // @see Drupal.behaviors.openidealThemeLikeWidgetLabel
+  $form_state->getFormObject()
+    ->submitForm($form, $form_state);
   $callback_object = $form_state->getFormObject();
   $field_items = $form_state->get('field_items');
   $settings = $form_state->get('formatter_settings') + $field_items->getSettings();
   $results = \Drupal::service('votingapi_reaction.manager')->getResults($callback_object->getEntity(), $settings);
   $result = array_sum(array_column($results, 'vote_sum'));
-  $form['summary_result'] = [
-    '#type' => 'hidden',
-    '#attributes' => ['class' => ['votings-api-summary-result']],
-    '#value' => $result,
-  ];
-  $form_state->getFormObject()
-    ->submitForm($form, $form_state);
+  $response = new AjaxResponse();
 
-  return $form;
+  // Form insert.
+  $html = \Drupal::service('renderer')->renderRoot($form);
+  $response->addCommand(new InsertCommand(NULL, $html));
+  $response->setAttachments($form['#attached']);
+
+  // Votes update.
+  $content = '<p class="idea-statistics-block--list__item--count">' . $result . '</p>';
+  $response->addCommand(new InsertCommand('.idea-statistics-block--list__item--bottom.like_tag .idea-statistics-block--list__item--count', $content));
+
+  return $response;
 }
 
 /**
@@ -99,7 +106,8 @@ function openideal_challenge_form_alter(&$form, FormStateInterface $form_state, 
  * Implements hook_views_query_alter().
  */
 function openideal_challenge_views_query_alter(ViewExecutable $view, QueryPluginBase $query) {
-  if ($view->id() === 'challenges' && $view->current_display === 'all_challenges_page' && $view->exposed_data['sort_by'] === 'field_schedule_close_value') {
+  if ($view->id(
+    ) === 'challenges' && $view->current_display === 'all_challenges_page' && $view->exposed_data['sort_by'] === 'field_schedule_close_value') {
     $table = 'node__field_schedule_close';
     $field = 'field_schedule_close_value';
     $alias = implode('_', [$table, $field, 'is_null']);
