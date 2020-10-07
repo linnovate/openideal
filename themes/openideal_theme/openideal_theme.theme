@@ -189,24 +189,14 @@ function openideal_theme_preprocess_image(&$variables) {
 /**
  * Implements hook_preprocess_HOOK().
  */
-function openideal_theme_preprocess_views_view(&$variables) {
-  $view = $variables['view'];
-  // In case when the user watching profile of another user,
-  // need to change the "partial" field for user_mention user.
-  if ($view->id() == 'public_activity' && $view->current_display == 'personalized_activity_block'
-    && \Drupal::currentUser()->id() !== \Drupal::routeMatch()->getParameter('user')->id()) {
+function openideal_theme_preprocess_message__user_mention(&$variables) {
+  // In case the user is not viewing its page,
+  // its necessary to change the partial template.
+  if (\Drupal::routeMatch()->getRouteName() == 'entity.user.canonical' &&
+    \Drupal::currentUser()->id() !== \Drupal::routeMatch()->getParameter('user')->id()) {
+    $elements = &$variables['elements'];
     $variables['#cache']['contexts'][] = 'user.is_user_profile_page';
-    $langcode = $view->storage->language()->getId();
-    $rows = &$variables['rows'][0]['#rows'];
-    if (!empty($rows)) {
-      foreach ($rows as &$row) {
-        $entity = $row['#message'];
-        if ($row['#message']->getTemplate()->id() == 'user_mention') {
-          $partials = $entity->getText($langcode);
-          $row['partial_0']['#markup'] = $partials[3];
-          $row['#view_mode'] = 'mentioned_user';
-        }
-      }
-    }
+    $partials = $elements['#message']->getText(\Drupal::languageManager()->getCurrentLanguage()->getId());
+    $variables['content']['partial_0']['#markup'] = $partials[3];
   }
 }
