@@ -13636,9 +13636,11 @@ nav.tabs {
     .site-navigation--add-idea a {
       padding: 9.5px 1.3em;
       border-radius: 25px;
-      -webkit-transition: background-color 0.5s ease-in-out;
-      -o-transition: background-color 0.5s ease-in-out;
-      transition: background-color 0.5s ease-in-out;
+      -webkit-transition: background-color 0.5s ease-in-out, -webkit-transform 0.4s ease-in-out;
+      transition: background-color 0.5s ease-in-out, -webkit-transform 0.4s ease-in-out;
+      -o-transition: background-color 0.5s ease-in-out, -o-transform 0.4s ease-in-out;
+      transition: background-color 0.5s ease-in-out, transform 0.4s ease-in-out;
+      transition: background-color 0.5s ease-in-out, transform 0.4s ease-in-out, -webkit-transform 0.4s ease-in-out, -o-transform 0.4s ease-in-out;
       background-color: #27C0FF;
       color: #fff;
       font-weight: bold;
@@ -13664,6 +13666,9 @@ nav.tabs {
         background-color: #27C8f9;
         text-decoration: none; }
       .site-navigation--add-idea a:active {
+        -webkit-transform: scale(0.9);
+             -o-transform: scale(0.9);
+                transform: scale(0.9);
         background-color: #27C8f9;
         text-decoration: none; }
       .site-navigation--add-idea a:before {
@@ -13909,6 +13914,21 @@ nav.tabs {
   .block-site-wide-statistics-block {
     display: none; } }
 
+.list-group {
+  display: unset;
+  -webkit-box-orient: unset;
+  -webkit-box-direction: unset;
+  -webkit-flex-direction: unset;
+      -ms-flex-direction: unset;
+          flex-direction: unset; }
+
+.list-group-item {
+  display: unset;
+  position: unset;
+  padding: unset;
+  border: unset;
+  background-color: unset; }
+
 .block-page-title-block .title {
   color: #343352;
   font-size: 2.25rem;
@@ -13949,9 +13969,11 @@ nav.tabs {
 .form-actions input {
   margin-bottom: 6px;
   border-radius: 25px;
-  -webkit-transition: background-color 0.5s ease-in-out;
-  -o-transition: background-color 0.5s ease-in-out;
-  transition: background-color 0.5s ease-in-out;
+  -webkit-transition: background-color 0.5s ease-in-out, -webkit-transform 0.4s ease-in-out;
+  transition: background-color 0.5s ease-in-out, -webkit-transform 0.4s ease-in-out;
+  -o-transition: background-color 0.5s ease-in-out, -o-transform 0.4s ease-in-out;
+  transition: background-color 0.5s ease-in-out, transform 0.4s ease-in-out;
+  transition: background-color 0.5s ease-in-out, transform 0.4s ease-in-out, -webkit-transform 0.4s ease-in-out, -o-transform 0.4s ease-in-out;
   background-color: #1294ca;
   color: #fff;
   font-weight: bold; }
@@ -13959,6 +13981,9 @@ nav.tabs {
     background-color: #1e7697;
     text-decoration: none; }
   .form-actions input:active {
+    -webkit-transform: scale(0.9);
+         -o-transform: scale(0.9);
+            transform: scale(0.9);
     background-color: #1e7697;
     text-decoration: none; }
 
@@ -14031,9 +14056,11 @@ nav.tabs {
     margin-bottom: 24px; }
     .comments--header__add-comment-btn {
       border-radius: 25px;
-      -webkit-transition: background-color 0.5s ease-in-out;
-      -o-transition: background-color 0.5s ease-in-out;
-      transition: background-color 0.5s ease-in-out;
+      -webkit-transition: background-color 0.5s ease-in-out, -webkit-transform 0.4s ease-in-out;
+      transition: background-color 0.5s ease-in-out, -webkit-transform 0.4s ease-in-out;
+      -o-transition: background-color 0.5s ease-in-out, -o-transform 0.4s ease-in-out;
+      transition: background-color 0.5s ease-in-out, transform 0.4s ease-in-out;
+      transition: background-color 0.5s ease-in-out, transform 0.4s ease-in-out, -webkit-transform 0.4s ease-in-out, -o-transform 0.4s ease-in-out;
       background-color: transparent;
       color: #fff;
       font-weight: bold;
@@ -14045,6 +14072,9 @@ nav.tabs {
         background-color: transparent;
         text-decoration: none; }
       .comments--header__add-comment-btn:active {
+        -webkit-transform: scale(0.9);
+             -o-transform: scale(0.9);
+                transform: scale(0.9);
         background-color: transparent;
         text-decoration: none; }
       .comments--header__add-comment-btn:hover, .comments--header__add-comment-btn:active {
@@ -14146,9 +14176,11 @@ nav.tabs {
       text-transform: uppercase;
       font-size: inherit;
       border-radius: 25px;
-      -webkit-transition: background-color 0.5s ease-in-out;
-      -o-transition: background-color 0.5s ease-in-out;
-      transition: background-color 0.5s ease-in-out;
+      -webkit-transition: background-color 0.5s ease-in-out, -webkit-transform 0.4s ease-in-out;
+      transition: background-color 0.5s ease-in-out, -webkit-transform 0.4s ease-in-out;
+      -o-transition: background-color 0.5s ease-in-out, -o-transform 0.4s ease-in-out;
+      transition: background-color 0.5s ease-in-out, transform 0.4s ease-in-out;
+      transition: background-color 0.5s ease-in-out, transform 0.4s ease-in-out, -webkit-transform 0.4s ease-in-out, -o-transform 0.4s ease-in-out;
       background-color: #1294ca;
       color: #fff;
       font-weight: bold;
@@ -14157,6 +14189,9 @@ nav.tabs {
         background-color: #1e7697;
         text-decoration: none; }
       .comment-comment-form .form-actions .font-submit-btn-wrapper .form-submit:active {
+        -webkit-transform: scale(0.9);
+             -o-transform: scale(0.9);
+                transform: scale(0.9);
         background-color: #1e7697;
         text-decoration: none; }
     .comment-comment-form .form-actions .font-submit-btn-wrapper img {
@@ -14262,9 +14297,11 @@ nav.tabs {
     display: flex; }
     .node--view-mode-full .block-field-blocknodearticlefield-tags .field__items li {
       border-radius: 25px;
-      -webkit-transition: background-color 0.5s ease-in-out;
-      -o-transition: background-color 0.5s ease-in-out;
-      transition: background-color 0.5s ease-in-out;
+      -webkit-transition: background-color 0.5s ease-in-out, -webkit-transform 0.4s ease-in-out;
+      transition: background-color 0.5s ease-in-out, -webkit-transform 0.4s ease-in-out;
+      -o-transition: background-color 0.5s ease-in-out, -o-transform 0.4s ease-in-out;
+      transition: background-color 0.5s ease-in-out, transform 0.4s ease-in-out;
+      transition: background-color 0.5s ease-in-out, transform 0.4s ease-in-out, -webkit-transform 0.4s ease-in-out, -o-transform 0.4s ease-in-out;
       background-color: #fff;
       color: #fff;
       font-weight: bold;
@@ -14280,6 +14317,9 @@ nav.tabs {
         background-color: #fff;
         text-decoration: none; }
       .node--view-mode-full .block-field-blocknodearticlefield-tags .field__items li:active {
+        -webkit-transform: scale(0.9);
+             -o-transform: scale(0.9);
+                transform: scale(0.9);
         background-color: #fff;
         text-decoration: none; }
 
@@ -14344,9 +14384,11 @@ nav.tabs {
   .node--view-mode-full .two-columns-challenge-ideas a {
     padding: 15px 70px;
     border-radius: 25px;
-    -webkit-transition: background-color 0.5s ease-in-out;
-    -o-transition: background-color 0.5s ease-in-out;
-    transition: background-color 0.5s ease-in-out;
+    -webkit-transition: background-color 0.5s ease-in-out, -webkit-transform 0.4s ease-in-out;
+    transition: background-color 0.5s ease-in-out, -webkit-transform 0.4s ease-in-out;
+    -o-transition: background-color 0.5s ease-in-out, -o-transform 0.4s ease-in-out;
+    transition: background-color 0.5s ease-in-out, transform 0.4s ease-in-out;
+    transition: background-color 0.5s ease-in-out, transform 0.4s ease-in-out, -webkit-transform 0.4s ease-in-out, -o-transform 0.4s ease-in-out;
     background-color: #27C0FF;
     color: #fff;
     font-weight: bold;
@@ -14355,6 +14397,9 @@ nav.tabs {
       background-color: #5eaed2;
       text-decoration: none; }
     .node--view-mode-full .two-columns-challenge-ideas a:active {
+      -webkit-transform: scale(0.9);
+           -o-transform: scale(0.9);
+              transform: scale(0.9);
       background-color: #5eaed2;
       text-decoration: none; }
 
@@ -14511,9 +14556,11 @@ nav.tabs {
         font-size: 0.9375rem;
         margin-bottom: 49px;
         border-radius: 25px;
-        -webkit-transition: background-color 0.5s ease-in-out;
-        -o-transition: background-color 0.5s ease-in-out;
-        transition: background-color 0.5s ease-in-out;
+        -webkit-transition: background-color 0.5s ease-in-out, -webkit-transform 0.4s ease-in-out;
+        transition: background-color 0.5s ease-in-out, -webkit-transform 0.4s ease-in-out;
+        -o-transition: background-color 0.5s ease-in-out, -o-transform 0.4s ease-in-out;
+        transition: background-color 0.5s ease-in-out, transform 0.4s ease-in-out;
+        transition: background-color 0.5s ease-in-out, transform 0.4s ease-in-out, -webkit-transform 0.4s ease-in-out, -o-transform 0.4s ease-in-out;
         background-color: #1294ca;
         color: #fff;
         font-weight: bold;
@@ -14522,6 +14569,9 @@ nav.tabs {
           background-color: #1e7697;
           text-decoration: none; }
         .region-sidebar--flag-and-follow--element .votingapi-reaction-item:active, .region-sidebar--flag--element .votingapi-reaction-item:active {
+          -webkit-transform: scale(0.9);
+               -o-transform: scale(0.9);
+                  transform: scale(0.9);
           background-color: #1e7697;
           text-decoration: none; }
       .region-sidebar--flag-and-follow--element .votingapi-reaction-item.active, .region-sidebar--flag--element .votingapi-reaction-item.active {
@@ -14543,9 +14593,11 @@ nav.tabs {
                   flex-basis: 100%;
           font-size: 0.9375rem;
           border-radius: 25px;
-          -webkit-transition: background-color 0.5s ease-in-out;
-          -o-transition: background-color 0.5s ease-in-out;
-          transition: background-color 0.5s ease-in-out;
+          -webkit-transition: background-color 0.5s ease-in-out, -webkit-transform 0.4s ease-in-out;
+          transition: background-color 0.5s ease-in-out, -webkit-transform 0.4s ease-in-out;
+          -o-transition: background-color 0.5s ease-in-out, -o-transform 0.4s ease-in-out;
+          transition: background-color 0.5s ease-in-out, transform 0.4s ease-in-out;
+          transition: background-color 0.5s ease-in-out, transform 0.4s ease-in-out, -webkit-transform 0.4s ease-in-out, -o-transform 0.4s ease-in-out;
           background-color: #27C0FF;
           color: #fff;
           font-weight: bold; }
@@ -14553,6 +14605,9 @@ nav.tabs {
             background-color: #5eaed2;
             text-decoration: none; }
           .region-sidebar--flag-and-follow--element .flag-follow a:active, .region-sidebar--flag-and-follow--element .flag-follow--body:active, .region-sidebar--flag--element .flag-follow a:active, .region-sidebar--flag--element .flag-follow--body:active {
+            -webkit-transform: scale(0.9);
+                 -o-transform: scale(0.9);
+                    transform: scale(0.9);
             background-color: #5eaed2;
             text-decoration: none; }
       .region-sidebar--flag-and-follow--element .flag-follow--body, .region-sidebar--flag--element .flag-follow--body {
@@ -14626,9 +14681,11 @@ nav.tabs {
   .block-openideal-idea-tags-block .list-group-item {
     margin-bottom: 5px;
     border-radius: 25px;
-    -webkit-transition: background-color 0.5s ease-in-out;
-    -o-transition: background-color 0.5s ease-in-out;
-    transition: background-color 0.5s ease-in-out;
+    -webkit-transition: background-color 0.5s ease-in-out, -webkit-transform 0.4s ease-in-out;
+    transition: background-color 0.5s ease-in-out, -webkit-transform 0.4s ease-in-out;
+    -o-transition: background-color 0.5s ease-in-out, -o-transform 0.4s ease-in-out;
+    transition: background-color 0.5s ease-in-out, transform 0.4s ease-in-out;
+    transition: background-color 0.5s ease-in-out, transform 0.4s ease-in-out, -webkit-transform 0.4s ease-in-out, -o-transform 0.4s ease-in-out;
     background-color: #fff;
     color: #fff;
     font-weight: bold;
@@ -14643,6 +14700,9 @@ nav.tabs {
       background-color: #fff;
       text-decoration: none; }
     .block-openideal-idea-tags-block .list-group-item:active {
+      -webkit-transform: scale(0.9);
+           -o-transform: scale(0.9);
+              transform: scale(0.9);
       background-color: #fff;
       text-decoration: none; }
 
@@ -15199,13 +15259,13 @@ nav.tabs {
   .node--view-mode-teaser .teaser-top-section--section__second {
     padding: 15px; } }
 
-.site-wide-statistics-block--list {
+.block-openideal-statistics.block-site-wide-statistics-block .idea-statistics-block--list {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
   list-style: none; }
-  .site-wide-statistics-block--list__item {
+  .block-openideal-statistics.block-site-wide-statistics-block .idea-statistics-block--list__item {
     display: -webkit-box;
     display: -webkit-flex;
     display: -ms-flexbox;
@@ -15229,7 +15289,7 @@ nav.tabs {
     padding: 12px 6px 0;
     background-color: #fff;
     min-width: 77px; }
-    .site-wide-statistics-block--list__item--bottom {
+    .block-openideal-statistics.block-site-wide-statistics-block .idea-statistics-block--list__item--bottom {
       display: -webkit-box;
       display: -webkit-flex;
       display: -ms-flexbox;
@@ -15244,23 +15304,27 @@ nav.tabs {
           -ms-flex-align: center;
               align-items: center;
       text-transform: uppercase; }
-    .site-wide-statistics-block--list__item .item-svg {
+    .block-openideal-statistics.block-site-wide-statistics-block .idea-statistics-block--list__item .item-svg {
       width: 32px;
       height: 32px;
-      margin-bottom: 6px; }
-    .site-wide-statistics-block--list__item--statistics_tag {
+      margin-bottom: 6px;
+      margin-right: 0; }
+    .block-openideal-statistics.block-site-wide-statistics-block .idea-statistics-block--list__item--statistics_tag {
       background: url("../images/icons/statistics_tag.svg") no-repeat center center; }
-    .site-wide-statistics-block--list__item--members_tag {
+    .block-openideal-statistics.block-site-wide-statistics-block .idea-statistics-block--list__item--members_tag {
       background: url("../images/icons/members_tag.svg") no-repeat center center; }
-    .site-wide-statistics-block--list__item--comment_tag {
+    .block-openideal-statistics.block-site-wide-statistics-block .idea-statistics-block--list__item--comment_tag {
       background: url("../images/icons/comment_tag.svg") no-repeat center center; }
-    .site-wide-statistics-block--list__item--like_tag {
+    .block-openideal-statistics.block-site-wide-statistics-block .idea-statistics-block--list__item--like_tag {
       background: url("../images/icons/like_tag.svg") no-repeat center center; }
-    .site-wide-statistics-block--list__item p {
+    .block-openideal-statistics.block-site-wide-statistics-block .idea-statistics-block--list__item p {
       line-height: 1;
       letter-spacing: -0.5px;
       font-size: 15px; }
-    .site-wide-statistics-block--list__item--count {
+    .block-openideal-statistics.block-site-wide-statistics-block .idea-statistics-block--list__item--title {
+      margin-bottom: 1rem; }
+    .block-openideal-statistics.block-site-wide-statistics-block .idea-statistics-block--list__item--count {
+      margin-right: 0;
       font-weight: bold;
       margin-bottom: 1px; }
 
@@ -15527,9 +15591,11 @@ nav.tabs {
         -ms-flex-align: center;
             align-items: center;
     border-radius: 25px;
-    -webkit-transition: background-color 0.5s ease-in-out;
-    -o-transition: background-color 0.5s ease-in-out;
-    transition: background-color 0.5s ease-in-out;
+    -webkit-transition: background-color 0.5s ease-in-out, -webkit-transform 0.4s ease-in-out;
+    transition: background-color 0.5s ease-in-out, -webkit-transform 0.4s ease-in-out;
+    -o-transition: background-color 0.5s ease-in-out, -o-transform 0.4s ease-in-out;
+    transition: background-color 0.5s ease-in-out, transform 0.4s ease-in-out;
+    transition: background-color 0.5s ease-in-out, transform 0.4s ease-in-out, -webkit-transform 0.4s ease-in-out, -o-transform 0.4s ease-in-out;
     background-color: #1294ca;
     color: #fff;
     font-weight: bold;
@@ -15546,6 +15612,9 @@ nav.tabs {
       background-color: #1e829a;
       text-decoration: none; }
     .entity--user--canonical .user-top .nav-tabs .nav-item .nav-link:active {
+      -webkit-transform: scale(0.9);
+           -o-transform: scale(0.9);
+              transform: scale(0.9);
       background-color: #1e829a;
       text-decoration: none; }
     .entity--user--canonical .user-top .nav-tabs .nav-item .nav-link:before {
@@ -15577,9 +15646,11 @@ nav.tabs {
         -ms-flex-align: center;
             align-items: center;
     border-radius: 25px;
-    -webkit-transition: background-color 0.5s ease-in-out;
-    -o-transition: background-color 0.5s ease-in-out;
-    transition: background-color 0.5s ease-in-out;
+    -webkit-transition: background-color 0.5s ease-in-out, -webkit-transform 0.4s ease-in-out;
+    transition: background-color 0.5s ease-in-out, -webkit-transform 0.4s ease-in-out;
+    -o-transition: background-color 0.5s ease-in-out, -o-transform 0.4s ease-in-out;
+    transition: background-color 0.5s ease-in-out, transform 0.4s ease-in-out;
+    transition: background-color 0.5s ease-in-out, transform 0.4s ease-in-out, -webkit-transform 0.4s ease-in-out, -o-transform 0.4s ease-in-out;
     background-color: #1294ca;
     color: #fff;
     font-weight: bold;
@@ -15592,6 +15663,9 @@ nav.tabs {
       background-color: #1e829a;
       text-decoration: none; }
     .entity--user--canonical .user-top .user-actions--link a:active {
+      -webkit-transform: scale(0.9);
+           -o-transform: scale(0.9);
+              transform: scale(0.9);
       background-color: #1e829a;
       text-decoration: none; }
 
@@ -15787,9 +15861,11 @@ nav.tabs {
     .user-pass .form-actions input,
     .user-register-form .form-actions input {
       border-radius: 25px;
-      -webkit-transition: background-color 0.5s ease-in-out;
-      -o-transition: background-color 0.5s ease-in-out;
-      transition: background-color 0.5s ease-in-out;
+      -webkit-transition: background-color 0.5s ease-in-out, -webkit-transform 0.4s ease-in-out;
+      transition: background-color 0.5s ease-in-out, -webkit-transform 0.4s ease-in-out;
+      -o-transition: background-color 0.5s ease-in-out, -o-transform 0.4s ease-in-out;
+      transition: background-color 0.5s ease-in-out, transform 0.4s ease-in-out;
+      transition: background-color 0.5s ease-in-out, transform 0.4s ease-in-out, -webkit-transform 0.4s ease-in-out, -o-transform 0.4s ease-in-out;
       background-color: #1294ca;
       color: #fff;
       font-weight: bold; }
@@ -15801,6 +15877,9 @@ nav.tabs {
       .user-login-form .form-actions input:active,
       .user-pass .form-actions input:active,
       .user-register-form .form-actions input:active {
+        -webkit-transform: scale(0.9);
+             -o-transform: scale(0.9);
+                transform: scale(0.9);
         background-color: #1e7697;
         text-decoration: none; }
   .user-login-form .social-login-buttons,
@@ -15855,9 +15934,11 @@ nav.tabs {
   padding-right: 0; }
   .node--edit-form--main input[type="submit"] {
     border-radius: 25px;
-    -webkit-transition: background-color 0.5s ease-in-out;
-    -o-transition: background-color 0.5s ease-in-out;
-    transition: background-color 0.5s ease-in-out;
+    -webkit-transition: background-color 0.5s ease-in-out, -webkit-transform 0.4s ease-in-out;
+    transition: background-color 0.5s ease-in-out, -webkit-transform 0.4s ease-in-out;
+    -o-transition: background-color 0.5s ease-in-out, -o-transform 0.4s ease-in-out;
+    transition: background-color 0.5s ease-in-out, transform 0.4s ease-in-out;
+    transition: background-color 0.5s ease-in-out, transform 0.4s ease-in-out, -webkit-transform 0.4s ease-in-out, -o-transform 0.4s ease-in-out;
     background-color: transparent;
     color: #fff;
     font-weight: bold;
@@ -15869,6 +15950,9 @@ nav.tabs {
       background-color: #1e7697;
       text-decoration: none; }
     .node--edit-form--main input[type="submit"]:active {
+      -webkit-transform: scale(0.9);
+           -o-transform: scale(0.9);
+              transform: scale(0.9);
       background-color: #1e7697;
       text-decoration: none; }
     .node--edit-form--main input[type="submit"]:hover {
@@ -15883,9 +15967,11 @@ nav.tabs {
     padding: 1px 14px;
     font-size: 16px;
     border-radius: 25px;
-    -webkit-transition: background-color 0.5s ease-in-out;
-    -o-transition: background-color 0.5s ease-in-out;
-    transition: background-color 0.5s ease-in-out;
+    -webkit-transition: background-color 0.5s ease-in-out, -webkit-transform 0.4s ease-in-out;
+    transition: background-color 0.5s ease-in-out, -webkit-transform 0.4s ease-in-out;
+    -o-transition: background-color 0.5s ease-in-out, -o-transform 0.4s ease-in-out;
+    transition: background-color 0.5s ease-in-out, transform 0.4s ease-in-out;
+    transition: background-color 0.5s ease-in-out, transform 0.4s ease-in-out, -webkit-transform 0.4s ease-in-out, -o-transform 0.4s ease-in-out;
     background-color: #1294ca;
     color: #fff;
     font-weight: bold; }
@@ -15893,6 +15979,9 @@ nav.tabs {
       background-color: #1e7697;
       text-decoration: none; }
     .node--edit-form--main button:active {
+      -webkit-transform: scale(0.9);
+           -o-transform: scale(0.9);
+              transform: scale(0.9);
       background-color: #1e7697;
       text-decoration: none; }
   .node--edit-form--main .details-wrapper {
@@ -15906,9 +15995,11 @@ nav.tabs {
       height: unset;
       font-size: 14px;
       border-radius: 25px;
-      -webkit-transition: background-color 0.5s ease-in-out;
-      -o-transition: background-color 0.5s ease-in-out;
-      transition: background-color 0.5s ease-in-out;
+      -webkit-transition: background-color 0.5s ease-in-out, -webkit-transform 0.4s ease-in-out;
+      transition: background-color 0.5s ease-in-out, -webkit-transform 0.4s ease-in-out;
+      -o-transition: background-color 0.5s ease-in-out, -o-transform 0.4s ease-in-out;
+      transition: background-color 0.5s ease-in-out, transform 0.4s ease-in-out;
+      transition: background-color 0.5s ease-in-out, transform 0.4s ease-in-out, -webkit-transform 0.4s ease-in-out, -o-transform 0.4s ease-in-out;
       background-color: #1294ca;
       color: #fff;
       font-weight: bold; }
@@ -15916,6 +16007,9 @@ nav.tabs {
         background-color: #1e7697;
         text-decoration: none; }
       .node--edit-form--main .details-wrapper .js-form-wrapper .form-submit:active {
+        -webkit-transform: scale(0.9);
+             -o-transform: scale(0.9);
+                transform: scale(0.9);
         background-color: #1e7697;
         text-decoration: none; }
   .node--edit-form--main .form-item-field-category label {
@@ -15945,9 +16039,11 @@ nav.tabs {
   .node--edit-form .field--widget-moderation-state-buttons > div .form-control:disabled,
   .node--edit-form .field--widget-moderation-state-buttons > div .form-control[readonly] {
     border-radius: 25px;
-    -webkit-transition: background-color 0.5s ease-in-out;
-    -o-transition: background-color 0.5s ease-in-out;
-    transition: background-color 0.5s ease-in-out;
+    -webkit-transition: background-color 0.5s ease-in-out, -webkit-transform 0.4s ease-in-out;
+    transition: background-color 0.5s ease-in-out, -webkit-transform 0.4s ease-in-out;
+    -o-transition: background-color 0.5s ease-in-out, -o-transform 0.4s ease-in-out;
+    transition: background-color 0.5s ease-in-out, transform 0.4s ease-in-out;
+    transition: background-color 0.5s ease-in-out, transform 0.4s ease-in-out, -webkit-transform 0.4s ease-in-out, -o-transform 0.4s ease-in-out;
     background-color: #1294ca;
     color: #fff;
     font-weight: bold; }
@@ -15957,6 +16053,9 @@ nav.tabs {
       text-decoration: none; }
     .node--edit-form .field--widget-moderation-state-buttons > div .form-control:disabled:active,
     .node--edit-form .field--widget-moderation-state-buttons > div .form-control[readonly]:active {
+      -webkit-transform: scale(0.9);
+           -o-transform: scale(0.9);
+              transform: scale(0.9);
       background-color: #1e7697;
       text-decoration: none; }
 
@@ -15981,9 +16080,11 @@ nav.tabs {
       height: unset;
       margin-right: 10px;
       border-radius: 25px;
-      -webkit-transition: background-color 0.5s ease-in-out;
-      -o-transition: background-color 0.5s ease-in-out;
-      transition: background-color 0.5s ease-in-out;
+      -webkit-transition: background-color 0.5s ease-in-out, -webkit-transform 0.4s ease-in-out;
+      transition: background-color 0.5s ease-in-out, -webkit-transform 0.4s ease-in-out;
+      -o-transition: background-color 0.5s ease-in-out, -o-transform 0.4s ease-in-out;
+      transition: background-color 0.5s ease-in-out, transform 0.4s ease-in-out;
+      transition: background-color 0.5s ease-in-out, transform 0.4s ease-in-out, -webkit-transform 0.4s ease-in-out, -o-transform 0.4s ease-in-out;
       background-color: #1294ca;
       color: #fff;
       font-weight: bold; }
@@ -15991,6 +16092,9 @@ nav.tabs {
         background-color: #1e7697;
         text-decoration: none; }
       .node--edit-form--footer .form-group input:active {
+        -webkit-transform: scale(0.9);
+             -o-transform: scale(0.9);
+                transform: scale(0.9);
         background-color: #1e7697;
         text-decoration: none; }
 
@@ -16294,9 +16398,11 @@ nav.tabs {
   .view-frontpage .view-filters .form-row .frontpage-add-idea-button {
     margin-left: auto;
     border-radius: 25px;
-    -webkit-transition: background-color 0.5s ease-in-out;
-    -o-transition: background-color 0.5s ease-in-out;
-    transition: background-color 0.5s ease-in-out;
+    -webkit-transition: background-color 0.5s ease-in-out, -webkit-transform 0.4s ease-in-out;
+    transition: background-color 0.5s ease-in-out, -webkit-transform 0.4s ease-in-out;
+    -o-transition: background-color 0.5s ease-in-out, -o-transform 0.4s ease-in-out;
+    transition: background-color 0.5s ease-in-out, transform 0.4s ease-in-out;
+    transition: background-color 0.5s ease-in-out, transform 0.4s ease-in-out, -webkit-transform 0.4s ease-in-out, -o-transform 0.4s ease-in-out;
     background-color: #27C0FF;
     color: #fff;
     font-weight: bold;
@@ -16307,6 +16413,9 @@ nav.tabs {
       background-color: #5eaed2;
       text-decoration: none; }
     .view-frontpage .view-filters .form-row .frontpage-add-idea-button:active {
+      -webkit-transform: scale(0.9);
+           -o-transform: scale(0.9);
+              transform: scale(0.9);
       background-color: #5eaed2;
       text-decoration: none; }
     .view-frontpage .view-filters .form-row .frontpage-add-idea-button:before {
@@ -16703,7 +16812,8 @@ nav.tabs {
           content: ": "; }
       .node--view-mode-teaser .block-openideal-idea-info-block .idea-information--list__item--value {
         margin-right: 5px;
-        font-size: 14px; }
+        font-size: 14px;
+        margin-bottom: 0; }
         .node--view-mode-teaser .block-openideal-idea-info-block .idea-information--list__item--value .challenge-status--deadline {
           font-size: 14px; }
   .node--view-mode-teaser .block-field-blocknodechallengetitle a,
@@ -17024,9 +17134,11 @@ nav.tabs {
 
 .openideal-statistics-date-select-form .form-submit {
   border-radius: 25px;
-  -webkit-transition: background-color 0.5s ease-in-out;
-  -o-transition: background-color 0.5s ease-in-out;
-  transition: background-color 0.5s ease-in-out;
+  -webkit-transition: background-color 0.5s ease-in-out, -webkit-transform 0.4s ease-in-out;
+  transition: background-color 0.5s ease-in-out, -webkit-transform 0.4s ease-in-out;
+  -o-transition: background-color 0.5s ease-in-out, -o-transform 0.4s ease-in-out;
+  transition: background-color 0.5s ease-in-out, transform 0.4s ease-in-out;
+  transition: background-color 0.5s ease-in-out, transform 0.4s ease-in-out, -webkit-transform 0.4s ease-in-out, -o-transform 0.4s ease-in-out;
   background-color: #1294ca;
   color: #fff;
   font-weight: bold;
@@ -17036,6 +17148,9 @@ nav.tabs {
     background-color: #1e7697;
     text-decoration: none; }
   .openideal-statistics-date-select-form .form-submit:active {
+    -webkit-transform: scale(0.9);
+         -o-transform: scale(0.9);
+            transform: scale(0.9);
     background-color: #1e7697;
     text-decoration: none; }
 
@@ -17197,9 +17312,11 @@ nav.tabs {
       -ms-flex-preferred-size: 10%;
           flex-basis: 10%;
   border-radius: 25px;
-  -webkit-transition: background-color 0.5s ease-in-out;
-  -o-transition: background-color 0.5s ease-in-out;
-  transition: background-color 0.5s ease-in-out;
+  -webkit-transition: background-color 0.5s ease-in-out, -webkit-transform 0.4s ease-in-out;
+  transition: background-color 0.5s ease-in-out, -webkit-transform 0.4s ease-in-out;
+  -o-transition: background-color 0.5s ease-in-out, -o-transform 0.4s ease-in-out;
+  transition: background-color 0.5s ease-in-out, transform 0.4s ease-in-out;
+  transition: background-color 0.5s ease-in-out, transform 0.4s ease-in-out, -webkit-transform 0.4s ease-in-out, -o-transform 0.4s ease-in-out;
   background-color: #1294ca;
   color: #fff;
   font-weight: bold; }
@@ -17207,6 +17324,9 @@ nav.tabs {
     background-color: #1e7697;
     text-decoration: none; }
   .field--widget-openideal-user-entity-browser-single-file input:active {
+    -webkit-transform: scale(0.9);
+         -o-transform: scale(0.9);
+            transform: scale(0.9);
     background-color: #1e7697;
     text-decoration: none; }
 

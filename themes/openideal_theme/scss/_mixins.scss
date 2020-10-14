@@ -19,15 +19,17 @@ $value in $theme-colors {
 
 @mixin btn-theme($btn-color, $active-color) {
     border-radius: 25px;
-    transition: background-color 0.5s ease-in-out;
+    transition: background-color 0.5s ease-in-out, transform 0.4s ease-in-out;
     background-color: $btn-color;
     color: $white;
     font-weight: $font-weight-bold;
+
     &:hover {
         background-color: $active-color;
         text-decoration: none;
     }
     &:active {
+        transform: scale(0.9);
         background-color: $active-color;
         text-decoration: none;
     }
