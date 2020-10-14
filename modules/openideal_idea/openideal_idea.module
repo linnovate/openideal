@@ -76,6 +76,10 @@ function openideal_idea_form_node_idea_form_alter(&$form, FormStateInterface $fo
       $form['field_challenge']['widget']['#default_value'] = $challenge_id;
     }
   }
+
+  if (isset($form['title']['widget'][0]['value'])) {
+    $form['title']['widget'][0]['value']['#autocomplete_route_name'] = 'openideal_idea.autocomplete_controller';
+  }
 }
 
 /**
