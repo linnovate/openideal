@@ -6,6 +6,7 @@
  */
 
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Link;
 use Drupal\Core\StringTranslation\TranslatableMarkup;
 use Drupal\Core\Url;
 use Drupal\node\NodeInterface;
@@ -77,6 +78,18 @@ function openideal_theme_preprocess_page(&$variables) {
     || $route_match->getRouteName() == 'entity.user.canonical'
     || $route_match->getRouteName() == 'view.news.all_news_page') {
     $variables['is_activity_page'] = TRUE;
+  }
+
+  if ($route_match->getRouteName() == 'entity.node.canonical' &&
+    $route_match->getParameter('node')->bundle() == 'idea' &&
+    \Drupal::request()->query->has('idea-duplication')) {
+    $link = Link::createFromRoute('create an idea by yourself', 'node.add', ['node_type' => 'idea'])->toString();
+    \Drupal::messenger()->addMessage(
+      t("<div>This idea might be similar to the one you were about to create.</div>
+      <div>Consider joining this idea as a follower or co-author.</div>
+      <div>Ideas have better chance in being complete, and to move on to execution, if a large group of people collaborates on making the idea better.</div>
+      <div>If you want, and whenever you want, you can always go ahead and @create.</div>", ['@create' => $link])
+    );
   }
 }
 

@@ -8,10 +8,9 @@ openideal_idea.openideal_idea_score_config_form:
   options:
     _admin_route: TRUE
 
-openideal_idea.autocomplete_controller:
-  path: '/admin/idea/autocomplete'
+openideal_idea.ideas_autocomplete:
+  path: '/idea/autocomplete'
   defaults:
-    _controller: '\Drupal\openideal_idea\Controller\AutocompleteController::autocomplete'
-    _title: 'Idea autocomplete'
+    _controller: '\Drupal\openideal_idea\Controller\IdeasAutocompleteController::autocomplete'
   requirements:
     _permission: 'access content'
