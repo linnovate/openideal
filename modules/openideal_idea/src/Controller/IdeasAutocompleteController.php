@@ -87,7 +87,7 @@ class IdeasAutocompleteController extends ControllerBase {
 
     foreach ($entity_labels as $values) {
       foreach ($values as $entity_id => $label) {
-        $node_url = Url::fromRoute('entity.node.canonical', ['node' => $entity_id], ['query' => ['idea-duplication' => TRUE]])->toString();
+        $node_url = Url::fromRoute('entity.node.canonical', ['node' => $entity_id], ['query' => ['suggested-idea' => TRUE]])->toString();
         $matches[] = ['value' => $label, 'label' => $label, 'url' => $node_url];
       }
     }
