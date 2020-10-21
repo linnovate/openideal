@@ -14,6 +14,7 @@
   }
 
   &__container {
+    min-width: 125.38px;
     font-weight: 600;
     font-size: 14px;
     line-height: 130%;
@@ -26,7 +27,7 @@
       border-width: 2px;
       top: 50%;
       transform: translateY(-50%);
-      left: -4.251px;
+      left: -4.2px;
       border-style: solid;
       border-radius: 50%;
       position: absolute;
@@ -142,31 +143,6 @@
         background: #FDEEEE;
         border-color: $reject;
       }
-    }
-  }
-
-  &.postponed,
-  &.draft_approval {
-    .idea-statistics-and-status-block--status__container::before {
-      left: -4px;
-    }
-  }
-
-  &.published {
-    .idea-statistics-and-status-block--status__container::before {
-      left: -4.151px;
-    }
-  }
-
-  &.rejected {
-    .idea-statistics-and-status-block--status__container::before {
-      left: -4px;
-    }
-  }
-
-  &.approved {
-    .idea-statistics-and-status-block--status__container::before {
-      left: -4.6px;
     }
   }
 }
