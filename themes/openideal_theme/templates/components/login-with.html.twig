@@ -1,0 +1,16 @@
+{% set module = 'social-auth' %}
+
+{{ attach_library('social_auth/auth-icons') }}
+
+{% for social_network in social_networks %}
+  {% if destination %}
+    <a class="{{ module }} auth-link" href="{{ path(social_network.route) }}?destination={{ destination }}">
+  {% else %}
+    <a class="{{ module }} auth-link" href="{{ path(social_network.route) }}">
+  {% endif %}
+      <div class="{{ module ~ '--icon-wrapper' }}">
+        <img class="{{ module ~ '--icon' }} auth-icon" src="{{ base_path }}{{ social_network.img_path }}" alt="{{ social_network.name }}" title="{{ social_network.name }}">
+      </div>
+      <span class="{{ module ~ '--name' }}">{{ social_network.name }}</span>
+  </a>
+{% endfor %}

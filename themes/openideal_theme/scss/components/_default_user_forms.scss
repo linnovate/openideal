@@ -21,7 +21,6 @@
 .user-login-form,
 .user-pass,
 .user-register-form {
-  max-width: 560px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -43,19 +42,12 @@
   }
 
   .form-actions {
-    width: 100%;
-    input {
-      @include btn-theme($btn-dark, #1e7697);
-    }
-  }
-  .social-login-buttons {
-    margin-top: 5px;
-    display: flex;
     align-items: center;
-    justify-content: center;
-
-    img {
-      border-radius: 50%;
+    display: flex;
+    text-transform: uppercase;
+    input {
+      border-width: 0;
+      @include btn-theme($btn-light, #2e5d6d);
     }
   }
 }

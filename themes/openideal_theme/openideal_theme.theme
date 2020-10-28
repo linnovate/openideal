@@ -68,15 +68,20 @@ function openideal_theme_preprocess_html(&$variables) {
  */
 function openideal_theme_preprocess_page(&$variables) {
   $route_match = \Drupal::routeMatch();
+  $route_name = $route_match->getRouteName();
   $node = $route_match->getParameter('node');
   if ($node instanceof NodeInterface) {
     $variables['node_type'] = $node->bundle();
   }
 
-  if ($route_match->getRouteName() == 'view.frontpage.front_page'
-    || $route_match->getRouteName() == 'entity.user.canonical'
-    || $route_match->getRouteName() == 'view.news.all_news_page') {
+  if ($route_name == 'view.frontpage.front_page'
+    || $route_name == 'entity.user.canonical'
+    || $route_name == 'view.news.all_news_page') {
     $variables['is_activity_page'] = TRUE;
+  }
+  elseif ($route_name == 'user.login') {
+    $variables['#attached']['library'][] = 'openideal_theme/underliner';
+    $variables['#attached']['drupalSettings']['loginPage']['underliner'] = TRUE;
   }
 }
 

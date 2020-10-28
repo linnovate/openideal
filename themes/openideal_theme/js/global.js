@@ -286,6 +286,28 @@
   }
 
   /**
+   * Attach behaviours on user login.
+   *
+   * @type {Drupal~behavior}
+   *
+   * @prop {Drupal~behaviorAttach} attach
+   *   Add svg underline for <em> tag.
+   */
+  Drupal.behaviors.openidealThemeLoginUndeline = {
+    attach: function (context, settings) {
+      if (settings.loginPage.underliner) {
+        var $span = $('.user-login-form-container--right__text--section__first span').once('openideal_theme_login_undeline');
+        if ($span.length) {
+          var $em = $('.user-login-form-container--right__text--section__first em').get(0);
+          $span.css('width', $em.offsetWidth)
+          $span.css('height', $em.offsetHeight)
+          new Underliner('.user-login-form-container--right__text--section__first em', '#27C0FF', '#27C0FF', 4, 6);
+        }
+      }
+    }
+  }
+
+  /**
    * Add the behaviour to comment reply link.
    *
    * @type {Drupal~behavior}

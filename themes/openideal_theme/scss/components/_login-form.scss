@@ -1,0 +1,205 @@
+.user-login-form-container {
+  background-color: $white;
+  display: flex;
+
+  // Title
+  &--title {
+    font-style: normal;
+    font-weight: 600;
+    font-size: size(25);
+    line-height: size(33);
+    text-align: center;
+    margin-bottom: size(41);
+  }
+
+  // Left container with form
+  &--left {
+    padding: size(40) size(46);
+    width: size(522);
+
+    // Social login buttons
+    &__social-login-buttons {
+      .social-auth {
+        margin-bottom: size(12);
+        background: #FFFFFF;
+        border: 1px solid #D0D6DC;
+        box-sizing: border-box;
+        border-radius: 60px;
+        padding: size(18);
+        position: relative;
+        display: flex;
+        justify-content: center;
+
+        &--name {
+          font-family: "Assistant", Roboto, -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+          font-style: normal;
+          font-weight: 600;
+          font-size: size(15);
+          line-height: size(20);
+          color: #343352;
+        }
+
+        &--icon-wrapper {
+          position: absolute;
+          width: 34px;
+          justify-content: center;
+          display: flex;
+          left: size(20);
+          top: 50%;
+          transform: translateY(-50%);
+          margin-right: size(10);
+
+          &::after {
+            content: '';
+            width: 1px;
+            height: 100%;
+            display: block;
+            background: #D0D6DC;
+            position: absolute;
+            right: size(-12);
+            top: 0;
+          }
+        }
+
+        &--icon {
+
+        }
+      }
+    }
+
+    // Or  "--- or ---"
+    &__or {
+      margin: 10px 0;
+      display: flex;
+      &--line {
+        flex-grow: 1;
+        flex-shrink: 1;
+        background-color: #dbdbdb;
+        height: 1px;
+        position: relative;
+        top: .45em;
+      }
+
+      &--or {
+        color: #8e8e8e;
+        flex-grow: 0;
+        flex-shrink: 0;
+        font-size: 13px;
+        font-weight: 600;
+        line-height: 15px;
+        margin: 0 18px;
+        text-transform: uppercase;
+      }
+    }
+  }
+
+  // Right section
+  &--right {
+    width: size(522);
+    color: $white;
+    margin-bottom: 0;
+    position: relative;
+    background: #26282E;
+    overflow: hidden;
+
+    &__text {
+      display: flex;
+
+      &--section__first {
+        z-index: 999;
+        padding: size(38);
+
+        ul {
+          list-style: none;
+          padding: 0;
+          margin: 0;
+        }
+
+        li {
+          padding-left: size(13);
+          text-indent: -.7em;
+          margin-bottom: size(17);
+          font-size: size(20);
+          line-height: size(26);
+        }
+
+        li::before {
+          content: "• ";
+          font-size: size(25);
+          color: #27C0FF;
+        }
+
+        h2 {
+
+          span {
+            display: inline-block;
+            position: relative;
+          }
+
+          em {
+            position: absolute;
+            left: 0;
+            color: white;
+
+            & + svg {
+              position: absolute;
+              left: 0;
+              bottom: -40%;
+              opacity: 1;
+
+              path {
+                stroke-dashoffset: 0;
+              }
+            }
+          }
+
+          svg {
+            pointer-events: none;
+            transition: 0.5s;
+            //outline: solid 1px lightgrey;
+          }
+
+          path {
+            transition: stroke-dasharray 0.5s, stroke-dashoffset 0.5s, opacity 0.5s;
+
+            &:last-child {
+              opacity: 0.2;
+            }
+          }
+
+          font-style: normal;
+          font-weight: bold;
+          font-size: size(52);
+          line-height: 60px;
+          letter-spacing: 0.01em;
+        }
+      }
+
+      &--section__second {
+        position: absolute;
+        bottom: 0;
+        &::after {
+          content: '';
+          position: absolute;
+          top: 0;
+          right: 0;
+          bottom: 0;
+          left: 0;
+          background: linear-gradient(176.59deg, #262930 7.81%, rgba(38, 41, 48, 0) 40.61%);
+        }
+      }
+    }
+  }
+
+  // Actions
+  &--actions {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: center;
+
+    .form-submit {
+      width: 50%;
+    }
+  }
+}

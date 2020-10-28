@@ -21,6 +21,6 @@ settings:
 visibility:
   route:
     id: route
-    routes: entity.user.canonical
+    routes: "entity.user.canonical\r\nuser.login\r\nuser.logout\r\nuser.register"
     negate: true
     context_mapping: {  }

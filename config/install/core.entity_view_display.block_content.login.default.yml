@@ -1,0 +1,93 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.login
+    - field.field.block_content.login.body
+    - field.field.block_content.login.field_image
+  module:
+    - image
+    - layout_builder
+    - text
+  theme:
+    - openideal_theme
+third_party_settings:
+  layout_builder:
+    allow_custom: false
+    enabled: true
+    sections:
+      -
+        layout_id: openideal_two_columns_teaser
+        layout_settings:
+          label: ''
+          main_class: user-login-form-container--right__text
+          layout_builder_styles_style:
+            author: 0
+            user_compact: 0
+            user_profile: 0
+            user_profile_top: 0
+        components:
+          2f0d2b45-54c7-4ba5-ba86-65dc9505679e:
+            uuid: 2f0d2b45-54c7-4ba5-ba86-65dc9505679e
+            region: first
+            configuration:
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              id: 'field_block:block_content:login:body'
+              formatter:
+                label: hidden
+                type: text_default
+                settings:
+                  offset: 0
+                  limit: 0
+                third_party_settings: {  }
+            additional: {  }
+            weight: 0
+          1e4a8db3-8563-465d-bdaa-672eaf9eac1f:
+            uuid: 1e4a8db3-8563-465d-bdaa-672eaf9eac1f
+            region: second
+            configuration:
+              id: 'field_block:block_content:login:field_image'
+              label: Image
+              provider: layout_builder
+              label_display: '0'
+              formatter:
+                label: hidden
+                type: image
+                settings:
+                  image_style: ''
+                  image_link: ''
+                third_party_settings: {  }
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+            additional: {  }
+            weight: 1
+        third_party_settings: {  }
+id: block_content.login.default
+targetEntityType: block_content
+bundle: login
+mode: default
+content:
+  body:
+    label: hidden
+    type: text_default
+    weight: 0
+    settings:
+      offset: 0
+      limit: 0
+    third_party_settings: {  }
+    region: content
+  field_image:
+    weight: 1
+    label: above
+    settings:
+      image_style: ''
+      image_link: ''
+      offset: 0
+      limit: 0
+    third_party_settings: {  }
+    type: image
+    region: content
+hidden: {  }
