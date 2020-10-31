@@ -296,12 +296,12 @@
   Drupal.behaviors.openidealThemeLoginUndeline = {
     attach: function (context, settings) {
       if (settings.loginPage.underliner) {
-        var $span = $('.user-login-form-container--right__text--section__first span').once('openideal_theme_login_undeline');
+        var $span = $('.user-login-form--container--right__text--section__first span').once('openideal_theme_login_undeline');
         if ($span.length) {
-          var $em = $('.user-login-form-container--right__text--section__first em').get(0);
+          var $em = $('.user-login-form--container--right__text--section__first em').get(0);
           $span.css('width', $em.offsetWidth)
           $span.css('height', $em.offsetHeight)
-          new Underliner('.user-login-form-container--right__text--section__first em', '#27C0FF', '#27C0FF', 4, 6);
+          new Underliner('.user-login-form--container--right__text--section__first em', '#27C0FF', '#27C0FF', 4, 6);
         }
       }
     }

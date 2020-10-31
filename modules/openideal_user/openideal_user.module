@@ -6,6 +6,7 @@
  */
 
 use Drupal\Core\Cache\RefinableCacheableDependencyInterface;
+use Drupal\Core\Link;
 use Drupal\message\MessageInterface;
 use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Entity\EntityInterface;
@@ -30,35 +31,47 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 /**
  * Implements hook_form_FORM_ID_alter().
  */
+function openideal_user_form_user_register_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  $form['title'] = [
+    '#type' => 'html_tag',
+    '#tag' => 'h1',
+    '#value' => t('Create your @site account', ['@site' => \Drupal::config('system.site')->get('name')]),
+    '#weight' => -1,
+  ];
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
 function openideal_user_form_user_login_form_alter(&$form, FormStateInterface $form_state, $form_id) {
   /** @var \Drupal\social_api\Plugin\NetworkManager $network_manager */
   $network_manager = \Drupal::service('plugin.network.manager');
   $social_plugins = \Drupal::config('social_auth.settings')->get('auth');
-  /** @var \Drupal\block\Entity\Block $block */
-  $block = \Drupal::entityTypeManager()->getViewBuilder('block')->view(\Drupal::entityTypeManager()->getStorage('block')->load('login_right_section'), 'full');
-  // Need to render the block here, because form
-  // doesn't provide ability to put #lazy_builder.
-  // @see https://www.drupal.org/project/drupal/issues/3067038
-  $rendered_block = \Drupal::service('renderer')->render($block);
+  $form['#attributes']['class'][] = 'user-login-form';
   $form['container'] = [
     '#type' => 'container',
-    '#attributes' => ['class' => ['user-login-form-container']],
+    '#attributes' => ['class' => ['user-login-form--container']],
     'left' => [
       '#type' => 'container',
-      '#attributes' => ['class' => ['user-login-form-container--left']],
+      '#attributes' => ['class' => ['user-login-form--container--left']],
     ],
     'right' => [
       '#type' => 'container',
-      '#attributes' => ['class' => ['user-login-form-container--right']],
+      '#attributes' => ['class' => ['user-login-form--container--right']],
     ],
   ];
 
-  $form['container']['right']['section']['#markup'] = $rendered_block;
+  $entity_manager = \Drupal::entityTypeManager();
+  $block_entity = $entity_manager->getStorage('block_content')->loadByProperties(['info' => 'login']);
+  if (!empty($block_entity)) {
+    $block = $entity_manager->getViewBuilder('block_content')->view(current($block_entity), 'full');
+    $form['container']['right']['section']['block'] = $block;
+  }
 
   $form['container']['left']['title'] = [
     '#type' => 'html_tag',
     '#tag' => 'h1',
-    '#attributes' => ['class' => ['user-login-form-container--title']],
+    '#attributes' => ['class' => ['user-login-form--container--title']],
     '#value' => t('Login to @site', ['@site' => \Drupal::config('system.site')->get('name')]),
   ];
 
@@ -105,27 +118,27 @@ function openideal_user_form_user_login_form_alter(&$form, FormStateInterface $f
   if (!empty($social_plugins)) {
     $form['container']['left']['or'] = [
       '#type' => 'container',
-      '#attributes' => ['class' => ['user-login-form-container--left__or']],
+      '#attributes' => ['class' => ['user-login-form--container--left__or']],
       'before' => [
         '#type' => 'container',
-        '#attributes' => ['class' => ['user-login-form-container--left__or--line']],
+        '#attributes' => ['class' => ['user-login-form--container--left__or--line']],
       ],
       'or' => [
         '#type' => 'html_tag',
         '#tag' => 'p',
         '#value' => 'or',
-        '#attributes' => ['class' => ['user-login-form-container--left__or--or']],
+        '#attributes' => ['class' => ['user-login-form--container--left__or--or']],
       ],
       'after' => [
         '#type' => 'container',
-        '#attributes' => ['class' => ['user-login-form-container--left__or--line']],
+        '#attributes' => ['class' => ['user-login-form--container--left__or--line']],
       ],
       '#weight' => '2',
     ];
 
     $form['container']['left']['social_buttons'] = [
       '#type' => 'container',
-      '#attributes' => ['class' => ['user-login-form-container--left__social-login-buttons']],
+      '#attributes' => ['class' => ['user-login-form--container--left__social-login-buttons']],
       'buttons' => [
         '#theme' => 'login_with',
         '#social_networks' => $social_plugins,
@@ -134,8 +147,27 @@ function openideal_user_form_user_login_form_alter(&$form, FormStateInterface $f
     ];
   }
 
+  $signup_link = Link::createFromRoute(t('signup'), 'user.register')->toString();
+  $reset_link = Link::createFromRoute(t('Forgot your password?'), 'user.pass')->toString();
+  $form['container']['left']['bottom'] = [
+    '#type' => 'container',
+    '#attributes' => ['class' => ['user-login-form--container__bottom']],
+    'signup' => [
+      '#type' => 'html_tag',
+      '#attributes' => ['class' => ['user-login-form--container__bottom--signup', 'user-login-form--container__bottom--text']],
+      '#tag' => 'p',
+      '#value' => t("Don't have an account? @link", ['@link' => $signup_link]),
+    ],
+    'reset' => [
+      '#type' => 'html_tag',
+      '#attributes' => ['class' => ['user-login-form--container__bottom--forgot-password', 'user-login-form--container__bottom--text']],
+      '#tag' => 'p',
+      '#value' => t("@link", ['@link' => $reset_link]),
+    ],
+  ];
+
   $form['actions']['submit']['#value'] = t('Login');
-  $form['actions']['#attributes']['class'][] = 'user-login-form-container--actions';
+  $form['actions']['#attributes']['class'][] = 'user-login-form--container--actions';
   $form['container']['left']['actions'] = $form['actions'];
   unset($form['actions']);
 }
