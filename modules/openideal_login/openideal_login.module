@@ -7,11 +7,17 @@
 
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Link;
+use Drupal\Core\Routing\RouteMatch;
+use Drupal\Core\Url;
+use Drupal\openideal_user\Event\OpenidealUserEvents;
+use Drupal\openideal_user\Event\OpenidealUserJoinedSiteEvent;
+use Drupal\user\UserInterface;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
 /**
  * Implements hook_form_FORM_ID_alter().
  */
-function openideal_user_form_user_register_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+function openideal_login_form_user_register_form_alter(&$form, FormStateInterface $form_state, $form_id) {
   $form['title'] = [
     '#type' => 'html_tag',
     '#tag' => 'h1',
@@ -23,7 +29,7 @@ function openideal_user_form_user_register_form_alter(&$form, FormStateInterface
 /**
  * Implements hook_form_FORM_ID_alter().
  */
-function openideal_user_form_user_login_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+function openideal_login_form_user_login_form_alter(&$form, FormStateInterface $form_state, $form_id) {
   /** @var \Drupal\social_api\Plugin\NetworkManager $network_manager */
   $network_manager = \Drupal::service('plugin.network.manager');
   $social_plugins = \Drupal::config('social_auth.settings')->get('auth');
@@ -163,4 +169,26 @@ function openideal_user_form_user_login_form_alter(&$form, FormStateInterface $f
   $form['actions']['#attributes']['class'][] = 'user-login-form--container--actions';
   $form['container']['left']['actions'] = $form['actions'];
   unset($form['actions']);
+}
+
+/**
+ * Implements hook_user_login().
+ */
+function openideal_login_user_login(UserInterface $account) {
+  if (RouteMatch::createFromRequest(\Drupal::request())->getRouteName() == 'user_registrationpassword.confirm') {
+    $event = new OpenidealUserJoinedSiteEvent($account);
+    \Drupal::service('event_dispatcher')->dispatch(OpenidealUserEvents::OPENIDEA_USER_JOINED_THE_SITE, $event);
+
+    // Redirect user if joined the site for the first
+    // time via the user_registrationpassword one time link.
+    $response = new RedirectResponse(URL::fromRoute('openideal_user.register.user.more_about_you')->toString());
+    $response->send();
+  }
+
+  // If user was created by UI or via social logins then dispatch
+  // OpenidealUserEvents.
+  if (!$account->getLastAccessedTime()) {
+    $event = new OpenidealUserJoinedSiteEvent($account);
+    \Drupal::service('event_dispatcher')->dispatch(OpenidealUserEvents::OPENIDEA_USER_JOINED_THE_SITE, $event);
+  }
 }
