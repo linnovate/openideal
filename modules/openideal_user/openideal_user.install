@@ -5,45 +5,12 @@
  * Install, update and uninstall functions for the openideal user module.
  */
 
-use Drupal\block_content\Entity\BlockContent;
-
 /**
  * Implements hook_update_N().
  */
-function openideal_user_update_8001(&$sandbox) {
-  $blocks = \Drupal::entityTypeManager()->getStorage('block_content')->loadByProperties(['info' => 'login']);
-  if (!empty($blocks)) {
-    return;
+function openideal_user_update_8001() {
+  if (!\Drupal::moduleHandler()->moduleExists('openideal_login')) {
+    \Drupal::service('module_installer')->install(['openideal_login']);
+    return t('The "OpenideaL Login" module has been installed.');
   }
-
-  // Create a block_content for right section of login screen.
-  $module_handler = \Drupal::service('module_handler');
-  $path = $module_handler->getModule('openideal_user')->getPath() . '/images/login_background.jpg';
-  /** @var \Drupal\Core\Image\ImageInterface $image */
-  $image = \Drupal::service('image.factory')->get($path);
-  $destination = \Drupal::config('system.file')->get('default_scheme') . '://' . basename($path);
-  $file = file_save_data(file_get_contents($path), $destination);
-
-  $block = BlockContent::create([
-    'type' => 'login',
-    'info' => 'login',
-    'body' => [
-      // Not sure if need to wrap the value with t().
-      'value' => "<h2>Ideas <span><em>Inspire</em></span> Innovation</h2>
-<ul>
-	<li>Innovation at your fingertips</li>
-	<li>Create personalized customer experiences</li>
-	<li>Share your thoughts about how to improve company workflow</li>
-</ul>
-",
-      'format' => 'full_html',
-    ],
-    'field_image' => [
-      'target_id' => $file->id(),
-      'width' => $image->getWidth(),
-      'height' => $image->getHeight(),
-      'alt' => t('Hands with lamps'),
-    ],
-  ]);
-  $block->save();
 }

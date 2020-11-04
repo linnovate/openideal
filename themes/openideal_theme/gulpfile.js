@@ -18,7 +18,6 @@ const paths = {
     bootstrap: './node_modules/bootstrap/dist/js/bootstrap.min.js',
     jquery: './node_modules/jquery/dist/jquery.min.js',
     popper: 'node_modules/popper.js/dist/umd/popper.min.js.map',
-    underliner: 'node_modules/link-underliner/index.js',
     dest: './js'
   }
 }
@@ -64,8 +63,7 @@ function stylesRtl() {
 
 // Move the javascript files into our js folder
 function js() {
-  return gulp.src([paths.js.bootstrap, paths.js.jquery, paths.js.popper, paths.js.underliner])
-    .pipe(rename((path) => path.basename.includes('index') ? (path.basename = 'underliner') : null))
+  return gulp.src([paths.js.bootstrap, paths.js.jquery, paths.js.popper])
     .pipe(gulp.dest(paths.js.dest))
 }
 

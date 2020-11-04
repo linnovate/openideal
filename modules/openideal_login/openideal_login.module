@@ -1,0 +1,166 @@
+<?php
+
+/**
+ * @file
+ * Contains openideal_login.module.
+ */
+
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Link;
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function openideal_user_form_user_register_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  $form['title'] = [
+    '#type' => 'html_tag',
+    '#tag' => 'h1',
+    '#value' => t('Create your @site account', ['@site' => \Drupal::config('system.site')->get('name')]),
+    '#weight' => -1,
+  ];
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function openideal_user_form_user_login_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  /** @var \Drupal\social_api\Plugin\NetworkManager $network_manager */
+  $network_manager = \Drupal::service('plugin.network.manager');
+  $social_plugins = \Drupal::config('social_auth.settings')->get('auth');
+  $form['#attributes']['class'][] = 'user-login-form';
+  $form['container'] = [
+    '#type' => 'container',
+    '#attributes' => ['class' => ['user-login-form--container']],
+    'left' => [
+      '#type' => 'container',
+      '#attributes' => ['class' => ['user-login-form--container--left']],
+    ],
+    'right' => [
+      '#type' => 'container',
+      '#attributes' => ['class' => ['user-login-form--container--right']],
+    ],
+  ];
+
+  $entity_manager = \Drupal::entityTypeManager();
+  $block_entity = $entity_manager->getStorage('block_content')->loadByProperties(['info' => 'login']);
+  if (!empty($block_entity)) {
+    $block = $entity_manager->getViewBuilder('block_content')->view(current($block_entity), 'full');
+    $form['container']['right']['section']['block'] = $block;
+  }
+
+  $form['container']['left']['title'] = [
+    '#type' => 'html_tag',
+    '#tag' => 'h1',
+    '#attributes' => ['class' => ['user-login-form--container--title']],
+    '#value' => t('Login to @site', ['@site' => \Drupal::config('system.site')->get('name')]),
+  ];
+
+  foreach (['name', 'pass'] as $child) {
+    if (isset($form[$child])) {
+      unset($form[$child]['#description']);
+
+      if ($child == 'name') {
+        $form[$child]['#placeholder'] = t('Email Address');
+        $form[$child]['#weight'] = 3;
+      }
+      if ($child == 'pass') {
+        $form[$child]['#placeholder'] = t('Password');
+        $form[$child]['#weight'] = 4;
+      }
+
+      $form['container']['left'][$child] = $form[$child];
+      unset($form[$child]);
+    }
+  }
+
+  // Remove socials that aren't configured properly.
+  foreach ($social_plugins as $plugin_id => &$data) {
+    if (!$network_manager->createInstance($plugin_id)->getSdk()) {
+      unset($social_plugins[$plugin_id]);
+    }
+
+    $theme_path = \Drupal::service('theme_handler')->getTheme('openideal_theme')->getPath();
+    $prefix = 'Sign in with';
+    if (strpos($plugin_id, 'google') !== FALSE) {
+      $data['img_path'] = $theme_path . '/images/icons/google_icon.png';
+      $data['name'] = t('@prefix Google', ['@prefix' => $prefix]);
+    }
+    elseif (strpos($plugin_id, 'facebook') !== FALSE) {
+      $data['img_path'] = $theme_path . '/images/icons/facebook_icon.png';
+      $data['name'] = t('@prefix Facebook', ['@prefix' => $prefix]);
+    }
+    elseif (strpos($plugin_id, 'github') !== FALSE) {
+      $data['img_path'] = $theme_path . '/images/icons/github_icon.png';
+      $data['name'] = t('@prefix GitHub', ['@prefix' => $prefix]);
+    }
+  }
+
+  if (!empty($social_plugins)) {
+    $form['container']['left']['or'] = [
+      '#type' => 'container',
+      '#attributes' => ['class' => ['user-login-form--container--left__or']],
+      'before' => [
+        '#type' => 'container',
+        '#attributes' => ['class' => ['user-login-form--container--left__or--line']],
+      ],
+      'or' => [
+        '#type' => 'html_tag',
+        '#tag' => 'p',
+        '#value' => 'or',
+        '#attributes' => ['class' => ['user-login-form--container--left__or--or']],
+      ],
+      'after' => [
+        '#type' => 'container',
+        '#attributes' => ['class' => ['user-login-form--container--left__or--line']],
+      ],
+      '#weight' => '2',
+    ];
+
+    $form['container']['left']['social_buttons'] = [
+      '#type' => 'container',
+      '#attributes' => ['class' => ['user-login-form--container--left__social-login-buttons']],
+      'buttons' => [
+        '#theme' => 'login_with',
+        '#social_networks' => $social_plugins,
+        '#weight' => '1',
+      ],
+    ];
+  }
+
+  $signup_link = Link::createFromRoute(t('signup'), 'user.register')->toString();
+  $reset_link = Link::createFromRoute(t('Forgot your password?'), 'user.pass')->toString();
+  $form['container']['left']['bottom'] = [
+    '#type' => 'container',
+    '#attributes' => ['class' => ['user-login-form--container__bottom']],
+    'signup' => [
+      '#type' => 'html_tag',
+      '#attributes' => [
+        'class' => [
+          'user-login-form--container__bottom--signup',
+          'user-login-form--container__bottom--text',
+        ],
+      ],
+      '#tag' => 'p',
+      '#value' => t("Don't have an account? @link", ['@link' => $signup_link]),
+    ],
+    'reset' => [
+      '#type' => 'html_tag',
+      '#attributes' => [
+        'class' => [
+          'user-login-form--container__bottom--forgot-password',
+          'user-login-form--container__bottom--text',
+        ],
+      ],
+      '#tag' => 'p',
+      '#value' => t("@link", ['@link' => $reset_link]),
+    ],
+  ];
+
+  $form['#attached']['library'][] = 'openideal_login/underliner';
+  $form['#attached']['drupalSettings']['loginPage']['underliner'] = TRUE;
+
+  $form['actions']['submit']['#value'] = t('Login');
+  $form['actions']['#attributes']['class'][] = 'user-login-form--container--actions';
+  $form['container']['left']['actions'] = $form['actions'];
+  unset($form['actions']);
+}

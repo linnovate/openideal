@@ -22,25 +22,8 @@ expression:
     conditions:
       -
         id: rules_condition
-        uuid: 64e03746-3bac-4912-8821-0f309c585a53
-        weight: -50
-        context_values:
-          operation: '=='
-          value: node
-        context_mapping:
-          data: vote.entity_type.value
-        context_processors:
-          operation:
-            rules_tokens: {  }
-          value:
-            rules_tokens: {  }
-        provides_mapping: {  }
-        condition_id: rules_data_comparison
-        negate: false
-      -
-        id: rules_condition
         uuid: e42d9597-8b68-4c0f-8104-82cf94775eed
-        weight: -49
+        weight: -50
         context_values:
           operation: '=='
           value: idea
@@ -57,7 +40,7 @@ expression:
       -
         id: rules_condition
         uuid: f8e70bdc-3ebd-416a-88c7-8d51fea56a84
-        weight: -48
+        weight: -49
         context_values: {  }
         context_mapping:
           entity: vote
@@ -68,7 +51,7 @@ expression:
       -
         id: rules_condition
         uuid: 077a555d-78ba-4e37-bf84-5bfb1bafeed6
-        weight: -47
+        weight: -48
         context_values:
           operation: '=='
         context_mapping:
