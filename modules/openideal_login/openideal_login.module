@@ -86,18 +86,17 @@ function openideal_login_form_user_login_form_alter(&$form, FormStateInterface $
     }
 
     $theme_path = \Drupal::service('theme_handler')->getTheme('openideal_theme')->getPath();
-    $prefix = 'Sign in with';
     if (strpos($plugin_id, 'google') !== FALSE) {
       $data['img_path'] = $theme_path . '/images/icons/google_icon.png';
-      $data['name'] = t('@prefix Google', ['@prefix' => $prefix]);
+      $data['name'] = t('Sign in with Google');
     }
     elseif (strpos($plugin_id, 'facebook') !== FALSE) {
       $data['img_path'] = $theme_path . '/images/icons/facebook_icon.png';
-      $data['name'] = t('@prefix Facebook', ['@prefix' => $prefix]);
+      $data['name'] = t('Sign in with Facebook');
     }
     elseif (strpos($plugin_id, 'github') !== FALSE) {
       $data['img_path'] = $theme_path . '/images/icons/github_icon.png';
-      $data['name'] = t('@prefix GitHub', ['@prefix' => $prefix]);
+      $data['name'] = t('Sign in with GitHub');
     }
   }
 
@@ -158,7 +157,7 @@ function openideal_login_form_user_login_form_alter(&$form, FormStateInterface $
         ],
       ],
       '#tag' => 'p',
-      '#value' => t("@link", ['@link' => $reset_link]),
+      '#value' => $reset_link,
     ],
   ];
 
