@@ -192,9 +192,9 @@ function openideal_theme_preprocess_image(&$variables) {
 function openideal_theme_preprocess_message__user_mention(&$variables) {
   // In case the user is not viewing its page,
   // its necessary to change the partial template.
+  $variables['#cache']['contexts'][] = 'user.is_user_profile_page';
   if (\Drupal::routeMatch()->getRouteName() == 'entity.user.canonical' &&
     \Drupal::currentUser()->id() !== \Drupal::routeMatch()->getParameter('user')->id()) {
-    $variables['#cache']['contexts'][] = 'user.is_user_profile_page';
     $partial = $variables['elements']['#message']->getText(\Drupal::languageManager()->getCurrentLanguage()->getId(), 3);
     if (!empty($partial)) {
       $variables['content']['partial_0']['#markup'] = current($partial);
