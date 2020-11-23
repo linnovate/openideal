@@ -18,7 +18,6 @@
    */
   function generateDefaultDate(date) {
     if (!(date instanceof Date)) {
-      // @Todo: throw error?
       return;
     }
     var language = drupalSettings.path.currentLanguage;
@@ -47,24 +46,5 @@
       })
     }
   };
-
-  /**
-   * Change html5 date input view format.
-   *
-   * @type {Drupal~behavior}
-   *
-   * @prop {Drupal~behaviorAttach} attach
-   *   Attach dynamic format change to date.
-   */
-  Drupal.behaviors.openidealChallengeHMTL5Date = {
-    attach: function (context, settings) {
-      $('input[type="date"]').once('openideal_challenge_html5_date').each(function () {
-        $(this).on('change', function () {
-          var attribute = !this.value ? 'dd/mm/yyyy' : generateDefaultDate(new Date(this.value));
-          this.setAttribute('data-date', attribute);
-        }).trigger("change")
-      })
-    }
-  }
 }
 )(jQuery, Drupal, drupalSettings);
