@@ -1,0 +1,20 @@
+{#
+/**
+ * @file
+ * Default theme implementation for the statistics_item render element.
+ *
+ * Available variables:
+ * - img: attributes.
+ * - bottom: attributes, [count[value, attrbiutes], title[attributes, value]]
+ * - show_title: bool if TRUE show title. default TRUE
+ *
+ * @ingroup themeable
+ */
+#}
+<div {{ img.attributes }}></div>
+<div {{ bottom.attributes }} >
+    <p {{ bottom.count.attributes }}>{{ bottom.count.value }}</p>
+    {% if show_title %}
+        <p {{ bottom.title.attributes }}>{{ bottom.title.value }}</p>
+    {% endif %}
+</div>

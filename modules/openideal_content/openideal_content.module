@@ -5,6 +5,8 @@
  * Contains openideal_content.module.
  */
 
+use Drupal\Core\Ajax\AjaxResponse;
+use Drupal\Core\Ajax\InsertCommand;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Url;
@@ -19,6 +21,46 @@ function openideal_content_link_alter(&$variables) {
   if ($variables['url']->isExternal()) {
     $variables['options']['attributes']['target'] = '_blank';
   }
+}
+
+/**
+ * Implements hook_form_BASE_FORM_ID_alter().
+ */
+function openideal_content_form_vote_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  $entity = $form_state->getFormObject()->getEntity();
+  if (isset($form['type']['#ajax']['callback']) && $entity->entity_type->value == 'node') {
+    $form['type']['#ajax']['callback'] = '_openideal_content_vote_ajax_submit';
+  }
+}
+
+/**
+ * Ajax submit handler.
+ *
+ * Replace submit handler from voting api, and set the
+ * voting count into hidden field for FE purposes.
+ */
+function _openideal_content_vote_ajax_submit(&$form, FormStateInterface $form_state) {
+  // Todo: change the button label here.
+  // @see Drupal.behaviors.openidealThemeLikeWidgetLabel
+  $form_state->getFormObject()
+    ->submitForm($form, $form_state);
+  $callback_object = $form_state->getFormObject();
+  $field_items = $form_state->get('field_items');
+  $settings = $form_state->get('formatter_settings') + $field_items->getSettings();
+  $results = \Drupal::service('votingapi_reaction.manager')->getResults($callback_object->getEntity(), $settings);
+  $result = array_sum(array_column($results, 'vote_sum'));
+  $response = new AjaxResponse();
+
+  // Form insert.
+  $html = \Drupal::service('renderer')->renderRoot($form);
+  $response->addCommand(new InsertCommand(NULL, $html));
+  $response->setAttachments($form['#attached']);
+
+  // Votes update.
+  $content = '<p class="idea-statistics-block--list__item--count" data-openideal-vote="like_tag">' . $result . '</p>';
+  $response->addCommand(new InsertCommand('[data-openideal-vote="like_tag"]', $content));
+
+  return $response;
 }
 
 /**

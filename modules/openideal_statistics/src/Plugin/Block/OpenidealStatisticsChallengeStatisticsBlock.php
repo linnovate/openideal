@@ -28,7 +28,6 @@ class OpenidealStatisticsChallengeStatisticsBlock extends BlockBase {
    * {@inheritdoc}
    */
   public function build($challenge = NULL) {
-    $build = [];
     $contexts = $this->getContexts();
     $is_not_full = isset($contexts['view_mode']) && $contexts['view_mode']->getContextValue() != 'full';
     $id = NULL;
@@ -40,45 +39,56 @@ class OpenidealStatisticsChallengeStatisticsBlock extends BlockBase {
       return [];
     }
 
-    $build['#theme'] = 'site_wide_statistics_block';
-    $build['#main_class'] = 'idea-statistics-block';
-    $build['#show_title'] = !$is_not_full;
-    $build['#content'] = [
+    $items = [
       'ideas' => [
-        'bottom' => [
+        '#lazy_element' => [
           '#lazy_builder' => ['openideal_statistics.lazy_builder:getChallengeIdeas', [$id]],
           '#create_placeholder' => TRUE,
         ],
-        'title' => $this->t('Challenge ideas'),
-        'img_class' => $is_not_full ? 'public_stream_idea' : 'statistics_tag',
+        '#item_title' => $this->t('Challenge ideas'),
+        '#img_class' => $is_not_full ? 'public_stream_idea' : 'statistics_tag',
       ],
       'votes' => [
-        'bottom' => [
+        '#lazy_element' => [
           '#lazy_builder' => ['openideal_statistics.lazy_builder:getVotes', [$id]],
           '#create_placeholder' => TRUE,
         ],
-        'title' => $this->t('Votes'),
-        'img_class' => $is_not_full ? 'public_stream_like' : 'like_tag',
+        '#item_title' => $this->t('Votes'),
+        '#img_class' => $is_not_full ? 'public_stream_like' : 'like_tag',
       ],
       'comments' => [
-        'bottom' => [
+        '#lazy_element' => [
           '#lazy_builder' => ['openideal_statistics.lazy_builder:getComments', [$id]],
           '#create_placeholder' => TRUE,
         ],
-        'title' => $this->t('Comments'),
-        'img_class' => $is_not_full ? 'public_stream_comment' : 'comment_tag',
+        '#item_title' => $this->t('Comments'),
+        '#img_class' => $is_not_full ? 'public_stream_comment' : 'comment_tag',
       ],
       'views' => [
-        'bottom' => [
+        '#lazy_element' => [
           '#lazy_builder' => ['openideal_statistics.lazy_builder:getViews', [$id]],
           '#create_placeholder' => TRUE,
         ],
-        'title' => $this->t('Views'),
-        'img_class' => $is_not_full ? 'public_stream_view' : 'view_tag',
+        '#item_title' => $this->t('Views'),
+        '#img_class' => $is_not_full ? 'public_stream_view' : 'view_tag',
       ],
     ];
 
-    return $build;
+    foreach ($items as &$item) {
+      $item['#wrapper_attributes'] = ['class' => ['idea-statistics-block--list__item']];
+      $item['#type'] = 'statistics_item';
+      $item['#show_title'] = !$is_not_full;
+    }
+
+    return [
+      'content' => [
+        '#theme' => 'item_list',
+        '#items' => $items,
+        '#attributes' => ['class' => ['idea-statistics-block--list']],
+        '#wrapper_attributes' => ['class' => ['idea-statistics-block']],
+      ],
+    ];
+
   }
 
 }

@@ -10,11 +10,11 @@
  */
 function openideal_statistics_theme() {
   return [
-    'site_wide_statistics_block' => [
+    'statistics_item' => [
       'variables' => [
-        'content' => NULL,
-        'main_class' => NULL,
         'show_title' => NULL,
+        'img' => NULL,
+        'bottom' => NULL,
       ],
     ],
     'export_icon__openideal' => [
