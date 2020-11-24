@@ -5,7 +5,9 @@
  * Functions to support theming in the SASS Starterkit subtheme.
  */
 
+use Drupal\Component\Render\FormattableMarkup;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Link;
 use Drupal\Core\StringTranslation\TranslatableMarkup;
 use Drupal\Core\Url;
 use Drupal\node\NodeInterface;
@@ -77,6 +79,17 @@ function openideal_theme_preprocess_page(&$variables) {
     || $route_match->getRouteName() == 'entity.user.canonical'
     || $route_match->getRouteName() == 'view.news.all_news_page') {
     $variables['is_activity_page'] = TRUE;
+  }
+
+  if ($route_match->getRouteName() == 'entity.node.canonical' &&
+    $route_match->getParameter('node')->bundle() == 'idea' &&
+    \Drupal::request()->query->has('suggested-idea')) {
+    $link = Link::createFromRoute(t('create an idea by yourself'), 'node.add', ['node_type' => 'idea'])->toString();
+    $message = new FormattableMarkup('<div>' . t('This idea might be similar to the one you were about to create.') . '</div>
+      <div>' . t('Consider joining this idea as a follower or co-author.') . '</div>
+      <div>' . t('Ideas have better chance in being complete, and to move on to execution, if a large group of people collaborates on making the idea better.') . '</div>
+      <div>' . t('If you want, and whenever you want, you can always go ahead and @create') . '</div>', ['@create' => $link]);
+    \Drupal::messenger()->addMessage($message);
   }
 }
 

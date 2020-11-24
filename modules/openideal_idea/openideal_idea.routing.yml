@@ -7,3 +7,10 @@ openideal_idea.openideal_idea_score_config_form:
     _permission: 'access to configuration forms'
   options:
     _admin_route: TRUE
+
+openideal_idea.ideas_autocomplete:
+  path: '/idea/autocomplete'
+  defaults:
+    _controller: '\Drupal\openideal_idea\Controller\IdeasAutocompleteController::autocomplete'
+  requirements:
+    _permission: 'access content'
