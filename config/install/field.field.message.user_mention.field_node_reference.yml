@@ -1,0 +1,29 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.message.field_node_reference
+    - message.template.user_mention
+    - node.type.challenge
+    - node.type.idea
+id: message.user_mention.field_node_reference
+field_name: field_node_reference
+entity_type: message
+bundle: user_mention
+label: 'Node reference'
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      challenge: challenge
+      idea: idea
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: challenge
+field_type: entity_reference

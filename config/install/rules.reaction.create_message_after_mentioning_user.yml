@@ -1,0 +1,56 @@
+langcode: en
+status: true
+dependencies: {  }
+id: create_message_after_mentioning_user
+label: 'Create a message after mentioning user'
+events:
+  -
+    event_name: openideal_user.user_mention
+description: ''
+tags: {  }
+config_version: '3'
+expression:
+  id: rules_rule
+  uuid: 01d20fdd-19f2-4e3c-adfd-45332d13c5e8
+  weight: 0
+  conditions:
+    id: rules_and
+    uuid: 564f446b-dd81-4070-95c7-07a55021ba46
+    weight: 0
+    conditions:
+      -
+        id: rules_condition
+        uuid: 7fcb2dcc-c1eb-42ac-8b64-73029e7b65ce
+        weight: 0
+        context_values:
+          operation: '=='
+          value: '1'
+        context_mapping:
+          data: comment.entity_id.entity.status.value
+        context_processors:
+          operation:
+            rules_tokens: {  }
+          value:
+            rules_tokens: {  }
+        provides_mapping: {  }
+        condition_id: rules_data_comparison
+        negate: false
+  actions:
+    id: rules_action_set
+    uuid: 4c6fadd2-58a4-421b-a312-43c59a6f7222
+    weight: 0
+    actions:
+      -
+        id: rules_action
+        uuid: 87e5f07f-7981-4f1f-ad17-29a70e3809a1
+        weight: 0
+        context_values:
+          template: user_mention
+        context_mapping:
+          referenced_entity: comment
+          user: user
+        context_processors:
+          template:
+            rules_tokens: {  }
+        provides_mapping: {  }
+        action_id: openideal_message_action
