@@ -179,7 +179,7 @@ class OpenidealStatisticsPerDayCharts extends BlockBase implements ContainerFact
       $from = $filters[OpenidealStatisticsDateSelectForm::FROM] ?? $from;
     }
 
-    // @Todo: investigate if there is possibility to count occurrences of equal fields.
+    // @todo investigate if there is possibility to count occurrences of equal fields.
     $select = $this->database->select($this->getTable(), 'd');
     $select->addExpression("DATE_FORMAT(FROM_UNIXTIME(d.${created}), '%Y-%m-%d')", 'date');
     $select->condition("d.${created}", $this->time->getRequestTime() - $from, '>=');

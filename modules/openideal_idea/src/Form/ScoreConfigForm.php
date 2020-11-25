@@ -6,7 +6,7 @@ use Drupal\Core\Form\ConfigFormBase;
 use Drupal\Core\Form\FormStateInterface;
 
 /**
- * Class ScoreConfigForm.
+ * Openideal score configuration form.
  */
 class ScoreConfigForm extends ConfigFormBase {
 

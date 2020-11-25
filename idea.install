@@ -26,7 +26,7 @@ function idea_install() {
 
   // Force set the administerusersbyrole configuration in fact
   // the module change it during installation of profile.
-  // @Todo: Further investigation.
+  // @todo Further investigation.
   \Drupal::configFactory()->getEditable('administerusersbyrole.settings')->set('roles', ['manager' => 'safe'])->save();
 
   // To avoid issues with importing of configurations set system.site

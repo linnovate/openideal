@@ -40,7 +40,7 @@ function openideal_content_form_vote_form_alter(&$form, FormStateInterface $form
  * voting count into hidden field for FE purposes.
  */
 function _openideal_content_vote_ajax_submit(&$form, FormStateInterface $form_state) {
-  // Todo: change the button label here.
+  // @todo change the button label here.
   // @see Drupal.behaviors.openidealThemeLikeWidgetLabel
   $form_state->getFormObject()
     ->submitForm($form, $form_state);

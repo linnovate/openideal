@@ -42,7 +42,9 @@ class OpenidealStatisticsChallengeStatisticsBlock extends BlockBase {
     $items = [
       'ideas' => [
         '#lazy_element' => [
-          '#lazy_builder' => ['openideal_statistics.lazy_builder:getChallengeIdeas', [$id]],
+          '#lazy_builder' => ['openideal_statistics.lazy_builder:getChallengeIdeas',
+            [$id],
+          ],
           '#create_placeholder' => TRUE,
         ],
         '#item_title' => $this->t('Challenge ideas'),
@@ -50,7 +52,9 @@ class OpenidealStatisticsChallengeStatisticsBlock extends BlockBase {
       ],
       'votes' => [
         '#lazy_element' => [
-          '#lazy_builder' => ['openideal_statistics.lazy_builder:getVotes', [$id]],
+          '#lazy_builder' => ['openideal_statistics.lazy_builder:getVotes',
+            [$id],
+          ],
           '#create_placeholder' => TRUE,
         ],
         '#item_title' => $this->t('Votes'),
@@ -58,7 +62,9 @@ class OpenidealStatisticsChallengeStatisticsBlock extends BlockBase {
       ],
       'comments' => [
         '#lazy_element' => [
-          '#lazy_builder' => ['openideal_statistics.lazy_builder:getComments', [$id]],
+          '#lazy_builder' => ['openideal_statistics.lazy_builder:getComments',
+            [$id],
+          ],
           '#create_placeholder' => TRUE,
         ],
         '#item_title' => $this->t('Comments'),
@@ -66,7 +72,9 @@ class OpenidealStatisticsChallengeStatisticsBlock extends BlockBase {
       ],
       'views' => [
         '#lazy_element' => [
-          '#lazy_builder' => ['openideal_statistics.lazy_builder:getViews', [$id]],
+          '#lazy_builder' => ['openideal_statistics.lazy_builder:getViews',
+            [$id],
+          ],
           '#create_placeholder' => TRUE,
         ],
         '#item_title' => $this->t('Views'),

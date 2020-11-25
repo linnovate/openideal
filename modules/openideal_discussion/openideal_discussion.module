@@ -1,0 +1,39 @@
+<?php
+
+/**
+ * @file
+ * Contain Openideal discussion hooks.
+ */
+
+use Drupal\Core\Access\AccessResult;
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Session\AccountInterface;
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function openideal_discussion_form_node_discussion_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  // Hide title for the discussion add form.
+  // @Todo: create the modal for Discussion edit form.
+  if (\Drupal::request()->query->get('_wrapper_format') == 'drupal_bootstrap4_modal') {
+    $form['title']['widget'][0]['value']['#default_value'] = 'Discussion';
+    $form['title']['#attributes']['class'] = 'd-none';
+    $form['body']['widget'][0]['#title_display'] = 'invisible';
+  }
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_create_access().
+ *
+ * Allow to add comments in Idea discussion only for group
+ * Author, Co-author and Expert.
+ */
+function openideal_discussion_comment_create_access(AccountInterface $account, array $context, $entity_bundle) {
+  if (($node = \Drupal::routeMatch()->getParameter('node')) && $node->bundle() == 'discussion') {
+    /** @var \Drupal\openideal_idea\OpenidealHelper $helper */
+    $helper = \Drupal::service('openideal_idea.helper');
+    $member = $helper->getGroupMember($account, $node, 'idea-group_node-discussion');
+    return AccessResult::forbiddenIf(($member && !$member->hasPermission('create group_node:discussion entity') || !$member));
+  }
+  return AccessResult::neutral();
+}

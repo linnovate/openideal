@@ -8,7 +8,7 @@ use Drupal\Core\Messenger\MessengerTrait;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 /**
- * Class OpenidealIdeaEventSubscriber.
+ * Openideal Idea event subscriber.
  */
 class OpenidealIdeaEventSubscriber implements EventSubscriberInterface {
 

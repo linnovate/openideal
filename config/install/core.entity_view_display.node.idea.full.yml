@@ -10,6 +10,7 @@ dependencies:
     - field.field.node.idea.field_category
     - field.field.node.idea.field_challenge
     - field.field.node.idea.field_comments
+    - field.field.node.idea.field_discussions
     - field.field.node.idea.field_duplicate_of
     - field.field.node.idea.field_idea_tags
     - field.field.node.idea.field_images
@@ -18,6 +19,7 @@ dependencies:
     - field.field.node.idea.field_overall_score
     - node.type.idea
     - views.view.followers
+    - views.view.ideas
   module:
     - comment
     - file
@@ -25,6 +27,7 @@ dependencies:
     - layout_builder
     - layout_discovery
     - metatag
+    - openideal_discussion
     - openideal_idea
     - openideal_slideshow
     - openideal_statistics
@@ -251,6 +254,42 @@ third_party_settings:
       -
         layout_id: layout_onecol
         layout_settings:
+          label: ''
+          layout_builder_styles_style:
+            author: 0
+            user_compact: 0
+            user_profile: 0
+            user_profile_top: 0
+        components:
+          98279087-e79c-45bf-8428-07c9bc822434:
+            uuid: 98279087-e79c-45bf-8428-07c9bc822434
+            region: content
+            configuration:
+              id: openidel_discussion_add
+              label: 'Add disscusion block'
+              provider: openideal_discussion
+              label_display: '0'
+              context_mapping:
+                node: layout_builder.entity
+            additional: {  }
+            weight: 0
+          c7c3e2b3-623a-427d-b3ac-478baf6a5691:
+            uuid: c7c3e2b3-623a-427d-b3ac-478baf6a5691
+            region: content
+            configuration:
+              id: 'views_block:ideas-idea_discussions_block'
+              label: ''
+              provider: views
+              label_display: '0'
+              views_label: ''
+              items_per_page: none
+              context_mapping: {  }
+            additional: {  }
+            weight: 1
+        third_party_settings: {  }
+      -
+        layout_id: layout_onecol
+        layout_settings:
           label: Comments
         components:
           163c6726-be89-47be-b90e-763c79372d89:
@@ -365,6 +404,7 @@ content:
     third_party_settings: {  }
 hidden:
   addtoany: true
+  field_discussions: true
   field_like: true
   field_overall_score: true
   moderation_state_buttons_widget: true

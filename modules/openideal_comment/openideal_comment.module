@@ -21,7 +21,7 @@ function openideal_comment_ajax_comments_wrapper_id_alter(&$wrapper_html_id, $co
   // rendered twice (by default node builder and Ajax Comments).
   // Later (with cache), it's "rendered" only once so IDs don't match.
   // We're just appending 2, because this ID matches cached markup.
-  // TODO: Should be investigated further.
+  // @todo Should be investigated further.
   $html_id = $commented_entity->getEntityTypeId() . '_' . $commented_entity->bundle() . '_' . $field_name;
   if ($wrapper_html_id === Html::getId($html_id)) {
     $wrapper_html_id = Html::getId($html_id) . '--2';
@@ -43,7 +43,7 @@ function openideal_comment_preprocess_comment(&$variables) {
  * Implements hook_entity_type_alter().
  */
 function openideal_comment_entity_type_alter(array &$entity_types) {
-  /** @var $entity_types \Drupal\Core\Entity\EntityTypeInterface[] */
+  /** @var \Drupal\Core\Entity\EntityTypeInterface[] $entity_types */
   $entity_types['comment']->setHandlerClass('view_builder', OpenidealCommentViewBuilder::class);
 }
 

@@ -8,7 +8,7 @@ use Drupal\layout_builder\LayoutBuilderEvents;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 /**
- * Class OpenidealIdeaEventSubscriber.
+ * Openideal Statistics Event subscriber.
  */
 class OpenidealStatisticsEventSubscriber implements EventSubscriberInterface {
 
@@ -20,6 +20,7 @@ class OpenidealStatisticsEventSubscriber implements EventSubscriberInterface {
   public static function getSubscribedEvents() {
     // Make sure to react on event before layout_builder.
     // @see BlockComponentRenderArray
+    // @codingStandardsIgnoreLine
     $events[LayoutBuilderEvents::SECTION_COMPONENT_BUILD_RENDER_ARRAY] = ['onBuildRender', 101];
     return $events;
   }

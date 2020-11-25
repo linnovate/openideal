@@ -33,7 +33,7 @@ class OpenidealDuplicateOfIdeaFormatter extends EntityReferenceFormatterBase {
             '@link' => $entity->toUrl()->toString(),
             '@title' => $entity->label(),
           ]);
-          // @TODO: add css class to the markup.
+          // @todo add css class to the markup.
           $elements[$delta] = [
             '#type' => 'markup',
             '#markup' => '<div>' . $field_text . '</div>',

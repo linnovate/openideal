@@ -6,7 +6,7 @@ use Drupal\user\UserInterface;
 use Symfony\Component\EventDispatcher\Event;
 
 /**
- * Class OpenidealUserJoinedSiteEvent.
+ * An event to that fires when user join the site.
  */
 class OpenidealUserJoinedSiteEvent extends Event {
 

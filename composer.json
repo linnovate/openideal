@@ -184,6 +184,7 @@
         "drupal/avatars": "^1.1",
         "drupal/better_exposed_filters": "^4.0",
         "drupal/bootstrap_barrio": "^5.0",
+        "drupal/bootstrap4_modal": "^2.0",
         "drupal/ckeditor_media_embed": "^1.9",
         "drupal/ckeditor_mentions": "2.x-dev",
         "drupal/comments_order": "^1.1",
@@ -257,6 +258,7 @@
         "patches": {
             "drupal/core": {
                 "Combined Fields Filter does not work with body summary": "https://www.drupal.org/files/issues/2020-08-28/3049502-27.patch",
+                "Multiple usages of FieldPluginBase::getEntity do not check for NULL, leading to WSOD": "https://www.drupal.org/files/issues/2020-09-03/3007424-108.patch",
                 "Add visibility control conditions to blocks within Layout Builder": "https://www.drupal.org/files/issues/2020-06-23/2916876-92.patch",
                 "Fix comment access handling": "https://www.drupal.org/files/issues/2020-07-18/2879087-65.patch",
                 "Dynamically provide action plugins for every moderation state change": "https://www.drupal.org/files/issues/2020-01-25/2797583-149.patch",
@@ -279,9 +281,6 @@
             },
             "drupal/group": {
                 "Permissions to choose which roles a member can assign, edit or delete": "https://www.drupal.org/files/issues/2020-07-27/group-user-manage-by-role-permissions-3027685-29.patch"
-            },
-            "drupal/rabbit_hole": {
-                "Split performAction() into submethods in PageRedirect Behaviour": "https://www.drupal.org/files/issues/2019-11-21/3095653-5.patch"
             }
         }
     }

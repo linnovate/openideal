@@ -121,7 +121,10 @@ function openideal_user_preprocess_page(&$variables) {
       && ($current_route !== 'entity.user.edit_form' && $current_route !== 'openideal_user.register.user.more_about_you')
       && !$user->hasRole('administrator')) {
       \Drupal::messenger()->addMessage(t('Please fill your <a href="@link">profile</a>',
-        ['@link' => Url::fromRoute('entity.user.edit_form', ['user' => $user_id])->toString()]
+        [
+          '@link' => Url::fromRoute('entity.user.edit_form',
+          ['user' => $user_id])->toString(),
+        ]
       ));
     }
   }

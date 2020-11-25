@@ -3,7 +3,7 @@
 namespace Drupal\openideal_challenge\Service;
 
 /**
- * OpenidealChallengeServiceInterface file.
+ * Opeindeal Challenge service interface.
  */
 interface OpenidealChallengeServiceInterface {
 

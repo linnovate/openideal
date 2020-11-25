@@ -49,7 +49,9 @@ class OpenidealStatisticsIdeaStatisticsBlock extends BlockBase {
       ],
       'votes' => [
         '#lazy_element' => [
-          '#lazy_builder' => ['openideal_statistics.lazy_builder:getVotes', [$id]],
+          '#lazy_builder' => ['openideal_statistics.lazy_builder:getVotes',
+            [$id],
+          ],
           '#create_placeholder' => TRUE,
         ],
         '#item_title' => $this->t('Votes'),
@@ -57,7 +59,9 @@ class OpenidealStatisticsIdeaStatisticsBlock extends BlockBase {
       ],
       'comments' => [
         '#lazy_element' => [
-          '#lazy_builder' => ['openideal_statistics.lazy_builder:getComments', [$id]],
+          '#lazy_builder' => ['openideal_statistics.lazy_builder:getComments',
+            [$id],
+          ],
           '#create_placeholder' => TRUE,
         ],
         '#item_title' => $this->t('Comments'),
@@ -65,7 +69,9 @@ class OpenidealStatisticsIdeaStatisticsBlock extends BlockBase {
       ],
       'views' => [
         '#lazy_element' => [
-          '#lazy_builder' => ['openideal_statistics.lazy_builder:getViews', [$id]],
+          '#lazy_builder' => ['openideal_statistics.lazy_builder:getViews',
+            [$id],
+          ],
           '#create_placeholder' => TRUE,
         ],
         '#item_title' => $this->t('Views'),
@@ -73,7 +79,7 @@ class OpenidealStatisticsIdeaStatisticsBlock extends BlockBase {
       ],
     ];
 
-    // @Todo: create trait or abstract class with this as method.
+    // @todo create trait or abstract class with this as method.
     foreach ($items as &$item) {
       $item['#wrapper_attributes'] = ['class' => ['idea-statistics-block--list__item']];
       $item['#type'] = 'statistics_item';

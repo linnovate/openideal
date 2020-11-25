@@ -1,0 +1,35 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.discussion.body
+    - field.field.node.discussion.field_comments
+    - field.field.node.discussion.field_status
+    - node.type.discussion
+  module:
+    - text
+    - user
+id: node.discussion.teaser
+targetEntityType: node
+bundle: discussion
+mode: teaser
+content:
+  body:
+    label: hidden
+    type: text_summary_or_trimmed
+    weight: 101
+    settings:
+      trim_length: 600
+      offset: 0
+      limit: 0
+    third_party_settings: {  }
+    region: content
+  links:
+    weight: 100
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+hidden:
+  field_comments: true
+  field_status: true

@@ -11,7 +11,7 @@ use Drupal\node\NodeInterface;
 use Drupal\statistics\NodeStatisticsDatabaseStorage;
 
 /**
- * Class OpenidealHelper.
+ * Provides openideal helper service.
  */
 class OpenidealHelper {
 
@@ -79,15 +79,17 @@ class OpenidealHelper {
    *
    * @param \Drupal\node\NodeInterface $node
    *   Node.
+   * @param string $type
+   *   Plugin type.
    *
    * @return \Drupal\group\Entity\Group
    *   Group.
    */
-  public function getGroupByNode(NodeInterface $node) {
+  public function getGroupFromIdeaNode(NodeInterface $node, $type = 'idea-group_node-idea') {
     // Get the group_content - gnode.
     $group_contents = $this->entityTypeManager
       ->getStorage('group_content')
-      ->loadByEntity($node);
+      ->loadByProperties(['entity_id' => $node->id(), 'type' => $type]);
 
     if (!empty($group_contents)) {
       // Don't need to check all of group contents,
@@ -106,12 +108,14 @@ class OpenidealHelper {
    *   Account to fetch.
    * @param \Drupal\node\NodeInterface $node
    *   Node to check in.
+   * @param string $type
+   *   Plugin type.
    *
    * @return \Drupal\group\GroupMembership|false
    *   Return group member or false.
    */
-  public function getGroupMember(AccountInterface $account, NodeInterface $node) {
-    if ($group = $this->getGroupByNode($node)) {
+  public function getGroupMember(AccountInterface $account, NodeInterface $node, $type = 'idea-group_node-idea') {
+    if ($group = $this->getGroupFromIdeaNode($node, $type)) {
       return $this->groupMembershipLoader->load($group, $account);
     }
     return FALSE;

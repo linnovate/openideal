@@ -2,6 +2,7 @@
 
 namespace Drupal\openideal_user\Plugin\RulesAction;
 
+use Drupal\openideal_idea\OpenidealHelper;
 use Drupal\user\Entity\User;
 use Drupal\rules\Context\ContextConfig;
 use Drupal\group\GroupMembershipLoader;
@@ -43,6 +44,13 @@ class TransactionBulkExecute extends RulesActionBase implements ContainerFactory
   protected $groupMembershipLoader;
 
   /**
+   * Openideal Helper.
+   *
+   * @var \Drupal\openideal_idea\OpenidealHelper
+   */
+  protected $helper;
+
+  /**
    * {@inheritDoc}
    */
   public function __construct(
@@ -51,12 +59,14 @@ class TransactionBulkExecute extends RulesActionBase implements ContainerFactory
     $plugin_definition,
     EntityTypeManagerInterface $entity_type_manager,
     ExpressionManager $expressionManager,
-    GroupMembershipLoader $groupMembershipLoader
+    GroupMembershipLoader $groupMembershipLoader,
+    OpenidealHelper $helper
   ) {
     parent::__construct($configuration, $plugin_id, $plugin_definition);
     $this->entityTypeManager = $entity_type_manager;
     $this->expressionManager = $expressionManager;
     $this->groupMembershipLoader = $groupMembershipLoader;
+    $this->helper = $helper;
   }
 
   /**
@@ -69,7 +79,8 @@ class TransactionBulkExecute extends RulesActionBase implements ContainerFactory
       $plugin_definition,
       $container->get('entity_type.manager'),
       $container->get('plugin.manager.rules_expression'),
-      $container->get('group.membership_loader')
+      $container->get('group.membership_loader'),
+      $container->get('openideal_idea.helper')
     );
   }
 
@@ -96,16 +107,13 @@ class TransactionBulkExecute extends RulesActionBase implements ContainerFactory
    */
   private function getUsers() {
     $users = [];
-    $storage = $this->entityTypeManager->getStorage('group_content');
-    /** @var \Drupal\group\Entity\GroupContent $group_content */
-    $group_contents = $storage->loadByEntity($this->getContextValue('idea'));
+    $idea = $this->getContextValue('idea');
     // In case if node were deleted.
-    // Because STATE_CHANGED event invokes even if node deleted.
-    if (empty($group_contents)) {
+    // Because STATE_CHANGED event invokes even if node is deleted.
+    if (!($group = $this->helper->getGroupFromIdeaNode($idea))) {
       return [];
     }
-    $group_content = reset($group_contents);
-    $group_members_ships = $this->groupMembershipLoader->loadByGroup($group_content->getGroup());
+    $group_members_ships = $this->groupMembershipLoader->loadByGroup($group);
     foreach ($group_members_ships as $content_group) {
       $member = $content_group->getUser();
       $users += [$member->id() => $member];
