@@ -26,14 +26,15 @@ function openideal_discussion_form_node_discussion_form_alter(&$form, FormStateI
  * Implements hook_ENTITY_TYPE_create_access().
  *
  * Allow to add comments in Idea discussion only for group
- * Author, Co-author and Expert.
+ * Author, Co-author and Expert and the discussion status is open.
  */
 function openideal_discussion_comment_create_access(AccountInterface $account, array $context, $entity_bundle) {
   if (($node = \Drupal::routeMatch()->getParameter('node')) && $node->bundle() == 'discussion') {
     /** @var \Drupal\openideal_idea\OpenidealHelper $helper */
     $helper = \Drupal::service('openideal_idea.helper');
     $member = $helper->getGroupMember($account, $node, 'idea-group_node-discussion');
-    return AccessResult::forbiddenIf(($member && !$member->hasPermission('create group_node:discussion entity') || !$member));
+    $status = (bool) $node->field_status->value;
+    return AccessResult::forbiddenIf(($member && !$member->hasPermission('create group_node:discussion entity') || !$member || !$status));
   }
   return AccessResult::neutral();
 }
