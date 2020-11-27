@@ -3,6 +3,7 @@
 namespace Drupal\openideal_discussion\Plugin\Block;
 
 use Drupal\Component\Serialization\Json;
+use Drupal\content_moderation\ModerationInformation;
 use Drupal\Core\Block\BlockBase;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\Core\Session\AccountProxy;
@@ -46,6 +47,13 @@ class OpenidealDiscussionAddBlock extends BlockBase implements ContainerFactoryP
   protected $currentUser;
 
   /**
+   * Moderation information.
+   *
+   * @var \Drupal\content_moderation\ModerationInformation
+   */
+  protected $moderationInformation;
+
+  /**
    * Constructs a new OpenidealIdeaGoBack object.
    *
    * @param array $configuration
@@ -58,17 +66,21 @@ class OpenidealDiscussionAddBlock extends BlockBase implements ContainerFactoryP
    *   Openideal helper.
    * @param \Drupal\Core\Session\AccountProxy $currentUser
    *   Current user.
+   * @param \Drupal\content_moderation\ModerationInformation $moderationInformation
+   *   Moderation information.
    */
   public function __construct(
     array $configuration,
     $plugin_id,
     $plugin_definition,
     OpenidealHelper $helper,
-    AccountProxy $currentUser
+    AccountProxy $currentUser,
+    ModerationInformation $moderationInformation
   ) {
     parent::__construct($configuration, $plugin_id, $plugin_definition);
     $this->helper = $helper;
     $this->currentUser = $currentUser;
+    $this->moderationInformation = $moderationInformation;
   }
 
   /**
@@ -80,7 +92,8 @@ class OpenidealDiscussionAddBlock extends BlockBase implements ContainerFactoryP
       $plugin_id,
       $plugin_definition,
       $container->get('openideal_idea.helper'),
-      $container->get('current_user')
+      $container->get('current_user'),
+      $container->get('content_moderation.moderation_information')
     );
   }
 
@@ -92,10 +105,12 @@ class OpenidealDiscussionAddBlock extends BlockBase implements ContainerFactoryP
     if ($node = $this->getEntity($this->getContexts())) {
       $group = $this->helper->getGroupFromIdeaNode($node);
       $member = $this->helper->getGroupMember($this->currentUser, $node);
+      $state_id = $this->moderationInformation->getOriginalState($node)->id();
       $url = Url::fromRoute('entity.group_content.create_form', [
         'group' => $group->id(),
         'plugin_id' => 'group_node:discussion',
       ]);
+      $add_review_access = (($member && $member->hasPermission('create group_node:discussion entity')) && $state_id == 'ex');
 
       // @todo Make count query for better performance.
       $discussions = $group->getContent('group_node:discussion');
@@ -107,7 +122,7 @@ class OpenidealDiscussionAddBlock extends BlockBase implements ContainerFactoryP
         'title' => [
           '#type' => 'html_tag',
           '#tag' => 'h3',
-          '#value' => $this->t('Export Review (@count)', ['@count' => $count]),
+          '#value' => $this->t('Expert Review (@count)', ['@count' => $count]),
         ],
         'link' => [
           '#type' => 'link',
@@ -121,7 +136,7 @@ class OpenidealDiscussionAddBlock extends BlockBase implements ContainerFactoryP
             'class' => ['use-ajax', 'text-uppercase'],
           ],
           '#title' => $this->t('Add Expert Review'),
-          '#access' => ($member && $member->hasPermission('create group_node:discussion entity')),
+          '#access' => $add_review_access,
         ],
       ];
       $build['#cache']['tags'] = $node->getCacheTags();

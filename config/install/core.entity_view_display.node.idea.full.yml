@@ -270,7 +270,22 @@ third_party_settings:
               label_display: '0'
               context_mapping:
                 node: layout_builder.entity
-            additional: {  }
+            additional:
+              visibility:
+                493d2ff4-1b04-4596-b396-e81c61b58bc6:
+                  id: openideal_discussion_entity_in_state
+                  states:
+                    ex: ex
+                    needs_work: needs_work
+                    approved: approved
+                    postponed: postponed
+                    launched: launched
+                    rejected: rejected
+                  negate: 0
+                  uuid: 493d2ff4-1b04-4596-b396-e81c61b58bc6
+                  context_mapping:
+                    node: layout_builder.entity
+              visibility_operator: and
             weight: 0
           c7c3e2b3-623a-427d-b3ac-478baf6a5691:
             uuid: c7c3e2b3-623a-427d-b3ac-478baf6a5691
@@ -283,7 +298,22 @@ third_party_settings:
               views_label: ''
               items_per_page: none
               context_mapping: {  }
-            additional: {  }
+            additional:
+              visibility:
+                a0f3e645-fcf9-48f5-b52d-ec1489a14233:
+                  id: openideal_discussion_entity_in_state
+                  states:
+                    ex: ex
+                    needs_work: needs_work
+                    approved: approved
+                    postponed: postponed
+                    launched: launched
+                    rejected: rejected
+                  negate: 0
+                  uuid: a0f3e645-fcf9-48f5-b52d-ec1489a14233
+                  context_mapping:
+                    node: layout_builder.entity
+              visibility_operator: and
             weight: 1
         third_party_settings: {  }
       -

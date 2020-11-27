@@ -5,6 +5,7 @@ dependencies:
     - field.field.node.discussion.body
     - field.field.node.discussion.field_comments
     - field.field.node.discussion.field_status
+    - field.field.node.discussion.field_visibility
     - node.type.discussion
   module:
     - allowed_formats
@@ -49,6 +50,13 @@ content:
     settings:
       display_label: true
     third_party_settings: {  }
+  field_visibility:
+    weight: 26
+    settings:
+      display_label: true
+    third_party_settings: {  }
+    type: boolean_checkbox
+    region: content
   moderation_state:
     type: moderation_state_default
     weight: 7

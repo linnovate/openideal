@@ -6,6 +6,7 @@
  */
 
 use Drupal\Core\Access\AccessResult;
+use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Session\AccountInterface;
 
@@ -35,6 +36,24 @@ function openideal_discussion_comment_create_access(AccountInterface $account, a
     $member = $helper->getGroupMember($account, $node, 'idea-group_node-discussion');
     $status = (bool) $node->field_status->value;
     return AccessResult::forbiddenIf(($member && !$member->hasPermission('create group_node:discussion entity') || !$member || !$status));
+  }
+  return AccessResult::neutral();
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_access().
+ *
+ * Hide the discussion when field_visibility turned off and make it visible only
+ * for user with 'view unpublished group_node:discussion entity' permission.
+ */
+function openideal_discussion_node_access(EntityInterface $entity, $operation, AccountInterface $account) {
+  if ($operation == 'view' && $entity->bundle() == 'discussion') {
+    /** @var \Drupal\openideal_idea\OpenidealHelper $helper */
+    $helper = \Drupal::service('openideal_idea.helper');
+    $member = $helper->getGroupMember($account, $entity, 'idea-group_node-discussion');
+    if (!$member || ($member && !$member->hasPermission('view unpublished group_node:discussion entity'))) {
+      return AccessResult::forbiddenIf(!$entity->field_visibility->value);
+    }
   }
   return AccessResult::neutral();
 }
