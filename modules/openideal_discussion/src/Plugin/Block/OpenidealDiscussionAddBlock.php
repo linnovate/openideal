@@ -132,6 +132,8 @@ class OpenidealDiscussionAddBlock extends BlockBase implements ContainerFactoryP
             'data-dialog-options' => Json::encode([
               'title' => $this->t('Expert Review'),
               'dialogClasses' => 'modal-xl',
+              // Set the idea title as it will be put into request object.
+              'ideaTitle' => $node->getTitle(),
             ]),
             'class' => ['use-ajax', 'text-uppercase'],
           ],

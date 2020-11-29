@@ -82,8 +82,8 @@ class OpenidealHelper {
    * @param string $type
    *   Plugin type.
    *
-   * @return \Drupal\group\Entity\Group
-   *   Group.
+   * @return \Drupal\group\Entity\Group|false
+   *   Group or false in case if group couldn't be found.
    */
   public function getGroupFromIdeaNode(NodeInterface $node, $type = 'idea-group_node-idea') {
     // Get the group_content - gnode.

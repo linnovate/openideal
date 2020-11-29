@@ -71,8 +71,25 @@ expression:
         negate: true
       -
         id: rules_condition
-        uuid: 1e9a9fab-a15e-4de2-b16e-e023fa234235
+        uuid: 76d5caab-28d7-452a-9f74-3585bbbab017
         weight: -47
+        context_values:
+          type: node
+          bundle: discussion
+        context_mapping:
+          entity: node
+        context_processors:
+          type:
+            rules_tokens: {  }
+          bundle:
+            rules_tokens: {  }
+        provides_mapping: {  }
+        condition_id: rules_entity_is_of_bundle
+        negate: true
+      -
+        id: rules_condition
+        uuid: 1e9a9fab-a15e-4de2-b16e-e023fa234235
+        weight: -46
         context_values: {  }
         context_mapping:
           node: node

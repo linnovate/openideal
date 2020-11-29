@@ -1,0 +1,89 @@
+langcode: en
+status: true
+dependencies: {  }
+id: create_a_message_after_adding_discussion
+label: 'Create a message after adding discussion'
+events:
+  -
+    event_name: 'rules_entity_insert:node--discussion'
+description: ''
+tags: {  }
+config_version: '3'
+expression:
+  id: rules_rule
+  uuid: 0b04f355-b11e-42fb-a069-b387bbe13374
+  weight: 0
+  conditions:
+    id: rules_and
+    uuid: f39db1f4-1ed5-40e4-bac2-19f7c48e320d
+    weight: 0
+    conditions:
+      -
+        id: rules_condition
+        uuid: 55d3b8d7-03d7-4887-8351-876a77fd93f3
+        weight: 0
+        context_values:
+          field: field_visibility
+        context_mapping:
+          entity: node
+        context_processors:
+          field:
+            rules_tokens: {  }
+        provides_mapping: {  }
+        condition_id: rules_entity_has_field
+        negate: false
+      -
+        id: rules_condition
+        uuid: a239d75d-9b38-4dd4-a511-a2c5110475b6
+        weight: 0
+        context_values:
+          type: node
+          bundle: discussion
+        context_mapping:
+          entity: node
+        context_processors:
+          type:
+            rules_tokens: {  }
+          bundle:
+            rules_tokens: {  }
+        provides_mapping: {  }
+        condition_id: rules_entity_is_of_bundle
+        negate: false
+      -
+        id: rules_condition
+        uuid: bce36cfd-0df4-443e-9447-5489eef5d035
+        weight: 0
+        context_values:
+          operation: '=='
+          value: '1'
+        context_mapping:
+          data: node.field_visibility.value
+        context_processors:
+          operation:
+            rules_tokens: {  }
+          value:
+            rules_tokens: {  }
+        provides_mapping: {  }
+        condition_id: rules_data_comparison
+        negate: false
+  actions:
+    id: rules_action_set
+    uuid: eb190302-e589-41a5-9ade-76f2e0a864dc
+    weight: 0
+    actions:
+      -
+        id: rules_action
+        uuid: 7be8447a-b17a-4f5a-b4fd-a7c82f861674
+        weight: 0
+        context_values:
+          template: node_created
+          user: ''
+        context_mapping:
+          referenced_entity: node
+        context_processors:
+          template:
+            rules_tokens: {  }
+          user:
+            rules_tokens: {  }
+        provides_mapping: {  }
+        action_id: openideal_message_action
