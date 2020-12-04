@@ -9,6 +9,7 @@ use Drupal\Core\Link;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\Core\Session\AccountProxy;
 use Drupal\datetime\Plugin\Field\FieldType\DateTimeItem;
+use Drupal\group\Access\GroupPermissionChecker;
 use Drupal\node\NodeInterface;
 use Drupal\openideal_challenge\OpenidealContextEntityTrait;
 use Drupal\openideal_idea\OpenidealHelper;
@@ -55,6 +56,13 @@ class OpenidealIdeaUpdateInfo extends BlockBase implements ContainerFactoryPlugi
   protected $currentUser;
 
   /**
+   * Group permission checker.
+   *
+   * @var \Drupal\group\Access\GroupPermissionChecker
+   */
+  protected $groupPermissionChecker;
+
+  /**
    * {@inheritDoc}
    */
   public function __construct(
@@ -63,12 +71,14 @@ class OpenidealIdeaUpdateInfo extends BlockBase implements ContainerFactoryPlugi
     $plugin_definition,
     DateFormatter $date_formatter,
     OpenidealHelper $helper,
-    AccountProxy $currentUser
+    AccountProxy $currentUser,
+    GroupPermissionChecker $groupPermissionChecker
   ) {
     parent::__construct($configuration, $plugin_id, $plugin_definition);
     $this->dateFormatter = $date_formatter;
     $this->helper = $helper;
     $this->currentUser = $currentUser;
+    $this->groupPermissionChecker = $groupPermissionChecker;
   }
 
   /**
@@ -81,7 +91,8 @@ class OpenidealIdeaUpdateInfo extends BlockBase implements ContainerFactoryPlugi
       $plugin_definition,
       $container->get('date.formatter'),
       $container->get('openideal_idea.helper'),
-      $container->get('current_user')
+      $container->get('current_user'),
+      $container->get('group_permission.checker')
     );
   }
 
@@ -110,10 +121,15 @@ class OpenidealIdeaUpdateInfo extends BlockBase implements ContainerFactoryPlugi
         'access' => $this->configuration['use_updated'],
       ];
 
-      $member = $this->helper->getGroupMember($this->currentUser, $node);
-      if ($member && $member->hasPermission('update any group_node:idea entity')) {
-        $link = Link::createFromRoute($this->t('Edit'), 'entity.node.edit_form', ['node' => $node->id()])->toString();
-        $build['#content']['edit'] = $link;
+      $group = $this->helper->getGroupFromNode($node);
+      if (($group && $this->groupPermissionChecker->hasPermissionInGroup('update any group_node:idea content', $this->currentUser, $group)) ||
+        (!$group && $node->access('update', $this->currentUser))) {
+        $link = Link::createFromRoute($this->t('Edit'), 'entity.node.edit_form', ['node' => $node->id()])->toString()->getGeneratedLink();
+        $build['#content']['edit'] = [
+          'value' => $link,
+          'title' => $this->t('Actions'),
+          'access' => $this->configuration['use_edit'],
+        ];
       }
       $build['#cache']['tags'] = $node->getCacheTags();
       $build['#cache']['contexts'][] = 'route';
@@ -129,7 +145,7 @@ class OpenidealIdeaUpdateInfo extends BlockBase implements ContainerFactoryPlugi
     $form['node_dates_info'] = [
       '#type' => 'fieldset',
       '#title' => $this->t('Toggle node dates info elements'),
-      '#description' => $this->t('Choose which dates elements you want to show in this block instance.'),
+      '#description' => $this->t('Choose which elements you want to show in this block instance.'),
     ];
     $form['node_dates_info']['use_created'] = [
       '#type' => 'checkbox',
@@ -150,6 +166,11 @@ class OpenidealIdeaUpdateInfo extends BlockBase implements ContainerFactoryPlugi
       '#description' => $this->t('Challenge schedule status (only for challenge)'),
       '#default_value' => $this->configuration['use_schedule'],
     ];
+    $form['node_dates_info']['use_edit'] = [
+      '#type' => 'checkbox',
+      '#title' => $this->t('Edit node link'),
+      '#default_value' => $this->configuration['use_edit'],
+    ];
     return $form;
   }
 
@@ -161,6 +182,7 @@ class OpenidealIdeaUpdateInfo extends BlockBase implements ContainerFactoryPlugi
     $this->configuration['use_created'] = $block_branding['use_created'];
     $this->configuration['use_updated'] = $block_branding['use_updated'];
     $this->configuration['use_schedule'] = $block_branding['use_schedule'];
+    $this->configuration['use_edit'] = $block_branding['use_edit'];
   }
 
   /**
@@ -171,6 +193,7 @@ class OpenidealIdeaUpdateInfo extends BlockBase implements ContainerFactoryPlugi
       'use_created' => TRUE,
       'use_updated' => TRUE,
       'use_schedule' => FALSE,
+      'use_edit' => FALSE,
     ] + parent::defaultConfiguration();
   }
 

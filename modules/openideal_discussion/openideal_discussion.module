@@ -5,10 +5,11 @@
  * Contain Openideal discussion hooks.
  */
 
-use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Entity\EntityInterface;
+use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Session\AccountInterface;
+use Drupal\node\NodeInterface;
 
 /**
  * Implements hook_form_FORM_ID_alter().
@@ -28,16 +29,19 @@ function openideal_discussion_form_node_discussion_form_alter(&$form, FormStateI
 /**
  * Implements hook_ENTITY_TYPE_create_access().
  *
- * Allow to add comments in Idea discussion only for group member with
- * such roles: Author, Co-author and Expert and the discussion status is open.
+ * Allow to add comments in Idea discussion only
+ * for group member with certain permission.
  */
 function openideal_discussion_comment_create_access(AccountInterface $account, array $context, $entity_bundle) {
   if (($node = \Drupal::routeMatch()->getParameter('node')) && $node->bundle() == 'discussion') {
+    /** @var \Drupal\group\Access\GroupPermissionChecker $permission_checker */
+    $permission_checker = \Drupal::service('group_permission.checker');
     /** @var \Drupal\openideal_idea\OpenidealHelper $helper */
     $helper = \Drupal::service('openideal_idea.helper');
-    $member = $helper->getGroupMember($account, $node, 'idea-group_node-discussion');
+
+    $group = $helper->getGroupFromNode($node);
     $status = (bool) $node->field_status->value;
-    return AccessResult::forbiddenIf(($member && !$member->hasPermission('create group_node:discussion entity') || !$member || !$status));
+    return AccessResult::forbiddenIf(!$permission_checker->hasPermissionInGroup('create group_node:discussion entity', $account, $group) || !$status);
   }
   return AccessResult::neutral();
 }
@@ -48,12 +52,21 @@ function openideal_discussion_comment_create_access(AccountInterface $account, a
  * Hide the discussion when field_visibility turned off and make it visible only
  * for user with 'view unpublished group_node:discussion entity' permission.
  */
-function openideal_discussion_node_access(EntityInterface $entity, $operation, AccountInterface $account) {
+function openideal_discussion_node_access(NodeInterface $entity, $operation, AccountInterface $account) {
   if ($operation == 'view' && $entity->bundle() == 'discussion') {
+    /** @var \Drupal\group\Access\GroupPermissionChecker $permission_checker */
+    $permission_checker = \Drupal::service('group_permission.checker');
     /** @var \Drupal\openideal_idea\OpenidealHelper $helper */
     $helper = \Drupal::service('openideal_idea.helper');
-    $member = $helper->getGroupMember($account, $entity, 'idea-group_node-discussion');
-    if (!$member || ($member && !$member->hasPermission('view unpublished group_node:discussion entity'))) {
+
+    // Get the group from node.
+    if (!($group = $helper->getGroupFromNode($entity))) {
+      \Drupal::logger('openideal_disscussion')->error('Canot find group for given discussion');
+      // @todo Don't now if need to restrict access here.
+      return AccessResult::neutral();
+    }
+
+    if ($permission_checker->hasPermissionInGroup('view unpublished group_node:discussion entity', $account, $group)) {
       return AccessResult::forbiddenIf(!$entity->field_visibility->value);
     }
   }
@@ -61,21 +74,19 @@ function openideal_discussion_node_access(EntityInterface $entity, $operation, A
 }
 
 /**
- * Implements hook_message_view().
+ * Implements hook_ENTITY_TYPE_insert().
  */
-function openideal_discussion_message_view($message, $view_mode, $langcode) {
-  /** @var \Drupal\message\Entity\Message $message */
-  $message = $message['#message'];
-  if ($message->getTemplate()->id() == 'node_created'
-    && ($node = $message->field_node_reference->entity)
-    && $node->bundle() == 'discussion'
-    && $node->field_visibility->value) {
-    // @todo Implement logic.
-    $account = \Drupal::currentUser();
-    /** @var \Drupal\openideal_idea\OpenidealHelper $helper */
-    $helper = \Drupal::service('openideal_idea.helper');
-    $group_contents = $helper->getGroupFromIdeaNode($node);
-    $group = current($group_contents);
-    $member = $helper->getGroupMember($account, $node, 'idea-group_node-discussion');
+function openideal_discussion_node_insert(EntityInterface $entity) {
+  if ($entity->bundle() == 'discussion') {
+    /** @var \Drupal\group\Entity\Group $group */
+    $group = \Drupal::routeMatch()->getParameter('group');
+    if (!$group) {
+      \Drupal::logger('openideal_discussion')->error("Can't find group for Discussion");
+    }
+
+    $ideas = $group->getContentEntities('group_node:idea');
+    $idea = current($ideas);
+    $entity->set('field_idea', $idea);
+    $entity->save();
   }
 }

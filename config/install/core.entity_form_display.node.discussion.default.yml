@@ -4,6 +4,7 @@ dependencies:
   config:
     - field.field.node.discussion.body
     - field.field.node.discussion.field_comments
+    - field.field.node.discussion.field_idea
     - field.field.node.discussion.field_status
     - field.field.node.discussion.field_visibility
     - node.type.discussion
@@ -51,7 +52,7 @@ content:
       display_label: true
     third_party_settings: {  }
   field_visibility:
-    weight: 26
+    weight: 11
     settings:
       display_label: true
     third_party_settings: {  }
@@ -107,4 +108,5 @@ content:
     settings: {  }
     third_party_settings: {  }
 hidden:
+  field_idea: true
   status: true

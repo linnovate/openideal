@@ -6,6 +6,7 @@ dependencies:
     - core.entity_view_mode.node.message
     - field.field.node.discussion.body
     - field.field.node.discussion.field_comments
+    - field.field.node.discussion.field_idea
     - field.field.node.discussion.field_status
     - field.field.node.discussion.field_visibility
     - node.type.discussion
@@ -103,5 +104,6 @@ content:
     settings: {  }
     third_party_settings: {  }
 hidden:
+  field_idea: true
   field_status: true
   field_visibility: true

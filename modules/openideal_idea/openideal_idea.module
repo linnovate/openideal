@@ -179,9 +179,12 @@ function openideal_idea_entity_access(EntityInterface $entity, $operation, Accou
   $moderation_info = Drupal::service('content_moderation.moderation_information');
   if ($operation === 'update' && $moderation_info->isModeratedEntity($entity) && $entity->moderation_state && $entity instanceof NodeInterface) {
     // Get the group member.
+    /** @var \Drupal\openideal_idea\OpenidealHelper $helper */
     $helper = \Drupal::service('openideal_idea.helper');
-    $member = $helper->getGroupMember($account, $entity);
-    if ($member && $member->hasPermission('update own group_node:idea entity')) {
+    $group = $helper->getGroupFromNode($entity);
+    /** @var \Drupal\group\Access\GroupPermissionChecker $permission_checker */
+    $permission_checker = \Drupal::service('group_permission.checker');
+    if ($permission_checker->hasPermissionInGroup('update any group_node:idea content', $account, $group)) {
       return AccessResult::neutral();
     }
     return content_moderation_entity_access($entity, $operation, $account);

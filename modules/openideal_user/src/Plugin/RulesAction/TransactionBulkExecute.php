@@ -110,7 +110,7 @@ class TransactionBulkExecute extends RulesActionBase implements ContainerFactory
     $idea = $this->getContextValue('idea');
     // In case if node were deleted.
     // Because STATE_CHANGED event invokes even if node is deleted.
-    if (!($group = $this->helper->getGroupFromIdeaNode($idea))) {
+    if (!($group = $this->helper->getGroupFromNode($idea))) {
       return [];
     }
     $group_members_ships = $this->groupMembershipLoader->loadByGroup($group);

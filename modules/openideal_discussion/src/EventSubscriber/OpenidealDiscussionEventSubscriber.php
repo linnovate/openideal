@@ -3,6 +3,7 @@
 namespace Drupal\openideal_discussion\EventSubscriber;
 
 use Drupal\Core\Messenger\MessengerTrait;
+use Drupal\Core\StringTranslation\StringTranslationTrait;
 use Drupal\layout_builder\Event\SectionComponentBuildRenderArrayEvent;
 use Drupal\layout_builder\LayoutBuilderEvents;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -12,6 +13,7 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
  */
 class OpenidealDiscussionEventSubscriber implements EventSubscriberInterface {
 
+  use StringTranslationTrait;
   use MessengerTrait;
 
   /**
@@ -41,7 +43,7 @@ class OpenidealDiscussionEventSubscriber implements EventSubscriberInterface {
 
       $build['content'] = [
         '#type' => 'link',
-        '#title' => t('Read review →'),
+        '#title' => $this->t('Read review →'),
         '#url' => $context['entity']->getContextValue()->toUrl(),
       ];
 
