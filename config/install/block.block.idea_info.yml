@@ -21,6 +21,7 @@ settings:
   use_created: 1
   use_updated: 1
   use_schedule: 1
+  use_edit: 1
   context_mapping:
     node: '@node.node_route_context:node'
 visibility:
@@ -28,8 +29,9 @@ visibility:
     id: node_type
     bundles:
       challenge: challenge
-      article: article
+      discussion: discussion
       idea: idea
+      article: article
     negate: false
     context_mapping:
       node: '@node.node_route_context:node'

@@ -7,6 +7,7 @@ dependencies:
     - field.storage.message.field_user_reference
     - flag.flag.follow
     - message.template.created_reply_on_comment
+    - message.template.discussion_create
     - message.template.user_mention
   module:
     - comment
@@ -42,7 +43,8 @@ display:
           distinct: false
           replica: false
           query_comment: ''
-          query_tags: {  }
+          query_tags:
+            - message_access
       exposed_form:
         type: basic
         options:
@@ -599,18 +601,6 @@ display:
           admin_label: 'field_node_reference: Content'
           required: false
           plugin_id: standard
-        flag_relationship:
-          id: flag_relationship
-          table: node_field_data
-          field: flag_relationship
-          relationship: field_node_reference
-          group_type: group
-          admin_label: Flags
-          required: false
-          flag: follow
-          user_scope: any
-          entity_type: node
-          plugin_id: flag_relationship
         field_comment_reference:
           id: field_comment_reference
           table: message__field_comment_reference
@@ -631,12 +621,52 @@ display:
           entity_type: comment
           entity_field: pid
           plugin_id: standard
+        field_idea:
+          id: field_idea
+          table: node__field_idea
+          field: field_idea
+          relationship: field_node_reference
+          group_type: group
+          admin_label: 'field_idea: Content'
+          required: false
+          plugin_id: standard
+        node:
+          id: node
+          table: comment_field_data
+          field: node
+          relationship: field_comment_reference
+          group_type: group
+          admin_label: 'Content From Comment'
+          required: false
+          entity_type: comment
+          plugin_id: standard
+        field_idea_1:
+          id: field_idea_1
+          table: node__field_idea
+          field: field_idea
+          relationship: node
+          group_type: group
+          admin_label: 'field_idea: Content From Comment'
+          required: false
+          plugin_id: standard
+        flag_relationship_1:
+          id: flag_relationship_1
+          table: node_field_data
+          field: flag_relationship
+          relationship: field_node_reference
+          group_type: group
+          admin_label: Flags
+          required: false
+          flag: follow
+          user_scope: any
+          entity_type: node
+          plugin_id: flag_relationship
       filters:
         uid:
           id: uid
           table: flagging
           field: uid
-          relationship: flag_relationship
+          relationship: flag_relationship_1
           group_type: group
           admin_label: ''
           operator: '='
@@ -854,12 +884,101 @@ display:
           entity_type: message
           entity_field: uid
           plugin_id: numeric
+        template_2:
+          id: template_2
+          table: message_field_data
+          field: template
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: in
+          value:
+            discussion_create: discussion_create
+          group: 4
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          entity_type: message
+          entity_field: template
+          plugin_id: bundle
+        uid_3:
+          id: uid_3
+          table: flagging
+          field: uid
+          relationship: flag_relationship_1
+          group_type: group
+          admin_label: ''
+          operator: '='
+          value:
+            min: ''
+            max: ''
+            value: '[user-page-id]'
+          group: 4
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            placeholder: ''
+            min_placeholder: ''
+            max_placeholder: ''
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          entity_type: flagging
+          entity_field: uid
+          plugin_id: numeric
       filter_groups:
         operator: OR
         groups:
           1: OR
           2: AND
           3: AND
+          4: AND
       arguments: {  }
       cache:
         type: none
@@ -931,10 +1050,12 @@ display:
       defaults:
         filters: false
         filter_groups: false
+        relationships: false
       filter_groups:
         operator: AND
         groups:
           1: AND
+      relationships: {  }
     cache_metadata:
       max-age: -1
       contexts:

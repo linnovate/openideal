@@ -8,6 +8,7 @@ use Drupal\Core\Block\BlockBase;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\Core\Session\AccountProxy;
 use Drupal\Core\Url;
+use Drupal\group\Access\GroupPermissionChecker;
 use Drupal\openideal_challenge\OpenidealContextEntityTrait;
 use Drupal\openideal_idea\OpenidealHelper;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -54,6 +55,13 @@ class OpenidealDiscussionAddBlock extends BlockBase implements ContainerFactoryP
   protected $moderationInformation;
 
   /**
+   * Permission checker.
+   *
+   * @var \Drupal\group\Access\GroupPermissionChecker
+   */
+  protected $groupPermissionChecker;
+
+  /**
    * Constructs a new OpenidealIdeaGoBack object.
    *
    * @param array $configuration
@@ -68,6 +76,8 @@ class OpenidealDiscussionAddBlock extends BlockBase implements ContainerFactoryP
    *   Current user.
    * @param \Drupal\content_moderation\ModerationInformation $moderationInformation
    *   Moderation information.
+   * @param \Drupal\group\Access\GroupPermissionChecker $groupPermissionChecker
+   *   Group permission checker.
    */
   public function __construct(
     array $configuration,
@@ -75,12 +85,14 @@ class OpenidealDiscussionAddBlock extends BlockBase implements ContainerFactoryP
     $plugin_definition,
     OpenidealHelper $helper,
     AccountProxy $currentUser,
-    ModerationInformation $moderationInformation
+    ModerationInformation $moderationInformation,
+    GroupPermissionChecker $groupPermissionChecker
   ) {
     parent::__construct($configuration, $plugin_id, $plugin_definition);
     $this->helper = $helper;
     $this->currentUser = $currentUser;
     $this->moderationInformation = $moderationInformation;
+    $this->groupPermissionChecker = $groupPermissionChecker;
   }
 
   /**
@@ -93,7 +105,8 @@ class OpenidealDiscussionAddBlock extends BlockBase implements ContainerFactoryP
       $plugin_definition,
       $container->get('openideal_idea.helper'),
       $container->get('current_user'),
-      $container->get('content_moderation.moderation_information')
+      $container->get('content_moderation.moderation_information'),
+      $container->get('group_permission.checker')
     );
   }
 
@@ -103,14 +116,13 @@ class OpenidealDiscussionAddBlock extends BlockBase implements ContainerFactoryP
   public function build() {
     $build = [];
     if ($node = $this->getEntity($this->getContexts())) {
-      $group = $this->helper->getGroupFromIdeaNode($node);
-      $member = $this->helper->getGroupMember($this->currentUser, $node);
+      $group = $this->helper->getGroupFromNode($node);
       $state_id = $this->moderationInformation->getOriginalState($node)->id();
       $url = Url::fromRoute('entity.group_content.create_form', [
         'group' => $group->id(),
         'plugin_id' => 'group_node:discussion',
       ]);
-      $add_review_access = (($member && $member->hasPermission('create group_node:discussion entity')) && $state_id == 'ex');
+      $add_review_access = ($this->groupPermissionChecker->hasPermissionInGroup('create group_node:discussion entity', $this->currentUser, $group) && $state_id == 'ex');
 
       // @todo Make count query for better performance.
       $discussions = $group->getContent('group_node:discussion');

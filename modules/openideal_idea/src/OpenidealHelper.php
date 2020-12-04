@@ -79,17 +79,15 @@ class OpenidealHelper {
    *
    * @param \Drupal\node\NodeInterface $node
    *   Node.
-   * @param string $type
-   *   Plugin type.
    *
    * @return \Drupal\group\Entity\Group|false
    *   Group or false in case if group couldn't be found.
    */
-  public function getGroupFromIdeaNode(NodeInterface $node, $type = 'idea-group_node-idea') {
+  public function getGroupFromNode(NodeInterface $node) {
     // Get the group_content - gnode.
     $group_contents = $this->entityTypeManager
       ->getStorage('group_content')
-      ->loadByProperties(['entity_id' => $node->id(), 'type' => $type]);
+      ->loadByEntity($node);
 
     if (!empty($group_contents)) {
       // Don't need to check all of group contents,
@@ -108,14 +106,12 @@ class OpenidealHelper {
    *   Account to fetch.
    * @param \Drupal\node\NodeInterface $node
    *   Node to check in.
-   * @param string $type
-   *   Plugin type.
    *
    * @return \Drupal\group\GroupMembership|false
    *   Return group member or false.
    */
-  public function getGroupMember(AccountInterface $account, NodeInterface $node, $type = 'idea-group_node-idea') {
-    if ($group = $this->getGroupFromIdeaNode($node, $type)) {
+  public function getGroupMember(AccountInterface $account, NodeInterface $node) {
+    if ($group = $this->getGroupFromNode($node)) {
       return $this->groupMembershipLoader->load($group, $account);
     }
     return FALSE;
