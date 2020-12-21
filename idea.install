@@ -42,6 +42,10 @@ function idea_install() {
  * Configuration update.
  */
 function idea_update_8001() {
+  if (!\Drupal::moduleHandler()->moduleExists('update_helper')) {
+    \Drupal::service('module_installer')->install(['update_helper']);
+  }
+
   /** @var \Drupal\update_helper\Updater $updateHelper */
   $updateHelper = \Drupal::service('update_helper.updater');
 

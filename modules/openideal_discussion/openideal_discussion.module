@@ -16,7 +16,6 @@ use Drupal\node\NodeInterface;
  */
 function openideal_discussion_form_node_discussion_form_alter(&$form, FormStateInterface $form_state, $form_id) {
   // Hide title for the discussion add form.
-  // @todo create the modal for Discussion edit form.
   if (\Drupal::request()->query->get('_wrapper_format') == 'drupal_bootstrap4_modal') {
     // @todo make a checks.
     $title = \Drupal::request()->request->get('dialogOptions')['title'];
@@ -41,7 +40,7 @@ function openideal_discussion_comment_create_access(AccountInterface $account, a
 
     $group = $helper->getGroupFromNode($node);
     $status = (bool) $node->field_status->value;
-    return AccessResult::forbiddenIf(!$permission_checker->hasPermissionInGroup('create group_node:discussion entity', $account, $group) || !$status);
+    return AccessResult::forbiddenIf(!$status || !$permission_checker->hasPermissionInGroup('create group_node:discussion entity', $account, $group));
   }
   return AccessResult::neutral();
 }
@@ -61,8 +60,7 @@ function openideal_discussion_node_access(NodeInterface $entity, $operation, Acc
 
     // Get the group from node.
     if (!($group = $helper->getGroupFromNode($entity))) {
-      \Drupal::logger('openideal_disscussion')->error('Canot find group for given discussion');
-      // @todo Don't now if need to restrict access here.
+      \Drupal::logger('openideal_disscussion')->error('Cannot find group for given discussion');
       return AccessResult::neutral();
     }
 

@@ -39,7 +39,6 @@ dependencies:
   - default_content:default_content
   - drupal:dblog
   - layout_builder_styles:layout_builder_styles
-  - bootstrap4_modal:bootstrap4_modal
   - dropzonejs:dropzonejs
   - dropzonejs_eb_widget:dropzonejs_eb_widget
   - drupal:dynamic_page_cache
@@ -125,6 +124,9 @@ dependencies:
   - openideal_comment:openideal_comment
   - openideal_footer:openideal_footer
   - openideal_statistics:openideal_statistics
+
+install:
+  - bootstrap4_modal:bootstrap4_modal
 
 themes:
   - adminimal_theme

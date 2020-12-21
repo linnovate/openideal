@@ -5,6 +5,7 @@ namespace Drupal\openideal_discussion\Plugin\Block;
 use Drupal\Component\Serialization\Json;
 use Drupal\content_moderation\ModerationInformation;
 use Drupal\Core\Block\BlockBase;
+use Drupal\Core\Extension\ModuleHandlerInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\Core\Session\AccountProxy;
 use Drupal\Core\Url;
@@ -62,6 +63,13 @@ class OpenidealDiscussionAddBlock extends BlockBase implements ContainerFactoryP
   protected $groupPermissionChecker;
 
   /**
+   * Module handler.
+   *
+   * @var \Drupal\Core\Extension\ModuleHandlerInterface
+   */
+  protected $moduleHandler;
+
+  /**
    * Constructs a new OpenidealIdeaGoBack object.
    *
    * @param array $configuration
@@ -78,6 +86,8 @@ class OpenidealDiscussionAddBlock extends BlockBase implements ContainerFactoryP
    *   Moderation information.
    * @param \Drupal\group\Access\GroupPermissionChecker $groupPermissionChecker
    *   Group permission checker.
+   * @param \Drupal\Core\Extension\ModuleHandlerInterface $moduleHandler
+   *   Module handler.
    */
   public function __construct(
     array $configuration,
@@ -86,13 +96,15 @@ class OpenidealDiscussionAddBlock extends BlockBase implements ContainerFactoryP
     OpenidealHelper $helper,
     AccountProxy $currentUser,
     ModerationInformation $moderationInformation,
-    GroupPermissionChecker $groupPermissionChecker
+    GroupPermissionChecker $groupPermissionChecker,
+    ModuleHandlerInterface $moduleHandler
   ) {
     parent::__construct($configuration, $plugin_id, $plugin_definition);
     $this->helper = $helper;
     $this->currentUser = $currentUser;
     $this->moderationInformation = $moderationInformation;
     $this->groupPermissionChecker = $groupPermissionChecker;
+    $this->moduleHandler = $moduleHandler;
   }
 
   /**
@@ -106,7 +118,8 @@ class OpenidealDiscussionAddBlock extends BlockBase implements ContainerFactoryP
       $container->get('openideal_idea.helper'),
       $container->get('current_user'),
       $container->get('content_moderation.moderation_information'),
-      $container->get('group_permission.checker')
+      $container->get('group_permission.checker'),
+      $container->get('module_handler')
     );
   }
 
@@ -127,7 +140,7 @@ class OpenidealDiscussionAddBlock extends BlockBase implements ContainerFactoryP
       // @todo Make count query for better performance.
       $discussions = $group->getContent('group_node:discussion');
       $count = count($discussions);
-
+      $dialog_type = $this->moduleHandler->moduleExists('bootstrap4_modal') ? 'bootstrap4_modal' : 'modal';
       $build['content'] = [
         '#type' => 'container',
         '#attributes' => ['class' => ['d-flex', 'justify-content-between']],
@@ -140,7 +153,7 @@ class OpenidealDiscussionAddBlock extends BlockBase implements ContainerFactoryP
           '#type' => 'link',
           '#url' => $url,
           '#attributes' => [
-            'data-dialog-type' => 'bootstrap4_modal',
+            'data-dialog-type' => $dialog_type,
             'data-dialog-options' => Json::encode([
               'title' => $this->t('Expert Review'),
               'dialogClasses' => 'modal-xl',
