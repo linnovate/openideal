@@ -18,6 +18,7 @@ dependencies:
     - field.field.node.idea.field_overall_score
     - node.type.idea
     - views.view.followers
+    - views.view.ideas
   module:
     - comment
     - file
@@ -247,29 +248,6 @@ third_party_settings:
                 view_mode: view_mode
             additional: {  }
             weight: 14
-        third_party_settings: {  }
-      -
-        layout_id: layout_onecol
-        layout_settings:
-          label: Comments
-        components:
-          163c6726-be89-47be-b90e-763c79372d89:
-            uuid: 163c6726-be89-47be-b90e-763c79372d89
-            region: content
-            configuration:
-              label_display: '0'
-              context_mapping:
-                entity: layout_builder.entity
-              id: 'field_block:node:idea:field_comments'
-              formatter:
-                label: above
-                settings:
-                  view_mode: default
-                  pager_id: 0
-                third_party_settings: {  }
-                type: comment_default
-            additional: {  }
-            weight: 0
         third_party_settings: {  }
       -
         layout_id: layout_onecol

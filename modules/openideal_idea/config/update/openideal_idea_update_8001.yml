@@ -166,7 +166,214 @@ views.view.ideas:
               - 'config:core.entity_view_display.node.discussion.default'
               - 'config:core.entity_view_display.node.discussion.teaser'
         idea_discussions_block:
+          display_plugin: block
+          id: idea_discussions_block
+          display_title: 'Idea discussions (block)'
+          position: 5
+          display_options:
+            display_extenders: { }
+            display_description: ''
+            style:
+              type: default
+              options: { }
+            defaults:
+              style: false
+              row: false
+              filters: false
+              filter_groups: false
+              arguments: false
+              relationships: false
+              fields: false
+            row:
+              type: fields
+              options:
+                inline: { }
+                separator: ''
+                hide_empty: false
+                default_field_elements: true
+            filters:
+              status:
+                value: '1'
+                table: node_field_data
+                field: status
+                plugin_id: boolean
+                entity_type: node
+                entity_field: status
+                id: status
+                expose:
+                  operator: ''
+                  operator_limit_selection: false
+                  operator_list: { }
+                group: 1
+              type:
+                id: type
+                table: node_field_data
+                field: type
+                value:
+                  idea: idea
+                entity_type: node
+                entity_field: type
+                plugin_id: bundle
+                expose:
+                  operator_limit_selection: false
+                  operator_list: { }
+                group: 1
+            filter_groups:
+              operator: AND
+              groups:
+                1: AND
+            arguments:
+              nid:
+                id: nid
+                table: node_field_data
+                field: nid
+                relationship: none
+                group_type: group
+                admin_label: ''
+                default_action: default
+                exception:
+                  value: all
+                  title_enable: false
+                  title: All
+                title_enable: false
+                title: ''
+                default_argument_type: node
+                default_argument_options: { }
+                default_argument_skip_url: false
+                summary_options:
+                  base_path: ''
+                  count: true
+                  items_per_page: 25
+                  override: false
+                summary:
+                  sort_order: asc
+                  number_of_records: 0
+                  format: default_summary
+                specify_validation: false
+                validate:
+                  type: none
+                  fail: 'not found'
+                validate_options: { }
+                break_phrase: false
+                not: false
+                entity_type: node
+                entity_field: nid
+                plugin_id: node_nid
+            relationships:
+              group_content:
+                id: group_content
+                table: node_field_data
+                field: group_content
+                relationship: none
+                group_type: group
+                admin_label: 'Content group content'
+                required: false
+                group_content_plugins:
+                  'group_node:idea': 'group_node:idea'
+                  'group_node:article': '0'
+                  'group_node:challenge': '0'
+                  'group_node:discussion': '0'
+                  'group_node:faq': '0'
+                  'group_node:page': '0'
+                entity_type: node
+                plugin_id: group_content_to_entity_reverse
+              gid:
+                id: gid
+                table: group_content_field_data
+                field: gid
+                entity_type: group_content
+                entity_field: gid
+                plugin_id: standard
+                relationship: group_content
+              group_content_id:
+                id: group_content_id
+                table: groups_field_data
+                field: group_content_id
+                relationship: gid
+                group_type: group
+                admin_label: 'Group content'
+                required: false
+                group_content_plugins:
+                  'group_node:discussion': 'group_node:discussion'
+                  'group_node:article': '0'
+                  'group_node:challenge': '0'
+                  'group_node:faq': '0'
+                  'group_node:idea': '0'
+                  'group_node:page': '0'
+                  group_membership: '0'
+                entity_type: group
+                plugin_id: group_to_group_content
+              gc__node_1:
+                id: gc__node_1
+                table: group_content_field_data
+                field: gc__node
+                relationship: group_content_id
+                group_type: group
+                admin_label: 'Group content Content'
+                required: false
+                group_content_plugins:
+                  'group_node:discussion': 'group_node:discussion'
+                  'group_node:article': '0'
+                  'group_node:challenge': '0'
+                  'group_node:faq': '0'
+                  'group_node:idea': '0'
+                  'group_node:page': '0'
+                entity_type: group_content
+                plugin_id: group_content_to_entity
+            fields:
+              rendered_entity:
+                id: rendered_entity
+                table: node
+                field: rendered_entity
+                relationship: gc__node_1
+                group_type: group
+                admin_label: ''
+                label: ''
+                exclude: false
+                alter:
+                  alter_text: false
+                  text: ''
+                  make_link: false
+                  path: ''
+                  absolute: false
+                  external: false
+                  replace_spaces: false
+                  path_case: none
+                  trim_whitespace: false
+                  alt: ''
+                  rel: ''
+                  link_class: ''
+                  prefix: ''
+                  suffix: ''
+                  target: ''
+                  nl2br: false
+                  max_length: 0
+                  word_boundary: true
+                  ellipsis: true
+                  more_link: false
+                  more_link_text: ''
+                  more_link_path: ''
+                  strip_tags: false
+                  trim: false
+                  preserve_tags: ''
+                  html: false
+                element_type: ''
+                element_class: ''
+                element_label_type: ''
+                element_label_class: ''
+                element_label_colon: false
+                element_wrapper_type: ''
+                element_wrapper_class: ''
+                element_default_classes: true
+                empty: ''
+                hide_empty: false
+                empty_zero: false
+                hide_alter_empty: true
+                view_mode: teaser
+                entity_type: node
+                plugin_id: rendered_entity
           cache_metadata:
+            max-age: -1
             contexts:
               - 'languages:language_interface'
               - url
@@ -175,7 +382,6 @@ views.view.ideas:
               - 'url.query_args:sort_order'
               - 'user.node_grants:view'
               - user.permissions
-            max-age: -1
             tags:
               - 'config:core.entity_view_display.node.article.default'
               - 'config:core.entity_view_display.node.article.front_page_teaser'
@@ -202,212 +408,6 @@ views.view.ideas:
               - 'config:core.entity_view_display.node.page.full'
               - 'config:core.entity_view_display.node.page.message'
               - 'config:core.entity_view_display.node.page.teaser'
-          display_options:
-            arguments:
-              nid:
-                admin_label: ''
-                break_phrase: false
-                default_action: default
-                default_argument_options: {  }
-                default_argument_skip_url: false
-                default_argument_type: node
-                entity_field: nid
-                entity_type: node
-                exception:
-                  title: All
-                  title_enable: false
-                  value: all
-                field: nid
-                group_type: group
-                id: nid
-                not: false
-                plugin_id: node_nid
-                relationship: none
-                specify_validation: false
-                summary:
-                  format: default_summary
-                  number_of_records: 0
-                  sort_order: asc
-                summary_options:
-                  base_path: ''
-                  count: true
-                  items_per_page: 25
-                  override: false
-                table: node_field_data
-                title: ''
-                title_enable: false
-                validate:
-                  fail: 'not found'
-                  type: none
-                validate_options: {  }
-            defaults:
-              arguments: false
-              fields: false
-              filter_groups: false
-              filters: false
-              relationships: false
-              row: false
-              style: false
-            display_description: ''
-            display_extenders: {  }
-            fields:
-              rendered_entity:
-                admin_label: ''
-                alter:
-                  absolute: false
-                  alt: ''
-                  alter_text: false
-                  ellipsis: true
-                  external: false
-                  html: false
-                  link_class: ''
-                  make_link: false
-                  max_length: 0
-                  more_link: false
-                  more_link_path: ''
-                  more_link_text: ''
-                  nl2br: false
-                  path: ''
-                  path_case: none
-                  prefix: ''
-                  preserve_tags: ''
-                  rel: ''
-                  replace_spaces: false
-                  strip_tags: false
-                  suffix: ''
-                  target: ''
-                  text: ''
-                  trim: false
-                  trim_whitespace: false
-                  word_boundary: true
-                element_class: ''
-                element_default_classes: true
-                element_label_class: ''
-                element_label_colon: false
-                element_label_type: ''
-                element_type: ''
-                element_wrapper_class: ''
-                element_wrapper_type: ''
-                empty: ''
-                empty_zero: false
-                entity_type: node
-                exclude: false
-                field: rendered_entity
-                group_type: group
-                hide_alter_empty: true
-                hide_empty: false
-                id: rendered_entity
-                label: ''
-                plugin_id: rendered_entity
-                relationship: gc__node_1
-                table: node
-                view_mode: teaser
-            filter_groups:
-              groups:
-                1: AND
-              operator: AND
-            filters:
-              status:
-                entity_field: status
-                entity_type: node
-                expose:
-                  operator: ''
-                  operator_limit_selection: false
-                  operator_list: {  }
-                field: status
-                group: 1
-                id: status
-                plugin_id: boolean
-                table: node_field_data
-                value: '1'
-              type:
-                entity_field: type
-                entity_type: node
-                expose:
-                  operator_limit_selection: false
-                  operator_list: {  }
-                field: type
-                group: 1
-                id: type
-                plugin_id: bundle
-                table: node_field_data
-                value:
-                  idea: idea
-            relationships:
-              gc__node_1:
-                admin_label: 'Group content Content'
-                entity_type: group_content
-                field: gc__node
-                group_content_plugins:
-                  'group_node:article': '0'
-                  'group_node:challenge': '0'
-                  'group_node:discussion': 'group_node:discussion'
-                  'group_node:faq': '0'
-                  'group_node:idea': '0'
-                  'group_node:page': '0'
-                group_type: group
-                id: gc__node_1
-                plugin_id: group_content_to_entity
-                relationship: group_content_id
-                required: false
-                table: group_content_field_data
-              gid:
-                entity_field: gid
-                entity_type: group_content
-                field: gid
-                id: gid
-                plugin_id: standard
-                relationship: group_content
-                table: group_content_field_data
-              group_content:
-                admin_label: 'Content group content'
-                entity_type: node
-                field: group_content
-                group_content_plugins:
-                  'group_node:article': '0'
-                  'group_node:challenge': '0'
-                  'group_node:discussion': '0'
-                  'group_node:faq': '0'
-                  'group_node:idea': 'group_node:idea'
-                  'group_node:page': '0'
-                group_type: group
-                id: group_content
-                plugin_id: group_content_to_entity_reverse
-                relationship: none
-                required: false
-                table: node_field_data
-              group_content_id:
-                admin_label: 'Group content'
-                entity_type: group
-                field: group_content_id
-                group_content_plugins:
-                  group_membership: '0'
-                  'group_node:article': '0'
-                  'group_node:challenge': '0'
-                  'group_node:discussion': 'group_node:discussion'
-                  'group_node:faq': '0'
-                  'group_node:idea': '0'
-                  'group_node:page': '0'
-                group_type: group
-                id: group_content_id
-                plugin_id: group_to_group_content
-                relationship: gid
-                required: false
-                table: groups_field_data
-            row:
-              options:
-                default_field_elements: true
-                hide_empty: false
-                inline: {  }
-                separator: ''
-              type: fields
-            style:
-              options: {  }
-              type: default
-          display_plugin: block
-          display_title: 'Idea discussions (block)'
-          id: idea_discussions_block
-          position: 5
 views.view.public_activity:
   expected_config:
     display:
