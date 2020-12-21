@@ -18,9 +18,6 @@ function openideal_idea_install() {
  * Configuration update.
  */
 function openideal_idea_update_8001() {
-  if (!\Drupal::moduleHandler()->moduleExists('openideal_discussion')) {
-    \Drupal::service('module_installer')->install(['openideal_discussion']);
-  }
   if (!\Drupal::moduleHandler()->moduleExists('update_helper')) {
     \Drupal::service('module_installer')->install(['update_helper']);
   }

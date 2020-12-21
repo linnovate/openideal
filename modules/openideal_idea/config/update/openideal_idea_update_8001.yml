@@ -57,11 +57,6 @@ block.block.idea_info:
 core.entity_view_display.node.idea.full:
   expected_config: {  }
   update_actions:
-    remove:
-      third_party_settings:
-        layout_builder:
-          sections:
-            2
     add:
       third_party_settings:
         layout_builder:
@@ -132,29 +127,41 @@ core.entity_view_display.node.idea.full:
                     visibility_operator: and
                   weight: 1
               third_party_settings: { }
-            3:
-              layout_id: layout_onecol
-              layout_settings:
-                label: Comments
-              components:
-                163c6726-be89-47be-b90e-763c79372d89:
-                  uuid: 163c6726-be89-47be-b90e-763c79372d89
-                  region: content
-                  configuration:
-                    label_display: '0'
-                    context_mapping:
-                      entity: layout_builder.entity
-                    id: 'field_block:node:idea:field_comments'
-                    formatter:
-                      label: above
-                      settings:
-                        view_mode: default
-                        pager_id: 0
-                      third_party_settings: { }
-                      type: comment_default
-                  additional: { }
-                  weight: 0
-              third_party_settings: { }
+rules.reaction.create_a_message_after_adding_new_content:
+  expected_config:
+    expression:
+      conditions:
+        conditions:
+          -1:
+            weight: -47
+  update_actions:
+    add:
+      expression:
+        conditions:
+          conditions:
+            -
+              condition_id: rules_entity_is_of_bundle
+              context_mapping:
+                entity: node
+              context_processors:
+                bundle:
+                  rules_tokens: {  }
+                type:
+                  rules_tokens: {  }
+              context_values:
+                bundle: discussion
+                type: node
+              id: rules_condition
+              negate: true
+              provides_mapping: {  }
+              uuid: 76d5caab-28d7-452a-9f74-3585bbbab017
+              weight: -47
+    change:
+      expression:
+        conditions:
+          conditions:
+            -1:
+              weight: -46
 views.view.ideas:
   expected_config: {  }
   update_actions:
