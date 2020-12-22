@@ -121,9 +121,7 @@ class OpenidealIdeaUpdateInfo extends BlockBase implements ContainerFactoryPlugi
         'access' => $this->configuration['use_updated'],
       ];
 
-      $group = $this->helper->getGroupFromNode($node);
-      if (($group && $this->groupPermissionChecker->hasPermissionInGroup('update any group_node:idea content', $this->currentUser, $group)) ||
-        (!$group && $node->access('update', $this->currentUser))) {
+      if ($node->access('update', $this->currentUser)) {
         $link = Link::createFromRoute($this->t('Edit'), 'entity.node.edit_form', ['node' => $node->id()])->toString()->getGeneratedLink();
         $build['#content']['edit'] = [
           'value' => $link,

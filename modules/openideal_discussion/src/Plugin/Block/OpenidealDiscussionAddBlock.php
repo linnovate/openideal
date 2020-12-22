@@ -144,6 +144,7 @@ class OpenidealDiscussionAddBlock extends BlockBase implements ContainerFactoryP
       $build['content'] = [
         '#type' => 'container',
         '#attributes' => ['class' => ['d-flex', 'justify-content-between']],
+        '#access' => $add_review_access,
         'title' => [
           '#type' => 'html_tag',
           '#tag' => 'h3',
@@ -163,7 +164,6 @@ class OpenidealDiscussionAddBlock extends BlockBase implements ContainerFactoryP
             'class' => ['use-ajax', 'text-uppercase'],
           ],
           '#title' => $this->t('Add Expert Review'),
-          '#access' => $add_review_access,
         ],
       ];
       $build['#cache']['tags'] = $node->getCacheTags();
