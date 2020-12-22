@@ -1,0 +1,16 @@
+<?php
+
+/**
+ * @file
+ * Install, update and uninstall functions for the openideal user module.
+ */
+
+/**
+ * Implements hook_update_N().
+ */
+function openideal_user_update_8001() {
+  if (!\Drupal::moduleHandler()->moduleExists('openideal_login')) {
+    \Drupal::service('module_installer')->install(['openideal_login']);
+    return t('The "OpenideaL Login" module has been installed.');
+  }
+}

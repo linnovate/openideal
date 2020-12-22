@@ -70,14 +70,19 @@ function openideal_theme_preprocess_html(&$variables) {
  */
 function openideal_theme_preprocess_page(&$variables) {
   $route_match = \Drupal::routeMatch();
+  $route_name = $route_match->getRouteName();
   $node = $route_match->getParameter('node');
   if ($node instanceof NodeInterface) {
     $variables['node_type'] = $node->bundle();
   }
 
-  if ($route_match->getRouteName() == 'view.frontpage.front_page'
-    || $route_match->getRouteName() == 'entity.user.canonical'
-    || $route_match->getRouteName() == 'view.news.all_news_page') {
+  $activity_pages = [
+    'view.frontpage.front_page',
+    'entity.user.canonical',
+    'view.news.all_news_page',
+  ];
+
+  if (in_array($route_name, $activity_pages)) {
     $variables['is_activity_page'] = TRUE;
   }
 

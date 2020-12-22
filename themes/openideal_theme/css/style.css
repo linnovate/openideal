@@ -13636,11 +13636,11 @@ nav.tabs {
     .site-navigation--add-idea a {
       padding: 9.5px 1.3em;
       border-radius: 25px;
-      -webkit-transition: background-color 0.5s ease-in-out, -webkit-transform 0.4s ease-in-out;
-      transition: background-color 0.5s ease-in-out, -webkit-transform 0.4s ease-in-out;
-      -o-transition: background-color 0.5s ease-in-out, -o-transform 0.4s ease-in-out;
-      transition: background-color 0.5s ease-in-out, transform 0.4s ease-in-out;
-      transition: background-color 0.5s ease-in-out, transform 0.4s ease-in-out, -webkit-transform 0.4s ease-in-out, -o-transform 0.4s ease-in-out;
+      -webkit-transition: background-color 0.5s ease-in-out, -webkit-transform .5s;
+      transition: background-color 0.5s ease-in-out, -webkit-transform .5s;
+      -o-transition: background-color 0.5s ease-in-out, -o-transform .5s;
+      transition: background-color 0.5s ease-in-out, transform .5s;
+      transition: background-color 0.5s ease-in-out, transform .5s, -webkit-transform .5s, -o-transform .5s;
       background-color: #27C0FF;
       color: #fff;
       font-weight: bold;
@@ -13664,13 +13664,19 @@ nav.tabs {
       text-transform: uppercase; }
       .site-navigation--add-idea a:hover {
         background-color: #27C8f9;
-        text-decoration: none; }
+        text-decoration: none;
+        -webkit-transform: scale(1.005);
+             -o-transform: scale(1.005);
+                transform: scale(1.005); }
       .site-navigation--add-idea a:active {
         -webkit-transform: scale(0.9);
              -o-transform: scale(0.9);
                 transform: scale(0.9);
         background-color: #27C8f9;
-        text-decoration: none; }
+        text-decoration: none;
+        -webkit-transform: scale(1.005);
+             -o-transform: scale(1.005);
+                transform: scale(1.005); }
       .site-navigation--add-idea a:before {
         content: '';
         display: inline-block;
@@ -13969,23 +13975,51 @@ nav.tabs {
 .form-actions input {
   margin-bottom: 6px;
   border-radius: 25px;
-  -webkit-transition: background-color 0.5s ease-in-out, -webkit-transform 0.4s ease-in-out;
-  transition: background-color 0.5s ease-in-out, -webkit-transform 0.4s ease-in-out;
-  -o-transition: background-color 0.5s ease-in-out, -o-transform 0.4s ease-in-out;
-  transition: background-color 0.5s ease-in-out, transform 0.4s ease-in-out;
-  transition: background-color 0.5s ease-in-out, transform 0.4s ease-in-out, -webkit-transform 0.4s ease-in-out, -o-transform 0.4s ease-in-out;
+  -webkit-transition: background-color 0.5s ease-in-out, -webkit-transform .5s;
+  transition: background-color 0.5s ease-in-out, -webkit-transform .5s;
+  -o-transition: background-color 0.5s ease-in-out, -o-transform .5s;
+  transition: background-color 0.5s ease-in-out, transform .5s;
+  transition: background-color 0.5s ease-in-out, transform .5s, -webkit-transform .5s, -o-transform .5s;
   background-color: #1294ca;
   color: #fff;
   font-weight: bold; }
   .form-actions input:hover {
     background-color: #1e7697;
-    text-decoration: none; }
+    text-decoration: none;
+    -webkit-transform: scale(1.005);
+         -o-transform: scale(1.005);
+            transform: scale(1.005); }
   .form-actions input:active {
     -webkit-transform: scale(0.9);
          -o-transform: scale(0.9);
             transform: scale(0.9);
     background-color: #1e7697;
-    text-decoration: none; }
+    text-decoration: none;
+    -webkit-transform: scale(1.005);
+         -o-transform: scale(1.005);
+            transform: scale(1.005); }
+
+.form-control {
+  border: 1px solid #D0D6DC;
+  border-radius: unset;
+  line-height: 1.125rem;
+  height: unset; }
+  .form-control::-webkit-input-placeholder {
+    font-family: "Assistant", Roboto, -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    font-size: 1rem;
+    display: block; }
+  .form-control::-moz-placeholder {
+    font-family: "Assistant", Roboto, -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    font-size: 1rem;
+    display: block; }
+  .form-control::-ms-input-placeholder {
+    font-family: "Assistant", Roboto, -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    font-size: 1rem;
+    display: block; }
+  .form-control::placeholder {
+    font-family: "Assistant", Roboto, -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    font-size: 1rem;
+    display: block; }
 
 .block-openidel-idea-node-bundle {
   position: absolute;
@@ -14056,11 +14090,11 @@ nav.tabs {
     margin-bottom: 24px; }
     .comments--header__add-comment-btn {
       border-radius: 25px;
-      -webkit-transition: background-color 0.5s ease-in-out, -webkit-transform 0.4s ease-in-out;
-      transition: background-color 0.5s ease-in-out, -webkit-transform 0.4s ease-in-out;
-      -o-transition: background-color 0.5s ease-in-out, -o-transform 0.4s ease-in-out;
-      transition: background-color 0.5s ease-in-out, transform 0.4s ease-in-out;
-      transition: background-color 0.5s ease-in-out, transform 0.4s ease-in-out, -webkit-transform 0.4s ease-in-out, -o-transform 0.4s ease-in-out;
+      -webkit-transition: background-color 0.5s ease-in-out, -webkit-transform .5s;
+      transition: background-color 0.5s ease-in-out, -webkit-transform .5s;
+      -o-transition: background-color 0.5s ease-in-out, -o-transform .5s;
+      transition: background-color 0.5s ease-in-out, transform .5s;
+      transition: background-color 0.5s ease-in-out, transform .5s, -webkit-transform .5s, -o-transform .5s;
       background-color: transparent;
       color: #fff;
       font-weight: bold;
@@ -14070,13 +14104,19 @@ nav.tabs {
       padding: 15px 70px; }
       .comments--header__add-comment-btn:hover {
         background-color: transparent;
-        text-decoration: none; }
+        text-decoration: none;
+        -webkit-transform: scale(1.005);
+             -o-transform: scale(1.005);
+                transform: scale(1.005); }
       .comments--header__add-comment-btn:active {
         -webkit-transform: scale(0.9);
              -o-transform: scale(0.9);
                 transform: scale(0.9);
         background-color: transparent;
-        text-decoration: none; }
+        text-decoration: none;
+        -webkit-transform: scale(1.005);
+             -o-transform: scale(1.005);
+                transform: scale(1.005); }
       .comments--header__add-comment-btn:hover, .comments--header__add-comment-btn:active {
         color: #1294ca; }
   .comments--bottom {
@@ -14176,24 +14216,30 @@ nav.tabs {
       text-transform: uppercase;
       font-size: inherit;
       border-radius: 25px;
-      -webkit-transition: background-color 0.5s ease-in-out, -webkit-transform 0.4s ease-in-out;
-      transition: background-color 0.5s ease-in-out, -webkit-transform 0.4s ease-in-out;
-      -o-transition: background-color 0.5s ease-in-out, -o-transform 0.4s ease-in-out;
-      transition: background-color 0.5s ease-in-out, transform 0.4s ease-in-out;
-      transition: background-color 0.5s ease-in-out, transform 0.4s ease-in-out, -webkit-transform 0.4s ease-in-out, -o-transform 0.4s ease-in-out;
+      -webkit-transition: background-color 0.5s ease-in-out, -webkit-transform .5s;
+      transition: background-color 0.5s ease-in-out, -webkit-transform .5s;
+      -o-transition: background-color 0.5s ease-in-out, -o-transform .5s;
+      transition: background-color 0.5s ease-in-out, transform .5s;
+      transition: background-color 0.5s ease-in-out, transform .5s, -webkit-transform .5s, -o-transform .5s;
       background-color: #1294ca;
       color: #fff;
       font-weight: bold;
       padding-left: 25px; }
       .comment-comment-form .form-actions .font-submit-btn-wrapper .form-submit:hover {
         background-color: #1e7697;
-        text-decoration: none; }
+        text-decoration: none;
+        -webkit-transform: scale(1.005);
+             -o-transform: scale(1.005);
+                transform: scale(1.005); }
       .comment-comment-form .form-actions .font-submit-btn-wrapper .form-submit:active {
         -webkit-transform: scale(0.9);
              -o-transform: scale(0.9);
                 transform: scale(0.9);
         background-color: #1e7697;
-        text-decoration: none; }
+        text-decoration: none;
+        -webkit-transform: scale(1.005);
+             -o-transform: scale(1.005);
+                transform: scale(1.005); }
     .comment-comment-form .form-actions .font-submit-btn-wrapper img {
       font-size: inherit;
       top: 50%;
@@ -14297,11 +14343,11 @@ nav.tabs {
     display: flex; }
     .node--view-mode-full .block-field-blocknodearticlefield-tags .field__items li {
       border-radius: 25px;
-      -webkit-transition: background-color 0.5s ease-in-out, -webkit-transform 0.4s ease-in-out;
-      transition: background-color 0.5s ease-in-out, -webkit-transform 0.4s ease-in-out;
-      -o-transition: background-color 0.5s ease-in-out, -o-transform 0.4s ease-in-out;
-      transition: background-color 0.5s ease-in-out, transform 0.4s ease-in-out;
-      transition: background-color 0.5s ease-in-out, transform 0.4s ease-in-out, -webkit-transform 0.4s ease-in-out, -o-transform 0.4s ease-in-out;
+      -webkit-transition: background-color 0.5s ease-in-out, -webkit-transform .5s;
+      transition: background-color 0.5s ease-in-out, -webkit-transform .5s;
+      -o-transition: background-color 0.5s ease-in-out, -o-transform .5s;
+      transition: background-color 0.5s ease-in-out, transform .5s;
+      transition: background-color 0.5s ease-in-out, transform .5s, -webkit-transform .5s, -o-transform .5s;
       background-color: #fff;
       color: #fff;
       font-weight: bold;
@@ -14315,13 +14361,19 @@ nav.tabs {
       margin-bottom: 5px; }
       .node--view-mode-full .block-field-blocknodearticlefield-tags .field__items li:hover {
         background-color: #fff;
-        text-decoration: none; }
+        text-decoration: none;
+        -webkit-transform: scale(1.005);
+             -o-transform: scale(1.005);
+                transform: scale(1.005); }
       .node--view-mode-full .block-field-blocknodearticlefield-tags .field__items li:active {
         -webkit-transform: scale(0.9);
              -o-transform: scale(0.9);
                 transform: scale(0.9);
         background-color: #fff;
-        text-decoration: none; }
+        text-decoration: none;
+        -webkit-transform: scale(1.005);
+             -o-transform: scale(1.005);
+                transform: scale(1.005); }
 
 .node--view-mode-full .idea-statistics-and-status-block,
 .node--view-mode-full .block-openideal-statistics-challenge-statistics {
@@ -14384,24 +14436,30 @@ nav.tabs {
   .node--view-mode-full .two-columns-challenge-ideas a {
     padding: 15px 70px;
     border-radius: 25px;
-    -webkit-transition: background-color 0.5s ease-in-out, -webkit-transform 0.4s ease-in-out;
-    transition: background-color 0.5s ease-in-out, -webkit-transform 0.4s ease-in-out;
-    -o-transition: background-color 0.5s ease-in-out, -o-transform 0.4s ease-in-out;
-    transition: background-color 0.5s ease-in-out, transform 0.4s ease-in-out;
-    transition: background-color 0.5s ease-in-out, transform 0.4s ease-in-out, -webkit-transform 0.4s ease-in-out, -o-transform 0.4s ease-in-out;
+    -webkit-transition: background-color 0.5s ease-in-out, -webkit-transform .5s;
+    transition: background-color 0.5s ease-in-out, -webkit-transform .5s;
+    -o-transition: background-color 0.5s ease-in-out, -o-transform .5s;
+    transition: background-color 0.5s ease-in-out, transform .5s;
+    transition: background-color 0.5s ease-in-out, transform .5s, -webkit-transform .5s, -o-transform .5s;
     background-color: #27C0FF;
     color: #fff;
     font-weight: bold;
     font-size: 15px; }
     .node--view-mode-full .two-columns-challenge-ideas a:hover {
       background-color: #5eaed2;
-      text-decoration: none; }
+      text-decoration: none;
+      -webkit-transform: scale(1.005);
+           -o-transform: scale(1.005);
+              transform: scale(1.005); }
     .node--view-mode-full .two-columns-challenge-ideas a:active {
       -webkit-transform: scale(0.9);
            -o-transform: scale(0.9);
               transform: scale(0.9);
       background-color: #5eaed2;
-      text-decoration: none; }
+      text-decoration: none;
+      -webkit-transform: scale(1.005);
+           -o-transform: scale(1.005);
+              transform: scale(1.005); }
 
 .view--news--all-news-page .node--type-article .card-body .block-openideal-rrssb-block h2 {
   text-transform: uppercase;
@@ -14556,24 +14614,30 @@ nav.tabs {
         font-size: 0.9375rem;
         margin-bottom: 49px;
         border-radius: 25px;
-        -webkit-transition: background-color 0.5s ease-in-out, -webkit-transform 0.4s ease-in-out;
-        transition: background-color 0.5s ease-in-out, -webkit-transform 0.4s ease-in-out;
-        -o-transition: background-color 0.5s ease-in-out, -o-transform 0.4s ease-in-out;
-        transition: background-color 0.5s ease-in-out, transform 0.4s ease-in-out;
-        transition: background-color 0.5s ease-in-out, transform 0.4s ease-in-out, -webkit-transform 0.4s ease-in-out, -o-transform 0.4s ease-in-out;
+        -webkit-transition: background-color 0.5s ease-in-out, -webkit-transform .5s;
+        transition: background-color 0.5s ease-in-out, -webkit-transform .5s;
+        -o-transition: background-color 0.5s ease-in-out, -o-transform .5s;
+        transition: background-color 0.5s ease-in-out, transform .5s;
+        transition: background-color 0.5s ease-in-out, transform .5s, -webkit-transform .5s, -o-transform .5s;
         background-color: #1294ca;
         color: #fff;
         font-weight: bold;
         margin-right: 0; }
         .region-sidebar--flag-and-follow--element .votingapi-reaction-item:hover, .region-sidebar--flag--element .votingapi-reaction-item:hover {
           background-color: #1e7697;
-          text-decoration: none; }
+          text-decoration: none;
+          -webkit-transform: scale(1.005);
+               -o-transform: scale(1.005);
+                  transform: scale(1.005); }
         .region-sidebar--flag-and-follow--element .votingapi-reaction-item:active, .region-sidebar--flag--element .votingapi-reaction-item:active {
           -webkit-transform: scale(0.9);
                -o-transform: scale(0.9);
                   transform: scale(0.9);
           background-color: #1e7697;
-          text-decoration: none; }
+          text-decoration: none;
+          -webkit-transform: scale(1.005);
+               -o-transform: scale(1.005);
+                  transform: scale(1.005); }
       .region-sidebar--flag-and-follow--element .votingapi-reaction-item.active, .region-sidebar--flag--element .votingapi-reaction-item.active {
         background-color: #1e7697; }
       .region-sidebar--flag-and-follow--element .flag-follow, .region-sidebar--flag--element .flag-follow {
@@ -14593,23 +14657,29 @@ nav.tabs {
                   flex-basis: 100%;
           font-size: 0.9375rem;
           border-radius: 25px;
-          -webkit-transition: background-color 0.5s ease-in-out, -webkit-transform 0.4s ease-in-out;
-          transition: background-color 0.5s ease-in-out, -webkit-transform 0.4s ease-in-out;
-          -o-transition: background-color 0.5s ease-in-out, -o-transform 0.4s ease-in-out;
-          transition: background-color 0.5s ease-in-out, transform 0.4s ease-in-out;
-          transition: background-color 0.5s ease-in-out, transform 0.4s ease-in-out, -webkit-transform 0.4s ease-in-out, -o-transform 0.4s ease-in-out;
+          -webkit-transition: background-color 0.5s ease-in-out, -webkit-transform .5s;
+          transition: background-color 0.5s ease-in-out, -webkit-transform .5s;
+          -o-transition: background-color 0.5s ease-in-out, -o-transform .5s;
+          transition: background-color 0.5s ease-in-out, transform .5s;
+          transition: background-color 0.5s ease-in-out, transform .5s, -webkit-transform .5s, -o-transform .5s;
           background-color: #27C0FF;
           color: #fff;
           font-weight: bold; }
           .region-sidebar--flag-and-follow--element .flag-follow a:hover, .region-sidebar--flag-and-follow--element .flag-follow--body:hover, .region-sidebar--flag--element .flag-follow a:hover, .region-sidebar--flag--element .flag-follow--body:hover {
             background-color: #5eaed2;
-            text-decoration: none; }
+            text-decoration: none;
+            -webkit-transform: scale(1.005);
+                 -o-transform: scale(1.005);
+                    transform: scale(1.005); }
           .region-sidebar--flag-and-follow--element .flag-follow a:active, .region-sidebar--flag-and-follow--element .flag-follow--body:active, .region-sidebar--flag--element .flag-follow a:active, .region-sidebar--flag--element .flag-follow--body:active {
             -webkit-transform: scale(0.9);
                  -o-transform: scale(0.9);
                     transform: scale(0.9);
             background-color: #5eaed2;
-            text-decoration: none; }
+            text-decoration: none;
+            -webkit-transform: scale(1.005);
+                 -o-transform: scale(1.005);
+                    transform: scale(1.005); }
       .region-sidebar--flag-and-follow--element .flag-follow--body, .region-sidebar--flag--element .flag-follow--body {
         margin: 70px 0 11px 0; }
 
@@ -14681,11 +14751,11 @@ nav.tabs {
   .block-openideal-idea-tags-block .list-group-item {
     margin-bottom: 5px;
     border-radius: 25px;
-    -webkit-transition: background-color 0.5s ease-in-out, -webkit-transform 0.4s ease-in-out;
-    transition: background-color 0.5s ease-in-out, -webkit-transform 0.4s ease-in-out;
-    -o-transition: background-color 0.5s ease-in-out, -o-transform 0.4s ease-in-out;
-    transition: background-color 0.5s ease-in-out, transform 0.4s ease-in-out;
-    transition: background-color 0.5s ease-in-out, transform 0.4s ease-in-out, -webkit-transform 0.4s ease-in-out, -o-transform 0.4s ease-in-out;
+    -webkit-transition: background-color 0.5s ease-in-out, -webkit-transform .5s;
+    transition: background-color 0.5s ease-in-out, -webkit-transform .5s;
+    -o-transition: background-color 0.5s ease-in-out, -o-transform .5s;
+    transition: background-color 0.5s ease-in-out, transform .5s;
+    transition: background-color 0.5s ease-in-out, transform .5s, -webkit-transform .5s, -o-transform .5s;
     background-color: #fff;
     color: #fff;
     font-weight: bold;
@@ -14698,13 +14768,19 @@ nav.tabs {
     text-decoration: none; }
     .block-openideal-idea-tags-block .list-group-item:hover {
       background-color: #fff;
-      text-decoration: none; }
+      text-decoration: none;
+      -webkit-transform: scale(1.005);
+           -o-transform: scale(1.005);
+              transform: scale(1.005); }
     .block-openideal-idea-tags-block .list-group-item:active {
       -webkit-transform: scale(0.9);
            -o-transform: scale(0.9);
               transform: scale(0.9);
       background-color: #fff;
-      text-decoration: none; }
+      text-decoration: none;
+      -webkit-transform: scale(1.005);
+           -o-transform: scale(1.005);
+              transform: scale(1.005); }
 
 .idea-statistics-block {
   margin-bottom: 15px;
@@ -15591,11 +15667,11 @@ nav.tabs {
         -ms-flex-align: center;
             align-items: center;
     border-radius: 25px;
-    -webkit-transition: background-color 0.5s ease-in-out, -webkit-transform 0.4s ease-in-out;
-    transition: background-color 0.5s ease-in-out, -webkit-transform 0.4s ease-in-out;
-    -o-transition: background-color 0.5s ease-in-out, -o-transform 0.4s ease-in-out;
-    transition: background-color 0.5s ease-in-out, transform 0.4s ease-in-out;
-    transition: background-color 0.5s ease-in-out, transform 0.4s ease-in-out, -webkit-transform 0.4s ease-in-out, -o-transform 0.4s ease-in-out;
+    -webkit-transition: background-color 0.5s ease-in-out, -webkit-transform .5s;
+    transition: background-color 0.5s ease-in-out, -webkit-transform .5s;
+    -o-transition: background-color 0.5s ease-in-out, -o-transform .5s;
+    transition: background-color 0.5s ease-in-out, transform .5s;
+    transition: background-color 0.5s ease-in-out, transform .5s, -webkit-transform .5s, -o-transform .5s;
     background-color: #1294ca;
     color: #fff;
     font-weight: bold;
@@ -15610,13 +15686,19 @@ nav.tabs {
     color: #fff; }
     .entity--user--canonical .user-top .nav-tabs .nav-item .nav-link:hover {
       background-color: #1e829a;
-      text-decoration: none; }
+      text-decoration: none;
+      -webkit-transform: scale(1.005);
+           -o-transform: scale(1.005);
+              transform: scale(1.005); }
     .entity--user--canonical .user-top .nav-tabs .nav-item .nav-link:active {
       -webkit-transform: scale(0.9);
            -o-transform: scale(0.9);
               transform: scale(0.9);
       background-color: #1e829a;
-      text-decoration: none; }
+      text-decoration: none;
+      -webkit-transform: scale(1.005);
+           -o-transform: scale(1.005);
+              transform: scale(1.005); }
     .entity--user--canonical .user-top .nav-tabs .nav-item .nav-link:before {
       content: '';
       display: block;
@@ -15646,11 +15728,11 @@ nav.tabs {
         -ms-flex-align: center;
             align-items: center;
     border-radius: 25px;
-    -webkit-transition: background-color 0.5s ease-in-out, -webkit-transform 0.4s ease-in-out;
-    transition: background-color 0.5s ease-in-out, -webkit-transform 0.4s ease-in-out;
-    -o-transition: background-color 0.5s ease-in-out, -o-transform 0.4s ease-in-out;
-    transition: background-color 0.5s ease-in-out, transform 0.4s ease-in-out;
-    transition: background-color 0.5s ease-in-out, transform 0.4s ease-in-out, -webkit-transform 0.4s ease-in-out, -o-transform 0.4s ease-in-out;
+    -webkit-transition: background-color 0.5s ease-in-out, -webkit-transform .5s;
+    transition: background-color 0.5s ease-in-out, -webkit-transform .5s;
+    -o-transition: background-color 0.5s ease-in-out, -o-transform .5s;
+    transition: background-color 0.5s ease-in-out, transform .5s;
+    transition: background-color 0.5s ease-in-out, transform .5s, -webkit-transform .5s, -o-transform .5s;
     background-color: #1294ca;
     color: #fff;
     font-weight: bold;
@@ -15661,13 +15743,19 @@ nav.tabs {
     color: #fff; }
     .entity--user--canonical .user-top .user-actions--link a:hover {
       background-color: #1e829a;
-      text-decoration: none; }
+      text-decoration: none;
+      -webkit-transform: scale(1.005);
+           -o-transform: scale(1.005);
+              transform: scale(1.005); }
     .entity--user--canonical .user-top .user-actions--link a:active {
       -webkit-transform: scale(0.9);
            -o-transform: scale(0.9);
               transform: scale(0.9);
       background-color: #1e829a;
-      text-decoration: none; }
+      text-decoration: none;
+      -webkit-transform: scale(1.005);
+           -o-transform: scale(1.005);
+              transform: scale(1.005); }
 
 .profile-user-profile-view-mode h2 {
   font-size: 30px;
@@ -15768,7 +15856,6 @@ nav.tabs {
     .main-content nav.tabs ul .nav-item.active a {
       background: unset; }
 
-.user--login section.main-content,
 .user--register section.main-content,
 .user--pass section.main-content {
   display: -webkit-box;
@@ -15789,7 +15876,6 @@ nav.tabs {
       -ms-flex-align: center;
           align-items: center; }
 
-.user--login .block-system-main-block,
 .user--register .block-system-main-block,
 .user--pass .block-system-main-block {
   display: -webkit-box;
@@ -15801,7 +15887,6 @@ nav.tabs {
       -ms-flex-pack: center;
           justify-content: center; }
 
-.user--login .nav-tabs,
 .user--register .nav-tabs,
 .user--pass .nav-tabs {
   -webkit-box-pack: center;
@@ -15812,7 +15897,6 @@ nav.tabs {
 .user-login-form,
 .user-pass,
 .user-register-form {
-  max-width: 560px;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -15846,6 +15930,7 @@ nav.tabs {
   .user-pass .password-parent,
   .user-register-form .confirm-parent,
   .user-register-form .password-parent {
+    max-width: unset;
     min-width: unset;
     overflow: unset; }
   .user-login-form .form-submit,
@@ -15856,36 +15941,72 @@ nav.tabs {
   .user-login-form .form-actions,
   .user-pass .form-actions,
   .user-register-form .form-actions {
-    width: 100%; }
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+        -ms-flex-align: center;
+            align-items: center;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    text-transform: uppercase; }
     .user-login-form .form-actions input,
     .user-pass .form-actions input,
     .user-register-form .form-actions input {
+      border-width: 0;
       border-radius: 25px;
-      -webkit-transition: background-color 0.5s ease-in-out, -webkit-transform 0.4s ease-in-out;
-      transition: background-color 0.5s ease-in-out, -webkit-transform 0.4s ease-in-out;
-      -o-transition: background-color 0.5s ease-in-out, -o-transform 0.4s ease-in-out;
-      transition: background-color 0.5s ease-in-out, transform 0.4s ease-in-out;
-      transition: background-color 0.5s ease-in-out, transform 0.4s ease-in-out, -webkit-transform 0.4s ease-in-out, -o-transform 0.4s ease-in-out;
-      background-color: #1294ca;
+      -webkit-transition: background-color 0.5s ease-in-out, -webkit-transform .5s;
+      transition: background-color 0.5s ease-in-out, -webkit-transform .5s;
+      -o-transition: background-color 0.5s ease-in-out, -o-transform .5s;
+      transition: background-color 0.5s ease-in-out, transform .5s;
+      transition: background-color 0.5s ease-in-out, transform .5s, -webkit-transform .5s, -o-transform .5s;
+      background-color: #27C0FF;
       color: #fff;
       font-weight: bold; }
       .user-login-form .form-actions input:hover,
       .user-pass .form-actions input:hover,
       .user-register-form .form-actions input:hover {
-        background-color: #1e7697;
-        text-decoration: none; }
+        background-color: #2e5d6d;
+        text-decoration: none;
+        -webkit-transform: scale(1.005);
+             -o-transform: scale(1.005);
+                transform: scale(1.005); }
       .user-login-form .form-actions input:active,
       .user-pass .form-actions input:active,
       .user-register-form .form-actions input:active {
         -webkit-transform: scale(0.9);
              -o-transform: scale(0.9);
                 transform: scale(0.9);
-        background-color: #1e7697;
-        text-decoration: none; }
-  .user-login-form .social-login-buttons,
-  .user-pass .social-login-buttons,
-  .user-register-form .social-login-buttons {
-    margin-top: 5px;
+        background-color: #2e5d6d;
+        text-decoration: none;
+        -webkit-transform: scale(1.005);
+             -o-transform: scale(1.005);
+                transform: scale(1.005); }
+
+.user-pass,
+.user-register-form {
+  padding: 2.5rem 2.875rem;
+  max-width: 62.5rem;
+  background-color: #fff; }
+  .user-pass h1,
+  .user-register-form h1 {
+    font-style: normal;
+    font-weight: 600;
+    font-size: 1.5625rem;
+    line-height: 2.0625rem;
+    text-align: center;
+    margin-bottom: 2.5625rem; }
+  .user-pass .form-group,
+  .user-register-form .form-group {
+    margin-bottom: 0.625rem; }
+  .user-pass .form-control,
+  .user-register-form .form-control {
+    padding: 0.9375rem 0.875rem; }
+  .user-pass .form-group,
+  .user-register-form .form-group {
+    width: 100%; }
+  .user-pass .form-actions,
+  .user-register-form .form-actions {
     display: -webkit-box;
     display: -webkit-flex;
     display: -ms-flexbox;
@@ -15894,39 +16015,14 @@ nav.tabs {
     -webkit-align-items: center;
         -ms-flex-align: center;
             align-items: center;
-    -webkit-box-pack: center;
-    -webkit-justify-content: center;
-        -ms-flex-pack: center;
-            justify-content: center; }
-    .user-login-form .social-login-buttons img,
-    .user-pass .social-login-buttons img,
-    .user-register-form .social-login-buttons img {
-      border-radius: 50%; }
-
-@media (max-width: 615px) {
-  .user-login-form .form-actions {
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-orient: horizontal;
+    -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
-    -webkit-flex-direction: row;
-        -ms-flex-direction: row;
-            flex-direction: row;
-    -webkit-box-pack: center;
-    -webkit-justify-content: center;
-        -ms-flex-pack: center;
-            justify-content: center;
-    -webkit-flex-wrap: wrap;
-        -ms-flex-wrap: wrap;
-            flex-wrap: wrap;
-    width: 100%; }
-    .user-login-form .form-actions .form-submit {
-      -webkit-box-flex: 1;
-      -webkit-flex: 1 0 100%;
-          -ms-flex: 1 0 100%;
-              flex: 1 0 100%; } }
+    -webkit-flex-direction: column;
+        -ms-flex-direction: column;
+            flex-direction: column; }
+    .user-pass .form-actions input,
+    .user-register-form .form-actions input {
+      width: 50%; }
 
 .node--edit-form--main {
   float: unset;
@@ -15934,11 +16030,11 @@ nav.tabs {
   padding-right: 0; }
   .node--edit-form--main input[type="submit"] {
     border-radius: 25px;
-    -webkit-transition: background-color 0.5s ease-in-out, -webkit-transform 0.4s ease-in-out;
-    transition: background-color 0.5s ease-in-out, -webkit-transform 0.4s ease-in-out;
-    -o-transition: background-color 0.5s ease-in-out, -o-transform 0.4s ease-in-out;
-    transition: background-color 0.5s ease-in-out, transform 0.4s ease-in-out;
-    transition: background-color 0.5s ease-in-out, transform 0.4s ease-in-out, -webkit-transform 0.4s ease-in-out, -o-transform 0.4s ease-in-out;
+    -webkit-transition: background-color 0.5s ease-in-out, -webkit-transform .5s;
+    transition: background-color 0.5s ease-in-out, -webkit-transform .5s;
+    -o-transition: background-color 0.5s ease-in-out, -o-transform .5s;
+    transition: background-color 0.5s ease-in-out, transform .5s;
+    transition: background-color 0.5s ease-in-out, transform .5s, -webkit-transform .5s, -o-transform .5s;
     background-color: transparent;
     color: #fff;
     font-weight: bold;
@@ -15948,13 +16044,19 @@ nav.tabs {
     transition: background-color 0.5s ease-in-out, color 0.5s ease-in-out; }
     .node--edit-form--main input[type="submit"]:hover {
       background-color: #1e7697;
-      text-decoration: none; }
+      text-decoration: none;
+      -webkit-transform: scale(1.005);
+           -o-transform: scale(1.005);
+              transform: scale(1.005); }
     .node--edit-form--main input[type="submit"]:active {
       -webkit-transform: scale(0.9);
            -o-transform: scale(0.9);
               transform: scale(0.9);
       background-color: #1e7697;
-      text-decoration: none; }
+      text-decoration: none;
+      -webkit-transform: scale(1.005);
+           -o-transform: scale(1.005);
+              transform: scale(1.005); }
     .node--edit-form--main input[type="submit"]:hover {
       color: #fff; }
   .node--edit-form--main input[type="text"] {
@@ -15967,23 +16069,29 @@ nav.tabs {
     padding: 1px 14px;
     font-size: 16px;
     border-radius: 25px;
-    -webkit-transition: background-color 0.5s ease-in-out, -webkit-transform 0.4s ease-in-out;
-    transition: background-color 0.5s ease-in-out, -webkit-transform 0.4s ease-in-out;
-    -o-transition: background-color 0.5s ease-in-out, -o-transform 0.4s ease-in-out;
-    transition: background-color 0.5s ease-in-out, transform 0.4s ease-in-out;
-    transition: background-color 0.5s ease-in-out, transform 0.4s ease-in-out, -webkit-transform 0.4s ease-in-out, -o-transform 0.4s ease-in-out;
+    -webkit-transition: background-color 0.5s ease-in-out, -webkit-transform .5s;
+    transition: background-color 0.5s ease-in-out, -webkit-transform .5s;
+    -o-transition: background-color 0.5s ease-in-out, -o-transform .5s;
+    transition: background-color 0.5s ease-in-out, transform .5s;
+    transition: background-color 0.5s ease-in-out, transform .5s, -webkit-transform .5s, -o-transform .5s;
     background-color: #1294ca;
     color: #fff;
     font-weight: bold; }
     .node--edit-form--main button:hover {
       background-color: #1e7697;
-      text-decoration: none; }
+      text-decoration: none;
+      -webkit-transform: scale(1.005);
+           -o-transform: scale(1.005);
+              transform: scale(1.005); }
     .node--edit-form--main button:active {
       -webkit-transform: scale(0.9);
            -o-transform: scale(0.9);
               transform: scale(0.9);
       background-color: #1e7697;
-      text-decoration: none; }
+      text-decoration: none;
+      -webkit-transform: scale(1.005);
+           -o-transform: scale(1.005);
+              transform: scale(1.005); }
   .node--edit-form--main .details-wrapper {
     position: relative; }
     .node--edit-form--main .details-wrapper label {
@@ -15995,23 +16103,29 @@ nav.tabs {
       height: unset;
       font-size: 14px;
       border-radius: 25px;
-      -webkit-transition: background-color 0.5s ease-in-out, -webkit-transform 0.4s ease-in-out;
-      transition: background-color 0.5s ease-in-out, -webkit-transform 0.4s ease-in-out;
-      -o-transition: background-color 0.5s ease-in-out, -o-transform 0.4s ease-in-out;
-      transition: background-color 0.5s ease-in-out, transform 0.4s ease-in-out;
-      transition: background-color 0.5s ease-in-out, transform 0.4s ease-in-out, -webkit-transform 0.4s ease-in-out, -o-transform 0.4s ease-in-out;
+      -webkit-transition: background-color 0.5s ease-in-out, -webkit-transform .5s;
+      transition: background-color 0.5s ease-in-out, -webkit-transform .5s;
+      -o-transition: background-color 0.5s ease-in-out, -o-transform .5s;
+      transition: background-color 0.5s ease-in-out, transform .5s;
+      transition: background-color 0.5s ease-in-out, transform .5s, -webkit-transform .5s, -o-transform .5s;
       background-color: #1294ca;
       color: #fff;
       font-weight: bold; }
       .node--edit-form--main .details-wrapper .js-form-wrapper .form-submit:hover {
         background-color: #1e7697;
-        text-decoration: none; }
+        text-decoration: none;
+        -webkit-transform: scale(1.005);
+             -o-transform: scale(1.005);
+                transform: scale(1.005); }
       .node--edit-form--main .details-wrapper .js-form-wrapper .form-submit:active {
         -webkit-transform: scale(0.9);
              -o-transform: scale(0.9);
                 transform: scale(0.9);
         background-color: #1e7697;
-        text-decoration: none; }
+        text-decoration: none;
+        -webkit-transform: scale(1.005);
+             -o-transform: scale(1.005);
+                transform: scale(1.005); }
   .node--edit-form--main .form-item-field-category label {
     font-size: 16px; }
 
@@ -16039,25 +16153,31 @@ nav.tabs {
   .node--edit-form .field--widget-moderation-state-buttons > div .form-control:disabled,
   .node--edit-form .field--widget-moderation-state-buttons > div .form-control[readonly] {
     border-radius: 25px;
-    -webkit-transition: background-color 0.5s ease-in-out, -webkit-transform 0.4s ease-in-out;
-    transition: background-color 0.5s ease-in-out, -webkit-transform 0.4s ease-in-out;
-    -o-transition: background-color 0.5s ease-in-out, -o-transform 0.4s ease-in-out;
-    transition: background-color 0.5s ease-in-out, transform 0.4s ease-in-out;
-    transition: background-color 0.5s ease-in-out, transform 0.4s ease-in-out, -webkit-transform 0.4s ease-in-out, -o-transform 0.4s ease-in-out;
+    -webkit-transition: background-color 0.5s ease-in-out, -webkit-transform .5s;
+    transition: background-color 0.5s ease-in-out, -webkit-transform .5s;
+    -o-transition: background-color 0.5s ease-in-out, -o-transform .5s;
+    transition: background-color 0.5s ease-in-out, transform .5s;
+    transition: background-color 0.5s ease-in-out, transform .5s, -webkit-transform .5s, -o-transform .5s;
     background-color: #1294ca;
     color: #fff;
     font-weight: bold; }
     .node--edit-form .field--widget-moderation-state-buttons > div .form-control:disabled:hover,
     .node--edit-form .field--widget-moderation-state-buttons > div .form-control[readonly]:hover {
       background-color: #1e7697;
-      text-decoration: none; }
+      text-decoration: none;
+      -webkit-transform: scale(1.005);
+           -o-transform: scale(1.005);
+              transform: scale(1.005); }
     .node--edit-form .field--widget-moderation-state-buttons > div .form-control:disabled:active,
     .node--edit-form .field--widget-moderation-state-buttons > div .form-control[readonly]:active {
       -webkit-transform: scale(0.9);
            -o-transform: scale(0.9);
               transform: scale(0.9);
       background-color: #1e7697;
-      text-decoration: none; }
+      text-decoration: none;
+      -webkit-transform: scale(1.005);
+           -o-transform: scale(1.005);
+              transform: scale(1.005); }
 
 .node--edit-form--footer {
   float: unset;
@@ -16080,23 +16200,29 @@ nav.tabs {
       height: unset;
       margin-right: 10px;
       border-radius: 25px;
-      -webkit-transition: background-color 0.5s ease-in-out, -webkit-transform 0.4s ease-in-out;
-      transition: background-color 0.5s ease-in-out, -webkit-transform 0.4s ease-in-out;
-      -o-transition: background-color 0.5s ease-in-out, -o-transform 0.4s ease-in-out;
-      transition: background-color 0.5s ease-in-out, transform 0.4s ease-in-out;
-      transition: background-color 0.5s ease-in-out, transform 0.4s ease-in-out, -webkit-transform 0.4s ease-in-out, -o-transform 0.4s ease-in-out;
+      -webkit-transition: background-color 0.5s ease-in-out, -webkit-transform .5s;
+      transition: background-color 0.5s ease-in-out, -webkit-transform .5s;
+      -o-transition: background-color 0.5s ease-in-out, -o-transform .5s;
+      transition: background-color 0.5s ease-in-out, transform .5s;
+      transition: background-color 0.5s ease-in-out, transform .5s, -webkit-transform .5s, -o-transform .5s;
       background-color: #1294ca;
       color: #fff;
       font-weight: bold; }
       .node--edit-form--footer .form-group input:hover {
         background-color: #1e7697;
-        text-decoration: none; }
+        text-decoration: none;
+        -webkit-transform: scale(1.005);
+             -o-transform: scale(1.005);
+                transform: scale(1.005); }
       .node--edit-form--footer .form-group input:active {
         -webkit-transform: scale(0.9);
              -o-transform: scale(0.9);
                 transform: scale(0.9);
         background-color: #1e7697;
-        text-decoration: none; }
+        text-decoration: none;
+        -webkit-transform: scale(1.005);
+             -o-transform: scale(1.005);
+                transform: scale(1.005); }
 
 @media (max-width: 530px) {
   .node--edit-form .field--widget-moderation-state-buttons > div input {
@@ -16398,11 +16524,11 @@ nav.tabs {
   .view-frontpage .view-filters .form-row .frontpage-add-idea-button {
     margin-left: auto;
     border-radius: 25px;
-    -webkit-transition: background-color 0.5s ease-in-out, -webkit-transform 0.4s ease-in-out;
-    transition: background-color 0.5s ease-in-out, -webkit-transform 0.4s ease-in-out;
-    -o-transition: background-color 0.5s ease-in-out, -o-transform 0.4s ease-in-out;
-    transition: background-color 0.5s ease-in-out, transform 0.4s ease-in-out;
-    transition: background-color 0.5s ease-in-out, transform 0.4s ease-in-out, -webkit-transform 0.4s ease-in-out, -o-transform 0.4s ease-in-out;
+    -webkit-transition: background-color 0.5s ease-in-out, -webkit-transform .5s;
+    transition: background-color 0.5s ease-in-out, -webkit-transform .5s;
+    -o-transition: background-color 0.5s ease-in-out, -o-transform .5s;
+    transition: background-color 0.5s ease-in-out, transform .5s;
+    transition: background-color 0.5s ease-in-out, transform .5s, -webkit-transform .5s, -o-transform .5s;
     background-color: #27C0FF;
     color: #fff;
     font-weight: bold;
@@ -16411,13 +16537,19 @@ nav.tabs {
     padding: 0.6em 2.5em; }
     .view-frontpage .view-filters .form-row .frontpage-add-idea-button:hover {
       background-color: #5eaed2;
-      text-decoration: none; }
+      text-decoration: none;
+      -webkit-transform: scale(1.005);
+           -o-transform: scale(1.005);
+              transform: scale(1.005); }
     .view-frontpage .view-filters .form-row .frontpage-add-idea-button:active {
       -webkit-transform: scale(0.9);
            -o-transform: scale(0.9);
               transform: scale(0.9);
       background-color: #5eaed2;
-      text-decoration: none; }
+      text-decoration: none;
+      -webkit-transform: scale(1.005);
+           -o-transform: scale(1.005);
+              transform: scale(1.005); }
     .view-frontpage .view-filters .form-row .frontpage-add-idea-button:before {
       content: '';
       display: inline-block;
@@ -16648,7 +16780,6 @@ nav.tabs {
     display: none; }
   .teaser-view-mode fieldset select,
   .view--user-admin-people--community-page fieldset select {
-    margin-bottom: 5px;
     border: 1px solid #C6CDD0;
     border-radius: 4px;
     -webkit-appearance: none;
@@ -16673,14 +16804,13 @@ nav.tabs {
     border: 0.8px solid #D0D6DC;
     border-radius: 30px;
     background: #E8E8E9;
-    margin-top: 0;
-    margin-bottom: 5px; }
+    margin-top: 0; }
     .teaser-view-mode .form-item-search label,
     .view--user-admin-people--community-page .form-item-search label {
       display: none; }
     .teaser-view-mode .form-item-search input,
     .view--user-admin-people--community-page .form-item-search input {
-      padding: 18px 3rem 18px 18px;
+      padding: 0.5rem 1.25rem;
       background: transparent;
       border: none;
       margin: 0; }
@@ -17134,11 +17264,11 @@ nav.tabs {
 
 .openideal-statistics-date-select-form .form-submit {
   border-radius: 25px;
-  -webkit-transition: background-color 0.5s ease-in-out, -webkit-transform 0.4s ease-in-out;
-  transition: background-color 0.5s ease-in-out, -webkit-transform 0.4s ease-in-out;
-  -o-transition: background-color 0.5s ease-in-out, -o-transform 0.4s ease-in-out;
-  transition: background-color 0.5s ease-in-out, transform 0.4s ease-in-out;
-  transition: background-color 0.5s ease-in-out, transform 0.4s ease-in-out, -webkit-transform 0.4s ease-in-out, -o-transform 0.4s ease-in-out;
+  -webkit-transition: background-color 0.5s ease-in-out, -webkit-transform .5s;
+  transition: background-color 0.5s ease-in-out, -webkit-transform .5s;
+  -o-transition: background-color 0.5s ease-in-out, -o-transform .5s;
+  transition: background-color 0.5s ease-in-out, transform .5s;
+  transition: background-color 0.5s ease-in-out, transform .5s, -webkit-transform .5s, -o-transform .5s;
   background-color: #1294ca;
   color: #fff;
   font-weight: bold;
@@ -17146,13 +17276,19 @@ nav.tabs {
   margin-bottom: 15px; }
   .openideal-statistics-date-select-form .form-submit:hover {
     background-color: #1e7697;
-    text-decoration: none; }
+    text-decoration: none;
+    -webkit-transform: scale(1.005);
+         -o-transform: scale(1.005);
+            transform: scale(1.005); }
   .openideal-statistics-date-select-form .form-submit:active {
     -webkit-transform: scale(0.9);
          -o-transform: scale(0.9);
             transform: scale(0.9);
     background-color: #1e7697;
-    text-decoration: none; }
+    text-decoration: none;
+    -webkit-transform: scale(1.005);
+         -o-transform: scale(1.005);
+            transform: scale(1.005); }
 
 .reports-filters {
   display: -webkit-box;
@@ -17312,23 +17448,29 @@ nav.tabs {
       -ms-flex-preferred-size: 10%;
           flex-basis: 10%;
   border-radius: 25px;
-  -webkit-transition: background-color 0.5s ease-in-out, -webkit-transform 0.4s ease-in-out;
-  transition: background-color 0.5s ease-in-out, -webkit-transform 0.4s ease-in-out;
-  -o-transition: background-color 0.5s ease-in-out, -o-transform 0.4s ease-in-out;
-  transition: background-color 0.5s ease-in-out, transform 0.4s ease-in-out;
-  transition: background-color 0.5s ease-in-out, transform 0.4s ease-in-out, -webkit-transform 0.4s ease-in-out, -o-transform 0.4s ease-in-out;
+  -webkit-transition: background-color 0.5s ease-in-out, -webkit-transform .5s;
+  transition: background-color 0.5s ease-in-out, -webkit-transform .5s;
+  -o-transition: background-color 0.5s ease-in-out, -o-transform .5s;
+  transition: background-color 0.5s ease-in-out, transform .5s;
+  transition: background-color 0.5s ease-in-out, transform .5s, -webkit-transform .5s, -o-transform .5s;
   background-color: #1294ca;
   color: #fff;
   font-weight: bold; }
   .field--widget-openideal-user-entity-browser-single-file input:hover {
     background-color: #1e7697;
-    text-decoration: none; }
+    text-decoration: none;
+    -webkit-transform: scale(1.005);
+         -o-transform: scale(1.005);
+            transform: scale(1.005); }
   .field--widget-openideal-user-entity-browser-single-file input:active {
     -webkit-transform: scale(0.9);
          -o-transform: scale(0.9);
             transform: scale(0.9);
     background-color: #1e7697;
-    text-decoration: none; }
+    text-decoration: none;
+    -webkit-transform: scale(1.005);
+         -o-transform: scale(1.005);
+            transform: scale(1.005); }
 
 .idea-statistics-and-status-block--status {
   position: relative;
@@ -17638,6 +17780,264 @@ nav.tabs {
   background: -webkit-linear-gradient(top, #676C72 0.01%, #676C72 24.75%, #1294CA 25.28%, #1294CA 45.54%, #1EBCA1 48.73%, #1EBCA1 67.12%, #C7D2EB 67.39%, #C7D2EB 100%);
   background: -o-linear-gradient(top, #676C72 0.01%, #676C72 24.75%, #1294CA 25.28%, #1294CA 45.54%, #1EBCA1 48.73%, #1EBCA1 67.12%, #C7D2EB 67.39%, #C7D2EB 100%);
   background: linear-gradient(180deg, #676C72 0.01%, #676C72 24.75%, #1294CA 25.28%, #1294CA 45.54%, #1EBCA1 48.73%, #1EBCA1 67.12%, #C7D2EB 67.39%, #C7D2EB 100%); }
+
+.user-login-form {
+  padding-bottom: calc(1rem + 2.5rem); }
+  .user-login-form--container {
+    background-color: #fff;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex; }
+    .user-login-form--container--title {
+      font-style: normal;
+      font-weight: 600;
+      font-size: 1.5625rem;
+      line-height: 2.0625rem;
+      text-align: center;
+      margin-bottom: 2.5625rem; }
+    .user-login-form--container--left {
+      position: relative;
+      padding: 2.5rem 2.875rem;
+      width: 32.625rem; }
+      .user-login-form--container--left__social-login-buttons .social-auth {
+        margin-bottom: 0.75rem;
+        background: #FFFFFF;
+        border: 1px solid #D0D6DC;
+        -webkit-box-sizing: border-box;
+                box-sizing: border-box;
+        border-radius: 60px;
+        padding: 1.125rem;
+        position: relative;
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-pack: center;
+        -webkit-justify-content: center;
+            -ms-flex-pack: center;
+                justify-content: center; }
+        .user-login-form--container--left__social-login-buttons .social-auth--name {
+          font-family: "Assistant", Roboto, -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+          font-style: normal;
+          font-weight: 600;
+          font-size: 0.9375rem;
+          line-height: 1.25rem;
+          color: #343352; }
+        .user-login-form--container--left__social-login-buttons .social-auth--icon-wrapper {
+          position: absolute;
+          width: 34px;
+          -webkit-box-pack: center;
+          -webkit-justify-content: center;
+              -ms-flex-pack: center;
+                  justify-content: center;
+          display: -webkit-box;
+          display: -webkit-flex;
+          display: -ms-flexbox;
+          display: flex;
+          left: 1.25rem;
+          top: 50%;
+          -webkit-transform: translateY(-50%);
+               -o-transform: translateY(-50%);
+                  transform: translateY(-50%);
+          margin-right: 0.625rem; }
+          .user-login-form--container--left__social-login-buttons .social-auth--icon-wrapper::after {
+            content: '';
+            width: 1px;
+            height: 100%;
+            display: block;
+            background: #D0D6DC;
+            position: absolute;
+            right: -0.75rem;
+            top: 0; }
+      .user-login-form--container--left__or {
+        margin: 10px 0;
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex; }
+        .user-login-form--container--left__or--line {
+          -webkit-box-flex: 1;
+          -webkit-flex-grow: 1;
+              -ms-flex-positive: 1;
+                  flex-grow: 1;
+          -webkit-flex-shrink: 1;
+              -ms-flex-negative: 1;
+                  flex-shrink: 1;
+          background-color: #dbdbdb;
+          height: 1px;
+          position: relative;
+          top: .45em; }
+        .user-login-form--container--left__or--or {
+          color: #8e8e8e;
+          -webkit-box-flex: 0;
+          -webkit-flex-grow: 0;
+              -ms-flex-positive: 0;
+                  flex-grow: 0;
+          -webkit-flex-shrink: 0;
+              -ms-flex-negative: 0;
+                  flex-shrink: 0;
+          font-size: 13px;
+          font-weight: 600;
+          line-height: 15px;
+          margin: 0 18px;
+          text-transform: uppercase; }
+    .user-login-form--container--right {
+      width: 32.625rem;
+      color: #fff;
+      margin-bottom: 0;
+      position: relative;
+      background: #26282E;
+      overflow: hidden; }
+      .user-login-form--container--right__text {
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex; }
+        .user-login-form--container--right__text--section__first {
+          z-index: 999;
+          padding: 2.375rem; }
+          .user-login-form--container--right__text--section__first ul {
+            list-style: none;
+            padding: 0;
+            margin: 0; }
+          .user-login-form--container--right__text--section__first li {
+            padding-left: 0.8125rem;
+            text-indent: -.7em;
+            margin-bottom: 1.0625rem;
+            font-size: 1.25rem;
+            line-height: 1.625rem; }
+          .user-login-form--container--right__text--section__first li::before {
+            content: "• ";
+            font-size: 1.5625rem;
+            color: #27C0FF; }
+          .user-login-form--container--right__text--section__first h2 {
+            font-style: normal;
+            font-weight: bold;
+            font-size: 3.25rem;
+            line-height: 60px;
+            letter-spacing: 0.01em; }
+            .user-login-form--container--right__text--section__first h2 span {
+              display: inline-block;
+              position: relative; }
+            .user-login-form--container--right__text--section__first h2 em {
+              color: white; }
+              .user-login-form--container--right__text--section__first h2 em + svg {
+                position: absolute;
+                left: 0;
+                bottom: -40%;
+                opacity: 1; }
+                .user-login-form--container--right__text--section__first h2 em + svg path {
+                  stroke-dashoffset: 0; }
+            .user-login-form--container--right__text--section__first h2 svg {
+              pointer-events: none;
+              -webkit-transition: 0.5s;
+              -o-transition: 0.5s;
+              transition: 0.5s; }
+            .user-login-form--container--right__text--section__first h2 path {
+              -webkit-transition: stroke-dasharray 0.5s, stroke-dashoffset 0.5s, opacity 0.5s;
+              -o-transition: stroke-dasharray 0.5s, stroke-dashoffset 0.5s, opacity 0.5s;
+              transition: stroke-dasharray 0.5s, stroke-dashoffset 0.5s, opacity 0.5s; }
+              .user-login-form--container--right__text--section__first h2 path:last-child {
+                opacity: 0.2; }
+        .user-login-form--container--right__text--section__second {
+          position: absolute;
+          bottom: 0; }
+          .user-login-form--container--right__text--section__second::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            background: -webkit-linear-gradient(273.41deg, #262930 7.81%, rgba(38, 41, 48, 0) 40.61%);
+            background: -o-linear-gradient(273.41deg, #262930 7.81%, rgba(38, 41, 48, 0) 40.61%);
+            background: linear-gradient(176.59deg, #262930 7.81%, rgba(38, 41, 48, 0) 40.61%); }
+    .user-login-form--container__bottom {
+      position: absolute;
+      bottom: -7.5rem;
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-orient: vertical;
+      -webkit-box-direction: normal;
+      -webkit-flex-direction: column;
+          -ms-flex-direction: column;
+              flex-direction: column;
+      -webkit-box-align: center;
+      -webkit-align-items: center;
+          -ms-flex-align: center;
+              align-items: center;
+      -webkit-box-pack: center;
+      -webkit-justify-content: center;
+          -ms-flex-pack: center;
+              justify-content: center;
+      left: 50%;
+      -webkit-transform: translateX(-50%);
+           -o-transform: translateX(-50%);
+              transform: translateX(-50%);
+      width: 19rem; }
+      .user-login-form--container__bottom--text {
+        font-weight: 600;
+        font-size: 1rem;
+        line-height: 1.3125rem;
+        color: #000; }
+        .user-login-form--container__bottom--text a {
+          color: #27C0FF; }
+    .user-login-form--container--actions {
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-align: center;
+      -webkit-align-items: center;
+          -ms-flex-align: center;
+              align-items: center;
+      width: 100%;
+      -webkit-box-pack: center;
+      -webkit-justify-content: center;
+          -ms-flex-pack: center;
+              justify-content: center; }
+      .user-login-form--container--actions .form-submit {
+        width: 50%; }
+  .user-login-form .form-control {
+    padding: 1.125rem 1rem; }
+
+@media (max-width: 83.125rem) {
+  .user-login-form--container--right, .user-login-form--container--left {
+    width: 25rem; } }
+
+@media (max-width: 53.75rem) {
+  .user-login-form--container--right {
+    display: none; }
+  .user-login-form--container--left {
+    width: auto; }
+    .user-login-form--container--left__social-login-buttons .social-auth {
+      padding: 0.875rem; } }
+
+@media (max-width: 26.375rem) {
+  .user-login-form--container--left {
+    padding: 0.875rem 0.875rem; }
+    .user-login-form--container--left__social-login-buttons {
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-pack: space-evenly;
+      -webkit-justify-content: space-evenly;
+          -ms-flex-pack: space-evenly;
+              justify-content: space-evenly; }
+      .user-login-form--container--left__social-login-buttons .social-auth--icon-wrapper {
+        position: static;
+        -webkit-transform: unset;
+             -o-transform: unset;
+                transform: unset;
+        margin: 0; }
+        .user-login-form--container--left__social-login-buttons .social-auth--icon-wrapper::after {
+          content: unset; }
+      .user-login-form--container--left__social-login-buttons .social-auth--name {
+        display: none; } }
 
 .community-page .view-content {
   display: -webkit-box;
