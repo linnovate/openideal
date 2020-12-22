@@ -25,6 +25,8 @@ function openideal_discussion_form_node_discussion_form_alter(&$form, FormStateI
  * for group member with certain permission.
  */
 function openideal_discussion_comment_create_access(AccountInterface $account, array $context, $entity_bundle) {
+  // Get commented entity from $context array once
+  // https://www.drupal.org/project/drupal/issues/2879087 is landed.
   if (($node = \Drupal::routeMatch()->getParameter('node')) && $node->bundle() == 'discussion') {
     /** @var \Drupal\group\Access\GroupPermissionChecker $permission_checker */
     $permission_checker = \Drupal::service('group_permission.checker');
@@ -42,11 +44,13 @@ function openideal_discussion_comment_create_access(AccountInterface $account, a
  * Implements hook_ENTITY_TYPE_insert().
  */
 function openideal_discussion_node_insert(EntityInterface $entity) {
+  // Don't do that logic in hook_ENTITY_TYPE_presave because need
+  // to add the group only once.
   if ($entity->bundle() == 'discussion') {
     /** @var \Drupal\group\Entity\Group $group */
     $group = \Drupal::routeMatch()->getParameter('group');
     if (!$group) {
-      \Drupal::logger('openideal_discussion')->error("Can't find group for Discussion");
+      \Drupal::logger('openideal_discussion')->error('Cannot find group for Discussion, for discussion id=@id', ['@id' => $entity->id()]);
     }
 
     $ideas = $group->getContentEntities('group_node:idea');

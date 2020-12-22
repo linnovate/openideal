@@ -70,7 +70,7 @@ function openideal_content_views_query_alter(ViewExecutable $view, QueryPluginBa
   if ($view->id() == 'public_activity' && $view->current_display === 'personalized_activity_block' && $user = \Drupal::routeMatch()->getParameter('user')) {
     $table_queue = $query->getTableQueue();
 
-    // Instead of adding three time flagging relation ship in views change
+    // Instead of adding three time flagging relationship in views change
     // "main" join conditions.
     if (isset($table_queue['flagging_node_field_data'])) {
       /** @var \Drupal\views\Plugin\views\join\Standard $join */
