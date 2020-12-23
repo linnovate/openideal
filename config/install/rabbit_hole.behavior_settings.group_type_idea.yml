@@ -1,8 +1,13 @@
 langcode: en
 status: true
-dependencies: {  }
+dependencies:
+  config:
+    - group.type.idea
 id: group_type_idea
+entity_type_id: group_type
+entity_id: idea
 action: openideal_group_page_redirect
 allow_override: 1
 redirect: ''
 redirect_code: 301
+redirect_fallback_action: access_denied
