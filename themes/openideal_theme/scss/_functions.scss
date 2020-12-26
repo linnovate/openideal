@@ -1,0 +1,4 @@
+// Convert px into rem.
+@function size($target) {
+  @return ($target / 16) * 1rem;
+}

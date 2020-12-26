@@ -18,44 +18,54 @@ class SiteWideStatisticsBlock extends BlockBase {
    * {@inheritdoc}
    */
   public function build() {
-    $build['#theme'] = 'site_wide_statistics_block';
-    $build['#main_class'] = 'site-wide-statistics-block';
-    $build['#show_title'] = TRUE;
-    $build['#content'] = [
+    $items = [
       'ideas' => [
-        'bottom' => [
+        '#img_class' => 'statistics_tag',
+        '#lazy_element' => [
           '#lazy_builder' => ['openideal_statistics.lazy_builder:getIdeas', []],
           '#create_placeholder' => TRUE,
         ],
-        'title' => $this->t('Ideas'),
-        'img_class' => 'statistics_tag',
+        '#item_title' => $this->t('Ideas'),
       ],
       'members' => [
-        'bottom' => [
+        '#lazy_element' => [
           '#lazy_builder' => ['openideal_statistics.lazy_builder:getMembers', []],
           '#create_placeholder' => TRUE,
         ],
-        'title' => $this->t('Members'),
-        'img_class' => 'members_tag',
+        '#item_title' => $this->t('Members'),
+        '#img_class' => 'members_tag',
       ],
       'comments' => [
-        'bottom' => [
+        '#lazy_element' => [
           '#lazy_builder' => ['openideal_statistics.lazy_builder:getComments', []],
           '#create_placeholder' => TRUE,
         ],
-        'title' => $this->t('Comments'),
-        'img_class' => 'comment_tag',
+        '#item_title' => $this->t('Comments'),
+        '#img_class' => 'comment_tag',
       ],
       'votes' => [
-        'bottom' => [
+        '#lazy_element' => [
           '#lazy_builder' => ['openideal_statistics.lazy_builder:getVotes', []],
           '#create_placeholder' => TRUE,
         ],
-        'title' => $this->t('Votes'),
-        'img_class' => 'like_tag',
+        '#item_title' => $this->t('Votes'),
+        '#img_class' => 'like_tag',
       ],
     ];
-    return $build;
+
+    foreach ($items as &$item) {
+      $item['#wrapper_attributes'] = ['class' => ['idea-statistics-block--list__item']];
+      $item['#type'] = 'statistics_item';
+    }
+
+    return [
+      'content' => [
+        '#theme' => 'item_list',
+        '#items' => $items,
+        '#attributes' => ['class' => ['idea-statistics-block--list']],
+        '#wrapper_attributes' => ['class' => ['idea-statistics-block']],
+      ],
+    ];
   }
 
 }

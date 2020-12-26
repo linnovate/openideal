@@ -5,7 +5,9 @@
  * Functions to support theming in the SASS Starterkit subtheme.
  */
 
+use Drupal\Component\Render\FormattableMarkup;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Link;
 use Drupal\Core\StringTranslation\TranslatableMarkup;
 use Drupal\Core\Url;
 use Drupal\node\NodeInterface;
@@ -68,15 +70,31 @@ function openideal_theme_preprocess_html(&$variables) {
  */
 function openideal_theme_preprocess_page(&$variables) {
   $route_match = \Drupal::routeMatch();
+  $route_name = $route_match->getRouteName();
   $node = $route_match->getParameter('node');
   if ($node instanceof NodeInterface) {
     $variables['node_type'] = $node->bundle();
   }
 
-  if ($route_match->getRouteName() == 'view.frontpage.front_page'
-    || $route_match->getRouteName() == 'entity.user.canonical'
-    || $route_match->getRouteName() == 'view.news.all_news_page') {
+  $activity_pages = [
+    'view.frontpage.front_page',
+    'entity.user.canonical',
+    'view.news.all_news_page',
+  ];
+
+  if (in_array($route_name, $activity_pages)) {
     $variables['is_activity_page'] = TRUE;
+  }
+
+  if ($route_match->getRouteName() == 'entity.node.canonical' &&
+    $route_match->getParameter('node')->bundle() == 'idea' &&
+    \Drupal::request()->query->has('suggested-idea')) {
+    $link = Link::createFromRoute(t('create an idea by yourself'), 'node.add', ['node_type' => 'idea'])->toString();
+    $message = new FormattableMarkup('<div>' . t('This idea might be similar to the one you were about to create.') . '</div>
+      <div>' . t('Consider joining this idea as a follower or co-author.') . '</div>
+      <div>' . t('Ideas have better chance in being complete, and to move on to execution, if a large group of people collaborates on making the idea better.') . '</div>
+      <div>' . t('If you want, and whenever you want, you can always go ahead and @create') . '</div>', ['@create' => $link]);
+    \Drupal::messenger()->addMessage($message);
   }
 }
 
@@ -185,5 +203,21 @@ function openideal_theme_preprocess_image(&$variables) {
   // Set image title same as alt.
   if (empty($variables['attributes']['title']) && !empty($variables['alt'])) {
     $variables['attributes']['title'] = $variables['alt'];
+  }
+}
+
+/**
+ * Implements hook_preprocess_HOOK().
+ */
+function openideal_theme_preprocess_message__user_mention(&$variables) {
+  // In case the user is not viewing its page,
+  // its necessary to change the partial template.
+  $variables['#cache']['contexts'][] = 'user.is_user_profile_page';
+  if (\Drupal::routeMatch()->getRouteName() == 'entity.user.canonical' &&
+    \Drupal::currentUser()->id() !== \Drupal::routeMatch()->getParameter('user')->id()) {
+    $partial = $variables['elements']['#message']->getText(\Drupal::languageManager()->getCurrentLanguage()->getId(), 3);
+    if (!empty($partial)) {
+      $variables['content']['partial_0']['#markup'] = current($partial);
+    }
   }
 }

@@ -33,6 +33,11 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  *       assignment_restriction = "selector",
  *       required = TRUE
  *     ),
+ *     "user" = @ContextDefinition("entity:user",
+ *       label = @Translation("User"),
+ *       assignment_restriction = "selector",
+ *       required = FALSE
+ *     ),
  *   }
  * )
  */
@@ -89,14 +94,23 @@ class MessageAction extends RulesActionBase implements ContainerFactoryPluginInt
    *   Template ID.
    * @param \Drupal\Core\Entity\EntityInterface $entity
    *   The referenced entity.
+   * @param \Drupal\user\UserInterface $user
+   *   The mentioned user.
    */
-  protected function doExecute($template, EntityInterface $entity) {
+  protected function doExecute($template, EntityInterface $entity, UserInterface $user = NULL) {
     // If user already voted nothing to do here.
     if ($entity instanceof VoteInterface && $this->isUserVoted($entity, $template)) {
       return;
     }
 
     $owner_id = $entity instanceof UserInterface ? $entity->id() : $entity->getOwnerId();
+
+    // In case if event is user mentions, need to specify a mentioned user
+    // as an owner.
+    if ($user) {
+      $owner_id = $user->id();
+    }
+
     $message = Message::create(['template' => $template, 'uid' => $owner_id]);
     $entity_type = $entity->getEntityTypeId();
 

@@ -10,7 +10,6 @@ use Drupal\message\MessageInterface;
 use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\Core\Routing\RouteMatch;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\Url;
 use Drupal\flag\FlagInterface;
@@ -18,39 +17,12 @@ use Drupal\group\Entity\GroupContent;
 use Drupal\node\NodeInterface;
 use Drupal\openideal_user\Event\OpenidealUserEvents;
 use Drupal\openideal_user\Event\OpenidealUserGroupEvent;
-use Drupal\openideal_user\Event\OpenidealUserJoinedSiteEvent;
 use Drupal\openideal_user\Form\OpenidealSecondStepRegistrationForm;
 use Drupal\transaction\TransactionInterface;
 use Drupal\user\UserInterface;
 use Drupal\views\Plugin\views\query\QueryPluginBase;
 use Drupal\views\ViewExecutable;
 use Drupal\views\Views;
-use Symfony\Component\HttpFoundation\RedirectResponse;
-
-/**
- * Implements hook_form_FORM_ID_alter().
- */
-function openideal_user_form_user_login_form_alter(&$form, FormStateInterface $form_state, $form_id) {
-  /** @var \Drupal\social_api\Plugin\NetworkManager $network_manager */
-  $network_manager = \Drupal::service('plugin.network.manager');
-  $social_plugins = \Drupal::config('social_auth.settings')->get('auth');
-
-  // Remove socials that aren't configured properly.
-  foreach ($social_plugins as $plugin_id => $data) {
-    if (!$network_manager->createInstance($plugin_id)->getSdk()) {
-      unset($social_plugins[$plugin_id]);
-    }
-  }
-  $form['actions']['social_buttons'] = [
-    '#type' => 'container',
-    '#attributes' => ['class' => ['social-login-buttons']],
-    'buttons' => [
-      '#theme' => 'login_with',
-      '#social_networks' => $social_plugins,
-      '#weight' => '1',
-    ],
-  ];
-}
 
 /**
  * Implements hook_menu_local_tasks_alter().
@@ -75,28 +47,6 @@ function openideal_user_menu_local_tasks_alter(&$data, $route_name, RefinableCac
       $data['tabs'][0]['entity.user.contact_form']['#link']['url']->setOptions(['attributes' => ['class' => ['contact-link']]]);
       $data['tabs'][0]['entity.user.contact_form']['#link']['title'] = t('Send message');
     }
-  }
-}
-
-/**
- * Implements hook_user_login().
- */
-function openideal_user_user_login(UserInterface $account) {
-  if (RouteMatch::createFromRequest(\Drupal::request())->getRouteName() == 'user_registrationpassword.confirm') {
-    $event = new OpenidealUserJoinedSiteEvent($account);
-    \Drupal::service('event_dispatcher')->dispatch(OpenidealUserEvents::OPENIDEA_USER_JOINED_THE_SITE, $event);
-
-    // Redirect user if joined the site for the first
-    // time via the user_registrationpassword one time link.
-    $response = new RedirectResponse(URL::fromRoute('openideal_user.register.user.more_about_you')->toString());
-    $response->send();
-  }
-
-  // If user was created by UI or via social logins then dispatch
-  // OpenidealUserEvents.
-  if (!$account->getLastAccessedTime()) {
-    $event = new OpenidealUserJoinedSiteEvent($account);
-    \Drupal::service('event_dispatcher')->dispatch(OpenidealUserEvents::OPENIDEA_USER_JOINED_THE_SITE, $event);
   }
 }
 
@@ -233,7 +183,7 @@ function openideal_user_mail($key, &$message, $params) {
  */
 function openideal_user_form_alter(&$form, FormStateInterface $form_state, $form_id) {
   if (in_array($form_id, ['node_idea_edit_form', 'node_idea_form'])
-  && !\Drupal::currentUser()->hasPermission('administer site configuration')) {
+    && !\Drupal::currentUser()->hasPermission('administer site configuration')) {
     $form['field_duplicate_of']['#access'] = FALSE;
   }
 

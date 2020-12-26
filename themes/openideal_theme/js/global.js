@@ -175,6 +175,7 @@
         var $this = $(this);
         var $item = $('.votingapi-reaction-item', $this);
         var $label = $('.votingapi-reaction-label', $this);
+
         if ($('.radio input', $this).is(':checked')) {
           $item.addClass('active');
           $label.text(Drupal.t('Liked'));

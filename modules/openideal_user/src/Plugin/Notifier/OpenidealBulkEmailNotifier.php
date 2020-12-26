@@ -114,6 +114,12 @@ class OpenidealBulkEmailNotifier extends MessageNotifierBase {
       return $recipients;
     }
 
+    // In case of mention send only for the mentioned user.
+    if ($template === 'user_mention') {
+      $owner = $this->message->getOwner();
+      return [$owner->id() => $owner->getEmail()];
+    }
+
     // If it's a reply to comment only need to notify the parent comment owner.
     if ($template === 'created_reply_on_comment') {
       $comment = $this->message->field_comment_reference->entity;

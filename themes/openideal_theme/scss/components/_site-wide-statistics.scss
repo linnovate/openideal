@@ -1,58 +1,66 @@
-.site-wide-statistics-block {
-  &--list {
-    display: flex;
-    list-style: none;
-
-    &__item {
+.block-openideal-statistics.block-site-wide-statistics-block {
+  .idea-statistics-block {
+    &--list {
       display: flex;
-      flex-direction: column;
-      align-items: center;
-      margin-right: 5px;
-      flex-basis: 75px;
-      box-shadow: 0 1px 5px rgba(0,0,0,0.03), 0 3px 6px rgba(0,0,0,0.1);
-      border-radius: 2px;
-      padding: 12px 6px 0;
-      background-color: #fff;
-      min-width: 77px;
+      list-style: none;
 
-      &--bottom {
+      &__item {
         display: flex;
         flex-direction: column;
         align-items: center;
-        text-transform: uppercase;
-      }
+        margin-right: 5px;
+        flex-basis: 75px;
+        box-shadow: 0 1px 5px rgba(0,0,0,0.03), 0 3px 6px rgba(0,0,0,0.1);
+        border-radius: 2px;
+        padding: 12px 6px 0;
+        background-color: #fff;
+        min-width: 77px;
 
-      .item-svg {
-        width: 32px;
-        height: 32px;
-        margin-bottom: 6px;
-      }
+        &--bottom {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          text-transform: uppercase;
+        }
 
-      &--statistics_tag {
-        background: url('../images/icons/statistics_tag.svg') no-repeat center center;
-      }
+        .item-svg {
+          width: 32px;
+          height: 32px;
+          margin-bottom: 6px;
+          margin-right: 0;
+        }
 
-      &--members_tag {
-        background: url('../images/icons/members_tag.svg') no-repeat center center;
-      }
+        &--statistics_tag {
+          background: url('../images/icons/statistics_tag.svg') no-repeat center center;
+        }
 
-      &--comment_tag {
-        background: url('../images/icons/comment_tag.svg') no-repeat center center;
-      }
+        &--members_tag {
+          background: url('../images/icons/members_tag.svg') no-repeat center center;
+        }
 
-      &--like_tag {
-        background: url('../images/icons/like_tag.svg') no-repeat center center;
-      }
+        &--comment_tag {
+          background: url('../images/icons/comment_tag.svg') no-repeat center center;
+        }
 
-      p {
-        line-height: 1;
-        letter-spacing: -0.5px;
-        font-size: 15px;
-      }
+        &--like_tag {
+          background: url('../images/icons/like_tag.svg') no-repeat center center;
+        }
 
-      &--count {
-        font-weight: bold;
-        margin-bottom: 1px;
+        p {
+          line-height: 1;
+          letter-spacing: -0.5px;
+          font-size: 15px;
+        }
+
+        &--title {
+          margin-bottom: 1rem;
+        }
+
+        &--count {
+          margin-right: 0;
+          font-weight: bold;
+          margin-bottom: 1px;
+        }
       }
     }
   }

@@ -1,4 +1,3 @@
-.user--login,
 .user--register,
 .user--pass {
   section.main-content {
@@ -21,7 +20,6 @@
 .user-login-form,
 .user-pass,
 .user-register-form {
-  max-width: 560px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -33,6 +31,7 @@
 
   .confirm-parent,
   .password-parent {
+    max-width: unset;
     min-width: unset;
     overflow: unset;
   }
@@ -43,33 +42,50 @@
   }
 
   .form-actions {
-    width: 100%;
-    input {
-      @include btn-theme($btn-dark, #1e7697);
-    }
-  }
-  .social-login-buttons {
-    margin-top: 5px;
-    display: flex;
     align-items: center;
-    justify-content: center;
-
-    img {
-      border-radius: 50%;
+    display: flex;
+    text-transform: uppercase;
+    input {
+      border-width: 0;
+      @include btn-theme($btn-light, #2e5d6d);
     }
   }
 }
 
-@media (max-width: 615px) {
-  .user-login-form .form-actions {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    flex-wrap: wrap;
-    width: 100%;
+.user-pass,
+.user-register-form {
+  padding: size(40) size(46);
+  max-width: size(1000);
+  background-color: $white;
 
-    .form-submit {
-      flex: 1 0 100%;
+  h1 {
+    font-style: normal;
+    font-weight: 600;
+    font-size: size(25);
+    line-height: size(33);
+    text-align: center;
+    margin-bottom: size(41);
+  }
+
+  .form-group {
+    margin-bottom: size(10);
+  }
+
+  .form-control {
+    padding: size(15) size(14);
+  }
+
+  .form-group {
+    width: 100%;
+  }
+
+  .form-actions {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+
+    input {
+      width: 50%;
     }
   }
 }
