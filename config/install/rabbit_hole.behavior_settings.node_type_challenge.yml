@@ -1,8 +1,13 @@
 langcode: en
 status: true
-dependencies: {  }
+dependencies:
+  config:
+    - node.type.challenge
 id: node_type_challenge
+entity_type_id: node_type
+entity_id: challenge
 action: display_page
 allow_override: 0
 redirect: ''
 redirect_code: 301
+redirect_fallback_action: access_denied
