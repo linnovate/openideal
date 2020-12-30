@@ -1,0 +1,34 @@
+ultimate_cron.job.openideal_challenge_cron:
+  expected_config:
+    launcher:
+      configuration:
+        launcher:
+          thread: 0
+        timeouts:
+          lock_timeout: 3600
+    logger:
+      configuration:
+        expire: 1209600
+        method: '3'
+        retain: 1000
+    scheduler:
+      configuration:
+        rules:
+          - '* * * * *'
+  update_actions:
+    delete:
+      launcher:
+        configuration:
+          launcher:
+            thread: 0
+          timeouts:
+            lock_timeout: 3600
+      logger:
+        configuration:
+          expire: 1209600
+          method: '3'
+          retain: 1000
+      scheduler:
+        configuration:
+          rules:
+            - '* * * * *'

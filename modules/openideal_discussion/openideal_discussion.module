@@ -35,7 +35,7 @@ function openideal_discussion_comment_create_access(AccountInterface $account, a
 
     $group = $helper->getGroupFromNode($node);
     $status = (bool) $node->field_status->value;
-    return AccessResult::forbiddenIf(!$status || !$permission_checker->hasPermissionInGroup('create group_node:discussion entity', $account, $group))->addCacheableDependency($node);
+    return AccessResult::forbiddenIf(!$status || !$permission_checker->hasPermissionInGroup('view unpublished group_node:discussion entity', $account, $group))->addCacheableDependency($node);
   }
   return AccessResult::neutral();
 }

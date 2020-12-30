@@ -10,19 +10,7 @@ module: openideal_idea
 callback: openideal_idea_cron
 scheduler:
   id: simple
-  configuration:
-    rules:
-      - '*/30+@ * * * *'
 launcher:
   id: serial
-  configuration:
-    timeouts:
-      lock_timeout: 3600
-    launcher:
-      thread: 0
 logger:
   id: database
-  configuration:
-    method: '3'
-    expire: 1209600
-    retain: 1000

@@ -454,98 +454,6 @@ views.view.public_activity:
       display:
         personalized_activity_block:
           display_options:
-            filter_groups:
-              groups:
-                4: AND
-            filters:
-              template_2:
-                admin_label: ''
-                entity_field: template
-                entity_type: message
-                expose:
-                  description: ''
-                  identifier: ''
-                  label: ''
-                  multiple: false
-                  operator: ''
-                  operator_id: ''
-                  operator_limit_selection: false
-                  operator_list: {  }
-                  reduce: false
-                  remember: false
-                  remember_roles:
-                    authenticated: authenticated
-                  required: false
-                  use_operator: false
-                exposed: false
-                field: template
-                group: 4
-                group_info:
-                  default_group: All
-                  default_group_multiple: {  }
-                  description: ''
-                  group_items: {  }
-                  identifier: ''
-                  label: ''
-                  multiple: false
-                  optional: true
-                  remember: false
-                  widget: select
-                group_type: group
-                id: template_2
-                is_grouped: false
-                operator: in
-                plugin_id: bundle
-                relationship: none
-                table: message_field_data
-                value:
-                  discussion_create: discussion_create
-              uid_3:
-                admin_label: ''
-                entity_field: uid
-                entity_type: flagging
-                expose:
-                  description: ''
-                  identifier: ''
-                  label: ''
-                  max_placeholder: ''
-                  min_placeholder: ''
-                  multiple: false
-                  operator: ''
-                  operator_id: ''
-                  operator_limit_selection: false
-                  operator_list: {  }
-                  placeholder: ''
-                  remember: false
-                  remember_roles:
-                    authenticated: authenticated
-                  required: false
-                  use_operator: false
-                exposed: false
-                field: uid
-                group: 4
-                group_info:
-                  default_group: All
-                  default_group_multiple: {  }
-                  description: ''
-                  group_items: {  }
-                  identifier: ''
-                  label: ''
-                  multiple: false
-                  optional: true
-                  remember: false
-                  widget: select
-                group_type: group
-                id: uid_3
-                is_grouped: false
-                operator: '='
-                plugin_id: numeric
-                relationship: flag_relationship_1
-                table: flagging
-                value:
-                  max: ''
-                  min: ''
-                  value: '[user-page-id]'
             relationships:
               field_idea:
                 admin_label: 'field_idea: Content'
@@ -554,15 +462,6 @@ views.view.public_activity:
                 id: field_idea
                 plugin_id: standard
                 relationship: field_node_reference
-                required: false
-                table: node__field_idea
-              field_idea_1:
-                admin_label: 'field_idea: Content From Comment'
-                field: field_idea
-                group_type: group
-                id: field_idea_1
-                plugin_id: standard
-                relationship: node
                 required: false
                 table: node__field_idea
         public_activity_block:
@@ -606,3 +505,37 @@ views.view.public_activity:
                 relationship: field_comment_reference
                 required: false
                 table: comment_field_data
+ultimate_cron.job.openideal_idea_cron:
+  expected_config:
+    launcher:
+      configuration:
+        launcher:
+          thread: 0
+        timeouts:
+          lock_timeout: 3600
+    logger:
+      configuration:
+        expire: 1209600
+        method: '3'
+        retain: 1000
+    scheduler:
+      configuration:
+        rules:
+          - '*/30+@ * * * *'
+  update_actions:
+    delete:
+      launcher:
+        configuration:
+          launcher:
+            thread: 0
+          timeouts:
+            lock_timeout: 3600
+      logger:
+        configuration:
+          expire: 1209600
+          method: '3'
+          retain: 1000
+      scheduler:
+        configuration:
+          rules:
+            - '*/30+@ * * * *'

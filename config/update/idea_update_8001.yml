@@ -6,3 +6,27 @@ block.block.ridiculously_responsive_social_share_buttons:
         node_type:
           bundles:
             discussion: discussion
+eu_cookie_compliance.settings:
+  expected_config:
+    mobile_popup_info:
+      format: basic_html
+      value: ''
+    popup_agreed:
+      format: restricted_html
+    popup_info:
+      format: restricted_html
+    withdraw_message:
+      format: restricted_html
+      value: '<h2>This site uses cookies to offer you a better browsing experience. </h2><p>You have given your consent for us to set cookies.</p>'
+  update_actions:
+    change:
+      mobile_popup_info:
+        format: plain_text
+        value: '<h2>We use cookies on this site to enhance your user experience</h2><p>By tapping the Accept button, you agree to us doing so.</p>'
+      popup_agreed:
+        format: plain_text
+      popup_info:
+        format: plain_text
+      withdraw_message:
+        format: plain_text
+        value: '<h2>We use cookies on this site to enhance your user experience</h2><p>You have given your consent for us to set cookies.</p>'

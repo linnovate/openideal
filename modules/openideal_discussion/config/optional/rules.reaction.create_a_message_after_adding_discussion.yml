@@ -20,21 +20,18 @@ expression:
     conditions:
       -
         id: rules_condition
-        uuid: 55d3b8d7-03d7-4887-8351-876a77fd93f3
+        uuid: 136f15ae-4bbc-4009-859e-380877bb87cc
         weight: 0
-        context_values:
-          field: field_visibility
+        context_values: {  }
         context_mapping:
-          entity: node
-        context_processors:
-          field:
-            rules_tokens: {  }
+          node: node
+        context_processors: {  }
         provides_mapping: {  }
-        condition_id: rules_entity_has_field
+        condition_id: rules_node_is_published
         negate: false
       -
         id: rules_condition
-        uuid: a239d75d-9b38-4dd4-a511-a2c5110475b6
+        uuid: bf8bce00-3c06-46f0-a3fe-0532f10707bd
         weight: 0
         context_values:
           type: node
@@ -48,23 +45,6 @@ expression:
             rules_tokens: {  }
         provides_mapping: {  }
         condition_id: rules_entity_is_of_bundle
-        negate: false
-      -
-        id: rules_condition
-        uuid: bce36cfd-0df4-443e-9447-5489eef5d035
-        weight: 0
-        context_values:
-          operation: '=='
-          value: '1'
-        context_mapping:
-          data: node.field_visibility.value
-        context_processors:
-          operation:
-            rules_tokens: {  }
-          value:
-            rules_tokens: {  }
-        provides_mapping: {  }
-        condition_id: rules_data_comparison
         negate: false
   actions:
     id: rules_action_set
