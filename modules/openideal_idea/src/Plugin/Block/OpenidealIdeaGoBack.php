@@ -78,21 +78,24 @@ class OpenidealIdeaGoBack extends BlockBase implements ContainerFactoryPluginInt
    */
   public function build() {
     $node = $this->currentRouteMatch->getParameter('node');
+    $plural_label = '';
     $build = [];
     if ($node instanceof NodeInterface) {
       $bundle = $node->bundle();
-      $page = $bundle . 's';
       switch ($bundle) {
         case 'idea':
           $url = Url::fromRoute('view.ideas.all_ideas_page');
+          $plural_label = $this->t('ideas');
           break;
 
         case 'challenge':
           $url = Url::fromRoute('view.challenges.all_challenges_page');
+          $plural_label = $this->t('challenges');
           break;
 
         case 'article':
           $url = Url::fromRoute('view.news.all_news_page');
+          $plural_label = $this->t('article');
           break;
 
         case 'discussion':
@@ -103,13 +106,13 @@ class OpenidealIdeaGoBack extends BlockBase implements ContainerFactoryPluginInt
           }
 
           $url = $idea->first()->get('entity')->getTarget()->getValue()->toUrl();
-          $page = 'Idea';
+          $plural_label = $this->t('Idea');
 
       }
 
       $build['link'] = [
         '#type' => 'link',
-        '#title' => $this->t('Back to @page', ['@page' => $page]),
+        '#title' => $this->t('Back to @page', ['@page' => $plural_label]),
         '#url' => $url,
       ];
       $build['#cache']['tags'] = $node->getCacheTags();
