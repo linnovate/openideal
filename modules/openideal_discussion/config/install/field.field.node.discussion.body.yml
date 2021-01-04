@@ -9,8 +9,8 @@ dependencies:
     - text
 third_party_settings:
   allowed_formats:
-    basic_html: basic_html
-    basic_html_with_embedded_video: '0'
+    basic_html_with_embedded_video: basic_html_with_embedded_video
+    basic_html: '0'
     comments: '0'
     restricted_comments_html: '0'
     restricted_html: '0'
@@ -22,7 +22,7 @@ entity_type: node
 bundle: discussion
 label: Body
 description: ''
-required: false
+required: true
 translatable: true
 default_value: {  }
 default_value_callback: ''

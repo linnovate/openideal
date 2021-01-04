@@ -11,9 +11,13 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Session\AccountInterface;
 
 /**
- * Implements hook_form_FORM_ID_alter().
+ * Implements hook_form_alter().
  */
-function openideal_discussion_form_node_discussion_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+function openideal_discussion_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  if (!in_array($form_id, ['node_discussion_edit_form', 'node_discussion_form'])) {
+    return;
+  }
+
   $form['status']['widget']['value']['#title'] = 'Visibility';
   $form['status']['widget']['value']['#description'] = t('<p>If checked show the discussion for each user otherwise only shows to idea group members</p>');
 }

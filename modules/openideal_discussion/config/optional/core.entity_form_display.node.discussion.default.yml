@@ -10,7 +10,6 @@ dependencies:
   module:
     - allowed_formats
     - comment
-    - content_moderation
     - path
     - text
 id: node.discussion.default
@@ -44,11 +43,10 @@ content:
     type: comment_default
     region: content
   field_status:
-    type: boolean_checkbox
+    type: options_buttons
     weight: 10
     region: content
-    settings:
-      display_label: true
+    settings: {  }
     third_party_settings: {  }
   moderation_state:
     type: moderation_state_default

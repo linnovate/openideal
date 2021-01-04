@@ -130,6 +130,18 @@ class OpenidealBulkEmailNotifier extends MessageNotifierBase {
     /** @var \Drupal\node\NodeInterface $node */
     $node = $this->message->field_node_reference->entity;
 
+    // In case of discussion create fetch the idea from group.
+    if ($template === 'discussion_create' || $node->hasField('field_idea')) {
+      $idea_field = $node->get('field_idea');
+
+      if ($idea_field->isEmpty()) {
+        $this->logger->error('Discussion (id = @id) has no idea.', ['@id' => $node->id()]);
+        return [];
+      }
+
+      $node = $idea_field->first()->get('entity')->getTarget()->getValue();
+    }
+
     // Get all flaggings and notify users subscribed to the entity.
     /** @var \Drupal\flag\FlagService $flag */
     $flagging_users = $this->flag->getFlaggingUsers($node);
