@@ -30,3 +30,19 @@ eu_cookie_compliance.settings:
       withdraw_message:
         format: plain_text
         value: '<h2>We use cookies on this site to enhance your user experience</h2><p>You have given your consent for us to set cookies.</p>'
+block.block.mobile_footer_block:
+  expected_config: {  }
+  update_actions:
+    add:
+      visibility:
+        node_type:
+          bundles:
+            discussion: discussion
+block.block.ridiculously_responsive_social_share_buttons_footer:
+  expected_config: {  }
+  update_actions:
+    add:
+      visibility:
+        node_type:
+          bundles:
+            discussion: discussion

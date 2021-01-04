@@ -143,7 +143,13 @@ class OpenidealDiscussionAddBlock extends BlockBase implements ContainerFactoryP
       $dialog_type = $this->moduleHandler->moduleExists('bootstrap4_modal') ? 'bootstrap4_modal' : 'modal';
       $build['content'] = [
         '#type' => 'container',
-        '#attributes' => ['class' => ['d-flex', 'justify-content-between', 'align-items-center']],
+        '#attributes' => [
+          'class' => [
+            'd-flex',
+            'justify-content-between',
+            'align-items-center',
+          ],
+        ],
         '#access' => $add_review_access,
         'title' => [
           '#type' => 'html_tag',
