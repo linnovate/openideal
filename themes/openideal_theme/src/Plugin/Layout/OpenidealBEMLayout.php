@@ -45,7 +45,12 @@ class OpenidealBEMLayout extends LayoutDefault {
    */
   public function build(array $regions) {
     $build = parent::build($regions);
-    $build['#main_class'] = $this->configuration['main_class'];
+    $main_class = $this->configuration['main_class'];
+    $build['#attributes']['class'][] = $main_class;
+
+    foreach ($this->getPluginDefinition()->getRegions() as $region => $info) {
+      $build[$region]['#attributes']['class'][] = $main_class . '--section__' . $region;
+    }
     return $build;
   }
 

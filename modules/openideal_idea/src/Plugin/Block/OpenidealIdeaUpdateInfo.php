@@ -112,12 +112,12 @@ class OpenidealIdeaUpdateInfo extends BlockBase implements ContainerFactoryPlugi
 
       $build['#content']['created'] = [
         'value' => $created,
-        'title' => $this->t('Created'),
+        'title' => $this->t('Posted on'),
         'access' => $this->configuration['use_created'],
       ];
       $build['#content']['changed'] = [
         'value' => $changed,
-        'title' => $this->t('Changed'),
+        'title' => $this->t('Recently updated'),
         'access' => $this->configuration['use_updated'],
       ];
 
@@ -154,8 +154,8 @@ class OpenidealIdeaUpdateInfo extends BlockBase implements ContainerFactoryPlugi
 
     $form['node_dates_info']['use_updated'] = [
       '#type' => 'checkbox',
-      '#title' => $this->t('Site name'),
-      '#description' => $this->t('Updated'),
+      '#title' => $this->t('Updated'),
+      '#description' => $this->t('Node last modification'),
       '#default_value' => $this->configuration['use_updated'],
     ];
     $form['node_dates_info']['use_schedule'] = [

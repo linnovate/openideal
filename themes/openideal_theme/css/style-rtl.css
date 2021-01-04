@@ -13673,10 +13673,7 @@ nav.tabs {
              -o-transform: scale(0.9);
                 transform: scale(0.9);
         background-color: #27C8f9;
-        text-decoration: none;
-        -webkit-transform: scale(1.005);
-             -o-transform: scale(1.005);
-                transform: scale(1.005); }
+        text-decoration: none; }
       .site-navigation--add-idea a:before {
         content: '';
         display: inline-block;
@@ -13994,10 +13991,7 @@ nav.tabs {
          -o-transform: scale(0.9);
             transform: scale(0.9);
     background-color: #1e7697;
-    text-decoration: none;
-    -webkit-transform: scale(1.005);
-         -o-transform: scale(1.005);
-            transform: scale(1.005); }
+    text-decoration: none; }
 
 .form-control {
   border: 1px solid #D0D6DC;
@@ -14088,6 +14082,9 @@ nav.tabs {
         -ms-flex-align: center;
             align-items: center;
     margin-bottom: 24px; }
+    .comments--header h2.title {
+      font-size: 1.75rem;
+      font-weight: 600; }
     .comments--header__add-comment-btn {
       border-radius: 25px;
       -webkit-transition: background-color 0.5s ease-in-out, -webkit-transform .5s;
@@ -14113,10 +14110,7 @@ nav.tabs {
              -o-transform: scale(0.9);
                 transform: scale(0.9);
         background-color: transparent;
-        text-decoration: none;
-        -webkit-transform: scale(1.005);
-             -o-transform: scale(1.005);
-                transform: scale(1.005); }
+        text-decoration: none; }
       .comments--header__add-comment-btn:hover, .comments--header__add-comment-btn:active {
         color: #1294ca; }
   .comments--bottom {
@@ -14236,10 +14230,7 @@ nav.tabs {
              -o-transform: scale(0.9);
                 transform: scale(0.9);
         background-color: #1e7697;
-        text-decoration: none;
-        -webkit-transform: scale(1.005);
-             -o-transform: scale(1.005);
-                transform: scale(1.005); }
+        text-decoration: none; }
     .comment-comment-form .form-actions .font-submit-btn-wrapper img {
       font-size: inherit;
       top: 50%;
@@ -14276,12 +14267,14 @@ nav.tabs {
 .node--view-mode-full .card-body {
   padding: 26px 19px 50px 101px; }
   .node--view-mode-full .card-body .block-field-blocknodechallengecreated,
+  .node--view-mode-full .card-body .block-field-blocknodediscussioncreated,
   .node--view-mode-full .card-body .block-field-blocknodearticlecreated,
   .node--view-mode-full .card-body .block-field-blocknodeideacreated {
     font-size: 0.9375rem;
     color: #676C72;
     margin-bottom: 10px; }
   .node--view-mode-full .card-body .block-field-blocknodeideatitle,
+  .node--view-mode-full .card-body .block-field-blocknodediscussiontitle,
   .node--view-mode-full .card-body .block-field-blocknodepagetitle,
   .node--view-mode-full .card-body .block-field-blocknodearticletitle,
   .node--view-mode-full .card-body .block-field-blocknodechallengetitle {
@@ -14289,11 +14282,13 @@ nav.tabs {
     line-height: 30px;
     margin-bottom: 26px; }
     .node--view-mode-full .card-body .block-field-blocknodeideatitle a,
+    .node--view-mode-full .card-body .block-field-blocknodediscussiontitle a,
     .node--view-mode-full .card-body .block-field-blocknodepagetitle a,
     .node--view-mode-full .card-body .block-field-blocknodearticletitle a,
     .node--view-mode-full .card-body .block-field-blocknodechallengetitle a {
       color: inherit; }
   .node--view-mode-full .card-body .block-field-blocknodeideabody,
+  .node--view-mode-full .card-body .block-field-blocknodediscussionbody,
   .node--view-mode-full .card-body .block-field-blocknodepagebody,
   .node--view-mode-full .card-body .block-field-blocknodearticlebody,
   .node--view-mode-full .card-body .block-field-blocknodechallengebody {
@@ -14330,6 +14325,14 @@ nav.tabs {
     margin-bottom: 0; }
     .node--view-mode-full .card-body .idea-statistics-block--list {
       margin: 0; }
+
+.node--view-mode-full.node--type-discussion .card-img-top {
+  padding: 1.625rem 1.5625rem 0 1.5625rem; }
+  .node--view-mode-full.node--type-discussion .card-img-top .block-field-blocknodediscussionuid {
+    border-bottom: 1px solid #E0E0E0; }
+
+.node--view-mode-full.node--type-discussion .card-body {
+  padding: 1.5625rem 1.5625rem 2.6875rem 6.3125rem; }
 
 .node--view-mode-full .block-field-blocknodearticlefield-tags {
   margin-top: 10px; }
@@ -14370,10 +14373,7 @@ nav.tabs {
              -o-transform: scale(0.9);
                 transform: scale(0.9);
         background-color: #fff;
-        text-decoration: none;
-        -webkit-transform: scale(1.005);
-             -o-transform: scale(1.005);
-                transform: scale(1.005); }
+        text-decoration: none; }
 
 .node--view-mode-full .idea-statistics-and-status-block,
 .node--view-mode-full .block-openideal-statistics-challenge-statistics {
@@ -14420,6 +14420,71 @@ nav.tabs {
           width: 24px;
           height: 24px; }
 
+.node--view-mode-full .block-openidel-discussion-add {
+  padding-top: 2.75rem;
+  padding-bottom: 1.5625rem;
+  border-top: 1px solid #E0E0E0;
+  margin-top: 2.75rem;
+  position: relative; }
+  .node--view-mode-full .block-openidel-discussion-add .ajax-progress {
+    display: inline-block;
+    padding: 0;
+    position: absolute;
+    left: -15px;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+         -o-transform: translateY(-50%);
+            transform: translateY(-50%); }
+  .node--view-mode-full .block-openidel-discussion-add .throbber {
+    padding: 1px 5px 2px 6px; }
+  .node--view-mode-full .block-openidel-discussion-add h3 {
+    margin-bottom: 0;
+    font-size: 1.75rem;
+    font-weight: 600; }
+  .node--view-mode-full .block-openidel-discussion-add a {
+    border-radius: 25px;
+    -webkit-transition: background-color 0.5s ease-in-out, -webkit-transform .5s;
+    transition: background-color 0.5s ease-in-out, -webkit-transform .5s;
+    -o-transition: background-color 0.5s ease-in-out, -o-transform .5s;
+    transition: background-color 0.5s ease-in-out, transform .5s;
+    transition: background-color 0.5s ease-in-out, transform .5s, -webkit-transform .5s, -o-transform .5s;
+    background-color: transparent;
+    color: #fff;
+    font-weight: bold;
+    border: 0.09375rem solid #1294ca;
+    font-size: 0.9375rem;
+    color: #1294ca;
+    padding: 0.9375rem 2.6875rem;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+        -ms-flex-align: center;
+            align-items: center; }
+    .node--view-mode-full .block-openidel-discussion-add a:hover {
+      background-color: transparent;
+      text-decoration: none;
+      -webkit-transform: scale(1.005);
+           -o-transform: scale(1.005);
+              transform: scale(1.005); }
+    .node--view-mode-full .block-openidel-discussion-add a:active {
+      -webkit-transform: scale(0.9);
+           -o-transform: scale(0.9);
+              transform: scale(0.9);
+      background-color: transparent;
+      text-decoration: none; }
+    .node--view-mode-full .block-openidel-discussion-add a:hover, .node--view-mode-full .block-openidel-discussion-add a:active {
+      color: #1294ca; }
+
+.node--view-mode-full .block-views-blockideas-idea-discussions-block {
+  border-radius: 4px;
+  overflow: hidden;
+  border-right: 3px solid #1EBCA1; }
+  .node--view-mode-full .block-views-blockideas-idea-discussions-block .views-row:not(:last-child) .discussion-teaser--section__second {
+    border-bottom: 1px solid #E0E0E0; }
+
 .node--view-mode-full .two-columns-challenge-ideas {
   margin: 30px 0;
   display: -webkit-box;
@@ -14456,10 +14521,7 @@ nav.tabs {
            -o-transform: scale(0.9);
               transform: scale(0.9);
       background-color: #5eaed2;
-      text-decoration: none;
-      -webkit-transform: scale(1.005);
-           -o-transform: scale(1.005);
-              transform: scale(1.005); }
+      text-decoration: none; }
 
 .view--news--all-news-page .node--type-article .card-body .block-openideal-rrssb-block h2 {
   text-transform: uppercase;
@@ -14525,6 +14587,29 @@ nav.tabs {
 @media (max-width: 767px) {
   .comments--header__add-comment-btn {
     display: none; } }
+
+@media (max-width: 630px) {
+  .node--view-mode-teaser.node--type-discussion .block-openideal-idea-info-block {
+    -webkit-flex-basis: initial;
+        -ms-flex-preferred-size: initial;
+            flex-basis: initial;
+    -webkit-box-ordinal-group: initial;
+    -webkit-order: initial;
+        -ms-flex-order: initial;
+            order: initial;
+    display: initial;
+    -webkit-box-pack: initial;
+    -webkit-justify-content: initial;
+        -ms-flex-pack: initial;
+            justify-content: initial; } }
+
+@media (max-width: 480px) {
+  .node--view-mode-full .block-openidel-discussion-add h3 {
+    font-size: 1.125rem;
+    font-weight: 600; }
+  .node--view-mode-full .block-openidel-discussion-add a {
+    padding: 0.625rem 0.625rem;
+    font-size: 0.8125rem; } }
 
 @media (max-width: 435px) {
   .node--view-mode-full.node--type-idea .idea-statistics-and-status-block .idea-statistics-and-status-block--status {
@@ -14634,10 +14719,7 @@ nav.tabs {
                -o-transform: scale(0.9);
                   transform: scale(0.9);
           background-color: #1e7697;
-          text-decoration: none;
-          -webkit-transform: scale(1.005);
-               -o-transform: scale(1.005);
-                  transform: scale(1.005); }
+          text-decoration: none; }
       .region-sidebar--flag-and-follow--element .votingapi-reaction-item.active, .region-sidebar--flag--element .votingapi-reaction-item.active {
         background-color: #1e7697; }
       .region-sidebar--flag-and-follow--element .flag-follow, .region-sidebar--flag--element .flag-follow {
@@ -14676,10 +14758,7 @@ nav.tabs {
                  -o-transform: scale(0.9);
                     transform: scale(0.9);
             background-color: #5eaed2;
-            text-decoration: none;
-            -webkit-transform: scale(1.005);
-                 -o-transform: scale(1.005);
-                    transform: scale(1.005); }
+            text-decoration: none; }
       .region-sidebar--flag-and-follow--element .flag-follow--body, .region-sidebar--flag--element .flag-follow--body {
         margin: 70px 0 11px 0; }
 
@@ -14777,10 +14856,7 @@ nav.tabs {
            -o-transform: scale(0.9);
               transform: scale(0.9);
       background-color: #fff;
-      text-decoration: none;
-      -webkit-transform: scale(1.005);
-           -o-transform: scale(1.005);
-              transform: scale(1.005); }
+      text-decoration: none; }
 
 .idea-statistics-block {
   margin-bottom: 15px;
@@ -15702,10 +15778,7 @@ nav.tabs {
            -o-transform: scale(0.9);
               transform: scale(0.9);
       background-color: #1e829a;
-      text-decoration: none;
-      -webkit-transform: scale(1.005);
-           -o-transform: scale(1.005);
-              transform: scale(1.005); }
+      text-decoration: none; }
     .entity--user--canonical .user-top .nav-tabs .nav-item .nav-link:before {
       content: '';
       display: block;
@@ -15759,10 +15832,7 @@ nav.tabs {
            -o-transform: scale(0.9);
               transform: scale(0.9);
       background-color: #1e829a;
-      text-decoration: none;
-      -webkit-transform: scale(1.005);
-           -o-transform: scale(1.005);
-              transform: scale(1.005); }
+      text-decoration: none; }
 
 .profile-user-profile-view-mode h2 {
   font-size: 30px;
@@ -15985,10 +16055,7 @@ nav.tabs {
              -o-transform: scale(0.9);
                 transform: scale(0.9);
         background-color: #2e5d6d;
-        text-decoration: none;
-        -webkit-transform: scale(1.005);
-             -o-transform: scale(1.005);
-                transform: scale(1.005); }
+        text-decoration: none; }
 
 .user-pass,
 .user-register-form {
@@ -16060,10 +16127,7 @@ nav.tabs {
            -o-transform: scale(0.9);
               transform: scale(0.9);
       background-color: #1e7697;
-      text-decoration: none;
-      -webkit-transform: scale(1.005);
-           -o-transform: scale(1.005);
-              transform: scale(1.005); }
+      text-decoration: none; }
     .node--edit-form--main input[type="submit"]:hover {
       color: #fff; }
   .node--edit-form--main input[type="text"] {
@@ -16095,10 +16159,7 @@ nav.tabs {
            -o-transform: scale(0.9);
               transform: scale(0.9);
       background-color: #1e7697;
-      text-decoration: none;
-      -webkit-transform: scale(1.005);
-           -o-transform: scale(1.005);
-              transform: scale(1.005); }
+      text-decoration: none; }
   .node--edit-form--main .details-wrapper {
     position: relative; }
     .node--edit-form--main .details-wrapper label {
@@ -16129,10 +16190,7 @@ nav.tabs {
              -o-transform: scale(0.9);
                 transform: scale(0.9);
         background-color: #1e7697;
-        text-decoration: none;
-        -webkit-transform: scale(1.005);
-             -o-transform: scale(1.005);
-                transform: scale(1.005); }
+        text-decoration: none; }
   .node--edit-form--main .form-item-field-category label {
     font-size: 16px; }
 
@@ -16181,10 +16239,7 @@ nav.tabs {
            -o-transform: scale(0.9);
               transform: scale(0.9);
       background-color: #1e7697;
-      text-decoration: none;
-      -webkit-transform: scale(1.005);
-           -o-transform: scale(1.005);
-              transform: scale(1.005); }
+      text-decoration: none; }
 
 .node--edit-form--footer {
   float: unset;
@@ -16226,10 +16281,7 @@ nav.tabs {
              -o-transform: scale(0.9);
                 transform: scale(0.9);
         background-color: #1e7697;
-        text-decoration: none;
-        -webkit-transform: scale(1.005);
-             -o-transform: scale(1.005);
-                transform: scale(1.005); }
+        text-decoration: none; }
 
 @media (max-width: 530px) {
   .node--edit-form .field--widget-moderation-state-buttons > div input {
@@ -16549,10 +16601,7 @@ nav.tabs {
            -o-transform: scale(0.9);
               transform: scale(0.9);
       background-color: #5eaed2;
-      text-decoration: none;
-      -webkit-transform: scale(1.005);
-           -o-transform: scale(1.005);
-              transform: scale(1.005); }
+      text-decoration: none; }
     .view-frontpage .view-filters .form-row .frontpage-add-idea-button:before {
       content: '';
       display: inline-block;
@@ -17288,10 +17337,7 @@ nav.tabs {
          -o-transform: scale(0.9);
             transform: scale(0.9);
     background-color: #1e7697;
-    text-decoration: none;
-    -webkit-transform: scale(1.005);
-         -o-transform: scale(1.005);
-            transform: scale(1.005); }
+    text-decoration: none; }
 
 .reports-filters {
   display: -webkit-box;
@@ -17470,10 +17516,7 @@ nav.tabs {
          -o-transform: scale(0.9);
             transform: scale(0.9);
     background-color: #1e7697;
-    text-decoration: none;
-    -webkit-transform: scale(1.005);
-         -o-transform: scale(1.005);
-            transform: scale(1.005); }
+    text-decoration: none; }
 
 .idea-statistics-and-status-block--status {
   position: relative;
@@ -18041,6 +18084,47 @@ nav.tabs {
           content: unset; }
       .user-login-form--container--left__social-login-buttons .social-auth--name {
         display: none; } }
+
+.node--type-discussion.node--view-mode-teaser {
+  margin-bottom: 0; }
+
+.discussion-teaser {
+  padding: 1rem 1.25rem 0rem 1.25rem;
+  border-radius: 0; }
+  .discussion-teaser--section__first, .discussion-teaser--section__second {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+    -webkit-justify-content: space-between;
+        -ms-flex-pack: justify;
+            justify-content: space-between; }
+  .discussion-teaser--section__first {
+    margin-bottom: 0.9375rem; }
+    .discussion-teaser--section__first .block-openideal-idea-info-block .idea-information--list__item {
+      -webkit-box-orient: vertical;
+      -webkit-box-direction: normal;
+      -webkit-flex-direction: column;
+          -ms-flex-direction: column;
+              flex-direction: column;
+      -webkit-box-align: center;
+      -webkit-align-items: center;
+          -ms-flex-align: center;
+              align-items: center; }
+      .discussion-teaser--section__first .block-openideal-idea-info-block .idea-information--list__item--value {
+        color: #343352;
+        font-weight: bold; }
+      .discussion-teaser--section__first .block-openideal-idea-info-block .idea-information--list__item--title {
+        font-weight: normal; }
+        .discussion-teaser--section__first .block-openideal-idea-info-block .idea-information--list__item--title:after {
+          content: ''; }
+  .discussion-teaser--section__second {
+    padding: 0rem 0rem 1rem 4.625rem; }
+    .discussion-teaser--section__second .block-extra-field-blocknodediscussionlinks {
+      font-weight: 600; }
+  .discussion-teaser p {
+    margin-bottom: 0; }
 
 .community-page .view-content {
   display: -webkit-box;
