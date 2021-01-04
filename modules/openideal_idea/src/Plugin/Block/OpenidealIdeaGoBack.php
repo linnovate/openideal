@@ -85,6 +85,8 @@ class OpenidealIdeaGoBack extends BlockBase implements ContainerFactoryPluginInt
       switch ($bundle) {
         case 'idea':
           $url = Url::fromRoute('view.ideas.all_ideas_page');
+          // @todo Change to Node::getPluralLabel once
+          //   https://www.drupal.org/project/drupal/issues/2765065 implemented.
           $plural_label = $this->t('ideas');
           break;
 
