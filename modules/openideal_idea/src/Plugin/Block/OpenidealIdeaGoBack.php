@@ -78,7 +78,7 @@ class OpenidealIdeaGoBack extends BlockBase implements ContainerFactoryPluginInt
    */
   public function build() {
     $node = $this->currentRouteMatch->getParameter('node');
-    $plural_label = '';
+    $page = '';
     $build = [];
     if ($node instanceof NodeInterface) {
       $bundle = $node->bundle();
@@ -87,17 +87,17 @@ class OpenidealIdeaGoBack extends BlockBase implements ContainerFactoryPluginInt
           $url = Url::fromRoute('view.ideas.all_ideas_page');
           // @todo Change to Node::getPluralLabel once
           //   https://www.drupal.org/project/drupal/issues/2765065 implemented.
-          $plural_label = $this->t('ideas');
+          $page = $this->t('ideas');
           break;
 
         case 'challenge':
           $url = Url::fromRoute('view.challenges.all_challenges_page');
-          $plural_label = $this->t('challenges');
+          $page = $this->t('challenges');
           break;
 
         case 'article':
           $url = Url::fromRoute('view.news.all_news_page');
-          $plural_label = $this->t('article');
+          $page = $this->t('article');
           break;
 
         case 'discussion':
@@ -108,13 +108,13 @@ class OpenidealIdeaGoBack extends BlockBase implements ContainerFactoryPluginInt
           }
 
           $url = $idea->first()->get('entity')->getTarget()->getValue()->toUrl();
-          $plural_label = $this->t('Idea');
+          $page = $this->t('Idea');
 
       }
 
       $build['link'] = [
         '#type' => 'link',
-        '#title' => $this->t('Back to @page', ['@page' => $plural_label]),
+        '#title' => $this->t('Back to @page', ['@page' => $page]),
         '#url' => $url,
       ];
       $build['#cache']['tags'] = $node->getCacheTags();
