@@ -3,29 +3,28 @@ status: true
 dependencies:
   module:
     - node
+    - openideal_statistics
     - route_condition
-    - rrssb
   theme:
     - openideal_theme
-id: ridiculously_responsive_social_share_buttons
+id: workflow_status
 theme: openideal_theme
 region: sidebar
-weight: -5
+weight: -10
 provider: null
-plugin: rrssb_block
+plugin: openideal_statistics_status
 settings:
-  id: rrssb_block
-  label: 'Share this content'
-  provider: rrssb
+  id: openideal_statistics_status
+  label: Status
+  provider: openideal_statistics
   label_display: visible
-  button_set: default
+  show_all_states: true
+  context_mapping:
+    node: '@node.node_route_context:node'
 visibility:
   node_type:
     id: node_type
     bundles:
-      article: article
-      challenge: challenge
-      discussion: discussion
       idea: idea
     negate: false
     context_mapping:

@@ -1,3 +1,7 @@
+__global_actions:
+  import_configs:
+    - field.field.node.idea.field_five_stars
+    - field.storage.node.field_five_stars
 group.role.idea-443ed8e03:
   expected_config: {  }
   update_actions:
@@ -30,6 +34,7 @@ group.role.idea-expert:
   update_actions:
     add:
       permissions:
+        - 'vote on five stars'
         - 'create group_node:discussion entity'
         - 'delete own group_node:discussion entity'
         - 'update own group_node:discussion entity'
@@ -50,6 +55,8 @@ group.role.idea-outsider:
 block.block.idea_info:
   expected_config: {  }
   update_actions:
+    change:
+      weight: -14
     add:
       settings:
         use_edit: 1
@@ -61,6 +68,8 @@ core.entity_view_display.node.idea.full:
   expected_config: {  }
   update_actions:
     add:
+      hidden:
+        field_five_stars: true
       third_party_settings:
         layout_builder:
           sections:
@@ -540,3 +549,115 @@ ultimate_cron.job.openideal_idea_cron:
         configuration:
           rules:
             - '*/30+@ * * * *'
+block.block.challenge_flag_block:
+  expected_config:
+    weight: -11
+  update_actions:
+    change:
+      weight: -15
+block.block.challenge_statistics_block:
+  expected_config:
+    weight: -8
+  update_actions:
+    change:
+      weight: -12
+block.block.flag_and_like_block:
+  expected_config:
+    weight: -12
+  update_actions:
+    change:
+      weight: -16
+block.block.idea_statistics_sidebar_block:
+  expected_config:
+    weight: -7
+  update_actions:
+    add:
+      settings:
+        show_five_stars: 1
+    change:
+      weight: -11
+block.block.node_tags:
+  expected_config:
+    weight: -2
+  update_actions:
+    change:
+      weight: -5
+block.block.ridiculously_responsive_social_share_buttons:
+  expected_config:
+    weight: -5
+  update_actions:
+    change:
+      weight: -8
+block.block.views_block__followers_co_authors_block:
+  expected_config:
+    weight: -3
+  update_actions:
+    change:
+      weight: -6
+block.block.views_block__followers_followers:
+  expected_config:
+    weight: -4
+  update_actions:
+    change:
+      weight: -7
+block.block.views_block__public_activity_personalized_activity_block:
+  expected_config:
+    weight: -9
+  update_actions:
+    change:
+      weight: -13
+block.block.views_block__public_activity_public_activity_block:
+  expected_config:
+    weight: -13
+  update_actions:
+    change:
+      weight: -17
+block.block.workflow_status:
+  expected_config:
+    weight: -6
+  update_actions:
+    change:
+      weight: -10
+core.entity_form_display.node.idea.default:
+  expected_config: {  }
+  update_actions:
+    add:
+      hidden:
+        field_five_stars: true
+core.entity_view_display.node.idea.default:
+  expected_config: {  }
+  update_actions:
+    add:
+      content:
+        field_five_stars:
+          label: above
+          region: content
+          settings:
+            limit: 0
+            offset: 0
+            readonly: false
+            show_own_vote: false
+            show_results: false
+            style: default
+            values: {  }
+          third_party_settings: {  }
+          type: voting_api_formatter
+          weight: 113
+core.entity_view_display.node.idea.front_page_teaser:
+  expected_config: {  }
+  update_actions:
+    add:
+      hidden:
+        field_five_stars: true
+core.entity_view_display.node.idea.message:
+  expected_config: {  }
+  update_actions:
+    add:
+      hidden:
+        field_five_stars: true
+core.entity_view_display.node.idea.teaser:
+  expected_config: {  }
+  update_actions:
+    add:
+      hidden:
+        field_five_stars: true

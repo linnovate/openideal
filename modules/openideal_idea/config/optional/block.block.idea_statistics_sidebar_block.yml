@@ -10,7 +10,7 @@ dependencies:
 id: idea_statistics_sidebar_block
 theme: openideal_theme
 region: sidebar
-weight: -7
+weight: -11
 provider: null
 plugin: openideal_statistics_idea_statistics
 settings:
@@ -18,6 +18,7 @@ settings:
   label: 'Rating and statistics'
   provider: openideal_statistics
   label_display: visible
+  show_five_stars: 1
   context_mapping:
     node: '@node.node_route_context:node'
 visibility:

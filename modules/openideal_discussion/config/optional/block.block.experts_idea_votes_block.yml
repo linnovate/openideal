@@ -1,34 +1,28 @@
 langcode: en
 status: true
 dependencies:
-  config:
-    - views.view.followers
   module:
     - node
+    - openideal_idea
     - route_condition
-    - views
   theme:
     - openideal_theme
-id: views_block__followers_followers
+id: experts_idea_votes_block
 theme: openideal_theme
 region: sidebar
-weight: -4
+weight: -9
 provider: null
-plugin: 'views_block:followers-followers'
+plugin: openideal_discussion_experts_voting
 settings:
-  id: 'views_block:followers-followers'
-  label: ''
-  provider: views
+  id: openideal_idea_experts_voting
+  label: 'Idea votes'
+  provider: openideal_discussion
   label_display: visible
-  views_label: ''
-  items_per_page: none
-  context_mapping: {  }
 visibility:
   node_type:
     id: node_type
     bundles:
-      challenge: challenge
-      idea: idea
+      discussion: discussion
     negate: false
     context_mapping:
       node: '@node.node_route_context:node'

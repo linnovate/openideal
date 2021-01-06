@@ -3,28 +3,29 @@ status: true
 dependencies:
   module:
     - node
-    - openideal_idea
     - route_condition
+    - rrssb
   theme:
     - openideal_theme
-id: node_tags
+id: ridiculously_responsive_social_share_buttons
 theme: openideal_theme
 region: sidebar
-weight: -5
+weight: -8
 provider: null
-plugin: openideal_idea_tags_block
+plugin: rrssb_block
 settings:
-  id: openideal_idea_tags_block
-  label: Tags
-  provider: openideal_idea
-  label_display: '0'
-  context_mapping:
-    node: '@node.node_route_context:node'
+  id: rrssb_block
+  label: 'Share this content'
+  provider: rrssb
+  label_display: visible
+  button_set: default
 visibility:
   node_type:
     id: node_type
     bundles:
       article: article
+      challenge: challenge
+      discussion: discussion
       idea: idea
     negate: false
     context_mapping:

@@ -3,6 +3,7 @@
 namespace Drupal\openideal_statistics\Plugin\Block;
 
 use Drupal\Core\Block\BlockBase;
+use Drupal\Core\Form\FormStateInterface;
 use Drupal\openideal_challenge\OpenidealContextEntityTrait;
 
 /**
@@ -32,12 +33,14 @@ class OpenidealStatisticsIdeaStatisticsBlock extends BlockBase {
     $is_not_full = isset($contexts['view_mode']) && $contexts['view_mode']->getContextValue() != 'full';
     $id = NULL;
 
+    /** @var \Drupal\node\NodeInterface $node */
     if ($node = $this->getEntity($this->getContexts())) {
       $id = $node->id();
     }
     else {
       return [];
     }
+
 
     $items = [
       'overall_score' => [
@@ -79,6 +82,18 @@ class OpenidealStatisticsIdeaStatisticsBlock extends BlockBase {
       ],
     ];
 
+    if ($this->configuration['show_five_stars'] && $node->hasField('field_five_stars')) {
+      $field = $node->get('field_five_stars')->view([
+        'label' => 'hidden',
+        'settings' => [
+          'show_results' => '1',
+          'style' => 'fontawesome-stars',
+        ],
+      ]);
+
+      $items['five_stars'] = $field;
+    }
+
     // @todo create trait or abstract class with this as method.
     foreach ($items as &$item) {
       $item['#wrapper_attributes'] = ['class' => ['idea-statistics-block--list__item']];
@@ -94,6 +109,32 @@ class OpenidealStatisticsIdeaStatisticsBlock extends BlockBase {
         '#wrapper_attributes' => ['class' => ['idea-statistics-block']],
       ],
     ];
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public function blockForm($form, FormStateInterface $form_state) {
+    $form['show_five_stars'] = [
+      '#type' => 'checkbox',
+      '#title' => $this->t('Show five stars'),
+      '#default_value' => $this->configuration['show_five_stars'],
+    ];
+    return $form;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public function blockSubmit($form, FormStateInterface $form_state) {
+    $this->configuration['show_five_stars'] = $form_state->getValue('show_five_stars');
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public function defaultConfiguration() {
+    return parent::defaultConfiguration() + ['show_five_stars' => FALSE];
   }
 
 }

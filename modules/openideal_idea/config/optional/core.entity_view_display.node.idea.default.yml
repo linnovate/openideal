@@ -9,6 +9,7 @@ dependencies:
     - field.field.node.idea.field_challenge
     - field.field.node.idea.field_comments
     - field.field.node.idea.field_duplicate_of
+    - field.field.node.idea.field_five_stars
     - field.field.node.idea.field_idea_tags
     - field.field.node.idea.field_images
     - field.field.node.idea.field_like
@@ -27,6 +28,7 @@ dependencies:
     - user
     - views
     - votingapi_reaction
+    - votingapi_widgets
 third_party_settings:
   layout_builder:
     allow_custom: false
@@ -326,6 +328,20 @@ content:
       link: true
     third_party_settings: {  }
     type: entity_reference_label
+    region: content
+  field_five_stars:
+    weight: 113
+    label: above
+    settings:
+      readonly: false
+      style: default
+      show_results: false
+      values: {  }
+      show_own_vote: false
+      offset: 0
+      limit: 0
+    third_party_settings: {  }
+    type: voting_api_formatter
     region: content
   field_idea_tags:
     weight: 104

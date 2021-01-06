@@ -75,17 +75,29 @@
     }
   }
 
-  &.node--type-discussion {
-    .card-img-top {
-      padding: size(26) size(25) 0 size(25);
+  &.node--type-discussion .node__content > .card {
+    padding: size(25) size(25) size(25) size(25);
 
-      .block-field-blocknodediscussionuid {
-        border-bottom: 1px solid #E0E0E0;
-      }
+    .card-img-top {
+      margin-bottom: 25px;
+      border-bottom: 1px solid #E0E0E0;
+      display: flex;
+      justify-content: space-between;
     }
 
     .card-body {
-      padding: size(25) size(101) size(43) size(25);
+      padding: 0 size(80) size(18) 0;
+    }
+
+    .votingapi-widgets form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      p,
+      fieldset {
+        margin-bottom: 0;
+      }
     }
   }
 

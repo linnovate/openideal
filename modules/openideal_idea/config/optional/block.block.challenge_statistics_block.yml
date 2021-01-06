@@ -7,25 +7,24 @@ dependencies:
     - route_condition
   theme:
     - openideal_theme
-id: workflow_status
+id: challenge_statistics_block
 theme: openideal_theme
 region: sidebar
-weight: -6
+weight: -12
 provider: null
-plugin: openideal_statistics_status
+plugin: openideal_statistics_challenge_statistics
 settings:
-  id: openideal_statistics_status
-  label: Status
+  id: openideal_statistics_challenge_statistics
+  label: 'Rating and statistics'
   provider: openideal_statistics
   label_display: visible
-  show_all_states: true
   context_mapping:
     node: '@node.node_route_context:node'
 visibility:
   node_type:
     id: node_type
     bundles:
-      idea: idea
+      challenge: challenge
     negate: false
     context_mapping:
       node: '@node.node_route_context:node'
