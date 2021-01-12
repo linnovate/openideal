@@ -1,0 +1,20 @@
+.node--type-idea.node--view-mode-full .card-img-top {
+  position: relative;
+  &::before {
+    z-index: 575;
+    content: '';
+    display: block;
+    position: absolute;
+    bottom: 0;
+    width: size(129);
+    height: size(25);
+    left: 0;
+    background: url("../images/icons/idea_tag.png")  no-repeat #{size(-1)} center;
+  }
+}
+
+@media (max-width: size(600)) {
+  .node--type-idea.node--view-mode-full .card-img-top::before {
+    display: none;
+  }
+}
