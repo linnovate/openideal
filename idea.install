@@ -6,6 +6,7 @@
  */
 
 use Drupal\user\Entity\User;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Implements hook_install().
@@ -36,4 +37,39 @@ function idea_install() {
     ->set('slogan', 'Ideas, challenges, news')
     ->set('page', ['front' => '/home'])
     ->save();
+
+  drupal_register_shutdown_function('_rebuild_cache');
+}
+
+/**
+ * Force rebuild all Drupal's caches.
+ *
+ * We should rebuild Drupal cache because rules module after the
+ * reaction rule is saved, need to rebuild the container,
+ * otherwise the reaction rule will not fire. However, during Drupal
+ * installation if there are new registered Rules events Drupal container
+ * is not rebuilt and we need to force rebuild it.
+ */
+function _rebuild_cache() {
+  if (file_exists(DRUPAL_ROOT . '/autoload.php')
+    && file_exists(DRUPAL_ROOT . '/core/includes/utility.inc')
+  ) {
+    $loader = require DRUPAL_ROOT . '/autoload.php';
+    include_once DRUPAL_ROOT . '/core/includes/utility.inc';
+  }
+  else {
+    return;
+  }
+
+  $request = Request::createFromGlobals();
+
+  // Clear user cache for all major platforms.
+  $user_caches = [
+    'apcu_clear_cache',
+    'wincache_ucache_clear',
+    'xcache_clear_cache',
+  ];
+  array_map('call_user_func', array_filter($user_caches, 'is_callable'));
+
+  drupal_rebuild($loader, $request);
 }
