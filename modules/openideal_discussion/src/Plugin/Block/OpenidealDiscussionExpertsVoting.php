@@ -3,9 +3,10 @@
 namespace Drupal\openideal_discussion\Plugin\Block;
 
 use Drupal\Core\Block\BlockBase;
+use Drupal\Core\Entity\EntityFieldManager;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\Core\Routing\CurrentRouteMatch;
-use Drupal\openideal_idea\OpenidealHelper;
+use Drupal\field\Entity\FieldConfig;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
@@ -26,30 +27,32 @@ class OpenidealDiscussionExpertsVoting extends BlockBase implements ContainerFac
   protected $routeMatch;
 
   /**
-   * Openideal helper.
+   * Entity field manager.
    *
-   * @var \Drupal\openideal_idea\OpenidealHelper
+   * @var \Drupal\Core\Entity\EntityFieldManager
    */
-  protected $openidealHelper;
+  protected $fieldManager;
+
 
   /**
    * {@inheritDoc}
    */
-  public function __construct(array $configuration, $plugin_id, $plugin_definition, CurrentRouteMatch $routeMatch, OpenidealHelper $openidealHelper) {
+  public function __construct(array $configuration, $plugin_id, $plugin_definition, CurrentRouteMatch $routeMatch, EntityFieldManager $fieldManager) {
     parent::__construct($configuration, $plugin_id, $plugin_definition);
     $this->routeMatch = $routeMatch;
-    $this->openidealHelper = $openidealHelper;
+    $this->fieldManager = $fieldManager;
   }
 
   /**
    * {@inheritDoc}
    */
   public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
-    return new static($configuration,
+    return new static(
+      $configuration,
       $plugin_id,
       $plugin_definition,
       $container->get('current_route_match'),
-      $container->get('openideal_idea.helper')
+      $container->get('entity_field.manager')
     );
   }
 
@@ -62,9 +65,15 @@ class OpenidealDiscussionExpertsVoting extends BlockBase implements ContainerFac
     if (($node = $this->routeMatch->getParameter('node')) && $node->bundle() === 'discussion' && !$node->get('field_idea')->isEmpty()) {
       $build['#cache']['contexts'] = ['user.roles', 'user.permissions'];
       $build['#cache']['tags'] = $node->getCacheTags();
+      /** @var \Drupal\node\Entity\Node $idea */
       $idea = $node->get('field_idea')->first()->get('entity')->getTarget()->getValue();
-      $view = $idea->get('field_five_stars')->view(['label' => 'hidden', 'settings' => ['show_results' => '1', 'style' => 'fontawesome-stars']]);
-      $build['content'] = $view;
+      $settings = ['label' => 'hidden', 'settings' => ['show_results' => '1', 'style' => 'fontawesome-stars']];
+      $fields = $idea->getFieldDefinitions();
+      foreach ($fields as $field_name => $field_definition) {
+        if ($field_definition instanceof FieldConfig && $field_definition->getType() == 'voting_api_field') {
+          $build['content'][] = $idea->{$field_name}->view($settings);
+        }
+      }
     }
     return $build;
   }
