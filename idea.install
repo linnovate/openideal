@@ -27,7 +27,7 @@ function idea_install() {
 
   // Force set the administerusersbyrole configuration in fact
   // the module change it during installation of profile.
-  // @Todo: Further investigation.
+  // @todo Further investigation.
   \Drupal::configFactory()->getEditable('administerusersbyrole.settings')->set('roles', ['manager' => 'safe'])->save();
 
   // To avoid issues with importing of configurations set system.site
@@ -38,28 +38,19 @@ function idea_install() {
     ->set('page', ['front' => '/home'])
     ->save();
 
-  drupal_register_shutdown_function('_rebuild_cache');
+  drupal_register_shutdown_function('_idea_rebuild_cache');
 }
 
 /**
  * Force rebuild all Drupal's caches.
  *
- * We should rebuild Drupal cache because rules module after the
- * reaction rule is saved, need to rebuild the container,
- * otherwise the reaction rule will not fire. However, during Drupal
- * installation if there are new registered Rules events Drupal container
- * is not rebuilt and we need to force rebuild it.
+ * Rules require clearing the cache to rebuild the container and register
+ * new rules events. Clearing cache in hook_install() didn't help, that's
+ * why it was moved to shutdown function.
  */
-function _rebuild_cache() {
-  if (file_exists(DRUPAL_ROOT . '/autoload.php')
-    && file_exists(DRUPAL_ROOT . '/core/includes/utility.inc')
-  ) {
-    $loader = require DRUPAL_ROOT . '/autoload.php';
-    include_once DRUPAL_ROOT . '/core/includes/utility.inc';
-  }
-  else {
-    return;
-  }
+function _idea_rebuild_cache() {
+  $loader = require DRUPAL_ROOT . '/autoload.php';
+  include_once DRUPAL_ROOT . '/core/includes/utility.inc';
 
   $request = Request::createFromGlobals();
 
