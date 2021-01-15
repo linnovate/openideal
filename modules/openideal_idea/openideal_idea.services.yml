@@ -11,5 +11,6 @@ services:
       - '@group.membership_loader'
       - '@config.factory'
       - '@module_handler'
+      - '@database'
     calls:
       - [setStatisticsStorage, ['@?statistics.storage.node']]

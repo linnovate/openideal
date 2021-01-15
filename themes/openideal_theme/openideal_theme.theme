@@ -221,15 +221,3 @@ function openideal_theme_preprocess_message__user_mention(&$variables) {
     }
   }
 }
-
-/**
- * Implements hook_preprocess_HOOK().
- */
-function openideal_theme_preprocess_votingapi_widgets_summary(&$variables) {
-  /** @var \Drupal\votingapi\Entity\Vote $vote */
-  $vote = $variables['vote'];
-  $field_name = $variables['vote']->get('field_name')->getString();
-  $node = $vote->get('entity_id')->first()->get('entity')->getValue();
-  $label = $node->get($field_name)->getfieldDefinition()->label();
-  $variables['label'] = $label;
-}

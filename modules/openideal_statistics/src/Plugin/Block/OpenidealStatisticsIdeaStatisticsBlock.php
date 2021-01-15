@@ -4,6 +4,7 @@ namespace Drupal\openideal_statistics\Plugin\Block;
 
 use Drupal\Core\Block\BlockBase;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\field\Entity\FieldConfig;
 use Drupal\openideal_challenge\OpenidealContextEntityTrait;
 
 /**
@@ -41,7 +42,6 @@ class OpenidealStatisticsIdeaStatisticsBlock extends BlockBase {
       return [];
     }
 
-
     $items = [
       'overall_score' => [
         '#lazy_element' => [
@@ -52,7 +52,8 @@ class OpenidealStatisticsIdeaStatisticsBlock extends BlockBase {
       ],
       'votes' => [
         '#lazy_element' => [
-          '#lazy_builder' => ['openideal_statistics.lazy_builder:getVotes',
+          '#lazy_builder' => [
+            'openideal_statistics.lazy_builder:getVotes',
             [$id],
           ],
           '#create_placeholder' => TRUE,
@@ -62,7 +63,8 @@ class OpenidealStatisticsIdeaStatisticsBlock extends BlockBase {
       ],
       'comments' => [
         '#lazy_element' => [
-          '#lazy_builder' => ['openideal_statistics.lazy_builder:getComments',
+          '#lazy_builder' => [
+            'openideal_statistics.lazy_builder:getComments',
             [$id],
           ],
           '#create_placeholder' => TRUE,
@@ -72,7 +74,8 @@ class OpenidealStatisticsIdeaStatisticsBlock extends BlockBase {
       ],
       'views' => [
         '#lazy_element' => [
-          '#lazy_builder' => ['openideal_statistics.lazy_builder:getViews',
+          '#lazy_builder' => [
+            'openideal_statistics.lazy_builder:getViews',
             [$id],
           ],
           '#create_placeholder' => TRUE,
@@ -82,16 +85,16 @@ class OpenidealStatisticsIdeaStatisticsBlock extends BlockBase {
       ],
     ];
 
-    if ($this->configuration['show_five_stars'] && $node->hasField('field_five_stars')) {
-      $field = $node->get('field_five_stars')->view([
-        'label' => 'hidden',
-        'settings' => [
-          'show_results' => '1',
-          'style' => 'fontawesome-stars',
-        ],
-      ]);
-
-      $items['five_stars'] = $field;
+    // Do not show if idea is not in below then expert review workflow phase.
+    if ($this->configuration['show_five_stars'] && $node->bundle() == 'idea' &&
+      !in_array($node->moderation_state->value, ['published', 'draft_approval', 'draft'])) {
+      $settings = ['label' => 'inline', 'settings' => ['show_results' => '1', 'style' => 'fontawesome-stars']];
+      $fields = $node->getFieldDefinitions();
+      foreach ($fields as $field_name => $field_definition) {
+        if ($field_definition instanceof FieldConfig && $field_definition->getType() == 'voting_api_field') {
+          $items[$field_name] = $node->{$field_name}->view($settings);
+        }
+      }
     }
 
     // @todo create trait or abstract class with this as method.

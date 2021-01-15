@@ -106,7 +106,7 @@ function openideal_idea_node_presave(NodeInterface $node) {
     // @todo Change the workflow state.
   }
   elseif ($node->bundle() == 'idea') {
-    $overall_score = \Drupal::service('openideal_idea.helper')->computeOverallScore($node->id());
+    $overall_score = \Drupal::service('openideal_idea.helper')->computeOverallScore($node);
     $node->set('field_overall_score', $overall_score);
   }
 }

@@ -67,7 +67,7 @@ class OpenidealDiscussionExpertsVoting extends BlockBase implements ContainerFac
       $build['#cache']['tags'] = $node->getCacheTags();
       /** @var \Drupal\node\Entity\Node $idea */
       $idea = $node->get('field_idea')->first()->get('entity')->getTarget()->getValue();
-      $settings = ['label' => 'hidden', 'settings' => ['show_results' => '1', 'style' => 'fontawesome-stars']];
+      $settings = ['label' => 'inline', 'settings' => ['show_results' => '1', 'style' => 'fontawesome-stars']];
       $fields = $idea->getFieldDefinitions();
       foreach ($fields as $field_name => $field_definition) {
         if ($field_definition instanceof FieldConfig && $field_definition->getType() == 'voting_api_field') {

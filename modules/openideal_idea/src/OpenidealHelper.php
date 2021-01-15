@@ -3,9 +3,11 @@
 namespace Drupal\openideal_idea;
 
 use Drupal\Core\Config\ConfigFactory;
+use Drupal\Core\Database\Connection;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Extension\ModuleHandler;
 use Drupal\Core\Session\AccountInterface;
+use Drupal\field\Entity\FieldConfig;
 use Drupal\group\GroupMembershipLoader;
 use Drupal\node\NodeInterface;
 use Drupal\statistics\NodeStatisticsDatabaseStorage;
@@ -51,6 +53,13 @@ class OpenidealHelper {
   protected $nodeStatisticsDatabase;
 
   /**
+   * Database connection.
+   *
+   * @var \Drupal\Core\Database\Connection
+   */
+  protected $database;
+
+  /**
    * OpenidealHelper construct.
    *
    * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager
@@ -61,17 +70,21 @@ class OpenidealHelper {
    *   Config factory.
    * @param \Drupal\Core\Extension\ModuleHandler $moduleHandler
    *   Module handler.
+   * @param \Drupal\Core\Database\Connection $database
+   *   Database.
    */
   public function __construct(
     EntityTypeManagerInterface $entity_type_manager,
     GroupMembershipLoader $group_membership_loader,
     ConfigFactory $configFactory,
-    ModuleHandler $moduleHandler
+    ModuleHandler $moduleHandler,
+    Connection $database
   ) {
     $this->entityTypeManager = $entity_type_manager;
     $this->groupMembershipLoader = $group_membership_loader;
     $this->configFactory = $configFactory;
     $this->moduleHandler = $moduleHandler;
+    $this->database = $database;
   }
 
   /**
@@ -120,13 +133,14 @@ class OpenidealHelper {
   /**
    * Compute overall score.
    *
-   * @param string|int $id
+   * @param NodeInterface $idea
    *   Node id.
    *
    * @return float|int
    *   Score.
    */
-  public function computeOverallScore($id) {
+  public function computeOverallScore(NodeInterface $idea) {
+    $id = $idea->id();
     $configuration = $this->configFactory->get('openideal_idea.scoreconfig');
     // Get node comments.
     $comments = $this->entityTypeManager->getStorage('comment')->getQuery()
@@ -153,7 +167,24 @@ class OpenidealHelper {
       }
     }
 
-    return $comments * ($configuration->get('comments_value') ?? 10)
+    $five_stars = 0;
+    $fields = $idea->getFieldDefinitions();
+    foreach ($fields as $field_name => $field_definition) {
+      if ($field_definition instanceof FieldConfig && $field_definition->getType() == 'voting_api_field') {
+        $average_score = $this->database->select('votingapi_result', 'v')
+          ->fields('v', ['value'])
+          ->condition('entity_type', $idea->getEntityTypeId())
+          ->condition('entity_id', $id)
+          ->condition('function', 'vote_field_average:node.' . $field_name)
+          ->execute()
+          ->fetchField();
+        $weight = (int) $idea->get($field_name)->getFieldDefinition()->getThirdPartySetting('openideal_idea', 'weight');
+
+        $five_stars += ((int) $average_score - 3) * $weight;
+      }
+    }
+
+    return $five_stars + $comments * ($configuration->get('comments_value') ?? 10)
       + $votes * ($configuration->get('votes_value') ?? 5)
       + $node_counter_value;
   }
