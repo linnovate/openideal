@@ -6,7 +6,6 @@ use Drupal\Component\Utility\Html;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\field\Entity\FieldStorageConfig;
-use Exception;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
@@ -103,13 +102,6 @@ class OpenidealIdeaAddFiveStarsForm extends FormBase {
   /**
    * {@inheritdoc}
    */
-  public function validateForm(array &$form, FormStateInterface $form_state) {
-    parent::validateForm($form, $form_state);
-  }
-
-  /**
-   * {@inheritdoc}
-   */
   public function submitForm(array &$form, FormStateInterface $form_state) {
     $values = $form_state->getValue('field');
     $field_name = $this->configFactory()->get('field_ui.settings')->get('field_prefix') . $values['field_name'];
@@ -148,8 +140,13 @@ class OpenidealIdeaAddFiveStarsForm extends FormBase {
       $field = $this->entityManager->getStorage('field_config')->create($field_values);
       $field->setThirdPartySetting('openideal_idea', 'weight', $values['weight']);
       $field->save();
-    } catch (Exception $e) {
-      $this->messenger()->addError($this->t('There was a problem creating field %label: @message', ['%label' => $values['label'], '@message' => $e->getMessage()]));
+    }
+    catch (\Exception $e) {
+      $this->messenger()->addError(
+        $this->t('There was a problem creating field %label: @message',
+          ['%label' => $values['label'], '@message' => $e->getMessage()]
+        )
+      );
       return;
     }
 
@@ -164,7 +161,7 @@ class OpenidealIdeaAddFiveStarsForm extends FormBase {
    * Checks if a field machine name is taken.
    *
    * @param string $value
-   *   The machine name, not prefixed.*
+   *   The machine name, not prefixed.*.
    *
    * @return bool
    *   Whether or not the field machine name is taken.

@@ -87,8 +87,17 @@ class OpenidealStatisticsIdeaStatisticsBlock extends BlockBase {
 
     // Do not show if idea is not in below then expert review workflow phase.
     if ($this->configuration['show_five_stars'] && $node->bundle() == 'idea' &&
-      !in_array($node->moderation_state->value, ['published', 'draft_approval', 'draft'])) {
-      $settings = ['label' => 'inline', 'settings' => ['show_results' => '1', 'style' => 'fontawesome-stars']];
+      !in_array($node->moderation_state->value,
+        [
+          'published',
+          'draft_approval',
+          'draft',
+        ]
+      )) {
+      $settings = [
+        'label' => 'inline',
+        'settings' => ['show_results' => '1', 'style' => 'fontawesome-stars'],
+      ];
       $fields = $node->getFieldDefinitions();
       foreach ($fields as $field_name => $field_definition) {
         if ($field_definition instanceof FieldConfig && $field_definition->getType() == 'voting_api_field') {

@@ -133,7 +133,7 @@ class OpenidealHelper {
   /**
    * Compute overall score.
    *
-   * @param NodeInterface $idea
+   * @param \Drupal\node\NodeInterface $idea
    *   Node id.
    *
    * @return float|int

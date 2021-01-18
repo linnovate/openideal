@@ -70,7 +70,7 @@ class OpenidealIdeaEditFiveStarsForm extends FormBase {
       '#type' => 'fieldset',
       '#title' => $this->t('Widgets'),
     ];
-    foreach ($fields as $field_name => $field_definition) {
+    foreach ($fields as $field_definition) {
       if ($field_definition instanceof FieldConfig && $field_definition->getType() == 'voting_api_field') {
         $this->fields[] = $field_definition;
         $id = $field_definition->getUniqueIdentifier();
@@ -95,7 +95,7 @@ class OpenidealIdeaEditFiveStarsForm extends FormBase {
               'entity.field_config.node_field_delete_form',
               ['node_type' => 'idea', 'field_config' => $field_definition->id()],
               [
-                'query' => ['destination' => Url::fromRoute('openideal_idea.openideal_idea_edit_five_stars')->toString()]
+                'query' => ['destination' => Url::fromRoute('openideal_idea.openideal_idea_edit_five_stars')->toString()],
               ]
             ),
             '#title' => $this->t('Delete'),
