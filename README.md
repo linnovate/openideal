@@ -45,6 +45,18 @@ When at the `web` directory, run the following:
 - Change `dbuser@127.0.0.1/db_name` with your DB settings
 - The last bit - `idea` is the name of the profile
 
+## Update
+
+At any point you can run
+
+`composer require linnovate/openideal:[version-number]` 
+
+where `[version number]` is the desired tag, then run `drush updb`. 
+
+To upgrade Drupal core version run 
+
+`composer update drupal/core 'drupal/core-*' --with-dependencies` , then run `drush updb`. 
+
 ## License
 
 This project is licensed under the [GNU General Public License, version 2 or later](http://www.gnu.org/licenses/old-licenses/gpl-2.0.html). See [this page](https://www.drupal.org/about/licensing) on drupal.org for more details. 
