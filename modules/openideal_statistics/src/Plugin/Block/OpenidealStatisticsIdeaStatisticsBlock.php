@@ -4,8 +4,8 @@ namespace Drupal\openideal_statistics\Plugin\Block;
 
 use Drupal\Core\Block\BlockBase;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\field\Entity\FieldConfig;
 use Drupal\openideal_challenge\OpenidealContextEntityTrait;
+use Drupal\openideal_statistics\OpenidealStatisticsFivestarsTrait;
 
 /**
  * Provides a 'OpenidealStatisticsIdeaStatisticsBlock' block.
@@ -25,6 +25,7 @@ use Drupal\openideal_challenge\OpenidealContextEntityTrait;
 class OpenidealStatisticsIdeaStatisticsBlock extends BlockBase {
 
   use OpenidealContextEntityTrait;
+  use OpenidealStatisticsFivestarsTrait;
 
   /**
    * {@inheritdoc}
@@ -94,16 +95,7 @@ class OpenidealStatisticsIdeaStatisticsBlock extends BlockBase {
           'draft',
         ]
       )) {
-      $settings = [
-        'label' => 'inline',
-        'settings' => ['show_results' => '1', 'style' => 'fontawesome-stars'],
-      ];
-      $fields = $node->getFieldDefinitions();
-      foreach ($fields as $field_name => $field_definition) {
-        if ($field_definition instanceof FieldConfig && $field_definition->getType() == 'voting_api_field') {
-          $items[$field_name] = $node->{$field_name}->view($settings);
-        }
-      }
+      $items += $this->viewFivestars($node);
     }
 
     // @todo create trait or abstract class with this as method.

@@ -7,18 +7,13 @@ use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Url;
 use Drupal\field\Entity\FieldConfig;
+use Drupal\openideal_idea\OpenidealHelper;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Configure OpenideaL Idea settings for this site.
  */
 class OpenidealIdeaEditFiveStarsForm extends FormBase {
-
-  protected const ENTITY_TYPE = 'node';
-
-  protected const FIELD_TYPE = 'voting_api_field';
-
-  protected const BUNDLE = 'idea';
 
   /**
    * Entity type manager.
@@ -71,7 +66,7 @@ class OpenidealIdeaEditFiveStarsForm extends FormBase {
       '#title' => $this->t('Widgets'),
     ];
     foreach ($fields as $field_definition) {
-      if ($field_definition instanceof FieldConfig && $field_definition->getType() == 'voting_api_field') {
+      if (OpenidealHelper::isVotingAPIField($field_definition)) {
         $this->fields[] = $field_definition;
         $id = $field_definition->getUniqueIdentifier();
         $weight = $field_definition->getThirdPartySetting('openideal_idea', 'weight');
@@ -83,11 +78,20 @@ class OpenidealIdeaEditFiveStarsForm extends FormBase {
             '#title' => $this->t('Label'),
             '#default_value' => $label,
           ],
-          'weight' => [
-            '#required' => TRUE,
-            '#min' => 0,
-            '#type' => 'number',
-            '#default_value' => $weight ?? 0,
+          'weight_wrapper' => [
+            'title' => [
+              '#type' => 'link',
+              '#attributes' => ['class' => ['form-required']],
+              '#title' => $this->t('Weight'),
+              '#url' => Url::fromRoute('openideal_idea.openideal_idea_score_config_form'),
+            ],
+            'weight' => [
+              '#required' => TRUE,
+              '#description' => $this->t('The widget weight directly affect overall idea score'),
+              '#min' => 0,
+              '#type' => 'number',
+              '#default_value' => $weight ?? 0,
+            ],
           ],
           'delete' => [
             '#type' => 'link',

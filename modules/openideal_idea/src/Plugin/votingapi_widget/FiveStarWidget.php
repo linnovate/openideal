@@ -62,7 +62,7 @@ class FiveStarWidget extends BaseFiveStarWidget {
   public function canVote($vote, $account = FALSE) {
     /** @var \Drupal\node\NodeInterface $node */
     if (($node = $this->routeMatch->getParameter('node')) && $node->bundle() == 'discussion' && ($group = $this->helper->getGroupFromNode($node))) {
-      return $this->permissionChecker->hasPermissionInGroup('vote on five stars', $account ?: $this->account, $group);
+      return $this->permissionChecker->hasPermissionInGroup('vote on expert review', $account ?: $this->account, $group);
     }
     return parent::canVote($vote, $account);
   }

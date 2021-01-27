@@ -5,7 +5,7 @@ namespace Drupal\openideal_idea;
 use Drupal\Core\Config\ConfigFactory;
 use Drupal\Core\Database\Connection;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
-use Drupal\Core\Extension\ModuleHandler;
+use Drupal\Core\Field\FieldDefinitionInterface;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\field\Entity\FieldConfig;
 use Drupal\group\GroupMembershipLoader;
@@ -68,8 +68,6 @@ class OpenidealHelper {
    *   Group membership loader.
    * @param \Drupal\Core\Config\ConfigFactory $configFactory
    *   Config factory.
-   * @param \Drupal\Core\Extension\ModuleHandler $moduleHandler
-   *   Module handler.
    * @param \Drupal\Core\Database\Connection $database
    *   Database.
    */
@@ -77,13 +75,11 @@ class OpenidealHelper {
     EntityTypeManagerInterface $entity_type_manager,
     GroupMembershipLoader $group_membership_loader,
     ConfigFactory $configFactory,
-    ModuleHandler $moduleHandler,
     Connection $database
   ) {
     $this->entityTypeManager = $entity_type_manager;
     $this->groupMembershipLoader = $group_membership_loader;
     $this->configFactory = $configFactory;
-    $this->moduleHandler = $moduleHandler;
     $this->database = $database;
   }
 
@@ -160,33 +156,74 @@ class OpenidealHelper {
     $node_counter_value = 0;
 
     // If statistics module is enabled then add node view count to score.
-    if ($this->moduleHandler->moduleExists('statistics')) {
+    if ($this->nodeStatisticsDatabase) {
       $statistics_result = $this->nodeStatisticsDatabase->fetchView($id);
       if ($statistics_result) {
         $node_counter_value = $statistics_result->getTotalCount() * ($configuration->get('node_value') ?? 0.2);
       }
     }
 
-    $five_stars = 0;
-    $fields = $idea->getFieldDefinitions();
-    foreach ($fields as $field_name => $field_definition) {
-      if ($field_definition instanceof FieldConfig && $field_definition->getType() == 'voting_api_field') {
-        $average_score = $this->database->select('votingapi_result', 'v')
-          ->fields('v', ['value'])
-          ->condition('entity_type', $idea->getEntityTypeId())
-          ->condition('entity_id', $id)
-          ->condition('function', 'vote_field_average:node.' . $field_name)
-          ->execute()
-          ->fetchField();
-        $weight = (int) $idea->get($field_name)->getFieldDefinition()->getThirdPartySetting('openideal_idea', 'weight');
-
-        $five_stars += ((int) $average_score - 3) * $weight;
-      }
-    }
+    $five_stars = $this->retrieveFivestarsScore($idea);
 
     return $five_stars + $comments * ($configuration->get('comments_value') ?? 10)
       + $votes * ($configuration->get('votes_value') ?? 5)
       + $node_counter_value;
+  }
+
+  /**
+   * Retrieve voting api results for an idea.
+   *
+   * Formula: (average_score - 3) * weight.
+   *
+   * @param \Drupal\node\NodeInterface $idea
+   *   Idea.
+   *
+   * @return int
+   *   Results.
+   */
+  private function retrieveFivestarsScore(NodeInterface $idea) {
+    $fields = $idea->getFieldDefinitions();
+    $query = $this->database->select('votingapi_result', 'v')
+      ->fields('v', ['function', 'value'])
+      ->condition('entity_type', $idea->getEntityTypeId())
+      ->condition('type', 'vote')
+      ->condition('entity_id', $idea->id());
+    $condition = $query->orConditionGroup();
+    $weights = [];
+    foreach ($fields as $field_name => $field_definition) {
+      if (static::isVotingAPIField($field_definition)) {
+        $weight = (int) $idea->get($field_name)->getFieldDefinition()->getThirdPartySetting('openideal_idea', 'weight');
+        $condition->condition('function', 'vote_field_average:node.' . $field_name);
+        $weights['vote_field_average:node.' . $field_name] = $weight;
+      }
+    }
+    $scores = $query
+      ->condition($condition)
+      ->execute()
+      ->fetchAllKeyed(1, 0);
+
+    $fivestars_score = 0;
+    array_walk($scores,
+      function ($function, $value) use ($weights, &$fivestars_score) {
+        $fivestars_score += ((int) $value - 3) * $weights[$function];
+      }
+    );
+
+    return $fivestars_score;
+  }
+
+  /**
+   * Checks if the field of voting api type.
+   *
+   * @param \Drupal\Core\Field\FieldDefinitionInterface $field_definition
+   *   Field to check.
+   *
+   * @return bool
+   *   TRUE if it is voting api field.
+   */
+  // @codingStandardsIgnoreLine
+  public static function isVotingAPIField(FieldDefinitionInterface $field_definition) {
+    return $field_definition instanceof FieldConfig && $field_definition->getType() == 'voting_api_field';
   }
 
   /**

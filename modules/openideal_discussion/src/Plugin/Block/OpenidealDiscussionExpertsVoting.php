@@ -6,7 +6,7 @@ use Drupal\Core\Block\BlockBase;
 use Drupal\Core\Entity\EntityFieldManager;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\Core\Routing\CurrentRouteMatch;
-use Drupal\field\Entity\FieldConfig;
+use Drupal\openideal_statistics\OpenidealStatisticsFivestarsTrait;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
@@ -18,6 +18,8 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  * )
  */
 class OpenidealDiscussionExpertsVoting extends BlockBase implements ContainerFactoryPluginInterface {
+
+  use OpenidealStatisticsFivestarsTrait;
 
   /**
    * Route match.
@@ -62,23 +64,12 @@ class OpenidealDiscussionExpertsVoting extends BlockBase implements ContainerFac
     $build = [];
     /** @var \Drupal\node\NodeInterface $node */
     if (($node = $this->routeMatch->getParameter('node')) && $node->bundle() === 'discussion' && !$node->get('field_idea')->isEmpty()) {
-      $build['#cache']['contexts'] = ['user.roles', 'user.permissions'];
+      $build['#cache']['contexts'] = ['user.roles'];
       $build['#cache']['tags'] = $node->getCacheTags();
       /** @var \Drupal\node\Entity\Node $idea */
-      $idea = $node->get('field_idea')->first()->get('entity')->getTarget()->getValue();
-      $settings = [
-        'label' => 'inline',
-        'settings' => [
-          'show_results' => '1',
-          'style' => 'fontawesome-stars',
-        ],
-      ];
-      $fields = $idea->getFieldDefinitions();
-      foreach ($fields as $field_name => $field_definition) {
-        if ($field_definition instanceof FieldConfig && $field_definition->getType() == 'voting_api_field') {
-          $build['content'][] = $idea->{$field_name}->view($settings);
-        }
-      }
+      $idea = $node->get('field_idea')->entity;
+
+      $build['content'] = $this->viewFivestars($idea);
     }
     return $build;
   }

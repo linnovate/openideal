@@ -4,11 +4,37 @@ namespace Drupal\openideal_idea\Form;
 
 use Drupal\Core\Form\ConfigFormBase;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\openideal_idea\OpenidealHelper;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Openideal score configuration form.
  */
 class ScoreConfigForm extends ConfigFormBase {
+
+  /**
+   * Entity field manager.
+   *
+   * @var \Drupal\Core\Entity\EntityFieldManagerInterface
+   */
+  protected $entityFieldManager;
+
+  /**
+   * Fields.
+   *
+   * @var array
+   */
+  protected $fields;
+
+  /**
+   * {@inheritDoc}
+   */
+  public static function create(ContainerInterface $container) {
+    $instance = parent::create($container);
+
+    $instance->entityFieldManager = $container->get('entity_field.manager');
+    return $instance;
+  }
 
   /**
    * {@inheritdoc}
@@ -62,6 +88,31 @@ class ScoreConfigForm extends ConfigFormBase {
       '#default_value' => $config->get('node') ?? 0.2,
     ];
 
+    $fields = $this->entityFieldManager->getFieldDefinitions('node', 'idea');
+
+    $form['weights'] = [
+      '#type' => 'fieldset',
+      '#title' => $this->t('Fivestars widgets'),
+      '#description' => $this->t('Configure weights of fivestar widgets'),
+    ];
+
+    foreach ($fields as $name => $field_definition) {
+      if (OpenidealHelper::isVotingAPIField($field_definition)) {
+        $weight = $field_definition->getThirdPartySetting('openideal_idea', 'weight');
+        $this->fields['weight' . $name] = [
+          'weight' => $weight,
+          'field_definition' => $field_definition,
+        ];
+        $form['weights']['weight' . $name] = [
+          '#title' => $field_definition->getLabel(),
+          '#required' => TRUE,
+          '#min' => 0,
+          '#type' => 'number',
+          '#default_value' => $weight ?? 0,
+        ];
+      }
+    }
+
     return parent::buildForm($form, $form_state);
   }
 
@@ -69,13 +120,23 @@ class ScoreConfigForm extends ConfigFormBase {
    * {@inheritdoc}
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
-    parent::submitForm($form, $form_state);
+    $values = $form_state->cleanValues()->getValues();
+
+    // Save configuration only in case if field was changed.
+    foreach ($values as $name => $value) {
+      if (strpos($name, 'weight') === 0 && $this->fields[$name]['weight'] !== $value) {
+        $this->fields[$name]['field_definition']->setThirdPartySetting('openideal_idea', 'weight', $value);
+        $this->fields[$name]['field_definition']->save();
+      }
+    }
 
     $this->config('openideal_idea.scoreconfig')
       ->set('comments_value', $form_state->getValue('comments_value'))
       ->set('votes_value', $form_state->getValue('votes_value'))
       ->set('node_value', $form_state->getValue('node'))
       ->save();
+
+    parent::submitForm($form, $form_state);
   }
 
 }
