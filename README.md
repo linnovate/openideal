@@ -26,10 +26,17 @@ OI is based on Drupal, and therefore it is modular, and allows growth and adapta
 OpenideaL is super easy to install. The following composer command will install the full codebase, together with all the required dependencies and libraries:
 
 ```
-composer create-project linnovate/openideal-composer
+composer create-project linnovate/openideal-composer openideal
 ```
 
 Once the command has finishd executing, the `web` directory will hold all the necessary files to run OpenideaL. Proceed to installation of the site(s).
+
+If you run into a `Fatal error: Allowed memory size of xxxxxxxx bytes exhausted`, try running the above command like this:
+
+```
+COMPOSER_MEMORY_LIMIT=-1 composer create-project linnovate/openideal-composer openideal
+```
+
 
 ## Installation
 
