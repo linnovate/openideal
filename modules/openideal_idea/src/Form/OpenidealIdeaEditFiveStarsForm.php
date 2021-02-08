@@ -137,10 +137,10 @@ class OpenidealIdeaEditFiveStarsForm extends FormBase {
         if ($field_definition instanceof FieldConfig
           && $field_definition->getType() == 'voting_api_field'
           && $field_definition->getUniqueIdentifier() == $id
-          && ($field_definition->label() != $field_configuration['label'] || $field_configuration['weight'] != $field_definition->getThirdPartySetting('openideal_idea', 'weight'))
+          && ($field_definition->label() != $field_configuration['label'] || $field_configuration['weight_wrapper']['weight'] != $field_definition->getThirdPartySetting('openideal_idea', 'weight'))
         ) {
           $field_definition->setLabel($field_configuration['label']);
-          $field_definition->setThirdPartySetting('openideal_idea', 'weight', $field_configuration['weight']);
+          $field_definition->setThirdPartySetting('openideal_idea', 'weight', $field_configuration['weight_wrapper']['weight']);
           $field_definition->save();
         }
       }

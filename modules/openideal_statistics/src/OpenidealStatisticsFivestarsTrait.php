@@ -33,6 +33,8 @@ trait OpenidealStatisticsFivestarsTrait {
     foreach ($fields as $field_name => $field_definition) {
       if (OpenidealHelper::isVotingAPIField($field_definition)) {
         $fivestars[$field_name] = $idea->get($field_name)->view($defaultSettings);
+        // @todo Make further investigation why Drupal doesn't put cache tags for fields.
+        $fivestars[$field_name]['#cache']['tags'] = $field_definition->getCacheTags();
       }
     }
 

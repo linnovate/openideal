@@ -91,6 +91,7 @@ class OpenidealStatisticsChallengeStatisticsBlock extends BlockBase {
     return [
       'content' => [
         '#theme' => 'item_list',
+        '#cache' => ['tags' => $node->getCacheTags()],
         '#items' => $items,
         '#attributes' => ['class' => ['idea-statistics-block--list']],
         '#wrapper_attributes' => ['class' => ['idea-statistics-block']],
