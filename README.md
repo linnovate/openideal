@@ -45,6 +45,11 @@ When at the `web` directory, run the following:
 - Change `dbuser@127.0.0.1/db_name` with your DB settings
 - The last bit - `idea` is the name of the profile
 
+## Update
+
+1. Run `composer update`
+2. Update the database using drush command `drush updb`
+
 ## License
 
 This project is licensed under the [GNU General Public License, version 2 or later](http://www.gnu.org/licenses/old-licenses/gpl-2.0.html). See [this page](https://www.drupal.org/about/licensing) on drupal.org for more details. 
