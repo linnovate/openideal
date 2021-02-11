@@ -12,6 +12,13 @@ block.block.ridiculously_responsive_social_share_buttons:
         node_type:
           bundles:
             discussion: discussion
+block.block.openideal_theme_local_tasks:
+  expected_config: {  }
+  update_actions:
+    add:
+      visibility:
+        route:
+          routes: "entity.user.canonical\r\nuser.login\r\nuser.logout\r\nuser.register\r\nuser.pass"
 eu_cookie_compliance.settings:
   expected_config:
     mobile_popup_info:
@@ -92,3 +99,137 @@ core.entity_form_display.node.article.default:
             show_default_crop: true
             warn_multiple_usages: false
           type: image_widget_crop
+image.style.compact_user_icon:
+  expected_config:
+    effects:
+      ce9840e8-543a-4383-812c-6edfb1c00b5b:
+        weight: 1
+  update_actions:
+    add:
+      effects:
+        6fa7f79a-6f43-41cd-adaf-46942dd4dcb7:
+          data:
+            crop_type: profile
+          id: crop_crop
+          uuid: 6fa7f79a-6f43-41cd-adaf-46942dd4dcb7
+          weight: -10
+    change:
+      effects:
+        ce9840e8-543a-4383-812c-6edfb1c00b5b:
+          weight: -9
+image.style.creator_ico:
+  expected_config:
+    effects:
+      b83d69cf-6f96-45ed-8a51-b6c6ff0e162a:
+        weight: 1
+  update_actions:
+    add:
+      effects:
+        85766918-2eb5-42cc-8a2a-59e7145996ac:
+          data:
+            crop_type: profile
+          id: crop_crop
+          uuid: 85766918-2eb5-42cc-8a2a-59e7145996ac
+          weight: -10
+    change:
+      effects:
+        b83d69cf-6f96-45ed-8a51-b6c6ff0e162a:
+          weight: -9
+image.style.follower_icon:
+  expected_config:
+    effects:
+      64393dd7-031f-46d5-8b8e-703026c01ba2:
+        weight: 1
+  update_actions:
+    change:
+      effects:
+        64393dd7-031f-46d5-8b8e-703026c01ba2:
+          weight: -9
+        761ba95e-5ad1-493c-a7fd-7bc5ffc2dbf1:
+          data:
+            crop_type: profile
+          id: crop_crop
+          uuid: 761ba95e-5ad1-493c-a7fd-7bc5ffc2dbf1
+          weight: -10
+image.style.front_page_teaser:
+  expected_config:
+    effects:
+      c584ed11-9458-46dc-bfe7-8f4c276d6df0:
+        weight: 1
+  update_actions:
+    change:
+      effects:
+        c584ed11-9458-46dc-bfe7-8f4c276d6df0:
+          weight: -9
+        d90ac3e4-3990-4a10-a2b1-16f53604527f:
+          data:
+            crop_type: image
+          id: crop_crop
+          uuid: d90ac3e4-3990-4a10-a2b1-16f53604527f
+          weight: -10
+image.style.front_page_teaser_large:
+  expected_config:
+    effects:
+      6f84ca64-ce22-4cb2-a1b0-f8a4bdbd4208:
+        weight: 1
+  update_actions:
+    add:
+      effects:
+        45674ad3-5a44-4159-959c-ecb399ec400f:
+          data:
+            crop_type: image
+          id: crop_crop
+          uuid: 45674ad3-5a44-4159-959c-ecb399ec400f
+          weight: -10
+    change:
+      effects:
+        6f84ca64-ce22-4cb2-a1b0-f8a4bdbd4208:
+          weight: -9
+image.style.slideshow_large:
+  expected_config:
+    effects:
+      2f466a65-9f37-4ea9-95bb-3490aea48d6c:
+        weight: 1
+  update_actions:
+    change:
+      effects:
+        2f466a65-9f37-4ea9-95bb-3490aea48d6c:
+          weight: -9
+        9a2e9d9d-97de-44f0-b78c-e6c150ad6587:
+          data:
+            crop_type: image
+          id: crop_crop
+          uuid: 9a2e9d9d-97de-44f0-b78c-e6c150ad6587
+          weight: -10
+image.style.user_account_image:
+  expected_config:
+    effects:
+      6f47a4e3-ec96-44a9-8d2d-0f3280354770:
+        weight: 1
+  update_actions:
+    change:
+      effects:
+        6f47a4e3-ec96-44a9-8d2d-0f3280354770:
+          weight: -9
+        ed64aa73-ea9f-4f84-b903-2378aa2a2030:
+          data:
+            crop_type: profile
+          id: crop_crop
+          uuid: ed64aa73-ea9f-4f84-b903-2378aa2a2030
+          weight: -10
+image.style.user_icon_in_public_activity_26x26_:
+  expected_config:
+    effects:
+      2568d6d7-42ce-4ed3-b24d-61b362152fe9:
+        weight: 1
+  update_actions:
+    change:
+      effects:
+        2568d6d7-42ce-4ed3-b24d-61b362152fe9:
+          weight: -9
+        79f8da78-2d68-44df-8950-a0ca676efc32:
+          data:
+            crop_type: profile
+          id: crop_crop
+          uuid: 79f8da78-2d68-44df-8950-a0ca676efc32
+          weight: -10
