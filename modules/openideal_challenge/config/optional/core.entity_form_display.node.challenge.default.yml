@@ -14,10 +14,13 @@ dependencies:
     - field.field.node.challenge.field_schedule_close
     - field.field.node.challenge.field_schedule_open
     - field.field.node.challenge.field_supporting_data
+    - image.style.front_page_teaser_large
     - node.type.challenge
   module:
     - allowed_formats
+    - content_moderation
     - entity_browser
+    - image_widget_crop
     - metatag
     - openideal_challenge
     - path
@@ -55,16 +58,17 @@ content:
   field_images:
     weight: 7
     settings:
-      entity_browser: openideal_images_browser
-      field_widget_remove: true
-      selection_mode: selection_append
-      preview_image_style: thumbnail
-      field_widget_edit: true
-      field_widget_replace: false
-      open: false
-      view_mode: default
+      show_default_crop: true
+      warn_multiple_usages: true
+      preview_image_style: front_page_teaser_large
+      crop_preview_image_style: original
+      progress_indicator: throbber
+      crop_list:
+        - image
+      crop_types_required: {  }
+      show_crop_area: false
     third_party_settings: {  }
-    type: entity_browser_file
+    type: image_widget_crop
     region: content
   field_is_open:
     weight: 10

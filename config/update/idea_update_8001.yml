@@ -51,3 +51,43 @@ block.block.ridiculously_responsive_social_share_buttons_footer:
         node_type:
           bundles:
             discussion: discussion
+core.entity_form_display.node.article.default:
+  expected_config:
+    content:
+      field_images:
+        settings:
+          entity_browser: openideal_images_browser
+          field_widget_edit: true
+          field_widget_remove: true
+          field_widget_replace: true
+          open: false
+          preview_image_style: thumbnail
+          selection_mode: selection_append
+          view_mode: default
+        type: entity_browser_file
+  update_actions:
+    delete:
+      content:
+        field_images:
+          settings:
+            entity_browser: openideal_images_browser
+            field_widget_edit: true
+            field_widget_remove: true
+            field_widget_replace: true
+            open: false
+            selection_mode: selection_append
+            view_mode: default
+    change:
+      content:
+        field_images:
+          settings:
+            crop_list:
+              - image
+            crop_preview_image_style: original
+            crop_types_required: {  }
+            preview_image_style: front_page_teaser_large
+            progress_indicator: throbber
+            show_crop_area: false
+            show_default_crop: true
+            warn_multiple_usages: false
+          type: image_widget_crop

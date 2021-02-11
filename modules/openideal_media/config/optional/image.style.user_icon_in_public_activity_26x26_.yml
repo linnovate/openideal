@@ -1,14 +1,24 @@
 langcode: en
 status: true
-dependencies: {  }
+dependencies:
+  config:
+    - crop.type.profile
+  module:
+    - crop
 name: user_icon_in_public_activity_26x26_
 label: 'User icon in public activity (26x26)'
 effects:
   2568d6d7-42ce-4ed3-b24d-61b362152fe9:
     uuid: 2568d6d7-42ce-4ed3-b24d-61b362152fe9
     id: image_scale_and_crop
-    weight: 1
+    weight: -9
     data:
       width: 26
       height: 26
       anchor: center-center
+  79f8da78-2d68-44df-8950-a0ca676efc32:
+    uuid: 79f8da78-2d68-44df-8950-a0ca676efc32
+    id: crop_crop
+    weight: -10
+    data:
+      crop_type: profile
