@@ -47,7 +47,7 @@ When at the `web` directory, run the following:
 
 ## Update
 
-1. Run `composer update`
+1. Run `composer update linnovate/openideal --with-dependencies`
 2. Update the database using drush command `drush updb`
 
 ## License
