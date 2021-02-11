@@ -3,7 +3,6 @@ status: true
 dependencies:
   config:
     - core.entity_form_mode.user.edit
-    - entity_browser.browser.openideal_image_browser
     - field.field.user.user.avatars_avatar_generator
     - field.field.user.user.avatars_user_picture
     - field.field.user.user.field_age_group
@@ -12,8 +11,9 @@ dependencies:
     - field.field.user.user.field_last_name
     - field.field.user.user.field_points
     - field.field.user.user.user_picture
+    - image.style.user_account_image
   module:
-    - entity_browser
+    - image_widget_crop
     - user
 id: user.user.edit
 targetEntityType: user
@@ -26,18 +26,19 @@ content:
     settings: {  }
     third_party_settings: {  }
   avatars_user_picture:
-    type: entity_browser_file
+    type: image_widget_crop
     weight: 5
     region: content
     settings:
-      entity_browser: openideal_image_browser
-      field_widget_remove: true
-      selection_mode: selection_append
-      preview_image_style: compact_user_icon
-      field_widget_edit: true
-      field_widget_replace: false
-      open: false
-      view_mode: default
+      show_default_crop: true
+      warn_multiple_usages: true
+      preview_image_style: user_account_image
+      crop_preview_image_style: original
+      progress_indicator: throbber
+      crop_list:
+        - profile
+      crop_types_required: {  }
+      show_crop_area: false
     third_party_settings: {  }
   field_age_group:
     type: options_select
