@@ -13767,13 +13767,20 @@ nav.tabs {
         -ms-flex-direction: column;
             flex-direction: column;
     margin-bottom: 0; }
-    .site-navigation--user-account .profile-author-view-mode .layout__region--content img {
-      width: 64px;
-      height: 64px;
-      border-radius: 50%;
+    .site-navigation--user-account .profile-author-view-mode .layout__region--content .field--name-user-picture {
+      max-width: 4rem;
+      height: 4rem;
       margin-right: 0; }
+    .site-navigation--user-account .profile-author-view-mode .layout__region--content img {
+      border-radius: 50%;
+      margin-right: 0;
+      -o-object-fit: cover;
+         object-fit: cover; }
     .site-navigation--user-account .profile-author-view-mode .layout__region--content a {
-      margin-top: 6px;
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: -ms-flexbox;
+      display: flex;
       font-size: 16px;
       font-weight: bold;
       text-decoration: none;
@@ -14263,6 +14270,11 @@ nav.tabs {
     .block-extra-field-blockcommentcommentlinks .nav-link {
       padding: 10px;
       font-size: 0.9375rem; } }
+
+.node--view-mode-full .card-img-top img {
+  max-height: 15.625rem;
+  -o-object-fit: cover;
+     object-fit: cover; }
 
 .node--view-mode-full .card-body {
   padding: 26px 101px 50px 19px; }
@@ -15173,8 +15185,11 @@ nav.tabs {
     margin: 0; }
   .message .profile-author-view-mode .layout__region--content {
     margin-bottom: 0; }
-  .message .profile-author-view-mode .layout__region--content a:hover {
-    color: #fff; }
+    .message .profile-author-view-mode .layout__region--content a:hover {
+      color: #fff; }
+    .message .profile-author-view-mode .layout__region--content .field--name-user-picture {
+      width: 26px;
+      height: 26px; }
   .message a {
     -webkit-transition: color 0.3s;
     -o-transition: color 0.3s;
@@ -15547,20 +15562,28 @@ nav.tabs {
   -webkit-align-items: center;
       -ms-flex-align: center;
           align-items: center;
-  margin-bottom: 26px; }
+  margin-bottom: 1.625rem; }
   .profile-author-view-mode .layout__region--content a {
+    height: 100%;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
     font-style: normal;
     font-weight: bold;
     color: #343352;
-    text-transform: capitalize;
-    margin-right: 3px; }
+    text-transform: capitalize; }
     .profile-author-view-mode .layout__region--content a:hover {
       color: #343352; }
+  .profile-author-view-mode .layout__region--content .field--name-user-picture {
+    margin-right: 0.4375rem;
+    max-width: 2.875rem;
+    height: 2.875rem; }
   .profile-author-view-mode .layout__region--content img {
-    width: 46px;
-    height: 46px;
-    border-radius: 50%;
-    margin-right: 7px; }
+    height: auto;
+    -o-object-fit: cover;
+       object-fit: cover;
+    border-radius: 50%; }
 
 .view--user-admin-people--community-page article.profile {
   padding: 0 5px; }
@@ -15736,9 +15759,14 @@ nav.tabs {
     -webkit-align-items: center;
         -ms-flex-align: center;
             align-items: center; }
-    .entity--user--canonical .user-top--section__first img {
-      border-radius: 50%;
+    .entity--user--canonical .user-top--section__first .field--name-user-picture {
+      width: 7.5rem;
+      height: 7.5rem;
       margin-right: 21px; }
+    .entity--user--canonical .user-top--section__first img {
+      -o-object-fit: contain;
+         object-fit: contain;
+      border-radius: 50%; }
   .entity--user--canonical .user-top--section__second {
     display: -webkit-box;
     display: -webkit-flex;
@@ -16451,7 +16479,9 @@ nav.tabs {
   .front-page-teaser .block-field-blocknodearticlefield-images img,
   .front-page-teaser .block-field-blocknodeideafield-images img {
     width: 100%;
-    height: auto; }
+    max-height: 12.1875rem;
+    -o-object-fit: cover;
+       object-fit: cover; }
   .front-page-teaser .block-openideal-idea-info-block {
     display: -webkit-box;
     display: -webkit-flex;
@@ -16977,11 +17007,14 @@ nav.tabs {
       .node--view-mode-teaser .teaser-top-section--section__first .block-field-blocknodearticlefield-images img,
       .node--view-mode-teaser .teaser-top-section--section__first .block-field-blocknodeideafield-images img {
         width: 100%;
-        height: 100%; }
+        height: 100%;
+        -o-object-fit: cover;
+           object-fit: cover; }
       .node--view-mode-teaser .teaser-top-section--section__first.teaser-top-section--without-slideshow {
         background-color: #F0F2F3;
         border-top-right-radius: 0; }
       .node--view-mode-teaser .teaser-top-section--section__first a {
+        width: 400px;
         overflow: hidden;
         height: 190px;
         display: block; }
@@ -17128,7 +17161,10 @@ nav.tabs {
   .node--view-mode-teaser .profile-author-view-mode .layout__region--content {
     margin-bottom: 0; }
     .node--view-mode-teaser .profile-author-view-mode .layout__region--content a {
-      display: block; }
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: -ms-flexbox;
+      display: flex; }
   .node--view-mode-teaser .block-field-blocknodeideacreated,
   .node--view-mode-teaser .block-field-blocknodearticlecreated,
   .node--view-mode-teaser .block-field-blocknodechallengecreated {
@@ -17166,6 +17202,10 @@ nav.tabs {
 
 .view--challenges--all-challenges-page .idea-statistics-block--list {
   margin: 0 17px 0 0; }
+
+@media (max-width: 81.25rem) {
+  .node--view-mode-teaser .teaser-top-section--section__first a {
+    width: auto; } }
 
 @media (max-width: 1414px) {
   .node--view-mode-teaser .block-field-blocknodechallengefield-images img,
@@ -18383,6 +18423,10 @@ a {
 .card-group img {
   margin: 0;
   width: 100%;
+  height: 100%; }
+
+img {
+  max-width: 100%;
   height: auto; }
 
 .card-group .field--type-image {

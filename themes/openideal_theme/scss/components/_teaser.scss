@@ -103,6 +103,7 @@
         img {
           width: 100%;
           height: 100%;
+          object-fit: cover;
         }
       }
 
@@ -112,6 +113,7 @@
       }
 
       a {
+        width: 400px;
         overflow: hidden;
         height: 190px;
         display: block;
@@ -277,7 +279,7 @@
     margin-bottom: 0;
 
     a {
-      display: block;
+      display: flex;
     }
   }
 
@@ -322,6 +324,12 @@
 
 .view--challenges--all-challenges-page .idea-statistics-block--list {
   margin: 0 17px 0 0;
+}
+
+@media (max-width: size(1300)) {
+  .node--view-mode-teaser .teaser-top-section--section__first a {
+    width: auto;
+  }
 }
 
 @media (max-width: 1414px) {

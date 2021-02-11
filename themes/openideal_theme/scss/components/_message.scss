@@ -19,10 +19,14 @@
 
   .profile-author-view-mode .layout__region--content {
     margin-bottom: 0;
-  }
+    a:hover {
+      color: $white;
+    }
 
-  .profile-author-view-mode .layout__region--content a:hover {
-    color: $white;
+    .field--name-user-picture {
+      width: 26px;
+      height: 26px;
+    }
   }
 
   a {
