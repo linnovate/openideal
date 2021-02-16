@@ -11,7 +11,7 @@ use Drupal\Core\Entity\EntityInterface;
 abstract class OpenidealStatisticsBaseStatisticsBlock extends BlockBase {
 
   /**
-   * Checks if it's a full view mode.
+   * Checks if provided view mode not active.
    *
    * @return bool
    *   True is not provided view mode.
