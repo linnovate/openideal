@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\openideal_theme\Plugin\Layout;
+namespace Drupal\openideal_content\Plugin\Layout;
 
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Layout\LayoutDefault;
