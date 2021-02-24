@@ -6,6 +6,7 @@
  */
 
 use Drupal\user\Entity\User;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Implements hook_install().
@@ -36,6 +37,32 @@ function idea_install() {
     ->set('slogan', 'Ideas, challenges, news')
     ->set('page', ['front' => '/home'])
     ->save();
+
+  drupal_register_shutdown_function('_idea_rebuild_cache');
+}
+
+/**
+ * Force rebuild all Drupal's caches.
+ *
+ * Rules require clearing the cache to rebuild the container and register
+ * new rules events. Clearing cache in hook_install() didn't help, that's
+ * why it was moved to shutdown function.
+ */
+function _idea_rebuild_cache() {
+  $loader = require DRUPAL_ROOT . '/autoload.php';
+  include_once DRUPAL_ROOT . '/core/includes/utility.inc';
+
+  $request = Request::createFromGlobals();
+
+  // Clear user cache for all major platforms.
+  $user_caches = [
+    'apcu_clear_cache',
+    'wincache_ucache_clear',
+    'xcache_clear_cache',
+  ];
+  array_map('call_user_func', array_filter($user_caches, 'is_callable'));
+
+  drupal_rebuild($loader, $request);
 }
 
 /**
