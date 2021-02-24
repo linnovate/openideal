@@ -20,11 +20,22 @@ expression:
     conditions:
       -
         id: rules_condition
-        uuid: 7cd3932b-b234-4283-9b5a-ceb3cdc2ebf7
-        weight: 0
+        uuid: 7309dabd-c050-4003-97c5-3c06c6517790
+        weight: -50
         context_values: {  }
         context_mapping:
           data: comment.pid
+        context_processors: {  }
+        provides_mapping: {  }
+        condition_id: rules_data_is_empty
+        negate: true
+      -
+        id: rules_condition
+        uuid: 7cd3932b-b234-4283-9b5a-ceb3cdc2ebf7
+        weight: -49
+        context_values: {  }
+        context_mapping:
+          data: comment.pid.target_id
         context_processors: {  }
         provides_mapping: {  }
         condition_id: rules_data_is_empty
