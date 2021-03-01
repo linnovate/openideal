@@ -31,14 +31,17 @@ abstract class OpenidealStatisticsBaseStatisticsBlock extends BlockBase implemen
   /**
    * Checks if provided view mode not active.
    *
+   * @todo Remove me, and add this as block configuration.
+   *
    * @return bool
    *   True is not provided view mode.
    */
   public function isViewMode($mode) {
-    // Can't check view mode of blocks that are placed as plain structure
-    // blocks, so need to check if there is a node and if so then it's
-    // full view mode.
-    return (($mode == 'full' && $this->routeMatch->getParameter('node')) || (isset($this->getContexts()['view_mode'])) && ($this->getContexts()['view_mode']->getContextValue() == $mode));
+    // Can't check view mode of blocks that are placed in "Block layout"
+    // page, so need to check if it is a entity.node.canonical page and if so
+    // then its full view mode.
+    return ($mode == 'full' && $this->routeMatch->getRouteName() == 'entity.node.canonical') ||
+      isset($this->getContexts()['view_mode']) && $this->getContexts()['view_mode']->getContextValue() == $mode;
   }
 
   /**
