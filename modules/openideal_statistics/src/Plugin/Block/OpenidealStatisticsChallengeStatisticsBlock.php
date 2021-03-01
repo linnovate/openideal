@@ -27,7 +27,7 @@ class OpenidealStatisticsChallengeStatisticsBlock extends OpenidealStatisticsBas
    * {@inheritdoc}
    */
   public function build($challenge = NULL) {
-    $is_not_full = $this->isNotViewMode('full');
+    $is_not_full = !$this->isViewMode('full');
     $id = NULL;
 
     if ($node = $this->getEntity($this->getContexts())) {

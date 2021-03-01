@@ -4,11 +4,29 @@ namespace Drupal\openideal_statistics\Plugin\Block;
 
 use Drupal\Core\Block\BlockBase;
 use Drupal\Core\Entity\EntityInterface;
+use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Provides base class for openidealEntityStatistics blocks.
  */
-abstract class OpenidealStatisticsBaseStatisticsBlock extends BlockBase {
+abstract class OpenidealStatisticsBaseStatisticsBlock extends BlockBase implements ContainerFactoryPluginInterface {
+
+  /**
+   * Route match.
+   *
+   * @var \Drupal\Core\Routing\RouteMatch
+   */
+  protected $routeMatch;
+
+  /**
+   * {@inheritDoc}
+   */
+  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
+    $instance = new static($configuration, $plugin_id, $plugin_definition);
+    $instance->routeMatch = $container->get('current_route_match');
+    return $instance;
+  }
 
   /**
    * Checks if provided view mode not active.
@@ -16,8 +34,11 @@ abstract class OpenidealStatisticsBaseStatisticsBlock extends BlockBase {
    * @return bool
    *   True is not provided view mode.
    */
-  public function isNotViewMode($mode) {
-    return isset($this->getContexts()['view_mode']) && ($this->getContexts()['view_mode']->getContextValue() != $mode);
+  public function isViewMode($mode) {
+    // Can't check view mode of blocks that are placed as plain structure
+    // blocks, so need to check if there is a node and if so then it's
+    // full view mode.
+    return (($mode == 'full' && $this->routeMatch->getParameter('node')) || (isset($this->getContexts()['view_mode'])) && ($this->getContexts()['view_mode']->getContextValue() == $mode));
   }
 
   /**

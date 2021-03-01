@@ -30,8 +30,7 @@ class OpenidealStatisticsIdeaStatisticsBlock extends OpenidealStatisticsBaseStat
    * {@inheritdoc}
    */
   public function build($challenge = NULL) {
-    $contexts = $this->getContexts();
-    $is_not_full = isset($contexts['view_mode']) && $contexts['view_mode']->getContextValue() != 'full';
+    $is_not_full = !$this->isViewMode('full');
     $id = NULL;
 
     /** @var \Drupal\node\NodeInterface $node */
