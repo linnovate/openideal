@@ -73,7 +73,7 @@ class OpenidealIdeaEditFiveStarsForm extends FormBase {
         $label = $field_definition->label();
         $form['fields'][$id] = [
           '#type' => 'container',
-          '#attributes' => ['class' => ['field-five-stars-voting-wrapper']],
+          '#attributes' => ['class' => ['field-fivestar-voting-wrapper']],
           'label' => [
             '#required' => TRUE,
             '#type' => 'textfield',
@@ -123,7 +123,7 @@ class OpenidealIdeaEditFiveStarsForm extends FormBase {
       '#value' => $this->t('Save'),
     ];
 
-    $form['#attached']['library'][] = 'openideal_idea/fivestars';
+    $form['#attached']['library'][] = 'openideal_idea/fivestar';
 
     return $form;
   }
