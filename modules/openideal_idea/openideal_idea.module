@@ -349,3 +349,13 @@ function openideal_idea_module_implements_alter(&$implementations, $hook) {
 function openideal_idea_validation_constraint_alter(array &$definitions) {
   $definitions['ModerationState']['class'] = OpenidealModerationStateConstraint::class;
 }
+
+/**
+ * Implements hook_rabbit_hole_values_alter().
+ */
+function openideal_idea_rabbit_hole_values_alter(array &$values, \Drupal\Core\Entity\ContentEntityInterface $entity) {
+  // Redirect to Idea page even if it's an administrator.
+  if ($values['rh_action'] == 'openideal_group_page_redirect') {
+    $values['bypass_access'] = FALSE;
+  }
+}
