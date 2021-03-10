@@ -40,7 +40,7 @@ function openideal_content_form_vote_form_alter(&$form, FormStateInterface $form
  * voting count into hidden field for FE purposes.
  */
 function _openideal_content_vote_ajax_submit(&$form, FormStateInterface $form_state) {
-  // Todo: change the button label here.
+  // @todo change the button label here.
   // @see Drupal.behaviors.openidealThemeLikeWidgetLabel
   $form_state->getFormObject()
     ->submitForm($form, $form_state);
@@ -68,6 +68,20 @@ function _openideal_content_vote_ajax_submit(&$form, FormStateInterface $form_st
  */
 function openideal_content_views_query_alter(ViewExecutable $view, QueryPluginBase $query) {
   if ($view->id() == 'public_activity' && $view->current_display === 'personalized_activity_block' && $user = \Drupal::routeMatch()->getParameter('user')) {
+    $table_queue = $query->getTableQueue();
+
+    // Instead of adding three time flagging relationship in views change
+    // "main" join conditions.
+    if (isset($table_queue['flagging_node_field_data'])) {
+      /** @var \Drupal\views\Plugin\views\join\Standard $join */
+      $join = $table_queue['flagging_node_field_data']['join'];
+      $join->leftField = "'follow'";
+      $join->leftTable = NULL;
+      $join->field = 'flag_id';
+      // @todo make additional checks if tables fields where changed.
+      $join->extra = "node_field_data_node__field_idea.nid = flagging_node_field_data.entity_id OR node_field_data_message__field_node_reference.nid = flagging_node_field_data.entity_id";
+    }
+
     foreach ($query->where as &$condition_group) {
       foreach ($condition_group['conditions'] as &$condition) {
         if ($condition['value'] == '[user-page-id]') {

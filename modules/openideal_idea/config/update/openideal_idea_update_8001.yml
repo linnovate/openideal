@@ -1,0 +1,663 @@
+__global_actions:
+  import_configs:
+    - field.storage.node.field_five_stars
+    - field.field.node.idea.field_five_stars
+group.role.idea-443ed8e03:
+  expected_config: {  }
+  update_actions:
+    add:
+      permissions:
+        - 'view group_node:discussion entity'
+        - 'create group_node:discussion entity'
+        - 'delete any group_node:discussion entity'
+        - 'update any group_node:idea entity'
+        - 'update any group_node:discussion entity'
+        - 'view group_node:discussion entity'
+        - 'view unpublished group_node:discussion entity'
+group.role.idea-author:
+  expected_config: {  }
+  update_actions:
+    add:
+      permissions:
+        - 'update own group_node:discussion entity'
+        - 'view group_node:discussion entity'
+        - 'view unpublished group_node:discussion entity'
+group.role.idea-co_author:
+  expected_config: {  }
+  update_actions:
+    add:
+      permissions:
+        - 'view group_node:discussion entity'
+        - 'view unpublished group_node:discussion entity'
+group.role.idea-expert:
+  expected_config: {  }
+  update_actions:
+    add:
+      permissions:
+        - 'vote on expert review'
+        - 'create group_node:discussion entity'
+        - 'delete own group_node:discussion entity'
+        - 'update own group_node:discussion entity'
+        - 'view group_node:discussion entity'
+        - 'view unpublished group_node:discussion entity'
+group.role.idea-member:
+  expected_config: {  }
+  update_actions:
+    add:
+      permissions:
+        - 'view group_node:discussion entity'
+group.role.idea-outsider:
+  expected_config: {  }
+  update_actions:
+    add:
+      permissions:
+        - 'view group_node:discussion entity'
+block.block.idea_info:
+  expected_config: {  }
+  update_actions:
+    change:
+      weight: -14
+    add:
+      settings:
+        use_edit: 1
+      visibility:
+        node_type:
+          bundles:
+            discussion: discussion
+core.entity_view_display.node.idea.full:
+  expected_config: {  }
+  update_actions:
+    add:
+      hidden:
+        field_five_stars: true
+      third_party_settings:
+        layout_builder:
+          sections:
+            2:
+              layout_id: layout_onecol
+              layout_settings:
+                label: ''
+                layout_builder_styles_style:
+                  author: 0
+                  user_compact: 0
+                  user_profile: 0
+                  user_profile_top: 0
+              components:
+                98279087-e79c-45bf-8428-07c9bc822434:
+                  uuid: 98279087-e79c-45bf-8428-07c9bc822434
+                  region: content
+                  configuration:
+                    id: openidel_discussion_add
+                    label: 'Add disscusion block'
+                    provider: openideal_discussion
+                    label_display: '0'
+                    context_mapping:
+                      node: layout_builder.entity
+                  additional:
+                    visibility:
+                      493d2ff4-1b04-4596-b396-e81c61b58bc6:
+                        id: openideal_discussion_entity_in_state
+                        states:
+                          ex: ex
+                          needs_work: needs_work
+                          approved: approved
+                          postponed: postponed
+                          launched: launched
+                          rejected: rejected
+                        negate: 0
+                        uuid: 493d2ff4-1b04-4596-b396-e81c61b58bc6
+                        context_mapping:
+                          node: layout_builder.entity
+                    visibility_operator: and
+                  weight: 0
+                c7c3e2b3-623a-427d-b3ac-478baf6a5691:
+                  uuid: c7c3e2b3-623a-427d-b3ac-478baf6a5691
+                  region: content
+                  configuration:
+                    id: 'views_block:ideas-idea_discussions_block'
+                    label: ''
+                    provider: views
+                    label_display: '0'
+                    views_label: ''
+                    items_per_page: none
+                    context_mapping: { }
+                  additional:
+                    visibility:
+                      a0f3e645-fcf9-48f5-b52d-ec1489a14233:
+                        id: openideal_discussion_entity_in_state
+                        states:
+                          ex: ex
+                          needs_work: needs_work
+                          approved: approved
+                          postponed: postponed
+                          launched: launched
+                          rejected: rejected
+                        negate: 0
+                        uuid: a0f3e645-fcf9-48f5-b52d-ec1489a14233
+                        context_mapping:
+                          node: layout_builder.entity
+                    visibility_operator: and
+                  weight: 1
+              third_party_settings: { }
+rules.reaction.create_a_message_after_adding_new_content:
+  expected_config: { }
+  update_actions:
+    add:
+      expression:
+        conditions:
+          conditions:
+            -
+              condition_id: rules_entity_is_of_bundle
+              context_mapping:
+                entity: node
+              context_processors:
+                bundle:
+                  rules_tokens: {  }
+                type:
+                  rules_tokens: {  }
+              context_values:
+                bundle: discussion
+                type: node
+              id: rules_condition
+              negate: true
+              provides_mapping: {  }
+              uuid: 76d5caab-28d7-452a-9f74-3585bbbab017
+              weight: -47
+views.view.ideas:
+  expected_config: {  }
+  update_actions:
+    add:
+      display:
+        all_ideas_page:
+          cache_metadata:
+            tags:
+              - 'config:core.entity_view_display.node.discussion.default'
+              - 'config:core.entity_view_display.node.discussion.teaser'
+        idea_discussions_block:
+          display_plugin: block
+          id: idea_discussions_block
+          display_title: 'Idea discussions (block)'
+          position: 5
+          display_options:
+            display_extenders: { }
+            display_description: ''
+            style:
+              type: default
+              options: { }
+            defaults:
+              style: false
+              row: false
+              filters: false
+              filter_groups: false
+              arguments: false
+              relationships: false
+              fields: false
+            row:
+              type: fields
+              options:
+                inline: { }
+                separator: ''
+                hide_empty: false
+                default_field_elements: true
+            filters:
+              status:
+                value: '1'
+                table: node_field_data
+                field: status
+                plugin_id: boolean
+                entity_type: node
+                entity_field: status
+                id: status
+                expose:
+                  operator: ''
+                  operator_limit_selection: false
+                  operator_list: { }
+                group: 1
+              type:
+                id: type
+                table: node_field_data
+                field: type
+                value:
+                  idea: idea
+                entity_type: node
+                entity_field: type
+                plugin_id: bundle
+                expose:
+                  operator_limit_selection: false
+                  operator_list: { }
+                group: 1
+            filter_groups:
+              operator: AND
+              groups:
+                1: AND
+            arguments:
+              nid:
+                id: nid
+                table: node_field_data
+                field: nid
+                relationship: none
+                group_type: group
+                admin_label: ''
+                default_action: default
+                exception:
+                  value: all
+                  title_enable: false
+                  title: All
+                title_enable: false
+                title: ''
+                default_argument_type: node
+                default_argument_options: { }
+                default_argument_skip_url: false
+                summary_options:
+                  base_path: ''
+                  count: true
+                  items_per_page: 25
+                  override: false
+                summary:
+                  sort_order: asc
+                  number_of_records: 0
+                  format: default_summary
+                specify_validation: false
+                validate:
+                  type: none
+                  fail: 'not found'
+                validate_options: { }
+                break_phrase: false
+                not: false
+                entity_type: node
+                entity_field: nid
+                plugin_id: node_nid
+            relationships:
+              group_content:
+                id: group_content
+                table: node_field_data
+                field: group_content
+                relationship: none
+                group_type: group
+                admin_label: 'Content group content'
+                required: false
+                group_content_plugins:
+                  'group_node:idea': 'group_node:idea'
+                  'group_node:article': '0'
+                  'group_node:challenge': '0'
+                  'group_node:discussion': '0'
+                  'group_node:faq': '0'
+                  'group_node:page': '0'
+                entity_type: node
+                plugin_id: group_content_to_entity_reverse
+              gid:
+                id: gid
+                table: group_content_field_data
+                field: gid
+                entity_type: group_content
+                entity_field: gid
+                plugin_id: standard
+                relationship: group_content
+              group_content_id:
+                id: group_content_id
+                table: groups_field_data
+                field: group_content_id
+                relationship: gid
+                group_type: group
+                admin_label: 'Group content'
+                required: false
+                group_content_plugins:
+                  'group_node:discussion': 'group_node:discussion'
+                  'group_node:article': '0'
+                  'group_node:challenge': '0'
+                  'group_node:faq': '0'
+                  'group_node:idea': '0'
+                  'group_node:page': '0'
+                  group_membership: '0'
+                entity_type: group
+                plugin_id: group_to_group_content
+              gc__node_1:
+                id: gc__node_1
+                table: group_content_field_data
+                field: gc__node
+                relationship: group_content_id
+                group_type: group
+                admin_label: 'Group content Content'
+                required: false
+                group_content_plugins:
+                  'group_node:discussion': 'group_node:discussion'
+                  'group_node:article': '0'
+                  'group_node:challenge': '0'
+                  'group_node:faq': '0'
+                  'group_node:idea': '0'
+                  'group_node:page': '0'
+                entity_type: group_content
+                plugin_id: group_content_to_entity
+            fields:
+              rendered_entity:
+                id: rendered_entity
+                table: node
+                field: rendered_entity
+                relationship: gc__node_1
+                group_type: group
+                admin_label: ''
+                label: ''
+                exclude: false
+                alter:
+                  alter_text: false
+                  text: ''
+                  make_link: false
+                  path: ''
+                  absolute: false
+                  external: false
+                  replace_spaces: false
+                  path_case: none
+                  trim_whitespace: false
+                  alt: ''
+                  rel: ''
+                  link_class: ''
+                  prefix: ''
+                  suffix: ''
+                  target: ''
+                  nl2br: false
+                  max_length: 0
+                  word_boundary: true
+                  ellipsis: true
+                  more_link: false
+                  more_link_text: ''
+                  more_link_path: ''
+                  strip_tags: false
+                  trim: false
+                  preserve_tags: ''
+                  html: false
+                element_type: ''
+                element_class: ''
+                element_label_type: ''
+                element_label_class: ''
+                element_label_colon: false
+                element_wrapper_type: ''
+                element_wrapper_class: ''
+                element_default_classes: true
+                empty: ''
+                hide_empty: false
+                empty_zero: false
+                hide_alter_empty: true
+                view_mode: teaser
+                entity_type: node
+                plugin_id: rendered_entity
+          cache_metadata:
+            max-age: -1
+            contexts:
+              - 'languages:language_interface'
+              - url
+              - url.query_args
+              - 'url.query_args:sort_by'
+              - 'url.query_args:sort_order'
+              - 'user.node_grants:view'
+              - user.permissions
+            tags:
+              - 'config:core.entity_view_display.node.article.default'
+              - 'config:core.entity_view_display.node.article.front_page_teaser'
+              - 'config:core.entity_view_display.node.article.full'
+              - 'config:core.entity_view_display.node.article.message'
+              - 'config:core.entity_view_display.node.article.rss'
+              - 'config:core.entity_view_display.node.article.teaser'
+              - 'config:core.entity_view_display.node.challenge.default'
+              - 'config:core.entity_view_display.node.challenge.front_page_teaser'
+              - 'config:core.entity_view_display.node.challenge.full'
+              - 'config:core.entity_view_display.node.challenge.message'
+              - 'config:core.entity_view_display.node.challenge.teaser'
+              - 'config:core.entity_view_display.node.discussion.default'
+              - 'config:core.entity_view_display.node.discussion.teaser'
+              - 'config:core.entity_view_display.node.faq.default'
+              - 'config:core.entity_view_display.node.faq.message'
+              - 'config:core.entity_view_display.node.faq.teaser'
+              - 'config:core.entity_view_display.node.idea.default'
+              - 'config:core.entity_view_display.node.idea.front_page_teaser'
+              - 'config:core.entity_view_display.node.idea.full'
+              - 'config:core.entity_view_display.node.idea.message'
+              - 'config:core.entity_view_display.node.idea.teaser'
+              - 'config:core.entity_view_display.node.page.default'
+              - 'config:core.entity_view_display.node.page.full'
+              - 'config:core.entity_view_display.node.page.message'
+              - 'config:core.entity_view_display.node.page.teaser'
+views.view.public_activity:
+  expected_config:
+    display:
+      default:
+        display_options:
+          query:
+            options:
+              query_tags: {  }
+      personalized_activity_block:
+        display_options:
+          filters:
+            uid:
+              relationship: flag_relationship
+          relationships:
+            flag_relationship:
+              admin_label: Flags
+              entity_type: node
+              field: flag_relationship
+              flag: follow
+              group_type: group
+              id: flag_relationship
+              plugin_id: flag_relationship
+              relationship: field_node_reference
+              required: false
+              table: node_field_data
+              user_scope: any
+  update_actions:
+    delete:
+      display:
+        personalized_activity_block:
+          display_options:
+            relationships:
+              flag_relationship:
+                admin_label: Flags
+                entity_type: node
+                field: flag_relationship
+                flag: follow
+                group_type: group
+                id: flag_relationship
+                plugin_id: flag_relationship
+                relationship: field_node_reference
+                required: false
+                table: node_field_data
+                user_scope: any
+    add:
+      display:
+        personalized_activity_block:
+          display_options:
+            relationships:
+              field_idea:
+                admin_label: 'field_idea: Content'
+                field: field_idea
+                group_type: group
+                id: field_idea
+                plugin_id: standard
+                relationship: field_node_reference
+                required: false
+                table: node__field_idea
+        public_activity_block:
+          display_options:
+            defaults:
+              relationships: false
+            relationships: {  }
+    change:
+      display:
+        default:
+          display_options:
+            query:
+              options:
+                query_tags:
+                  - message_access
+        personalized_activity_block:
+          display_options:
+            filters:
+              uid:
+                relationship: flag_relationship_1
+            relationships:
+              flag_relationship_1:
+                admin_label: Flags
+                entity_type: node
+                field: flag_relationship
+                flag: follow
+                group_type: group
+                id: flag_relationship_1
+                plugin_id: flag_relationship
+                relationship: field_node_reference
+                required: false
+                table: node_field_data
+                user_scope: any
+              node:
+                admin_label: 'Content From Comment'
+                entity_type: comment
+                field: node
+                group_type: group
+                id: node
+                plugin_id: standard
+                relationship: field_comment_reference
+                required: false
+                table: comment_field_data
+ultimate_cron.job.openideal_idea_cron:
+  expected_config:
+    launcher:
+      configuration:
+        launcher:
+          thread: 0
+        timeouts:
+          lock_timeout: 3600
+    logger:
+      configuration:
+        expire: 1209600
+        method: '3'
+        retain: 1000
+    scheduler:
+      configuration:
+        rules:
+          - '*/30+@ * * * *'
+  update_actions:
+    delete:
+      launcher:
+        configuration:
+          launcher:
+            thread: 0
+          timeouts:
+            lock_timeout: 3600
+      logger:
+        configuration:
+          expire: 1209600
+          method: '3'
+          retain: 1000
+      scheduler:
+        configuration:
+          rules:
+            - '*/30+@ * * * *'
+block.block.challenge_flag_block:
+  expected_config:
+    weight: -11
+  update_actions:
+    change:
+      weight: -15
+block.block.challenge_statistics_block:
+  expected_config:
+    weight: -8
+  update_actions:
+    change:
+      weight: -12
+block.block.flag_and_like_block:
+  expected_config:
+    weight: -12
+  update_actions:
+    change:
+      weight: -16
+block.block.idea_statistics_sidebar_block:
+  expected_config:
+    weight: -7
+  update_actions:
+    add:
+      settings:
+        show_five_stars: 1
+    change:
+      weight: -11
+block.block.node_tags:
+  expected_config:
+    weight: -2
+  update_actions:
+    change:
+      weight: -5
+block.block.ridiculously_responsive_social_share_buttons:
+  expected_config:
+    weight: -5
+  update_actions:
+    change:
+      weight: -8
+block.block.views_block__followers_co_authors_block:
+  expected_config:
+    weight: -3
+  update_actions:
+    change:
+      weight: -6
+block.block.views_block__followers_followers:
+  expected_config:
+    weight: -4
+  update_actions:
+    change:
+      weight: -7
+block.block.views_block__public_activity_personalized_activity_block:
+  expected_config:
+    weight: -9
+  update_actions:
+    change:
+      weight: -13
+block.block.views_block__public_activity_public_activity_block:
+  expected_config:
+    weight: -13
+  update_actions:
+    change:
+      weight: -17
+block.block.workflow_status:
+  expected_config:
+    weight: -6
+  update_actions:
+    change:
+      weight: -10
+core.entity_form_display.node.idea.default:
+  expected_config: {  }
+  update_actions:
+    add:
+      hidden:
+        field_five_stars: true
+core.entity_view_display.node.idea.default:
+  expected_config: {  }
+  update_actions:
+    add:
+      content:
+        field_five_stars:
+          label: above
+          region: content
+          settings:
+            limit: 0
+            offset: 0
+            readonly: false
+            show_own_vote: false
+            show_results: false
+            style: default
+            values: {  }
+          third_party_settings: {  }
+          type: voting_api_formatter
+          weight: 113
+core.entity_view_display.node.idea.front_page_teaser:
+  expected_config: {  }
+  update_actions:
+    add:
+      hidden:
+        field_five_stars: true
+core.entity_view_display.node.idea.message:
+  expected_config: {  }
+  update_actions:
+    add:
+      hidden:
+        field_five_stars: true
+core.entity_view_display.node.idea.teaser:
+  expected_config: {  }
+  update_actions:
+    add:
+      hidden:
+        field_five_stars: true

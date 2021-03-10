@@ -15,7 +15,7 @@ use Drupal\social_auth_google\GoogleAuthManager;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 /**
- * Class OpenidealSocialAuthSubscriber.
+ * Event subscriber to react on social auth events.
  */
 class OpenidealSocialAuthSubscriber implements EventSubscriberInterface {
 

@@ -6,8 +6,30 @@ core_version_requirement: ^8 || ^9
 package: 'OpenideaL'
 
 dependencies:
-  - rrssb:rrssb
+  # OI
+  - openideal_layout:openideal_layout
+  # Core
+  - drupal:block
   - drupal:content_moderation
-  - drupal:workflows
-  - group:group
+  - drupal:file
+  - drupal:menu_ui
   - drupal:node
+  - drupal:workflows
+  - drupal:user
+  - drupal:text
+  - drupal:comment
+  - drupal:comments_order
+  - drupal:image
+  - drupal:metatag
+  - drupal:layout_builder
+  # Contrib
+  - dropzonejs_eb_widget:dropzonejs_eb_widget
+  - allowed_formats:allowed_formats
+  - flag:flag
+  - group:group
+  - gnode:gnode
+  - update_helper:update_helper
+  - group_roles_management:group_roles_management
+  - rrssb:rrssb
+  - votingapi_reaction:votingapi_reaction
+  - votingapi_widgets:votingapi_widgets

@@ -6,7 +6,7 @@ use Drupal\content_moderation\Event\ContentModerationStateChangedEvent;
 use Symfony\Component\EventDispatcher\Event;
 
 /**
- * Class OpenidealContentModerationEvent.
+ * An event for content moderation state.
  */
 class OpenidealContentModerationEvent extends Event {
 

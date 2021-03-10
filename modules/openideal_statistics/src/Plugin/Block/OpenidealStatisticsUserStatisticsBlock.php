@@ -51,7 +51,9 @@ class OpenidealStatisticsUserStatisticsBlock extends BlockBase {
       ],
       'ideas' => [
         'bottom' => [
-          '#lazy_builder' => ['openideal_statistics.lazy_builder:getUserIdeas', [$id]],
+          '#lazy_builder' => ['openideal_statistics.lazy_builder:getUserIdeas',
+            [$id],
+          ],
           '#create_placeholder' => TRUE,
         ],
         'title' => $this->t('@user ideas', ['@user' => $user->getDisplayName()]),
@@ -59,7 +61,9 @@ class OpenidealStatisticsUserStatisticsBlock extends BlockBase {
       ],
       'votes' => [
         'bottom' => [
-          '#lazy_builder' => ['openideal_statistics.lazy_builder:getUserVotes', [$id]],
+          '#lazy_builder' => ['openideal_statistics.lazy_builder:getUserVotes',
+            [$id],
+          ],
           '#create_placeholder' => TRUE,
         ],
         'title' => $this->t('@user votes', ['@user' => $user->getDisplayName()]),
@@ -67,7 +71,9 @@ class OpenidealStatisticsUserStatisticsBlock extends BlockBase {
       ],
       'comments' => [
         'bottom' => [
-          '#lazy_builder' => ['openideal_statistics.lazy_builder:getUserComments', [$id]],
+          '#lazy_builder' => ['openideal_statistics.lazy_builder:getUserComments',
+            [$id],
+          ],
           '#create_placeholder' => TRUE,
         ],
         'title' => $this->t('@user comments', ['@user' => $user->getDisplayName()]),

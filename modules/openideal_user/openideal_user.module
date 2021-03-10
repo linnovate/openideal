@@ -71,7 +71,10 @@ function openideal_user_preprocess_page(&$variables) {
       && ($current_route !== 'entity.user.edit_form' && $current_route !== 'openideal_user.register.user.more_about_you')
       && !$user->hasRole('administrator')) {
       \Drupal::messenger()->addMessage(t('Please fill your <a href="@link">profile</a>',
-        ['@link' => Url::fromRoute('entity.user.edit_form', ['user' => $user_id])->toString()]
+        [
+          '@link' => Url::fromRoute('entity.user.edit_form',
+          ['user' => $user_id])->toString(),
+        ]
       ));
     }
   }
@@ -200,8 +203,8 @@ function openideal_user_form_alter(&$form, FormStateInterface $form_state, $form
 function _openideal_user_preprocess_group_membership($element, FormStateInterface $form_state) {
   if (isset($element['idea-author']) == 'idea-author' && \Drupal::routeMatch()->getRouteName() == 'entity.group_content.edit_form') {
     $group = \Drupal::routeMatch()->getParameter('group');
-    $roles = \Drupal::service('group.membership_loader')->load($group, Drupal::currentUser())->getRoles();
-    if (array_key_exists('idea-author', $roles)) {
+    // @todo Fix submit logic.
+    if (!\Drupal::service('group_permission.checker')->hasPermissionInGroup('manage members with role idea-author', \Drupal::currentUser(), $group)) {
       $element['idea-author']['#attributes']['disabled'] = TRUE;
     }
   }

@@ -1,0 +1,65 @@
+<?php
+
+/**
+ * @file
+ * Contain Openideal discussion hooks.
+ */
+
+use Drupal\Core\Entity\EntityInterface;
+use Drupal\Core\Access\AccessResult;
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Session\AccountInterface;
+
+/**
+ * Implements hook_form_alter().
+ */
+function openideal_discussion_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  if (!in_array($form_id, ['node_discussion_edit_form', 'node_discussion_form'])) {
+    return;
+  }
+
+  $form['status']['widget']['value']['#title'] = 'Visibility';
+  $form['status']['widget']['value']['#description'] = t('<p>If checked show the discussion for each user otherwise only shows to idea group members</p>');
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_create_access().
+ *
+ * Allow to add comments in Idea discussion only
+ * for group member with certain permission.
+ */
+function openideal_discussion_comment_create_access(AccountInterface $account, array $context, $entity_bundle) {
+  // Get commented entity from $context array once
+  // https://www.drupal.org/project/drupal/issues/2879087 is landed.
+  if (($node = \Drupal::routeMatch()->getParameter('node')) && $node->bundle() == 'discussion') {
+    /** @var \Drupal\group\Access\GroupPermissionChecker $permission_checker */
+    $permission_checker = \Drupal::service('group_permission.checker');
+    /** @var \Drupal\openideal_idea\OpenidealHelper $helper */
+    $helper = \Drupal::service('openideal_idea.helper');
+
+    $group = $helper->getGroupFromNode($node);
+    $status = (bool) $node->field_status->value;
+    return AccessResult::forbiddenIf(!$status || !$permission_checker->hasPermissionInGroup('view unpublished group_node:discussion entity', $account, $group))->addCacheableDependency($node);
+  }
+  return AccessResult::neutral();
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_insert().
+ */
+function openideal_discussion_node_insert(EntityInterface $entity) {
+  // Don't do that logic in hook_ENTITY_TYPE_presave because need
+  // to add the group only once.
+  if ($entity->bundle() == 'discussion') {
+    /** @var \Drupal\group\Entity\Group $group */
+    $group = \Drupal::routeMatch()->getParameter('group');
+    if (!$group) {
+      \Drupal::logger('openideal_discussion')->error('Cannot find group for Discussion, for discussion id=@id', ['@id' => $entity->id()]);
+    }
+
+    $ideas = $group->getContentEntities('group_node:idea');
+    $idea = current($ideas);
+    $entity->set('field_idea', $idea);
+    $entity->save();
+  }
+}
