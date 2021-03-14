@@ -9,7 +9,7 @@ use Drupal\layout_builder\LayoutBuilderEvents;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 /**
- * Class OpenidealCommentEventSubscriber.
+ * Openideal Comment event subscriber.
  */
 class OpenidealCommentEventSubscriber implements EventSubscriberInterface {
 

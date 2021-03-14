@@ -29,7 +29,10 @@ class SiteWideStatisticsBlock extends BlockBase {
       ],
       'members' => [
         '#lazy_element' => [
-          '#lazy_builder' => ['openideal_statistics.lazy_builder:getMembers', []],
+          '#lazy_builder' => [
+            'openideal_statistics.lazy_builder:getMembers',
+            [],
+          ],
           '#create_placeholder' => TRUE,
         ],
         '#item_title' => $this->t('Members'),
@@ -37,7 +40,10 @@ class SiteWideStatisticsBlock extends BlockBase {
       ],
       'comments' => [
         '#lazy_element' => [
-          '#lazy_builder' => ['openideal_statistics.lazy_builder:getComments', []],
+          '#lazy_builder' => [
+            'openideal_statistics.lazy_builder:getComments',
+            [],
+          ],
           '#create_placeholder' => TRUE,
         ],
         '#item_title' => $this->t('Comments'),

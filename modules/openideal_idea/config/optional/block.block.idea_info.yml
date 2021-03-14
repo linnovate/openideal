@@ -1,0 +1,42 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - openideal_idea
+    - route_condition
+  theme:
+    - openideal_theme
+id: idea_info
+theme: openideal_theme
+region: sidebar
+weight: -14
+provider: null
+plugin: openideal_idea_info_block
+settings:
+  id: openideal_idea_info_block
+  label: 'Node info'
+  provider: openideal_idea
+  label_display: '0'
+  use_created: 1
+  use_updated: 1
+  use_schedule: 1
+  use_edit: 1
+  context_mapping:
+    node: '@node.node_route_context:node'
+visibility:
+  node_type:
+    id: node_type
+    bundles:
+      challenge: challenge
+      discussion: discussion
+      idea: idea
+      article: article
+    negate: false
+    context_mapping:
+      node: '@node.node_route_context:node'
+  route:
+    id: route
+    routes: entity.node.canonical
+    negate: false
+    context_mapping: {  }

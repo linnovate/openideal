@@ -1,0 +1,45 @@
+.node--type-discussion.node--view-mode-teaser {
+  margin-bottom: 0;
+}
+
+.discussion-teaser {
+  padding: size(16) size(20) size(0) size(20);
+  border-radius: 0;
+
+  &--section__first,
+  &--section__second {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &--section__first {
+    margin-bottom: size(15);
+
+    .block-openideal-idea-info-block .idea-information--list__item {
+      flex-direction: column;
+      align-items: center;
+      &--value {
+        color: $main-font-color;
+        font-weight: $font-weight-bold;
+      }
+      &--title {
+        font-weight: $font-weight-normal;
+        &:after {
+          content: '';
+        }
+      }
+    }
+  }
+
+  &--section__second {
+    padding: size(0) size(74) size(16) size(0);
+
+    .block-extra-field-blocknodediscussionlinks {
+      font-weight: 600;
+    }
+  }
+
+  p {
+    margin-bottom: 0;
+  }
+}

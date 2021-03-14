@@ -35,7 +35,6 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  *     ),
  *     "user" = @ContextDefinition("entity:user",
  *       label = @Translation("User"),
- *       assignment_restriction = "selector",
  *       required = FALSE
  *     ),
  *   }
@@ -94,10 +93,10 @@ class MessageAction extends RulesActionBase implements ContainerFactoryPluginInt
    *   Template ID.
    * @param \Drupal\Core\Entity\EntityInterface $entity
    *   The referenced entity.
-   * @param \Drupal\user\UserInterface $user
+   * @param \Drupal\user\UserInterface|null $user
    *   The mentioned user.
    */
-  protected function doExecute($template, EntityInterface $entity, UserInterface $user = NULL) {
+  protected function doExecute($template, EntityInterface $entity, $user = NULL) {
     // If user already voted nothing to do here.
     if ($entity instanceof VoteInterface && $this->isUserVoted($entity, $template)) {
       return;

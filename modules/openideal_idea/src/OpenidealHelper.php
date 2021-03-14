@@ -3,15 +3,17 @@
 namespace Drupal\openideal_idea;
 
 use Drupal\Core\Config\ConfigFactory;
+use Drupal\Core\Database\Connection;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
-use Drupal\Core\Extension\ModuleHandler;
+use Drupal\Core\Field\FieldDefinitionInterface;
 use Drupal\Core\Session\AccountInterface;
+use Drupal\field\Entity\FieldConfig;
 use Drupal\group\GroupMembershipLoader;
 use Drupal\node\NodeInterface;
 use Drupal\statistics\NodeStatisticsDatabaseStorage;
 
 /**
- * Class OpenidealHelper.
+ * Provides openideal helper service.
  */
 class OpenidealHelper {
 
@@ -51,6 +53,13 @@ class OpenidealHelper {
   protected $nodeStatisticsDatabase;
 
   /**
+   * Database connection.
+   *
+   * @var \Drupal\Core\Database\Connection
+   */
+  protected $database;
+
+  /**
    * OpenidealHelper construct.
    *
    * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager
@@ -59,19 +68,19 @@ class OpenidealHelper {
    *   Group membership loader.
    * @param \Drupal\Core\Config\ConfigFactory $configFactory
    *   Config factory.
-   * @param \Drupal\Core\Extension\ModuleHandler $moduleHandler
-   *   Module handler.
+   * @param \Drupal\Core\Database\Connection $database
+   *   Database.
    */
   public function __construct(
     EntityTypeManagerInterface $entity_type_manager,
     GroupMembershipLoader $group_membership_loader,
     ConfigFactory $configFactory,
-    ModuleHandler $moduleHandler
+    Connection $database
   ) {
     $this->entityTypeManager = $entity_type_manager;
     $this->groupMembershipLoader = $group_membership_loader;
     $this->configFactory = $configFactory;
-    $this->moduleHandler = $moduleHandler;
+    $this->database = $database;
   }
 
   /**
@@ -80,10 +89,10 @@ class OpenidealHelper {
    * @param \Drupal\node\NodeInterface $node
    *   Node.
    *
-   * @return \Drupal\group\Entity\Group
-   *   Group.
+   * @return \Drupal\group\Entity\Group|false
+   *   Group or false in case if group couldn't be found.
    */
-  public function getGroupByNode(NodeInterface $node) {
+  public function getGroupFromNode(NodeInterface $node) {
     // Get the group_content - gnode.
     $group_contents = $this->entityTypeManager
       ->getStorage('group_content')
@@ -111,7 +120,7 @@ class OpenidealHelper {
    *   Return group member or false.
    */
   public function getGroupMember(AccountInterface $account, NodeInterface $node) {
-    if ($group = $this->getGroupByNode($node)) {
+    if ($group = $this->getGroupFromNode($node)) {
       return $this->groupMembershipLoader->load($group, $account);
     }
     return FALSE;
@@ -120,13 +129,14 @@ class OpenidealHelper {
   /**
    * Compute overall score.
    *
-   * @param string|int $id
+   * @param \Drupal\node\NodeInterface $idea
    *   Node id.
    *
    * @return float|int
    *   Score.
    */
-  public function computeOverallScore($id) {
+  public function computeOverallScore(NodeInterface $idea) {
+    $id = $idea->id();
     $configuration = $this->configFactory->get('openideal_idea.scoreconfig');
     // Get node comments.
     $comments = $this->entityTypeManager->getStorage('comment')->getQuery()
@@ -146,16 +156,74 @@ class OpenidealHelper {
     $node_counter_value = 0;
 
     // If statistics module is enabled then add node view count to score.
-    if ($this->moduleHandler->moduleExists('statistics')) {
+    if ($this->nodeStatisticsDatabase) {
       $statistics_result = $this->nodeStatisticsDatabase->fetchView($id);
       if ($statistics_result) {
         $node_counter_value = $statistics_result->getTotalCount() * ($configuration->get('node_value') ?? 0.2);
       }
     }
 
-    return $comments * ($configuration->get('comments_value') ?? 10)
+    $five_stars = $this->retrieveFivestarsScore($idea);
+
+    return $five_stars + $comments * ($configuration->get('comments_value') ?? 10)
       + $votes * ($configuration->get('votes_value') ?? 5)
       + $node_counter_value;
+  }
+
+  /**
+   * Retrieve voting api results for an idea.
+   *
+   * Formula: (average_score - 3) * weight.
+   *
+   * @param \Drupal\node\NodeInterface $idea
+   *   Idea.
+   *
+   * @return int
+   *   Results.
+   */
+  private function retrieveFivestarsScore(NodeInterface $idea) {
+    $fields = $idea->getFieldDefinitions();
+    $query = $this->database->select('votingapi_result', 'v')
+      ->fields('v', ['function', 'value'])
+      ->condition('entity_type', $idea->getEntityTypeId())
+      ->condition('type', 'vote')
+      ->condition('entity_id', $idea->id());
+    $condition = $query->orConditionGroup();
+    $weights = [];
+    foreach ($fields as $field_name => $field_definition) {
+      if (static::isVotingAPIField($field_definition)) {
+        $weight = (int) $idea->get($field_name)->getFieldDefinition()->getThirdPartySetting('openideal_idea', 'weight');
+        $condition->condition('function', 'vote_field_average:node.' . $field_name);
+        $weights['vote_field_average:node.' . $field_name] = $weight;
+      }
+    }
+    $scores = $query
+      ->condition($condition)
+      ->execute()
+      ->fetchAllKeyed(1, 0);
+
+    $fivestars_score = 0;
+    array_walk($scores,
+      function ($function, $value) use ($weights, &$fivestars_score) {
+        $fivestars_score += ((int) $value - 3) * $weights[$function];
+      }
+    );
+
+    return $fivestars_score;
+  }
+
+  /**
+   * Checks if the field of voting api type.
+   *
+   * @param \Drupal\Core\Field\FieldDefinitionInterface $field_definition
+   *   Field to check.
+   *
+   * @return bool
+   *   TRUE if it is voting api field.
+   */
+  // @codingStandardsIgnoreLine
+  public static function isVotingAPIField(FieldDefinitionInterface $field_definition) {
+    return $field_definition instanceof FieldConfig && $field_definition->getType() == 'voting_api_field';
   }
 
   /**
