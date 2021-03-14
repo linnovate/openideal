@@ -12,17 +12,13 @@ bundle: faq
 mode: default
 content:
   field_faq_items:
-    type: faqfield_accordion
-    weight: 2
+    type: faqfield_anchor_list
+    weight: 3
     label: hidden
     settings:
-      active: 0
-      heightStyle: auto
-      collapsible: false
-      event: click
-      animate:
-        easing: linear
-        duration: 200
+      anchor_list_type: ul
+      offset: 0
+      limit: 0
     third_party_settings: {  }
     region: content
 hidden: {  }

@@ -1,0 +1,26 @@
+uuid: ca275675-c5a8-4cfd-8ddb-f50a905cd311
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.faq
+    - field.field.block_content.faq.field_faq
+  module:
+    - entity_reference_revisions
+id: block_content.faq.default
+targetEntityType: block_content
+bundle: faq
+mode: default
+content:
+  field_faq:
+    type: entity_reference_revisions_entity_view
+    weight: 0
+    label: hidden
+    settings:
+      view_mode: default
+      link: ''
+      offset: 0
+      limit: 0
+    third_party_settings: {  }
+    region: content
+hidden: {  }
