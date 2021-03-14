@@ -1,0 +1,14 @@
+<?php
+
+/**
+ * @file Contains main hooks for ofc module.
+ */
+
+/**
+ * Implements hook_ENTITY_TYPE_insert().
+ */
+function openideal_faq_content_node_insert(\Drupal\node\NodeInterface $node) {
+  if ($node->uuid() == '62e92783-c1a6-4cc2-bd50-198884f083ec') {
+    $path = \Drupal::service('path.alias_storage')->save("/node/" . $node->id(), "/faq", "en");
+  }
+}
