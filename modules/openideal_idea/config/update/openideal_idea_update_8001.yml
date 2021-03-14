@@ -449,17 +449,6 @@ views.view.public_activity:
           display_options:
             relationships:
               flag_relationship:
-                admin_label: Flags
-                entity_type: node
-                field: flag_relationship
-                flag: follow
-                group_type: group
-                id: flag_relationship
-                plugin_id: flag_relationship
-                relationship: field_node_reference
-                required: false
-                table: node_field_data
-                user_scope: any
     add:
       display:
         personalized_activity_block:
@@ -618,12 +607,6 @@ block.block.workflow_status:
   update_actions:
     change:
       weight: -10
-core.entity_form_display.node.idea.default:
-  expected_config: {  }
-  update_actions:
-    add:
-      hidden:
-        field_five_stars: true
 core.entity_view_display.node.idea.default:
   expected_config: {  }
   update_actions:
@@ -661,3 +644,52 @@ core.entity_view_display.node.idea.teaser:
     add:
       hidden:
         field_five_stars: true
+core.entity_form_display.node.idea.default:
+  expected_config:
+    content:
+      field_images:
+        settings:
+          entity_browser: openideal_images_browser
+          field_widget_edit: true
+          field_widget_remove: true
+          field_widget_replace: true
+          open: false
+          preview_image_style: thumbnail
+          selection_mode: selection_append
+          view_mode: default
+        type: entity_browser_file
+  update_actions:
+    add:
+      dependencies:
+        config:
+          - entity_browser.browser.openideal_file_browser
+          - image.style.front_page_teaser_large
+        module:
+          - image_widget_crop
+      hidden:
+        field_five_stars: true
+    delete:
+      content:
+        field_images:
+          settings:
+            entity_browser: openideal_images_browser
+            field_widget_edit: true
+            field_widget_remove: true
+            field_widget_replace: true
+            open: false
+            selection_mode: selection_append
+            view_mode: default
+    change:
+      content:
+        field_images:
+          settings:
+            crop_list:
+              - image
+            crop_preview_image_style: original
+            crop_types_required: {  }
+            preview_image_style: front_page_teaser_large
+            progress_indicator: throbber
+            show_crop_area: false
+            show_default_crop: true
+            warn_multiple_usages: true
+          type: image_widget_crop

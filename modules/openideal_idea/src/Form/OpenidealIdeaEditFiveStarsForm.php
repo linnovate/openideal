@@ -72,6 +72,8 @@ class OpenidealIdeaEditFiveStarsForm extends FormBase {
         $weight = $field_definition->getThirdPartySetting('openideal_idea', 'weight');
         $label = $field_definition->label();
         $form['fields'][$id] = [
+          '#type' => 'container',
+          '#attributes' => ['class' => ['field-fivestar-voting-wrapper']],
           'label' => [
             '#required' => TRUE,
             '#type' => 'textfield',
@@ -120,6 +122,8 @@ class OpenidealIdeaEditFiveStarsForm extends FormBase {
       '#type' => 'submit',
       '#value' => $this->t('Save'),
     ];
+
+    $form['#attached']['library'][] = 'openideal_idea/fivestar';
 
     return $form;
   }

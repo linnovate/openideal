@@ -1,0 +1,135 @@
+core.entity_form_display.user.user.additional_details:
+  expected_config:
+    content:
+      avatars_user_picture:
+        settings:
+          entity_browser: openideal_image_browser
+          field_widget_edit: true
+          field_widget_remove: '1'
+          field_widget_replace: 0
+          open: 0
+          preview_image_style: compact_user_icon
+          selection_mode: selection_append
+          view_mode: default
+        type: openideal_user_entity_browser_single_file
+  update_actions:
+    delete:
+      content:
+        avatars_user_picture:
+          settings:
+            entity_browser: openideal_image_browser
+            field_widget_edit: true
+            field_widget_remove: '1'
+            field_widget_replace: 0
+            open: 0
+            selection_mode: selection_append
+            view_mode: default
+    change:
+      content:
+        avatars_user_picture:
+          settings:
+            crop_list:
+              - profile
+            crop_preview_image_style: original
+            crop_types_required: {  }
+            preview_image_style: user_account_image
+            progress_indicator: throbber
+            show_crop_area: false
+            show_default_crop: true
+            warn_multiple_usages: true
+          type: image_widget_crop
+core.entity_form_display.user.user.default:
+  expected_config:
+    content:
+      avatars_user_picture:
+        settings:
+          entity_browser: openideal_image_browser
+          field_widget_edit: true
+          field_widget_remove: '1'
+          field_widget_replace: 0
+          open: 0
+          preview_image_style: compact_user_icon
+          selection_mode: selection_append
+          view_mode: default
+        type: openideal_user_entity_browser_single_file
+  update_actions:
+    delete:
+      content:
+        avatars_user_picture:
+          settings:
+            entity_browser: openideal_image_browser
+            field_widget_edit: true
+            field_widget_remove: '1'
+            field_widget_replace: 0
+            open: 0
+            selection_mode: selection_append
+            view_mode: default
+    change:
+      content:
+        avatars_user_picture:
+          settings:
+            crop_list:
+              - profile
+            crop_preview_image_style: original
+            crop_types_required: {  }
+            preview_image_style: user_account_image
+            progress_indicator: throbber
+            show_crop_area: false
+            show_default_crop: true
+            warn_multiple_usages: true
+          type: image_widget_crop
+core.entity_form_display.user.user.edit:
+  expected_config:
+    content:
+      avatars_user_picture:
+        settings:
+          entity_browser: openideal_image_browser
+          field_widget_edit: true
+          field_widget_remove: true
+          field_widget_replace: false
+          open: false
+          preview_image_style: compact_user_icon
+          selection_mode: selection_append
+          view_mode: default
+        type: entity_browser_file
+  update_actions:
+    delete:
+      content:
+        avatars_user_picture:
+          settings:
+            entity_browser: openideal_image_browser
+            field_widget_edit: true
+            field_widget_remove: true
+            field_widget_replace: false
+            open: false
+            selection_mode: selection_append
+            view_mode: default
+    change:
+      content:
+        avatars_user_picture:
+          settings:
+            crop_list:
+              - profile
+            crop_preview_image_style: original
+            crop_types_required: {  }
+            preview_image_style: user_account_image
+            progress_indicator: throbber
+            show_crop_area: false
+            show_default_crop: true
+            warn_multiple_usages: true
+          type: image_widget_crop
+layout_builder_styles.style.user_compact:
+  expected_config: {  }
+  update_actions:
+    add:
+      layout_restrictions: {  }
+layout_builder_styles.style.user_profile:
+  expected_config: {  }
+  update_actions:
+    add:
+      layout_restrictions: {  }
+layout_builder_styles.style.user_profile_top:
+  expected_config: {  }
+  update_actions:
+    add:
+      layout_restrictions: {  }

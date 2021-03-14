@@ -13708,10 +13708,7 @@ nav.tabs {
              -o-transform: scale(0.9);
                 transform: scale(0.9);
         background-color: #27C8f9;
-        text-decoration: none;
-        -webkit-transform: scale(1.005);
-             -o-transform: scale(1.005);
-                transform: scale(1.005); }
+        text-decoration: none; }
       .site-navigation--add-idea a:before {
         content: '';
         display: inline-block;
@@ -13805,13 +13802,20 @@ nav.tabs {
         -ms-flex-direction: column;
             flex-direction: column;
     margin-bottom: 0; }
-    .site-navigation--user-account .profile-author-view-mode .layout__region--content img {
-      width: 64px;
-      height: 64px;
-      border-radius: 50%;
+    .site-navigation--user-account .profile-author-view-mode .layout__region--content .field--name-user-picture {
+      max-width: 4rem;
+      height: 4rem;
       margin-right: 0; }
+    .site-navigation--user-account .profile-author-view-mode .layout__region--content img {
+      border-radius: 50%;
+      margin-right: 0;
+      -o-object-fit: cover;
+         object-fit: cover; }
     .site-navigation--user-account .profile-author-view-mode .layout__region--content a {
-      margin-top: 6px;
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: -ms-flexbox;
+      display: flex;
       font-size: 16px;
       font-weight: bold;
       text-decoration: none;
@@ -14029,10 +14033,7 @@ nav.tabs {
          -o-transform: scale(0.9);
             transform: scale(0.9);
     background-color: #1e7697;
-    text-decoration: none;
-    -webkit-transform: scale(1.005);
-         -o-transform: scale(1.005);
-            transform: scale(1.005); }
+    text-decoration: none; }
 
 .form-control {
   border: 1px solid #D0D6DC;
@@ -14151,10 +14152,7 @@ nav.tabs {
              -o-transform: scale(0.9);
                 transform: scale(0.9);
         background-color: transparent;
-        text-decoration: none;
-        -webkit-transform: scale(1.005);
-             -o-transform: scale(1.005);
-                transform: scale(1.005); }
+        text-decoration: none; }
       .comments--header__add-comment-btn:hover, .comments--header__add-comment-btn:active {
         color: #1294ca; }
   .comments--bottom {
@@ -14274,10 +14272,7 @@ nav.tabs {
              -o-transform: scale(0.9);
                 transform: scale(0.9);
         background-color: #1e7697;
-        text-decoration: none;
-        -webkit-transform: scale(1.005);
-             -o-transform: scale(1.005);
-                transform: scale(1.005); }
+        text-decoration: none; }
     .comment-comment-form .form-actions .font-submit-btn-wrapper img {
       font-size: inherit;
       top: 50%;
@@ -14310,6 +14305,11 @@ nav.tabs {
     .block-extra-field-blockcommentcommentlinks .nav-link {
       padding: 10px;
       font-size: 0.9375rem; } }
+
+.node--view-mode-full .card-img-top img {
+  max-height: 15.625rem;
+  -o-object-fit: cover;
+     object-fit: cover; }
 
 .node--view-mode-full .card-body {
   padding: 26px 101px 50px 19px; }
@@ -14445,10 +14445,7 @@ nav.tabs {
              -o-transform: scale(0.9);
                 transform: scale(0.9);
         background-color: #fff;
-        text-decoration: none;
-        -webkit-transform: scale(1.005);
-             -o-transform: scale(1.005);
-                transform: scale(1.005); }
+        text-decoration: none; }
 
 .node--view-mode-full .idea-statistics-and-status-block,
 .node--view-mode-full .block-openideal-statistics-challenge-statistics {
@@ -14549,10 +14546,7 @@ nav.tabs {
            -o-transform: scale(0.9);
               transform: scale(0.9);
       background-color: transparent;
-      text-decoration: none;
-      -webkit-transform: scale(1.005);
-           -o-transform: scale(1.005);
-              transform: scale(1.005); }
+      text-decoration: none; }
     .node--view-mode-full .block-openidel-discussion-add a:hover, .node--view-mode-full .block-openidel-discussion-add a:active {
       color: #1294ca; }
 
@@ -14599,10 +14593,7 @@ nav.tabs {
            -o-transform: scale(0.9);
               transform: scale(0.9);
       background-color: #5eaed2;
-      text-decoration: none;
-      -webkit-transform: scale(1.005);
-           -o-transform: scale(1.005);
-              transform: scale(1.005); }
+      text-decoration: none; }
 
 .view--news--all-news-page .node--type-article .card-body .block-openideal-rrssb-block h2 {
   text-transform: uppercase;
@@ -14800,10 +14791,7 @@ nav.tabs {
                -o-transform: scale(0.9);
                   transform: scale(0.9);
           background-color: #1e7697;
-          text-decoration: none;
-          -webkit-transform: scale(1.005);
-               -o-transform: scale(1.005);
-                  transform: scale(1.005); }
+          text-decoration: none; }
       .region-sidebar--flag-and-follow--element .votingapi-reaction-item.active, .region-sidebar--flag--element .votingapi-reaction-item.active {
         background-color: #1e7697; }
       .region-sidebar--flag-and-follow--element .flag-follow, .region-sidebar--flag--element .flag-follow {
@@ -14842,10 +14830,7 @@ nav.tabs {
                  -o-transform: scale(0.9);
                     transform: scale(0.9);
             background-color: #5eaed2;
-            text-decoration: none;
-            -webkit-transform: scale(1.005);
-                 -o-transform: scale(1.005);
-                    transform: scale(1.005); }
+            text-decoration: none; }
       .region-sidebar--flag-and-follow--element .flag-follow--body, .region-sidebar--flag--element .flag-follow--body {
         margin: 70px 0 11px 0; }
   .region-sidebar .fivestar form {
@@ -14955,10 +14940,7 @@ nav.tabs {
            -o-transform: scale(0.9);
               transform: scale(0.9);
       background-color: #fff;
-      text-decoration: none;
-      -webkit-transform: scale(1.005);
-           -o-transform: scale(1.005);
-              transform: scale(1.005); }
+      text-decoration: none; }
 
 .idea-statistics-block {
   margin-bottom: 15px;
@@ -15238,8 +15220,11 @@ nav.tabs {
     margin: 0; }
   .message .profile-author-view-mode .layout__region--content {
     margin-bottom: 0; }
-  .message .profile-author-view-mode .layout__region--content a:hover {
-    color: #fff; }
+    .message .profile-author-view-mode .layout__region--content a:hover {
+      color: #fff; }
+    .message .profile-author-view-mode .layout__region--content .field--name-user-picture {
+      width: 26px;
+      height: 26px; }
   .message a {
     -webkit-transition: color 0.3s;
     -o-transition: color 0.3s;
@@ -15612,20 +15597,28 @@ nav.tabs {
   -webkit-align-items: center;
       -ms-flex-align: center;
           align-items: center;
-  margin-bottom: 26px; }
+  margin-bottom: 1.625rem; }
   .profile-author-view-mode .layout__region--content a {
+    height: 100%;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
     font-style: normal;
     font-weight: bold;
     color: #343352;
-    text-transform: capitalize;
-    margin-right: 3px; }
+    text-transform: capitalize; }
     .profile-author-view-mode .layout__region--content a:hover {
       color: #343352; }
+  .profile-author-view-mode .layout__region--content .field--name-user-picture {
+    margin-right: 0.4375rem;
+    max-width: 2.875rem;
+    height: 2.875rem; }
   .profile-author-view-mode .layout__region--content img {
-    width: 46px;
-    height: 46px;
-    border-radius: 50%;
-    margin-right: 7px; }
+    height: auto;
+    -o-object-fit: cover;
+       object-fit: cover;
+    border-radius: 50%; }
 
 .view--user-admin-people--community-page article.profile {
   padding: 0 5px; }
@@ -15801,9 +15794,14 @@ nav.tabs {
     -webkit-align-items: center;
         -ms-flex-align: center;
             align-items: center; }
-    .entity--user--canonical .user-top--section__first img {
-      border-radius: 50%;
+    .entity--user--canonical .user-top--section__first .field--name-user-picture {
+      width: 7.5rem;
+      height: 7.5rem;
       margin-right: 21px; }
+    .entity--user--canonical .user-top--section__first img {
+      -o-object-fit: contain;
+         object-fit: contain;
+      border-radius: 50%; }
   .entity--user--canonical .user-top--section__second {
     display: -webkit-box;
     display: -webkit-flex;
@@ -15894,10 +15892,7 @@ nav.tabs {
            -o-transform: scale(0.9);
               transform: scale(0.9);
       background-color: #1e829a;
-      text-decoration: none;
-      -webkit-transform: scale(1.005);
-           -o-transform: scale(1.005);
-              transform: scale(1.005); }
+      text-decoration: none; }
     .entity--user--canonical .user-top .nav-tabs .nav-item .nav-link:before {
       content: '';
       display: block;
@@ -15951,10 +15946,7 @@ nav.tabs {
            -o-transform: scale(0.9);
               transform: scale(0.9);
       background-color: #1e829a;
-      text-decoration: none;
-      -webkit-transform: scale(1.005);
-           -o-transform: scale(1.005);
-              transform: scale(1.005); }
+      text-decoration: none; }
 
 .profile-user-profile-view-mode h2 {
   font-size: 30px;
@@ -16177,10 +16169,7 @@ nav.tabs {
              -o-transform: scale(0.9);
                 transform: scale(0.9);
         background-color: #2e5d6d;
-        text-decoration: none;
-        -webkit-transform: scale(1.005);
-             -o-transform: scale(1.005);
-                transform: scale(1.005); }
+        text-decoration: none; }
 
 .user-pass,
 .user-register-form {
@@ -16252,10 +16241,7 @@ nav.tabs {
            -o-transform: scale(0.9);
               transform: scale(0.9);
       background-color: #1e7697;
-      text-decoration: none;
-      -webkit-transform: scale(1.005);
-           -o-transform: scale(1.005);
-              transform: scale(1.005); }
+      text-decoration: none; }
     .node--edit-form--main input[type="submit"]:hover {
       color: #fff; }
   .node--edit-form--main input[type="text"] {
@@ -16287,10 +16273,7 @@ nav.tabs {
            -o-transform: scale(0.9);
               transform: scale(0.9);
       background-color: #1e7697;
-      text-decoration: none;
-      -webkit-transform: scale(1.005);
-           -o-transform: scale(1.005);
-              transform: scale(1.005); }
+      text-decoration: none; }
   .node--edit-form--main .details-wrapper {
     position: relative; }
     .node--edit-form--main .details-wrapper label {
@@ -16321,10 +16304,7 @@ nav.tabs {
              -o-transform: scale(0.9);
                 transform: scale(0.9);
         background-color: #1e7697;
-        text-decoration: none;
-        -webkit-transform: scale(1.005);
-             -o-transform: scale(1.005);
-                transform: scale(1.005); }
+        text-decoration: none; }
   .node--edit-form--main .form-item-field-category label {
     font-size: 16px; }
 
@@ -16373,10 +16353,7 @@ nav.tabs {
            -o-transform: scale(0.9);
               transform: scale(0.9);
       background-color: #1e7697;
-      text-decoration: none;
-      -webkit-transform: scale(1.005);
-           -o-transform: scale(1.005);
-              transform: scale(1.005); }
+      text-decoration: none; }
 
 .node--edit-form--footer {
   float: unset;
@@ -16418,10 +16395,7 @@ nav.tabs {
              -o-transform: scale(0.9);
                 transform: scale(0.9);
         background-color: #1e7697;
-        text-decoration: none;
-        -webkit-transform: scale(1.005);
-             -o-transform: scale(1.005);
-                transform: scale(1.005); }
+        text-decoration: none; }
 
 @media (max-width: 530px) {
   .node--edit-form .field--widget-moderation-state-buttons > div input {
@@ -16540,7 +16514,9 @@ nav.tabs {
   .front-page-teaser .block-field-blocknodearticlefield-images img,
   .front-page-teaser .block-field-blocknodeideafield-images img {
     width: 100%;
-    height: auto; }
+    max-height: 12.1875rem;
+    -o-object-fit: cover;
+       object-fit: cover; }
   .front-page-teaser .block-openideal-idea-info-block {
     display: -webkit-box;
     display: -webkit-flex;
@@ -16745,10 +16721,7 @@ nav.tabs {
            -o-transform: scale(0.9);
               transform: scale(0.9);
       background-color: #5eaed2;
-      text-decoration: none;
-      -webkit-transform: scale(1.005);
-           -o-transform: scale(1.005);
-              transform: scale(1.005); }
+      text-decoration: none; }
     .view-frontpage .view-filters .form-row .frontpage-add-idea-button:before {
       content: '';
       display: inline-block;
@@ -17069,11 +17042,14 @@ nav.tabs {
       .node--view-mode-teaser .teaser-top-section--section__first .block-field-blocknodearticlefield-images img,
       .node--view-mode-teaser .teaser-top-section--section__first .block-field-blocknodeideafield-images img {
         width: 100%;
-        height: 100%; }
+        height: 100%;
+        -o-object-fit: cover;
+           object-fit: cover; }
       .node--view-mode-teaser .teaser-top-section--section__first.teaser-top-section--without-slideshow {
         background-color: #F0F2F3;
         border-top-right-radius: 0; }
       .node--view-mode-teaser .teaser-top-section--section__first a {
+        width: 400px;
         overflow: hidden;
         height: 190px;
         display: block; }
@@ -17220,7 +17196,10 @@ nav.tabs {
   .node--view-mode-teaser .profile-author-view-mode .layout__region--content {
     margin-bottom: 0; }
     .node--view-mode-teaser .profile-author-view-mode .layout__region--content a {
-      display: block; }
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: -ms-flexbox;
+      display: flex; }
   .node--view-mode-teaser .block-field-blocknodeideacreated,
   .node--view-mode-teaser .block-field-blocknodearticlecreated,
   .node--view-mode-teaser .block-field-blocknodechallengecreated {
@@ -17258,6 +17237,10 @@ nav.tabs {
 
 .view--challenges--all-challenges-page .idea-statistics-block--list {
   margin: 0 17px 0 0; }
+
+@media (max-width: 81.25rem) {
+  .node--view-mode-teaser .teaser-top-section--section__first a {
+    width: auto; } }
 
 @media (max-width: 1414px) {
   .node--view-mode-teaser .block-field-blocknodechallengefield-images img,
@@ -17484,10 +17467,7 @@ nav.tabs {
          -o-transform: scale(0.9);
             transform: scale(0.9);
     background-color: #1e7697;
-    text-decoration: none;
-    -webkit-transform: scale(1.005);
-         -o-transform: scale(1.005);
-            transform: scale(1.005); }
+    text-decoration: none; }
 
 .reports-filters {
   display: -webkit-box;
@@ -17666,10 +17646,7 @@ nav.tabs {
          -o-transform: scale(0.9);
             transform: scale(0.9);
     background-color: #1e7697;
-    text-decoration: none;
-    -webkit-transform: scale(1.005);
-         -o-transform: scale(1.005);
-            transform: scale(1.005); }
+    text-decoration: none; }
 
 .idea-statistics-and-status-block--status {
   position: relative;
@@ -18481,6 +18458,10 @@ a {
 .card-group img {
   margin: 0;
   width: 100%;
+  height: 100%; }
+
+img {
+  max-width: 100%;
   height: auto; }
 
 .card-group .field--type-image {

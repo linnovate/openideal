@@ -1,14 +1,24 @@
 langcode: en
 status: true
-dependencies: {  }
+dependencies:
+  config:
+    - crop.type.image
+  module:
+    - crop
 name: front_page_teaser_large
 label: 'Front page teaser large (619x240)'
 effects:
   6f84ca64-ce22-4cb2-a1b0-f8a4bdbd4208:
     uuid: 6f84ca64-ce22-4cb2-a1b0-f8a4bdbd4208
     id: image_scale_and_crop
-    weight: 1
+    weight: -9
     data:
       width: 900
       height: 240
       anchor: center-center
+  45674ad3-5a44-4159-959c-ecb399ec400f:
+    uuid: 45674ad3-5a44-4159-959c-ecb399ec400f
+    id: crop_crop
+    weight: -10
+    data:
+      crop_type: image

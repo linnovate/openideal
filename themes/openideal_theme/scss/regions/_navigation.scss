@@ -119,19 +119,24 @@
       }
     }
 
-
     .profile-author-view-mode .layout__region--content {
       flex-direction: column;
       margin-bottom: 0;
 
-      img {
-        width: 64px;
-        height: 64px;
-        border-radius: 50%;
+      .field--name-user-picture {
+        max-width: size(64);
+        height: size(64);
         margin-right: 0;
       }
+
+      img {
+        border-radius: 50%;
+        margin-right: 0;
+        object-fit: cover;
+      }
+
       a {
-        margin-top: 6px;
+        display: flex;
         font-size: 16px;
         font-weight: $font-weight-bold;
         text-decoration: none;

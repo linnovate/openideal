@@ -2,7 +2,6 @@
 
 namespace Drupal\openideal_statistics\Plugin\Block;
 
-use Drupal\Core\Block\BlockBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\openideal_challenge\OpenidealContextEntityTrait;
 use Drupal\openideal_statistics\OpenidealStatisticsFivestarsTrait;
@@ -22,7 +21,7 @@ use Drupal\openideal_statistics\OpenidealStatisticsFivestarsTrait;
  *   }
  * )
  */
-class OpenidealStatisticsIdeaStatisticsBlock extends BlockBase {
+class OpenidealStatisticsIdeaStatisticsBlock extends OpenidealStatisticsBaseStatisticsBlock {
 
   use OpenidealContextEntityTrait;
   use OpenidealStatisticsFivestarsTrait;
@@ -31,8 +30,7 @@ class OpenidealStatisticsIdeaStatisticsBlock extends BlockBase {
    * {@inheritdoc}
    */
   public function build($challenge = NULL) {
-    $contexts = $this->getContexts();
-    $is_not_full = isset($contexts['view_mode']) && $contexts['view_mode']->getContextValue() != 'full';
+    $is_not_full = !$this->isViewMode('full');
     $id = NULL;
 
     /** @var \Drupal\node\NodeInterface $node */
@@ -98,22 +96,7 @@ class OpenidealStatisticsIdeaStatisticsBlock extends BlockBase {
       $items += $this->viewFivestars($node);
     }
 
-    // @todo create trait or abstract class with this as method.
-    foreach ($items as &$item) {
-      $item['#wrapper_attributes'] = ['class' => ['idea-statistics-block--list__item']];
-      $item['#type'] = 'statistics_item';
-      $item['#show_title'] = !$is_not_full;
-    }
-
-    return [
-      'content' => [
-        '#theme' => 'item_list',
-        '#cache' => ['tags' => $node->getCacheTags()],
-        '#items' => $items,
-        '#attributes' => ['class' => ['idea-statistics-block--list']],
-        '#wrapper_attributes' => ['class' => ['idea-statistics-block']],
-      ],
-    ];
+    return $this->buildItems($items, 'idea-statistics-block', $node, !$is_not_full);
   }
 
   /**
