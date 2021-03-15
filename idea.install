@@ -22,8 +22,12 @@ function idea_install() {
   $user->roles[] = 'administrator';
   $user->save();
 
+  /** @var \Drupal\Core\Extension\ModuleInstaller $module_installer */
+  $module_installer = \Drupal::service('module_installer');
   // Install 'openideal_content' module.
-  \Drupal::service('module_installer')->install(['openideal_content']);
+  $module_installer->install(['openideal_content', 'openideal_faq_content']);
+
+  $module_installer->uninstall(['openideal_faq_content']);
 
   // Force set the administerusersbyrole configuration in fact
   // the module change it during installation of profile.
