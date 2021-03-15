@@ -14,7 +14,7 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 /**
- * Class OpenidealUserEventSubscriber.
+ * Openideal user general event subscriber.
  */
 class OpenidealUserEventSubscriber implements EventSubscriberInterface {
 

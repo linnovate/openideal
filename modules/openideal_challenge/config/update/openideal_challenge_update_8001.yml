@@ -1,0 +1,74 @@
+ultimate_cron.job.openideal_challenge_cron:
+  expected_config:
+    launcher:
+      configuration:
+        launcher:
+          thread: 0
+        timeouts:
+          lock_timeout: 3600
+    logger:
+      configuration:
+        expire: 1209600
+        method: '3'
+        retain: 1000
+    scheduler:
+      configuration:
+        rules:
+          - '* * * * *'
+  update_actions:
+    delete:
+      launcher:
+        configuration:
+          launcher:
+            thread: 0
+          timeouts:
+            lock_timeout: 3600
+      logger:
+        configuration:
+          expire: 1209600
+          method: '3'
+          retain: 1000
+      scheduler:
+        configuration:
+          rules:
+            - '* * * * *'
+core.entity_form_display.node.challenge.default:
+  expected_config:
+    content:
+      field_images:
+        settings:
+          entity_browser: openideal_images_browser
+          field_widget_edit: true
+          field_widget_remove: true
+          field_widget_replace: false
+          open: false
+          preview_image_style: thumbnail
+          selection_mode: selection_append
+          view_mode: default
+        type: entity_browser_file
+  update_actions:
+    delete:
+      content:
+        field_images:
+          settings:
+            entity_browser: openideal_images_browser
+            field_widget_edit: true
+            field_widget_remove: true
+            field_widget_replace: false
+            open: false
+            selection_mode: selection_append
+            view_mode: default
+    change:
+      content:
+        field_images:
+          settings:
+            crop_list:
+              - image
+            crop_preview_image_style: original
+            crop_types_required: {  }
+            preview_image_style: front_page_teaser_large
+            progress_indicator: throbber
+            show_crop_area: false
+            show_default_crop: true
+            warn_multiple_usages: true
+          type: image_widget_crop

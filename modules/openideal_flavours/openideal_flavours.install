@@ -10,6 +10,7 @@
  */
 function openideal_flavours_install() {
   // Delete grant with id 0 - 'deny all'.
+  // @todo Remove it in favor of new access logic in group module.
   node_access_rebuild();
 
   // Remove from 'outsider' role (any not a group member)

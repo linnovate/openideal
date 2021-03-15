@@ -10,9 +10,15 @@
       display: flex;
       align-items: center;
 
-      img {
-        border-radius: 50%;
+      .field--name-user-picture {
+        width: size(120);
+        height: size(120);
         margin-right: 21px;
+      }
+
+      img {
+        object-fit: contain;
+        border-radius: 50%;
       }
     }
 

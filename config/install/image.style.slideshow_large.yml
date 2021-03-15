@@ -1,14 +1,24 @@
 langcode: en
 status: true
-dependencies: {  }
+dependencies:
+  config:
+    - crop.type.image
+  module:
+    - crop
 name: slideshow_large
 label: 'Slideshow large (1200x250)'
 effects:
   2f466a65-9f37-4ea9-95bb-3490aea48d6c:
     uuid: 2f466a65-9f37-4ea9-95bb-3490aea48d6c
     id: image_scale_and_crop
-    weight: 1
+    weight: -9
     data:
       width: 1200
       height: 250
       anchor: center-center
+  9a2e9d9d-97de-44f0-b78c-e6c150ad6587:
+    uuid: 9a2e9d9d-97de-44f0-b78c-e6c150ad6587
+    id: crop_crop
+    weight: -10
+    data:
+      crop_type: image

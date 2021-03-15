@@ -6,7 +6,7 @@ use Drupal\Core\Block\BlockBase;
 use Drupal\openideal_challenge\OpenidealContextEntityTrait;
 
 /**
- * Class ChallengeIdeasTitleWithCount.
+ * Challenge ideas title with ideas count.
  *
  * @Block(
  *   id = "openidel_challenge_challenge_ideas_title",
@@ -43,7 +43,9 @@ class ChallengeIdeasTitleWithCount extends BlockBase {
           '#markup' => ' (',
         ],
         'count' => [
-          '#lazy_builder' => ['openideal_statistics.lazy_builder:getChallengeIdeas', [$node->id()]],
+          '#lazy_builder' => ['openideal_statistics.lazy_builder:getChallengeIdeas',
+            [$node->id()],
+          ],
           '#create_placeholder' => TRUE,
         ],
         'suffix' => [

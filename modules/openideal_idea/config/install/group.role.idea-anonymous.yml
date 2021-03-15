@@ -1,0 +1,16 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - group.type.idea
+id: idea-anonymous
+label: Anonymous
+weight: -102
+internal: true
+audience: anonymous
+group_type: idea
+permissions_ui: true
+permissions:
+  - 'view group'
+  - 'view group_node:discussion entity'
+  - 'view group_node:idea entity'

@@ -22,7 +22,7 @@ class GroupPageRedirect extends PageRedirect {
     /** @var \Drupal\Core\Entity\EntityInterface $group_content */
     foreach ($entity->getContentEntities() as $group_content) {
       if ($group_content->getEntityTypeId() === 'node' && $group_content->bundle() === 'idea') {
-        return $group_content->toUrl();
+        return $group_content->toUrl()->toString();
       }
     }
 

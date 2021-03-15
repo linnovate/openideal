@@ -1,14 +1,24 @@
 langcode: en
 status: true
-dependencies: {  }
+dependencies:
+  config:
+    - crop.type.profile
+  module:
+    - crop
 name: creator_ico
 label: 'Creator icon (46x46)'
 effects:
   b83d69cf-6f96-45ed-8a51-b6c6ff0e162a:
     uuid: b83d69cf-6f96-45ed-8a51-b6c6ff0e162a
     id: image_scale_and_crop
-    weight: 1
+    weight: -9
     data:
       width: 46
       height: 46
       anchor: center-center
+  85766918-2eb5-42cc-8a2a-59e7145996ac:
+    uuid: 85766918-2eb5-42cc-8a2a-59e7145996ac
+    id: crop_crop
+    weight: -10
+    data:
+      crop_type: profile

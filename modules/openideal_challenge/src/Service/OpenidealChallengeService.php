@@ -9,7 +9,7 @@ use Drupal\openideal_challenge\Event\OpenidealChallengeEvent;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**
- * Class OpenidealChallengeService.
+ * Provides Openideal challenge service.
  *
  * @package Drupal\openideal_challenge\Service
  */

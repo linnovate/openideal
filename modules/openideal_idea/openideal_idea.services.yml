@@ -10,6 +10,6 @@ services:
       - '@entity_type.manager'
       - '@group.membership_loader'
       - '@config.factory'
-      - '@module_handler'
+      - '@database'
     calls:
       - [setStatisticsStorage, ['@?statistics.storage.node']]

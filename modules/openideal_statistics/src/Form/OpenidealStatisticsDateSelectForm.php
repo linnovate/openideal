@@ -6,7 +6,7 @@ use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
 
 /**
- * Class OpenidealStatisticsDateSelectForm.
+ * Openideal Statistics date select form.
  */
 class OpenidealStatisticsDateSelectForm extends FormBase {
 

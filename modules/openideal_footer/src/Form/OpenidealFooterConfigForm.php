@@ -6,14 +6,14 @@ use Drupal\Core\Form\ConfigFormBase;
 use Drupal\Core\Form\FormStateInterface;
 
 /**
- * Class OpenidealFooterConfigForm.
+ * Footer configuration form.
  */
 class OpenidealFooterConfigForm extends ConfigFormBase {
 
   /**
    * Default social links.
    *
-   * Todo: Ask for twitter link.
+   * @todo Ask for twitter link.
    */
   const TWITTER = '';
   const GITHUB = 'https://github.com/istolar/openideal_distribution';

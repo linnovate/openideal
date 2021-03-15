@@ -1,23 +1,28 @@
 .profile-author-view-mode .layout__region--content {
   display: flex;
   align-items: center;
-  margin-bottom: 26px;
+  margin-bottom: size(26);
   a {
+    height: 100%;
+    display: flex;
     font-style: normal;
     font-weight: bold;
     color: $primary-color;
     text-transform: capitalize;
-    margin-right: 3px;
     &:hover {
       color: $primary-color;
     }
   }
 
-  img {
-    width: 46px;
-    height: 46px;
-    border-radius: 50%;
-    margin-right: 7px;
+  .field--name-user-picture {
+    margin-right: size(7);
+    max-width: size(46);
+    height: size(46);
+  }
 
+  img {
+    height: auto;
+    object-fit: cover;
+    border-radius: 50%;
   }
 }

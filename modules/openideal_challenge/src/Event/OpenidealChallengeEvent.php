@@ -6,7 +6,7 @@ use Drupal\Core\Entity\EntityInterface;
 use Symfony\Component\EventDispatcher\Event;
 
 /**
- * Class OpenidealChallengeEvent.
+ * Provide event that fires when the challenge is open|close.
  *
  * @package Drupal\openideal_challenge\Event
  */

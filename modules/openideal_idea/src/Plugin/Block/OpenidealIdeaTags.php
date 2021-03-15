@@ -43,7 +43,7 @@ class OpenidealIdeaTags extends BlockBase {
         '#attributes' => ['class' => ['idea-tags']],
       ];
       $items = [];
-      // @Todo: Unify field names.
+      // @todo Unify field names.
       foreach ($node->{$field} as $tag) {
         $items[] = $tag->entity->label();
       }

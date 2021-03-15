@@ -22,6 +22,10 @@ function openideal_statistics_token_info() {
       'description' => t('The count of all ideas in the site'),
       'type' => 'openideal',
     ],
+    'expert-reviews-count' => [
+      'name' => t('OpenideaL - the count of expert reviews for given ideas'),
+      'type' => 'openideal',
+    ],
     'comments-count' => [
       'name' => t('OpenideaL - the count of all comments'),
       'description' => t('The count of all comments in the site'),
@@ -86,7 +90,7 @@ function openideal_statistics_tokens($type, $tokens, array $data, array $options
           $query = $entity_type_manager->getStorage('user')->getQuery();
           $result = $query
             ->condition('status', '1')
-            // @Todo: Remove once we will find better way to resolve this issue,
+            // @todo Remove once we will find better way to resolve this issue,
             // and remove the same logic from community page view.
             ->condition('uid', '1', '>')
             ->count()
