@@ -4,11 +4,17 @@
  * @file Contains main hooks for ofc module.
  */
 
+use Drupal\node\NodeInterface;
+
 /**
  * Implements hook_ENTITY_TYPE_insert().
+ *
+ * Dirty save path alias that is hardcoded to the node uuid that is
+ * imported with this module, because of update_helper cannot save
+ * path alias.
  */
-function openideal_faq_content_node_insert(\Drupal\node\NodeInterface $node) {
+function openideal_faq_content_node_insert(NodeInterface $node) {
   if ($node->uuid() == '62e92783-c1a6-4cc2-bd50-198884f083ec') {
-    $path = \Drupal::service('path.alias_storage')->save("/node/" . $node->id(), "/faq", "en");
+    \Drupal::service('path.alias_storage')->save("/node/" . $node->id(), "/faq", "en");
   }
 }
