@@ -2,7 +2,6 @@
 
 namespace Drupal\openideal_statistics\Plugin\Block;
 
-use Drupal\Core\Block\BlockBase;
 use Drupal\openideal_challenge\OpenidealContextEntityTrait;
 
 /**
@@ -20,7 +19,7 @@ use Drupal\openideal_challenge\OpenidealContextEntityTrait;
  *   }
  * )
  */
-class OpenidealStatisticsChallengeStatisticsBlock extends BlockBase {
+class OpenidealStatisticsChallengeStatisticsBlock extends OpenidealStatisticsBaseStatisticsBlock {
 
   use OpenidealContextEntityTrait;
 
@@ -28,8 +27,7 @@ class OpenidealStatisticsChallengeStatisticsBlock extends BlockBase {
    * {@inheritdoc}
    */
   public function build($challenge = NULL) {
-    $contexts = $this->getContexts();
-    $is_not_full = isset($contexts['view_mode']) && $contexts['view_mode']->getContextValue() != 'full';
+    $is_not_full = !$this->isViewMode('full');
     $id = NULL;
 
     if ($node = $this->getEntity($this->getContexts())) {
@@ -42,7 +40,9 @@ class OpenidealStatisticsChallengeStatisticsBlock extends BlockBase {
     $items = [
       'ideas' => [
         '#lazy_element' => [
-          '#lazy_builder' => ['openideal_statistics.lazy_builder:getChallengeIdeas', [$id]],
+          '#lazy_builder' => ['openideal_statistics.lazy_builder:getChallengeIdeas',
+            [$id],
+          ],
           '#create_placeholder' => TRUE,
         ],
         '#item_title' => $this->t('Challenge ideas'),
@@ -50,7 +50,9 @@ class OpenidealStatisticsChallengeStatisticsBlock extends BlockBase {
       ],
       'votes' => [
         '#lazy_element' => [
-          '#lazy_builder' => ['openideal_statistics.lazy_builder:getVotes', [$id]],
+          '#lazy_builder' => ['openideal_statistics.lazy_builder:getVotes',
+            [$id],
+          ],
           '#create_placeholder' => TRUE,
         ],
         '#item_title' => $this->t('Votes'),
@@ -58,7 +60,9 @@ class OpenidealStatisticsChallengeStatisticsBlock extends BlockBase {
       ],
       'comments' => [
         '#lazy_element' => [
-          '#lazy_builder' => ['openideal_statistics.lazy_builder:getComments', [$id]],
+          '#lazy_builder' => ['openideal_statistics.lazy_builder:getComments',
+            [$id],
+          ],
           '#create_placeholder' => TRUE,
         ],
         '#item_title' => $this->t('Comments'),
@@ -66,7 +70,9 @@ class OpenidealStatisticsChallengeStatisticsBlock extends BlockBase {
       ],
       'views' => [
         '#lazy_element' => [
-          '#lazy_builder' => ['openideal_statistics.lazy_builder:getViews', [$id]],
+          '#lazy_builder' => ['openideal_statistics.lazy_builder:getViews',
+            [$id],
+          ],
           '#create_placeholder' => TRUE,
         ],
         '#item_title' => $this->t('Views'),
@@ -74,21 +80,7 @@ class OpenidealStatisticsChallengeStatisticsBlock extends BlockBase {
       ],
     ];
 
-    foreach ($items as &$item) {
-      $item['#wrapper_attributes'] = ['class' => ['idea-statistics-block--list__item']];
-      $item['#type'] = 'statistics_item';
-      $item['#show_title'] = !$is_not_full;
-    }
-
-    return [
-      'content' => [
-        '#theme' => 'item_list',
-        '#items' => $items,
-        '#attributes' => ['class' => ['idea-statistics-block--list']],
-        '#wrapper_attributes' => ['class' => ['idea-statistics-block']],
-      ],
-    ];
-
+    return $this->buildItems($items, 'idea-statistics-block', $node, !$is_not_full);
   }
 
 }

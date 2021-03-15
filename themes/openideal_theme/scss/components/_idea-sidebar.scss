@@ -98,6 +98,15 @@
       }
     }
   }
+  .fivestar form {
+    display: flex;
+    align-items: center;
+
+    .br-widget {
+      height: initial;
+      margin-right: size(5);
+    }
+  }
 }
 
 .site-sidebar-node--article .region-sidebar {
@@ -210,7 +219,11 @@
         margin: 0 5px 0 0;
       }
 
-      &--title {
+      .form-group {
+        margin-bottom: 0;
+      }
+
+      &--title, .field--type-voting-api-field.field--label-inline .field__label {
         text-transform: uppercase;
         margin: 0;
         padding: 0;
@@ -227,6 +240,21 @@
 
       &--score_tag {
         background-size: 32px;
+      }
+
+      .fivestar {
+        font-weight: $font-weight-bold;
+        padding: 0;
+        margin: 0 5px 0 0;
+
+        .fivestar-text {
+          text-transform: uppercase;
+          margin: 0;
+          padding: 0;
+          font-size: 13px;
+          color: $dark-gray;
+          font-weight: $font-weight-normal;
+        }
       }
     }
 

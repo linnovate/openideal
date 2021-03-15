@@ -1,0 +1,6 @@
+services:
+  openideal_discussion.subscriber:
+    class: Drupal\openideal_discussion\EventSubscriber\OpenidealDiscussionEventSubscriber
+    arguments: []
+    tags:
+      - { name: event_subscriber }

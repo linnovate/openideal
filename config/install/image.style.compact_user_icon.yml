@@ -1,14 +1,24 @@
 langcode: en
 status: true
-dependencies: {  }
+dependencies:
+  config:
+    - crop.type.profile
+  module:
+    - crop
 name: compact_user_icon
 label: 'Compact user icon (90x90)'
 effects:
   ce9840e8-543a-4383-812c-6edfb1c00b5b:
     uuid: ce9840e8-543a-4383-812c-6edfb1c00b5b
     id: image_scale_and_crop
-    weight: 1
+    weight: -9
     data:
       width: 90
       height: 90
       anchor: center-center
+  6fa7f79a-6f43-41cd-adaf-46942dd4dcb7:
+    uuid: 6fa7f79a-6f43-41cd-adaf-46942dd4dcb7
+    id: crop_crop
+    weight: -10
+    data:
+      crop_type: profile

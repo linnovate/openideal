@@ -6,7 +6,7 @@ use Drupal\group\Entity\GroupContent;
 use Symfony\Component\EventDispatcher\Event;
 
 /**
- * Class OpenidealUserGroupEvent.
+ * Event fires when user join|left group.
  */
 class OpenidealUserGroupEvent extends Event {
 
@@ -43,8 +43,8 @@ class OpenidealUserGroupEvent extends Event {
     // When the Idea has been deleted, it first removes the gnode group content,
     // so can't get it from group.
     if ($content = $group_content->getGroup()->getContent('group_node:idea')) {
-      // As one node can have be part of one group get first element.
-      // @Todo: check if node can be part more then for one group,
+      // As one node can be part of one group get first element.
+      // @todo check if node can be part more then for one group,
       // and restrict it, if so.
       $this->node = reset($content)->getEntity();
     }

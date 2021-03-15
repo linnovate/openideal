@@ -1,0 +1,45 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - openideal_idea
+    - route_condition
+    - user
+  theme:
+    - openideal_theme
+id: challenge_flag_block
+theme: openideal_theme
+region: sidebar
+weight: -15
+provider: null
+plugin: openideal_idea_flag_and_like_block
+settings:
+  id: openideal_idea_flag_and_like_block
+  label: 'Challenge flag and Like block'
+  provider: openideal_idea
+  label_display: '0'
+  hide_like: 0
+  main_class: 'challenge-voting region-sidebar--flag-and-follow'
+  context_mapping:
+    node: '@node.node_route_context:node'
+visibility:
+  node_type:
+    id: node_type
+    bundles:
+      challenge: challenge
+    negate: false
+    context_mapping:
+      node: '@node.node_route_context:node'
+  route:
+    id: route
+    routes: entity.node.canonical
+    negate: false
+    context_mapping: {  }
+  user_role:
+    id: user_role
+    roles:
+      authenticated: authenticated
+    negate: false
+    context_mapping:
+      user: '@user.current_user_context:current_user'

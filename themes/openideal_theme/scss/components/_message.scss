@@ -19,10 +19,14 @@
 
   .profile-author-view-mode .layout__region--content {
     margin-bottom: 0;
-  }
+    a:hover {
+      color: $white;
+    }
 
-  .profile-author-view-mode .layout__region--content a:hover {
-    color: $white;
+    .field--name-user-picture {
+      width: 26px;
+      height: 26px;
+    }
   }
 
   a {
@@ -118,6 +122,14 @@
 
     &:after {
       border-bottom: 21px solid #F2994A;
+    }
+  }
+
+  &--referenced-label--discussion {
+    background: #905a2b;
+
+    &:after {
+      border-bottom: 21px solid #905a2b;
     }
   }
 

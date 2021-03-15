@@ -1,14 +1,24 @@
 langcode: en
 status: true
-dependencies: {  }
+dependencies:
+  config:
+    - crop.type.profile
+  module:
+    - crop
 name: user_account_image
 label: 'User account image (120x120)'
 effects:
   6f47a4e3-ec96-44a9-8d2d-0f3280354770:
     uuid: 6f47a4e3-ec96-44a9-8d2d-0f3280354770
     id: image_scale_and_crop
-    weight: 1
+    weight: -9
     data:
       width: 120
       height: 120
       anchor: center-center
+  ed64aa73-ea9f-4f84-b903-2378aa2a2030:
+    uuid: ed64aa73-ea9f-4f84-b903-2378aa2a2030
+    id: crop_crop
+    weight: -10
+    data:
+      crop_type: profile

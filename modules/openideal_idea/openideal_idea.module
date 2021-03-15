@@ -103,10 +103,10 @@ function openideal_idea_form_content_moderation_entity_moderation_form_alter(&$f
 function openideal_idea_node_presave(NodeInterface $node) {
   // Check entity type and duplicate_of field of the entity.
   if ($node->bundle() == 'idea' && !$node->get('field_duplicate_of')->isEmpty()) {
-    // Todo: Change the workflow state.
+    // @todo Change the workflow state.
   }
   elseif ($node->bundle() == 'idea') {
-    $overall_score = \Drupal::service('openideal_idea.helper')->computeOverallScore($node->id());
+    $overall_score = \Drupal::service('openideal_idea.helper')->computeOverallScore($node);
     $node->set('field_overall_score', $overall_score);
   }
 }
@@ -174,14 +174,17 @@ function openideal_idea_entity_access(EntityInterface $entity, $operation, Accou
     }
   }
 
-  // @Todo: Remove once appropriate permissions will be implemented
+  // @todo Remove once appropriate permissions will be implemented
   // https://www.drupal.org/project/drupal/issues/2808309
   $moderation_info = Drupal::service('content_moderation.moderation_information');
   if ($operation === 'update' && $moderation_info->isModeratedEntity($entity) && $entity->moderation_state && $entity instanceof NodeInterface) {
     // Get the group member.
+    /** @var \Drupal\openideal_idea\OpenidealHelper $helper */
     $helper = \Drupal::service('openideal_idea.helper');
-    $member = $helper->getGroupMember($account, $entity);
-    if ($member && $member->hasPermission('update own group_node:idea entity')) {
+    $group = $helper->getGroupFromNode($entity);
+    /** @var \Drupal\group\Access\GroupPermissionChecker $permission_checker */
+    $permission_checker = \Drupal::service('group_permission.checker');
+    if ($permission_checker->hasPermissionInGroup('update any group_node:idea content', $account, $group)) {
       return AccessResult::neutral();
     }
     return content_moderation_entity_access($entity, $operation, $account);
@@ -336,7 +339,7 @@ function openideal_idea_module_implements_alter(&$implementations, $hook) {
   // If the user has not permission to update the content moderation,
   // if not allow to edit whole node, but we need to have the ability to.
   // @See: openideal_idea_entity_access()
-  // @Todo: Remove once appropriate permissions will be implemented
+  // @todo Remove once appropriate permissions will be implemented
   // https://www.drupal.org/project/drupal/issues/2808309
   if ($hook == 'entity_access' && isset($implementations['content_moderation'])) {
     unset($implementations['content_moderation']);

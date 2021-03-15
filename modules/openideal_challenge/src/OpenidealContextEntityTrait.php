@@ -17,7 +17,7 @@ trait OpenidealContextEntityTrait {
    * @param string $entity_type
    *   The entity type.
    *
-   * @Todo: create an interface with constants those describe $entity_type's?
+   * @todo create an interface with constants those describe $entity_type's?
    *    or always call the entity variable as "entity".
    *
    * @return \Drupal\Core\Entity\EntityInterface|false

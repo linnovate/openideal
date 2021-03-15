@@ -6,7 +6,7 @@ use Drupal\Core\Controller\ControllerBase;
 use Drupal\openideal_statistics\Form\OpenidealStatisticsDateSelectForm;
 
 /**
- * Class ChartsAndStatisticsController.
+ * Charts and Statistics Controller.
  */
 class ChartsAndStatisticsController extends ControllerBase {
 

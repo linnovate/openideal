@@ -2,7 +2,6 @@
 
 namespace Drupal\openideal_statistics\Plugin\Block;
 
-use Drupal\Core\Block\BlockBase;
 use Drupal\openideal_challenge\OpenidealContextEntityTrait;
 
 /**
@@ -20,7 +19,7 @@ use Drupal\openideal_challenge\OpenidealContextEntityTrait;
  *   }
  * )
  */
-class OpenidealStatisticsUserStatisticsBlock extends BlockBase {
+class OpenidealStatisticsUserStatisticsBlock extends OpenidealStatisticsBaseStatisticsBlock {
 
   use OpenidealContextEntityTrait;
 
@@ -28,7 +27,6 @@ class OpenidealStatisticsUserStatisticsBlock extends BlockBase {
    * {@inheritdoc}
    */
   public function build() {
-    $build = [];
     $id = NULL;
 
     if ($user = $this->getEntity($this->getContexts())) {
@@ -38,44 +36,47 @@ class OpenidealStatisticsUserStatisticsBlock extends BlockBase {
       return [];
     }
 
-    $build['#theme'] = 'site_wide_statistics_block';
-    $build['#main_class'] = 'idea-statistics-block';
-    $build['#show_title'] = FALSE;
-    $build['#content'] = [
+    $items = [
       'points' => [
-        'bottom' => [
+        '#lazy_element' => [
           '#markup' => (int) $user->field_points->value,
         ],
-        'title' => $this->t('@user points', ['@user' => $user->getDisplayName()]),
-        'img_class' => 'score_tag',
+        '#item_title' => $this->t('@user points', ['@user' => $user->getDisplayName()]),
+        '#img_class' => 'score_tag',
       ],
       'ideas' => [
-        'bottom' => [
-          '#lazy_builder' => ['openideal_statistics.lazy_builder:getUserIdeas', [$id]],
+        '#lazy_element' => [
+          '#lazy_builder' => ['openideal_statistics.lazy_builder:getUserIdeas',
+            [$id],
+          ],
           '#create_placeholder' => TRUE,
         ],
-        'title' => $this->t('@user ideas', ['@user' => $user->getDisplayName()]),
-        'img_class' => 'public_stream_idea',
+        '#item_title' => $this->t('@user ideas', ['@user' => $user->getDisplayName()]),
+        '#img_class' => 'public_stream_idea',
       ],
       'votes' => [
-        'bottom' => [
-          '#lazy_builder' => ['openideal_statistics.lazy_builder:getUserVotes', [$id]],
+        '#lazy_element' => [
+          '#lazy_builder' => ['openideal_statistics.lazy_builder:getUserVotes',
+            [$id],
+          ],
           '#create_placeholder' => TRUE,
         ],
-        'title' => $this->t('@user votes', ['@user' => $user->getDisplayName()]),
-        'img_class' => 'public_stream_like',
+        '#item_title' => $this->t('@user votes', ['@user' => $user->getDisplayName()]),
+        '#img_class' => 'public_stream_like',
       ],
       'comments' => [
-        'bottom' => [
-          '#lazy_builder' => ['openideal_statistics.lazy_builder:getUserComments', [$id]],
+        '#lazy_element' => [
+          '#lazy_builder' => ['openideal_statistics.lazy_builder:getUserComments',
+            [$id],
+          ],
           '#create_placeholder' => TRUE,
         ],
-        'title' => $this->t('@user comments', ['@user' => $user->getDisplayName()]),
-        'img_class' => 'public_stream_comment',
+        '#item_title' => $this->t('@user comments', ['@user' => $user->getDisplayName()]),
+        '#img_class' => 'public_stream_comment',
       ],
     ];
 
-    return $build;
+    return $this->buildItems($items, 'idea-statistics-block', $user, FALSE);
   }
 
 }
