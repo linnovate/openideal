@@ -1,0 +1,25 @@
+.modal-content .node-discussion-form.node-form {
+  .radio {
+    margin-left: size(5);
+
+    label {
+      font-size: size(17);
+    }
+  }
+}
+
+.node--type-discussion.node--view-mode-full .node__content > .card {
+  border-top-left-radius: 0;
+  margin-top: size(50);
+  position: relative;
+  &::before {
+    content: '';
+    display: block;
+    position: absolute;
+    top: size(-25);
+    width: size(183);
+    height: size(25);
+    left: 0;
+    background: url("../images/icons/discussion_tag.png")  no-repeat #{size(-1)} center;
+  }
+}

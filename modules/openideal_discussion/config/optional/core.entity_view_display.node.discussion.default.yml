@@ -1,0 +1,115 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_display.comment.comment.default
+    - field.field.node.discussion.body
+    - field.field.node.discussion.field_comments
+    - field.field.node.discussion.field_idea
+    - field.field.node.discussion.field_status
+    - node.type.discussion
+  module:
+    - comment
+    - layout_builder
+    - layout_discovery
+    - text
+    - user
+third_party_settings:
+  layout_builder:
+    allow_custom: false
+    enabled: true
+    sections:
+      -
+        layout_id: layout_onecol
+        layout_settings:
+          label: ''
+        components:
+          eb412da6-a7a4-4080-9a77-70bf27ba2a9e:
+            uuid: eb412da6-a7a4-4080-9a77-70bf27ba2a9e
+            region: content
+            configuration:
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              id: 'field_block:node:discussion:body'
+              formatter:
+                label: hidden
+                type: text_default
+                settings:
+                  offset: 0
+                  limit: 0
+                third_party_settings: {  }
+            additional: {  }
+            weight: 2
+          5230e2a2-49ea-46b9-b6a5-e85790b0f47e:
+            uuid: 5230e2a2-49ea-46b9-b6a5-e85790b0f47e
+            region: content
+            configuration:
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              id: 'field_block:node:discussion:field_comments'
+              formatter:
+                label: hidden
+                settings:
+                  view_mode: default
+                  pager_id: 0
+                  offset: 0
+                  limit: 0
+                third_party_settings: {  }
+                type: comment_default
+            additional: {  }
+            weight: 3
+          ca27518c-cc36-4cd0-8e0b-b9c3b9fa6e8c:
+            uuid: ca27518c-cc36-4cd0-8e0b-b9c3b9fa6e8c
+            region: content
+            configuration:
+              id: 'field_block:node:discussion:title'
+              label: Title
+              provider: layout_builder
+              label_display: '0'
+              formatter:
+                label: hidden
+                type: string
+                settings:
+                  link_to_entity: false
+                third_party_settings: {  }
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+            additional: {  }
+            weight: 0
+        third_party_settings: {  }
+id: node.discussion.default
+targetEntityType: node
+bundle: discussion
+mode: default
+content:
+  body:
+    label: hidden
+    type: text_default
+    weight: 1
+    settings:
+      offset: 0
+      limit: 0
+    third_party_settings: {  }
+    region: content
+  field_comments:
+    weight: 2
+    label: hidden
+    settings:
+      view_mode: default
+      pager_id: 0
+      offset: 0
+      limit: 0
+    third_party_settings: {  }
+    type: comment_default
+    region: content
+  links:
+    weight: 0
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  field_idea: true
+  field_status: true

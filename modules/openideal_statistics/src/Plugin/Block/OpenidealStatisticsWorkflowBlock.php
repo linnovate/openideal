@@ -96,7 +96,11 @@ class OpenidealStatisticsWorkflowBlock extends BlockBase implements ContainerFac
       $build = [
         'container' => [
           '#type' => 'container',
-          '#attributes' => ['class' => ['idea-statistics-and-status-block--status', $state->id()]],
+          '#attributes' => [
+            'class' => ['idea-statistics-and-status-block--status',
+              $state->id(),
+            ],
+          ],
           'status' => [
             '#type' => 'html_tag',
             '#attributes' => ['class' => ['idea-statistics-and-status-block--status__container']],

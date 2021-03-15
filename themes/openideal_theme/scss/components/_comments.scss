@@ -9,6 +9,11 @@
     align-items: center;
     margin-bottom: 24px;
 
+    h2.title {
+      font-size: size(28);
+      font-weight: 600;
+    }
+
     &__add-comment-btn {
       @include btn-theme(transparent, transparent);
       border: 1.5px solid $btn-dark;

@@ -9,7 +9,7 @@ exclude_admin_theme: false
 langcode: en
 popup_agreed:
   value: '<h2>Thank you for accepting cookies</h2><p>You can now hide this message or find out more about cookies.</p>'
-  format: restricted_html
+  format: plain_text
 popup_agree_button_message: 'I accept cookies'
 popup_agreed_enabled: false
 popup_bg_hex: 0779bf
@@ -25,10 +25,10 @@ popup_hide_agreed: false
 popup_hide_button_message: Hide
 popup_info:
   value: '<h2>We use cookies on this site to enhance your user experience</h2><p>By clicking the Accept button, you agree to us doing so.</p>'
-  format: restricted_html
+  format: plain_text
 mobile_popup_info:
-  value: ''
-  format: basic_html
+  value: '<h2>We use cookies on this site to enhance your user experience</h2><p>By tapping the Accept button, you agree to us doing so.</p>'
+  format: plain_text
 popup_info_template: new
 mobile_breakpoint: 768
 popup_link: '<front>'
@@ -50,8 +50,8 @@ disabled_javascripts: ''
 whitelisted_cookies: ''
 consent_storage_method: do_not_store
 withdraw_message:
-  value: '<h2>This site uses cookies to offer you a better browsing experience. </h2><p>You have given your consent for us to set cookies.</p>'
-  format: restricted_html
+  value: '<h2>We use cookies on this site to enhance your user experience</h2><p>You have given your consent for us to set cookies.</p>'
+  format: plain_text
 withdraw_action_button_label: 'Withdraw consent'
 withdraw_tab_button_label: 'Privacy settings'
 withdraw_enabled: false

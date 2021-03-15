@@ -56,9 +56,11 @@ When at the `web` directory, run the following:
 
 At any point you can run
 
-`composer require linnovate/openideal:[version-number]` 
-
-where `[version number]` is the desired tag, then run `drush updb`. 
+`composer require linnovate/openideal:[version-number]` where `[version number]` is the desired tag.
+`composer update`
+`drush updb`
+`drush cr`
+`drush cim`
 
 To upgrade Drupal core version run 
 

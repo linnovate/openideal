@@ -6,7 +6,12 @@ core: 8.x
 core_version_requirement: ^8 || ^9
 
 dependencies:
+  - drupal:user
+  - drupal:file
+  - drupal:image
+  - drupal:options
   - user_registrationpassword:user_registrationpassword
+  - avatars:avatars_gravatar
   - social_auth:social_auth
   - social_auth_facebook:social_auth_facebook
   - social_auth_github:social_auth_github
@@ -14,3 +19,6 @@ dependencies:
   - social_auth_linkedin:social_auth_linkedin
   - rules:rules
   - ckeditor_mentions:ckeditor_mentions
+  - layout_builder_styles:layout_builder_styles
+  - openideal_idea:openideal_idea
+  - openideal_layout:openideal_layout

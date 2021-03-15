@@ -1,0 +1,23 @@
+.field--type-voting-api-field.field--label-inline {
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: flex-end;
+  width: fit-content;
+
+  .field__item {
+    font-weight: $font-weight-bold;
+  }
+
+  .field__label {
+    text-transform: uppercase;
+    margin: 0 0 0 size(5);
+    padding: 0;
+    font-size: 13px;
+    color: $dark-gray;
+    font-weight: $font-weight-normal;
+  }
+
+  .form-group {
+    margin-bottom: 0;
+  }
+}

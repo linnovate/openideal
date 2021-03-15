@@ -20,7 +20,7 @@ trait OpenidealStatisticsFilterTrait {
    *   Filters to apply.
    */
   public function getFilters() {
-    // @Todo: get request service in block and pass here?
+    // @todo get request service in block and pass here?
     $query = \Drupal::request()->query;
     if ($query->has(Filter::FIXED_RANGE)) {
       $range = $query->get(Filter::FIXED_RANGE);

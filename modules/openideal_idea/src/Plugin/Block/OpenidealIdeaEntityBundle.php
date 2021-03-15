@@ -36,7 +36,11 @@ class OpenidealIdeaEntityBundle extends BlockBase {
       $build['content_type'] = [
         '#type' => 'html_tag',
         '#tag' => 'div',
-        '#attributes' => ['class' => ['entity_bundle_label', 'entity_bundle_label--' . $entity->bundle()]],
+        '#attributes' => [
+          'class' => [
+            'entity_bundle_label', 'entity_bundle_label--' . $entity->bundle(),
+          ],
+        ],
         '#value' => $entity->bundle() == 'article' ? $this->t('News') : $entity->bundle(),
       ];
     }

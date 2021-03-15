@@ -7,7 +7,7 @@ use Drupal\Core\Entity\ContentEntityForm;
 use Drupal\Core\Url;
 
 /**
- * OpenidealSecondStepRegistration object.
+ * Second step registration form.
  */
 class OpenidealSecondStepRegistrationForm extends ContentEntityForm {
 
@@ -25,7 +25,7 @@ class OpenidealSecondStepRegistrationForm extends ContentEntityForm {
     $user = $this->entityTypeManager->getStorage('user')->load($this->currentUser()->id());
     self::setEntity($user);
 
-    /* @var $entity \Drupal\user\Entity\User */
+    /** @var \Drupal\user\Entity\User $entity */
     $form = parent::buildForm($form, $form_state);
     $first_name = $user->get('field_first_name');
     $last_name = $user->get('field_last_name');

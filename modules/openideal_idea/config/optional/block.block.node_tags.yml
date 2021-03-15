@@ -1,0 +1,36 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - openideal_idea
+    - route_condition
+  theme:
+    - openideal_theme
+id: node_tags
+theme: openideal_theme
+region: sidebar
+weight: -5
+provider: null
+plugin: openideal_idea_tags_block
+settings:
+  id: openideal_idea_tags_block
+  label: Tags
+  provider: openideal_idea
+  label_display: '0'
+  context_mapping:
+    node: '@node.node_route_context:node'
+visibility:
+  node_type:
+    id: node_type
+    bundles:
+      article: article
+      idea: idea
+    negate: false
+    context_mapping:
+      node: '@node.node_route_context:node'
+  route:
+    id: route
+    routes: entity.node.canonical
+    negate: false
+    context_mapping: {  }

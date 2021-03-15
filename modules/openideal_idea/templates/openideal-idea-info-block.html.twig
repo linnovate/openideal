@@ -14,7 +14,7 @@
             {% if item.access %}
                 <li class="idea-information--list__item">
                     <div class="idea-information--list__item--title">{{ item.title }}</div>
-                    <div class="idea-information--list__item--value">{{ item.value }}</div>
+                    <div class="idea-information--list__item--value">{{ item.value|raw }}</div>
                 </li>
             {% endif %}
         {% endfor %}
