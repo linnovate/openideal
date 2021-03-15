@@ -19,7 +19,10 @@ function openideal_faq_update_8001() {
   \Drupal::service('module_installer')->uninstall(['openideal_faq_content']);
 
 
-  // @todo Add functionality to delete all configuration related to FAQ node.
+  if ($faq = \Drupal::entityTypeManager()->getStorage('node_type')->load('faq')) {
+    $faq->delete();
+  }
+
 
   // Output logged messages to related channel of update execution.
   return $updateHelper->logger()->output();

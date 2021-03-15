@@ -1,7 +1,4 @@
 __global_actions:
-  import_configs:
-    - views.view.faq
-    - core.entity_view_display.node.faq.full
   install_modules:
     - openideal_faq_content
 paragraphs.paragraphs_type.faq:
@@ -14,15 +11,6 @@ paragraphs.paragraphs_type.faq:
       behavior_plugins:
         faq_view_behaviour:
           default_view: faqfield_anchor_list
-core.entity_view_display.node.faq.default:
-  expected_config: {  }
-  update_actions:
-    add:
-      content:
-        field_faq_items:
-          settings:
-            limit: 0
-            offset: 0
 core.entity_view_display.paragraph.faq.default:
   expected_config:
     content:
