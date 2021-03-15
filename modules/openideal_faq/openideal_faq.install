@@ -18,7 +18,13 @@ function openideal_faq_update_8001() {
   // Uninstall module because it only contains faq page.
   \Drupal::service('module_installer')->uninstall(['openideal_faq_content']);
 
+  // Delete FAQ nodes if exists.
+  $node_storage = \Drupal::entityTypeManager()->getStorage('node');
 
+  $faqs = $node_storage->loadByProperties(['type' => 'faq']);
+  $node_storage->delete($faqs);
+
+  // Delete FAQ Content type if exists.
   if ($faq = \Drupal::entityTypeManager()->getStorage('node_type')->load('faq')) {
     $faq->delete();
   }
