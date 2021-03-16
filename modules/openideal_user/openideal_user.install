@@ -37,3 +37,34 @@ function openideal_user_update_8002() {
   // Output logged messages to related channel of update execution.
   return $updateHelper->logger()->output();
 }
+
+/**
+ * Implements hook_update_N().
+ */
+function openideal_user_update_8003() {
+  user_role_revoke_permissions('manager', ['display eu cookie compliance popup']);
+  user_role_grant_permissions(
+    'manager',
+    [
+      'access files overview',
+      'access group overview',
+      'access taxonomy overview',
+      'administer content types',
+      'administer message templates',
+      'administer messages',
+      'administer node fields',
+      'administer node form display',
+      'administer taxonomy',
+      'administer user fields',
+      'administer user form display',
+      'administer workflows',
+      'bypass group access',
+      'cancel users with role manager',
+      'edit users with role manager',
+      'overview messages',
+      'role-assign users with role manager',
+      'use text format full_html',
+      'view users with role manager',
+    ]
+  );
+}
