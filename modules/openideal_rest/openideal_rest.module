@@ -1,0 +1,23 @@
+<?php
+
+/**
+ * @file
+ * Contains main functionality/hooks for openideal_rest module.
+ */
+
+/**
+ * Implements hook_webhooks_event_info_alter().
+ */
+function openideal_rest_webhooks_event_info_alter(&$options) {
+  $options = [];
+
+  /** @var \Drupal\message\Entity\MessageTemplate[] $message_templates */
+  $message_templates = \Drupal::entityTypeManager()->getStorage('message_template')->loadMultiple();
+
+  foreach ($message_templates as $message) {
+    $options[$message->id()] = [
+      'type' => $message->label(),
+      'event' => $message->id(),
+    ];
+  }
+}
