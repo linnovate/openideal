@@ -1,0 +1,14 @@
+webhooks.webhook.*.third_party.openideal_rest:
+  type: mapping
+  label: 'Webhook plugin types'
+  mapping:
+    plugin:
+      type: string
+      label: 'Plugin'
+
+webhooks.settings.mapping.plugins:
+  type: sequence
+  label: 'Plugins'
+  sequence:
+    type: string
+    label: 'Plugin'

@@ -2,26 +2,24 @@
 
 namespace Drupal\openideal_rest\Plugin\RulesAction;
 
+use Drupal\Component\Serialization\Json;
+use Drupal\Core\Entity\EntityInterface;
+use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
-use Drupal\openideal_rest\Event\WebhookEvent;
+use Drupal\message\MessageInterface;
 use Drupal\rules\Core\RulesActionBase;
+use Drupal\webhooks\Webhook;
+use Drupal\webhooks\WebhooksService;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Symfony\Component\Serializer\SerializerInterface;
 
 /**
  * Provides a Webhook action.
  *
  * @RulesAction(
  *   id = "openideal_rest_webhook",
- *   label = @Translation("Send webhook on OI events"),
- *   category = @Translation("Webhook"),
- *   context_definitions = {
- *     "type" = @ContextDefinition("string",
- *       label = @Translation("Webhook type"),
- *       required = TRUE
- *     ),
- *   }
+ *   deriver = "Drupal\openideal_rest\Plugin\RulesAction\WebhookActionDeriver",
  * )
  */
 class WebhookAction extends RulesActionBase implements ContainerFactoryPluginInterface {
@@ -33,7 +31,21 @@ class WebhookAction extends RulesActionBase implements ContainerFactoryPluginInt
    *
    * @var \Symfony\Component\EventDispatcher\EventDispatcherInterface
    */
-  protected $eventDispatcher;
+  protected $webhookService;
+
+  /**
+   * Entity type manager.
+   *
+   * @var \Drupal\Core\Entity\EntityTypeManagerInterface
+   */
+  protected $entityTypeManager;
+
+  /**
+   * Serializer.
+   *
+   * @var \Symfony\Component\Serializer\SerializerInterface
+   */
+  protected $serializer;
 
   /**
    * {@inheritDoc}
@@ -42,10 +54,14 @@ class WebhookAction extends RulesActionBase implements ContainerFactoryPluginInt
     array $configuration,
     $plugin_id,
     $plugin_definition,
-    EventDispatcherInterface $eventDispatcher
+    WebhooksService $webhookService,
+    EntityTypeManagerInterface $entityTypeManager,
+    SerializerInterface $serializer
   ) {
     parent::__construct($configuration, $plugin_id, $plugin_definition);
-    $this->eventDispatcher = $eventDispatcher;
+    $this->webhookService = $webhookService;
+    $this->entityTypeManager = $entityTypeManager;
+    $this->serializer = $serializer;
   }
 
   /**
@@ -56,18 +72,95 @@ class WebhookAction extends RulesActionBase implements ContainerFactoryPluginInt
       $configuration,
       $plugin_id,
       $plugin_definition,
-      $container->get('event_dispatcher')
+      $container->get('webhooks.service'),
+      $container->get('entity_type.manager'),
+      $container->get('serializer')
     );
   }
 
   /**
    * Dispatch webhooks event.
    *
-   * @param string $type
-   *   Webhook type.
+   * @param \Drupal\Core\Entity\EntityInterface $entity
+   *   Entity from fetch data.
+   * @param string $event
+   *   Event id.
    */
-  protected function doExecute(string $type) {
+  protected function doExecute(EntityInterface $entity, $event) {
+    // Remove default part of id.
+    $id = preg_replace('/[a-z0-9_]+:/', '', $this->getPluginId());
 
+    switch (strtolower($id)) {
+      case 'slack':
+        $this->reactOnSlack($entity, $event);
+        return;
+
+      default:
+        $this->reactOnDefault($entity, $event);
+
+    }
+  }
+
+  /**
+   * Send slack webhooks.
+   *
+   * @param \Drupal\message\MessageInterface $entity
+   *   Entity.
+   * @param string $event
+   *   Event.
+   */
+  protected function reactOnSlack(MessageInterface $entity, $event) {
+    $webhook_configs = $this->getWebConfigByEventAndPlugin($event, 'slack');
+
+    $template_id = $entity->getTemplate()->id();
+    // Only user_joined event don't have message partial field for
+    // email because we don't have ability to follow the user.
+    $delta = $template_id == 'user_joined' ? 1 : 3;
+    $delta = $template_id == 'user_mention' ? 4 : $delta;
+
+    // @todo Implement logic to identify message texts inside partial fields
+    //   or create another field.
+    $text = $entity->getText(NULL, $delta);
+    $text = Json::decode(reset($text));
+    foreach ($webhook_configs as $webhook_config) {
+      $webhook = new Webhook(
+        ['event' => $event] + $text,
+        [],
+        $event,
+        $webhook_config->getContentType()
+      );
+      $this->webhookService->send($webhook_config, $webhook);
+    }
+  }
+
+  /**
+   * Default handler.
+   */
+  protected function reactOnDefault($entity, $event) {
+    // @todo Implement.
+  }
+
+  /**
+   * Load webconfig by event and plugin.
+   *
+   * @param string $event
+   *   Event type.
+   * @param string $plugin
+   *   Plugin type.
+   *
+   * @return \Drupal\webhooks\Entity\WebhookConfig[]
+   *   Webconfig entities.
+   */
+  protected function getWebConfigByEventAndPlugin($event, $plugin) {
+    $storage = $this->entityTypeManager->getStorage('webhook_config');
+    $query = $storage->getQuery()
+      ->condition('status', 1)
+      ->condition('events', $event, 'CONTAINS')
+      ->condition('type', 'outgoing', '=')
+      ->condition('third_party_settings.openideal_rest.plugin', $plugin, '=');
+    $ids = $query->execute();
+
+    return $storage->loadMultiple($ids);
   }
 
 }
