@@ -1,0 +1,16 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - openideal_rest
+third_party_settings:
+  openideal_rest:
+    plugin: slack
+id: slack
+label: Slack
+payload_url: ''
+type: outgoing
+events: 'a:11:{s:18:"challenge_schedule";s:18:"challenge_schedule";s:15:"comment_created";s:15:"comment_created";s:16:"create_challenge";s:16:"create_challenge";s:19:"create_like_on_node";s:19:"create_like_on_node";s:23:"created_like_on_comment";s:23:"created_like_on_comment";s:24:"created_reply_on_comment";s:24:"created_reply_on_comment";s:17:"discussion_create";s:17:"discussion_create";s:22:"idea_life_cycle_change";s:22:"idea_life_cycle_change";s:12:"node_created";s:12:"node_created";s:11:"user_joined";s:11:"user_joined";s:12:"user_mention";s:12:"user_mention";}'
+content_type: application/json
+secret: null
+non_blocking: false

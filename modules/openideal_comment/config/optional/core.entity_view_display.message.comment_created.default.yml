@@ -1,0 +1,39 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.message.comment_created.field_comment_reference
+    - field.field.message.comment_created.field_node_reference
+    - message.template.comment_created
+  module:
+    - layout_builder
+third_party_settings:
+  layout_builder:
+    allow_custom: false
+    enabled: false
+id: message.comment_created.default
+targetEntityType: message
+bundle: comment_created
+mode: default
+content:
+  field_comment_reference:
+    type: entity_reference_entity_view
+    weight: 1
+    region: content
+    label: hidden
+    settings:
+      view_mode: message
+      link: false
+      offset: 0
+      limit: 0
+    third_party_settings: {  }
+  partial_0:
+    weight: 0
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  field_node_reference: true
+  partial_1: true
+  partial_2: true
+  partial_3: true

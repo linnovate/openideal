@@ -56,8 +56,7 @@ function openideal_rest_form_webhook_config_form_alter(&$form, FormStateInterfac
     '#required' => TRUE,
     '#title' => t('Type of webhook'),
     '#options' => $plugins,
-    // @todo User can delete slack, so need to make check or remove ability to delete it.
-    '#default_value' => $entity->getThirdPartySettings('openideal_rest', 'plugin') ?? 'slack',
+    '#default_value' => empty($plugin = $entity->getThirdPartySettings('openideal_rest', 'plugin')) ? 'slack' : reset($plugin),
     '#weight' => -1,
     '#states' => [
       // We don't support plugins for other then outgoing webhooks.

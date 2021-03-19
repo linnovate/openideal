@@ -3,17 +3,17 @@ status: true
 dependencies:
   config:
     - core.entity_view_mode.message.mail_subject
-    - field.field.message.discussion_create.field_node_reference
-    - message.template.discussion_create
+    - field.field.message.challenge_schedule.field_node_reference
+    - message.template.challenge_schedule
   module:
     - layout_builder
 third_party_settings:
   layout_builder:
     allow_custom: false
     enabled: false
-id: message.discussion_create.mail_subject
+id: message.challenge_schedule.mail_subject
 targetEntityType: message
-bundle: discussion_create
+bundle: challenge_schedule
 mode: mail_subject
 content:
   partial_1:

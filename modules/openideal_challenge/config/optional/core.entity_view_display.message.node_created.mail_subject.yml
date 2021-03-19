@@ -3,17 +3,17 @@ status: true
 dependencies:
   config:
     - core.entity_view_mode.message.mail_subject
-    - field.field.message.discussion_create.field_node_reference
-    - message.template.discussion_create
+    - field.field.message.node_created.field_node_reference
+    - message.template.node_created
   module:
     - layout_builder
 third_party_settings:
   layout_builder:
     allow_custom: false
     enabled: false
-id: message.discussion_create.mail_subject
+id: message.node_created.mail_subject
 targetEntityType: message
-bundle: discussion_create
+bundle: node_created
 mode: mail_subject
 content:
   partial_1:

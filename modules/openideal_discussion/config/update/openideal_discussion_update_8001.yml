@@ -1,0 +1,26 @@
+core.entity_view_display.message.discussion_create.default:
+  expected_config: {  }
+  update_actions:
+    add:
+      hidden:
+        partial_3: true
+core.entity_view_display.message.discussion_create.mail_body:
+  expected_config: {  }
+  update_actions:
+    add:
+      hidden:
+        partial_3: true
+core.entity_view_display.message.discussion_create.mail_subject:
+  expected_config: {  }
+  update_actions:
+    add:
+      hidden:
+        partial_3: true
+message.template.discussion_create:
+  expected_config: {  }
+  update_actions:
+    add:
+      text:
+        -
+          format: message
+          value: "{\r\n    \"text\": \"New [message:field_node_reference:entity:content-type]: [message:field_node_reference:entity:title].\",\r\n    \"blocks\": [\r\n    \t{\r\n    \t\t\"type\": \"section\",\r\n    \t\t\"text\": {\r\n    \t\t\t\"type\": \"mrkdwn\",\r\n    \t\t\t\"text\": \"New [message:field_node_reference:entity:content-type]: <[message:field_node_reference:entity:url]|[message:field_node_reference:entity:title]>\"\r\n    \t\t}\r\n    \t}\r\n   ]\r\n}"

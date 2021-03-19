@@ -2,15 +2,18 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.field.message.discussion_create.field_node_reference
-    - message.template.discussion_create
-id: message.discussion_create.default
+    - field.field.message.user_mention.field_comment_reference
+    - field.field.message.user_mention.field_node_reference
+    - message.template.user_mention
+id: message.user_mention.default
 targetEntityType: message
-bundle: discussion_create
+bundle: user_mention
 mode: default
 content:
-  field_node_reference:
+  field_comment_reference:
+    type: entity_reference_entity_view
     weight: 1
+    region: content
     label: hidden
     settings:
       view_mode: message
@@ -18,14 +21,14 @@ content:
       offset: 0
       limit: 0
     third_party_settings: {  }
-    type: entity_reference_entity_view
-    region: content
   partial_0:
     weight: 0
     region: content
     settings: {  }
     third_party_settings: {  }
 hidden:
+  field_node_reference: true
   partial_1: true
   partial_2: true
   partial_3: true
+  partial_4: true

@@ -1,0 +1,90 @@
+core.entity_view_display.message.comment_created.default:
+  expected_config: {  }
+  update_actions:
+    add:
+      content:
+        field_comment_reference:
+          settings:
+            limit: 0
+            offset: 0
+      hidden:
+        partial_3: true
+core.entity_view_display.message.comment_created.mail_body:
+  expected_config: {  }
+  update_actions:
+    add:
+      hidden:
+        partial_3: true
+core.entity_view_display.message.comment_created.mail_subject:
+  expected_config: {  }
+  update_actions:
+    add:
+      hidden:
+        partial_3: true
+core.entity_view_display.message.created_like_on_comment.default:
+  expected_config: {  }
+  update_actions:
+    add:
+      content:
+        field_comment_reference:
+          settings:
+            limit: 0
+            offset: 0
+      hidden:
+        partial_3: true
+core.entity_view_display.message.created_reply_on_comment.default:
+  expected_config: {  }
+  update_actions:
+    add:
+      content:
+        field_comment_reference:
+          settings:
+            limit: 0
+            offset: 0
+      hidden:
+        partial_3: true
+core.entity_view_display.message.created_reply_on_comment.mail_body:
+  expected_config: {  }
+  update_actions:
+    add:
+      hidden:
+        partial_3: true
+core.entity_view_display.message.created_reply_on_comment.mail_subject:
+  expected_config: {  }
+  update_actions:
+    add:
+      hidden:
+        partial_3: true
+message.template.comment_created:
+  expected_config: {  }
+  update_actions:
+    add:
+      dependencies:
+        config:
+          - filter.format.message
+      text:
+        -
+          format: message
+          value: "{\r\n    \"text\": \"New [message:field_node_reference:entity:content-type]: [message:field_node_reference:entity:title].\",\r\n    \"blocks\": [\r\n    \t{\r\n    \t\t\"type\": \"section\",\r\n    \t\t\"text\": {\r\n    \t\t\t\"type\": \"mrkdwn\",\r\n    \t\t\t\"text\": \"<[message:author:url:absolute]|[message:author:display-name]> commented on <[message:field_node_reference:entity:url]|[message:trimmed-node-title]>\"\r\n    \t\t}\r\n    \t}\r\n   ]\r\n}"
+message.template.created_like_on_comment:
+  expected_config: {  }
+  update_actions:
+    add:
+      dependencies:
+        config:
+          - filter.format.message
+      text:
+        -
+          format: message
+          value: "{\r\n    \"text\": \"[message:author:display-name] voted on a comment in [message:field_comment_reference:entity:title].\",\r\n    \"blocks\": [\r\n    \t{\r\n    \t\t\"type\": \"section\",\r\n    \t\t\"text\": {\r\n    \t\t\t\"type\": \"mrkdwn\",\r\n    \t\t\t\"text\": \"<[message:author:url:absolute]|[message:author:display-name]> voted on a comment in <[message:field_node_reference:entity:url]|[message:field_node_reference:entity:title]>\"\r\n    \t\t}\r\n    \t}\r\n   ]\r\n}"
+message.template.created_reply_on_comment:
+  expected_config: {  }
+  update_actions:
+    add:
+      dependencies:
+        config:
+          - filter.format.message
+      text:
+        -
+          format: message
+          value: "{\r\n    \"text\": \"[message:author:display-name]\_replied to your comment.\",\r\n    \"blocks\": [\r\n    \t{\r\n    \t\t\"type\": \"section\",\r\n    \t\t\"text\": {\r\n    \t\t\t\"type\": \"mrkdwn\",\r\n    \t\t\t\"text\": \"<[message:author:url:absolute]|[message:author:display-name]> replied to your comment\"\r\n    \t\t}\r\n    \t}\r\n   ]\r\n}"

@@ -1,0 +1,32 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - filter.format.basic_html
+    - filter.format.full_html
+    - filter.format.message
+template: user_mention
+label: 'User mention'
+description: ''
+text:
+  -
+    value: "<p class=\"message--text\">[message:field_comment_reference:entity:author] mentioned you in <a href=\"[message:field_node_reference:entity:url]\">[message:field_node_reference:entity:title]</a></p>\r\n"
+    format: full_html
+  -
+    value: "<p>You have a new mention on [site:name]</p>\r\n"
+    format: basic_html
+  -
+    value: "<p>Content: [message:field_comment_reference:entity:author] has mentioned you on [message:field_node_reference:entity:title]. See what they say: [message:field_node_reference:entity:url]</p>\r\n"
+    format: basic_html
+  -
+    value: "<p class=\"message--text\">[message:field_comment_reference:entity:author] mentioned [message:author:display-name] in <a href=\"[message:field_node_reference:entity:url]\">[message:field_node_reference:entity:title]</a></p>\r\n"
+    format: full_html
+  -
+    value: "{ \r\n   \"text\": \"You have a new mention on [site:name].\", \r\n  \"blocks\": \r\n      [ \r\n         { \r\n             \"type\": \"section\", \r\n             \"text\": { \r\n                 \"type\": \"mrkdwn\", \r\n                 \"text\": \"[message:field_comment_reference:entity:author] mentioned [message:author:display-name] in <[message:field_node_reference:entity:url]|[message:field_node_reference:entity:title]>\" \r\n             }\r\n       } \r\n   ] \r\n}"
+    format: message
+settings:
+  'token options':
+    clear: false
+    'token replace': true
+  purge_override: false
+  purge_methods: {  }

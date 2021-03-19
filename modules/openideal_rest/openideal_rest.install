@@ -1,0 +1,19 @@
+<?php
+
+/**
+ * @file
+ * Contain main update/install functionality.
+ */
+
+/**
+ * Implements hook_install().
+ */
+function openideal_rest_install() {
+  // Adds to default plugins for webhooks.
+  \Drupal::configFactory()->getEditable('webhooks.settings')
+    ->set('plugins', [
+      'other' => 'Other',
+      'slack' => 'Slack',
+    ])
+    ->save();
+}

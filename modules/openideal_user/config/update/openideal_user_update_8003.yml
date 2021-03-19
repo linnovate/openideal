@@ -1,0 +1,51 @@
+core.entity_view_display.message.user_joined.default:
+  expected_config: {  }
+  update_actions:
+    add:
+      hidden:
+        partial_1: true
+core.entity_view_display.message.user_mention.default:
+  expected_config: {  }
+  update_actions:
+    add:
+      hidden:
+        partial_4: true
+core.entity_view_display.message.user_mention.mail_body:
+  expected_config: {  }
+  update_actions:
+    add:
+      hidden:
+        partial_4: true
+core.entity_view_display.message.user_mention.mail_subject:
+  expected_config: {  }
+  update_actions:
+    add:
+      hidden:
+        partial_4: true
+core.entity_view_display.message.user_mention.mentioned_user:
+  expected_config: {  }
+  update_actions:
+    add:
+      hidden:
+        partial_4: true
+message.template.user_joined:
+  expected_config: {  }
+  update_actions:
+    add:
+      dependencies:
+        config:
+          - filter.format.message
+      text:
+        -
+          format: message
+          value: "{\r\n    \"text\": \"[message:author:display-name] joined the site.\",\r\n    \"blocks\": [\r\n    \t{\r\n    \t\t\"type\": \"section\",\r\n    \t\t\"text\": {\r\n    \t\t\t\"type\": \"mrkdwn\",\r\n    \t\t\t\"text\": \"<[message:author:url:absolute]|[message:author:display-name]> joined the site.\"\r\n    \t\t}\r\n    \t}\r\n   ]\r\n}"
+message.template.user_mention:
+  expected_config: { }
+  update_actions:
+    add:
+      dependencies:
+        config:
+          - filter.format.message
+      text:
+          format: message
+          value: "{ \r\n   \"text\": \"You have a new mention on [site:name].\", \r\n  \"blocks\": \r\n      [ \r\n         { \r\n             \"type\": \"section\", \r\n             \"text\": { \r\n                 \"type\": \"mrkdwn\", \r\n                 \"text\": \"[message:field_comment_reference:entity:author] mentioned [message:author:display-name] in <[message:field_node_reference:entity:url]|[message:field_node_reference:entity:title]>\" \r\n             }\r\n       } \r\n   ] \r\n}"

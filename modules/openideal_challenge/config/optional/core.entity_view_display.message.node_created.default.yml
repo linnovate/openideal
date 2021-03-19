@@ -2,15 +2,23 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.field.message.discussion_create.field_node_reference
-    - message.template.discussion_create
-id: message.discussion_create.default
+    - field.field.message.node_created.field_node_reference
+    - message.template.node_created
+  module:
+    - layout_builder
+third_party_settings:
+  layout_builder:
+    allow_custom: false
+    enabled: false
+id: message.node_created.default
 targetEntityType: message
-bundle: discussion_create
+bundle: node_created
 mode: default
 content:
   field_node_reference:
+    type: entity_reference_entity_view
     weight: 1
+    region: content
     label: hidden
     settings:
       view_mode: message
@@ -18,8 +26,6 @@ content:
       offset: 0
       limit: 0
     third_party_settings: {  }
-    type: entity_reference_entity_view
-    region: content
   partial_0:
     weight: 0
     region: content

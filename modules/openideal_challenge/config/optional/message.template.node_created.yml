@@ -2,10 +2,11 @@ langcode: en
 status: true
 dependencies:
   config:
+    - filter.format.basic_html
     - filter.format.full_html
     - filter.format.message
-template: discussion_create
-label: 'New discussion'
+template: node_created
+label: 'New node'
 description: ''
 text:
   -
@@ -16,9 +17,9 @@ text:
     format: full_html
   -
     value: "<p>New [message:field_node_reference:entity:content-type]: [message:field_node_reference:entity:title]</p>\r\n"
-    format: full_html
+    format: basic_html
   -
-    value: "{\r\n    \"text\": \"New [message:field_node_reference:entity:content-type]: [message:field_node_reference:entity:title].\",\r\n    \"blocks\": [\r\n    \t{\r\n    \t\t\"type\": \"section\",\r\n    \t\t\"text\": {\r\n    \t\t\t\"type\": \"mrkdwn\",\r\n    \t\t\t\"text\": \"New [message:field_node_reference:entity:content-type]: <[message:field_node_reference:entity:url]|[message:field_node_reference:entity:title]>\"\r\n    \t\t}\r\n    \t}\r\n   ]\r\n}"
+    value: "{\r\n    \"text\": \"New [message:field_node_reference:entity:content-type]: [message:field_node_reference:entity:title].\",\r\n    \"blocks\": [\r\n    \t{\r\n    \t\t\"type\": \"section\",\r\n    \t\t\"text\": {\r\n    \t\t\t\"type\": \"mrkdwn\",\r\n    \t\t\t\"text\": \"New [message:field_node_reference:entity:content-type] <[message:field_node_reference:entity:url]|[message:field_node_reference:entity:title]>\"\r\n    \t\t}\r\n    \t}\r\n   ]\r\n}"
     format: message
 settings:
   'token options':

@@ -37,3 +37,28 @@ function openideal_user_update_8002() {
   // Output logged messages to related channel of update execution.
   return $updateHelper->logger()->output();
 }
+
+
+/**
+ * Configuration update.
+ */
+function openideal_user_update_8003() {
+  /** @var \Drupal\update_helper\Updater $updateHelper */
+  $updateHelper = \Drupal::service('update_helper.updater');
+
+  /** @var \Drupal\message\Entity\MessageTemplate $user_mention_message */
+  $user_mention_message = \Drupal::entityTypeManager()->getStorage('message_template')->load('user_mention');
+
+  // Update dirty message template existing value, because update helper can't do it
+  // in adequate way.
+  $partials = $user_mention_message->get('text');
+  $partials[3]['value'] = '<p class="message--text">[message:field_comment_reference:entity:author] mentioned [message:author:display-name] in <a href="[message:field_node_reference:entity:url]">[message:field_node_reference:entity:title]</a></p>\r\n';
+  $user_mention_message->set('text', $partials);
+  $user_mention_message->save();
+
+  // Execute configuration update definitions with logging of success.
+  $updateHelper->executeUpdate('openideal_user', 'openideal_user_update_8003');
+
+  // Output logged messages to related channel of update execution.
+  return $updateHelper->logger()->output();
+}

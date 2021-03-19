@@ -2,21 +2,21 @@ langcode: en
 status: true
 dependencies:
   config:
-    - core.entity_view_mode.message.mail_subject
-    - field.field.message.discussion_create.field_node_reference
-    - message.template.discussion_create
+    - core.entity_view_mode.message.mail_body
+    - field.field.message.create_challenge.field_node_reference
+    - message.template.create_challenge
   module:
     - layout_builder
 third_party_settings:
   layout_builder:
     allow_custom: false
     enabled: false
-id: message.discussion_create.mail_subject
+id: message.create_challenge.mail_body
 targetEntityType: message
-bundle: discussion_create
-mode: mail_subject
+bundle: create_challenge
+mode: mail_body
 content:
-  partial_1:
+  partial_2:
     weight: 0
     region: content
     settings: {  }
@@ -24,5 +24,5 @@ content:
 hidden:
   field_node_reference: true
   partial_0: true
-  partial_2: true
+  partial_1: true
   partial_3: true

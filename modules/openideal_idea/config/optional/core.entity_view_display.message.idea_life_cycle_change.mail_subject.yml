@@ -3,17 +3,17 @@ status: true
 dependencies:
   config:
     - core.entity_view_mode.message.mail_subject
-    - field.field.message.discussion_create.field_node_reference
-    - message.template.discussion_create
+    - field.field.message.idea_life_cycle_change.field_node_reference
+    - message.template.idea_life_cycle_change
   module:
     - layout_builder
 third_party_settings:
   layout_builder:
     allow_custom: false
     enabled: false
-id: message.discussion_create.mail_subject
+id: message.idea_life_cycle_change.mail_subject
 targetEntityType: message
-bundle: discussion_create
+bundle: idea_life_cycle_change
 mode: mail_subject
 content:
   partial_1:

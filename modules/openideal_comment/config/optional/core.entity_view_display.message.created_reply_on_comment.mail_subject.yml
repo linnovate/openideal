@@ -3,17 +3,17 @@ status: true
 dependencies:
   config:
     - core.entity_view_mode.message.mail_subject
-    - field.field.message.discussion_create.field_node_reference
-    - message.template.discussion_create
+    - field.field.message.created_reply_on_comment.field_comment_reference
+    - message.template.created_reply_on_comment
   module:
     - layout_builder
 third_party_settings:
   layout_builder:
     allow_custom: false
     enabled: false
-id: message.discussion_create.mail_subject
+id: message.created_reply_on_comment.mail_subject
 targetEntityType: message
-bundle: discussion_create
+bundle: created_reply_on_comment
 mode: mail_subject
 content:
   partial_1:
@@ -22,7 +22,7 @@ content:
     settings: {  }
     third_party_settings: {  }
 hidden:
-  field_node_reference: true
+  field_comment_reference: true
   partial_0: true
   partial_2: true
   partial_3: true
