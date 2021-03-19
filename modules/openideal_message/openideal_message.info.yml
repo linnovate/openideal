@@ -1,0 +1,12 @@
+name: 'Openideal Message'
+type: module
+description: 'Provides main message template and related functionality to message for OpenideaL'
+core: 8.x
+core_version_requirement: ^8 || ^9
+package: 'OpenideaL'
+
+dependencies:
+  - message:message
+  - drupal:filter
+  - openideal_editor:openideal:editor
+  - rules:rules
