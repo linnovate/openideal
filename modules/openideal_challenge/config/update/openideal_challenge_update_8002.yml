@@ -88,7 +88,7 @@ message.template.create_challenge:
       text:
         -
           format: message
-          value: "{\r\n    \"text\": \"New challenge: [message:field_node_reference:entity:title].\",\r\n    \"blocks\": [\r\n    \t{\r\n    \t\t\"type\": \"section\",\r\n    \t\t\"text\": {\r\n    \t\t\t\"type\": \"mrkdwn\",\r\n    \t\t\t\"text\": \"New challenge:<[message:field_node_reference:entity:url]|[message:field_node_reference:entity:title]>\"\r\n    \t\t}\r\n    \t}\r\n   ]\r\n}"
+          value: "{\r\n    \"text\": \"New challenge: [message:field_node_reference:entity:title].\",\r\n    \"blocks\": [\r\n    \t{\r\n    \t\t\"type\": \"section\",\r\n    \t\t\"text\": {\r\n    \t\t\t\"type\": \"mrkdwn\",\r\n    \t\t\t\"text\": \"New challenge: <[message:field_node_reference:entity:url]|[message:field_node_reference:entity:title]>\"\r\n    \t\t}\r\n    \t}\r\n   ]\r\n}"
 message.template.node_created:
   expected_config: {  }
   update_actions:

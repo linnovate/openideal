@@ -20,6 +20,9 @@ message.template.discussion_create:
   expected_config: {  }
   update_actions:
     add:
+      dependencies:
+        config:
+          - filter.format.message
       text:
         -
           format: message

@@ -47,5 +47,6 @@ message.template.user_mention:
         config:
           - filter.format.message
       text:
+        -
           format: message
           value: "{ \r\n   \"text\": \"You have a new mention on [site:name].\", \r\n  \"blocks\": \r\n      [ \r\n         { \r\n             \"type\": \"section\", \r\n             \"text\": { \r\n                 \"type\": \"mrkdwn\", \r\n                 \"text\": \"[message:field_comment_reference:entity:author] mentioned [message:author:display-name] in <[message:field_node_reference:entity:url]|[message:field_node_reference:entity:title]>\" \r\n             }\r\n       } \r\n   ] \r\n}"

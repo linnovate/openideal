@@ -2,11 +2,6 @@ core.entity_view_display.message.comment_created.default:
   expected_config: {  }
   update_actions:
     add:
-      content:
-        field_comment_reference:
-          settings:
-            limit: 0
-            offset: 0
       hidden:
         partial_3: true
 core.entity_view_display.message.comment_created.mail_body:
@@ -25,22 +20,24 @@ core.entity_view_display.message.created_like_on_comment.default:
   expected_config: {  }
   update_actions:
     add:
-      content:
-        field_comment_reference:
-          settings:
-            limit: 0
-            offset: 0
+      hidden:
+        partial_3: true
+core.entity_view_display.message.created_like_on_comment.mail_subject:
+  expected_config: {  }
+  update_actions:
+    add:
+      hidden:
+        partial_3: true
+core.entity_view_display.message.created_like_on_comment.mail_body:
+  expected_config: {  }
+  update_actions:
+    add:
       hidden:
         partial_3: true
 core.entity_view_display.message.created_reply_on_comment.default:
   expected_config: {  }
   update_actions:
     add:
-      content:
-        field_comment_reference:
-          settings:
-            limit: 0
-            offset: 0
       hidden:
         partial_3: true
 core.entity_view_display.message.created_reply_on_comment.mail_body:
