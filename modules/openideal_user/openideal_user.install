@@ -39,7 +39,7 @@ function openideal_user_update_8002() {
 }
 
 /**
- * Implements hook_update_N().
+ * Change manager permissions.
  */
 function openideal_user_update_8003() {
   user_role_revoke_permissions('manager', ['display eu cookie compliance popup']);

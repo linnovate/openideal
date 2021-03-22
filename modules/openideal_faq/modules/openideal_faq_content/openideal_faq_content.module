@@ -15,7 +15,7 @@ use Drupal\node\NodeInterface;
  * path alias.
  */
 function openideal_faq_content_node_insert(NodeInterface $node) {
-  if ($node->uuid() == '62e92783-c1a6-4cc2-bd50-198884f083ec') {
+  if ($node->uuid() == '0f3d3fcc-e19b-4cad-bbe2-56a86fe8b07d') {
     \Drupal::service('path.alias_storage')->save('/node/' . $node->id(), '/faq', 'en');
   }
 }

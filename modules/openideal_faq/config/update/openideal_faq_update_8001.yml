@@ -1,8 +1,6 @@
 __global_actions:
-  install_modules:
-    - openideal_faq_content
   import_configs:
-    - layout_builder_styles.style.card
+    - layout_builder_styles.style.p_4
     - block_content.type.faq
     - field.storage.block_content.field_faq
     - field.storage.node.layout_builder__layout
@@ -10,6 +8,8 @@ __global_actions:
     - field.field.node.page.layout_builder__layout
     - core.entity_form_display.block_content.faq.default
     - core.entity_view_display.block_content.faq.default
+  install_modules:
+    - layout_builder_modal
 paragraphs.paragraphs_type.faq:
   expected_config:
     behavior_plugins:

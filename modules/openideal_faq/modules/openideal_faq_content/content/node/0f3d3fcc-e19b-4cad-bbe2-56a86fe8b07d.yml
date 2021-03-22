@@ -5,8 +5,8 @@ _meta:
   bundle: page
   default_langcode: en
   depends:
-    035d831a-6844-4fe5-a549-52d3d152bc92: block_content
-    f026293a-9b83-4c33-b1c1-60878065096c: block_content
+    f9e19b58-893f-4f42-b5cc-f8e1b0b4d803: block_content
+    ddfe70f2-02e2-4c60-95e5-360ea73b9320: block_content
 default:
   revision_uid:
     -
@@ -49,8 +49,8 @@ default:
           label: ''
           layout_builder_styles_style: {  }
         components:
-          430d58e0-36f2-4047-ba6c-8837cf34c1b9:
-            uuid: 430d58e0-36f2-4047-ba6c-8837cf34c1b9
+          40ab0213-d000-4974-8814-7d2c2a22f768:
+            uuid: 40ab0213-d000-4974-8814-7d2c2a22f768
             region: content
             configuration:
               id: 'inline_block:basic'
@@ -58,11 +58,11 @@ default:
               provider: layout_builder
               label_display: 0
               view_mode: full
-              block_revision_id: '2'
+              block_revision_id: '5'
               block_serialized: null
               context_mapping: {  }
             additional:
-              target_uuid: 035d831a-6844-4fe5-a549-52d3d152bc92
+              target_uuid: f9e19b58-893f-4f42-b5cc-f8e1b0b4d803
             weight: 0
         third_party_settings: {  }
     -
@@ -72,9 +72,10 @@ default:
           label: ''
           layout_builder_styles_style:
             - card
+            - p_4
         components:
-          270c61f9-a4f3-49d9-ab8e-cdfa162d5ced:
-            uuid: 270c61f9-a4f3-49d9-ab8e-cdfa162d5ced
+          f59a5b48-9dbc-4cd7-a23e-117803b6168a:
+            uuid: f59a5b48-9dbc-4cd7-a23e-117803b6168a
             region: content
             configuration:
               id: 'inline_block:faq'
@@ -82,10 +83,10 @@ default:
               provider: layout_builder
               label_display: 0
               view_mode: full
-              block_revision_id: '3'
+              block_revision_id: '4'
               block_serialized: null
               context_mapping: {  }
             additional:
-              target_uuid: f026293a-9b83-4c33-b1c1-60878065096c
+              target_uuid: ddfe70f2-02e2-4c60-95e5-360ea73b9320
             weight: 0
         third_party_settings: {  }

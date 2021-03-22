@@ -15,6 +15,8 @@ function openideal_faq_update_8001() {
   // Execute configuration update definitions with logging of success.
   $updateHelper->executeUpdate('openideal_faq', 'openideal_faq_update_8001');
 
+  \Drupal::service('module_installer')->install(['openideal_faq_content']);
+
   // Uninstall module because it only contains faq page.
   \Drupal::service('module_installer')->uninstall(['openideal_faq_content']);
 
