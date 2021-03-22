@@ -1,7 +1,8 @@
 <?php
 
 /**
- * @file Contains main hooks for ofc module.
+ * @file
+ * Contains main hooks for openideal_faq_content module.
  */
 
 use Drupal\node\NodeInterface;
@@ -15,6 +16,6 @@ use Drupal\node\NodeInterface;
  */
 function openideal_faq_content_node_insert(NodeInterface $node) {
   if ($node->uuid() == '62e92783-c1a6-4cc2-bd50-198884f083ec') {
-    \Drupal::service('path.alias_storage')->save("/node/" . $node->id(), "/faq", "en");
+    \Drupal::service('path.alias_storage')->save('/node/' . $node->id(), '/faq', 'en');
   }
 }

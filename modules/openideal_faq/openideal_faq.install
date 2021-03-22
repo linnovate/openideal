@@ -29,7 +29,6 @@ function openideal_faq_update_8001() {
     $faq->delete();
   }
 
-
   // Output logged messages to related channel of update execution.
   return $updateHelper->logger()->output();
 }
