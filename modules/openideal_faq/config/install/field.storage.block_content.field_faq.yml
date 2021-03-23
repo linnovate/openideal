@@ -2,12 +2,12 @@ langcode: en
 status: true
 dependencies:
   module:
+    - block_content
     - entity_reference_revisions
-    - node
     - paragraphs
-id: node.field_faq_items
-field_name: field_faq_items
-entity_type: node
+id: block_content.field_faq
+field_name: field_faq
+entity_type: block_content
 type: entity_reference_revisions
 settings:
   target_type: paragraph

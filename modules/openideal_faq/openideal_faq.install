@@ -1,0 +1,36 @@
+<?php
+
+/**
+ * @file
+ * Contains install/update hooks for openideal_faq module.
+ */
+
+/**
+ * Configuration update.
+ */
+function openideal_faq_update_8001() {
+  /** @var \Drupal\update_helper\Updater $updateHelper */
+  $updateHelper = \Drupal::service('update_helper.updater');
+
+  // Execute configuration update definitions with logging of success.
+  $updateHelper->executeUpdate('openideal_faq', 'openideal_faq_update_8001');
+
+  \Drupal::service('module_installer')->install(['openideal_faq_content']);
+
+  // Uninstall module because it only contains faq page.
+  \Drupal::service('module_installer')->uninstall(['openideal_faq_content']);
+
+  // Delete FAQ nodes if exists.
+  $node_storage = \Drupal::entityTypeManager()->getStorage('node');
+
+  $faqs = $node_storage->loadByProperties(['type' => 'faq']);
+  $node_storage->delete($faqs);
+
+  // Delete FAQ Content type if exists.
+  if ($faq = \Drupal::entityTypeManager()->getStorage('node_type')->load('faq')) {
+    $faq->delete();
+  }
+
+  // Output logged messages to related channel of update execution.
+  return $updateHelper->logger()->output();
+}

@@ -1,0 +1,35 @@
+core.entity_form_display.node.page.default:
+  expected_config: {  }
+  update_actions:
+    add:
+      hidden:
+        layout_builder__layout: true
+core.entity_view_display.node.page.default:
+  expected_config:
+    hidden: {  }
+  update_actions:
+    change:
+      hidden:
+        layout_builder__layout: true
+core.entity_view_display.node.page.full:
+  expected_config:
+    third_party_settings:
+      layout_builder:
+        allow_custom: false
+  update_actions:
+    change:
+      third_party_settings:
+        layout_builder:
+          allow_custom: true
+core.entity_view_display.node.page.message:
+  expected_config: {  }
+  update_actions:
+    add:
+      hidden:
+        layout_builder__layout: true
+core.entity_view_display.node.page.teaser:
+  expected_config: {  }
+  update_actions:
+    add:
+      hidden:
+        layout_builder__layout: true

@@ -2,29 +2,24 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.field.node.faq.field_faq_items
-    - node.type.faq
+    - block_content.type.faq
+    - field.field.block_content.faq.field_faq
   module:
     - entity_reference_revisions
-    - user
-id: node.faq.default
-targetEntityType: node
+id: block_content.faq.default
+targetEntityType: block_content
 bundle: faq
 mode: default
 content:
-  field_faq_items:
+  field_faq:
     type: entity_reference_revisions_entity_view
-    weight: 101
+    weight: 0
     label: hidden
     settings:
       view_mode: default
       link: ''
+      offset: 0
+      limit: 0
     third_party_settings: {  }
     region: content
-  links:
-    weight: 100
-    region: content
-    settings: {  }
-    third_party_settings: {  }
-hidden:
-  addtoany: true
+hidden: {  }

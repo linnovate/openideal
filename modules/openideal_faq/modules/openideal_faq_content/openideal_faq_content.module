@@ -1,0 +1,21 @@
+<?php
+
+/**
+ * @file
+ * Contains main hooks for openideal_faq_content module.
+ */
+
+use Drupal\node\NodeInterface;
+
+/**
+ * Implements hook_ENTITY_TYPE_insert().
+ *
+ * Dirty save path alias that is hardcoded to the node uuid that is
+ * imported with this module, because of update_helper cannot save
+ * path alias.
+ */
+function openideal_faq_content_node_insert(NodeInterface $node) {
+  if ($node->uuid() == '0f3d3fcc-e19b-4cad-bbe2-56a86fe8b07d') {
+    \Drupal::service('path.alias_storage')->save('/node/' . $node->id(), '/faq', 'en');
+  }
+}

@@ -1,0 +1,57 @@
+__global_actions:
+  import_configs:
+    - layout_builder_styles.style.p_4
+    - block_content.type.faq
+    - field.storage.block_content.field_faq
+    - field.storage.node.layout_builder__layout
+    - field.field.block_content.faq.field_faq
+    - field.field.node.page.layout_builder__layout
+    - core.entity_form_display.block_content.faq.default
+    - core.entity_view_display.block_content.faq.default
+  install_modules:
+    - layout_builder_modal
+paragraphs.paragraphs_type.faq:
+  expected_config:
+    behavior_plugins:
+      faq_view_behaviour:
+        default_view: faqfield_accordion
+  update_actions:
+    change:
+      behavior_plugins:
+        faq_view_behaviour:
+          default_view: faqfield_anchor_list
+core.entity_view_display.paragraph.faq.default:
+  expected_config:
+    content:
+      field_faq_items:
+        settings:
+          active: 0
+          animate:
+            duration: 200
+            easing: linear
+          collapsible: false
+          event: click
+          heightStyle: auto
+        type: faqfield_accordion
+        weight: 2
+  update_actions:
+    delete:
+      content:
+        field_faq_items:
+          settings:
+            active: 0
+            animate:
+              duration: 200
+              easing: linear
+            collapsible: false
+            event: click
+            heightStyle: auto
+    change:
+      content:
+        field_faq_items:
+          settings:
+            anchor_list_type: ul
+            limit: 0
+            offset: 0
+          type: faqfield_anchor_list
+          weight: 3

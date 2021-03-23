@@ -2,6 +2,7 @@ langcode: en
 status: true
 dependencies:
   config:
+    - core.entity_view_mode.node.full
     - field.field.node.page.body
     - field.field.node.page.field_attached_docs
     - field.field.node.page.field_images
@@ -17,7 +18,7 @@ dependencies:
     - bootstrap_barrio
 third_party_settings:
   layout_builder:
-    allow_custom: false
+    allow_custom: true
     enabled: true
     sections:
       -
@@ -30,52 +31,60 @@ third_party_settings:
             user_profile: 0
             user_profile_top: 0
         components:
-          bebb7a24-c5c4-48f7-a42e-c04fdbc85988:
-            uuid: bebb7a24-c5c4-48f7-a42e-c04fdbc85988
+          04134f32-c096-4551-ba34-0bb705f07a2c:
+            uuid: 04134f32-c096-4551-ba34-0bb705f07a2c
             region: second
             configuration:
-              label_display: '0'
-              context_mapping:
-                entity: layout_builder.entity
               id: 'field_block:node:page:body'
+              label: Body
+              provider: layout_builder
+              label_display: '0'
               formatter:
-                label: above
+                label: hidden
+                type: text_default
                 settings: {  }
                 third_party_settings: {  }
-                type: text_default
-            additional: {  }
-            weight: 4
-          b818ca5c-477b-4180-902c-a65c2aae52dd:
-            uuid: b818ca5c-477b-4180-902c-a65c2aae52dd
-            region: second
-            configuration:
-              label_display: '0'
               context_mapping:
                 entity: layout_builder.entity
+                view_mode: view_mode
+            additional: {  }
+            weight: 2
+          bc64fdd7-ed87-4eff-9a63-3201d7fde2b9:
+            uuid: bc64fdd7-ed87-4eff-9a63-3201d7fde2b9
+            region: second
+            configuration:
               id: 'field_block:node:page:field_attached_docs'
+              label: 'Attached docs'
+              provider: layout_builder
+              label_display: '0'
               formatter:
                 label: above
+                type: file_default
                 settings:
+                  offset: 0
+                  limit: 0
                   use_description_as_link_text: true
                 third_party_settings: {  }
-                type: file_default
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
             additional: {  }
-            weight: 5
-          becf61b1-092e-4ce8-b3ec-4be7e0fcee61:
-            uuid: becf61b1-092e-4ce8-b3ec-4be7e0fcee61
+            weight: 3
+          99a93f94-606e-4a80-a1c8-4f2895654fde:
+            uuid: 99a93f94-606e-4a80-a1c8-4f2895654fde
             region: first
             configuration:
               id: openidel_slideshow_block
               label: Slideshow
               provider: openideal_slideshow
-              label_display: visible
+              label_display: '0'
               image_style: slideshow_large
               context_mapping:
                 node: layout_builder.entity
             additional: {  }
             weight: 0
-          1b480a55-1504-42c4-ae4e-bb5c639cb0f5:
-            uuid: 1b480a55-1504-42c4-ae4e-bb5c639cb0f5
+          67cf0f75-5028-42d7-a702-9dc5b3b6e816:
+            uuid: 67cf0f75-5028-42d7-a702-9dc5b3b6e816
             region: second
             configuration:
               id: 'field_block:node:page:title'
@@ -92,12 +101,12 @@ third_party_settings:
                 entity: layout_builder.entity
                 view_mode: view_mode
             additional: {  }
-            weight: 3
+            weight: 1
         third_party_settings: {  }
-id: node.page.default
+id: node.page.full
 targetEntityType: node
 bundle: page
-mode: default
+mode: full
 content:
   addtoany:
     weight: 101
@@ -107,7 +116,9 @@ content:
   body:
     weight: 105
     label: above
-    settings: {  }
+    settings:
+      offset: 0
+      limit: 0
     third_party_settings: {  }
     type: text_default
     region: content
@@ -116,6 +127,8 @@ content:
     label: above
     settings:
       use_description_as_link_text: true
+      offset: 0
+      limit: 0
     third_party_settings: {  }
     type: file_default
     region: content
@@ -125,12 +138,17 @@ content:
     settings:
       image_style: ''
       image_link: ''
+      offset: 0
+      limit: 0
     third_party_settings: {  }
     type: image
     region: content
   field_paragraphs:
     type: entity_reference_revisions_entity_view
     region: content
+    weight: 106
+    settings: {  }
+    third_party_settings: {  }
   links:
     weight: 101
     region: content

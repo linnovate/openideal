@@ -1,0 +1,38 @@
+_meta:
+  version: '1.0'
+  entity_type: menu_link_content
+  uuid: 6ed77ffc-13c7-4976-9988-15014462eaaf
+  bundle: menu_link_content
+  default_langcode: en
+  depends:
+    0f3d3fcc-e19b-4cad-bbe2-56a86fe8b07d: node
+default:
+  enabled:
+    -
+      value: true
+  title:
+    -
+      value: FAQ
+  menu_name:
+    -
+      value: main
+  link:
+    -
+      target_uuid: 0f3d3fcc-e19b-4cad-bbe2-56a86fe8b07d
+      title: ''
+      options: {  }
+  external:
+    -
+      value: false
+  rediscover:
+    -
+      value: false
+  weight:
+    -
+      value: 12
+  expanded:
+    -
+      value: false
+  revision_translation_affected:
+    -
+      value: true

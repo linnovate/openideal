@@ -1,0 +1,92 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 0f3d3fcc-e19b-4cad-bbe2-56a86fe8b07d
+  bundle: page
+  default_langcode: en
+  depends:
+    f9e19b58-893f-4f42-b5cc-f8e1b0b4d803: block_content
+    ddfe70f2-02e2-4c60-95e5-360ea73b9320: block_content
+default:
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: FAQ
+  created:
+    -
+      value: 1615371141
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  revision_translation_affected:
+    -
+      value: true
+  rh_action:
+    -
+      value: bundle_default
+  rh_redirect_response:
+    -
+      value: 301
+  rh_redirect_fallback_action:
+    -
+      value: bundle_default
+  layout_builder__layout:
+    -
+      section:
+        layout_id: layout_onecol
+        layout_settings:
+          label: ''
+          layout_builder_styles_style: {  }
+        components:
+          40ab0213-d000-4974-8814-7d2c2a22f768:
+            uuid: 40ab0213-d000-4974-8814-7d2c2a22f768
+            region: content
+            configuration:
+              id: 'inline_block:basic'
+              label: FAQ
+              provider: layout_builder
+              label_display: 0
+              view_mode: full
+              block_revision_id: '5'
+              block_serialized: null
+              context_mapping: {  }
+            additional:
+              target_uuid: f9e19b58-893f-4f42-b5cc-f8e1b0b4d803
+            weight: 0
+        third_party_settings: {  }
+    -
+      section:
+        layout_id: layout_onecol
+        layout_settings:
+          label: ''
+          layout_builder_styles_style:
+            - card
+            - p_4
+        components:
+          f59a5b48-9dbc-4cd7-a23e-117803b6168a:
+            uuid: f59a5b48-9dbc-4cd7-a23e-117803b6168a
+            region: content
+            configuration:
+              id: 'inline_block:faq'
+              label: FAQ
+              provider: layout_builder
+              label_display: 0
+              view_mode: full
+              block_revision_id: '4'
+              block_serialized: null
+              context_mapping: {  }
+            additional:
+              target_uuid: ddfe70f2-02e2-4c60-95e5-360ea73b9320
+            weight: 0
+        third_party_settings: {  }
