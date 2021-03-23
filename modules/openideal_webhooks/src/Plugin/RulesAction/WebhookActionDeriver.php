@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\openideal_rest\Plugin\RulesAction;
+namespace Drupal\openideal_webhooks\Plugin\RulesAction;
 
 use Drupal\Component\Plugin\Derivative\DeriverBase;
 use Drupal\Core\Plugin\Discovery\ContainerDeriverInterface;
@@ -12,7 +12,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 /**
  * Derives Webhooks type of plugin.
  *
- * @see \Drupal\openideal_rest\Plugin\RulesAction\WebhookAction
+ * @see \Drupal\openideal_webhooks\Plugin\RulesAction\WebhookAction
  */
 class WebhookActionDeriver extends DeriverBase implements ContainerDeriverInterface {
 

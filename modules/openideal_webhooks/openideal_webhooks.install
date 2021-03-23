@@ -8,7 +8,7 @@
 /**
  * Implements hook_install().
  */
-function openideal_rest_install() {
+function openideal_webhooks_install() {
   // Adds to default plugins for webhooks.
   \Drupal::configFactory()->getEditable('webhooks.settings')
     ->set('plugins', [

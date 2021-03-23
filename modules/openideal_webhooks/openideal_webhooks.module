@@ -1,0 +1,58 @@
+<?php
+
+/**
+ * @file
+ * Contains main functionality/hooks for openideal_webhooks module.
+ */
+
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\openideal_webhooks\OpenidealWebhooksPluginTypes as WebhookType;
+
+/**
+ * Implements hook_webhooks_event_info_alter().
+ */
+function openideal_webhooks_webhooks_event_info_alter(&$options) {
+  $options = [];
+
+  /** @var \Drupal\message\Entity\MessageTemplate[] $message_templates */
+  $message_templates = \Drupal::entityTypeManager()->getStorage('message_template')->loadMultiple();
+
+  foreach ($message_templates as $message) {
+    $options[$message->id()] = [
+      'type' => $message->label(),
+      'event' => $message->id(),
+    ];
+  }
+}
+
+/**
+ * Implements hook_form_BASE_FORM_ID_alter().
+ *
+ * Adds additional "plugin" field into the webhook form.
+ */
+function openideal_webhooks_form_webhook_config_form_alter(&$form, FormStateInterface $form_state) {
+  $form['actions']['submit']['#submit'][] = '_openideal_webhooks_webhook_config_submit';
+}
+
+/**
+ * Submit handler.
+ *
+ * Add "plugin" third party setting for outgoing webhooks.
+ *
+ * @param array $form
+ *   Form.
+ * @param \Drupal\Core\Form\FormStateInterface $form_state
+ *   Form state.
+ */
+function _openideal_webhooks_webhook_config_submit(array $form, FormStateInterface $form_state) {
+  if ($form_state->getValue('type') != 'outgoing' || !($payload_url = $form_state->getValue('payload_url'))) {
+    return;
+  }
+
+  $plugin_type = preg_match('/hooks\.slack\.com/', $payload_url) ? WebhookType::SLACK : WebhookType::OTHER;
+
+  $webconfig = $form_state->getFormObject()->getEntity();
+
+  $webconfig->setThirdPartySetting('openideal_webhooks', 'plugin', $plugin_type);
+  $webconfig->save();
+}

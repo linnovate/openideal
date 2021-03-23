@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\openideal_rest\Plugin\RulesAction;
+namespace Drupal\openideal_webhooks\Plugin\RulesAction;
 
 use Drupal\Component\Serialization\Json;
 use Drupal\Core\Entity\EntityInterface;
@@ -18,8 +18,8 @@ use Symfony\Component\Serializer\SerializerInterface;
  * Provides a Webhook action.
  *
  * @RulesAction(
- *   id = "openideal_rest_webhook",
- *   deriver = "Drupal\openideal_rest\Plugin\RulesAction\WebhookActionDeriver",
+ *   id = "openideal_webhook",
+ *   deriver = "Drupal\openideal_webhooks\Plugin\RulesAction\WebhookActionDeriver",
  * )
  */
 class WebhookAction extends RulesActionBase implements ContainerFactoryPluginInterface {
@@ -92,12 +92,11 @@ class WebhookAction extends RulesActionBase implements ContainerFactoryPluginInt
 
     switch (strtolower($id)) {
       case 'slack':
-        $this->reactOnSlack($entity, $event);
+        $this->reactOnSlack($entity, $event, $id);
         return;
 
       default:
-        $this->reactOnDefault($entity, $event);
-
+        $this->reactOnDefault($entity, $event, $id);
     }
   }
 
@@ -108,9 +107,11 @@ class WebhookAction extends RulesActionBase implements ContainerFactoryPluginInt
    *   Entity.
    * @param string $event
    *   Event.
+   * @param string $id
+   *   String plugin id.
    */
-  protected function reactOnSlack(MessageInterface $entity, $event) {
-    $webhook_configs = $this->getWebConfigByEventAndPlugin($event, 'slack');
+  protected function reactOnSlack(MessageInterface $entity, $event, $id) {
+    $webhook_configs = $this->getWebConfigByEventAndPlugin($event, $id);
 
     $template_id = $entity->getTemplate()->id();
     // Only user_joined event don't have message partial field for
@@ -135,9 +136,31 @@ class WebhookAction extends RulesActionBase implements ContainerFactoryPluginInt
 
   /**
    * Default handler.
+   *
+   * @param \Drupal\Core\Entity\EntityInterface $entity
+   *   Entity.
+   * @param string $event
+   *   Event.
+   * @param string $id
+   *   String plugin id.
    */
-  protected function reactOnDefault($entity, $event) {
-    // @todo Implement.
+  protected function reactOnDefault(EntityInterface $entity, $event, $id) {
+    $webhook_configs = $this->getWebConfigByEventAndPlugin($event, $id);
+
+    $entity = $this->serializer->normalize($entity);
+
+    foreach ($webhook_configs as $webhook_config) {
+      $webhook = new Webhook(
+        [
+          'event' => $event,
+          'entity' => $entity,
+        ],
+        [],
+        $event,
+        $webhook_config->getContentType()
+      );
+      $this->webhookService->send($webhook_config, $webhook);
+    }
   }
 
   /**
@@ -155,9 +178,10 @@ class WebhookAction extends RulesActionBase implements ContainerFactoryPluginInt
     $storage = $this->entityTypeManager->getStorage('webhook_config');
     $query = $storage->getQuery()
       ->condition('status', 1)
-      ->condition('events', $event, 'CONTAINS')
+      ->condition('events', '"' . $event . '"', 'CONTAINS')
       ->condition('type', 'outgoing', '=')
-      ->condition('third_party_settings.openideal_rest.plugin', $plugin, '=');
+      ->condition('third_party_settings.openideal_webhooks.plugin', $plugin, '=')
+      ->accessCheck(FALSE);
     $ids = $query->execute();
 
     return $storage->loadMultiple($ids);
