@@ -262,6 +262,7 @@
         "installer-name": "idea",
         "patches": {
             "drupal/core": {
+                "Layout builder fails to assign inline block access dependencies for the overrides section storage on entities with pending revisions": "https://www.drupal.org/files/issues/2020-09-10/3047022-43.patch",
                 "Combined Fields Filter does not work with body summary": "https://www.drupal.org/files/issues/2020-08-28/3049502-27.patch",
                 "Multiple usages of FieldPluginBase::getEntity do not check for NULL, leading to WSOD": "https://www.drupal.org/files/issues/2020-09-03/3007424-108.patch",
                 "Add visibility control conditions to blocks within Layout Builder": "https://www.drupal.org/files/issues/2020-06-23/2916876-92.patch",
@@ -274,6 +275,8 @@
                 "Off-canvas style resets are overriding styles (especially SVGs) resulting in display issues": "https://www.drupal.org/files/issues/2019-05-07/off-canvas-style-resets-2958588-13.patch"
             },
             "drupal/paragraphs": {
+                "Paragraphs do not render: access check for \"view\" fail when using layout builder + custom blocks & content revisions because the incorrect parent revision ID is being passed in ParagraphAccessControlHandler::checkAccess()": "https://www.drupal.org/files/issues/2020-07-08/access-controll-issue-3090200-22.patch",
+                "Unavailable to add/edit paragraphs on adding translation.": "https://www.drupal.org/files/issues/paragraphs-translation_paragraph_issue-2925533-2.patch",
                 "paragraphs missing langcode patch": "https://www.drupal.org/files/issues/paragraphs-missing-langcode-2901390-3.patch"
             },
             "drupal/default_content": {
