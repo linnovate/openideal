@@ -27,6 +27,12 @@ class WebhookAction extends RulesActionBase implements ContainerFactoryPluginInt
   use StringTranslationTrait;
 
   /**
+   * Outgoing webhook types.
+   */
+  const SLACK = 'slack';
+  const OTHER = 'other';
+
+  /**
    * Event dispatcher.
    *
    * @var \Symfony\Component\EventDispatcher\EventDispatcherInterface
@@ -91,7 +97,7 @@ class WebhookAction extends RulesActionBase implements ContainerFactoryPluginInt
     $id = preg_replace('/[a-z0-9_]+:/', '', $this->getPluginId());
 
     switch (strtolower($id)) {
-      case 'slack':
+      case self::SLACK:
         $this->reactOnSlack($entity, $event, $id);
         return;
 

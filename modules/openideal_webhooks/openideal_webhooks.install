@@ -5,6 +5,8 @@
  * Contain main update/install functionality.
  */
 
+use Drupal\openideal_webhooks\Plugin\RulesAction\WebhookAction as PluginType;
+
 /**
  * Implements hook_install().
  */
@@ -12,8 +14,8 @@ function openideal_webhooks_install() {
   // Adds to default plugins for webhooks.
   \Drupal::configFactory()->getEditable('webhooks.settings')
     ->set('plugins', [
-      'other' => 'Other',
-      'slack' => 'Slack',
+      PluginType::OTHER => 'Other',
+      PluginType::SLACK => 'Slack',
     ])
     ->save();
 }
