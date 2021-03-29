@@ -96,7 +96,7 @@ class WebhookAction extends RulesActionBase implements ContainerFactoryPluginInt
     // Remove default part of id.
     $id = preg_replace('/[a-z0-9_]+:/', '', $this->getPluginId());
 
-    switch (strtolower($id)) {
+    switch ($id) {
       case self::SLACK:
         $this->reactOnSlack($entity, $event, $id);
         return;
@@ -152,7 +152,6 @@ class WebhookAction extends RulesActionBase implements ContainerFactoryPluginInt
    */
   protected function reactOnDefault(EntityInterface $entity, $event, $id) {
     $webhook_configs = $this->getWebConfigByEventAndPlugin($event, $id);
-
     $entity = $this->serializer->normalize($entity);
 
     foreach ($webhook_configs as $webhook_config) {
