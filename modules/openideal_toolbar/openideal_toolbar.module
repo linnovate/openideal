@@ -12,5 +12,6 @@ function openideal_toolbar_element_info_alter(array &$types) {
   // Attach our extra CSS for toolbar icons.
   if (isset($types['toolbar'])) {
     $types['toolbar']['#attached']['library'][] = 'openideal_toolbar/openideal_toolbar.icon';
+    $types['toolbar']['#attached']['drupalSettings']['openidealToolbar']['logo'] = 'https://www.openidealapp.com/wp-content/uploads/2021/03/openideal_logo.png?domain=' . \Drupal::request()->getHost();
   }
 }
