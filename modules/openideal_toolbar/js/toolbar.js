@@ -12,9 +12,11 @@
      */
     Drupal.behaviors.openidealToolbar = {
       attach: function (context, settings) {
-        $('.toolbar-icon-openideal-toolbar-help').once('openideal_toolbar').each(function () {
+        $('.toolbar-icon-openideal-toolbar-help', context).once('openideal_toolbar').each(function () {
           var logo = settings.openidealToolbar.logo;
-          $(this).css('--toolbar-url', `url(${logo})`)
+          if (logo) {
+            $(this).css('--toolbar-url', `url(${logo})`)
+          }
         })
       }
     }
