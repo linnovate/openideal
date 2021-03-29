@@ -119,3 +119,24 @@
   }
 
 }
+
+@media (max-width: size(563)) {
+  .entity--user--canonical .user-top {
+    flex-direction: column;
+
+    nav {
+      margin-top: size(10);
+      width: 100%;
+    }
+
+    .nav-tabs {
+      flex-direction: row;
+      justify-content: space-evenly;
+
+      & .nav-item:first-child {
+        display: none;
+      }
+    }
+
+  }
+}
