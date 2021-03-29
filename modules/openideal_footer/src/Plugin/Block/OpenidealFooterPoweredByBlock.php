@@ -4,6 +4,7 @@ namespace Drupal\openideal_footer\Plugin\Block;
 
 use Drupal\Core\Block\BlockBase;
 use Drupal\Core\Config\ConfigFactory;
+use Drupal\Core\Extension\ModuleHandlerInterface;
 use Drupal\Core\Extension\ThemeHandler;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -42,6 +43,13 @@ class OpenidealFooterPoweredByBlock extends BlockBase implements ContainerFactor
   protected $request;
 
   /**
+   * Module handler.
+   *
+   * @var \Drupal\Core\Extension\ModuleHandlerInterface
+   */
+  protected $moduleHandler;
+
+  /**
    * {@inheritDoc}
    */
   public function __construct(array $configuration,
@@ -49,12 +57,14 @@ class OpenidealFooterPoweredByBlock extends BlockBase implements ContainerFactor
                               $plugin_definition,
                               ThemeHandler $theme_handler,
                               ConfigFactory $config_factory,
-                              RequestStack $requestStack
+                              RequestStack $requestStack,
+                              ModuleHandlerInterface $moduleHandler
   ) {
     parent::__construct($configuration, $plugin_id, $plugin_definition);
     $this->themeHandler = $theme_handler;
     $this->configFactory = $config_factory;
     $this->request = $requestStack->getCurrentRequest();
+    $this->moduleHandler = $moduleHandler;
   }
 
   /**
@@ -64,7 +74,8 @@ class OpenidealFooterPoweredByBlock extends BlockBase implements ContainerFactor
     return new static($configuration, $plugin_id, $plugin_definition,
       $container->get('theme_handler'),
       $container->get('config.factory'),
-      $container->get('request_stack')
+      $container->get('request_stack'),
+      $container->get('module_handler')
     );
   }
 
@@ -75,10 +86,11 @@ class OpenidealFooterPoweredByBlock extends BlockBase implements ContainerFactor
     $config = $this->configFactory->get('openideal_footer.openideal_footer_links_config');
     $path = $this->themeHandler->getTheme('openideal_theme')->getPath();
     $base_theme_path = base_path() . $path;
+    $path = $this->moduleHandler->getModule('openideal_footer')->getPath();
     return [
       '#theme' => 'openideal_powered_by',
       '#site_url' => $config->get('openideal_official_site'),
-      '#logo' => 'https://www.openidealapp.com/wp-content/uploads/sites/175/2020/08/logo_openideal_distro.png?domain=' . $this->request->getHost(),
+      '#logo' => base_path() . $path . '/images/logo.webp',
       '#links' => [
         'github' => [
           'path' => $config->get('github'),
