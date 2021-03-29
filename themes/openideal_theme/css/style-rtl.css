@@ -15948,6 +15948,29 @@ nav.tabs {
       background-color: #1e829a;
       text-decoration: none; }
 
+@media (max-width: 35.1875rem) {
+  .entity--user--canonical .user-top {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+        -ms-flex-direction: column;
+            flex-direction: column; }
+    .entity--user--canonical .user-top nav {
+      margin-top: 0.625rem;
+      width: 100%; }
+    .entity--user--canonical .user-top .nav-tabs {
+      -webkit-box-orient: horizontal;
+      -webkit-box-direction: normal;
+      -webkit-flex-direction: row;
+          -ms-flex-direction: row;
+              flex-direction: row;
+      -webkit-box-pack: space-evenly;
+      -webkit-justify-content: space-evenly;
+          -ms-flex-pack: space-evenly;
+              justify-content: space-evenly; }
+      .entity--user--canonical .user-top .nav-tabs .nav-item:first-child {
+        display: none; } }
+
 .profile-user-profile-view-mode h2 {
   font-size: 30px;
   margin: 20px 0; }
