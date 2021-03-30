@@ -1,0 +1,31 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.message.mail_subject
+    - field.field.message.user_mention.field_comment_reference
+    - field.field.message.user_mention.field_node_reference
+    - message.template.user_mention
+  module:
+    - layout_builder
+third_party_settings:
+  layout_builder:
+    allow_custom: false
+    enabled: false
+id: message.user_mention.mail_subject
+targetEntityType: message
+bundle: user_mention
+mode: mail_subject
+content:
+  partial_1:
+    weight: 0
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  field_comment_reference: true
+  field_node_reference: true
+  partial_0: true
+  partial_2: true
+  partial_3: true
+  partial_4: true

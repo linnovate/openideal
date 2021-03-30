@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - filter.format.full_html
+    - filter.format.message
+template: user_joined
+label: 'User joined the site'
+description: ''
+text:
+  -
+    value: "<p class=\"message--text\"><a href=\"[message:author:url:absolute]\">[message:author:display-name]</a>&nbsp;joined the site.</p>\r\n"
+    format: full_html
+  -
+    value: "{\r\n    \"text\": \"[message:author:display-name] joined the site.\",\r\n    \"blocks\": [\r\n    \t{\r\n    \t\t\"type\": \"section\",\r\n    \t\t\"text\": {\r\n    \t\t\t\"type\": \"mrkdwn\",\r\n    \t\t\t\"text\": \"<[message:author:url:absolute]|[message:author:display-name]> joined the site.\"\r\n    \t\t}\r\n    \t}\r\n   ]\r\n}"
+    format: message
+settings:
+  'token options':
+    clear: false
+    'token replace': true
+  purge_override: false
+  purge_methods: {  }

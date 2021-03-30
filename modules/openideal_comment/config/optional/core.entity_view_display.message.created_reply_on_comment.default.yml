@@ -1,0 +1,31 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.message.created_reply_on_comment.field_comment_reference
+    - message.template.created_reply_on_comment
+id: message.created_reply_on_comment.default
+targetEntityType: message
+bundle: created_reply_on_comment
+mode: default
+content:
+  field_comment_reference:
+    type: entity_reference_entity_view
+    weight: 1
+    region: content
+    label: hidden
+    settings:
+      view_mode: message
+      link: false
+      offset: 0
+      limit: 0
+    third_party_settings: {  }
+  partial_0:
+    weight: 0
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  partial_1: true
+  partial_2: true
+  partial_3: true

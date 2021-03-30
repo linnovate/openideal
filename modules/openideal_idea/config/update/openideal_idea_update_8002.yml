@@ -1,0 +1,74 @@
+core.entity_view_display.message.create_like_on_node.default:
+  expected_config: {  }
+  update_actions:
+    add:
+      content:
+        field_node_reference:
+          settings:
+            limit: 0
+            offset: 0
+      hidden:
+        partial_3: true
+core.entity_view_display.message.create_like_on_node.mail_body:
+  expected_config: {  }
+  update_actions:
+    add:
+      hidden:
+        partial_3: true
+core.entity_view_display.message.create_like_on_node.mail_subject:
+  expected_config: {  }
+  update_actions:
+    add:
+      hidden:
+        partial_3: true
+core.entity_view_display.message.idea_life_cycle_change.default:
+  expected_config: {  }
+  update_actions:
+    add:
+      content:
+        field_node_reference:
+          settings:
+            limit: 0
+            offset: 0
+      hidden:
+        partial_3: true
+core.entity_view_display.message.idea_life_cycle_change.mail_body:
+  expected_config: {  }
+  update_actions:
+    add:
+      hidden:
+        partial_3: true
+core.entity_view_display.message.idea_life_cycle_change.mail_subject:
+  expected_config: {  }
+  update_actions:
+    add:
+      hidden:
+        partial_3: true
+message.template.create_like_on_node:
+  expected_config: {  }
+  update_actions:
+    add:
+      dependencies:
+        config:
+          - filter.format.message
+      text:
+        -
+          format: message
+          value: "{\r\n    \"text\": \"[site:name]: New 'like' in the [message:field_node_reference:entity:content-type]: [message:field_node_reference:entity:title].\",\r\n    \"blocks\": [\r\n    \t{\r\n    \t\t\"type\": \"section\",\r\n    \t\t\"text\": {\r\n    \t\t\t\"type\": \"mrkdwn\",\r\n    \t\t\t\"text\": \"<[message:author:url:absolute]|[message:author:display-name]> voted on the <[message:field_node_reference:entity:url]|[message:field_node_reference:entity:title]>\"\r\n    \t\t}\r\n    \t}\r\n   ]\r\n}"
+message.template.idea_life_cycle_change:
+  expected_config: {  }
+  update_actions:
+    add:
+      dependencies:
+        config:
+          - filter.format.message
+      text:
+        -
+          format: message
+          value: "{\r\n    \"text\": \"[message:field_node_reference:entity:title] has moved to @idea_life_cycle phase.\",\r\n    \"blocks\": [\r\n    \t{\r\n    \t\t\"type\": \"section\",\r\n    \t\t\"text\": {\r\n    \t\t\t\"type\": \"mrkdwn\",\r\n    \t\t\t\"text\": \"<[message:field_node_reference:entity:url]|[message:field_node_reference:entity:title]> has moved to @idea_life_cycle phase.\"\r\n    \t\t}\r\n    \t}\r\n   ]\r\n}"
+user.role.manager:
+  expected_config: {  }
+  update_actions:
+    add:
+      permissions:
+        - 'use text format message'

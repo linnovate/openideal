@@ -1,0 +1,29 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - filter.format.basic_html
+    - filter.format.full_html
+    - filter.format.message
+template: comment_created
+label: 'New comment created'
+description: ''
+text:
+  -
+    value: "<div class=\"message--text\"><a href=\"[message:author:url:absolute]\">[message:author:display-name]</a>&nbsp;commented on <a href=\"[message:field_node_reference:entity:url]\">[message:trimmed-node-title]:</a> <a href=\"[message:comment-url]\">[message:trimmed-comment]</a></div>\r\n"
+    format: full_html
+  -
+    value: "<p>[site:name] New comment!</p>\r\n"
+    format: basic_html
+  -
+    value: "<p>[message:author:display-name] commented on [message:trimmed-node-title]:[message:trimmed-comment]</p>\r\n"
+    format: basic_html
+  -
+    value: "{\r\n    \"text\": \"New [message:field_node_reference:entity:content-type]: [message:field_node_reference:entity:title].\",\r\n    \"blocks\": [\r\n    \t{\r\n    \t\t\"type\": \"section\",\r\n    \t\t\"text\": {\r\n    \t\t\t\"type\": \"mrkdwn\",\r\n    \t\t\t\"text\": \"<[message:author:url:absolute]|[message:author:display-name]> commented on <[message:field_node_reference:entity:url]|[message:trimmed-node-title]>\"\r\n    \t\t}\r\n    \t}\r\n   ]\r\n}"
+    format: message
+settings:
+  'token options':
+    clear: false
+    'token replace': true
+  purge_override: false
+  purge_methods: {  }

@@ -1,0 +1,37 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.message.create_like_on_node.field_node_reference
+    - message.template.create_like_on_node
+  module:
+    - layout_builder
+third_party_settings:
+  layout_builder:
+    allow_custom: false
+    enabled: false
+id: message.create_like_on_node.default
+targetEntityType: message
+bundle: create_like_on_node
+mode: default
+content:
+  field_node_reference:
+    type: entity_reference_entity_view
+    weight: 1
+    region: content
+    label: hidden
+    settings:
+      view_mode: message
+      link: false
+      offset: 0
+      limit: 0
+    third_party_settings: {  }
+  partial_0:
+    weight: 0
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  partial_1: true
+  partial_2: true
+  partial_3: true

@@ -1,0 +1,36 @@
+langcode: en
+status: true
+dependencies: {  }
+id: create_outcoming_slack_webhook
+label: 'Create outcoming slack webhook'
+events:
+  -
+    event_name: 'rules_entity_insert:message'
+description: ''
+tags: {  }
+config_version: '3'
+expression:
+  id: rules_rule
+  uuid: 8d69a4c5-d1f1-467e-850c-65fd09ad96b2
+  weight: 0
+  conditions:
+    id: rules_and
+    uuid: a592d298-25d3-4595-b60a-bcad892dbc31
+    weight: 0
+    conditions: {  }
+  actions:
+    id: rules_action_set
+    uuid: 9a39fbad-005c-47f2-b5db-695c08efbf86
+    weight: 0
+    actions:
+      -
+        id: rules_action
+        uuid: a8137311-6124-4fc0-ac2b-5007cf4a9e7f
+        weight: 0
+        context_values: {  }
+        context_mapping:
+          entity: message
+          event: message.template.target_id
+        context_processors: {  }
+        provides_mapping: {  }
+        action_id: 'openideal_webhook:slack'
