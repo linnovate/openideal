@@ -22,17 +22,7 @@ OpenideaL includes tools for the website managers which allow them to identify *
 OI is based on Drupal, and therefore it is modular, and allows growth and adaptation to the organization’s specific needs. These adaptations may include a unique design, polls and surveys, interfacing with external applications or adapting the interface to a range of devices ans apis.
 
 ## Prerequisites:
-OpenideaL will require several PHP packages pre-installed to build your installation. For the best experience, we recommend installing the following packages prior to building OpenideaL:
-* php  
-* php-xml  
-* php(version)-gd  **Note: replace (version) with the actual version of PHP installed, e.g. "php7.3-gd"**  
-
-1. To install pre-requisites (Linux with apt package manager):  
-`sudo apt install php php-xml`  
-2. Once this is done, find your version of php:  
-`php --version`  
-3. Install gd for your version of php (In this example, I use PHP v7.3):  
-`sudo apt install php7.3-gd`
+OpenideaL relies heavily upon [Drupal](https://www.drupal.org/) and is subject to its system requirements. OpenIdeaL will require several additional packages and tools from the Drupal dependencies pre-installed to build OpenIdeaL. For the best experience, we recommend ensuring that you have satisfied the [Drupal System Requirements](https://www.drupal.org/docs/system-requirements) before moving forward.
 
 ## Build
 
