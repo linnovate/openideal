@@ -22,7 +22,7 @@ OpenideaL includes tools for the website managers which allow them to identify *
 OI is based on Drupal, and therefore it is modular, and allows growth and adaptation to the organization’s specific needs. These adaptations may include a unique design, polls and surveys, interfacing with external applications or adapting the interface to a range of devices ans apis.
 
 ## Prerequisites:
-OpenideaL relies heavily upon [Drupal](https://www.drupal.org/) and is subject to its system requirements. OpenIdeaL will require several additional packages and tools from the Drupal dependencies pre-installed to build OpenIdeaL. For the best experience, we recommend ensuring that you have satisfied the [Drupal System Requirements](https://www.drupal.org/docs/system-requirements) before moving forward.
+Since OpenideaL relies on [Drupal](https://www.drupal.org/) and is subject to its system requirements, it is recommended ensuring that you have satisfied the [Drupal System Requirements](https://www.drupal.org/docs/system-requirements) before moving forward.
 
 ## Build
 
