@@ -28,6 +28,8 @@ Since OpenideaL relies on [Drupal](https://www.drupal.org/) and is subject to it
 
 OpenideaL is super easy to install. The following composer command will install the full codebase, together with all the required dependencies and libraries:
 
+Don't use PHP 8 or 8.1 please use 7.4.
+
 ```
 composer create-project linnovate/openideal-composer openideal
 ```
