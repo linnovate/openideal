@@ -58,19 +58,19 @@ When at the `web` directory, run the following:
 - Change `dbuser@127.0.0.1/db_name` with your DB settings
 - The last bit - `idea` is the name of the profile
 
-## Docker Installation powered by Docker4Drupal by Wodby
-Follow the guide - https://github.com/linnovate/openideal/wiki/Install-OpenideaL-with-Docker4Drupal-by-Wodby
+## Docker Installation with Docker4Drupal by Wodby
+[Follow the guide](https://github.com/linnovate/openideal/wiki/Install-OpenideaL-with-Docker4Drupal-by-Wodby)
 
 ## Update to new version of OpenideaL
 
 At any point you can run
 
-`composer require linnovate/openideal:[version-number]` where `[version number]` is the desired tag.
-`drush updb`
-`drush cr`
-`drush cim`
+- `composer require linnovate/openideal:[version-number]` where `[version number]` is the desired tag.
+- `drush updb`
+- `drush cr`
+- `drush cim`
 
-To upgrade Drupal core version run
+To upgrade Drupal core version run  
 **Be aware upgrade to Drupal 9 will not work**, for now OpenideaL doesn't support it
 
 `composer update drupal/core 'drupal/core-*' --with-dependencies` , then run `drush updb`. 
