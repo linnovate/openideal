@@ -193,7 +193,19 @@
                     "type": "zip"
                 }
             }
-        }
+        },
+            {
+                "type": "package",
+                "package": {
+                    "name": "ckeditor/emojione",
+                    "version": "1.0.2",
+                    "type": "drupal-library",
+                    "dist": {
+                        "url": "https://download.ckeditor.com/emojione/releases/emojione_1.0.2.zip",
+                        "type": "zip"
+                    }
+                }
+            }
     ],
     "require": {
         "bower-asset/c3": "^0.7.20",
@@ -233,6 +245,7 @@
         "drupal/domain_registration": "^1.4",
         "drupal/dropzonejs": "^2.1",
         "drupal/email_registration": "^1.0",
+        "drupal/ckeditor_emojione": "^1.4",
         "drupal/entity_browser": "^2.5",
         "drupal/eu_cookie_compliance": "1.14.0",
         "drupal/faqfield": "^1.1",
