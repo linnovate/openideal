@@ -15,7 +15,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  * @Block(
  *  id = "openideal_user_logout_block",
  *  admin_label = @Translation("User logout"),
- *   context = {
+ *   context_definitions = {
  *      "user" = @ContextDefinition(
  *       "entity:user",
  *       label = @Translation("Current user"),

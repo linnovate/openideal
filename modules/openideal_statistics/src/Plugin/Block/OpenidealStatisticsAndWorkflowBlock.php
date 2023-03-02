@@ -13,7 +13,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  * @Block(
  *  id = "openideal_statistics_and_status",
  *  admin_label = @Translation("Statistics and status block"),
- *   context = {
+ *   context_definitions = {
  *      "node" = @ContextDefinition(
  *       "entity:node",
  *       label = @Translation("Current Node"),

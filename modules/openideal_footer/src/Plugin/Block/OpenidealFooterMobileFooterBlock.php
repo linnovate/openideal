@@ -11,7 +11,7 @@ use Drupal\openideal_idea\Plugin\Block\OpenidealIdeaFlagAndLikeBlock;
  * @Block(
  *  id = "openideal_footer_mobile_footer_block",
  *  admin_label = @Translation("Mobile footer block"),
- *   context = {
+ *   context_definitions = {
  *      "node" = @ContextDefinition(
  *       "entity:node",
  *       label = @Translation("Current Node"),

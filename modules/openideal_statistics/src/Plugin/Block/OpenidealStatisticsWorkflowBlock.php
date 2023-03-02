@@ -16,7 +16,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  * @Block(
  *  id = "openideal_statistics_status",
  *  admin_label = @Translation("Workflow status."),
- *   context = {
+ *   context_definitions = {
  *      "node" = @ContextDefinition(
  *       "entity:node",
  *       label = @Translation("Current Node"),
