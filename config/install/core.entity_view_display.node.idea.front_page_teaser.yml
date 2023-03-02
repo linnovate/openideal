@@ -1,0 +1,346 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.base_field_override.node.idea.created
+    - core.base_field_override.node.idea.uid
+    - core.entity_view_display.comment.comment.default
+    - core.entity_view_mode.node.front_page_teaser
+    - field.field.node.idea.body
+    - field.field.node.idea.field_attached_docs
+    - field.field.node.idea.field_category
+    - field.field.node.idea.field_challenge
+    - field.field.node.idea.field_comments
+    - field.field.node.idea.field_duplicate_of
+    - field.field.node.idea.field_five_stars
+    - field.field.node.idea.field_idea_tags
+    - field.field.node.idea.field_images
+    - field.field.node.idea.field_like
+    - field.field.node.idea.field_meta_tags
+    - field.field.node.idea.field_overall_score
+    - node.type.idea
+  module:
+    - comment
+    - file
+    - image
+    - layout_builder
+    - metatag
+    - openideal_idea
+    - openideal_layout
+    - openideal_statistics
+    - text
+    - user
+    - votingapi_reaction
+third_party_settings:
+  layout_builder:
+    enabled: true
+    allow_custom: false
+    sections:
+      -
+        layout_id: openideal_three_columns
+        layout_settings:
+          label: ''
+          context_mapping: {  }
+          main_class: front-page-teaser
+          layout_builder_styles_style:
+            author: 0
+            user_compact: 0
+            user_profile: 0
+            user_profile_top: 0
+        components:
+          d59fa5f6-3ecc-4d21-ba73-d5db543c7bdc:
+            uuid: d59fa5f6-3ecc-4d21-ba73-d5db543c7bdc
+            region: second
+            configuration:
+              id: 'field_block:node:idea:title'
+              label: Title
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: string
+                label: hidden
+                settings:
+                  link_to_entity: true
+                third_party_settings: {  }
+            weight: 0
+            additional: {  }
+          07a4b0ba-f0f4-448b-934b-ec4cdc1a2ba5:
+            uuid: 07a4b0ba-f0f4-448b-934b-ec4cdc1a2ba5
+            region: second
+            configuration:
+              id: 'field_block:node:idea:uid'
+              label: 'Authored by'
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: entity_reference_entity_view
+                label: hidden
+                settings:
+                  view_mode: author
+                third_party_settings: {  }
+            weight: 1
+            additional: {  }
+          1798941c-490e-4d06-8bdf-a8310ebce944:
+            uuid: 1798941c-490e-4d06-8bdf-a8310ebce944
+            region: second
+            configuration:
+              id: 'field_block:node:idea:body'
+              label: Body
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: text_summary_or_trimmed
+                label: hidden
+                settings:
+                  trim_length: 400
+                third_party_settings: {  }
+            weight: 2
+            additional: {  }
+          3f0c88d3-3cb9-4c6e-8db3-b296ef2ecf4b:
+            uuid: 3f0c88d3-3cb9-4c6e-8db3-b296ef2ecf4b
+            region: third
+            configuration:
+              id: openideal_statistics_idea_statistics
+              label: 'Idea statistics block'
+              label_display: '0'
+              provider: openideal_statistics
+              context_mapping:
+                node: layout_builder.entity
+            weight: -10
+            additional: {  }
+          e0510c35-f24d-4087-9816-80cc1b20c280:
+            uuid: e0510c35-f24d-4087-9816-80cc1b20c280
+            region: third
+            configuration:
+              id: 'field_block:node:idea:created'
+              label: 'Authored on'
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: timestamp
+                label: hidden
+                settings:
+                  date_format: custom
+                  custom_date_format: d/m/Y
+                  timezone: ''
+                third_party_settings: {  }
+            weight: -8
+            additional: {  }
+          8a263ac8-9885-4c26-a327-31ce11544df3:
+            uuid: 8a263ac8-9885-4c26-a327-31ce11544df3
+            region: third
+            configuration:
+              id: openideal_idea_flag_and_like_block
+              label: 'Flag and Like block'
+              label_display: '0'
+              provider: openideal_idea
+              context_mapping:
+                node: layout_builder.entity
+              hide_like: 1
+              main_class: homepage-teaser--flag
+            weight: -7
+            additional: {  }
+          c6095adf-087f-4edb-883b-36c3e97238bf:
+            uuid: c6095adf-087f-4edb-883b-36c3e97238bf
+            region: first
+            configuration:
+              id: openidel_idea_node_bundle
+              label: 'Entity bundle'
+              label_display: '0'
+              provider: openideal_idea
+              context_mapping:
+                entity: layout_builder.entity
+            weight: -9
+            additional: {  }
+          1ef90dbd-e318-418e-bbbc-9a6bd969126c:
+            uuid: 1ef90dbd-e318-418e-bbbc-9a6bd969126c
+            region: first
+            configuration:
+              id: 'field_block:node:idea:field_images'
+              label: Images
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: image
+                label: hidden
+                settings:
+                  offset: 0
+                  limit: 1
+                  image_link: content
+                  image_style: front_page_teaser
+                third_party_settings: {  }
+            weight: -10
+            additional: {  }
+          31a68b33-9e47-4b8f-8b01-32b2c0c640b1:
+            uuid: 31a68b33-9e47-4b8f-8b01-32b2c0c640b1
+            region: third
+            configuration:
+              id: openideal_statistics_status
+              label: 'Workflow status.'
+              label_display: '0'
+              provider: openideal_statistics
+              context_mapping:
+                node: layout_builder.entity
+              show_all_states: false
+            weight: -9
+            additional: {  }
+          28bbf6f5-4498-4103-854c-2939f2c2682b:
+            uuid: 28bbf6f5-4498-4103-854c-2939f2c2682b
+            region: content
+            configuration:
+              id: 'field_block:node:idea:field_images'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: image
+                label: hidden
+                settings:
+                  offset: 0
+                  limit: 0
+                  image_link: ''
+                  image_style: ''
+                  image_loading:
+                    attribute: lazy
+                third_party_settings: {  }
+            weight: 0
+            additional: {  }
+        third_party_settings: {  }
+id: node.idea.front_page_teaser
+targetEntityType: node
+bundle: idea
+mode: front_page_teaser
+content:
+  body:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 101
+    region: content
+  content_moderation_control:
+    settings: {  }
+    third_party_settings: {  }
+    weight: -20
+    region: content
+  field_attached_docs:
+    type: file_default
+    label: hidden
+    settings:
+      use_description_as_link_text: true
+    third_party_settings: {  }
+    weight: 103
+    region: content
+  field_category:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 108
+    region: content
+  field_challenge:
+    type: entity_reference_label
+    label: hidden
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 106
+    region: content
+  field_comments:
+    type: comment_default
+    label: above
+    settings:
+      view_mode: default
+      pager_id: 0
+    third_party_settings: {  }
+    weight: 109
+    region: content
+  field_duplicate_of:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 107
+    region: content
+  field_idea_tags:
+    type: entity_reference_label
+    label: hidden
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 104
+    region: content
+  field_images:
+    type: image
+    label: hidden
+    settings:
+      offset: 0
+      limit: 0
+      image_link: ''
+      image_style: ''
+      image_loading:
+        attribute: lazy
+    third_party_settings: {  }
+    weight: 102
+    region: content
+  field_like:
+    type: votingapi_reaction_default
+    label: above
+    settings:
+      show_summary: true
+      show_icon: true
+      show_label: true
+      show_count: true
+      sort_reactions: desc
+    third_party_settings: {  }
+    weight: 111
+    region: content
+  field_meta_tags:
+    type: metatag_empty_formatter
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 110
+    region: content
+  field_overall_score:
+    type: number_decimal
+    label: above
+    settings:
+      thousand_separator: ''
+      decimal_separator: .
+      scale: 2
+      prefix_suffix: true
+    third_party_settings: {  }
+    weight: 112
+    region: content
+  flag_follow:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 10
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden:
+  addtoany: true
+  field_five_stars: true
+  moderation_state_buttons_widget: true

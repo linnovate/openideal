@@ -1,0 +1,16 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - openideal_challenge
+title: 'Default cron handler'
+id: openideal_challenge_cron
+weight: 0
+module: openideal_challenge
+callback: openideal_challenge_cron
+scheduler:
+  id: simple
+launcher:
+  id: serial
+logger:
+  id: database

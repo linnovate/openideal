@@ -1,0 +1,37 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - route_condition
+    - rrssb
+  theme:
+    - openideal_theme
+id: ridiculously_responsive_social_share_buttons
+theme: openideal_theme
+region: sidebar
+weight: -8
+provider: null
+plugin: rrssb_block
+settings:
+  id: rrssb_block
+  label: 'Share this content'
+  label_display: visible
+  provider: rrssb
+  button_set: default
+visibility:
+  route:
+    id: route
+    routes: entity.node.canonical
+    negate: false
+    context_mapping: {  }
+  'entity_bundle:node':
+    id: 'entity_bundle:node'
+    negate: false
+    context_mapping:
+      node: '@node.node_route_context:node'
+    bundles:
+      article: article
+      challenge: challenge
+      discussion: discussion
+      idea: idea

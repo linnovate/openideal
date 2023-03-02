@@ -22,13 +22,13 @@ expression:
         id: rules_condition
         uuid: 6930d5a9-9ae0-4c7d-bd1c-df8aec56e60d
         weight: 0
+        condition_id: rules_user_is_blocked
+        negate: true
         context_values: {  }
         context_mapping:
           user: user
         context_processors: {  }
         provides_mapping: {  }
-        condition_id: rules_user_is_blocked
-        negate: true
   actions:
     id: rules_action_set
     uuid: 6ec95133-3c88-47dc-aa9b-6ad77c98a8b3
@@ -38,6 +38,7 @@ expression:
         id: rules_action
         uuid: f7e54511-63d1-4b3e-a8ab-953a036776d1
         weight: 0
+        action_id: openideal_message_action
         context_values:
           template: user_joined
         context_mapping:
@@ -46,4 +47,3 @@ expression:
           template:
             rules_tokens: {  }
         provides_mapping: {  }
-        action_id: openideal_message_action

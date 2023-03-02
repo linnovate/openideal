@@ -12,20 +12,20 @@ mode: default
 content:
   field_comment_reference:
     type: entity_reference_entity_view
-    weight: 1
-    region: content
     label: hidden
     settings:
-      view_mode: message
-      link: false
       offset: 0
       limit: 0
+      view_mode: message
+      link: false
     third_party_settings: {  }
-  partial_0:
-    weight: 0
+    weight: 1
     region: content
+  partial_0:
     settings: {  }
     third_party_settings: {  }
+    weight: 0
+    region: content
 hidden:
   field_node_reference: true
   partial_1: true

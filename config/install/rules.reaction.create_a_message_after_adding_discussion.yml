@@ -1,0 +1,69 @@
+langcode: en
+status: true
+dependencies: {  }
+id: create_a_message_after_adding_discussion
+label: 'Create a message after adding discussion'
+events:
+  -
+    event_name: 'rules_entity_insert:node--discussion'
+description: ''
+tags: {  }
+config_version: '3'
+expression:
+  id: rules_rule
+  uuid: 0b04f355-b11e-42fb-a069-b387bbe13374
+  weight: 0
+  conditions:
+    id: rules_and
+    uuid: f39db1f4-1ed5-40e4-bac2-19f7c48e320d
+    weight: 0
+    conditions:
+      -
+        id: rules_condition
+        uuid: 136f15ae-4bbc-4009-859e-380877bb87cc
+        weight: 0
+        condition_id: rules_node_is_published
+        negate: false
+        context_values: {  }
+        context_mapping:
+          node: node
+        context_processors: {  }
+        provides_mapping: {  }
+      -
+        id: rules_condition
+        uuid: bf8bce00-3c06-46f0-a3fe-0532f10707bd
+        weight: 0
+        condition_id: rules_entity_is_of_bundle
+        negate: false
+        context_values:
+          type: node
+          bundle: discussion
+        context_mapping:
+          entity: node
+        context_processors:
+          type:
+            rules_tokens: {  }
+          bundle:
+            rules_tokens: {  }
+        provides_mapping: {  }
+  actions:
+    id: rules_action_set
+    uuid: eb190302-e589-41a5-9ade-76f2e0a864dc
+    weight: 0
+    actions:
+      -
+        id: rules_action
+        uuid: 7be8447a-b17a-4f5a-b4fd-a7c82f861674
+        weight: 0
+        action_id: openideal_message_action
+        context_values:
+          template: discussion_create
+          user: ''
+        context_mapping:
+          referenced_entity: node
+        context_processors:
+          template:
+            rules_tokens: {  }
+          user:
+            rules_tokens: {  }
+        provides_mapping: {  }

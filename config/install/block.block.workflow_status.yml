@@ -1,0 +1,36 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - openideal_statistics
+    - route_condition
+  theme:
+    - openideal_theme
+id: workflow_status
+theme: openideal_theme
+region: sidebar
+weight: -10
+provider: null
+plugin: openideal_statistics_status
+settings:
+  id: openideal_statistics_status
+  label: Status
+  label_display: visible
+  provider: openideal_statistics
+  context_mapping:
+    node: '@node.node_route_context:node'
+  show_all_states: true
+visibility:
+  route:
+    id: route
+    routes: entity.node.canonical
+    negate: false
+    context_mapping: {  }
+  'entity_bundle:node':
+    id: 'entity_bundle:node'
+    negate: false
+    context_mapping:
+      node: '@node.node_route_context:node'
+    bundles:
+      idea: idea

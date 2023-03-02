@@ -1,0 +1,217 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.base_field_override.node.challenge.uid
+    - core.entity_view_mode.node.teaser
+    - field.field.node.challenge.body
+    - field.field.node.challenge.field_category
+    - field.field.node.challenge.field_comments
+    - field.field.node.challenge.field_images
+    - field.field.node.challenge.field_is_open
+    - field.field.node.challenge.field_like
+    - field.field.node.challenge.field_main_image
+    - field.field.node.challenge.field_meta_tags
+    - field.field.node.challenge.field_schedule_close
+    - field.field.node.challenge.field_schedule_open
+    - field.field.node.challenge.field_supporting_data
+    - node.type.challenge
+  module:
+    - layout_builder
+    - openideal_idea
+    - openideal_layout
+    - openideal_statistics
+    - text
+    - user
+third_party_settings:
+  layout_builder:
+    enabled: true
+    allow_custom: false
+    sections:
+      -
+        layout_id: openideal_two_columns_teaser
+        layout_settings:
+          label: Top
+          context_mapping: {  }
+          main_class: teaser-top-section
+          layout_builder_styles_style: ''
+        components:
+          dbfd8d6c-8d4a-4bbb-ad31-e4f4cfcdb145:
+            uuid: dbfd8d6c-8d4a-4bbb-ad31-e4f4cfcdb145
+            region: second
+            configuration:
+              id: 'field_block:node:challenge:title'
+              label: Title
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: string
+                label: hidden
+                settings:
+                  link_to_entity: true
+                third_party_settings: {  }
+            weight: 0
+            additional: {  }
+          9f4f16e5-5219-420e-8229-f8a08fd869ea:
+            uuid: 9f4f16e5-5219-420e-8229-f8a08fd869ea
+            region: second
+            configuration:
+              id: 'field_block:node:challenge:body'
+              label: Body
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: text_summary_or_trimmed
+                label: hidden
+                settings:
+                  trim_length: 400
+                third_party_settings: {  }
+            weight: 1
+            additional: {  }
+          93527806-93a6-406f-b4db-19d80427635c:
+            uuid: 93527806-93a6-406f-b4db-19d80427635c
+            region: first
+            configuration:
+              id: openidel_idea_node_bundle
+              label: 'Entity bundle'
+              label_display: '0'
+              provider: openideal_idea
+              context_mapping:
+                entity: layout_builder.entity
+            weight: 1
+            additional: {  }
+          a22591d4-fd28-4aee-b9d0-02ae890c3ea1:
+            uuid: a22591d4-fd28-4aee-b9d0-02ae890c3ea1
+            region: first
+            configuration:
+              id: 'field_block:node:challenge:field_images'
+              label: Images
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: image
+                label: hidden
+                settings:
+                  offset: 0
+                  limit: 1
+                  image_link: content
+                  image_style: front_page_teaser_large
+                third_party_settings: {  }
+            weight: 2
+            additional: {  }
+        third_party_settings: {  }
+      -
+        layout_id: openideal_two_columns_teaser
+        layout_settings:
+          label: Bottom
+          context_mapping: {  }
+          main_class: teaser-bottom-section
+          layout_builder_styles_style: ''
+        components:
+          2925684c-b09b-4018-b6ff-35eabd02b678:
+            uuid: 2925684c-b09b-4018-b6ff-35eabd02b678
+            region: first
+            configuration:
+              id: 'field_block:node:challenge:uid'
+              label: 'Authored by'
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: entity_reference_entity_view
+                label: hidden
+                settings:
+                  view_mode: author
+                third_party_settings: {  }
+            weight: 0
+            additional: {  }
+          95d4b25b-b666-4927-804f-fa9d32f55493:
+            uuid: 95d4b25b-b666-4927-804f-fa9d32f55493
+            region: second
+            configuration:
+              id: openideal_idea_flag_and_like_block
+              label: 'Flag and Like block'
+              label_display: '0'
+              provider: openideal_idea
+              context_mapping:
+                node: layout_builder.entity
+              hide_like: 1
+              main_class: teaser-flag
+            weight: -8
+            additional: {  }
+          70d5ee21-4bf9-4524-9819-ec92f82dc68c:
+            uuid: 70d5ee21-4bf9-4524-9819-ec92f82dc68c
+            region: second
+            configuration:
+              id: openideal_statistics_challenge_statistics
+              label: 'Challenge statistics block'
+              label_display: '0'
+              provider: openideal_statistics
+              context_mapping:
+                node: layout_builder.entity
+            weight: -10
+            additional: {  }
+          d65a383c-684a-4973-87e8-4a50ea4cc13d:
+            uuid: d65a383c-684a-4973-87e8-4a50ea4cc13d
+            region: second
+            configuration:
+              id: openideal_idea_info_block
+              label: 'Idea info'
+              label_display: '0'
+              provider: openideal_idea
+              context_mapping:
+                node: layout_builder.entity
+              use_created: 0
+              use_updated: 0
+              use_schedule: 1
+            weight: -9
+            additional:
+              layout_builder_styles_style:
+                mobile_status_and_statistics: 0
+        third_party_settings: {  }
+id: node.challenge.teaser
+targetEntityType: node
+bundle: challenge
+mode: teaser
+content:
+  body:
+    type: text_summary_or_trimmed
+    label: hidden
+    settings:
+      trim_length: 600
+    third_party_settings: {  }
+    weight: 101
+    region: content
+  flag_follow:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 10
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden:
+  addtoany: true
+  field_category: true
+  field_comments: true
+  field_images: true
+  field_is_open: true
+  field_like: true
+  field_main_image: true
+  field_meta_tags: true
+  field_schedule_close: true
+  field_schedule_open: true
+  field_supporting_data: true

@@ -9,18 +9,18 @@ dependencies:
     - layout_builder
 third_party_settings:
   layout_builder:
-    allow_custom: false
     enabled: false
+    allow_custom: false
 id: message.created_reply_on_comment.mail_subject
 targetEntityType: message
 bundle: created_reply_on_comment
 mode: mail_subject
 content:
   partial_1:
-    weight: 0
-    region: content
     settings: {  }
     third_party_settings: {  }
+    weight: 0
+    region: content
 hidden:
   field_comment_reference: true
   partial_0: true

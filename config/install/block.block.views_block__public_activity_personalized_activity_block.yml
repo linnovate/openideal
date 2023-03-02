@@ -1,0 +1,29 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - views.view.public_activity
+  module:
+    - route_condition
+    - views
+  theme:
+    - openideal_theme
+id: views_block__public_activity_personalized_activity_block
+theme: openideal_theme
+region: sidebar
+weight: -13
+provider: null
+plugin: 'views_block:public_activity-personalized_activity_block'
+settings:
+  id: 'views_block:public_activity-personalized_activity_block'
+  label: 'Latest Updates'
+  label_display: visible
+  provider: views
+  views_label: 'Latest Updates'
+  items_per_page: none
+visibility:
+  route:
+    id: route
+    routes: entity.user.canonical
+    negate: false
+    context_mapping: {  }

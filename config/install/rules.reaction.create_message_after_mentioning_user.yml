@@ -22,6 +22,8 @@ expression:
         id: rules_condition
         uuid: 7fcb2dcc-c1eb-42ac-8b64-73029e7b65ce
         weight: 0
+        condition_id: rules_data_comparison
+        negate: false
         context_values:
           operation: '=='
           value: '1'
@@ -33,8 +35,6 @@ expression:
           value:
             rules_tokens: {  }
         provides_mapping: {  }
-        condition_id: rules_data_comparison
-        negate: false
   actions:
     id: rules_action_set
     uuid: 4c6fadd2-58a4-421b-a312-43c59a6f7222
@@ -44,6 +44,7 @@ expression:
         id: rules_action
         uuid: 87e5f07f-7981-4f1f-ad17-29a70e3809a1
         weight: 0
+        action_id: openideal_message_action
         context_values:
           template: user_mention
         context_mapping:
@@ -53,4 +54,3 @@ expression:
           template:
             rules_tokens: {  }
         provides_mapping: {  }
-        action_id: openideal_message_action

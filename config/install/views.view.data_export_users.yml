@@ -22,152 +22,12 @@ base_table: users_field_data
 base_field: uid
 display:
   default:
-    display_plugin: default
     id: default
     display_title: Master
+    display_plugin: default
     position: 0
     display_options:
-      access:
-        type: perm
-        options:
-          perm: 'access activity pages openideal'
-      cache:
-        type: tag
-        options: {  }
-      query:
-        type: views_query
-        options:
-          disable_sql_rewrite: false
-          distinct: false
-          replica: false
-          query_comment: ''
-          query_tags: {  }
-      exposed_form:
-        type: bef
-        options:
-          submit_button: Apply
-          reset_button: false
-          reset_button_label: Reset
-          exposed_sorts_label: 'Sort by'
-          expose_sort_order: true
-          sort_asc_label: Asc
-          sort_desc_label: Desc
-          text_input_required: 'Select any filter and click on Apply to see results'
-          text_input_required_format: basic_html
-          bef:
-            general:
-              autosubmit: true
-              autosubmit_exclude_textfield: false
-              autosubmit_textfield_delay: 500
-              autosubmit_hide: true
-              input_required: false
-              allow_secondary: false
-              secondary_label: 'Advanced options'
-              secondary_open: false
-            filter:
-              name:
-                plugin_id: default
-                advanced:
-                  collapsible: false
-                  is_secondary: false
-              field_gender_value:
-                plugin_id: default
-                advanced:
-                  rewrite:
-                    filter_rewrite_values: ''
-                  collapsible: false
-                  is_secondary: false
-              created:
-                plugin_id: bef_datepicker
-                advanced:
-                  collapsible: false
-                  is_secondary: false
-              created_1:
-                plugin_id: bef_datepicker
-                advanced:
-                  collapsible: false
-                  is_secondary: false
-      pager:
-        type: mini
-        options:
-          items_per_page: 10
-          offset: 0
-          id: 0
-          total_pages: null
-          expose:
-            items_per_page: false
-            items_per_page_label: 'Items per page'
-            items_per_page_options: '5, 10, 25, 50'
-            items_per_page_options_all: false
-            items_per_page_options_all_label: '- All -'
-            offset: false
-            offset_label: Offset
-          tags:
-            previous: ‹‹
-            next: ››
-      style:
-        type: table
-        options:
-          grouping: {  }
-          row_class: ''
-          default_row_class: true
-          override: true
-          sticky: false
-          caption: ''
-          summary: ''
-          description: ''
-          columns:
-            name: name
-            created: created
-            mail: mail
-            field_gender: field_gender
-            uuid: uuid
-            field_age_group: field_age_group
-          info:
-            name:
-              sortable: true
-              default_sort_order: asc
-              align: ''
-              separator: ''
-              empty_column: false
-              responsive: ''
-            created:
-              sortable: true
-              default_sort_order: asc
-              align: ''
-              separator: ''
-              empty_column: false
-              responsive: ''
-            mail:
-              sortable: false
-              default_sort_order: asc
-              align: ''
-              separator: ''
-              empty_column: false
-              responsive: ''
-            field_gender:
-              sortable: true
-              default_sort_order: asc
-              align: ''
-              separator: ''
-              empty_column: false
-              responsive: ''
-            uuid:
-              align: ''
-              separator: ''
-              empty_column: false
-              responsive: ''
-            field_age_group:
-              sortable: true
-              default_sort_order: asc
-              align: ''
-              separator: ''
-              empty_column: false
-              responsive: ''
-          default: '-1'
-          empty_table: false
-      row:
-        type: fields
+      title: 'Users data export'
       fields:
         name:
           id: name
@@ -176,6 +36,9 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: user
+          entity_field: name
+          plugin_id: field
           label: Name
           exclude: false
           alter:
@@ -231,9 +94,6 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-          entity_type: user
-          entity_field: name
-          plugin_id: field
         uid:
           id: uid
           table: users_field_data
@@ -241,6 +101,9 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: user
+          entity_field: uid
+          plugin_id: field
           label: UID
           exclude: false
           alter:
@@ -297,9 +160,6 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-          entity_type: user
-          entity_field: uid
-          plugin_id: field
         field_gender:
           id: field_gender
           table: user__field_gender
@@ -307,6 +167,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          plugin_id: field
           label: Gender
           exclude: false
           alter:
@@ -361,7 +222,6 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-          plugin_id: field
         created:
           id: created
           table: users_field_data
@@ -369,6 +229,9 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: user
+          entity_field: created
+          plugin_id: field
           label: Created
           exclude: false
           alter:
@@ -426,9 +289,6 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-          entity_type: user
-          entity_field: created
-          plugin_id: field
         mail:
           id: mail
           table: users_field_data
@@ -436,6 +296,9 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: user
+          entity_field: mail
+          plugin_id: field
           label: Email
           exclude: false
           alter:
@@ -490,9 +353,6 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-          entity_type: user
-          entity_field: mail
-          plugin_id: field
         field_age_group:
           id: field_age_group
           table: user__field_age_group
@@ -500,6 +360,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          plugin_id: field
           label: 'Age group'
           exclude: false
           alter:
@@ -554,21 +415,93 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-          plugin_id: field
+      pager:
+        type: mini
+        options:
+          offset: 0
+          items_per_page: 10
+          total_pages: null
+          id: 0
+          tags:
+            next: ››
+            previous: ‹‹
+          expose:
+            items_per_page: false
+            items_per_page_label: 'Items per page'
+            items_per_page_options: '5, 10, 25, 50'
+            items_per_page_options_all: false
+            items_per_page_options_all_label: '- All -'
+            offset: false
+            offset_label: Offset
+      exposed_form:
+        type: bef
+        options:
+          submit_button: Apply
+          reset_button: false
+          reset_button_label: Reset
+          exposed_sorts_label: 'Sort by'
+          expose_sort_order: true
+          sort_asc_label: Asc
+          sort_desc_label: Desc
+          text_input_required: 'Select any filter and click on Apply to see results'
+          text_input_required_format: basic_html
+          bef:
+            general:
+              autosubmit: true
+              autosubmit_exclude_textfield: false
+              autosubmit_textfield_delay: 500
+              autosubmit_hide: true
+              input_required: false
+              allow_secondary: false
+              secondary_label: 'Advanced options'
+              secondary_open: false
+            filter:
+              name:
+                plugin_id: default
+                advanced:
+                  collapsible: false
+                  is_secondary: false
+              field_gender_value:
+                plugin_id: default
+                advanced:
+                  rewrite:
+                    filter_rewrite_values: ''
+                  collapsible: false
+                  is_secondary: false
+              created:
+                plugin_id: bef_datepicker
+                advanced:
+                  collapsible: false
+                  is_secondary: false
+              created_1:
+                plugin_id: bef_datepicker
+                advanced:
+                  collapsible: false
+                  is_secondary: false
+      access:
+        type: perm
+        options:
+          perm: 'access activity pages openideal'
+      cache:
+        type: tag
+        options: {  }
+      empty: {  }
+      sorts: {  }
+      arguments: {  }
       filters:
         status:
-          value: '1'
+          id: status
           table: users_field_data
           field: status
-          plugin_id: boolean
           entity_type: user
           entity_field: status
-          id: status
+          plugin_id: boolean
+          value: '1'
+          group: 1
           expose:
             operator: ''
             operator_limit_selection: false
             operator_list: {  }
-          group: 1
         name:
           id: name
           table: users_field_data
@@ -576,6 +509,9 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: user
+          entity_field: name
+          plugin_id: string
           operator: contains
           value: ''
           group: 1
@@ -609,9 +545,6 @@ display:
             default_group: All
             default_group_multiple: {  }
             group_items: {  }
-          entity_type: user
-          entity_field: name
-          plugin_id: string
         field_gender_value:
           id: field_gender_value
           table: user__field_gender
@@ -619,6 +552,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          plugin_id: list_field
           operator: or
           value:
             all: all
@@ -657,7 +591,6 @@ display:
             default_group_multiple: {  }
             group_items: {  }
           reduce_duplicates: false
-          plugin_id: list_field
         created:
           id: created
           table: users_field_data
@@ -665,6 +598,9 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: user
+          entity_field: created
+          plugin_id: date
           operator: '>='
           value:
             min: ''
@@ -689,9 +625,9 @@ display:
               authenticated: authenticated
               anonymous: '0'
               administrator: '0'
-            placeholder: ''
             min_placeholder: ''
             max_placeholder: ''
+            placeholder: ''
           is_grouped: false
           group_info:
             label: ''
@@ -704,9 +640,6 @@ display:
             default_group: All
             default_group_multiple: {  }
             group_items: {  }
-          entity_type: user
-          entity_field: created
-          plugin_id: date
         created_1:
           id: created_1
           table: users_field_data
@@ -714,6 +647,9 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: user
+          entity_field: created
+          plugin_id: date
           operator: '<='
           value:
             min: ''
@@ -738,9 +674,9 @@ display:
               authenticated: authenticated
               anonymous: '0'
               administrator: '0'
-            placeholder: ''
             min_placeholder: ''
             max_placeholder: ''
+            placeholder: ''
           is_grouped: false
           group_info:
             label: ''
@@ -753,21 +689,85 @@ display:
             default_group: All
             default_group_multiple: {  }
             group_items: {  }
-          entity_type: user
-          entity_field: created
-          plugin_id: date
-      sorts: {  }
-      title: 'Users data export'
-      header: {  }
-      footer: {  }
-      empty: {  }
-      relationships: {  }
-      arguments: {  }
-      display_extenders: {  }
       filter_groups:
         operator: AND
         groups:
           1: AND
+      style:
+        type: table
+        options:
+          grouping: {  }
+          row_class: ''
+          default_row_class: true
+          columns:
+            name: name
+            created: created
+            mail: mail
+            field_gender: field_gender
+            uuid: uuid
+            field_age_group: field_age_group
+          default: '-1'
+          info:
+            name:
+              sortable: true
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            created:
+              sortable: true
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            mail:
+              sortable: false
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            field_gender:
+              sortable: true
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            uuid:
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            field_age_group:
+              sortable: true
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+          override: true
+          sticky: false
+          summary: ''
+          empty_table: false
+          caption: ''
+          description: ''
+      row:
+        type: fields
+      query:
+        type: views_query
+        options:
+          query_comment: ''
+          disable_sql_rewrite: false
+          distinct: false
+          replica: false
+          query_tags: {  }
+      relationships: {  }
+      header: {  }
+      footer: {  }
+      display_extenders: {  }
     cache_metadata:
       max-age: -1
       contexts:
@@ -780,23 +780,11 @@ display:
         - 'config:field.storage.user.field_age_group'
         - 'config:field.storage.user.field_gender'
   data_export_users_data_export:
-    display_plugin: data_export
     id: data_export_users_data_export
     display_title: 'Data export users (data export)'
+    display_plugin: data_export
     position: 1
     display_options:
-      display_extenders: {  }
-      path: admin/export/user
-      display_description: ''
-      filename: '[date:html_month].users.csv'
-      automatic_download: false
-      store_in_public_file_directory: null
-      redirect_to_display: none
-      custom_redirect_path: false
-      include_query_params: false
-      displays:
-        data_export_users_page: data_export_users_page
-        default: '0'
       style:
         type: data_export
         options:
@@ -811,6 +799,18 @@ display:
             encoding: utf8
             utf8_bom: '0'
             use_serializer_encode_only: false
+      display_description: ''
+      display_extenders: {  }
+      path: admin/export/user
+      displays:
+        data_export_users_page: data_export_users_page
+        default: '0'
+      filename: '[date:html_month].users.csv'
+      automatic_download: false
+      store_in_public_file_directory: null
+      custom_redirect_path: false
+      redirect_to_display: none
+      include_query_params: false
     cache_metadata:
       max-age: -1
       contexts:
@@ -823,23 +823,23 @@ display:
         - 'config:field.storage.user.field_age_group'
         - 'config:field.storage.user.field_gender'
   data_export_users_page:
-    display_plugin: page
     id: data_export_users_page
     display_title: 'Data export users (page)'
+    display_plugin: page
     position: 1
     display_options:
+      display_description: ''
       display_extenders: {  }
       path: admin/openideal/activity/user
-      display_description: ''
       menu:
         type: normal
         title: Users
         description: ''
-        expanded: false
-        parent: openideal_toolbar.activity
         weight: 3
-        context: '0'
+        expanded: false
         menu_name: admin
+        parent: openideal_toolbar.activity
+        context: '0'
     cache_metadata:
       max-age: -1
       contexts:

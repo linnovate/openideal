@@ -22,6 +22,8 @@ expression:
         id: rules_condition
         uuid: b4e0659b-673e-4b51-96a4-c4c91af7a182
         weight: 0
+        condition_id: rules_data_comparison
+        negate: true
         context_values:
           operation: '=='
           value: draft
@@ -33,12 +35,12 @@ expression:
           value:
             rules_tokens: {  }
         provides_mapping: {  }
-        condition_id: rules_data_comparison
-        negate: true
       -
         id: rules_condition
         uuid: 461866f7-cb91-4bac-b9f7-9a7b28b200fd
         weight: 0
+        condition_id: rules_data_comparison
+        negate: true
         context_values:
           operation: '=='
           value: draft_approval
@@ -50,12 +52,12 @@ expression:
           value:
             rules_tokens: {  }
         provides_mapping: {  }
-        condition_id: rules_data_comparison
-        negate: true
       -
         id: rules_condition
         uuid: a80fefc1-8cec-4f53-88a0-dad89be5a690
         weight: 0
+        condition_id: rules_data_comparison
+        negate: true
         context_values:
           operation: '=='
         context_mapping:
@@ -65,12 +67,12 @@ expression:
           operation:
             rules_tokens: {  }
         provides_mapping: {  }
-        condition_id: rules_data_comparison
-        negate: true
       -
         id: rules_condition
         uuid: bbbe5676-f787-4cb1-bac4-4e1e01b751b6
         weight: 0
+        condition_id: rules_data_comparison
+        negate: true
         context_values:
           operation: '=='
           value: needs_work
@@ -82,8 +84,6 @@ expression:
           value:
             rules_tokens: {  }
         provides_mapping: {  }
-        condition_id: rules_data_comparison
-        negate: true
   actions:
     id: rules_action_set
     uuid: 61e1c472-5ff0-495d-9fd1-76d120c7597c
@@ -93,6 +93,7 @@ expression:
         id: rules_action
         uuid: 87f59cd7-2d13-4def-b4fe-1810713ed570
         weight: 0
+        action_id: openideal_message_action
         context_values:
           template: idea_life_cycle_change
         context_mapping:
@@ -101,4 +102,3 @@ expression:
           template:
             rules_tokens: {  }
         provides_mapping: {  }
-        action_id: openideal_message_action

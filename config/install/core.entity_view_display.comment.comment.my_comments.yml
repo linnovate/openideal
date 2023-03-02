@@ -13,50 +13,51 @@ dependencies:
     - text
 third_party_settings:
   layout_builder:
-    allow_custom: false
     enabled: true
+    allow_custom: false
     sections:
       -
         layout_id: layout_onecol
         layout_settings:
           label: ''
+          context_mapping: {  }
         components:
           0e788d62-3fc4-4e5f-bad4-82478de5be0e:
             uuid: 0e788d62-3fc4-4e5f-bad4-82478de5be0e
             region: content
             configuration:
+              id: 'field_block:comment:comment:comment_body'
               label_display: '0'
               context_mapping:
                 entity: layout_builder.entity
-              id: 'field_block:comment:comment:comment_body'
               formatter:
-                label: hidden
                 type: text_default
+                label: hidden
                 settings: {  }
                 third_party_settings: {  }
-            additional: {  }
             weight: 2
+            additional: {  }
           ce734f7b-401c-4fa0-921e-fea307f8ef82:
             uuid: ce734f7b-401c-4fa0-921e-fea307f8ef82
             region: content
             configuration:
               id: 'field_block:comment:comment:created'
               label: Created
-              provider: layout_builder
               label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
               formatter:
-                label: hidden
                 type: timestamp_ago
+                label: hidden
                 settings:
                   future_format: '@interval hence'
                   past_format: '@interval ago'
                   granularity: 2
                 third_party_settings: {  }
-              context_mapping:
-                entity: layout_builder.entity
-                view_mode: view_mode
-            additional: {  }
             weight: 3
+            additional: {  }
         third_party_settings: {  }
 id: comment.comment.my_comments
 targetEntityType: comment
@@ -64,12 +65,12 @@ bundle: comment
 mode: my_comments
 content:
   comment_body:
-    label: hidden
     type: text_default
-    weight: 0
-    region: content
+    label: hidden
     settings: {  }
     third_party_settings: {  }
+    weight: 0
+    region: content
 hidden:
   field_like: true
   links: true

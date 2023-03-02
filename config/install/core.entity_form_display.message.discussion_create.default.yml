@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.message.discussion_create.field_node_reference
+    - message.template.discussion_create
+id: message.discussion_create.default
+targetEntityType: message
+bundle: discussion_create
+mode: default
+content:
+  field_node_reference:
+    type: entity_reference_autocomplete
+    weight: 0
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden: {  }

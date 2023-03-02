@@ -18,13 +18,14 @@ dependencies:
     - bootstrap_barrio
 third_party_settings:
   layout_builder:
-    allow_custom: false
     enabled: true
+    allow_custom: false
     sections:
       -
         layout_id: barrio_cardtopimage
         layout_settings:
           label: ''
+          context_mapping: {  }
           layout_builder_styles_style:
             author: 0
             user_compact: 0
@@ -37,71 +38,92 @@ third_party_settings:
             configuration:
               id: 'field_block:node:page:body'
               label: Body
-              provider: layout_builder
               label_display: '0'
-              formatter:
-                label: hidden
-                type: text_default
-                settings: {  }
-                third_party_settings: {  }
+              provider: layout_builder
               context_mapping:
                 entity: layout_builder.entity
                 view_mode: view_mode
-            additional: {  }
+              formatter:
+                type: text_default
+                label: hidden
+                settings: {  }
+                third_party_settings: {  }
             weight: 2
+            additional: {  }
           bc64fdd7-ed87-4eff-9a63-3201d7fde2b9:
             uuid: bc64fdd7-ed87-4eff-9a63-3201d7fde2b9
             region: second
             configuration:
               id: 'field_block:node:page:field_attached_docs'
               label: 'Attached docs'
-              provider: layout_builder
               label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
               formatter:
-                label: above
                 type: file_default
+                label: above
                 settings:
                   offset: 0
                   limit: 0
                   use_description_as_link_text: true
                 third_party_settings: {  }
-              context_mapping:
-                entity: layout_builder.entity
-                view_mode: view_mode
-            additional: {  }
             weight: 3
+            additional: {  }
           99a93f94-606e-4a80-a1c8-4f2895654fde:
             uuid: 99a93f94-606e-4a80-a1c8-4f2895654fde
             region: first
             configuration:
               id: openidel_slideshow_block
               label: Slideshow
-              provider: openideal_slideshow
               label_display: '0'
-              image_style: slideshow_large
+              provider: openideal_slideshow
               context_mapping:
                 node: layout_builder.entity
-            additional: {  }
+              image_style: slideshow_large
             weight: 0
+            additional: {  }
           67cf0f75-5028-42d7-a702-9dc5b3b6e816:
             uuid: 67cf0f75-5028-42d7-a702-9dc5b3b6e816
             region: second
             configuration:
               id: 'field_block:node:page:title'
               label: Title
-              provider: layout_builder
               label_display: '0'
-              formatter:
-                label: hidden
-                type: string
-                settings:
-                  link_to_entity: false
-                third_party_settings: {  }
+              provider: layout_builder
               context_mapping:
                 entity: layout_builder.entity
                 view_mode: view_mode
-            additional: {  }
+              formatter:
+                type: string
+                label: hidden
+                settings:
+                  link_to_entity: false
+                third_party_settings: {  }
             weight: 1
+            additional: {  }
+          7231c502-440f-4b65-9297-153e1de34173:
+            uuid: 7231c502-440f-4b65-9297-153e1de34173
+            region: content
+            configuration:
+              id: 'field_block:node:page:field_images'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: image
+                label: above
+                settings:
+                  offset: 0
+                  limit: 0
+                  image_link: ''
+                  image_style: ''
+                  image_loading:
+                    attribute: lazy
+                third_party_settings: {  }
+            weight: 0
+            additional: {  }
         third_party_settings: {  }
 id: node.page.full
 targetEntityType: node
@@ -109,49 +131,51 @@ bundle: page
 mode: full
 content:
   addtoany:
-    weight: 101
     settings: {  }
     third_party_settings: {  }
+    weight: 101
     region: content
   body:
-    weight: 105
+    type: text_default
     label: above
     settings:
       offset: 0
       limit: 0
     third_party_settings: {  }
-    type: text_default
+    weight: 105
     region: content
   field_attached_docs:
-    weight: 104
+    type: file_default
     label: above
     settings:
-      use_description_as_link_text: true
       offset: 0
       limit: 0
+      use_description_as_link_text: true
     third_party_settings: {  }
-    type: file_default
+    weight: 104
     region: content
   field_images:
-    weight: 103
+    type: image
     label: above
     settings:
-      image_style: ''
-      image_link: ''
       offset: 0
       limit: 0
+      image_link: ''
+      image_style: ''
+      image_loading:
+        attribute: lazy
     third_party_settings: {  }
-    type: image
+    weight: 103
     region: content
   field_paragraphs:
     type: entity_reference_revisions_entity_view
-    region: content
-    weight: 106
     settings: {  }
     third_party_settings: {  }
+    weight: 106
+    region: content
   links:
+    settings: {  }
+    third_party_settings: {  }
     weight: 101
     region: content
-    settings: {  }
-    third_party_settings: {  }
 hidden: {  }

@@ -12,8 +12,8 @@ auth:
     route: social_auth_linkedin.redirect_to_linkedin
     img_path: modules/contrib/social_auth_linkedin/img/linkedin_logo.svg
 post_login: /user/register/step-2
+user_allowed: register
 redirect_user_form: false
 disable_admin_login: true
 disabled_roles:
   administrator: '0'
-user_allowed: register

@@ -1,0 +1,47 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.user.user.avatars_avatar_generator
+    - field.field.user.user.avatars_user_picture
+    - field.field.user.user.field_age_group
+    - field.field.user.user.field_first_name
+    - field.field.user.user.field_gender
+    - field.field.user.user.field_last_name
+    - field.field.user.user.field_points
+    - field.field.user.user.user_picture
+  module:
+    - image
+    - user
+id: user.user.default
+targetEntityType: user
+bundle: user
+mode: default
+content:
+  member_for:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 5
+    region: content
+  user_picture:
+    type: image
+    label: above
+    settings:
+      offset: 0
+      limit: 0
+      image_link: ''
+      image_style: ''
+      image_loading:
+        attribute: lazy
+    third_party_settings: {  }
+    weight: 6
+    region: content
+hidden:
+  avatars_avatar_generator: true
+  avatars_user_picture: true
+  field_age_group: true
+  field_first_name: true
+  field_gender: true
+  field_last_name: true
+  field_points: true
+  realname: true

@@ -1,0 +1,55 @@
+langcode: en
+status: true
+dependencies: {  }
+id: create_message_after_posting_comment
+label: 'Create a message after posting a comment'
+events:
+  -
+    event_name: 'rules_entity_insert:comment'
+description: ''
+tags: {  }
+config_version: '3'
+expression:
+  id: rules_rule
+  uuid: 3814e16c-9121-4cfa-88b0-63f62c73595f
+  weight: 0
+  conditions:
+    id: rules_and
+    uuid: 84be03e1-def1-40c0-8ba6-be80c57e21a5
+    weight: 0
+    conditions:
+      -
+        id: rules_condition
+        uuid: 47c935f6-ccff-4f14-8220-55f5564c553a
+        weight: 0
+        condition_id: rules_data_comparison
+        negate: false
+        context_values:
+          operation: '=='
+          value: '1'
+        context_mapping:
+          data: comment.entity_id.entity.status.value
+        context_processors:
+          operation:
+            rules_tokens: {  }
+          value:
+            rules_tokens: {  }
+        provides_mapping: {  }
+  actions:
+    id: rules_action_set
+    uuid: e379becc-4dca-43c2-9fd1-348184064005
+    weight: 0
+    actions:
+      -
+        id: rules_action
+        uuid: ca1dd82c-787a-4c0d-9ccf-60bf823d3642
+        weight: 0
+        action_id: openideal_message_action
+        context_values:
+          template: comment_created
+        context_mapping:
+          referenced_entity: comment
+        context_processors:
+          template:
+            rules_tokens: {  }
+        provides_mapping: {  }
