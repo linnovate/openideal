@@ -12,19 +12,19 @@ dependencies:
   module:
     - comment
     - layout_builder
+    - openideal_layout
     - text
     - user
-  theme:
-    - openideal_theme
 third_party_settings:
   layout_builder:
-    allow_custom: false
     enabled: true
+    allow_custom: false
     sections:
       -
         layout_id: openideal_card_with_footer
         layout_settings:
           label: ''
+          context_mapping: {  }
           layout_builder_styles_style:
             author: 0
             user_compact: 0
@@ -37,40 +37,40 @@ third_party_settings:
             configuration:
               id: 'field_block:node:discussion:uid'
               label: 'Authored by'
-              provider: layout_builder
               label_display: '0'
-              formatter:
-                label: hidden
-                type: entity_reference_entity_view
-                settings:
-                  view_mode: author
-                third_party_settings: {  }
+              provider: layout_builder
               context_mapping:
                 entity: layout_builder.entity
                 view_mode: view_mode
-            additional: {  }
+              formatter:
+                type: entity_reference_entity_view
+                label: hidden
+                settings:
+                  view_mode: author
+                third_party_settings: {  }
             weight: 0
+            additional: {  }
           396066f3-3fae-47ca-baf8-494360627fe0:
             uuid: 396066f3-3fae-47ca-baf8-494360627fe0
             region: footer
             configuration:
               id: 'field_block:node:discussion:created'
               label: 'Authored on'
-              provider: layout_builder
               label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
               formatter:
-                label: hidden
                 type: timestamp
+                label: hidden
                 settings:
                   date_format: openideal_date
                   custom_date_format: ''
                   timezone: ''
                 third_party_settings: {  }
-              context_mapping:
-                entity: layout_builder.entity
-                view_mode: view_mode
-            additional: {  }
             weight: 0
+            additional: {  }
         third_party_settings: {  }
 id: node.discussion.message
 targetEntityType: node
@@ -78,30 +78,30 @@ bundle: discussion
 mode: message
 content:
   body:
-    label: hidden
     type: text_default
-    weight: 1
+    label: hidden
     settings:
       offset: 0
       limit: 0
     third_party_settings: {  }
+    weight: 1
     region: content
   field_comments:
-    weight: 2
+    type: comment_default
     label: hidden
     settings:
-      view_mode: default
-      pager_id: 0
       offset: 0
       limit: 0
+      view_mode: default
+      pager_id: 0
     third_party_settings: {  }
-    type: comment_default
+    weight: 2
     region: content
   links:
-    weight: 0
-    region: content
     settings: {  }
     third_party_settings: {  }
+    weight: 0
+    region: content
 hidden:
   field_idea: true
   field_status: true

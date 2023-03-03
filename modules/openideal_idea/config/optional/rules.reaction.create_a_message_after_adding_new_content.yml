@@ -22,6 +22,8 @@ expression:
         id: rules_condition
         uuid: 216fa1fd-7ec3-4c05-8961-efcbe341ed3d
         weight: -50
+        condition_id: rules_entity_is_of_bundle
+        negate: true
         context_values:
           type: node
           bundle: idea
@@ -33,12 +35,12 @@ expression:
           bundle:
             rules_tokens: {  }
         provides_mapping: {  }
-        condition_id: rules_entity_is_of_bundle
-        negate: true
       -
         id: rules_condition
         uuid: 1985e0ff-a9fc-40b7-b0e7-79b9e561445a
         weight: -49
+        condition_id: rules_entity_is_of_bundle
+        negate: true
         context_values:
           type: node
           bundle: faq
@@ -50,12 +52,12 @@ expression:
           bundle:
             rules_tokens: {  }
         provides_mapping: {  }
-        condition_id: rules_entity_is_of_bundle
-        negate: true
       -
         id: rules_condition
         uuid: 3b5e2cc0-5ccd-46a2-89bf-9f0c7eb6d192
         weight: -48
+        condition_id: rules_entity_is_of_bundle
+        negate: true
         context_values:
           type: node
           bundle: challenge
@@ -67,12 +69,12 @@ expression:
           bundle:
             rules_tokens: {  }
         provides_mapping: {  }
-        condition_id: rules_entity_is_of_bundle
-        negate: true
       -
         id: rules_condition
         uuid: 76d5caab-28d7-452a-9f74-3585bbbab017
         weight: -47
+        condition_id: rules_entity_is_of_bundle
+        negate: true
         context_values:
           type: node
           bundle: discussion
@@ -84,19 +86,17 @@ expression:
           bundle:
             rules_tokens: {  }
         provides_mapping: {  }
-        condition_id: rules_entity_is_of_bundle
-        negate: true
       -
         id: rules_condition
         uuid: 1e9a9fab-a15e-4de2-b16e-e023fa234235
         weight: -46
+        condition_id: rules_node_is_published
+        negate: false
         context_values: {  }
         context_mapping:
           node: node
         context_processors: {  }
         provides_mapping: {  }
-        condition_id: rules_node_is_published
-        negate: false
   actions:
     id: rules_action_set
     uuid: ab78db4f-0e1f-40b5-a921-5a4500342127
@@ -106,6 +106,7 @@ expression:
         id: rules_action
         uuid: 2ed6b64a-a1ce-46e0-99bb-30a9d1e0f241
         weight: 0
+        action_id: openideal_message_action
         context_values:
           template: node_created
         context_mapping:
@@ -114,4 +115,3 @@ expression:
           template:
             rules_tokens: {  }
         provides_mapping: {  }
-        action_id: openideal_message_action

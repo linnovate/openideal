@@ -11,50 +11,50 @@ type: content_moderation
 type_settings:
   states:
     approved:
-      published: true
-      default_revision: true
       label: Approved
       weight: 1
+      published: true
+      default_revision: true
     draft:
       label: Draft
+      weight: -5
       published: false
       default_revision: false
-      weight: -5
     draft_approval:
-      published: false
-      default_revision: true
       label: 'Send to Approval'
       weight: -3
-    ex:
-      published: true
+      published: false
       default_revision: true
+    ex:
       label: 'Expert Review'
       weight: -1
-    launched:
       published: true
       default_revision: true
+    launched:
       label: Launched
       weight: 3
-    needs_work:
       published: true
       default_revision: true
+    needs_work:
       label: 'Needs Work'
       weight: 0
-    postponed:
       published: true
       default_revision: true
+    postponed:
       label: Postponed
       weight: 2
+      published: true
+      default_revision: true
     published:
       label: Ideation
-      published: true
-      default_revision: true
       weight: -2
-    rejected:
       published: true
       default_revision: true
+    rejected:
       label: Rejected
       weight: 4
+      published: true
+      default_revision: true
   transitions:
     approved:
       label: Approved
@@ -71,10 +71,10 @@ type_settings:
       weight: 0
     create_new_draft:
       label: 'Create New Draft'
-      to: draft
-      weight: -5
       from:
         - draft
+      to: draft
+      weight: -5
     draft_approval:
       label: Ideation
       from:

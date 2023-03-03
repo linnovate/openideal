@@ -22,17 +22,19 @@ expression:
         id: rules_condition
         uuid: 136f15ae-4bbc-4009-859e-380877bb87cc
         weight: 0
+        condition_id: rules_node_is_published
+        negate: false
         context_values: {  }
         context_mapping:
           node: node
         context_processors: {  }
         provides_mapping: {  }
-        condition_id: rules_node_is_published
-        negate: false
       -
         id: rules_condition
         uuid: bf8bce00-3c06-46f0-a3fe-0532f10707bd
         weight: 0
+        condition_id: rules_entity_is_of_bundle
+        negate: false
         context_values:
           type: node
           bundle: discussion
@@ -44,8 +46,6 @@ expression:
           bundle:
             rules_tokens: {  }
         provides_mapping: {  }
-        condition_id: rules_entity_is_of_bundle
-        negate: false
   actions:
     id: rules_action_set
     uuid: eb190302-e589-41a5-9ade-76f2e0a864dc
@@ -55,6 +55,7 @@ expression:
         id: rules_action
         uuid: 7be8447a-b17a-4f5a-b4fd-a7c82f861674
         weight: 0
+        action_id: openideal_message_action
         context_values:
           template: discussion_create
           user: ''
@@ -66,4 +67,3 @@ expression:
           user:
             rules_tokens: {  }
         provides_mapping: {  }
-        action_id: openideal_message_action

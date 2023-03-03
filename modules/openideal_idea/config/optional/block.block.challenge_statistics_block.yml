@@ -16,20 +16,20 @@ plugin: openideal_statistics_challenge_statistics
 settings:
   id: openideal_statistics_challenge_statistics
   label: 'Rating and statistics'
-  provider: openideal_statistics
   label_display: visible
+  provider: openideal_statistics
   context_mapping:
     node: '@node.node_route_context:node'
 visibility:
-  node_type:
-    id: node_type
-    bundles:
-      challenge: challenge
-    negate: false
-    context_mapping:
-      node: '@node.node_route_context:node'
   route:
     id: route
     routes: entity.node.canonical
     negate: false
     context_mapping: {  }
+  'entity_bundle:node':
+    id: 'entity_bundle:node'
+    negate: false
+    context_mapping:
+      node: '@node.node_route_context:node'
+    bundles:
+      challenge: challenge

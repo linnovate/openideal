@@ -16,21 +16,21 @@ plugin: openideal_idea_tags_block
 settings:
   id: openideal_idea_tags_block
   label: Tags
-  provider: openideal_idea
   label_display: '0'
+  provider: openideal_idea
   context_mapping:
     node: '@node.node_route_context:node'
 visibility:
-  node_type:
-    id: node_type
-    bundles:
-      article: article
-      idea: idea
-    negate: false
-    context_mapping:
-      node: '@node.node_route_context:node'
   route:
     id: route
     routes: entity.node.canonical
     negate: false
     context_mapping: {  }
+  'entity_bundle:node':
+    id: 'entity_bundle:node'
+    negate: false
+    context_mapping:
+      node: '@node.node_route_context:node'
+    bundles:
+      article: article
+      idea: idea

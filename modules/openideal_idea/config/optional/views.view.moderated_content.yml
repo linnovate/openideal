@@ -4,13 +4,13 @@ dependencies:
   config:
     - node.type.idea
     - workflows.workflow.life_cycle_phases
-  enforced:
-    module:
-      - content_moderation
   module:
     - content_moderation
     - node
     - user
+  enforced:
+    module:
+      - content_moderation
 id: moderated_content
 label: 'Moderated content'
 module: views
@@ -20,114 +20,12 @@ base_table: node_field_revision
 base_field: vid
 display:
   default:
-    display_plugin: default
     id: default
     display_title: Master
+    display_plugin: default
     position: 0
     display_options:
-      access:
-        type: perm
-        options:
-          perm: 'view any unpublished content'
-      cache:
-        type: tag
-        options: {  }
-      query:
-        type: views_query
-        options:
-          disable_sql_rewrite: false
-          distinct: false
-          replica: false
-          query_comment: ''
-          query_tags: {  }
-      exposed_form:
-        type: basic
-        options:
-          submit_button: Filter
-          reset_button: true
-          reset_button_label: Reset
-          exposed_sorts_label: 'Sort by'
-          expose_sort_order: true
-          sort_asc_label: Asc
-          sort_desc_label: Desc
-      pager:
-        type: full
-        options:
-          items_per_page: 50
-          offset: 0
-          id: 0
-          total_pages: null
-          tags:
-            previous: '‹ Previous'
-            next: 'Next ›'
-            first: '« First'
-            last: 'Last »'
-          expose:
-            items_per_page: false
-            items_per_page_label: 'Items per page'
-            items_per_page_options: '5, 10, 25, 50'
-            items_per_page_options_all: false
-            items_per_page_options_all_label: '- All -'
-            offset: false
-            offset_label: Offset
-          quantity: 9
-      style:
-        type: table
-        options:
-          grouping: {  }
-          row_class: ''
-          default_row_class: true
-          override: true
-          sticky: true
-          caption: ''
-          summary: ''
-          description: ''
-          columns:
-            title: title
-            type: type
-            name: name
-            moderation_state: moderation_state
-            changed: changed
-          info:
-            title:
-              sortable: true
-              default_sort_order: asc
-              align: ''
-              separator: ''
-              empty_column: false
-              responsive: ''
-            type:
-              sortable: true
-              default_sort_order: asc
-              align: ''
-              separator: ''
-              empty_column: false
-              responsive: ''
-            name:
-              sortable: false
-              default_sort_order: asc
-              align: ''
-              separator: ''
-              empty_column: false
-              responsive: ''
-            moderation_state:
-              sortable: true
-              default_sort_order: asc
-              align: ''
-              separator: ''
-              empty_column: false
-              responsive: ''
-            changed:
-              sortable: true
-              default_sort_order: desc
-              align: ''
-              separator: ''
-              empty_column: false
-              responsive: ''
-          default: changed
-          empty_table: true
-      row:
-        type: fields
+      title: Ideas
       fields:
         node_bulk_form:
           id: node_bulk_form
@@ -136,6 +34,8 @@ display:
           relationship: nid
           group_type: group
           admin_label: ''
+          entity_type: node
+          plugin_id: node_bulk_form
           label: ''
           exclude: false
           alter:
@@ -189,8 +89,6 @@ display:
             - change_idea_status_to_postponed
             - change_idea_status_to_rejected
             - change_idea_status_to_send_to_approval
-          entity_type: node
-          plugin_id: node_bulk_form
         title:
           id: title
           table: node_field_revision
@@ -198,6 +96,9 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: node
+          entity_field: title
+          plugin_id: field
           label: Title
           exclude: false
           alter:
@@ -253,9 +154,6 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-          entity_type: node
-          entity_field: title
-          plugin_id: field
         type:
           id: type
           table: node_field_data
@@ -263,6 +161,9 @@ display:
           relationship: nid
           group_type: group
           admin_label: ''
+          entity_type: node
+          entity_field: type
+          plugin_id: field
           label: 'Content type'
           exclude: false
           alter:
@@ -318,9 +219,6 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-          entity_type: node
-          entity_field: type
-          plugin_id: field
         name:
           id: name
           table: users_field_data
@@ -328,6 +226,9 @@ display:
           relationship: uid
           group_type: group
           admin_label: ''
+          entity_type: user
+          entity_field: name
+          plugin_id: field
           label: Author
           exclude: false
           alter:
@@ -383,9 +284,6 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-          entity_type: user
-          entity_field: name
-          plugin_id: field
         moderation_state:
           id: moderation_state
           table: node_field_revision
@@ -393,6 +291,8 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: node
+          plugin_id: field
           label: 'Moderation state'
           exclude: false
           alter:
@@ -447,8 +347,6 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-          entity_type: node
-          plugin_id: field
         changed:
           id: changed
           table: node_field_revision
@@ -456,6 +354,9 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: node
+          entity_field: changed
+          plugin_id: field
           label: Updated
           exclude: false
           alter:
@@ -513,9 +414,6 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-          entity_type: node
-          entity_field: changed
-          plugin_id: field
         operations:
           id: operations
           table: node_revision
@@ -523,6 +421,8 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: node
+          plugin_id: entity_operations
           label: Operations
           exclude: false
           alter:
@@ -565,8 +465,58 @@ display:
           empty_zero: false
           hide_alter_empty: true
           destination: true
-          entity_type: node
-          plugin_id: entity_operations
+      pager:
+        type: full
+        options:
+          offset: 0
+          items_per_page: 50
+          total_pages: null
+          id: 0
+          tags:
+            next: 'Next ›'
+            previous: '‹ Previous'
+            first: '« First'
+            last: 'Last »'
+          expose:
+            items_per_page: false
+            items_per_page_label: 'Items per page'
+            items_per_page_options: '5, 10, 25, 50'
+            items_per_page_options_all: false
+            items_per_page_options_all_label: '- All -'
+            offset: false
+            offset_label: Offset
+          quantity: 9
+      exposed_form:
+        type: basic
+        options:
+          submit_button: Filter
+          reset_button: true
+          reset_button_label: Reset
+          exposed_sorts_label: 'Sort by'
+          expose_sort_order: true
+          sort_asc_label: Asc
+          sort_desc_label: Desc
+      access:
+        type: perm
+        options:
+          perm: 'view any unpublished content'
+      cache:
+        type: tag
+        options: {  }
+      empty:
+        area_text_custom:
+          id: area_text_custom
+          table: views
+          field: area_text_custom
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: text_custom
+          empty: true
+          content: 'No moderated content available. Only pending versions of content, such as drafts, are listed here.'
+          tokenize: false
+      sorts: {  }
+      arguments: {  }
       filters:
         latest_translation_affected_revision:
           id: latest_translation_affected_revision
@@ -575,6 +525,8 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: node
+          plugin_id: latest_translation_affected_revision
           operator: '='
           value: ''
           group: 1
@@ -585,14 +537,14 @@ display:
             description: ''
             use_operator: false
             operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
             identifier: ''
             required: false
             remember: false
             multiple: false
             remember_roles:
               authenticated: authenticated
-            operator_limit_selection: false
-            operator_list: {  }
           is_grouped: false
           group_info:
             label: ''
@@ -605,8 +557,6 @@ display:
             default_group: All
             default_group_multiple: {  }
             group_items: {  }
-          entity_type: node
-          plugin_id: latest_translation_affected_revision
         title:
           id: title
           table: node_field_revision
@@ -614,6 +564,9 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: node
+          entity_field: title
+          plugin_id: string
           operator: contains
           value: ''
           group: 1
@@ -624,6 +577,8 @@ display:
             description: ''
             use_operator: false
             operator: title_op
+            operator_limit_selection: false
+            operator_list: {  }
             identifier: title
             required: false
             remember: false
@@ -632,8 +587,6 @@ display:
               authenticated: authenticated
               anonymous: '0'
               administrator: '0'
-            operator_limit_selection: false
-            operator_list: {  }
           is_grouped: false
           group_info:
             label: ''
@@ -646,9 +599,6 @@ display:
             default_group: All
             default_group_multiple: {  }
             group_items: {  }
-          entity_type: node
-          entity_field: title
-          plugin_id: string
         type:
           id: type
           table: node_field_data
@@ -656,6 +606,9 @@ display:
           relationship: nid
           group_type: group
           admin_label: ''
+          entity_type: node
+          entity_field: type
+          plugin_id: bundle
           operator: in
           value: {  }
           group: 1
@@ -666,6 +619,8 @@ display:
             description: ''
             use_operator: false
             operator: type_op
+            operator_limit_selection: false
+            operator_list: {  }
             identifier: type
             required: false
             remember: false
@@ -675,8 +630,6 @@ display:
               anonymous: '0'
               administrator: '0'
             reduce: false
-            operator_limit_selection: false
-            operator_list: {  }
           is_grouped: false
           group_info:
             label: ''
@@ -689,9 +642,6 @@ display:
             default_group: All
             default_group_multiple: {  }
             group_items: {  }
-          entity_type: node
-          entity_field: type
-          plugin_id: bundle
         moderation_state:
           id: moderation_state
           table: node_field_revision
@@ -699,6 +649,8 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: node
+          plugin_id: moderation_state_filter
           operator: in
           value:
             editorial-draft: editorial-draft
@@ -711,6 +663,8 @@ display:
             description: ''
             use_operator: false
             operator: moderation_state_op
+            operator_limit_selection: false
+            operator_list: {  }
             identifier: moderation_state
             required: false
             remember: false
@@ -720,8 +674,6 @@ display:
               anonymous: '0'
               administrator: '0'
             reduce: true
-            operator_limit_selection: false
-            operator_list: {  }
           is_grouped: false
           group_info:
             label: ''
@@ -734,8 +686,6 @@ display:
             default_group: All
             default_group_multiple: {  }
             group_items: {  }
-          entity_type: node
-          plugin_id: moderation_state_filter
         langcode:
           id: langcode
           table: node_field_revision
@@ -743,6 +693,9 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: node
+          entity_field: langcode
+          plugin_id: language
           operator: in
           value: {  }
           group: 1
@@ -753,6 +706,8 @@ display:
             description: ''
             use_operator: false
             operator: langcode_op
+            operator_limit_selection: false
+            operator_list: {  }
             identifier: langcode
             required: false
             remember: false
@@ -762,8 +717,6 @@ display:
               anonymous: '0'
               administrator: '0'
             reduce: false
-            operator_limit_selection: false
-            operator_list: {  }
           is_grouped: false
           group_info:
             label: ''
@@ -776,9 +729,6 @@ display:
             default_group: All
             default_group_multiple: {  }
             group_items: {  }
-          entity_type: node
-          entity_field: langcode
-          plugin_id: language
         moderation_state_1:
           id: moderation_state_1
           table: node_field_revision
@@ -786,6 +736,8 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: node
+          plugin_id: moderation_state_filter
           operator: in
           value:
             life_cycle_phases-draft: life_cycle_phases-draft
@@ -826,24 +778,75 @@ display:
             default_group: All
             default_group_multiple: {  }
             group_items: {  }
-          entity_type: node
-          plugin_id: moderation_state_filter
-      sorts: {  }
-      title: Ideas
-      header: {  }
-      footer: {  }
-      empty:
-        area_text_custom:
-          id: area_text_custom
-          table: views
-          field: area_text_custom
-          relationship: none
-          group_type: group
-          admin_label: ''
-          empty: true
-          tokenize: false
-          content: 'No moderated content available. Only pending versions of content, such as drafts, are listed here.'
-          plugin_id: text_custom
+      filter_groups:
+        operator: AND
+        groups:
+          1: AND
+      style:
+        type: table
+        options:
+          grouping: {  }
+          row_class: ''
+          default_row_class: true
+          columns:
+            title: title
+            type: type
+            name: name
+            moderation_state: moderation_state
+            changed: changed
+          default: changed
+          info:
+            title:
+              sortable: true
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            type:
+              sortable: true
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            name:
+              sortable: false
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            moderation_state:
+              sortable: true
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            changed:
+              sortable: true
+              default_sort_order: desc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+          override: true
+          sticky: true
+          summary: ''
+          empty_table: true
+          caption: ''
+          description: ''
+      row:
+        type: fields
+      query:
+        type: views_query
+        options:
+          query_comment: ''
+          disable_sql_rewrite: false
+          distinct: false
+          replica: false
+          query_tags: {  }
       relationships:
         nid:
           id: nid
@@ -852,10 +855,10 @@ display:
           relationship: none
           group_type: group
           admin_label: 'Get the actual content from a content revision.'
-          required: false
           entity_type: node
           entity_field: nid
           plugin_id: standard
+          required: false
         uid:
           id: uid
           table: node_field_revision
@@ -863,16 +866,13 @@ display:
           relationship: none
           group_type: group
           admin_label: User
-          required: false
           entity_type: node
           entity_field: uid
           plugin_id: standard
-      arguments: {  }
+          required: false
+      header: {  }
+      footer: {  }
       display_extenders: {  }
-      filter_groups:
-        operator: AND
-        groups:
-          1: AND
     cache_metadata:
       max-age: 0
       contexts:
@@ -885,14 +885,11 @@ display:
       tags:
         - 'config:workflow_list'
   ideas_page:
-    display_plugin: page
     id: ideas_page
     display_title: 'Ideas (page)'
+    display_plugin: page
     position: 1
     display_options:
-      display_extenders: {  }
-      path: admin/content/ideas
-      display_description: ''
       fields:
         node_bulk_form:
           id: node_bulk_form
@@ -901,6 +898,8 @@ display:
           relationship: nid
           group_type: group
           admin_label: ''
+          entity_type: node
+          plugin_id: node_bulk_form
           label: ''
           exclude: false
           alter:
@@ -954,8 +953,6 @@ display:
             - change_idea_status_to_postponed
             - change_idea_status_to_rejected
             - change_idea_status_to_send_to_approval
-          entity_type: node
-          plugin_id: node_bulk_form
         title:
           id: title
           table: node_field_revision
@@ -963,6 +960,9 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: node
+          entity_field: title
+          plugin_id: field
           label: Title
           exclude: false
           alter:
@@ -1018,9 +1018,6 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-          entity_type: node
-          entity_field: title
-          plugin_id: field
         type:
           id: type
           table: node_field_data
@@ -1028,6 +1025,9 @@ display:
           relationship: nid
           group_type: group
           admin_label: ''
+          entity_type: node
+          entity_field: type
+          plugin_id: field
           label: 'Content type'
           exclude: true
           alter:
@@ -1083,9 +1083,6 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-          entity_type: node
-          entity_field: type
-          plugin_id: field
         name:
           id: name
           table: users_field_data
@@ -1093,6 +1090,9 @@ display:
           relationship: uid
           group_type: group
           admin_label: ''
+          entity_type: user
+          entity_field: name
+          plugin_id: field
           label: Author
           exclude: false
           alter:
@@ -1148,9 +1148,6 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-          entity_type: user
-          entity_field: name
-          plugin_id: field
         moderation_state:
           id: moderation_state
           table: node_field_revision
@@ -1158,6 +1155,8 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: node
+          plugin_id: field
           label: 'Moderation state'
           exclude: false
           alter:
@@ -1212,8 +1211,6 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-          entity_type: node
-          plugin_id: field
         changed:
           id: changed
           table: node_field_revision
@@ -1221,6 +1218,9 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: node
+          entity_field: changed
+          plugin_id: field
           label: Updated
           exclude: false
           alter:
@@ -1278,9 +1278,6 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-          entity_type: node
-          entity_field: changed
-          plugin_id: field
         operations:
           id: operations
           table: node_revision
@@ -1288,6 +1285,8 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: node
+          plugin_id: entity_operations
           label: Operations
           exclude: false
           alter:
@@ -1330,12 +1329,6 @@ display:
           empty_zero: false
           hide_alter_empty: true
           destination: true
-          entity_type: node
-          plugin_id: entity_operations
-      defaults:
-        fields: false
-        filters: false
-        filter_groups: false
       filters:
         latest_translation_affected_revision:
           id: latest_translation_affected_revision
@@ -1344,6 +1337,8 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: node
+          plugin_id: latest_translation_affected_revision
           operator: '='
           value: ''
           group: 1
@@ -1354,14 +1349,14 @@ display:
             description: ''
             use_operator: false
             operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
             identifier: ''
             required: false
             remember: false
             multiple: false
             remember_roles:
               authenticated: authenticated
-            operator_limit_selection: false
-            operator_list: {  }
           is_grouped: false
           group_info:
             label: ''
@@ -1374,8 +1369,6 @@ display:
             default_group: All
             default_group_multiple: {  }
             group_items: {  }
-          entity_type: node
-          plugin_id: latest_translation_affected_revision
         title:
           id: title
           table: node_field_revision
@@ -1383,6 +1376,9 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: node
+          entity_field: title
+          plugin_id: string
           operator: contains
           value: ''
           group: 1
@@ -1393,6 +1389,8 @@ display:
             description: ''
             use_operator: false
             operator: title_op
+            operator_limit_selection: false
+            operator_list: {  }
             identifier: title
             required: false
             remember: false
@@ -1401,8 +1399,6 @@ display:
               authenticated: authenticated
               anonymous: '0'
               administrator: '0'
-            operator_limit_selection: false
-            operator_list: {  }
           is_grouped: false
           group_info:
             label: ''
@@ -1415,9 +1411,6 @@ display:
             default_group: All
             default_group_multiple: {  }
             group_items: {  }
-          entity_type: node
-          entity_field: title
-          plugin_id: string
         type:
           id: type
           table: node_field_data
@@ -1425,6 +1418,9 @@ display:
           relationship: nid
           group_type: group
           admin_label: ''
+          entity_type: node
+          entity_field: type
+          plugin_id: bundle
           operator: in
           value: {  }
           group: 1
@@ -1435,6 +1431,8 @@ display:
             description: ''
             use_operator: false
             operator: type_op
+            operator_limit_selection: false
+            operator_list: {  }
             identifier: type
             required: false
             remember: false
@@ -1444,8 +1442,6 @@ display:
               anonymous: '0'
               administrator: '0'
             reduce: false
-            operator_limit_selection: false
-            operator_list: {  }
           is_grouped: false
           group_info:
             label: ''
@@ -1458,9 +1454,6 @@ display:
             default_group: All
             default_group_multiple: {  }
             group_items: {  }
-          entity_type: node
-          entity_field: type
-          plugin_id: bundle
         moderation_state:
           id: moderation_state
           table: node_field_revision
@@ -1468,6 +1461,8 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: node
+          plugin_id: moderation_state_filter
           operator: in
           value:
             editorial-draft: editorial-draft
@@ -1480,6 +1475,8 @@ display:
             description: ''
             use_operator: false
             operator: moderation_state_op
+            operator_limit_selection: false
+            operator_list: {  }
             identifier: moderation_state
             required: false
             remember: false
@@ -1489,8 +1486,6 @@ display:
               anonymous: '0'
               administrator: '0'
             reduce: true
-            operator_limit_selection: false
-            operator_list: {  }
           is_grouped: false
           group_info:
             label: ''
@@ -1503,8 +1498,6 @@ display:
             default_group: All
             default_group_multiple: {  }
             group_items: {  }
-          entity_type: node
-          plugin_id: moderation_state_filter
         langcode:
           id: langcode
           table: node_field_revision
@@ -1512,6 +1505,9 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: node
+          entity_field: langcode
+          plugin_id: language
           operator: in
           value: {  }
           group: 1
@@ -1522,6 +1518,8 @@ display:
             description: ''
             use_operator: false
             operator: langcode_op
+            operator_limit_selection: false
+            operator_list: {  }
             identifier: langcode
             required: false
             remember: false
@@ -1531,8 +1529,6 @@ display:
               anonymous: '0'
               administrator: '0'
             reduce: false
-            operator_limit_selection: false
-            operator_list: {  }
           is_grouped: false
           group_info:
             label: ''
@@ -1545,9 +1541,6 @@ display:
             default_group: All
             default_group_multiple: {  }
             group_items: {  }
-          entity_type: node
-          entity_field: langcode
-          plugin_id: language
         moderation_state_1:
           id: moderation_state_1
           table: node_field_revision
@@ -1555,6 +1548,8 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: node
+          plugin_id: moderation_state_filter
           operator: in
           value:
             life_cycle_phases-draft: life_cycle_phases-draft
@@ -1595,8 +1590,6 @@ display:
             default_group: All
             default_group_multiple: {  }
             group_items: {  }
-          entity_type: node
-          plugin_id: moderation_state_filter
         type_1:
           id: type_1
           table: node_field_data
@@ -1604,6 +1597,9 @@ display:
           relationship: nid
           group_type: group
           admin_label: ''
+          entity_type: node
+          entity_field: type
+          plugin_id: bundle
           operator: in
           value:
             idea: idea
@@ -1636,13 +1632,17 @@ display:
             default_group: All
             default_group_multiple: {  }
             group_items: {  }
-          entity_type: node
-          entity_field: type
-          plugin_id: bundle
       filter_groups:
         operator: AND
         groups:
           1: AND
+      defaults:
+        fields: false
+        filters: false
+        filter_groups: false
+      display_description: ''
+      display_extenders: {  }
+      path: admin/content/ideas
     cache_metadata:
       max-age: 0
       contexts:
@@ -1655,15 +1655,15 @@ display:
       tags:
         - 'config:workflow_list'
   moderated_content:
-    display_plugin: page
     id: moderated_content
     display_title: Ideas
+    display_plugin: page
     position: 1
     display_options:
+      enabled: false
+      display_description: ''
       display_extenders: {  }
       path: admin/content/ideas
-      display_description: ''
-      enabled: false
     cache_metadata:
       max-age: 0
       contexts:

@@ -11,19 +11,19 @@ dependencies:
   module:
     - layout_builder
     - openideal_idea
+    - openideal_layout
     - text
     - user
-  theme:
-    - openideal_theme
 third_party_settings:
   layout_builder:
-    allow_custom: false
     enabled: true
+    allow_custom: false
     sections:
       -
         layout_id: openideal_two_columns_teaser
         layout_settings:
           label: ''
+          context_mapping: {  }
           main_class: discussion-teaser
           layout_builder_styles_style:
             - card
@@ -34,69 +34,69 @@ third_party_settings:
             configuration:
               id: 'extra_field_block:node:discussion:links'
               label: Links
-              provider: layout_builder
               label_display: '0'
+              provider: layout_builder
               context_mapping:
                 entity: layout_builder.entity
-            additional: {  }
             weight: 3
+            additional: {  }
           c602d485-a665-4ad8-975d-756991602d04:
             uuid: c602d485-a665-4ad8-975d-756991602d04
             region: second
             configuration:
               id: 'field_block:node:discussion:body'
               label: Body
-              provider: layout_builder
               label_display: '0'
-              formatter:
-                label: hidden
-                type: text_trimmed
-                settings:
-                  trim_length: 100
-                third_party_settings: {  }
+              provider: layout_builder
               context_mapping:
                 entity: layout_builder.entity
                 view_mode: view_mode
-            additional: {  }
+              formatter:
+                type: text_trimmed
+                label: hidden
+                settings:
+                  trim_length: 100
+                third_party_settings: {  }
             weight: 2
+            additional: {  }
           a24fdc34-83f4-4af5-b8a5-6929116e8bf5:
             uuid: a24fdc34-83f4-4af5-b8a5-6929116e8bf5
             region: first
             configuration:
               id: openideal_idea_info_block
               label: 'Node info'
-              provider: openideal_idea
               label_display: '0'
+              provider: openideal_idea
+              context_mapping:
+                node: layout_builder.entity
               use_created: 1
               use_updated: 0
               use_schedule: 0
               use_edit: 0
               created: 0
               changed: 0
-              context_mapping:
-                node: layout_builder.entity
+            weight: 1
             additional:
               layout_builder_styles_style: {  }
-            weight: 1
           1129f522-10f0-4f14-ad73-66527cddddec:
             uuid: 1129f522-10f0-4f14-ad73-66527cddddec
             region: first
             configuration:
               id: 'field_block:node:discussion:uid'
               label: 'Authored by'
-              provider: layout_builder
               label_display: '0'
-              formatter:
-                label: hidden
-                type: entity_reference_entity_view
-                settings:
-                  view_mode: author
-                third_party_settings: {  }
+              provider: layout_builder
               context_mapping:
                 entity: layout_builder.entity
                 view_mode: view_mode
-            additional: {  }
+              formatter:
+                type: entity_reference_entity_view
+                label: hidden
+                settings:
+                  view_mode: author
+                third_party_settings: {  }
             weight: 0
+            additional: {  }
         third_party_settings: {  }
 id: node.discussion.teaser
 targetEntityType: node
@@ -104,14 +104,14 @@ bundle: discussion
 mode: teaser
 content:
   body:
-    label: hidden
     type: text_summary_or_trimmed
-    weight: 0
+    label: hidden
     settings:
-      trim_length: 600
       offset: 0
       limit: 0
+      trim_length: 600
     third_party_settings: {  }
+    weight: 0
     region: content
 hidden:
   field_comments: true

@@ -3,7 +3,7 @@ status: true
 dependencies:
   module:
     - node
-    - openideal_idea
+    - openideal_discussion
     - route_condition
   theme:
     - openideal_theme
@@ -16,18 +16,18 @@ plugin: openideal_discussion_experts_voting
 settings:
   id: openideal_idea_experts_voting
   label: 'Idea votes'
-  provider: openideal_discussion
   label_display: visible
+  provider: openideal_discussion
 visibility:
-  node_type:
-    id: node_type
-    bundles:
-      discussion: discussion
-    negate: false
-    context_mapping:
-      node: '@node.node_route_context:node'
   route:
     id: route
     routes: entity.node.canonical
     negate: false
     context_mapping: {  }
+  'entity_bundle:node':
+    id: 'entity_bundle:node'
+    negate: false
+    context_mapping:
+      node: '@node.node_route_context:node'
+    bundles:
+      discussion: discussion

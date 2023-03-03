@@ -16,27 +16,27 @@ plugin: openideal_idea_info_block
 settings:
   id: openideal_idea_info_block
   label: 'Node info'
-  provider: openideal_idea
   label_display: '0'
+  provider: openideal_idea
+  context_mapping:
+    node: '@node.node_route_context:node'
   use_created: 1
   use_updated: 1
   use_schedule: 1
   use_edit: 1
-  context_mapping:
-    node: '@node.node_route_context:node'
 visibility:
-  node_type:
-    id: node_type
-    bundles:
-      challenge: challenge
-      discussion: discussion
-      idea: idea
-      article: article
-    negate: false
-    context_mapping:
-      node: '@node.node_route_context:node'
   route:
     id: route
     routes: entity.node.canonical
     negate: false
     context_mapping: {  }
+  'entity_bundle:node':
+    id: 'entity_bundle:node'
+    negate: false
+    context_mapping:
+      node: '@node.node_route_context:node'
+    bundles:
+      challenge: challenge
+      discussion: discussion
+      idea: idea
+      article: article

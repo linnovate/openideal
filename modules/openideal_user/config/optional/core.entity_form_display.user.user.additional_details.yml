@@ -25,15 +25,15 @@ content:
     weight: 4
     region: content
     settings:
-      show_default_crop: true
-      warn_multiple_usages: true
+      progress_indicator: throbber
       preview_image_style: user_account_image
       crop_preview_image_style: original
-      progress_indicator: throbber
       crop_list:
         - profile
       crop_types_required: {  }
+      warn_multiple_usages: true
       show_crop_area: false
+      show_default_crop: true
     third_party_settings: {  }
   field_age_group:
     type: options_buttons
@@ -65,9 +65,9 @@ content:
     third_party_settings: {  }
   translation:
     weight: 10
+    region: content
     settings: {  }
     third_party_settings: {  }
-    region: content
 hidden:
   account: true
   avatars_avatar_generator: true

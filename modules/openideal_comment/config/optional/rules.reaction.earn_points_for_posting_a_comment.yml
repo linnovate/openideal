@@ -24,6 +24,8 @@ expression:
         id: rules_condition
         uuid: 659937fd-8182-4794-8966-2bc437781c14
         weight: -50
+        condition_id: rules_data_comparison
+        negate: false
         context_values:
           operation: '=='
           value: idea
@@ -35,30 +37,28 @@ expression:
           value:
             rules_tokens: {  }
         provides_mapping: {  }
-        condition_id: rules_data_comparison
-        negate: false
       -
         id: rules_condition
         uuid: 06f8e054-64bb-4041-baee-c2c49cc3fd47
         weight: -48
+        condition_id: 'openideal_idea_state:draft'
+        negate: true
         context_values: {  }
         context_mapping:
           idea_id: comment.entity_id.entity.nid.value
         context_processors: {  }
         provides_mapping: {  }
-        condition_id: 'openideal_idea_state:draft'
-        negate: true
       -
         id: rules_condition
         uuid: f8e4db7a-0451-4ef1-89fd-4b7b598695f6
         weight: 0
+        condition_id: 'openideal_idea_state:draft_approval'
+        negate: true
         context_values: {  }
         context_mapping:
           idea_id: comment.entity_id.entity.nid.value
         context_processors: {  }
         provides_mapping: {  }
-        condition_id: 'openideal_idea_state:draft_approval'
-        negate: true
   actions:
     id: rules_action_set
     uuid: 0d1c4458-da3b-4b14-8fd1-3a154b308b7f
@@ -68,6 +68,7 @@ expression:
         id: rules_action
         uuid: 6d54331d-d6e1-4885-b3c5-46285287bc9e
         weight: -50
+        action_id: rules_entity_fetch_by_id
         context_values:
           type: user
         context_mapping:
@@ -76,11 +77,11 @@ expression:
           type:
             rules_tokens: {  }
         provides_mapping: {  }
-        action_id: rules_entity_fetch_by_id
       -
         id: rules_action
         uuid: daae0574-3e8b-4a07-9230-afc139e29463
         weight: -49
+        action_id: 'transaction_create:userpoints'
         context_values:
           transaction_type_id: user_points
           operation_id: earn_points_for_posting_a_comment
@@ -99,11 +100,11 @@ expression:
           transaction_field_log_message:
             rules_tokens: {  }
         provides_mapping: {  }
-        action_id: 'transaction_create:userpoints'
       -
         id: rules_action
         uuid: 020bd945-41d4-4234-b53f-c48cf6ec1f6f
         weight: 0
+        action_id: transaction_execute
         context_values:
           immediate: ''
         context_mapping:
@@ -112,4 +113,3 @@ expression:
           immediate:
             rules_tokens: {  }
         provides_mapping: {  }
-        action_id: transaction_execute

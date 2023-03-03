@@ -19,13 +19,14 @@ dependencies:
     - user
 third_party_settings:
   layout_builder:
-    allow_custom: false
     enabled: true
+    allow_custom: false
     sections:
       -
         layout_id: layout_onecol
         layout_settings:
           label: Section
+          context_mapping: {  }
           layout_builder_styles_style: author
         components:
           ce4d89cd-30de-4071-8a7b-dcfc7280e187:
@@ -34,33 +35,54 @@ third_party_settings:
             configuration:
               id: openideal_user_user_name_block
               label: 'User name'
-              provider: openideal_user
               label_display: '0'
+              provider: openideal_user
               context_mapping:
                 user: layout_builder.entity
               hide_label: 1
-            additional: {  }
             weight: 2
+            additional: {  }
           905abf77-399a-4a9b-826a-2cf21309bbe5:
             uuid: 905abf77-399a-4a9b-826a-2cf21309bbe5
             region: content
             configuration:
               id: 'field_block:user:user:user_picture'
               label: Picture
-              provider: layout_builder
               label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
               formatter:
-                label: hidden
                 type: openideal_user_user_image
+                label: hidden
                 settings:
                   image_style: compact_user_icon
                   image_link: content
                 third_party_settings: {  }
+            weight: 1
+            additional: {  }
+          def87d49-1ab4-469b-854b-f26f7b9298ef:
+            uuid: def87d49-1ab4-469b-854b-f26f7b9298ef
+            region: content
+            configuration:
+              id: 'field_block:user:user:user_picture'
+              label_display: '0'
               context_mapping:
                 entity: layout_builder.entity
-                view_mode: view_mode
+              formatter:
+                type: image
+                label: hidden
+                settings:
+                  offset: 0
+                  limit: 0
+                  image_link: content
+                  image_style: ''
+                  image_loading:
+                    attribute: lazy
+                third_party_settings: {  }
+            weight: 3
             additional: {  }
-            weight: 1
         third_party_settings: {  }
 id: user.user.author
 targetEntityType: user
@@ -69,29 +91,33 @@ mode: author
 content:
   field_first_name:
     type: string
+    label: hidden
+    settings:
+      link_to_entity: true
+    third_party_settings: {  }
     weight: 1
     region: content
-    label: hidden
-    settings:
-      link_to_entity: true
-    third_party_settings: {  }
   field_last_name:
     type: string
-    weight: 2
-    region: content
     label: hidden
     settings:
       link_to_entity: true
     third_party_settings: {  }
+    weight: 2
+    region: content
   user_picture:
     type: image
-    weight: 0
-    region: content
     label: hidden
     settings:
-      image_style: ''
+      offset: 0
+      limit: 0
       image_link: content
+      image_style: ''
+      image_loading:
+        attribute: lazy
     third_party_settings: {  }
+    weight: 0
+    region: content
 hidden:
   avatars_avatar_generator: true
   avatars_user_picture: true

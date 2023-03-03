@@ -21,20 +21,20 @@ dependencies:
   module:
     - layout_builder
     - openideal_idea
+    - openideal_layout
     - openideal_statistics
     - text
     - user
-  theme:
-    - openideal_theme
 third_party_settings:
   layout_builder:
-    allow_custom: false
     enabled: true
+    allow_custom: false
     sections:
       -
         layout_id: openideal_two_columns_teaser
         layout_settings:
           label: Top
+          context_mapping: {  }
           main_class: teaser-top-section
           layout_builder_styles_style: ''
         components:
@@ -44,77 +44,78 @@ third_party_settings:
             configuration:
               id: 'field_block:node:idea:title'
               label: Title
-              provider: layout_builder
               label_display: '0'
-              formatter:
-                label: hidden
-                type: string
-                settings:
-                  link_to_entity: true
-                third_party_settings: {  }
+              provider: layout_builder
               context_mapping:
                 entity: layout_builder.entity
                 view_mode: view_mode
-            additional: {  }
+              formatter:
+                type: string
+                label: hidden
+                settings:
+                  link_to_entity: true
+                third_party_settings: {  }
             weight: 0
+            additional: {  }
           c3a67bab-353c-4cb7-b124-f79cffca07c3:
             uuid: c3a67bab-353c-4cb7-b124-f79cffca07c3
             region: second
             configuration:
               id: 'field_block:node:idea:body'
               label: Body
-              provider: layout_builder
               label_display: '0'
-              formatter:
-                label: hidden
-                type: text_summary_or_trimmed
-                settings:
-                  trim_length: 400
-                third_party_settings: {  }
+              provider: layout_builder
               context_mapping:
                 entity: layout_builder.entity
                 view_mode: view_mode
-            additional: {  }
+              formatter:
+                type: text_summary_or_trimmed
+                label: hidden
+                settings:
+                  trim_length: 400
+                third_party_settings: {  }
             weight: 1
+            additional: {  }
           e6fbf796-ef1f-49f6-943a-7539d1a9e648:
             uuid: e6fbf796-ef1f-49f6-943a-7539d1a9e648
             region: first
             configuration:
               id: openidel_idea_node_bundle
               label: 'Entity bundle'
-              provider: openideal_idea
               label_display: '0'
+              provider: openideal_idea
               context_mapping:
                 entity: layout_builder.entity
-            additional: {  }
             weight: 1
+            additional: {  }
           8294f8b9-f1fc-4cc9-ab1f-63f67b8a3272:
             uuid: 8294f8b9-f1fc-4cc9-ab1f-63f67b8a3272
             region: first
             configuration:
               id: 'field_block:node:idea:field_images'
               label: Images
-              provider: layout_builder
               label_display: '0'
-              formatter:
-                label: hidden
-                type: image
-                settings:
-                  offset: 0
-                  limit: 1
-                  image_style: front_page_teaser_large
-                  image_link: content
-                third_party_settings: {  }
+              provider: layout_builder
               context_mapping:
                 entity: layout_builder.entity
                 view_mode: view_mode
-            additional: {  }
+              formatter:
+                type: image
+                label: hidden
+                settings:
+                  offset: 0
+                  limit: 1
+                  image_link: content
+                  image_style: front_page_teaser_large
+                third_party_settings: {  }
             weight: 2
+            additional: {  }
         third_party_settings: {  }
       -
         layout_id: openideal_two_columns_teaser
         layout_settings:
           label: Bottom
+          context_mapping: {  }
           main_class: teaser-bottom-section
           layout_builder_styles_style: ''
         components:
@@ -124,78 +125,78 @@ third_party_settings:
             configuration:
               id: 'field_block:node:idea:uid'
               label: 'Authored by'
-              provider: layout_builder
               label_display: '0'
-              formatter:
-                label: hidden
-                type: entity_reference_entity_view
-                settings:
-                  view_mode: author
-                third_party_settings: {  }
+              provider: layout_builder
               context_mapping:
                 entity: layout_builder.entity
                 view_mode: view_mode
-            additional: {  }
+              formatter:
+                type: entity_reference_entity_view
+                label: hidden
+                settings:
+                  view_mode: author
+                third_party_settings: {  }
             weight: 0
+            additional: {  }
           774fba92-5419-4699-95d4-c4b3f4f2a036:
             uuid: 774fba92-5419-4699-95d4-c4b3f4f2a036
             region: second
             configuration:
               id: 'field_block:node:idea:created'
               label: 'Authored on'
-              provider: layout_builder
               label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
               formatter:
-                label: hidden
                 type: timestamp
+                label: hidden
                 settings:
                   date_format: custom
                   custom_date_format: d/m/Y
                   timezone: ''
                 third_party_settings: {  }
-              context_mapping:
-                entity: layout_builder.entity
-                view_mode: view_mode
-            additional: {  }
             weight: 7
+            additional: {  }
           5c8cc165-0af8-4cab-ab01-01f4f7e27c9a:
             uuid: 5c8cc165-0af8-4cab-ab01-01f4f7e27c9a
             region: second
             configuration:
               id: openideal_statistics_idea_statistics
               label: 'Idea statistics block'
-              provider: openideal_statistics
               label_display: '0'
+              provider: openideal_statistics
               context_mapping:
                 node: layout_builder.entity
-            additional: {  }
             weight: 6
+            additional: {  }
           3c63eee1-62e0-4bd7-a38d-6b503d88ec82:
             uuid: 3c63eee1-62e0-4bd7-a38d-6b503d88ec82
             region: second
             configuration:
               id: openideal_statistics_status
               label: 'Workflow status.'
-              provider: openideal_statistics
               label_display: '0'
+              provider: openideal_statistics
               context_mapping:
                 node: layout_builder.entity
-            additional: {  }
             weight: 4
+            additional: {  }
           a55a5b51-ccbf-4b0f-9b0a-277e43ad1119:
             uuid: a55a5b51-ccbf-4b0f-9b0a-277e43ad1119
             region: second
             configuration:
               id: openideal_idea_flag_and_like_block
               label: 'Flag and Like block'
-              provider: openideal_idea
               label_display: '0'
-              hide_like: 1
-              main_class: teaser-flag
+              provider: openideal_idea
               context_mapping:
                 node: layout_builder.entity
-            additional: {  }
+              hide_like: 1
+              main_class: teaser-flag
             weight: 8
+            additional: {  }
         third_party_settings: {  }
 id: node.idea.teaser
 targetEntityType: node
@@ -203,23 +204,23 @@ bundle: idea
 mode: teaser
 content:
   body:
-    label: hidden
     type: text_summary_or_trimmed
-    weight: 1
+    label: hidden
     settings:
       trim_length: 600
     third_party_settings: {  }
+    weight: 1
     region: content
   flag_follow:
+    settings: {  }
+    third_party_settings: {  }
     weight: 3
     region: content
+  links:
     settings: {  }
     third_party_settings: {  }
-  links:
     weight: 0
     region: content
-    settings: {  }
-    third_party_settings: {  }
 hidden:
   addtoany: true
   content_moderation_control: true
