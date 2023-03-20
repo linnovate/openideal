@@ -285,6 +285,7 @@
         "drupal/votingapi_reaction": "^1.1",
         "drupal/votingapi_widgets": "1.0-alpha6",
         "drupal/field_limiter": "^1.1",
+        "drupal/transaction": "1.0@beta",
         "npm-asset/dropzone": "^5.7",
         "npm-asset/imagesloaded": "^4.1",
         "npm-asset/jquery-bar-rating": "^1.2",
@@ -353,6 +354,10 @@
             },
             "drupal/moderation_state_buttons_widget": {
                 "ArgumentCountError: Too few arguments": "https://www.drupal.org/files/issues/2021-05-15/moderation_state_buttons_widget-D9-3214142-2.patch"
+            },
+            "drupal/transaction": {
+                "The transaction_type_id context is not a valid context": "https://www.drupal.org/files/issues/2022-01-08/transaction-context_definitions-3239802-3.patch",
+                "context key in transaction.rules.events.yml should be context_definitions": "https://git.drupalcode.org/project/transaction/-/commit/6129715d82cdb42b597cd06664f0fe97aa295e81.patch"
             }
         }
     }
