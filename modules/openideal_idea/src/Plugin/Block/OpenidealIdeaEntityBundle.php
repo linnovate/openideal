@@ -12,7 +12,7 @@ use Drupal\openideal_challenge\OpenidealContextEntityTrait;
  *   id = "openidel_idea_node_bundle",
  *   admin_label = @Translation("Entity bundle"),
  *   category = @Translation("Openideal"),
- *   context = {
+ *   context_definitions = {
  *      "entity" = @ContextDefinition(
  *       "entity",
  *       label = @Translation("Current Node"),

@@ -1,0 +1,119 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.article
+    - node.type.challenge
+    - node.type.faq
+    - node.type.idea
+    - node.type.page
+    - taxonomy.vocabulary.categories
+    - taxonomy.vocabulary.tags
+    - workflows.workflow.life_cycle_phases
+  module:
+    - administerusersbyrole
+    - comment
+    - content_moderation
+    - eu_cookie_compliance
+    - node
+    - openideal_idea
+    - openideal_toolbar
+    - openideal_user
+    - paragraphs
+    - system
+    - taxonomy
+    - toolbar
+    - transaction
+id: manager
+label: Manager
+weight: 3
+is_admin: null
+permissions:
+  - 'access activity pages openideal'
+  - 'access content'
+  - 'access content overview'
+  - 'access openideal toolbar'
+  - 'access to add expert'
+  - 'access to configuration forms'
+  - 'access to user points configuration forms'
+  - 'access toolbar'
+  - 'access user profiles'
+  - 'access users overview'
+  - 'administer comment types'
+  - 'administer comments'
+  - 'administer nodes'
+  - 'allow empty user mail'
+  - 'bypass node access'
+  - 'cancel users by role'
+  - 'create article content'
+  - 'create challenge content'
+  - 'create faq content'
+  - 'create idea content'
+  - 'create page content'
+  - 'create terms in categories'
+  - 'create terms in tags'
+  - 'create user_points transaction'
+  - 'create users'
+  - 'delete all revisions'
+  - 'delete any article content'
+  - 'delete any challenge content'
+  - 'delete any faq content'
+  - 'delete any idea content'
+  - 'delete any page content'
+  - 'delete article revisions'
+  - 'delete challenge revisions'
+  - 'delete faq revisions'
+  - 'delete idea revisions'
+  - 'delete own article content'
+  - 'delete own challenge content'
+  - 'delete own faq content'
+  - 'delete own idea content'
+  - 'delete own page content'
+  - 'delete page revisions'
+  - 'delete terms in categories'
+  - 'delete terms in tags'
+  - 'display eu cookie compliance popup'
+  - 'edit any article content'
+  - 'edit any challenge content'
+  - 'edit any faq content'
+  - 'edit any idea content'
+  - 'edit any page content'
+  - 'edit own article content'
+  - 'edit own challenge content'
+  - 'edit own faq content'
+  - 'edit own idea content'
+  - 'edit own page content'
+  - 'edit own user_points transaction'
+  - 'edit terms in categories'
+  - 'edit terms in tags'
+  - 'edit users by role'
+  - 'revert all revisions'
+  - 'revert article revisions'
+  - 'revert challenge revisions'
+  - 'revert faq revisions'
+  - 'revert idea revisions'
+  - 'revert page revisions'
+  - 'role-assign users by role'
+  - 'use life_cycle_phases transition approved'
+  - 'use life_cycle_phases transition back_to_expert_review'
+  - 'use life_cycle_phases transition create_new_draft'
+  - 'use life_cycle_phases transition draft_approval'
+  - 'use life_cycle_phases transition expert_review'
+  - 'use life_cycle_phases transition launched'
+  - 'use life_cycle_phases transition needs_work'
+  - 'use life_cycle_phases transition postponed'
+  - 'use life_cycle_phases transition publish'
+  - 'use life_cycle_phases transition rejected'
+  - 'view all revisions'
+  - 'view any unpublished content'
+  - 'view any user_points transaction'
+  - 'view article revisions'
+  - 'view challenge revisions'
+  - 'view faq revisions'
+  - 'view idea revisions'
+  - 'view latest version'
+  - 'view own unpublished content'
+  - 'view page revisions'
+  - 'view the administration theme'
+  - 'view unpublished paragraphs'
+  - 'view users by role'

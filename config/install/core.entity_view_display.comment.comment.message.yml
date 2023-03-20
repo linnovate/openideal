@@ -10,19 +10,19 @@ dependencies:
     - field.field.comment.comment.field_like
   module:
     - layout_builder
+    - openideal_layout
     - text
     - votingapi_reaction
-  theme:
-    - openideal_theme
 third_party_settings:
   layout_builder:
-    allow_custom: false
     enabled: true
+    allow_custom: false
     sections:
       -
         layout_id: openideal_card_with_footer
         layout_settings:
           label: Content
+          context_mapping: {  }
         components:
           d7d54887-cec6-4d5b-9754-b41526c83406:
             uuid: d7d54887-cec6-4d5b-9754-b41526c83406
@@ -30,40 +30,40 @@ third_party_settings:
             configuration:
               id: 'field_block:comment:comment:created'
               label: Created
-              provider: layout_builder
               label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
               formatter:
-                label: hidden
                 type: timestamp
+                label: hidden
                 settings:
                   date_format: custom
                   custom_date_format: d/m/Y
                   timezone: ''
                 third_party_settings: {  }
-              context_mapping:
-                entity: layout_builder.entity
-                view_mode: view_mode
-            additional: {  }
             weight: 0
+            additional: {  }
           5a5d3a0d-5452-465c-867e-7ab73e2d1683:
             uuid: 5a5d3a0d-5452-465c-867e-7ab73e2d1683
             region: first
             configuration:
               id: 'field_block:comment:comment:uid'
               label: 'User ID'
-              provider: layout_builder
               label_display: '0'
-              formatter:
-                label: hidden
-                type: entity_reference_entity_view
-                settings:
-                  view_mode: author
-                third_party_settings: {  }
+              provider: layout_builder
               context_mapping:
                 entity: layout_builder.entity
                 view_mode: view_mode
-            additional: {  }
+              formatter:
+                type: entity_reference_entity_view
+                label: hidden
+                settings:
+                  view_mode: author
+                third_party_settings: {  }
             weight: -9
+            additional: {  }
         third_party_settings: {  }
 id: comment.comment.message
 targetEntityType: comment
@@ -71,14 +71,14 @@ bundle: comment
 mode: message
 content:
   comment_body:
-    label: hidden
     type: text_default
-    weight: 0
-    region: content
+    label: hidden
     settings: {  }
     third_party_settings: {  }
+    weight: 0
+    region: content
   field_like:
-    weight: 4
+    type: votingapi_reaction_default
     label: above
     settings:
       show_summary: true
@@ -87,11 +87,11 @@ content:
       show_count: true
       sort_reactions: desc
     third_party_settings: {  }
-    type: votingapi_reaction_default
+    weight: 4
     region: content
   links:
-    weight: 2
-    region: content
     settings: {  }
     third_party_settings: {  }
+    weight: 2
+    region: content
 hidden: {  }

@@ -20,103 +20,12 @@ base_table: transaction
 base_field: id
 display:
   default:
-    display_plugin: default
     id: default
     display_title: Master
+    display_plugin: default
     position: 0
     display_options:
-      access:
-        type: perm
-        options:
-          perm: 'view any user_points transaction'
-      cache:
-        type: tag
-        options: {  }
-      query:
-        type: views_query
-        options:
-          disable_sql_rewrite: false
-          distinct: false
-          replica: false
-          query_comment: ''
-          query_tags: {  }
-      exposed_form:
-        type: basic
-        options:
-          submit_button: Apply
-          reset_button: false
-          reset_button_label: Reset
-          exposed_sorts_label: 'Sort by'
-          expose_sort_order: true
-          sort_asc_label: Asc
-          sort_desc_label: Desc
-      pager:
-        type: full
-        options:
-          items_per_page: 10
-          offset: 0
-          id: 0
-          total_pages: null
-          tags:
-            previous: ‹‹
-            next: ››
-            first: '« First'
-            last: 'Last »'
-          expose:
-            items_per_page: false
-            items_per_page_label: 'Items per page'
-            items_per_page_options: '5, 10, 25, 50'
-            items_per_page_options_all: false
-            items_per_page_options_all_label: '- All -'
-            offset: false
-            offset_label: Offset
-          quantity: 9
-      style:
-        type: table
-        options:
-          grouping: {  }
-          row_class: ''
-          default_row_class: true
-          override: true
-          sticky: false
-          caption: ''
-          summary: ''
-          description: ''
-          columns:
-            target_entity__target_id: target_entity__target_id
-            uid: uid
-            field_points: field_points
-          info:
-            target_entity__target_id:
-              sortable: false
-              default_sort_order: asc
-              align: ''
-              separator: ''
-              empty_column: false
-              responsive: ''
-            uid:
-              sortable: false
-              default_sort_order: asc
-              align: ''
-              separator: ''
-              empty_column: true
-              responsive: ''
-            field_points:
-              sortable: false
-              default_sort_order: asc
-              align: ''
-              separator: ''
-              empty_column: false
-              responsive: ''
-          default: '-1'
-          empty_table: false
-      row:
-        type: fields
-        options:
-          inline: {  }
-          separator: ''
-          hide_empty: false
-          default_field_elements: true
+      title: 'User transactions'
       fields:
         target_entity__target_id:
           id: target_entity__target_id
@@ -125,6 +34,9 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: transaction
+          entity_field: target_entity
+          plugin_id: field
           label: User
           exclude: false
           alter:
@@ -180,9 +92,6 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-          entity_type: transaction
-          entity_field: target_entity
-          plugin_id: field
         field_amount:
           id: field_amount
           table: transaction__field_amount
@@ -190,6 +99,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          plugin_id: field
           label: Points
           exclude: false
           alter:
@@ -235,9 +145,9 @@ display:
           type: number_decimal
           settings:
             thousand_separator: ''
-            prefix_suffix: true
             decimal_separator: .
             scale: 0
+            prefix_suffix: true
           group_column: value
           group_columns: {  }
           group_rows: true
@@ -248,7 +158,6 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-          plugin_id: field
         created_1:
           id: created_1
           table: transaction
@@ -256,6 +165,9 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: transaction
+          entity_field: created
+          plugin_id: field
           label: Date
           exclude: false
           alter:
@@ -313,9 +225,6 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-          entity_type: transaction
-          entity_field: created
-          plugin_id: field
         result_message:
           id: result_message
           table: transaction
@@ -323,6 +232,8 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: transaction
+          plugin_id: field
           label: Status
           exclude: false
           alter:
@@ -378,8 +289,6 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-          entity_type: transaction
-          plugin_id: field
         operations:
           id: operations
           table: transaction
@@ -387,6 +296,8 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: transaction
+          plugin_id: entity_operations
           label: Operations
           exclude: false
           alter:
@@ -429,38 +340,44 @@ display:
           empty_zero: false
           hide_alter_empty: true
           destination: true
-          entity_type: transaction
-          plugin_id: entity_operations
-      filters:
-        type:
-          id: type
-          table: transaction
-          field: type
-          value:
-            user_points: user_points
-          entity_type: transaction
-          entity_field: type
-          plugin_id: bundle
+      pager:
+        type: full
+        options:
+          offset: 0
+          items_per_page: 10
+          total_pages: null
+          id: 0
+          tags:
+            next: ››
+            previous: ‹‹
+            first: '« First'
+            last: 'Last »'
           expose:
-            operator_limit_selection: false
-            operator_list: {  }
-      sorts:
-        target_entity__target_id:
-          id: target_entity__target_id
-          table: transaction
-          field: target_entity__target_id
-          relationship: none
-          group_type: group
-          admin_label: ''
-          order: ASC
-          exposed: false
-          expose:
-            label: ''
-          entity_type: transaction
-          entity_field: target_entity
-          plugin_id: standard
-      header: {  }
-      footer: {  }
+            items_per_page: false
+            items_per_page_label: 'Items per page'
+            items_per_page_options: '5, 10, 25, 50'
+            items_per_page_options_all: false
+            items_per_page_options_all_label: '- All -'
+            offset: false
+            offset_label: Offset
+          quantity: 9
+      exposed_form:
+        type: basic
+        options:
+          submit_button: Apply
+          reset_button: false
+          reset_button_label: Reset
+          exposed_sorts_label: 'Sort by'
+          expose_sort_order: true
+          sort_asc_label: Asc
+          sort_desc_label: Desc
+      access:
+        type: perm
+        options:
+          perm: 'view any user_points transaction'
+      cache:
+        type: tag
+        options: {  }
       empty:
         area_text_custom:
           id: area_text_custom
@@ -469,10 +386,94 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
-          empty: true
-          tokenize: false
-          content: '<p>- no users with points found -</p>'
           plugin_id: text_custom
+          empty: true
+          content: '<p>- no users with points found -</p>'
+          tokenize: false
+      sorts:
+        target_entity__target_id:
+          id: target_entity__target_id
+          table: transaction
+          field: target_entity__target_id
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: transaction
+          entity_field: target_entity
+          plugin_id: standard
+          order: ASC
+          expose:
+            label: ''
+            field_identifier: target_entity__target_id
+          exposed: false
+      arguments: {  }
+      filters:
+        type:
+          id: type
+          table: transaction
+          field: type
+          entity_type: transaction
+          entity_field: type
+          plugin_id: bundle
+          value:
+            user_points: user_points
+          expose:
+            operator_limit_selection: false
+            operator_list: {  }
+      style:
+        type: table
+        options:
+          grouping: {  }
+          row_class: ''
+          default_row_class: true
+          columns:
+            target_entity__target_id: target_entity__target_id
+            uid: uid
+            field_points: field_points
+          default: '-1'
+          info:
+            target_entity__target_id:
+              sortable: false
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            uid:
+              sortable: false
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: true
+              responsive: ''
+            field_points:
+              sortable: false
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+          override: true
+          sticky: false
+          summary: ''
+          empty_table: false
+          caption: ''
+          description: ''
+      row:
+        type: fields
+        options:
+          default_field_elements: true
+          inline: {  }
+          separator: ''
+          hide_empty: false
+      query:
+        type: views_query
+        options:
+          query_comment: ''
+          disable_sql_rewrite: false
+          distinct: false
+          replica: false
+          query_tags: {  }
       relationships:
         user__target_entity:
           id: user__target_entity
@@ -481,13 +482,13 @@ display:
           relationship: none
           group_type: group
           admin_label: 'Target entity: User'
-          required: true
           entity_type: transaction
           plugin_id: standard
-      arguments: {  }
-      display_extenders: {  }
-      title: 'User transactions'
+          required: true
       group_by: false
+      header: {  }
+      footer: {  }
+      display_extenders: {  }
     cache_metadata:
       max-age: -1
       contexts:
@@ -498,13 +499,12 @@ display:
       tags:
         - 'config:field.storage.transaction.field_amount'
   user_points_page:
-    display_plugin: page
     id: user_points_page
     display_title: 'User points (page)'
+    display_plugin: page
     position: 3
     display_options:
-      display_extenders: {  }
-      display_description: ''
+      title: 'User points'
       fields:
         created_1:
           id: created_1
@@ -513,6 +513,9 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: transaction
+          entity_field: created
+          plugin_id: field
           label: Date
           exclude: false
           alter:
@@ -570,9 +573,6 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-          entity_type: transaction
-          entity_field: created
-          plugin_id: field
         description:
           id: description
           table: transaction
@@ -580,6 +580,8 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: transaction
+          plugin_id: field
           label: Description
           exclude: false
           alter:
@@ -635,8 +637,6 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-          entity_type: transaction
-          plugin_id: field
         field_amount:
           id: field_amount
           table: transaction__field_amount
@@ -644,6 +644,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          plugin_id: field
           label: Points
           exclude: false
           alter:
@@ -689,9 +690,9 @@ display:
           type: number_decimal
           settings:
             thousand_separator: ''
-            prefix_suffix: true
             decimal_separator: .
             scale: 0
+            prefix_suffix: true
           group_column: value
           group_columns: {  }
           group_rows: true
@@ -702,7 +703,6 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-          plugin_id: field
         operations:
           id: operations
           table: transaction
@@ -710,6 +710,8 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: transaction
+          plugin_id: entity_operations
           label: Operations
           exclude: false
           alter:
@@ -752,15 +754,6 @@ display:
           empty_zero: false
           hide_alter_empty: true
           destination: true
-          entity_type: transaction
-          plugin_id: entity_operations
-      defaults:
-        fields: false
-        empty: false
-        relationships: false
-        arguments: false
-        title: false
-      path: 'user/{user}/points/applied'
       empty:
         area_text_custom:
           id: area_text_custom
@@ -769,11 +762,10 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
-          empty: true
-          tokenize: false
-          content: '<p>- no transactions found -</p>'
           plugin_id: text_custom
-      relationships: {  }
+          empty: true
+          content: '<p>- no transactions found -</p>'
+          tokenize: false
       arguments:
         target_entity__target_id:
           id: target_entity__target_id
@@ -782,6 +774,9 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: transaction
+          entity_field: target_entity
+          plugin_id: numeric
           default_action: default
           exception:
             value: ''
@@ -797,8 +792,8 @@ display:
           summary_options:
             base_path: ''
             count: true
-            items_per_page: 25
             override: false
+            items_per_page: 25
           summary:
             sort_order: asc
             number_of_records: 0
@@ -815,10 +810,16 @@ display:
             roles: {  }
           break_phrase: false
           not: false
-          entity_type: transaction
-          entity_field: target_entity
-          plugin_id: numeric
-      title: 'User points'
+      defaults:
+        empty: false
+        title: false
+        relationships: false
+        fields: false
+        arguments: false
+      relationships: {  }
+      display_description: ''
+      display_extenders: {  }
+      path: 'user/{user}/points/applied'
     cache_metadata:
       max-age: -1
       contexts:
@@ -830,14 +831,12 @@ display:
       tags:
         - 'config:field.storage.transaction.field_amount'
   user_points_transactions_page:
-    display_plugin: page
     id: user_points_transactions_page
     display_title: 'Transactions (page)'
+    display_plugin: page
     position: 2
     display_options:
-      display_extenders: {  }
-      display_description: ''
-      path: admin/people/userpoints/transaction
+      title: 'User transactions'
       fields:
         target_entity__target_id:
           id: target_entity__target_id
@@ -846,6 +845,9 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: transaction
+          entity_field: target_entity
+          plugin_id: field
           label: User
           exclude: false
           alter:
@@ -901,9 +903,6 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-          entity_type: transaction
-          entity_field: target_entity
-          plugin_id: field
         field_amount:
           id: field_amount
           table: transaction__field_amount
@@ -911,6 +910,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          plugin_id: field
           label: Points
           exclude: false
           alter:
@@ -956,9 +956,9 @@ display:
           type: number_decimal
           settings:
             thousand_separator: ''
-            prefix_suffix: true
             decimal_separator: .
             scale: 0
+            prefix_suffix: true
           group_column: value
           group_columns: {  }
           group_rows: true
@@ -969,7 +969,6 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-          plugin_id: field
         created_1:
           id: created_1
           table: transaction
@@ -977,6 +976,9 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: transaction
+          entity_field: created
+          plugin_id: field
           label: Date
           exclude: false
           alter:
@@ -1034,9 +1036,6 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-          entity_type: transaction
-          entity_field: created
-          plugin_id: field
         result_message:
           id: result_message
           table: transaction
@@ -1044,6 +1043,8 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: transaction
+          plugin_id: field
           label: Status
           exclude: false
           alter:
@@ -1099,8 +1100,6 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-          entity_type: transaction
-          plugin_id: field
         operations:
           id: operations
           table: transaction
@@ -1108,6 +1107,8 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: transaction
+          plugin_id: entity_operations
           label: Operations
           exclude: false
           alter:
@@ -1150,31 +1151,6 @@ display:
           empty_zero: false
           hide_alter_empty: true
           destination: true
-          entity_type: transaction
-          plugin_id: entity_operations
-      defaults:
-        fields: false
-        empty: false
-        exposed_form: false
-        arguments: false
-        filters: false
-        filter_groups: false
-        relationships: false
-        sorts: false
-        title: false
-      empty:
-        area_text_custom:
-          id: area_text_custom
-          table: views
-          field: area_text_custom
-          relationship: none
-          group_type: group
-          admin_label: ''
-          empty: true
-          tokenize: false
-          content: '<p>- no transaction points found -</p>'
-          plugin_id: text_custom
-      exposed_block: false
       exposed_form:
         type: bef
         options:
@@ -1206,6 +1182,34 @@ display:
                     filter_rewrite_values: ''
                   collapsible: false
                   is_secondary: false
+      empty:
+        area_text_custom:
+          id: area_text_custom
+          table: views
+          field: area_text_custom
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: text_custom
+          empty: true
+          content: '<p>- no transaction points found -</p>'
+          tokenize: false
+      sorts:
+        target_entity__target_id:
+          id: target_entity__target_id
+          table: transaction
+          field: target_entity__target_id
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: transaction
+          entity_field: target_entity
+          plugin_id: standard
+          order: ASC
+          expose:
+            label: ''
+            field_identifier: target_entity__target_id
+          exposed: false
       arguments:
         uid:
           id: uid
@@ -1214,6 +1218,9 @@ display:
           relationship: user__target_entity
           group_type: group
           admin_label: ''
+          entity_type: user
+          entity_field: uid
+          plugin_id: user_uid
           default_action: default
           exception:
             value: all
@@ -1230,8 +1237,8 @@ display:
           summary_options:
             base_path: ''
             count: true
-            items_per_page: 25
             override: false
+            items_per_page: 25
           summary:
             sort_order: asc
             number_of_records: 0
@@ -1248,19 +1255,16 @@ display:
             roles: {  }
           break_phrase: false
           not: false
-          entity_type: user
-          entity_field: uid
-          plugin_id: user_uid
       filters:
         type:
           id: type
           table: transaction
           field: type
-          value:
-            user_points: user_points
           entity_type: transaction
           entity_field: type
           plugin_id: bundle
+          value:
+            user_points: user_points
           expose:
             operator_limit_selection: false
             operator_list: {  }
@@ -1271,6 +1275,9 @@ display:
           relationship: user__target_entity
           group_type: group
           admin_label: ''
+          entity_type: user
+          entity_field: uid
+          plugin_id: user_name
           operator: in
           value: {  }
           group: 1
@@ -1304,13 +1311,20 @@ display:
             default_group: All
             default_group_multiple: {  }
             group_items: {  }
-          entity_type: user
-          entity_field: uid
-          plugin_id: user_name
       filter_groups:
         operator: AND
         groups:
           1: AND
+      defaults:
+        empty: false
+        title: false
+        exposed_form: false
+        relationships: false
+        fields: false
+        sorts: false
+        arguments: false
+        filters: false
+        filter_groups: false
       relationships:
         user__target_entity:
           id: user__target_entity
@@ -1319,34 +1333,22 @@ display:
           relationship: none
           group_type: group
           admin_label: 'Target entity: User'
+          entity_type: transaction
+          plugin_id: standard
           required: true
-          entity_type: transaction
-          plugin_id: standard
-      sorts:
-        target_entity__target_id:
-          id: target_entity__target_id
-          table: transaction
-          field: target_entity__target_id
-          relationship: none
-          group_type: group
-          admin_label: ''
-          order: ASC
-          exposed: false
-          expose:
-            label: ''
-          entity_type: transaction
-          entity_field: target_entity
-          plugin_id: standard
+      display_description: ''
+      exposed_block: false
+      display_extenders: {  }
+      path: admin/people/userpoints/transaction
       menu:
         type: normal
         title: Transactions
         description: ''
-        expanded: false
-        parent: openideal_toolbar.user_points
         weight: 0
-        context: '0'
+        expanded: false
         menu_name: admin
-      title: 'User transactions'
+        parent: openideal_toolbar.user_points
+        context: '0'
     cache_metadata:
       max-age: -1
       contexts:
@@ -1358,20 +1360,12 @@ display:
       tags:
         - 'config:field.storage.transaction.field_amount'
   user_total_points_page:
-    display_plugin: page
     id: user_total_points_page
     display_title: 'Totals (page)'
+    display_plugin: page
     position: 1
     display_options:
-      display_extenders: {  }
-      display_description: ''
       title: 'User total points'
-      defaults:
-        title: false
-        fields: false
-        group_by: false
-        arguments: false
-      path: admin/people/userpoints/totals
       fields:
         target_entity__target_id:
           id: target_entity__target_id
@@ -1380,6 +1374,9 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: transaction
+          entity_field: target_entity
+          plugin_id: field
           label: User
           exclude: false
           alter:
@@ -1435,9 +1432,6 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-          entity_type: transaction
-          entity_field: target_entity
-          plugin_id: field
         uid:
           id: uid
           table: users_field_data
@@ -1445,6 +1439,9 @@ display:
           relationship: user__target_entity
           group_type: group
           admin_label: ''
+          entity_type: user
+          entity_field: uid
+          plugin_id: field
           label: 'User ID'
           exclude: true
           alter:
@@ -1501,9 +1498,6 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-          entity_type: user
-          entity_field: uid
-          plugin_id: field
         field_points:
           id: field_points
           table: user__field_points
@@ -1511,6 +1505,7 @@ display:
           relationship: user__target_entity
           group_type: group
           admin_label: ''
+          plugin_id: field
           label: Points
           exclude: false
           alter:
@@ -1556,9 +1551,9 @@ display:
           type: number_decimal
           settings:
             thousand_separator: ''
-            prefix_suffix: true
             decimal_separator: .
             scale: 0
+            prefix_suffix: true
           group_column: value
           group_columns: {  }
           group_rows: true
@@ -1569,23 +1564,30 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-          plugin_id: field
+      arguments: {  }
+      defaults:
+        title: false
+        group_by: false
+        fields: false
+        arguments: false
       group_by: true
+      display_description: ''
+      display_extenders: {  }
+      path: admin/people/userpoints/totals
       menu:
         type: normal
         title: Total
         description: ''
-        expanded: false
-        parent: openideal_toolbar.user_points
         weight: 0
-        context: '0'
+        expanded: false
         menu_name: admin
+        parent: openideal_toolbar.user_points
+        context: '0'
       tab_options:
         type: none
         title: ''
         description: ''
         weight: 0
-      arguments: {  }
     cache_metadata:
       max-age: -1
       contexts:

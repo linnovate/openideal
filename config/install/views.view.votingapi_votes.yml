@@ -14,143 +14,12 @@ base_table: votingapi_vote
 base_field: id
 display:
   default:
-    display_plugin: default
     id: default
     display_title: Master
+    display_plugin: default
     position: 0
     display_options:
-      access:
-        type: perm
-        options:
-          perm: 'administer voting api'
-      cache:
-        type: tag
-        options: {  }
-      query:
-        type: views_query
-        options:
-          disable_sql_rewrite: false
-          distinct: false
-          replica: false
-          query_comment: ''
-          query_tags: {  }
-      exposed_form:
-        type: basic
-        options:
-          submit_button: Apply
-          reset_button: true
-          reset_button_label: Reset
-          exposed_sorts_label: 'Sort by'
-          expose_sort_order: true
-          sort_asc_label: Asc
-          sort_desc_label: Desc
-      pager:
-        type: full
-        options:
-          items_per_page: 50
-          offset: 0
-          id: 0
-          total_pages: null
-          tags:
-            previous: ‹‹
-            next: ››
-            first: '« First'
-            last: 'Last »'
-          expose:
-            items_per_page: false
-            items_per_page_label: 'Items per page'
-            items_per_page_options: '5, 10, 25, 50'
-            items_per_page_options_all: false
-            items_per_page_options_all_label: '- All -'
-            offset: false
-            offset_label: Offset
-          quantity: 9
-      style:
-        type: table
-        options:
-          grouping: {  }
-          row_class: ''
-          default_row_class: true
-          override: true
-          sticky: false
-          caption: ''
-          summary: ''
-          description: ''
-          columns:
-            id: id
-            type: type
-            entity_id: entity_id
-            entity_type: entity_type
-            value: value
-            vote_source: vote_source
-            user_id: user_id
-            timestamp: timestamp
-          info:
-            id:
-              sortable: true
-              default_sort_order: asc
-              align: ''
-              separator: ''
-              empty_column: false
-              responsive: ''
-            type:
-              sortable: true
-              default_sort_order: asc
-              align: ''
-              separator: ''
-              empty_column: false
-              responsive: ''
-            entity_id:
-              sortable: true
-              default_sort_order: asc
-              align: ''
-              separator: ''
-              empty_column: false
-              responsive: ''
-            entity_type:
-              sortable: true
-              default_sort_order: asc
-              align: ''
-              separator: ''
-              empty_column: false
-              responsive: ''
-            value:
-              sortable: true
-              default_sort_order: asc
-              align: ''
-              separator: ''
-              empty_column: false
-              responsive: ''
-            vote_source:
-              sortable: true
-              default_sort_order: asc
-              align: ''
-              separator: ''
-              empty_column: false
-              responsive: ''
-            user_id:
-              sortable: true
-              default_sort_order: asc
-              align: ''
-              separator: ''
-              empty_column: false
-              responsive: ''
-            timestamp:
-              sortable: true
-              default_sort_order: desc
-              align: ''
-              separator: ''
-              empty_column: false
-              responsive: ''
-          default: timestamp
-          empty_table: false
-      row:
-        type: fields
-        options:
-          inline: {  }
-          separator: ''
-          hide_empty: false
-          default_field_elements: true
+      title: 'Voting API votes'
       fields:
         id:
           id: id
@@ -159,6 +28,9 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: vote
+          entity_field: id
+          plugin_id: field
           label: ID
           exclude: false
           alter:
@@ -215,9 +87,6 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-          entity_type: vote
-          entity_field: id
-          plugin_id: field
         type:
           id: type
           table: votingapi_vote
@@ -225,6 +94,9 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: vote
+          entity_field: type
+          plugin_id: field
           label: 'Vote type'
           exclude: false
           alter:
@@ -280,9 +152,6 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-          entity_type: vote
-          entity_field: type
-          plugin_id: field
         value:
           id: value
           table: votingapi_vote
@@ -290,6 +159,9 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: vote
+          entity_field: value
+          plugin_id: field
           label: Value
           exclude: false
           alter:
@@ -335,9 +207,9 @@ display:
           type: number_decimal
           settings:
             thousand_separator: ''
-            prefix_suffix: true
             decimal_separator: .
             scale: 2
+            prefix_suffix: true
           group_column: value
           group_columns: {  }
           group_rows: true
@@ -348,9 +220,6 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-          entity_type: vote
-          entity_field: value
-          plugin_id: field
         vote_source:
           id: vote_source
           table: votingapi_vote
@@ -358,6 +227,9 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: vote
+          entity_field: vote_source
+          plugin_id: field
           label: 'Vote Source'
           exclude: false
           alter:
@@ -413,9 +285,6 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-          entity_type: vote
-          entity_field: vote_source
-          plugin_id: field
         user_id:
           id: user_id
           table: votingapi_vote
@@ -423,6 +292,9 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: vote
+          entity_field: user_id
+          plugin_id: field
           label: 'Voted by'
           exclude: false
           alter:
@@ -478,9 +350,6 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-          entity_type: vote
-          entity_field: user_id
-          plugin_id: field
         timestamp:
           id: timestamp
           table: votingapi_vote
@@ -488,6 +357,9 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: vote
+          entity_field: timestamp
+          plugin_id: field
           label: 'Voted on'
           exclude: false
           alter:
@@ -545,9 +417,47 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-          entity_type: vote
-          entity_field: timestamp
-          plugin_id: field
+      pager:
+        type: full
+        options:
+          offset: 0
+          items_per_page: 50
+          total_pages: null
+          id: 0
+          tags:
+            next: ››
+            previous: ‹‹
+            first: '« First'
+            last: 'Last »'
+          expose:
+            items_per_page: false
+            items_per_page_label: 'Items per page'
+            items_per_page_options: '5, 10, 25, 50'
+            items_per_page_options_all: false
+            items_per_page_options_all_label: '- All -'
+            offset: false
+            offset_label: Offset
+          quantity: 9
+      exposed_form:
+        type: basic
+        options:
+          submit_button: Apply
+          reset_button: true
+          reset_button_label: Reset
+          exposed_sorts_label: 'Sort by'
+          expose_sort_order: true
+          sort_asc_label: Asc
+          sort_desc_label: Desc
+      access:
+        type: perm
+        options:
+          perm: 'administer voting api'
+      cache:
+        type: tag
+        options: {  }
+      empty: {  }
+      sorts: {  }
+      arguments: {  }
       filters:
         type:
           id: type
@@ -556,6 +466,9 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: vote
+          entity_field: type
+          plugin_id: bundle
           operator: in
           value: {  }
           group: 1
@@ -592,9 +505,6 @@ display:
             default_group: All
             default_group_multiple: {  }
             group_items: {  }
-          entity_type: vote
-          entity_field: type
-          plugin_id: bundle
         title:
           id: title
           table: node_field_data
@@ -602,6 +512,9 @@ display:
           relationship: entity_id
           group_type: group
           admin_label: ''
+          entity_type: node
+          entity_field: title
+          plugin_id: string
           operator: contains
           value: ''
           group: 1
@@ -638,9 +551,6 @@ display:
             default_group: All
             default_group_multiple: {  }
             group_items: {  }
-          entity_type: node
-          entity_field: title
-          plugin_id: string
         entity_type:
           id: entity_type
           table: votingapi_vote
@@ -648,6 +558,9 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: vote
+          entity_field: entity_type
+          plugin_id: string
           operator: contains
           value: ''
           group: 1
@@ -684,9 +597,6 @@ display:
             default_group: All
             default_group_multiple: {  }
             group_items: {  }
-          entity_type: vote
-          entity_field: entity_type
-          plugin_id: string
         vote_source:
           id: vote_source
           table: votingapi_vote
@@ -694,6 +604,9 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: vote
+          entity_field: vote_source
+          plugin_id: string
           operator: contains
           value: ''
           group: 1
@@ -730,9 +643,6 @@ display:
             default_group: All
             default_group_multiple: {  }
             group_items: {  }
-          entity_type: vote
-          entity_field: vote_source
-          plugin_id: string
         name:
           id: name
           table: users_field_data
@@ -740,6 +650,9 @@ display:
           relationship: user_id
           group_type: group
           admin_label: ''
+          entity_type: user
+          entity_field: name
+          plugin_id: string
           operator: contains
           value: ''
           group: 1
@@ -776,13 +689,104 @@ display:
             default_group: All
             default_group_multiple: {  }
             group_items: {  }
-          entity_type: user
-          entity_field: name
-          plugin_id: string
-      sorts: {  }
-      header: {  }
-      footer: {  }
-      empty: {  }
+      filter_groups:
+        operator: AND
+        groups:
+          1: AND
+      style:
+        type: table
+        options:
+          grouping: {  }
+          row_class: ''
+          default_row_class: true
+          columns:
+            id: id
+            type: type
+            entity_id: entity_id
+            entity_type: entity_type
+            value: value
+            vote_source: vote_source
+            user_id: user_id
+            timestamp: timestamp
+          default: timestamp
+          info:
+            id:
+              sortable: true
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            type:
+              sortable: true
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            entity_id:
+              sortable: true
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            entity_type:
+              sortable: true
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            value:
+              sortable: true
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            vote_source:
+              sortable: true
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            user_id:
+              sortable: true
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            timestamp:
+              sortable: true
+              default_sort_order: desc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+          override: true
+          sticky: false
+          summary: ''
+          empty_table: false
+          caption: ''
+          description: ''
+      row:
+        type: fields
+        options:
+          default_field_elements: true
+          inline: {  }
+          separator: ''
+          hide_empty: false
+      query:
+        type: views_query
+        options:
+          query_comment: ''
+          disable_sql_rewrite: false
+          distinct: false
+          replica: false
+          query_tags: {  }
       relationships:
         entity_id:
           id: entity_id
@@ -791,10 +795,10 @@ display:
           relationship: none
           group_type: group
           admin_label: 'Voted entity'
-          required: false
           entity_type: vote
           entity_field: entity_id
           plugin_id: standard
+          required: false
         user_id:
           id: user_id
           table: votingapi_vote
@@ -802,17 +806,13 @@ display:
           relationship: none
           group_type: group
           admin_label: Voter
-          required: false
           entity_type: vote
           entity_field: user_id
           plugin_id: standard
-      arguments: {  }
+          required: false
+      header: {  }
+      footer: {  }
       display_extenders: {  }
-      filter_groups:
-        operator: AND
-        groups:
-          1: AND
-      title: 'Voting API votes'
     cache_metadata:
       max-age: -1
       contexts:
@@ -823,17 +823,11 @@ display:
         - user.permissions
       tags: {  }
   admin_page:
-    display_plugin: page
     id: admin_page
     display_title: 'All Votes'
+    display_plugin: page
     position: 1
     display_options:
-      display_extenders: {  }
-      display_description: ''
-      defaults:
-        arguments: true
-        fields: false
-      path: admin/content/vote
       fields:
         id:
           id: id
@@ -842,6 +836,9 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: vote
+          entity_field: id
+          plugin_id: field
           label: ID
           exclude: false
           alter:
@@ -898,9 +895,6 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-          entity_type: vote
-          entity_field: id
-          plugin_id: field
         type:
           id: type
           table: votingapi_vote
@@ -908,6 +902,9 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: vote
+          entity_field: type
+          plugin_id: field
           label: 'Vote type'
           exclude: false
           alter:
@@ -963,9 +960,6 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-          entity_type: vote
-          entity_field: type
-          plugin_id: field
         entity_id:
           id: entity_id
           table: votingapi_vote
@@ -973,6 +967,9 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: vote
+          entity_field: entity_id
+          plugin_id: field
           label: 'Voted entity'
           exclude: false
           alter:
@@ -1028,9 +1025,6 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-          entity_type: vote
-          entity_field: entity_id
-          plugin_id: field
         entity_type:
           id: entity_type
           table: votingapi_vote
@@ -1038,6 +1032,9 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: vote
+          entity_field: entity_type
+          plugin_id: field
           label: 'Entity Type'
           exclude: false
           alter:
@@ -1093,9 +1090,6 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-          entity_type: vote
-          entity_field: entity_type
-          plugin_id: field
         value:
           id: value
           table: votingapi_vote
@@ -1103,6 +1097,9 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: vote
+          entity_field: value
+          plugin_id: field
           label: Value
           exclude: false
           alter:
@@ -1148,9 +1145,9 @@ display:
           type: number_decimal
           settings:
             thousand_separator: ''
-            prefix_suffix: true
             decimal_separator: .
             scale: 2
+            prefix_suffix: true
           group_column: value
           group_columns: {  }
           group_rows: true
@@ -1161,9 +1158,6 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-          entity_type: vote
-          entity_field: value
-          plugin_id: field
         vote_source:
           id: vote_source
           table: votingapi_vote
@@ -1171,6 +1165,9 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: vote
+          entity_field: vote_source
+          plugin_id: field
           label: 'Vote Source'
           exclude: false
           alter:
@@ -1226,9 +1223,6 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-          entity_type: vote
-          entity_field: vote_source
-          plugin_id: field
         user_id:
           id: user_id
           table: votingapi_vote
@@ -1236,6 +1230,9 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: vote
+          entity_field: user_id
+          plugin_id: field
           label: 'Voted by'
           exclude: false
           alter:
@@ -1291,9 +1288,6 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-          entity_type: vote
-          entity_field: user_id
-          plugin_id: field
         timestamp:
           id: timestamp
           table: votingapi_vote
@@ -1301,6 +1295,9 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: vote
+          entity_field: timestamp
+          plugin_id: field
           label: 'Voted on'
           exclude: false
           alter:
@@ -1358,18 +1355,21 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-          entity_type: vote
-          entity_field: timestamp
-          plugin_id: field
+      defaults:
+        fields: false
+        arguments: true
+      display_description: ''
+      display_extenders: {  }
+      path: admin/content/vote
       menu:
         type: tab
         title: Votes
         description: ''
-        expanded: false
-        parent: ''
         weight: 0
-        context: '0'
+        expanded: false
         menu_name: main
+        parent: ''
+        context: '0'
     cache_metadata:
       max-age: -1
       contexts:
@@ -1380,23 +1380,11 @@ display:
         - user.permissions
       tags: {  }
   node_page:
-    display_plugin: page
     id: node_page
     display_title: 'Entity Votes'
+    display_plugin: page
     position: 2
     display_options:
-      display_extenders: {  }
-      path: node/%node/votes
-      menu:
-        type: tab
-        title: Votes
-        description: ''
-        expanded: false
-        parent: ''
-        weight: 0
-        context: '0'
-        menu_name: main
-      display_description: ''
       arguments:
         entity_id:
           id: entity_id
@@ -1405,6 +1393,9 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: vote
+          entity_field: entity_id
+          plugin_id: numeric
           default_action: default
           exception:
             value: all
@@ -1420,8 +1411,8 @@ display:
           summary_options:
             base_path: ''
             count: true
-            items_per_page: 25
             override: false
+            items_per_page: 25
           summary:
             sort_order: asc
             number_of_records: 0
@@ -1433,18 +1424,27 @@ display:
           validate_options: {  }
           break_phrase: false
           not: false
-          entity_type: vote
-          entity_field: entity_id
-          plugin_id: numeric
-      defaults:
-        arguments: false
-        filters: false
-        filter_groups: false
       filters: {  }
       filter_groups:
         operator: AND
         groups:
           1: AND
+      defaults:
+        arguments: false
+        filters: false
+        filter_groups: false
+      display_description: ''
+      display_extenders: {  }
+      path: node/%node/votes
+      menu:
+        type: tab
+        title: Votes
+        description: ''
+        weight: 0
+        expanded: false
+        menu_name: main
+        parent: ''
+        context: '0'
     cache_metadata:
       max-age: -1
       contexts:

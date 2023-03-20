@@ -12,7 +12,7 @@ use Drupal\Core\Form\FormStateInterface;
  *   id = "openidel_slideshow_block",
  *   admin_label = @Translation("Slideshow"),
  *   category = @Translation("Openideal"),
- *   context = {
+ *   context_definitions = {
  *      "node" = @ContextDefinition(
  *       "entity:node",
  *       label = @Translation("Current Node"),

@@ -1,0 +1,20 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - group.type.idea
+id: idea-expert
+label: Expert
+weight: 5
+internal: false
+audience: member
+group_type: idea
+permissions_ui: true
+permissions:
+  - 'create group_node:discussion entity'
+  - 'delete own group_node:discussion entity'
+  - 'update own group_node:discussion entity'
+  - 'view group'
+  - 'view group_node:discussion entity'
+  - 'view unpublished group_node:discussion entity'
+  - 'vote on expert review'

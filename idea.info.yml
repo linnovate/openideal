@@ -25,6 +25,7 @@ dependencies:
   - route_condition:route_condition
   - update_helper:update_helper
   - ckeditor_mentions:ckeditor_mentions
+  - ckeditor_mentions_realname:ckeditor_mentions_realname
   - ckeditor_media_embed:ckeditor_media_embed
   - drupal:comment
   - drupal:action
@@ -113,6 +114,10 @@ dependencies:
   - votingapi_reaction:votingapi_reaction
   - drupal:views
   - paragraphs:paragraphs
+  - drupal:ckeditor_emojione
+  - field_limiter:field_limiter
+  - realname:realname
+  - update_helper:update_helper
   # Custom modules
   - openideal_challenge:openideal_challenge
   - openideal_faq:openideal_faq
@@ -125,7 +130,6 @@ dependencies:
   - openideal_footer:openideal_footer
   - openideal_login:openideal_login
   - openideal_statistics:openideal_statistics
-  - update_helper:update_helper
 
 install:
   - bootstrap4_modal:bootstrap4_modal

@@ -1,0 +1,33 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_like
+    - node.type.challenge
+  module:
+    - votingapi_reaction
+id: node.challenge.field_like
+field_name: field_like
+entity_type: node
+bundle: challenge
+label: Like
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    status: '2'
+default_value_callback: ''
+settings:
+  anonymous_detection:
+    1: '1'
+    2: '2'
+  anonymous_rollover: '-1'
+  reactions:
+    reaction_like: reaction_like
+    reaction_angry: 0
+    reaction_laughing: 0
+    reaction_love: 0
+    reaction_sad: 0
+    reaction_surprised: 0
+field_type: votingapi_reaction

@@ -24,6 +24,8 @@ expression:
         id: rules_condition
         uuid: 64e03746-3bac-4912-8821-0f309c585a53
         weight: -50
+        condition_id: rules_data_comparison
+        negate: false
         context_values:
           operation: '=='
           value: node
@@ -35,12 +37,12 @@ expression:
           value:
             rules_tokens: {  }
         provides_mapping: {  }
-        condition_id: rules_data_comparison
-        negate: false
       -
         id: rules_condition
         uuid: e42d9597-8b68-4c0f-8104-82cf94775eed
         weight: -49
+        condition_id: rules_data_comparison
+        negate: false
         context_values:
           operation: '=='
           value: idea
@@ -52,23 +54,23 @@ expression:
           value:
             rules_tokens: {  }
         provides_mapping: {  }
-        condition_id: rules_data_comparison
-        negate: false
       -
         id: rules_condition
         uuid: f8e70bdc-3ebd-416a-88c7-8d51fea56a84
         weight: -48
+        condition_id: openideal_user_is_voted
+        negate: true
         context_values: {  }
         context_mapping:
           entity: vote
         context_processors: {  }
         provides_mapping: {  }
-        condition_id: openideal_user_is_voted
-        negate: true
       -
         id: rules_condition
         uuid: 077a555d-78ba-4e37-bf84-5bfb1bafeed6
         weight: -47
+        condition_id: rules_data_comparison
+        negate: true
         context_values:
           operation: '=='
         context_mapping:
@@ -78,8 +80,6 @@ expression:
           operation:
             rules_tokens: {  }
         provides_mapping: {  }
-        condition_id: rules_data_comparison
-        negate: true
   actions:
     id: rules_action_set
     uuid: 6e2e6d92-312b-4899-ae41-b4688bd8d0d9
@@ -89,6 +89,7 @@ expression:
         id: rules_action
         uuid: 5b09544d-8a12-44b8-847b-e0bf2898e73b
         weight: 0
+        action_id: rules_entity_fetch_by_id
         context_values:
           type: user
         context_mapping:
@@ -97,11 +98,11 @@ expression:
           type:
             rules_tokens: {  }
         provides_mapping: {  }
-        action_id: rules_entity_fetch_by_id
       -
         id: rules_action
         uuid: d1e48889-f61f-4b7e-93c6-bff531330227
         weight: 0
+        action_id: 'transaction_create:userpoints'
         context_values:
           transaction_type_id: user_points
           operation_id: earn_points_for_voting_an_idea
@@ -120,11 +121,11 @@ expression:
           transaction_field_log_message:
             rules_tokens: {  }
         provides_mapping: {  }
-        action_id: 'transaction_create:userpoints'
       -
         id: rules_action
         uuid: 973e390b-e79d-442b-a539-f55dcf2daeb6
         weight: 0
+        action_id: transaction_execute
         context_values:
           immediate: 'TRUE'
         context_mapping:
@@ -133,4 +134,3 @@ expression:
           immediate:
             rules_tokens: {  }
         provides_mapping: {  }
-        action_id: transaction_execute

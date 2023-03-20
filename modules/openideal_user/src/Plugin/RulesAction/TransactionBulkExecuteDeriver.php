@@ -118,7 +118,7 @@ class TransactionBulkExecuteDeriver extends DeriverBase implements ContainerDeri
     $this->derivatives['user_points'] = [
       'label' => $this->t('Create a new bulk transaction @transactor_type transaction', ['@transactor_type' => $transactor['title']]),
       'category' => $this->t('Transaction'),
-      'context' => $contexts,
+      'context_definitions' => $contexts,
       'provides' => [
         'transaction' => ContextDefinition::create('entity:transaction')
           ->setLabel($this->t('Transaction'))
