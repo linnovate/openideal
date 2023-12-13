@@ -55,6 +55,7 @@ function openideal_idea_cron() {
   $entity_query = $storage->getQuery();
 
   $entities = $entity_query->condition('type', 'idea')
+    ->accessCheck(TRUE)
     ->sort('changed', 'DESC')
     ->range(0, 50)
     ->execute();
@@ -267,6 +268,7 @@ function openideal_idea_form_views_exposed_form_alter(&$form, FormStateInterface
   // Get the list of published and opened challenges.
   $node_storage = \Drupal::entityTypeManager()->getStorage('node');
   $query = $node_storage->getQuery()
+    ->accessCheck(TRUE)
     ->condition('type', 'challenge', '=')
     ->condition('field_is_open', TRUE, '=')
     ->condition('status', NodeInterface::PUBLISHED)

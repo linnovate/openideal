@@ -8,8 +8,8 @@ dependencies:
     - layout_builder
 third_party_settings:
   layout_builder:
-    allow_custom: false
     enabled: false
+    allow_custom: false
 id: message.create_like_on_node.default
 targetEntityType: message
 bundle: create_like_on_node
@@ -17,18 +17,18 @@ mode: default
 content:
   field_node_reference:
     type: entity_reference_entity_view
-    weight: 1
-    region: content
     label: hidden
     settings:
       view_mode: message
       link: false
     third_party_settings: {  }
-  partial_0:
-    weight: 0
+    weight: 1
     region: content
+  partial_0:
     settings: {  }
     third_party_settings: {  }
+    weight: 0
+    region: content
 hidden:
   partial_1: true
   partial_2: true

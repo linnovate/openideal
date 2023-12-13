@@ -58,14 +58,14 @@ class VoteEntityPublished extends RulesConditionBase implements ContainerFactory
   /**
    * Check if the voted entity is Published.
    *
-   * @param \Drupal\votingapi\VoteInterface $vote
+   * @param \Drupal\votingapi\VoteInterface $entity
    *   The entity to check.
    *
    * @return bool
    *   TRUE if user voted today, false otherwise.
    */
-  protected function doEvaluate(VoteInterface $vote) {
-    $entity = $this->entityTypeManager->getStorage($vote->getVotedEntityType())->load($vote->getVotedEntityId());
+  protected function doEvaluate(VoteInterface $entity) {
+    $entity = $this->entityTypeManager->getStorage($entity->getVotedEntityType())->load($entity->getVotedEntityId());
     if ($entity instanceof Comment) {
       return $entity->getCommentedEntity()->isPublished();
     }
@@ -74,5 +74,4 @@ class VoteEntityPublished extends RulesConditionBase implements ContainerFactory
     }
     return FALSE;
   }
-
 }

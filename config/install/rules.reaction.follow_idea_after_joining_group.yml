@@ -22,6 +22,8 @@ expression:
         id: rules_condition
         uuid: 566fa3aa-9839-4a88-804e-86bce6911194
         weight: 0
+        condition_id: rules_data_comparison
+        negate: false
         context_values:
           operation: '=='
           value: idea
@@ -33,8 +35,6 @@ expression:
           value:
             rules_tokens: {  }
         provides_mapping: {  }
-        condition_id: rules_data_comparison
-        negate: false
   actions:
     id: rules_action_set
     uuid: 7db1f1f7-b94d-4422-a7e1-f46ee3654d33
@@ -44,6 +44,7 @@ expression:
         id: rules_action
         uuid: ac82e6de-b6a8-4712-ac71-87101858a0ba
         weight: 0
+        action_id: openideal_user_flag_action
         context_values:
           operation: flag
           flag_id: follow
@@ -56,4 +57,3 @@ expression:
           flag_id:
             rules_tokens: {  }
         provides_mapping: {  }
-        action_id: openideal_user_flag_action

@@ -12,7 +12,7 @@ use Drupal\openideal_challenge\OpenidealContextEntityTrait;
  * @Block(
  *  id = "openideal_user_user_name_block",
  *  admin_label = @Translation("User name"),
- *   context = {
+ *   context_definitions = {
  *      "user" = @ContextDefinition(
  *       "entity:user",
  *       label = @Translation("Current user"),

@@ -22,18 +22,15 @@ settings:
             - Blockquote
             - Emojione
   plugins:
-    language:
-      language_list: un
-    stylescombo:
-      styles: ''
-    autoembed:
-      status: ''
     mentions:
-      enable: 1
-      charcount: '2'
-      timeout: '500'
-      item_template: '<img class="photo" src="{avatar}" /><strong class="realname">{realname}</strong>'
-      output_template: '<a data-mention="{id}" href="{user_page}">@{realname}</a><span>&nbsp;</span>'
+      enable: true
+      mentions_type: realname
+      charcount: 3
+      timeout: 500
+      marker: '@'
+      use_advanced_pattern: false
+      pattern: ''
+      advanced_pattern: ''
 image_upload:
   status: false
   scheme: public

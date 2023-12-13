@@ -13,18 +13,18 @@ dependencies:
     - file
     - image
     - layout_builder
+    - openideal_layout
     - user
-  theme:
-    - openideal_theme
 third_party_settings:
   layout_builder:
-    allow_custom: false
     enabled: true
+    allow_custom: false
     sections:
       -
         layout_id: openideal_card_with_footer
         layout_settings:
           label: Content
+          context_mapping: {  }
         components:
           05a9e030-95d2-47d8-9bcc-246c82a38619:
             uuid: 05a9e030-95d2-47d8-9bcc-246c82a38619
@@ -32,40 +32,61 @@ third_party_settings:
             configuration:
               id: 'field_block:node:page:uid'
               label: 'Authored by'
-              provider: layout_builder
               label_display: '0'
-              formatter:
-                label: hidden
-                type: entity_reference_entity_view
-                settings:
-                  view_mode: author
-                third_party_settings: {  }
+              provider: layout_builder
               context_mapping:
                 entity: layout_builder.entity
                 view_mode: view_mode
-            additional: {  }
+              formatter:
+                type: entity_reference_entity_view
+                label: hidden
+                settings:
+                  view_mode: author
+                third_party_settings: {  }
             weight: 2
+            additional: {  }
           0e01cf1e-256b-43c4-bc25-f132a118d9f8:
             uuid: 0e01cf1e-256b-43c4-bc25-f132a118d9f8
             region: footer
             configuration:
               id: 'field_block:node:page:created'
               label: 'Authored on'
-              provider: layout_builder
               label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
               formatter:
-                label: above
                 type: timestamp
+                label: above
                 settings:
                   date_format: custom
                   custom_date_format: d/m/Y
                   timezone: ''
                 third_party_settings: {  }
+            weight: 2
+            additional: {  }
+          0209a260-579e-43dc-ab50-46f2daece54d:
+            uuid: 0209a260-579e-43dc-ab50-46f2daece54d
+            region: content
+            configuration:
+              id: 'field_block:node:page:field_images'
+              label_display: '0'
               context_mapping:
                 entity: layout_builder.entity
-                view_mode: view_mode
+              formatter:
+                type: image
+                label: above
+                settings:
+                  offset: 0
+                  limit: 0
+                  image_link: ''
+                  image_style: ''
+                  image_loading:
+                    attribute: lazy
+                third_party_settings: {  }
+            weight: 0
             additional: {  }
-            weight: 2
         third_party_settings: {  }
 id: node.page.message
 targetEntityType: node
@@ -73,37 +94,41 @@ bundle: page
 mode: message
 content:
   addtoany:
-    weight: 101
     settings: {  }
     third_party_settings: {  }
+    weight: 101
     region: content
   field_attached_docs:
-    weight: 104
+    type: file_default
     label: above
     settings:
       use_description_as_link_text: true
     third_party_settings: {  }
-    type: file_default
+    weight: 104
     region: content
   field_images:
-    weight: 103
+    type: image
     label: above
     settings:
-      image_style: ''
+      offset: 0
+      limit: 0
       image_link: ''
+      image_style: ''
+      image_loading:
+        attribute: lazy
     third_party_settings: {  }
-    type: image
+    weight: 103
     region: content
   field_paragraphs:
     type: entity_reference_revisions_entity_view
-    region: content
-    weight: 105
     settings: {  }
     third_party_settings: {  }
+    weight: 105
+    region: content
   links:
+    settings: {  }
+    third_party_settings: {  }
     weight: 101
     region: content
-    settings: {  }
-    third_party_settings: {  }
 hidden:
   body: true

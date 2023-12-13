@@ -17,13 +17,14 @@ dependencies:
     - bootstrap_barrio
 third_party_settings:
   layout_builder:
-    allow_custom: false
     enabled: true
+    allow_custom: false
     sections:
       -
         layout_id: barrio_cardtopimage
         layout_settings:
           label: ''
+          context_mapping: {  }
           layout_builder_styles_style:
             author: 0
             user_compact: 0
@@ -34,65 +35,86 @@ third_party_settings:
             uuid: bebb7a24-c5c4-48f7-a42e-c04fdbc85988
             region: second
             configuration:
+              id: 'field_block:node:page:body'
               label_display: '0'
               context_mapping:
                 entity: layout_builder.entity
-              id: 'field_block:node:page:body'
               formatter:
+                type: text_default
                 label: above
                 settings: {  }
                 third_party_settings: {  }
-                type: text_default
-            additional: {  }
             weight: 4
+            additional: {  }
           b818ca5c-477b-4180-902c-a65c2aae52dd:
             uuid: b818ca5c-477b-4180-902c-a65c2aae52dd
             region: second
             configuration:
+              id: 'field_block:node:page:field_attached_docs'
               label_display: '0'
               context_mapping:
                 entity: layout_builder.entity
-              id: 'field_block:node:page:field_attached_docs'
               formatter:
+                type: file_default
                 label: above
                 settings:
                   use_description_as_link_text: true
                 third_party_settings: {  }
-                type: file_default
-            additional: {  }
             weight: 5
+            additional: {  }
           becf61b1-092e-4ce8-b3ec-4be7e0fcee61:
             uuid: becf61b1-092e-4ce8-b3ec-4be7e0fcee61
             region: first
             configuration:
               id: openidel_slideshow_block
               label: Slideshow
-              provider: openideal_slideshow
               label_display: visible
-              image_style: slideshow_large
+              provider: openideal_slideshow
               context_mapping:
                 node: layout_builder.entity
-            additional: {  }
+              image_style: slideshow_large
             weight: 0
+            additional: {  }
           1b480a55-1504-42c4-ae4e-bb5c639cb0f5:
             uuid: 1b480a55-1504-42c4-ae4e-bb5c639cb0f5
             region: second
             configuration:
               id: 'field_block:node:page:title'
               label: Title
-              provider: layout_builder
               label_display: '0'
-              formatter:
-                label: hidden
-                type: string
-                settings:
-                  link_to_entity: false
-                third_party_settings: {  }
+              provider: layout_builder
               context_mapping:
                 entity: layout_builder.entity
                 view_mode: view_mode
-            additional: {  }
+              formatter:
+                type: string
+                label: hidden
+                settings:
+                  link_to_entity: false
+                third_party_settings: {  }
             weight: 3
+            additional: {  }
+          87479890-aa6d-43df-bac6-ab1efd22c08b:
+            uuid: 87479890-aa6d-43df-bac6-ab1efd22c08b
+            region: content
+            configuration:
+              id: 'field_block:node:page:field_images'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: image
+                label: above
+                settings:
+                  offset: 0
+                  limit: 0
+                  image_link: ''
+                  image_style: ''
+                  image_loading:
+                    attribute: lazy
+                third_party_settings: {  }
+            weight: 0
+            additional: {  }
         third_party_settings: {  }
 id: node.page.default
 targetEntityType: node
@@ -100,40 +122,44 @@ bundle: page
 mode: default
 content:
   addtoany:
-    weight: 101
     settings: {  }
     third_party_settings: {  }
+    weight: 101
     region: content
   body:
-    weight: 105
+    type: text_default
     label: above
     settings: {  }
     third_party_settings: {  }
-    type: text_default
+    weight: 105
     region: content
   field_attached_docs:
-    weight: 104
+    type: file_default
     label: above
     settings:
       use_description_as_link_text: true
     third_party_settings: {  }
-    type: file_default
+    weight: 104
     region: content
   field_images:
-    weight: 103
+    type: image
     label: above
     settings:
-      image_style: ''
+      offset: 0
+      limit: 0
       image_link: ''
+      image_style: ''
+      image_loading:
+        attribute: lazy
     third_party_settings: {  }
-    type: image
+    weight: 103
     region: content
   field_paragraphs:
     type: entity_reference_revisions_entity_view
     region: content
   links:
-    weight: 101
-    region: content
     settings: {  }
     third_party_settings: {  }
+    weight: 101
+    region: content
 hidden: {  }

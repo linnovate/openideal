@@ -1,0 +1,79 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.user.follower
+    - field.field.user.user.avatars_avatar_generator
+    - field.field.user.user.avatars_user_picture
+    - field.field.user.user.field_age_group
+    - field.field.user.user.field_first_name
+    - field.field.user.user.field_gender
+    - field.field.user.user.field_last_name
+    - field.field.user.user.field_points
+    - field.field.user.user.user_picture
+    - image.style.follower_icon
+  module:
+    - image
+    - layout_builder
+    - layout_discovery
+    - user
+third_party_settings:
+  layout_builder:
+    enabled: true
+    allow_custom: false
+    sections:
+      -
+        layout_id: layout_onecol
+        layout_settings:
+          label: ''
+          context_mapping: {  }
+        components:
+          3e049496-5ae3-4fe4-a953-b9eaaefda934:
+            uuid: 3e049496-5ae3-4fe4-a953-b9eaaefda934
+            region: content
+            configuration:
+              id: 'field_block:user:user:user_picture'
+              label: Picture
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: openideal_user_user_image
+                label: hidden
+                settings:
+                  image_style: follower_icon
+                  image_link: content
+                third_party_settings: {  }
+            weight: 0
+            additional: {  }
+        third_party_settings: {  }
+id: user.user.follower
+targetEntityType: user
+bundle: user
+mode: follower
+content:
+  user_picture:
+    type: image
+    label: hidden
+    settings:
+      image_link: content
+      image_style: follower_icon
+      image_loading:
+        attribute: lazy
+      offset: 0
+      limit: 0
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  avatars_avatar_generator: true
+  avatars_user_picture: true
+  field_age_group: true
+  field_first_name: true
+  field_gender: true
+  field_last_name: true
+  field_points: true
+  member_for: true
+  realname: true
