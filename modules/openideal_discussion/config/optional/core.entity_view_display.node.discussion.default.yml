@@ -16,70 +16,69 @@ dependencies:
     - user
 third_party_settings:
   layout_builder:
-    enabled: true
     allow_custom: false
+    enabled: true
     sections:
       -
         layout_id: layout_onecol
         layout_settings:
           label: ''
-          context_mapping: {  }
         components:
           eb412da6-a7a4-4080-9a77-70bf27ba2a9e:
             uuid: eb412da6-a7a4-4080-9a77-70bf27ba2a9e
             region: content
             configuration:
-              id: 'field_block:node:discussion:body'
               label_display: '0'
               context_mapping:
                 entity: layout_builder.entity
+              id: 'field_block:node:discussion:body'
               formatter:
-                type: text_default
                 label: hidden
+                type: text_default
                 settings:
                   offset: 0
                   limit: 0
                 third_party_settings: {  }
-            weight: 2
             additional: {  }
+            weight: 2
           5230e2a2-49ea-46b9-b6a5-e85790b0f47e:
             uuid: 5230e2a2-49ea-46b9-b6a5-e85790b0f47e
             region: content
             configuration:
-              id: 'field_block:node:discussion:field_comments'
               label_display: '0'
               context_mapping:
                 entity: layout_builder.entity
+              id: 'field_block:node:discussion:field_comments'
               formatter:
-                type: comment_default
                 label: hidden
                 settings:
-                  offset: 0
-                  limit: 0
                   view_mode: default
                   pager_id: 0
+                  offset: 0
+                  limit: 0
                 third_party_settings: {  }
-            weight: 3
+                type: comment_default
             additional: {  }
+            weight: 3
           ca27518c-cc36-4cd0-8e0b-b9c3b9fa6e8c:
             uuid: ca27518c-cc36-4cd0-8e0b-b9c3b9fa6e8c
             region: content
             configuration:
               id: 'field_block:node:discussion:title'
               label: Title
-              label_display: '0'
               provider: layout_builder
-              context_mapping:
-                entity: layout_builder.entity
-                view_mode: view_mode
+              label_display: '0'
               formatter:
-                type: string
                 label: hidden
+                type: string
                 settings:
                   link_to_entity: false
                 third_party_settings: {  }
-            weight: 0
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
             additional: {  }
+            weight: 0
         third_party_settings: {  }
 id: node.discussion.default
 targetEntityType: node
@@ -87,30 +86,30 @@ bundle: discussion
 mode: default
 content:
   body:
-    type: text_default
     label: hidden
+    type: text_default
+    weight: 1
     settings:
       offset: 0
       limit: 0
     third_party_settings: {  }
-    weight: 1
     region: content
   field_comments:
-    type: comment_default
+    weight: 2
     label: hidden
     settings:
-      offset: 0
-      limit: 0
       view_mode: default
       pager_id: 0
+      offset: 0
+      limit: 0
     third_party_settings: {  }
-    weight: 2
+    type: comment_default
     region: content
   links:
-    settings: {  }
-    third_party_settings: {  }
     weight: 0
     region: content
+    settings: {  }
+    third_party_settings: {  }
 hidden:
   field_idea: true
   field_status: true

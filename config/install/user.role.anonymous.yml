@@ -1,14 +1,6 @@
 langcode: en
 status: true
-dependencies:
-  config:
-    - filter.format.comments
-    - filter.format.restricted_html
-  module:
-    - comment
-    - contact
-    - filter
-    - system
+dependencies: {  }
 id: anonymous
 label: 'Anonymous user'
 weight: 0
@@ -18,5 +10,7 @@ permissions:
   - 'access content'
   - 'access site-wide contact form'
   - 'access user profiles'
+  - 'search content'
   - 'use text format comments'
   - 'use text format restricted_html'
+  - 'view media'

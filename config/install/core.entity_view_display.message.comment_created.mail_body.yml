@@ -10,18 +10,18 @@ dependencies:
     - layout_builder
 third_party_settings:
   layout_builder:
-    enabled: false
     allow_custom: false
+    enabled: false
 id: message.comment_created.mail_body
 targetEntityType: message
 bundle: comment_created
 mode: mail_body
 content:
   partial_2:
-    settings: {  }
-    third_party_settings: {  }
     weight: 0
     region: content
+    settings: {  }
+    third_party_settings: {  }
 hidden:
   field_comment_reference: true
   field_node_reference: true

@@ -18,27 +18,27 @@ content:
     settings: {  }
     third_party_settings: {  }
   field_amount:
-    type: number
     weight: 1
-    region: content
     settings:
       placeholder: ''
     third_party_settings: {  }
+    type: number
+    region: content
   operation:
     type: options_select
     weight: 0
-    region: content
     settings: {  }
+    region: content
     third_party_settings: {  }
   uid:
     type: entity_reference_autocomplete
     weight: 2
-    region: content
     settings:
       match_operator: CONTAINS
-      match_limit: 10
       size: 60
       placeholder: ''
+      match_limit: 10
+    region: content
     third_party_settings: {  }
 hidden:
   field_balance: true

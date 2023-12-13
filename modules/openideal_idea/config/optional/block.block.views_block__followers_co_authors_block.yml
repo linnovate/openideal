@@ -18,21 +18,21 @@ plugin: 'views_block:followers-co_authors_block'
 settings:
   id: 'views_block:followers-co_authors_block'
   label: ''
-  label_display: visible
   provider: views
-  context_mapping: {  }
+  label_display: visible
   views_label: ''
   items_per_page: none
+  context_mapping: {  }
 visibility:
+  node_type:
+    id: node_type
+    bundles:
+      idea: idea
+    negate: false
+    context_mapping:
+      node: '@node.node_route_context:node'
   route:
     id: route
     routes: entity.node.canonical
     negate: false
     context_mapping: {  }
-  'entity_bundle:node':
-    id: 'entity_bundle:node'
-    negate: false
-    context_mapping:
-      node: '@node.node_route_context:node'
-    bundles:
-      idea: idea

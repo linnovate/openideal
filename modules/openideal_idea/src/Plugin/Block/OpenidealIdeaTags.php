@@ -11,7 +11,7 @@ use Drupal\openideal_challenge\OpenidealContextEntityTrait;
  * @Block(
  *  id = "openideal_idea_tags_block",
  *  admin_label = @Translation("Node tags"),
- *   context_definitions = {
+ *   context = {
  *      "node" = @ContextDefinition(
  *       "entity:node",
  *       label = @Translation("Current Node"),

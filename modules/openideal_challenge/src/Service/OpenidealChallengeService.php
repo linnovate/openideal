@@ -80,7 +80,6 @@ class OpenidealChallengeService implements OpenidealChallengeServiceInterface {
     // to the current time.
     $query = $this->entityTypeManager->getStorage('node')->getQuery()
       ->exists($operation_field_name)
-      ->accessCheck(TRUE)
       ->condition($operation_field_name, $this->time->getRequestTime(), '<=')
       ->condition('type', 'challenge', '=')
       ->condition('status', NodeInterface::PUBLISHED)

@@ -3,14 +3,13 @@
 namespace Drupal\openideal_statistics;
 
 use Drupal\Core\Entity\EntityTypeManagerInterface;
-use Drupal\Core\Security\TrustedCallbackInterface;
 use Drupal\Core\Utility\Token;
 use Drupal\statistics\NodeStatisticsDatabaseStorage;
 
 /**
  * LazyBuilder object.
  */
-class OpenidealStatisticsLazyBuilder implements TrustedCallbackInterface {
+class OpenidealStatisticsLazyBuilder {
 
   /**
    * Entity type manager.
@@ -47,13 +46,6 @@ class OpenidealStatisticsLazyBuilder implements TrustedCallbackInterface {
     $this->entityTypeManager = $entity_type_manager;
     $this->token = $token;
     $this->nodeStatistics = $node_statistics_database_storage;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public static function trustedCallbacks() {
-    return ['getIdeas', 'getMembers', 'getComments', 'getVotes', 'getChallengeIdeas', 'getViews', 'getUserIdeas', 'getUserVotes', 'getUserComments'];
   }
 
   /**

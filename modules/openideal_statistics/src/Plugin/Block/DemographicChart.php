@@ -94,7 +94,6 @@ class DemographicChart extends BlockBase implements ContainerFactoryPluginInterf
     $query = $storage->getQuery();
     $query->exists('field_gender')
       ->exists('field_age_group')
-      ->accessCheck(TRUE)
       ->condition('status', '1');
 
     $filters = $this->getFilters();

@@ -1,29 +1,6 @@
 langcode: en
 status: true
-dependencies:
-  config:
-    - filter.format.basic_html
-    - filter.format.basic_html_with_embedded_video
-    - filter.format.comments
-    - filter.format.restricted_comments_html
-    - node.type.idea
-    - workflows.workflow.life_cycle_phases
-  module:
-    - avatars
-    - ckeditor_mentions
-    - comment
-    - contact
-    - content_moderation
-    - dropzonejs
-    - entity_browser
-    - eu_cookie_compliance
-    - filter
-    - flag
-    - node
-    - shortcut
-    - statistics
-    - system
-    - votingapi_reaction
+dependencies: {  }
 id: authenticated
 label: 'Authenticated user'
 weight: 1
@@ -42,9 +19,12 @@ permissions:
   - 'avatars avatar_generator user gravatar'
   - 'avatars avatar_generator user gravatar_generator'
   - 'avatars avatar_generator user user_upload'
+  - 'clear own vote on comment:comment:field_voting_comment'
+  - 'clear own vote on node:idea:field_voting'
   - 'control reaction status on comment:comment:field_like'
   - 'control reaction status on node:challenge:field_like'
   - 'control reaction status on node:idea:field_like'
+  - 'create content translations'
   - 'create idea content'
   - 'create reaction on comment:comment:field_like'
   - 'create reaction on node:challenge:field_like'
@@ -53,13 +33,23 @@ permissions:
   - 'dropzone upload files'
   - 'edit own comments'
   - 'edit own idea content'
+  - 'edit own vote on comment:comment:field_voting_comment'
+  - 'edit own vote on node:idea:field_voting'
+  - 'edit voting status on comment:comment:field_voting_comment'
+  - 'edit voting status on node:idea:field_voting'
   - 'flag follow'
+  - 'flag follow other items'
   - 'modify reaction on comment:comment:field_like'
   - 'modify reaction on node:challenge:field_like'
   - 'modify reaction on node:idea:field_like'
   - 'post comments'
+  - 'rabbit hole bypass user'
+  - 'search content'
   - 'skip comment approval'
+  - 'translate idea node'
   - 'unflag follow'
+  - 'unflag follow other items'
+  - 'update content translations'
   - 'use inline mentions'
   - 'use life_cycle_phases transition create_new_draft'
   - 'use life_cycle_phases transition publish'
@@ -67,8 +57,11 @@ permissions:
   - 'use text format basic_html_with_embedded_video'
   - 'use text format comments'
   - 'use text format restricted_comments_html'
+  - 'view media'
   - 'view own unpublished content'
   - 'view post access counter'
   - 'view reactions on comment:comment:field_like'
   - 'view reactions on node:challenge:field_like'
   - 'view reactions on node:idea:field_like'
+  - 'vote on comment:comment:field_voting_comment'
+  - 'vote on node:idea:field_voting'

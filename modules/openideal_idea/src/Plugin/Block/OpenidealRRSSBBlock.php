@@ -12,7 +12,7 @@ use Drupal\rrssb\Plugin\Block\RRSSBBlock;
  *   id = "openideal_rrssb_block",
  *   admin_label = @Translation("Openideal RRSSB block with ability to set contextual entity"),
  *   category = @Translation("RRSSB"),
- *   context_definitions = {
+ *   context = {
  *      "node" = @ContextDefinition(
  *       "entity:node",
  *       label = @Translation("Current Node"),

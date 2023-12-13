@@ -16,70 +16,79 @@ tips:
     id: views-main
     plugin: text
     label: 'Manage view settings'
-    weight: 1
     body: 'View or edit the configuration.'
+    weight: 1
   views-ui-displays:
     id: views-ui-displays
     plugin: text
     label: 'Displays in this view'
-    weight: 2
     body: 'A display is a way of outputting the results, e.g., as a page or a block. A view can contain multiple displays, which are listed here. The active display is highlighted.'
-    selector: '#views-display-top'
+    weight: 2
+    attributes:
+      data-id: views-display-top
   views-ui-view-admin:
     id: views-ui-view-admin
     plugin: text
     label: 'View administration'
-    weight: 3
     body: 'Perform administrative tasks, including adding a description and creating a clone. Click the drop-down button to view the available options.'
-    selector: '#views-display-extra-actions'
-    position: left-start
+    weight: 3
+    location: left
+    attributes:
+      data-id: views-display-extra-actions
   views-ui-format:
     id: views-ui-format
     plugin: text
     label: 'Output format'
-    weight: 4
     body: 'Choose how to output results. E.g., choose <em>Content</em> to output each item completely, using your configured display settings. Or choose <em>Fields</em>, which allows you to output only specific fields for each result. Additional formats can be added by installing modules to <em>extend</em> Drupal''s base functionality.'
-    selector: .views-ui-display-tab-bucket.format
+    weight: 4
+    attributes:
+      data-class: views-ui-display-tab-bucket.format
   views-ui-fields:
     id: views-ui-fields
     plugin: text
     label: Fields
-    weight: 5
     body: 'If this view uses fields, they are listed here. You can click on a field to configure it.'
-    selector: .views-ui-display-tab-bucket.field
+    weight: 5
+    attributes:
+      data-class: views-ui-display-tab-bucket.field
   views-ui-filter:
     id: views-ui-filter
     plugin: text
     label: 'Filter your view'
-    weight: 6
     body: 'Add filters to limit the results in the output. E.g., to only show content that is <em>published</em>, you would add a filter for <em>Published</em> and select <em>Yes</em>.'
-    selector: .views-ui-display-tab-bucket.filter
+    weight: 6
+    attributes:
+      data-class: views-ui-display-tab-bucket.filter
   views-ui-filter-operations:
     id: views-ui-filter-operations
     plugin: text
     label: 'Filter actions'
-    weight: 7
     body: 'Add, rearrange or remove filters.'
-    selector: '.views-ui-display-tab-bucket.filter .dropbutton-widget'
+    weight: 7
+    attributes:
+      data-class: 'views-ui-display-tab-bucket.filter .dropbutton-widget'
   views-ui-sorts:
     id: views-ui-sorts
     plugin: text
     label: 'Sort Criteria'
-    weight: 8
     body: 'Control the order in which the results are output. Click on an active sort rule to configure it.'
-    selector: .views-ui-display-tab-bucket.sort
+    weight: 8
+    attributes:
+      data-class: views-ui-display-tab-bucket.sort
   views-ui-sorts-operations:
     id: views-ui-sorts-operations
     plugin: text
     label: 'Sort actions'
-    weight: 9
     body: 'Add, rearrange or remove sorting rules.'
-    selector: '.views-ui-display-tab-bucket.sort .dropbutton-widget'
+    weight: 9
+    attributes:
+      data-class: 'views-ui-display-tab-bucket.sort .dropbutton-widget'
   views-ui-preview:
     id: views-ui-preview
     plugin: text
     label: Preview
-    weight: 10
     body: 'Show a preview of the view output.'
-    selector: '#preview-submit'
-    position: left-start
+    weight: 10
+    location: left
+    attributes:
+      data-id: preview-submit

@@ -12,9 +12,7 @@ bundle: faq
 mode: default
 content:
   field_faq_items:
-    type: faqfield_default
     weight: 0
-    region: content
     settings:
       answer_widget: text_format
       question_title: Question
@@ -25,11 +23,13 @@ content:
         question_rows: 0
         answer_rows: 3
     third_party_settings: {  }
+    type: faqfield_default
+    region: content
   translation:
     weight: 10
-    region: content
     settings: {  }
     third_party_settings: {  }
+    region: content
 hidden:
   created: true
   status: true

@@ -140,7 +140,6 @@ class OpenidealHelper {
     $configuration = $this->configFactory->get('openideal_idea.scoreconfig');
     // Get node comments.
     $comments = $this->entityTypeManager->getStorage('comment')->getQuery()
-      ->accessCheck(TRUE)
       ->condition('entity_id', $id)
       ->condition('entity_type', 'node')
       ->count()
@@ -148,7 +147,6 @@ class OpenidealHelper {
 
     // Get node votes.
     $votes = $this->entityTypeManager->getStorage('vote')->getQuery()
-      ->accessCheck(TRUE)
       ->condition('entity_id', $id)
       ->condition('entity_type', 'node')
       ->count()

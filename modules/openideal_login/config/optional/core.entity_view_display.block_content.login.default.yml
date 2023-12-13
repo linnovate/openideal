@@ -8,18 +8,18 @@ dependencies:
   module:
     - image
     - layout_builder
-    - openideal_layout
     - text
+  theme:
+    - openideal_theme
 third_party_settings:
   layout_builder:
-    enabled: true
     allow_custom: false
+    enabled: true
     sections:
       -
         layout_id: openideal_two_columns_teaser
         layout_settings:
           label: ''
-          context_mapping: {  }
           main_class: user-login-form--container--right__text
           layout_builder_styles_style:
             author: 0
@@ -31,60 +31,39 @@ third_party_settings:
             uuid: 2f0d2b45-54c7-4ba5-ba86-65dc9505679e
             region: first
             configuration:
-              id: 'field_block:block_content:login:body'
               label_display: '0'
               context_mapping:
                 entity: layout_builder.entity
+              id: 'field_block:block_content:login:body'
               formatter:
-                type: text_default
                 label: hidden
+                type: text_default
                 settings:
                   offset: 0
                   limit: 0
                 third_party_settings: {  }
-            weight: 0
             additional: {  }
+            weight: 0
           1e4a8db3-8563-465d-bdaa-672eaf9eac1f:
             uuid: 1e4a8db3-8563-465d-bdaa-672eaf9eac1f
             region: second
             configuration:
               id: 'field_block:block_content:login:field_image'
               label: Image
-              label_display: '0'
               provider: layout_builder
+              label_display: '0'
+              formatter:
+                label: hidden
+                type: image
+                settings:
+                  image_style: ''
+                  image_link: ''
+                third_party_settings: {  }
               context_mapping:
                 entity: layout_builder.entity
                 view_mode: view_mode
-              formatter:
-                type: image
-                label: hidden
-                settings:
-                  image_link: ''
-                  image_style: ''
-                third_party_settings: {  }
+            additional: {  }
             weight: 1
-            additional: {  }
-          68031833-c40b-4a80-ae5b-edc80a0520e8:
-            uuid: 68031833-c40b-4a80-ae5b-edc80a0520e8
-            region: content
-            configuration:
-              id: 'field_block:block_content:login:field_image'
-              label_display: '0'
-              context_mapping:
-                entity: layout_builder.entity
-              formatter:
-                type: image
-                label: above
-                settings:
-                  offset: 0
-                  limit: 0
-                  image_link: ''
-                  image_style: ''
-                  image_loading:
-                    attribute: lazy
-                third_party_settings: {  }
-            weight: 0
-            additional: {  }
         third_party_settings: {  }
 id: block_content.login.default
 targetEntityType: block_content
@@ -92,25 +71,23 @@ bundle: login
 mode: default
 content:
   body:
-    type: text_default
     label: hidden
+    type: text_default
+    weight: 0
     settings:
       offset: 0
       limit: 0
     third_party_settings: {  }
-    weight: 0
     region: content
   field_image:
-    type: image
+    weight: 1
     label: above
     settings:
+      image_style: ''
+      image_link: ''
       offset: 0
       limit: 0
-      image_link: ''
-      image_style: ''
-      image_loading:
-        attribute: lazy
     third_party_settings: {  }
-    weight: 1
+    type: image
     region: content
 hidden: {  }

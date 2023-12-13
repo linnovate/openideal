@@ -12,36 +12,69 @@ dependencies:
     - field.field.user.user.user_picture
   module:
     - image
+    - options
     - user
 id: user.user.default
 targetEntityType: user
 bundle: user
 mode: default
 content:
-  member_for:
+  field_age_group:
+    weight: 5
+    label: above
     settings: {  }
     third_party_settings: {  }
-    weight: 5
+    type: list_default
     region: content
-  user_picture:
-    type: image
+  field_first_name:
+    weight: 1
     label: above
     settings:
-      offset: 0
-      limit: 0
-      image_link: ''
-      image_style: ''
-      image_loading:
-        attribute: lazy
+      link_to_entity: false
     third_party_settings: {  }
-    weight: 6
+    type: string
     region: content
+  field_gender:
+    weight: 4
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: list_default
+    region: content
+  field_last_name:
+    weight: 2
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_points:
+    weight: 0
+    label: above
+    settings:
+      thousand_separator: ''
+      decimal_separator: .
+      scale: 2
+      prefix_suffix: true
+    third_party_settings: {  }
+    type: number_decimal
+    region: content
+  member_for:
+    weight: 0
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  user_picture:
+    type: image
+    weight: 3
+    region: content
+    label: above
+    settings:
+      image_style: ''
+      image_link: ''
+    third_party_settings: {  }
 hidden:
   avatars_avatar_generator: true
   avatars_user_picture: true
-  field_age_group: true
-  field_first_name: true
-  field_gender: true
-  field_last_name: true
-  field_points: true
   realname: true

@@ -19,19 +19,19 @@ dependencies:
     - node.type.challenge
   module:
     - layout_builder
-    - openideal_layout
     - openideal_statistics
     - user
+  theme:
+    - openideal_theme
 third_party_settings:
   layout_builder:
-    enabled: true
     allow_custom: false
+    enabled: true
     sections:
       -
         layout_id: openideal_card_with_footer
         layout_settings:
           label: ''
-          context_mapping: {  }
         components:
           7d58b000-7492-4203-9e83-1464f6ec8ec0:
             uuid: 7d58b000-7492-4203-9e83-1464f6ec8ec0
@@ -39,52 +39,52 @@ third_party_settings:
             configuration:
               id: 'field_block:node:challenge:uid'
               label: 'Authored by'
-              label_display: '0'
               provider: layout_builder
-              context_mapping:
-                entity: layout_builder.entity
-                view_mode: view_mode
+              label_display: '0'
               formatter:
-                type: entity_reference_entity_view
                 label: hidden
+                type: entity_reference_entity_view
                 settings:
                   view_mode: author
                 third_party_settings: {  }
-            weight: -9
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
             additional: {  }
+            weight: -9
           bbe2ea7f-dceb-4e08-8912-dcb4b9ada62f:
             uuid: bbe2ea7f-dceb-4e08-8912-dcb4b9ada62f
             region: footer
             configuration:
               id: 'field_block:node:challenge:created'
               label: 'Authored on'
-              label_display: '0'
               provider: layout_builder
-              context_mapping:
-                entity: layout_builder.entity
-                view_mode: view_mode
+              label_display: '0'
               formatter:
-                type: timestamp
                 label: hidden
+                type: timestamp
                 settings:
                   date_format: custom
                   custom_date_format: d/m/Y
                   timezone: ''
                 third_party_settings: {  }
-            weight: 0
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
             additional: {  }
+            weight: 0
           0755f53c-8517-492d-9f25-cb0a2b3e919c:
             uuid: 0755f53c-8517-492d-9f25-cb0a2b3e919c
             region: footer
             configuration:
               id: openideal_statistics_challenge_statistics
               label: 'Challenge statistics block'
-              label_display: '0'
               provider: openideal_statistics
+              label_display: '0'
               context_mapping:
                 node: layout_builder.entity
-            weight: 1
             additional: {  }
+            weight: 1
         third_party_settings: {  }
 id: node.challenge.message
 targetEntityType: node

@@ -22,13 +22,13 @@ expression:
         id: rules_condition
         uuid: f943670a-63d7-4e89-9c76-8f54b9e3421a
         weight: 0
-        condition_id: rules_node_is_published
-        negate: false
         context_values: {  }
         context_mapping:
           node: entity
         context_processors: {  }
         provides_mapping: {  }
+        condition_id: rules_node_is_published
+        negate: false
   actions:
     id: rules_action_set
     uuid: 69aed080-147c-4717-a0bd-0a80014614e7
@@ -38,7 +38,6 @@ expression:
         id: rules_action
         uuid: 74699594-145f-4d3b-a7ef-48488b71f1ed
         weight: 0
-        action_id: openideal_message_action
         context_values:
           template: challenge_schedule
         context_mapping:
@@ -47,3 +46,4 @@ expression:
           template:
             rules_tokens: {  }
         provides_mapping: {  }
+        action_id: openideal_message_action

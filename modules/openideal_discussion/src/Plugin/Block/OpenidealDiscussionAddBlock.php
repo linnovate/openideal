@@ -21,7 +21,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  *   id = "openidel_discussion_add",
  *   admin_label = @Translation("Add disscusion block"),
  *   category = @Translation("Openideal"),
- *   context_definitions = {
+ *   context = {
  *      "node" = @ContextDefinition(
  *       "entity:node",
  *       label = @Translation("Current Node"),

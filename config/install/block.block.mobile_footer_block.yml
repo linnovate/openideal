@@ -16,25 +16,25 @@ plugin: openideal_footer_mobile_footer_block
 settings:
   id: openideal_footer_mobile_footer_block
   label: 'Mobile footer block'
-  label_display: '0'
   provider: openideal_footer
-  context_mapping:
-    node: '@node.node_route_context:node'
+  label_display: '0'
   hide_like: 0
   main_class: site-footer-mobile-block
+  context_mapping:
+    node: '@node.node_route_context:node'
 visibility:
-  route:
-    id: route
-    routes: entity.node.canonical
-    negate: false
-    context_mapping: {  }
-  'entity_bundle:node':
-    id: 'entity_bundle:node'
-    negate: false
-    context_mapping:
-      node: '@node.node_route_context:node'
+  node_type:
+    id: node_type
     bundles:
       article: article
       challenge: challenge
       discussion: discussion
       idea: idea
+    negate: false
+    context_mapping:
+      node: '@node.node_route_context:node'
+  route:
+    id: route
+    routes: entity.node.canonical
+    negate: false
+    context_mapping: {  }

@@ -15,17 +15,17 @@ plugin: rrssb_block
 settings:
   id: rrssb_block
   label: 'Share this content'
-  label_display: '0'
   provider: rrssb
+  label_display: '0'
   button_set: default
 visibility:
-  'entity_bundle:node':
-    id: 'entity_bundle:node'
-    negate: false
-    context_mapping:
-      node: '@node.node_route_context:node'
+  node_type:
+    id: node_type
     bundles:
       discussion: discussion
       article: article
       challenge: challenge
       idea: idea
+    negate: false
+    context_mapping:
+      node: '@node.node_route_context:node'

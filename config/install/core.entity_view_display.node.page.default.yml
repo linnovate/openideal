@@ -17,14 +17,13 @@ dependencies:
     - bootstrap_barrio
 third_party_settings:
   layout_builder:
-    enabled: true
     allow_custom: false
+    enabled: true
     sections:
       -
         layout_id: barrio_cardtopimage
         layout_settings:
           label: ''
-          context_mapping: {  }
           layout_builder_styles_style:
             author: 0
             user_compact: 0
@@ -35,86 +34,65 @@ third_party_settings:
             uuid: bebb7a24-c5c4-48f7-a42e-c04fdbc85988
             region: second
             configuration:
-              id: 'field_block:node:page:body'
               label_display: '0'
               context_mapping:
                 entity: layout_builder.entity
+              id: 'field_block:node:page:body'
               formatter:
-                type: text_default
                 label: above
                 settings: {  }
                 third_party_settings: {  }
-            weight: 4
+                type: text_default
             additional: {  }
+            weight: 4
           b818ca5c-477b-4180-902c-a65c2aae52dd:
             uuid: b818ca5c-477b-4180-902c-a65c2aae52dd
             region: second
             configuration:
-              id: 'field_block:node:page:field_attached_docs'
               label_display: '0'
               context_mapping:
                 entity: layout_builder.entity
+              id: 'field_block:node:page:field_attached_docs'
               formatter:
-                type: file_default
                 label: above
                 settings:
                   use_description_as_link_text: true
                 third_party_settings: {  }
-            weight: 5
+                type: file_default
             additional: {  }
+            weight: 5
           becf61b1-092e-4ce8-b3ec-4be7e0fcee61:
             uuid: becf61b1-092e-4ce8-b3ec-4be7e0fcee61
             region: first
             configuration:
               id: openidel_slideshow_block
               label: Slideshow
-              label_display: visible
               provider: openideal_slideshow
+              label_display: visible
+              image_style: slideshow_large
               context_mapping:
                 node: layout_builder.entity
-              image_style: slideshow_large
-            weight: 0
             additional: {  }
+            weight: 0
           1b480a55-1504-42c4-ae4e-bb5c639cb0f5:
             uuid: 1b480a55-1504-42c4-ae4e-bb5c639cb0f5
             region: second
             configuration:
               id: 'field_block:node:page:title'
               label: Title
-              label_display: '0'
               provider: layout_builder
-              context_mapping:
-                entity: layout_builder.entity
-                view_mode: view_mode
+              label_display: '0'
               formatter:
-                type: string
                 label: hidden
+                type: string
                 settings:
                   link_to_entity: false
                 third_party_settings: {  }
-            weight: 3
-            additional: {  }
-          87479890-aa6d-43df-bac6-ab1efd22c08b:
-            uuid: 87479890-aa6d-43df-bac6-ab1efd22c08b
-            region: content
-            configuration:
-              id: 'field_block:node:page:field_images'
-              label_display: '0'
               context_mapping:
                 entity: layout_builder.entity
-              formatter:
-                type: image
-                label: above
-                settings:
-                  offset: 0
-                  limit: 0
-                  image_link: ''
-                  image_style: ''
-                  image_loading:
-                    attribute: lazy
-                third_party_settings: {  }
-            weight: 0
+                view_mode: view_mode
             additional: {  }
+            weight: 3
         third_party_settings: {  }
 id: node.page.default
 targetEntityType: node
@@ -122,44 +100,40 @@ bundle: page
 mode: default
 content:
   addtoany:
+    weight: 101
     settings: {  }
     third_party_settings: {  }
-    weight: 101
     region: content
   body:
-    type: text_default
+    weight: 105
     label: above
     settings: {  }
     third_party_settings: {  }
-    weight: 105
+    type: text_default
     region: content
   field_attached_docs:
-    type: file_default
+    weight: 104
     label: above
     settings:
       use_description_as_link_text: true
     third_party_settings: {  }
-    weight: 104
+    type: file_default
     region: content
   field_images:
-    type: image
+    weight: 103
     label: above
     settings:
-      offset: 0
-      limit: 0
-      image_link: ''
       image_style: ''
-      image_loading:
-        attribute: lazy
+      image_link: ''
     third_party_settings: {  }
-    weight: 103
+    type: image
     region: content
   field_paragraphs:
     type: entity_reference_revisions_entity_view
     region: content
   links:
-    settings: {  }
-    third_party_settings: {  }
     weight: 101
     region: content
+    settings: {  }
+    third_party_settings: {  }
 hidden: {  }

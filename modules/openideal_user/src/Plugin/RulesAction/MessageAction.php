@@ -147,7 +147,6 @@ class MessageAction extends RulesActionBase implements ContainerFactoryPluginInt
   private function isUserVoted(VoteInterface $entity, string $template) {
     $query = $this->entityTypeManager->getStorage('message')->getQuery();
     $result = $query
-      ->accessCheck(TRUE)
       ->condition('template', $template)
       ->condition('field_' . $entity->getVotedEntityType() . '_reference', $entity->getVotedEntityId())
       ->condition('uid', $entity->getOwnerId())
