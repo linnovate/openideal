@@ -62,27 +62,6 @@ third_party_settings:
                 third_party_settings: {  }
             weight: 1
             additional: {  }
-          def87d49-1ab4-469b-854b-f26f7b9298ef:
-            uuid: def87d49-1ab4-469b-854b-f26f7b9298ef
-            region: content
-            configuration:
-              id: 'field_block:user:user:user_picture'
-              label_display: '0'
-              context_mapping:
-                entity: layout_builder.entity
-              formatter:
-                type: image
-                label: hidden
-                settings:
-                  offset: 0
-                  limit: 0
-                  image_link: content
-                  image_style: ''
-                  image_loading:
-                    attribute: lazy
-                third_party_settings: {  }
-            weight: 3
-            additional: {  }
         third_party_settings: {  }
 id: user.user.author
 targetEntityType: user
@@ -109,12 +88,12 @@ content:
     type: image
     label: hidden
     settings:
-      offset: 0
-      limit: 0
       image_link: content
       image_style: ''
       image_loading:
         attribute: lazy
+      offset: 0
+      limit: 0
     third_party_settings: {  }
     weight: 0
     region: content

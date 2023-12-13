@@ -58,27 +58,6 @@ third_party_settings:
               context_mapping: {  }
             weight: -8
             additional: {  }
-          1d50e088-96e4-4f6d-915e-0cd381430168:
-            uuid: 1d50e088-96e4-4f6d-915e-0cd381430168
-            region: content
-            configuration:
-              id: 'field_block:node:idea:field_images'
-              label_display: '0'
-              context_mapping:
-                entity: layout_builder.entity
-              formatter:
-                type: image
-                label: hidden
-                settings:
-                  offset: 0
-                  limit: 0
-                  image_link: ''
-                  image_style: ''
-                  image_loading:
-                    attribute: lazy
-                third_party_settings: {  }
-            weight: -7
-            additional: {  }
         third_party_settings: {  }
       -
         layout_id: barrio_cardtopimage
@@ -435,12 +414,12 @@ content:
     type: image
     label: hidden
     settings:
-      offset: 0
-      limit: 0
       image_link: ''
       image_style: ''
       image_loading:
         attribute: lazy
+      offset: 0
+      limit: 0
     third_party_settings: {  }
     weight: 102
     region: content

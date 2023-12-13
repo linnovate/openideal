@@ -179,11 +179,15 @@ third_party_settings:
                 type: image
                 label: hidden
                 settings:
-                  offset: 0
-                  limit: 1
                   image_link: content
                   image_style: front_page_teaser
-                third_party_settings: {  }
+                  image_loading:
+                    attribute: lazy
+                third_party_settings:
+                  field_formatter_range:
+                    order: 0
+                    limit: 1
+                    offset: 0
             weight: -10
             additional: {  }
           31a68b33-9e47-4b8f-8b01-32b2c0c640b1:
@@ -211,12 +215,12 @@ third_party_settings:
                 type: image
                 label: hidden
                 settings:
-                  offset: 0
-                  limit: 0
                   image_link: ''
                   image_style: ''
                   image_loading:
                     attribute: lazy
+                  offset: 0
+                  limit: 0
                 third_party_settings: {  }
             weight: 0
             additional: {  }
@@ -291,12 +295,12 @@ content:
     type: image
     label: hidden
     settings:
-      offset: 0
-      limit: 0
       image_link: ''
       image_style: ''
       image_loading:
         attribute: lazy
+      offset: 0
+      limit: 0
     third_party_settings: {  }
     weight: 102
     region: content

@@ -173,11 +173,15 @@ third_party_settings:
                 type: image
                 label: hidden
                 settings:
-                  offset: 0
-                  limit: 1
                   image_link: content
                   image_style: front_page_teaser_large
-                third_party_settings: {  }
+                  image_loading:
+                    attribute: lazy
+                third_party_settings:
+                  field_formatter_range:
+                    order: 0
+                    limit: 1
+                    offset: 0
             weight: -10
             additional: {  }
           8ef43d7e-f75c-48ee-af24-94b26af1bbe7:
@@ -192,12 +196,12 @@ third_party_settings:
                 type: image
                 label: above
                 settings:
-                  offset: 0
-                  limit: 0
                   image_link: ''
                   image_style: ''
                   image_loading:
                     attribute: lazy
+                  offset: 0
+                  limit: 0
                 third_party_settings: {  }
             weight: 0
             additional: {  }
@@ -213,12 +217,12 @@ third_party_settings:
                 type: image
                 label: above
                 settings:
-                  offset: 0
-                  limit: 0
                   image_link: ''
                   image_style: ''
                   image_loading:
                     attribute: lazy
+                  offset: 0
+                  limit: 0
                 third_party_settings: {  }
             weight: 1
             additional: {  }
@@ -256,12 +260,12 @@ content:
     type: image
     label: above
     settings:
-      offset: 0
-      limit: 0
       image_link: ''
       image_style: ''
       image_loading:
         attribute: lazy
+      offset: 0
+      limit: 0
     third_party_settings: {  }
     weight: 103
     region: content
@@ -291,12 +295,12 @@ content:
     type: image
     label: above
     settings:
-      offset: 0
-      limit: 0
       image_link: ''
       image_style: ''
       image_loading:
         attribute: lazy
+      offset: 0
+      limit: 0
     third_party_settings: {  }
     weight: 102
     region: content
