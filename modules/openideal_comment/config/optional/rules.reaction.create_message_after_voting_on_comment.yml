@@ -22,8 +22,6 @@ expression:
         id: rules_condition
         uuid: 52f7b8e0-71ae-4d29-86d9-e936bbf43b03
         weight: 0
-        condition_id: rules_data_comparison
-        negate: false
         context_values:
           operation: '=='
           value: comment
@@ -35,17 +33,19 @@ expression:
           value:
             rules_tokens: {  }
         provides_mapping: {  }
+        condition_id: rules_data_comparison
+        negate: false
       -
         id: rules_condition
         uuid: 20ba25c0-e02b-4cea-9c86-b087379c40dc
         weight: 0
-        condition_id: openideal_voted_entity_is_published
-        negate: false
         context_values: {  }
         context_mapping:
           entity: vote
         context_processors: {  }
         provides_mapping: {  }
+        condition_id: openideal_voted_entity_is_published
+        negate: false
   actions:
     id: rules_action_set
     uuid: d508aa16-cd12-421a-b7ea-0ec972c33771
@@ -55,7 +55,6 @@ expression:
         id: rules_action
         uuid: 364eb4bb-7ec1-4009-bb95-6100cb48c115
         weight: 0
-        action_id: openideal_message_action
         context_values:
           template: created_like_on_comment
         context_mapping:
@@ -64,3 +63,4 @@ expression:
           template:
             rules_tokens: {  }
         provides_mapping: {  }
+        action_id: openideal_message_action

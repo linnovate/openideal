@@ -10,7 +10,7 @@ use Drupal\openideal_challenge\OpenidealContextEntityTrait;
  * @Block(
  *  id = "openideal_statistics_challenge_statistics",
  *  admin_label = @Translation("Challenge statistics block"),
- *   context_definitions = {
+ *   context = {
  *      "node" = @ContextDefinition(
  *       "entity:node",
  *       label = @Translation("Current Node"),

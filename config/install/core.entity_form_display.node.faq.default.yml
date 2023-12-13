@@ -5,7 +5,6 @@ dependencies:
     - field.field.node.faq.field_faq_items
     - node.type.faq
   module:
-    - content_moderation
     - paragraphs
     - path
 id: node.faq.default
@@ -22,7 +21,6 @@ content:
   field_faq_items:
     type: paragraphs
     weight: 121
-    region: content
     settings:
       title: Paragraph
       title_plural: Paragraphs
@@ -38,11 +36,12 @@ content:
         collapse_edit_all: collapse_edit_all
         duplicate: duplicate
     third_party_settings: {  }
+    region: content
   moderation_state:
     type: moderation_state_default
     weight: 100
-    region: content
     settings: {  }
+    region: content
     third_party_settings: {  }
   path:
     type: path
@@ -52,24 +51,24 @@ content:
     third_party_settings: {  }
   promote:
     type: boolean_checkbox
-    weight: 15
-    region: content
     settings:
       display_label: true
+    weight: 15
+    region: content
     third_party_settings: {  }
   status:
     type: boolean_checkbox
-    weight: 120
-    region: content
     settings:
       display_label: true
+    weight: 120
+    region: content
     third_party_settings: {  }
   sticky:
     type: boolean_checkbox
-    weight: 16
-    region: content
     settings:
       display_label: true
+    weight: 16
+    region: content
     third_party_settings: {  }
   title:
     type: string_textfield
@@ -81,22 +80,22 @@ content:
     third_party_settings: {  }
   translation:
     weight: 10
-    region: content
     settings: {  }
     third_party_settings: {  }
+    region: content
   uid:
     type: entity_reference_autocomplete
     weight: 5
-    region: content
     settings:
       match_operator: CONTAINS
-      match_limit: 10
       size: 60
       placeholder: ''
+      match_limit: 10
+    region: content
     third_party_settings: {  }
   url_redirects:
     weight: 50
-    region: content
     settings: {  }
     third_party_settings: {  }
+    region: content
 hidden: {  }

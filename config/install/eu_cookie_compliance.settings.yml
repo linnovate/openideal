@@ -1,11 +1,28 @@
-langcode: en
-popup_enabled: true
-popup_clicking_confirmation: false
-popup_scrolling_confirmation: false
+cookie_lifetime: 100
+domain: ''
+domains_option: 1
+domains_list: ''
 eu_only: null
 eu_only_js: null
-popup_position: false
-fixed_top_position: true
+exclude_paths: "/admin\r\n/admin/*\r\n/batch\r\n/node/add*\r\n/node/*/*\r\n/user/*/*"
+exclude_admin_theme: false
+langcode: en
+popup_agreed:
+  value: '<h2>Thank you for accepting cookies</h2><p>You can now hide this message or find out more about cookies.</p>'
+  format: plain_text
+popup_agree_button_message: 'I accept cookies'
+popup_agreed_enabled: false
+popup_bg_hex: 0779bf
+popup_clicking_confirmation: false
+popup_scrolling_confirmation: false
+popup_delay: 1000
+show_more_info: null
+popup_more_info_button_message: null
+popup_enabled: true
+popup_find_more_button_message: 'More info'
+popup_height: null
+popup_hide_agreed: false
+popup_hide_button_message: Hide
 popup_info:
   value: '<h2>We use cookies on this site to enhance your user experience</h2><p>By clicking the Accept button, you agree to us doing so.</p>'
   format: plain_text
@@ -13,54 +30,37 @@ mobile_popup_info:
   value: '<h2>We use cookies on this site to enhance your user experience</h2><p>By tapping the Accept button, you agree to us doing so.</p>'
   format: plain_text
 popup_info_template: new
-popup_agree_button_message: 'I accept cookies'
-popup_more_info_button_message: null
 mobile_breakpoint: 768
-popup_agreed_enabled: false
-popup_hide_agreed: false
-disagree_button_label: 'I refuse cookies'
-popup_agreed:
-  value: '<h2>Thank you for accepting cookies</h2><p>You can now hide this message or find out more about cookies.</p>'
-  format: plain_text
-popup_find_more_button_message: 'More info'
-popup_hide_button_message: Hide
 popup_link: '<front>'
 popup_link_new_window: true
-popup_height: null
-popup_width: 100%
-popup_delay: 1000
-show_more_info: null
-popup_bg_hex: 0779bf
+popup_position: false
+fixed_top_position: true
 popup_text_hex: ffffff
-domain: ''
-domains_option: 1
-domains_list: ''
-exclude_paths: "/admin\r\n/admin/*\r\n/batch\r\n/node/add*\r\n/node/*/*\r\n/user/*/*"
-exclude_admin_theme: false
-cookie_session: 0
-cookie_lifetime: 100
-use_mobile_message: false
+popup_width: 100%
 use_bare_css: false
 disagree_do_not_show_popup: false
 reload_page: false
 cookie_name: ''
 exclude_uid_1: false
 better_support_for_screen_readers: false
+use_mobile_message: false
 method: opt_in
+disagree_button_label: 'I refuse cookies'
 disabled_javascripts: ''
+whitelisted_cookies: ''
 consent_storage_method: do_not_store
 withdraw_message:
   value: '<h2>We use cookies on this site to enhance your user experience</h2><p>You have given your consent for us to set cookies.</p>'
   format: plain_text
-withdraw_tab_button_label: 'Privacy settings'
 withdraw_action_button_label: 'Withdraw consent'
+withdraw_tab_button_label: 'Privacy settings'
 withdraw_enabled: false
-withdraw_button_on_info_popup: false
+cookie_categories: ''
+enable_save_preferences_button: true
 save_preferences_button_label: 'Save preferences'
 accept_all_categories_button_label: 'Accept all cookies'
-enable_save_preferences_button: true
-domain_all_sites: false
-whitelisted_cookies: ''
-cookie_categories: ''
 fix_first_cookie_category: true
 select_all_categories_by_default: false
+withdraw_button_on_info_popup: false
+domain_all_sites: false
+cookie_session: 0

@@ -20,11 +20,11 @@ default_value_callback: ''
 settings:
   handler: 'default:paragraph'
   handler_settings:
+    negate: 0
     target_bundles:
       faq: faq
-    negate: 0
     target_bundles_drag_drop:
       faq:
-        weight: 2
         enabled: true
+        weight: 2
 field_type: entity_reference_revisions

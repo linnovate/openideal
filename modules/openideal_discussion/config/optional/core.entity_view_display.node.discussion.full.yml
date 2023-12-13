@@ -20,14 +20,13 @@ dependencies:
     - bootstrap_barrio
 third_party_settings:
   layout_builder:
-    enabled: true
     allow_custom: false
+    enabled: true
     sections:
       -
         layout_id: layout_onecol
         layout_settings:
           label: ''
-          context_mapping: {  }
           layout_builder_styles_style: {  }
         components:
           504f056e-63ee-4231-a993-93a1d8c3dc8b:
@@ -36,17 +35,16 @@ third_party_settings:
             configuration:
               id: openideal_idea_go_back_block
               label: 'Go back'
-              label_display: '0'
               provider: openideal_idea
+              label_display: '0'
               context_mapping: {  }
-            weight: 0
             additional: {  }
+            weight: 0
         third_party_settings: {  }
       -
         layout_id: barrio_cardtopimage
         layout_settings:
           label: ''
-          context_mapping: {  }
           layout_builder_styles_style: {  }
         components:
           3725c5f4-d2cb-4c38-b44b-b5ccfe80a292:
@@ -55,61 +53,60 @@ third_party_settings:
             configuration:
               id: 'field_block:node:discussion:uid'
               label: 'Authored by'
-              label_display: '0'
               provider: layout_builder
-              context_mapping:
-                entity: layout_builder.entity
-                view_mode: view_mode
+              label_display: '0'
               formatter:
-                type: entity_reference_entity_view
                 label: hidden
+                type: entity_reference_entity_view
                 settings:
                   view_mode: author
                 third_party_settings: {  }
-            weight: 0
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
             additional: {  }
+            weight: 0
           cf7816e0-876b-4120-91f5-a192a071e855:
             uuid: cf7816e0-876b-4120-91f5-a192a071e855
             region: second
             configuration:
-              id: 'field_block:node:discussion:body'
               label_display: '0'
               context_mapping:
                 entity: layout_builder.entity
+              id: 'field_block:node:discussion:body'
               formatter:
-                type: text_default
                 label: hidden
+                type: text_default
                 settings:
                   offset: 0
                   limit: 0
                 third_party_settings: {  }
-            weight: 1
             additional: {  }
+            weight: 1
           2a6a48e0-2116-4bf8-9d6e-ce7323c2f71f:
             uuid: 2a6a48e0-2116-4bf8-9d6e-ce7323c2f71f
             region: second
             configuration:
               id: 'field_block:node:discussion:title'
               label: Title
-              label_display: '0'
               provider: layout_builder
-              context_mapping:
-                entity: layout_builder.entity
-                view_mode: view_mode
+              label_display: '0'
               formatter:
-                type: string
                 label: hidden
+                type: string
                 settings:
                   link_to_entity: false
                 third_party_settings: {  }
-            weight: 0
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
             additional: {  }
+            weight: 0
         third_party_settings: {  }
       -
         layout_id: layout_onecol
         layout_settings:
           label: ''
-          context_mapping: {  }
           layout_builder_styles_style: {  }
         components:
           b0171142-2492-4a27-821e-c8a5666ab221:
@@ -118,22 +115,22 @@ third_party_settings:
             configuration:
               id: 'field_block:node:discussion:field_comments'
               label: Comments
-              label_display: '0'
               provider: layout_builder
-              context_mapping:
-                entity: layout_builder.entity
-                view_mode: view_mode
+              label_display: '0'
               formatter:
-                type: comment_default
                 label: above
+                type: comment_default
                 settings:
                   view_mode: default
                   pager_id: 0
                 third_party_settings:
                   ajax_comments:
                     enable_ajax_comments: '1'
-            weight: 0
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
             additional: {  }
+            weight: 0
         third_party_settings: {  }
 id: node.discussion.full
 targetEntityType: node
@@ -141,30 +138,30 @@ bundle: discussion
 mode: full
 content:
   body:
-    type: text_default
     label: hidden
+    type: text_default
+    weight: 1
     settings:
       offset: 0
       limit: 0
     third_party_settings: {  }
-    weight: 1
     region: content
   field_comments:
-    type: comment_default
+    weight: 2
     label: hidden
     settings:
-      offset: 0
-      limit: 0
       view_mode: default
       pager_id: 0
+      offset: 0
+      limit: 0
     third_party_settings: {  }
-    weight: 2
+    type: comment_default
     region: content
   links:
-    settings: {  }
-    third_party_settings: {  }
     weight: 0
     region: content
+    settings: {  }
+    third_party_settings: {  }
 hidden:
   field_idea: true
   field_status: true

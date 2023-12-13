@@ -22,24 +22,24 @@ expression:
         id: rules_condition
         uuid: 7309dabd-c050-4003-97c5-3c06c6517790
         weight: -50
-        condition_id: rules_data_is_empty
-        negate: true
         context_values: {  }
         context_mapping:
           data: comment.pid
         context_processors: {  }
         provides_mapping: {  }
+        condition_id: rules_data_is_empty
+        negate: true
       -
         id: rules_condition
         uuid: 7cd3932b-b234-4283-9b5a-ceb3cdc2ebf7
         weight: -49
-        condition_id: rules_data_is_empty
-        negate: true
         context_values: {  }
         context_mapping:
           data: comment.pid.target_id
         context_processors: {  }
         provides_mapping: {  }
+        condition_id: rules_data_is_empty
+        negate: true
   actions:
     id: rules_action_set
     uuid: 656824a8-1d2e-4f68-b4d3-de90852222fc
@@ -49,7 +49,6 @@ expression:
         id: rules_action
         uuid: ccadc125-6d49-41b9-b0a5-bf08f030f2ba
         weight: 0
-        action_id: openideal_message_action
         context_values:
           template: created_reply_on_comment
         context_mapping:
@@ -58,3 +57,4 @@ expression:
           template:
             rules_tokens: {  }
         provides_mapping: {  }
+        action_id: openideal_message_action

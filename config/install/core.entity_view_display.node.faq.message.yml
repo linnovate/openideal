@@ -12,33 +12,32 @@ dependencies:
     - user
 third_party_settings:
   layout_builder:
-    enabled: true
     allow_custom: false
+    enabled: true
     sections:
       -
         layout_id: layout_onecol
         layout_settings:
           label: ''
-          context_mapping: {  }
         components:
           c5b49214-f38e-457c-941d-635eff145524:
             uuid: c5b49214-f38e-457c-941d-635eff145524
             region: content
             configuration:
-              id: 'extra_field_block:node:faq:links'
               label_display: '0'
               context_mapping:
                 entity: layout_builder.entity
-            weight: 0
+              id: 'extra_field_block:node:faq:links'
             additional: {  }
+            weight: 0
           7074f39d-cbe0-4e61-bc76-4793d8eb01f6:
             uuid: 7074f39d-cbe0-4e61-bc76-4793d8eb01f6
             region: content
             configuration:
-              id: 'field_block:node:faq:field_faq_items'
               label_display: '0'
               context_mapping:
                 entity: layout_builder.entity
+              id: 'field_block:node:faq:field_faq_items'
               formatter:
                 type: entity_reference_revisions_entity_view
                 label: hidden
@@ -46,8 +45,8 @@ third_party_settings:
                   view_mode: default
                   link: ''
                 third_party_settings: {  }
-            weight: 1
             additional: {  }
+            weight: 1
         third_party_settings: {  }
 id: node.faq.message
 targetEntityType: node
@@ -56,17 +55,17 @@ mode: message
 content:
   field_faq_items:
     type: entity_reference_revisions_entity_view
+    weight: 101
     label: hidden
     settings:
       view_mode: default
       link: ''
     third_party_settings: {  }
-    weight: 101
     region: content
   links:
-    settings: {  }
-    third_party_settings: {  }
     weight: 100
     region: content
+    settings: {  }
+    third_party_settings: {  }
 hidden:
   addtoany: true

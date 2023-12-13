@@ -15,45 +15,50 @@ tips:
     plugin: text
     label: Honeypot
     weight: -10
-    position: top
     body: "Congratulations on installing Honeypot on your site! With just a few clicks, you can have your site well-protected against automated spam bots.\r\n\r\nClick Next to be guided through this configuration page."
+    location: top
   protect-all-forms:
     id: protect-all-forms
     plugin: text
     label: 'Protect all forms'
     weight: -9
-    position: bottom
-    selector: '#edit-protect-all-forms'
+    attributes:
+      data-id: edit-protect-all-forms
     body: "Protecting all the forms is the easiest way to quickly cut down on spam on your site, but doing this disables Drupal's caching for every page where a form is displayed.\r\n\r\nNote: If you have the honeypot time limit enabled, this option may cause issues with Drupal Commerce product forms or similarly-sparse forms that are able to be completed in a very short time."
+    location: bottom
   log-blocked-form-submissions:
     id: log-blocked-form-submissions
     plugin: text
     label: 'Log blocked form submissions'
     weight: -8
-    position: bottom
-    selector: '#edit-log'
+    attributes:
+      data-id: edit-log
     body: 'Check this box to log every form submission using watchdog. If you have Database Logging enabled, you can view these log entries in the Recent log messages page under Reports.'
+    location: bottom
   honeypot-element-name:
     id: honeypot-element-name
     plugin: text
     label: 'Honeypot Element Name'
     weight: -7
-    position: top
-    selector: '#edit-element-name'
+    attributes:
+      data-id: edit-element-name
     body: 'Spam bots typically fill out any field they believe will help get links back to their site, so tempting them with a field named something like ''url'', ''homepage'', or ''link'' makes it hard for them to resist filling in the field—and easy to catch them in the trap and reject their submissions!'
+    location: top
   honeypot-time-limit:
     id: honeypot-time-limit
     plugin: text
     label: 'Honeypot Time Limit'
     weight: -6
-    position: top
-    selector: '#edit-time-limit'
+    attributes:
+      data-id: edit-time-limit
     body: 'If you enter a positive value, Honeypot will require that all protected forms take at least that many seconds long to fill out. Most forms take at least 5-10 seconds to complete (if you''re a human), so setting this to a value < 5 will help protect against spam bots. Set to 0 to disable.'
+    location: top
   honeypot-form-specific-settings:
     id: honeypot-form-specific-settings
     plugin: text
     label: 'Honeypot form-specific settings'
     weight: -5
-    position: top
-    selector: '#edit-form-settings'
+    attributes:
+      data-id: edit-form-settings
     body: 'If you would like to choose particular forms to be protected by Honeypot, check the forms you wish to protect in this section. Most common types of forms are available for protection.'
+    location: top

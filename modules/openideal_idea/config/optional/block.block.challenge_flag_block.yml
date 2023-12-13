@@ -17,13 +17,20 @@ plugin: openideal_idea_flag_and_like_block
 settings:
   id: openideal_idea_flag_and_like_block
   label: 'Challenge flag and Like block'
-  label_display: '0'
   provider: openideal_idea
-  context_mapping:
-    node: '@node.node_route_context:node'
+  label_display: '0'
   hide_like: 0
   main_class: 'challenge-voting region-sidebar--flag-and-follow'
+  context_mapping:
+    node: '@node.node_route_context:node'
 visibility:
+  node_type:
+    id: node_type
+    bundles:
+      challenge: challenge
+    negate: false
+    context_mapping:
+      node: '@node.node_route_context:node'
   route:
     id: route
     routes: entity.node.canonical
@@ -31,15 +38,8 @@ visibility:
     context_mapping: {  }
   user_role:
     id: user_role
+    roles:
+      authenticated: authenticated
     negate: false
     context_mapping:
       user: '@user.current_user_context:current_user'
-    roles:
-      authenticated: authenticated
-  'entity_bundle:node':
-    id: 'entity_bundle:node'
-    negate: false
-    context_mapping:
-      node: '@node.node_route_context:node'
-    bundles:
-      challenge: challenge

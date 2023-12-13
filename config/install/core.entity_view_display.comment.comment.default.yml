@@ -13,60 +13,56 @@ dependencies:
     - votingapi_reaction
 third_party_settings:
   layout_builder:
-    enabled: true
     allow_custom: false
+    enabled: true
     sections:
       -
         layout_id: layout_onecol
         layout_settings:
           label: ''
-          context_mapping: {  }
         components:
           f0946b35-1cb9-42af-baac-10df8b49f6fc:
             uuid: f0946b35-1cb9-42af-baac-10df8b49f6fc
             region: content
             configuration:
-              id: 'extra_field_block:comment:comment:links'
               label_display: '0'
               context_mapping:
                 entity: layout_builder.entity
-            weight: 6
+              id: 'extra_field_block:comment:comment:links'
             additional: {  }
+            weight: 6
           68436313-ad30-4361-8454-b9448b100777:
             uuid: 68436313-ad30-4361-8454-b9448b100777
             region: content
             configuration:
               id: 'field_block:comment:comment:created'
               label: Created
-              label_display: '0'
               provider: layout_builder
-              context_mapping:
-                entity: layout_builder.entity
-                view_mode: view_mode
+              label_display: '0'
               formatter:
-                type: timestamp_ago
                 label: hidden
+                type: timestamp_ago
                 settings:
                   future_format: '@interval hence'
                   past_format: '@interval ago'
                   granularity: 2
                 third_party_settings: {  }
-            weight: 1
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
             additional: {  }
+            weight: 1
           b944681b-c2dd-4077-a9ea-4bfbe1266eec:
             uuid: b944681b-c2dd-4077-a9ea-4bfbe1266eec
             region: content
             configuration:
               id: 'field_block:comment:comment:field_like'
               label: Like
-              label_display: '0'
               provider: layout_builder
-              context_mapping:
-                entity: layout_builder.entity
-                view_mode: view_mode
+              label_display: '0'
               formatter:
-                type: votingapi_reaction_default
                 label: hidden
+                type: votingapi_reaction_default
                 settings:
                   show_summary: false
                   show_icon: true
@@ -74,23 +70,26 @@ third_party_settings:
                   show_count: true
                   sort_reactions: desc
                 third_party_settings: {  }
-            weight: 7
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
             additional: {  }
+            weight: 7
           5e5f6f5e-1a41-43b9-8d91-eac5268073c5:
             uuid: 5e5f6f5e-1a41-43b9-8d91-eac5268073c5
             region: content
             configuration:
-              id: 'field_block:comment:comment:comment_body'
               label_display: '0'
               context_mapping:
                 entity: layout_builder.entity
+              id: 'field_block:comment:comment:comment_body'
               formatter:
-                type: text_default
                 label: hidden
+                type: text_default
                 settings: {  }
                 third_party_settings: {  }
-            weight: 5
             additional: {  }
+            weight: 5
         third_party_settings: {  }
 id: comment.comment.default
 targetEntityType: comment
@@ -98,14 +97,14 @@ bundle: comment
 mode: default
 content:
   comment_body:
-    type: text_default
     label: hidden
-    settings: {  }
-    third_party_settings: {  }
+    type: text_default
     weight: 0
     region: content
+    settings: {  }
+    third_party_settings: {  }
   field_like:
-    type: votingapi_reaction_default
+    weight: 4
     label: above
     settings:
       show_summary: true
@@ -114,11 +113,11 @@ content:
       show_count: true
       sort_reactions: desc
     third_party_settings: {  }
-    weight: 4
+    type: votingapi_reaction_default
     region: content
   links:
-    settings: {  }
-    third_party_settings: {  }
     weight: 2
     region: content
+    settings: {  }
+    third_party_settings: {  }
 hidden: {  }

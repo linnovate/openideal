@@ -22,8 +22,6 @@ expression:
         id: rules_condition
         uuid: 844bc609-3bf5-4784-9931-378e57157795
         weight: -50
-        condition_id: rules_data_comparison
-        negate: false
         context_values:
           operation: '=='
           value: '0'
@@ -35,23 +33,23 @@ expression:
           value:
             rules_tokens: {  }
         provides_mapping: {  }
+        condition_id: rules_data_comparison
+        negate: false
       -
         id: rules_condition
         uuid: 7372ef2f-4177-4a33-b15c-358aab4db1b7
         weight: -49
-        condition_id: rules_node_is_published
-        negate: false
         context_values: {  }
         context_mapping:
           node: node
         context_processors: {  }
         provides_mapping: {  }
+        condition_id: rules_node_is_published
+        negate: false
       -
         id: rules_condition
         uuid: d764805a-19db-445b-892a-b8fcc8e3567b
         weight: -48
-        condition_id: rules_entity_is_of_bundle
-        negate: true
         context_values:
           type: node
           bundle: idea
@@ -63,6 +61,8 @@ expression:
           bundle:
             rules_tokens: {  }
         provides_mapping: {  }
+        condition_id: rules_entity_is_of_bundle
+        negate: true
   actions:
     id: rules_action_set
     uuid: 2e665d22-dd48-4e5a-8939-0adecc98dc27
@@ -72,7 +72,6 @@ expression:
         id: rules_action
         uuid: a8689a2a-bfda-47d2-a4ba-cab05e5c8776
         weight: 0
-        action_id: openideal_message_action
         context_values:
           template: node_created
         context_mapping:
@@ -81,3 +80,4 @@ expression:
           template:
             rules_tokens: {  }
         provides_mapping: {  }
+        action_id: openideal_message_action

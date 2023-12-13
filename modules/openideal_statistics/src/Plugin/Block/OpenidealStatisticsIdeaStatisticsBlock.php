@@ -12,7 +12,7 @@ use Drupal\openideal_statistics\OpenidealStatisticsFivestarsTrait;
  * @Block(
  *  id = "openideal_statistics_idea_statistics",
  *  admin_label = @Translation("Idea statistics block"),
- *   context_definitions = {
+ *   context = {
  *      "node" = @ContextDefinition(
  *       "entity:node",
  *       label = @Translation("Current Node"),

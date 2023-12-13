@@ -10,21 +10,21 @@ bundle: discussion_create
 mode: default
 content:
   field_node_reference:
-    type: entity_reference_entity_view
+    weight: 1
     label: hidden
     settings:
-      offset: 0
-      limit: 0
       view_mode: message
       link: false
+      offset: 0
+      limit: 0
     third_party_settings: {  }
-    weight: 1
+    type: entity_reference_entity_view
     region: content
   partial_0:
-    settings: {  }
-    third_party_settings: {  }
     weight: 0
     region: content
+    settings: {  }
+    third_party_settings: {  }
 hidden:
   partial_1: true
   partial_2: true

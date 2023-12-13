@@ -13,20 +13,18 @@ dependencies:
     - field.field.user.user.user_picture
   module:
     - layout_builder
-    - openideal_layout
     - openideal_statistics
     - openideal_user
     - user
 third_party_settings:
   layout_builder:
-    enabled: true
     allow_custom: false
+    enabled: true
     sections:
       -
         layout_id: openideal_two_columns_teaser
         layout_settings:
           label: ''
-          context_mapping: {  }
           main_class: two-columns-flexible
           layout_builder_styles_style:
             author: 0
@@ -40,66 +38,66 @@ third_party_settings:
             configuration:
               id: 'field_block:user:user:user_picture'
               label: Picture
-              label_display: '0'
               provider: layout_builder
-              context_mapping:
-                entity: layout_builder.entity
-                view_mode: view_mode
+              label_display: '0'
               formatter:
-                type: openideal_user_user_image
                 label: hidden
+                type: openideal_user_user_image
                 settings:
                   image_style: compact_user_icon
                   image_link: content
                 third_party_settings: {  }
-            weight: 3
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
             additional: {  }
+            weight: 3
           425f3923-73c7-4fd1-b43c-1c50c9cf6424:
             uuid: 425f3923-73c7-4fd1-b43c-1c50c9cf6424
             region: first
             configuration:
               id: openideal_user_user_name_block
               label: 'User name'
-              label_display: '0'
               provider: openideal_user
+              label_display: '0'
               context_mapping:
                 user: layout_builder.entity
               hide_label: 1
-            weight: 4
             additional: {  }
+            weight: 4
           3e73382b-516f-465c-b237-07fbb2b9dece:
             uuid: 3e73382b-516f-465c-b237-07fbb2b9dece
             region: first
             configuration:
               id: 'field_block:user:user:created'
               label: 'Member since:'
-              label_display: '0'
               provider: layout_builder
-              context_mapping:
-                entity: layout_builder.entity
-                view_mode: view_mode
+              label_display: '0'
               formatter:
-                type: timestamp
                 label: inline
+                type: timestamp
                 settings:
                   date_format: openideal_short_full_date
                   custom_date_format: d/m/Y
                   timezone: ''
                 third_party_settings: {  }
-            weight: 6
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
             additional: {  }
+            weight: 6
           7f421378-46a9-4fc1-8b72-2a635406189e:
             uuid: 7f421378-46a9-4fc1-8b72-2a635406189e
             region: second
             configuration:
               id: openideal_statistics_user_statistics
               label: 'User statistics block'
-              label_display: '0'
               provider: openideal_statistics
+              label_display: '0'
               context_mapping:
                 node: layout_builder.entity
-            weight: 7
             additional: {  }
+            weight: 7
         third_party_settings: {  }
 id: user.user.compact
 targetEntityType: user

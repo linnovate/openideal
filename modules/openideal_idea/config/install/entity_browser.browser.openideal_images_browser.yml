@@ -17,13 +17,7 @@ widget_selector: tabs
 widget_selector_configuration: {  }
 widgets:
   f8e78972-f432-4330-b55b-88699bf8c50a:
-    id: dropzonejs
-    uuid: f8e78972-f432-4330-b55b-88699bf8c50a
-    label: Browse
-    weight: 1
     settings:
-      submit_text: 'Select images'
-      auto_select: false
       upload_location: 'public://[date:custom:Y]-[date:custom:m]'
       dropzone_description: 'Drop images here to upload them'
       max_filesize: 32M
@@ -34,3 +28,9 @@ widgets:
       resize_quality: !!float 1
       resize_method: contain
       thumbnail_method: contain
+      submit_text: 'Select images'
+      auto_select: false
+    uuid: f8e78972-f432-4330-b55b-88699bf8c50a
+    weight: 1
+    label: Browse
+    id: dropzonejs

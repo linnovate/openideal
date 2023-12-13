@@ -26,21 +26,21 @@ dependencies:
     - layout_builder
     - metatag
     - openideal_idea
-    - openideal_layout
     - openideal_statistics
     - text
     - user
     - votingapi_reaction
+  theme:
+    - openideal_theme
 third_party_settings:
   layout_builder:
-    enabled: true
     allow_custom: false
+    enabled: true
     sections:
       -
         layout_id: openideal_three_columns
         layout_settings:
           label: ''
-          context_mapping: {  }
           main_class: front-page-teaser
           layout_builder_styles_style:
             author: 0
@@ -54,172 +54,151 @@ third_party_settings:
             configuration:
               id: 'field_block:node:idea:title'
               label: Title
-              label_display: '0'
               provider: layout_builder
-              context_mapping:
-                entity: layout_builder.entity
-                view_mode: view_mode
+              label_display: '0'
               formatter:
-                type: string
                 label: hidden
+                type: string
                 settings:
                   link_to_entity: true
                 third_party_settings: {  }
-            weight: 0
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
             additional: {  }
+            weight: 0
           07a4b0ba-f0f4-448b-934b-ec4cdc1a2ba5:
             uuid: 07a4b0ba-f0f4-448b-934b-ec4cdc1a2ba5
             region: second
             configuration:
               id: 'field_block:node:idea:uid'
               label: 'Authored by'
-              label_display: '0'
               provider: layout_builder
-              context_mapping:
-                entity: layout_builder.entity
-                view_mode: view_mode
+              label_display: '0'
               formatter:
-                type: entity_reference_entity_view
                 label: hidden
+                type: entity_reference_entity_view
                 settings:
                   view_mode: author
                 third_party_settings: {  }
-            weight: 1
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
             additional: {  }
+            weight: 1
           1798941c-490e-4d06-8bdf-a8310ebce944:
             uuid: 1798941c-490e-4d06-8bdf-a8310ebce944
             region: second
             configuration:
               id: 'field_block:node:idea:body'
               label: Body
-              label_display: '0'
               provider: layout_builder
-              context_mapping:
-                entity: layout_builder.entity
-                view_mode: view_mode
+              label_display: '0'
               formatter:
-                type: text_summary_or_trimmed
                 label: hidden
+                type: text_summary_or_trimmed
                 settings:
                   trim_length: 400
                 third_party_settings: {  }
-            weight: 2
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
             additional: {  }
+            weight: 2
           3f0c88d3-3cb9-4c6e-8db3-b296ef2ecf4b:
             uuid: 3f0c88d3-3cb9-4c6e-8db3-b296ef2ecf4b
             region: third
             configuration:
               id: openideal_statistics_idea_statistics
               label: 'Idea statistics block'
-              label_display: '0'
               provider: openideal_statistics
+              label_display: '0'
               context_mapping:
                 node: layout_builder.entity
-            weight: -10
             additional: {  }
+            weight: -10
           e0510c35-f24d-4087-9816-80cc1b20c280:
             uuid: e0510c35-f24d-4087-9816-80cc1b20c280
             region: third
             configuration:
               id: 'field_block:node:idea:created'
               label: 'Authored on'
-              label_display: '0'
               provider: layout_builder
-              context_mapping:
-                entity: layout_builder.entity
-                view_mode: view_mode
+              label_display: '0'
               formatter:
-                type: timestamp
                 label: hidden
+                type: timestamp
                 settings:
                   date_format: custom
                   custom_date_format: d/m/Y
                   timezone: ''
                 third_party_settings: {  }
-            weight: -8
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
             additional: {  }
+            weight: -8
           8a263ac8-9885-4c26-a327-31ce11544df3:
             uuid: 8a263ac8-9885-4c26-a327-31ce11544df3
             region: third
             configuration:
               id: openideal_idea_flag_and_like_block
               label: 'Flag and Like block'
-              label_display: '0'
               provider: openideal_idea
-              context_mapping:
-                node: layout_builder.entity
+              label_display: '0'
               hide_like: 1
               main_class: homepage-teaser--flag
-            weight: -7
+              context_mapping:
+                node: layout_builder.entity
             additional: {  }
+            weight: -7
           c6095adf-087f-4edb-883b-36c3e97238bf:
             uuid: c6095adf-087f-4edb-883b-36c3e97238bf
             region: first
             configuration:
               id: openidel_idea_node_bundle
               label: 'Entity bundle'
-              label_display: '0'
               provider: openideal_idea
+              label_display: '0'
               context_mapping:
                 entity: layout_builder.entity
-            weight: -9
             additional: {  }
+            weight: -9
           1ef90dbd-e318-418e-bbbc-9a6bd969126c:
             uuid: 1ef90dbd-e318-418e-bbbc-9a6bd969126c
             region: first
             configuration:
               id: 'field_block:node:idea:field_images'
               label: Images
-              label_display: '0'
               provider: layout_builder
-              context_mapping:
-                entity: layout_builder.entity
-                view_mode: view_mode
+              label_display: '0'
               formatter:
-                type: image
                 label: hidden
+                type: image
                 settings:
                   offset: 0
                   limit: 1
-                  image_link: content
                   image_style: front_page_teaser
+                  image_link: content
                 third_party_settings: {  }
-            weight: -10
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
             additional: {  }
+            weight: -10
           31a68b33-9e47-4b8f-8b01-32b2c0c640b1:
             uuid: 31a68b33-9e47-4b8f-8b01-32b2c0c640b1
             region: third
             configuration:
               id: openideal_statistics_status
               label: 'Workflow status.'
-              label_display: '0'
               provider: openideal_statistics
+              label_display: '0'
+              show_all_states: false
               context_mapping:
                 node: layout_builder.entity
-              show_all_states: false
+            additional: {  }
             weight: -9
-            additional: {  }
-          28bbf6f5-4498-4103-854c-2939f2c2682b:
-            uuid: 28bbf6f5-4498-4103-854c-2939f2c2682b
-            region: content
-            configuration:
-              id: 'field_block:node:idea:field_images'
-              label_display: '0'
-              context_mapping:
-                entity: layout_builder.entity
-              formatter:
-                type: image
-                label: hidden
-                settings:
-                  offset: 0
-                  limit: 0
-                  image_link: ''
-                  image_style: ''
-                  image_loading:
-                    attribute: lazy
-                third_party_settings: {  }
-            weight: 0
-            additional: {  }
         third_party_settings: {  }
 id: node.idea.front_page_teaser
 targetEntityType: node
@@ -227,81 +206,77 @@ bundle: idea
 mode: front_page_teaser
 content:
   body:
-    type: text_default
     label: hidden
+    type: text_default
+    weight: 101
     settings: {  }
     third_party_settings: {  }
-    weight: 101
     region: content
   content_moderation_control:
+    weight: -20
     settings: {  }
     third_party_settings: {  }
-    weight: -20
     region: content
   field_attached_docs:
-    type: file_default
+    weight: 103
     label: hidden
     settings:
       use_description_as_link_text: true
     third_party_settings: {  }
-    weight: 103
+    type: file_default
     region: content
   field_category:
-    type: entity_reference_label
+    weight: 108
     label: above
     settings:
       link: true
     third_party_settings: {  }
-    weight: 108
+    type: entity_reference_label
     region: content
   field_challenge:
-    type: entity_reference_label
+    weight: 106
     label: hidden
     settings:
       link: true
     third_party_settings: {  }
-    weight: 106
+    type: entity_reference_label
     region: content
   field_comments:
-    type: comment_default
+    weight: 109
     label: above
     settings:
       view_mode: default
       pager_id: 0
     third_party_settings: {  }
-    weight: 109
+    type: comment_default
     region: content
   field_duplicate_of:
-    type: entity_reference_label
+    weight: 107
     label: above
     settings:
       link: true
     third_party_settings: {  }
-    weight: 107
+    type: entity_reference_label
     region: content
   field_idea_tags:
-    type: entity_reference_label
+    weight: 104
     label: hidden
     settings:
       link: true
     third_party_settings: {  }
-    weight: 104
+    type: entity_reference_label
     region: content
   field_images:
-    type: image
+    weight: 102
     label: hidden
     settings:
-      offset: 0
-      limit: 0
-      image_link: ''
       image_style: ''
-      image_loading:
-        attribute: lazy
+      image_link: ''
     third_party_settings: {  }
-    weight: 102
+    type: image
     region: content
   field_like:
-    type: votingapi_reaction_default
+    weight: 111
     label: above
     settings:
       show_summary: true
@@ -310,17 +285,17 @@ content:
       show_count: true
       sort_reactions: desc
     third_party_settings: {  }
-    weight: 111
+    type: votingapi_reaction_default
     region: content
   field_meta_tags:
-    type: metatag_empty_formatter
+    weight: 110
     label: above
     settings: {  }
     third_party_settings: {  }
-    weight: 110
+    type: metatag_empty_formatter
     region: content
   field_overall_score:
-    type: number_decimal
+    weight: 112
     label: above
     settings:
       thousand_separator: ''
@@ -328,18 +303,18 @@ content:
       scale: 2
       prefix_suffix: true
     third_party_settings: {  }
-    weight: 112
+    type: number_decimal
     region: content
   flag_follow:
+    weight: 10
     settings: {  }
     third_party_settings: {  }
-    weight: 10
     region: content
   links:
-    settings: {  }
-    third_party_settings: {  }
     weight: 100
     region: content
+    settings: {  }
+    third_party_settings: {  }
 hidden:
   addtoany: true
   field_five_stars: true

@@ -14,8 +14,8 @@ plugin: openideal_user_user_account_block
 settings:
   id: openideal_user_user_account_block
   label: 'User account'
-  label_display: '0'
   provider: openideal_user
+  label_display: '0'
   context_mapping:
     user: '@user.current_user_context:current_user'
 visibility: {  }

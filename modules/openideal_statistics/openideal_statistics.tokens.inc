@@ -89,7 +89,6 @@ function openideal_statistics_tokens($type, $tokens, array $data, array $options
         case 'members-count':
           $query = $entity_type_manager->getStorage('user')->getQuery();
           $result = $query
-            ->accessCheck(TRUE)
             ->condition('status', '1')
             // @todo Remove once we will find better way to resolve this issue,
             // and remove the same logic from community page view.
@@ -103,7 +102,6 @@ function openideal_statistics_tokens($type, $tokens, array $data, array $options
         case 'comments-count':
           $query = $entity_type_manager->getStorage('comment')->getQuery();
           $result = $query
-            ->accessCheck(TRUE)
             ->condition('status', '1')
             ->count()
             ->execute();
@@ -114,7 +112,6 @@ function openideal_statistics_tokens($type, $tokens, array $data, array $options
         case 'ideas-count':
           $query = $entity_type_manager->getStorage('node')->getQuery();
           $result = $query
-            ->accessCheck(TRUE)
             ->condition('status', '1')
             ->condition('type', 'idea')
             ->count()
@@ -126,7 +123,6 @@ function openideal_statistics_tokens($type, $tokens, array $data, array $options
         case 'votes-count':
           $query = $entity_type_manager->getStorage('vote')->getQuery();
           $result = $query
-            ->accessCheck(TRUE)
             ->count()
             ->execute();
           $replacements[$original] = $result;
@@ -149,7 +145,6 @@ function openideal_statistics_tokens($type, $tokens, array $data, array $options
           if (!empty($data['user'])) {
             $storage = \Drupal::entityTypeManager()->getStorage('vote');
             $count = $storage->getQuery()
-              ->accessCheck(TRUE)
               ->condition('user_id', $data['user']->id())
               ->condition('type', 'reaction_like')
               ->count()
@@ -164,7 +159,6 @@ function openideal_statistics_tokens($type, $tokens, array $data, array $options
           if (!empty($data['user'])) {
             $query = $entity_type_manager->getStorage('comment')->getQuery();
             $result = $query
-              ->accessCheck(TRUE)
               ->condition('status', '1')
               ->condition('uid', $data['user']->id())
               ->count()
@@ -177,7 +171,6 @@ function openideal_statistics_tokens($type, $tokens, array $data, array $options
         case 'user-ideas-count':
           if (!empty($data['user'])) {
             $result = \Drupal::entityQuery('node')
-              ->accessCheck(TRUE)
               ->condition('status', '1')
               ->condition('type', 'idea')
               ->condition('uid', $data['user']->id())
@@ -193,7 +186,6 @@ function openideal_statistics_tokens($type, $tokens, array $data, array $options
             $storage = \Drupal::entityTypeManager()->getStorage('node');
             $node_query = $storage->getQuery();
             $result = $node_query->condition('field_challenge', $data['node_id'], '=')
-              ->accessCheck(TRUE)
               ->condition('type', 'idea')
               ->condition('status', 1)
               ->count()
