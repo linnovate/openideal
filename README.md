@@ -21,9 +21,15 @@ OpenideaL includes tools for the website managers which allow them to identify *
 
 OI is based on Drupal, and therefore it is modular, and allows growth and adaptation to the organization’s specific needs. These adaptations may include a unique design, polls and surveys, interfacing with external applications or adapting the interface to a range of devices ans apis.
 
+## Prerequisites:
+Since OpenideaL relies on [Drupal](https://www.drupal.org/) and is subject to its system requirements, it is recommended ensuring that you have satisfied the [Drupal System Requirements](https://www.drupal.org/docs/system-requirements) before moving forward.
+
 ## Build
 
 OpenideaL is super easy to install. The following composer command will install the full codebase, together with all the required dependencies and libraries:
+
+- Please use PHP 7.4, don't use PHP 8 or 8.1 it won't work.
+- Recommended composer 2 - really faster and uses a lot less memory. (It has been tested with composer 1, 2.0 - 2.3.5)
 
 ```
 composer create-project linnovate/openideal-composer openideal
@@ -52,17 +58,20 @@ When at the `web` directory, run the following:
 - Change `dbuser@127.0.0.1/db_name` with your DB settings
 - The last bit - `idea` is the name of the profile
 
-## Update
+## Docker Installation with Docker4Drupal by Wodby
+[Follow the guide](https://github.com/linnovate/openideal/wiki/Install-OpenideaL-with-Docker4Drupal-by-Wodby)
+
+## Update to new version of OpenideaL
 
 At any point you can run
 
-`composer require linnovate/openideal:[version-number]` where `[version number]` is the desired tag.
-`composer update`
-`drush updb`
-`drush cr`
-`drush cim`
+- `composer require linnovate/openideal:[version-number]` where `[version number]` is the desired tag.
+- `drush updb`
+- `drush cr`
+- `drush cim`
 
-To upgrade Drupal core version run 
+To upgrade Drupal core version run  
+**Be aware upgrade to Drupal 9 will not work**, for now OpenideaL doesn't support it
 
 `composer update drupal/core 'drupal/core-*' --with-dependencies` , then run `drush updb`. 
 
