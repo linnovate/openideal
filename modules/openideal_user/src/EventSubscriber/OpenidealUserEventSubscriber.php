@@ -2,16 +2,17 @@
 
 namespace Drupal\openideal_user\EventSubscriber;
 
-use Drupal\ckeditor_mentions\CKEditorMentionEvent;
 use Drupal\comment\Entity\Comment;
-use Drupal\content_moderation\Event\ContentModerationEvents;
-use Drupal\content_moderation\Event\ContentModerationStateChangedEvent;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
-use Drupal\openideal_user\Event\OpenidealContentModerationEvent;
+use Drupal\ckeditor_mentions\Events\CKEditorEvents;
 use Drupal\openideal_user\Event\OpenidealUserEvents;
 use Drupal\openideal_user\Event\OpenidealUserMentionEvent;
+use Drupal\content_moderation\Event\ContentModerationEvents;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Drupal\openideal_user\Event\OpenidealContentModerationEvent;
+use Drupal\ckeditor_mentions\Events\CKEditorMentionEventInterface;
+use Drupal\content_moderation\Event\ContentModerationStateChangedEvent;
 
 /**
  * Openideal user general event subscriber.
@@ -50,7 +51,7 @@ class OpenidealUserEventSubscriber implements EventSubscriberInterface {
    */
   public static function getSubscribedEvents() {
     return [
-      CKEditorMentionEvent::MENTION_FIRST => 'usersAreMentioned',
+      CKEditorEvents::MENTION_FIRST => 'usersAreMentioned',
       ContentModerationEvents::STATE_CHANGED => 'stateChanged',
     ];
   }
@@ -61,11 +62,9 @@ class OpenidealUserEventSubscriber implements EventSubscriberInterface {
    * @param \Drupal\ckeditor_mentions\CKEditorMentionEvent $event
    *   The dispatched event.
    */
-  public function usersAreMentioned(CKEditorMentionEvent $event) {
+  public function usersAreMentioned(CKEditorMentionEventInterface $event) {
     if ((($comment = $event->getEntity()) instanceof Comment) && !empty($event->getMentionedUsers())) {
-      // If user was mentioned twice in comment remove it.
-      $user_ids = array_unique(array_keys($event->getMentionedUsers()));
-      foreach ($user_ids as $id) {
+      if ($id = $event->getMentionedEntity()->id()){
         $storage = $this->entityTypeManager->getStorage('user');
         $user = $storage->load($id);
         $event = new OpenidealUserMentionEvent($comment, $user);
