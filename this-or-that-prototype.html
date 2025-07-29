@@ -1,0 +1,157 @@
+<script type="text/javascript">
+        var gk_isXlsx = false;
+        var gk_xlsxFileLookup = {};
+        var gk_fileData = {};
+        function filledCell(cell) {
+          return cell !== '' && cell != null;
+        }
+        function loadFileData(filename) {
+        if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
+            try {
+                var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
+                var firstSheetName = workbook.SheetNames[0];
+                var worksheet = workbook.Sheets[firstSheetName];
+
+                // Convert sheet to JSON to filter blank rows
+                var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
+                // Filter out blank rows (rows where all cells are empty, null, or undefined)
+                var filteredData = jsonData.filter(row => row.some(filledCell));
+
+                // Heuristic to find the header row by ignoring rows with fewer filled cells than the next row
+                var headerRowIndex = filteredData.findIndex((row, index) =>
+                  row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
+                );
+                // Fallback
+                if (headerRowIndex === -1 || headerRowIndex > 25) {
+                  headerRowIndex = 0;
+                }
+
+                // Convert filtered JSON back to CSV
+                var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex)); // Create a new sheet from filtered array of arrays
+                csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
+                return csv;
+            } catch (e) {
+                console.error(e);
+                return "";
+            }
+        }
+        return gk_fileData[filename] || "";
+        }
+        </script><!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>This or That - OpenideaL Prototype</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f7f7f7;
+      margin: 0;
+      padding: 20px;
+      color: #333;
+    }
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      background-color: #fff;
+      border: 1px solid #3b5998;
+      border-radius: 5px;
+      padding: 20px;
+    }
+    .idea-container {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+    }
+    .idea {
+      flex: 1;
+      padding: 15px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      background-color: #f5f6f5;
+    }
+    .idea h2 {
+      font-size: 18px;
+      margin: 0 0 10px;
+      color: #3b5998;
+    }
+    .idea p {
+      font-size: 14px;
+      margin: 0 0 10px;
+      color: #333;
+    }
+    .idea .stats {
+      font-size: 12px;
+      color: #666;
+      margin-bottom: 10px;
+    }
+    .vote-btn {
+      background-color: #3b5998;
+      color: #fff;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 3px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+    .vote-btn:hover {
+      background-color: #4c70ba;
+    }
+    .next-btn {
+      display: block;
+      margin: 20px auto;
+      background-color: #3b5998;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 3px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    .next-btn:hover {
+      background-color: #4c70ba;
+    }
+    @media (max-width: 600px) {
+      .idea-container {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="idea-container">
+      <div class="idea" id="idea1">
+        <h2>AI-Driven Customer Support</h2>
+        <p>Implement an AI chatbot for real-time customer support...</p>
+        <div class="stats">Votes: <span id="votes1">10</span> | Comments: 5</div>
+        <button class="vote-btn" onclick="vote(1)">Vote</button>
+      </div>
+      <div class="idea" id="idea2">
+        <h2>VR Training Platform</h2>
+        <p>Develop a VR-based training module for employees...</p>
+        <div class="stats">Votes: <span id="votes2">8</span> | Comments: 3</div>
+        <button class="vote-btn" onclick="vote(2)">Vote</button>
+      </div>
+    </div>
+    <button class="next-btn" onclick="loadNextPair()">Next Pair</button>
+  </div>
+
+  <script>
+    function vote(ideaId) {
+      const votesElement = document.getElementById(`votes${ideaId}`);
+      let votes = parseInt(votesElement.textContent);
+      votesElement.textContent = votes + 1;
+      alert(`Voted for Idea ${ideaId}!`);
+      // In a real implementation, this would send a request to Drupal's API
+    }
+
+    function loadNextPair() {
+      // Placeholder for fetching new ideas
+      alert('Loading next pair of ideas...');
+      // In a real implementation, this would fetch new ideas from Drupal's API
+    }
+  </script>
+</body>
+</html>
